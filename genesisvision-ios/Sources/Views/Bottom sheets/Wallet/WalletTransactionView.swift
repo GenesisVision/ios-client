@@ -28,6 +28,11 @@ class WalletTransactionView: UIView {
     @IBOutlet weak var topStackView: TopStackView!
     @IBOutlet weak var statusStackView: StatusStackView!
     
+    @IBOutlet weak var signalFeeStackView: SignalFeeStackView! {
+        didSet {
+            signalFeeStackView.isHidden = true
+        }
+    }
     @IBOutlet weak var investmentStackView: InvestmentStackView! {
         didSet {
             investmentStackView.isHidden = true
@@ -498,77 +503,76 @@ extension WalletTransactionView {
     }
     
     private func setupSignalSubscribe(_ model: TransactionDetails) {
-        investmentStackView.isHidden = false
-        investmentStackView.assetStackView.assetLogoImageView?.profilePhotoImageView.image = UIImage.programPlaceholder
+        signalFeeStackView.isHidden = false
+        signalFeeStackView.assetStackView.assetLogoImageView?.profilePhotoImageView.image = UIImage.programPlaceholder
         
         if let details = model.programDetails, let currency = model.currency {
             if let programType = details.programType {
-                investmentStackView.assetStackView.headerLabel.text = "To the signal provider"
+                signalFeeStackView.assetStackView.headerLabel.text = "To the signal provider"
                 
                 topStackView.subtitleLabel.text = "Signal fee payment"
                 
                 if programType == .program, let level = details.level {
-                    investmentStackView.assetStackView.assetLogoImageView.levelButton.setTitle(level.toString(), for: .normal)
+                    signalFeeStackView.assetStackView.assetLogoImageView.levelButton.setTitle(level.toString(), for: .normal)
                 } else {
-                    investmentStackView.assetStackView.assetLogoImageView.levelButton.isHidden = true
+                    signalFeeStackView.assetStackView.assetLogoImageView.levelButton.isHidden = true
                 }
             }
             
             if let color = details.color {
-                investmentStackView.assetStackView.assetLogoImageView?.profilePhotoImageView?.backgroundColor = UIColor.hexColor(color)
+                signalFeeStackView.assetStackView.assetLogoImageView?.profilePhotoImageView?.backgroundColor = UIColor.hexColor(color)
             }
             if let logo = details.logo, let fileUrl = getFileURL(fileName: logo) {
-                investmentStackView.assetStackView.assetLogoImageView?.profilePhotoImageView.kf.indicatorType = .activity
-                investmentStackView.assetStackView.assetLogoImageView?.profilePhotoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
-                investmentStackView.assetStackView.assetLogoImageView?.profilePhotoImageView.backgroundColor = .clear
+                signalFeeStackView.assetStackView.assetLogoImageView?.profilePhotoImageView.kf.indicatorType = .activity
+                signalFeeStackView.assetStackView.assetLogoImageView?.profilePhotoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
+                signalFeeStackView.assetStackView.assetLogoImageView?.profilePhotoImageView.backgroundColor = .clear
             }
             
             if let title = details.title {
-                investmentStackView.assetStackView.titleLabel.text = title
+                signalFeeStackView.assetStackView.titleLabel.text = title
             }
             
             if let managerName = model.programDetails?.managerName {
-                investmentStackView.assetStackView.subtitleLabel.text = managerName
+                signalFeeStackView.assetStackView.subtitleLabel.text = managerName
             }
             
-            investmentStackView.amountStackView.subtitleLabel.text = "Amount"
+            signalFeeStackView.amountStackView.subtitleLabel.text = "Amount"
             if let amount = model.amount, let currencyType = CurrencyType(rawValue: currency.rawValue) {
-                investmentStackView.amountStackView.titleLabel.text = amount.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+                signalFeeStackView.amountStackView.titleLabel.text = amount.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
             } else {
-                investmentStackView.amountStackView.isHidden = true
+                signalFeeStackView.amountStackView.isHidden = true
             }
             
-            investmentStackView.entryFeeStackView.isHidden = true
-            investmentStackView.successFeeStackView.isHidden = true
-            investmentStackView.gvCommissionStackView.isHidden = true
-            investmentStackView.exitFeeStackView.isHidden = true
-
             if let fees = model.signalFees {
-                if fees.count > 0, let value = fees[0].value, let title = fees[0].title, let currency = fees[0].currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
-                    investmentStackView.entryFeeStackView.isHidden = false
-                    investmentStackView.entryFeeStackView.subtitleLabel.text = title
-                    investmentStackView.entryFeeStackView.titleLabel.text = value.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
-                }
-                if fees.count > 1, let value = fees[1].value, let title = fees[1].title, let currency = fees[1].currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
-                    investmentStackView.successFeeStackView.isHidden = false
-                    investmentStackView.successFeeStackView.subtitleLabel.text = title
-                    investmentStackView.successFeeStackView.titleLabel.text = value.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
-                }
-                if fees.count > 2, let value = fees[2].value, let title = fees[2].title, let currency = fees[2].currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
-                    investmentStackView.gvCommissionStackView.isHidden = false
-                    investmentStackView.gvCommissionStackView.subtitleLabel.text = title
-                    investmentStackView.gvCommissionStackView.titleLabel.text = value.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
-                }
-                if fees.count > 3, let value = fees[3].value, let title = fees[3].title, let currency = fees[3].currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
-                    investmentStackView.exitFeeStackView.isHidden = false
-                    investmentStackView.exitFeeStackView.subtitleLabel.text = title
-                    investmentStackView.exitFeeStackView.titleLabel.text = value.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+                fees.forEach { (fee) in
+                    guard let value = fee.value, let title = fee.title, let currency = fee.currency, let currencyType = CurrencyType(rawValue: currency.rawValue) else { return }
+                    
+                    let subtitleLabel = SubtitleLabel()
+                    subtitleLabel.font = UIFont.getFont(.semibold, size: 12.0)
+                    subtitleLabel.text = title
+                    let titleLabel = TitleLabel()
+                    titleLabel.font = UIFont.getFont(.regular, size: 16.0)
+                    titleLabel.text = value.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+                    
+                    let vStack = UIStackView(arrangedSubviews: [subtitleLabel, titleLabel])
+                    vStack.axis = .vertical
+                    vStack.spacing = 8.0
+                    vStack.alignment = .fill
+                    vStack.distribution = .fillProportionally
+                    
+                    signalFeeStackView.feesStackView.addArrangedSubview(vStack)
                 }
             }
         }
     }
 }
 
+class SignalFeeStackView: UIStackView {
+    @IBOutlet weak var assetStackView: AssetStackView!
+    @IBOutlet weak var feesStackView: UIStackView!
+    @IBOutlet weak var amountStackView: AmountStackView!
+}
+    
 class InvestmentStackView: UIStackView {
     @IBOutlet weak var assetStackView: AssetStackView!
     @IBOutlet weak var successFeeStackView: DefaultStackView!

@@ -9,10 +9,10 @@ import Foundation
 import Alamofire
 
 open class JSONEncodingHelper {
-
+    
     open class func encodingParameters<T:Encodable>(forEncodableObject encodableObj: T?) -> Parameters? {
         var params: Parameters? = nil
-
+        
         // Encode the Encodable object
         if let encodableObj = encodableObj {
             let encodeResult = CodableHelper.encode(encodableObj, prettyPrint: true)
@@ -20,8 +20,9 @@ open class JSONEncodingHelper {
                 params = JSONDataEncoding.encodingParameters(jsonData: encodeResult.data)
             }
         }
-
+        
         return params
     }
-
+    
 }
+

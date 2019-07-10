@@ -219,7 +219,7 @@ extension SignalTradesViewModel {
     
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [SignalTradesTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
     
-        let sorting = sortingDelegateManager.sortingManager?.getSelectedSorting()
+        let sorting = sortingDelegateManager.manager?.getSelectedSorting()
         
         if isOpenTrades {
             SignalDataProvider.getTradesOpen(with: nil, skip: skip, take: take, completion: { [weak self] (tradesViewModel) in

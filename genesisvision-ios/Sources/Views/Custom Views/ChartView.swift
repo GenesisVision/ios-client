@@ -253,7 +253,7 @@ class ChartView: CombinedChartView {
             maxLimitLine = ChartLimitLine(limit: maxLimitValue, label: "\(maxLimitValue)")
             maxLimitLine.lineWidth = 1
             maxLimitLine.lineDashLengths = [1.0, 8.0]
-            maxLimitLine.labelPosition = .rightBottom
+            maxLimitLine.labelPosition = .bottomRight
             maxLimitLine.drawLabelEnabled = true
             maxLimitLine.valueTextColor = UIColor.Cell.title
             maxLimitLine.lineColor = UIColor.Cell.subtitle
@@ -263,7 +263,7 @@ class ChartView: CombinedChartView {
             minLimitLine = ChartLimitLine(limit: minLimitValue, label: "\(minLimitValue)")
             minLimitLine.lineWidth = 1
             minLimitLine.lineDashLengths = [1.0, 8.0]
-            minLimitLine.labelPosition = .rightTop
+            minLimitLine.labelPosition = .topRight
             minLimitLine.drawLabelEnabled = true
             minLimitLine.valueTextColor = UIColor.Cell.title
             minLimitLine.lineColor = UIColor.Cell.subtitle
@@ -347,7 +347,7 @@ class ChartView: CombinedChartView {
             let yValue = profit + investorsFunds + managerFunds
             return ChartDataEntry(x: values[i].date?.timeIntervalSince1970 ?? 0, y: yValue)
         }
-        lineChartDataSet = LineChartDataSet(values: profitDataEntry, label: "Profit Chart")
+        lineChartDataSet = LineChartDataSet(entries: profitDataEntry, label: "Profit Chart")
         lineChartDataSet.setColor(UIColor.Chart.dark)
         lineChartDataSet.fill = Fill(CGColor: UIColor.Chart.dark.cgColor)
         lineChartDataSet.fillAlpha = 1.0
@@ -363,7 +363,7 @@ class ChartView: CombinedChartView {
             let yValue = investorsFunds + managerFunds
             return ChartDataEntry(x: values[i].date?.timeIntervalSince1970 ?? 0, y: yValue)
         }
-        lineChartDataSet = LineChartDataSet(values: investorsFundsDataEntry, label: "Investors Funds Chart")
+        lineChartDataSet = LineChartDataSet(entries: investorsFundsDataEntry, label: "Investors Funds Chart")
         lineChartDataSet.setColor(UIColor.Chart.middle)
         lineChartDataSet.fill = Fill(CGColor: UIColor.Chart.middle.cgColor)
         lineChartDataSet.fillAlpha = 1.0
@@ -377,7 +377,7 @@ class ChartView: CombinedChartView {
             let yValue = values[i].managerFunds ?? 0.0
             return ChartDataEntry(x: values[i].date?.timeIntervalSince1970 ?? 0, y: yValue)
         }
-        lineChartDataSet = LineChartDataSet(values: managerFundsDataEntry, label: "Manager Funds Chart")
+        lineChartDataSet = LineChartDataSet(entries: managerFundsDataEntry, label: "Manager Funds Chart")
         lineChartDataSet.setColor(UIColor.Chart.dark)
         lineChartDataSet.fill = Fill(CGColor: UIColor.Chart.dark.cgColor)
         lineChartDataSet.fillAlpha = 1.0
@@ -399,7 +399,7 @@ class ChartView: CombinedChartView {
             let yValue = investorsFunds + managerFunds
             return ChartDataEntry(x: values[i].date?.timeIntervalSince1970 ?? 0, y: yValue)
         }
-        lineChartDataSet = LineChartDataSet(values: investorsFundsDataEntry, label: "Investors Funds Chart")
+        lineChartDataSet = LineChartDataSet(entries: investorsFundsDataEntry, label: "Investors Funds Chart")
         lineChartDataSet.setColor(UIColor.Chart.middle)
         lineChartDataSet.fill = Fill(CGColor: UIColor.Chart.middle.cgColor)
         lineChartDataSet.fillAlpha = 1.0
@@ -413,7 +413,7 @@ class ChartView: CombinedChartView {
             let yValue = values[i].managerFunds ?? 0.0
             return ChartDataEntry(x: values[i].date?.timeIntervalSince1970 ?? 0, y: yValue)
         }
-        lineChartDataSet = LineChartDataSet(values: managerFundsDataEntry, label: "Manager Funds Chart")
+        lineChartDataSet = LineChartDataSet(entries: managerFundsDataEntry, label: "Manager Funds Chart")
         lineChartDataSet.setColor(UIColor.Chart.dark)
         lineChartDataSet.fill = Fill(CGColor: UIColor.Chart.dark.cgColor)
         lineChartDataSet.fillAlpha = 1.0
@@ -433,7 +433,7 @@ class ChartView: CombinedChartView {
             return ChartDataEntry(x: values[i].date?.timeIntervalSince1970 ?? 0, y: values[i].value ?? 0)
         }
         
-        lineChartDataSet = LineChartDataSet(values: totalDataEntry, label: "Line Profit")
+        lineChartDataSet = LineChartDataSet(entries: totalDataEntry, label: "Line Profit")
         
         setNegativeOrPositiveColor()
         
@@ -445,7 +445,7 @@ class ChartView: CombinedChartView {
             return BarChartDataEntry(x: values[i].date?.timeIntervalSince1970 ?? 0, y: values[i].value ?? 0)
         }
         
-        barChartDataSet = BarChartDataSet(values: totalDataEntry, label: "Bar profit")
+        barChartDataSet = BarChartDataSet(entries: totalDataEntry, label: "Bar profit")
         
         let barChartData = BarChartData(dataSet: barChartDataSet)
         

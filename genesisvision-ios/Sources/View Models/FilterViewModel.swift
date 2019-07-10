@@ -30,6 +30,7 @@ final class FilterViewModel {
         case levels
         case currency
         case sort
+        case tags
         case dateRange
         case onlyActive
     }
@@ -49,6 +50,7 @@ final class FilterViewModel {
     
     var sortingDelegateManager: SortingDelegateManager?
     var currencyDelegateManager: FilterCurrencyDelegateManager?
+    var tagsDelegateManager: TagsDelegateManager?
     var levelsFilterView: LevelsFilterView?
     var dateRangeView: DateRangeView?
     var onlyActive: Bool?
@@ -66,7 +68,7 @@ final class FilterViewModel {
         self.filterType = filterType
         switch filterType {
         case .programs:
-            rows = [.levels, .currency, .sort, .dateRange]
+            rows = [.levels, .currency, .sort, .tags, .dateRange]
         case .dashboardFunds, .dashboardPrograms:
             rows = [.sort, .dateRange, .onlyActive]
         default:
@@ -109,7 +111,7 @@ final class FilterViewModel {
     }
     
     func changeHighToLowValue() {
-        if let sortingManager = sortingDelegateManager?.sortingManager {
+        if let sortingManager = sortingDelegateManager?.manager {
             sortingManager.highToLowValue = !sortingManager.highToLowValue
         }
         
@@ -119,6 +121,7 @@ final class FilterViewModel {
     func reset() {
         currencyDelegateManager?.reset()
         sortingDelegateManager?.reset()
+        tagsDelegateManager?.reset()
         levelsFilterView?.reset()
         dateRangeView?.reset()
         onlyActive = false
@@ -137,7 +140,11 @@ final class FilterViewModel {
                     viewModels[idx].detail = selectedDate
                 }
             case .sort:
-                if let detail = sortingDelegateManager?.sortingManager?.getSelectedSortingValue() {
+                if let detail = sortingDelegateManager?.manager?.getSelectedSortingValue() {
+                    viewModels[idx].detail = detail
+                }
+            case .tags:
+                if let detail = tagsDelegateManager?.manager?.getSelectedValues() {
                     viewModels[idx].detail = detail
                 }
             case .onlyActive:
@@ -154,10 +161,15 @@ final class FilterViewModel {
             filterModel.levelModel.maxLevel = maxLevel
         }
         
-        if let sortingManager = sortingDelegateManager?.sortingManager {
+        if let sortingManager = sortingDelegateManager?.manager {
             filterModel.sortingModel.selectedIndex = sortingManager.selectedIndex
             filterModel.sortingModel.highToLowValue = sortingManager.highToLowValue
             filterModel.sortingModel.selectedSorting = sortingManager.getSelectedSorting()
+        }
+        
+        if let tagsManager = tagsDelegateManager?.manager {
+            filterModel.tagsModel.selectedIdxs = tagsManager.selectedIdxs
+            filterModel.tagsModel.selectedTags = tagsManager.getSelectedTagValues()
         }
         
         if let currencyDelegateManager = currencyDelegateManager {
@@ -196,6 +208,8 @@ final class FilterViewModel {
                 setupSortingManager(filterModel, sortingType: sortingType)
             case .onlyActive:
                 onlyActive = filterModel.onlyActive
+            case .tags:
+                setupTagsManager(filterModel)
             }
         }
     }
@@ -226,8 +240,15 @@ final class FilterViewModel {
         let sortingManager = SortingManager(sortingType)
         sortingDelegateManager = SortingDelegateManager(sortingManager)
         sortingDelegateManager?.delegate = self
-        sortingDelegateManager?.sortingManager?.selectedIndex = filterModel.sortingModel.selectedIndex
-        sortingDelegateManager?.sortingManager?.highToLowValue = filterModel.sortingModel.highToLowValue
+        sortingDelegateManager?.manager?.selectedIndex = filterModel.sortingModel.selectedIndex
+        sortingDelegateManager?.manager?.highToLowValue = filterModel.sortingModel.highToLowValue
+    }
+    
+    private func setupTagsManager(_ filterModel: FilterModel) {
+        let tagsManager = TagsManager()
+        tagsDelegateManager = TagsDelegateManager(tagsManager)
+        tagsDelegateManager?.delegate = self
+        tagsDelegateManager?.manager?.selectedIdxs = filterModel.tagsModel.selectedIdxs
     }
     
     private func setup() {
@@ -257,10 +278,16 @@ final class FilterViewModel {
                 
                 viewModels.append(tableViewCellViewModel!)
             case .sort:
-                guard let highToLowValue = sortingDelegateManager?.sortingManager?.highToLowValue else { return }
+                guard let highToLowValue = sortingDelegateManager?.manager?.highToLowValue else { return }
                 
                 tableViewCellViewModel = FilterTableViewCellViewModel(title: "Sort", detail: nil, detailImage: highToLowValue ? #imageLiteral(resourceName: "img_profit_filter_icon") : #imageLiteral(resourceName: "img_profit_filter_desc_icon"), switchOn: nil, style: .detail, delegate: nil)
-                if let selectedValue = sortingDelegateManager?.sortingManager?.getSelectedSortingValue() {
+                if let selectedValue = sortingDelegateManager?.manager?.getSelectedSortingValue() {
+                    tableViewCellViewModel?.detail = selectedValue
+                }
+                viewModels.append(tableViewCellViewModel!)
+            case .tags:
+                tableViewCellViewModel = FilterTableViewCellViewModel(title: "Tags", detail: nil, detailImage: nil, switchOn: nil, style: .detail, delegate: nil)
+                if let selectedValue = tagsDelegateManager?.manager?.getSelectedValues() {
                     tableViewCellViewModel?.detail = selectedValue
                 }
                 viewModels.append(tableViewCellViewModel!)
@@ -388,12 +415,27 @@ extension FilterViewModel: SortingDelegate {
         let index = rows.index { $0 == .sort }
         guard let idx = index else { return }
         
-        if let sortingManager = sortingDelegateManager?.sortingManager {
-            let detail = sortingManager.getSelectedSortingValue()
-            let highToLowValue = sortingManager.highToLowValue
+        if let manager = sortingDelegateManager?.manager {
+            let detail = manager.getSelectedSortingValue()
+            let highToLowValue = manager.highToLowValue
             
             viewModels[idx].detail = detail
             viewModels[idx].detailImage = highToLowValue ? #imageLiteral(resourceName: "img_profit_filter_icon") : #imageLiteral(resourceName: "img_profit_filter_desc_icon")
+        }
+        
+        filterViewModelProtocol?.didFilterReloadCell(idx)
+    }
+}
+
+extension FilterViewModel: TagsDelegate {
+    func didSelectTag() {
+        let index = rows.index { $0 == .tags }
+        guard let idx = index else { return }
+        
+        if let manager = tagsDelegateManager?.manager {
+            let detail = manager.getSelectedValues()
+            
+            viewModels[idx].detail = detail
         }
         
         filterViewModelProtocol?.didFilterReloadCell(idx)

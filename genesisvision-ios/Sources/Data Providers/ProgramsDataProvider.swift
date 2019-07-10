@@ -14,6 +14,8 @@ class ProgramsDataProvider: DataProvider {
         let levelMin = filterModel?.levelModel.minLevel
         let levelMax = filterModel?.levelModel.maxLevel
         
+        let tags = filterModel?.tagsModel.selectedTags
+        
         let statisticDateFrom = filterModel?.dateRangeModel.dateFrom
         let statisticDateTo = filterModel?.dateRangeModel.dateTo
         
@@ -42,7 +44,7 @@ class ProgramsDataProvider: DataProvider {
         
         let authorization = AuthManager.authorizedToken
         
-        ProgramsAPI.v10ProgramsGet(authorization: authorization, levelMin: levelMin, levelMax: levelMax, profitAvgMin: profitAvgMin, profitAvgMax: profitAvgMax, sorting: sorting, programCurrency: programCurrency, currencySecondary: currencySecondary, levelUpFrom: levelUpFrom, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: facetId, isFavorite: isFavorite, ids: nil, managerId: managerId, programManagerId: nil, skip: skip, take: take) { (viewModel, error) in
+        ProgramsAPI.v10ProgramsGet(authorization: authorization, levelMin: levelMin, levelMax: levelMax, profitAvgMin: profitAvgMin, profitAvgMax: profitAvgMax, sorting: sorting, programCurrency: programCurrency, currencySecondary: currencySecondary, levelUpFrom: levelUpFrom, tags: tags, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: facetId, isFavorite: isFavorite, ids: nil, managerId: managerId, programManagerId: nil, skip: skip, take: take) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }

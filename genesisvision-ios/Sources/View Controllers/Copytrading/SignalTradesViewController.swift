@@ -56,6 +56,19 @@ class SignalTradesViewController: BaseViewControllerWithTableView {
         }
     }
     
+    private func showCommissions(_ orderModel: OrderSignalModel) {
+        guard let fees = orderModel.totalCommissionByType else { return }
+        let feesHeight = 50 * fees.count
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.initializeHeight = CGFloat(150 + feesHeight)
+        bottomSheetController.lineViewIsHidden = true
+        
+        let view = CommissionsView.viewFromNib()
+        view.configure(orderModel)
+        bottomSheetController.addContentsView(view)
+        bottomSheetController.present()
+    }
+    
     override func fetch() {
         viewModel.refresh { [weak self] (result) in
             self?.hideAll()
@@ -115,6 +128,12 @@ extension SignalTradesViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        guard let model = viewModel.model(for: indexPath) else {
+            return
+        }
+        
+        self.showCommissions(model.orderModel)
     }
     
     // MARK: - UITableViewDataSource

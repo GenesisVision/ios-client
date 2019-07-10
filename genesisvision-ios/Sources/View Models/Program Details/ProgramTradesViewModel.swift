@@ -196,7 +196,7 @@ extension ProgramTradesViewModel {
         
         guard let programId = programId else { return completionError(.failure(errorType: .apiError(message: nil))) }
         
-        let sorting = sortingDelegateManager.sortingManager?.getSelectedSorting()
+        let sorting = sortingDelegateManager.manager?.getSelectedSorting()
         
         if isOpenTrades {
             ProgramsDataProvider.getTradesOpen(with: programId, sorting: sorting as? ProgramsAPI.Sorting_v10ProgramsByIdTradesOpenGet, skip: skip, take: take, completion: { [weak self] (tradesViewModel) in

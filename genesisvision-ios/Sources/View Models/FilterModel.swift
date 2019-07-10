@@ -20,6 +20,16 @@ struct FilterSortingModel {
     }
 }
 
+struct FilterTagsModel {
+    var selectedIdxs: [Int] = []
+    var selectedTags: [String] = []
+    
+    init() {
+        selectedIdxs = []
+        selectedTags = []
+    }
+}
+
 struct FilterLevelModel {
     var minLevel: Int = 1
     var maxLevel: Int = 7
@@ -42,6 +52,7 @@ class FilterModel {
     var levelUpData: LevelUpData?
     
     var sortingModel: FilterSortingModel
+    var tagsModel: FilterTagsModel
     var levelModel: FilterLevelModel
     var dateRangeModel: FilterDateRangeModel
     var currencyModel: FilterCurrencyModel
@@ -60,6 +71,7 @@ class FilterModel {
     
     init() {
         sortingModel = FilterSortingModel()
+        tagsModel = FilterTagsModel()
         levelModel = FilterLevelModel()
         dateRangeModel = FilterDateRangeModel()
         currencyModel = FilterCurrencyModel()

@@ -286,7 +286,7 @@ final class SortingDelegateManager: NSObject, UITableViewDelegate, UITableViewDa
     
     weak var delegate: SortingDelegate?
     
-    var sortingManager: SortingManager?
+    var manager: SortingManager?
     
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [DashboardCurrencyTableViewCellViewModel.self]
@@ -296,24 +296,24 @@ final class SortingDelegateManager: NSObject, UITableViewDelegate, UITableViewDa
     init(_ sortingManager: SortingManager) {
         super.init()
         
-        self.sortingManager = sortingManager
+        self.manager = sortingManager
     }
     
     func reset() {
-        sortingManager?.reset()
+        manager?.reset()
     }
     
     // MARK: - UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        sortingManager?.changeSorting(at: indexPath.row)
+        manager?.changeSorting(at: indexPath.row)
         
         delegate?.didSelectSorting()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sortingManager?.sortingValues.count ?? 0
+        return manager?.sortingValues.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -322,8 +322,8 @@ final class SortingDelegateManager: NSObject, UITableViewDelegate, UITableViewDa
             return cell
         }
         
-        let title = sortingManager?.sortingValues[indexPath.row]
-        let isSelected = indexPath.row == sortingManager?.selectedIndex
+        let title = manager?.sortingValues[indexPath.row]
+        let isSelected = indexPath.row == manager?.selectedIndex
         cell.configure(title: title, selected: isSelected)
         
         return cell

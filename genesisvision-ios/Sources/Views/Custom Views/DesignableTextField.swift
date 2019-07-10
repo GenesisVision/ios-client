@@ -34,12 +34,8 @@ class DesignableUITextField: UITextField, UITextFieldDelegate {
     var borderLine = UIView()
     
     var placeholderColor: UIColor? {
-        get {
-            return self.placeholderColor
-            
-        }
-        set {
-            self.attributedPlaceholder = NSAttributedString(string: self.placeholder ?? "", attributes: [NSAttributedStringKey.foregroundColor: newValue ?? UIColor.TextField.placeholder])
+        didSet {
+            self.attributedPlaceholder = NSAttributedString(string: self.placeholder ?? "", attributes: [NSAttributedStringKey.foregroundColor: placeholderColor ?? UIColor.TextField.placeholder])
         }
     }
     

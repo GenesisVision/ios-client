@@ -32,6 +32,13 @@ class AssetsViewController: BaseTabmanViewController<AssetsTabmanViewModel>, UIS
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //FIXME:
+//        scrollToPage(.next, animated: true)
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }

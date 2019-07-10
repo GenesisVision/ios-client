@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		18099AFD55D5395CE47D60A3 /* Pods_genesisvision_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C27C45D024CDE259719CEEA9 /* Pods_genesisvision_ios.framework */; };
 		5E019ED82294294600BB513A /* SignalTradesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E019ED72294294600BB513A /* SignalTradesViewModel.swift */; };
+		5E026FF322D3497F00C555CC /* TagsDelegateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E026FF222D3497F00C555CC /* TagsDelegateManager.swift */; };
+		5E026FF722D3531900C555CC /* TagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E026FF622D3531900C555CC /* TagTableViewCell.swift */; };
+		5E026FF922D3532400C555CC /* TagTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E026FF822D3532400C555CC /* TagTableViewCellViewModel.swift */; };
+		5E026FFB22D3565700C555CC /* TagTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E026FFA22D3565700C555CC /* TagTableViewCell.xib */; };
 		5E067A5420EE3AD5002CA1D1 /* DashboardTabmanRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E067A5320EE3AD5002CA1D1 /* DashboardTabmanRouter.swift */; };
 		5E067A5620EE3AEF002CA1D1 /* DashboardTabmanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E067A5520EE3AEF002CA1D1 /* DashboardTabmanViewModel.swift */; };
 		5E085F47215E7D9B00950042 /* ProgramViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E085F46215E7D9B00950042 /* ProgramViewController.swift */; };
@@ -284,7 +288,6 @@
 		5E9C75F922CA20C5003604ED /* LevelInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9C753D22CA206F003604ED /* LevelInfo.swift */; };
 		5E9C75FA22CA20C5003604ED /* PlatformCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9C753E22CA2071003604ED /* PlatformCurrency.swift */; };
 		5E9C75FB22CA20C5003604ED /* FundSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9C753F22CA2073003604ED /* FundSets.swift */; };
-		5E9C75FC22CA20C5003604ED /* GeeTestDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9C754022CA2074003604ED /* GeeTestDetails.swift */; };
 		5E9C75FD22CA20C5003604ED /* ProgramPeriodViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9C754122CA2076003604ED /* ProgramPeriodViewModel.swift */; };
 		5E9C75FE22CA20C5003604ED /* NewFundRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9C754222CA2079003604ED /* NewFundRequest.swift */; };
 		5E9C75FF22CA20C5003604ED /* NotificationSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9C754322CA207C003604ED /* NotificationSettingViewModel.swift */; };
@@ -373,7 +376,6 @@
 		5E9C765222CA20C5003604ED /* SocialLinksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9C759622CA20B9003604ED /* SocialLinksViewModel.swift */; };
 		5E9C765322CA20C5003604ED /* TransactionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9C759722CA20B9003604ED /* TransactionDetails.swift */; };
 		5E9C765422CA20C5003604ED /* ProgramUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9C759822CA20B9003604ED /* ProgramUpdate.swift */; };
-		5E9C765522CA20C5003604ED /* GeeTestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9C759922CA20B9003604ED /* GeeTestResult.swift */; };
 		5E9C765622CA20C5003604ED /* SignalTradingEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9C759A22CA20B9003604ED /* SignalTradingEvents.swift */; };
 		5E9C765722CA20C5003604ED /* RatesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9C759B22CA20BA003604ED /* RatesModel.swift */; };
 		5E9C765822CA20C5003604ED /* ManagerOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9C759C22CA20BA003604ED /* ManagerOverview.swift */; };
@@ -470,8 +472,6 @@
 		5EAC11B620B8587D0057A2D2 /* AuthTwoFactorSignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAC11B520B8587D0057A2D2 /* AuthTwoFactorSignInViewModel.swift */; };
 		5EAC11B820B8588C0057A2D2 /* AuthTwoFactorSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAC11B720B8588C0057A2D2 /* AuthTwoFactorSignInViewController.swift */; };
 		5EAC11BA20B862400057A2D2 /* AuthTwoFactorSignInRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAC11B920B862400057A2D2 /* AuthTwoFactorSignInRouter.swift */; };
-		5EAD0AB4208F7CB000A92B49 /* EasyTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAD0AB2208F7CB000A92B49 /* EasyTipView.swift */; };
-		5EAD0AB5208F7CB000A92B49 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAD0AB3208F7CB000A92B49 /* UIKitExtensions.swift */; };
 		5EAD0AB72090AB1000A92B49 /* MarkerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EAD0AB62090AB1000A92B49 /* MarkerView.xib */; };
 		5EAD0AB92090AB2300A92B49 /* MarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAD0AB82090AB2300A92B49 /* MarkerView.swift */; };
 		5EAD3504214FCA1C0057450C /* AllEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAD3503214FCA1C0057450C /* AllEnums.swift */; };
@@ -536,6 +536,8 @@
 		5ED0C9192091144200C83F23 /* PlateTableViewCellAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0C9172091144100C83F23 /* PlateTableViewCellAppearance.swift */; };
 		5ED0C91B2091157600C83F23 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0C91A2091157500C83F23 /* ShadowView.swift */; };
 		5ED0C91D2091158500C83F23 /* ShadowViewAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0C91C2091158500C83F23 /* ShadowViewAppearance.swift */; };
+		5ED0F33222CE501600F3F9F0 /* CommissionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ED0F33022CE501600F3F9F0 /* CommissionsView.xib */; };
+		5ED0F33322CE501600F3F9F0 /* CommissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0F33122CE501600F3F9F0 /* CommissionsView.swift */; };
 		5ED1141821594ED900EC5385 /* EventListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED1141721594ED900EC5385 /* EventListViewModel.swift */; };
 		5ED1141A2159545900EC5385 /* ChartsTabmanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED114192159545900EC5385 /* ChartsTabmanViewModel.swift */; };
 		5ED1141C2159549500EC5385 /* AssetsTabmanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED1141B2159549500EC5385 /* AssetsTabmanViewModel.swift */; };
@@ -555,6 +557,8 @@
 		5ED738792194FA33001DA633 /* FilterTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED738782194FA33001DA633 /* FilterTableViewCellViewModel.swift */; };
 		5ED7387F21951017001DA633 /* LevelsFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ED7387D21951017001DA633 /* LevelsFilterView.xib */; };
 		5ED7388021951018001DA633 /* LevelsFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED7387E21951017001DA633 /* LevelsFilterView.swift */; };
+		5EDB60A922D5EFFF0074C13B /* GeeTestDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDB60A822D5EFFF0074C13B /* GeeTestDetails.swift */; };
+		5EDB60AB22D5F0050074C13B /* GeeTestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDB60AA22D5F0050074C13B /* GeeTestResult.swift */; };
 		5EDD6D3D22C64AA600B9DB93 /* CreateAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDD6D3C22C64AA600B9DB93 /* CreateAccountViewModel.swift */; };
 		5EDD6D3F22C7A6DE00B9DB93 /* CustomLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDD6D3E22C7A6DE00B9DB93 /* CustomLabels.swift */; };
 		5EDD6D4122C7A70D00B9DB93 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDD6D4022C7A70D00B9DB93 /* CustomTextField.swift */; };
@@ -746,6 +750,10 @@
 		382A460F742C4CFCF1959337 /* Pods-genesisvision-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.release.xcconfig"; sourceTree = "<group>"; };
 		48CE503E3E1E1FE94C4379A5 /* Pods-genesisvision-ios.release manager.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.release manager.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.release manager.xcconfig"; sourceTree = "<group>"; };
 		5E019ED72294294600BB513A /* SignalTradesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalTradesViewModel.swift; sourceTree = "<group>"; };
+		5E026FF222D3497F00C555CC /* TagsDelegateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsDelegateManager.swift; sourceTree = "<group>"; };
+		5E026FF622D3531900C555CC /* TagTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTableViewCell.swift; sourceTree = "<group>"; };
+		5E026FF822D3532400C555CC /* TagTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		5E026FFA22D3565700C555CC /* TagTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagTableViewCell.xib; sourceTree = "<group>"; };
 		5E067A5320EE3AD5002CA1D1 /* DashboardTabmanRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTabmanRouter.swift; sourceTree = "<group>"; };
 		5E067A5520EE3AEF002CA1D1 /* DashboardTabmanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTabmanViewModel.swift; sourceTree = "<group>"; };
 		5E085F46215E7D9B00950042 /* ProgramViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramViewController.swift; sourceTree = "<group>"; };
@@ -1025,7 +1033,6 @@
 		5E9C753D22CA206F003604ED /* LevelInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelInfo.swift; sourceTree = "<group>"; };
 		5E9C753E22CA2071003604ED /* PlatformCurrency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatformCurrency.swift; sourceTree = "<group>"; };
 		5E9C753F22CA2073003604ED /* FundSets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FundSets.swift; sourceTree = "<group>"; };
-		5E9C754022CA2074003604ED /* GeeTestDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeeTestDetails.swift; sourceTree = "<group>"; };
 		5E9C754122CA2076003604ED /* ProgramPeriodViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramPeriodViewModel.swift; sourceTree = "<group>"; };
 		5E9C754222CA2079003604ED /* NewFundRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewFundRequest.swift; sourceTree = "<group>"; };
 		5E9C754322CA207C003604ED /* NotificationSettingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationSettingViewModel.swift; sourceTree = "<group>"; };
@@ -1114,7 +1121,6 @@
 		5E9C759622CA20B9003604ED /* SocialLinksViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialLinksViewModel.swift; sourceTree = "<group>"; };
 		5E9C759722CA20B9003604ED /* TransactionDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionDetails.swift; sourceTree = "<group>"; };
 		5E9C759822CA20B9003604ED /* ProgramUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramUpdate.swift; sourceTree = "<group>"; };
-		5E9C759922CA20B9003604ED /* GeeTestResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeeTestResult.swift; sourceTree = "<group>"; };
 		5E9C759A22CA20B9003604ED /* SignalTradingEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalTradingEvents.swift; sourceTree = "<group>"; };
 		5E9C759B22CA20BA003604ED /* RatesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatesModel.swift; sourceTree = "<group>"; };
 		5E9C759C22CA20BA003604ED /* ManagerOverview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerOverview.swift; sourceTree = "<group>"; };
@@ -1211,8 +1217,6 @@
 		5EAC11B520B8587D0057A2D2 /* AuthTwoFactorSignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTwoFactorSignInViewModel.swift; sourceTree = "<group>"; };
 		5EAC11B720B8588C0057A2D2 /* AuthTwoFactorSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTwoFactorSignInViewController.swift; sourceTree = "<group>"; };
 		5EAC11B920B862400057A2D2 /* AuthTwoFactorSignInRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTwoFactorSignInRouter.swift; sourceTree = "<group>"; };
-		5EAD0AB2208F7CB000A92B49 /* EasyTipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EasyTipView.swift; sourceTree = "<group>"; };
-		5EAD0AB3208F7CB000A92B49 /* UIKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
 		5EAD0AB62090AB1000A92B49 /* MarkerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarkerView.xib; sourceTree = "<group>"; };
 		5EAD0AB82090AB2300A92B49 /* MarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerView.swift; sourceTree = "<group>"; };
 		5EAD3503214FCA1C0057450C /* AllEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllEnums.swift; sourceTree = "<group>"; };
@@ -1277,6 +1281,8 @@
 		5ED0C9172091144100C83F23 /* PlateTableViewCellAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlateTableViewCellAppearance.swift; sourceTree = "<group>"; };
 		5ED0C91A2091157500C83F23 /* ShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		5ED0C91C2091158500C83F23 /* ShadowViewAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowViewAppearance.swift; sourceTree = "<group>"; };
+		5ED0F33022CE501600F3F9F0 /* CommissionsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommissionsView.xib; sourceTree = "<group>"; };
+		5ED0F33122CE501600F3F9F0 /* CommissionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommissionsView.swift; sourceTree = "<group>"; };
 		5ED1141721594ED900EC5385 /* EventListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListViewModel.swift; sourceTree = "<group>"; };
 		5ED114192159545900EC5385 /* ChartsTabmanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsTabmanViewModel.swift; sourceTree = "<group>"; };
 		5ED1141B2159549500EC5385 /* AssetsTabmanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsTabmanViewModel.swift; sourceTree = "<group>"; };
@@ -1296,6 +1302,8 @@
 		5ED738782194FA33001DA633 /* FilterTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		5ED7387D21951017001DA633 /* LevelsFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LevelsFilterView.xib; sourceTree = "<group>"; };
 		5ED7387E21951017001DA633 /* LevelsFilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelsFilterView.swift; sourceTree = "<group>"; };
+		5EDB60A822D5EFFF0074C13B /* GeeTestDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeeTestDetails.swift; sourceTree = "<group>"; };
+		5EDB60AA22D5F0050074C13B /* GeeTestResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeeTestResult.swift; sourceTree = "<group>"; };
 		5EDD6D3C22C64AA600B9DB93 /* CreateAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewModel.swift; sourceTree = "<group>"; };
 		5EDD6D3E22C7A6DE00B9DB93 /* CustomLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabels.swift; sourceTree = "<group>"; };
 		5EDD6D4022C7A70D00B9DB93 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
@@ -1633,6 +1641,8 @@
 		5E18CE1320C566F0008FE5B5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				5EDB60AA22D5F0050074C13B /* GeeTestResult.swift */,
+				5EDB60A822D5EFFF0074C13B /* GeeTestDetails.swift */,
 				5E9C751022CA2050003604ED /* AmountWithCurrency.swift */,
 				5E9C751222CA2053003604ED /* AndroidAppVersion.swift */,
 				5E9C75A722CA20BE003604ED /* AndroidVersion.swift */,
@@ -1688,8 +1698,6 @@
 				5E9C756222CA20A0003604ED /* FundsList.swift */,
 				5E9C757D22CA20B2003604ED /* FundStatistic.swift */,
 				5E9C759522CA20B8003604ED /* FundWithdrawInfo.swift */,
-				5E9C754022CA2074003604ED /* GeeTestDetails.swift */,
-				5E9C759922CA20B9003604ED /* GeeTestResult.swift */,
 				5E9C75B322CA20C1003604ED /* InternalTransferRequest.swift */,
 				5E9C758322CA20B3003604ED /* IOsAppVersion.swift */,
 				5E9C753D22CA206F003604ED /* LevelInfo.swift */,
@@ -2044,15 +2052,6 @@
 			path = List;
 			sourceTree = "<group>";
 		};
-		5EAD0AB1208F7CA900A92B49 /* EasyTipView */ = {
-			isa = PBXGroup;
-			children = (
-				5EAD0AB2208F7CB000A92B49 /* EasyTipView.swift */,
-				5EAD0AB3208F7CB000A92B49 /* UIKitExtensions.swift */,
-			);
-			path = EasyTipView;
-			sourceTree = "<group>";
-		};
 		5EB996AB20F392DA00E31D23 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -2322,6 +2321,7 @@
 				5E7A6A8A214020EE005DEEBD /* BottomSheet.swift */,
 				5E86BFDD22B7FFC70019DC85 /* TradeDetailView.swift */,
 				5E86BFDC22B7FFC60019DC85 /* TradeDetailView.xib */,
+				5ED0F32F22CE4FF200F3F9F0 /* Commissions */,
 				5EF16D6A21E8C4BF00FF55B8 /* Selected Chart Assets */,
 				5ED645F221C06A0E0044AC1D /* About Level */,
 				5EC6709721AEAA13009BF4C0 /* Invest and Withdraw */,
@@ -2556,6 +2556,15 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		5ED0F32F22CE4FF200F3F9F0 /* Commissions */ = {
+			isa = PBXGroup;
+			children = (
+				5ED0F33122CE501600F3F9F0 /* CommissionsView.swift */,
+				5ED0F33022CE501600F3F9F0 /* CommissionsView.xib */,
+			);
+			path = Commissions;
+			sourceTree = "<group>";
+		};
 		5ED3B477210898810026C123 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -2639,6 +2648,7 @@
 				5EC78728216BE8B2000C91E4 /* InRequestsDelegateManager.swift */,
 				5EC7872A216BE8E6000C91E4 /* CurrencyDelegateManager.swift */,
 				5EC7872C216BE905000C91E4 /* SortingDelegateManager.swift */,
+				5E026FF222D3497F00C555CC /* TagsDelegateManager.swift */,
 				5EC78817216CE74D000C91E4 /* EventsDelegateManager.swift */,
 				5E6732AF2195DEBC000A5C7C /* FilterCurrencyDelegateManager.swift */,
 				5EA1FE2B21A30EC200308D81 /* FacetsDelegateManager.swift */,
@@ -2995,6 +3005,9 @@
 				5ED738782194FA33001DA633 /* FilterTableViewCellViewModel.swift */,
 				5ED738742194FA15001DA633 /* FilterTableViewCell.swift */,
 				5ED738752194FA15001DA633 /* FilterTableViewCell.xib */,
+				5E026FF822D3532400C555CC /* TagTableViewCellViewModel.swift */,
+				5E026FF622D3531900C555CC /* TagTableViewCell.swift */,
+				5E026FFA22D3565700C555CC /* TagTableViewCell.xib */,
 			);
 			path = Filter;
 			sourceTree = "<group>";
@@ -3274,7 +3287,6 @@
 			isa = PBXGroup;
 			children = (
 				5E87E75E208F423300141269 /* ScrollableSegmentedControl.swift */,
-				5EAD0AB1208F7CA900A92B49 /* EasyTipView */,
 				FC27231C20498958005225F2 /* QRCodeReader */,
 				FC0E20152044459500872BE5 /* QRCode */,
 				FC140F942030168100B71E7F /* API Client */,
@@ -3494,6 +3506,7 @@
 				5EA274BF21628253008CAF77 /* YourInvestmentTableViewCell.xib in Resources */,
 				5E0E1B9C2221A0CC001F3C4E /* InfoSignalsTableViewCell.xib in Resources */,
 				5E5BC29B21868FD7009E4BA3 /* FundAssetsHeaderView.xib in Resources */,
+				5E026FFB22D3565700C555CC /* TagTableViewCell.xib in Resources */,
 				5E0ACEC2217FA7C600DC76AA /* ErrorBottomSheetView.xib in Resources */,
 				5E8340E6207E39B6004A29F1 /* ProgramTradesTableViewCell.xib in Resources */,
 				5EE13217221F037C00231F6C /* WalletMoreButtonView.xib in Resources */,
@@ -3518,6 +3531,7 @@
 				5E1CF81D218B71D100541C70 /* Montserrat-Bold.ttf in Resources */,
 				5E93E70E21D1AC130020DE55 /* NotificationsSettingsCustomTableViewCell.xib in Resources */,
 				5E3C72FC2174EC6500DE6F7D /* InvestWithdrawConfirmView.xib in Resources */,
+				5ED0F33222CE501600F3F9F0 /* CommissionsView.xib in Resources */,
 				5E6A6BC1216D5EEE0082C343 /* PortfolioEventTableViewCell.xib in Resources */,
 				FC49641E2015500700104CEB /* Dashboard.storyboard in Resources */,
 				5E9C74DF22C99D6B003604ED /* DetailStatisticsTableViewCell.xib in Resources */,
@@ -3653,6 +3667,7 @@
 				5EA8B9C621B45DD40074EA2C /* SearchPageboyViewControllerDataSource.swift in Sources */,
 				5E9C75DA22CA20C4003604ED /* ProgramsLevelsInfo.swift in Sources */,
 				5E9C761322CA20C5003604ED /* WalletsGrandTotal.swift in Sources */,
+				5E026FF722D3531900C555CC /* TagTableViewCell.swift in Sources */,
 				5E9C764F22CA20C5003604ED /* FundProfitChart.swift in Sources */,
 				5E9C766222CA20C5003604ED /* ProgramPeriodsViewModel.swift in Sources */,
 				5EA7A0FA20A0B0AD00D895FC /* ProgramTabmanViewController.swift in Sources */,
@@ -3733,6 +3748,7 @@
 				5E9C765A22CA20C5003604ED /* ProgramSets.swift in Sources */,
 				5E93E70021D1A5370020DE55 /* NotificationsSettingsGeneralTableViewCell.swift in Sources */,
 				5E616B4F20F7B73400B3459D /* CreateProgramThirdViewModel.swift in Sources */,
+				5EDB60AB22D5F0050074C13B /* GeeTestResult.swift in Sources */,
 				FC0E200E2044359800872BE5 /* WalletDepositViewModel.swift in Sources */,
 				5E9C761722CA20C5003604ED /* WalletMultiAvailable.swift in Sources */,
 				5EEE4557210B2377009CF791 /* ManagerDashboardViewController.swift in Sources */,
@@ -3896,6 +3912,7 @@
 				FCA19A45201AE86900157AD6 /* WalletRouter.swift in Sources */,
 				5E0E1BAB2223E559001F3C4E /* WalletCopytradingAccountTableViewCellViewModel.swift in Sources */,
 				5E9C75DC22CA20C4003604ED /* ResetPasswordViewModel.swift in Sources */,
+				5ED0F33322CE501600F3F9F0 /* CommissionsView.swift in Sources */,
 				5EEA3E592177756800449E86 /* ManagerTabmanViewController.swift in Sources */,
 				5EC1C3AD228557FE0024008E /* WalletsAccountsTransferViewModel.swift in Sources */,
 				5EFE7C442181E78700D385C8 /* FundProfitViewController.swift in Sources */,
@@ -3936,6 +3953,7 @@
 				5E18CE0520C0561B008FE5B5 /* AuthTwoFactorTabmanRouter.swift in Sources */,
 				5E5BC29221868A44009E4BA3 /* FundAssetsViewModel.swift in Sources */,
 				5E9C760122CA20C5003604ED /* ProgramProfitChart.swift in Sources */,
+				5E026FF322D3497F00C555CC /* TagsDelegateManager.swift in Sources */,
 				5E11DFCC21B91F2100B2B6EE /* ListViewModel.swift in Sources */,
 				5E9C762E22CA20C5003604ED /* ProgramPwdUpdate.swift in Sources */,
 				5E6732AE2195C56A000A5C7C /* BaseViewControllerWithTableView.swift in Sources */,
@@ -3954,7 +3972,6 @@
 				FC27232720498959005225F2 /* QRCodeReader.swift in Sources */,
 				FC140FEA2030168100B71E7F /* Models.swift in Sources */,
 				5EAD3510214FD5AF0057450C /* ChartsPageboyViewControllerDataSource.swift in Sources */,
-				5E9C75FC22CA20C5003604ED /* GeeTestDetails.swift in Sources */,
 				5E0AD0EF21813F3800DC76AA /* FundTabmanViewController.swift in Sources */,
 				5E9C75EA22CA20C5003604ED /* PlatformStatistic.swift in Sources */,
 				5E9C767822CA20C5003604ED /* ManagerProgramCreateResult.swift in Sources */,
@@ -4117,7 +4134,6 @@
 				5ED7388021951018001DA633 /* LevelsFilterView.swift in Sources */,
 				5EEE455B210B4049009CF791 /* ManagerDashboardTabmanViewModel.swift in Sources */,
 				5E1813842061D36700481646 /* DatePickerViewController.swift in Sources */,
-				5E9C765522CA20C5003604ED /* GeeTestResult.swift in Sources */,
 				5E2BA549226F373300C6A88C /* WalletCurrencyTableViewCellViewModel.swift in Sources */,
 				FCA19A3D201AE35800157AD6 /* WelcomeViewModel.swift in Sources */,
 				5E9C75C922CA20C4003604ED /* ProgramLevelInfo.swift in Sources */,
@@ -4142,7 +4158,6 @@
 				5E7717682153F5A1002624FC /* DashboardProgramListViewController.swift in Sources */,
 				5E27EC4A218758AC00C6CF5C /* FundAssetTableViewCell.swift in Sources */,
 				5E9C765022CA20C5003604ED /* SignalDetails.swift in Sources */,
-				5EAD0AB4208F7CB000A92B49 /* EasyTipView.swift in Sources */,
 				5EA1FE2A21A3004C00308D81 /* FacetCollectionViewCellViewModel.swift in Sources */,
 				FC140FE92030168100B71E7F /* JSONEncodingHelper.swift in Sources */,
 				5E9C75D122CA20C4003604ED /* ProgramDetailsFull.swift in Sources */,
@@ -4166,7 +4181,6 @@
 				5EC78814216CDE65000C91E4 /* UICollectionView+CellViewModel.swift in Sources */,
 				5EC1C3B5228817750024008E /* AccountsDepositCurrencyDelegateManager.swift in Sources */,
 				5E33E3B420AB20B900A0B9DE /* ProgramTabmanRouter.swift in Sources */,
-				5EAD0AB5208F7CB000A92B49 /* UIKitExtensions.swift in Sources */,
 				5E8340DE207E38A4004A29F1 /* ProgramTradesViewController.swift in Sources */,
 				5E9C764022CA20C5003604ED /* UserCommissionData.swift in Sources */,
 				FCA19A37201AE01D00157AD6 /* ConfirmationRouter.swift in Sources */,
@@ -4228,12 +4242,14 @@
 				5E9C763E22CA20C5003604ED /* BrokersInfo.swift in Sources */,
 				5E9C762A22CA20C5003604ED /* FundDetails.swift in Sources */,
 				FCB1786E2045C46E00A482B7 /* DataProvider.swift in Sources */,
+				5EDB60A922D5EFFF0074C13B /* GeeTestDetails.swift in Sources */,
 				5EA274BE21628253008CAF77 /* YourInvestmentTableViewCell.swift in Sources */,
 				5E0E1BB12223E5CB001F3C4E /* WalletCopytradingAccountListViewModel.swift in Sources */,
 				FCA19A41201AE83F00157AD6 /* DashboardViewModel.swift in Sources */,
 				5E9C767422CA20C5003604ED /* SignalProviderSubscribers.swift in Sources */,
 				FCA19A39201AE02F00157AD6 /* SignInRouter.swift in Sources */,
 				5EE0075D217871BB0045B890 /* ManagerInfoViewModel.swift in Sources */,
+				5E026FF922D3532400C555CC /* TagTableViewCellViewModel.swift in Sources */,
 				5E9C767922CA20C5003604ED /* BlockchainInfo.swift in Sources */,
 				5E44E5A82289808400865A85 /* PlatformAPI.swift in Sources */,
 				5E9C75F522CA20C5003604ED /* NotificationList.swift in Sources */,

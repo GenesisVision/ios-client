@@ -128,7 +128,6 @@ struct AppearanceController {
         setupSegmentedControl()
         setupPlateCell()
         setupShadowView()
-        setupEasyTipView()
     }
     
     // NavigationBar
@@ -183,29 +182,6 @@ struct AppearanceController {
         segmentedControlAppearance.tintColor = UIColor.primary
         segmentedControlAppearance.borderColor = UIColor.primary
         segmentedControlAppearance.borderWidth = 2
-    }
-    
-    // MARK: - EasyTipView
-    private static func setupEasyTipView() {
-        var preferences = EasyTipView.Preferences()
-        preferences.drawing.font = UIFont.getFont(.regular, size: 15)
-        preferences.drawing.foregroundColor = UIColor.Font.white
-        preferences.drawing.backgroundColor = UIColor.primary
-        preferences.drawing.arrowPosition = EasyTipView.ArrowPosition.bottom
-        preferences.drawing.shadowColor = UIColor.Font.dark
-        preferences.drawing.shadowOpacity = 0.5
-        preferences.drawing.shadowRadius = 3.0
-        preferences.drawing.shadowOffset = CGSize(width: 2.0, height: 2.0)
-        preferences.hasShadow = true
-        
-        preferences.animating.dismissTransform = CGAffineTransform(translationX: 0, y: -15)
-        preferences.animating.showInitialTransform = CGAffineTransform(translationX: 0, y: -15)
-        preferences.animating.showInitialAlpha = 0
-        preferences.animating.showDuration = 0.3
-        preferences.animating.dismissDuration = 0.3
-        preferences.animating.captureAllTaps = true
-        
-        EasyTipView.globalPreferences = preferences
     }
     
     // MARK: - PlateCell

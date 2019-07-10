@@ -163,7 +163,7 @@ extension SignalListViewController: DelegateManagerProtocol {
 
 extension SignalListViewController {
     override func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
-//        viewModel.showProgramList()
+        viewModel.showProgramList()
     }
 }
 

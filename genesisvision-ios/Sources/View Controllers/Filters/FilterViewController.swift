@@ -105,14 +105,14 @@ class FiltersViewController: BaseViewControllerWithTableView {
     }
     
     private func showSort() {
-        guard let sortingManager = viewModel.sortingDelegateManager?.sortingManager else { return }
+        guard let manager = viewModel.sortingDelegateManager?.manager else { return }
         
         bottomSheetController = BottomSheetController()
         let normalImage = #imageLiteral(resourceName: "img_profit_filter_icon")
         let selectedImage = #imageLiteral(resourceName: "img_profit_filter_desc_icon")
         
         bottomSheetController.initializeHeight = 350
-        bottomSheetController.addNavigationBar("Sort by", buttonTitle: "High to Low", buttonSelectedTitle: "Low to High", normalImage: normalImage, selectedImage: selectedImage, buttonAction: #selector(highToLowButtonAction), buttonTarget: self, buttonSelected: !sortingManager.highToLowValue)
+        bottomSheetController.addNavigationBar("Sort by", buttonTitle: "High to Low", buttonSelectedTitle: "Low to High", normalImage: normalImage, selectedImage: selectedImage, buttonAction: #selector(highToLowButtonAction), buttonTarget: self, buttonSelected: !manager.highToLowValue)
         
         bottomSheetController.addTableView { [weak self] tableView in
             if let sortingDelegateManager = self?.viewModel.sortingDelegateManager {
@@ -121,6 +121,23 @@ class FiltersViewController: BaseViewControllerWithTableView {
                 tableView.dataSource = sortingDelegateManager
             }
             
+            tableView.separatorStyle = .none
+        }
+        
+        bottomSheetController.present()
+    }
+    
+    private func showTags() {
+        guard let manager = viewModel.tagsDelegateManager else { return }
+        
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.initializeHeight = 350
+        bottomSheetController.addNavigationBar("Tags")
+        
+        bottomSheetController.addTableView { tableView in
+            tableView.registerNibs(for: manager.cellModelsForRegistration)
+            tableView.delegate = manager
+            tableView.dataSource = manager
             tableView.separatorStyle = .none
         }
         
@@ -179,6 +196,8 @@ extension FiltersViewController: UITableViewDelegate, UITableViewDataSource {
             showLevels()
         case .sort:
             showSort()
+        case .tags:
+            showTags()
         case .dateRange:
             showDateRange()
         case .onlyActive:
