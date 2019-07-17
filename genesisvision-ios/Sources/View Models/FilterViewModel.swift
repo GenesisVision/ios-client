@@ -68,7 +68,10 @@ final class FilterViewModel {
         self.filterType = filterType
         switch filterType {
         case .programs:
-            rows = [.levels, .currency, .sort, .dateRange, .tags]
+            rows = [.currency, .sort, .dateRange, .tags]
+            if filterModel.facetTitle != "Rating" {
+                rows.insert(.levels, at: 0)
+            }
         case .funds:
             rows = [.sort, .dateRange, .tags]
         case .dashboardFunds, .dashboardPrograms:

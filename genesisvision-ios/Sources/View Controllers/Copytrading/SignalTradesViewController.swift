@@ -22,8 +22,6 @@ class SignalTradesViewController: BaseViewControllerWithTableView {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        view.endEditing(true)
     }
     
     // MARK: - Private methods

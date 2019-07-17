@@ -8,41 +8,46 @@
 
 import UIKit
 
+protocol RatingTableHeaderViewProtocol: class {
+    func levelButtonDidTap(_ level: Int)
+}
+
 class RatingTableHeaderView: UITableViewHeaderFooterView {
     // MARK: - Outlets
-    @IBOutlet weak var programsTotalCountTitleLabel: SubtitleLabel!
-    @IBOutlet weak var programsTotalCountValueLabel: TitleLabel!
+    @IBOutlet var levelButtons: [RatingLevelButton]!
     
-    @IBOutlet weak var quotaTitleLabel: SubtitleLabel!
-    @IBOutlet weak var quotaValueLabel: TitleLabel!
-    
-    @IBOutlet weak var targetProfitTitleLabel: SubtitleLabel!
-    @IBOutlet weak var targetProfitValueLabel: TitleLabel!
+    weak var delegate: RatingTableHeaderViewProtocol?
     
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
 
         contentView.backgroundColor = UIColor.BaseView.bg
+        levelButtons.forEach { (levelButton) in
+            levelButton.withBorderColor = true
+            levelButton.showProgress = false
+            
+            if let text = levelButton.titleLabel?.text, let tag = Int(text) {
+                levelButton.tag = tag
+                if tag == 1 {
+                    levelButton.isSelected = true
+                    levelButton.isEnabled = false
+                }
+            } else {
+                levelButton.tag = 0
+            }
+        }
     }
     
-    func configure(_ levelUpData: LevelUpData) {
-        programsTotalCountTitleLabel.text = "Programs"
-        if let total = levelUpData.total {
-            programsTotalCountValueLabel.text = total.toString()
+    @IBAction func levelButtonsAction(_ sender: RatingLevelButton) {
+        levelButtons.forEach { (levelButton) in
+            levelButton.isEnabled = true
+            levelButton.isSelected = false
         }
         
-        quotaTitleLabel.text = "Quota"
-        if let quota = levelUpData.quota {
-            quotaValueLabel.text = quota.toString()
-        }
+        sender.isSelected = true
+        sender.isEnabled = false
         
-        targetProfitTitleLabel.text = "Target profit"
-        if let targetProfit = levelUpData.targetProfit {
-            let sign = targetProfit == 0 ? "" : targetProfit > 0 ? "+" : "-"
-            targetProfitValueLabel.text = sign + targetProfit.rounded(withType: .undefined).toString() + "%"
-            
-            targetProfitValueLabel.textColor = targetProfit == 0 ? UIColor.Cell.title : targetProfit > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
-        }
+        delegate?.levelButtonDidTap(sender.tag)
     }
 }

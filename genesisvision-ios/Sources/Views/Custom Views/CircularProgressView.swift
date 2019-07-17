@@ -26,8 +26,16 @@ class CircularProgressView: UIView {
     public var percentTextEnable: Bool = false
     public var clockwise: Bool = true
     public var lineWidth: CGFloat = 2
-    public var foregroundStrokeColor: UIColor = UIColor.primary
-    public var backgroundStrokeColor: UIColor = UIColor.primary.withAlphaComponent(0.2)
+    public var foregroundStrokeColor: UIColor? {
+        didSet {
+            self.layoutSubviews()
+        }
+    }
+    public var backgroundStrokeColor: UIColor? {
+        didSet {
+            self.layoutSubviews()
+        }
+    }
 
     public func setProgress(to progressConstant: Double, withAnimation: Bool) {
         progress = Double(progressConstant > 1
@@ -98,10 +106,14 @@ class CircularProgressView: UIView {
         
         let foregroundPath = UIBezierPath(arcCenter: center, radius: center.x, startAngle: clockwise ? startAngle : endAngle, endAngle: clockwise ? endAngle : startAngle, clockwise: clockwise)
         foregroundLayer.path = foregroundPath.cgPath
-        foregroundLayer.strokeColor = foregroundStrokeColor.cgColor
+        if let foregroundStrokeColor = foregroundStrokeColor {
+            foregroundLayer.strokeColor = foregroundStrokeColor.cgColor
+        }
 
         let backgroundPath = UIBezierPath(arcCenter: center, radius: center.x, startAngle: CGFloat(0), endAngle: 2 * CGFloat.pi, clockwise: clockwise)
         backgroundLayer.path = backgroundPath.cgPath
-        backgroundLayer.strokeColor = backgroundStrokeColor.cgColor
+        if let backgroundStrokeColor = backgroundStrokeColor {
+            backgroundLayer.strokeColor = backgroundStrokeColor.cgColor
+        }
     }
 }

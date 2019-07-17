@@ -12,7 +12,11 @@ class ListDelegateManager<T: ListViewModelProtocol>: NSObject, UITableViewDelega
     var viewModel: T?
     weak var delegate: DelegateManagerProtocol?
     
-    var ratingTableHeaderView: RatingTableHeaderView?
+    var ratingTableHeaderView: RatingTableHeaderView? {
+        didSet {
+            ratingTableHeaderView?.delegate = self
+        }
+    }
     
     init(with viewModel: T) {
         super.init()
@@ -62,7 +66,7 @@ class ListDelegateManager<T: ListViewModelProtocol>: NSObject, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if viewModel?.filterModel.levelUpData != nil {
+        if viewModel?.filterModel.facetTitle == "Rating" {
             return 60.0
         }
         
@@ -70,10 +74,8 @@ class ListDelegateManager<T: ListViewModelProtocol>: NSObject, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if let levelUpData = viewModel?.filterModel.levelUpData {
+        if viewModel?.filterModel.facetTitle == "Rating" {
             let header = tableView.dequeueReusableHeaderFooterView() as RatingTableHeaderView
-            header.configure(levelUpData)
-            
             ratingTableHeaderView = header
             
             return ratingTableHeaderView
@@ -116,5 +118,12 @@ class ListDelegateManager<T: ListViewModelProtocol>: NSObject, UITableViewDelega
             //            print("up")
             scrollView.isScrollEnabled = scrollView.contentOffset.y >= -44.0
         }
+    }
+}
+
+extension ListDelegateManager: RatingTableHeaderViewProtocol {
+    func levelButtonDidTap(_ level: Int) {
+        viewModel?.filterModel.levelsSet = [level]
+        viewModel?.refresh(completion: { (result) in })
     }
 }

@@ -275,12 +275,6 @@ extension Router {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    func showRatingList(with filterModel: FilterModel) {
-        guard let viewController = getRating(with: filterModel) else { return }
-        
-        navigationController?.pushViewController(viewController, animated: true)
-    }
-    
     func getRootTabBar(parent: Router?) -> UITabBarController? {
         if let rootTabBarController = parent?.rootTabBarController {
             return rootTabBarController
@@ -531,19 +525,6 @@ extension Router {
         let router = ListRouter(parentRouter: parentRouter ?? self)
         router.currentController = viewController
         let viewModel = ManagerListViewModel(withRouter: router, reloadDataProtocol: viewController, filterModel: filterModel, showFacets: showFacets)
-        viewController.viewModel = viewModel
-        
-        viewController.hidesBottomBarWhenPushed = true
-        return viewController
-    }
-    
-    func getRating(with filterModel: FilterModel?) -> RatingViewController? {
-        let viewController = RatingViewController()
-        
-        let router = Router(parentRouter: self, navigationController: navigationController)
-        router.currentController = viewController
-        
-        let viewModel = RatingTabmanViewModel(withRouter: router, tabmanViewModelDelegate: viewController)
         viewController.viewModel = viewModel
         
         viewController.hidesBottomBarWhenPushed = true

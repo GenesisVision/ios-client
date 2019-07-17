@@ -59,7 +59,7 @@ final class ListViewModel: ListViewModelProtocol {
         } else {
             var hasFilter = false
             
-            if self.filterModel.mask == nil, self.filterModel.levelUpData == nil, self.filterModel.facetId == nil {
+            if self.filterModel.mask == nil, self.filterModel.facetTitle != "", self.filterModel.facetId == nil {
                 hasFilter = true
             }
             
@@ -85,6 +85,10 @@ final class ListViewModel: ListViewModelProtocol {
             self.filterModel = filterModel
             if let facetTitle = filterModel.facetTitle {
                 self.title = (facetTitle == "Favorites" ? "Favorite" : facetTitle) + " " + title.lowercased()
+                
+                if facetTitle == "Rating" {
+                    filterModel.levelsSet = [1]
+                }
             }
         }
     }
@@ -243,7 +247,7 @@ final class ListViewModel: ListViewModelProtocol {
         assetList.programs?.forEach({ (asset) in
             guard let programListRouter = self.router as? ListRouter else { return }
             
-            let viewModel = ProgramTableViewCellViewModel(asset: asset, isRating: filterModel.levelUpData != nil, delegate: programListRouter.currentController as? FavoriteStateChangeProtocol)
+            let viewModel = ProgramTableViewCellViewModel(asset: asset, isRating: filterModel.facetTitle == "MostReliable", delegate: programListRouter.currentController as? FavoriteStateChangeProtocol)
             viewModels.append(viewModel)
         })
 
@@ -356,7 +360,7 @@ extension ListViewModel {
                 assetList.programs?.forEach({ (asset) in
                     guard let listRouter = self?.router as? ListRouter else { return completionError(.failure(errorType: .apiError(message: nil))) }
                     
-                    let programTableViewCellViewModel = ProgramTableViewCellViewModel(asset: asset, isRating: self?.filterModel.levelUpData != nil, delegate: listRouter.currentController as? FavoriteStateChangeProtocol)
+                    let programTableViewCellViewModel = ProgramTableViewCellViewModel(asset: asset, isRating: false, delegate: listRouter.currentController as? FavoriteStateChangeProtocol)
                     viewModels.append(programTableViewCellViewModel)
                 })
                 

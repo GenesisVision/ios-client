@@ -62,12 +62,7 @@ final class ProgramFacetsViewModel: ListViewModelProtocolWithFacets {
         
         filterModel.sortingModel.sortType = sortType.rawValue
         
-        switch sortType {
-        case .toLevelUp:
-            router.show(routeType: .showRatingList(filterModel: filterModel))
-        default:
-            router.show(routeType: .showAssetList(filterModel: filterModel, assetType: assetType))
-        }
+        router.show(routeType: .showAssetList(filterModel: filterModel, assetType: assetType))
     }
     
     func numberOfItems(in section: Int) -> Int {
@@ -129,12 +124,7 @@ final class FundFacetsViewModel: ListViewModelProtocolWithFacets {
         
         filterModel.sortingModel.sortType = sortType.rawValue
         
-        switch sortType {
-        case .toLevelUp:
-            router.show(routeType: .showRatingList(filterModel: filterModel))
-        default:
-            router.show(routeType: .showAssetList(filterModel: filterModel, assetType: assetType))
-        }
+        router.show(routeType: .showAssetList(filterModel: filterModel, assetType: assetType))
     }
     
     func numberOfItems(in section: Int) -> Int {
@@ -304,7 +294,7 @@ extension ListViewModelProtocol {
     
     /// Return view models for registration header/footer Nib files
     var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
-        if filterModel.levelUpData != nil {
+        if filterModel.facetTitle == "Rating" {
             return [RatingTableHeaderView.self]
         }
         

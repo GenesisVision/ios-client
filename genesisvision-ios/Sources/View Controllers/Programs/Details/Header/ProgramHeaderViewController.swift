@@ -62,6 +62,7 @@ class ProgramHeaderViewController: BaseViewController {
     @IBOutlet weak var levelButton: LevelButton! {
         didSet {
             levelButton.borderSize = 0.0
+            levelButton.bgColor = UIColor.BaseView.bg
         }
     }
     
@@ -205,7 +206,7 @@ class ProgramHeaderViewController: BaseViewController {
         guard let programDetailsFull = programDetailsFull, let tags = programDetailsFull.tags, !tags.isEmpty else { return }
         
         let tagsCount = tags.count
-        
+        //FIXIT: stackview programmatically
         firstTagLabel.isHidden = true
         if let name = tags[0].name, let color = tags[0].color {
             firstTagLabel.isHidden = false

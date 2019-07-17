@@ -49,8 +49,6 @@ struct FilterCurrencyModel {
 class FilterModel {
     var levelUpSummary: LevelUpSummary?
     
-    var levelUpData: LevelUpData?
-    
     var sortingModel: FilterSortingModel
     var tagsModel: FilterTagsModel
     var levelModel: FilterLevelModel
@@ -68,6 +66,8 @@ class FilterModel {
     var profitAvgMax: Double?
     
     var onlyActive: Bool = false
+    
+    var levelsSet: [Int]?
     
     init() {
         sortingModel = FilterSortingModel()

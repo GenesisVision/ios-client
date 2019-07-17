@@ -10,7 +10,6 @@ enum ListRouteType {
     case signIn
     case showAssetDetails(assetId: String, assetType: AssetType)
     case showAssetList(filterModel: FilterModel, assetType: AssetType)
-    case showRatingList(filterModel: FilterModel)
     case showFilterVC(listViewModel: ListViewModelProtocol, filterModel: FilterModel, filterType: FilterType, sortingType: SortingType)
 }
 
@@ -27,8 +26,6 @@ extension ListRouterProtocol where Self: Router {
             showAssetDetails(with: assetId, assetType: assetType)
         case .showAssetList(let filterModel, let assetType):
             showAssetList(with: filterModel, assetType: assetType)
-        case .showRatingList(let filterModel):
-            showRatingList(with: filterModel)
         case .showFilterVC(let listViewModel, let filterModel, let filterType, let sortingType):
             showFilterVC(with: listViewModel, filterModel: filterModel, filterType: filterType, sortingType: sortingType)
         }

@@ -185,6 +185,15 @@ class NumpadView: UIView {
         }
     }
     
+    var isBlock = true {
+        didSet {
+            isEnable = isBlock
+            
+            clearButton.isEnabled = isBlock
+            clearButton.alpha = isBlock ? 1.0 : 0.3
+        }
+    }
+    
     var buttonBackgroundColor: UIColor = UIColor.BaseView.bg  {
         didSet {
             numberButtons.forEach { (button) in

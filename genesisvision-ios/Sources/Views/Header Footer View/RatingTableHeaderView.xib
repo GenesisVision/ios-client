@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,64 +13,73 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" restorationIdentifier="RatingTableHeaderView" id="HcM-09-upK" customClass="RatingTableHeaderView" customModule="Genesis_Vision" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="563" height="312"/>
+            <rect key="frame" x="0.0" y="0.0" width="660" height="126"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="xcz-AC-Erz">
-                    <rect key="frame" x="20" y="0.0" width="523" height="312"/>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="xcz-AC-Erz">
+                    <rect key="frame" x="20" y="0.0" width="620" height="126"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="hFH-XO-WZh">
-                            <rect key="frame" x="0.0" y="135" width="163.5" height="42"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Programs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="geP-2G-6mx" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                    <rect key="frame" x="48.5" y="0.0" width="66.5" height="18"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UiW-pA-hgu" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                    <rect key="frame" x="77" y="24" width="9.5" height="18"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
-                        </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="ntC-rV-ctS">
-                            <rect key="frame" x="179.5" y="135" width="164" height="42"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quota" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQg-2s-8w8" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                    <rect key="frame" x="61" y="0.0" width="42" height="18"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N3i-I9-BH1" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                    <rect key="frame" x="77.5" y="24" width="9.5" height="18"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
-                        </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="NPZ-BK-iIB">
-                            <rect key="frame" x="359.5" y="135" width="163.5" height="42"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Target profit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N71-O1-pc3" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                    <rect key="frame" x="39.5" y="0.0" width="84.5" height="18"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="meD-ga-EP8" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                    <rect key="frame" x="77" y="24" width="9.5" height="18"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
-                        </stackView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ty2-cU-TnJ" customClass="RatingLevelButton" customModule="Genesis_Vision" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="46" width="34" height="34"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="Ty2-cU-TnJ" secondAttribute="height" multiplier="1:1" id="eFl-kE-86q"/>
+                            </constraints>
+                            <state key="normal" title="1"/>
+                            <connections>
+                                <action selector="levelButtonsAction:" destination="HcM-09-upK" eventType="touchUpInside" id="4WX-X5-Zuz"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eEg-V0-RoU" customClass="RatingLevelButton" customModule="Genesis_Vision" customModuleProvider="target">
+                            <rect key="frame" x="97.5" y="46" width="34" height="34"/>
+                            <state key="normal" title="2"/>
+                            <connections>
+                                <action selector="levelButtonsAction:" destination="HcM-09-upK" eventType="touchUpInside" id="oeF-yu-Ino"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sjp-qE-IWo" customClass="RatingLevelButton" customModule="Genesis_Vision" customModuleProvider="target">
+                            <rect key="frame" x="195.5" y="46" width="34" height="34"/>
+                            <state key="normal" title="3"/>
+                            <connections>
+                                <action selector="levelButtonsAction:" destination="HcM-09-upK" eventType="touchUpInside" id="V1g-Hz-R8B"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PpG-wM-cua" customClass="RatingLevelButton" customModule="Genesis_Vision" customModuleProvider="target">
+                            <rect key="frame" x="293" y="46" width="34" height="34"/>
+                            <state key="normal" title="4"/>
+                            <connections>
+                                <action selector="levelButtonsAction:" destination="HcM-09-upK" eventType="touchUpInside" id="8mI-8g-Xwe"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v5k-PT-y3s" customClass="RatingLevelButton" customModule="Genesis_Vision" customModuleProvider="target">
+                            <rect key="frame" x="390.5" y="46" width="34" height="34"/>
+                            <state key="normal" title="5"/>
+                            <connections>
+                                <action selector="levelButtonsAction:" destination="HcM-09-upK" eventType="touchUpInside" id="LbH-gd-0Qe"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Kb-c3-CDe" customClass="RatingLevelButton" customModule="Genesis_Vision" customModuleProvider="target">
+                            <rect key="frame" x="488.5" y="46" width="34" height="34"/>
+                            <state key="normal" title="6"/>
+                            <connections>
+                                <action selector="levelButtonsAction:" destination="HcM-09-upK" eventType="touchUpInside" id="wG2-Jm-5AN"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8IY-ce-wa6" customClass="RatingLevelButton" customModule="Genesis_Vision" customModuleProvider="target">
+                            <rect key="frame" x="586" y="46" width="34" height="34"/>
+                            <state key="normal" title="7"/>
+                            <connections>
+                                <action selector="levelButtonsAction:" destination="HcM-09-upK" eventType="touchUpInside" id="9Ha-mx-upT"/>
+                            </connections>
+                        </button>
                     </subviews>
+                    <constraints>
+                        <constraint firstItem="v5k-PT-y3s" firstAttribute="width" secondItem="Ty2-cU-TnJ" secondAttribute="height" multiplier="1:1" id="0dm-Eb-E6I"/>
+                        <constraint firstItem="3Kb-c3-CDe" firstAttribute="width" secondItem="Ty2-cU-TnJ" secondAttribute="height" multiplier="1:1" id="CQm-fu-OIQ"/>
+                        <constraint firstItem="PpG-wM-cua" firstAttribute="width" secondItem="Ty2-cU-TnJ" secondAttribute="height" multiplier="1:1" id="JzV-AH-5Oh"/>
+                        <constraint firstItem="eEg-V0-RoU" firstAttribute="width" secondItem="Ty2-cU-TnJ" secondAttribute="height" multiplier="1:1" id="LUy-Tl-hiY"/>
+                        <constraint firstItem="8IY-ce-wa6" firstAttribute="width" secondItem="Ty2-cU-TnJ" secondAttribute="height" multiplier="1:1" id="aoF-qY-0Sp"/>
+                        <constraint firstItem="Sjp-qE-IWo" firstAttribute="width" secondItem="Ty2-cU-TnJ" secondAttribute="height" multiplier="1:1" id="hza-7n-f90"/>
+                    </constraints>
                 </stackView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -83,14 +92,15 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="Eq4-UW-zDG"/>
             <connections>
-                <outlet property="programsTotalCountTitleLabel" destination="geP-2G-6mx" id="9ey-FB-FAp"/>
-                <outlet property="programsTotalCountValueLabel" destination="UiW-pA-hgu" id="Exu-uf-IFz"/>
-                <outlet property="quotaTitleLabel" destination="AQg-2s-8w8" id="osg-jC-6E2"/>
-                <outlet property="quotaValueLabel" destination="N3i-I9-BH1" id="EsV-f9-sX0"/>
-                <outlet property="targetProfitTitleLabel" destination="N71-O1-pc3" id="LZo-bc-fyH"/>
-                <outlet property="targetProfitValueLabel" destination="meD-ga-EP8" id="PEe-4c-w5u"/>
+                <outletCollection property="levelButtons" destination="Ty2-cU-TnJ" collectionClass="NSMutableArray" id="yYV-cI-LnC"/>
+                <outletCollection property="levelButtons" destination="eEg-V0-RoU" collectionClass="NSMutableArray" id="iHk-Qf-r1I"/>
+                <outletCollection property="levelButtons" destination="Sjp-qE-IWo" collectionClass="NSMutableArray" id="4VI-tm-pl5"/>
+                <outletCollection property="levelButtons" destination="PpG-wM-cua" collectionClass="NSMutableArray" id="I6H-6M-ZLy"/>
+                <outletCollection property="levelButtons" destination="v5k-PT-y3s" collectionClass="NSMutableArray" id="LOy-rJ-0gl"/>
+                <outletCollection property="levelButtons" destination="3Kb-c3-CDe" collectionClass="NSMutableArray" id="Gfs-c2-Shm"/>
+                <outletCollection property="levelButtons" destination="8IY-ce-wa6" collectionClass="NSMutableArray" id="WLK-26-ejh"/>
             </connections>
-            <point key="canvasLocation" x="797.60000000000002" y="-44.07796101949026"/>
+            <point key="canvasLocation" x="875.20000000000005" y="-127.736131934033"/>
         </view>
     </objects>
 </document>

@@ -127,21 +127,6 @@ final class FundWithdrawViewModel {
     
     // MARK: - Navigation
     func withdraw(with amount: Double, completion: @escaping CompletionBlock) {
-        apiWithdraw(with: amount, completion: completion)
-    }
-    
-    func goToBack() {
-        detailProtocol?.didReload()
-        router.goToBack()
-    }
-    
-    func close() {
-        router.closeVC()
-    }
-    
-    // MARK: - Private methods
-    // MARK: - API
-    private func apiWithdraw(with amount: Double, completion: @escaping CompletionBlock) {
         guard let walletCurrency = self.selectedWalletFromDelegateManager?.selected?.currency?.rawValue else { return completion(.failure(errorType: .apiError(message: nil))) }
         
         let currency = InvestorAPI.Currency_v10InvestorFundsByIdWithdrawByPercentPost(rawValue: walletCurrency)
@@ -151,11 +136,12 @@ final class FundWithdrawViewModel {
         }
     }
     
-    private func responseHandler(_ error: Error?, completion: @escaping CompletionBlock) {
-        if let error = error {
-            return ErrorHandler.handleApiError(error: error, completion: completion)
-        }
-        
-        completion(.success)
+    func goToBack() {
+        detailProtocol?.didReload()
+        router.goToBack()
+    }
+    
+    func close() {
+        router.closeVC()
     }
 }

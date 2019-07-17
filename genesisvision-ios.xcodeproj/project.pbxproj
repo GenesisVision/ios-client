@@ -18,8 +18,6 @@
 		5E085F47215E7D9B00950042 /* ProgramViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E085F46215E7D9B00950042 /* ProgramViewController.swift */; };
 		5E085F49215E802100950042 /* ProgramHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E085F48215E802100950042 /* ProgramHeaderViewController.swift */; };
 		5E085F4B215E867600950042 /* ProgramRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E085F4A215E867600950042 /* ProgramRouter.swift */; };
-		5E0ACEC2217FA7C600DC76AA /* ErrorBottomSheetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E0ACEC0217FA7C400DC76AA /* ErrorBottomSheetView.xib */; };
-		5E0ACEC3217FA7C600DC76AA /* ErrorBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0ACEC1217FA7C500DC76AA /* ErrorBottomSheetView.swift */; };
 		5E0ACEC5217FC4C500DC76AA /* FundsDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0ACEC4217FC4C500DC76AA /* FundsDataProvider.swift */; };
 		5E0AD0E12181374F00DC76AA /* DashboardFundListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0AD0E02181374F00DC76AA /* DashboardFundListViewController.swift */; };
 		5E0AD0E3218138A800DC76AA /* DashboardFundListDelegateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0AD0E2218138A800DC76AA /* DashboardFundListDelegateManager.swift */; };
@@ -506,6 +504,8 @@
 		5EC1C3BC22881AD70024008E /* SignalTradesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC1C3BB22881AD70024008E /* SignalTradesViewController.swift */; };
 		5EC1C3BE22881AE00024008E /* SignalListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC1C3BD22881AE00024008E /* SignalListViewController.swift */; };
 		5EC1E94120E3A91B00AE3560 /* BiometricIDAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC1E94020E3A91B00AE3560 /* BiometricIDAuthManager.swift */; };
+		5EC2402322D9139D0053AFF0 /* ErrorBottomSheetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EC2402122D9139D0053AFF0 /* ErrorBottomSheetView.xib */; };
+		5EC2402422D9139D0053AFF0 /* ErrorBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC2402222D9139D0053AFF0 /* ErrorBottomSheetView.swift */; };
 		5EC273AC2056B7DB00E51494 /* NumberToStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC273AB2056B7DB00E51494 /* NumberToStringExtension.swift */; };
 		5EC7871D216BD243000C91E4 /* NotificationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC7871C216BD243000C91E4 /* NotificationListViewController.swift */; };
 		5EC7871F216BD3E1000C91E4 /* NotificationListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC7871E216BD3E1000C91E4 /* NotificationListViewModel.swift */; };
@@ -759,8 +759,6 @@
 		5E085F46215E7D9B00950042 /* ProgramViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramViewController.swift; sourceTree = "<group>"; };
 		5E085F48215E802100950042 /* ProgramHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramHeaderViewController.swift; sourceTree = "<group>"; };
 		5E085F4A215E867600950042 /* ProgramRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramRouter.swift; sourceTree = "<group>"; };
-		5E0ACEC0217FA7C400DC76AA /* ErrorBottomSheetView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ErrorBottomSheetView.xib; sourceTree = "<group>"; };
-		5E0ACEC1217FA7C500DC76AA /* ErrorBottomSheetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorBottomSheetView.swift; sourceTree = "<group>"; };
 		5E0ACEC4217FC4C500DC76AA /* FundsDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundsDataProvider.swift; sourceTree = "<group>"; };
 		5E0AD0E02181374F00DC76AA /* DashboardFundListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardFundListViewController.swift; sourceTree = "<group>"; };
 		5E0AD0E2218138A800DC76AA /* DashboardFundListDelegateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardFundListDelegateManager.swift; sourceTree = "<group>"; };
@@ -1251,6 +1249,8 @@
 		5EC1C3BB22881AD70024008E /* SignalTradesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalTradesViewController.swift; sourceTree = "<group>"; };
 		5EC1C3BD22881AE00024008E /* SignalListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalListViewController.swift; sourceTree = "<group>"; };
 		5EC1E94020E3A91B00AE3560 /* BiometricIDAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricIDAuthManager.swift; sourceTree = "<group>"; };
+		5EC2402122D9139D0053AFF0 /* ErrorBottomSheetView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ErrorBottomSheetView.xib; sourceTree = "<group>"; };
+		5EC2402222D9139D0053AFF0 /* ErrorBottomSheetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorBottomSheetView.swift; sourceTree = "<group>"; };
 		5EC273AB2056B7DB00E51494 /* NumberToStringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberToStringExtension.swift; sourceTree = "<group>"; };
 		5EC7871C216BD243000C91E4 /* NotificationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationListViewController.swift; sourceTree = "<group>"; };
 		5EC7871E216BD3E1000C91E4 /* NotificationListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationListViewModel.swift; sourceTree = "<group>"; };
@@ -1459,7 +1459,7 @@
 		FCB8DFCE2010F99200698D18 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		FCBD22C12019EACA000B8E38 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		FCBD2326201A2582000B8E38 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
-		FCC9DD24200DF2C3008825EC /* GV DEV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GV DEV.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCC9DD24200DF2C3008825EC /* Genesis Vision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Genesis Vision.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCC9DD27200DF2C3008825EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FCC9DD3B200DFA5E008825EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FCC9DD41200DFA5E008825EC /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -2357,8 +2357,8 @@
 		5EC6709621AEAA07009BF4C0 /* Error */ = {
 			isa = PBXGroup;
 			children = (
-				5E0ACEC1217FA7C500DC76AA /* ErrorBottomSheetView.swift */,
-				5E0ACEC0217FA7C400DC76AA /* ErrorBottomSheetView.xib */,
+				5EC2402222D9139D0053AFF0 /* ErrorBottomSheetView.swift */,
+				5EC2402122D9139D0053AFF0 /* ErrorBottomSheetView.xib */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -3089,7 +3089,7 @@
 		FCC9DD25200DF2C3008825EC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FCC9DD24200DF2C3008825EC /* GV DEV.app */,
+				FCC9DD24200DF2C3008825EC /* Genesis Vision.app */,
 				5E8724C920E0B7E3007A1E16 /* Genesis VisionUITests.xctest */,
 			);
 			name = Products;
@@ -3406,7 +3406,7 @@
 			);
 			name = "genesisvision-ios";
 			productName = "genesisvision-ios";
-			productReference = FCC9DD24200DF2C3008825EC /* GV DEV.app */;
+			productReference = FCC9DD24200DF2C3008825EC /* Genesis Vision.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -3498,6 +3498,7 @@
 				5EA274B3216281DD008CAF77 /* DefaultTableViewCell.xib in Resources */,
 				5E93E6FD21D1A5370020DE55 /* NotificationsSettingsGeneralTableViewCell.xib in Resources */,
 				5EB9320F214697FF00EE01A2 /* DetailManagerTableViewCell.xib in Resources */,
+				5EC2402322D9139D0053AFF0 /* ErrorBottomSheetView.xib in Resources */,
 				FCB2C4EE2010D51D0012AA58 /* Auth.storyboard in Resources */,
 				5EA274C321628274008CAF77 /* DetailProfitChartTableViewCell.xib in Resources */,
 				FCC9DD56200DFA5E008825EC /* LaunchScreen.storyboard in Resources */,
@@ -3507,7 +3508,6 @@
 				5E0E1B9C2221A0CC001F3C4E /* InfoSignalsTableViewCell.xib in Resources */,
 				5E5BC29B21868FD7009E4BA3 /* FundAssetsHeaderView.xib in Resources */,
 				5E026FFB22D3565700C555CC /* TagTableViewCell.xib in Resources */,
-				5E0ACEC2217FA7C600DC76AA /* ErrorBottomSheetView.xib in Resources */,
 				5E8340E6207E39B6004A29F1 /* ProgramTradesTableViewCell.xib in Resources */,
 				5EE13217221F037C00231F6C /* WalletMoreButtonView.xib in Resources */,
 				5EA1FE2821A2F24A00308D81 /* FacetCollectionViewCell.xib in Resources */,
@@ -3767,7 +3767,6 @@
 				5EF14D8E2181F80200B3843A /* FundViewModel.swift in Sources */,
 				5E9C767A22CA20C5003604ED /* DashboardPortfolioEvent.swift in Sources */,
 				5E9C75F322CA20C5003604ED /* Broker.swift in Sources */,
-				5E0ACEC3217FA7C600DC76AA /* ErrorBottomSheetView.swift in Sources */,
 				5EA1FE2721A2F24A00308D81 /* FacetCollectionViewCell.swift in Sources */,
 				5E9C765922CA20C5003604ED /* ManagersList.swift in Sources */,
 				5EC1C3B72288178A0024008E /* WalletDepositCurrencyDelegateManager.swift in Sources */,
@@ -4101,6 +4100,7 @@
 				5EF14D9B2181FBCD00B3843A /* FundInvestViewModel.swift in Sources */,
 				5EF14D792181EB0E00B3843A /* FundWithdrawViewController.swift in Sources */,
 				5E9C761F22CA20C5003604ED /* ProgramStatistic.swift in Sources */,
+				5EC2402422D9139D0053AFF0 /* ErrorBottomSheetView.swift in Sources */,
 				5E19A1D62063A5DE0010014A /* UITableViewCellExtension.swift in Sources */,
 				5EA274DD2162DF33008CAF77 /* ProgramProfitViewController.swift in Sources */,
 				FC0E201C2044459500872BE5 /* CIColorExtension.swift in Sources */,
@@ -4626,12 +4626,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = "Debug Manager";
 		};
@@ -4651,7 +4652,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "\"-DMANAGER\"";
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor;
-				PRODUCT_NAME = "GV DEV";
+				PRODUCT_NAME = "Genesis Vision";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -4710,12 +4711,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = "Debug Investor";
 		};
@@ -4736,7 +4738,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Onone";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "\"-DINVESTOR\"";
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor;
-				PRODUCT_NAME = "GV DEV";
+				PRODUCT_NAME = "Genesis Vision";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -4789,10 +4791,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Release Investor";
@@ -4866,10 +4869,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Release Manager";

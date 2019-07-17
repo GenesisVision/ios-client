@@ -68,7 +68,7 @@ class ErrorBottomSheetView: UIView {
         
         switch type {
         case .error:
-            iconImageView.image = #imageLiteral(resourceName: "img_error_icon")
+            iconImageView.image = #imageLiteral(resourceName: "img_wallet_status_delete_icon")
             iconImageView.isHidden = false
             iconStackView.isHidden = false
         case .success:
@@ -76,7 +76,7 @@ class ErrorBottomSheetView: UIView {
             iconImageView.isHidden = false
             iconStackView.isHidden = false
         case .warning:
-            iconImageView.image = #imageLiteral(resourceName: "img_error_icon")
+            iconImageView.image = #imageLiteral(resourceName: "img_wallet_status_delete_icon")
             iconImageView.isHidden = false
             iconStackView.isHidden = false
         case .text:

@@ -15,6 +15,8 @@ final class ProgramWithdrawViewModel {
     var programCurrency: CurrencyType
     var labelPlaceholder: String = "0"
     
+    var withdrawAll: Bool = false
+    
     var programWithdrawInfo: ProgramWithdrawInfo?
     
     private weak var detailProtocol: DetailProtocol?
@@ -48,7 +50,9 @@ final class ProgramWithdrawViewModel {
     
     // MARK: - Navigation
     func withdraw(with amount: Double, completion: @escaping CompletionBlock) {
-        apiWithdraw(with: amount, completion: completion)
+        ProgramsDataProvider.withdraw(withAmount: amount, programId: programId, withdrawAll: withdrawAll) { (result) in
+            completion(result)
+        }
     }
     
     func goToBack() {
@@ -58,21 +62,5 @@ final class ProgramWithdrawViewModel {
     
     func close() {
         router.closeVC()
-    }
-    
-    // MARK: - Private methods
-    // MARK: - API
-    private func apiWithdraw(with amount: Double, completion: @escaping CompletionBlock) {
-        ProgramsDataProvider.withdraw(withAmount: amount, programId: programId) { (result) in
-            completion(result)
-        }
-    }
-    
-    private func responseHandler(_ error: Error?, completion: @escaping CompletionBlock) {
-        if let error = error {
-            return ErrorHandler.handleApiError(error: error, completion: completion)
-        }
-        
-        completion(.success)
     }
 }

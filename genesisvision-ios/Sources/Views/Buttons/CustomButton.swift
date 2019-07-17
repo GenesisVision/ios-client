@@ -305,16 +305,28 @@ class StatusButton: UIButton {
 }
 
 class LevelButton: UIButton {
-    var fontSize: CGFloat = 14.0
-    var borderSize: CGFloat = 3.0
+    var fontSize: CGFloat = 12.0
+    var borderSize: CGFloat = 2.0
+    var borderInsetSize: CGFloat = 3.0
+    var showProgress: Bool = true
+    var progress: Double = 0.5
+
+    var bgColor: UIColor?
+    var progressView: CircularProgressView!
     
     // MARK: - Lifecycle
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
-        self.commonInit()
         
+        progressView = CircularProgressView()
+        progressView.percentTextEnable = false
+        progressView.isUserInteractionEnabled = false
+        progressView.setProgress(to: progress, withAnimation: true)
+        addSubview(progressView)
+        
+        self.commonInit()
     }
-    
+ 
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.commonInit()
@@ -323,17 +335,68 @@ class LevelButton: UIButton {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        commonInit()
+        roundCorners()
+        
+        backgroundColor = bgColor ?? UIColor.Cell.bg
+        
+        if showProgress {
+            progressView.frame = bounds.insetBy(dx: borderInsetSize, dy: borderInsetSize)
+            progressView.lineWidth = borderSize
+
+            if let level = Int(titleLabel?.text ?? "") {
+                progressView.foregroundStrokeColor = UIColor.Level.color(for: level)
+                progressView.backgroundStrokeColor = UIColor.Level.color(for: level).withAlphaComponent(0.2)
+            }
+        }
     }
     
     func commonInit() {
         titleLabel?.font = UIFont.getFont(.semibold, size: fontSize)
-
-        roundCorners(borderWidth: borderSize, borderColor: UIColor.Cell.bg)
-        
         setTitleColor(UIColor.Cell.title, for: .normal)
-        if let level = Int(titleLabel?.text ?? "") {
-            backgroundColor = UIColor.Level.color(for: level)
+    }
+}
+
+
+class RatingLevelButton: UIButton {
+    var fontSize: CGFloat = 14.0
+    var borderSize: CGFloat = 3.0
+    var withBorderColor: Bool = false
+    var showProgress: Bool = true
+    
+    override var isHighlighted: Bool {
+        didSet {
+            UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1.0, options: [.curveEaseOut, .beginFromCurrentState], animations: {
+                DispatchQueue.main.async {
+                    self.alpha = self.isHighlighted ? 0.8 : 1
+                    self.transform = self.isHighlighted ? self.transform.scaledBy(x: 0.997, y: 0.997) : .identity
+                }
+            }, completion: nil)
         }
+    }
+    
+    
+    // MARK: - Lifecycle
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+        
+        self.commonInit()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        guard let level = Int(titleLabel?.text ?? "") else { return }
+        if self.isEnabled {
+            backgroundColor = UIColor.Level.color(for: level)
+            roundCorners()
+        } else {
+            backgroundColor = UIColor.BaseView.bg
+            roundCorners(borderWidth: borderSize, borderColor: UIColor.Level.color(for: level))
+        }
+    }
+    
+    func commonInit() {
+        titleLabel?.font = UIFont.getFont(.semibold, size: fontSize)
+        setTitleColor(UIColor.Cell.title, for: .normal)
     }
 }

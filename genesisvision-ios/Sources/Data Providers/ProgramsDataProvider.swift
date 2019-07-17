@@ -13,6 +13,7 @@ class ProgramsDataProvider: DataProvider {
     
         let levelMin = filterModel?.levelModel.minLevel
         let levelMax = filterModel?.levelModel.maxLevel
+        let levelsSet = filterModel?.levelsSet
         
         let tags = filterModel?.tagsModel.selectedTags
         
@@ -30,7 +31,6 @@ class ProgramsDataProvider: DataProvider {
         let facetId = filterModel?.facetId
         let managerId = filterModel?.managerId
         let chartPointsCount = filterModel?.chartPointsCount
-        let levelUpFrom = filterModel?.levelUpData?.level
         
         var programCurrency: ProgramsAPI.ProgramCurrency_v10ProgramsGet?
         if let selectedCurrency = filterModel?.currencyModel.selectedCurrency, let newCurrency = ProgramsAPI.ProgramCurrency_v10ProgramsGet(rawValue: selectedCurrency) {
@@ -44,7 +44,7 @@ class ProgramsDataProvider: DataProvider {
         
         let authorization = AuthManager.authorizedToken
         
-        ProgramsAPI.v10ProgramsGet(authorization: authorization, levelMin: levelMin, levelMax: levelMax, profitAvgMin: profitAvgMin, profitAvgMax: profitAvgMax, sorting: sorting, programCurrency: programCurrency, currencySecondary: currencySecondary, levelUpFrom: levelUpFrom, tags: tags, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: facetId, isFavorite: isFavorite, ids: nil, managerId: managerId, programManagerId: nil, skip: skip, take: take) { (viewModel, error) in
+        ProgramsAPI.v10ProgramsGet(authorization: authorization, levelMin: levelMin, levelMax: levelMax, levelsSet: levelsSet, profitAvgMin: profitAvgMin, profitAvgMax: profitAvgMax, sorting: sorting, programCurrency: programCurrency, currencySecondary: currencySecondary, tags: tags, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: facetId, isFavorite: isFavorite, ids: nil, managerId: managerId, programManagerId: nil, skip: skip, take: take) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
@@ -106,13 +106,13 @@ class ProgramsDataProvider: DataProvider {
         }
     }
     
-    static func withdraw(withAmount amount: Double, programId: String?, errorCompletion: @escaping CompletionBlock) {
+    static func withdraw(withAmount amount: Double, programId: String?, withdrawAll: Bool? = nil, errorCompletion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken,
             let programId = programId,
             let uuid = UUID(uuidString: programId)
             else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
 
-        InvestorAPI.v10InvestorProgramsByIdWithdrawMultiByAmountPost(id: uuid, amount: amount, authorization: authorization) { (error) in
+        InvestorAPI.v10InvestorProgramsByIdWithdrawMultiByAmountPost(id: uuid, amount: amount, authorization: authorization, withdrawAll: withdrawAll) { (error) in
             DataProvider().responseHandler(error, completion: errorCompletion)
         }
     }

@@ -25,8 +25,6 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         }
     }
     
-    var ratingTableHeaderView: RatingTableHeaderView?
-    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

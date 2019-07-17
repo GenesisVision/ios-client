@@ -11,18 +11,13 @@ import UIKit
 class RatingPageboyViewControllerDataSource: BasePageboyViewControllerDataSource {
     // MARK: - Private methods
     internal override func setup(router: Router, filterModel: FilterModel? = nil, showFacets: Bool) {
+        let filterModel = FilterModel()
+        filterModel.dateRangeModel.dateFrom = nil
+        filterModel.dateRangeModel.dateTo = nil
         
-        guard let levelUpSummary = filterModel?.levelUpSummary, let levelData = levelUpSummary.levelData else { return }
         
-        for data in levelData {
-            let filterModel = FilterModel()
-            filterModel.levelUpData = data
-            filterModel.dateRangeModel.dateFrom = nil
-            filterModel.dateRangeModel.dateTo = nil
-            
-            guard let programListViewController = router.getPrograms(with: filterModel, showFacets: showFacets, parentRouter: router) else { return }
-            
-            controllers.append(programListViewController)
-        }
+        guard let programListViewController = router.getPrograms(with: filterModel, showFacets: showFacets, parentRouter: router) else { return }
+        
+        controllers.append(programListViewController)
     }
 }

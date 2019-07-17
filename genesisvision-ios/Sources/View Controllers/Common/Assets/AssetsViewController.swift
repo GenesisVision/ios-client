@@ -35,7 +35,7 @@ class AssetsViewController: BaseTabmanViewController<AssetsTabmanViewModel>, UIS
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //FIXME:
+        //FIXME: change tab for dashboards fund
 //        scrollToPage(.next, animated: true)
     }
     

@@ -56,7 +56,18 @@ class ProgramWithdrawViewController: BaseViewController {
     @IBOutlet weak var payoutDayValueLabel: TitleLabel!
     
     // MARK: - Buttons
-    @IBOutlet weak var withdrawButton: ActionButton!
+    @IBOutlet weak var withdrawButton: ActionButton! {
+        didSet {
+            withdrawButton.titleLabel?.font = UIFont.getFont(.regular, size: 14.0)
+        }
+    }
+    
+    @IBOutlet weak var withdrawAllSwitchButton: UIButton! {
+        didSet {
+            withdrawAllSwitchButton.setImage(#imageLiteral(resourceName: "img_checkbox_unselected_icon"), for: .normal)
+            withdrawAllSwitchButton.setImage(#imageLiteral(resourceName: "img_checkbox_selected_icon"), for: .selected)
+        }
+    }
     
     // MARK: - Views
     var confirmView: InvestWithdrawConfirmView!
@@ -138,7 +149,7 @@ class ProgramWithdrawViewController: BaseViewController {
         withdrawButton.setEnabled(withdrawButtonEnabled)
     }
     
-    private func withdrawMethod() {
+    private func   withdrawMethod() {
         guard let text = amountToWithdrawValueLabel.text,
             let amount = text.doubleValue
             else { return showErrorHUD(subtitle: "Enter withdraw value, please") }
@@ -169,6 +180,7 @@ class ProgramWithdrawViewController: BaseViewController {
         
         confirmView = InvestWithdrawConfirmView.viewFromNib()
         
+        let withdrawAll = viewModel.withdrawAll
         let subtitle = "Your request will be processed at the end of the reporting period."
         
         let confirmViewModel = InvestWithdrawConfirmModel(title: "Confirm Withdraw",
@@ -177,7 +189,7 @@ class ProgramWithdrawViewController: BaseViewController {
                                                           programTitle: viewModel.programWithdrawInfo?.title,
                                                           managerName: nil,
                                                           firstTitle: "Amount to withdraw",
-                                                          firstValue: amountToWithdrawValueLabel.text,
+                                                          firstValue: withdrawAll ? "All" : amountToWithdrawValueLabel.text,
                                                           secondTitle: "Payout day",
                                                           secondValue: viewModel.programWithdrawInfo?.periodEnds?.onlyDateFormatString,
                                                           thirdTitle: nil,
@@ -198,6 +210,14 @@ class ProgramWithdrawViewController: BaseViewController {
     @IBAction func copyAllButtonAction(_ sender: UIButton) {
         amountToWithdrawValueLabel.text = availableToWithdrawValue.toString(withoutFormatter: true)
         amountToWithdrawValue = availableToWithdrawValue
+    }
+    
+    @IBAction func switchButtonAction(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        numpadView.isBlock = !sender.isSelected
+        viewModel.withdrawAll = sender.isSelected
+        
+        withdrawButton.setEnabled(sender.isSelected)
     }
 }
 
