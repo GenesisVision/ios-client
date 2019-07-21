@@ -227,8 +227,6 @@ class ChartView: CombinedChartView {
         rightAxisFormatter.maximumFractionDigits = 1
         rightAxisFormatter.negativeSuffix = " " + currencyValue
         rightAxisFormatter.positiveSuffix = " " + currencyValue
-
-        
         
         if chartType == .default {
             setViewPortOffsets(left: 0, top: 0, right: 0, bottom: 0)
@@ -253,7 +251,7 @@ class ChartView: CombinedChartView {
             maxLimitLine = ChartLimitLine(limit: maxLimitValue, label: "\(maxLimitValue)")
             maxLimitLine.lineWidth = 1
             maxLimitLine.lineDashLengths = [1.0, 8.0]
-            maxLimitLine.labelPosition = .bottomRight
+            maxLimitLine.labelPosition = .topRight
             maxLimitLine.drawLabelEnabled = true
             maxLimitLine.valueTextColor = UIColor.Cell.title
             maxLimitLine.lineColor = UIColor.Cell.subtitle
@@ -263,7 +261,7 @@ class ChartView: CombinedChartView {
             minLimitLine = ChartLimitLine(limit: minLimitValue, label: "\(minLimitValue)")
             minLimitLine.lineWidth = 1
             minLimitLine.lineDashLengths = [1.0, 8.0]
-            minLimitLine.labelPosition = .topRight
+            minLimitLine.labelPosition = .bottomRight
             minLimitLine.drawLabelEnabled = true
             minLimitLine.valueTextColor = UIColor.Cell.title
             minLimitLine.lineColor = UIColor.Cell.subtitle

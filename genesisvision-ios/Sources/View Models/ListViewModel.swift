@@ -43,6 +43,10 @@ final class ListViewModel: ListViewModelProtocol {
     var viewModels = [CellViewAnyModel]()
     var facetsViewModels: [CellViewAnyModel]?
     
+    var signInButtonEnable: Bool {
+        return state == .listWithSignIn
+    }
+    
     // MARK: - Init
     init(withRouter router: ListRouterProtocol, reloadDataProtocol: ReloadDataProtocol?, filterModel: FilterModel? = nil, showFacets: Bool = false, bottomViewType: BottomViewType? = .none, assetType: AssetType) {
         self.router = router
@@ -176,10 +180,6 @@ final class ListViewModel: ListViewModelProtocol {
     
     func isLogin() -> Bool {
         return AuthManager.isLogin()
-    }
-    
-    var signInButtonEnable: Bool {
-        return state == .listWithSignIn
     }
     
     func changeFavorite(value: Bool, assetId: String, request: Bool = false, completion: @escaping CompletionBlock) {

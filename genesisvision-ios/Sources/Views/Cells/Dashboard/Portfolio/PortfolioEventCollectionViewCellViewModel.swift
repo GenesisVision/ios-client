@@ -20,15 +20,6 @@ extension PortfolioEventCollectionViewCellViewModel: CellViewModel {
             cell.titleLabel.text = title
         }
         
-        if let value = dashboardPortfolioEvent.value, let currency = dashboardPortfolioEvent.currency, let programCurrency = CurrencyType(rawValue: currency.rawValue) {
-            cell.balanceValueLabel.text = value.rounded(withType: programCurrency).toString() + " \(programCurrency.rawValue)"
-            cell.balanceValueLabel.textColor = value == 0
-                ? UIColor.Cell.subtitle
-                : value > 0
-                ? UIColor.Cell.greenTitle
-                : UIColor.Cell.redTitle
-        }
-        
         if let date = dashboardPortfolioEvent.date {
             cell.dateLabel.text = date.dateAndTimeFormatString
         }
@@ -44,12 +35,20 @@ extension PortfolioEventCollectionViewCellViewModel: CellViewModel {
             cell.iconImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
         }
         
+        if let value = dashboardPortfolioEvent.value, let currency = dashboardPortfolioEvent.currency, let programCurrency = CurrencyType(rawValue: currency.rawValue) {
+            cell.balanceValueLabel.text = value.rounded(withType: programCurrency).toString() + " \(programCurrency.rawValue)"
+        }
+        
+        cell.balanceValueLabel.textColor = UIColor.Cell.title
+        
         if let type = dashboardPortfolioEvent.type {
             switch type {
             case .profit:
                 cell.typeImageView.image = #imageLiteral(resourceName: "img_event_profit")
+                cell.balanceValueLabel.textColor = UIColor.Cell.greenTitle
             case .loss:
                 cell.typeImageView.image = #imageLiteral(resourceName: "img_event_loss")
+                cell.balanceValueLabel.textColor = UIColor.Cell.redTitle
             case .withdraw:
                 cell.typeImageView.image = #imageLiteral(resourceName: "img_event_withdraw")
             case .invest:

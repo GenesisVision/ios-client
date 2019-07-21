@@ -135,6 +135,15 @@ class ProgramsDataProvider: DataProvider {
         }
     }
     
+    static func getPeriodHistory(with programId: String?, dateFrom: Date? = nil, dateTo: Date? = nil, numberMin: Int? = nil, numberMax: Int? = nil, status: ProgramsAPI.Status_v10ProgramsByIdPeriodsGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ programPeriodsViewModel: ProgramPeriodsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        
+        guard let programId = programId, let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        ProgramsAPI.v10ProgramsByIdPeriodsGet(id: programId, authorization: authorization, dateFrom: dateFrom, dateTo: dateTo, numberMin: numberMin, numberMax: numberMax, status: status, skip: skip, take: take) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
     static func getProfitChart(with programId: String, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, completion: @escaping (_ tradesChartViewModel: ProgramProfitChart?) -> Void, errorCompletion: @escaping CompletionBlock) {
         guard let uuid = UUID(uuidString: programId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         

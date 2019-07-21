@@ -67,6 +67,17 @@ class ProgramTabmanRouter: TabmanRouter {
         return viewController
     }
     
+    func getPeriodHistory(with programId: String, currency: CurrencyType) -> ProgramPeriodHistoryViewController? {
+        guard let router = self.parentRouter as? ProgramRouter else { return nil }
+        
+        let viewController = ProgramPeriodHistoryViewController()
+        router.currentController = viewController
+        let viewModel = ProgramPeriodHistoryViewModel(withRouter: router, programId: programId, reloadDataProtocol: viewController, currency: currency)
+        viewController.viewModel = viewModel
+        
+        return viewController
+    }
+    
     func getProfit(with programId: String) -> ProgramProfitViewController? {
         guard let vc = currentController as? ProgramTabmanViewController, let router = self.parentRouter as? ProgramRouter else { return nil }
         

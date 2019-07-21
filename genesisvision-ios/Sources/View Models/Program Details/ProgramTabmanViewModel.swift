@@ -76,6 +76,11 @@ final class ProgramTabmanViewModel: TabmanViewModel {
                 self.addController(tradesVC)
             }
             
+            if let currency = programDetailsFull.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency), let vc = router.getPeriodHistory(with: programId, currency: currencyType) {
+                self.addItem(vc.viewModel.title.uppercased())
+                self.addController(vc)
+            }
+            
             if let personalProgramDetails = programDetailsFull.personalProgramDetails, let isInvested = personalProgramDetails.isInvested, isInvested, let vc = router.getEvents(with: programId) {
                 self.addController(vc)
                 self.addItem(vc.viewModel.title.uppercased())

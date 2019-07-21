@@ -12,11 +12,13 @@ final class SignalTradesViewModel {
     // MARK: - Variables
     var title: String = "Trades"
     
-    var router: DashboardRouter!
+    var router: SignalRouterProtocol!
     private weak var reloadDataProtocol: ReloadDataProtocol?
     private weak var signalTradesProtocol: SignalTradesProtocol?
     
     var sortingDelegateManager: SortingDelegateManager!
+    
+    var currency: CurrencyType?
     
     var canFetchMoreResults = true
     var dataType: DataType = .api
@@ -48,10 +50,18 @@ final class SignalTradesViewModel {
     var isOpenTrades: Bool = false
     
     // MARK: - Init
-    init(withRouter router: DashboardRouter, reloadDataProtocol: ReloadDataProtocol?, isOpenTrades: Bool? = false, signalTradesProtocol: SignalTradesProtocol? = nil) {
+    init(withRouter router: SignalRouterProtocol, reloadDataProtocol: ReloadDataProtocol?, isOpenTrades: Bool? = false, signalTradesProtocol: SignalTradesProtocol? = nil, currency: CurrencyType? = nil) {
         self.router = router
         self.isOpenTrades = isOpenTrades ?? false
         self.reloadDataProtocol = reloadDataProtocol
+        self.currency = currency
+        
+        if self.isOpenTrades {
+            self.router.signalOpenTradesViewController = reloadDataProtocol as? SignalOpenTradesViewController
+        } else {
+            self.router.signalTradesViewController = reloadDataProtocol as? SignalTradesViewController
+        }
+        
         self.signalTradesProtocol = signalTradesProtocol
         
         title = self.isOpenTrades ? "Open trades" : "Trades history"
@@ -222,11 +232,11 @@ extension SignalTradesViewModel {
         let sorting = sortingDelegateManager.manager?.getSelectedSorting()
         
         if isOpenTrades {
-            SignalDataProvider.getTradesOpen(with: nil, skip: skip, take: take, completion: { [weak self] (tradesViewModel) in
+            SignalDataProvider.getTradesOpen(with: nil, currency: currency, skip: skip, take: take, completion: { [weak self] (tradesViewModel) in
                 self?.saveTrades(tradesViewModel, completionSuccess, completionError: completionError)
                 }, errorCompletion: completionError)
         } else {
-            SignalDataProvider.getTrades(from: dateFrom, dateTo: dateTo, sorting: sorting as? SignalAPI.Sorting_v10SignalTradesGet, skip: skip, take: take, completion: { [weak self ] (tradesViewModel) in
+            SignalDataProvider.getTrades(from: dateFrom, dateTo: dateTo, sorting: sorting as? SignalAPI.Sorting_v10SignalTradesGet, currency: currency, skip: skip, take: take, completion: { [weak self ] (tradesViewModel) in
                 self?.saveTrades(tradesViewModel, completionSuccess, completionError: completionError)
             }, errorCompletion: completionError)
         }

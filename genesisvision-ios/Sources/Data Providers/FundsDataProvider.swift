@@ -171,4 +171,13 @@ class FundsDataProvider: DataProvider {
         }
     }
 
+    static func getReallocateHistory(with assetId: String?, dateFrom: Date? = nil, dateTo: Date? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ reallocationsViewModel: ReallocationsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        
+        guard let assetId = assetId, let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        FundsAPI.v10FundsByIdReallocationsGet(id: uuid, dateFrom: dateFrom, dateTo: dateTo, skip: skip, take: take) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
 }

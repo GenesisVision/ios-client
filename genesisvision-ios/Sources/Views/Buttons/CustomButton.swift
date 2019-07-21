@@ -309,7 +309,7 @@ class LevelButton: UIButton {
     var borderSize: CGFloat = 2.0
     var borderInsetSize: CGFloat = 3.0
     var showProgress: Bool = true
-    var progress: Double = 0.5
+    var progress: Double = 0.0
 
     var bgColor: UIColor?
     var progressView: CircularProgressView!
@@ -321,7 +321,6 @@ class LevelButton: UIButton {
         progressView = CircularProgressView()
         progressView.percentTextEnable = false
         progressView.isUserInteractionEnabled = false
-        progressView.setProgress(to: progress, withAnimation: true)
         addSubview(progressView)
         
         self.commonInit()
@@ -338,6 +337,7 @@ class LevelButton: UIButton {
         roundCorners()
         
         backgroundColor = bgColor ?? UIColor.Cell.bg
+        progressView.setProgress(to: progress / 100.0, withAnimation: true)
         
         if showProgress {
             progressView.frame = bounds.insetBy(dx: borderInsetSize, dy: borderInsetSize)

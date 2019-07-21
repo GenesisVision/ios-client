@@ -23,6 +23,10 @@ extension NotificationsSettingsProgramTableViewCellViewModel: CellViewModel {
             cell.assetLogoImageView.levelButton.setTitle(level.toString(), for: .normal)
         }
         
+        if let levelProgress = setting.levelProgress {
+            cell.assetLogoImageView.levelButton.progress = levelProgress
+        }
+        
         if let color = setting.color {
             cell.assetLogoImageView.profilePhotoImageView.backgroundColor = UIColor.hexColor(color)
         }

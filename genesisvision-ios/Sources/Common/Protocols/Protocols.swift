@@ -20,6 +20,12 @@ protocol YourInvestmentProtocol: class {
     func didChangeSwitch(value: Bool)
 }
 
+protocol SignalRouterProtocol {
+    var signalOpenTradesViewController: SignalOpenTradesViewController? { get set }
+    var signalTradesViewController: SignalTradesViewController? { get set }
+    var signalTradingLogViewController: SignalTradingLogViewController? { get set }
+}
+
 protocol WalletActionsProtocol: class {
     func didTapWithdrawButton()
     func didTapAddFundsButton()

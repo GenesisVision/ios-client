@@ -17,18 +17,20 @@ open class PlatformInfo: Codable {
     public var fundsFacets: [FundFacet]?
     public var programsInfo: ProgramsInfo?
     public var currencies: [String]?
+    public var programCurrencies: [String]?
     public var platformCurrencies: [PlatformCurrency]?
     public var enums: Enums?
 
 
     
-    public init(iOSVersion: IOsAppVersion?, androidVersion: AndroidAppVersion?, programsFacets: [ProgramFacet]?, fundsFacets: [FundFacet]?, programsInfo: ProgramsInfo?, currencies: [String]?, platformCurrencies: [PlatformCurrency]?, enums: Enums?) {
+    public init(iOSVersion: IOsAppVersion?, androidVersion: AndroidAppVersion?, programsFacets: [ProgramFacet]?, fundsFacets: [FundFacet]?, programsInfo: ProgramsInfo?, currencies: [String]?, programCurrencies: [String]?, platformCurrencies: [PlatformCurrency]?, enums: Enums?) {
         self.iOSVersion = iOSVersion
         self.androidVersion = androidVersion
         self.programsFacets = programsFacets
         self.fundsFacets = fundsFacets
         self.programsInfo = programsInfo
         self.currencies = currencies
+        self.programCurrencies = programCurrencies
         self.platformCurrencies = platformCurrencies
         self.enums = enums
     }
@@ -46,6 +48,7 @@ open class PlatformInfo: Codable {
         try container.encodeIfPresent(fundsFacets, forKey: "fundsFacets")
         try container.encodeIfPresent(programsInfo, forKey: "programsInfo")
         try container.encodeIfPresent(currencies, forKey: "currencies")
+        try container.encodeIfPresent(programCurrencies, forKey: "programCurrencies")
         try container.encodeIfPresent(platformCurrencies, forKey: "platformCurrencies")
         try container.encodeIfPresent(enums, forKey: "enums")
     }
@@ -61,6 +64,7 @@ open class PlatformInfo: Codable {
         fundsFacets = try container.decodeIfPresent([FundFacet].self, forKey: "fundsFacets")
         programsInfo = try container.decodeIfPresent(ProgramsInfo.self, forKey: "programsInfo")
         currencies = try container.decodeIfPresent([String].self, forKey: "currencies")
+        programCurrencies = try container.decodeIfPresent([String].self, forKey: "programCurrencies")
         platformCurrencies = try container.decodeIfPresent([PlatformCurrency].self, forKey: "platformCurrencies")
         enums = try container.decodeIfPresent(Enums.self, forKey: "enums")
     }

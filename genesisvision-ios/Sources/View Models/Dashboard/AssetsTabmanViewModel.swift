@@ -32,7 +32,8 @@ class AssetsTabmanViewModel: TabmanViewModel {
         if signalEnable, router is DashboardRouter {
             items?.append(contentsOf: [TabmanBar.Item(title: "Copytrading"),
                                        TabmanBar.Item(title: "Open trades"),
-                                       TabmanBar.Item(title: "Trades history")])
+                                       TabmanBar.Item(title: "Trades history"),
+                                       TabmanBar.Item(title: "Trading log")])
         }
         
         dataSource = AssetsPageboyViewControllerDataSource(router: router, filterModel: filterModel, showFacets: showFacets)

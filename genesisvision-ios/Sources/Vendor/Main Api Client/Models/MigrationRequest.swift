@@ -13,20 +13,14 @@ open class MigrationRequest: Codable {
 
     public var dateCreate: Date?
     public var newLeverage: Int?
-    public var brokerTradingAccountId: UUID?
-    public var brokerTradingAccountName: String?
-    public var brokerName: String?
-    public var brokerLogo: String?
+    public var newBroker: Broker?
 
 
     
-    public init(dateCreate: Date?, newLeverage: Int?, brokerTradingAccountId: UUID?, brokerTradingAccountName: String?, brokerName: String?, brokerLogo: String?) {
+    public init(dateCreate: Date?, newLeverage: Int?, newBroker: Broker?) {
         self.dateCreate = dateCreate
         self.newLeverage = newLeverage
-        self.brokerTradingAccountId = brokerTradingAccountId
-        self.brokerTradingAccountName = brokerTradingAccountName
-        self.brokerName = brokerName
-        self.brokerLogo = brokerLogo
+        self.newBroker = newBroker
     }
     
 
@@ -38,10 +32,7 @@ open class MigrationRequest: Codable {
 
         try container.encodeIfPresent(dateCreate, forKey: "dateCreate")
         try container.encodeIfPresent(newLeverage, forKey: "newLeverage")
-        try container.encodeIfPresent(brokerTradingAccountId, forKey: "brokerTradingAccountId")
-        try container.encodeIfPresent(brokerTradingAccountName, forKey: "brokerTradingAccountName")
-        try container.encodeIfPresent(brokerName, forKey: "brokerName")
-        try container.encodeIfPresent(brokerLogo, forKey: "brokerLogo")
+        try container.encodeIfPresent(newBroker, forKey: "newBroker")
     }
 
     // Decodable protocol methods
@@ -51,10 +42,7 @@ open class MigrationRequest: Codable {
 
         dateCreate = try container.decodeIfPresent(Date.self, forKey: "dateCreate")
         newLeverage = try container.decodeIfPresent(Int.self, forKey: "newLeverage")
-        brokerTradingAccountId = try container.decodeIfPresent(UUID.self, forKey: "brokerTradingAccountId")
-        brokerTradingAccountName = try container.decodeIfPresent(String.self, forKey: "brokerTradingAccountName")
-        brokerName = try container.decodeIfPresent(String.self, forKey: "brokerName")
-        brokerLogo = try container.decodeIfPresent(String.self, forKey: "brokerLogo")
+        newBroker = try container.decodeIfPresent(Broker.self, forKey: "newBroker")
     }
 }
 

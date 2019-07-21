@@ -38,11 +38,14 @@ class CircularProgressView: UIView {
     }
 
     public func setProgress(to progressConstant: Double, withAnimation: Bool) {
-        progress = Double(progressConstant > 1
-            ? 1
-            : progressConstant < 0
-            ? 0
-            : progressConstant)
+        guard progress != progressConstant else { return }
+        
+        progress = progressConstant > 1.0
+            ? 1.0
+            : progressConstant < 0.0
+                ? 0.0
+                : progressConstant
+        
         let percentText = (progress * 100).rounded(toPlaces: 0).toString() + "%"
         percentLabel.text = percentText
         percentLabel.sizeToFit()
@@ -60,7 +63,7 @@ class CircularProgressView: UIView {
 
 
     //MARK: Private
-    private var progress: Double = 0
+    public private(set) var progress: Double = 0
     private let foregroundLayer = CAShapeLayer()
     private let backgroundLayer = CAShapeLayer()
     private let percentLabel: TitleLabel = {

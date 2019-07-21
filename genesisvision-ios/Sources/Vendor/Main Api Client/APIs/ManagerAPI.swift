@@ -2518,12 +2518,52 @@ open class ManagerAPI {
       "isOwnProgram" : true,
       "isReinvest" : true,
       "migration" : {
-        "brokerTradingAccountName" : "brokerTradingAccountName",
+        "newBroker" : {
+          "leverageMin" : 6,
+          "leverageMax" : 1,
+          "assets" : "assets",
+          "terms" : "terms",
+          "fee" : 0.8008281904610115,
+          "name" : "name",
+          "isForex" : true,
+          "description" : "description",
+          "logo" : "logo",
+          "accountTypes" : [ {
+            "name" : "name",
+            "isForex" : true,
+            "description" : "description",
+            "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+            "isSignalsAvailable" : true,
+            "type" : "Undefined",
+            "leverages" : [ 5, 5 ],
+            "minimumDepositsAmount" : {
+              "key" : 5.637376656633329
+            },
+            "currencies" : [ "currencies", "currencies" ]
+          }, {
+            "name" : "name",
+            "isForex" : true,
+            "description" : "description",
+            "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+            "isSignalsAvailable" : true,
+            "type" : "Undefined",
+            "leverages" : [ 5, 5 ],
+            "minimumDepositsAmount" : {
+              "key" : 5.637376656633329
+            },
+            "currencies" : [ "currencies", "currencies" ]
+          } ],
+          "isSignalsAvailable" : true,
+          "tags" : [ {
+            "color" : "color",
+            "name" : "name"
+          }, {
+            "color" : "color",
+            "name" : "name"
+          } ]
+        },
         "newLeverage" : 1,
-        "brokerTradingAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-        "dateCreate" : "2000-01-23T04:56:07.000+00:00",
-        "brokerName" : "brokerName",
-        "brokerLogo" : "brokerLogo"
+        "dateCreate" : "2000-01-23T04:56:07.000+00:00"
       },
       "signalSubscription" : {
         "mode" : "ByBalance",
@@ -2645,12 +2685,52 @@ open class ManagerAPI {
       "isOwnProgram" : true,
       "isReinvest" : true,
       "migration" : {
-        "brokerTradingAccountName" : "brokerTradingAccountName",
+        "newBroker" : {
+          "leverageMin" : 6,
+          "leverageMax" : 1,
+          "assets" : "assets",
+          "terms" : "terms",
+          "fee" : 0.8008281904610115,
+          "name" : "name",
+          "isForex" : true,
+          "description" : "description",
+          "logo" : "logo",
+          "accountTypes" : [ {
+            "name" : "name",
+            "isForex" : true,
+            "description" : "description",
+            "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+            "isSignalsAvailable" : true,
+            "type" : "Undefined",
+            "leverages" : [ 5, 5 ],
+            "minimumDepositsAmount" : {
+              "key" : 5.637376656633329
+            },
+            "currencies" : [ "currencies", "currencies" ]
+          }, {
+            "name" : "name",
+            "isForex" : true,
+            "description" : "description",
+            "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+            "isSignalsAvailable" : true,
+            "type" : "Undefined",
+            "leverages" : [ 5, 5 ],
+            "minimumDepositsAmount" : {
+              "key" : 5.637376656633329
+            },
+            "currencies" : [ "currencies", "currencies" ]
+          } ],
+          "isSignalsAvailable" : true,
+          "tags" : [ {
+            "color" : "color",
+            "name" : "name"
+          }, {
+            "color" : "color",
+            "name" : "name"
+          } ]
+        },
         "newLeverage" : 1,
-        "brokerTradingAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-        "dateCreate" : "2000-01-23T04:56:07.000+00:00",
-        "brokerName" : "brokerName",
-        "brokerLogo" : "brokerLogo"
+        "dateCreate" : "2000-01-23T04:56:07.000+00:00"
       },
       "signalSubscription" : {
         "mode" : "ByBalance",
@@ -2811,15 +2891,25 @@ open class ManagerAPI {
     }
 
     /**
+     * enum for parameter assetType
+     */
+    public enum AssetType_v10ManagerRequestsBySkipByTakeGet: String { 
+        case all = "All"
+        case program = "Program"
+        case fund = "Fund"
+    }
+
+    /**
      Get all requests
      
      - parameter skip: (path)  
      - parameter take: (path)  
      - parameter authorization: (header) JWT access token 
+     - parameter assetType: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10ManagerRequestsBySkipByTakeGet(skip: Int, take: Int, authorization: String, completion: @escaping ((_ data: ProgramRequests?,_ error: Error?) -> Void)) {
-        v10ManagerRequestsBySkipByTakeGetWithRequestBuilder(skip: skip, take: take, authorization: authorization).execute { (response, error) -> Void in
+    open class func v10ManagerRequestsBySkipByTakeGet(skip: Int, take: Int, authorization: String, assetType: AssetType_v10ManagerRequestsBySkipByTakeGet? = nil, completion: @escaping ((_ data: ProgramRequests?,_ error: Error?) -> Void)) {
+        v10ManagerRequestsBySkipByTakeGetWithRequestBuilder(skip: skip, take: take, authorization: authorization, assetType: assetType).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -2873,10 +2963,11 @@ open class ManagerAPI {
      - parameter skip: (path)  
      - parameter take: (path)  
      - parameter authorization: (header) JWT access token 
+     - parameter assetType: (query)  (optional)
 
      - returns: RequestBuilder<ProgramRequests> 
      */
-    open class func v10ManagerRequestsBySkipByTakeGetWithRequestBuilder(skip: Int, take: Int, authorization: String) -> RequestBuilder<ProgramRequests> {
+    open class func v10ManagerRequestsBySkipByTakeGetWithRequestBuilder(skip: Int, take: Int, authorization: String, assetType: AssetType_v10ManagerRequestsBySkipByTakeGet? = nil) -> RequestBuilder<ProgramRequests> {
         var path = "/v1.0/manager/requests/{skip}/{take}"
         path = path.replacingOccurrences(of: "{skip}", with: "\(skip)", options: .literal, range: nil)
         path = path.replacingOccurrences(of: "{take}", with: "\(take)", options: .literal, range: nil)
@@ -2884,7 +2975,10 @@ open class ManagerAPI {
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
-
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "assetType": assetType?.rawValue
+        ])
+        
         let nillableHeaders: [String: Any?] = [
             "Authorization": authorization
         ]

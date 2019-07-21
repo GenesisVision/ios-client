@@ -14,7 +14,7 @@ enum DashboardRouteType {
     case showFilterVC(listViewModel: ListViewModelProtocol, filterModel: FilterModel, filterType: FilterType, sortingType: SortingType)
 }
 
-class DashboardRouter: Router, ListRouterProtocol {
+class DashboardRouter: Router, SignalRouterProtocol, ListRouterProtocol {
     
     var dashboardViewController: DashboardViewController!
     
@@ -24,10 +24,11 @@ class DashboardRouter: Router, ListRouterProtocol {
     
     var programListViewController: DashboardProgramListViewController?
     var fundListViewController: DashboardFundListViewController?
+    
     var signalListViewController: SignalListViewController?
     var signalOpenTradesViewController: SignalOpenTradesViewController?
     var signalTradesViewController: SignalTradesViewController?
-    
+    var signalTradingLogViewController: SignalTradingLogViewController?
     
     // MARK: - Lifecycle
     init(parentRouter: Router?, navigationController: UINavigationController?, dashboardViewController: DashboardViewController) {

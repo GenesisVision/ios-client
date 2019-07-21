@@ -15,14 +15,16 @@ open class BrokerDetails: Codable {
     public var logo: String?
     public var showSwaps: Bool?
     public var showTickets: Bool?
+    public var name: String?
 
 
     
-    public init(isForex: Bool?, logo: String?, showSwaps: Bool?, showTickets: Bool?) {
+    public init(isForex: Bool?, logo: String?, showSwaps: Bool?, showTickets: Bool?, name: String?) {
         self.isForex = isForex
         self.logo = logo
         self.showSwaps = showSwaps
         self.showTickets = showTickets
+        self.name = name
     }
     
 
@@ -36,6 +38,7 @@ open class BrokerDetails: Codable {
         try container.encodeIfPresent(logo, forKey: "logo")
         try container.encodeIfPresent(showSwaps, forKey: "showSwaps")
         try container.encodeIfPresent(showTickets, forKey: "showTickets")
+        try container.encodeIfPresent(name, forKey: "name")
     }
 
     // Decodable protocol methods
@@ -47,6 +50,7 @@ open class BrokerDetails: Codable {
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
         showSwaps = try container.decodeIfPresent(Bool.self, forKey: "showSwaps")
         showTickets = try container.decodeIfPresent(Bool.self, forKey: "showTickets")
+        name = try container.decodeIfPresent(String.self, forKey: "name")
     }
 }
 

@@ -48,9 +48,10 @@ final class WalletTabmanViewModel: TabmanViewModel {
                 self.title = title
             }
             
-            items = [TabmanBar.Item(title: "Balance")]
-//                     TabmanBar.Item(title: "Open trades"),
-//                     TabmanBar.Item(title: "Trades history")]
+            items = [TabmanBar.Item(title: "Balance"),
+                     TabmanBar.Item(title: "Open trades"),
+                     TabmanBar.Item(title: "Trades history"),
+                     TabmanBar.Item(title: "Trading log")]
             
             dataSource = WalletCopytradingPageboyViewControllerDataSource(router: router, account: account)
         case .all:
@@ -124,6 +125,15 @@ class WalletCopytradingPageboyViewControllerDataSource: BasePageboyViewControlle
             if let vc = router.getBalance(account: account) {
                 controllers.append(vc)
             }
+            
+            let signalOpenTrades = router.getSignalOpenTrades(with: router, currency: CurrencyType(rawValue: account?.currency?.rawValue ?? ""))
+            controllers.append(signalOpenTrades)
+            
+            let signalTrades = router.getSignalTrades(with: router, currency: CurrencyType(rawValue: account?.currency?.rawValue ?? ""))
+            controllers.append(signalTrades)
+            
+            let signalTradingLog = router.getSignalTradingLog(with: router)
+            controllers.append(signalTradingLog)
         }
     }
 }

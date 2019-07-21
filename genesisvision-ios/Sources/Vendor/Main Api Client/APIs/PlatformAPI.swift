@@ -176,6 +176,7 @@ open class PlatformAPI {
     "rateToGvt" : 1.4894159098541704,
     "name" : "name"
   } ],
+  "programCurrencies" : [ "programCurrencies", "programCurrencies" ],
   "currencies" : [ "currencies", "currencies" ]
 }}]
 

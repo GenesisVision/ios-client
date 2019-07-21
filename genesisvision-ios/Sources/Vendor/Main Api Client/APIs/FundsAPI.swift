@@ -481,9 +481,9 @@ open class FundsAPI {
      - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10FundsByIdReallocationsGet(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+    open class func v10FundsByIdReallocationsGet(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ReallocationsViewModel?,_ error: Error?) -> Void)) {
         v10FundsByIdReallocationsGetWithRequestBuilder(id: id, dateFrom: dateFrom, dateTo: dateTo, skip: skip, take: take).execute { (response, error) -> Void in
-            completion(error);
+            completion(response?.body, error);
         }
     }
 
@@ -491,6 +491,40 @@ open class FundsAPI {
     /**
      Get history of asset part update requests.
      - GET /v1.0/funds/{id}/reallocations
+     - examples: [{contentType=application/json, example={
+  "total" : 0,
+  "reallocations" : [ {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "parts" : [ {
+      "color" : "color",
+      "icon" : "icon",
+      "name" : "name",
+      "asset" : "asset",
+      "percent" : 5.962133916683182
+    }, {
+      "color" : "color",
+      "icon" : "icon",
+      "name" : "name",
+      "asset" : "asset",
+      "percent" : 5.962133916683182
+    } ]
+  }, {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "parts" : [ {
+      "color" : "color",
+      "icon" : "icon",
+      "name" : "name",
+      "asset" : "asset",
+      "percent" : 5.962133916683182
+    }, {
+      "color" : "color",
+      "icon" : "icon",
+      "name" : "name",
+      "asset" : "asset",
+      "percent" : 5.962133916683182
+    } ]
+  } ]
+}}]
      
      - parameter id: (path)  
      - parameter dateFrom: (query)  (optional)
@@ -498,9 +532,9 @@ open class FundsAPI {
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
 
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<ReallocationsViewModel> 
      */
-    open class func v10FundsByIdReallocationsGetWithRequestBuilder(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<Void> {
+    open class func v10FundsByIdReallocationsGetWithRequestBuilder(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ReallocationsViewModel> {
         var path = "/v1.0/funds/{id}/reallocations"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
@@ -515,7 +549,7 @@ open class FundsAPI {
         ])
         
 
-        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+        let requestBuilder: RequestBuilder<ReallocationsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }

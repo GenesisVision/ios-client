@@ -36,8 +36,8 @@ extension DetailStatisticsTableViewCellViewModel: CellViewModel {
         if let value = programDetailsFull.volumeScale {
             cell.volumeLabel.text = value.toString()
         }
-        if let min = programDetailsFull.leverageMin, let max = programDetailsFull.leverageMax {
-            cell.leverageLabel.text = "\(min):\(max)"
+        if let max = programDetailsFull.leverageMax {
+            cell.leverageLabel.text = "1:\(max)"
         }
     }
 }

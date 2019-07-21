@@ -1724,7 +1724,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_program_level_bg" translatesAutoresizingMaskIntoConstraints="NO" id="hhe-DH-fmz">
-                                        <rect key="frame" x="359" y="47.666666666666657" width="55" height="161"/>
+                                        <rect key="frame" x="359" y="47.666666666666671" width="55" height="161.00000000000003"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="161" id="LxM-9H-WQc"/>
                                             <constraint firstAttribute="width" constant="55" id="Yhy-wE-ejs"/>
@@ -1989,7 +1989,7 @@ That’s it, those are all the rules! Here is a simplified recap: you need to en
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="YH9-8q-FPy" customClass="LevelStackView" customModule="Genesis_Vision" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="121" height="40"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y4P-bc-LvZ" customClass="LevelButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y4P-bc-LvZ" customClass="RatingLevelButton" customModule="Genesis_Vision" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="40" id="wnI-RG-49t"/>
@@ -2025,7 +2025,7 @@ That’s it, those are all the rules! Here is a simplified recap: you need to en
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="uaq-DD-Nwa" customClass="LevelStackView" customModule="Genesis_Vision" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="56" width="121" height="40"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6gQ-pW-ZDl" customClass="LevelButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6gQ-pW-ZDl" customClass="RatingLevelButton" customModule="Genesis_Vision" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="40" id="0CE-zv-pbo"/>
@@ -2061,7 +2061,7 @@ That’s it, those are all the rules! Here is a simplified recap: you need to en
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="vkV-wO-KUl" customClass="LevelStackView" customModule="Genesis_Vision" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="112" width="121" height="40"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ija-6H-ZHF" customClass="LevelButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ija-6H-ZHF" customClass="RatingLevelButton" customModule="Genesis_Vision" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="40" id="UQ6-Jw-Sgq"/>
@@ -2097,7 +2097,7 @@ That’s it, those are all the rules! Here is a simplified recap: you need to en
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="atf-a5-G2h" customClass="LevelStackView" customModule="Genesis_Vision" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="168" width="121" height="40"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1zK-OO-IGw" customClass="LevelButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1zK-OO-IGw" customClass="RatingLevelButton" customModule="Genesis_Vision" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="40" id="dzL-Dr-sJz"/>
@@ -2133,7 +2133,7 @@ That’s it, those are all the rules! Here is a simplified recap: you need to en
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="8rw-4J-xlO" customClass="LevelStackView" customModule="Genesis_Vision" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="224" width="121" height="40"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Zx-6y-5jA" customClass="LevelButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Zx-6y-5jA" customClass="RatingLevelButton" customModule="Genesis_Vision" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="40" id="pfT-8P-fTg"/>
@@ -2169,7 +2169,7 @@ That’s it, those are all the rules! Here is a simplified recap: you need to en
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="kTC-JE-aMY" customClass="LevelStackView" customModule="Genesis_Vision" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="280" width="121" height="40"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2zI-nC-27F" customClass="LevelButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2zI-nC-27F" customClass="RatingLevelButton" customModule="Genesis_Vision" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="40" id="pSc-Se-8xT"/>
@@ -2205,7 +2205,7 @@ That’s it, those are all the rules! Here is a simplified recap: you need to en
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="EyZ-0E-BVW" customClass="LevelStackView" customModule="Genesis_Vision" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="336" width="121" height="40"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yRf-Sf-3MH" customClass="LevelButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yRf-Sf-3MH" customClass="RatingLevelButton" customModule="Genesis_Vision" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="40" id="iSZ-8d-T4H"/>

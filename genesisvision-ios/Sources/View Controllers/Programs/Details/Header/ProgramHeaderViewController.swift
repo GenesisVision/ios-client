@@ -176,6 +176,10 @@ class ProgramHeaderViewController: BaseViewController {
             levelButton.setTitle(level.toString(), for: .normal)
         }
         
+        if let levelProgress = programDetailsFull?.levelProgress {
+            levelButton.progress = levelProgress
+        }
+        
         bgImageView.image = UIImage.programPlaceholder
         headerTitleImageView.image = UIImage.programPlaceholder
         

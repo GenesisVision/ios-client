@@ -78,6 +78,11 @@ final class FundTabmanViewModel: TabmanViewModel {
                 self.addItem(vc.viewModel.title.uppercased())
             }
             
+            if let vc = router.getReallocateHistory(with: fundId) {
+                self.addController(vc)
+                self.addItem(vc.viewModel.title.uppercased())
+            }
+            
             reloadPages()
         }
     }

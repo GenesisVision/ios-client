@@ -16,10 +16,14 @@ enum WalletRouteType {
     case showAssetDetails(assetId: String, assetType: AssetType)
 }
 
-class WalletRouter: Router {
+class WalletRouter: Router, SignalRouterProtocol {
     
     var walletBalanceViewController: WalletBalanceViewController?
     var walletTabmanViewController: WalletViewController?
+    
+    var signalOpenTradesViewController: SignalOpenTradesViewController?
+    var signalTradesViewController: SignalTradesViewController?
+    var signalTradingLogViewController: SignalTradingLogViewController?
     
     // MARK: - Public methods
     func show(routeType: WalletRouteType) {

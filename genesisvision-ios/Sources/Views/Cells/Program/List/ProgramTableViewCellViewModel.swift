@@ -50,6 +50,10 @@ extension ProgramTableViewCellViewModel: CellViewModel {
         cell.assetLogoImageView.levelButton.setImage(nil, for: .normal)
         cell.assetLogoImageView.levelButton.setTitle(nil, for: .normal)
         
+        if let levelProgress = asset.levelProgress {
+            cell.assetLogoImageView.levelButton.progress = levelProgress
+        }
+        
         cell.bgColor = UIColor.Cell.bg
         
         cell.ratingPlaceHeightConstraint.constant = isRating ? 24.0 : 0.0

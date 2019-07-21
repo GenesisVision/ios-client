@@ -303,12 +303,52 @@ open class SearchAPI {
         "isOwnProgram" : true,
         "isReinvest" : true,
         "migration" : {
-          "brokerTradingAccountName" : "brokerTradingAccountName",
+          "newBroker" : {
+            "leverageMin" : 6,
+            "leverageMax" : 1,
+            "assets" : "assets",
+            "terms" : "terms",
+            "fee" : 0.8008281904610115,
+            "name" : "name",
+            "isForex" : true,
+            "description" : "description",
+            "logo" : "logo",
+            "accountTypes" : [ {
+              "name" : "name",
+              "isForex" : true,
+              "description" : "description",
+              "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+              "isSignalsAvailable" : true,
+              "type" : "Undefined",
+              "leverages" : [ 5, 5 ],
+              "minimumDepositsAmount" : {
+                "key" : 5.637376656633329
+              },
+              "currencies" : [ "currencies", "currencies" ]
+            }, {
+              "name" : "name",
+              "isForex" : true,
+              "description" : "description",
+              "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+              "isSignalsAvailable" : true,
+              "type" : "Undefined",
+              "leverages" : [ 5, 5 ],
+              "minimumDepositsAmount" : {
+                "key" : 5.637376656633329
+              },
+              "currencies" : [ "currencies", "currencies" ]
+            } ],
+            "isSignalsAvailable" : true,
+            "tags" : [ {
+              "color" : "color",
+              "name" : "name"
+            }, {
+              "color" : "color",
+              "name" : "name"
+            } ]
+          },
           "newLeverage" : 1,
-          "brokerTradingAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-          "dateCreate" : "2000-01-23T04:56:07.000+00:00",
-          "brokerName" : "brokerName",
-          "brokerLogo" : "brokerLogo"
+          "dateCreate" : "2000-01-23T04:56:07.000+00:00"
         },
         "signalSubscription" : {
           "mode" : "ByBalance",
@@ -430,12 +470,52 @@ open class SearchAPI {
         "isOwnProgram" : true,
         "isReinvest" : true,
         "migration" : {
-          "brokerTradingAccountName" : "brokerTradingAccountName",
+          "newBroker" : {
+            "leverageMin" : 6,
+            "leverageMax" : 1,
+            "assets" : "assets",
+            "terms" : "terms",
+            "fee" : 0.8008281904610115,
+            "name" : "name",
+            "isForex" : true,
+            "description" : "description",
+            "logo" : "logo",
+            "accountTypes" : [ {
+              "name" : "name",
+              "isForex" : true,
+              "description" : "description",
+              "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+              "isSignalsAvailable" : true,
+              "type" : "Undefined",
+              "leverages" : [ 5, 5 ],
+              "minimumDepositsAmount" : {
+                "key" : 5.637376656633329
+              },
+              "currencies" : [ "currencies", "currencies" ]
+            }, {
+              "name" : "name",
+              "isForex" : true,
+              "description" : "description",
+              "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+              "isSignalsAvailable" : true,
+              "type" : "Undefined",
+              "leverages" : [ 5, 5 ],
+              "minimumDepositsAmount" : {
+                "key" : 5.637376656633329
+              },
+              "currencies" : [ "currencies", "currencies" ]
+            } ],
+            "isSignalsAvailable" : true,
+            "tags" : [ {
+              "color" : "color",
+              "name" : "name"
+            }, {
+              "color" : "color",
+              "name" : "name"
+            } ]
+          },
           "newLeverage" : 1,
-          "brokerTradingAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-          "dateCreate" : "2000-01-23T04:56:07.000+00:00",
-          "brokerName" : "brokerName",
-          "brokerLogo" : "brokerLogo"
+          "dateCreate" : "2000-01-23T04:56:07.000+00:00"
         },
         "signalSubscription" : {
           "mode" : "ByBalance",

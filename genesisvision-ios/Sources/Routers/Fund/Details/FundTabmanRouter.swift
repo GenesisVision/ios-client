@@ -62,4 +62,15 @@ class FundTabmanRouter: TabmanRouter {
         
         return viewController
     }
+    
+    func getReallocateHistory(with fundId: String) -> FundReallocateHistoryViewController? {
+        guard let router = self.parentRouter as? FundRouter else { return nil }
+        
+        let viewController = FundReallocateHistoryViewController()
+        router.currentController = viewController
+        let viewModel = FundReallocateHistoryViewModel(withRouter: router, fundId: fundId, reloadDataProtocol: viewController)
+        viewController.viewModel = viewModel
+        
+        return viewController
+    }
 }

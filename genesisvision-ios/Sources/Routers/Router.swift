@@ -300,7 +300,6 @@ extension Router {
         } else {
             self.navigationController?.pushViewController(viewController, animated: true)
         }
-        
     }
     
     func showAssetDetails(with assetId: String, assetType: AssetType) {
@@ -399,6 +398,26 @@ extension Router {
         navigationController?.openSafariVC(with: Urls.termsWebAddress)
     }
     
+    func goToBack(animated: Bool = false) {
+        popViewController(animated: animated)
+    }
+    
+    func goToSecond() {
+        popViewController(animated: false)
+        popViewController(animated: false)
+    }
+    
+    func goToRoot(animated: Bool = true) {
+        popToRootViewController(animated: animated)
+    }
+    
+    func closeVC(animated: Bool = true) {
+        dismiss(animated: animated)
+    }
+}
+
+//Get View Controllers
+extension Router {
     func getEventsViewController(with assetId: String? = nil, router: Router? = nil, allowsSelection: Bool = true) -> AllEventsViewController? {
         guard let viewController = AllEventsViewController.storyboardInstance(.dashboard) else { return nil }
         
@@ -414,7 +433,7 @@ extension Router {
         let router = ProgramRouter(parentRouter: self, navigationController: navigationController, programViewController: viewController)
         let viewModel = ProgramViewModel(withRouter: router, programId: programId, programViewController: viewController)
         viewController.viewModel = viewModel
-
+        
         viewController.hidesBottomBarWhenPushed = true
         return viewController
     }
@@ -500,7 +519,7 @@ extension Router {
         let router = ListRouter(parentRouter: parentRouter ?? self)
         router.currentController = viewController
         let viewModel = ListViewModel(withRouter: router, reloadDataProtocol: viewController, filterModel: filterModel, showFacets: showFacets, assetType: .program)
-
+        
         viewController.viewModel = viewModel
         
         viewController.hidesBottomBarWhenPushed = true
@@ -530,21 +549,34 @@ extension Router {
         viewController.hidesBottomBarWhenPushed = true
         return viewController
     }
-    
-    func goToBack(animated: Bool = false) {
-        popViewController(animated: animated)
+}
+
+//signal vc
+extension Router {
+    func getSignalTrades(with router: SignalRouterProtocol, currency: CurrencyType? = nil) -> SignalTradesViewController {
+        let viewController = SignalTradesViewController()
+        viewController.tableViewStyle = .plain
+        let viewModel = SignalTradesViewModel(withRouter: router, reloadDataProtocol: viewController, isOpenTrades: false, currency: currency)
+        viewController.viewModel = viewModel
+        
+        return viewController
     }
     
-    func goToSecond() {
-        popViewController(animated: false)
-        popViewController(animated: false)
+    func getSignalOpenTrades(with router: SignalRouterProtocol, currency: CurrencyType? = nil) -> SignalOpenTradesViewController {
+        let viewController = SignalOpenTradesViewController()
+        viewController.tableViewStyle = .plain
+        let viewModel = SignalTradesViewModel(withRouter: router, reloadDataProtocol: viewController, isOpenTrades: true, signalTradesProtocol: viewController, currency: currency)
+        viewController.viewModel = viewModel
+        
+        return viewController
     }
     
-    func goToRoot(animated: Bool = true) {
-        popToRootViewController(animated: animated)
-    }
-    
-    func closeVC(animated: Bool = true) {
-        dismiss(animated: animated)
+    func getSignalTradingLog(with router: SignalRouterProtocol, currency: CurrencyType? = nil) -> SignalTradingLogViewController {
+        let viewController = SignalTradingLogViewController()
+        viewController.tableViewStyle = .plain
+        let viewModel = SignalTradingLogViewModel(withRouter: router, reloadDataProtocol: viewController, currency: currency)
+        viewController.viewModel = viewModel
+        
+        return viewController
     }
 }

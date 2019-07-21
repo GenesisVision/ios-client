@@ -10,6 +10,8 @@ import UIKit.UITableViewHeaderFooterView
 
 final class ProgramTradesViewModel {
     // MARK: - Variables
+    typealias CellViewModel = ProgramTradesTableViewCellViewModel
+    
     var title: String = "Trades"
     var programId: String?
     
@@ -36,13 +38,13 @@ final class ProgramTradesViewModel {
         return self.isOpenTrades ? "There are no open positions" : "There are no trades"
     }
     
-    var viewModels = [ProgramTradesTableViewCellViewModel]() {
+    var viewModels = [CellViewModel]() {
         didSet {
             self.sortModels(viewModels)
         }
     }
     
-    var sections = [Date : [ProgramTradesTableViewCellViewModel]]()
+    var sections = [Date : [CellViewModel]]()
     var sortedSections = [Date]()
     
     var isOpenTrades: Bool = false
@@ -71,7 +73,7 @@ extension ProgramTradesViewModel {
     // MARK: - Public methods
     /// Return view models for registration cell Nib files
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [ProgramTradesTableViewCellViewModel.self]
+        return [CellViewModel.self]
     }
     /// Return view models for registration header/footer Nib files
     var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
@@ -128,7 +130,7 @@ extension ProgramTradesViewModel {
         
         canFetchMoreResults = false
         fetch({ [weak self] (totalCount, viewModels) in
-            var allViewModels = self?.viewModels ?? [ProgramTradesTableViewCellViewModel]()
+            var allViewModels = self?.viewModels ?? [CellViewModel]()
             
             viewModels.forEach({ (viewModel) in
                 allViewModels.append(viewModel)
@@ -154,14 +156,14 @@ extension ProgramTradesViewModel {
     }
     
     /// Get TableViewCellViewModel for IndexPath
-    func model(for indexPath: IndexPath) -> ProgramTradesTableViewCellViewModel? {
+    func model(for indexPath: IndexPath) -> CellViewModel? {
         guard let section = sections[sortedSections[indexPath.section]] else { return nil }
         return section[indexPath.row]
     }
     
     // MARK: - Private methods
-    private func sortModels(_ viewModels: [ProgramTradesTableViewCellViewModel]) {
-        var sections = [Date : [ProgramTradesTableViewCellViewModel]]()
+    private func sortModels(_ viewModels: [CellViewModel]) {
+        var sections = [Date : [CellViewModel]]()
         
         for model in viewModels {
             let dateFormatter = DateFormatter()
@@ -184,7 +186,7 @@ extension ProgramTradesViewModel {
         self.sections = sections
     }
     
-    private func updateFetchedData(totalCount: Int, viewModels: [ProgramTradesTableViewCellViewModel]) {
+    private func updateFetchedData(totalCount: Int, viewModels: [CellViewModel]) {
         self.viewModels = viewModels
         self.totalCount = totalCount
         self.skip += self.take
@@ -192,7 +194,7 @@ extension ProgramTradesViewModel {
         self.reloadDataProtocol?.didReloadData()
     }
     
-    private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [ProgramTradesTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
+    private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [CellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         
         guard let programId = programId else { return completionError(.failure(errorType: .apiError(message: nil))) }
         
@@ -203,12 +205,12 @@ extension ProgramTradesViewModel {
                 guard tradesViewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completionError)
                 }
-                var viewModels = [ProgramTradesTableViewCellViewModel]()
+                var viewModels = [CellViewModel]()
                 
                 let totalCount = tradesViewModel?.total ?? 0
                 
                 tradesViewModel?.trades?.forEach({ (orderModel) in
-                    let viewModel = ProgramTradesTableViewCellViewModel(orderModel: orderModel, currencyType: self?.currencyType ?? .gvt)
+                    let viewModel = CellViewModel(orderModel: orderModel, currencyType: self?.currencyType ?? .gvt)
                     viewModels.append(viewModel)
                 })
                 
@@ -220,12 +222,12 @@ extension ProgramTradesViewModel {
                 guard tradesViewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completionError)
                 }
-                var viewModels = [ProgramTradesTableViewCellViewModel]()
+                var viewModels = [CellViewModel]()
                 
                 let totalCount = tradesViewModel?.total ?? 0
                 
                 tradesViewModel?.trades?.forEach({ (orderModel) in
-                    let viewModel = ProgramTradesTableViewCellViewModel(orderModel: orderModel, currencyType: self?.currencyType ?? .gvt)
+                    let viewModel = CellViewModel(orderModel: orderModel, currencyType: self?.currencyType ?? .gvt)
                     viewModels.append(viewModel)
                 })
                 

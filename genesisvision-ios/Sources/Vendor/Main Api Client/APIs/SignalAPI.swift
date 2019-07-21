@@ -381,11 +381,13 @@ open class SignalAPI {
     "totalCommissionByType" : [ {
       "amount" : 9.301444243932576,
       "currency" : "Undefined",
-      "type" : "Undefined"
+      "type" : "Undefined",
+      "title" : "title"
     }, {
       "amount" : 9.301444243932576,
       "currency" : "Undefined",
-      "type" : "Undefined"
+      "type" : "Undefined",
+      "title" : "title"
     } ],
     "priceCurrent" : 7.386281948385884,
     "entry" : "In",
@@ -507,11 +509,13 @@ open class SignalAPI {
     "totalCommissionByType" : [ {
       "amount" : 9.301444243932576,
       "currency" : "Undefined",
-      "type" : "Undefined"
+      "type" : "Undefined",
+      "title" : "title"
     }, {
       "amount" : 9.301444243932576,
       "currency" : "Undefined",
-      "type" : "Undefined"
+      "type" : "Undefined",
+      "title" : "title"
     } ],
     "priceCurrent" : 7.386281948385884,
     "entry" : "In",
@@ -827,11 +831,13 @@ open class SignalAPI {
     "totalCommissionByType" : [ {
       "amount" : 9.301444243932576,
       "currency" : "Undefined",
-      "type" : "Undefined"
+      "type" : "Undefined",
+      "title" : "title"
     }, {
       "amount" : 9.301444243932576,
       "currency" : "Undefined",
-      "type" : "Undefined"
+      "type" : "Undefined",
+      "title" : "title"
     } ],
     "priceCurrent" : 7.386281948385884,
     "entry" : "In",
@@ -953,11 +959,13 @@ open class SignalAPI {
     "totalCommissionByType" : [ {
       "amount" : 9.301444243932576,
       "currency" : "Undefined",
-      "type" : "Undefined"
+      "type" : "Undefined",
+      "title" : "title"
     }, {
       "amount" : 9.301444243932576,
       "currency" : "Undefined",
-      "type" : "Undefined"
+      "type" : "Undefined",
+      "title" : "title"
     } ],
     "priceCurrent" : 7.386281948385884,
     "entry" : "In",

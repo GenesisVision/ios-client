@@ -14,13 +14,21 @@ open class FinancialStatistic: Codable {
     public var deposit: Double?
     public var withdraw: Double?
     public var commissionRebate: Double?
+    public var successFee: Double?
+    public var entryFee: Double?
+    public var profit: Double?
+    public var balance: Double?
 
 
     
-    public init(deposit: Double?, withdraw: Double?, commissionRebate: Double?) {
+    public init(deposit: Double?, withdraw: Double?, commissionRebate: Double?, successFee: Double?, entryFee: Double?, profit: Double?, balance: Double?) {
         self.deposit = deposit
         self.withdraw = withdraw
         self.commissionRebate = commissionRebate
+        self.successFee = successFee
+        self.entryFee = entryFee
+        self.profit = profit
+        self.balance = balance
     }
     
 
@@ -33,6 +41,10 @@ open class FinancialStatistic: Codable {
         try container.encodeIfPresent(deposit, forKey: "deposit")
         try container.encodeIfPresent(withdraw, forKey: "withdraw")
         try container.encodeIfPresent(commissionRebate, forKey: "commissionRebate")
+        try container.encodeIfPresent(successFee, forKey: "successFee")
+        try container.encodeIfPresent(entryFee, forKey: "entryFee")
+        try container.encodeIfPresent(profit, forKey: "profit")
+        try container.encodeIfPresent(balance, forKey: "balance")
     }
 
     // Decodable protocol methods
@@ -43,6 +55,10 @@ open class FinancialStatistic: Codable {
         deposit = try container.decodeIfPresent(Double.self, forKey: "deposit")
         withdraw = try container.decodeIfPresent(Double.self, forKey: "withdraw")
         commissionRebate = try container.decodeIfPresent(Double.self, forKey: "commissionRebate")
+        successFee = try container.decodeIfPresent(Double.self, forKey: "successFee")
+        entryFee = try container.decodeIfPresent(Double.self, forKey: "entryFee")
+        profit = try container.decodeIfPresent(Double.self, forKey: "profit")
+        balance = try container.decodeIfPresent(Double.self, forKey: "balance")
     }
 }
 

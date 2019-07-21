@@ -63,6 +63,10 @@ extension DashboardProgramTableViewCellViewModel: CellViewModel {
             cell.assetLogoImageView.levelButton.setTitle(level.toString(), for: .normal)
         }
         
+        if let levelProgress = program.levelProgress {
+            cell.assetLogoImageView.levelButton.progress = levelProgress
+        }
+        
         if let currency = program.currency {
             cell.currencyLabel.text = currency.rawValue
         }

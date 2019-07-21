@@ -22,10 +22,11 @@ class AssetsPageboyViewControllerDataSource: BasePageboyViewControllerDataSource
                 controllers = [programListViewController, fundListViewController]
                 
                 let signalListViewController = getSignalList(router)
-                let signalTradesViewController = getTrades(with: router)
                 let signalOpenTradesViewController = getOpenTrades(with: router)
+                let signalTradesViewController = getTrades(with: router)
+                let signalTradingLogViewController = getTradesLog(with: router)
                 
-                controllers.append(contentsOf: [signalListViewController, signalOpenTradesViewController, signalTradesViewController])
+                controllers.append(contentsOf: [signalListViewController, signalOpenTradesViewController, signalTradesViewController, signalTradingLogViewController])
             }
         } else {
             guard let programListViewController = getPrograms(with: router, filterModel: filterModel, showFacets: showFacets), let fundListViewController = getFunds(with: router, filterModel: filterModel, showFacets: showFacets) else { return }
@@ -88,22 +89,16 @@ class AssetsPageboyViewControllerDataSource: BasePageboyViewControllerDataSource
     }
     
     func getTrades(with router: DashboardRouter) -> SignalTradesViewController {
-        let viewController = SignalTradesViewController()
-        viewController.tableViewStyle = .plain
-        router.signalTradesViewController = viewController
-        let viewModel = SignalTradesViewModel(withRouter: router, reloadDataProtocol: viewController, isOpenTrades: false)
-        viewController.viewModel = viewModel
-        
-        return viewController
+        return router.getSignalTrades(with: router)
     }
     
     func getOpenTrades(with router: DashboardRouter) -> SignalOpenTradesViewController {
-        let viewController = SignalOpenTradesViewController()
-        viewController.tableViewStyle = .plain
-        router.signalOpenTradesViewController = viewController
-        let viewModel = SignalTradesViewModel(withRouter: router, reloadDataProtocol: viewController, isOpenTrades: true, signalTradesProtocol: viewController)
-        viewController.viewModel = viewModel
-        
-        return viewController
+        return router.getSignalOpenTrades(with: router)
     }
+    
+    func getTradesLog(with router: DashboardRouter) -> SignalTradingLogViewController {
+        return router.getSignalTradingLog(with: router)
+    }
+    
+    
 }

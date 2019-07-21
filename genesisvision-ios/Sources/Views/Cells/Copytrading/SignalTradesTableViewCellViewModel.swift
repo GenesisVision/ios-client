@@ -30,6 +30,10 @@ extension SignalTradesTableViewCellViewModel: CellViewModel {
                     cell.assetLogoImageView.levelButton.setTitle(level.toString(), for: .normal)
                 }
                 
+                if let levelProgress = program.levelProgress {
+                    cell.assetLogoImageView.levelButton.progress = levelProgress
+                }
+                
                 if let color = program.color {
                     cell.assetLogoImageView.profilePhotoImageView.backgroundColor = UIColor.hexColor(color)
                 }

@@ -44,13 +44,15 @@ open class TotalCommission: Codable {
     public var amount: Double?
     public var currency: Currency?
     public var type: ModelType?
+    public var title: String?
 
 
     
-    public init(amount: Double?, currency: Currency?, type: ModelType?) {
+    public init(amount: Double?, currency: Currency?, type: ModelType?, title: String?) {
         self.amount = amount
         self.currency = currency
         self.type = type
+        self.title = title
     }
     
 
@@ -63,6 +65,7 @@ open class TotalCommission: Codable {
         try container.encodeIfPresent(amount, forKey: "amount")
         try container.encodeIfPresent(currency, forKey: "currency")
         try container.encodeIfPresent(type, forKey: "type")
+        try container.encodeIfPresent(title, forKey: "title")
     }
 
     // Decodable protocol methods
@@ -73,6 +76,7 @@ open class TotalCommission: Codable {
         amount = try container.decodeIfPresent(Double.self, forKey: "amount")
         currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
         type = try container.decodeIfPresent(ModelType.self, forKey: "type")
+        title = try container.decodeIfPresent(String.self, forKey: "title")
     }
 }
 

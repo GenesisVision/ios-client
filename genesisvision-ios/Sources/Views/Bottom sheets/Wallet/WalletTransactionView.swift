@@ -252,8 +252,9 @@ extension WalletTransactionView {
                     topStackView.subtitleLabel.text = programType == .program ? "Close program" : "Close fund"
                 }
                 
-                if programType == .program, let level = details.level {
+                if programType == .program, let level = details.level, let levelProgress = details.levelProgress {
                     openProgramStackView.assetStackView.assetLogoImageView.levelButton.setTitle(level.toString(), for: .normal)
+                    openProgramStackView.assetStackView.assetLogoImageView.levelButton.progress = levelProgress
                 } else {
                     openProgramStackView.assetStackView.assetLogoImageView.levelButton.isHidden = true
                 }
@@ -291,8 +292,9 @@ extension WalletTransactionView {
             investmentStackView.assetStackView.headerLabel.text = programType == .program ? "To the program" : "To the fund"
             topStackView.subtitleLabel.text = programType == .program ? "Program investment" : "Fund investment"
             
-            if programType == .program, let level = details.level {
+            if programType == .program, let level = details.level, let levelProgress = details.levelProgress {
                 investmentStackView.assetStackView.assetLogoImageView.levelButton.setTitle(level.toString(), for: .normal)
+                investmentStackView.assetStackView.assetLogoImageView.levelButton.progress = levelProgress
             } else {
                 investmentStackView.assetStackView.assetLogoImageView.levelButton.isHidden = true
             }
@@ -345,8 +347,9 @@ extension WalletTransactionView {
             investmentStackView.assetStackView.headerLabel.text = programType == .program ? "Program" : "Fund"
             topStackView.subtitleLabel.text = programType == .program ? "Profit program" : "Profit fund"
             
-            if programType == .program, let level = details.level {
+            if programType == .program, let level = details.level, let levelProgress = details.levelProgress {
                 investmentStackView.assetStackView.assetLogoImageView.levelButton.setTitle(level.toString(), for: .normal)
+                investmentStackView.assetStackView.assetLogoImageView.levelButton.progress = levelProgress
             } else {
                 investmentStackView.assetStackView.assetLogoImageView.levelButton.isHidden = true
             }
@@ -406,8 +409,9 @@ extension WalletTransactionView {
                 withdrawalStackView.assetStackView.headerLabel.text = programType == .program ? "From the program" : "From the fund"
                 topStackView.subtitleLabel.text = programType == .program ? "Program withdrawal" : "Fund withdrawal"
                 
-                if programType == .program, let level = details.level {
+                if programType == .program, let level = details.level, let levelProgress = details.levelProgress {
                     withdrawalStackView.assetStackView.assetLogoImageView.levelButton.setTitle(level.toString(), for: .normal)
+                    withdrawalStackView.assetStackView.assetLogoImageView.levelButton.progress = levelProgress
                 } else {
                     withdrawalStackView.assetStackView.assetLogoImageView.levelButton.isHidden = true
                 }
@@ -512,8 +516,9 @@ extension WalletTransactionView {
                 
                 topStackView.subtitleLabel.text = "Signal fee payment"
                 
-                if programType == .program, let level = details.level {
+                if programType == .program, let level = details.level, let levelProgress = details.levelProgress {
                     signalFeeStackView.assetStackView.assetLogoImageView.levelButton.setTitle(level.toString(), for: .normal)
+                    signalFeeStackView.assetStackView.assetLogoImageView.levelButton.progress = levelProgress
                 } else {
                     signalFeeStackView.assetStackView.assetLogoImageView.levelButton.isHidden = true
                 }
