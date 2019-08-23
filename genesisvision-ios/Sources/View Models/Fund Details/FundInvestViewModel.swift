@@ -13,6 +13,7 @@ final class FundInvestViewModel {
     var title: String = "Investment"
     var fundId: String?
     var fundCurrency: CurrencyType? = .usd
+    var walletCurrency: CurrencyType?
     var labelPlaceholder: String = "0"
     
     var fundInvestInfo: FundInvestInfo?
@@ -42,6 +43,8 @@ final class FundInvestViewModel {
         self.selectedWalletFromDelegateManager?.selected = wallets[selectedIndex]
         self.selectedWalletFromDelegateManager?.selectedIndex = selectedIndex
         
+        self.walletCurrency = CurrencyType(rawValue: wallets[selectedIndex].currency?.rawValue ?? "")
+        
         updateRate(completion: completion)
     }
     
@@ -58,6 +61,7 @@ final class FundInvestViewModel {
                 self?.selectedWalletFromDelegateManager?.walletId = 0
                 self?.selectedWalletFromDelegateManager?.selectedIndex = 0
                 self?.selectedWalletFromDelegateManager?.selected = wallets[0]
+                self?.walletCurrency = CurrencyType(rawValue: wallets[0].currency?.rawValue ?? "")
             }
             
             FundsDataProvider.getInvestInfo(fundId: fundId, currencySecondary: currencySecondary, completion: { [weak self] (fundInvestInfo) in

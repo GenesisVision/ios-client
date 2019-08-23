@@ -26,7 +26,7 @@ final class RatingTabmanViewModel: TabmanViewModel {
         self.searchBarEnable = searchBarEnable
         self.showFacets = showFacets
         self.tabmanViewModelDelegate = tabmanViewModelDelegate
-        self.dataSource = RatingPageboyViewControllerDataSource(router: router, filterModel: filterModel, showFacets: showFacets)
+        self.dataSource = RatingPageboyViewControllerDataSource(router: router, showFacets: showFacets)
         
         ProgramsDataProvider.getLevelUpSummary(completion: { [weak self] (levelUpSummary) in
             self?.updateItems(levelUpSummary)
@@ -45,7 +45,7 @@ final class RatingTabmanViewModel: TabmanViewModel {
         guard let levelUpSummary = levelUpSummary, let levelData = levelUpSummary.levelData else { return }
         
         self.filterModel.levelUpSummary = levelUpSummary
-        self.dataSource = RatingPageboyViewControllerDataSource(router: router, filterModel: filterModel, showFacets: showFacets)
+        self.dataSource = RatingPageboyViewControllerDataSource(router: router, showFacets: showFacets)
         
         var items: [TabmanBar.Item] = []
         for data in levelData {

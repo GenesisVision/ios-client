@@ -11,6 +11,21 @@ import Foundation
 
 open class AttachToSignalProvider: Codable {
 
+    public enum InitialDepositCurrency: String, Codable { 
+        case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
+        case ada = "ADA"
+        case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
+        case bnb = "BNB"
+        case usd = "USD"
+        case eur = "EUR"
+    }
     public enum Mode: String, Codable { 
         case byBalance = "ByBalance"
         case percent = "Percent"
@@ -31,39 +46,24 @@ open class AttachToSignalProvider: Codable {
         case usd = "USD"
         case eur = "EUR"
     }
-    public enum InitialDepositCurrency: String, Codable { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
-        case btc = "BTC"
-        case ada = "ADA"
-        case usdt = "USDT"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case usd = "USD"
-        case eur = "EUR"
-    }
+    public var initialDepositCurrency: InitialDepositCurrency?
+    public var initialDepositAmount: Double?
     public var mode: Mode?
     public var percent: Double?
     public var openTolerancePercent: Double?
     public var fixedVolume: Double?
     public var fixedCurrency: FixedCurrency?
-    public var initialDepositCurrency: InitialDepositCurrency?
-    public var initialDepositAmount: Double?
 
 
     
-    public init(mode: Mode?, percent: Double?, openTolerancePercent: Double?, fixedVolume: Double?, fixedCurrency: FixedCurrency?, initialDepositCurrency: InitialDepositCurrency?, initialDepositAmount: Double?) {
+    public init(initialDepositCurrency: InitialDepositCurrency?, initialDepositAmount: Double?, mode: Mode?, percent: Double?, openTolerancePercent: Double?, fixedVolume: Double?, fixedCurrency: FixedCurrency?) {
+        self.initialDepositCurrency = initialDepositCurrency
+        self.initialDepositAmount = initialDepositAmount
         self.mode = mode
         self.percent = percent
         self.openTolerancePercent = openTolerancePercent
         self.fixedVolume = fixedVolume
         self.fixedCurrency = fixedCurrency
-        self.initialDepositCurrency = initialDepositCurrency
-        self.initialDepositAmount = initialDepositAmount
     }
     
 
@@ -73,13 +73,13 @@ open class AttachToSignalProvider: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
+        try container.encodeIfPresent(initialDepositCurrency, forKey: "initialDepositCurrency")
+        try container.encodeIfPresent(initialDepositAmount, forKey: "initialDepositAmount")
         try container.encodeIfPresent(mode, forKey: "mode")
         try container.encodeIfPresent(percent, forKey: "percent")
         try container.encodeIfPresent(openTolerancePercent, forKey: "openTolerancePercent")
         try container.encodeIfPresent(fixedVolume, forKey: "fixedVolume")
         try container.encodeIfPresent(fixedCurrency, forKey: "fixedCurrency")
-        try container.encodeIfPresent(initialDepositCurrency, forKey: "initialDepositCurrency")
-        try container.encodeIfPresent(initialDepositAmount, forKey: "initialDepositAmount")
     }
 
     // Decodable protocol methods
@@ -87,13 +87,13 @@ open class AttachToSignalProvider: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
+        initialDepositCurrency = try container.decodeIfPresent(InitialDepositCurrency.self, forKey: "initialDepositCurrency")
+        initialDepositAmount = try container.decodeIfPresent(Double.self, forKey: "initialDepositAmount")
         mode = try container.decodeIfPresent(Mode.self, forKey: "mode")
         percent = try container.decodeIfPresent(Double.self, forKey: "percent")
         openTolerancePercent = try container.decodeIfPresent(Double.self, forKey: "openTolerancePercent")
         fixedVolume = try container.decodeIfPresent(Double.self, forKey: "fixedVolume")
         fixedCurrency = try container.decodeIfPresent(FixedCurrency.self, forKey: "fixedCurrency")
-        initialDepositCurrency = try container.decodeIfPresent(InitialDepositCurrency.self, forKey: "initialDepositCurrency")
-        initialDepositAmount = try container.decodeIfPresent(Double.self, forKey: "initialDepositAmount")
     }
 }
 

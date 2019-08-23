@@ -147,7 +147,7 @@ class FundInvestViewController: BaseViewController {
     }
     
     private func updateUI() {
-        guard let fundCurrency = viewModel.fundCurrency else { return }
+        guard let fundCurrency = viewModel.fundCurrency, let walletCurrency = viewModel.selectedWalletFromDelegateManager?.selected?.currency?.rawValue, let walletCurrencyType = CurrencyType(rawValue: walletCurrency) else { return }
         
         //wallet
         self.selectedWalletFromValueLabel.text = viewModel.getSelectedWalletTitle()
@@ -181,13 +181,13 @@ class FundInvestViewController: BaseViewController {
         let entryFeeValueLabelString = entryFeeString + "% (≈\(entryFeeCurrencyString) \(fundCurrency.rawValue))"
         self.entryFeeValueLabel.text = entryFeeValueLabelString
         
-        let gvCommissionCurrency = gvCommission * amountToInvestValue * rate / 100
-        let gvCommissionCurrencyString = gvCommissionCurrency.rounded(withType: fundCurrency).toString()
+        let gvCommissionCurrency = gvCommission * amountToInvestValue / 100
+        let gvCommissionCurrencyString = gvCommissionCurrency.rounded(withType: walletCurrencyType).toString()
         let gvCommissionString = gvCommission.rounded(toPlaces: 3).toString()
         
-        let gvCommissionValueLabelString = gvCommissionString + "% (≈\(gvCommissionCurrencyString) \(fundCurrency.rawValue))"
+        let gvCommissionValueLabelString = gvCommissionString + "% (≈\(gvCommissionCurrencyString) \(walletCurrencyType.rawValue))"
         self.gvCommissionValueLabel.text = gvCommissionValueLabelString
-        let investmentAmountValue = (amountToInvestValue * rate - entryFeeCurrency - gvCommissionCurrency).rounded(withType: fundCurrency).toString()
+        let investmentAmountValue = (amountToInvestValue * rate - entryFeeCurrency - gvCommissionCurrency * rate).rounded(withType: fundCurrency).toString()
         self.investmentAmountValueLabel.text = "≈" + investmentAmountValue + " " + fundCurrency.rawValue
         
         let investButtonEnabled = amountToInvestValue * rate >= viewModel.getMinInvestmentAmount()
@@ -324,7 +324,7 @@ extension FundInvestViewController: NumpadViewProtocol {
     }
     
     var currency: CurrencyType? {
-        return viewModel.fundCurrency
+        return viewModel.walletCurrency
     }
     
     func changedActive(value: Bool) {

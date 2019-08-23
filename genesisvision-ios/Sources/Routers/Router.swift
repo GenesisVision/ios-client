@@ -553,8 +553,8 @@ extension Router {
 
 //signal vc
 extension Router {
-    func getSignalTrades(with router: SignalRouterProtocol, currency: CurrencyType? = nil) -> SignalTradesViewController {
-        let viewController = SignalTradesViewController()
+    func getSignalTrades(with router: SignalRouterProtocol, currency: CurrencyType? = nil) -> SignalTradesViewController? {
+        guard let viewController = SignalTradesViewController.storyboardInstance(.dashboard) else { return nil }
         viewController.tableViewStyle = .plain
         let viewModel = SignalTradesViewModel(withRouter: router, reloadDataProtocol: viewController, isOpenTrades: false, currency: currency)
         viewController.viewModel = viewModel
@@ -562,8 +562,8 @@ extension Router {
         return viewController
     }
     
-    func getSignalOpenTrades(with router: SignalRouterProtocol, currency: CurrencyType? = nil) -> SignalOpenTradesViewController {
-        let viewController = SignalOpenTradesViewController()
+    func getSignalOpenTrades(with router: SignalRouterProtocol, currency: CurrencyType? = nil) -> SignalOpenTradesViewController? {
+        guard let viewController = SignalOpenTradesViewController.storyboardInstance(.dashboard) else { return nil }
         viewController.tableViewStyle = .plain
         let viewModel = SignalTradesViewModel(withRouter: router, reloadDataProtocol: viewController, isOpenTrades: true, signalTradesProtocol: viewController, currency: currency)
         viewController.viewModel = viewModel
@@ -571,8 +571,8 @@ extension Router {
         return viewController
     }
     
-    func getSignalTradingLog(with router: SignalRouterProtocol, currency: CurrencyType? = nil) -> SignalTradingLogViewController {
-        let viewController = SignalTradingLogViewController()
+    func getSignalTradingLog(with router: SignalRouterProtocol, currency: CurrencyType? = nil) -> SignalTradingLogViewController? {
+        guard let viewController = SignalTradingLogViewController.storyboardInstance(.dashboard) else { return nil }
         viewController.tableViewStyle = .plain
         let viewModel = SignalTradingLogViewModel(withRouter: router, reloadDataProtocol: viewController, currency: currency)
         viewController.viewModel = viewModel

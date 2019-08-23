@@ -50,6 +50,10 @@ final class ProgramFacetsViewModel: ListViewModelProtocolWithFacets {
             filterModel.facetTitle = facetTitle
         }
         
+        if let facetSorting = facet.sorting?.rawValue {
+            filterModel.facetSorting = facetSorting
+        }
+        
         if let uuid = facet.id?.uuidString {
             filterModel.facetId = uuid
         }
@@ -110,6 +114,10 @@ final class FundFacetsViewModel: ListViewModelProtocolWithFacets {
         
         if let facetTitle = facet.title {
             filterModel.facetTitle = facetTitle
+        }
+        
+        if let facetSorting = facet.sorting?.rawValue {
+            filterModel.facetSorting = facetSorting
         }
         
         if let uuid = facet.id?.uuidString {
@@ -395,8 +403,8 @@ extension ListViewModelProtocol {
         router.show(routeType: .signIn)
     }
     
-    func showFilterVC(filterType: FilterType, sortingType: SortingType) {
-        router.show(routeType: .showFilterVC(listViewModel: self, filterModel: self.filterModel, filterType: filterType, sortingType: sortingType))
+    func showFilterVC(listViewModel: ListViewModelProtocol, filterModel: FilterModel, filterType: FilterType, sortingType: SortingType) {
+        router.show(routeType: .showFilterVC(listViewModel: listViewModel, filterModel: filterModel, filterType: filterType, sortingType: sortingType))
     }
     
     // MARK: - Nodata

@@ -486,7 +486,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.074509803921568626" green="0.11764705882352941" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="61j-9s-2lI" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Idd-ap-JQ5" secondAttribute="bottom" constant="8" id="62V-3L-3Wm"/>
+                            <constraint firstItem="61j-9s-2lI" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Idd-ap-JQ5" secondAttribute="bottom" id="62V-3L-3Wm"/>
                             <constraint firstItem="61j-9s-2lI" firstAttribute="trailing" secondItem="F8v-KL-HF4" secondAttribute="trailing" id="6Mt-hj-DKx"/>
                             <constraint firstItem="k4A-Kz-3qk" firstAttribute="top" secondItem="Uun-QE-fnC" secondAttribute="bottom" constant="8" id="8Fq-e8-q7O"/>
                             <constraint firstItem="61j-9s-2lI" firstAttribute="leading" secondItem="F8v-KL-HF4" secondAttribute="leading" id="Aiy-Ok-KMX"/>
@@ -494,11 +494,12 @@
                             <constraint firstItem="k4A-Kz-3qk" firstAttribute="leading" secondItem="F8v-KL-HF4" secondAttribute="leading" id="Q72-5q-yNA"/>
                             <constraint firstItem="Idd-ap-JQ5" firstAttribute="top" secondItem="F8v-KL-HF4" secondAttribute="top" id="dNh-7E-avy"/>
                             <constraint firstItem="Idd-ap-JQ5" firstAttribute="leading" secondItem="F8v-KL-HF4" secondAttribute="leading" id="o6H-OG-M4q"/>
+                            <constraint firstItem="Uun-QE-fnC" firstAttribute="top" secondItem="61j-9s-2lI" secondAttribute="bottom" priority="999" constant="16" id="pdw-us-eoJ"/>
                             <constraint firstItem="F8v-KL-HF4" firstAttribute="bottom" secondItem="k4A-Kz-3qk" secondAttribute="bottom" id="s5O-20-y17"/>
                             <constraint firstItem="Idd-ap-JQ5" firstAttribute="trailing" secondItem="F8v-KL-HF4" secondAttribute="trailing" id="tTP-6V-yP1"/>
                             <constraint firstItem="k4A-Kz-3qk" firstAttribute="trailing" secondItem="F8v-KL-HF4" secondAttribute="trailing" id="ueI-8U-qHp"/>
                             <constraint firstItem="Uun-QE-fnC" firstAttribute="leading" secondItem="F8v-KL-HF4" secondAttribute="leading" constant="20" id="utZ-ZH-5a7"/>
-                            <constraint firstItem="Uun-QE-fnC" firstAttribute="top" secondItem="61j-9s-2lI" secondAttribute="bottom" constant="16" id="vMU-Pp-DPy"/>
+                            <constraint firstItem="Uun-QE-fnC" firstAttribute="top" relation="greaterThanOrEqual" secondItem="61j-9s-2lI" secondAttribute="bottom" id="vMU-Pp-DPy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="F8v-KL-HF4"/>
                     </view>
@@ -1724,7 +1725,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_program_level_bg" translatesAutoresizingMaskIntoConstraints="NO" id="hhe-DH-fmz">
-                                        <rect key="frame" x="359" y="47.666666666666671" width="55" height="161.00000000000003"/>
+                                        <rect key="frame" x="359" y="47.666666666666657" width="55" height="161"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="161" id="LxM-9H-WQc"/>
                                             <constraint firstAttribute="width" constant="55" id="Yhy-wE-ejs"/>

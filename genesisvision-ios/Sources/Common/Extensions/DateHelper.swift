@@ -185,7 +185,6 @@ extension Date {
         let minutes = components.minute ?? 0
         let seconds = components.second ?? 0
         
-        
         if year >= 2 {
             return "\(year) y"
         } else if (year >= 1) {

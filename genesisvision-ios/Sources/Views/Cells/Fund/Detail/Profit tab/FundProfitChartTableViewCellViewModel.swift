@@ -18,22 +18,17 @@ extension FundProfitChartTableViewCellViewModel: CellViewModel {
         
         cell.chartViewProtocol = chartViewProtocol
         
-        cell.amountTitleLabel.text = "Amount"
+        cell.amountTitleLabel.text = "Value"
         
-        if let amountValue = fundProfitChart.totalGvtProfit {
-            cell.amountValueLabel.text = amountValue.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
-        } else {
-            cell.amountValueLabel.isHidden = true
-        }
-        
-        if let amountCurrency = fundProfitChart.totalUsdProfit {
-            let currencyType: CurrencyType = .usd
-            cell.amountCurrencyLabel.text = amountCurrency.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
-        } else {
-            cell.amountCurrencyLabel.isHidden = true
-        }
+        cell.amountCurrencyLabel.isHidden = true
         
         if let equityChart = fundProfitChart.equityChart, equityChart.count > 0 {
+            if let value = equityChart.last?.value {
+                cell.amountValueLabel.text = value.rounded(withType: .undefined).toString() + "%"
+            } else {
+                cell.amountValueLabel.isHidden = true
+            }
+            
             cell.chartViewHeightConstraint.constant = 150.0
             cell.chartView.setup(lineChartData: equityChart, dateRangeModel: chartViewProtocol?.filterDateRangeModel)
             cell.chartView.isHidden = false

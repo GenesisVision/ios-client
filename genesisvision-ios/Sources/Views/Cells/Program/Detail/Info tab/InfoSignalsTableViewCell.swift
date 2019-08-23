@@ -65,13 +65,7 @@ class InfoSignalsTableViewCell: UITableViewCell {
         }
     }
     @IBOutlet weak var typeTitleLabel: SubtitleLabel!
-    
-    
-    @IBOutlet weak var followButton: ActionButton! {
-        didSet {
-            followButton.setEnabled(AuthManager.isLogin())
-        }
-    }
+    @IBOutlet weak var followButton: ActionButton!
     
     @IBOutlet weak var editButton: UIButton! {
         didSet {

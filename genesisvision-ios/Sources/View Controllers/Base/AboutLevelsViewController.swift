@@ -69,10 +69,26 @@ class AboutLevelsViewController: BaseViewController {
         subtitleLabel.setLineSpacing(lineSpacing: 3.0)
         
         titleLabel.text = "Investment Scale * Manager balance."
+        let headerAttribute = [NSAttributedString.Key.font: UIFont.getFont(.bold, size: 14.0)]
+        let textAttribute = [NSAttributedString.Key.font: UIFont.getFont(.regular, size: 14.0)]
         
-        let text = "Investment Scale is calculated according to a formula that takes into account:\n\n1. The Age of the program\n2. The Success of the trading manager.The Success of the trading manager is calculated with the help of the Genesis Ratio, which is the ratio of the program profit to its risk. The formula is similar to the Sharpe ratio and is set in a range from 0 to 1.If Genesis Ratio <0.2, then the program is high risk and the Investment scale is limited to 1 meaning that the manager can attract no more than his own deposit.\n3. The trading volume (Weighted volume scale)\nThis is a multiplier of the volume traded by the manager relative to the program balance for all periods. It is calculated similarly to the Genesis Ratio, being a weighted average over all periods.\n\nTo have a volume multiplier of 1 the managers weekly trading volume needs to be approximately the same as the amount of funds in his/her program. In the case of Forex programs, the volume is divided by the shoulder.\n\nThe coefficient is designed so that trading more in one period can compensate for the lack ofvolume during another period, but one-time high volumes won’t compensate for the lack of trading.\n\nNotes:\nIf the investor funds in the program exceed Av.to invest, then the Success Fee and Stop out Level are decreased until the investor funds in the program become less or equal to Av. to invest. This change takes effect in the new period.\n\nIf the manager is not verified, the available investment limit is always $1000, translated into account currency. Otherwise, the available limit is set in the range from $5k to $300k."
+        let headerText = "Investment Scale is calculated according to a formula that takes into account:\n\n"
+        let firstHeader = "1. The Age of the program\n\n"
+        let secondHeader = "2. The Success of the trading manager.\n\n"
+        let thirdHeader = "3. The trading volume (Weighted volume scale)\n\n"
+        let secondText = "The Success of the trading manager is calculated with the help of the Genesis Ratio, which is the ratio of the program profit to its risk. The formula is similar to the Sharpe ratio and is set in a range from 0 to 1.If Genesis Ratio <0.2, then the program is high risk and the Investment scale is limited to 1 meaning that the manager can attract no more than his own deposit.\n\n"
+        let thirdText = "This is a multiplier of the volume traded by the manager relative to the program balance for all periods. It is calculated similarly to the Genesis Ratio, being a weighted average over all periods.\n\n"
+        let lastText = "To have a volume multiplier of 1 the managers weekly trading volume needs to be approximately the same as the amount of funds in his/her program. In the case of Forex programs, the volume is divided by the shoulder.\n\nThe coefficient is designed so that trading more in one period can compensate for the lack ofvolume during another period, but one-time high volumes won’t compensate for the lack of trading.\n\nNotes:\nIf the investor funds in the program exceed Av.to invest, then the Success Fee and Stop out Level are decreased until the investor funds in the program become less or equal to Av. to invest. This change takes effect in the new period.\n\nIf the manager is not verified, the available investment limit is always $1000, translated into account currency. Otherwise, the available limit is set in the range from $5k to $300k."
         
-        textLabel.text = text
+        
+        let myString = NSMutableAttributedString(string: headerText, attributes: textAttribute)
+        myString.append(NSAttributedString(string: firstHeader, attributes: headerAttribute))
+        myString.append(NSAttributedString(string: secondHeader, attributes: headerAttribute))
+        myString.append(NSAttributedString(string: secondText, attributes: textAttribute))
+        myString.append(NSAttributedString(string: thirdHeader, attributes: headerAttribute))
+        myString.append(NSAttributedString(string: thirdText, attributes: textAttribute))
+        myString.append(NSAttributedString(string: lastText, attributes: textAttribute))
+        textLabel.attributedText = myString
         textLabel.setLineSpacing(lineSpacing: 3.0)
         
         levelsTitleLabel.text = "Levels limit"

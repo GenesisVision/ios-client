@@ -101,13 +101,13 @@
                                                                 <rect key="frame" x="0.0" y="56" width="354" height="25"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available in wallet" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vTi-Th-tnK" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="119.33333333333333" height="25"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="119" height="25"/>
                                                                         <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Lb-JE-qMw" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                        <rect key="frame" x="127.33333333333336" y="0.0" width="226.66666666666663" height="25"/>
+                                                                        <rect key="frame" x="127" y="0.0" width="227" height="25"/>
                                                                         <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
                                                                         <color key="textColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <nil key="highlightedColor"/>
@@ -643,6 +643,36 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eo5-uf-BWI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2312" y="1754"/>
+        </scene>
+        <!--Wallet Transaction List View Controller-->
+        <scene sceneID="fP3-49-5VI">
+            <objects>
+                <viewController storyboardIdentifier="WalletTransactionListViewController" id="GMv-km-UsI" customClass="WalletTransactionListViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4WN-DN-0Zs">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="v5m-o3-Mxu">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="EXB-vh-kcA" firstAttribute="trailing" secondItem="v5m-o3-Mxu" secondAttribute="trailing" id="1d1-bO-Wp7"/>
+                            <constraint firstAttribute="bottom" secondItem="v5m-o3-Mxu" secondAttribute="bottom" id="UL4-qR-3hY"/>
+                            <constraint firstItem="v5m-o3-Mxu" firstAttribute="top" secondItem="EXB-vh-kcA" secondAttribute="top" id="YZN-lF-IDr"/>
+                            <constraint firstItem="v5m-o3-Mxu" firstAttribute="leading" secondItem="EXB-vh-kcA" secondAttribute="leading" id="xIp-ev-egn"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="EXB-vh-kcA"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="v5m-o3-Mxu" id="Wym-yI-nOK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4my-6s-ZYj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="858" y="1046"/>
         </scene>
         <!--Wallet Copytrading Account List View Controller-->
         <scene sceneID="IQb-cK-mPw">
@@ -2150,52 +2180,52 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w1K-6x-g0f">
-                                        <rect key="frame" x="20" y="425.66666666666674" width="335" height="196"/>
+                                        <rect key="frame" x="20" y="425.66666666666674" width="335" height="184"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="hvb-Ju-qx9">
-                                                <rect key="frame" x="20" y="20" width="295" height="156"/>
+                                                <rect key="frame" x="20" y="20" width="295" height="144"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="EuU-G2-JyJ">
-                                                        <rect key="frame" x="0.0" y="0.0" width="93" height="156"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="93" height="144"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount held for 7 days*" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pRI-KW-NxZ" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="80.666666666666671" height="24"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pRI-KW-NxZ" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="37.666666666666664" height="12"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Any GVT" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fNb-5z-dnJ" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="31.999999999999943" width="42" height="12"/>
+                                                                <rect key="frame" x="0.0" y="20" width="42" height="12"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From 10 GVT up to 25" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ly2-9e-NF3" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="51.999999999999943" width="80.666666666666671" height="24"/>
+                                                                <rect key="frame" x="0.0" y="39.999999999999943" width="80.666666666666671" height="24"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Up to 50 GVT" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5au-yn-QxM" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="83.999999999999943" width="66" height="12"/>
+                                                                <rect key="frame" x="0.0" y="71.999999999999943" width="66" height="12"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Up to 100 GVT" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mSl-qZ-Cxr" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="103.99999999999994" width="71" height="12"/>
+                                                                <rect key="frame" x="0.0" y="91.999999999999943" width="71" height="12"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Up to 500 GVT" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h2C-v3-X7H" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="123.99999999999994" width="72.333333333333329" height="12"/>
+                                                                <rect key="frame" x="0.0" y="111.99999999999994" width="72.333333333333329" height="12"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="500 GVT+" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0D6-7I-2mq" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="143.99999999999994" width="49" height="12"/>
+                                                                <rect key="frame" x="0.0" y="131.99999999999994" width="49" height="12"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -2203,46 +2233,46 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Lk6-dh-LCl">
-                                                        <rect key="frame" x="101" y="0.0" width="93" height="156"/>
+                                                        <rect key="frame" x="101" y="0.0" width="93" height="144"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discount" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X7p-Ag-rrI" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                <rect key="frame" x="25" y="0.0" width="43" height="24"/>
+                                                                <rect key="frame" x="25" y="0.0" width="43" height="12"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FP0-FL-uiZ" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                <rect key="frame" x="36" y="31.999999999999943" width="21.333333333333329" height="12"/>
+                                                                <rect key="frame" x="36" y="20" width="21.333333333333329" height="12"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="35%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z0S-V0-1uL" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                <rect key="frame" x="36" y="51.999999999999943" width="21.333333333333329" height="24"/>
+                                                                <rect key="frame" x="36" y="39.999999999999943" width="21.333333333333329" height="24"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="40%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="96m-rx-DIz" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                <rect key="frame" x="35.666666666666657" y="83.999999999999943" width="21.666666666666671" height="12"/>
+                                                                <rect key="frame" x="35.666666666666657" y="71.999999999999943" width="21.666666666666671" height="12"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="45%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0K-58-BBq" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                <rect key="frame" x="35.666666666666657" y="103.99999999999994" width="21.666666666666671" height="12"/>
+                                                                <rect key="frame" x="35.666666666666657" y="91.999999999999943" width="21.666666666666671" height="12"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ON5-da-Eh1" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                <rect key="frame" x="36" y="123.99999999999994" width="21.333333333333329" height="12"/>
+                                                                <rect key="frame" x="36" y="111.99999999999994" width="21.333333333333329" height="12"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="55%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uug-j9-pbI" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                <rect key="frame" x="36" y="143.99999999999994" width="21.333333333333329" height="12"/>
+                                                                <rect key="frame" x="36" y="131.99999999999994" width="21.333333333333329" height="12"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -2250,46 +2280,46 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="bottom" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="MZE-na-Ina">
-                                                        <rect key="frame" x="202" y="0.0" width="93" height="156"/>
+                                                        <rect key="frame" x="202" y="0.0" width="93" height="144"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fees" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kfh-aO-Eb2" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                <rect key="frame" x="70" y="0.0" width="23" height="24"/>
+                                                                <rect key="frame" x="70" y="0.0" width="23" height="12"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.210%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W2Q-yq-GoQ" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                <rect key="frame" x="58" y="31.999999999999943" width="35" height="12"/>
+                                                                <rect key="frame" x="58" y="20" width="35" height="12"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.195%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hbt-rL-JUU" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                <rect key="frame" x="58" y="51.999999999999943" width="35" height="24"/>
+                                                                <rect key="frame" x="58" y="39.999999999999943" width="35" height="24"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.180%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ugp-2i-EYB" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                <rect key="frame" x="58" y="83.999999999999943" width="35" height="12"/>
+                                                                <rect key="frame" x="58" y="71.999999999999943" width="35" height="12"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.165%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aIW-nt-6Bd" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                <rect key="frame" x="58" y="103.99999999999994" width="35" height="12"/>
+                                                                <rect key="frame" x="58" y="91.999999999999943" width="35" height="12"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.150%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m9i-fS-oRf" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                <rect key="frame" x="58" y="123.99999999999994" width="35" height="12"/>
+                                                                <rect key="frame" x="58" y="111.99999999999994" width="35" height="12"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.135%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ry-xD-Mys" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                                                <rect key="frame" x="58" y="143.99999999999994" width="35" height="12"/>
+                                                                <rect key="frame" x="58" y="131.99999999999994" width="35" height="12"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -2323,8 +2353,8 @@
                                             <constraint firstItem="hvb-Ju-qx9" firstAttribute="leading" secondItem="w1K-6x-g0f" secondAttribute="leading" constant="20" id="qDw-d0-AAk"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="* Please note that to be eligible for a discount tier you should hold GVT on your Genesis Vision wallet for at least 7 days" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zQ5-AO-awe" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                        <rect key="frame" x="40" y="641.66666666666663" width="295" height="81.333333333333371"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="* Please note that to be eligible for a discount tier you should hold GVT on your Genesis Vision wallet" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zQ5-AO-awe" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                        <rect key="frame" x="40" y="629.66666666666663" width="295" height="61"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>

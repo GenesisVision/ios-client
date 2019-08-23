@@ -15,8 +15,6 @@ struct FundInvestNowTableViewCellViewModel {
 
 extension FundInvestNowTableViewCellViewModel: CellViewModel {
     func setup(on cell: InvestNowTableViewCell) {
-        cell.investButton.setEnabled(false)
-        
         if let canInvest = fundDetailsFull?.personalFundDetails?.canInvest {
             cell.investButton.setEnabled(canInvest)
         }

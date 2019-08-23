@@ -13,7 +13,6 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
     // MARK: - Veriables
     var tableView: UITableView!
     var fetchMoreActivityIndicator: UIActivityIndicatorView!
-    var previousViewController: UIViewController?
     var tableViewStyle: UITableView.Style = .plain
     
     // MARK: - Lifecycle
@@ -22,11 +21,6 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
         
         addTableViewIfNeeded()
         setupViews()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        tabBarController?.delegate = self
     }
     
     // MARK: - Private methods
@@ -92,43 +86,11 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
     func register3dTouch() {
         
     }
-}
-
-extension BaseViewControllerWithTableView: UITabBarControllerDelegate {
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        let tabBarIndex = tabBarController.selectedIndex
-        
-        guard previousViewController == viewController,
-            let navController = viewController as? BaseNavigationController,
-            let tabsType = TabsType(rawValue: tabBarIndex) else { return }
-        
-        switch tabsType {
-        case .dashboard:
-            if let vc = navController.viewControllers.first as? UIViewControllerWithScrollView, let scrollView = vc.scrollView {
-                scrollTop(scrollView)
-            }
-        case .assetList:
-            if let vc = navController.viewControllers.first as? ProgramListViewController, let tableView = vc.tableView {
-                scrollTop(tableView)
-            }
-        case .wallet:
-            break
-        case .profile:
-            if let vc = navController.viewControllers.first as? ProfileViewController, let tableView = vc.tableView {
-                scrollTop(tableView)
-            }
-        }
+    
+    @objc func tabBarDidScrollToTop(_ notification: Notification) {
+        scrollToTop(tableView)
     }
     
-    func scrollTop(_ scrollView: UIScrollView) {
-        scrollView.setContentOffset(CGPoint.zero, animated: true)
-        
-    }
-    
-    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        previousViewController = tabBarController.selectedViewController
-        return true
-    }
 }
 
 // MARK: - EmptyData

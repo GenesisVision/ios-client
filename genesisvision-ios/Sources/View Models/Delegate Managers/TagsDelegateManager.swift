@@ -165,7 +165,6 @@ final class TagsDelegateManager: NSObject, UITableViewDelegate, UITableViewDataS
             return cell
         }
         
-        
         if let manager = manager as? ProgramTagManager, let value = manager.values?[indexPath.row] {
             cell.configure(isSelected, tag: value)
         } else if let manager = manager as? PlatformAssetManager, let value = manager.values?[indexPath.row] {

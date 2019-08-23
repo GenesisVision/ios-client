@@ -151,6 +151,7 @@ extension DashboardFundListViewModel {
     func showFundList() {
         guard let router = router as? DashboardRouter else { return }
         router.show(routeType: .assetList)
+        NotificationCenter.default.post(name: .chooseFundList, object: nil, userInfo: nil)
     }
     
     func showFilterVC() {
@@ -246,7 +247,7 @@ extension DashboardFundListViewModel {
             
             var viewModels = [DashboardFundTableViewCellViewModel]()
             
-            let totalCount = fundList.funds?.count ?? 0
+            let totalCount = fundList.total ?? 0
             
             fundList.funds?.forEach({ (fund) in
                 if let router = self?.router as? DashboardRouter {

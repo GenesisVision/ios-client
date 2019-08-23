@@ -20,7 +20,15 @@ class ProgramsDataProvider: DataProvider {
         let statisticDateFrom = filterModel?.dateRangeModel.dateFrom
         let statisticDateTo = filterModel?.dateRangeModel.dateTo
         
-        let sorting = filterModel?.sortingModel.selectedSorting as? ProgramsAPI.Sorting_v10ProgramsGet ?? ProgramsAPI.Sorting_v10ProgramsGet.byProfitDesc
+        var sorting: ProgramsAPI.Sorting_v10ProgramsGet?
+        
+        if let selectedSorting = filterModel?.sortingModel.selectedSorting as? ProgramsAPI.Sorting_v10ProgramsGet, filterModel?.facetTitle != "Rating" {
+            sorting = selectedSorting
+        }
+        
+        if let facetSorting = filterModel?.facetSorting, filterModel?.facetTitle != "Rating" {
+            sorting = ProgramsAPI.Sorting_v10ProgramsGet(rawValue: facetSorting)
+        }
         
         let profitAvgMin = filterModel?.profitAvgMin
         let profitAvgMax = filterModel?.profitAvgMax

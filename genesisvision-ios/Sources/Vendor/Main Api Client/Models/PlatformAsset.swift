@@ -17,16 +17,18 @@ open class PlatformAsset: Codable {
     public var description: String?
     public var icon: String?
     public var color: String?
+    public var mandatoryFundPercent: Double?
 
 
     
-    public init(id: UUID?, name: String?, asset: String?, description: String?, icon: String?, color: String?) {
+    public init(id: UUID?, name: String?, asset: String?, description: String?, icon: String?, color: String?, mandatoryFundPercent: Double?) {
         self.id = id
         self.name = name
         self.asset = asset
         self.description = description
         self.icon = icon
         self.color = color
+        self.mandatoryFundPercent = mandatoryFundPercent
     }
     
 
@@ -42,6 +44,7 @@ open class PlatformAsset: Codable {
         try container.encodeIfPresent(description, forKey: "description")
         try container.encodeIfPresent(icon, forKey: "icon")
         try container.encodeIfPresent(color, forKey: "color")
+        try container.encodeIfPresent(mandatoryFundPercent, forKey: "mandatoryFundPercent")
     }
 
     // Decodable protocol methods
@@ -55,6 +58,7 @@ open class PlatformAsset: Codable {
         description = try container.decodeIfPresent(String.self, forKey: "description")
         icon = try container.decodeIfPresent(String.self, forKey: "icon")
         color = try container.decodeIfPresent(String.self, forKey: "color")
+        mandatoryFundPercent = try container.decodeIfPresent(Double.self, forKey: "mandatoryFundPercent")
     }
 }
 

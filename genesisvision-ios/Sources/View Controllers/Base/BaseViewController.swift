@@ -151,6 +151,10 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
     }
     
     // MARK: - Public Methods
+    func scrollToTop(_ scrollView: UIScrollView) {
+        scrollView.setContentOffset(.zero, animated: true)
+    }
+    
     func updateData(from dateFrom: Date?, to dateTo: Date?) {
         //fetch()
     }

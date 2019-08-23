@@ -319,6 +319,11 @@ extension ProgramInfoViewModel: InvestNowProtocol {
     }
     
     func didTapInvestButton() {
+        guard AuthManager.isLogin() else {
+            router.signInAction()
+            return
+        }
+        
         if availableInvestment > 0 {
             invest()
         } else if let topViewController = router.topViewController() {
@@ -329,6 +334,11 @@ extension ProgramInfoViewModel: InvestNowProtocol {
 
 extension ProgramInfoViewModel: InfoSignalsProtocol {
     func didTapFollowButton() {
+        guard AuthManager.isLogin() else {
+            router.signInAction()
+            return
+        }
+        
         if let hasSignalAccount = programDetailsFull?.personalProgramDetails?.signalSubscription?.hasSignalAccount, !hasSignalAccount {
             createAccount { [weak self] (selectedCurrencyType, depositAmount) in
                 self?.subscribe(true, initialDepositCurrency: selectedCurrencyType, initialDepositAmount: depositAmount)

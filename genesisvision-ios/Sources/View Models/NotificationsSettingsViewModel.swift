@@ -438,20 +438,13 @@ extension NotificationsSettingsViewModel: NotificationsSettingsProtocol {
     func didAdd(type: NotificationSettingViewModel.ModelType?) {
         router.currentController?.showProgressHUD()
         
-        let type = NotificationsAPI.ModelType_v10NotificationsSettingsAddPost(rawValue: type?.rawValue ?? "")
+        let modelType = NotificationsAPI.ModelType_v10NotificationsSettingsAddPost(rawValue: type?.rawValue ?? "")
         
-        NotificationsDataProvider.addSetting(assetId: assetId, type: type, completion: { [weak self] (uuidString) in
+        NotificationsDataProvider.addSetting(assetId: assetId, type: modelType, completion: { [weak self] (uuidString) in
             self?.router.currentController?.hideHUD()
             
-            if let uuidString = uuidString, let type = type {
-                switch type {
-                case .platformNewsAndUpdates:
-                    self?.settingsGeneralViewModels.first?.setting.id = UUID(uuidString: uuidString)
-                case .platformEmergency:
-                    self?.settingsGeneralViewModels.last?.setting.id = UUID(uuidString: uuidString)
-                default:
-                    break
-                }
+            if let uuidString = uuidString, let type = type, let viewModel = self?.settingsGeneralViewModels.first(where: { $0.setting.type == type }) {
+                viewModel.setting.id = UUID(uuidString: uuidString)
             }
         }) { [weak self] (result) in
             self?.router.currentController?.hideHUD()

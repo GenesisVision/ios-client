@@ -123,7 +123,13 @@ class ListDelegateManager<T: ListViewModelProtocol>: NSObject, UITableViewDelega
 
 extension ListDelegateManager: RatingTableHeaderViewProtocol {
     func levelButtonDidTap(_ level: Int) {
-        viewModel?.filterModel.levelsSet = [level]
+        var levels = [level]
+        
+        if let contains = viewModel?.filterModel.levelsSet?.contains(level), contains {
+            levels = []
+        }
+            
+        viewModel?.filterModel.levelsSet = levels
         viewModel?.refresh(completion: { (result) in })
     }
 }

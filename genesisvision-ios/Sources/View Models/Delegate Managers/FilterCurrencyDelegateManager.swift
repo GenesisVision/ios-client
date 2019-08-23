@@ -49,7 +49,7 @@ final class FilterCurrencyDelegateManager: NSObject, UITableViewDelegate, UITabl
             
             if let platformCurrencies = platformInfo.platformCurrencies {
                 self?.currencies.removeAll()
-                self?.currencies.append(PlatformCurrency(name: "All", rateToGvt: nil))
+                self?.currencies.append(PlatformCurrency(name: "All", rateToGvt: nil, color: nil))
                 self?.currencies.append(contentsOf: platformCurrencies)
                 self?.tableView?.reloadData()
             }

@@ -10,16 +10,16 @@ import UIKit
 
 class SearchPageboyViewControllerDataSource: BasePageboyViewControllerDataSource {
     // MARK: - Private methods
-    internal override func setup(router: Router, filterModel: FilterModel? = nil, showFacets: Bool) {
-        guard let programListViewController = router.getPrograms(with: filterModel, showFacets: showFacets, parentRouter: router) else { return }
+    internal override func setup(router: Router, showFacets: Bool) {
+        guard let programListViewController = router.getPrograms(with: FilterModel(), showFacets: showFacets, parentRouter: router) else { return }
         router.programsViewController = programListViewController
         controllers.append(programListViewController)
         
-        guard let fundListViewController = router.getFunds(with: filterModel, showFacets: showFacets, parentRouter: router) else { return }
+        guard let fundListViewController = router.getFunds(with: FilterModel(), showFacets: showFacets, parentRouter: router) else { return }
         router.fundsViewController = fundListViewController
         controllers.append(fundListViewController)
         
-        guard let managerListViewController = router.getManagers(with: filterModel, showFacets: showFacets, parentRouter: router) else { return }
+        guard let managerListViewController = router.getManagers(with: FilterModel(), showFacets: showFacets, parentRouter: router) else { return }
         router.managersViewController = managerListViewController
         controllers.append(managerListViewController)
     }

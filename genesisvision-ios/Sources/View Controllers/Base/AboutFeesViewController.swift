@@ -14,6 +14,7 @@ class AboutFeesViewController: BaseViewController {
     @IBOutlet weak var textLabel: SubtitleLabel! {
         didSet {
             textLabel.font = UIFont.getFont(.regular, size: 14.0)
+            textLabel.textColor = UIColor.Cell.title
         }
     }
     
@@ -41,12 +42,13 @@ class AboutFeesViewController: BaseViewController {
     private func setupUI() {
         title = "Fees and Discounts"
         
-        let text = "Any Genesis Vision user who holds a certain amount of GVT for 7 days receives a discount for transaction fees. The size of a discount can vary and depends on the amount of GVT that is being held. The regular trading fee is 0.3%, and the information on the tiered discount system can be found in the Genesis Vision Trading Conditions section.\n\nUsers of the Genesis Vision copy trading feature who hold any GVT on the Genesis Vision balance are eligible for discounts and also have the platform success fee of 10% for both investment programs and copy trading signals reduced by 1% for each 1000 GVT held."
+        let text = "Any Genesis Vision user who holds a certain amount of GVT receives a discount for transaction fees. The size of a discount can vary and depends on the amount of GVT that is being held. The regular trading fee is 0.3%, and the information on the tiered discount system can be found in the Genesis Markets Trading Conditions section.\n\nUsers of the Genesis Vision copy trading feature who hold any GVT on the Genesis Vision balance are eligible for discounts and also have the platform success fee of 10% for both investment programs and copy trading signals reduced by 1% for each 1000 GVT held."
         
         textLabel.text = text
         textLabel.setLineSpacing(lineSpacing: 3.0)
         
-        disclaimerLabel.text = "* Please note that to be eligible for a discount tier you should hold GVT on your Genesis Vision wallet for at least 7 days"
+        disclaimerLabel.text = ""
         disclaimerLabel.setLineSpacing(lineSpacing: 3.0)
+        disclaimerLabel.isHidden = true
     }
 }

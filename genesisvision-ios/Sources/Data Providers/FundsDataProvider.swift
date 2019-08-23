@@ -43,10 +43,10 @@ class FundsDataProvider: DataProvider {
         }
     }
     
-    static func get(fundId: String, currencySecondary: FundsAPI.CurrencySecondary_v10FundsByIdGet? = nil, completion: @escaping (_ fundDetailsFull: FundDetailsFull?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func get(fundId: String, currencySecondary: FundsAPI.Currency_v10FundsByIdGet? = nil, completion: @escaping (_ fundDetailsFull: FundDetailsFull?) -> Void, errorCompletion: @escaping CompletionBlock) {
         let authorization = AuthManager.authorizedToken
         
-        FundsAPI.v10FundsByIdGet(id: fundId, authorization: authorization, currencySecondary: currencySecondary) { (viewModel, error) in
+        FundsAPI.v10FundsByIdGet(id: fundId, authorization: authorization, currency: currencySecondary) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }

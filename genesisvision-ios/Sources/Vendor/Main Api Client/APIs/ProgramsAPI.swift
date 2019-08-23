@@ -12,16 +12,36 @@ import Alamofire
 
 open class ProgramsAPI {
     /**
+     * enum for parameter currency
+     */
+    public enum Currency_v10ProgramsByIdChartsBalanceGet: String { 
+        case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
+        case ada = "ADA"
+        case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
+        case bnb = "BNB"
+        case usd = "USD"
+        case eur = "EUR"
+    }
+
+    /**
      Program balance chart
      
      - parameter id: (path)  
      - parameter dateFrom: (query)  (optional)
      - parameter dateTo: (query)  (optional)
      - parameter maxPointCount: (query)  (optional)
+     - parameter currency: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10ProgramsByIdChartsBalanceGet(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, completion: @escaping ((_ data: ProgramBalanceChart?,_ error: Error?) -> Void)) {
-        v10ProgramsByIdChartsBalanceGetWithRequestBuilder(id: id, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount).execute { (response, error) -> Void in
+    open class func v10ProgramsByIdChartsBalanceGet(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency_v10ProgramsByIdChartsBalanceGet? = nil, completion: @escaping ((_ data: ProgramBalanceChart?,_ error: Error?) -> Void)) {
+        v10ProgramsByIdChartsBalanceGetWithRequestBuilder(id: id, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -31,30 +51,31 @@ open class ProgramsAPI {
      Program balance chart
      - GET /v1.0/programs/{id}/charts/balance
      - examples: [{contentType=application/json, example={
-  "programCurrencyBalance" : 0.8008281904610115,
+  "programCurrencyBalance" : 6.027456183070403,
   "programCurrency" : "Undefined",
   "balanceChart" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "investorsFunds" : 5.962133916683182,
-    "profit" : 6.027456183070403,
-    "managerFunds" : 1.4658129805029452
+    "investorsFunds" : 5.637376656633329,
+    "profit" : 1.4658129805029452,
+    "managerFunds" : 5.962133916683182
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "investorsFunds" : 5.962133916683182,
-    "profit" : 6.027456183070403,
-    "managerFunds" : 1.4658129805029452
+    "investorsFunds" : 5.637376656633329,
+    "profit" : 1.4658129805029452,
+    "managerFunds" : 5.962133916683182
   } ],
-  "gvtBalance" : 5.637376656633329
+  "gvtBalance" : 0.8008281904610115
 }}]
      
      - parameter id: (path)  
      - parameter dateFrom: (query)  (optional)
      - parameter dateTo: (query)  (optional)
      - parameter maxPointCount: (query)  (optional)
+     - parameter currency: (query)  (optional)
 
      - returns: RequestBuilder<ProgramBalanceChart> 
      */
-    open class func v10ProgramsByIdChartsBalanceGetWithRequestBuilder(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil) -> RequestBuilder<ProgramBalanceChart> {
+    open class func v10ProgramsByIdChartsBalanceGetWithRequestBuilder(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency_v10ProgramsByIdChartsBalanceGet? = nil) -> RequestBuilder<ProgramBalanceChart> {
         var path = "/v1.0/programs/{id}/charts/balance"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
@@ -64,7 +85,8 @@ open class ProgramsAPI {
         url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
             "DateFrom": dateFrom?.encodeToJSON(), 
             "DateTo": dateTo?.encodeToJSON(), 
-            "MaxPointCount": maxPointCount?.encodeToJSON()
+            "MaxPointCount": maxPointCount?.encodeToJSON(), 
+            "Currency": currency?.rawValue
         ])
         
 
@@ -74,16 +96,36 @@ open class ProgramsAPI {
     }
 
     /**
+     * enum for parameter currency
+     */
+    public enum Currency_v10ProgramsByIdChartsProfitGet: String { 
+        case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
+        case ada = "ADA"
+        case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
+        case bnb = "BNB"
+        case usd = "USD"
+        case eur = "EUR"
+    }
+
+    /**
      Program profit chart
      
      - parameter id: (path)  
      - parameter dateFrom: (query)  (optional)
      - parameter dateTo: (query)  (optional)
      - parameter maxPointCount: (query)  (optional)
+     - parameter currency: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10ProgramsByIdChartsProfitGet(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, completion: @escaping ((_ data: ProgramProfitChart?,_ error: Error?) -> Void)) {
-        v10ProgramsByIdChartsProfitGetWithRequestBuilder(id: id, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount).execute { (response, error) -> Void in
+    open class func v10ProgramsByIdChartsProfitGet(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency_v10ProgramsByIdChartsProfitGet? = nil, completion: @escaping ((_ data: ProgramProfitChart?,_ error: Error?) -> Void)) {
+        v10ProgramsByIdChartsProfitGetWithRequestBuilder(id: id, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -102,10 +144,10 @@ open class ProgramsAPI {
   "maxDrawdown" : 5.025004791520295,
   "equityChart" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "value" : 3.616076749251911
+    "value" : 0.8008281904610115
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "value" : 3.616076749251911
+    "value" : 0.8008281904610115
   } ],
   "tradingVolume" : 1.2315135367772556,
   "investors" : 1,
@@ -113,10 +155,10 @@ open class ProgramsAPI {
   "sortinoRatio" : 1.1730742509559433,
   "pnLChart" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "value" : 3.616076749251911
+    "value" : 0.8008281904610115
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "value" : 3.616076749251911
+    "value" : 0.8008281904610115
   } ],
   "balance" : 1.0246457001441578,
   "programCurrency" : "Undefined",
@@ -139,10 +181,11 @@ open class ProgramsAPI {
      - parameter dateFrom: (query)  (optional)
      - parameter dateTo: (query)  (optional)
      - parameter maxPointCount: (query)  (optional)
+     - parameter currency: (query)  (optional)
 
      - returns: RequestBuilder<ProgramProfitChart> 
      */
-    open class func v10ProgramsByIdChartsProfitGetWithRequestBuilder(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil) -> RequestBuilder<ProgramProfitChart> {
+    open class func v10ProgramsByIdChartsProfitGetWithRequestBuilder(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency_v10ProgramsByIdChartsProfitGet? = nil) -> RequestBuilder<ProgramProfitChart> {
         var path = "/v1.0/programs/{id}/charts/profit"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
@@ -152,7 +195,8 @@ open class ProgramsAPI {
         url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
             "DateFrom": dateFrom?.encodeToJSON(), 
             "DateTo": dateTo?.encodeToJSON(), 
-            "MaxPointCount": maxPointCount?.encodeToJSON()
+            "MaxPointCount": maxPointCount?.encodeToJSON(), 
+            "Currency": currency?.rawValue
         ])
         
 
@@ -290,10 +334,10 @@ open class ProgramsAPI {
   "successFee" : 7.061401241503109,
   "availableInvestmentLimit" : 6.683562403749608,
   "rating" : {
-    "rating" : 3,
+    "rating" : 6,
     "canLevelUp" : true,
-    "topPercent" : 4.145608029883936,
-    "profit" : 2.027123023002322
+    "topPercent" : 1.1730742509559433,
+    "profit" : 7.457744773683766
   },
   "description" : "description",
   "signalVolumeFee" : 1.0246457001441578,
@@ -310,10 +354,15 @@ open class ProgramsAPI {
   "currency" : "Undefined",
   "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "brokerDetails" : {
+    "showCommissionRebateSometime" : true,
+    "showCommissionRebate" : true,
     "showSwaps" : true,
-    "isForex" : true,
     "name" : "name",
+    "isForex" : true,
     "logo" : "logo",
+    "isForexSometime" : true,
+    "showSwapsSometime" : true,
+    "showTicketsSometime" : true,
     "showTickets" : true
   },
   "levelProgress" : 6.027456183070403,
@@ -327,13 +376,13 @@ open class ProgramsAPI {
     "tradesSuccessCount" : 5,
     "drawdownPercent" : 6.965117697638846,
     "balanceBase" : {
-      "amount" : 0.8008281904610115,
+      "amount" : 3.616076749251911,
       "currency" : "Undefined"
     },
     "tradesCount" : 6,
     "hasNotifications" : true,
     "balanceGVT" : {
-      "amount" : 0.8008281904610115,
+      "amount" : 3.616076749251911,
       "currency" : "Undefined"
     },
     "profitPercent" : 6.438423552598547,
@@ -344,7 +393,7 @@ open class ProgramsAPI {
     "startDate" : "2000-01-23T04:56:07.000+00:00",
     "startBalance" : 2.8841621266687802,
     "balanceSecondary" : {
-      "amount" : 0.8008281904610115,
+      "amount" : 3.616076749251911,
       "currency" : "Undefined"
     },
     "investorsCount" : 1
@@ -353,13 +402,13 @@ open class ProgramsAPI {
     "socialLinks" : [ {
       "name" : "name",
       "logo" : "logo",
-      "type" : "Undefined",
+      "type" : "Twitter",
       "value" : "value",
       "url" : "url"
     }, {
       "name" : "name",
       "logo" : "logo",
-      "type" : "Undefined",
+      "type" : "Twitter",
       "value" : "value",
       "url" : "url"
     } ],
@@ -381,17 +430,17 @@ open class ProgramsAPI {
     "login" : "login",
     "hasNotifications" : true,
     "canChangePassword" : true,
-    "gvtValue" : 7.386281948385884,
+    "gvtValue" : 4.965218492984954,
     "isFinishing" : true,
-    "value" : 1.0246457001441578,
-    "profit" : 1.4894159098541704,
+    "value" : 9.965781217890562,
+    "profit" : 9.369310271410669,
     "pendingOutputIsWithdrawAll" : true,
     "canInvest" : true,
     "notificationAvailableToInvestId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "showTwoFactorButton" : true,
     "canClosePeriod" : true,
-    "pendingOutput" : 1.1730742509559433,
-    "pendingInput" : 7.457744773683766,
+    "pendingOutput" : 9.018348186070783,
+    "pendingInput" : 8.762042012749001,
     "isOwnProgram" : true,
     "isReinvest" : true,
     "migration" : {
@@ -439,22 +488,22 @@ open class ProgramsAPI {
           "name" : "name"
         } ]
       },
-      "newLeverage" : 1,
+      "newLeverage" : 5,
       "dateCreate" : "2000-01-23T04:56:07.000+00:00"
     },
     "signalSubscription" : {
       "mode" : "ByBalance",
-      "totalVolume" : 1.2315135367772556,
+      "totalVolume" : 2.3021358869347655,
       "hasSignalAccount" : true,
-      "totalProfit" : 7.386281948385884,
+      "totalProfit" : 5.637376656633329,
       "fixedCurrency" : "Undefined",
-      "fixedVolume" : 4.145608029883936,
-      "openTolerancePercent" : 2.027123023002322,
+      "fixedVolume" : 5.962133916683182,
+      "openTolerancePercent" : 1.4658129805029452,
       "hasActiveSubscription" : true,
-      "percent" : 3.616076749251911
+      "percent" : 6.027456183070403
     },
     "canMakeSignalProvider" : true,
-    "invested" : 6.84685269835264,
+    "invested" : 6.683562403749608,
     "isFavorite" : true,
     "isInvested" : true,
     "status" : "Pending"
@@ -678,39 +727,55 @@ open class ProgramsAPI {
      Program periods
      - GET /v1.0/programs/{id}/periods
      - examples: [{contentType=application/json, example={
-  "total" : 7,
+  "total" : 5,
   "periods" : [ {
-    "number" : 0,
-    "balance" : 1.4658129805029452,
-    "dateTo" : "2000-01-23T04:56:07.000+00:00",
+    "investorsWithdraw" : 2.027123023002322,
     "dateFrom" : "2000-01-23T04:56:07.000+00:00",
-    "profit" : 6.027456183070403,
     "investors" : 5,
+    "investorsDeposit" : 3.616076749251911,
+    "managerWithdraw" : 7.061401241503109,
+    "number" : 6,
+    "investorsProfitWithdraw" : 4.145608029883936,
+    "managerDeposit" : 2.3021358869347655,
+    "balance" : 5.962133916683182,
+    "dateTo" : "2000-01-23T04:56:07.000+00:00",
+    "platformSuccessFee" : 7.386281948385884,
+    "periodLength" : 0.8008281904610115,
+    "managerCommissionRebate" : 9.301444243932576,
+    "profit" : 1.4658129805029452,
     "managerStatistic" : {
-      "entryFee" : 3.616076749251911,
-      "balance" : 4.145608029883936,
-      "successFee" : 9.301444243932576,
-      "deposit" : 5.637376656633329,
-      "commissionRebate" : 7.061401241503109,
-      "profit" : 2.027123023002322,
-      "withdraw" : 2.3021358869347655
+      "entryFee" : 7.457744773683766,
+      "balance" : 4.965218492984954,
+      "successFee" : 6.84685269835264,
+      "deposit" : 1.2315135367772556,
+      "commissionRebate" : 1.4894159098541704,
+      "profit" : 1.1730742509559433,
+      "withdraw" : 1.0246457001441578
     },
     "status" : "Planned"
   }, {
-    "number" : 0,
-    "balance" : 1.4658129805029452,
-    "dateTo" : "2000-01-23T04:56:07.000+00:00",
+    "investorsWithdraw" : 2.027123023002322,
     "dateFrom" : "2000-01-23T04:56:07.000+00:00",
-    "profit" : 6.027456183070403,
     "investors" : 5,
+    "investorsDeposit" : 3.616076749251911,
+    "managerWithdraw" : 7.061401241503109,
+    "number" : 6,
+    "investorsProfitWithdraw" : 4.145608029883936,
+    "managerDeposit" : 2.3021358869347655,
+    "balance" : 5.962133916683182,
+    "dateTo" : "2000-01-23T04:56:07.000+00:00",
+    "platformSuccessFee" : 7.386281948385884,
+    "periodLength" : 0.8008281904610115,
+    "managerCommissionRebate" : 9.301444243932576,
+    "profit" : 1.4658129805029452,
     "managerStatistic" : {
-      "entryFee" : 3.616076749251911,
-      "balance" : 4.145608029883936,
-      "successFee" : 9.301444243932576,
-      "deposit" : 5.637376656633329,
-      "commissionRebate" : 7.061401241503109,
-      "profit" : 2.027123023002322,
-      "withdraw" : 2.3021358869347655
+      "entryFee" : 7.457744773683766,
+      "balance" : 4.965218492984954,
+      "successFee" : 6.84685269835264,
+      "deposit" : 1.2315135367772556,
+      "commissionRebate" : 1.4894159098541704,
+      "profit" : 1.1730742509559433,
+      "withdraw" : 1.0246457001441578
     },
     "status" : "Planned"
   } ]
@@ -1044,10 +1109,10 @@ open class ProgramsAPI {
     "baseVolume" : 5.637376656633329,
     "signalData" : {
       "masters" : [ {
-        "share" : 7.457744773683766,
+        "share" : 6.84685269835264,
         "login" : "login"
       }, {
-        "share" : 7.457744773683766,
+        "share" : 6.84685269835264,
         "login" : "login"
       } ]
     },
@@ -1071,10 +1136,10 @@ open class ProgramsAPI {
     "baseVolume" : 5.637376656633329,
     "signalData" : {
       "masters" : [ {
-        "share" : 7.457744773683766,
+        "share" : 6.84685269835264,
         "login" : "login"
       }, {
-        "share" : 7.457744773683766,
+        "share" : 6.84685269835264,
         "login" : "login"
       } ]
     },
@@ -1208,10 +1273,10 @@ open class ProgramsAPI {
     "baseVolume" : 5.637376656633329,
     "signalData" : {
       "masters" : [ {
-        "share" : 7.457744773683766,
+        "share" : 6.84685269835264,
         "login" : "login"
       }, {
-        "share" : 7.457744773683766,
+        "share" : 6.84685269835264,
         "login" : "login"
       } ]
     },
@@ -1235,10 +1300,10 @@ open class ProgramsAPI {
     "baseVolume" : 5.637376656633329,
     "signalData" : {
       "masters" : [ {
-        "share" : 7.457744773683766,
+        "share" : 6.84685269835264,
         "login" : "login"
       }, {
-        "share" : 7.457744773683766,
+        "share" : 6.84685269835264,
         "login" : "login"
       } ]
     },
@@ -1384,6 +1449,7 @@ open class ProgramsAPI {
      - parameter hasInvestorsForAll: (query)  (optional)
      - parameter hasInvestorsForClosed: (query)  (optional)
      - parameter ids: (query)  (optional)
+     - parameter forceUseIdsList: (query)  (optional)
      - parameter managerId: (query)  (optional)
      - parameter programManagerId: (query)  (optional)
      - parameter status: (query)  (optional)
@@ -1391,8 +1457,8 @@ open class ProgramsAPI {
      - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10ProgramsGet(authorization: String? = nil, levelMin: Int? = nil, levelMax: Int? = nil, levelsSet: [Int]? = nil, profitAvgMin: Double? = nil, profitAvgMax: Double? = nil, sorting: Sorting_v10ProgramsGet? = nil, programCurrency: ProgramCurrency_v10ProgramsGet? = nil, currencySecondary: CurrencySecondary_v10ProgramsGet? = nil, levelUpFrom: Int? = nil, tags: [String]? = nil, isSignal: Bool? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, isEnabled: Bool? = nil, hasInvestorsForAll: Bool? = nil, hasInvestorsForClosed: Bool? = nil, ids: [UUID]? = nil, managerId: String? = nil, programManagerId: UUID? = nil, status: [String]? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ProgramsList?,_ error: Error?) -> Void)) {
-        v10ProgramsGetWithRequestBuilder(authorization: authorization, levelMin: levelMin, levelMax: levelMax, levelsSet: levelsSet, profitAvgMin: profitAvgMin, profitAvgMax: profitAvgMax, sorting: sorting, programCurrency: programCurrency, currencySecondary: currencySecondary, levelUpFrom: levelUpFrom, tags: tags, isSignal: isSignal, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: facetId, isFavorite: isFavorite, isEnabled: isEnabled, hasInvestorsForAll: hasInvestorsForAll, hasInvestorsForClosed: hasInvestorsForClosed, ids: ids, managerId: managerId, programManagerId: programManagerId, status: status, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func v10ProgramsGet(authorization: String? = nil, levelMin: Int? = nil, levelMax: Int? = nil, levelsSet: [Int]? = nil, profitAvgMin: Double? = nil, profitAvgMax: Double? = nil, sorting: Sorting_v10ProgramsGet? = nil, programCurrency: ProgramCurrency_v10ProgramsGet? = nil, currencySecondary: CurrencySecondary_v10ProgramsGet? = nil, levelUpFrom: Int? = nil, tags: [String]? = nil, isSignal: Bool? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, isEnabled: Bool? = nil, hasInvestorsForAll: Bool? = nil, hasInvestorsForClosed: Bool? = nil, ids: [UUID]? = nil, forceUseIdsList: Bool? = nil, managerId: String? = nil, programManagerId: UUID? = nil, status: [String]? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ProgramsList?,_ error: Error?) -> Void)) {
+        v10ProgramsGetWithRequestBuilder(authorization: authorization, levelMin: levelMin, levelMax: levelMax, levelsSet: levelsSet, profitAvgMin: profitAvgMin, profitAvgMax: profitAvgMax, sorting: sorting, programCurrency: programCurrency, currencySecondary: currencySecondary, levelUpFrom: levelUpFrom, tags: tags, isSignal: isSignal, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: facetId, isFavorite: isFavorite, isEnabled: isEnabled, hasInvestorsForAll: hasInvestorsForAll, hasInvestorsForClosed: hasInvestorsForClosed, ids: ids, forceUseIdsList: forceUseIdsList, managerId: managerId, programManagerId: programManagerId, status: status, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -1402,17 +1468,17 @@ open class ProgramsAPI {
      Programs list
      - GET /v1.0/programs
      - examples: [{contentType=application/json, example={
-  "total" : 4,
+  "total" : 6,
   "programs" : [ {
     "color" : "color",
     "stopOutLevel" : 5.962133916683182,
     "availableInvestment" : 5.637376656633329,
     "availableInvestmentLimit" : 7.061401241503109,
     "rating" : {
-      "rating" : 3,
+      "rating" : 6,
       "canLevelUp" : true,
-      "topPercent" : 4.145608029883936,
-      "profit" : 2.027123023002322
+      "topPercent" : 1.1730742509559433,
+      "profit" : 7.457744773683766
     },
     "description" : "description",
     "title" : "title",
@@ -1425,35 +1491,35 @@ open class ProgramsAPI {
     "periodDuration" : 1,
     "statistic" : {
       "balanceBase" : {
-        "amount" : 0.8008281904610115,
+        "amount" : 3.616076749251911,
         "currency" : "Undefined"
       },
-      "tradesCount" : 7,
+      "tradesCount" : 1,
       "balanceGVT" : {
-        "amount" : 0.8008281904610115,
+        "amount" : 3.616076749251911,
         "currency" : "Undefined"
       },
-      "profitPercent" : 1.4658129805029452,
-      "profitValue" : 5.962133916683182,
-      "drawdownPercent" : 5.637376656633329,
-      "currentValue" : 6.027456183070403,
+      "profitPercent" : 4.145608029883936,
+      "profitValue" : 7.386281948385884,
+      "drawdownPercent" : 1.2315135367772556,
+      "currentValue" : 2.027123023002322,
       "balanceSecondary" : {
-        "amount" : 0.8008281904610115,
+        "amount" : 3.616076749251911,
         "currency" : "Undefined"
       },
-      "investorsCount" : 2
+      "investorsCount" : 1
     },
     "manager" : {
       "socialLinks" : [ {
         "name" : "name",
         "logo" : "logo",
-        "type" : "Undefined",
+        "type" : "Twitter",
         "value" : "value",
         "url" : "url"
       }, {
         "name" : "name",
         "logo" : "logo",
-        "type" : "Undefined",
+        "type" : "Twitter",
         "value" : "value",
         "url" : "url"
       } ],
@@ -1484,17 +1550,17 @@ open class ProgramsAPI {
       "login" : "login",
       "hasNotifications" : true,
       "canChangePassword" : true,
-      "gvtValue" : 7.386281948385884,
+      "gvtValue" : 4.965218492984954,
       "isFinishing" : true,
-      "value" : 1.0246457001441578,
-      "profit" : 1.4894159098541704,
+      "value" : 9.965781217890562,
+      "profit" : 9.369310271410669,
       "pendingOutputIsWithdrawAll" : true,
       "canInvest" : true,
       "notificationAvailableToInvestId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "showTwoFactorButton" : true,
       "canClosePeriod" : true,
-      "pendingOutput" : 1.1730742509559433,
-      "pendingInput" : 7.457744773683766,
+      "pendingOutput" : 9.018348186070783,
+      "pendingInput" : 8.762042012749001,
       "isOwnProgram" : true,
       "isReinvest" : true,
       "migration" : {
@@ -1542,32 +1608,32 @@ open class ProgramsAPI {
             "name" : "name"
           } ]
         },
-        "newLeverage" : 1,
+        "newLeverage" : 5,
         "dateCreate" : "2000-01-23T04:56:07.000+00:00"
       },
       "signalSubscription" : {
         "mode" : "ByBalance",
-        "totalVolume" : 1.2315135367772556,
+        "totalVolume" : 2.3021358869347655,
         "hasSignalAccount" : true,
-        "totalProfit" : 7.386281948385884,
+        "totalProfit" : 5.637376656633329,
         "fixedCurrency" : "Undefined",
-        "fixedVolume" : 4.145608029883936,
-        "openTolerancePercent" : 2.027123023002322,
+        "fixedVolume" : 5.962133916683182,
+        "openTolerancePercent" : 1.4658129805029452,
         "hasActiveSubscription" : true,
-        "percent" : 3.616076749251911
+        "percent" : 6.027456183070403
       },
       "canMakeSignalProvider" : true,
-      "invested" : 6.84685269835264,
+      "invested" : 6.683562403749608,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
     },
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 3.616076749251911
+      "value" : 0.8008281904610115
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 3.616076749251911
+      "value" : 0.8008281904610115
     } ],
     "status" : "None"
   }, {
@@ -1576,10 +1642,10 @@ open class ProgramsAPI {
     "availableInvestment" : 5.637376656633329,
     "availableInvestmentLimit" : 7.061401241503109,
     "rating" : {
-      "rating" : 3,
+      "rating" : 6,
       "canLevelUp" : true,
-      "topPercent" : 4.145608029883936,
-      "profit" : 2.027123023002322
+      "topPercent" : 1.1730742509559433,
+      "profit" : 7.457744773683766
     },
     "description" : "description",
     "title" : "title",
@@ -1592,35 +1658,35 @@ open class ProgramsAPI {
     "periodDuration" : 1,
     "statistic" : {
       "balanceBase" : {
-        "amount" : 0.8008281904610115,
+        "amount" : 3.616076749251911,
         "currency" : "Undefined"
       },
-      "tradesCount" : 7,
+      "tradesCount" : 1,
       "balanceGVT" : {
-        "amount" : 0.8008281904610115,
+        "amount" : 3.616076749251911,
         "currency" : "Undefined"
       },
-      "profitPercent" : 1.4658129805029452,
-      "profitValue" : 5.962133916683182,
-      "drawdownPercent" : 5.637376656633329,
-      "currentValue" : 6.027456183070403,
+      "profitPercent" : 4.145608029883936,
+      "profitValue" : 7.386281948385884,
+      "drawdownPercent" : 1.2315135367772556,
+      "currentValue" : 2.027123023002322,
       "balanceSecondary" : {
-        "amount" : 0.8008281904610115,
+        "amount" : 3.616076749251911,
         "currency" : "Undefined"
       },
-      "investorsCount" : 2
+      "investorsCount" : 1
     },
     "manager" : {
       "socialLinks" : [ {
         "name" : "name",
         "logo" : "logo",
-        "type" : "Undefined",
+        "type" : "Twitter",
         "value" : "value",
         "url" : "url"
       }, {
         "name" : "name",
         "logo" : "logo",
-        "type" : "Undefined",
+        "type" : "Twitter",
         "value" : "value",
         "url" : "url"
       } ],
@@ -1651,17 +1717,17 @@ open class ProgramsAPI {
       "login" : "login",
       "hasNotifications" : true,
       "canChangePassword" : true,
-      "gvtValue" : 7.386281948385884,
+      "gvtValue" : 4.965218492984954,
       "isFinishing" : true,
-      "value" : 1.0246457001441578,
-      "profit" : 1.4894159098541704,
+      "value" : 9.965781217890562,
+      "profit" : 9.369310271410669,
       "pendingOutputIsWithdrawAll" : true,
       "canInvest" : true,
       "notificationAvailableToInvestId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "showTwoFactorButton" : true,
       "canClosePeriod" : true,
-      "pendingOutput" : 1.1730742509559433,
-      "pendingInput" : 7.457744773683766,
+      "pendingOutput" : 9.018348186070783,
+      "pendingInput" : 8.762042012749001,
       "isOwnProgram" : true,
       "isReinvest" : true,
       "migration" : {
@@ -1709,32 +1775,32 @@ open class ProgramsAPI {
             "name" : "name"
           } ]
         },
-        "newLeverage" : 1,
+        "newLeverage" : 5,
         "dateCreate" : "2000-01-23T04:56:07.000+00:00"
       },
       "signalSubscription" : {
         "mode" : "ByBalance",
-        "totalVolume" : 1.2315135367772556,
+        "totalVolume" : 2.3021358869347655,
         "hasSignalAccount" : true,
-        "totalProfit" : 7.386281948385884,
+        "totalProfit" : 5.637376656633329,
         "fixedCurrency" : "Undefined",
-        "fixedVolume" : 4.145608029883936,
-        "openTolerancePercent" : 2.027123023002322,
+        "fixedVolume" : 5.962133916683182,
+        "openTolerancePercent" : 1.4658129805029452,
         "hasActiveSubscription" : true,
-        "percent" : 3.616076749251911
+        "percent" : 6.027456183070403
       },
       "canMakeSignalProvider" : true,
-      "invested" : 6.84685269835264,
+      "invested" : 6.683562403749608,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
     },
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 3.616076749251911
+      "value" : 0.8008281904610115
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 3.616076749251911
+      "value" : 0.8008281904610115
     } ],
     "status" : "None"
   } ]
@@ -1762,6 +1828,7 @@ open class ProgramsAPI {
      - parameter hasInvestorsForAll: (query)  (optional)
      - parameter hasInvestorsForClosed: (query)  (optional)
      - parameter ids: (query)  (optional)
+     - parameter forceUseIdsList: (query)  (optional)
      - parameter managerId: (query)  (optional)
      - parameter programManagerId: (query)  (optional)
      - parameter status: (query)  (optional)
@@ -1770,7 +1837,7 @@ open class ProgramsAPI {
 
      - returns: RequestBuilder<ProgramsList> 
      */
-    open class func v10ProgramsGetWithRequestBuilder(authorization: String? = nil, levelMin: Int? = nil, levelMax: Int? = nil, levelsSet: [Int]? = nil, profitAvgMin: Double? = nil, profitAvgMax: Double? = nil, sorting: Sorting_v10ProgramsGet? = nil, programCurrency: ProgramCurrency_v10ProgramsGet? = nil, currencySecondary: CurrencySecondary_v10ProgramsGet? = nil, levelUpFrom: Int? = nil, tags: [String]? = nil, isSignal: Bool? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, isEnabled: Bool? = nil, hasInvestorsForAll: Bool? = nil, hasInvestorsForClosed: Bool? = nil, ids: [UUID]? = nil, managerId: String? = nil, programManagerId: UUID? = nil, status: [String]? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ProgramsList> {
+    open class func v10ProgramsGetWithRequestBuilder(authorization: String? = nil, levelMin: Int? = nil, levelMax: Int? = nil, levelsSet: [Int]? = nil, profitAvgMin: Double? = nil, profitAvgMax: Double? = nil, sorting: Sorting_v10ProgramsGet? = nil, programCurrency: ProgramCurrency_v10ProgramsGet? = nil, currencySecondary: CurrencySecondary_v10ProgramsGet? = nil, levelUpFrom: Int? = nil, tags: [String]? = nil, isSignal: Bool? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, isEnabled: Bool? = nil, hasInvestorsForAll: Bool? = nil, hasInvestorsForClosed: Bool? = nil, ids: [UUID]? = nil, forceUseIdsList: Bool? = nil, managerId: String? = nil, programManagerId: UUID? = nil, status: [String]? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ProgramsList> {
         let path = "/v1.0/programs"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -1798,6 +1865,7 @@ open class ProgramsAPI {
             "HasInvestorsForAll": hasInvestorsForAll, 
             "HasInvestorsForClosed": hasInvestorsForClosed, 
             "Ids": ids, 
+            "ForceUseIdsList": forceUseIdsList, 
             "ManagerId": managerId, 
             "ProgramManagerId": programManagerId, 
             "Status": status, 

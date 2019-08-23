@@ -12,6 +12,7 @@ class DashboardDataProvider: DataProvider {
     static func getDashboardSummary(chartCurrency: InvestorAPI.ChartCurrency_v10InvestorGet?, from: Date?, to: Date?, balancePoints: Int?, programsPoints: Int?, eventsTake: Int?, requestsSkip: Int?, requestsTake: Int?, completion: @escaping (_ dashboardSummary: DashboardSummary?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
         guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
         InvestorAPI.v10InvestorGet(authorization: authorization, chartCurrency: chartCurrency, from: from, to: to, balancePoints: balancePoints, programsPoints: programsPoints, eventsTake: eventsTake, requestsSkip: requestsSkip, requestsTake: requestsTake) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
@@ -25,7 +26,7 @@ class DashboardDataProvider: DataProvider {
         }
     }
     
-    static func getDashboardPortfolioEvents(with programId: String? = nil, from: Date? = nil, to: Date? = nil, type: InvestorAPI.ModelType_v10InvestorPortfolioEventsGet? = nil, assetType: InvestorAPI.AssetType_v10InvestorPortfolioEventsGet? = nil, skip: Int, take: Int, completion: @escaping (_ dashboardChartValue: DashboardPortfolioEvents?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getDashboardPortfolioEvents(with programId: String? = nil, from: Date? = nil, to: Date? = nil, type: InvestorAPI.EventType_v10InvestorInvestmentsEventsGet? = nil, assetType: InvestorAPI.AssetType_v10InvestorInvestmentsEventsGet? = nil, eventLocation: InvestorAPI.EventLocation_v10InvestorInvestmentsEventsGet, skip: Int, take: Int, completion: @escaping (_ events: InvestmentEventViewModels?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
         guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
@@ -35,7 +36,7 @@ class DashboardDataProvider: DataProvider {
             uuid = UUID(uuidString: programId)
         }
         
-        InvestorAPI.v10InvestorPortfolioEventsGet(authorization: authorization, assetId: uuid, from: from, to: to, type: type, assetType: assetType, skip: skip, take: take) { (viewModel, error) in
+        InvestorAPI.v10InvestorInvestmentsEventsGet(authorization: authorization, eventLocation: eventLocation, assetId: uuid, from: from, to: to, eventType: type, assetType: assetType, skip: skip, take: take) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }

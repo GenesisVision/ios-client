@@ -12,14 +12,14 @@ import Foundation
 open class SocialLinkViewModel: Codable {
 
     public enum ModelType: String, Codable { 
-        case undefined = "Undefined"
         case twitter = "Twitter"
         case telegram = "Telegram"
         case facebook = "Facebook"
-        case linkedIn = "LinkedIn"
         case youtube = "Youtube"
         case weChat = "WeChat"
         case email = "Email"
+        case linkedIn = "LinkedIn"
+        case undefined = "Undefined"
     }
     public var url: String?
     public var logo: String?

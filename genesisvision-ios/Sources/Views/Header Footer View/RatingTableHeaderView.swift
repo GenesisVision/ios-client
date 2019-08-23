@@ -29,24 +29,18 @@ class RatingTableHeaderView: UITableViewHeaderFooterView {
             
             if let text = levelButton.titleLabel?.text, let tag = Int(text) {
                 levelButton.tag = tag
-                if tag == 1 {
-                    levelButton.isSelected = true
-                    levelButton.isEnabled = false
-                }
-            } else {
-                levelButton.tag = 0
             }
         }
     }
     
     @IBAction func levelButtonsAction(_ sender: RatingLevelButton) {
         levelButtons.forEach { (levelButton) in
-            levelButton.isEnabled = true
-            levelButton.isSelected = false
+            if levelButton == sender {
+                levelButton.isSelected = !levelButton.isSelected
+            } else {
+                levelButton.isSelected = false
+            }
         }
-        
-        sender.isSelected = true
-        sender.isEnabled = false
         
         delegate?.levelButtonDidTap(sender.tag)
     }

@@ -251,6 +251,312 @@ open class SignalAPI {
     }
 
     /**
+     Subscribe to external signal account
+     
+     - parameter id: (path)  
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10SignalExternalAttachByIdExternalPost(id: UUID, authorization: String, model: AttachToExternalSignalProviderExt? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        v10SignalExternalAttachByIdExternalPostWithRequestBuilder(id: id, authorization: authorization, model: model).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Subscribe to external signal account
+     - POST /v1.0/signal/external/attach/{id}/external
+     
+     - parameter id: (path)  
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func v10SignalExternalAttachByIdExternalPostWithRequestBuilder(id: UUID, authorization: String, model: AttachToExternalSignalProviderExt? = nil) -> RequestBuilder<Void> {
+        var path = "/v1.0/signal/external/attach/{id}/external"
+        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+    }
+
+    /**
+     Create external signal account
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter request: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10SignalExternalCreatePost(authorization: String, request: NewExternalSignalAccountRequest? = nil, completion: @escaping ((_ data: ManagerProgramCreateResult?,_ error: Error?) -> Void)) {
+        v10SignalExternalCreatePostWithRequestBuilder(authorization: authorization, request: request).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Create external signal account
+     - POST /v1.0/signal/external/create
+     - examples: [{contentType=application/json, example={
+  "twoFactor" : {
+    "sharedKey" : "sharedKey",
+    "authenticatorUri" : "authenticatorUri"
+  },
+  "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+  "twoFactorRequired" : true
+}}]
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter request: (body)  (optional)
+
+     - returns: RequestBuilder<ManagerProgramCreateResult> 
+     */
+    open class func v10SignalExternalCreatePostWithRequestBuilder(authorization: String, request: NewExternalSignalAccountRequest? = nil) -> RequestBuilder<ManagerProgramCreateResult> {
+        let path = "/v1.0/signal/external/create"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: request)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<ManagerProgramCreateResult>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+    }
+
+    /**
+     * enum for parameter sorting
+     */
+    public enum Sorting_v10SignalExternalGet: String { 
+        case byProfitAsc = "ByProfitAsc"
+        case byProfitDesc = "ByProfitDesc"
+        case byDrawdownAsc = "ByDrawdownAsc"
+        case byDrawdownDesc = "ByDrawdownDesc"
+        case byTradesAsc = "ByTradesAsc"
+        case byTradesDesc = "ByTradesDesc"
+        case bySubscribersAsc = "BySubscribersAsc"
+        case bySubscribersDesc = "BySubscribersDesc"
+        case byNewDesc = "ByNewDesc"
+        case byNewAsc = "ByNewAsc"
+        case byTitleAsc = "ByTitleAsc"
+        case byTitleDesc = "ByTitleDesc"
+    }
+
+    /**
+     * enum for parameter status
+     */
+    public enum Status_v10SignalExternalGet: String { 
+        case _none = "None"
+        case pending = "Pending"
+        case errorCreating = "ErrorCreating"
+        case active = "Active"
+        case closed = "Closed"
+        case archived = "Archived"
+        case closedDueToInactivity = "ClosedDueToInactivity"
+    }
+
+    /**
+     Accounts list
+     
+     - parameter authorization: (header)  (optional)
+     - parameter tags: (query)  (optional)
+     - parameter sorting: (query)  (optional)
+     - parameter statisticDateFrom: (query)  (optional)
+     - parameter statisticDateTo: (query)  (optional)
+     - parameter chartPointsCount: (query)  (optional)
+     - parameter mask: (query)  (optional)
+     - parameter facetId: (query)  (optional)
+     - parameter isFavorite: (query)  (optional)
+     - parameter isEnabled: (query)  (optional)
+     - parameter hasInvestorsForAll: (query)  (optional)
+     - parameter hasInvestorsForClosed: (query)  (optional)
+     - parameter ids: (query)  (optional)
+     - parameter forceUseIdsList: (query)  (optional)
+     - parameter managerId: (query)  (optional)
+     - parameter programManagerId: (query)  (optional)
+     - parameter status: (query)  (optional)
+     - parameter skip: (query)  (optional)
+     - parameter take: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10SignalExternalGet(authorization: String? = nil, tags: [String]? = nil, sorting: Sorting_v10SignalExternalGet? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, isEnabled: Bool? = nil, hasInvestorsForAll: Bool? = nil, hasInvestorsForClosed: Bool? = nil, ids: [UUID]? = nil, forceUseIdsList: Bool? = nil, managerId: String? = nil, programManagerId: UUID? = nil, status: [String]? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: SignalAccountsList?,_ error: Error?) -> Void)) {
+        v10SignalExternalGetWithRequestBuilder(authorization: authorization, tags: tags, sorting: sorting, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: facetId, isFavorite: isFavorite, isEnabled: isEnabled, hasInvestorsForAll: hasInvestorsForAll, hasInvestorsForClosed: hasInvestorsForClosed, ids: ids, forceUseIdsList: forceUseIdsList, managerId: managerId, programManagerId: programManagerId, status: status, skip: skip, take: take).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Accounts list
+     - GET /v1.0/signal/external
+     - examples: [{contentType=application/json, example={
+  "total" : 6,
+  "signalAccounts" : [ {
+    "color" : "color",
+    "manager" : {
+      "socialLinks" : [ {
+        "name" : "name",
+        "logo" : "logo",
+        "type" : "Twitter",
+        "value" : "value",
+        "url" : "url"
+      }, {
+        "name" : "name",
+        "logo" : "logo",
+        "type" : "Twitter",
+        "value" : "value",
+        "url" : "url"
+      } ],
+      "registrationDate" : "2000-01-23T04:56:07.000+00:00",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "avatar" : "avatar",
+      "url" : "url",
+      "username" : "username"
+    },
+    "logo" : "logo",
+    "description" : "description",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "title" : "title",
+    "creationDate" : "2000-01-23T04:56:07.000+00:00",
+    "chart" : [ {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "value" : 0.8008281904610115
+    }, {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "value" : 0.8008281904610115
+    } ],
+    "url" : "url",
+    "tags" : [ {
+      "color" : "color",
+      "name" : "name"
+    }, {
+      "color" : "color",
+      "name" : "name"
+    } ],
+    "status" : "None"
+  }, {
+    "color" : "color",
+    "manager" : {
+      "socialLinks" : [ {
+        "name" : "name",
+        "logo" : "logo",
+        "type" : "Twitter",
+        "value" : "value",
+        "url" : "url"
+      }, {
+        "name" : "name",
+        "logo" : "logo",
+        "type" : "Twitter",
+        "value" : "value",
+        "url" : "url"
+      } ],
+      "registrationDate" : "2000-01-23T04:56:07.000+00:00",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "avatar" : "avatar",
+      "url" : "url",
+      "username" : "username"
+    },
+    "logo" : "logo",
+    "description" : "description",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "title" : "title",
+    "creationDate" : "2000-01-23T04:56:07.000+00:00",
+    "chart" : [ {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "value" : 0.8008281904610115
+    }, {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "value" : 0.8008281904610115
+    } ],
+    "url" : "url",
+    "tags" : [ {
+      "color" : "color",
+      "name" : "name"
+    }, {
+      "color" : "color",
+      "name" : "name"
+    } ],
+    "status" : "None"
+  } ]
+}}]
+     
+     - parameter authorization: (header)  (optional)
+     - parameter tags: (query)  (optional)
+     - parameter sorting: (query)  (optional)
+     - parameter statisticDateFrom: (query)  (optional)
+     - parameter statisticDateTo: (query)  (optional)
+     - parameter chartPointsCount: (query)  (optional)
+     - parameter mask: (query)  (optional)
+     - parameter facetId: (query)  (optional)
+     - parameter isFavorite: (query)  (optional)
+     - parameter isEnabled: (query)  (optional)
+     - parameter hasInvestorsForAll: (query)  (optional)
+     - parameter hasInvestorsForClosed: (query)  (optional)
+     - parameter ids: (query)  (optional)
+     - parameter forceUseIdsList: (query)  (optional)
+     - parameter managerId: (query)  (optional)
+     - parameter programManagerId: (query)  (optional)
+     - parameter status: (query)  (optional)
+     - parameter skip: (query)  (optional)
+     - parameter take: (query)  (optional)
+
+     - returns: RequestBuilder<SignalAccountsList> 
+     */
+    open class func v10SignalExternalGetWithRequestBuilder(authorization: String? = nil, tags: [String]? = nil, sorting: Sorting_v10SignalExternalGet? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, isEnabled: Bool? = nil, hasInvestorsForAll: Bool? = nil, hasInvestorsForClosed: Bool? = nil, ids: [UUID]? = nil, forceUseIdsList: Bool? = nil, managerId: String? = nil, programManagerId: UUID? = nil, status: [String]? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<SignalAccountsList> {
+        let path = "/v1.0/signal/external"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "Tags": tags, 
+            "Sorting": sorting?.rawValue, 
+            "StatisticDateFrom": statisticDateFrom?.encodeToJSON(), 
+            "StatisticDateTo": statisticDateTo?.encodeToJSON(), 
+            "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
+            "Mask": mask, 
+            "FacetId": facetId, 
+            "IsFavorite": isFavorite, 
+            "IsEnabled": isEnabled, 
+            "HasInvestorsForAll": hasInvestorsForAll, 
+            "HasInvestorsForClosed": hasInvestorsForClosed, 
+            "Ids": ids, 
+            "ForceUseIdsList": forceUseIdsList, 
+            "ManagerId": managerId, 
+            "ProgramManagerId": programManagerId, 
+            "Status": status, 
+            "Skip": skip?.encodeToJSON(), 
+            "Take": take?.encodeToJSON()
+        ])
+        
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<SignalAccountsList>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
      Close signal trade
      
      - parameter id: (path) Trade id 
@@ -366,48 +672,50 @@ open class SignalAPI {
      Get investors signals trades history
      - GET /v1.0/signal/trades
      - examples: [{contentType=application/json, example={
-  "total" : 1,
+  "total" : 7,
   "showSwaps" : true,
   "trades" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "originalCommissionCurrency" : "originalCommissionCurrency",
     "symbol" : "symbol",
     "ticket" : "ticket",
-    "swap" : 6.84685269835264,
-    "originalCommission" : 1.0246457001441578,
+    "swap" : 1.4894159098541704,
+    "originalCommission" : 1.2315135367772556,
     "totalCommission" : 7.061401241503109,
     "login" : "login",
-    "volume" : 3.616076749251911,
+    "volume" : 9.301444243932576,
     "totalCommissionByType" : [ {
-      "amount" : 9.301444243932576,
+      "amount" : 1.4658129805029452,
+      "description" : "description",
       "currency" : "Undefined",
-      "type" : "Undefined",
-      "title" : "title"
+      "title" : "title",
+      "type" : "Undefined"
     }, {
-      "amount" : 9.301444243932576,
+      "amount" : 1.4658129805029452,
+      "description" : "description",
       "currency" : "Undefined",
-      "type" : "Undefined",
-      "title" : "title"
+      "title" : "title",
+      "type" : "Undefined"
     } ],
-    "priceCurrent" : 7.386281948385884,
+    "priceCurrent" : 4.145608029883936,
     "entry" : "In",
-    "price" : 4.145608029883936,
+    "price" : 2.027123023002322,
     "showOriginalCommission" : true,
     "tradingAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "currency" : "Undefined",
-    "commission" : 1.4894159098541704,
+    "commission" : 1.0246457001441578,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "baseVolume" : 1.2315135367772556,
+    "baseVolume" : 7.386281948385884,
     "signalData" : {
       "masters" : [ {
-        "share" : 7.457744773683766,
+        "share" : 6.84685269835264,
         "login" : "login"
       }, {
-        "share" : 7.457744773683766,
+        "share" : 6.84685269835264,
         "login" : "login"
       } ]
     },
-    "profit" : 2.027123023002322,
+    "profit" : 3.616076749251911,
     "providers" : [ {
       "volume" : 1.4658129805029452,
       "firstOrderDate" : "2000-01-23T04:56:07.000+00:00",
@@ -424,13 +732,13 @@ open class SignalAPI {
         "socialLinks" : [ {
           "name" : "name",
           "logo" : "logo",
-          "type" : "Undefined",
+          "type" : "Twitter",
           "value" : "value",
           "url" : "url"
         }, {
           "name" : "name",
           "logo" : "logo",
-          "type" : "Undefined",
+          "type" : "Twitter",
           "value" : "value",
           "url" : "url"
         } ],
@@ -467,13 +775,13 @@ open class SignalAPI {
         "socialLinks" : [ {
           "name" : "name",
           "logo" : "logo",
-          "type" : "Undefined",
+          "type" : "Twitter",
           "value" : "value",
           "url" : "url"
         }, {
           "name" : "name",
           "logo" : "logo",
-          "type" : "Undefined",
+          "type" : "Twitter",
           "value" : "value",
           "url" : "url"
         } ],
@@ -501,41 +809,43 @@ open class SignalAPI {
     "originalCommissionCurrency" : "originalCommissionCurrency",
     "symbol" : "symbol",
     "ticket" : "ticket",
-    "swap" : 6.84685269835264,
-    "originalCommission" : 1.0246457001441578,
+    "swap" : 1.4894159098541704,
+    "originalCommission" : 1.2315135367772556,
     "totalCommission" : 7.061401241503109,
     "login" : "login",
-    "volume" : 3.616076749251911,
+    "volume" : 9.301444243932576,
     "totalCommissionByType" : [ {
-      "amount" : 9.301444243932576,
+      "amount" : 1.4658129805029452,
+      "description" : "description",
       "currency" : "Undefined",
-      "type" : "Undefined",
-      "title" : "title"
+      "title" : "title",
+      "type" : "Undefined"
     }, {
-      "amount" : 9.301444243932576,
+      "amount" : 1.4658129805029452,
+      "description" : "description",
       "currency" : "Undefined",
-      "type" : "Undefined",
-      "title" : "title"
+      "title" : "title",
+      "type" : "Undefined"
     } ],
-    "priceCurrent" : 7.386281948385884,
+    "priceCurrent" : 4.145608029883936,
     "entry" : "In",
-    "price" : 4.145608029883936,
+    "price" : 2.027123023002322,
     "showOriginalCommission" : true,
     "tradingAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "currency" : "Undefined",
-    "commission" : 1.4894159098541704,
+    "commission" : 1.0246457001441578,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "baseVolume" : 1.2315135367772556,
+    "baseVolume" : 7.386281948385884,
     "signalData" : {
       "masters" : [ {
-        "share" : 7.457744773683766,
+        "share" : 6.84685269835264,
         "login" : "login"
       }, {
-        "share" : 7.457744773683766,
+        "share" : 6.84685269835264,
         "login" : "login"
       } ]
     },
-    "profit" : 2.027123023002322,
+    "profit" : 3.616076749251911,
     "providers" : [ {
       "volume" : 1.4658129805029452,
       "firstOrderDate" : "2000-01-23T04:56:07.000+00:00",
@@ -552,13 +862,13 @@ open class SignalAPI {
         "socialLinks" : [ {
           "name" : "name",
           "logo" : "logo",
-          "type" : "Undefined",
+          "type" : "Twitter",
           "value" : "value",
           "url" : "url"
         }, {
           "name" : "name",
           "logo" : "logo",
-          "type" : "Undefined",
+          "type" : "Twitter",
           "value" : "value",
           "url" : "url"
         } ],
@@ -595,13 +905,13 @@ open class SignalAPI {
         "socialLinks" : [ {
           "name" : "name",
           "logo" : "logo",
-          "type" : "Undefined",
+          "type" : "Twitter",
           "value" : "value",
           "url" : "url"
         }, {
           "name" : "name",
           "logo" : "logo",
-          "type" : "Undefined",
+          "type" : "Twitter",
           "value" : "value",
           "url" : "url"
         } ],
@@ -816,48 +1126,50 @@ open class SignalAPI {
      Get investors signals open trades
      - GET /v1.0/signal/trades/open
      - examples: [{contentType=application/json, example={
-  "total" : 1,
+  "total" : 7,
   "showSwaps" : true,
   "trades" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "originalCommissionCurrency" : "originalCommissionCurrency",
     "symbol" : "symbol",
     "ticket" : "ticket",
-    "swap" : 6.84685269835264,
-    "originalCommission" : 1.0246457001441578,
+    "swap" : 1.4894159098541704,
+    "originalCommission" : 1.2315135367772556,
     "totalCommission" : 7.061401241503109,
     "login" : "login",
-    "volume" : 3.616076749251911,
+    "volume" : 9.301444243932576,
     "totalCommissionByType" : [ {
-      "amount" : 9.301444243932576,
+      "amount" : 1.4658129805029452,
+      "description" : "description",
       "currency" : "Undefined",
-      "type" : "Undefined",
-      "title" : "title"
+      "title" : "title",
+      "type" : "Undefined"
     }, {
-      "amount" : 9.301444243932576,
+      "amount" : 1.4658129805029452,
+      "description" : "description",
       "currency" : "Undefined",
-      "type" : "Undefined",
-      "title" : "title"
+      "title" : "title",
+      "type" : "Undefined"
     } ],
-    "priceCurrent" : 7.386281948385884,
+    "priceCurrent" : 4.145608029883936,
     "entry" : "In",
-    "price" : 4.145608029883936,
+    "price" : 2.027123023002322,
     "showOriginalCommission" : true,
     "tradingAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "currency" : "Undefined",
-    "commission" : 1.4894159098541704,
+    "commission" : 1.0246457001441578,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "baseVolume" : 1.2315135367772556,
+    "baseVolume" : 7.386281948385884,
     "signalData" : {
       "masters" : [ {
-        "share" : 7.457744773683766,
+        "share" : 6.84685269835264,
         "login" : "login"
       }, {
-        "share" : 7.457744773683766,
+        "share" : 6.84685269835264,
         "login" : "login"
       } ]
     },
-    "profit" : 2.027123023002322,
+    "profit" : 3.616076749251911,
     "providers" : [ {
       "volume" : 1.4658129805029452,
       "firstOrderDate" : "2000-01-23T04:56:07.000+00:00",
@@ -874,13 +1186,13 @@ open class SignalAPI {
         "socialLinks" : [ {
           "name" : "name",
           "logo" : "logo",
-          "type" : "Undefined",
+          "type" : "Twitter",
           "value" : "value",
           "url" : "url"
         }, {
           "name" : "name",
           "logo" : "logo",
-          "type" : "Undefined",
+          "type" : "Twitter",
           "value" : "value",
           "url" : "url"
         } ],
@@ -917,13 +1229,13 @@ open class SignalAPI {
         "socialLinks" : [ {
           "name" : "name",
           "logo" : "logo",
-          "type" : "Undefined",
+          "type" : "Twitter",
           "value" : "value",
           "url" : "url"
         }, {
           "name" : "name",
           "logo" : "logo",
-          "type" : "Undefined",
+          "type" : "Twitter",
           "value" : "value",
           "url" : "url"
         } ],
@@ -951,41 +1263,43 @@ open class SignalAPI {
     "originalCommissionCurrency" : "originalCommissionCurrency",
     "symbol" : "symbol",
     "ticket" : "ticket",
-    "swap" : 6.84685269835264,
-    "originalCommission" : 1.0246457001441578,
+    "swap" : 1.4894159098541704,
+    "originalCommission" : 1.2315135367772556,
     "totalCommission" : 7.061401241503109,
     "login" : "login",
-    "volume" : 3.616076749251911,
+    "volume" : 9.301444243932576,
     "totalCommissionByType" : [ {
-      "amount" : 9.301444243932576,
+      "amount" : 1.4658129805029452,
+      "description" : "description",
       "currency" : "Undefined",
-      "type" : "Undefined",
-      "title" : "title"
+      "title" : "title",
+      "type" : "Undefined"
     }, {
-      "amount" : 9.301444243932576,
+      "amount" : 1.4658129805029452,
+      "description" : "description",
       "currency" : "Undefined",
-      "type" : "Undefined",
-      "title" : "title"
+      "title" : "title",
+      "type" : "Undefined"
     } ],
-    "priceCurrent" : 7.386281948385884,
+    "priceCurrent" : 4.145608029883936,
     "entry" : "In",
-    "price" : 4.145608029883936,
+    "price" : 2.027123023002322,
     "showOriginalCommission" : true,
     "tradingAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "currency" : "Undefined",
-    "commission" : 1.4894159098541704,
+    "commission" : 1.0246457001441578,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "baseVolume" : 1.2315135367772556,
+    "baseVolume" : 7.386281948385884,
     "signalData" : {
       "masters" : [ {
-        "share" : 7.457744773683766,
+        "share" : 6.84685269835264,
         "login" : "login"
       }, {
-        "share" : 7.457744773683766,
+        "share" : 6.84685269835264,
         "login" : "login"
       } ]
     },
-    "profit" : 2.027123023002322,
+    "profit" : 3.616076749251911,
     "providers" : [ {
       "volume" : 1.4658129805029452,
       "firstOrderDate" : "2000-01-23T04:56:07.000+00:00",
@@ -1002,13 +1316,13 @@ open class SignalAPI {
         "socialLinks" : [ {
           "name" : "name",
           "logo" : "logo",
-          "type" : "Undefined",
+          "type" : "Twitter",
           "value" : "value",
           "url" : "url"
         }, {
           "name" : "name",
           "logo" : "logo",
-          "type" : "Undefined",
+          "type" : "Twitter",
           "value" : "value",
           "url" : "url"
         } ],
@@ -1045,13 +1359,13 @@ open class SignalAPI {
         "socialLinks" : [ {
           "name" : "name",
           "logo" : "logo",
-          "type" : "Undefined",
+          "type" : "Twitter",
           "value" : "value",
           "url" : "url"
         }, {
           "name" : "name",
           "logo" : "logo",
-          "type" : "Undefined",
+          "type" : "Twitter",
           "value" : "value",
           "url" : "url"
         } ],

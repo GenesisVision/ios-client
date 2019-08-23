@@ -23,10 +23,11 @@ open class PersonalSignalDetailsFull: Codable {
     public var isFavorite: Bool?
     public var isInvested: Bool?
     public var status: Status?
+    public var signalSettingsId: UUID?
 
 
     
-    public init(subscriptionDate: Date?, tradesCount: Int?, signalSubscription: SignalSubscription?, profit: Double?, volume: Double?, isFavorite: Bool?, isInvested: Bool?, status: Status?) {
+    public init(subscriptionDate: Date?, tradesCount: Int?, signalSubscription: SignalSubscription?, profit: Double?, volume: Double?, isFavorite: Bool?, isInvested: Bool?, status: Status?, signalSettingsId: UUID?) {
         self.subscriptionDate = subscriptionDate
         self.tradesCount = tradesCount
         self.signalSubscription = signalSubscription
@@ -35,6 +36,7 @@ open class PersonalSignalDetailsFull: Codable {
         self.isFavorite = isFavorite
         self.isInvested = isInvested
         self.status = status
+        self.signalSettingsId = signalSettingsId
     }
     
 
@@ -52,6 +54,7 @@ open class PersonalSignalDetailsFull: Codable {
         try container.encodeIfPresent(isFavorite, forKey: "isFavorite")
         try container.encodeIfPresent(isInvested, forKey: "isInvested")
         try container.encodeIfPresent(status, forKey: "status")
+        try container.encodeIfPresent(signalSettingsId, forKey: "signalSettingsId")
     }
 
     // Decodable protocol methods
@@ -67,6 +70,7 @@ open class PersonalSignalDetailsFull: Codable {
         isFavorite = try container.decodeIfPresent(Bool.self, forKey: "isFavorite")
         isInvested = try container.decodeIfPresent(Bool.self, forKey: "isInvested")
         status = try container.decodeIfPresent(Status.self, forKey: "status")
+        signalSettingsId = try container.decodeIfPresent(UUID.self, forKey: "signalSettingsId")
     }
 }
 

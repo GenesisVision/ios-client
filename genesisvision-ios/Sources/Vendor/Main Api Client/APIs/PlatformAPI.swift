@@ -62,6 +62,7 @@ open class PlatformAPI {
   "enums" : {
     "fund" : {
       "assets" : [ {
+        "mandatoryFundPercent" : 6.84685269835264,
         "color" : "color",
         "name" : "name",
         "icon" : "icon",
@@ -69,6 +70,7 @@ open class PlatformAPI {
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "asset" : "asset"
       }, {
+        "mandatoryFundPercent" : 6.84685269835264,
         "color" : "color",
         "name" : "name",
         "icon" : "icon",
@@ -171,9 +173,11 @@ open class PlatformAPI {
   } ],
   "platformCurrencies" : [ {
     "rateToGvt" : 1.4894159098541704,
+    "color" : "color",
     "name" : "name"
   }, {
     "rateToGvt" : 1.4894159098541704,
+    "color" : "color",
     "name" : "name"
   } ],
   "programCurrencies" : [ "programCurrencies", "programCurrencies" ],

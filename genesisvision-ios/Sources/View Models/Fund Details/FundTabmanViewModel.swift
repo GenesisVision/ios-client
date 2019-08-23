@@ -14,7 +14,7 @@ final class FundTabmanViewModel: TabmanViewModel {
     
     var fundDetailsFull: FundDetailsFull?
 
-    var сurrency: FundsAPI.CurrencySecondary_v10FundsByIdGet?
+    var сurrency: FundsAPI.Currency_v10FundsByIdGet?
     weak var favoriteStateUpdatedProtocol: FavoriteStateUpdatedProtocol?
     
     var isFavorite: Bool {
@@ -27,7 +27,7 @@ final class FundTabmanViewModel: TabmanViewModel {
         
         super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0, tabmanViewModelDelegate: tabmanViewModelDelegate)
         
-        сurrency = FundsAPI.CurrencySecondary_v10FundsByIdGet(rawValue: getSelectedCurrency())
+        сurrency = FundsAPI.Currency_v10FundsByIdGet(rawValue: getSelectedCurrency())
         title = "Fund Details"
         backgroundColor = UIColor.Cell.bg
     }

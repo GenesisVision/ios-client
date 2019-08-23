@@ -166,24 +166,24 @@ open class ProfileAPI {
      Get header profile
      - GET /v1.0/profile/header
      - examples: [{contentType=application/json, example={
-  "totalBalance" : 3.5571952270680973,
-  "pending" : 2.8841621266687802,
-  "available" : 1.284659006116532,
+  "totalBalance" : 6.438423552598547,
+  "pending" : 1.284659006116532,
+  "available" : 6.965117697638846,
   "notificationsCount" : 9,
   "kycConfirmed" : true,
-  "availableGvt" : 6.438423552598547,
+  "availableGvt" : 9.018348186070783,
   "avatar" : "avatar",
-  "investedGvt" : 9.018348186070783,
-  "favoritesCount" : 6,
+  "investedGvt" : 8.762042012749001,
+  "favoritesCount" : 9,
   "isNewUser" : true,
   "isTwoFactorEnabled" : true,
   "allowForex" : true,
   "name" : "name",
   "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "userType" : "Investor",
-  "totalBalanceGvt" : 8.762042012749001,
+  "totalBalanceGvt" : 6.683562403749608,
   "email" : "email",
-  "invested" : 6.965117697638846
+  "invested" : 3.5571952270680973
 }}]
      
      - parameter authorization: (header) JWT access token 
@@ -203,6 +203,138 @@ open class ProfileAPI {
         let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<ProfileHeaderViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     Add external exchange key
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10ProfileKeysAddPost(authorization: String, model: ExternalKeyAddViewModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        v10ProfileKeysAddPostWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Add external exchange key
+     - POST /v1.0/profile/keys/add
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func v10ProfileKeysAddPostWithRequestBuilder(authorization: String, model: ExternalKeyAddViewModel? = nil) -> RequestBuilder<Void> {
+        let path = "/v1.0/profile/keys/add"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+    }
+
+    /**
+     Delete external exchange key
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10ProfileKeysDeletePost(authorization: String, model: IdModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        v10ProfileKeysDeletePostWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Delete external exchange key
+     - POST /v1.0/profile/keys/delete
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func v10ProfileKeysDeletePostWithRequestBuilder(authorization: String, model: IdModel? = nil) -> RequestBuilder<Void> {
+        let path = "/v1.0/profile/keys/delete"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+    }
+
+    /**
+     Get external exchange keys
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10ProfileKeysGet(authorization: String, completion: @escaping ((_ data: ExternalKeysViewModel?,_ error: Error?) -> Void)) {
+        v10ProfileKeysGetWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Get external exchange keys
+     - GET /v1.0/profile/keys
+     - examples: [{contentType=application/json, example={
+  "total" : 0,
+  "keys" : [ {
+    "dateAdd" : "2000-01-23T04:56:07.000+00:00",
+    "exchangeName" : "exchangeName",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "title" : "title"
+  }, {
+    "dateAdd" : "2000-01-23T04:56:07.000+00:00",
+    "exchangeName" : "exchangeName",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "title" : "title"
+  } ]
+}}]
+     
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<ExternalKeysViewModel> 
+     */
+    open class func v10ProfileKeysGetWithRequestBuilder(authorization: String) -> RequestBuilder<ExternalKeysViewModel> {
+        let path = "/v1.0/profile/keys"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<ExternalKeysViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
@@ -305,13 +437,13 @@ open class ProfileAPI {
   "socialLinks" : [ {
     "name" : "name",
     "logo" : "logo",
-    "type" : "Undefined",
+    "type" : "Twitter",
     "value" : "value",
     "url" : "url"
   }, {
     "name" : "name",
     "logo" : "logo",
-    "type" : "Undefined",
+    "type" : "Twitter",
     "value" : "value",
     "url" : "url"
   } ]

@@ -59,13 +59,14 @@ class FilterModel {
     var isFavorite: Bool = false
     var facetId: String?
     var facetTitle: String?
+    var facetSorting: String?
     
     var managerId: String?
     
     var profitAvgMin: Double?
     var profitAvgMax: Double?
     
-    var onlyActive: Bool = false
+    var onlyActive: Bool = true
     
     var levelsSet: [Int]?
     

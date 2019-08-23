@@ -26,18 +26,18 @@ open class ProgramBalanceChart: Codable {
         case usd = "USD"
         case eur = "EUR"
     }
+    public var gvtBalance: Double?
     public var programCurrencyBalance: Double?
     public var programCurrency: ProgramCurrency?
     public var balanceChart: [ProgramBalanceChartElement]?
-    public var gvtBalance: Double?
 
 
     
-    public init(programCurrencyBalance: Double?, programCurrency: ProgramCurrency?, balanceChart: [ProgramBalanceChartElement]?, gvtBalance: Double?) {
+    public init(gvtBalance: Double?, programCurrencyBalance: Double?, programCurrency: ProgramCurrency?, balanceChart: [ProgramBalanceChartElement]?) {
+        self.gvtBalance = gvtBalance
         self.programCurrencyBalance = programCurrencyBalance
         self.programCurrency = programCurrency
         self.balanceChart = balanceChart
-        self.gvtBalance = gvtBalance
     }
     
 
@@ -47,10 +47,10 @@ open class ProgramBalanceChart: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
+        try container.encodeIfPresent(gvtBalance, forKey: "gvtBalance")
         try container.encodeIfPresent(programCurrencyBalance, forKey: "programCurrencyBalance")
         try container.encodeIfPresent(programCurrency, forKey: "programCurrency")
         try container.encodeIfPresent(balanceChart, forKey: "balanceChart")
-        try container.encodeIfPresent(gvtBalance, forKey: "gvtBalance")
     }
 
     // Decodable protocol methods
@@ -58,10 +58,10 @@ open class ProgramBalanceChart: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
+        gvtBalance = try container.decodeIfPresent(Double.self, forKey: "gvtBalance")
         programCurrencyBalance = try container.decodeIfPresent(Double.self, forKey: "programCurrencyBalance")
         programCurrency = try container.decodeIfPresent(ProgramCurrency.self, forKey: "programCurrency")
         balanceChart = try container.decodeIfPresent([ProgramBalanceChartElement].self, forKey: "balanceChart")
-        gvtBalance = try container.decodeIfPresent(Double.self, forKey: "gvtBalance")
     }
 }
 

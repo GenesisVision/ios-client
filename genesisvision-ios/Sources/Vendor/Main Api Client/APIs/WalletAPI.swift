@@ -848,6 +848,7 @@ open class WalletAPI {
         case all = "All"
         case program = "Program"
         case fund = "Fund"
+        case signal = "Signal"
     }
 
     /**

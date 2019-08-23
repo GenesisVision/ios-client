@@ -10,7 +10,7 @@ import UIKit
 
 class RatingPageboyViewControllerDataSource: BasePageboyViewControllerDataSource {
     // MARK: - Private methods
-    internal override func setup(router: Router, filterModel: FilterModel? = nil, showFacets: Bool) {
+    internal override func setup(router: Router, showFacets: Bool) {
         let filterModel = FilterModel()
         filterModel.dateRangeModel.dateFrom = nil
         filterModel.dateRangeModel.dateTo = nil

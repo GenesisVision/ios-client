@@ -39,7 +39,7 @@ class ProgramTradesViewController: BaseViewControllerWithTableView {
     }
     
     private func setup() {
-        bottomViewType = .dateRange
+        bottomViewType = viewModel.isOpenTrades ? .none : .dateRange
         noDataTitle = viewModel.noDataText()
         setupTableConfiguration()
         

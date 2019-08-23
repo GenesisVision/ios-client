@@ -32,6 +32,7 @@ open class OrderSignalModel: Codable {
         case balance = "Balance"
         case credit = "Credit"
         case undefined = "Undefined"
+        case manualBalancing = "ManualBalancing"
     }
     public enum Entry: String, Codable { 
         case _in = "In"
@@ -41,7 +42,7 @@ open class OrderSignalModel: Codable {
     }
     public var providers: [OrderSignalProgramInfo]?
     public var totalCommission: Double?
-    public var totalCommissionByType: [TotalCommission]?
+    public var totalCommissionByType: [FeeDetails]?
     public var tradingAccountId: UUID?
     public var currency: Currency?
     public var id: UUID?
@@ -69,7 +70,7 @@ open class OrderSignalModel: Codable {
 
 
     
-    public init(providers: [OrderSignalProgramInfo]?, totalCommission: Double?, totalCommissionByType: [TotalCommission]?, tradingAccountId: UUID?, currency: Currency?, id: UUID?, login: String?, ticket: String?, symbol: String?, volume: Double?, profit: Double?, direction: Direction?, date: Date?, price: Double?, priceCurrent: Double?, entry: Entry?, baseVolume: Double?, originalCommission: Double?, originalCommissionCurrency: String?, commission: Double?, swap: Double?, showOriginalCommission: Bool?, signalData: OrderModelSignalData?) {
+    public init(providers: [OrderSignalProgramInfo]?, totalCommission: Double?, totalCommissionByType: [FeeDetails]?, tradingAccountId: UUID?, currency: Currency?, id: UUID?, login: String?, ticket: String?, symbol: String?, volume: Double?, profit: Double?, direction: Direction?, date: Date?, price: Double?, priceCurrent: Double?, entry: Entry?, baseVolume: Double?, originalCommission: Double?, originalCommissionCurrency: String?, commission: Double?, swap: Double?, showOriginalCommission: Bool?, signalData: OrderModelSignalData?) {
         self.providers = providers
         self.totalCommission = totalCommission
         self.totalCommissionByType = totalCommissionByType
@@ -134,7 +135,7 @@ open class OrderSignalModel: Codable {
 
         providers = try container.decodeIfPresent([OrderSignalProgramInfo].self, forKey: "providers")
         totalCommission = try container.decodeIfPresent(Double.self, forKey: "totalCommission")
-        totalCommissionByType = try container.decodeIfPresent([TotalCommission].self, forKey: "totalCommissionByType")
+        totalCommissionByType = try container.decodeIfPresent([FeeDetails].self, forKey: "totalCommissionByType")
         tradingAccountId = try container.decodeIfPresent(UUID.self, forKey: "tradingAccountId")
         currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
         id = try container.decodeIfPresent(UUID.self, forKey: "id")

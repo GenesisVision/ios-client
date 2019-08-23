@@ -38,7 +38,8 @@ final class FundViewModel {
     }
     
     func fetch(completion: @escaping CompletionBlock) {
-        let сurrency = FundsAPI.CurrencySecondary_v10FundsByIdGet(rawValue: getSelectedCurrency())
+        let сurrency = FundsAPI.Currency_v10FundsByIdGet(rawValue: getSelectedCurrency())
+        
         FundsDataProvider.get(fundId: fundId, currencySecondary: сurrency, completion: { [weak self] (viewModel) in
             guard let viewModel = viewModel else { return }
             self?.fundDetailsFull = viewModel

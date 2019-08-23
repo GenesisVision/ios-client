@@ -11,13 +11,15 @@ import UIKit
 class BaseTabBarController: UITabBarController {
 
     var router: Router? = nil
+    var previousViewController: UIViewController?
+
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tabBar.isTranslucent = false
-
+        delegate = self
         showNewVersionAlertIfNeeded(self)
         showTwoFactorEnableAlertIfNeeded(self) { (enable) in
         }
@@ -96,5 +98,23 @@ class BaseTabBarController: UITabBarController {
     
     private func applyTheme() {
         tabBar.barTintColor = UIColor.TabBar.bg
+    }
+}
+
+extension BaseTabBarController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        let tabBarIndex = tabBarController.selectedIndex
+        
+        guard previousViewController == viewController,
+            let tabsType = TabsType(rawValue: tabBarIndex) else { return }
+
+        let userInfo: [String: TabsType] = ["type": tabsType]
+        
+        NotificationCenter.default.post(name: .tabBarDidScrollToTop, object: nil, userInfo: userInfo)
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        previousViewController = tabBarController.selectedViewController
+        return true
     }
 }

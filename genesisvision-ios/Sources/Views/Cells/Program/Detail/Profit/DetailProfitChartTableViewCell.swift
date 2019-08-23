@@ -20,6 +20,13 @@ class DetailProfitChartTableViewCell: UITableViewCell {
     weak var chartViewProtocol: ChartViewProtocol?
     
     // MARK: - Outlets
+    @IBOutlet weak var leftStackView: UIStackView!
+    @IBOutlet weak var rightStackView: UIStackView! {
+        didSet {
+            rightStackView.isHidden = true
+        }
+    }
+    
     @IBOutlet weak var chartViewHeightConstraint: NSLayoutConstraint! {
         didSet {
             chartViewHeightConstraint.constant = 0.0

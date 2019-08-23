@@ -20,7 +20,8 @@ open class PersonalFundDetailsFull: Codable {
     }
     public var withdrawPercent: Double?
     public var canReallocate: Bool?
-    public var possibleReallocationTime: Date?
+    public var availableReallocationPercents: Int?
+    public var nextReallocationPercents: Date?
     public var isFavorite: Bool?
     public var isInvested: Bool?
     public var isOwnProgram: Bool?
@@ -41,10 +42,11 @@ open class PersonalFundDetailsFull: Codable {
 
 
     
-    public init(withdrawPercent: Double?, canReallocate: Bool?, possibleReallocationTime: Date?, isFavorite: Bool?, isInvested: Bool?, isOwnProgram: Bool?, canCloseProgram: Bool?, canCloseAsset: Bool?, isFinishing: Bool?, canInvest: Bool?, canWithdraw: Bool?, canClosePeriod: Bool?, hasNotifications: Bool?, value: Double?, profit: Double?, invested: Double?, pendingInput: Double?, pendingOutput: Double?, pendingOutputIsWithdrawAll: Bool?, status: Status?) {
+    public init(withdrawPercent: Double?, canReallocate: Bool?, availableReallocationPercents: Int?, nextReallocationPercents: Date?, isFavorite: Bool?, isInvested: Bool?, isOwnProgram: Bool?, canCloseProgram: Bool?, canCloseAsset: Bool?, isFinishing: Bool?, canInvest: Bool?, canWithdraw: Bool?, canClosePeriod: Bool?, hasNotifications: Bool?, value: Double?, profit: Double?, invested: Double?, pendingInput: Double?, pendingOutput: Double?, pendingOutputIsWithdrawAll: Bool?, status: Status?) {
         self.withdrawPercent = withdrawPercent
         self.canReallocate = canReallocate
-        self.possibleReallocationTime = possibleReallocationTime
+        self.availableReallocationPercents = availableReallocationPercents
+        self.nextReallocationPercents = nextReallocationPercents
         self.isFavorite = isFavorite
         self.isInvested = isInvested
         self.isOwnProgram = isOwnProgram
@@ -73,7 +75,8 @@ open class PersonalFundDetailsFull: Codable {
 
         try container.encodeIfPresent(withdrawPercent, forKey: "withdrawPercent")
         try container.encodeIfPresent(canReallocate, forKey: "canReallocate")
-        try container.encodeIfPresent(possibleReallocationTime, forKey: "possibleReallocationTime")
+        try container.encodeIfPresent(availableReallocationPercents, forKey: "availableReallocationPercents")
+        try container.encodeIfPresent(nextReallocationPercents, forKey: "nextReallocationPercents")
         try container.encodeIfPresent(isFavorite, forKey: "isFavorite")
         try container.encodeIfPresent(isInvested, forKey: "isInvested")
         try container.encodeIfPresent(isOwnProgram, forKey: "isOwnProgram")
@@ -100,7 +103,8 @@ open class PersonalFundDetailsFull: Codable {
 
         withdrawPercent = try container.decodeIfPresent(Double.self, forKey: "withdrawPercent")
         canReallocate = try container.decodeIfPresent(Bool.self, forKey: "canReallocate")
-        possibleReallocationTime = try container.decodeIfPresent(Date.self, forKey: "possibleReallocationTime")
+        availableReallocationPercents = try container.decodeIfPresent(Int.self, forKey: "availableReallocationPercents")
+        nextReallocationPercents = try container.decodeIfPresent(Date.self, forKey: "nextReallocationPercents")
         isFavorite = try container.decodeIfPresent(Bool.self, forKey: "isFavorite")
         isInvested = try container.decodeIfPresent(Bool.self, forKey: "isInvested")
         isOwnProgram = try container.decodeIfPresent(Bool.self, forKey: "isOwnProgram")

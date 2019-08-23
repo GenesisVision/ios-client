@@ -251,7 +251,7 @@ class ChartView: CombinedChartView {
             maxLimitLine = ChartLimitLine(limit: maxLimitValue, label: "\(maxLimitValue)")
             maxLimitLine.lineWidth = 1
             maxLimitLine.lineDashLengths = [1.0, 8.0]
-            maxLimitLine.labelPosition = .topRight
+            maxLimitLine.labelPosition = .bottomRight
             maxLimitLine.drawLabelEnabled = true
             maxLimitLine.valueTextColor = UIColor.Cell.title
             maxLimitLine.lineColor = UIColor.Cell.subtitle
@@ -261,7 +261,7 @@ class ChartView: CombinedChartView {
             minLimitLine = ChartLimitLine(limit: minLimitValue, label: "\(minLimitValue)")
             minLimitLine.lineWidth = 1
             minLimitLine.lineDashLengths = [1.0, 8.0]
-            minLimitLine.labelPosition = .bottomRight
+            minLimitLine.labelPosition = .topRight
             minLimitLine.drawLabelEnabled = true
             minLimitLine.valueTextColor = UIColor.Cell.title
             minLimitLine.lineColor = UIColor.Cell.subtitle

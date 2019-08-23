@@ -103,13 +103,13 @@ open class ManagerAPI {
     "socialLinks" : [ {
       "name" : "name",
       "logo" : "logo",
-      "type" : "Undefined",
+      "type" : "Twitter",
       "value" : "value",
       "url" : "url"
     }, {
       "name" : "name",
       "logo" : "logo",
-      "type" : "Undefined",
+      "type" : "Twitter",
       "value" : "value",
       "url" : "url"
     } ],
@@ -163,13 +163,13 @@ open class ManagerAPI {
   "socialLinks" : [ {
     "name" : "name",
     "logo" : "logo",
-    "type" : "Undefined",
+    "type" : "Twitter",
     "value" : "value",
     "url" : "url"
   }, {
     "name" : "name",
     "logo" : "logo",
-    "type" : "Undefined",
+    "type" : "Twitter",
     "value" : "value",
     "url" : "url"
   } ],
@@ -228,6 +228,7 @@ open class ManagerAPI {
         case all = "All"
         case program = "Program"
         case fund = "Fund"
+        case signal = "Signal"
     }
 
     /**
@@ -520,13 +521,14 @@ open class ManagerAPI {
      Data for investing into the fund
      - GET /v1.0/manager/funds/{id}/invest/info/{currency}
      - examples: [{contentType=application/json, example={
-  "entryFee" : 1.4658129805029452,
+  "programCurrencyMinInvestment" : 1.4658129805029452,
+  "entryFee" : 5.962133916683182,
   "availableInWallet" : 0.8008281904610115,
   "isOwnProgram" : true,
-  "rate" : 5.637376656633329,
+  "rate" : 2.3021358869347655,
   "title" : "title",
   "minInvestmentAmount" : 6.027456183070403,
-  "gvCommission" : 5.962133916683182
+  "gvCommission" : 5.637376656633329
 }}]
      
      - parameter id: (path)  
@@ -574,42 +576,42 @@ open class ManagerAPI {
      Get investment program/fund requests
      - GET /v1.0/manager/funds/{id}/requests/{skip}/{take}
      - examples: [{contentType=application/json, example={
-  "totalValue" : 6.519180951018382,
-  "total" : 7,
+  "totalValue" : 7.058770351582356,
+  "total" : 0,
   "requests" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "feeExit" : 7.143538047012306,
+    "feeExit" : 3.0937452626664474,
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
-    "valueGvt" : 3.353193347011243,
+    "valueGvt" : 6.704019297950036,
     "withdrawAll" : true,
-    "fundWithdrawPercent" : 0.8851374739011653,
-    "feeEntry" : 3.0937452626664474,
+    "fundWithdrawPercent" : 7.143538047012306,
+    "feeEntry" : 3.353193347011243,
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "value" : 6.704019297950036,
+    "value" : 5.944895607614016,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "feeExit" : 7.143538047012306,
+    "feeExit" : 3.0937452626664474,
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
-    "valueGvt" : 3.353193347011243,
+    "valueGvt" : 6.704019297950036,
     "withdrawAll" : true,
-    "fundWithdrawPercent" : 0.8851374739011653,
-    "feeEntry" : 3.0937452626664474,
+    "fundWithdrawPercent" : 7.143538047012306,
+    "feeEntry" : 3.353193347011243,
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "value" : 6.704019297950036,
+    "value" : 5.944895607614016,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
   } ]
@@ -882,6 +884,25 @@ open class ManagerAPI {
     }
 
     /**
+     * enum for parameter currency
+     */
+    public enum Currency_v10ManagerFundsGet: String { 
+        case undefined = "Undefined"
+        case gvt = "GVT"
+        case eth = "ETH"
+        case btc = "BTC"
+        case ada = "ADA"
+        case usdt = "USDT"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
+        case bnb = "BNB"
+        case usd = "USD"
+        case eur = "EUR"
+    }
+
+    /**
      * enum for parameter currencySecondary
      */
     public enum CurrencySecondary_v10ManagerFundsGet: String { 
@@ -924,6 +945,7 @@ open class ManagerAPI {
      
      - parameter authorization: (header) JWT access token 
      - parameter sorting: (query)  (optional)
+     - parameter currency: (query)  (optional)
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
      - parameter chartPointsCount: (query)  (optional)
@@ -934,8 +956,8 @@ open class ManagerAPI {
      - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10ManagerFundsGet(authorization: String, sorting: Sorting_v10ManagerFundsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: CurrencySecondary_v10ManagerFundsGet? = nil, actionStatus: ActionStatus_v10ManagerFundsGet? = nil, dashboardActionStatus: DashboardActionStatus_v10ManagerFundsGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: FundsList?,_ error: Error?) -> Void)) {
-        v10ManagerFundsGetWithRequestBuilder(authorization: authorization, sorting: sorting, from: from, to: to, chartPointsCount: chartPointsCount, currencySecondary: currencySecondary, actionStatus: actionStatus, dashboardActionStatus: dashboardActionStatus, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func v10ManagerFundsGet(authorization: String, sorting: Sorting_v10ManagerFundsGet? = nil, currency: Currency_v10ManagerFundsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: CurrencySecondary_v10ManagerFundsGet? = nil, actionStatus: ActionStatus_v10ManagerFundsGet? = nil, dashboardActionStatus: DashboardActionStatus_v10ManagerFundsGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: FundsList?,_ error: Error?) -> Void)) {
+        v10ManagerFundsGetWithRequestBuilder(authorization: authorization, sorting: sorting, currency: currency, from: from, to: to, chartPointsCount: chartPointsCount, currencySecondary: currencySecondary, actionStatus: actionStatus, dashboardActionStatus: dashboardActionStatus, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -945,34 +967,38 @@ open class ManagerAPI {
      Manager funds
      - GET /v1.0/manager/funds
      - examples: [{contentType=application/json, example={
-  "total" : 6,
+  "total" : 7,
   "funds" : [ {
-    "totalAssetsCount" : 5,
+    "totalAssetsCount" : 3,
     "statistic" : {
       "balanceGVT" : {
-        "amount" : 0.8008281904610115,
+        "amount" : 3.616076749251911,
         "currency" : "Undefined"
       },
-      "profitPercent" : 9.369310271410669,
-      "drawdownPercent" : 6.683562403749608,
+      "balance" : {
+        "amount" : 3.616076749251911,
+        "currency" : "Undefined"
+      },
+      "profitPercent" : 1.284659006116532,
+      "drawdownPercent" : 2.8841621266687802,
       "balanceSecondary" : {
-        "amount" : 0.8008281904610115,
+        "amount" : 3.616076749251911,
         "currency" : "Undefined"
       },
-      "investorsCount" : 8
+      "investorsCount" : 6
     },
     "color" : "color",
     "manager" : {
       "socialLinks" : [ {
         "name" : "name",
         "logo" : "logo",
-        "type" : "Undefined",
+        "type" : "Twitter",
         "value" : "value",
         "url" : "url"
       }, {
         "name" : "name",
         "logo" : "logo",
-        "type" : "Undefined",
+        "type" : "Twitter",
         "value" : "value",
         "url" : "url"
       } ],
@@ -986,12 +1012,12 @@ open class ManagerAPI {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 9.965781217890562
+      "percent" : 6.965117697638846
     }, {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 9.965781217890562
+      "percent" : 6.965117697638846
     } ],
     "description" : "description",
     "title" : "title",
@@ -1005,19 +1031,20 @@ open class ManagerAPI {
       "canCloseProgram" : true,
       "canWithdraw" : true,
       "pendingOutputIsWithdrawAll" : true,
+      "nextReallocationPercents" : "2000-01-23T04:56:07.000+00:00",
       "canInvest" : true,
       "canClosePeriod" : true,
       "canReallocate" : true,
-      "pendingOutput" : 2.8841621266687802,
+      "pendingOutput" : 0.8851374739011653,
       "hasNotifications" : true,
-      "pendingInput" : 1.284659006116532,
+      "pendingInput" : 7.143538047012306,
       "isOwnProgram" : true,
-      "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
+      "availableReallocationPercents" : 5,
       "isFinishing" : true,
-      "value" : 6.438423552598547,
-      "profit" : 3.5571952270680973,
-      "withdrawPercent" : 9.018348186070783,
-      "invested" : 6.965117697638846,
+      "value" : 6.704019297950036,
+      "profit" : 3.353193347011243,
+      "withdrawPercent" : 6.878052220127876,
+      "invested" : 3.0937452626664474,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
@@ -1026,39 +1053,43 @@ open class ManagerAPI {
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 3.616076749251911
+      "value" : 0.8008281904610115
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 3.616076749251911
+      "value" : 0.8008281904610115
     } ],
     "status" : "None"
   }, {
-    "totalAssetsCount" : 5,
+    "totalAssetsCount" : 3,
     "statistic" : {
       "balanceGVT" : {
-        "amount" : 0.8008281904610115,
+        "amount" : 3.616076749251911,
         "currency" : "Undefined"
       },
-      "profitPercent" : 9.369310271410669,
-      "drawdownPercent" : 6.683562403749608,
+      "balance" : {
+        "amount" : 3.616076749251911,
+        "currency" : "Undefined"
+      },
+      "profitPercent" : 1.284659006116532,
+      "drawdownPercent" : 2.8841621266687802,
       "balanceSecondary" : {
-        "amount" : 0.8008281904610115,
+        "amount" : 3.616076749251911,
         "currency" : "Undefined"
       },
-      "investorsCount" : 8
+      "investorsCount" : 6
     },
     "color" : "color",
     "manager" : {
       "socialLinks" : [ {
         "name" : "name",
         "logo" : "logo",
-        "type" : "Undefined",
+        "type" : "Twitter",
         "value" : "value",
         "url" : "url"
       }, {
         "name" : "name",
         "logo" : "logo",
-        "type" : "Undefined",
+        "type" : "Twitter",
         "value" : "value",
         "url" : "url"
       } ],
@@ -1072,12 +1103,12 @@ open class ManagerAPI {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 9.965781217890562
+      "percent" : 6.965117697638846
     }, {
       "name" : "name",
       "icon" : "icon",
       "asset" : "asset",
-      "percent" : 9.965781217890562
+      "percent" : 6.965117697638846
     } ],
     "description" : "description",
     "title" : "title",
@@ -1091,19 +1122,20 @@ open class ManagerAPI {
       "canCloseProgram" : true,
       "canWithdraw" : true,
       "pendingOutputIsWithdrawAll" : true,
+      "nextReallocationPercents" : "2000-01-23T04:56:07.000+00:00",
       "canInvest" : true,
       "canClosePeriod" : true,
       "canReallocate" : true,
-      "pendingOutput" : 2.8841621266687802,
+      "pendingOutput" : 0.8851374739011653,
       "hasNotifications" : true,
-      "pendingInput" : 1.284659006116532,
+      "pendingInput" : 7.143538047012306,
       "isOwnProgram" : true,
-      "possibleReallocationTime" : "2000-01-23T04:56:07.000+00:00",
+      "availableReallocationPercents" : 5,
       "isFinishing" : true,
-      "value" : 6.438423552598547,
-      "profit" : 3.5571952270680973,
-      "withdrawPercent" : 9.018348186070783,
-      "invested" : 6.965117697638846,
+      "value" : 6.704019297950036,
+      "profit" : 3.353193347011243,
+      "withdrawPercent" : 6.878052220127876,
+      "invested" : 3.0937452626664474,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
@@ -1112,10 +1144,10 @@ open class ManagerAPI {
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 3.616076749251911
+      "value" : 0.8008281904610115
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 3.616076749251911
+      "value" : 0.8008281904610115
     } ],
     "status" : "None"
   } ]
@@ -1123,6 +1155,7 @@ open class ManagerAPI {
      
      - parameter authorization: (header) JWT access token 
      - parameter sorting: (query)  (optional)
+     - parameter currency: (query)  (optional)
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
      - parameter chartPointsCount: (query)  (optional)
@@ -1134,7 +1167,7 @@ open class ManagerAPI {
 
      - returns: RequestBuilder<FundsList> 
      */
-    open class func v10ManagerFundsGetWithRequestBuilder(authorization: String, sorting: Sorting_v10ManagerFundsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: CurrencySecondary_v10ManagerFundsGet? = nil, actionStatus: ActionStatus_v10ManagerFundsGet? = nil, dashboardActionStatus: DashboardActionStatus_v10ManagerFundsGet? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<FundsList> {
+    open class func v10ManagerFundsGetWithRequestBuilder(authorization: String, sorting: Sorting_v10ManagerFundsGet? = nil, currency: Currency_v10ManagerFundsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: CurrencySecondary_v10ManagerFundsGet? = nil, actionStatus: ActionStatus_v10ManagerFundsGet? = nil, dashboardActionStatus: DashboardActionStatus_v10ManagerFundsGet? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<FundsList> {
         let path = "/v1.0/manager/funds"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -1142,6 +1175,7 @@ open class ManagerAPI {
         let url = NSURLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
             "Sorting": sorting?.rawValue, 
+            "Currency": currency?.rawValue, 
             "From": from?.encodeToJSON(), 
             "To": to?.encodeToJSON(), 
             "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
@@ -1270,6 +1304,7 @@ open class ManagerAPI {
         case all = "All"
         case program = "Program"
         case fund = "Fund"
+        case signal = "Signal"
     }
 
     /**
@@ -1302,13 +1337,13 @@ open class ManagerAPI {
       "socialLinks" : [ {
         "name" : "name",
         "logo" : "logo",
-        "type" : "Undefined",
+        "type" : "Twitter",
         "value" : "value",
         "url" : "url"
       }, {
         "name" : "name",
         "logo" : "logo",
-        "type" : "Undefined",
+        "type" : "Twitter",
         "value" : "value",
         "url" : "url"
       } ],
@@ -1335,45 +1370,78 @@ open class ManagerAPI {
     "type" : "Program"
   } ],
   "fundChart" : {
-    "profitChangePercent" : 2.8841621266687802,
-    "calmarRatio" : 5.944895607614016,
-    "timeframeGvtProfit" : 3.0937452626664474,
+    "profitChangePercent" : 6.878052220127876,
+    "calmarRatio" : 3.353193347011243,
+    "timeframeGvtProfit" : 0.8851374739011653,
     "timeframeUsdProfit" : 9.018348186070783,
-    "maxDrawdown" : 6.704019297950036,
+    "maxDrawdown" : 3.0937452626664474,
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
     "equityChart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 3.616076749251911
+      "value" : 0.8008281904610115
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 3.616076749251911
+      "value" : 0.8008281904610115
     } ],
-    "investors" : 1,
-    "totalGvtProfit" : 3.353193347011243,
-    "sortinoRatio" : 6.878052220127876,
+    "investors" : 6,
+    "totalGvtProfit" : 7.143538047012306,
+    "sortinoRatio" : 6.704019297950036,
     "rebalances" : 6,
     "profitPercent" : 3.5571952270680973,
-    "balance" : 6.965117697638846,
-    "rate" : 7.143538047012306,
+    "assetsStates" : [ {
+      "otherPercent" : 1.284659006116532,
+      "assets" : [ {
+        "color" : "color",
+        "icon" : "icon",
+        "name" : "name",
+        "asset" : "asset",
+        "percent" : 6.965117697638846
+      }, {
+        "color" : "color",
+        "icon" : "icon",
+        "name" : "name",
+        "asset" : "asset",
+        "percent" : 6.965117697638846
+      } ],
+      "dateFrom" : "2000-01-23T04:56:07.000+00:00"
+    }, {
+      "otherPercent" : 1.284659006116532,
+      "assets" : [ {
+        "color" : "color",
+        "icon" : "icon",
+        "name" : "name",
+        "asset" : "asset",
+        "percent" : 6.965117697638846
+      }, {
+        "color" : "color",
+        "icon" : "icon",
+        "name" : "name",
+        "asset" : "asset",
+        "percent" : 6.965117697638846
+      } ],
+      "dateFrom" : "2000-01-23T04:56:07.000+00:00"
+    } ],
+    "balance" : 2.8841621266687802,
+    "rate" : 7.058770351582356,
     "totalUsdProfit" : 8.762042012749001,
-    "sharpeRatio" : 6.778324963048013
+    "sharpeRatio" : 5.944895607614016
   },
   "requests" : {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "feeExit" : 7.143538047012306,
+    "feeExit" : 3.0937452626664474,
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
-    "valueGvt" : 3.353193347011243,
+    "valueGvt" : 6.704019297950036,
     "withdrawAll" : true,
-    "fundWithdrawPercent" : 0.8851374739011653,
-    "feeEntry" : 3.0937452626664474,
+    "fundWithdrawPercent" : 7.143538047012306,
+    "feeEntry" : 3.353193347011243,
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "value" : 6.704019297950036,
+    "value" : 5.944895607614016,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
   },
@@ -1421,10 +1489,10 @@ open class ManagerAPI {
     "maxDrawdown" : 5.025004791520295,
     "equityChart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 3.616076749251911
+      "value" : 0.8008281904610115
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 3.616076749251911
+      "value" : 0.8008281904610115
     } ],
     "tradingVolume" : 1.2315135367772556,
     "investors" : 1,
@@ -1432,10 +1500,10 @@ open class ManagerAPI {
     "sortinoRatio" : 1.1730742509559433,
     "pnLChart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 3.616076749251911
+      "value" : 0.8008281904610115
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 3.616076749251911
+      "value" : 0.8008281904610115
     } ],
     "balance" : 1.0246457001441578,
     "programCurrency" : "Undefined",
@@ -1488,6 +1556,195 @@ open class ManagerAPI {
         let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<ManagerDashboard>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     * enum for parameter eventLocation
+     */
+    public enum EventLocation_v10ManagerInvestmentsEventsGet: String { 
+        case asset = "Asset"
+        case dashboard = "Dashboard"
+        case eventsAll = "EventsAll"
+    }
+
+    /**
+     * enum for parameter eventType
+     */
+    public enum EventType_v10ManagerInvestmentsEventsGet: String { 
+        case all = "All"
+        case assetStarted = "AssetStarted"
+        case assetFinished = "AssetFinished"
+        case assetPeriodStarted = "AssetPeriodStarted"
+        case assetPeriodEnded = "AssetPeriodEnded"
+        case assetPeriodEndedDueToStopOut = "AssetPeriodEndedDueToStopOut"
+        case assetBrokerChanged = "AssetBrokerChanged"
+        case assetInvestByInvestor = "AssetInvestByInvestor"
+        case assetWithdrawalByInvestor = "AssetWithdrawalByInvestor"
+        case assetInvestByManager = "AssetInvestByManager"
+        case assetWithdrawalByManager = "AssetWithdrawalByManager"
+        case assetPeriodProcessed = "AssetPeriodProcessed"
+        case assetReallocation = "AssetReallocation"
+        case assetSubscribeByInvestor = "AssetSubscribeByInvestor"
+        case assetUnsubscribeByInvestor = "AssetUnsubscribeByInvestor"
+        case assetTradeOpen = "AssetTradeOpen"
+        case assetTradeClosed = "AssetTradeClosed"
+        case assetSubscriptionEdit = "AssetSubscriptionEdit"
+    }
+
+    /**
+     * enum for parameter assetType
+     */
+    public enum AssetType_v10ManagerInvestmentsEventsGet: String { 
+        case all = "All"
+        case program = "Program"
+        case fund = "Fund"
+        case signal = "Signal"
+    }
+
+    /**
+     Events
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter eventLocation: (query)  (optional)
+     - parameter assetId: (query)  (optional)
+     - parameter from: (query)  (optional)
+     - parameter to: (query)  (optional)
+     - parameter eventType: (query)  (optional)
+     - parameter assetType: (query)  (optional)
+     - parameter skip: (query)  (optional)
+     - parameter take: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func v10ManagerInvestmentsEventsGet(authorization: String, eventLocation: EventLocation_v10ManagerInvestmentsEventsGet? = nil, assetId: UUID? = nil, from: Date? = nil, to: Date? = nil, eventType: EventType_v10ManagerInvestmentsEventsGet? = nil, assetType: AssetType_v10ManagerInvestmentsEventsGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: InvestmentEventViewModels?,_ error: Error?) -> Void)) {
+        v10ManagerInvestmentsEventsGetWithRequestBuilder(authorization: authorization, eventLocation: eventLocation, assetId: assetId, from: from, to: to, eventType: eventType, assetType: assetType, skip: skip, take: take).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Events
+     - GET /v1.0/manager/investments/events
+     - examples: [{contentType=application/json, example={
+  "total" : 5,
+  "events" : [ {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "assetDetails" : {
+      "color" : "color",
+      "logo" : "logo",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "title" : "title",
+      "url" : "url",
+      "assetType" : "None"
+    },
+    "amount" : 0.8008281904610115,
+    "feesInfo" : [ {
+      "amount" : 1.4658129805029452,
+      "description" : "description",
+      "currency" : "Undefined",
+      "title" : "title",
+      "type" : "Undefined"
+    }, {
+      "amount" : 1.4658129805029452,
+      "description" : "description",
+      "currency" : "Undefined",
+      "title" : "title",
+      "type" : "Undefined"
+    } ],
+    "icon" : "icon",
+    "changeState" : "Increased",
+    "extendedInfo" : [ {
+      "amount" : 6.027456183070403,
+      "currency" : "Undefined",
+      "title" : "title"
+    }, {
+      "amount" : 6.027456183070403,
+      "currency" : "Undefined",
+      "title" : "title"
+    } ],
+    "currency" : "Undefined",
+    "title" : "title",
+    "totalFeesCurrency" : "Undefined",
+    "totalFeesAmount" : 5.962133916683182
+  }, {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "assetDetails" : {
+      "color" : "color",
+      "logo" : "logo",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "title" : "title",
+      "url" : "url",
+      "assetType" : "None"
+    },
+    "amount" : 0.8008281904610115,
+    "feesInfo" : [ {
+      "amount" : 1.4658129805029452,
+      "description" : "description",
+      "currency" : "Undefined",
+      "title" : "title",
+      "type" : "Undefined"
+    }, {
+      "amount" : 1.4658129805029452,
+      "description" : "description",
+      "currency" : "Undefined",
+      "title" : "title",
+      "type" : "Undefined"
+    } ],
+    "icon" : "icon",
+    "changeState" : "Increased",
+    "extendedInfo" : [ {
+      "amount" : 6.027456183070403,
+      "currency" : "Undefined",
+      "title" : "title"
+    }, {
+      "amount" : 6.027456183070403,
+      "currency" : "Undefined",
+      "title" : "title"
+    } ],
+    "currency" : "Undefined",
+    "title" : "title",
+    "totalFeesCurrency" : "Undefined",
+    "totalFeesAmount" : 5.962133916683182
+  } ]
+}}]
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter eventLocation: (query)  (optional)
+     - parameter assetId: (query)  (optional)
+     - parameter from: (query)  (optional)
+     - parameter to: (query)  (optional)
+     - parameter eventType: (query)  (optional)
+     - parameter assetType: (query)  (optional)
+     - parameter skip: (query)  (optional)
+     - parameter take: (query)  (optional)
+
+     - returns: RequestBuilder<InvestmentEventViewModels> 
+     */
+    open class func v10ManagerInvestmentsEventsGetWithRequestBuilder(authorization: String, eventLocation: EventLocation_v10ManagerInvestmentsEventsGet? = nil, assetId: UUID? = nil, from: Date? = nil, to: Date? = nil, eventType: EventType_v10ManagerInvestmentsEventsGet? = nil, assetType: AssetType_v10ManagerInvestmentsEventsGet? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<InvestmentEventViewModels> {
+        let path = "/v1.0/manager/investments/events"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "EventLocation": eventLocation?.rawValue, 
+            "AssetId": assetId, 
+            "From": from?.encodeToJSON(), 
+            "To": to?.encodeToJSON(), 
+            "EventType": eventType?.rawValue, 
+            "AssetType": assetType?.rawValue, 
+            "Skip": skip?.encodeToJSON(), 
+            "Take": take?.encodeToJSON()
+        ])
+        
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<InvestmentEventViewModels>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
@@ -1820,16 +2077,17 @@ open class ManagerAPI {
      Data for investing into the program
      - GET /v1.0/manager/programs/{id}/invest/info/{currency}
      - examples: [{contentType=application/json, example={
-  "entryFee" : 5.637376656633329,
+  "programCurrencyMinInvestment" : 5.637376656633329,
+  "entryFee" : 2.3021358869347655,
   "availableInWallet" : 1.4658129805029452,
   "isOwnProgram" : true,
   "availableToInvestBase" : 6.027456183070403,
-  "rate" : 7.061401241503109,
+  "rate" : 9.301444243932576,
   "periodEnds" : "2000-01-23T04:56:07.000+00:00",
   "availableToInvest" : 0.8008281904610115,
   "title" : "title",
   "minInvestmentAmount" : 5.962133916683182,
-  "gvCommission" : 2.3021358869347655
+  "gvCommission" : 7.061401241503109
 }}]
      
      - parameter id: (path)  
@@ -2013,42 +2271,42 @@ open class ManagerAPI {
      Get investment program/fund requests
      - GET /v1.0/manager/programs/{id}/requests/{skip}/{take}
      - examples: [{contentType=application/json, example={
-  "totalValue" : 6.519180951018382,
-  "total" : 7,
+  "totalValue" : 7.058770351582356,
+  "total" : 0,
   "requests" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "feeExit" : 7.143538047012306,
+    "feeExit" : 3.0937452626664474,
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
-    "valueGvt" : 3.353193347011243,
+    "valueGvt" : 6.704019297950036,
     "withdrawAll" : true,
-    "fundWithdrawPercent" : 0.8851374739011653,
-    "feeEntry" : 3.0937452626664474,
+    "fundWithdrawPercent" : 7.143538047012306,
+    "feeEntry" : 3.353193347011243,
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "value" : 6.704019297950036,
+    "value" : 5.944895607614016,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "feeExit" : 7.143538047012306,
+    "feeExit" : 3.0937452626664474,
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
-    "valueGvt" : 3.353193347011243,
+    "valueGvt" : 6.704019297950036,
     "withdrawAll" : true,
-    "fundWithdrawPercent" : 0.8851374739011653,
-    "feeEntry" : 3.0937452626664474,
+    "fundWithdrawPercent" : 7.143538047012306,
+    "feeEntry" : 3.353193347011243,
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "value" : 6.704019297950036,
+    "value" : 5.944895607614016,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
   } ]
@@ -2422,17 +2680,17 @@ open class ManagerAPI {
      Manager programs
      - GET /v1.0/manager/programs
      - examples: [{contentType=application/json, example={
-  "total" : 4,
+  "total" : 6,
   "programs" : [ {
     "color" : "color",
     "stopOutLevel" : 5.962133916683182,
     "availableInvestment" : 5.637376656633329,
     "availableInvestmentLimit" : 7.061401241503109,
     "rating" : {
-      "rating" : 3,
+      "rating" : 6,
       "canLevelUp" : true,
-      "topPercent" : 4.145608029883936,
-      "profit" : 2.027123023002322
+      "topPercent" : 1.1730742509559433,
+      "profit" : 7.457744773683766
     },
     "description" : "description",
     "title" : "title",
@@ -2445,35 +2703,35 @@ open class ManagerAPI {
     "periodDuration" : 1,
     "statistic" : {
       "balanceBase" : {
-        "amount" : 0.8008281904610115,
+        "amount" : 3.616076749251911,
         "currency" : "Undefined"
       },
-      "tradesCount" : 7,
+      "tradesCount" : 1,
       "balanceGVT" : {
-        "amount" : 0.8008281904610115,
+        "amount" : 3.616076749251911,
         "currency" : "Undefined"
       },
-      "profitPercent" : 1.4658129805029452,
-      "profitValue" : 5.962133916683182,
-      "drawdownPercent" : 5.637376656633329,
-      "currentValue" : 6.027456183070403,
+      "profitPercent" : 4.145608029883936,
+      "profitValue" : 7.386281948385884,
+      "drawdownPercent" : 1.2315135367772556,
+      "currentValue" : 2.027123023002322,
       "balanceSecondary" : {
-        "amount" : 0.8008281904610115,
+        "amount" : 3.616076749251911,
         "currency" : "Undefined"
       },
-      "investorsCount" : 2
+      "investorsCount" : 1
     },
     "manager" : {
       "socialLinks" : [ {
         "name" : "name",
         "logo" : "logo",
-        "type" : "Undefined",
+        "type" : "Twitter",
         "value" : "value",
         "url" : "url"
       }, {
         "name" : "name",
         "logo" : "logo",
-        "type" : "Undefined",
+        "type" : "Twitter",
         "value" : "value",
         "url" : "url"
       } ],
@@ -2504,17 +2762,17 @@ open class ManagerAPI {
       "login" : "login",
       "hasNotifications" : true,
       "canChangePassword" : true,
-      "gvtValue" : 7.386281948385884,
+      "gvtValue" : 4.965218492984954,
       "isFinishing" : true,
-      "value" : 1.0246457001441578,
-      "profit" : 1.4894159098541704,
+      "value" : 9.965781217890562,
+      "profit" : 9.369310271410669,
       "pendingOutputIsWithdrawAll" : true,
       "canInvest" : true,
       "notificationAvailableToInvestId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "showTwoFactorButton" : true,
       "canClosePeriod" : true,
-      "pendingOutput" : 1.1730742509559433,
-      "pendingInput" : 7.457744773683766,
+      "pendingOutput" : 9.018348186070783,
+      "pendingInput" : 8.762042012749001,
       "isOwnProgram" : true,
       "isReinvest" : true,
       "migration" : {
@@ -2562,32 +2820,32 @@ open class ManagerAPI {
             "name" : "name"
           } ]
         },
-        "newLeverage" : 1,
+        "newLeverage" : 5,
         "dateCreate" : "2000-01-23T04:56:07.000+00:00"
       },
       "signalSubscription" : {
         "mode" : "ByBalance",
-        "totalVolume" : 1.2315135367772556,
+        "totalVolume" : 2.3021358869347655,
         "hasSignalAccount" : true,
-        "totalProfit" : 7.386281948385884,
+        "totalProfit" : 5.637376656633329,
         "fixedCurrency" : "Undefined",
-        "fixedVolume" : 4.145608029883936,
-        "openTolerancePercent" : 2.027123023002322,
+        "fixedVolume" : 5.962133916683182,
+        "openTolerancePercent" : 1.4658129805029452,
         "hasActiveSubscription" : true,
-        "percent" : 3.616076749251911
+        "percent" : 6.027456183070403
       },
       "canMakeSignalProvider" : true,
-      "invested" : 6.84685269835264,
+      "invested" : 6.683562403749608,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
     },
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 3.616076749251911
+      "value" : 0.8008281904610115
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 3.616076749251911
+      "value" : 0.8008281904610115
     } ],
     "status" : "None"
   }, {
@@ -2596,10 +2854,10 @@ open class ManagerAPI {
     "availableInvestment" : 5.637376656633329,
     "availableInvestmentLimit" : 7.061401241503109,
     "rating" : {
-      "rating" : 3,
+      "rating" : 6,
       "canLevelUp" : true,
-      "topPercent" : 4.145608029883936,
-      "profit" : 2.027123023002322
+      "topPercent" : 1.1730742509559433,
+      "profit" : 7.457744773683766
     },
     "description" : "description",
     "title" : "title",
@@ -2612,35 +2870,35 @@ open class ManagerAPI {
     "periodDuration" : 1,
     "statistic" : {
       "balanceBase" : {
-        "amount" : 0.8008281904610115,
+        "amount" : 3.616076749251911,
         "currency" : "Undefined"
       },
-      "tradesCount" : 7,
+      "tradesCount" : 1,
       "balanceGVT" : {
-        "amount" : 0.8008281904610115,
+        "amount" : 3.616076749251911,
         "currency" : "Undefined"
       },
-      "profitPercent" : 1.4658129805029452,
-      "profitValue" : 5.962133916683182,
-      "drawdownPercent" : 5.637376656633329,
-      "currentValue" : 6.027456183070403,
+      "profitPercent" : 4.145608029883936,
+      "profitValue" : 7.386281948385884,
+      "drawdownPercent" : 1.2315135367772556,
+      "currentValue" : 2.027123023002322,
       "balanceSecondary" : {
-        "amount" : 0.8008281904610115,
+        "amount" : 3.616076749251911,
         "currency" : "Undefined"
       },
-      "investorsCount" : 2
+      "investorsCount" : 1
     },
     "manager" : {
       "socialLinks" : [ {
         "name" : "name",
         "logo" : "logo",
-        "type" : "Undefined",
+        "type" : "Twitter",
         "value" : "value",
         "url" : "url"
       }, {
         "name" : "name",
         "logo" : "logo",
-        "type" : "Undefined",
+        "type" : "Twitter",
         "value" : "value",
         "url" : "url"
       } ],
@@ -2671,17 +2929,17 @@ open class ManagerAPI {
       "login" : "login",
       "hasNotifications" : true,
       "canChangePassword" : true,
-      "gvtValue" : 7.386281948385884,
+      "gvtValue" : 4.965218492984954,
       "isFinishing" : true,
-      "value" : 1.0246457001441578,
-      "profit" : 1.4894159098541704,
+      "value" : 9.965781217890562,
+      "profit" : 9.369310271410669,
       "pendingOutputIsWithdrawAll" : true,
       "canInvest" : true,
       "notificationAvailableToInvestId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "showTwoFactorButton" : true,
       "canClosePeriod" : true,
-      "pendingOutput" : 1.1730742509559433,
-      "pendingInput" : 7.457744773683766,
+      "pendingOutput" : 9.018348186070783,
+      "pendingInput" : 8.762042012749001,
       "isOwnProgram" : true,
       "isReinvest" : true,
       "migration" : {
@@ -2729,32 +2987,32 @@ open class ManagerAPI {
             "name" : "name"
           } ]
         },
-        "newLeverage" : 1,
+        "newLeverage" : 5,
         "dateCreate" : "2000-01-23T04:56:07.000+00:00"
       },
       "signalSubscription" : {
         "mode" : "ByBalance",
-        "totalVolume" : 1.2315135367772556,
+        "totalVolume" : 2.3021358869347655,
         "hasSignalAccount" : true,
-        "totalProfit" : 7.386281948385884,
+        "totalProfit" : 5.637376656633329,
         "fixedCurrency" : "Undefined",
-        "fixedVolume" : 4.145608029883936,
-        "openTolerancePercent" : 2.027123023002322,
+        "fixedVolume" : 5.962133916683182,
+        "openTolerancePercent" : 1.4658129805029452,
         "hasActiveSubscription" : true,
-        "percent" : 3.616076749251911
+        "percent" : 6.027456183070403
       },
       "canMakeSignalProvider" : true,
-      "invested" : 6.84685269835264,
+      "invested" : 6.683562403749608,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
     },
     "chart" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 3.616076749251911
+      "value" : 0.8008281904610115
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 3.616076749251911
+      "value" : 0.8008281904610115
     } ],
     "status" : "None"
   } ]
@@ -2897,6 +3155,7 @@ open class ManagerAPI {
         case all = "All"
         case program = "Program"
         case fund = "Fund"
+        case signal = "Signal"
     }
 
     /**
@@ -2919,42 +3178,42 @@ open class ManagerAPI {
      Get all requests
      - GET /v1.0/manager/requests/{skip}/{take}
      - examples: [{contentType=application/json, example={
-  "totalValue" : 6.519180951018382,
-  "total" : 7,
+  "totalValue" : 7.058770351582356,
+  "total" : 0,
   "requests" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "feeExit" : 7.143538047012306,
+    "feeExit" : 3.0937452626664474,
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
-    "valueGvt" : 3.353193347011243,
+    "valueGvt" : 6.704019297950036,
     "withdrawAll" : true,
-    "fundWithdrawPercent" : 0.8851374739011653,
-    "feeEntry" : 3.0937452626664474,
+    "fundWithdrawPercent" : 7.143538047012306,
+    "feeEntry" : 3.353193347011243,
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "value" : 6.704019297950036,
+    "value" : 5.944895607614016,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "feeExit" : 7.143538047012306,
+    "feeExit" : 3.0937452626664474,
     "canCancelRequest" : true,
     "programType" : "Program",
     "color" : "color",
-    "valueGvt" : 3.353193347011243,
+    "valueGvt" : 6.704019297950036,
     "withdrawAll" : true,
-    "fundWithdrawPercent" : 0.8851374739011653,
-    "feeEntry" : 3.0937452626664474,
+    "fundWithdrawPercent" : 7.143538047012306,
+    "feeEntry" : 3.353193347011243,
     "type" : "Invest",
     "title" : "title",
     "logo" : "logo",
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "value" : 6.704019297950036,
+    "value" : 5.944895607614016,
     "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "status" : "New"
   } ]

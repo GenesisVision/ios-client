@@ -13,12 +13,14 @@ open class PlatformCurrency: Codable {
 
     public var name: String?
     public var rateToGvt: Double?
+    public var color: String?
 
 
     
-    public init(name: String?, rateToGvt: Double?) {
+    public init(name: String?, rateToGvt: Double?, color: String?) {
         self.name = name
         self.rateToGvt = rateToGvt
+        self.color = color
     }
     
 
@@ -30,6 +32,7 @@ open class PlatformCurrency: Codable {
 
         try container.encodeIfPresent(name, forKey: "name")
         try container.encodeIfPresent(rateToGvt, forKey: "rateToGvt")
+        try container.encodeIfPresent(color, forKey: "color")
     }
 
     // Decodable protocol methods
@@ -39,6 +42,7 @@ open class PlatformCurrency: Codable {
 
         name = try container.decodeIfPresent(String.self, forKey: "name")
         rateToGvt = try container.decodeIfPresent(Double.self, forKey: "rateToGvt")
+        color = try container.decodeIfPresent(String.self, forKey: "color")
     }
 }
 

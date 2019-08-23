@@ -386,12 +386,12 @@ class RatingLevelButton: UIButton {
         super.layoutSubviews()
         
         guard let level = Int(titleLabel?.text ?? "") else { return }
-        if self.isEnabled {
-            backgroundColor = UIColor.Level.color(for: level)
-            roundCorners()
-        } else {
+        if self.isSelected {
             backgroundColor = UIColor.BaseView.bg
             roundCorners(borderWidth: borderSize, borderColor: UIColor.Level.color(for: level))
+        } else {
+            backgroundColor = UIColor.Level.color(for: level)
+            roundCorners()
         }
     }
     

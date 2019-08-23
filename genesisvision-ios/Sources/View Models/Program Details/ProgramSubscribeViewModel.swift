@@ -69,13 +69,13 @@ final class ProgramSubscribeViewModel {
         
         self.signalSubscription = signalSubscription ?? SignalSubscription(hasSignalAccount: nil, hasActiveSubscription: nil, mode: .byBalance, percent: 10, openTolerancePercent: 0.5, fixedVolume: 100, fixedCurrency: .usd, totalProfit: nil, totalVolume: nil)
         
-        self.attachToSignal = AttachToSignalProvider(mode: .byBalance,
+        self.attachToSignal = AttachToSignalProvider(initialDepositCurrency: .usd,
+                                                     initialDepositAmount: initialDepositAmount,
+                                                     mode: .byBalance,
                                                      percent: signalSubscription?.percent,
                                                      openTolerancePercent: signalSubscription?.openTolerancePercent,
                                                      fixedVolume: signalSubscription?.fixedVolume,
-                                                     fixedCurrency: nil,
-                                                     initialDepositCurrency: nil,
-                                                     initialDepositAmount: initialDepositAmount)
+                                                     fixedCurrency: nil)
         
         self.reasonMode = ._none
         

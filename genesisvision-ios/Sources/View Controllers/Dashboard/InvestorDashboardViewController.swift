@@ -40,6 +40,10 @@ class InvestorDashboardViewController: DashboardViewController {
     private func reloadData() {
 
     }
+    
+    func scrollToTop() {
+        
+    }
 }
 
 extension InvestorDashboardViewController: ReloadDataProtocol {

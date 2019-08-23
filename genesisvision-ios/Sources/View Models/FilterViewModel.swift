@@ -31,6 +31,7 @@ final class FilterViewModel {
         case currency
         case sort
         case tags
+        case assets
         case dateRange
         case onlyActive
     }
@@ -68,12 +69,9 @@ final class FilterViewModel {
         self.filterType = filterType
         switch filterType {
         case .programs:
-            rows = [.currency, .sort, .dateRange, .tags]
-            if filterModel.facetTitle != "Rating" {
-                rows.insert(.levels, at: 0)
-            }
+            rows = [.levels, .currency, .sort, .dateRange, .tags]
         case .funds:
-            rows = [.sort, .dateRange, .tags]
+            rows = [.sort, .dateRange, .assets]
         case .dashboardFunds, .dashboardPrograms:
             rows = [.sort, .dateRange, .onlyActive]
         }
@@ -146,7 +144,7 @@ final class FilterViewModel {
                 if let detail = sortingDelegateManager?.manager?.getSelectedSortingValue() {
                     viewModels[idx].detail = detail
                 }
-            case .tags:
+            case .tags, .assets:
                 if let detail = tagsDelegateManager?.manager?.getSelectedValues() {
                     viewModels[idx].detail = detail
                 }
@@ -211,7 +209,7 @@ final class FilterViewModel {
                 setupSortingManager(filterModel, sortingType: sortingType)
             case .onlyActive:
                 onlyActive = filterModel.onlyActive
-            case .tags:
+            case .tags, .assets:
                 setupTagsManager(filterModel)
             }
         }
@@ -287,8 +285,15 @@ final class FilterViewModel {
                     tableViewCellViewModel?.detail = selectedValue
                 }
                 viewModels.append(tableViewCellViewModel!)
-            case .tags:
-                tableViewCellViewModel = FilterTableViewCellViewModel(title: "Tags", detail: nil, detailImage: nil, switchOn: nil, style: .detail, delegate: nil)
+            case .tags, .assets:
+                var title = ""
+                if filterType == .programs {
+                    title = "Tags"
+                } else if filterType == .funds {
+                    title = "Assets"
+                }
+                
+                tableViewCellViewModel = FilterTableViewCellViewModel(title: title, detail: nil, detailImage: nil, switchOn: nil, style: .detail, delegate: nil)
                 if let selectedValue = tagsDelegateManager?.manager?.getSelectedValues() {
                     tableViewCellViewModel?.detail = selectedValue
                 }
@@ -431,7 +436,7 @@ extension FilterViewModel: SortingDelegate {
 
 extension FilterViewModel: TagsDelegate {
     func didSelectTag() {
-        let index = rows.firstIndex { $0 == .tags }
+        let index = rows.firstIndex { $0 == .tags || $0 == .assets }
         guard let idx = index else { return }
         
         if let manager = tagsDelegateManager?.manager {

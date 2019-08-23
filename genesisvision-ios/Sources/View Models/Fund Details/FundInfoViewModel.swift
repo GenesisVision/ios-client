@@ -173,7 +173,7 @@ extension FundInfoViewModel {
     }
     
     func fetch(completion: @escaping CompletionBlock) {
-        guard let currency = FundsAPI.CurrencySecondary_v10FundsByIdGet(rawValue: getSelectedCurrency()) else { return completion(.failure(errorType: .apiError(message: nil))) }
+        guard let currency = FundsAPI.Currency_v10FundsByIdGet(rawValue: getSelectedCurrency()) else { return completion(.failure(errorType: .apiError(message: nil))) }
         
         
         FundsDataProvider.get(fundId: self.fundId, currencySecondary: currency, completion: { [weak self] (viewModel) in
@@ -213,6 +213,11 @@ extension FundInfoViewModel: InvestNowProtocol {
     }
     
     func didTapInvestButton() {
+        guard AuthManager.isLogin() else {
+            router.signInAction()
+            return
+        }
+        
         invest()
     }
 }

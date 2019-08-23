@@ -126,14 +126,19 @@ class WalletCopytradingPageboyViewControllerDataSource: BasePageboyViewControlle
                 controllers.append(vc)
             }
             
-            let signalOpenTrades = router.getSignalOpenTrades(with: router, currency: CurrencyType(rawValue: account?.currency?.rawValue ?? ""))
-            controllers.append(signalOpenTrades)
+            let currency = CurrencyType(rawValue: account?.currency?.rawValue ?? "")
             
-            let signalTrades = router.getSignalTrades(with: router, currency: CurrencyType(rawValue: account?.currency?.rawValue ?? ""))
-            controllers.append(signalTrades)
+            if let signalOpenTrades = router.getSignalOpenTrades(with: router, currency: currency) {
+                controllers.append(signalOpenTrades)
+            }
             
-            let signalTradingLog = router.getSignalTradingLog(with: router)
-            controllers.append(signalTradingLog)
+            if let signalTrades = router.getSignalTrades(with: router, currency: currency) {
+                controllers.append(signalTrades)
+            }
+            
+            if let signalTradingLog = router.getSignalTradingLog(with: router, currency: currency) {
+                controllers.append(signalTradingLog)
+            }
         }
     }
 }

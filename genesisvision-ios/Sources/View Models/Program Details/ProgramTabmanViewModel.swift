@@ -81,7 +81,7 @@ final class ProgramTabmanViewModel: TabmanViewModel {
                 self.addController(vc)
             }
             
-            if let personalProgramDetails = programDetailsFull.personalProgramDetails, let isInvested = personalProgramDetails.isInvested, isInvested, let vc = router.getEvents(with: programId) {
+            if let _ = programDetailsFull.personalProgramDetails, let vc = router.getEvents(with: programId) {
                 self.addController(vc)
                 self.addItem(vc.viewModel.title.uppercased())
             }

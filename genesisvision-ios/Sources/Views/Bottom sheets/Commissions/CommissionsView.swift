@@ -81,9 +81,9 @@ class CommissionsView: UIView {
                 case .gvWithdrawal:
                     commisionTitle = "Withdrawal"
                 case .managerSignalMasterSuccessFee:
-                    commisionTitle = "Manager Signal Success Fee"
+                    commisionTitle = "Manager Success Fee"
                 case .managerSignalMasterVolumeFee:
-                    commisionTitle = "Manager Signal Volume Fee"
+                    commisionTitle = "Volume Fee"
                 case .gvSignalSuccessFee:
                     commisionTitle = "Signal Success Fee"
                 default:
@@ -95,7 +95,7 @@ class CommissionsView: UIView {
             
             if let totalCommission = orderModel.totalCommission, let currency = orderModel.currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
                 totalCommissionsStackView.isHidden = false
-                totalValueLabel.text = totalCommission.rounded(withType: currencyType).toString()
+                totalValueLabel.text = totalCommission.rounded(toPlaces: 8).toString()
                 totalCurrencyLabel.text = currencyType.rawValue
             }
         }
@@ -109,7 +109,7 @@ class CommissionsView: UIView {
         commisionTitleLabel.text = commisionTitle
         let valueLabel = TitleLabel()
         valueLabel.font = UIFont.getFont(.semibold, size: 16.0)
-        valueLabel.text = amount.rounded(withType: currencyType).toString()
+        valueLabel.text = amount.rounded(toPlaces: 8).toString()
         let currencyLabel = SubtitleLabel()
         currencyLabel.font = UIFont.getFont(.regular, size: 16.0)
         currencyLabel.text = currencyType.rawValue

@@ -630,6 +630,78 @@
             </objects>
             <point key="canvasLocation" x="1414" y="898"/>
         </scene>
+        <!--Dashboard Program List View Controller-->
+        <scene sceneID="sFc-iz-M9s">
+            <objects>
+                <viewController storyboardIdentifier="DashboardProgramListViewController" id="FOE-Ud-Rqd" customClass="DashboardProgramListViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zdX-eV-JUe">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jmQ-iU-Mex">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="FOE-Ud-Rqd" id="OAU-2h-jsa"/>
+                                    <outlet property="delegate" destination="FOE-Ud-Rqd" id="3Lk-MX-lkH"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="jmQ-iU-Mex" firstAttribute="leading" secondItem="BeG-VT-c9U" secondAttribute="leading" id="9w9-tt-gq2"/>
+                            <constraint firstAttribute="bottom" secondItem="jmQ-iU-Mex" secondAttribute="bottom" id="CLz-JV-1Jf"/>
+                            <constraint firstItem="BeG-VT-c9U" firstAttribute="trailing" secondItem="jmQ-iU-Mex" secondAttribute="trailing" id="Y2Q-Hd-vjg"/>
+                            <constraint firstItem="jmQ-iU-Mex" firstAttribute="top" secondItem="BeG-VT-c9U" secondAttribute="top" id="xcP-nJ-ylC"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="BeG-VT-c9U"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="7T9-kM-Tla"/>
+                    <connections>
+                        <outlet property="tableView" destination="jmQ-iU-Mex" id="ewe-dr-5kM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DYb-Xs-hfi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2863" y="1331"/>
+        </scene>
+        <!--Dashboard Fund List View Controller-->
+        <scene sceneID="Kdr-hQ-ny0">
+            <objects>
+                <viewController storyboardIdentifier="DashboardFundListViewController" id="rnz-Ne-kh7" customClass="DashboardFundListViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QZE-Uz-G3R">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="79j-4a-v0y">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="rnz-Ne-kh7" id="HO9-xC-Z8h"/>
+                                    <outlet property="delegate" destination="rnz-Ne-kh7" id="ADr-fy-jfi"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="l55-cb-ut5" firstAttribute="trailing" secondItem="79j-4a-v0y" secondAttribute="trailing" id="4Es-se-x6Z"/>
+                            <constraint firstItem="79j-4a-v0y" firstAttribute="top" secondItem="l55-cb-ut5" secondAttribute="top" id="A2Y-5G-BmR"/>
+                            <constraint firstAttribute="bottom" secondItem="79j-4a-v0y" secondAttribute="bottom" id="CAQ-JD-I2D"/>
+                            <constraint firstItem="79j-4a-v0y" firstAttribute="leading" secondItem="l55-cb-ut5" secondAttribute="leading" id="XcE-Vf-Y3E"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="l55-cb-ut5"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="0bk-91-fa6"/>
+                    <connections>
+                        <outlet property="tableView" destination="79j-4a-v0y" id="6bG-Mh-iRH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zBi-zi-ggo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3542" y="1333"/>
+        </scene>
         <!--All Events View Controller-->
         <scene sceneID="P9m-UJ-tOn">
             <objects>
@@ -665,6 +737,150 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WhQ-Vr-03c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4269.6000000000004" y="1333.5832083958021"/>
+        </scene>
+        <!--Signal List View Controller-->
+        <scene sceneID="SjW-TF-6hH">
+            <objects>
+                <viewController storyboardIdentifier="SignalListViewController" id="zwn-JI-5Mq" customClass="SignalListViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="21m-43-X4n">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ktu-bH-BlE">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="zwn-JI-5Mq" id="C9z-70-qVI"/>
+                                    <outlet property="delegate" destination="zwn-JI-5Mq" id="f5B-Jj-NiS"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ktu-bH-BlE" firstAttribute="top" secondItem="9CS-ri-5d7" secondAttribute="top" id="PFr-eW-syF"/>
+                            <constraint firstItem="ktu-bH-BlE" firstAttribute="leading" secondItem="9CS-ri-5d7" secondAttribute="leading" id="TAo-HW-NAd"/>
+                            <constraint firstAttribute="bottom" secondItem="ktu-bH-BlE" secondAttribute="bottom" id="ZE0-ld-Ad4"/>
+                            <constraint firstItem="9CS-ri-5d7" firstAttribute="trailing" secondItem="ktu-bH-BlE" secondAttribute="trailing" id="keQ-bK-p9L"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="9CS-ri-5d7"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ppp-Rm-7vw"/>
+                    <connections>
+                        <outlet property="tableView" destination="ktu-bH-BlE" id="54Y-bF-r58"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0ei-cE-LCx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4974" y="1333"/>
+        </scene>
+        <!--Signal Open Trades View Controller-->
+        <scene sceneID="3aa-Iy-NuP">
+            <objects>
+                <viewController storyboardIdentifier="SignalOpenTradesViewController" id="df1-j3-NBY" customClass="SignalOpenTradesViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tES-ql-NuN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2qN-CI-gpq">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="df1-j3-NBY" id="yPl-Yh-mp1"/>
+                                    <outlet property="delegate" destination="df1-j3-NBY" id="EZe-Eu-3iW"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="2qN-CI-gpq" firstAttribute="top" secondItem="QIU-iZ-VBQ" secondAttribute="top" id="4y2-ds-Q4K"/>
+                            <constraint firstAttribute="bottom" secondItem="2qN-CI-gpq" secondAttribute="bottom" id="9IK-62-4QV"/>
+                            <constraint firstItem="2qN-CI-gpq" firstAttribute="leading" secondItem="QIU-iZ-VBQ" secondAttribute="leading" id="mtl-yj-QQ4"/>
+                            <constraint firstItem="QIU-iZ-VBQ" firstAttribute="trailing" secondItem="2qN-CI-gpq" secondAttribute="trailing" id="tT1-M9-eRt"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="QIU-iZ-VBQ"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="XmN-4h-nX2"/>
+                    <connections>
+                        <outlet property="tableView" destination="2qN-CI-gpq" id="VBC-JX-gjR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yg2-V2-Zwq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5700" y="1332"/>
+        </scene>
+        <!--Signal Trades View Controller-->
+        <scene sceneID="qSA-xS-RKJ">
+            <objects>
+                <viewController storyboardIdentifier="SignalTradesViewController" id="CEY-zl-VxN" customClass="SignalTradesViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0Y9-Yo-L7D">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0nF-xB-dgl">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="CEY-zl-VxN" id="Fgi-hv-z7q"/>
+                                    <outlet property="delegate" destination="CEY-zl-VxN" id="cCS-V4-1UO"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="0nF-xB-dgl" secondAttribute="bottom" id="Moh-wc-fku"/>
+                            <constraint firstItem="0nF-xB-dgl" firstAttribute="top" secondItem="dZC-sf-sTt" secondAttribute="top" id="QqY-mf-FBF"/>
+                            <constraint firstItem="0nF-xB-dgl" firstAttribute="leading" secondItem="dZC-sf-sTt" secondAttribute="leading" id="fux-As-0Tf"/>
+                            <constraint firstItem="dZC-sf-sTt" firstAttribute="trailing" secondItem="0nF-xB-dgl" secondAttribute="trailing" id="jKE-Vh-Pdz"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="dZC-sf-sTt"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="5ZZ-qN-dCL"/>
+                    <connections>
+                        <outlet property="tableView" destination="0nF-xB-dgl" id="OvC-57-m3B"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wwQ-aI-QCj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6418" y="1331"/>
+        </scene>
+        <!--Signal Trading Log View Controller-->
+        <scene sceneID="uId-Ad-8to">
+            <objects>
+                <viewController storyboardIdentifier="SignalTradingLogViewController" id="vdu-nX-02a" customClass="SignalTradingLogViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cam-XH-19y">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rjS-qT-xdK">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="vdu-nX-02a" id="hIV-7H-4pY"/>
+                                    <outlet property="delegate" destination="vdu-nX-02a" id="h38-2q-ZOp"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="rjS-qT-xdK" firstAttribute="leading" secondItem="cGU-Fa-Qul" secondAttribute="leading" id="LIr-B7-5LY"/>
+                            <constraint firstItem="cGU-Fa-Qul" firstAttribute="trailing" secondItem="rjS-qT-xdK" secondAttribute="trailing" id="PSB-JQ-fll"/>
+                            <constraint firstAttribute="bottom" secondItem="rjS-qT-xdK" secondAttribute="bottom" id="RQW-Y7-Po5"/>
+                            <constraint firstItem="rjS-qT-xdK" firstAttribute="top" secondItem="cGU-Fa-Qul" secondAttribute="top" id="aEC-89-Voe"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="cGU-Fa-Qul"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="STj-Mj-ru4"/>
+                    <connections>
+                        <outlet property="tableView" destination="rjS-qT-xdK" id="Wi7-5O-ISg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ECf-b9-IeC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7183" y="1331"/>
         </scene>
     </scenes>
     <resources>

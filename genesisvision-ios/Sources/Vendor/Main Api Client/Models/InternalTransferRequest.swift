@@ -17,6 +17,8 @@ open class InternalTransferRequest: Codable {
         case copyTradingAccount = "CopyTradingAccount"
         case genesisVisionPlatform = "GenesisVisionPlatform"
         case signalProviderSettings = "SignalProviderSettings"
+        case program = "Program"
+        case fund = "Fund"
     }
     public enum DestinationType: String, Codable { 
         case undefined = "Undefined"
@@ -24,6 +26,8 @@ open class InternalTransferRequest: Codable {
         case copyTradingAccount = "CopyTradingAccount"
         case genesisVisionPlatform = "GenesisVisionPlatform"
         case signalProviderSettings = "SignalProviderSettings"
+        case program = "Program"
+        case fund = "Fund"
     }
     public var sourceId: UUID?
     public var sourceType: SourceType?

@@ -28,9 +28,9 @@ extension PeriodHistoryTableViewCellViewModel: CellViewModel {
         if let dateFrom = model.dateFrom {
             cell.dateStartLabel.text = dateFrom.onlyTimeFormatString
         }
-        cell.dateFinishTitleLabel.text = "Date finish"
-        if let dateTo = model.dateTo {
-            cell.dateFinishLabel.text = dateTo.onlyTimeFormatString
+        cell.dateFinishTitleLabel.text = "Period length"
+        if let periodLength = model.periodLength {
+            cell.dateFinishLabel.text = getPeriodDuration(from: Int(periodLength / 60))
         }
         cell.balanceTitleLabel.text = "Balance"
         if let balance = model.balance, let currency = currency {

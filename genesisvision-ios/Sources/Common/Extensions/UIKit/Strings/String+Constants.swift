@@ -63,6 +63,7 @@ extension String {
         struct SignOut {
             static let title: String = ""
             static let message: String = "Log out?"
+            static let confirm: String = "Log out"
         }
         struct NewVersionUpdate {
             static var alertTitle: String = "New version is available".localized
@@ -97,7 +98,8 @@ extension String {
         struct SignalTrade {
             struct Close {
                 static let title: String = "Closing the trade".localized
-                static let message: String = "Are you sure you want to close this trade?".localized
+                static let message: String = "Are you sure you want to close ".localized
+                static let confirm: String = "Close trade".localized
             }
         }
         struct ErrorMessages {

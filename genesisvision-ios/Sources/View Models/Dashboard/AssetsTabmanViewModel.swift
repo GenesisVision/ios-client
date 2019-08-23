@@ -36,6 +36,6 @@ class AssetsTabmanViewModel: TabmanViewModel {
                                        TabmanBar.Item(title: "Trading log")])
         }
         
-        dataSource = AssetsPageboyViewControllerDataSource(router: router, filterModel: filterModel, showFacets: showFacets)
+        dataSource = AssetsPageboyViewControllerDataSource(router: router, showFacets: showFacets)
     }
 }

@@ -99,8 +99,8 @@ extension AllEventsViewModel {
             return
         }
         
-        let event = selectedModel.dashboardPortfolioEvent
-        if let assetId = event.assetId?.uuidString, let type = event.assetType, let assetType = AssetType(rawValue: type.rawValue) {
+        let event = selectedModel.event
+        if let assetId = event.assetDetails?.id?.uuidString, let type = event.assetDetails?.assetType, let assetType = AssetType(rawValue: type.rawValue) {
             router.showAssetDetails(with: assetId, assetType: assetType)
         }
     }
@@ -172,13 +172,13 @@ extension AllEventsViewModel {
             dateFormatter.timeStyle = .none
             dateFormatter.locale = Bundle.main.locale
             
-            guard let dateStr = model.dashboardPortfolioEvent.date?.onlyDateFormatString, let date = dateFormatter.date(from: dateStr) else { return }
+            guard let dateStr = model.event.date?.onlyDateFormatString, let date = dateFormatter.date(from: dateStr) else { return }
             
             if sections.index(forKey: date) == nil {
                 sections[date] = [model]
             } else {
                 sections[date]!.append(model)
-                sections[date] = sections[date]!.sorted(by: { $0.dashboardPortfolioEvent.date!.compare($1.dashboardPortfolioEvent.date!) == .orderedDescending })
+                sections[date] = sections[date]!.sorted(by: { $0.event.date!.compare($1.event.date!) == .orderedDescending })
             }
         }
         
@@ -198,7 +198,7 @@ extension AllEventsViewModel {
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [PortfolioEventTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-            DashboardDataProvider.getDashboardPortfolioEvents(with: assetId, from: dateFrom, to: dateTo, skip: skip, take: take, completion: { (portfolioEvents) in
+            DashboardDataProvider.getDashboardPortfolioEvents(with: assetId, from: dateFrom, to: dateTo, eventLocation: .dashboard, skip: skip, take: take, completion: { (portfolioEvents) in
                 guard portfolioEvents != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completionError)
                 }
@@ -207,7 +207,7 @@ extension AllEventsViewModel {
                 let totalCount = portfolioEvents?.total ?? 0
                 
                 portfolioEvents?.events?.forEach({ (dashboardPortfolioEvent) in
-                    let viewModel = PortfolioEventTableViewCellViewModel(dashboardPortfolioEvent: dashboardPortfolioEvent)
+                    let viewModel = PortfolioEventTableViewCellViewModel(event: dashboardPortfolioEvent)
                     viewModels.append(viewModel)
                 })
                 

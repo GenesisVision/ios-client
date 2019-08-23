@@ -9,7 +9,12 @@
 import UIKit
 
 class SignalOpenTradesViewController: BaseViewControllerWithTableView {
-    
+    // MARK: - Outlets
+    @IBOutlet override var tableView: UITableView! {
+        didSet {
+            setupTableConfiguration()
+        }
+    }
     // MARK: - View Model
     var viewModel: SignalTradesViewModel!
     
@@ -20,7 +25,19 @@ class SignalOpenTradesViewController: BaseViewControllerWithTableView {
         setup()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(tabBarDidScrollToTop(_:)), name: .tabBarDidScrollToTop, object: nil)
+    }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: .tabBarDidScrollToTop, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .tabBarDidScrollToTop, object: nil)
+    }
     // MARK: - Private methods
     private func setupTableConfiguration() {
         tableView.configure(with: .defaultConfiguration)
@@ -39,7 +56,6 @@ class SignalOpenTradesViewController: BaseViewControllerWithTableView {
     private func setup() {
         bottomViewType = .none
         noDataTitle = viewModel.noDataText()
-        setupTableConfiguration()
         
         setupNavigationBar()
     }
@@ -47,7 +63,7 @@ class SignalOpenTradesViewController: BaseViewControllerWithTableView {
     private func reloadData() {
         DispatchQueue.main.async {
             self.refreshControl?.endRefreshing()
-            self.tableView?.reloadData()
+            self.tableView.reloadData()
         }
     }
     
@@ -174,10 +190,10 @@ extension SignalOpenTradesViewController: ReloadDataProtocol {
 }
 
 extension SignalOpenTradesViewController: SignalTradesProtocol {
-    func didCloseTrade(_ tradeId: String) {
+    func didCloseTrade(_ tradeId: String, symbol: String, volume: String) {
         showAlertWithTitle(title: String.Alerts.SignalTrade.Close.title,
-                           message: String.Alerts.SignalTrade.Close.message,
-                           actionTitle: String.Alerts.okButtonText,
+                           message: String.Alerts.SignalTrade.Close.message + "\(symbol) trade in volume \(volume)?",
+                           actionTitle: String.Alerts.SignalTrade.Close.confirm,
                            cancelTitle: String.Alerts.cancelButtonText,
                            handler: { [weak self] in
                             self?.showProgressHUD()

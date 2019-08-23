@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SignalTradesProtocol: class {
-    func didCloseTrade(_ tradeId: String)
+    func didCloseTrade(_ tradeId: String, symbol: String, volume: String)
 }
 
 class SignalTradesTableViewCell: PlateTableViewCell {
@@ -71,8 +71,8 @@ class SignalTradesTableViewCell: PlateTableViewCell {
     
     // MARK: - Actions
     @IBAction func closeButtonAction(_ sender: UIButton) {
-        guard let tradeId = tradeId else { return }
+        guard let tradeId = tradeId, let symbol = symbolLabel.text, let volume = volumeLabel.text else { return }
         
-        delegate?.didCloseTrade(tradeId)
+        delegate?.didCloseTrade(tradeId, symbol: symbol, volume: volume)
     }
 }

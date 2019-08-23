@@ -9,7 +9,12 @@
 import UIKit
 
 class DashboardProgramListViewController: BaseViewControllerWithTableView {
-    
+    // MARK: - Outlets
+    @IBOutlet override var tableView: UITableView! {
+        didSet {
+            setupTableConfiguration()
+        }
+    }
     // MARK: - View Model
     var viewModel: DashboardProgramListViewModel!
     var firstTimeSetup3dTouch: Bool = false
@@ -19,6 +24,20 @@ class DashboardProgramListViewController: BaseViewControllerWithTableView {
         super.viewDidLoad()
         
         setup()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(tabBarDidScrollToTop(_:)), name: .tabBarDidScrollToTop, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: .tabBarDidScrollToTop, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .tabBarDidScrollToTop, object: nil)
     }
     
     // MARK: - Private methods
@@ -39,8 +58,6 @@ class DashboardProgramListViewController: BaseViewControllerWithTableView {
         if let imageName = viewModel.noDataImageName() {
             noDataImage = UIImage(named: imageName)
         }
-        
-        setupTableConfiguration()
     }
     
     private func setupTableConfiguration() {
@@ -170,5 +187,19 @@ extension DashboardProgramListViewController: SwitchProtocol {
 extension DashboardProgramListViewController {
     override func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
         viewModel.showProgramList()
+    }
+}
+
+extension DashboardProgramListViewController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        let tabBarIndex = tabBarController.selectedIndex
+        
+        guard let tabsType = TabsType(rawValue: tabBarIndex) else { return }
+        switch tabsType {
+        case .dashboard:
+            tableView.setContentOffset(.zero, animated: true)
+        default:
+            break
+        }
     }
 }

@@ -17,6 +17,7 @@ open class OrderModel: Codable {
         case balance = "Balance"
         case credit = "Credit"
         case undefined = "Undefined"
+        case manualBalancing = "ManualBalancing"
     }
     public enum Entry: String, Codable { 
         case _in = "In"

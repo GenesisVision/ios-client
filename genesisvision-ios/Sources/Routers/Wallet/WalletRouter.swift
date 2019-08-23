@@ -71,8 +71,9 @@ class WalletRouter: Router, SignalRouterProtocol {
         return viewController
     }
     
-    func getInternalTransactions(_ wallet: WalletData? = nil) -> WalletTransactionListViewController? {
-        let viewController = WalletTransactionListViewController()
+    func getInternalTransactions(_ wallet: WalletData? = nil) ->
+        WalletTransactionListViewController? {
+        guard let viewController = WalletTransactionListViewController.storyboardInstance(.wallet) else { return nil }
         let viewModel = WalletInternalTransactionListViewModel(withRouter: self, reloadDataProtocol: viewController, wallet: wallet)
         viewController.viewModel = viewModel
         
@@ -80,7 +81,7 @@ class WalletRouter: Router, SignalRouterProtocol {
     }
     
     func getExternalTransactions(_ wallet: WalletData? = nil) -> WalletTransactionListViewController? {
-        let viewController = WalletTransactionListViewController()
+        guard let viewController = WalletTransactionListViewController.storyboardInstance(.wallet) else { return nil }
         let viewModel = WalletExternalTransactionListViewModel(withRouter: self, reloadDataProtocol: viewController, wallet: wallet)
         viewController.viewModel = viewModel
         

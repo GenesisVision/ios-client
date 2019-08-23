@@ -9,49 +9,29 @@
 import UIKit.UIColor
 
 struct PortfolioEventTableViewCellViewModel {
-    let dashboardPortfolioEvent: DashboardPortfolioEvent
+    let event: InvestmentEventViewModel
 }
 
 extension PortfolioEventTableViewCellViewModel: CellViewModel {
     func setup(on cell: PortfolioEventTableViewCell) {
         cell.iconImageView.image = UIImage.programPlaceholder
         
-        if let color = dashboardPortfolioEvent.color {
-            cell.iconImageView.backgroundColor = UIColor.hexColor(color)
-        }
-        
-        if let fileName = dashboardPortfolioEvent.logo, let fileUrl = getFileURL(fileName: fileName) {
+        if let fileName = event.icon, let fileUrl = getFileURL(fileName: fileName) {
             cell.iconImageView.kf.indicatorType = .activity
             cell.iconImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
         }
         
-        if let type = dashboardPortfolioEvent.type {
-            switch type {
-            case .profit:
-                cell.typeImageView.image = #imageLiteral(resourceName: "img_event_profit")
-            case .loss:
-                cell.typeImageView.image = #imageLiteral(resourceName: "img_event_loss")
-            case .withdraw:
-                cell.typeImageView.image = #imageLiteral(resourceName: "img_event_withdraw")
-            case .invest:
-                cell.typeImageView.image = #imageLiteral(resourceName: "img_event_invest")
-            case .reinvest:
-                cell.typeImageView.image = #imageLiteral(resourceName: "img_event_reinvest")
-            case .canceled:
-                cell.typeImageView.image = #imageLiteral(resourceName: "img_event_canceled")
-            case .ended:
-                cell.typeImageView.image = #imageLiteral(resourceName: "img_event_program_finished")
-            default:
-                cell.typeImageView.image = nil
-            }
+        if let fileName = event.assetDetails?.logo, let fileUrl = getFileURL(fileName: fileName) {
+            cell.typeImageView.kf.indicatorType = .activity
+            cell.typeImageView.kf.setImage(with: fileUrl, placeholder: UIImage.eventPlaceholder)
         }
-            
-        if let title = dashboardPortfolioEvent.description {
+        
+        if let title = event.title {
             cell.titleLabel.text = title
         }
         
-        if let value = dashboardPortfolioEvent.value, let currency = dashboardPortfolioEvent.currency, let programCurrency = CurrencyType(rawValue: currency.rawValue) {
-            cell.amountLabel.text = value.rounded(withType: programCurrency).toString() + " \(programCurrency.rawValue)"
+        if let value = event.amount, let currency = event.currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
+            cell.amountLabel.text = value.rounded(withType: currencyType).toString() + " \(currencyType.rawValue)"
             cell.amountLabel.textColor = value == 0
                 ? UIColor.Cell.subtitle
                 : value > 0
@@ -59,7 +39,7 @@ extension PortfolioEventTableViewCellViewModel: CellViewModel {
                     : UIColor.Cell.redTitle
         }
         
-        if let date = dashboardPortfolioEvent.date {
+        if let date = event.date {
             cell.dateLabel.text = date.onlyTimeFormatString
         }
     }

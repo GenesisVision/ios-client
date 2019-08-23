@@ -19,7 +19,7 @@ class SearchViewController: BaseTabmanViewController<SearchTabmanViewModel> {
         
         navigationItem.title = viewModel.title
         
-        pageboyDataSource = SearchPageboyViewControllerDataSource(router: viewModel.router, filterModel: viewModel.filterModel, showFacets: viewModel.showFacets)
+        pageboyDataSource = SearchPageboyViewControllerDataSource(router: viewModel.router, showFacets: viewModel.showFacets)
         self.dataSource = pageboyDataSource
         
         self.bar.items = viewModel.items

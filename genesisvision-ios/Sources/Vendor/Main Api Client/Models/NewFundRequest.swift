@@ -14,25 +14,25 @@ open class NewFundRequest: Codable {
     public var exitFee: Double?
     public var managementFee: Double?
     public var assets: [FundAssetPart]?
-    public var title: String?
-    public var description: String?
-    public var logo: String?
     public var entryFee: Double?
     public var depositAmount: Double?
     public var depositWalletId: UUID?
+    public var title: String?
+    public var description: String?
+    public var logo: String?
 
 
     
-    public init(exitFee: Double?, managementFee: Double?, assets: [FundAssetPart]?, title: String?, description: String?, logo: String?, entryFee: Double?, depositAmount: Double?, depositWalletId: UUID?) {
+    public init(exitFee: Double?, managementFee: Double?, assets: [FundAssetPart]?, entryFee: Double?, depositAmount: Double?, depositWalletId: UUID?, title: String?, description: String?, logo: String?) {
         self.exitFee = exitFee
         self.managementFee = managementFee
         self.assets = assets
-        self.title = title
-        self.description = description
-        self.logo = logo
         self.entryFee = entryFee
         self.depositAmount = depositAmount
         self.depositWalletId = depositWalletId
+        self.title = title
+        self.description = description
+        self.logo = logo
     }
     
 
@@ -45,12 +45,12 @@ open class NewFundRequest: Codable {
         try container.encodeIfPresent(exitFee, forKey: "exitFee")
         try container.encodeIfPresent(managementFee, forKey: "managementFee")
         try container.encodeIfPresent(assets, forKey: "assets")
-        try container.encodeIfPresent(title, forKey: "title")
-        try container.encodeIfPresent(description, forKey: "description")
-        try container.encodeIfPresent(logo, forKey: "logo")
         try container.encodeIfPresent(entryFee, forKey: "entryFee")
         try container.encodeIfPresent(depositAmount, forKey: "depositAmount")
         try container.encodeIfPresent(depositWalletId, forKey: "depositWalletId")
+        try container.encodeIfPresent(title, forKey: "title")
+        try container.encodeIfPresent(description, forKey: "description")
+        try container.encodeIfPresent(logo, forKey: "logo")
     }
 
     // Decodable protocol methods
@@ -61,12 +61,12 @@ open class NewFundRequest: Codable {
         exitFee = try container.decodeIfPresent(Double.self, forKey: "exitFee")
         managementFee = try container.decodeIfPresent(Double.self, forKey: "managementFee")
         assets = try container.decodeIfPresent([FundAssetPart].self, forKey: "assets")
-        title = try container.decodeIfPresent(String.self, forKey: "title")
-        description = try container.decodeIfPresent(String.self, forKey: "description")
-        logo = try container.decodeIfPresent(String.self, forKey: "logo")
         entryFee = try container.decodeIfPresent(Double.self, forKey: "entryFee")
         depositAmount = try container.decodeIfPresent(Double.self, forKey: "depositAmount")
         depositWalletId = try container.decodeIfPresent(UUID.self, forKey: "depositWalletId")
+        title = try container.decodeIfPresent(String.self, forKey: "title")
+        description = try container.decodeIfPresent(String.self, forKey: "description")
+        logo = try container.decodeIfPresent(String.self, forKey: "logo")
     }
 }
 

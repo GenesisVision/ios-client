@@ -62,6 +62,20 @@ class DashboardViewController: BaseViewController {
         setup()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(tabBarDidScrollToTop(_:)), name: .tabBarDidScrollToTop, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: .tabBarDidScrollToTop, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .tabBarDidScrollToTop, object: nil)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -111,6 +125,10 @@ class DashboardViewController: BaseViewController {
         setupUI()
         
         showProgressHUD()
+    }
+    
+    @objc private func tabBarDidScrollToTop(_ notification: Notification) {
+        scrollToTop(scrollView)
     }
     
     private func reloadData() {

@@ -22,8 +22,6 @@ extension InfoSignalsTableViewCellViewModel: CellViewModel {
     func setup(on cell: InfoSignalsTableViewCell) {
         cell.infoSignalsProtocol = infoSignalsProtocol
         
-        guard let signalSubscription = programDetailsFull?.personalProgramDetails?.signalSubscription else { return }
-        
         cell.titleLabel.text = type == .subscription ? "Subscription details" : "Signals"
         
         cell.followButton.isHidden = type == .subscription
@@ -32,11 +30,7 @@ extension InfoSignalsTableViewCellViewModel: CellViewModel {
         cell.editButton.isHidden = type == .signal
         cell.subscriptionStackView.isHidden = type == .signal
         
-        let hasActiveSubscription = signalSubscription.hasActiveSubscription ?? false
-        cell.followButton.setTitle(hasActiveSubscription ? "Unfollow trades" : "Follow trades", for: .normal)
-        cell.followButton.configure(with: hasActiveSubscription ? .darkClear : .normal)
-        
-        if type == .subscription {
+        if type == .subscription, let signalSubscription = programDetailsFull?.personalProgramDetails?.signalSubscription {
             if let hasActiveSubscription = signalSubscription.hasActiveSubscription {
                 cell.statusTitleLabel.text = "status"
                 cell.statusValueLabel.text = hasActiveSubscription ? "Active" : ""
@@ -76,5 +70,14 @@ extension InfoSignalsTableViewCellViewModel: CellViewModel {
                 cell.subscriptionFeeValueLabel.text = signalSubscriptionFee.rounded(withType: .undefined).toString() + "%"
             }
         }
+        
+        cell.followButton.setTitle("Follow trades", for: .normal)
+        cell.followButton.configure(with: .normal)
+        
+        guard let signalSubscription = programDetailsFull?.personalProgramDetails?.signalSubscription else { return }
+        
+        let hasActiveSubscription = signalSubscription.hasActiveSubscription ?? false
+        cell.followButton.setTitle(hasActiveSubscription ? "Unfollow trades" : "Follow trades", for: .normal)
+        cell.followButton.configure(with: hasActiveSubscription ? .darkClear : .normal)
     }
 }

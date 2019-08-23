@@ -32,8 +32,18 @@ class ProgramListViewController: BaseViewControllerWithTableView {
         setup()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(tabBarDidScrollToTop(_:)), name: .tabBarDidScrollToTop, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: .tabBarDidScrollToTop, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .tabBarDidScrollToTop, object: nil)
     }
     
     // MARK: - Private methods
@@ -119,7 +129,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
 
 extension ProgramListViewController {
     override func filterButtonAction() {
-        viewModel.showFilterVC(filterType: .programs, sortingType: .programs)
+        viewModel.showFilterVC(listViewModel: self.viewModel, filterModel: viewModel.filterModel, filterType: .programs, sortingType: .programs)
     }
     
     override func signInButtonAction() {

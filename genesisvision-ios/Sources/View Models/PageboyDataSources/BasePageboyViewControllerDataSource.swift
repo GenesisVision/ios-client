@@ -10,7 +10,7 @@ import UIKit
 import Pageboy
 
 protocol BasePageboyProtocol {
-    func setup(router: Router, filterModel: FilterModel?, showFacets: Bool)
+    func setup(router: Router, showFacets: Bool)
     func setup(router: Router, wallet: WalletData?)
 }
 
@@ -18,10 +18,10 @@ class BasePageboyViewControllerDataSource: NSObject, PageboyViewControllerDataSo
     
     var controllers = [BaseViewController]()
     
-    init(router: Router, filterModel: FilterModel? = nil, showFacets: Bool) {
+    init(router: Router, showFacets: Bool) {
         super.init()
         
-        setup(router: router, filterModel: filterModel, showFacets: showFacets)
+        setup(router: router, showFacets: showFacets)
     }
     
     init(router: Router, wallet: WalletData? = nil) {
@@ -49,7 +49,7 @@ class BasePageboyViewControllerDataSource: NSObject, PageboyViewControllerDataSo
     }
     
     // MARK: - Private methods
-    internal func setup(router: Router, filterModel: FilterModel? = nil, showFacets: Bool) {
+    internal func setup(router: Router, showFacets: Bool) {
     }
     
     internal func setup(router: Router, wallet: WalletData? = nil) {

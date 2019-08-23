@@ -9,6 +9,12 @@
 import UIKit
 
 class SignalTradingLogViewController: BaseViewControllerWithTableView {
+    // MARK: - Outlets
+    @IBOutlet override var tableView: UITableView! {
+        didSet {
+            setupTableConfiguration()
+        }
+    }
     
     // MARK: - View Model
     var viewModel: SignalTradingLogViewModel!
@@ -20,8 +26,18 @@ class SignalTradingLogViewController: BaseViewControllerWithTableView {
         setup()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(tabBarDidScrollToTop(_:)), name: .tabBarDidScrollToTop, object: nil)
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: .tabBarDidScrollToTop, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .tabBarDidScrollToTop, object: nil)
     }
     
     // MARK: - Private methods
@@ -42,7 +58,6 @@ class SignalTradingLogViewController: BaseViewControllerWithTableView {
     private func setup() {
         bottomViewType = .none
         noDataTitle = viewModel.noDataText()
-        setupTableConfiguration()
         
         setupNavigationBar()
     }
@@ -139,4 +154,3 @@ extension SignalTradingLogViewController: ReloadDataProtocol {
         reloadData()
     }
 }
-

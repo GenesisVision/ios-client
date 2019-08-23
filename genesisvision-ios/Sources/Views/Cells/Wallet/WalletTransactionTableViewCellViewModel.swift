@@ -26,8 +26,14 @@ extension WalletTransactionTableViewCellViewModel: CellViewModel {
 
         cell.amountLabel.text = ""
         
-        if let amount = walletTransaction.amount, let currencyFrom = walletTransaction.currencyFrom, let currency = CurrencyType(rawValue: currencyFrom.rawValue) {
-            cell.amountLabel.text = amount.rounded(withType: currency).toString() + " " + currency.rawValue
+        if let type = walletTransaction.type, let amount = walletTransaction.amount, let currencyFrom = walletTransaction.currencyFrom, let currency = CurrencyType(rawValue: currencyFrom.rawValue) {
+            switch type {
+            case .fee, .subscribeSignal, .receiveSignal:
+                cell.amountLabel.text = amount.rounded(withType: .btc).toString() + " " + currency.rawValue
+            default:
+                cell.amountLabel.text = amount.rounded(withType: currency).toString() + " " + currency.rawValue
+            }
+            
             cell.amountLabel.textColor = amount == 0 ? UIColor.Cell.title : amount > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
         } else {
             cell.amountLabel.isHidden = true

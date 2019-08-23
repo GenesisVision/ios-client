@@ -132,7 +132,11 @@ class FiltersViewController: BaseViewControllerWithTableView {
         
         bottomSheetController = BottomSheetController()
         bottomSheetController.initializeHeight = 350
-        bottomSheetController.addNavigationBar("Tags")
+        if viewModel.filterType == .programs {
+            bottomSheetController.addNavigationBar("Tags")
+        } else if viewModel.filterType == .funds {
+            bottomSheetController.addNavigationBar("Assets")
+        }
         
         bottomSheetController.addTableView { tableView in
             tableView.registerNibs(for: manager.cellModelsForRegistration)
@@ -196,7 +200,7 @@ extension FiltersViewController: UITableViewDelegate, UITableViewDataSource {
             showLevels()
         case .sort:
             showSort()
-        case .tags:
+        case .tags, .assets:
             showTags()
         case .dateRange:
             showDateRange()

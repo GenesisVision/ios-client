@@ -23,8 +23,8 @@ extension UIViewController {
     
     
     // MARK: - Alerts
-    func showAlertWithTitle(title: String?, message: String, actionTitle: String?, cancelTitle: String?, handler: (() -> Void)?, cancelHandler: (() -> Void)?) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+    func showAlertWithTitle(_ style: UIAlertController.Style = .alert, title: String?, message: String, actionTitle: String?, cancelTitle: String?, handler: (() -> Void)?, cancelHandler: (() -> Void)?) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: style)
         alert.view.tintColor = UIColor.Cell.headerBg
         
         if actionTitle != nil {

@@ -59,6 +59,8 @@ extension PortfolioEventCollectionViewCellViewModel: CellViewModel {
                 cell.typeImageView.image = #imageLiteral(resourceName: "img_event_canceled")
             case .ended:
                 cell.typeImageView.image = #imageLiteral(resourceName: "img_event_program_finished")
+            case .withdrawByStopOut:
+                cell.typeImageView.image = #imageLiteral(resourceName: "img_event_withdraw")
             default:
                 cell.typeImageView.image = nil
             }

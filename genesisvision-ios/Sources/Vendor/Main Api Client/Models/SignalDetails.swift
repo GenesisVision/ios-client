@@ -35,7 +35,6 @@ open class SignalDetails: Codable {
         case archived = "Archived"
         case closedDueToInactivity = "ClosedDueToInactivity"
     }
-    public var statistic: ProgramDetailsListStatistic?
     public var personalDetails: PersonalSignalDetailsFull?
     public var currency: Currency?
     public var level: Int?
@@ -55,8 +54,7 @@ open class SignalDetails: Codable {
 
 
     
-    public init(statistic: ProgramDetailsListStatistic?, personalDetails: PersonalSignalDetailsFull?, currency: Currency?, level: Int?, levelProgress: Double?, tags: [ProgramTag]?, subscribers: Int?, id: UUID?, logo: String?, url: String?, color: String?, title: String?, description: String?, status: Status?, creationDate: Date?, manager: ProfilePublic?, chart: [ChartSimple]?) {
-        self.statistic = statistic
+    public init(personalDetails: PersonalSignalDetailsFull?, currency: Currency?, level: Int?, levelProgress: Double?, tags: [ProgramTag]?, subscribers: Int?, id: UUID?, logo: String?, url: String?, color: String?, title: String?, description: String?, status: Status?, creationDate: Date?, manager: ProfilePublic?, chart: [ChartSimple]?) {
         self.personalDetails = personalDetails
         self.currency = currency
         self.level = level
@@ -82,7 +80,6 @@ open class SignalDetails: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(statistic, forKey: "statistic")
         try container.encodeIfPresent(personalDetails, forKey: "personalDetails")
         try container.encodeIfPresent(currency, forKey: "currency")
         try container.encodeIfPresent(level, forKey: "level")
@@ -106,7 +103,6 @@ open class SignalDetails: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        statistic = try container.decodeIfPresent(ProgramDetailsListStatistic.self, forKey: "statistic")
         personalDetails = try container.decodeIfPresent(PersonalSignalDetailsFull.self, forKey: "personalDetails")
         currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
         level = try container.decodeIfPresent(Int.self, forKey: "level")

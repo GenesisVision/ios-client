@@ -15,6 +15,7 @@ open class AssetsValue: Codable {
         case all = "All"
         case program = "Program"
         case fund = "Fund"
+        case signal = "Signal"
     }
     public var type: ModelType?
     public var id: UUID?

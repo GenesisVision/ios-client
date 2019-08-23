@@ -173,6 +173,7 @@ extension SignalListViewModel {
     func showProgramList() {
         if let router = router as? DashboardRouter {
             router.show(routeType: .assetList)
+            NotificationCenter.default.post(name: .chooseProgramList, object: nil, userInfo: nil)
         }
     }
     
@@ -284,7 +285,7 @@ extension SignalListViewModel {
             
             var viewModels = [SignalTableViewCellViewModel]()
             
-            let totalCount = signalList.programs?.count ?? 0
+            let totalCount = signalList.total ?? 0
             
             signalList.programs?.forEach({ (signal) in
                 if let router = self?.router as? DashboardRouter {

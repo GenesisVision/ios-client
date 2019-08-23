@@ -30,17 +30,35 @@ class AssetsViewController: BaseTabmanViewController<AssetsTabmanViewModel>, UIS
         if viewModel.searchBarEnable {
             setupSearchBar()
         }
+        
+        guard viewModel.router is DashboardRouter else {
+            NotificationCenter.default.addObserver(self, selector: #selector(chooseFundListDidTapped(_:)), name: .chooseFundList, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(chooseProgramListDidTapped(_:)), name: .chooseProgramList, object: nil)
+            return
+        }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        //FIXME: change tab for dashboards fund
-//        scrollToPage(.next, animated: true)
+    // MARK: - Private methods
+    @objc private func chooseProgramListDidTapped(_ notification: Notification) {
+        scrollToPage(.first, animated: true)
+    }
+    
+    @objc private func chooseFundListDidTapped(_ notification: Notification) {
+        scrollToPage(.last, animated: true)
+    }
+    
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .chooseFundList, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .chooseProgramList, object: nil)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
+    }
+    
+    func scrollToTop() {
+        
     }
     
     // MARK: - Private methods

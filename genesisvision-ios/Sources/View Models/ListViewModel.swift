@@ -91,7 +91,7 @@ final class ListViewModel: ListViewModelProtocol {
                 self.title = (facetTitle == "Favorites" ? "Favorite" : facetTitle) + " " + title.lowercased()
                 
                 if facetTitle == "Rating" {
-                    filterModel.levelsSet = [1]
+                    self.bottomViewType = .none
                 }
             }
         }

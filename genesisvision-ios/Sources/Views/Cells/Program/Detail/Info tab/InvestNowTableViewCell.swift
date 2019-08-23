@@ -37,11 +37,7 @@ class InvestNowTableViewCell: UITableViewCell {
     @IBOutlet weak var successFeeValueLabel: TitleLabel!
     @IBOutlet weak var successFeeTitleLabel: SubtitleLabel!
     
-    @IBOutlet weak var investButton: ActionButton! {
-        didSet {
-            investButton.setEnabled(AuthManager.isLogin())
-        }
-    }
+    @IBOutlet weak var investButton: ActionButton!
     
     @IBOutlet weak var entryFeeTooltip: TooltipButton! {
         didSet {

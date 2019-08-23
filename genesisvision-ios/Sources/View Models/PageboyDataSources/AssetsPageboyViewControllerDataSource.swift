@@ -10,33 +10,41 @@ import UIKit
 
 class AssetsPageboyViewControllerDataSource: BasePageboyViewControllerDataSource {
     // MARK: - Private methods
-    internal override func setup(router: Router, filterModel: FilterModel? = nil, showFacets: Bool) {
+    internal override func setup(router: Router, showFacets: Bool) {
         if let router = router as? DashboardRouter {
             
-            let programListViewController = getDashboardPrograms(router)
-            let fundListViewController = getDashboardFunds(router)
+            if let programListViewController = getDashboardPrograms(router) {
+                controllers.append(programListViewController)
+            }
             
-            controllers = [programListViewController, fundListViewController]
+            if let fundListViewController = getDashboardFunds(router) {
+                controllers.append(fundListViewController)
+            }
             
             if signalEnable {
-                controllers = [programListViewController, fundListViewController]
+                if let signalListViewController = getSignalList(router) {
+                    controllers.append(signalListViewController)
+                }
+                if let signalOpenTradesViewController = getOpenTrades(with: router) {
+                    controllers.append(signalOpenTradesViewController)
+                }
                 
-                let signalListViewController = getSignalList(router)
-                let signalOpenTradesViewController = getOpenTrades(with: router)
-                let signalTradesViewController = getTrades(with: router)
-                let signalTradingLogViewController = getTradesLog(with: router)
-                
-                controllers.append(contentsOf: [signalListViewController, signalOpenTradesViewController, signalTradesViewController, signalTradingLogViewController])
+                if let signalTradesViewController = getTrades(with: router) {
+                    controllers.append(signalTradesViewController)
+                }
+                if let signalTradingLogViewController = getTradesLog(with: router) {
+                    controllers.append(signalTradingLogViewController)
+                }
             }
         } else {
-            guard let programListViewController = getPrograms(with: router, filterModel: filterModel, showFacets: showFacets), let fundListViewController = getFunds(with: router, filterModel: filterModel, showFacets: showFacets) else { return }
+            guard let programListViewController = getPrograms(with: router, filterModel: FilterModel(), showFacets: showFacets), let fundListViewController = getFunds(with: router, filterModel: FilterModel(), showFacets: showFacets) else { return }
             
             controllers = [programListViewController, fundListViewController]
         }
     }
     
-    func getDashboardPrograms(_ router: DashboardRouter) -> DashboardProgramListViewController {
-        let viewController = DashboardProgramListViewController()
+    func getDashboardPrograms(_ router: DashboardRouter) -> DashboardProgramListViewController? {
+        guard let viewController = DashboardProgramListViewController.storyboardInstance(.dashboard) else { return nil}
         viewController.tableViewStyle = .plain
         router.programListViewController = viewController
         let programsViewModel = DashboardProgramListViewModel(withRouter: router)
@@ -45,8 +53,8 @@ class AssetsPageboyViewControllerDataSource: BasePageboyViewControllerDataSource
         return viewController
     }
     
-    func getDashboardFunds(_ router: DashboardRouter) -> DashboardFundListViewController {
-        let viewController = DashboardFundListViewController()
+    func getDashboardFunds(_ router: DashboardRouter) -> DashboardFundListViewController? {
+        guard let viewController = DashboardFundListViewController.storyboardInstance(.dashboard) else { return nil}
         viewController.tableViewStyle = .plain
         router.fundListViewController = viewController
         let fundsViewModel = DashboardFundListViewModel(withRouter: router)
@@ -78,8 +86,8 @@ class AssetsPageboyViewControllerDataSource: BasePageboyViewControllerDataSource
         return viewController
     }
     
-    func getSignalList(_ router: DashboardRouter) -> SignalListViewController {
-        let viewController = SignalListViewController()
+    func getSignalList(_ router: DashboardRouter) -> SignalListViewController? {
+        guard let viewController = SignalListViewController.storyboardInstance(.dashboard) else { return nil }
         viewController.tableViewStyle = .plain
         router.signalListViewController = viewController
         let dashboardSignalListViewModel = SignalListViewModel(withRouter: router)
@@ -88,15 +96,15 @@ class AssetsPageboyViewControllerDataSource: BasePageboyViewControllerDataSource
         return viewController
     }
     
-    func getTrades(with router: DashboardRouter) -> SignalTradesViewController {
+    func getTrades(with router: DashboardRouter) -> SignalTradesViewController? {
         return router.getSignalTrades(with: router)
     }
     
-    func getOpenTrades(with router: DashboardRouter) -> SignalOpenTradesViewController {
+    func getOpenTrades(with router: DashboardRouter) -> SignalOpenTradesViewController? {
         return router.getSignalOpenTrades(with: router)
     }
     
-    func getTradesLog(with router: DashboardRouter) -> SignalTradingLogViewController {
+    func getTradesLog(with router: DashboardRouter) -> SignalTradingLogViewController? {
         return router.getSignalTradingLog(with: router)
     }
     
