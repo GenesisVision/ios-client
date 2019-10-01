@@ -7,6 +7,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "A51D244F-9C07-4BA2-AC84-16788633E72C"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -23,43 +24,12 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/View Models/Program Details/ProgramInfoViewModel.swift"
-            timestampString = "586372382.899399"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "202"
-            endingLineNumber = "202"
-            landmarkName = "subscribe(_:initialDepositCurrency:initialDepositAmount:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/View Models/Copytrading/SignalTradesViewModel.swift"
-            timestampString = "586365130.30863"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "close(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
+            uuid = "0FA0DB23-0F8E-479C-9100-755F6890956F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "genesisvision-ios/Sources/View Controllers/Base/BaseViewControllerWithTableView.swift"
-            timestampString = "588270488.410441"
+            timestampString = "588683795.530879"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "121"
@@ -71,22 +41,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/Views/Cells/Fund/Detail/Profit tab/FundProfitChartTableViewCellViewModel.swift"
-            timestampString = "588259934.45336"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "setup(on:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
+            uuid = "73819F0B-B554-4455-A698-F5FAB49E20E4"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -103,81 +58,160 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "3AB69CD9-391F-4309-BE18-77C9ED6A9C32"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/View Models/PageboyDataSources/SearchPageboyViewControllerDataSource.swift"
-            timestampString = "588270488.411243"
+            filePath = "genesisvision-ios/Sources/View Controllers/Wallet/WalletTransactionListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "14"
-            endingLineNumber = "14"
-            landmarkName = "setup(router:filterModel:showFacets:)"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
+            landmarkName = "didReloadData()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "3AB69CD9-391F-4309-BE18-77C9ED6A9C32 - e8f3ba7ed6e2948a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Genesis_Vision.WalletTransactionListViewController.didReloadData() -&gt; ()"
+                  moduleName = "Genesis Vision"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/george/Projects/Genesis%20Vision/ios-client/genesisvision-ios/Sources/View%20Controllers/Wallet/WalletTransactionListViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "177"
+                  endingLineNumber = "177"
+                  offsetFromSymbolStart = "92">
+               </Location>
+               <Location
+                  uuid = "3AB69CD9-391F-4309-BE18-77C9ED6A9C32 - ff212e723f40ecf2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Tabman.TMBarItemable) -&gt; () in Genesis_Vision.WalletTransactionListViewController.didReloadData() -&gt; ()"
+                  moduleName = "Genesis Vision"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/george/Projects/Genesis%20Vision/ios-client/genesisvision-ios/Sources/View%20Controllers/Wallet/WalletTransactionListViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "177"
+                  endingLineNumber = "177"
+                  offsetFromSymbolStart = "140">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "766C8B2B-959D-460B-9449-4F5761241B16"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/Common/Protocols/ListViewModelProtocol.swift"
-            timestampString = "588270488.411342"
+            filePath = "genesisvision-ios/Sources/View Controllers/Wallet/WalletTransactionListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "407"
-            endingLineNumber = "407"
-            landmarkName = "showFilterVC(listViewModel:filterModel:filterType:sortingType:)"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
+            landmarkName = "fetch()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "766C8B2B-959D-460B-9449-4F5761241B16 - 6c84e007094f643d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Genesis_Vision.CompletionResult) -&gt; () in Genesis_Vision.WalletTransactionListViewController.fetch() -&gt; ()"
+                  moduleName = "Genesis Vision"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/george/Projects/Genesis%20Vision/ios-client/genesisvision-ios/Sources/View%20Controllers/Wallet/WalletTransactionListViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "89"
+                  endingLineNumber = "89"
+                  offsetFromSymbolStart = "276">
+               </Location>
+               <Location
+                  uuid = "766C8B2B-959D-460B-9449-4F5761241B16 - 7728e0e18baa43a3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Tabman.TMBarItemable) -&gt; () in closure #1 (Genesis_Vision.CompletionResult) -&gt; () in Genesis_Vision.WalletTransactionListViewController.fetch() -&gt; ()"
+                  moduleName = "Genesis Vision"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/george/Projects/Genesis%20Vision/ios-client/genesisvision-ios/Sources/View%20Controllers/Wallet/WalletTransactionListViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "87"
+                  endingLineNumber = "87"
+                  offsetFromSymbolStart = "136">
+               </Location>
+               <Location
+                  uuid = "766C8B2B-959D-460B-9449-4F5761241B16 - 7728e0e18baa43a3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Tabman.TMBarItemable) -&gt; () in closure #1 (Genesis_Vision.CompletionResult) -&gt; () in Genesis_Vision.WalletTransactionListViewController.fetch() -&gt; ()"
+                  moduleName = "Genesis Vision"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/george/Projects/Genesis%20Vision/ios-client/genesisvision-ios/Sources/View%20Controllers/Wallet/WalletTransactionListViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "89"
+                  endingLineNumber = "89"
+                  offsetFromSymbolStart = "144">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "515C3263-0A76-4A28-820A-867C0171C87B"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/Routers/Router.swift"
-            timestampString = "588263002.601802"
+            filePath = "genesisvision-ios/Sources/View Models/Dashboard/DashboardFundListViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "517"
-            endingLineNumber = "517"
-            landmarkName = "getPrograms(with:showFacets:parentRouter:)"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
+            landmarkName = "fetch(completion:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/Routers/Router.swift"
-            timestampString = "588263005.258702"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "533"
-            endingLineNumber = "533"
-            landmarkName = "getFunds(with:showFacets:parentRouter:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/Data Providers/DataProvider.swift"
-            timestampString = "588266340.252489"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
-            landmarkName = "responseHandler(_:completion:)"
-            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "515C3263-0A76-4A28-820A-867C0171C87B - a3c20e3c26a03220"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Genesis_Vision.DashboardFundListViewModel.fetch(completion: (Genesis_Vision.CompletionResult) -&gt; ()) -&gt; ()"
+                  moduleName = "Genesis Vision"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/george/Projects/Genesis%20Vision/ios-client/genesisvision-ios/Sources/View%20Models/Dashboard/DashboardFundListViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "165"
+                  endingLineNumber = "165"
+                  offsetFromSymbolStart = "160">
+               </Location>
+               <Location
+                  uuid = "515C3263-0A76-4A28-820A-867C0171C87B - 768f03e8ea2af23e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Int, Swift.Array&lt;Genesis_Vision.DashboardFundTableViewCellViewModel&gt;) -&gt; () in Genesis_Vision.DashboardFundListViewModel.fetch(completion: (Genesis_Vision.CompletionResult) -&gt; ()) -&gt; ()"
+                  moduleName = "Genesis Vision"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/george/Projects/Genesis%20Vision/ios-client/genesisvision-ios/Sources/View%20Models/Dashboard/DashboardFundListViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "165"
+                  endingLineNumber = "165"
+                  offsetFromSymbolStart = "136">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

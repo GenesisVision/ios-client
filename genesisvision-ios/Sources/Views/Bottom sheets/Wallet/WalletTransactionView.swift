@@ -13,7 +13,6 @@ protocol WalletTransactionViewProtocol: class {
     func copyAddressButtonDidPress(_ address: String)
     func resendButtonDidPress(_ uuid: UUID)
     func cancelButtonDidPress(_ uuid: UUID)
-
 }
 
 class WalletTransactionView: UIView {
@@ -632,6 +631,14 @@ class SignalDepositStackView: UIStackView {
 
 
 class TopStackView: DefaultStackView {
+    @IBOutlet weak var iconImageView: UIImageView! {
+        didSet {
+            iconImageView.contentMode = .scaleAspectFill
+            iconImageView.clipsToBounds = true
+            iconImageView.image = UIImage.eventPlaceholder
+            iconImageView.roundCorners()
+        }
+    }
     @IBOutlet weak var closeButton: UIButton!
     override var titleLabel: TitleLabel! {
         didSet {

@@ -31,7 +31,10 @@ open class RequestBuilder<T> {
         self.isBody = isBody
         self.headers = headers
         if isDebug {
+            print("\n---API---")
             print(URLString)
+            print(parameters ?? "")
+            print("---\n")
         }
         
         addHeaders(SwaggerClientAPI.customHeaders)

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FundAssetTableViewCell: TableViewCell {
+class FundAssetTableViewCell: UITableViewCell {
     
     @IBOutlet weak var assetLogoImageView: UIImageView! {
         didSet {

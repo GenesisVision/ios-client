@@ -11,59 +11,69 @@ import Kingfisher
 
 struct PortfolioEventCollectionViewCellViewModel {
     weak var reloadDataProtocol: ReloadDataProtocol?
-    let dashboardPortfolioEvent: DashboardPortfolioEvent
+    let event: InvestmentEventViewModel
 }
 
 extension PortfolioEventCollectionViewCellViewModel: CellViewModel {
     func setup(on cell: PortfolioEventCollectionViewCell) {
-        if let title = dashboardPortfolioEvent.description {
-            cell.titleLabel.text = title
+        if let fileName = event.icon, let fileUrl = getFileURL(fileName: fileName) {
+            cell.typeImageView.kf.indicatorType = .activity
+            cell.typeImageView.kf.setImage(with: fileUrl, placeholder: UIImage.eventPlaceholder)
         }
         
-        if let date = dashboardPortfolioEvent.date {
-            cell.dateLabel.text = date.dateAndTimeFormatString
-        }
-
-        cell.iconImageView.image = UIImage.programPlaceholder
-        
-        if let color = dashboardPortfolioEvent.color {
+        if let color = event.assetDetails?.color {
             cell.iconImageView.backgroundColor = UIColor.hexColor(color)
         }
         
-        if let fileName = dashboardPortfolioEvent.logo, let fileUrl = getFileURL(fileName: fileName) {
+        if let type = event.assetDetails?.assetType {
+            switch type {
+            case .funds:
+                cell.iconImageView.image = UIImage.fundPlaceholder
+            default:
+                cell.iconImageView.image = UIImage.programPlaceholder
+            }
+        }
+        
+        if let fileName = event.assetDetails?.logo, let fileUrl = getFileURL(fileName: fileName) {
             cell.iconImageView.kf.indicatorType = .activity
             cell.iconImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
         }
         
-        if let value = dashboardPortfolioEvent.value, let currency = dashboardPortfolioEvent.currency, let programCurrency = CurrencyType(rawValue: currency.rawValue) {
-            cell.balanceValueLabel.text = value.rounded(withType: programCurrency).toString() + " \(programCurrency.rawValue)"
+        if let title = event.title {
+            cell.titleLabel.text = title
         }
         
-        cell.balanceValueLabel.textColor = UIColor.Cell.title
-        
-        if let type = dashboardPortfolioEvent.type {
-            switch type {
-            case .profit:
-                cell.typeImageView.image = #imageLiteral(resourceName: "img_event_profit")
+        if let extendedInfo = event.extendedInfo?.first,
+            let amount = extendedInfo.amount,
+            let currency = extendedInfo.currency,
+            let currencyType = CurrencyType(rawValue: currency.rawValue) {
+            cell.balanceStackView.isHidden = false
+            
+            cell.balanceValueLabel.text = amount.rounded(withType: currencyType).toString() + " \(currencyType.rawValue)"
+            
+            cell.balanceValueLabel.textColor = UIColor.Cell.title
+        } else if let amount = event.amount,
+            let currency = event.currency,
+            let currencyType = CurrencyType(rawValue: currency.rawValue),
+            let changeState = event.changeState {
+            cell.balanceStackView.isHidden = false
+            
+            cell.balanceValueLabel.text = amount.rounded(withType: currencyType).toString() + " \(currencyType.rawValue)"
+            
+            switch changeState {
+            case .increased:
                 cell.balanceValueLabel.textColor = UIColor.Cell.greenTitle
-            case .loss:
-                cell.typeImageView.image = #imageLiteral(resourceName: "img_event_loss")
+            case .decreased:
                 cell.balanceValueLabel.textColor = UIColor.Cell.redTitle
-            case .withdraw:
-                cell.typeImageView.image = #imageLiteral(resourceName: "img_event_withdraw")
-            case .invest:
-                cell.typeImageView.image = #imageLiteral(resourceName: "img_event_invest")
-            case .reinvest:
-                cell.typeImageView.image = #imageLiteral(resourceName: "img_event_reinvest")
-            case .canceled:
-                cell.typeImageView.image = #imageLiteral(resourceName: "img_event_canceled")
-            case .ended:
-                cell.typeImageView.image = #imageLiteral(resourceName: "img_event_program_finished")
-            case .withdrawByStopOut:
-                cell.typeImageView.image = #imageLiteral(resourceName: "img_event_withdraw")
             default:
-                cell.typeImageView.image = nil
+                cell.balanceValueLabel.textColor = UIColor.Cell.title
             }
+        } else {
+            cell.balanceStackView.isHidden = true
+        }
+        
+        if let date = event.date {
+            cell.dateLabel.text = date.dateAndTimeFormatString
         }
     }
 }

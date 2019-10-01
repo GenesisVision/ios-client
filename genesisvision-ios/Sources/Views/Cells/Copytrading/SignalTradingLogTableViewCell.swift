@@ -10,7 +10,11 @@ import UIKit
 
 class SignalTradingLogTableViewCell: UITableViewCell {
     // MARK: - Views
-    @IBOutlet weak var titleLabel: TitleLabel!
+    @IBOutlet weak var titleLabel: TitleLabel! {
+        didSet {
+            titleLabel.font = UIFont.getFont(.regular, size: 14.0)
+        }
+    }
     @IBOutlet weak var dateLabel: SubtitleLabel!
     
     override func awakeFromNib() {

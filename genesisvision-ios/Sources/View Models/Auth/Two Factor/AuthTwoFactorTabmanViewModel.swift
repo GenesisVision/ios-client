@@ -6,18 +6,21 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
+import Tabman
+
 final class AuthTwoFactorTabmanViewModel: TabmanViewModel {
     // MARK: - Variables
     var sharedKey: String?
     
     // MARK: - Init
-    init(withRouter router: Router, tabmanViewModelDelegate: TabmanViewModelDelegate) {
-        super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0, tabmanViewModelDelegate: tabmanViewModelDelegate)
+    init(withRouter router: Router) {
+        super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0)
         
         title = "Enable Two Factor"
         isProgressive = true
         isScrollEnabled = false
-        style = .buttonBar
+        bounces = false
+        compresses = true
     }
     
     override func initializeViewControllers() {
@@ -26,20 +29,22 @@ final class AuthTwoFactorTabmanViewModel: TabmanViewModel {
     
     // MARK: - Private methods
     private func setup() {
+        self.items = []
+        
         if let router = router as? AuthTwoFactorTabmanRouter {
             if let vc = router.getTutorialVC(with: self) {
                 self.addController(vc)
-                self.addItem(vc.viewModel.title.uppercased())
+                self.items?.append(TMBarItem(title: vc.viewModel.title.uppercased()))
             }
             
             if let vc = router.getCreateVC(with: self) {
                 self.addController(vc)
-                self.addItem(vc.viewModel.title.uppercased())
+                self.items?.append(TMBarItem(title: vc.viewModel.title.uppercased()))
             }
             
             if let vc = router.getConfirmationVC(with: self) {
                 self.addController(vc)
-                self.addItem(vc.viewModel.title.uppercased())
+                self.items?.append(TMBarItem(title: vc.viewModel.title.uppercased()))
             }
             
             reloadPages()

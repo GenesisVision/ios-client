@@ -147,6 +147,7 @@ extension DashboardProgramListViewController: UIViewControllerPreviewingDelegate
 extension DashboardProgramListViewController: ReloadDataProtocol {
     func didReloadData() {
         reloadData()
+        tabmanBarItems?.forEach({ $0.badgeValue = "\(viewModel.totalCount)" })
     }
 }
 

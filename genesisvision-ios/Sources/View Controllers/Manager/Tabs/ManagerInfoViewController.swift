@@ -102,15 +102,15 @@ extension ManagerInfoViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        scrollView.isScrollEnabled = scrollView.contentOffset.y > -40.0
+        scrollView.isScrollEnabled = scrollView.contentOffset.y > -43.5
     }
     
     override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         let translation = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
         if translation.y > 0 {
-            scrollView.isScrollEnabled = scrollView.contentOffset.y > -40.0
+            scrollView.isScrollEnabled = scrollView.contentOffset.y > -43.5
         } else {
-            scrollView.isScrollEnabled = scrollView.contentOffset.y >= -40.0
+            scrollView.isScrollEnabled = scrollView.contentOffset.y >= -43.5
         }
     }
 }

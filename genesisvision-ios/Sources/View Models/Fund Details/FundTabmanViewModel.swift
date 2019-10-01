@@ -7,6 +7,7 @@
 //
 
 import UIKit.UIColor
+import Tabman
 
 final class FundTabmanViewModel: TabmanViewModel {
     // MARK: - Variables
@@ -22,10 +23,10 @@ final class FundTabmanViewModel: TabmanViewModel {
     }
     
     // MARK: - Init
-    init(withRouter router: Router, fundId: String, tabmanViewModelDelegate: TabmanViewModelDelegate) {
+    init(withRouter router: Router, fundId: String) {
         self.fundId = fundId
         
-        super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0, tabmanViewModelDelegate: tabmanViewModelDelegate)
+        super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0)
         
         сurrency = FundsAPI.Currency_v10FundsByIdGet(rawValue: getSelectedCurrency())
         title = "Fund Details"
@@ -52,35 +53,37 @@ final class FundTabmanViewModel: TabmanViewModel {
             self.fundDetailsFull = viewModel
         }
         
+        self.items = []
+        
         if let router = router as? FundTabmanRouter, let fundDetailsFull = fundDetailsFull {
             if let vc = router.getInfo(with: fundDetailsFull) {
                 self.addController(vc)
-                self.addItem(vc.viewModel.title.uppercased())
+                self.items?.append(TMBarItem(title: vc.viewModel.title.uppercased()))
             }
             
             if let vc = router.getAssets(with: fundId) {
                 self.addController(vc)
-                self.addItem(vc.viewModel.title.uppercased())
-            }
-            
-            if let vc = router.getProfit(with: fundId) {
-                self.addController(vc)
-                self.addItem(vc.viewModel.title.uppercased())
-            }
-            
-            if let vc = router.getBalance(with: fundId) {
-                self.addController(vc)
-                self.addItem(vc.viewModel.title.uppercased())
-            }
-            
-            if let vc = router.getEvents(with: fundId) {
-                self.addController(vc)
-                self.addItem(vc.viewModel.title.uppercased())
+                self.items?.append(TMBarItem(title: vc.viewModel.title.uppercased()))
             }
             
             if let vc = router.getReallocateHistory(with: fundId) {
                 self.addController(vc)
-                self.addItem(vc.viewModel.title.uppercased())
+                self.items?.append(TMBarItem(title: vc.viewModel.title.uppercased()))
+            }
+            
+            if let vc = router.getProfit(with: fundId) {
+                self.addController(vc)
+                self.items?.append(TMBarItem(title: vc.viewModel.title.uppercased()))
+            }
+            
+            if let vc = router.getBalance(with: fundId) {
+                self.addController(vc)
+                self.items?.append(TMBarItem(title: vc.viewModel.title.uppercased()))
+            }
+            
+            if let vc = router.getEvents(with: fundId) {
+                self.addController(vc)
+                self.items?.append(TMBarItem(title: vc.viewModel.title.uppercased()))
             }
             
             reloadPages()

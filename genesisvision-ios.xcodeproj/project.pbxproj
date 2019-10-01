@@ -111,6 +111,8 @@
 		5E395A2D2065613800A6B779 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E395A2C2065613800A6B779 /* GradientView.swift */; };
 		5E3C72FC2174EC6500DE6F7D /* InvestWithdrawConfirmView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E3C72FB2174EC6500DE6F7D /* InvestWithdrawConfirmView.xib */; };
 		5E3C72FE2174EC6E00DE6F7D /* InvestWithdrawConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3C72FD2174EC6E00DE6F7D /* InvestWithdrawConfirmView.swift */; };
+		5E3CB4382320136900928437 /* EventDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E3CB4372320136800928437 /* EventDetailsView.xib */; };
+		5E3CB43A2320137600928437 /* EventDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3CB4392320137600928437 /* EventDetailsView.swift */; };
 		5E44E5A82289808400865A85 /* PlatformAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E44E5992289808200865A85 /* PlatformAPI.swift */; };
 		5E4A7E85222B9D0900A97968 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4A7E81222B9D0900A97968 /* Constants.swift */; };
 		5E4A7E87222B9D0900A97968 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4A7E83222B9D0900A97968 /* AppConstants.swift */; };
@@ -883,6 +885,8 @@
 		5E395A2C2065613800A6B779 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		5E3C72FB2174EC6500DE6F7D /* InvestWithdrawConfirmView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvestWithdrawConfirmView.xib; sourceTree = "<group>"; };
 		5E3C72FD2174EC6E00DE6F7D /* InvestWithdrawConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestWithdrawConfirmView.swift; sourceTree = "<group>"; };
+		5E3CB4372320136800928437 /* EventDetailsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventDetailsView.xib; sourceTree = "<group>"; };
+		5E3CB4392320137600928437 /* EventDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsView.swift; sourceTree = "<group>"; };
 		5E44E5992289808200865A85 /* PlatformAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatformAPI.swift; sourceTree = "<group>"; };
 		5E4A7E81222B9D0900A97968 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5E4A7E82222B9D0900A97968 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -1972,6 +1976,24 @@
 			path = "Program Details";
 			sourceTree = "<group>";
 		};
+		5E3CB43B2320137D00928437 /* Event */ = {
+			isa = PBXGroup;
+			children = (
+				5E3CB4392320137600928437 /* EventDetailsView.swift */,
+				5E3CB4372320136800928437 /* EventDetailsView.xib */,
+			);
+			path = Event;
+			sourceTree = "<group>";
+		};
+		5E3CB43C2320138A00928437 /* Trade */ = {
+			isa = PBXGroup;
+			children = (
+				5E86BFDD22B7FFC70019DC85 /* TradeDetailView.swift */,
+				5E86BFDC22B7FFC60019DC85 /* TradeDetailView.xib */,
+			);
+			path = Trade;
+			sourceTree = "<group>";
+		};
 		5E4A7E80222B9D0900A97968 /* Config */ = {
 			isa = PBXGroup;
 			children = (
@@ -2413,8 +2435,8 @@
 			isa = PBXGroup;
 			children = (
 				5E7A6A8A214020EE005DEEBD /* BottomSheet.swift */,
-				5E86BFDD22B7FFC70019DC85 /* TradeDetailView.swift */,
-				5E86BFDC22B7FFC60019DC85 /* TradeDetailView.xib */,
+				5E3CB43B2320137D00928437 /* Event */,
+				5E3CB43C2320138A00928437 /* Trade */,
 				5ED0F32F22CE4FF200F3F9F0 /* Commissions */,
 				5EF16D6A21E8C4BF00FF55B8 /* Selected Chart Assets */,
 				5ED645F221C06A0E0044AC1D /* About Level */,
@@ -3607,6 +3629,7 @@
 				5E1CF821218B71D100541C70 /* Montserrat-SemiBold.ttf in Resources */,
 				5E6845E321EF8B4400DA8607 /* DateSectionTableHeaderView.xib in Resources */,
 				5E27EC49218758AC00C6CF5C /* FundAssetTableViewCell.xib in Resources */,
+				5E3CB4382320136900928437 /* EventDetailsView.xib in Resources */,
 				5E734256214AC7E200C4483E /* InRequestsTableViewCell.xib in Resources */,
 				5E1CF820218B71D100541C70 /* Montserrat-Regular.ttf in Resources */,
 				5E8340DC207E3279004A29F1 /* Program.storyboard in Resources */,
@@ -4162,6 +4185,7 @@
 				5ED0C9182091144200C83F23 /* PlateTableViewCell.swift in Sources */,
 				5EDAA6C522E4FDB700F7BF71 /* ProgramLevelInfo.swift in Sources */,
 				5EAD350E214FD58D0057450C /* ProfitViewController.swift in Sources */,
+				5E3CB43A2320137600928437 /* EventDetailsView.swift in Sources */,
 				FC140FE72030168100B71E7F /* Extensions.swift in Sources */,
 				5EDAA68122E4FDB600F7BF71 /* WalletTransaction.swift in Sources */,
 				5EDAA6EB22E4FDB700F7BF71 /* IOsAppVersion.swift in Sources */,
@@ -4807,8 +4831,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.4.0;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "\"-DMANAGER\"";
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor;
@@ -4893,8 +4918,9 @@
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.4.0;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Onone";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "\"-DINVESTOR\"";
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor;
@@ -4971,8 +4997,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.4.0;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "\"-DINVESTOR\"";
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor;
@@ -5049,8 +5076,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.4.0;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "\"-DMANAGER\"";
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor;

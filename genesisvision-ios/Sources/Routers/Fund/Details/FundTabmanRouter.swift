@@ -68,7 +68,7 @@ class FundTabmanRouter: TabmanRouter {
         
         let viewController = FundReallocateHistoryViewController()
         router.currentController = viewController
-        let viewModel = FundReallocateHistoryViewModel(withRouter: router, fundId: fundId, reloadDataProtocol: viewController)
+        let viewModel = FundReallocateHistoryViewModel(withRouter: router, fundId: fundId, reloadDataProtocol: viewController, delegate: viewController)
         viewController.viewModel = viewModel
         
         return viewController

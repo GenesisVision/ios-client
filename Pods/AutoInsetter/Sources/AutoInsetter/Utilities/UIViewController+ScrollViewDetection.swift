@@ -38,9 +38,15 @@ internal extension UIViewController {
     func forEachEmbeddedScrollView(_ action: (UIScrollView) -> Void) {
         for scrollView in self.embeddedScrollViews {
             guard let scrollView = scrollView else { continue }
-            guard !scrollView.isBeingInteracted else { continue }
             
             action(scrollView)
         }
+    }
+    
+    func shouldEvaluateEmbeddedScrollViews() -> Bool {
+        if self is UIPageViewController { // Ignore UIPageViewController
+            return false
+        }
+        return true
     }
 }

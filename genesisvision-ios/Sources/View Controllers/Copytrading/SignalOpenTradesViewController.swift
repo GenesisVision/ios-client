@@ -186,6 +186,7 @@ extension SignalOpenTradesViewController: ReloadDataProtocol {
     func didReloadData() {
         hideAll()
         reloadData()
+        tabmanBarItems?.forEach({ $0.badgeValue = "\(viewModel.totalCount)" })
     }
 }
 

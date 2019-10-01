@@ -23,9 +23,6 @@ class ChartsViewController: BaseTabmanViewController<ChartsTabmanViewModel> {
         }
         
         self.dataSource = pageboyDataSource
-        
-        // configure the bar
-        self.bar.items = [Item(title: "Portfolio")]
     }
 
     // MARK: - Public methods

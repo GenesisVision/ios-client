@@ -17,13 +17,14 @@ final class SearchTabmanViewModel: TabmanViewModel {
     var take = ApiKeys.take
     
     // MARK: - Init
-    init(withRouter router: Router, tabmanViewModelDelegate: TabmanViewModelDelegate? = nil) {
-        super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0, tabmanViewModelDelegate: tabmanViewModelDelegate)
+    init(withRouter router: Router) {
+        super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0)
         
         title = "Search"
-        items = [TabmanBar.Item(title: "Programs"),
-                 TabmanBar.Item(title: "Funds"),
-                 TabmanBar.Item(title: "Managers")]
+        
+        items = [TMBarItem(title: "Programs"),
+                 TMBarItem(title: "Funds"),
+                 TMBarItem(title: "Managers")]
         
         font = UIFont.getFont(.semibold, size: 16)
     }

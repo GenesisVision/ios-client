@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3A4A3B7CB9EC0D54334B9E5ED71838DE"
+               BlueprintIdentifier = "98525C980E31AD023453D945504DD676"
                BlueprintName = "AutoInsetter"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "AutoInsetter.framework">

@@ -29,7 +29,6 @@ final class DashboardProgramListViewModel: ListViewModelProtocol {
     var take = ApiKeys.take
     var totalCount = 0 {
         didSet {
-            title = totalCount > 0 ? "Programs \(totalCount)" : "Programs"
         }
     }
     

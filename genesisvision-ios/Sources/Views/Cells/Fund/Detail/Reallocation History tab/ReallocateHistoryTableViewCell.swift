@@ -8,9 +8,25 @@
 
 import UIKit
 
+protocol ReallocateHistoryTableViewCellProtocol: class {
+    func didTapSeeAllButton(_ index: Int)
+}
+
 class ReallocateHistoryTableViewCell: UITableViewCell {
     // MARK: - Labels
-    @IBOutlet weak var dateLabel: SubtitleLabel!
+    var index: Int?
+    
+    weak var delegate: ReallocateHistoryTableViewCellProtocol?
+    
+    @IBOutlet  weak var dateLabel: SubtitleLabel!
+    @IBOutlet weak var seeAllButton: UIButton! {
+        didSet {
+            seeAllButton.setTitleColor(UIColor.Common.white, for: .normal)
+            seeAllButton.titleLabel?.font = UIFont.getFont(.regular, size: 16.0)
+            seeAllButton.isHidden = true
+        }
+    }
+    @IBOutlet weak var stackView: UIStackView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -18,5 +34,10 @@ class ReallocateHistoryTableViewCell: UITableViewCell {
         backgroundColor = UIColor.BaseView.bg
         contentView.backgroundColor = UIColor.BaseView.bg
         selectionStyle = .none
+    }
+    
+    @IBAction func seeAllButtonAction(_ sender: UIButton) {
+        guard let index = index else { return }
+        delegate?.didTapSeeAllButton(index)
     }
 }

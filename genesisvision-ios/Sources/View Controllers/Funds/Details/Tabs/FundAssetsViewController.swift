@@ -122,6 +122,7 @@ extension FundAssetsViewController: UITableViewDelegate, UITableViewDataSource {
 extension FundAssetsViewController: ReloadDataProtocol {
     func didReloadData() {
         reloadData()
+        tabmanBarItems?.forEach({ $0.badgeValue = "\(viewModel.totalCount)" })
     }
 }
 

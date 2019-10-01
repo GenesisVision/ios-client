@@ -28,10 +28,17 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4QL-yP-bTT">
-                        <rect key="frame" x="30" y="32" width="405" height="50.5"/>
+                        <rect key="frame" x="20" y="8" width="425" height="98.5"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UserName" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7PB-5T-AYa" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="66.5" height="75.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="14"/>
+                                <color key="textColor" red="0.3422979712" green="0.39760923390000003" blue="0.46281796689999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="by " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XGm-8h-JBW" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="15.5" height="15"/>
+                                <rect key="frame" x="0.0" y="83.5" width="15.5" height="15"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="aFe-mv-D3h"/>
@@ -40,21 +47,14 @@
                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UserName" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7PB-5T-AYa" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="23" width="66.5" height="27.5"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="14"/>
-                                <color key="textColor" red="0.3422979712" green="0.39760923390000003" blue="0.46281796689999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="4QL-yP-bTT" firstAttribute="leading" secondItem="e5N-M4-qQC" secondAttribute="leading" constant="30" id="c2i-kg-WM7"/>
-                    <constraint firstAttribute="bottom" secondItem="4QL-yP-bTT" secondAttribute="bottom" constant="32" id="tS2-D1-RCY"/>
-                    <constraint firstItem="4QL-yP-bTT" firstAttribute="top" secondItem="e5N-M4-qQC" secondAttribute="top" constant="32" id="u34-K4-vqx"/>
-                    <constraint firstAttribute="trailing" secondItem="4QL-yP-bTT" secondAttribute="trailing" constant="30" id="y3B-pd-dL1"/>
+                    <constraint firstItem="4QL-yP-bTT" firstAttribute="leading" secondItem="e5N-M4-qQC" secondAttribute="leading" constant="20" id="c2i-kg-WM7"/>
+                    <constraint firstAttribute="bottom" secondItem="4QL-yP-bTT" secondAttribute="bottom" constant="8" id="tS2-D1-RCY"/>
+                    <constraint firstItem="4QL-yP-bTT" firstAttribute="top" secondItem="e5N-M4-qQC" secondAttribute="top" constant="8" id="u34-K4-vqx"/>
+                    <constraint firstAttribute="trailing" secondItem="4QL-yP-bTT" secondAttribute="trailing" constant="20" id="y3B-pd-dL1"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="mpg-34-OL4"/>

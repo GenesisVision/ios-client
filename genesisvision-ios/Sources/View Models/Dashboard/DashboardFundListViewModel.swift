@@ -31,7 +31,6 @@ final class DashboardFundListViewModel: ListViewModelProtocol {
     var take = ApiKeys.take
     var totalCount = 0 {
         didSet {
-            title = totalCount > 0 ? "Funds \(totalCount)" : "Funds"
         }
     }
     

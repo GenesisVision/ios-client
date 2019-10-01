@@ -22,6 +22,6 @@ target 'genesisvision-ios' do
     pod 'Crashlytics'
     
     pod 'ReachabilitySwift'
-    pod 'Tabman', '~> 1.0'
+    pod 'Tabman', '~> 2.6'
     pod 'NotificationBannerSwift'
 end

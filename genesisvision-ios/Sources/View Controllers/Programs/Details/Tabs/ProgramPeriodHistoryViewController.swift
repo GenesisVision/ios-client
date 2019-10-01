@@ -118,5 +118,6 @@ extension ProgramPeriodHistoryViewController: UITableViewDelegate, UITableViewDa
 extension ProgramPeriodHistoryViewController: ReloadDataProtocol {
     func didReloadData() {
         reloadData()
+        tabmanBarItems?.forEach({ $0.badgeValue = "\(viewModel.totalCount)" })
     }
 }

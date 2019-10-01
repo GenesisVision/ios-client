@@ -19,8 +19,8 @@ final class WalletTabmanViewModel: TabmanViewModel {
     
     var walletType: WalletType = .all
     // MARK: - Init
-    init(withRouter router: Router, wallet: WalletData? = nil, account: CopyTradingAccountInfo? = nil, tabmanViewModelDelegate: TabmanViewModelDelegate? = nil, walletType: WalletType) {
-        super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0, tabmanViewModelDelegate: tabmanViewModelDelegate)
+    init(withRouter router: Router, wallet: WalletData? = nil, account: CopyTradingAccountInfo? = nil, walletType: WalletType) {
+        super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0)
         
         self.wallet = wallet
         self.account = account
@@ -36,9 +36,9 @@ final class WalletTabmanViewModel: TabmanViewModel {
                 self.title = title
             }
             
-            items = [TabmanBar.Item(title: "Balance"),
-                     TabmanBar.Item(title: "Transactions"),
-                     TabmanBar.Item(title: "Deposits/Withdrawals")]
+            items = [TMBarItem(title: "Balance"),
+                     TMBarItem(title: "Transactions"),
+                     TMBarItem(title: "Deposits/Withdrawals")]
             
             dataSource = WalletPageboyViewControllerDataSource(router: router, wallet: wallet)
         case .account:
@@ -48,23 +48,23 @@ final class WalletTabmanViewModel: TabmanViewModel {
                 self.title = title
             }
             
-            items = [TabmanBar.Item(title: "Balance"),
-                     TabmanBar.Item(title: "Open trades"),
-                     TabmanBar.Item(title: "Trades history"),
-                     TabmanBar.Item(title: "Trading log")]
+            items = [TMBarItem(title: "Balance"),
+                     TMBarItem(title: "Open trades"),
+                     TMBarItem(title: "Trades history"),
+                     TMBarItem(title: "Trading log")]
             
             dataSource = WalletCopytradingPageboyViewControllerDataSource(router: router, account: account)
         case .all:
             self.title = "Wallets"
 
-            items = [TabmanBar.Item(title: "Balance"), TabmanBar.Item(title: "My Wallets")]
+            items = [TMBarItem(title: "Balance"), TMBarItem(title: "My Wallets")]
 
             if signalEnable {
-                items?.append(TabmanBar.Item(title: "Copytrading accounts"))
+                items?.append(TMBarItem(title: "Copytrading accounts"))
             }
     
-            items?.append(contentsOf: [TabmanBar.Item(title: "Transactions"),
-                                       TabmanBar.Item(title: "Deposits/Withdrawals")])
+            items?.append(contentsOf: [TMBarItem(title: "Transactions"),
+                                       TMBarItem(title: "Deposits/Withdrawals")])
             
             dataSource = WalletPageboyViewControllerDataSource(router: router, wallet: nil)
         }

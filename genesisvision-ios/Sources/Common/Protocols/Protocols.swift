@@ -215,6 +215,7 @@ extension UIViewControllerWithBottomView where Self: BaseViewController {
 
 protocol WalletListViewModelProtocol {
     var title: String { get }
+    var totalCount: Int { get }
     
     var cellModelsForRegistration: [CellViewAnyModel.Type] { get }
     var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] { get }

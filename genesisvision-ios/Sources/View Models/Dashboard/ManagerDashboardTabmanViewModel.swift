@@ -6,18 +6,21 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
+import Tabman
+
 final class ManagerDashboardTabmanViewModel: TabmanViewModel {
     // MARK: - Init
-    init(withRouter router: Router, tabmanViewModelDelegate: TabmanViewModelDelegate) {
-        super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0, tabmanViewModelDelegate: tabmanViewModelDelegate)
+    init(withRouter router: Router) {
+        super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0)
     }
     
     // MARK: - Private methods
     func setup() {
+        self.items = []
         if let router = router as? ManagerDashboardTabmanRouter {
             if let vc = router.getDashboard() {
                 self.addController(vc)
-                self.addItem(vc.viewModel.title)
+                self.items?.append(TMBarItem(title: vc.viewModel.title.uppercased()))
             }
             
             reloadPages()

@@ -197,5 +197,6 @@ extension SignalTradesViewController: UITableViewDelegate, UITableViewDataSource
 extension SignalTradesViewController: ReloadDataProtocol {
     func didReloadData() {
         reloadData()
+        tabmanBarItems?.forEach({ $0.badgeValue = "\(viewModel.totalCount)" })
     }
 }

@@ -29,7 +29,10 @@ final class WalletInternalTransactionListViewModel: WalletListViewModelProtocol 
     var dataType: DataType = .api
     var skip = 0            //offset
     var take = ApiKeys.take
-    var totalCount = 0      //total count of programs
+    var totalCount = 0 {
+        didSet {
+        }
+    }
     
     // MARK: - Init
     init(withRouter router: WalletRouter, reloadDataProtocol: ReloadDataProtocol?, wallet: WalletData? = nil) {

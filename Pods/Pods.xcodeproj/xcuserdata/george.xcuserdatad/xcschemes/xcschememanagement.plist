@@ -44,15 +44,30 @@
 			<key>orderHint</key>
 			<integer>20</integer>
 		</dict>
-		<key>FirebaseInstanceID.xcscheme_^#shared#^_</key>
+		<key>FirebaseCoreDiagnostics.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>21</integer>
 		</dict>
-		<key>FirebaseMessaging.xcscheme_^#shared#^_</key>
+		<key>FirebaseInstanceID.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>22</integer>
+		</dict>
+		<key>FirebaseMessaging.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>23</integer>
+		</dict>
+		<key>GoogleDataTransport.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>24</integer>
+		</dict>
+		<key>GoogleDataTransportCCTSupport.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>25</integer>
 		</dict>
 		<key>GoogleToolboxForMac.xcscheme</key>
 		<dict>
@@ -62,7 +77,7 @@
 		<key>GoogleUtilities.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>23</integer>
+			<integer>26</integer>
 		</dict>
 		<key>IQKeyboardManagerSwift.xcscheme</key>
 		<dict>
@@ -107,7 +122,7 @@
 		<key>PKHUD-PKHUDResources.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>24</integer>
+			<integer>27</integer>
 		</dict>
 		<key>PKHUD.xcscheme</key>
 		<dict>

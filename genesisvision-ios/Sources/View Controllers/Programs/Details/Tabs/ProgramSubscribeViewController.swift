@@ -118,7 +118,14 @@ class ProgramSubscribeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = viewModel.followType == .follow ? "Follow trades" : "Unfollow trades"
+        switch viewModel.followType {
+        case .follow:
+            navigationItem.title = "Follow trades"
+        case .unfollow:
+            navigationItem.title = "Unfollow trades"
+        case .edit:
+            navigationItem.title = "Trading settings"
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -129,22 +136,31 @@ class ProgramSubscribeViewController: BaseViewController {
     
     // MARK: - Private methods
     private func setup() {
-        subscriptionStackView.isHidden = viewModel.followType == .unfollow
-        subscribeButton.setTitle(viewModel.followType == .follow ? "Subscribe" : "Submit", for: .normal)
-        subscribeButton.configure(with: viewModel.followType == .follow ? .normal : .darkClear)
+        switch viewModel.followType {
+        case .follow, .edit:
+            subscriptionStackView.isHidden = false
+            subscribeButton.setTitle("Subscribe", for: .normal)
+            subscribeButton.configure(with: .normal)
+        case .unfollow:
+            subscriptionStackView.isHidden = true
+            subscribeButton.setTitle("Submit", for: .normal)
+            subscribeButton.configure(with: .darkClear)
+        }
         
         updateUI()
     }
-    
     
     private func updateUI() {
         self.typeValueLabel.text = viewModel.getSelected()
         self.typeDescriptionLabel.text = viewModel.getSelectedDescription()
         
-        if viewModel.followType == .follow {
+        switch viewModel.followType {
+        case .follow, .edit:
             self.volumeTextField.text = viewModel.volume.toString()
             self.toleranceTextField.text = viewModel.tolerance.toString()
             self.usdTextField.text = viewModel.usd.toString()
+        case .unfollow:
+            break
         }
         
         //TODO: approximate value
@@ -161,13 +177,15 @@ class ProgramSubscribeViewController: BaseViewController {
             viewModel.subscribe(completion: completion)
         case .unfollow:
             viewModel.unsubscribe(completion: completion)
+        case .edit:
+            viewModel.update(completion: completion)
         }
     }
     
     private func updatedMode() {
         typeValueLabel.text = viewModel.getSelected()
         
-        guard viewModel.followType == .follow else { return }
+        if viewModel.followType == .unfollow { return }
         
         usdStackView.isHidden = true
         volumeStackView.isHidden = true
@@ -256,6 +274,8 @@ class ProgramSubscribeViewController: BaseViewController {
             showFollowTypes()
         case .unfollow:
             showUnfollowTypes()
+        case .edit:
+            showFollowTypes()
         }
     }
     

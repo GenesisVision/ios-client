@@ -86,6 +86,7 @@ class WalletTransactionListViewController: BaseViewControllerWithTableView {
 //        showProgressHUD()
         viewModel.fetch { [weak self] (result) in
             self?.hideAll()
+            self?.tabmanBarItems?.forEach({ $0.badgeValue = "\(self?.viewModel.totalCount)" })
         }
     }
     
@@ -173,6 +174,7 @@ extension WalletTransactionListViewController: ReloadDataProtocol {
     func didReloadData() {
         hideAll()
         reloadData()
+        tabmanBarItems?.forEach({ $0.badgeValue = "\(viewModel.totalCount)" })
     }
 }
 
@@ -187,6 +189,7 @@ extension WalletTransactionListViewController: WalletTransactionViewProtocol {
     func closeButtonDidPress() {
         bottomSheetController.dismiss()
     }
+    
     func resendButtonDidPress(_ uuid: UUID) {
         bottomSheetController.dismiss()
         showProgressHUD()

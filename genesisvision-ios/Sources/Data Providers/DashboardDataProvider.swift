@@ -26,7 +26,7 @@ class DashboardDataProvider: DataProvider {
         }
     }
     
-    static func getDashboardPortfolioEvents(with programId: String? = nil, from: Date? = nil, to: Date? = nil, type: InvestorAPI.EventType_v10InvestorInvestmentsEventsGet? = nil, assetType: InvestorAPI.AssetType_v10InvestorInvestmentsEventsGet? = nil, eventLocation: InvestorAPI.EventLocation_v10InvestorInvestmentsEventsGet, skip: Int, take: Int, completion: @escaping (_ events: InvestmentEventViewModels?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getEvents(with programId: String? = nil, from: Date? = nil, to: Date? = nil, type: InvestorAPI.EventType_v10InvestorInvestmentsEventsGet? = nil, assetType: InvestorAPI.AssetType_v10InvestorInvestmentsEventsGet? = nil, eventLocation: InvestorAPI.EventLocation_v10InvestorInvestmentsEventsGet, skip: Int, take: Int, completion: @escaping (_ events: InvestmentEventViewModels?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
         guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         

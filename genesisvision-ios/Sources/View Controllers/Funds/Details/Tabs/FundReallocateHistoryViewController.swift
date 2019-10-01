@@ -115,5 +115,29 @@ extension FundReallocateHistoryViewController: UITableViewDelegate, UITableViewD
 extension FundReallocateHistoryViewController: ReloadDataProtocol {
     func didReloadData() {
         reloadData()
+        tabmanBarItems?.forEach({ $0.badgeValue = "\(viewModel.totalCount)" })
+    }
+}
+
+extension FundReallocateHistoryViewController: ReallocateHistoryTableViewCellProtocol {
+    func didTapSeeAllButton(_ index: Int) {
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.initializeHeight = 300
+        
+        bottomSheetController.addNavigationBar("Assets")
+        
+        viewModel.didTapSeeAll(index)
+        
+        bottomSheetController.addTableView { [weak self] tableView in
+            viewModel.fundAssetsDelegateManager?.tableView = tableView
+            tableView.separatorStyle = .none
+            
+            guard let fundAssetsDelegateManager = self?.viewModel.fundAssetsDelegateManager else { return }
+            tableView.registerNibs(for: fundAssetsDelegateManager.cellModelsForRegistration)
+            tableView.delegate = fundAssetsDelegateManager
+            tableView.dataSource = fundAssetsDelegateManager
+        }
+        
+        bottomSheetController.present()
     }
 }

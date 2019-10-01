@@ -7,6 +7,7 @@
 //
 
 import UIKit.UIColor
+import Tabman
 
 final class ProgramTabmanViewModel: TabmanViewModel {
     // MARK: - Variables
@@ -22,10 +23,10 @@ final class ProgramTabmanViewModel: TabmanViewModel {
     }
     
     // MARK: - Init
-    init(withRouter router: Router, programId: String, tabmanViewModelDelegate: TabmanViewModelDelegate) {
+    init(withRouter router: Router, programId: String) {
         self.programId = programId
         
-        super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0, tabmanViewModelDelegate: tabmanViewModelDelegate)
+        super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0)
         
         сurrency = ProgramsAPI.CurrencySecondary_v10ProgramsByIdGet(rawValue: getSelectedCurrency())
         title = "Program Details"
@@ -52,38 +53,40 @@ final class ProgramTabmanViewModel: TabmanViewModel {
             self.programDetailsFull = viewModel
         }
         
+        self.items = []
+        
         if let router = router as? ProgramTabmanRouter, let programDetailsFull = programDetailsFull {
             if let vc = router.getInfo(with: programDetailsFull) {
-                self.addItem(vc.viewModel.title.uppercased())
+                self.items?.append(TMBarItem(title: vc.viewModel.title.uppercased()))
                 self.addController(vc)
             }
             
             if let vc = router.getProfit(with: programId) {
-                self.addItem(vc.viewModel.title.uppercased())
+                self.items?.append(TMBarItem(title: vc.viewModel.title.uppercased()))
                 self.addController(vc)
             }
             
             if let vc = router.getBalance(with: programId) {
-                self.addItem(vc.viewModel.title.uppercased())
+                self.items?.append(TMBarItem(title: vc.viewModel.title.uppercased()))
                 self.addController(vc)
             }
             
             if let tradesCount = programDetailsFull.statistic?.tradesCount, tradesCount > 0, let currency = programDetailsFull.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency), let tradesVC = router.getTrades(with: programId, currencyType: currencyType), let openTradesVC = router.getTradesOpen(with: programId, currencyType: currencyType) {
-                self.addItem(openTradesVC.viewModel.title.uppercased())
+                self.items?.append(TMBarItem(title: openTradesVC.viewModel.title.uppercased()))
                 self.addController(openTradesVC)
                 
-                self.addItem(tradesVC.viewModel.title.uppercased())
+                self.items?.append(TMBarItem(title: tradesVC.viewModel.title.uppercased()))
                 self.addController(tradesVC)
             }
             
             if let currency = programDetailsFull.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency), let vc = router.getPeriodHistory(with: programId, currency: currencyType) {
-                self.addItem(vc.viewModel.title.uppercased())
+                self.items?.append(TMBarItem(title: vc.viewModel.title.uppercased()))
                 self.addController(vc)
             }
             
             if let _ = programDetailsFull.personalProgramDetails, let vc = router.getEvents(with: programId) {
+                self.items?.append(TMBarItem(title: vc.viewModel.title.uppercased()))
                 self.addController(vc)
-                self.addItem(vc.viewModel.title.uppercased())
             }
             
             reloadPages()

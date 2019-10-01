@@ -102,7 +102,7 @@ class CommissionsView: UIView {
     }
     
     
-    func addStackViews(commisionTitle: String, amount: Double, currencyType: CurrencyType) {
+    private func addStackViews(commisionTitle: String, amount: Double, currencyType: CurrencyType) {
         let commisionTitleLabel = SubtitleLabel()
         commisionTitleLabel.font = UIFont.getFont(.regular, size: 16.0)
         

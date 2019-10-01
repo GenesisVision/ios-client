@@ -11,8 +11,8 @@ final class CreateProgramTabmanViewModel: TabmanViewModel {
     var brokersViewModel: BrokersInfo?
     
     // MARK: - Init
-    init(withRouter router: Router, tabmanViewModelDelegate: TabmanViewModelDelegate) {
-        super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0, tabmanViewModelDelegate: tabmanViewModelDelegate)
+    init(withRouter router: Router) {
+        super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0)
         
         title = "Create Program"
         isProgressive = true

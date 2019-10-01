@@ -34,7 +34,10 @@ final class ListViewModel: ListViewModelProtocol {
 
     var skip = 0
     var take = ApiKeys.take
-    var totalCount = 0
+    var totalCount = 0 {
+        didSet {
+        }
+    }
 
     var showFacets = false
 

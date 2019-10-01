@@ -17,15 +17,14 @@ final class RatingTabmanViewModel: TabmanViewModel {
     var showFacets = false
     
     // MARK: - Init
-    init(withRouter router: Router, tabmanViewModelDelegate: TabmanViewModelDelegate? = nil, searchBarEnable: Bool = false, showFacets: Bool = false) {
-        super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0, tabmanViewModelDelegate: tabmanViewModelDelegate)
+    init(withRouter router: Router, searchBarEnable: Bool = false, showFacets: Bool = false) {
+        super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0)
         
         title = "Rating"
         font = UIFont.getFont(.semibold, size: 16)
         
         self.searchBarEnable = searchBarEnable
         self.showFacets = showFacets
-        self.tabmanViewModelDelegate = tabmanViewModelDelegate
         self.dataSource = RatingPageboyViewControllerDataSource(router: router, showFacets: showFacets)
         
         ProgramsDataProvider.getLevelUpSummary(completion: { [weak self] (levelUpSummary) in
@@ -47,15 +46,14 @@ final class RatingTabmanViewModel: TabmanViewModel {
         self.filterModel.levelUpSummary = levelUpSummary
         self.dataSource = RatingPageboyViewControllerDataSource(router: router, showFacets: showFacets)
         
-        var items: [TabmanBar.Item] = []
+        var items: [TMBarItem] = []
         for data in levelData {
             if let level = data.level {
-                items.append(TabmanBar.Item(title: "\(level) ⤍ \(level + 1)"))
+                items.append(TMBarItem(title: "\(level) ⤍ \(level + 1)"))
             }
         }
         
         self.items = items
-        tabmanViewModelDelegate?.updatedItems()
     }
     
     func showAboutLevels() {

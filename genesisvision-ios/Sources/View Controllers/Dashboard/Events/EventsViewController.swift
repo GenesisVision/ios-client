@@ -32,8 +32,6 @@ class EventsViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        viewModel.reloadDataProtocol = self
-        
         headerLabel.text = viewModel.title
         
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {

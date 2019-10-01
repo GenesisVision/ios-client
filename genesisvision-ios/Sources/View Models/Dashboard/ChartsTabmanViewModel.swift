@@ -13,10 +13,11 @@ class ChartsTabmanViewModel: TabmanViewModel {
     var dashboardPortfolioChartValue: DashboardChartValue?
     
     // MARK: - Init
-    init(withRouter router: Router, tabmanViewModelDelegate: TabmanViewModelDelegate? = nil, dashboardPortfolioChartValue: DashboardChartValue?) {
-        super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0, tabmanViewModelDelegate: tabmanViewModelDelegate)
+    init(withRouter router: Router, dashboardPortfolioChartValue: DashboardChartValue?) {
+        super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0)
         
         self.dashboardPortfolioChartValue = dashboardPortfolioChartValue
         font = UIFont.getFont(.semibold, size: 16)
+        items = [TMBarItem(title: "Portfolio")]
     }
 }

@@ -70,7 +70,7 @@ class ManagerViewController: BaseViewController {
             segue.identifier == "ManagerTabmanViewControllerSegue" {
             
             let router = ManagerTabmanRouter(parentRouter: self.viewModel.router, tabmanViewController: tabmanViewController)
-            let viewModel = ManagerTabmanViewModel(withRouter: router, managerId: self.viewModel.managerId, tabmanViewModelDelegate: tabmanViewController)
+            let viewModel = ManagerTabmanViewModel(withRouter: router, managerId: self.viewModel.managerId)
             tabmanViewController.viewModel = viewModel
             
             self.viewModel?.router?.managerDetailsTabmanViewController = tabmanViewController

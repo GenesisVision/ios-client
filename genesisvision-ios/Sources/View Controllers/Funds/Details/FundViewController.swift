@@ -75,7 +75,7 @@ class FundViewController: BaseViewController {
             tabmanViewController.fundInfoViewControllerProtocol = self
             
             let router = FundTabmanRouter(parentRouter: self.viewModel.router, tabmanViewController: tabmanViewController)
-            let viewModel = FundTabmanViewModel(withRouter: router, fundId: self.viewModel.fundId, tabmanViewModelDelegate: tabmanViewController)
+            let viewModel = FundTabmanViewModel(withRouter: router, fundId: self.viewModel.fundId)
             viewModel.favoriteStateUpdatedProtocol = self
             tabmanViewController.viewModel = viewModel
             

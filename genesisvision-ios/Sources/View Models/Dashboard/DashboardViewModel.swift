@@ -27,12 +27,14 @@ final class DashboardViewModel {
             if let vc = router.chartsViewController, let pageboyDataSource = vc.pageboyDataSource {
                 pageboyDataSource.update(dashboardPortfolioChartValue: dashboard.chart, programRequests: dashboard.requests)
             }
-            
-            if let vc = router.eventsViewController, let viewModel = vc.viewModel {
-                viewModel.dashboardPortfolioEvents = dashboard.events
-            }
         }
     }
+    private var events: [InvestmentEventViewModel]? {
+        didSet {
+            eventListViewModel?.events = events
+        }
+    }
+    
     private weak var reloadDataProtocol: ReloadDataProtocol?
     
     var assetsTabmanViewModel: AssetsTabmanViewModel?
@@ -50,7 +52,7 @@ final class DashboardViewModel {
         self.reloadDataProtocol = router.programListViewController
         assetsTabmanViewModel = AssetsTabmanViewModel(withRouter: router)
         chartsTabmanViewModel = ChartsTabmanViewModel(withRouter: router, dashboardPortfolioChartValue: dashboard?.chart)
-        eventListViewModel = EventListViewModel(withRouter: router, dashboardPortfolioEvents: dashboard?.events)
+        eventListViewModel = EventListViewModel(withRouter: router, events: events)
         
         NotificationCenter.default.addObserver(self, selector: #selector(enableTwoFactorNotification(notification:)), name: .twoFactorEnable, object: nil)
     }
@@ -75,6 +77,10 @@ final class DashboardViewModel {
         if let assetId = request.programId?.uuidString, let type = request.programType, let assetType = AssetType(rawValue: type.rawValue) {
             router.showAssetDetails(with: assetId, assetType: assetType)
         }
+    }
+    
+    func didSelectEvent(at assetId: String, assetType: AssetType) {
+        router.showAssetDetails(with: assetId, assetType: assetType)
     }
     // MARK: - Private methods
     @objc private func enableTwoFactorNotification(notification: Notification) {
@@ -118,41 +124,44 @@ extension DashboardViewModel {
     // MARK: - Public methods
     func refresh(completion: @escaping CompletionBlock) {
         updatePlatformInfo()
-        updateList()
         fetch(completion)
+        fetchEvents(completion)
     }
-    
     // MARK: - Private methods
     private func updatePlatformInfo() {
         PlatformManager.shared.getPlatformInfo(completion: { (model) in })
     }
     
-    private func updateList() {
+    func updateProgramList() {
         if let viewModel = router.programListViewController?.viewModel {
             viewModel.filterModel.dateRangeModel.dateFrom = dateFrom
             viewModel.filterModel.dateRangeModel.dateTo = dateTo
             
             router.programListViewController?.fetch()
         }
-        
+    }
+    func updateFundList() {
         if let viewModel = router.fundListViewController?.viewModel {
             viewModel.filterModel.dateRangeModel.dateFrom = dateFrom
             viewModel.filterModel.dateRangeModel.dateTo = dateTo
             
             router.fundListViewController?.fetch()
         }
-        
+    }
+    
+    func updateSignals() {
         if signalEnable {
             router.signalListViewController?.fetch()
-        }
-        
-        if signalEnable {
             router.signalOpenTradesViewController?.fetch()
-        }
-        
-        if signalEnable {
             router.signalTradesViewController?.fetch()
+            router.signalTradingLogViewController?.fetch()
         }
+    }
+    
+    func updateLists() {
+        updateProgramList()
+        updateFundList()
+        updateSignals()
     }
     
     private func fetch(_ completion: @escaping CompletionBlock) {
@@ -165,6 +174,18 @@ extension DashboardViewModel {
         DashboardDataProvider.getDashboardSummary(chartCurrency: chartCurrency, from: dateFrom, to: dateTo, balancePoints: balancePoints, programsPoints: programsPoints, eventsTake: eventsTake, requestsSkip: skip, requestsTake: requestsTake, completion: { [weak self] (dashboard) in
             guard let dashboard = dashboard else { return completion(.failure(errorType: .apiError(message: nil))) }
             self?.dashboard = dashboard
+            
+            completion(.success)
+        }, errorCompletion: completion)
+    }
+    
+    private func fetchEvents(_ completion: @escaping CompletionBlock) {
+        DashboardDataProvider.getEvents(with: nil, from: nil, to: nil, eventLocation: .dashboard, skip: skip, take: eventsTake, completion: { [weak self] (portfolioEvents) in
+            guard portfolioEvents != nil else {
+                return ErrorHandler.handleApiError(error: nil, completion: completion)
+            }
+            
+            self?.events = portfolioEvents?.events
             
             completion(.success)
         }, errorCompletion: completion)

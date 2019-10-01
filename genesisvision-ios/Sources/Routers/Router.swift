@@ -383,7 +383,7 @@ extension Router {
     func showCreateProgramVC() {
         let tabmanViewController = CreateProgramTabmanViewController()
         let router = CreateProgramTabmanRouter(parentRouter: self, tabmanViewController: tabmanViewController)
-        let viewModel = CreateProgramTabmanViewModel(withRouter: router, tabmanViewModelDelegate: tabmanViewController)
+        let viewModel = CreateProgramTabmanViewModel(withRouter: router)
         tabmanViewController.viewModel = viewModel
         tabmanViewController.hidesBottomBarWhenPushed = true
         
@@ -465,7 +465,7 @@ extension Router {
     func getTwoFactorEnableViewController() -> AuthTwoFactorTabmanViewController? {
         let tabmanViewController = AuthTwoFactorTabmanViewController()
         let router = AuthTwoFactorTabmanRouter(parentRouter: self, tabmanViewController: tabmanViewController)
-        tabmanViewController.viewModel = AuthTwoFactorTabmanViewModel(withRouter: router, tabmanViewModelDelegate: tabmanViewController)
+        tabmanViewController.viewModel = AuthTwoFactorTabmanViewModel(withRouter: router)
         tabmanViewController.hidesBottomBarWhenPushed = true
         
         return tabmanViewController

@@ -14,28 +14,20 @@ protocol TabmanViewModelProtocol {
     func initializeViewControllers()
 }
 
-protocol TabmanViewModelDelegate: class {
-    func updatedItems()
-}
-
 class TabmanViewModel: TabmanViewModelProtocol {
     // MARK: - Variables
     var title: String = ""
-    var items: [TabmanBar.Item]?
+    var items: [TMBarItem]?
     
     var pageboyDataSource: PageboyDataSource!
     
-    weak var tabmanViewModelDelegate: TabmanViewModelDelegate?
-    
-    internal var style: TabmanBar.Style = .scrollingButtonBar
-    internal var location: TabmanBar.Location = .top
+    internal var isButtonType: Bool = true
     internal var bounces = true
     internal var compresses = false
     internal var backgroundColor: UIColor = UIColor.BaseView.bg
     internal var font = UIFont.getFont(.semibold, size: 12)
     internal var isScrollEnabled = true
     internal var isProgressive = false
-    internal var itemDistribution: TabmanBar.Appearance.Layout.ItemDistribution = .leftAligned
     internal var shouldHideWhenSingleItem = false
     var router: Router!
     
@@ -46,11 +38,10 @@ class TabmanViewModel: TabmanViewModelProtocol {
     public private(set) var defaultPage: PageboyViewController.Page? = .first
     
     // MARK: - Init
-    init(withRouter router: Router, viewControllersCount: Int = 1, defaultPage: Int = 0, tabmanViewModelDelegate: TabmanViewModelDelegate?) {
+    init(withRouter router: Router, viewControllersCount: Int = 1, defaultPage: Int = 0) {
         self.router = router
         self.defaultPage = .at(index: defaultPage)
         self.viewControllersCount = viewControllersCount
-        self.tabmanViewModelDelegate = tabmanViewModelDelegate
         
         pageboyDataSource = PageboyDataSource(viewModel: self)
     }
@@ -58,7 +49,6 @@ class TabmanViewModel: TabmanViewModelProtocol {
     // MARK: - Public methods
     func addItem(_ item: String) {
         itemTitles.append(item)
-        tabmanViewModelDelegate?.updatedItems()
     }
     
     func addController(_ viewController: UIViewController) {
@@ -70,7 +60,6 @@ class TabmanViewModel: TabmanViewModelProtocol {
         viewControllers.remove(at: index)
         itemTitles.remove(at: index)
         viewControllersCount = viewControllers.count
-        tabmanViewModelDelegate?.updatedItems()
     }
     
     func removeAllControllers() {
@@ -81,7 +70,7 @@ class TabmanViewModel: TabmanViewModelProtocol {
         
     func reloadPages() {
         if let vc = self.router.currentController as? TabmanViewController {
-            vc.reloadPages()
+            vc.reloadData()
         }
         
         if let vc = self.router.currentController as? ProgramTabmanViewController {

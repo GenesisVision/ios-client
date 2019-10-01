@@ -27,7 +27,10 @@ final class ManagerListViewModel: ListViewModelProtocol {
     var chartPointsCount = ApiKeys.equityChartLength
     var skip = 0
     var take = ApiKeys.take
-    var totalCount = 0
+    var totalCount = 0 {
+        didSet {
+        }
+    }
     
     var showFacets = false
     

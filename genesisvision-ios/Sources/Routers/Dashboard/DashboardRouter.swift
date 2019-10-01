@@ -10,7 +10,7 @@ import UIKit.UINavigationController
 
 enum DashboardRouteType {
     case showAssetDetails(assetId: String, assetType: AssetType)
-    case assetList, notificationList, allEvents, requests(programRequests: ProgramRequests?)
+    case assetList, notificationList, allEvents, requests(programRequests: ProgramRequests?), eventDetails(event: InvestmentEventViewModel)
     case showFilterVC(listViewModel: ListViewModelProtocol, filterModel: FilterModel, filterType: FilterType, sortingType: SortingType)
 }
 
@@ -50,6 +50,8 @@ class DashboardRouter: Router, SignalRouterProtocol, ListRouterProtocol {
             showEvents()
         case .requests(let programRequests):
             showRequests(programRequests)
+        case .eventDetails(let event):
+            showEventDetails(event)
         case .showFilterVC(let listViewModel, let filterModel, let filterType, let sortingType):
             showFilterVC(with: listViewModel, filterModel: filterModel, filterType: filterType, sortingType: sortingType)
         }
@@ -62,5 +64,9 @@ class DashboardRouter: Router, SignalRouterProtocol, ListRouterProtocol {
     
     private func showRequests(_ programRequests: ProgramRequests?) {
         dashboardViewController.showRequests(programRequests)
+    }
+    
+    private func showEventDetails(_ event: InvestmentEventViewModel) {
+        dashboardViewController.showDetails(event)
     }
 }

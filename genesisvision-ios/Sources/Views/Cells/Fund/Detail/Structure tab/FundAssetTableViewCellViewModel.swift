@@ -48,3 +48,43 @@ extension FundAssetTableViewCellViewModel: CellViewModel {
     }
 }
 
+struct FundReallocateTableViewCellViewModel {
+    let fundAssetInfo: FundAssetPartWithIcon
+}
+
+extension FundReallocateTableViewCellViewModel: CellViewModel {
+    func setup(on cell: FundAssetTableViewCell) {
+        cell.assetLogoImageView.image = nil
+        
+        if let icon = fundAssetInfo.icon, let fileUrl = getFileURL(fileName: icon) {
+            cell.assetLogoImageView.kf.indicatorType = .activity
+            cell.assetLogoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.fundPlaceholder)
+        }
+        
+        if let name = fundAssetInfo.asset {
+            cell.nameLabel.text = name
+        } else {
+            cell.nameLabel.text = ""
+        }
+        
+        if let asset = fundAssetInfo.name {
+            cell.assetLabel.text = "(\(asset))"
+        } else {
+            cell.assetLabel.text = ""
+        }
+        
+        cell.targetPercentLabel.isHidden = true
+        
+        if let currenctPercent = fundAssetInfo.percent {
+            cell.currentPercentLabel.textAlignment = .right
+            cell.currentPercentLabel.text = currenctPercent.rounded(withType: .undefined).toString() + "%"
+        } else {
+            cell.currentPercentLabel.text = ""
+        }
+        
+        cell.backgroundColor = UIColor.Cell.bg
+        cell.contentView.backgroundColor = UIColor.Cell.bg
+    }
+}
+
+

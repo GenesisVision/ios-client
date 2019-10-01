@@ -24,6 +24,11 @@ class PortfolioEventCollectionViewCell: UICollectionViewCell {
     }
     
     @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var balanceStackView: UIStackView! {
+        didSet {
+            balanceStackView.isHidden = true
+        }
+    }
     @IBOutlet weak var balanceValueLabel: TitleLabel!
     @IBOutlet weak var titleLabel: TitleLabel!
     @IBOutlet weak var dateLabel: SubtitleLabel!

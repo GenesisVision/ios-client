@@ -17,6 +17,9 @@ final class FundReallocateHistoryViewModel {
     
     var router: FundRouter!
     private weak var reloadDataProtocol: ReloadDataProtocol?
+    private weak var delegate: ReallocateHistoryTableViewCellProtocol?
+    
+    var fundAssetsDelegateManager: FundAssetsDelegateManager?
     
     var canFetchMoreResults = true
     var dataType: DataType = .api
@@ -50,14 +53,20 @@ final class FundReallocateHistoryViewModel {
     var isOpenTrades: Bool = false
     
     // MARK: - Init
-    init(withRouter router: FundRouter, fundId: String, reloadDataProtocol: ReloadDataProtocol?) {
+    init(withRouter router: FundRouter, fundId: String, reloadDataProtocol: ReloadDataProtocol?, delegate: ReallocateHistoryTableViewCellProtocol?) {
         self.router = router
         self.fundId = fundId
         self.reloadDataProtocol = reloadDataProtocol
+        self.delegate = delegate
     }
     
     func hideHeader(value: Bool = true) {
         router.fundViewController.hideHeader(value)
+    }
+    
+    func didTapSeeAll(_ index: Int) {
+        guard let parts = viewModels[index].model.parts else { return }
+        self.fundAssetsDelegateManager = FundAssetsDelegateManager(parts)
     }
 }
 
@@ -197,14 +206,54 @@ extension FundReallocateHistoryViewModel {
             
             let totalCount = reallocationsViewModel.total ?? 0
             
-            reallocationsViewModel.reallocations?.forEach({ (model) in
-                let viewModel = CellViewModel(model: model)
+            reallocationsViewModel.reallocations?.enumerated().forEach({ [weak self] (index, model) in
+                let viewModel = CellViewModel(index: index, model: model, delegate: self?.delegate)
                 viewModels.append(viewModel)
             })
             
             completionSuccess(totalCount, viewModels)
             completionError(.success)
         }, errorCompletion: completionError)
+    }
+}
+
+final class FundAssetsDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource {
+    // MARK: - Variables
+    var tableView: UITableView?
+    
+    var parts = [FundAssetPartWithIcon]()
+    var viewModels = [FundReallocateTableViewCellViewModel]()
+    
+    var cellModelsForRegistration: [CellViewAnyModel.Type] {
+        return [FundReallocateTableViewCellViewModel.self]
+    }
+    
+    // MARK: - Lifecycle
+    init(_ parts: [FundAssetPartWithIcon]) {
+        super.init()
+        
+        self.parts = parts
+        parts.forEach({ (part) in
+            viewModels.append(FundReallocateTableViewCellViewModel(fundAssetInfo: part))
+        })
+    }
+    
+    // MARK: - UITableViewDelegate
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return tableView.dequeueReusableCell(withModel: viewModels[indexPath.row], for: indexPath)
+    }
+    
+    // MARK: - UITableViewDataSource
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModels.count
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 1.0
     }
 }
 

@@ -144,6 +144,7 @@ extension SignalListViewController: UIViewControllerPreviewingDelegate {
 extension SignalListViewController: ReloadDataProtocol {
     func didReloadData() {
         reloadData()
+        tabmanBarItems?.forEach({ $0.badgeValue = "\(viewModel.totalCount)" })
     }
 }
 

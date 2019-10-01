@@ -152,5 +152,6 @@ extension SignalTradingLogViewController: UITableViewDelegate, UITableViewDataSo
 extension SignalTradingLogViewController: ReloadDataProtocol {
     func didReloadData() {
         reloadData()
+        tabmanBarItems?.forEach({ $0.badgeValue = "\(viewModel.totalCount)" })
     }
 }

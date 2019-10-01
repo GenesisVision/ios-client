@@ -25,7 +25,6 @@ class AssetsViewController: BaseTabmanViewController<AssetsTabmanViewModel>, UIS
         navigationItem.title = viewModel.title
         
         dataSource = viewModel.dataSource
-        bar.items = viewModel.items
         
         if viewModel.searchBarEnable {
             setupSearchBar()
@@ -59,6 +58,11 @@ class AssetsViewController: BaseTabmanViewController<AssetsTabmanViewModel>, UIS
     
     func scrollToTop() {
         
+    }
+    
+    func increaseBadgeCount() {
+        let count = "123"
+        tabmanBarItems?.forEach({ $0.badgeValue = count })
     }
     
     // MARK: - Private methods

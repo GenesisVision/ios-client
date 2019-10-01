@@ -77,7 +77,7 @@ class ProgramViewController: BaseViewController {
             
             let router = ProgramTabmanRouter(parentRouter: self.viewModel.router, tabmanViewController: tabmanViewController)
             router.programViewController = self
-            let viewModel = ProgramTabmanViewModel(withRouter: router, programId: self.viewModel.programId, tabmanViewModelDelegate: tabmanViewController)
+            let viewModel = ProgramTabmanViewModel(withRouter: router, programId: self.viewModel.programId)
             viewModel.favoriteStateUpdatedProtocol = self
             tabmanViewController.viewModel = viewModel
             

@@ -118,5 +118,6 @@ extension ProgramTradesViewController: UITableViewDelegate, UITableViewDataSourc
 extension ProgramTradesViewController: ReloadDataProtocol {
     func didReloadData() {
         reloadData()
+        tabmanBarItems?.forEach({ $0.badgeValue = "\(viewModel.totalCount)" })
     }
 }

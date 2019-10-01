@@ -26,12 +26,6 @@ class RatingViewController: BaseTabmanViewController<RatingTabmanViewModel> {
         return .lightContent
     }
     
-    override func updatedItems() {
-        dataSource = viewModel.dataSource
-        bar.items = viewModel.items
-        reloadPages()
-    }
-    
     // MARK: - IBAction
     @objc @IBAction func aboutLevelsButtonAction(_ sender: UIButton) {
         viewModel.showAboutLevels()

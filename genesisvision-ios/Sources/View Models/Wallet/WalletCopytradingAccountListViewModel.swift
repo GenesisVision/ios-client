@@ -16,7 +16,7 @@ final class WalletCopytradingAccountListViewModel {
     
     // MARK: - Variables
     var title: String = "Copytrading accounts"
-    
+    var totalCount = 0
     var accounts: [CopyTradingAccountInfo]? {
         didSet {
             router.walletTabmanViewController?.viewModel?.accounts = accounts
@@ -147,6 +147,7 @@ extension WalletCopytradingAccountListViewModel {
             
             self?.accounts = copyTradingAccountsViewModel?.accounts
             self?.viewModels = viewModels
+            self?.totalCount = viewModels.count
             self?.reloadDataProtocol?.didReloadData()
             }, errorCompletion: { (result) in
                 print(result)

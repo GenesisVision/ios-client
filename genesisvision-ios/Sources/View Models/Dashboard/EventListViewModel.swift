@@ -19,16 +19,16 @@ class EventListViewModel {
     private var sections: [SectionType] = [.eventList]
     
     var router: DashboardRouter!
-    var dashboardPortfolioEvents: DashboardPortfolioEvents? {
+    var events: [InvestmentEventViewModel]? {
         didSet {
-            var dashboardEventsViewModels = [PortfolioEventCollectionViewCellViewModel]()
+            var eventsViewModels = [PortfolioEventCollectionViewCellViewModel]()
             
-            dashboardPortfolioEvents?.events?.forEach({ (event) in
-                let dashboardEventViewModel = PortfolioEventCollectionViewCellViewModel(reloadDataProtocol: router?.eventsViewController, dashboardPortfolioEvent: event)
-                dashboardEventsViewModels.append(dashboardEventViewModel)
+            events?.forEach({ (event) in
+                let eventViewModel = PortfolioEventCollectionViewCellViewModel(reloadDataProtocol: router?.eventsViewController, event: event)
+                eventsViewModels.append(eventViewModel)
             })
             
-            viewModels = dashboardEventsViewModels
+            viewModels = eventsViewModels
 
             reloadDataProtocol?.didReloadData()
         }
@@ -39,9 +39,9 @@ class EventListViewModel {
     
     var viewModels = [PortfolioEventCollectionViewCellViewModel]()
     
-    init(withRouter router: DashboardRouter, dashboardPortfolioEvents: DashboardPortfolioEvents?) {
+    init(withRouter router: DashboardRouter, events: [InvestmentEventViewModel]?) {
         self.router = router
-        self.dashboardPortfolioEvents = dashboardPortfolioEvents
+        self.events = events
         
         eventsDelegateManager = EventsDelegateManager(with: self)
     }
@@ -53,10 +53,7 @@ class EventListViewModel {
         }
         
         let selectedModel = viewModels[indexPath.row]
-        let event = selectedModel.dashboardPortfolioEvent
-        if let assetId = event.assetId?.uuidString, let type = event.assetType, let assetType = AssetType(rawValue: type.rawValue) {
-            router.showAssetDetails(with: assetId, assetType: assetType)
-        }
+        router.show(routeType: .eventDetails(event: selectedModel.event))
     }
     
     func showAllPortfolioEvents() {

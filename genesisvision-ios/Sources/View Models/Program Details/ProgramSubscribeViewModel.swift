@@ -12,6 +12,7 @@ final class ProgramSubscribeViewModel {
     
     enum FollowType {
         case follow
+        case edit
         case unfollow
     }
     // MARK: - Variables
@@ -87,7 +88,7 @@ final class ProgramSubscribeViewModel {
     // MARK: - Public methods
     func getSelectedDescription() -> String {
         switch followType {
-        case .follow:
+        case .follow, .edit:
             return getSelectedTypeDescription()
         case .unfollow:
             return getSelectedReasonDescription()
@@ -96,7 +97,7 @@ final class ProgramSubscribeViewModel {
     
     func getSelected() -> String {
         switch followType {
-        case .follow:
+        case .follow, .edit:
             return getSelectedType()
         case .unfollow:
             return getSelectedReason()
@@ -190,6 +191,23 @@ final class ProgramSubscribeViewModel {
         guard let programId = programId else { return completion(.failure(errorType: .apiError(message: nil))) }
         
         SignalDataProvider.subscribe(on: programId, model: attachToSignal, completion: completion)
+    }
+    
+    func update(completion: @escaping CompletionBlock) {
+        attachToSignal.fixedVolume = signalSubscription?.fixedVolume
+        attachToSignal.percent = signalSubscription?.percent
+        attachToSignal.openTolerancePercent = signalSubscription?.openTolerancePercent
+
+        if let fixedCurrency = signalSubscription?.fixedCurrency {
+            attachToSignal.fixedCurrency = AttachToSignalProvider.FixedCurrency(rawValue: fixedCurrency.rawValue)
+        }
+        if let mode = signalSubscription?.mode {
+            attachToSignal.mode = AttachToSignalProvider.Mode(rawValue: mode.rawValue)
+        }
+        
+        guard let programId = programId else { return completion(.failure(errorType: .apiError(message: nil))) }
+        
+        SignalDataProvider.update(with: programId, model: attachToSignal, completion: completion)
     }
     
     func unsubscribe(completion: @escaping CompletionBlock) {

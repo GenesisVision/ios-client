@@ -84,7 +84,7 @@ class ProgramInfoRouter: Router {
     func editSubscribe(_ programId: String, signalSubscription: SignalSubscription) {
         guard let viewController = ProgramSubscribeViewController.storyboardInstance(.program) else { return }
         
-        let viewModel = ProgramSubscribeViewModel(withRouter: self, programId: programId, signalSubscription: signalSubscription, detailProtocol: programViewController, followType: .follow)
+        let viewModel = ProgramSubscribeViewModel(withRouter: self, programId: programId, signalSubscription: signalSubscription, detailProtocol: programViewController, followType: .edit)
         viewController.viewModel = viewModel
         navigationController?.pushViewController(viewController, animated: true)
     }

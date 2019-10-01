@@ -21,8 +21,6 @@ class SearchViewController: BaseTabmanViewController<SearchTabmanViewModel> {
         
         pageboyDataSource = SearchPageboyViewControllerDataSource(router: viewModel.router, showFacets: viewModel.showFacets)
         self.dataSource = pageboyDataSource
-        
-        self.bar.items = viewModel.items
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

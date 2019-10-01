@@ -88,6 +88,30 @@ class AllEventsViewController: BaseViewControllerWithTableView {
         showProgressHUD()
         fetch()
     }
+    
+    private func showDetails(_ event: InvestmentEventViewModel) {
+        var count = 0
+        
+        if let extendedInfo = event.extendedInfo, !extendedInfo.isEmpty {
+            count += extendedInfo.count
+        }
+        
+        if let fees = event.feesInfo, !fees.isEmpty {
+            count += fees.count
+        }
+        
+        let height = Double((count + 1) * 40)
+        
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.initializeHeight = CGFloat(250.0 + height)
+        bottomSheetController.lineViewIsHidden = true
+        
+        let view = EventDetailsView.viewFromNib()
+        view.configure(event)
+        view.delegate = self
+        bottomSheetController.addContentsView(view)
+        bottomSheetController.present()
+    }
 }
 
 extension AllEventsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -107,7 +131,9 @@ extension AllEventsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        viewModel?.didSelectPortfolioEvents(at: indexPath)
+        guard let model = viewModel.model(for: indexPath) else { return }
+        
+        showDetails(model.event)
     }
     
     // MARK: - UITableViewDataSource
@@ -145,6 +171,17 @@ extension AllEventsViewController: UITableViewDelegate, UITableViewDataSource {
 extension AllEventsViewController: ReloadDataProtocol {
     func didReloadData() {
         reloadData()
+        tabmanBarItems?.forEach({ $0.badgeValue = "\(viewModel.totalCount)" })
     }
 }
 
+extension AllEventsViewController: EventDetailsViewProtocol {
+    func closeButtonDidPress() {
+        bottomSheetController.dismiss()
+    }
+    
+    func showAssetButtonDidPress(_ assetId: String, assetType: AssetType) {
+        bottomSheetController.dismiss()
+        viewModel.didSelectEvents(at: assetId, assetType: assetType)
+    }
+}

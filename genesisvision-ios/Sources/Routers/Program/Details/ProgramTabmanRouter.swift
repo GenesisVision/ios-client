@@ -90,7 +90,7 @@ class ProgramTabmanRouter: TabmanRouter {
     }
     
     func getEvents(with assetId: String) -> AllEventsViewController? {
-        guard let router = self.parentRouter as? ProgramRouter, let viewController = getEventsViewController(with: assetId, router: router, allowsSelection: false) else { return nil }
+        guard let router = self.parentRouter as? ProgramRouter, let viewController = getEventsViewController(with: assetId, router: router, allowsSelection: true) else { return nil }
         
         return viewController
     }

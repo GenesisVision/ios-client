@@ -7,6 +7,7 @@
 //
 
 import UIKit.UIColor
+import Tabman
 
 final class ManagerTabmanViewModel: TabmanViewModel {
     // MARK: - Variables
@@ -14,10 +15,10 @@ final class ManagerTabmanViewModel: TabmanViewModel {
     var managerProfileDetails: ManagerProfileDetails?
 
     // MARK: - Init
-    init(withRouter router: Router, managerId: String, tabmanViewModelDelegate: TabmanViewModelDelegate) {
+    init(withRouter router: Router, managerId: String) {
         self.managerId = managerId
         
-        super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0, tabmanViewModelDelegate: tabmanViewModelDelegate)
+        super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0)
         
         title = "Manager Details"
         backgroundColor = UIColor.Cell.bg
@@ -47,20 +48,21 @@ final class ManagerTabmanViewModel: TabmanViewModel {
             
             if let vc = router.getInfo(with: managerProfileDetails) {
                 self.addController(vc)
-                self.addItem(vc.viewModel.title.uppercased())
+                self.items?.append(TMBarItem(title: vc.viewModel.title.uppercased()))
             }
             
             let filterModel = FilterModel()
             filterModel.managerId = uuid
     
-            if let programs = router.getPrograms(with: filterModel) {
-                self.addController(programs)
-                self.addItem(programs.viewModel.title.uppercased())
+            self.items = []
+            if let vc = router.getPrograms(with: filterModel) {
+                self.addController(vc)
+                self.items?.append(TMBarItem(title: vc.viewModel.title.uppercased()))
             }
             
-            if let funds = router.getFunds(with: filterModel) {
-                self.addController(funds)
-                self.addItem(funds.viewModel.title.uppercased())
+            if let vc = router.getFunds(with: filterModel) {
+                self.addController(vc)
+                self.items?.append(TMBarItem(title: vc.viewModel.title.uppercased()))
             }
             
             reloadPages()
