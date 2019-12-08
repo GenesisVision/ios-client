@@ -11,8 +11,8 @@ class DashboardTabmanRouter: TabmanRouter {
     var programInfoViewController: ProgramInfoViewController?
     
     // MARK: - Public methods
-    func getDashboard() -> InvestorDashboardViewController? {
-        let viewController = InvestorDashboardViewController()
+    func getDashboard() -> DashboardViewController? {
+        let viewController = DashboardViewController()
         
         let navigationController = BaseNavigationController(rootViewController: viewController)
         let router = DashboardRouter(parentRouter: self, navigationController: navigationController, dashboardViewController: viewController)

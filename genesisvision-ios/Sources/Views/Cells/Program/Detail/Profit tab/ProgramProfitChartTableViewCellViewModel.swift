@@ -21,13 +21,13 @@ extension ProgramProfitChartTableViewCellViewModel: CellViewModel {
         cell.amountTitleLabel.text = "Amount"
         
         if let amountValue = programProfitChart.totalGvtProfit {
-            cell.amountValueLabel.text = amountValue.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
+            cell.amountValueLabel.text = amountValue.rounded(with: .gvt).toString() + " \(Constants.gvtString)"
         } else {
             cell.amountValueLabel.isHidden = true
         }
         
         if let amountCurrency = programProfitChart.totalProgramCurrencyProfit, let programCurrency = programProfitChart.programCurrency, let currencyType = CurrencyType(rawValue: programCurrency.rawValue) {
-            cell.amountCurrencyLabel.text = amountCurrency.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+            cell.amountCurrencyLabel.text = amountCurrency.rounded(with: currencyType).toString() + " " + currencyType.rawValue
         } else {
             cell.amountCurrencyLabel.isHidden = true
         }
@@ -42,13 +42,13 @@ extension ProgramProfitChartTableViewCellViewModel: CellViewModel {
         }
         
         if let changeValue = programProfitChart.timeframeGvtProfit {
-            cell.changeValueLabel.text = changeValue.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
+            cell.changeValueLabel.text = changeValue.rounded(with: .gvt).toString() + " \(Constants.gvtString)"
         } else {
             cell.changeValueLabel.isHidden = true
         }
         
         if let changeCurrency = programProfitChart.timeframeProgramCurrencyProfit, let programCurrency = programProfitChart.programCurrency, let currencyType = CurrencyType(rawValue: programCurrency.rawValue) {
-            cell.changeCurrencyLabel.text = changeCurrency.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+            cell.changeCurrencyLabel.text = changeCurrency.rounded(with: currencyType).toString() + " " + currencyType.rawValue
         } else {
             cell.changeCurrencyLabel.isHidden = true
         }

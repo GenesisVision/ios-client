@@ -324,6 +324,7 @@ class SettingsViewController: BaseTableViewController, UINavigationControllerDel
     }
     
     @IBAction func changePhotoButtonAction(_ sender: UIButton) {
+        view.endEditing(true)
         showImagePicker()
     }
 }

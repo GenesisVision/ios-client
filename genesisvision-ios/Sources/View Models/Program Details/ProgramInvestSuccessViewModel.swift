@@ -25,7 +25,7 @@ final class ProgramInvestSuccessViewModel: InfoViewModel {
     init(withRouter router: Router, investedAmount: Double) {
         self.router = router
         self.investedAmount = investedAmount
-        text = String.Info.investmentRequestSuccess.replacingOccurrences(of: "<N>", with: investedAmount.rounded(withType: .gvt).toString())
+        text = String.Info.investmentRequestSuccess.replacingOccurrences(of: "<N>", with: investedAmount.rounded(with: .gvt).toString())
     }
     
     func goBack() {

@@ -174,17 +174,17 @@ class FundWithdrawViewController: BaseViewController {
         
         let withdrawingValue = availableToWithdrawValue / 100 * amountToWithdrawValue
         
-        self.amountToWithdrawCurrencyLabel.text = "≈" + withdrawingValue.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+        self.amountToWithdrawCurrencyLabel.text = "≈" + withdrawingValue.rounded(with: currencyType).toString() + " " + currencyType.rawValue
         
-        let exitFeeString = exitFee.rounded(withType: .undefined).toString()
+        let exitFeeString = exitFee.rounded(with: .undefined).toString()
         
         let exitFeeCurrency = withdrawingValue / 100 * exitFee
-        let exitFeeCurrencyString = exitFeeCurrency.rounded(withType: currencyType).toString()
+        let exitFeeCurrencyString = exitFeeCurrency.rounded(with: currencyType).toString()
         
         let exitFeeValueLabelString = exitFeeString + "% (≈" + exitFeeCurrencyString + " " + currencyType.rawValue + ")"
         self.exitFeeValueLabel.text = exitFeeValueLabelString
         
-        let withdrawingAmountValue = (withdrawingValue - exitFeeCurrency).rounded(withType: currencyType).toString()
+        let withdrawingAmountValue = (withdrawingValue - exitFeeCurrency).rounded(with: currencyType).toString()
         self.withdrawingAmountValueLabel.text = "≈" + withdrawingAmountValue + " " + currencyType.rawValue
         
         let withdrawButtonEnabled = amountToWithdrawValue > 0 && amountToWithdrawValue <= 100
@@ -281,7 +281,7 @@ class FundWithdrawViewController: BaseViewController {
     }
 }
 
-extension FundWithdrawViewController: WalletDepositCurrencyDelegateManagerProtocol {
+extension FundWithdrawViewController: WalletDelegateManagerProtocol {
     func didSelectWallet(at indexPath: IndexPath, walletId: Int) {
         self.showProgressHUD()
         self.viewModel.updateWalletCurrencyFromIndex(indexPath.row) { [weak self] (result) in

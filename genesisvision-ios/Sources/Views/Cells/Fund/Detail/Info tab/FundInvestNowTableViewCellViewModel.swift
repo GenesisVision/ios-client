@@ -28,12 +28,12 @@ extension FundInvestNowTableViewCellViewModel: CellViewModel {
         
          if let entryFee = fundDetailsFull?.entryFee {
             cell.entryFeeTitleLabel.text = "entry fee"
-            cell.entryFeeValueLabel.text = entryFee.rounded(withType: .undefined).toString() + "%"
+            cell.entryFeeValueLabel.text = entryFee.rounded(with: .undefined).toString() + "%"
         }
         
         if let exitFee = fundDetailsFull?.exitFee {
             cell.successFeeTitleLabel.text = "exit fee"
-            cell.successFeeValueLabel.text = exitFee.rounded(withType: .undefined).toString() + "%"
+            cell.successFeeValueLabel.text = exitFee.rounded(with: .undefined).toString() + "%"
         }
         
         cell.investStackView.isHidden = true

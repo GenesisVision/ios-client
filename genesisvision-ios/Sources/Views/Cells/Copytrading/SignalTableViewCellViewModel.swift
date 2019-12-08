@@ -79,7 +79,7 @@ extension SignalTableViewCellViewModel: CellViewModel {
         
         if let profitPercent = signal.personalDetails?.profit {
             let sign = profitPercent > 0 ? "+" : ""
-            cell.profitPercentLabel.text = sign + profitPercent.rounded(withType: .undefined).toString() + "%"
+            cell.profitPercentLabel.text = sign + profitPercent.rounded(with: .undefined).toString() + "%"
             cell.profitPercentLabel.textColor = profitPercent == 0 ? UIColor.Cell.title : profitPercent > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
         }
         

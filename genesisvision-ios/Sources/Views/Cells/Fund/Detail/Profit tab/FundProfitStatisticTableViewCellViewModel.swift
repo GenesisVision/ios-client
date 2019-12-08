@@ -18,7 +18,7 @@ extension FundProfitStatisticTableViewCellViewModel: CellViewModel {
         
         cell.balanceTitleLabel.text = "Balance"
         if let value = fundProfitChart.balance {
-            cell.balanceValueLabel.text = value.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
+            cell.balanceValueLabel.text = value.rounded(with: .gvt).toString() + " \(Constants.gvtString)"
         }
         
         cell.investorsCountTitleLabel.text = "Investors"
@@ -37,27 +37,27 @@ extension FundProfitStatisticTableViewCellViewModel: CellViewModel {
         
         cell.profitFactorPercentTitleLabel.text = "Profit change"
         if let value = fundProfitChart.profitChangePercent {
-            cell.profitFactorPercentValueLabel.text = value.rounded(withType: .undefined).toString() + "%"
+            cell.profitFactorPercentValueLabel.text = value.rounded(with: .undefined).toString() + "%"
         }
         
         cell.sharpeRatioPercentTitleLabel.text = "Sharpe ratio"
         if let value = fundProfitChart.sharpeRatio {
-            cell.sharpeRatioPercentValueLabel.text = value.rounded(withType: .undefined).toString()
+            cell.sharpeRatioPercentValueLabel.text = value.rounded(with: .undefined).toString()
         }
         
         cell.calmarRatioPercentTitleLabel.text = "Calmar ratio"
         if let value = fundProfitChart.calmarRatio {
-            cell.calmarRatioPercentValueLabel.text = value.rounded(withType: .undefined).toString()
+            cell.calmarRatioPercentValueLabel.text = value.rounded(with: .undefined).toString()
         }
         
         cell.sortinoRatioPercentTitleLabel.text = "Sortino ratio"
         if let value = fundProfitChart.sortinoRatio {
-            cell.sortinoRatioPercentValueLabel.text = value.rounded(withType: .undefined).toString()
+            cell.sortinoRatioPercentValueLabel.text = value.rounded(with: .undefined).toString()
         }
         
         cell.drawdownPercentTitleLabel.text = "Max drawdown"
         if let value = fundProfitChart.maxDrawdown {
-            cell.drawdownPercentValueLabel.text = value.rounded(withType: .undefined).toString() + "%"
+            cell.drawdownPercentValueLabel.text = value.rounded(with: .undefined).toString() + "%"
         }
     }
 }

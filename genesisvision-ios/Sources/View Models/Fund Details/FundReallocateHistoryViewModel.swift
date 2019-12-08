@@ -100,7 +100,7 @@ extension FundReallocateHistoryViewModel {
     }
     
     func headerHeight(for section: Int) -> CGFloat {
-        return sortedSections.count > 0 ? 20.0 : 0.0
+        return sortedSections.count > 0 ? 30.0 : 0.0
     }
     
     func titleForHeader(in section: Int) -> String {

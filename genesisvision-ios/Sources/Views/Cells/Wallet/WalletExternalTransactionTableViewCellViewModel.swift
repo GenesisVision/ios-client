@@ -28,7 +28,7 @@ extension WalletExternalTransactionTableViewCellViewModel: CellViewModel {
         
         if let amount = walletTransaction.amount, let currencyFrom = walletTransaction.currency {
             if let currency = CurrencyType(rawValue: currencyFrom.rawValue) {
-                cell.amountLabel.text = amount.rounded(withType: currency).toString() + " " + currency.rawValue
+                cell.amountLabel.text = amount.rounded(with: currency).toString() + " " + currency.rawValue
             }
             
             if let type = walletTransaction.type {

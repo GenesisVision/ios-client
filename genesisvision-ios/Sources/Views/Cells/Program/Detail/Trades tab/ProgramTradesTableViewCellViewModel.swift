@@ -22,7 +22,7 @@ extension ProgramTradesTableViewCellViewModel: CellViewModel {
         
         if let value = orderModel.profit {
             cell.profitLabel.textColor = value == 0 ? UIColor.Cell.title : value > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
-            cell.profitLabel.text = value.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+            cell.profitLabel.text = value.rounded(with: currencyType).toString() + " " + currencyType.rawValue
         }
         
         if let value = orderModel.direction?.rawValue {

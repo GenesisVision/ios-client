@@ -60,11 +60,6 @@ class AssetsViewController: BaseTabmanViewController<AssetsTabmanViewModel>, UIS
         
     }
     
-    func increaseBadgeCount() {
-        let count = "123"
-        tabmanBarItems?.forEach({ $0.badgeValue = count })
-    }
-    
     // MARK: - Private methods
     private func setupSearchBar() {
         resultsViewController = SearchViewController()

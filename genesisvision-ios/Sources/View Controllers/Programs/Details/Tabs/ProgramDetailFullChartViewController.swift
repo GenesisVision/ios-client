@@ -26,31 +26,6 @@ class ProgramDetailFullChartViewController: BaseViewController {
     @IBOutlet weak var currencyValueLabel: CurrencyLabel!
     
     // MARK: - Views
-    @IBOutlet weak var segmentedControl: ScrollableSegmentedControl! {
-        didSet {
-            segmentedControl.segmentStyle = .textOnly
-            segmentedControl.insertSegment(withTitle: "1D", at: 0)
-            segmentedControl.insertSegment(withTitle: "1W", at: 1)
-            segmentedControl.insertSegment(withTitle: "1M", at: 2)
-            segmentedControl.insertSegment(withTitle: "3M", at: 3)
-            segmentedControl.insertSegment(withTitle: "6M", at: 4)
-            segmentedControl.insertSegment(withTitle: "1Y", at: 5)
-            segmentedControl.insertSegment(withTitle: "All", at: 6)
-            segmentedControl.selectedSegmentIndex = 6
-            segmentedControl.underlineSelected = true
-            segmentedControl.height = 21
-            
-            let textAttributes = [NSAttributedString.Key.font: UIFont.getFont(.regular, size: 16), NSAttributedString.Key.foregroundColor: UIColor.Font.light]
-            let textHighlightAttributes = [NSAttributedString.Key.font: UIFont.getFont(.regular, size: 16), NSAttributedString.Key.foregroundColor: UIColor.primary]
-            let textSelectAttributes = [NSAttributedString.Key.font: UIFont.getFont(.regular, size: 16), NSAttributedString.Key.foregroundColor: UIColor.primary]
-            
-            segmentedControl.setTitleTextAttributes(textAttributes, for: .normal)
-            segmentedControl.setTitleTextAttributes(textHighlightAttributes, for: .highlighted)
-            segmentedControl.setTitleTextAttributes(textSelectAttributes, for: .selected)
-            
-            segmentedControl.addTarget(self, action: #selector(segmentSelected(sender:)), for: .valueChanged)
-        }
-    }
     @IBOutlet weak var chartView: ChartView! {
         didSet {
             chartView.isUserInteractionEnabled = true
@@ -82,10 +57,6 @@ class ProgramDetailFullChartViewController: BaseViewController {
         currencyValueLabel.text = viewModel.getCurrencyValue()
         
 //        chartView.setup(chartType: .full, chartDataSet: viewModel.programDetailsFull?.chart, name: "Full Chart", currencyValue: viewModel.programDetailsFull?.currency?.rawValue)
-    }
-    
-    @objc func segmentSelected(sender: ScrollableSegmentedControl) {
-        print("Segment at index \(sender.selectedSegmentIndex)  selected")
     }
     
     // MARK: - Actions

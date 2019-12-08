@@ -7,55 +7,55 @@ extension UIView {
     
     
     /// Should the corner be as circle
-    public var circleCorner: Bool {
-        get {
-            return min(bounds.size.height, bounds.size.width) / 2 == cornerRadius
-        }
-        set {
-            cornerRadius = newValue ? min(bounds.size.height, bounds.size.width) / 2 : cornerRadius
-        }
-    }
-    
-    
-    /// Corner radius of view; also inspectable from Storyboard.
-    public var cornerRadius: CGFloat {
-        get {
-            return layer.cornerRadius
-        }
-        set {
-            layer.cornerRadius = circleCorner ? min(bounds.size.height, bounds.size.width) / 2 : newValue
-                //abs(CGFloat(Int(newValue * 100)) / 100)
-        }
-    }
+//    public var circleCorner: Bool {
+//        get {
+//            return min(bounds.size.height, bounds.size.width) / 2 == cornerRadius
+//        }
+//        set {
+//            cornerRadius = newValue ? min(bounds.size.height, bounds.size.width) / 2 : cornerRadius
+//        }
+//    }
+//
+//
+//    /// Corner radius of view; also inspectable from Storyboard.
+//    public var cornerRadius: CGFloat {
+//        get {
+//            return layer.cornerRadius
+//        }
+//        set {
+//            layer.cornerRadius = circleCorner ? min(bounds.size.height, bounds.size.width) / 2 : newValue
+//                //abs(CGFloat(Int(newValue * 100)) / 100)
+//        }
+//    }
     
     
     /// Border color of view; also inspectable from Storyboard.
-    public var borderColor: UIColor? {
-        get {
-            guard let color = layer.borderColor else {
-                return nil
-            }
-            return UIColor(cgColor: color)
-        }
-        set {
-            guard let color = newValue else {
-                layer.borderColor = nil
-                return
-            }
-            layer.borderColor = color.cgColor
-        }
-    }
+//    public var borderColor: UIColor? {
+//        get {
+//            guard let color = layer.borderColor else {
+//                return nil
+//            }
+//            return UIColor(cgColor: color)
+//        }
+//        set {
+//            guard let color = newValue else {
+//                layer.borderColor = nil
+//                return
+//            }
+//            layer.borderColor = color.cgColor
+//        }
+//    }
     
     
     /// Border width of view; also inspectable from Storyboard.
-    public var borderWidth: CGFloat {
-        get {
-            return layer.borderWidth
-        }
-        set {
-            layer.borderWidth = newValue
-        }
-    }
+//    public var borderWidth: CGFloat {
+//        get {
+//            return layer.borderWidth
+//        }
+//        set {
+//            layer.borderWidth = newValue
+//        }
+//    }
     
     
     /// Shadow color of view; also inspectable from Storyboard.
@@ -261,5 +261,23 @@ extension UIView {
         }
         getSubview(view: self)
         return all
+    }
+}
+
+
+extension UIStackView {
+    
+    func removeAllArrangedSubviews() {
+        
+        let removedSubviews = arrangedSubviews.reduce([]) { (allSubviews, subview) -> [UIView] in
+            self.removeArrangedSubview(subview)
+            return allSubviews + [subview]
+        }
+        
+        // Deactivate all constraints
+        NSLayoutConstraint.deactivate(removedSubviews.flatMap({ $0.constraints }))
+        
+        // Remove the views from self
+        removedSubviews.forEach({ $0.removeFromSuperview() })
     }
 }

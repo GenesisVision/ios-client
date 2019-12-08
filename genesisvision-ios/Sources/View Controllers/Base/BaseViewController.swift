@@ -10,6 +10,40 @@ import UIKit
 import DZNEmptyDataSet
 import MessageUI
 
+class BaseModalViewController: BaseViewController {
+    private var closeButtonItem: UIBarButtonItem!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        addCloseButton()
+    }
+    
+    private func close() {
+        showAlertWithTitle(.actionSheet, title: nil, message: "Are you sure?", actionTitle: "Close", cancelTitle: "Cancel", handler: {
+            self.dismiss(animated: true, completion: nil)
+        }, cancelHandler: nil)
+    }
+    
+    func addCloseButton() {
+        closeButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_close_icon"), style: .done, target: self, action: #selector(closeButtonAction))
+        navigationItem.leftBarButtonItems = [closeButtonItem]
+    }
+    
+    @objc private func closeButtonAction() {
+        dismiss(animated: true, completion: nil)
+    }
+}
+
+extension BaseModalViewController: UIAdaptivePresentationControllerDelegate {
+    func presentationControllerShouldDismiss(_ presentationController: UIPresentationController) -> Bool {
+        return false
+    }
+    
+    func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
+        close()
+    }
+}
+
 class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomSheet, NodataProtocol {
     var noDataTitle: String? = nil
     var noDataImage: UIImage? = nil
@@ -136,12 +170,8 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
         
         commonSetup()
         refreshControl?.endRefreshing()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
-        updateTheme()
+        view.backgroundColor = UIColor.BaseView.bg
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -152,7 +182,12 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
     
     // MARK: - Public Methods
     func scrollToTop(_ scrollView: UIScrollView) {
-        scrollView.setContentOffset(.zero, animated: true)
+        if let tableView = scrollView as? UITableView {
+            let indexPath = IndexPath(row: 0, section: 0)
+            tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        } else {
+            scrollView.setContentOffset(.zero, animated: true)
+        }
     }
     
     func updateData(from dateFrom: Date?, to dateTo: Date?) {

@@ -19,14 +19,14 @@ open class ManagerOverview: Codable {
 
     public func encode(to encoder: Encoder) throws {
 
-        var container = encoder.container(keyedBy: String.self)
+        _ = encoder.container(keyedBy: String.self)
 
     }
 
     // Decodable protocol methods
 
     public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
+        _ = try decoder.container(keyedBy: String.self)
 
     }
 }

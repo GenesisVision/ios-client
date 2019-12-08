@@ -46,7 +46,7 @@ extension FundYourInvestmentTableViewCellViewModel: CellViewModel {
         
         if let value = fundDetailsFull?.personalFundDetails?.value {
             cell.investedTitleLabel.text = "value"
-            cell.investedValueLabel.text = value.rounded(withType: currency).toString() + " " + currency.rawValue
+            cell.investedValueLabel.text = value.rounded(with: currency).toString() + " " + currency.rawValue
         } else {
             cell.investedTitleLabel.isHidden = true
             cell.investedValueLabel.isHidden = true
@@ -54,7 +54,7 @@ extension FundYourInvestmentTableViewCellViewModel: CellViewModel {
         
         if let value = fundDetailsFull?.personalFundDetails?.pendingInput, value > 0 {
             cell.valueTitleLabel.text = "pending input"
-            cell.valueLabel.text = value.rounded(withType: currency).toString() + " " + currency.rawValue
+            cell.valueLabel.text = value.rounded(with: currency).toString() + " " + currency.rawValue
         } else {
             cell.valueTitleLabel.isHidden = true
             cell.valueLabel.isHidden = true
@@ -62,7 +62,7 @@ extension FundYourInvestmentTableViewCellViewModel: CellViewModel {
         
         if let value = fundDetailsFull?.personalFundDetails?.pendingOutput, value > 0 {
             cell.profitTitleLabel.text = "pending output"
-            cell.profitValueLabel.text = value.rounded(withType: currency).toString() + " " + currency.rawValue
+            cell.profitValueLabel.text = value.rounded(with: currency).toString() + " " + currency.rawValue
         } else {
             cell.profitTitleLabel.isHidden = true
             cell.profitValueLabel.isHidden = true

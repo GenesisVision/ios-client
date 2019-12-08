@@ -1,5 +1,5 @@
 //
-//  WalletCurrencyTableViewCellViewModel.swift
+//  SelectableTableViewCellViewModel.swift
 //  genesisvision-ios
 //
 //  Created by George on 22/04/2019.
@@ -8,12 +8,10 @@
 
 import Foundation
 
-struct WalletCurrencyTableViewCellViewModel {
-    
+struct SelectableTableViewCellViewModel {
 }
 
-extension WalletCurrencyTableViewCellViewModel: CellViewModel {
-    func setup(on cell: WalletCurrencyTableViewCell) {
-        
+extension SelectableTableViewCellViewModel: CellViewModel {
+    func setup(on cell: SelectableTableViewCell) {
     }
 }

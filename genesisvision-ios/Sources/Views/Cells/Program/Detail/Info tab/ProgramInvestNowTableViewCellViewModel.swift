@@ -33,25 +33,25 @@ extension ProgramInvestNowTableViewCellViewModel: CellViewModel {
         
         cell.entryFeeTitleLabel.text = "entry fee"
         if let entryFeeCurrent = programDetailsFull?.entryFeeCurrent, let entryFeeSelected = programDetailsFull?.entryFeeSelected {
-            let entryFeeCurrentString = entryFeeCurrent.rounded(withType: .undefined).toString() + "%"
-            let entryFeeSelectedString = " (" + entryFeeSelected.rounded(withType: .undefined).toString() + "%)"
+            let entryFeeCurrentString = entryFeeCurrent.rounded(with: .undefined).toString() + "%"
+            let entryFeeSelectedString = " (" + entryFeeSelected.rounded(with: .undefined).toString() + "%)"
             
             cell.entryFeeValueLabel.text = entryFeeCurrent == entryFeeSelected ? entryFeeCurrentString : entryFeeCurrentString + entryFeeSelectedString
         }
         
         cell.successFeeTitleLabel.text = "success fee"
         if let successFee = programDetailsFull?.successFee {
-            cell.successFeeValueLabel.text = successFee.rounded(withType: .undefined).toString() + "%"
+            cell.successFeeValueLabel.text = successFee.rounded(with: .undefined).toString() + "%"
         }
         
         cell.investTitleLabel.text = "av. to invest"
         if let availableInvestment = programDetailsFull?.availableInvestmentBase, let currency = programDetailsFull?.currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
-            cell.investValueLabel.text = availableInvestment.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+            cell.investValueLabel.text = availableInvestment.rounded(with: currencyType).toString() + " " + currencyType.rawValue
         }
         
         cell.stopOutTitleLabel.text = "stop out"
         if let stopOutLevel = programDetailsFull?.stopOutLevel {
-            cell.stopOutValueLabel.text = stopOutLevel.rounded(withType: .undefined).toString() + "%"
+            cell.stopOutValueLabel.text = stopOutLevel.rounded(with: .undefined).toString() + "%"
         }
     }
 }

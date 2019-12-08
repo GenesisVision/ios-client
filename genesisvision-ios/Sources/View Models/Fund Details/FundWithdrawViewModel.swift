@@ -76,7 +76,7 @@ final class FundWithdrawViewModel {
     func getWithdrawalAmountCurrencyValue(_ amount: Double) -> String {
         guard let selectedWalletCurrency = self.selectedWalletFromDelegateManager?.selected?.currency?.rawValue, let currencyType = CurrencyType(rawValue: selectedWalletCurrency) else { return "" }
         let value = amount * getAvailableToWithdraw() / 100
-        return "≈" + value.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+        return "≈" + value.rounded(with: currencyType).toString() + " " + currencyType.rawValue
     }
     
     func getMinWithdrawalAmountText() -> String {

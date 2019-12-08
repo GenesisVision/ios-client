@@ -25,13 +25,12 @@ enum TabsType: Int {
 
 class Router {
     // MARK: - Variables
-    var investorDashboardViewController: InvestorDashboardViewController!
-    var managerDashboardViewController: ManagerDashboardViewController!
-    
     var programsViewController: ProgramListViewController!
     var fundsViewController: FundListViewController!
     var managersViewController: ManagerListViewController!
 
+    var dashboardViewController: DashboardViewController!
+    
     var assetsViewController: AssetsViewController!
     
     var currentController: UIViewController?
@@ -90,8 +89,7 @@ class Router {
         self.managersViewController = parentRouter?.managersViewController
         
         self.assetsViewController = parentRouter?.assetsViewController
-        self.investorDashboardViewController = parentRouter?.investorDashboardViewController
-        self.managerDashboardViewController = parentRouter?.managerDashboardViewController
+        self.dashboardViewController = parentRouter?.dashboardViewController
         
         self.rootTabBarController = parentRouter?.rootTabBarController
         
@@ -115,21 +113,13 @@ class Router {
     
     private func addDashboard(_ navigationController: inout BaseNavigationController, _ viewControllers: inout [UIViewController]) {
         
-        if isInvestorApp, let viewController = InvestorDashboardViewController.storyboardInstance(.dashboard) {
-            self.investorDashboardViewController = viewController
-            
-            navigationController = BaseNavigationController(rootViewController: viewController)
-            let router = DashboardRouter(parentRouter: self, navigationController: navigationController, dashboardViewController: viewController)
-            viewController.viewModel = DashboardViewModel(withRouter: router)
-        } else {
-            let viewController = ManagerDashboardViewController()
-            self.managerDashboardViewController = viewController
+        if let viewController = DashboardViewController.storyboardInstance(.dashboard) {
+            self.dashboardViewController = viewController
             
             navigationController = BaseNavigationController(rootViewController: viewController)
             let router = DashboardRouter(parentRouter: self, navigationController: navigationController, dashboardViewController: viewController)
             viewController.viewModel = DashboardViewModel(withRouter: router)
         }
-        
         
         navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_dashboard").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_dashboard").withRenderingMode(.alwaysOriginal)
         viewControllers.append(navigationController)

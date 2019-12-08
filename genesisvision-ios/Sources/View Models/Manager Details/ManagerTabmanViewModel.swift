@@ -44,6 +44,8 @@ final class ManagerTabmanViewModel: TabmanViewModel {
             self.managerProfileDetails = viewModel
         }
         
+        self.items = []
+        
         if let router = router as? ManagerTabmanRouter, let managerProfileDetails = managerProfileDetails, let uuid = managerProfileDetails.managerProfile?.id?.uuidString {
             
             if let vc = router.getInfo(with: managerProfileDetails) {
@@ -54,7 +56,6 @@ final class ManagerTabmanViewModel: TabmanViewModel {
             let filterModel = FilterModel()
             filterModel.managerId = uuid
     
-            self.items = []
             if let vc = router.getPrograms(with: filterModel) {
                 self.addController(vc)
                 self.items?.append(TMBarItem(title: vc.viewModel.title.uppercased()))

@@ -54,13 +54,10 @@ class WalletBalanceTableViewCell: UITableViewCell {
             break
         case .available:
             progressView.foregroundStrokeColor = UIColor.Common.purple
-            progressView.backgroundStrokeColor = UIColor.Common.purple.withAlphaComponent(0.2)
         case .invested:
             progressView.foregroundStrokeColor = UIColor.primary
-            progressView.backgroundStrokeColor = UIColor.primary.withAlphaComponent(0.2)
         case .pending:
-            progressView.foregroundStrokeColor = UIColor.Common.btcColor
-            progressView.backgroundStrokeColor = UIColor.Common.btcColor.withAlphaComponent(0.2)
+            progressView.foregroundStrokeColor = UIColor.Common.yellow
         }
     }
 }

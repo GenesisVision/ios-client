@@ -9,52 +9,23 @@
 import UIKit
 
 class BaseNavigationController: UINavigationController {
-
     // MARK: - Variables
-//    var shadowView: ShadowView!
+    var isTranslucent: Bool = false
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        if isTranslucent {
+            navigationBar.setBackgroundImage(UIImage(), for: .default)
+            navigationBar.shadowImage = UIImage()
+        }
         
-        navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationBar.shadowImage = UIImage()
-        navigationBar.isTranslucent = true
+        navigationBar.isTranslucent = isTranslucent
         navigationBar.barTintColor = UIColor.BaseView.bg
-        view.backgroundColor = UIColor.Cell.bg.withAlphaComponent(0.0)
-        
-        applyTheme()
-        NotificationCenter.default.addObserver(self, selector: #selector(themeChangedNotification(notification:)), name: .themeChanged, object: nil)
     }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self, name: .themeChanged, object: nil)
-    }
-    
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        guard let topViewController = self.topViewController else {
-            return AppearanceController.theme == .darkTheme ? .lightContent : .default
-        }
-      
-        switch topViewController {
-        case is InfoViewController:
-            return .lightContent
-        default:
-            return AppearanceController.theme == .darkTheme ? .lightContent : .default
-        }
-    }
-    
-    // MARK: - Private methods
-    @objc private func themeChangedNotification(notification: Notification) {
-        applyTheme()
-    }
-    
-    private func applyTheme() {
-//        navigationBar.barTintColor = UIColor.NavBar.colorScheme().backgroundColor
-//        navigationBar.tintColor = UIColor.NavBar.colorScheme().textColor
+        return .lightContent
     }
 }

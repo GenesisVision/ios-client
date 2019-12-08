@@ -24,7 +24,7 @@ class SignalOpenTradesViewController: BaseViewControllerWithTableView {
         
         setup()
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(tabBarDidScrollToTop(_:)), name: .tabBarDidScrollToTop, object: nil)
@@ -38,10 +38,11 @@ class SignalOpenTradesViewController: BaseViewControllerWithTableView {
     deinit {
         NotificationCenter.default.removeObserver(self, name: .tabBarDidScrollToTop, object: nil)
     }
+    
     // MARK: - Private methods
     private func setupTableConfiguration() {
         tableView.configure(with: .defaultConfiguration)
-//        tableView.allowsSelection = false
+        tableView.allowsSelection = false
         tableView.isScrollEnabled = false
         tableView.bounces = false
         
@@ -49,8 +50,6 @@ class SignalOpenTradesViewController: BaseViewControllerWithTableView {
         tableView.dataSource = self
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
         tableView.registerHeaderNib(for: viewModel.viewModelsForRegistration)
-        
-        setupPullToRefresh(scrollView: tableView)
     }
     
     private func setup() {
@@ -58,6 +57,9 @@ class SignalOpenTradesViewController: BaseViewControllerWithTableView {
         noDataTitle = viewModel.noDataText()
         
         setupNavigationBar()
+        
+        showProgressHUD()
+        fetch()
     }
     
     private func reloadData() {
@@ -73,8 +75,6 @@ class SignalOpenTradesViewController: BaseViewControllerWithTableView {
         bottomSheetController.lineViewIsHidden = true
         
         let view = TradeDetailView.viewFromNib()
-//        view.configure(details, uuid: <#UUID#>)
-//        view.delegate = self
         bottomSheetController.addContentsView(view)
         bottomSheetController.present()
     }
@@ -85,27 +85,14 @@ class SignalOpenTradesViewController: BaseViewControllerWithTableView {
             
             switch result {
             case .success:
-                break
+                if let totalCount = self?.viewModel.totalCount {
+                    self?.tabmanBarItems?.forEach({ $0.badgeValue = "\(totalCount)" })
+                }
             case .failure(let errorType):
                 ErrorHandler.handleError(with: errorType, viewController: self)
             }
         }
     }
-    
-    override func pullToRefresh() {
-        super.pullToRefresh()
-        
-        fetch()
-    }
-    
-    override func updateData(from dateFrom: Date?, to dateTo: Date?) {
-        viewModel.dateFrom = dateFrom
-        viewModel.dateTo = dateTo
-        
-        showProgressHUD()
-        fetch()
-    }
-    
 }
 
 extension SignalOpenTradesViewController: UITableViewDelegate, UITableViewDataSource {
@@ -124,16 +111,16 @@ extension SignalOpenTradesViewController: UITableViewDelegate, UITableViewDataSo
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         super.scrollViewDidScroll(scrollView)
-        scrollView.isScrollEnabled = scrollView.contentOffset.y > -44.0
+        scrollView.isScrollEnabled = scrollView.contentOffset.y > 0.0
     }
     
     override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         super.scrollViewWillBeginDragging(scrollView)
         let translation = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
         if translation.y > 0 {
-            scrollView.isScrollEnabled = scrollView.contentOffset.y > -44.0
+            scrollView.isScrollEnabled = scrollView.contentOffset.y > 0.0
         } else {
-            scrollView.isScrollEnabled = scrollView.contentOffset.y >= -44.0
+            scrollView.isScrollEnabled = scrollView.contentOffset.y >= 0.0
         }
     }
     
@@ -184,9 +171,7 @@ extension SignalOpenTradesViewController: UITableViewDelegate, UITableViewDataSo
 
 extension SignalOpenTradesViewController: ReloadDataProtocol {
     func didReloadData() {
-        hideAll()
         reloadData()
-        tabmanBarItems?.forEach({ $0.badgeValue = "\(viewModel.totalCount)" })
     }
 }
 

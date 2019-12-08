@@ -18,6 +18,7 @@ final class WalletTabmanViewModel: TabmanViewModel {
     var multiWallet: WalletMultiSummary?
     
     var walletType: WalletType = .all
+    
     // MARK: - Init
     init(withRouter router: Router, wallet: WalletData? = nil, account: CopyTradingAccountInfo? = nil, walletType: WalletType) {
         super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0)
@@ -40,7 +41,6 @@ final class WalletTabmanViewModel: TabmanViewModel {
                      TMBarItem(title: "Transactions"),
                      TMBarItem(title: "Deposits/Withdrawals")]
             
-            dataSource = WalletPageboyViewControllerDataSource(router: router, wallet: wallet)
         case .account:
             guard let account = account else { return }
             
@@ -53,7 +53,6 @@ final class WalletTabmanViewModel: TabmanViewModel {
                      TMBarItem(title: "Trades history"),
                      TMBarItem(title: "Trading log")]
             
-            dataSource = WalletCopytradingPageboyViewControllerDataSource(router: router, account: account)
         case .all:
             self.title = "Wallets"
 
@@ -65,9 +64,20 @@ final class WalletTabmanViewModel: TabmanViewModel {
     
             items?.append(contentsOf: [TMBarItem(title: "Transactions"),
                                        TMBarItem(title: "Deposits/Withdrawals")])
-            
+        }
+    }
+    
+    func getDataSources() -> BasePageboyViewControllerDataSource {
+        switch walletType {
+        case .wallet:
+            dataSource = WalletPageboyViewControllerDataSource(router: router, wallet: wallet)
+        case .account:
+            dataSource = WalletCopytradingPageboyViewControllerDataSource(router: router, account: account)
+        case .all:
             dataSource = WalletPageboyViewControllerDataSource(router: router, wallet: nil)
         }
+        
+        return dataSource
     }
     
     // MARK: - Public methods

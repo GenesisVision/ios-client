@@ -69,6 +69,7 @@ extension AppDelegate {
             if let viewController = PasscodeViewController.storyboardInstance(.settings), let vc = window.rootViewController {
                 let router = Router(parentRouter: nil)
                 viewController.viewModel = PasscodeViewModel(withRouter: router)
+                
                 viewController.delegate = self
                 viewController.passcodeState = .openApp
                 viewController.modalTransitionStyle = .crossDissolve
@@ -108,14 +109,16 @@ extension AppDelegate {
                 UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
             application.registerUserNotificationSettings(settings)
         }
-        
         application.registerForRemoteNotifications()
     }
     
     private func setupFirstScreen() {
         window = UIWindow(frame: UIScreen.main.bounds)
-        let welcomeViewController = WelcomeViewController()
-        window?.rootViewController = welcomeViewController
+        let vc = NewDashboardViewController()
+        let navController = BaseNavigationController(rootViewController: vc)
+        window?.rootViewController = navController
+//        let welcomeViewController = WelcomeViewController()
+//        window?.rootViewController = welcomeViewController
         window?.makeKeyAndVisible()
     }
     
@@ -139,6 +142,7 @@ extension AppDelegate: PasscodeProtocol {
     }
 }
 
+// MARK: - Remote notifications
 extension AppDelegate {
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         if let messageID = userInfo[gcmMessageIDKey] {

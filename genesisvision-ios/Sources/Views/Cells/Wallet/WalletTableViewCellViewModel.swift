@@ -32,7 +32,7 @@ extension WalletTableViewCellViewModel: CellViewModel {
         
         if let amount = wallet.total, let currency = wallet.currency {
             if let currency = CurrencyType(rawValue: currency.rawValue) {
-                cell.amountLabel.text = amount.rounded(withType: currency).toString() + " " + currency.rawValue
+                cell.amountLabel.text = amount.rounded(with: currency).toString() + " " + currency.rawValue
             }
         } else {
             cell.amountLabel.text = ""
@@ -40,7 +40,7 @@ extension WalletTableViewCellViewModel: CellViewModel {
         
         if let amount = wallet.totalCcy, let currency = wallet.currencyCcy {
             if let currency = CurrencyType(rawValue: currency.rawValue) {
-                cell.amountCcyLabel.text = amount.rounded(withType: currency).toString() + " " + currency.rawValue
+                cell.amountCcyLabel.text = amount.rounded(with: currency).toString() + " " + currency.rawValue
             }
         } else {
             cell.amountCcyLabel.text = ""

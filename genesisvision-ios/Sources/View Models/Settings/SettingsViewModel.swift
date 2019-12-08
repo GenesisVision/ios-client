@@ -178,7 +178,7 @@ final class SettingsViewModel {
         case 0, 1:
             return 0.0
         default:
-            return 20.0
+            return 30.0
         }
     }
     

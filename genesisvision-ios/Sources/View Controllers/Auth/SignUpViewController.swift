@@ -16,7 +16,7 @@ class SignUpViewController: BaseViewController {
     // MARK: - Outlets
     @IBOutlet weak var usernameStackView: UIStackView! {
         didSet {
-            usernameStackView.isHidden = isInvestorApp
+            usernameStackView.isHidden = false
         }
     }
     

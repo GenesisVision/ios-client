@@ -132,33 +132,33 @@ class PortfolioViewController: BaseViewController {
             
             amountTitleLabel.text = "Value"
             if let value = dashboardChartValue.value {
-                amountValueLabel.text = value.rounded(withType: .gvt).toString() + " " + Constants.gvtString
+                amountValueLabel.text = value.rounded(with: .gvt).toString() + " " + Constants.gvtString
             }
             if let valueCurrency = dashboardChartValue.valueCurrency, let selectedCurrency = CurrencyType(rawValue: getSelectedCurrency()) {
-                amountCurrencyLabel.text = valueCurrency.rounded(withType: selectedCurrency).toString() + " \(getSelectedCurrency())"
+                amountCurrencyLabel.text = valueCurrency.rounded(with: selectedCurrency).toString() + " \(getSelectedCurrency())"
             }
             
             changeTitleLabel.text = "Change"
             if let changePercent = dashboardChartValue.changePercent {
-                changePercentLabel.text = changePercent.rounded(withType: .undefined).toString() + "%"
+                changePercentLabel.text = changePercent.rounded(with: .undefined).toString() + "%"
                 changePercentLabel.textColor = changePercent == 0 ? UIColor.Cell.subtitle : changePercent > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
             }
             if let changeValue = dashboardChartValue.changeValue {
-                changeValueLabel.text = changeValue.rounded(withType: .gvt).toString() + " " + Constants.gvtString
+                changeValueLabel.text = changeValue.rounded(with: .gvt).toString() + " " + Constants.gvtString
             }
             if let changeValueCurrency = dashboardChartValue.changeValueCurrency, let selectedCurrency = CurrencyType(rawValue: getSelectedCurrency()) {
-                changeCurrencyLabel.text = changeValueCurrency.rounded(withType: selectedCurrency).toString() + " \(getSelectedCurrency())"
+                changeCurrencyLabel.text = changeValueCurrency.rounded(with: selectedCurrency).toString() + " \(getSelectedCurrency())"
             }
         
             if let programRequests = viewModel.programRequests {
                 inRequestsTitleLabel.text = "In Requests"
                 if let totalValue = programRequests.totalValue {
-                    inRequestsValueLabel.text = totalValue.rounded(withType: .gvt).toString() + " " + Constants.gvtString
+                    inRequestsValueLabel.text = totalValue.rounded(with: .gvt).toString() + " " + Constants.gvtString
                 }
                 
                 if let totalValue = programRequests.totalValue, let rate = dashboardChartValue.rate, let selectedCurrency = CurrencyType(rawValue: getSelectedCurrency()) {
                     let inRequestsCurrency = totalValue * rate
-                    inRequestsCurrencyLabel.text = inRequestsCurrency.rounded(withType: selectedCurrency).toString() + " \(getSelectedCurrency())"
+                    inRequestsCurrencyLabel.text = inRequestsCurrency.rounded(with: selectedCurrency).toString() + " \(getSelectedCurrency())"
                 }
             }
         }
@@ -240,18 +240,18 @@ class PortfolioViewController: BaseViewController {
                 let changeValue = selectedValue - firstValue
                 let changeValueCurrency = changeValue * rate
                 
-                amountValueLabel.text = selectedValue.rounded(withType: .gvt).toString() + " " + Constants.gvtString
+                amountValueLabel.text = selectedValue.rounded(with: .gvt).toString() + " " + Constants.gvtString
                 
                 let currency = getSelectedCurrency()
                 if let selectedCurrency = CurrencyType(rawValue: currency) {
-                    amountCurrencyLabel.text = selectedValueInCurrency.rounded(withType: selectedCurrency).toString() + " \(currency)"
+                    amountCurrencyLabel.text = selectedValueInCurrency.rounded(with: selectedCurrency).toString() + " \(currency)"
                     
-                    changeCurrencyLabel.text = changeValueCurrency.rounded(withType: selectedCurrency).toString() + " \(currency)"
+                    changeCurrencyLabel.text = changeValueCurrency.rounded(with: selectedCurrency).toString() + " \(currency)"
                 }
                 
                 changePercentLabel.text = getChangePercent(oldValue: firstValue, newValue: selectedValue)
 
-                changeValueLabel.text = changeValue.rounded(withType: .gvt).toString() + " " + Constants.gvtString
+                changeValueLabel.text = changeValue.rounded(with: .gvt).toString() + " " + Constants.gvtString
             }
         } else {
             

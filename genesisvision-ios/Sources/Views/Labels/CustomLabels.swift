@@ -37,6 +37,14 @@ class TitleLabel: CustomLabel {
     }
 }
 
+class LargeTitleLabel: CustomLabel {
+    // MARK: - Lifecycle
+    override func commonInit() {
+        textColor = UIColor.Cell.title
+        font = UIFont.getFont(.semibold, size: 21.0)
+    }
+}
+
 class SubtitleLabel: CustomLabel {
     // MARK: - Lifecycle
     override func commonInit() {

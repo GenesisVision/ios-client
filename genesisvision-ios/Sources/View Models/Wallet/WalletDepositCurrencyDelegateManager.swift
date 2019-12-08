@@ -10,7 +10,7 @@ import UIKit.UITableView
 
 final class WalletDepositCurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource, CurrencyDelegateManagerProtocol {
     // MARK: - Variables
-    weak var currencyDelegate: WalletDepositCurrencyDelegateManagerProtocol?
+    weak var currencyDelegate: WalletDelegateManagerProtocol?
     
     var tableView: UITableView?
     var wallets: [WalletData] = []
@@ -20,7 +20,7 @@ final class WalletDepositCurrencyDelegateManager: NSObject, UITableViewDelegate,
     var walletId: Int = 0
     
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [WalletCurrencyTableViewCellViewModel.self]
+        return [SelectableTableViewCellViewModel.self]
     }
     
     // MARK: - Lifecycle
@@ -48,13 +48,12 @@ final class WalletDepositCurrencyDelegateManager: NSObject, UITableViewDelegate,
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "WalletCurrencyTableViewCell", for: indexPath) as? WalletCurrencyTableViewCell else {
-            let cell = UITableViewCell()
-            return cell
-        }
+        let model = SelectableTableViewCellViewModel()
         
-        let isSelected = indexPath.row == selectedIndex
+        guard let cell = tableView.dequeueReusableCell(withModel: model, for: indexPath) as? SelectableTableViewCell else { return UITableViewCell() }
+        
         let wallet = wallets[indexPath.row]
+        let isSelected = indexPath.row == selectedIndex
         cell.configure(wallet, selected: isSelected)
         
         return cell

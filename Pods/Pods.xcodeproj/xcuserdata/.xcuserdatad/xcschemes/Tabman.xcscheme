@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FCE769FD61BE29F1C7487248DF9EA59C"
+               BlueprintIdentifier = "DE51F79FEDB60E6260AE5CBCC46FCFF6"
                BlueprintName = "Tabman"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "Tabman.framework">

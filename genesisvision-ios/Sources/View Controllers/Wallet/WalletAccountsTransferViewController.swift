@@ -24,7 +24,7 @@ class WalletAccountsTransferViewController: BaseViewController {
     var availableInWalletFromValue: Double = 0.0 {
         didSet {
             if let currencyType = viewModel.getCurrency(.from) {
-                self.availableInWalletFromValueLabel.text = availableInWalletFromValue.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+                self.availableInWalletFromValueLabel.text = availableInWalletFromValue.rounded(with: currencyType).toString() + " " + currencyType.rawValue
             }
         }
     }
@@ -32,7 +32,7 @@ class WalletAccountsTransferViewController: BaseViewController {
     var availableInWalletToValue: Double = 0.0 {
         didSet {
             if let currencyType = viewModel.getCurrency(.to) {
-                self.availableInWalletToValueLabel.text = availableInWalletToValue.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+                self.availableInWalletToValueLabel.text = availableInWalletToValue.rounded(with: currencyType).toString() + " " + currencyType.rawValue
             }
         }
     }
@@ -175,7 +175,7 @@ class WalletAccountsTransferViewController: BaseViewController {
         }
     
         if let currency = viewModel.getCurrency(.to) {
-            let value = (amountToTransferValue * viewModel.rate).rounded(withType: currency).toString()
+            let value = (amountToTransferValue * viewModel.rate).rounded(with: currency).toString()
             amountToTransferToValueLabel.text = "≈" + value + " " + currency.rawValue
         }
 
@@ -332,7 +332,7 @@ class WalletAccountsTransferViewController: BaseViewController {
     }
 }
 
-extension WalletAccountsTransferViewController: WalletDepositCurrencyDelegateManagerProtocol {
+extension WalletAccountsTransferViewController: WalletDelegateManagerProtocol {
     func didSelectWallet(at indexPath: IndexPath, walletId: Int) {
         switch walletId {
         case 1:

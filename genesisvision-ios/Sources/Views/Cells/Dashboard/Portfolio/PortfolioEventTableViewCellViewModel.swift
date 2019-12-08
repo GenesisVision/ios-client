@@ -47,11 +47,11 @@ extension PortfolioEventTableViewCellViewModel: CellViewModel {
             let amount = extendedInfo.amount,
             let currency = extendedInfo.currency,
             let currencyType = CurrencyType(rawValue: currency.rawValue) {
-            cell.amountLabel.text = amount.rounded(withType: currencyType).toString() + " \(currencyType.rawValue)"
+            cell.amountLabel.text = amount.rounded(with: currencyType).toString() + " \(currencyType.rawValue)"
             
             cell.amountLabel.textColor = UIColor.Cell.title
         } else if let amount = event.amount, let currency = event.currency, let currencyType = CurrencyType(rawValue: currency.rawValue), let changeState = event.changeState {
-            cell.amountLabel.text = amount.rounded(withType: currencyType).toString() + " \(currencyType.rawValue)"
+            cell.amountLabel.text = amount.rounded(with: currencyType).toString() + " \(currencyType.rawValue)"
             
             switch changeState {
             case .increased:

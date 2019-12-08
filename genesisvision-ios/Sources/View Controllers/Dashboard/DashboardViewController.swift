@@ -126,8 +126,6 @@ class DashboardViewController: BaseViewController {
         addBottomView()
         
         setupUI()
-        
-        showProgressHUD()
     }
     
     @objc private func tabBarDidScrollToTop(_ notification: Notification) {
@@ -270,7 +268,6 @@ extension DashboardViewController {
         let viewHeight = eventsViewHeightConstraint.constant + chartsViewHeightConstraint.constant - 44.0
         
         if yOffset >= viewHeight && self.filterStackView.alpha == 1.0 {
-
             UIView.animate(withDuration: 0.3, animations: {
                 self.filterStackView.alpha = 0.0
             }) { (success) in

@@ -103,20 +103,20 @@ class ListDelegateManager<T: ListViewModelProtocol>: NSObject, UITableViewDelega
         guard let canPullToRefresh = viewModel?.canPullToRefresh, !canPullToRefresh else { return }
         
         delegate?.delegateManagerScrollViewDidScroll(scrollView)
-        scrollView.isScrollEnabled = scrollView.contentOffset.y > -44.0
+        print(scrollView.contentOffset.y)
+        scrollView.isScrollEnabled = scrollView.contentOffset.y > -0.0
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         guard let canPullToRefresh = viewModel?.canPullToRefresh, !canPullToRefresh else { return }
         
         delegate?.delegateManagerScrollViewWillBeginDragging(scrollView)
+        print(scrollView.contentOffset.y)
         let translation = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
         if translation.y > 0 {
-            //            print("down")
-            scrollView.isScrollEnabled = scrollView.contentOffset.y > -44.0
+            scrollView.isScrollEnabled = scrollView.contentOffset.y > -0.0
         } else {
-            //            print("up")
-            scrollView.isScrollEnabled = scrollView.contentOffset.y >= -44.0
+            scrollView.isScrollEnabled = scrollView.contentOffset.y >= -0.0
         }
     }
 }

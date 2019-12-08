@@ -86,7 +86,9 @@ class WalletTransactionListViewController: BaseViewControllerWithTableView {
 //        showProgressHUD()
         viewModel.fetch { [weak self] (result) in
             self?.hideAll()
-            self?.tabmanBarItems?.forEach({ $0.badgeValue = "\(self?.viewModel.totalCount)" })
+            if let totalCount = self?.viewModel.totalCount {
+                self?.tabmanBarItems?.forEach({ $0.badgeValue = "\(totalCount)" })
+            }
         }
     }
     

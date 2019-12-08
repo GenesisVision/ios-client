@@ -20,13 +20,13 @@ extension ProgramBalanceChartTableViewCellViewModel: CellViewModel {
         cell.chartViewProtocol = chartViewProtocol
         
         if let amountValue = programBalanceChart.gvtBalance {
-            cell.amountValueLabel.text = amountValue.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
+            cell.amountValueLabel.text = amountValue.rounded(with: .gvt).toString() + " \(Constants.gvtString)"
         } else {
             cell.amountValueLabel.isHidden = true
         }
         
         if let amountCurrency = programBalanceChart.programCurrencyBalance, let programCurrency = programBalanceChart.programCurrency, let currencyType = CurrencyType(rawValue: programCurrency.rawValue) {
-            cell.amountCurrencyLabel.text = amountCurrency.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+            cell.amountCurrencyLabel.text = amountCurrency.rounded(with: currencyType).toString() + " " + currencyType.rawValue
         } else {
             cell.amountCurrencyLabel.isHidden = true
         }

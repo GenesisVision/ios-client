@@ -78,7 +78,7 @@ final class ProgramInvestViewModel {
     func getInvestmentAmountCurrencyValue(_ amount: Double) -> String {
         guard let programCurrency = programCurrency?.rawValue, let currencyType = CurrencyType(rawValue: programCurrency) else { return "" }
         let value = amount * rate
-        return "≈" + value.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+        return "≈" + value.rounded(with: currencyType).toString() + " " + currencyType.rawValue
     }
     
     func getMinInvestmentAmountText() -> String {
@@ -86,10 +86,10 @@ final class ProgramInvestViewModel {
         
         let minInvestmentAmount = getMinInvestmentAmount()
         
-        var text = "min " + minInvestmentAmount.rounded(withType: programCurrency).toString() + " " + programCurrency.rawValue
+        var text = "min " + minInvestmentAmount.rounded(with: programCurrency).toString() + " " + programCurrency.rawValue
         
         if programCurrency.rawValue != walletCurrency, let walletCurrencyType = CurrencyType(rawValue: walletCurrency) {
-            let minValueInWalletCurrency = (minInvestmentAmount / rate).rounded(withType: walletCurrencyType).toString() + " " + walletCurrencyType.rawValue
+            let minValueInWalletCurrency = (minInvestmentAmount / rate).rounded(with: walletCurrencyType).toString() + " " + walletCurrencyType.rawValue
             text.append("≈\(minValueInWalletCurrency)")
             return " (\(text))"
         }

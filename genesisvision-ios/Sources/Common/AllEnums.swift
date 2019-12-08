@@ -8,6 +8,47 @@
 
 import UIKit
 
+enum CellActionType {
+    case none
+    case dashboardTrading
+    case dashboardInvesting
+    case dashboardRecommendation
+    case tradingEvents
+    case tradingPublicList
+    case tradingPrivateList
+    case investingEvents
+    case investingFunds
+    case investingPrograms
+    
+    case createFund
+    case createAccount
+    
+    case attachAccount
+    case makeProgram
+    case makeSignal
+}
+
+enum DidSelectType {
+    case none
+    case depositFrom
+    
+    case leverage
+    case currency
+    case exchange
+    
+    case periods
+    case tradesDelay
+    
+    case selectBroker
+    case showBrokerDetails
+}
+
+enum ActionType {
+    case showAll
+    case add
+    case showBrokerDetails
+}
+
 // MARK: - Charts
 enum ChartType {
     case `default`, detail, full, dashboard, balance, profit

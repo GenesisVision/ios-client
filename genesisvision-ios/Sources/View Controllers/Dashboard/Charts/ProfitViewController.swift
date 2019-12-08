@@ -103,7 +103,7 @@ class ProfitViewController: BaseViewController {
             
             amountTitleLabel.text = "Amount"
             if let value = dashboardChartValue.value {
-                amountValueLabel.text = value.rounded(withType: .gvt).toString() + " " + Constants.gvtString
+                amountValueLabel.text = value.rounded(with: .gvt).toString() + " " + Constants.gvtString
             }
             if let valueCurrency = dashboardChartValue.valueCurrency {
                 amountCurrencyLabel.text = valueCurrency.toString() + " \(getSelectedCurrency())"
@@ -114,7 +114,7 @@ class ProfitViewController: BaseViewController {
                 changePercentLabel.text = changePercent.toString() + "%"
             }
             if let changeValue = dashboardChartValue.changeValue {
-                changeValueLabel.text = changeValue.rounded(withType: .gvt).toString() + " " + Constants.gvtString
+                changeValueLabel.text = changeValue.rounded(with: .gvt).toString() + " " + Constants.gvtString
             }
             if let changeValueCurrency = dashboardChartValue.changeValueCurrency {
                 changeCurrencyLabel.text = changeValueCurrency.toString() + " \(getSelectedCurrency())"

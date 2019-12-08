@@ -345,7 +345,6 @@ class LevelButton: UIButton {
 
             if let level = Int(titleLabel?.text ?? "") {
                 progressView.foregroundStrokeColor = UIColor.Level.color(for: level)
-                progressView.backgroundStrokeColor = UIColor.Level.color(for: level).withAlphaComponent(0.2)
             }
         }
     }
@@ -355,7 +354,6 @@ class LevelButton: UIButton {
         setTitleColor(UIColor.Cell.title, for: .normal)
     }
 }
-
 
 class RatingLevelButton: UIButton {
     var fontSize: CGFloat = 14.0
@@ -399,4 +397,14 @@ class RatingLevelButton: UIButton {
         titleLabel?.font = UIFont.getFont(.semibold, size: fontSize)
         setTitleColor(UIColor.Cell.title, for: .normal)
     }
+}
+
+class ShowAllButton: UIButton {
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        titleLabel?.font = UIFont.getFont(.semibold, size: 14)
+        setTitleColor(UIColor.primary, for: .normal)
+    }
+    
 }

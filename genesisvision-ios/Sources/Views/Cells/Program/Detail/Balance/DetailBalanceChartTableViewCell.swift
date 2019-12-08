@@ -147,7 +147,7 @@ extension DetailBalanceChartTableViewCell: ChartViewDelegate {
                     managersFundsTitleLabel.isHidden = false
                     managersFundsValueLabel.isHidden = false
                     
-                    managersFundsValueLabel.text = managerFunds.rounded(withType: .gvt).toString()
+                    managersFundsValueLabel.text = managerFunds.rounded(with: .gvt).toString()
                     managersFundsValueLabel.sizeToFit()
                 }
                 
@@ -155,7 +155,7 @@ extension DetailBalanceChartTableViewCell: ChartViewDelegate {
                     investorsFundsTitleLabel.isHidden = false
                     investorsFundsValueLabel.isHidden = false
                     
-                    investorsFundsValueLabel.text = investorsFunds.rounded(withType: .gvt).toString()
+                    investorsFundsValueLabel.text = investorsFunds.rounded(with: .gvt).toString()
                     investorsFundsValueLabel.sizeToFit()
                 }
                 
@@ -177,21 +177,21 @@ extension DetailBalanceChartTableViewCell: ChartViewDelegate {
                     profitTitleLabel.isHidden = false
                     profitValueLabel.isHidden = false
                     
-                    profitValueLabel.text = profit.rounded(withType: currency).toString()
+                    profitValueLabel.text = profit.rounded(with: currency).toString()
                 }
                 
                 if let managerFunds = result.managerFunds {
                     managersFundsTitleLabel.isHidden = false
                     managersFundsValueLabel.isHidden = false
                     
-                    managersFundsValueLabel.text = managerFunds.rounded(withType: currency).toString()
+                    managersFundsValueLabel.text = managerFunds.rounded(with: currency).toString()
                 }
                 
                 if let investorsFunds = result.investorsFunds {
                     investorsFundsTitleLabel.isHidden = false
                     investorsFundsValueLabel.isHidden = false
                     
-                    investorsFundsValueLabel.text = investorsFunds.rounded(withType: currency).toString()
+                    investorsFundsValueLabel.text = investorsFunds.rounded(with: currency).toString()
                 }
                 
                 if let date = result.date {

@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class CreateAccountViewModel {
+final class OldCreateAccountViewModel {
     // MARK: - Variables
     var title: String = "Account creation"
     var programId: String?
@@ -59,7 +59,7 @@ final class CreateAccountViewModel {
     func getInvestmentAmountCurrencyValue(_ amount: Double) -> String {
         guard let programCurrency = programCurrency?.rawValue, let currencyType = CurrencyType(rawValue: programCurrency) else { return "" }
         let value = amount * rate
-        return "≈" + value.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+        return "≈" + value.rounded(with: currencyType).toString() + " " + currencyType.rawValue
     }
     
     func getSelectedWalletTitle() -> String {

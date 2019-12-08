@@ -148,6 +148,126 @@ final class FundFacetsViewModel: ListViewModelProtocolWithFacets {
     }
 }
 
+protocol ViewModelWithCollection: BaseData, ListVMProtocol {
+    func getActions() -> [UIButton]
+    func makeLayout() -> UICollectionViewLayout
+    func getCollectionViewHeight() -> CGFloat
+}
+
+extension ViewModelWithCollection {
+    func getActions() -> [UIButton] {
+        return []
+    }
+    
+    func makeLayout() -> UICollectionViewLayout {
+        var layout: UICollectionViewLayout!
+        if #available(iOS 13.0, *) {
+            layout = UICollectionViewCompositionalLayout { (section: Int, environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+                let size = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1.0))
+                let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
+                let itemInset: NSDirectionalEdgeInsets = NSDirectionalEdgeInsets(top: 0.0, leading: Constants.SystemSizes.Cell.horizontalMarginValue / 2, bottom: Constants.SystemSizes.Cell.verticalMarginValues, trailing: Constants.SystemSizes.Cell.horizontalMarginValue / 2 )
+                let sectionInset: NSDirectionalEdgeInsets = NSDirectionalEdgeInsets(top: 0.0, leading: Constants.SystemSizes.Cell.horizontalMarginValue, bottom: Constants.SystemSizes.Cell.verticalMarginValues, trailing: Constants.SystemSizes.Cell.horizontalMarginValue)
+                
+                item.contentInsets = itemInset
+                let group = NSCollectionLayoutGroup.vertical(layoutSize: size, subitem: item, count: 1)
+                let section = NSCollectionLayoutSection(group: group)
+                section.contentInsets = sectionInset
+                section.orthogonalScrollingBehavior = .groupPaging
+                return section
+            }
+        } else {
+            // Fallback on earlier versions
+        }
+        return layout
+    }
+    
+    func getCollectionViewHeight() -> CGFloat {
+        return 150.0
+    }
+}
+
+protocol BaseData {
+    var title: String { get set }
+    var showActionsView: Bool { get set }
+    var type: CellActionType { get set }
+}
+
+extension BaseData {
+    var title: String { return "" }
+    var showActionsView: Bool { return false }
+    var type: CellActionType { return .none }
+}
+protocol ListVMProtocol {
+    var viewModels: [CellViewAnyModel] { get set }
+    var canPullToRefresh: Bool { get set }
+    
+    var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] { get }
+    var cellModelsForRegistration: [CellViewAnyModel.Type] { get }
+    
+    func model(at indexPath: IndexPath) -> CellViewAnyModel?
+    func cell(for indexPath: IndexPath, tableView: UITableView) -> UITableViewCell
+    
+    func modelsCount() -> Int
+    func numberOfSections() -> Int
+    func numberOfRows(in section: Int) -> Int
+    func headerTitle(for section: Int) -> String?
+    func headerHeight(for section: Int) -> CGFloat
+    
+    func didSelect(at indexPath: IndexPath)
+}
+
+extension ListVMProtocol {
+    var viewModels: [CellViewAnyModel] {
+        return []
+    }
+    var canPullToRefresh: Bool {
+        return false
+    }
+    
+    var cellModelsForRegistration: [CellViewAnyModel.Type] {
+        return []
+    }
+    var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
+        return []
+    }
+    
+    func model(at indexPath: IndexPath) -> CellViewAnyModel? {
+        return viewModels[indexPath.row]
+    }
+    
+    func cell(for indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
+        guard let model = model(at: indexPath) else {
+            return BaseTableViewCell()
+        }
+        
+        return tableView.dequeueReusableCell(withModel: model, for: indexPath)
+    }
+    
+    func modelsCount() -> Int {
+        return viewModels.count
+    }
+    
+    func numberOfSections() -> Int {
+        return 1
+    }
+    
+    func numberOfRows(in section: Int) -> Int {
+        return modelsCount()
+    }
+    
+    func headerTitle(for section: Int) -> String? {
+        return nil
+    }
+    
+    func headerHeight(for section: Int) -> CGFloat {
+        return 0.0
+    }
+    
+    func didSelect(at indexPath: IndexPath) {
+        
+    }
+}
+
 protocol ListViewModelProtocol {
     var router: ListRouterProtocol! { get }
     

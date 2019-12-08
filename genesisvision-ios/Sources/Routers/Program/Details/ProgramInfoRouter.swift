@@ -74,9 +74,9 @@ class ProgramInfoRouter: Router {
     }
     
     func createAccount(with programId: String, programCurrency: CurrencyType, completion: @escaping CreateAccountCompletionBlock) {
-        guard let viewController = CreateAccountViewController.storyboardInstance(.program) else { return }
+        guard let viewController = OldCreateAccountViewController.storyboardInstance(.program) else { return }
         
-        let viewModel = CreateAccountViewModel(withRouter: self, programId: programId, programCurrency: programCurrency, completion: completion)
+        let viewModel = OldCreateAccountViewModel(withRouter: self, programId: programId, programCurrency: programCurrency, completion: completion)
         viewController.viewModel = viewModel
         navigationController?.pushViewController(viewController, animated: true)
     }

@@ -22,7 +22,7 @@ extension ReallocateHistoryTableViewCellViewModel: CellViewModel {
         cell.delegate = delegate
         
         if let date = model.date {
-            cell.dateLabel.text = date.dateAndTimeToString()
+            cell.dateLabel.text = date.onlyTimeFormatString
         }
         
         if let parts = model.parts, !parts.isEmpty {
@@ -45,7 +45,7 @@ extension ReallocateHistoryTableViewCellViewModel: CellViewModel {
                 //percent
                 let label = UILabel()
                 if let percent = part.percent {
-                    label.text = percent.rounded(withType: .undefined).toString() + "%"
+                    label.text = percent.rounded(with: .undefined).toString() + "%"
                 }
                 label.textColor = UIColor.Common.white
                 label.font = UIFont.getFont(.regular, size: 16.0)

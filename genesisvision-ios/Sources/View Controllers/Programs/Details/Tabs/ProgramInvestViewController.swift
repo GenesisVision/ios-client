@@ -110,7 +110,7 @@ class ProgramInvestViewController: BaseViewController {
     var availableToInvestValue: Double = 0.0 {
         didSet {
             if let programCurrency = viewModel.programCurrency {
-                self.availableToInvestValueLabel.text = availableToInvestValue.rounded(withType: programCurrency).toString() + " " + programCurrency.rawValue
+                self.availableToInvestValueLabel.text = availableToInvestValue.rounded(with: programCurrency).toString() + " " + programCurrency.rawValue
             }
         }
     }
@@ -124,7 +124,7 @@ class ProgramInvestViewController: BaseViewController {
     var availableInWalletFromValue: Double = 0.0 {
         didSet {
             if let currency = viewModel.selectedWalletFromDelegateManager?.selected?.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency) {
-                self.availableInWalletValueLabel.text = availableInWalletFromValue.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+                self.availableInWalletValueLabel.text = availableInWalletFromValue.rounded(with: currencyType).toString() + " " + currencyType.rawValue
             }
         }
     }
@@ -189,19 +189,19 @@ class ProgramInvestViewController: BaseViewController {
         let gvCommission = viewModel.getGVCommision()
         
         let entryFeeCurrency = entryFee * amountToInvestValue * rate / 100
-        let entryFeeCurrencyString = entryFeeCurrency.rounded(withType: programCurrency).toString()
+        let entryFeeCurrencyString = entryFeeCurrency.rounded(with: programCurrency).toString()
         let entryFeeString = entryFee.rounded(toPlaces: 3).toString()
 
         let entryFeeValueLabelString = entryFeeString + "% (≈\(entryFeeCurrencyString) \(programCurrency.rawValue))"
         self.entryFeeValueLabel.text = entryFeeValueLabelString
 
         let gvCommissionCurrency = gvCommission * amountToInvestValue / 100
-        let gvCommissionCurrencyString = gvCommissionCurrency.rounded(withType: walletCurrencyType).toString()
+        let gvCommissionCurrencyString = gvCommissionCurrency.rounded(with: walletCurrencyType).toString()
         let gvCommissionString = gvCommission.rounded(toPlaces: 3).toString()
 
         let gvCommissionValueLabelString = gvCommissionString + "% (≈\(gvCommissionCurrencyString) \(walletCurrencyType.rawValue))"
         self.gvCommissionValueLabel.text = gvCommissionValueLabelString
-        let investmentAmountValue = (amountToInvestValue * rate - entryFeeCurrency - gvCommissionCurrency * rate).rounded(withType: programCurrency).toString()
+        let investmentAmountValue = (amountToInvestValue * rate - entryFeeCurrency - gvCommissionCurrency * rate).rounded(with: programCurrency).toString()
         self.investmentAmountValueLabel.text = "≈" + investmentAmountValue + " " + programCurrency.rawValue
     
         self.availableToInvestValue = viewModel.getAvailableToInvest()
@@ -305,7 +305,7 @@ class ProgramInvestViewController: BaseViewController {
         let rate = viewModel.rate
         if let currency = viewModel.selectedWalletFromDelegateManager?.selected?.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency) {
             
-            let minValue = min(availableToInvestValue / rate, availableInWalletFromValue).rounded(withType: currencyType)
+            let minValue = min(availableToInvestValue / rate, availableInWalletFromValue).rounded(with: currencyType)
             
             amountToInvestValueLabel.text = minValue.toString(withoutFormatter: true)
             amountToInvestValue = minValue
@@ -313,7 +313,7 @@ class ProgramInvestViewController: BaseViewController {
     }
 }
 
-extension ProgramInvestViewController: WalletDepositCurrencyDelegateManagerProtocol {
+extension ProgramInvestViewController: WalletDelegateManagerProtocol {
     func didSelectWallet(at indexPath: IndexPath, walletId: Int) {
         self.showProgressHUD()
         self.viewModel.updateWalletCurrencyFromIndex(indexPath.row) { [weak self] (result) in

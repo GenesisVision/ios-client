@@ -140,7 +140,7 @@ class ProgramWithdrawViewController: BaseViewController {
         if let rate = viewModel.programWithdrawInfo?.rate {
             let selectedCurrency = getSelectedCurrency()
             let currency = CurrencyType(rawValue: selectedCurrency) ?? .gvt
-            let amountToWithdrawValueCurrencyString = (amountToWithdrawValue * rate).rounded(withType: currency).toString()
+            let amountToWithdrawValueCurrencyString = (amountToWithdrawValue * rate).rounded(with: currency).toString()
             self.amountToWithdrawCurrencyLabel.text = "≈" + amountToWithdrawValueCurrencyString + " " + selectedCurrency
         }
         

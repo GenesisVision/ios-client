@@ -32,10 +32,16 @@ class CircularProgressView: UIView {
         }
     }
     public var backgroundStrokeColor: UIColor? {
-        didSet {
-            self.layoutSubviews()
-        }
+        return foregroundStrokeColor?.withAlphaComponent(0.2)
     }
+//    public var backgroundStrokeColor: UIColor? {
+//        didSet {
+//            self.layoutSubviews()
+//        }
+//        get {
+//
+//        }
+//    }
 
     public func setProgress(to progressConstant: Double, withAnimation: Bool) {
         guard progress != progressConstant else { return }

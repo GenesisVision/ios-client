@@ -16,8 +16,6 @@ enum DashboardRouteType {
 
 class DashboardRouter: Router, SignalRouterProtocol, ListRouterProtocol {
     
-    var dashboardViewController: DashboardViewController!
-    
     var chartsViewController: ChartsViewController?
     var eventsViewController: EventsViewController?
     var dashboardAssetsViewController: AssetsViewController?

@@ -97,7 +97,7 @@ final class WalletCurrencyDelegateManager: NSObject, UITableViewDelegate, UITabl
     var selectedWallet: WalletWithdrawalInfo?
     
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [WalletCurrencyTableViewCellViewModel.self]
+        return [SelectableTableViewCellViewModel.self]
     }
     
     // MARK: - Lifecycle
@@ -125,13 +125,12 @@ final class WalletCurrencyDelegateManager: NSObject, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "WalletCurrencyTableViewCell", for: indexPath) as? WalletCurrencyTableViewCell else {
-            let cell = UITableViewCell()
-            return cell
-        }
+        let model = SelectableTableViewCellViewModel()
         
-        let isSelected = indexPath.row == selectedIndex
+        guard let cell = tableView.dequeueReusableCell(withModel: model, for: indexPath) as? SelectableTableViewCell else { return UITableViewCell() }
+        
         let wallet = wallets[indexPath.row]
+        let isSelected = indexPath.row == selectedIndex
         cell.configure(wallet, selected: isSelected)
         
         return cell

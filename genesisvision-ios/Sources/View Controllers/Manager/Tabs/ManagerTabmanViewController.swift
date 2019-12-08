@@ -7,9 +7,13 @@
 //
 
 import UIKit
-import Pageboy
 
 class ManagerTabmanViewController: BaseTabmanViewController<ManagerTabmanViewModel> {
+    
+    // MARK: - Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
     
     // MARK: - Public Methods
     func setup(_ managerProfileDetails: ManagerProfileDetails?) {

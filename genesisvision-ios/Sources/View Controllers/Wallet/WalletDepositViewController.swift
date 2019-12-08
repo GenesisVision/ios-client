@@ -116,7 +116,7 @@ class WalletDepositViewController: BaseViewController {
             
             amountToDepositCurrencyLabel.text = currency.rawValue
             
-            amountToDepositGVTValueLabel.text = (amountToDepositValue / rateToGVT).rounded(withType: .gvt).toString() + " " + Constants.gvtString
+            amountToDepositGVTValueLabel.text = (amountToDepositValue / rateToGVT).rounded(with: .gvt).toString() + " " + Constants.gvtString
             
             if let title = selectedWallet.title {
                 selectedWalletCurrencyValueLabel.text = title + " | " + currency.rawValue
@@ -160,7 +160,7 @@ class WalletDepositViewController: BaseViewController {
     }
 }
 
-extension WalletDepositViewController: WalletDepositCurrencyDelegateManagerProtocol {
+extension WalletDepositViewController: WalletDelegateManagerProtocol {
     func didSelectWallet(at indexPath: IndexPath, walletId: Int) {
         self.viewModel.updateWalletCurrencyIndex(indexPath.row)
         self.updateUI()

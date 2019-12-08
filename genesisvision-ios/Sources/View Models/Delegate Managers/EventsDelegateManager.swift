@@ -78,7 +78,7 @@ final class EventsDelegateManager: NSObject, UICollectionViewDelegate, UICollect
             let pageboyDataSource = assetsViewController.viewModel.dataSource {
             for controller in pageboyDataSource.controllers {
                 if let vc = controller as? BaseViewControllerWithTableView {
-                    vc.tableView?.isScrollEnabled = yOffset > -44.0
+                    vc.tableView?.isScrollEnabled = yOffset > 0.0
                 }
             }
         }

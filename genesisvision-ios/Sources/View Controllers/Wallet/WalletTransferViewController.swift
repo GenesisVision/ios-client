@@ -24,7 +24,7 @@ class WalletTransferViewController: BaseViewController {
     var availableInWalletFromValue: Double = 0.0 {
         didSet {
             if let currency = viewModel.selectedWalletFromDelegateManager?.selected?.currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
-                self.availableInWalletFromValueLabel.text = availableInWalletFromValue.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+                self.availableInWalletFromValueLabel.text = availableInWalletFromValue.rounded(with: currencyType).toString() + " " + currencyType.rawValue
             }
         }
     }
@@ -32,7 +32,7 @@ class WalletTransferViewController: BaseViewController {
     var availableInWalletToValue: Double = 0.0 {
         didSet {
             if let currency = viewModel.selectedWalletToDelegateManager?.selected?.currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
-                self.availableInWalletToValueLabel.text = availableInWalletToValue.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+                self.availableInWalletToValueLabel.text = availableInWalletToValue.rounded(with: currencyType).toString() + " " + currencyType.rawValue
             }
         }
     }
@@ -177,7 +177,7 @@ class WalletTransferViewController: BaseViewController {
         if let to = selectedWalletTo.currency?.rawValue, let title = selectedWalletTo.title,  let currencyType = CurrencyType(rawValue: to) {
             selectedWalletToValueLabel.text = title + " | " + to
             
-            let value = (amountToTransferValue * viewModel.rate).rounded(withType: currencyType).toString()
+            let value = (amountToTransferValue * viewModel.rate).rounded(with: currencyType).toString()
             amountToTransferToValueLabel.text = "≈" + value + " " + currencyType.rawValue
         }
         
@@ -337,7 +337,7 @@ class WalletTransferViewController: BaseViewController {
     }
 }
 
-extension WalletTransferViewController: WalletDepositCurrencyDelegateManagerProtocol {
+extension WalletTransferViewController: WalletDelegateManagerProtocol {
     func didSelectWallet(at indexPath: IndexPath, walletId: Int) {
         switch walletId {
         case 1:

@@ -42,7 +42,7 @@ extension InRequestsTableViewCellViewModel: CellViewModel {
             if type == .withdrawal, programType == .fund {
                 if let fundWithdrawPercent = programRequest.fundWithdrawPercent, let valueGvt = programRequest.valueGvt {
                     let currency: CurrencyType = .gvt
-                    let text = "\(fundWithdrawPercent)% (≈" + valueGvt.rounded(withType: currency).toString() + " " + Constants.gvtString + ")"
+                    let text = "\(fundWithdrawPercent)% (≈" + valueGvt.rounded(with: currency).toString() + " " + Constants.gvtString + ")"
                     cell.amountValueLabel.text = text
                 }
             } else {
@@ -55,7 +55,7 @@ extension InRequestsTableViewCellViewModel: CellViewModel {
                 
                 if let value = programRequest.value, let programCurrency = programRequest.currency, let currency = CurrencyType(rawValue: programCurrency.rawValue) {
                     let text = cell.amountValueLabel.text ?? ""
-                    cell.amountValueLabel.text = text + value.rounded(withType: currency).toString() + " \(currency.rawValue)"
+                    cell.amountValueLabel.text = text + value.rounded(with: currency).toString() + " \(currency.rawValue)"
                 }
             }
         }

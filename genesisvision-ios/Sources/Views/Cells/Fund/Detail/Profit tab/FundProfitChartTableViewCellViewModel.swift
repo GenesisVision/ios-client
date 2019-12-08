@@ -24,7 +24,7 @@ extension FundProfitChartTableViewCellViewModel: CellViewModel {
         
         if let equityChart = fundProfitChart.equityChart, equityChart.count > 0 {
             if let value = equityChart.last?.value {
-                cell.amountValueLabel.text = value.rounded(withType: .undefined).toString() + "%"
+                cell.amountValueLabel.text = value.rounded(with: .undefined).toString() + "%"
             } else {
                 cell.amountValueLabel.isHidden = true
             }
@@ -39,7 +39,7 @@ extension FundProfitChartTableViewCellViewModel: CellViewModel {
             }
             
             if let changeValue = fundProfitChart.timeframeGvtProfit {
-                cell.changeValueLabel.text = changeValue.rounded(withType: .gvt).toString() + " \(Constants.gvtString)"
+                cell.changeValueLabel.text = changeValue.rounded(with: .gvt).toString() + " \(Constants.gvtString)"
             } else {
                 cell.changeValueLabel.isHidden = true
             }
@@ -47,7 +47,7 @@ extension FundProfitChartTableViewCellViewModel: CellViewModel {
             if let changeCurrency = fundProfitChart.timeframeUsdProfit {
                 let currencyType: CurrencyType = .usd
                 
-                cell.changeCurrencyLabel.text = changeCurrency.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+                cell.changeCurrencyLabel.text = changeCurrency.rounded(with: currencyType).toString() + " " + currencyType.rawValue
             } else {
                 cell.changeCurrencyLabel.isHidden = true
             }

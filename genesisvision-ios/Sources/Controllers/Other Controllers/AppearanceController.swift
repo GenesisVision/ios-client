@@ -125,7 +125,6 @@ struct AppearanceController {
         UITabBar.appearance().barStyle = theme.barStyle
 
         setupTabBar()
-        setupSegmentedControl()
         setupPlateCell()
         setupShadowView()
     }
@@ -171,17 +170,6 @@ struct AppearanceController {
         IQKeyboardManager.shared.toolbarTintColor = UIColor.primary
         IQKeyboardManager.shared.toolbarDoneBarButtonItemText = "Dismiss"
         IQKeyboardManager.shared.placeholderFont = UIFont.getFont(.regular, size: 14.0)
-    }
-    
-    // MARK: - SegmentedControl
-    private static func setupSegmentedControl() {
-        let segmentedControlAppearance = ScrollableSegmentedControl.appearance()
-        segmentedControlAppearance.segmentContentColor = UIColor.Font.light
-        segmentedControlAppearance.selectedSegmentContentColor = UIColor.primary
-        segmentedControlAppearance.backgroundColor = UIColor.clear
-        segmentedControlAppearance.tintColor = UIColor.primary
-        segmentedControlAppearance.borderColor = UIColor.primary
-        segmentedControlAppearance.borderWidth = 2
     }
     
     // MARK: - PlateCell

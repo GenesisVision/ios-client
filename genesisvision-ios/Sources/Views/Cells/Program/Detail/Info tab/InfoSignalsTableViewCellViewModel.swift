@@ -38,7 +38,7 @@ extension InfoSignalsTableViewCellViewModel: CellViewModel {
 
             if let totalProfit = signalSubscription.totalProfit {
                 cell.profitTitleLabel.text = "profit"
-                cell.profitValueLabel.text = totalProfit.rounded(withType: .undefined).toString() + "%"
+                cell.profitValueLabel.text = totalProfit.rounded(with: .undefined).toString() + "%"
             }
             
             if let mode = signalSubscription.mode {
@@ -57,17 +57,17 @@ extension InfoSignalsTableViewCellViewModel: CellViewModel {
             
             if let value = signalSubscription.openTolerancePercent {
                 cell.valueTitleLabel.text = "tolerance percentage"
-                cell.valueValueLabel.text = value.rounded(withType: .undefined).toString() + "%"
+                cell.valueValueLabel.text = value.rounded(with: .undefined).toString() + "%"
             }
         } else {
             if let signalSuccessFee = programDetailsFull?.signalSuccessFee {
                 cell.successFeeTitleLabel.text = "success fee"
-                cell.successFeeValueLabel.text = signalSuccessFee.rounded(withType: .undefined).toString() + "%"
+                cell.successFeeValueLabel.text = signalSuccessFee.rounded(with: .undefined).toString() + "%"
             }
             
             if let signalSubscriptionFee = programDetailsFull?.signalVolumeFee {
                 cell.subscriptionFeeTitleLabel.text = "volume fee"
-                cell.subscriptionFeeValueLabel.text = signalSubscriptionFee.rounded(withType: .undefined).toString() + "%"
+                cell.subscriptionFeeValueLabel.text = signalSubscriptionFee.rounded(with: .undefined).toString() + "%"
             }
         }
         

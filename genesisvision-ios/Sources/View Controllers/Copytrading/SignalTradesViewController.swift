@@ -43,7 +43,7 @@ class SignalTradesViewController: BaseViewControllerWithTableView {
     // MARK: - Private methods
     private func setupTableConfiguration() {
         tableView.configure(with: .defaultConfiguration)
-//        tableView.allowsSelection = false
+
         tableView.isScrollEnabled = false
         tableView.bounces = false
         
@@ -51,8 +51,6 @@ class SignalTradesViewController: BaseViewControllerWithTableView {
         tableView.dataSource = self
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
         tableView.registerHeaderNib(for: viewModel.viewModelsForRegistration)
-        
-        setupPullToRefresh(scrollView: tableView)
     }
     
     private func setup() {
@@ -60,6 +58,9 @@ class SignalTradesViewController: BaseViewControllerWithTableView {
         noDataTitle = viewModel.noDataText()
         
         setupNavigationBar()
+        
+        showProgressHUD()
+        fetch()
     }
     
     private func reloadData() {
@@ -99,18 +100,9 @@ class SignalTradesViewController: BaseViewControllerWithTableView {
         }
     }
     
-    override func pullToRefresh() {
-        super.pullToRefresh()
-        
-        fetch()
-    }
-    
     override func updateData(from dateFrom: Date?, to dateTo: Date?) {
         viewModel.dateFrom = dateFrom
         viewModel.dateTo = dateTo
-        
-        showProgressHUD()
-        fetch()
     }
 }
 
@@ -130,16 +122,16 @@ extension SignalTradesViewController: UITableViewDelegate, UITableViewDataSource
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         super.scrollViewDidScroll(scrollView)
-        scrollView.isScrollEnabled = scrollView.contentOffset.y > -44.0
+        scrollView.isScrollEnabled = scrollView.contentOffset.y > 0.0
     }
     
     override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         super.scrollViewWillBeginDragging(scrollView)
         let translation = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
         if translation.y > 0 {
-            scrollView.isScrollEnabled = scrollView.contentOffset.y > -44.0
+            scrollView.isScrollEnabled = scrollView.contentOffset.y > 0.0
         } else {
-            scrollView.isScrollEnabled = scrollView.contentOffset.y >= -44.0
+            scrollView.isScrollEnabled = scrollView.contentOffset.y >= 0.0
         }
     }
     

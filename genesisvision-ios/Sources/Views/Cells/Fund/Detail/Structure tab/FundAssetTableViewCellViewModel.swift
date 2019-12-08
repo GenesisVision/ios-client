@@ -35,13 +35,13 @@ extension FundAssetTableViewCellViewModel: CellViewModel {
         }
         
         if let targetPercent = fundAssetInfo.target {
-            cell.targetPercentLabel.text = targetPercent.rounded(withType: .undefined).toString() + "%"
+            cell.targetPercentLabel.text = targetPercent.rounded(with: .undefined).toString() + "%"
         } else {
             cell.targetPercentLabel.text = ""
         }
         
         if let currenctPercent = fundAssetInfo.current {
-            cell.currentPercentLabel.text = currenctPercent.rounded(withType: .undefined).toString() + "%"
+            cell.currentPercentLabel.text = currenctPercent.rounded(with: .undefined).toString() + "%"
         } else {
             cell.currentPercentLabel.text = ""
         }
@@ -77,7 +77,7 @@ extension FundReallocateTableViewCellViewModel: CellViewModel {
         
         if let currenctPercent = fundAssetInfo.percent {
             cell.currentPercentLabel.textAlignment = .right
-            cell.currentPercentLabel.text = currenctPercent.rounded(withType: .undefined).toString() + "%"
+            cell.currentPercentLabel.text = currenctPercent.rounded(with: .undefined).toString() + "%"
         } else {
             cell.currentPercentLabel.text = ""
         }

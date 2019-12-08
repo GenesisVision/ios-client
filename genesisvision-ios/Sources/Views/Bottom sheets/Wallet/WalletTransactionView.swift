@@ -183,7 +183,7 @@ extension WalletTransactionView {
         
         platformFeeStackView.amountStackView.subtitleLabel.text = "Amount"
         if let amount = model.amount, let currency = model.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency) {
-            platformFeeStackView.amountStackView.titleLabel.text = amount.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+            platformFeeStackView.amountStackView.titleLabel.text = amount.rounded(with: currencyType).toString() + " " + currencyType.rawValue
         }
     }
     private func setupExternalDeposit(_ model: TransactionDetails) {
@@ -200,7 +200,7 @@ extension WalletTransactionView {
         
         externalDepositStackView.toAmountStackView.subtitleLabel.text = "Amount"
         if let amount = model.amount, let currency = model.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency) {
-            externalDepositStackView.toAmountStackView.titleLabel.text = amount.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+            externalDepositStackView.toAmountStackView.titleLabel.text = amount.rounded(with: currencyType).toString() + " " + currencyType.rawValue
         }
     }
     private func setupExternalWithdrawal(_ model: TransactionDetails) {
@@ -220,7 +220,7 @@ extension WalletTransactionView {
         
         externalWithdrawalStackView.fromAmountStackView.subtitleLabel.text = "Amount"
         if let amount = model.amount, let currency = model.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency) {
-            externalWithdrawalStackView.fromAmountStackView.titleLabel.text = amount.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+            externalWithdrawalStackView.fromAmountStackView.titleLabel.text = amount.rounded(with: currencyType).toString() + " " + currencyType.rawValue
         }
         
         if let details = model.externalTransactionDetails {
@@ -277,7 +277,7 @@ extension WalletTransactionView {
             
             openProgramStackView.amountStackView.subtitleLabel.text = "Investment amount"
             if let amount = model.amount, let currencyType = CurrencyType(rawValue: currency.rawValue) {
-                openProgramStackView.amountStackView.titleLabel.text = amount.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+                openProgramStackView.amountStackView.titleLabel.text = amount.rounded(with: currencyType).toString() + " " + currencyType.rawValue
             } else {
                 openProgramStackView.amountStackView.isHidden = true
             }
@@ -320,19 +320,19 @@ extension WalletTransactionView {
             investmentStackView.entryFeeStackView.subtitleLabel.text = "Entry fee"
             if let entryFee = model.programDetails?.entryFee, let entryFeePercent = model.programDetails?.entryFeePercent, let currencyType = CurrencyType(rawValue: currency.rawValue) {
 
-                investmentStackView.entryFeeStackView.titleLabel.text = "\(entryFeePercent)% (" + entryFee.rounded(withType: currencyType).toString() + " " + currencyType.rawValue + ")"
+                investmentStackView.entryFeeStackView.titleLabel.text = "\(entryFeePercent)% (" + entryFee.rounded(with: currencyType).toString() + " " + currencyType.rawValue + ")"
             } else {
                 investmentStackView.entryFeeStackView.isHidden = true
             }
             investmentStackView.gvCommissionStackView.subtitleLabel.text = "GV Commission"
             if let gvCommission = model.gvCommission, let gvCommissionCurrency = model.gvCommissionCurrency, let gvCommissionPercent = model.gvCommissionPercent, let currencyType = CurrencyType(rawValue: gvCommissionCurrency.rawValue) {
-                investmentStackView.gvCommissionStackView.titleLabel.text = "\(gvCommissionPercent)% (" + gvCommission.rounded(withType: currencyType).toString() + " " + currencyType.rawValue + ")"
+                investmentStackView.gvCommissionStackView.titleLabel.text = "\(gvCommissionPercent)% (" + gvCommission.rounded(with: currencyType).toString() + " " + currencyType.rawValue + ")"
             } else {
                 investmentStackView.gvCommissionStackView.isHidden = true
             }
             investmentStackView.amountStackView.subtitleLabel.text = "Investment amount"
             if let amount = model.amount, let currencyType = CurrencyType(rawValue: currency.rawValue) {
-                investmentStackView.amountStackView.titleLabel.text = amount.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+                investmentStackView.amountStackView.titleLabel.text = amount.rounded(with: currencyType).toString() + " " + currencyType.rawValue
             } else {
                 investmentStackView.amountStackView.isHidden = true
             }
@@ -371,14 +371,14 @@ extension WalletTransactionView {
             
             if programType == .program, let currency = model.gvCommissionCurrency, let successFee = model.programDetails?.successFee, let successFeePercent = model.programDetails?.successFeePercent, let currencyType = CurrencyType(rawValue: currency.rawValue) {
                 investmentStackView.successFeeStackView.subtitleLabel.text = "Success fee"
-                investmentStackView.successFeeStackView.titleLabel.text = "\(successFeePercent)% (" + successFee.rounded(withType: currencyType).toString() + " " + currencyType.rawValue + ")"
+                investmentStackView.successFeeStackView.titleLabel.text = "\(successFeePercent)% (" + successFee.rounded(with: currencyType).toString() + " " + currencyType.rawValue + ")"
             } else {
                 investmentStackView.successFeeStackView.isHidden = true
             }
             
             if programType == .fund, let exitFee = model.programDetails?.exitFee, let exitFeePercent = model.programDetails?.exitFeePercent, let currencyType = CurrencyType(rawValue: currency.rawValue) {
                 investmentStackView.exitFeeStackView.subtitleLabel.text = "Exit fee"
-                investmentStackView.exitFeeStackView.titleLabel.text = "\(exitFeePercent)% (" + exitFee.rounded(withType: currencyType).toString() + " " + currencyType.rawValue + ")"
+                investmentStackView.exitFeeStackView.titleLabel.text = "\(exitFeePercent)% (" + exitFee.rounded(with: currencyType).toString() + " " + currencyType.rawValue + ")"
             } else {
                 investmentStackView.exitFeeStackView.isHidden = true
             }
@@ -387,13 +387,13 @@ extension WalletTransactionView {
 
             investmentStackView.gvCommissionStackView.subtitleLabel.text = "GV Commission"
             if let gvCommission = model.gvCommission, let currency = model.gvCommissionCurrency, let gvCommissionPercent = model.gvCommissionPercent, let currencyType = CurrencyType(rawValue: currency.rawValue) {
-                investmentStackView.gvCommissionStackView.titleLabel.text = "\(gvCommissionPercent)% (" + gvCommission.rounded(withType: currencyType).toString() + " " + currencyType.rawValue + ")"
+                investmentStackView.gvCommissionStackView.titleLabel.text = "\(gvCommissionPercent)% (" + gvCommission.rounded(with: currencyType).toString() + " " + currencyType.rawValue + ")"
             } else {
                 investmentStackView.gvCommissionStackView.isHidden = true
             }
             investmentStackView.amountStackView.subtitleLabel.text = "Investment amount"
             if let amount = model.amount, let currencyType = CurrencyType(rawValue: currency.rawValue) {
-                investmentStackView.amountStackView.titleLabel.text = amount.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+                investmentStackView.amountStackView.titleLabel.text = amount.rounded(with: currencyType).toString() + " " + currencyType.rawValue
             } else {
                 investmentStackView.amountStackView.isHidden = true
             }
@@ -431,7 +431,7 @@ extension WalletTransactionView {
             }
             withdrawalStackView.amountStackView.subtitleLabel.text = "Withdrawal amount"
             if let amount = model.amount, let currencyType = CurrencyType(rawValue: currency.rawValue) {
-                withdrawalStackView.amountStackView.titleLabel.text = amount.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+                withdrawalStackView.amountStackView.titleLabel.text = amount.rounded(with: currencyType).toString() + " " + currencyType.rawValue
             } else {
                 withdrawalStackView.amountStackView.isHidden = true
             }
@@ -461,7 +461,7 @@ extension WalletTransactionView {
         
         convertingStackView.fromAmountStackView.subtitleLabel.text = "Written off wallet"
         if let amount = model.amount, let currencyType = CurrencyType(rawValue: currency.rawValue) {
-            convertingStackView.fromAmountStackView.titleLabel.text = amount.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+            convertingStackView.fromAmountStackView.titleLabel.text = amount.rounded(with: currencyType).toString() + " " + currencyType.rawValue
         } else {
             convertingStackView.fromAmountStackView.isHidden = true
         }
@@ -482,13 +482,13 @@ extension WalletTransactionView {
             
             convertingStackView.toAmountStackView.subtitleLabel.text = "Credited to the wallet"
             if let amount = details.amountTo, let currencyType = CurrencyType(rawValue: currencyTo.rawValue) {
-                convertingStackView.toAmountStackView.titleLabel.text = amount.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+                convertingStackView.toAmountStackView.titleLabel.text = amount.rounded(with: currencyType).toString() + " " + currencyType.rawValue
             } else {
                 convertingStackView.toAmountStackView.isHidden = true
             }
             
             if let amount = details.rateValue, let currencyType = CurrencyType(rawValue: currencyTo.rawValue) {
-                convertingStackView.rateStackView.titleLabel.text = "1 \(currency.rawValue) = \(amount.rounded(withType: currencyType).toString()) \(currencyType.rawValue)"
+                convertingStackView.rateStackView.titleLabel.text = "1 \(currency.rawValue) = \(amount.rounded(with: currencyType).toString()) \(currencyType.rawValue)"
             } else {
                 convertingStackView.rateStackView.isHidden = true
             }
@@ -501,7 +501,7 @@ extension WalletTransactionView {
         
         signalDepositStackView.amountStackView.subtitleLabel.text = "Investment amount"
         if let amount = model.amount, let currency = model.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency) {
-            signalDepositStackView.amountStackView.titleLabel.text = amount.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+            signalDepositStackView.amountStackView.titleLabel.text = amount.rounded(with: currencyType).toString() + " " + currencyType.rawValue
         }
     }
     
@@ -542,7 +542,7 @@ extension WalletTransactionView {
             
             signalFeeStackView.amountStackView.subtitleLabel.text = "Amount"
             if let amount = model.amount, let currencyType = CurrencyType(rawValue: currency.rawValue) {
-                signalFeeStackView.amountStackView.titleLabel.text = amount.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+                signalFeeStackView.amountStackView.titleLabel.text = amount.rounded(with: currencyType).toString() + " " + currencyType.rawValue
             } else {
                 signalFeeStackView.amountStackView.isHidden = true
             }
@@ -556,7 +556,7 @@ extension WalletTransactionView {
                     subtitleLabel.text = title
                     let titleLabel = TitleLabel()
                     titleLabel.font = UIFont.getFont(.regular, size: 16.0)
-                    titleLabel.text = value.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+                    titleLabel.text = value.rounded(with: currencyType).toString() + " " + currencyType.rawValue
                     
                     let vStack = UIStackView(arrangedSubviews: [subtitleLabel, titleLabel])
                     vStack.axis = .vertical

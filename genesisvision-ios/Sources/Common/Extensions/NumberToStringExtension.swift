@@ -9,6 +9,10 @@
 import Foundation
 
 extension Double {
+    func getString(with currency: CurrencyType) -> String {
+        return self.rounded(with: currency).toString() + " " + currency.rawValue
+    }
+    
     func toString(currency: Bool = false, withoutFormatter: Bool = false) -> String {
         guard !withoutFormatter else {
             return String(describing: self)

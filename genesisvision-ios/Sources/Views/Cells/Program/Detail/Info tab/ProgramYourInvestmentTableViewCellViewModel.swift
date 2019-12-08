@@ -50,13 +50,13 @@ extension ProgramYourInvestmentTableViewCellViewModel: CellViewModel {
             let invested = programDetailsFull?.personalProgramDetails?.invested {
             let profitValue = value - invested
             let sign = profitValue > 0 ? "+" : ""
-            cell.profitValueLabel.text = sign + profitValue.rounded(withType: currency).toString() + " " + currency.rawValue + " (\(profitPercent.rounded(withType: .undefined).toString())%)"
+            cell.profitValueLabel.text = sign + profitValue.rounded(with: currency).toString() + " " + currency.rawValue + " (\(profitPercent.rounded(with: .undefined).toString())%)"
             cell.profitValueLabel.textColor = profitPercent == 0 ? UIColor.Cell.title : profitPercent > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
         }
         
         cell.valueTitleLabel.text = "value"
         if let value = programDetailsFull?.personalProgramDetails?.value {
-            cell.valueLabel.text = value.rounded(withType: currency).toString() + " " + currency.rawValue
+            cell.valueLabel.text = value.rounded(with: currency).toString() + " " + currency.rawValue
         }
     }
 }

@@ -124,8 +124,9 @@ extension DashboardViewModel {
     // MARK: - Public methods
     func refresh(completion: @escaping CompletionBlock) {
         updatePlatformInfo()
-        fetch(completion)
-        fetchEvents(completion)
+        fetchEvents { [weak self] (result) in
+            self?.fetch(completion)
+        }
     }
     // MARK: - Private methods
     private func updatePlatformInfo() {

@@ -16,21 +16,21 @@ final class SignalTradesViewModel {
     private weak var reloadDataProtocol: ReloadDataProtocol?
     private weak var signalTradesProtocol: SignalTradesProtocol?
     
-    var sortingDelegateManager: SortingDelegateManager!
+    var canFetchMoreResults = true
+    var dataType: DataType = .api
+    var count: String = ""
     
     var currency: CurrencyType?
     
-    var canFetchMoreResults = true
-    var dataType: DataType = .api
-    var transactionsCount: String = ""
-    var dateFrom: Date?
-    var dateTo: Date?
     var skip = 0
     var take = ApiKeys.take
     
+    var dateFrom: Date?
+    var dateTo: Date?
+    
     var totalCount = 0 {
         didSet {
-            transactionsCount = "\(totalCount) trades"
+            count = "\(totalCount) trades"
         }
     }
     
@@ -48,13 +48,15 @@ final class SignalTradesViewModel {
     var sortedSections = [Date]()
     
     var isOpenTrades: Bool = false
+    var sortingDelegateManager: SortingDelegateManager!
     
     // MARK: - Init
     init(withRouter router: SignalRouterProtocol, reloadDataProtocol: ReloadDataProtocol?, isOpenTrades: Bool? = false, signalTradesProtocol: SignalTradesProtocol? = nil, currency: CurrencyType? = nil) {
         self.router = router
-        self.isOpenTrades = isOpenTrades ?? false
-        self.reloadDataProtocol = reloadDataProtocol
         self.currency = currency
+        self.isOpenTrades = isOpenTrades ?? false
+        
+        self.reloadDataProtocol = reloadDataProtocol
         
         if self.isOpenTrades {
             self.router.signalOpenTradesViewController = reloadDataProtocol as? SignalOpenTradesViewController
@@ -113,7 +115,7 @@ extension SignalTradesViewModel {
     }
     
     func headerHeight(for section: Int) -> CGFloat {
-        return sortedSections.count > 0 ? 20.0 : 0.0
+        return sortedSections.count > 0 ? 30.0 : 0.0
     }
     
     func titleForHeader(in section: Int) -> String {
@@ -209,11 +211,12 @@ extension SignalTradesViewModel {
         self.reloadDataProtocol?.didReloadData()
     }
     
-    private func saveTrades(_ tradesViewModel: TradesSignalViewModel?, _ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [SignalTradesTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
+    private func saveTrades(_ tradesViewModel: TradesSignalViewModel?, _ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [SignalTradesTableViewCellViewModel]) -> Void, _ completionError: @escaping CompletionBlock) {
         
         guard tradesViewModel != nil else {
             return ErrorHandler.handleApiError(error: nil, completion: completionError)
         }
+        
         var viewModels = [SignalTradesTableViewCellViewModel]()
         
         let totalCount = tradesViewModel?.total ?? 0
@@ -229,15 +232,15 @@ extension SignalTradesViewModel {
     
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [SignalTradesTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
     
-        let sorting = sortingDelegateManager.manager?.getSelectedSorting()
-        
         if isOpenTrades {
             SignalDataProvider.getTradesOpen(with: nil, currency: currency, skip: skip, take: take, completion: { [weak self] (tradesViewModel) in
-                self?.saveTrades(tradesViewModel, completionSuccess, completionError: completionError)
+                self?.saveTrades(tradesViewModel, completionSuccess, completionError)
                 }, errorCompletion: completionError)
         } else {
+            let sorting = sortingDelegateManager.manager?.getSelectedSorting()
+            
             SignalDataProvider.getTrades(from: dateFrom, dateTo: dateTo, sorting: sorting as? SignalAPI.Sorting_v10SignalTradesGet, currency: currency, skip: skip, take: take, completion: { [weak self ] (tradesViewModel) in
-                self?.saveTrades(tradesViewModel, completionSuccess, completionError: completionError)
+                self?.saveTrades(tradesViewModel, completionSuccess, completionError)
             }, errorCompletion: completionError)
         }
     }

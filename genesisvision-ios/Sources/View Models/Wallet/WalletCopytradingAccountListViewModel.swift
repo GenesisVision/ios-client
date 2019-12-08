@@ -33,8 +33,6 @@ final class WalletCopytradingAccountListViewModel {
     init(withRouter router: WalletRouter, reloadDataProtocol: ReloadDataProtocol?) {
         self.router = router
         self.reloadDataProtocol = reloadDataProtocol
-        
-        setup()
     }
 }
 
@@ -90,11 +88,6 @@ extension WalletCopytradingAccountListViewModel {
         case .accounts:
             return viewModels[indexPath.row]
         }
-    }
-    
-    // MARK: - Private methods
-    private func setup() {
-        fetch()
     }
 }
 

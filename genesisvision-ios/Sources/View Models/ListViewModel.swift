@@ -51,7 +51,7 @@ final class ListViewModel: ListViewModelProtocol {
     }
     
     // MARK: - Init
-    init(withRouter router: ListRouterProtocol, reloadDataProtocol: ReloadDataProtocol?, filterModel: FilterModel? = nil, showFacets: Bool = false, bottomViewType: BottomViewType? = .none, assetType: AssetType) {
+    init(withRouter router: ListRouterProtocol, reloadDataProtocol: ReloadDataProtocol?, filterModel: FilterModel? = nil, showFacets: Bool = false, bottomViewType: BottomViewType? = nil, assetType: AssetType) {
         self.router = router
         self.reloadDataProtocol = reloadDataProtocol
         self.showFacets = showFacets

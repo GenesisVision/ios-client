@@ -63,7 +63,7 @@ enum LineStyle {
 }
 
 func getChangePercent(oldValue: Double, newValue: Double) -> String {
-    let percentText = oldValue > 0.0 ? (Double(newValue - oldValue) / oldValue * 100.0).rounded(withType: .undefined).toString() : "∞"
+    let percentText = oldValue > 0.0 ? (Double(newValue - oldValue) / oldValue * 100.0).rounded(with: .undefined).toString() : "∞"
     return percentText + "%"
     
 }

@@ -47,6 +47,7 @@ class DashboardFundListViewController: BaseViewControllerWithTableView {
         setupUI()
         
         showProgressHUD()
+        fetch()
     }
     
     private func setupUI() {
@@ -65,7 +66,7 @@ class DashboardFundListViewController: BaseViewControllerWithTableView {
         tableView.contentInset.bottom = 60.0
         
         tableView.isScrollEnabled = false
-        tableView.bounces = true
+        tableView.bounces = false
         tableView.delegate = self.viewModel?.fundListDelegateManager
         tableView.dataSource = self.viewModel?.fundListDelegateManager
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)

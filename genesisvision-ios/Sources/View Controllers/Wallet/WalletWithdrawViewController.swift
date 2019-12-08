@@ -34,7 +34,7 @@ class WalletWithdrawViewController: BaseViewController {
     var availableInWalletValue: Double = 0.0 {
         didSet {
             if let currency = viewModel.selectedWallet?.currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
-                self.availableInWalletValueLabel.text = availableInWalletValue.rounded(withType: currencyType).toString() + " " + currencyType.rawValue
+                self.availableInWalletValueLabel.text = availableInWalletValue.rounded(with: currencyType).toString() + " " + currencyType.rawValue
             }
         }
     }
@@ -197,13 +197,13 @@ class WalletWithdrawViewController: BaseViewController {
                 selectedWalletCurrencyValueLabel.text = description + " | " + currency.rawValue
             }
             
-            self.feeValueLabel.text = commission.rounded(withType: currencyType).toString() + " " + currency.rawValue
+            self.feeValueLabel.text = commission.rounded(with: currencyType).toString() + " " + currency.rawValue
             
             if amountToWithdrawValue > commission {
                 var value = amountToWithdrawValue - commission
                 value = value > 0.0 ? value : 0.0
                 
-                self.withdrawingValueLabel.text = value.rounded(withType: currencyType).toString() + " " + currency.rawValue
+                self.withdrawingValueLabel.text = value.rounded(with: currencyType).toString() + " " + currency.rawValue
             } else {
                 self.withdrawingValueLabel.text = "0 " + currency.rawValue
             }

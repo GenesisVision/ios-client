@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="NeuzeitGro-Bol.ttf">
+            <string>NeuzeitGro-Bol</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="qHw-oO-uQZ" customClass="BrokerDetailsView" customModule="GV_DEBUG" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cg6-tF-Ojc" customClass="TopStackView" customModule="GV_DEBUG" customModuleProvider="target">
+                    <rect key="frame" x="20" y="12" width="335" height="62"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="zIx-2e-VSf">
+                            <rect key="frame" x="0.0" y="0.0" width="335" height="53"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="yyP-hJ-40S">
+                                    <rect key="frame" x="0.0" y="0.0" width="279" height="53"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W6o-2S-oVS" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="45"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DCR-EH-WXV" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="53" width="0.0" height="0.0"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </stackView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yrL-nU-aOo">
+                                    <rect key="frame" x="295" y="6.5" width="40" height="40"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="40" id="gD1-Nt-AzW"/>
+                                        <constraint firstAttribute="height" constant="40" id="myF-Fu-cAH"/>
+                                    </constraints>
+                                    <state key="normal" image="img_event_program_closed"/>
+                                    <connections>
+                                        <action selector="closeButtonAction:" destination="qHw-oO-uQZ" eventType="touchUpInside" id="hrC-Sk-sLR"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="53" id="fJm-sH-oth"/>
+                            </constraints>
+                        </stackView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ch-5K-jvS">
+                            <rect key="frame" x="0.0" y="61" width="335" height="1"/>
+                            <color key="backgroundColor" red="0.1450980392" green="0.1960784314" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="FVY-uy-55E"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="62" id="lbr-2a-yhi"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="subtitleLabel" destination="DCR-EH-WXV" id="OSc-Qw-vBT"/>
+                        <outlet property="titleLabel" destination="W6o-2S-oVS" id="51c-OI-x5b"/>
+                    </connections>
+                </stackView>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J06-EE-htb">
+                    <rect key="frame" x="20" y="74" width="335" height="526"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="2JT-f6-nUD" customClass="BrokerDetailsStackView" customModule="GV_DEBUG" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="20" width="335" height="386"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="BDi-Bg-I18" customClass="DefaultStackView" customModule="GV_DEBUG" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="335" height="46"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CfA-xo-FUs" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="14.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fez-eb-FOY" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="22.5" width="335" height="23.5"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="20"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <connections>
+                                        <outlet property="subtitleLabel" destination="CfA-xo-FUs" id="hjg-eL-5Jf"/>
+                                        <outlet property="titleLabel" destination="fez-eb-FOY" id="Ctj-l4-dnj"/>
+                                    </connections>
+                                </stackView>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="GqY-NR-TmT" customClass="DefaultStackView" customModule="GV_DEBUG" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="66" width="335" height="40"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Default" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Khu-av-u9e" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="14.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y74-cL-4EN" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="22.5" width="335" height="17.5"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <connections>
+                                        <outlet property="subtitleLabel" destination="Khu-av-u9e" id="mFs-uv-9XD"/>
+                                        <outlet property="titleLabel" destination="y74-cL-4EN" id="vsH-jf-SsR"/>
+                                    </connections>
+                                </stackView>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cEJ-FI-cx4" customClass="DefaultStackView" customModule="GV_DEBUG" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="126" width="335" height="50"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Default" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8v5-hp-QFW" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="18"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="num-qc-KC9" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="26" width="335" height="24"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="50" id="E3k-uc-LYU"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="subtitleLabel" destination="8v5-hp-QFW" id="QW6-IU-R18"/>
+                                        <outlet property="titleLabel" destination="num-qc-KC9" id="KTb-Zn-LuK"/>
+                                    </connections>
+                                </stackView>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="uuf-VK-tpr" customClass="TermsStackView" customModule="GV_DEBUG" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="196" width="335" height="50"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Default" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rAt-jP-Yq9" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="18"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wiy-U6-joZ" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="26" width="335" height="24"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="50" id="esu-tg-Wcq"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="subtitleLabel" destination="rAt-jP-Yq9" id="XCa-Ue-hQB"/>
+                                        <outlet property="titleLabel" destination="wiy-U6-joZ" id="W8v-X5-Zd3"/>
+                                    </connections>
+                                </stackView>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Bni-Z4-pj0" customClass="DefaultStackView" customModule="GV_DEBUG" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="266" width="335" height="50"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Default" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uhs-xs-K4s" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="18"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sff-ZL-IJc" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="26" width="335" height="24"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="50" id="2cs-gD-qog"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="subtitleLabel" destination="uhs-xs-K4s" id="szV-2g-BDn"/>
+                                        <outlet property="titleLabel" destination="Sff-ZL-IJc" id="iPi-cn-c4w"/>
+                                    </connections>
+                                </stackView>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Hnt-iF-QdM" customClass="DefaultStackView" customModule="GV_DEBUG" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="336" width="335" height="50"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CFx-IB-NvZ" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="14.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lHq-EF-hDM" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="26.5" width="335" height="23.5"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="20"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <connections>
+                                        <outlet property="subtitleLabel" destination="CFx-IB-NvZ" id="2Id-Cm-C6H"/>
+                                        <outlet property="titleLabel" destination="lHq-EF-hDM" id="X4O-8a-Oeh"/>
+                                    </connections>
+                                </stackView>
+                            </subviews>
+                            <connections>
+                                <outlet property="aboutStackView" destination="BDi-Bg-I18" id="ueb-tO-Eyr"/>
+                                <outlet property="accountTypeStackView" destination="GqY-NR-TmT" id="zbS-pC-d5m"/>
+                                <outlet property="assetsStackView" destination="Hnt-iF-QdM" id="Yuy-GC-Z9G"/>
+                                <outlet property="leverageStackView" destination="Bni-Z4-pj0" id="KNC-Wl-lQk"/>
+                                <outlet property="termsStackView" destination="uuf-VK-tpr" id="0wW-n8-vgF"/>
+                                <outlet property="tradingPlatformStackView" destination="cEJ-FI-cx4" id="xgt-ox-e8K"/>
+                            </connections>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="2JT-f6-nUD" firstAttribute="width" secondItem="J06-EE-htb" secondAttribute="width" id="TwR-Dh-dAG"/>
+                        <constraint firstItem="2JT-f6-nUD" firstAttribute="leading" secondItem="J06-EE-htb" secondAttribute="leading" id="W14-EZ-kdx"/>
+                        <constraint firstItem="2JT-f6-nUD" firstAttribute="top" secondItem="J06-EE-htb" secondAttribute="top" constant="20" id="eMm-gG-5st"/>
+                        <constraint firstAttribute="bottom" secondItem="2JT-f6-nUD" secondAttribute="bottom" id="qkZ-Re-lbe"/>
+                        <constraint firstAttribute="trailing" secondItem="2JT-f6-nUD" secondAttribute="trailing" id="vg0-Gg-CgL"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="cg6-tF-Ojc" firstAttribute="top" secondItem="qHw-oO-uQZ" secondAttribute="top" constant="12" id="6Zl-mx-VHY"/>
+                <constraint firstItem="PWX-3e-Ilp" firstAttribute="trailing" secondItem="cg6-tF-Ojc" secondAttribute="trailing" constant="20" id="I5n-oW-Nse"/>
+                <constraint firstItem="PWX-3e-Ilp" firstAttribute="bottom" secondItem="J06-EE-htb" secondAttribute="bottom" id="eMr-w6-hYA"/>
+                <constraint firstItem="J06-EE-htb" firstAttribute="leading" secondItem="PWX-3e-Ilp" secondAttribute="leading" constant="20" id="kdZ-Rl-qfL"/>
+                <constraint firstItem="cg6-tF-Ojc" firstAttribute="leading" secondItem="PWX-3e-Ilp" secondAttribute="leading" constant="20" id="lvm-5A-y0F"/>
+                <constraint firstItem="J06-EE-htb" firstAttribute="top" secondItem="cg6-tF-Ojc" secondAttribute="bottom" id="mTI-B7-u6b"/>
+                <constraint firstItem="PWX-3e-Ilp" firstAttribute="trailing" secondItem="J06-EE-htb" secondAttribute="trailing" constant="20" id="yfk-xL-JbF"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="PWX-3e-Ilp"/>
+            <connections>
+                <outlet property="scrollView" destination="J06-EE-htb" id="UrJ-L0-8Je"/>
+                <outlet property="stackView" destination="2JT-f6-nUD" id="q7i-7M-S5k"/>
+                <outlet property="topStackView" destination="cg6-tF-Ojc" id="9ze-b0-W75"/>
+            </connections>
+            <point key="canvasLocation" x="132" y="1289.0554722638681"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="img_event_program_closed" width="28" height="28"/>
+    </resources>
+</document>

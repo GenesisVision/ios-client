@@ -49,6 +49,7 @@ class SignalListViewController: BaseViewControllerWithTableView {
         setupUI()
         
         showProgressHUD()
+        fetch()
     }
     
     private func setupUI() {
@@ -108,6 +109,11 @@ class SignalListViewController: BaseViewControllerWithTableView {
         super.pullToRefresh()
         
         fetch()
+    }
+    
+    override func updateData(from dateFrom: Date?, to dateTo: Date?) {
+        viewModel.filterModel.dateRangeModel.dateFrom = dateFrom
+        viewModel.filterModel.dateRangeModel.dateTo = dateTo
     }
 }
 

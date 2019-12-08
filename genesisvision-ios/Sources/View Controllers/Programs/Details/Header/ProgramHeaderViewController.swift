@@ -186,7 +186,7 @@ class ProgramHeaderViewController: BaseViewController {
         if let color = programDetailsFull?.color {
             bgImageView.backgroundColor = UIColor.hexColor(color)
             headerTitleImageView.backgroundColor = UIColor.hexColor(color)
-        }
+    }
         
         if let logo = programDetailsFull?.logo, let fileUrl = getFileURL(fileName: logo) {
             bgImageView.kf.indicatorType = .activity

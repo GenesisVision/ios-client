@@ -8,6 +8,46 @@
 
 import UIKit
 
+protocol BaseCellProtocol: class {
+    func action(_ type: CellActionType, actionType: ActionType)
+    func didSelect(_ type: CellActionType, cellViewModel: CellViewAnyModel?)
+    func didSelect(_ type: DidSelectType, index: Int)
+    func didReload()
+}
+
+extension BaseCellProtocol {
+    func action(_ type: CellActionType, actionType: ActionType) {
+        
+    }
+    func didSelect(_ type: CellActionType, cellViewModel: CellViewAnyModel?) {
+        
+    }
+    func didSelect(_ type: DidSelectType, index: Int) {
+        
+    }
+    func didReload() {
+        
+    }
+}
+
+extension BaseCellProtocol where Self: ListViewController {
+    func didReload() {
+        hideHUD()
+        tableView.reloadData()
+        refreshControl?.endRefreshing()
+    }
+}
+
+@objc protocol BaseTableViewCellProtocol {
+    weak var titleLabel: LargeTitleLabel! { get set }
+    weak var actionsView: UIStackView! { get set }
+}
+@objc protocol BaseTableViewCellWithCollection {
+    weak var collectionView: UICollectionView! { get set }
+    
+    func collectionSetup()
+}
+
 protocol NodataProtocol {
     var noDataTitle: String? { get }
     var noDataImage: UIImage? { get }
@@ -236,6 +276,6 @@ protocol WalletListViewModelProtocol {
     func noDataButtonTitle() -> String
 }
 
-protocol WalletDepositCurrencyDelegateManagerProtocol: class {
+protocol WalletDelegateManagerProtocol: class {
     func didSelectWallet(at indexPath: IndexPath, walletId: Int)
 }

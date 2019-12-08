@@ -24,14 +24,16 @@ extension ImagePickerPresentable where Self: UIViewController {
         
         return UIAlertAction(title: title, style: .default) { [unowned self] _ in
             let pickerController           = UIImagePickerController()
+            pickerController.navigationBar.isTranslucent = false
             pickerController.delegate      = ImagePickerHelper.shared
             pickerController.sourceType    = type
             pickerController.allowsEditing = true
             
-            pickerController.navigationBar.barStyle = .black
-            pickerController.navigationBar.barTintColor = UIColor.BaseView.bg
-            pickerController.navigationBar.tintColor = UIColor.Cell.title
-            pickerController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.Cell.title, NSAttributedString.Key.font: UIFont.getFont(.semibold, size: 18.0)]
+//            pickerController.modalPresentationStyle = .pageSheet
+//            pickerController.navigationBar.barStyle = .black
+//            pickerController.navigationBar.barTintColor = UIColor.BaseView.bg
+//            pickerController.navigationBar.tintColor = UIColor.Cell.title
+//            pickerController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.Cell.title, NSAttributedString.Key.font: UIFont.getFont(.semibold, size: 18.0)]
             
             self.present(pickerController, animated: true)
         }
@@ -95,8 +97,8 @@ extension ImagePickerHelper: UIImagePickerControllerDelegate {
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-// Local variable inserted by Swift 4.2 migrator.
-let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
+        let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
 
         var data: Data?
         let fileName = "avatar.jpg"

@@ -49,7 +49,7 @@ extension PortfolioEventCollectionViewCellViewModel: CellViewModel {
             let currencyType = CurrencyType(rawValue: currency.rawValue) {
             cell.balanceStackView.isHidden = false
             
-            cell.balanceValueLabel.text = amount.rounded(withType: currencyType).toString() + " \(currencyType.rawValue)"
+            cell.balanceValueLabel.text = amount.rounded(with: currencyType).toString() + " \(currencyType.rawValue)"
             
             cell.balanceValueLabel.textColor = UIColor.Cell.title
         } else if let amount = event.amount,
@@ -58,7 +58,7 @@ extension PortfolioEventCollectionViewCellViewModel: CellViewModel {
             let changeState = event.changeState {
             cell.balanceStackView.isHidden = false
             
-            cell.balanceValueLabel.text = amount.rounded(withType: currencyType).toString() + " \(currencyType.rawValue)"
+            cell.balanceValueLabel.text = amount.rounded(with: currencyType).toString() + " \(currencyType.rawValue)"
             
             switch changeState {
             case .increased:

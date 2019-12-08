@@ -160,21 +160,23 @@ extension UIViewController {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    func openSafariVC(with url: URL) {
-        let safariViewController = SFSafariViewController(url: url, entersReaderIfAvailable: false)
+    func getSafariVC(with url: URL) -> SFSafariViewController {
+        let configuration = SFSafariViewController.Configuration()
+        configuration.entersReaderIfAvailable = false
+        let safariViewController = SFSafariViewController(url: url, configuration: configuration)
         safariViewController.preferredBarTintColor = UIColor.BaseView.bg
 //        safariViewController.preferredControlTintColor = UIColor.primary
         if #available(iOS 11.0, *) {
             safariViewController.dismissButtonStyle = .close
         }
         safariViewController.modalPresentationStyle = .overFullScreen
-        present(viewController: safariViewController)
+        return safariViewController
     }
     
     func openSafariVC(with urlAddress: String) {
         guard let url = URL(string: urlAddress) else { return }
         
-        openSafariVC(with: url)
+        present(viewController: getSafariVC(with: url))
     }
     
     func showActionSheet(with title: String?,
