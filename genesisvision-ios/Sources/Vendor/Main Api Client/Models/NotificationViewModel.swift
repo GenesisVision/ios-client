@@ -11,48 +11,21 @@ import Foundation
 
 open class NotificationViewModel: Codable {
 
-    public enum ModelType: String, Codable { 
-        case platformNewsAndUpdates = "PlatformNewsAndUpdates"
-        case platformEmergency = "PlatformEmergency"
-        case platformOther = "PlatformOther"
-        case profileUpdated = "ProfileUpdated"
-        case profilePwdUpdated = "ProfilePwdUpdated"
-        case profileVerification = "ProfileVerification"
-        case profile2FA = "Profile2FA"
-        case profileSecurity = "ProfileSecurity"
-        case tradingAccountPwdUpdated = "TradingAccountPwdUpdated"
-        case programNewsAndUpdates = "ProgramNewsAndUpdates"
-        case programEndOfPeriod = "ProgramEndOfPeriod"
-        case programCondition = "ProgramCondition"
-        case programExceedInvestmentLimit = "ProgramExceedInvestmentLimit"
-        case fundNewsAndUpdates = "FundNewsAndUpdates"
-        case fundEndOfPeriod = "FundEndOfPeriod"
-        case fundRebalancing = "FundRebalancing"
-        case managerNewProgram = "ManagerNewProgram"
-        case managerNewFund = "ManagerNewFund"
-        case managerNewExternalSignalAccount = "ManagerNewExternalSignalAccount"
-        case signals = "Signals"
-        case externalSignals = "ExternalSignals"
-    }
-    public enum AssetType: String, Codable { 
-        case program = "Program"
-        case fund = "Fund"
-    }
     public var id: UUID?
     public var text: String?
     public var date: Date?
-    public var type: ModelType?
+    public var type: NotificationType?
     public var assetId: UUID?
     public var managerId: UUID?
     public var logo: String?
     public var url: String?
     public var color: String?
     public var isUnread: Bool?
-    public var assetType: AssetType?
+    public var assetType: InvestmentProgramType?
 
 
     
-    public init(id: UUID?, text: String?, date: Date?, type: ModelType?, assetId: UUID?, managerId: UUID?, logo: String?, url: String?, color: String?, isUnread: Bool?, assetType: AssetType?) {
+    public init(id: UUID?, text: String?, date: Date?, type: NotificationType?, assetId: UUID?, managerId: UUID?, logo: String?, url: String?, color: String?, isUnread: Bool?, assetType: InvestmentProgramType?) {
         self.id = id
         self.text = text
         self.date = date
@@ -94,14 +67,14 @@ open class NotificationViewModel: Codable {
         id = try container.decodeIfPresent(UUID.self, forKey: "id")
         text = try container.decodeIfPresent(String.self, forKey: "text")
         date = try container.decodeIfPresent(Date.self, forKey: "date")
-        type = try container.decodeIfPresent(ModelType.self, forKey: "type")
+        type = try container.decodeIfPresent(NotificationType.self, forKey: "type")
         assetId = try container.decodeIfPresent(UUID.self, forKey: "assetId")
         managerId = try container.decodeIfPresent(UUID.self, forKey: "managerId")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
         url = try container.decodeIfPresent(String.self, forKey: "url")
         color = try container.decodeIfPresent(String.self, forKey: "color")
         isUnread = try container.decodeIfPresent(Bool.self, forKey: "isUnread")
-        assetType = try container.decodeIfPresent(AssetType.self, forKey: "assetType")
+        assetType = try container.decodeIfPresent(InvestmentProgramType.self, forKey: "assetType")
     }
 }
 

@@ -11,27 +11,33 @@ import Foundation
 
 open class BrokerDetails: Codable {
 
+    public var id: UUID?
     public var logo: String?
     public var name: String?
-    public var isForex: Bool?
+    public var type: BrokerTradeServerType?
+    public var isKycRequired: Bool?
     public var showSwaps: Bool?
     public var showTickets: Bool?
     public var showCommissionRebate: Bool?
-    public var isForexSometime: Bool?
+    public var isSignalsAvailable: Bool?
+    public var isKycRequiredSometime: Bool?
     public var showSwapsSometime: Bool?
     public var showTicketsSometime: Bool?
     public var showCommissionRebateSometime: Bool?
 
 
     
-    public init(logo: String?, name: String?, isForex: Bool?, showSwaps: Bool?, showTickets: Bool?, showCommissionRebate: Bool?, isForexSometime: Bool?, showSwapsSometime: Bool?, showTicketsSometime: Bool?, showCommissionRebateSometime: Bool?) {
+    public init(id: UUID?, logo: String?, name: String?, type: BrokerTradeServerType?, isKycRequired: Bool?, showSwaps: Bool?, showTickets: Bool?, showCommissionRebate: Bool?, isSignalsAvailable: Bool?, isKycRequiredSometime: Bool?, showSwapsSometime: Bool?, showTicketsSometime: Bool?, showCommissionRebateSometime: Bool?) {
+        self.id = id
         self.logo = logo
         self.name = name
-        self.isForex = isForex
+        self.type = type
+        self.isKycRequired = isKycRequired
         self.showSwaps = showSwaps
         self.showTickets = showTickets
         self.showCommissionRebate = showCommissionRebate
-        self.isForexSometime = isForexSometime
+        self.isSignalsAvailable = isSignalsAvailable
+        self.isKycRequiredSometime = isKycRequiredSometime
         self.showSwapsSometime = showSwapsSometime
         self.showTicketsSometime = showTicketsSometime
         self.showCommissionRebateSometime = showCommissionRebateSometime
@@ -44,13 +50,16 @@ open class BrokerDetails: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
+        try container.encodeIfPresent(id, forKey: "id")
         try container.encodeIfPresent(logo, forKey: "logo")
         try container.encodeIfPresent(name, forKey: "name")
-        try container.encodeIfPresent(isForex, forKey: "isForex")
+        try container.encodeIfPresent(type, forKey: "type")
+        try container.encodeIfPresent(isKycRequired, forKey: "isKycRequired")
         try container.encodeIfPresent(showSwaps, forKey: "showSwaps")
         try container.encodeIfPresent(showTickets, forKey: "showTickets")
         try container.encodeIfPresent(showCommissionRebate, forKey: "showCommissionRebate")
-        try container.encodeIfPresent(isForexSometime, forKey: "isForexSometime")
+        try container.encodeIfPresent(isSignalsAvailable, forKey: "isSignalsAvailable")
+        try container.encodeIfPresent(isKycRequiredSometime, forKey: "isKycRequiredSometime")
         try container.encodeIfPresent(showSwapsSometime, forKey: "showSwapsSometime")
         try container.encodeIfPresent(showTicketsSometime, forKey: "showTicketsSometime")
         try container.encodeIfPresent(showCommissionRebateSometime, forKey: "showCommissionRebateSometime")
@@ -61,13 +70,16 @@ open class BrokerDetails: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
+        id = try container.decodeIfPresent(UUID.self, forKey: "id")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
         name = try container.decodeIfPresent(String.self, forKey: "name")
-        isForex = try container.decodeIfPresent(Bool.self, forKey: "isForex")
+        type = try container.decodeIfPresent(BrokerTradeServerType.self, forKey: "type")
+        isKycRequired = try container.decodeIfPresent(Bool.self, forKey: "isKycRequired")
         showSwaps = try container.decodeIfPresent(Bool.self, forKey: "showSwaps")
         showTickets = try container.decodeIfPresent(Bool.self, forKey: "showTickets")
         showCommissionRebate = try container.decodeIfPresent(Bool.self, forKey: "showCommissionRebate")
-        isForexSometime = try container.decodeIfPresent(Bool.self, forKey: "isForexSometime")
+        isSignalsAvailable = try container.decodeIfPresent(Bool.self, forKey: "isSignalsAvailable")
+        isKycRequiredSometime = try container.decodeIfPresent(Bool.self, forKey: "isKycRequiredSometime")
         showSwapsSometime = try container.decodeIfPresent(Bool.self, forKey: "showSwapsSometime")
         showTicketsSometime = try container.decodeIfPresent(Bool.self, forKey: "showTicketsSometime")
         showCommissionRebateSometime = try container.decodeIfPresent(Bool.self, forKey: "showCommissionRebateSometime")

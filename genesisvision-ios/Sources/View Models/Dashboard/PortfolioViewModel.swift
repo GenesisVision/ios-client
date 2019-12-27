@@ -50,8 +50,8 @@ final class PortfolioViewModel {
     }
     
     // MARK: - Public methods
-    func selectChart(_ date: Date) -> (ValueChartBar?, ChartSimple?) {
-        var balanceChart: ChartSimple? = nil
+    func selectChart(_ date: Date) -> (ValueChartBar?, SimpleChartPoint?) {
+        var balanceChart: SimpleChartPoint? = nil
         
         if let selectedValueChartBar = dashboardChartValue?.investedProgramsInfo?.first(where: { $0.date == date }) {
             self.selectedValueChartBar = selectedValueChartBar
@@ -82,7 +82,7 @@ final class PortfolioViewModel {
         }
     }
     
-    func getDashboardVC() -> DashboardViewController {
+    func getDashboardVC() -> NewDashboardViewController {
         return router.dashboardViewController
     }
     

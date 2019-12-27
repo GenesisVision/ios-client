@@ -13,9 +13,9 @@ final class AccountsDepositCurrencyDelegateManager: NSObject, UITableViewDelegat
     weak var currencyDelegate: WalletDelegateManagerProtocol?
     
     var tableView: UITableView?
-    var accounts: [CopyTradingAccountInfo] = []
+    var accounts: [TradingAccountDetails] = []
     var selectedIndex: Int = 0
-    var selected: CopyTradingAccountInfo?
+    var selected: TradingAccountDetails?
     
     var walletId: Int = 0
     
@@ -24,7 +24,7 @@ final class AccountsDepositCurrencyDelegateManager: NSObject, UITableViewDelegat
     }
     
     // MARK: - Lifecycle
-    init(_ accounts: [CopyTradingAccountInfo]) {
+    init(_ accounts: [TradingAccountDetails]) {
         super.init()
         
         self.accounts = accounts

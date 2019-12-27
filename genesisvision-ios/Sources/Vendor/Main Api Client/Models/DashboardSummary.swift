@@ -11,24 +11,20 @@ import Foundation
 
 open class DashboardSummary: Codable {
 
-    public var chart: DashboardChartValue?
-    public var events: DashboardPortfolioEvents?
-    public var profileHeader: ProfileHeaderViewModel?
-    public var programsCount: Int?
-    public var fundsCount: Int?
-    public var signalsCount: Int?
-    public var requests: ProgramRequests?
+    public var invested: Double?
+    public var trading: Double?
+    public var wallets: Double?
+    public var total: Double?
+    public var profits: DashboardProfits?
 
 
     
-    public init(chart: DashboardChartValue?, events: DashboardPortfolioEvents?, profileHeader: ProfileHeaderViewModel?, programsCount: Int?, fundsCount: Int?, signalsCount: Int?, requests: ProgramRequests?) {
-        self.chart = chart
-        self.events = events
-        self.profileHeader = profileHeader
-        self.programsCount = programsCount
-        self.fundsCount = fundsCount
-        self.signalsCount = signalsCount
-        self.requests = requests
+    public init(invested: Double?, trading: Double?, wallets: Double?, total: Double?, profits: DashboardProfits?) {
+        self.invested = invested
+        self.trading = trading
+        self.wallets = wallets
+        self.total = total
+        self.profits = profits
     }
     
 
@@ -38,13 +34,11 @@ open class DashboardSummary: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(chart, forKey: "chart")
-        try container.encodeIfPresent(events, forKey: "events")
-        try container.encodeIfPresent(profileHeader, forKey: "profileHeader")
-        try container.encodeIfPresent(programsCount, forKey: "programsCount")
-        try container.encodeIfPresent(fundsCount, forKey: "fundsCount")
-        try container.encodeIfPresent(signalsCount, forKey: "signalsCount")
-        try container.encodeIfPresent(requests, forKey: "requests")
+        try container.encodeIfPresent(invested, forKey: "invested")
+        try container.encodeIfPresent(trading, forKey: "trading")
+        try container.encodeIfPresent(wallets, forKey: "wallets")
+        try container.encodeIfPresent(total, forKey: "total")
+        try container.encodeIfPresent(profits, forKey: "profits")
     }
 
     // Decodable protocol methods
@@ -52,13 +46,11 @@ open class DashboardSummary: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        chart = try container.decodeIfPresent(DashboardChartValue.self, forKey: "chart")
-        events = try container.decodeIfPresent(DashboardPortfolioEvents.self, forKey: "events")
-        profileHeader = try container.decodeIfPresent(ProfileHeaderViewModel.self, forKey: "profileHeader")
-        programsCount = try container.decodeIfPresent(Int.self, forKey: "programsCount")
-        fundsCount = try container.decodeIfPresent(Int.self, forKey: "fundsCount")
-        signalsCount = try container.decodeIfPresent(Int.self, forKey: "signalsCount")
-        requests = try container.decodeIfPresent(ProgramRequests.self, forKey: "requests")
+        invested = try container.decodeIfPresent(Double.self, forKey: "invested")
+        trading = try container.decodeIfPresent(Double.self, forKey: "trading")
+        wallets = try container.decodeIfPresent(Double.self, forKey: "wallets")
+        total = try container.decodeIfPresent(Double.self, forKey: "total")
+        profits = try container.decodeIfPresent(DashboardProfits.self, forKey: "profits")
     }
 }
 

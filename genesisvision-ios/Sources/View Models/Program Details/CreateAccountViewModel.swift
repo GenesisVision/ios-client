@@ -15,7 +15,8 @@ final class OldCreateAccountViewModel {
     var programCurrency: CurrencyType?
     var labelPlaceholder: String = "0"
     
-    var walletMultiSummary: WalletMultiSummary?
+    var walletSummary: WalletSummary?
+    var walletMultiAvailable: WalletMultiAvailable?
     var selectedWalletFromDelegateManager: WalletDepositCurrencyDelegateManager?
     
     var rate: Double = 0.0
@@ -33,8 +34,8 @@ final class OldCreateAccountViewModel {
     
     // MARK: - Public methods
     func updateWalletCurrencyFromIndex(_ selectedIndex: Int, completion: @escaping CompletionBlock) {
-        guard let walletMultiSummary = walletMultiSummary,
-            let wallets = walletMultiSummary.wallets else { return }
+        guard let walletSummary = walletSummary,
+            let wallets = walletSummary.wallets else { return }
         
         self.selectedWalletFromDelegateManager?.selected = wallets[selectedIndex]
         self.selectedWalletFromDelegateManager?.selectedIndex = selectedIndex
@@ -45,7 +46,7 @@ final class OldCreateAccountViewModel {
     func getInfo(completion: @escaping CompletionBlock) {
         AuthManager.getWallet(completion: { [weak self] (wallet) in
             if let wallet = wallet, let wallets = wallet.wallets {
-                self?.walletMultiSummary = wallet
+                self?.walletSummary = wallet
                 self?.selectedWalletFromDelegateManager = WalletDepositCurrencyDelegateManager(wallets)
                 self?.selectedWalletFromDelegateManager?.walletId = 0
                 self?.selectedWalletFromDelegateManager?.selectedIndex = 0
@@ -86,8 +87,8 @@ final class OldCreateAccountViewModel {
     
     // MARK: - Private methods
     private func updateRate(completion: @escaping CompletionBlock) {
-        RateDataProvider.getRate(from: self.selectedWalletFromDelegateManager?.selected?.currency?.rawValue ?? "", to: programCurrency?.rawValue ?? "", completion: { [weak self] (rate) in
-            self?.rate = rate ?? 0.0
+        RateDataProvider.getRate(from: self.selectedWalletFromDelegateManager?.selected?.currency?.rawValue ?? "", to: programCurrency?.rawValue ?? "", completion: { [weak self] (rateModel) in
+            self?.rate = rateModel?.rate ?? 0.0
             completion(.success)
             }, errorCompletion: completion)
     }

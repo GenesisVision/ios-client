@@ -85,7 +85,7 @@ class SettingsRouter: Router {
     private func showProfile(_ profileModel: ProfileFullViewModel) {
         guard let viewController = ProfileViewController.storyboardInstance(.profile) else { return }
         let router = ProfileRouter(parentRouter: self, navigationController: navigationController)
-        viewController.viewModel = ProfileViewModel(withRouter: router, profileModel: profileModel, textFieldDelegate: viewController)
+        viewController.viewModel = ProfileViewModel(withRouter: router, profileModel: profileModel)
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)
     }

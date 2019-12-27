@@ -10,7 +10,7 @@ import UIKit
 
 final class NavigationTitleView: UIView {
     var currencyTitleButton: StatusButton = {
-        let selectedCurrency = getSelectedCurrency()
+        let selectedCurrency = selectedPlatformCurrency
         
         let currencyTitleButton = StatusButton(type: .system)
         currencyTitleButton.frame = CGRect(x: 0, y: 0, width: 73, height: 18)

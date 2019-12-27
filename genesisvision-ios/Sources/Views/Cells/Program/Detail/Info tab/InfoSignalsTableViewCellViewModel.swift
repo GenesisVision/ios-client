@@ -8,13 +8,8 @@
 
 import Foundation
 
-enum InfoSignalType {
-    case signal, subscription
-}
-
 struct InfoSignalsTableViewCellViewModel {
-    let programDetailsFull: ProgramDetailsFull?
-    let type: InfoSignalType
+    let programDetailsFull: ProgramFollowDetailsFull?
     weak var infoSignalsProtocol: InfoSignalsProtocol?
 }
 
@@ -22,15 +17,41 @@ extension InfoSignalsTableViewCellViewModel: CellViewModel {
     func setup(on cell: InfoSignalsTableViewCell) {
         cell.infoSignalsProtocol = infoSignalsProtocol
         
-        cell.titleLabel.text = type == .subscription ? "Subscription details" : "Signals"
+        cell.titleLabel.text = "Signals"
         
-        cell.followButton.isHidden = type == .subscription
-        cell.signalStackView.isHidden = type == .subscription
+        if let signalSuccessFee = programDetailsFull?.followDetails?.signalSettings?.signalSuccessFee {
+            cell.successFeeTitleLabel.text = "success fee"
+            cell.successFeeValueLabel.text = signalSuccessFee.rounded(with: .undefined).toString() + "%"
+        }
         
-        cell.editButton.isHidden = type == .signal
-        cell.subscriptionStackView.isHidden = type == .signal
+        if let signalVolumeFee = programDetailsFull?.followDetails?.signalSettings?.signalVolumeFee {
+            cell.subscriptionFeeTitleLabel.text = "volume fee"
+            cell.subscriptionFeeValueLabel.text = signalVolumeFee.rounded(with: .undefined).toString() + "%"
+        }
         
-        if type == .subscription, let signalSubscription = programDetailsFull?.personalProgramDetails?.signalSubscription {
+        cell.followButton.setTitle("Follow trades", for: .normal)
+        cell.followButton.configure(with: .normal)
+        
+        guard let signalSettings = programDetailsFull?.followDetails?.signalSettings else { return }
+        
+        let isActive = signalSettings.isActive ?? false
+        cell.followButton.setTitle(isActive ? "Unfollow trades" : "Follow trades", for: .normal)
+        cell.followButton.configure(with: isActive ? .darkClear : .normal)
+    }
+}
+
+struct InfoSubscriptionTableViewCellViewModel {
+    let signalSubscription: SignalSubscription?
+    weak var infoSignalsProtocol: InfoSignalsProtocol?
+}
+
+extension InfoSubscriptionTableViewCellViewModel: CellViewModel {
+    func setup(on cell: InfoSubscriptionTableViewCell) {
+        cell.infoSignalsProtocol = infoSignalsProtocol
+        
+        cell.titleLabel.text = "Subscription details"
+        
+        if let signalSubscription = signalSubscription {
             if let hasActiveSubscription = signalSubscription.hasActiveSubscription {
                 cell.statusTitleLabel.text = "status"
                 cell.statusValueLabel.text = hasActiveSubscription ? "Active" : ""
@@ -54,30 +75,11 @@ extension InfoSignalsTableViewCellViewModel: CellViewModel {
                 }
                 cell.typeValueLabel.text = type
             }
-            
+
             if let value = signalSubscription.openTolerancePercent {
                 cell.valueTitleLabel.text = "tolerance percentage"
                 cell.valueValueLabel.text = value.rounded(with: .undefined).toString() + "%"
             }
-        } else {
-            if let signalSuccessFee = programDetailsFull?.signalSuccessFee {
-                cell.successFeeTitleLabel.text = "success fee"
-                cell.successFeeValueLabel.text = signalSuccessFee.rounded(with: .undefined).toString() + "%"
-            }
-            
-            if let signalSubscriptionFee = programDetailsFull?.signalVolumeFee {
-                cell.subscriptionFeeTitleLabel.text = "volume fee"
-                cell.subscriptionFeeValueLabel.text = signalSubscriptionFee.rounded(with: .undefined).toString() + "%"
-            }
         }
-        
-        cell.followButton.setTitle("Follow trades", for: .normal)
-        cell.followButton.configure(with: .normal)
-        
-        guard let signalSubscription = programDetailsFull?.personalProgramDetails?.signalSubscription else { return }
-        
-        let hasActiveSubscription = signalSubscription.hasActiveSubscription ?? false
-        cell.followButton.setTitle(hasActiveSubscription ? "Unfollow trades" : "Follow trades", for: .normal)
-        cell.followButton.configure(with: hasActiveSubscription ? .darkClear : .normal)
     }
 }

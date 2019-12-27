@@ -15,7 +15,7 @@ struct FundInvestNowTableViewCellViewModel {
 
 extension FundInvestNowTableViewCellViewModel: CellViewModel {
     func setup(on cell: InvestNowTableViewCell) {
-        if let canInvest = fundDetailsFull?.personalFundDetails?.canInvest {
+        if let canInvest = fundDetailsFull?.personalDetails?.canInvest {
             cell.investButton.setEnabled(canInvest)
         }
         
@@ -26,12 +26,12 @@ extension FundInvestNowTableViewCellViewModel: CellViewModel {
         cell.titleLabel.text = "Invest Now"
         cell.investButton.setTitle("Invest", for: .normal)
         
-         if let entryFee = fundDetailsFull?.entryFee {
+         if let entryFee = fundDetailsFull?.entryFeeCurrent {
             cell.entryFeeTitleLabel.text = "entry fee"
             cell.entryFeeValueLabel.text = entryFee.rounded(with: .undefined).toString() + "%"
         }
         
-        if let exitFee = fundDetailsFull?.exitFee {
+        if let exitFee = fundDetailsFull?.exitFeeCurrent {
             cell.successFeeTitleLabel.text = "exit fee"
             cell.successFeeValueLabel.text = exitFee.rounded(with: .undefined).toString() + "%"
         }

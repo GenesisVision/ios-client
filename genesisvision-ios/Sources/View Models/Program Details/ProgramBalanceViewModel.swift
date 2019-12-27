@@ -43,10 +43,11 @@ final class ProgramBalanceViewModel {
     
     // MARK: - Public methods
     func selectProgramBalanceChartElement(_ date: Date) {
-        if let result = programBalanceChart?.balanceChart?.first(where: { $0.date == date }) {
-            print("selectProgramBalanceChartElement")
-            print(result)
-        }
+        //FIXME:
+//        if let result = programBalanceChart?.chart?.first(where: { $0.date == date }) {
+//            print("selectProgramBalanceChartElement")
+//            print(result)
+//        }
     }
     
     func hideHeader(value: Bool = true) {

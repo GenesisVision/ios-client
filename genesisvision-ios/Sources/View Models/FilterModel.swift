@@ -47,7 +47,7 @@ struct FilterCurrencyModel {
 }
 
 class FilterModel {
-    var levelUpSummary: LevelUpSummary?
+    var levelsInfo: ProgramsLevelsInfo?
     
     var sortingModel: FilterSortingModel
     var tagsModel: FilterTagsModel

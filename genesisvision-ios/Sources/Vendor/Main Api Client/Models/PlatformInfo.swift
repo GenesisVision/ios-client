@@ -11,28 +11,20 @@ import Foundation
 
 open class PlatformInfo: Codable {
 
-    public var iOSVersion: IOsAppVersion?
-    public var androidVersion: AndroidAppVersion?
-    public var programsFacets: [ProgramFacet]?
-    public var fundsFacets: [FundFacet]?
-    public var programsInfo: ProgramsInfo?
-    public var currencies: [String]?
-    public var programCurrencies: [String]?
-    public var platformCurrencies: [PlatformCurrency]?
-    public var enums: Enums?
+    public var appVersionInfo: AppVersion?
+    public var filters: FilterInfo?
+    public var assetInfo: AssetPlatformInfo?
+    public var usersInfo: UsersPlatformInfo?
+    public var commonInfo: PlatformCommonInfo?
 
 
     
-    public init(iOSVersion: IOsAppVersion?, androidVersion: AndroidAppVersion?, programsFacets: [ProgramFacet]?, fundsFacets: [FundFacet]?, programsInfo: ProgramsInfo?, currencies: [String]?, programCurrencies: [String]?, platformCurrencies: [PlatformCurrency]?, enums: Enums?) {
-        self.iOSVersion = iOSVersion
-        self.androidVersion = androidVersion
-        self.programsFacets = programsFacets
-        self.fundsFacets = fundsFacets
-        self.programsInfo = programsInfo
-        self.currencies = currencies
-        self.programCurrencies = programCurrencies
-        self.platformCurrencies = platformCurrencies
-        self.enums = enums
+    public init(appVersionInfo: AppVersion?, filters: FilterInfo?, assetInfo: AssetPlatformInfo?, usersInfo: UsersPlatformInfo?, commonInfo: PlatformCommonInfo?) {
+        self.appVersionInfo = appVersionInfo
+        self.filters = filters
+        self.assetInfo = assetInfo
+        self.usersInfo = usersInfo
+        self.commonInfo = commonInfo
     }
     
 
@@ -42,15 +34,11 @@ open class PlatformInfo: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(iOSVersion, forKey: "iOSVersion")
-        try container.encodeIfPresent(androidVersion, forKey: "androidVersion")
-        try container.encodeIfPresent(programsFacets, forKey: "programsFacets")
-        try container.encodeIfPresent(fundsFacets, forKey: "fundsFacets")
-        try container.encodeIfPresent(programsInfo, forKey: "programsInfo")
-        try container.encodeIfPresent(currencies, forKey: "currencies")
-        try container.encodeIfPresent(programCurrencies, forKey: "programCurrencies")
-        try container.encodeIfPresent(platformCurrencies, forKey: "platformCurrencies")
-        try container.encodeIfPresent(enums, forKey: "enums")
+        try container.encodeIfPresent(appVersionInfo, forKey: "appVersionInfo")
+        try container.encodeIfPresent(filters, forKey: "filters")
+        try container.encodeIfPresent(assetInfo, forKey: "assetInfo")
+        try container.encodeIfPresent(usersInfo, forKey: "usersInfo")
+        try container.encodeIfPresent(commonInfo, forKey: "commonInfo")
     }
 
     // Decodable protocol methods
@@ -58,15 +46,11 @@ open class PlatformInfo: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        iOSVersion = try container.decodeIfPresent(IOsAppVersion.self, forKey: "iOSVersion")
-        androidVersion = try container.decodeIfPresent(AndroidAppVersion.self, forKey: "androidVersion")
-        programsFacets = try container.decodeIfPresent([ProgramFacet].self, forKey: "programsFacets")
-        fundsFacets = try container.decodeIfPresent([FundFacet].self, forKey: "fundsFacets")
-        programsInfo = try container.decodeIfPresent(ProgramsInfo.self, forKey: "programsInfo")
-        currencies = try container.decodeIfPresent([String].self, forKey: "currencies")
-        programCurrencies = try container.decodeIfPresent([String].self, forKey: "programCurrencies")
-        platformCurrencies = try container.decodeIfPresent([PlatformCurrency].self, forKey: "platformCurrencies")
-        enums = try container.decodeIfPresent(Enums.self, forKey: "enums")
+        appVersionInfo = try container.decodeIfPresent(AppVersion.self, forKey: "appVersionInfo")
+        filters = try container.decodeIfPresent(FilterInfo.self, forKey: "filters")
+        assetInfo = try container.decodeIfPresent(AssetPlatformInfo.self, forKey: "assetInfo")
+        usersInfo = try container.decodeIfPresent(UsersPlatformInfo.self, forKey: "usersInfo")
+        commonInfo = try container.decodeIfPresent(PlatformCommonInfo.self, forKey: "commonInfo")
     }
 }
 

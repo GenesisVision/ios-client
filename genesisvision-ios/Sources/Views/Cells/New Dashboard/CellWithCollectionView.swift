@@ -8,12 +8,12 @@
 
 import UIKit
 
-struct CellWithCollectionViewModel<ViewModel: ViewModelWithCollection> {
+struct CellWithCollectionViewModel<ViewModel: CellViewModelWithCollection> {
     var viewModel: ViewModel
     var dataSource: CollectionViewDataSource<ViewModel>!
     
-    weak var delegate: BaseCellProtocol?
-    init(_ viewModel: ViewModel, delegate: BaseCellProtocol?) {
+    weak var delegate: BaseTableViewProtocol?
+    init(_ viewModel: ViewModel, delegate: BaseTableViewProtocol?) {
         self.viewModel = viewModel
         self.delegate = delegate
         
@@ -39,20 +39,34 @@ class CellWithCollectionView: BaseTableViewCell {
     }
     
     // MARK: - Methods
-    func configure(_ viewModel: ViewModelWithCollection, delegate: BaseCellProtocol?, collectionViewDelegate: UICollectionViewDelegate, collectionViewDataSource: UICollectionViewDataSource, cellModelsForRegistration: [CellViewAnyModel.Type]) {
+    func configure(_ viewModel: CellViewModelWithCollection, delegate: BaseTableViewProtocol?, collectionViewDelegate: UICollectionViewDelegate, collectionViewDataSource: UICollectionViewDataSource, cellModelsForRegistration: [CellViewAnyModel.Type]) {
+        if viewModel.hideLoader() {
+            loaderView.stopAnimating()
+            loaderView.isHidden = true
+        }
+        
         self.type = viewModel.type
         self.delegate = delegate
 
         self.titleLabel.text = viewModel.title
-        self.actionsView.isHidden = !viewModel.showActionsView
         
         self.collectionHeightConstraint.constant = viewModel.getCollectionViewHeight()
         
-        actionsView.removeAllArrangedSubviews()
-        
-        viewModel.getActions().forEach { (btn) in
+        rightButtonsView.removeAllArrangedSubviews()
+        viewModel.getRightButtons().forEach { (btn) in
             btn.titleLabel?.font = UIFont.getFont(.semibold, size: 14)
-            actionsView.addArrangedSubview(btn)
+            rightButtonsView.addArrangedSubview(btn)
+        }
+        
+        leftButtonsView.removeAllArrangedSubviews()
+        viewModel.getLeftButtons().forEach { (btn) in
+            leftButtonsView.addArrangedSubview(btn)
+        }
+        
+        countLabel.isHidden = true
+        if let count = viewModel.getTotalCount() {
+            countLabel.isHidden = false
+            countLabel.text = count.toString()
         }
         
         setupCollectionView(collectionViewDelegate, collectionViewDataSource, cellModelsForRegistration: cellModelsForRegistration, layout: viewModel.makeLayout())

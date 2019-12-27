@@ -26,10 +26,11 @@ class ChartView: CombinedChartView {
     weak var chartMarkerProtocol: ChartMarkerProtocol?
     weak var chartViewProtocol: ChartViewProtocol?
 
-    private var barChartData: [ValueChartBar]?
-    private var lineChartData: [ChartSimple]?
-    private var programBalanceChartData: [ProgramBalanceChartElement]?
-    private var fundBalanceChartData: [BalanceChartElement]?
+//    private var barChartData: [ValueChartBar]?
+    private var lineChartData: [SimpleChartPoint]?
+    
+    private var programBalanceChartData: [BalanceChartPoint]?
+    private var fundBalanceChartData: [BalanceChartPoint]?
     
     var animationEnable: Bool = true
     private var name: String?
@@ -102,10 +103,10 @@ class ChartView: CombinedChartView {
     
     // MARK: - Public methods
     func setup(chartType: ChartType = .detail,
-               lineChartData: [ChartSimple]? = nil,
-               barChartData: [ValueChartBar]? = nil,
-               programBalanceChartData: [ProgramBalanceChartElement]? = nil,
-               fundBalanceChartData: [BalanceChartElement]? = nil,
+               lineChartData: [SimpleChartPoint]? = nil,
+//               barChartData: [ValueChartBar]? = nil,
+               programBalanceChartData: [BalanceChartPoint]? = nil,
+               fundBalanceChartData: [BalanceChartPoint]? = nil,
                name: String? = "DataSet",
                currencyValue: String? = nil,
                dateRangeModel: FilterDateRangeModel? = nil) {
@@ -113,7 +114,7 @@ class ChartView: CombinedChartView {
         self.chartType = chartType
         self.name = name
         self.lineChartData = lineChartData
-        self.barChartData = barChartData
+//        self.barChartData = barChartData
         self.programBalanceChartData = programBalanceChartData
         self.fundBalanceChartData = fundBalanceChartData
         self.currencyValue = currencyValue ?? ""
@@ -132,15 +133,15 @@ class ChartView: CombinedChartView {
         
         if let lineChartData = lineChartData {
             data.lineData = generateLineChartData(lineChartData)
-            
+
             data.lineData.calcMinMax()
             maxLimitValue = data.lineData.getYMax().rounded(toPlaces: 2)
             minLimitValue = data.lineData.getYMin().rounded(toPlaces: 2)
         }
         
-        if let barChartData = barChartData {
-            data.barData = generateBarChartData(barChartData)
-        }
+//        if let barChartData = barChartData {
+//            data.barData = generateBarChartData(barChartData)
+//        }
         
         if let programBalanceChartData = programBalanceChartData {
             let lineData = generateProgramBalanceChartData(programBalanceChartData)
@@ -335,15 +336,14 @@ class ChartView: CombinedChartView {
         }
     }
     
-    private func generateProgramBalanceChartData(_ values: [ProgramBalanceChartElement]) -> LineChartData {
+    private func generateProgramBalanceChartData(_ values: [BalanceChartPoint]) -> LineChartData {
         let lineChartData = LineChartData()
         
         let profitDataEntry = (0..<values.count).map { (i) -> ChartDataEntry in
-            let profit = values[i].profit ?? 0.0
             let investorsFunds = values[i].investorsFunds ?? 0.0
             let managerFunds = values[i].managerFunds ?? 0.0
-            let yValue = profit + investorsFunds + managerFunds
-            return ChartDataEntry(x: values[i].date?.timeIntervalSince1970 ?? 0, y: yValue)
+            let yValue = investorsFunds + managerFunds
+            return ChartDataEntry(x: Double(values[i].date ?? 0), y: yValue)
         }
         lineChartDataSet = LineChartDataSet(entries: profitDataEntry, label: "Profit Chart")
         lineChartDataSet.setColor(UIColor.Chart.dark)
@@ -359,7 +359,7 @@ class ChartView: CombinedChartView {
             let investorsFunds = values[i].investorsFunds ?? 0.0
             let managerFunds = values[i].managerFunds ?? 0.0
             let yValue = investorsFunds + managerFunds
-            return ChartDataEntry(x: values[i].date?.timeIntervalSince1970 ?? 0, y: yValue)
+            return ChartDataEntry(x: Double(values[i].date ?? 0), y: yValue)
         }
         lineChartDataSet = LineChartDataSet(entries: investorsFundsDataEntry, label: "Investors Funds Chart")
         lineChartDataSet.setColor(UIColor.Chart.middle)
@@ -373,7 +373,7 @@ class ChartView: CombinedChartView {
         
         let managerFundsDataEntry = (0..<values.count).map { (i) -> ChartDataEntry in
             let yValue = values[i].managerFunds ?? 0.0
-            return ChartDataEntry(x: values[i].date?.timeIntervalSince1970 ?? 0, y: yValue)
+            return ChartDataEntry(x: Double(values[i].date ?? 0), y: yValue)
         }
         lineChartDataSet = LineChartDataSet(entries: managerFundsDataEntry, label: "Manager Funds Chart")
         lineChartDataSet.setColor(UIColor.Chart.dark)
@@ -388,14 +388,14 @@ class ChartView: CombinedChartView {
         return lineChartData
     }
     
-    private func generateFundBalanceChartData(_ values: [BalanceChartElement]) -> LineChartData {
+    private func generateFundBalanceChartData(_ values: [BalanceChartPoint]) -> LineChartData {
         let lineChartData = LineChartData()
         
         let investorsFundsDataEntry = (0..<values.count).map { (i) -> ChartDataEntry in
             let investorsFunds = values[i].investorsFunds ?? 0.0
             let managerFunds = values[i].managerFunds ?? 0.0
             let yValue = investorsFunds + managerFunds
-            return ChartDataEntry(x: values[i].date?.timeIntervalSince1970 ?? 0, y: yValue)
+            return ChartDataEntry(x: Double(values[i].date ?? 0), y: yValue)
         }
         lineChartDataSet = LineChartDataSet(entries: investorsFundsDataEntry, label: "Investors Funds Chart")
         lineChartDataSet.setColor(UIColor.Chart.middle)
@@ -409,7 +409,7 @@ class ChartView: CombinedChartView {
         
         let managerFundsDataEntry = (0..<values.count).map { (i) -> ChartDataEntry in
             let yValue = values[i].managerFunds ?? 0.0
-            return ChartDataEntry(x: values[i].date?.timeIntervalSince1970 ?? 0, y: yValue)
+            return ChartDataEntry(x: Double(values[i].date ?? 0), y: yValue)
         }
         lineChartDataSet = LineChartDataSet(entries: managerFundsDataEntry, label: "Manager Funds Chart")
         lineChartDataSet.setColor(UIColor.Chart.dark)
@@ -425,33 +425,33 @@ class ChartView: CombinedChartView {
     }
     
     
-    private func generateLineChartData(_ values: [ChartSimple]) -> LineChartData {
+    private func generateLineChartData(_ values: [SimpleChartPoint]) -> LineChartData {
 
         let totalDataEntry = (0..<values.count).map { (i) -> ChartDataEntry in
-            return ChartDataEntry(x: values[i].date?.timeIntervalSince1970 ?? 0, y: values[i].value ?? 0)
+            return ChartDataEntry(x: Double(values[i].date ?? 0), y: values[i].value ?? 0)
         }
-        
+
         lineChartDataSet = LineChartDataSet(entries: totalDataEntry, label: "Line Profit")
-        
+
         setNegativeOrPositiveColor()
-        
+
         return LineChartData(dataSet: lineChartDataSet)
     }
-    
-    private func generateBarChartData(_ values: [ValueChartBar]) -> BarChartData {
-        let totalDataEntry = (0..<values.count).map { (i) -> BarChartDataEntry in
-            return BarChartDataEntry(x: values[i].date?.timeIntervalSince1970 ?? 0, y: values[i].value ?? 0)
-        }
-        
-        barChartDataSet = BarChartDataSet(entries: totalDataEntry, label: "Bar profit")
-        
-        let barChartData = BarChartData(dataSet: barChartDataSet)
-        
-        let width = Date(timeIntervalSince1970: barChartData.xMax).interval(ofComponent: .second, fromDate: Date(timeIntervalSince1970: barChartData.xMin)) / 60
-        barChartData.barWidth = Double(width)
-        
-        return barChartData
-    }
+
+//    private func generateBarChartData(_ values: [ValueChartBar]) -> BarChartData {
+//        let totalDataEntry = (0..<values.count).map { (i) -> BarChartDataEntry in
+//            return BarChartDataEntry(x: values[i].date?.timeIntervalSince1970 ?? 0, y: values[i].value ?? 0)
+//        }
+//
+//        barChartDataSet = BarChartDataSet(entries: totalDataEntry, label: "Bar profit")
+//
+//        let barChartData = BarChartData(dataSet: barChartDataSet)
+//
+//        let width = Date(timeIntervalSince1970: barChartData.xMax).interval(ofComponent: .second, fromDate: Date(timeIntervalSince1970: barChartData.xMin)) / 60
+//        barChartData.barWidth = Double(width)
+//
+//        return barChartData
+//    }
     
     private func setNegativeOrPositiveColor() {
         if let firstValue = lineChartData?.first?.value, let lastValue = lineChartData?.last?.value {

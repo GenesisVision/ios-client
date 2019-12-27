@@ -62,7 +62,7 @@ class ManagerInfoViewController: BaseViewControllerWithTableView {
     }
     
     // MARK: - Public methods
-    func updateDetails(with managerProfileDetails: ManagerProfileDetails) {
+    func updateDetails(with managerProfileDetails: PublicProfile) {
         viewModel.updateDetails(with: managerProfileDetails)
         reloadData()
     }

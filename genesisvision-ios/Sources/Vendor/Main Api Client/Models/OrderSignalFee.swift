@@ -11,43 +11,13 @@ import Foundation
 
 open class OrderSignalFee: Codable {
 
-    public enum Currency: String, Codable { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
-        case btc = "BTC"
-        case ada = "ADA"
-        case usdt = "USDT"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case usd = "USD"
-        case eur = "EUR"
-    }
-    public enum ModelType: String, Codable { 
-        case undefined = "Undefined"
-        case gvProgramEntry = "GvProgramEntry"
-        case gvProgramSuccess = "GvProgramSuccess"
-        case gvFundEntry = "GvFundEntry"
-        case gvGmGvtHolderFee = "GvGmGvtHolderFee"
-        case managerProgramEntry = "ManagerProgramEntry"
-        case managerProgramSuccess = "ManagerProgramSuccess"
-        case managerFundEntry = "ManagerFundEntry"
-        case managerFundExit = "ManagerFundExit"
-        case gvWithdrawal = "GvWithdrawal"
-        case managerSignalMasterSuccessFee = "ManagerSignalMasterSuccessFee"
-        case managerSignalMasterVolumeFee = "ManagerSignalMasterVolumeFee"
-        case gvSignalSuccessFee = "GvSignalSuccessFee"
-    }
     public var amount: Double?
     public var currency: Currency?
-    public var type: ModelType?
+    public var type: FeeType?
 
 
     
-    public init(amount: Double?, currency: Currency?, type: ModelType?) {
+    public init(amount: Double?, currency: Currency?, type: FeeType?) {
         self.amount = amount
         self.currency = currency
         self.type = type
@@ -72,7 +42,7 @@ open class OrderSignalFee: Codable {
 
         amount = try container.decodeIfPresent(Double.self, forKey: "amount")
         currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
-        type = try container.decodeIfPresent(ModelType.self, forKey: "type")
+        type = try container.decodeIfPresent(FeeType.self, forKey: "type")
     }
 }
 

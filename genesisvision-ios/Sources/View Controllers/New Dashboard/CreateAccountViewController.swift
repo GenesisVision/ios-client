@@ -26,34 +26,87 @@ class CreateAccountViewController: BaseModalViewController {
         
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = UIColor.BaseView.bg
-
-        viewModel = CreateAccountViewModel(self)
-        stackView.configure(viewModel)
         
-        showProgressHUD()
-        viewModel.brokerCollectionViewModel.fetch()
+        setup()
     }
     
+    func setup() {
+        viewModel = CreateAccountViewModel(self)
+        
+        stackView.amountView.maxButton.addTarget(self, action: #selector(copyMaxValueButtonAction), for: .touchUpInside)
+        stackView.amountView.textField.designableTextFieldDelegate = self
+        stackView.amountView.textField.delegate = self
+        stackView.amountView.textField.addTarget(self, action: #selector(checkActionButton), for: .editingChanged)
+        
+        showProgressHUD()
+        viewModel.fetch()
+    }
+    
+    func updateUI() {
+        stackView.configure(viewModel)
+        stackView.selectBrokerView.collectionView.reloadData()
+    }
+    
+    func showBrokerDetails(_ index: Int) {
+        self.view.endEditing(true)
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.initializeHeight = 500.0
+        
+        let brokerDetailsView = BrokerDetailsView.viewFromNib()
+        
+        brokerDetailsView.configure(viewModel.brokerCollectionViewModel.get(index), delegate: self)
+        bottomSheetController.addContentsView(brokerDetailsView)
+        bottomSheetController.bottomSheetControllerProtocol = brokerDetailsView
+
+        present(bottomSheetController, animated: true, completion: nil)
+    }
+    
+    func showBrokerTerms(_ url: String) {
+        guard let url = URL(string: url) else { return }
+        let vc = getSafariVC(with: url)
+        vc.modalPresentationStyle = .formSheet
+        present(vc, animated: true, completion: nil)
+    }
+    @objc func checkActionButton() {
+        guard let amount = stackView.amountView.textField.text else { return }
+        
+        let value = !amount.isEmpty
+        
+        stackView.actionButton.setEnabled(value)
+    }
     // MARK: - Actions
     @IBAction func createAccountButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
         
-        dismiss(animated: true, completion: nil)
+        if let depositAmount = stackView.amountView.textField.text?.doubleValue {
+            viewModel.request.depositAmount = depositAmount
+        }
+        
+        showProgressHUD()
+        viewModel.createAccount { [weak self] (result) in
+            self?.hideAll()
+            
+            switch result {
+            case .success:
+                self?.dismiss(animated: true, completion: nil)
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self)
+            }
+        }
     }
     @IBAction func selectExchangeButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
         bottomSheetController = BottomSheetController()
         bottomSheetController.initializeHeight = 275.0
 
-        bottomSheetController.addNavigationBar(viewModel.exchangeListViewModel.title)
+        bottomSheetController.addNavigationBar(viewModel.accountTypeListViewModel.title)
 
         bottomSheetController.addTableView { tableView in
-            viewModel.exchangeListViewModel.tableView = tableView
             tableView.separatorStyle = .none
 
-            tableView.registerNibs(for: viewModel.exchangeListViewModel.cellModelsForRegistration)
-            tableView.delegate = viewModel.exchangeListDataSource
-            tableView.dataSource = viewModel.exchangeListDataSource
+            tableView.registerNibs(for: viewModel.accountTypeListViewModel.cellModelsForRegistration)
+            tableView.delegate = viewModel.accountTypeListDataSource
+            tableView.dataSource = viewModel.accountTypeListDataSource
             tableView.reloadData()
         }
 
@@ -113,42 +166,11 @@ class CreateAccountViewController: BaseModalViewController {
 
         present(bottomSheetController, animated: true, completion: nil)
     }
-    
-    func showBrokerDetails(_ index: Int) {
-        self.view.endEditing(true)
-        bottomSheetController = BottomSheetController()
-        bottomSheetController.initializeHeight = 500.0
-        
-        let brokerDetailsView = BrokerDetailsView.viewFromNib()
-        let model = BrokerDetailsModel(title: "Genesis Market",
-                                       about: "Huobi is a Singapore-based cryptocurrency exchange. Founded in China, the company now has offices in Hong Kong, Korea, Japan and the United States. It is currently one of the largest crypto exchanges in the world, judging by 24-hour period volume.",
-                                       accountType: "BTC, ETH, USDT",
-                                       tradingPlatform: "MetaTrader5",
-                                       terms: "https://genesismarkets.io/page/tradingconditions",
-                                       leverage: "1:1",
-                                       assets: "More than 400 various crypto assets")
-        
-        brokerDetailsView.configure(model, delegate: self)
-        bottomSheetController.addContentsView(brokerDetailsView)
-        bottomSheetController.bottomSheetControllerProtocol = brokerDetailsView
-
-        present(bottomSheetController, animated: true, completion: nil)
-    }
-    
-    func selectBroker(_ index: Int) {
-        self.view.endEditing(true)
-        viewModel.brokerCollectionViewModel.selectedIndex = index
-        showProgressHUD()
-        viewModel.brokerCollectionViewModel.fetch()
-        stackView.configure(viewModel)
-    }
-    
-    func showBrokerTerms(_ url: String) {
-        self.view.endEditing(true)
-        guard let url = URL(string: url) else { return }
-        let vc = getSafariVC(with: url)
-        vc.modalPresentationStyle = .formSheet
-        present(vc, animated: true, completion: nil)
+    @IBAction func copyMaxValueButtonAction(_ sender: UIButton) {
+        if let wallet = viewModel.fromListViewModel?.selected(), let currency = wallet.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency), let availableInWalletFromValue = wallet.available {
+            
+            stackView.amountView.textField.text = availableInWalletFromValue.rounded(with: currencyType).toString(withoutFormatter: true)
+        }
     }
 }
 
@@ -169,42 +191,58 @@ extension CreateAccountViewController: BrokerDetailsViewProtocol {
     }
 }
 
-extension CreateAccountViewController: BaseCellProtocol {
+extension CreateAccountViewController: UITextFieldDelegate, DesignableUITextFieldDelegate {
+    func textFieldDidClear(_ textField: UITextField) {
+        checkActionButton()
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        checkActionButton()
+    }
+}
+
+extension CreateAccountViewController: BaseTableViewProtocol {
     func didReload() {
         hideAll()
-        stackView.selectBrokerView.collectionView.reloadData()
+        updateUI()
     }
     
     func didSelect(_ type: DidSelectType, index: Int) {
-        switch type {
-        case .exchange:
-            stackView.accountTypeView.textLabel.text = viewModel.exchangeListViewModel.selected
-        case .currency:
-            stackView.currencyView.textLabel.text = viewModel.currencyListViewModel.selected?.currency?.rawValue
-        case .leverage:
-            stackView.leverageView.textLabel.text = viewModel.leverageListViewModel.selected?.toString()
-        case .depositFrom:
-            stackView.fromView.textLabel.text = viewModel.fromListViewModel.selected?.currency?.rawValue
-        case .showBrokerDetails:
+        self.view.endEditing(true)
+        
+        if type == .showBrokerDetails {
             showBrokerDetails(index)
+            return
+        }
+        
+        bottomSheetController.dismiss()
+    
+        switch type {
+        case .accountType:
+            viewModel.updateAccountType(index)
+        case .currency:
+            viewModel.updateCurrency(index)
+        case .leverage:
+            viewModel.updateLeverage(index)
+        case .walletFrom:
+            viewModel.updateWalletFrom(index)
         case .selectBroker:
-            selectBroker(index)
+            viewModel.updateBroker()
         default:
             break
         }
         
-        bottomSheetController.dismiss()
+        updateUI()
     }
-    
 }
 
 class CreateAccountViewModel {
     // MARK: - Variables
-    var exchangeListViewModel: ExchangeListViewModel!
-    var exchangeListDataSource: TableViewDataSource<ExchangeListViewModel>!
+    var accountTypeListViewModel: AccountTypeListViewModel!
+    var accountTypeListDataSource: TableViewDataSource<AccountTypeListViewModel>!
     
-    var currencyListViewModel: FromListViewModel!
-    var currencyListDataSource: TableViewDataSource<FromListViewModel>!
+    var currencyListViewModel: CurrencyListViewModel!
+    var currencyListDataSource: TableViewDataSource<CurrencyListViewModel>!
     
     var leverageListViewModel: LeverageListViewModel!
     var leverageListDataSource: TableViewDataSource<LeverageListViewModel>!
@@ -215,37 +253,165 @@ class CreateAccountViewModel {
     var brokerCollectionViewModel: BrokerCollectionViewModel!
     var brokerCollectionDataSource: CollectionViewDataSource<BrokerCollectionViewModel>!
     
-    weak var delegate: BaseCellProtocol?
-    init(_ delegate: BaseCellProtocol?) {
+    var brokersInfo: BrokersInfo? {
+        didSet {
+            brokerCollectionViewModel = BrokerCollectionViewModel(delegate, items: brokersInfo?.brokers)
+            brokerCollectionDataSource = CollectionViewDataSource(brokerCollectionViewModel)
+            
+            if let broker = brokersInfo?.brokers?.first {
+                let accountTypes = broker.accountTypes
+                accountTypeListViewModel = AccountTypeListViewModel(delegate, items: accountTypes ?? [], selectedIndex: 0)
+                accountTypeListDataSource = TableViewDataSource(accountTypeListViewModel)
+                
+                let accountType = accountTypes?.first
+                
+                let currencies = accountType?.currencies
+                currencyListViewModel = CurrencyListViewModel(delegate, items: currencies ?? [], selectedIndex: 0)
+                currencyListDataSource = TableViewDataSource(currencyListViewModel)
+                
+                updateWalletFrom()
+                
+                let leverages = accountType?.leverages
+                leverageListViewModel = LeverageListViewModel(delegate, items: leverages ?? [], selectedIndex: 0)
+                leverageListDataSource = TableViewDataSource(leverageListViewModel)
+            }
+        }
+    }
+    
+    var rateModel: RateModel?
+    var walletSummary: WalletSummary? {
+        didSet {
+            if let wallets = walletSummary?.wallets, !wallets.isEmpty {
+                fromListViewModel = FromListViewModel(delegate, items: wallets, selectedIndex: 0)
+                fromListDataSource = TableViewDataSource(fromListViewModel)
+            }
+        }
+    }
+    var minAmounts: [TradingAccountMinCreateAmount]?
+    var twoFactorStatus: TwoFactorStatus?
+    lazy var currency = getPlatformCurrencyType()
+    private let errorCompletion: ((CompletionResult) -> Void) = { (result) in
+       print(result)
+    }
+    var request = NewTradingAccountRequest(depositAmount: nil, depositWalletId: nil, currency: nil, leverage: nil, brokerAccountTypeId: nil)
+    var createResultModel: TradingAccountCreateResult?
+    
+    weak var delegate: BaseTableViewProtocol?
+    init(_ delegate: BaseTableViewProtocol?) {
         self.delegate = delegate
+    }
+    private func fetchBrokers(_ walletSummary: WalletSummary?) {
+        BrokersDataProvider.getBrokers(completion: { [weak self] (model) in
+            self?.brokersInfo = model
+            self?.walletSummary = walletSummary
+            self?.delegate?.didReload()
+        }, errorCompletion: self.errorCompletion)
+    }
+    func fetch() {
+        WalletDataProvider.get(with: currency, completion: { [weak self] (walletSummary) in
+            self?.fetchBrokers(walletSummary)
+        }, errorCompletion: errorCompletion)
         
-        let exchanges = ["Binance"]
-        exchangeListViewModel = ExchangeListViewModel(delegate, items: exchanges, selected: nil)
-        exchangeListDataSource = TableViewDataSource(exchangeListViewModel)
+        PlatformManager.shared.getPlatformInfo { [weak self] (model) in
+            guard let model = model?.assetInfo?.tradingAccountInfo?.minAmounts else { return }
+            self?.minAmounts = model
+        }
+    }
+    
+    func createAccount(completion: @escaping CompletionBlock) {
+        AssetsDataProvider.createTradingAccount(request, completion: { [weak self] (model) in
+            self?.createResultModel = model
+            completion(.success)
+        }, errorCompletion: completion)
+    }
+    func updateBroker() {
+        if let broker = brokerCollectionViewModel.getSelected() {
+            accountTypeListViewModel = AccountTypeListViewModel(delegate, items: broker.accountTypes ?? [], selectedIndex: 0)
+            accountTypeListDataSource = TableViewDataSource(accountTypeListViewModel)
+            
+            updateAccountType(0)
+        }
+    }
+    func updateWalletFrom() {
+        if let fromListViewModel = fromListViewModel, let currencyListViewModel = currencyListViewModel {
+            fromListViewModel.selectedIndex = fromListViewModel.items.firstIndex(where: { $0.currency?.rawValue == currencyListViewModel.selected() }) ?? 0
+        }
+    }
+    
+    func updateWalletFrom(_ index: Int) {
+        fromListViewModel.selectedIndex = index
+        request.depositWalletId = fromListViewModel.selected()?.id
+    }
+    
+    func updateAccountType(_ index: Int) {
+        accountTypeListViewModel.selectedIndex = index
         
-        let wallets: [WalletWithdrawalInfo] = []
-        currencyListViewModel = FromListViewModel(delegate, items: wallets, selected: nil)
+        guard let accountType = accountTypeListViewModel.selected() else { return }
+        request.brokerAccountTypeId = accountType.id
+
+        currencyListViewModel = CurrencyListViewModel(delegate, items: accountType.currencies ?? [], selectedIndex: 0)
         currencyListDataSource = TableViewDataSource(currencyListViewModel)
         
-        let leverages = [1,3,5]
-        leverageListViewModel = LeverageListViewModel(delegate, items: leverages, selected: nil)
+        updateWalletFrom()
+        
+        leverageListViewModel = LeverageListViewModel(delegate, items: accountType.leverages ?? [], selectedIndex: 0)
         leverageListDataSource = TableViewDataSource(leverageListViewModel)
+    }
+    func updateCurrency(_ index: Int) {
+        currencyListViewModel.selectedIndex = index
+        if let currency = currencyListViewModel.selected() {
+            request.currency = Currency(rawValue: currency)
+        }
+    }
+    func updateLeverage(_ index: Int) {
+        leverageListViewModel.selectedIndex = index
+        if let selected = leverageListViewModel.selected() {
+            request.leverage = selected
+        }
+    }
+    func getMinDeposit() -> String {
+        guard let currency = currencyListViewModel.selected(), let accountType = accountTypeListViewModel.selected(), let minDeposits = accountType.minimumDepositsAmount, let minDeposit = minDeposits[currency], let currencyType = CurrencyType(rawValue: currency) else { return "" }
         
-        fromListViewModel = FromListViewModel(delegate, items: wallets, selected: nil)
-        fromListDataSource = TableViewDataSource(fromListViewModel)
+        return minDeposit.rounded(with: currencyType).toString() + " " + currencyType.rawValue
+    }
+    func getSelectedWallet() -> String {
+        guard let fromListViewModel = fromListViewModel, let selected = fromListViewModel.selected(), let title = selected.title, let currency = selected.currency?.rawValue else { return "" }
         
-        brokerCollectionViewModel = BrokerCollectionViewModel(delegate)
-        brokerCollectionDataSource = CollectionViewDataSource(brokerCollectionViewModel)
+        return "\(currency) | \(title)"
+    }
+    func getAvailable() -> String {
+        guard let selected = fromListViewModel?.selected(), let currency = selected.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency), let available = fromListViewModel?.selected()?.available else { return "" }
+        return available.rounded(with: currencyType).toString() + " " + currencyType.rawValue
+    }
+    func getLeverage() -> String {
+        guard let selected = leverageListViewModel.selected() else { return "" }
+        return selected.toString()
+    }
+    func isEnableLeverageSelector() -> Bool {
+        guard let count = leverageListViewModel?.items.count else { return false }
+        return count > 1
+    }
+    func getAccountType() -> String {
+        guard let selected = accountTypeListViewModel.selected()?.name else { return "" }
+        return selected
+    }
+    func isEnableAccountTypeSelector() -> Bool {
+        guard let count = accountTypeListViewModel?.items.count else { return false }
+        return count > 1
+    }
+    func getCurrency() -> String {
+        guard let selected = currencyListViewModel?.selected() else { return "" }
+        return selected
+    }
+    func isEnableCurrencySelector() -> Bool {
+        guard let count = currencyListViewModel?.items.count else { return false }
+        return count > 1
     }
 }
-class ExchangeListViewModel: SelectableListViewModel<String> {
+class ExchangeListViewModel: SelectableListViewModel<Broker> {
     var title = "Choose exchange"
     
     var tableView: UITableView!
-    
-    override func updateSelectedIndex() {
-        self.selectedIndex = items.firstIndex{ $0 == self.selected } ?? 0
-    }
     
     override func cell(for indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
         let model = SelectableTableViewCellViewModel()
@@ -265,12 +431,51 @@ class ExchangeListViewModel: SelectableListViewModel<String> {
         delegate?.didSelect(.exchange, index: indexPath.row)
     }
 }
+class AccountTypeListViewModel: SelectableListViewModel<BrokerAccountType> {
+    var title = "Choose account type"
+    
+    override func cell(for indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
+        let model = SelectableTableViewCellViewModel()
+        
+        guard let cell = tableView.dequeueReusableCell(withModel: model, for: indexPath) as? SelectableTableViewCell else { return UITableViewCell() }
+        
+        let item = items[indexPath.row]
+        let isSelected = indexPath.row == selectedIndex
+        cell.configure(item, selected: isSelected)
+        
+        return cell
+    }
+    
+    override func didSelect(at indexPath: IndexPath) {
+        super.didSelect(at: indexPath)
+
+        delegate?.didSelect(.accountType, index: indexPath.row)
+    }
+}
+class CurrencyListViewModel: SelectableListViewModel<String> {
+    var title = "Choose currency"
+    
+    override func cell(for indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
+        let model = SelectableTableViewCellViewModel()
+        
+        guard let cell = tableView.dequeueReusableCell(withModel: model, for: indexPath) as? SelectableTableViewCell else { return UITableViewCell() }
+        
+        let item = items[indexPath.row]
+        let isSelected = indexPath.row == selectedIndex
+        cell.configure(item, selected: isSelected)
+        
+        return cell
+    }
+    
+    override func didSelect(at indexPath: IndexPath) {
+        super.didSelect(at: indexPath)
+
+        delegate?.didSelect(.currency, index: indexPath.row)
+    }
+}
 class LeverageListViewModel: SelectableListViewModel<Int> {
     var title = "Choose broker's leverage"
     
-    override func updateSelectedIndex() {
-        self.selectedIndex = items.firstIndex{ $0 == self.selected } ?? 0
-    }
     override func cell(for indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
         let model = SelectableTableViewCellViewModel()
 
@@ -289,13 +494,8 @@ class LeverageListViewModel: SelectableListViewModel<Int> {
         delegate?.didSelect(.leverage, index: indexPath.row)
     }
 }
-
-class FromListViewModel: SelectableListViewModel<WalletWithdrawalInfo> {
+class FromListViewModel: SelectableListViewModel<WalletData> {
     var title = "Choose wallet"
-    
-    override func updateSelectedIndex() {
-        self.selectedIndex = items.firstIndex(where: { return $0.currency == self.selected?.currency } ) ?? 0
-    }
     
     override func cell(for indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
         let model = SelectableTableViewCellViewModel()
@@ -312,17 +512,20 @@ class FromListViewModel: SelectableListViewModel<WalletWithdrawalInfo> {
     override func didSelect(at indexPath: IndexPath) {
         super.didSelect(at: indexPath)
         
-        delegate?.didSelect(.depositFrom, index: indexPath.row)
+        delegate?.didSelect(.walletFrom, index: indexPath.row)
+    }
+    
+    func updateSelected(_ currency: CurrencyType) {
+        self.selectedIndex = items.firstIndex(where: { $0.currency?.rawValue == currency.rawValue }) ?? 0
     }
 }
-
-class BrokerCollectionViewModel: ViewModelWithCollection {
+class BrokerCollectionViewModel: CellViewModelWithCollection {
     var title: String
-    var showActionsView: Bool
     var type: CellActionType
     
-    var selectedIndex: Int = 0
-
+    private var selectedIndex: Int = 0
+    private var items: [Broker]?
+    
     var viewModels = [CellViewAnyModel]()
 
     var canPullToRefresh: Bool = true
@@ -335,34 +538,53 @@ class BrokerCollectionViewModel: ViewModelWithCollection {
         return [BrokerCollectionViewCellViewModel.self]
     }
 
-    weak var delegate: BaseCellProtocol?
-    init(_ delegate: BaseCellProtocol?) {
+    weak var delegate: BaseTableViewProtocol?
+    init(_ delegate: BaseTableViewProtocol?, items: [Broker]?) {
         self.delegate = delegate
         self.title = "Select broker"
-        self.showActionsView = false
         self.type = .createAccount
+        self.items = items
+        
+        viewModels = items?.map { BrokerCollectionViewCellViewModel(brokerModel: $0, delegate: self) } ?? []
     }
     
-    func fetch() {
-        viewModels = [CellViewAnyModel]()
-        viewModels.append(BrokerCollectionViewCellViewModel(brokerModel: BrokerModel(tags: ["Signal", "Forex"], logo: nil), isSelected: selectedIndex == 0, delegate: delegate, index: 0))
-        viewModels.append(BrokerCollectionViewCellViewModel(brokerModel: BrokerModel(tags: ["Forex"], logo: nil), isSelected: selectedIndex == 1, delegate: delegate, index: 1))
-        viewModels.append(BrokerCollectionViewCellViewModel(brokerModel: BrokerModel(tags: ["Binance 2"], logo: nil), isSelected: selectedIndex == 2, delegate: delegate, index: 2))
-        viewModels.append(BrokerCollectionViewCellViewModel(brokerModel: BrokerModel(tags: ["Binance 3"], logo: nil), isSelected: selectedIndex == 3, delegate: delegate, index: 3))
-        viewModels.append(BrokerCollectionViewCellViewModel(brokerModel: BrokerModel(tags: ["Binance 4"], logo: nil), isSelected: selectedIndex == 4, delegate: delegate, index: 4))
-        
-        delegate?.didReload()
+    func getSelected() -> Broker? {
+        return items?[selectedIndex]
+    }
+    
+    func get(_ index: Int) -> Broker? {
+        return items?[index]
     }
     
     func didSelect(at indexPath: IndexPath) {
+        selectedIndex = indexPath.row
         delegate?.didSelect(.selectBroker, index: indexPath.row)
     }
     
-    func getActions() -> [UIButton] {
-        return []
+    
+}
+
+extension BrokerCollectionViewModel: BrokerCollectionViewCellViewModelProtocol {
+    func showDetails(_ broker: Broker) {
+        guard let index = items?.firstIndex(where: { $0.name == broker.name }) else { return }
+        
+        delegate?.didSelect(.showBrokerDetails, index: index)
     }
     
+    func isSelected(_ broker: Broker) -> Bool {
+        guard let index = items?.firstIndex(where: { $0.name == broker.name }) else { return false }
+        
+        return selectedIndex == index
+    }
+}
+extension BrokerCollectionViewModel {
     func getCollectionViewHeight() -> CGFloat {
         return 200.0
     }
+    
+    func makeLayout() -> UICollectionViewLayout {
+        return CustomLayout.defaultLayout(2)
+    }
 }
+
+

@@ -10,6 +10,7 @@ import UIKit.UITableView
 
 final class WalletDepositCurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource, CurrencyDelegateManagerProtocol {
     // MARK: - Variables
+    var title = "Choose wallet"
     weak var currencyDelegate: WalletDelegateManagerProtocol?
     
     var tableView: UITableView?
@@ -24,10 +25,12 @@ final class WalletDepositCurrencyDelegateManager: NSObject, UITableViewDelegate,
     }
     
     // MARK: - Lifecycle
-    init(_ wallets: [WalletData]) {
+    init(_ wallets: [WalletData], selectedIndex: Int = 0) {
         super.init()
         
         self.wallets = wallets
+        self.selectedIndex = selectedIndex
+        self.selected = wallets[selectedIndex]
     }
     
     func updateSelectedIndex() {
@@ -38,6 +41,7 @@ final class WalletDepositCurrencyDelegateManager: NSObject, UITableViewDelegate,
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
+        self.selectedIndex = indexPath.row
         self.selected = wallets[indexPath.row]
         
         currencyDelegate?.didSelectWallet(at: indexPath, walletId: walletId)

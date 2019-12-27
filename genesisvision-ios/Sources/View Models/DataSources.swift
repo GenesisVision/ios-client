@@ -8,8 +8,10 @@
 
 import UIKit
 
-class TableViewDataSource<ViewModel: ListVMProtocol>: NSObject, UITableViewDataSource, UITableViewDelegate {
+class TableViewDataSource<ViewModel: ViewModelWithListProtocol>: NSObject, UITableViewDataSource, UITableViewDelegate {
     var viewModel: ViewModel
+    
+    weak var delegate: DelegateManagerProtocol?
     
     init(_ viewModel: ViewModel) {
         self.viewModel = viewModel
@@ -48,7 +50,7 @@ class TableViewDataSource<ViewModel: ListVMProtocol>: NSObject, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-        guard cellAnimations, let cell = tableView.cellForRow(at: indexPath) else { return }
+        guard viewModel.cellAnimations(), let cell = tableView.cellForRow(at: indexPath) else { return }
         
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1.0, options: [.curveEaseOut, .beginFromCurrentState], animations: {
             cell.alpha = 0.8
@@ -57,16 +59,42 @@ class TableViewDataSource<ViewModel: ListVMProtocol>: NSObject, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
-        guard cellAnimations, let cell = tableView.cellForRow(at: indexPath) else { return }
+        guard viewModel.cellAnimations(), let cell = tableView.cellForRow(at: indexPath) else { return }
         
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1.0, options: [.curveEaseOut, .beginFromCurrentState], animations: {
             cell.alpha = 1
             cell.transform = .identity
         }, completion: nil)
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if let viewModel = viewModel as? ListViewModelWithPaging {
+            viewModel.fetchMore(at: indexPath)
+        }
+    }
+    
+    @available(iOS 13.0, *)
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        guard let menu = viewModel.getMenu(indexPath) else { return nil }
+        
+        let actionProvider: UIContextMenuActionProvider = { _ in
+            return menu
+        }
+
+        return UIContextMenuConfiguration(identifier: "unique-ID" as NSCopying, previewProvider: nil, actionProvider: actionProvider)
+    }
+    
+    // MARK: - UITableViewDelegate
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        delegate?.delegateManagerScrollViewDidScroll(scrollView)
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        delegate?.delegateManagerScrollViewWillBeginDragging(scrollView)
+    }
 }
 
-final class CollectionViewDataSource<ViewModel: ListVMProtocol>: NSObject, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+final class CollectionViewDataSource<ViewModel: ViewModelWithListProtocol>: NSObject, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     var viewModel: ViewModel
     
     // MARK: - Lifecycle
@@ -106,5 +134,14 @@ final class CollectionViewDataSource<ViewModel: ListVMProtocol>: NSObject, UICol
         if let cell = collectionView.cellForItem(at: indexPath) {
             cell.backgroundColor = UIColor.Cell.bg
         }
+    }
+    
+    @available(iOS 13.0, *)
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        guard let menu = viewModel.getMenu(indexPath) else { return nil }
+        
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { suggestedActions in
+            return menu
+        })
     }
 }

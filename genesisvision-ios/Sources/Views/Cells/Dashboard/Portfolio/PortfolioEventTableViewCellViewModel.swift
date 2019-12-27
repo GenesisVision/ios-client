@@ -14,8 +14,7 @@ struct PortfolioEventTableViewCellViewModel {
 
 extension PortfolioEventTableViewCellViewModel: CellViewModel {
     func setup(on cell: PortfolioEventTableViewCell) {
-        cell.iconImageView.image = UIImage.programPlaceholder
-        
+        cell.iconImageView.image = UIImage.eventPlaceholder
         if let fileName = event.icon, let fileUrl = getFileURL(fileName: fileName) {
             cell.typeImageView.kf.indicatorType = .activity
             cell.typeImageView.kf.setImage(with: fileUrl, placeholder: UIImage.eventPlaceholder)
@@ -27,7 +26,7 @@ extension PortfolioEventTableViewCellViewModel: CellViewModel {
         
         if let type = event.assetDetails?.assetType {
             switch type {
-            case .funds:
+            case .fund:
                 cell.iconImageView.image = UIImage.fundPlaceholder
             default:
                 cell.iconImageView.image = UIImage.programPlaceholder
@@ -47,12 +46,14 @@ extension PortfolioEventTableViewCellViewModel: CellViewModel {
             let amount = extendedInfo.amount,
             let currency = extendedInfo.currency,
             let currencyType = CurrencyType(rawValue: currency.rawValue) {
-            cell.amountLabel.text = amount.rounded(with: currencyType).toString() + " \(currencyType.rawValue)"
-            
+            let text = amount.rounded(with: currencyType).toString() + " \(currencyType.rawValue)"
+            cell.amountLabel.text = text
             cell.amountLabel.textColor = UIColor.Cell.title
+            cell.amountLabel.isHidden = false
         } else if let amount = event.amount, let currency = event.currency, let currencyType = CurrencyType(rawValue: currency.rawValue), let changeState = event.changeState {
-            cell.amountLabel.text = amount.rounded(with: currencyType).toString() + " \(currencyType.rawValue)"
-            
+            let text = amount.rounded(with: currencyType).toString() + " \(currencyType.rawValue)"
+            cell.amountLabel.text = text
+            cell.amountLabel.isHidden = false
             switch changeState {
             case .increased:
                 cell.amountLabel.textColor = UIColor.Cell.greenTitle

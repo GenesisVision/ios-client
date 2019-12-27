@@ -8,9 +8,8 @@
 
 import UIKit
 
-class InvestingEventsViewModel: ViewModelWithCollection {
+class InvestingEventsViewModel: CellViewModelWithCollection {
     var title: String
-    var showActionsView: Bool
     var type: CellActionType
     
     var viewModels = [CellViewAnyModel]()
@@ -25,26 +24,30 @@ class InvestingEventsViewModel: ViewModelWithCollection {
         return [PortfolioEventCollectionViewCellViewModel.self]
     }
     
-    weak var delegate: BaseCellProtocol?
-    init(_ delegate: BaseCellProtocol?) {
+    var details: DashboardInvestingDetails?
+    weak var delegate: BaseTableViewProtocol?
+    init(_ details: DashboardInvestingDetails?, delegate: BaseTableViewProtocol?) {
+        self.details = details
         self.delegate = delegate
         title = "Events"
-        showActionsView = true
         type = .investingEvents
         
-        let viewModel = PortfolioEventCollectionViewCellViewModel(reloadDataProtocol: nil, event: InvestmentEventViewModel(title: "title", icon: nil, date: Date(), assetDetails: AssetDetails(id: nil, logo: nil, color: nil, title: "Asset", url: nil, assetType: .programs), amount: 20.0, currency: .btc, changeState: .increased, extendedInfo: nil, feesInfo: nil, totalFeesAmount: nil, totalFeesCurrency: nil))
-        viewModels.append(viewModel)
-        viewModels.append(viewModel)
-        viewModels.append(viewModel)
-        viewModels.append(viewModel)
-        viewModels.append(viewModel)
+        details?.events?.items?.forEach({ (model) in
+            viewModels.append(PortfolioEventCollectionViewCellViewModel(reloadDataProtocol: nil, event: model))
+        })
     }
     
     func didSelect(at indexPath: IndexPath) {
         delegate?.didSelect(type, cellViewModel: model(at: indexPath))
     }
     
-    func getActions() -> [UIButton] {
+    @IBAction func showAllButtonAction(_ sender: UIButton) {
+        delegate?.action(type, actionType: .showAll)
+    }
+}
+
+extension InvestingEventsViewModel {
+    func getRightButtons() -> [UIButton] {
         let showAllButton = UIButton(type: .system)
         showAllButton.setTitle("show all", for: .normal)
         showAllButton.setTitleColor(.primary, for: .normal)
@@ -52,9 +55,15 @@ class InvestingEventsViewModel: ViewModelWithCollection {
         return [showAllButton]
     }
     
-    @IBAction func showAllButtonAction(_ sender: UIButton) {
-        delegate?.action(type, actionType: .showAll)
+    func getTotalCount() -> Int? {
+        return details?.events?.total
     }
+    
+    func getCollectionViewHeight() -> CGFloat {
+        return 170.0
+    }
+    
+    
 }
 
 

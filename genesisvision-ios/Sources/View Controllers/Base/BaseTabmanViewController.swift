@@ -51,7 +51,8 @@ class BaseTabmanViewController<T: TabmanViewModel>: TabmanViewController {
             button.selectedTintColor = UIColor.Cell.title
             button.font = self.viewModel.font
             button.selectedFont = self.viewModel.font
-            button.badge.tintColor = UIColor.Cell.subtitle
+            button.badge.textColor = UIColor.primary
+            button.badge.tintColor = UIColor.primary.withAlphaComponent(0.1)
         }
 
         bar.backgroundView.style = .flat(color: self.viewModel.backgroundColor)

@@ -36,7 +36,7 @@ class СhoosePhotoView: UIView {
         
         editImageView.isHidden = true
         editImageView.tintColor = UIColor.Font.white
-        editImageView.image = #imageLiteral(resourceName: "img_profile_image_edit")
+        editImageView.image = #imageLiteral(resourceName: "img_add_photo_icon")
     }
     
     override func layoutSubviews() {

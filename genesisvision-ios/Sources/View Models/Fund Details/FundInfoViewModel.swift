@@ -32,10 +32,10 @@ final class FundInfoViewModel {
     var requestSkip = 0
     var requestTake = ApiKeys.take
     
-    private var equityChart: [ChartSimple]?
+    private var equityChart: [SimpleChartPoint]?
     public private(set) var fundDetailsFull: FundDetailsFull? {
         didSet {
-            if let isInvested = fundDetailsFull?.personalFundDetails?.isInvested, isInvested, let status = fundDetailsFull?.personalFundDetails?.status, status != .ended {
+            if let isInvested = fundDetailsFull?.personalDetails?.isInvested, isInvested, let status = fundDetailsFull?.personalDetails?.status, status != .ended {
                 if !sections.contains(.yourInvestment) {
                     sections.insert(.yourInvestment, at: 1)
                 }
@@ -126,7 +126,7 @@ final class FundInfoViewModel {
 extension FundInfoViewModel {
     // MARK: - Public methods
     func showManagerVC() {
-        guard let managerId = fundDetailsFull?.manager?.id?.uuidString else { return }
+        guard let managerId = fundDetailsFull?.owner?.id?.uuidString else { return }
         router.show(routeType: .manager(managerId: managerId))
     }
     
@@ -145,7 +145,7 @@ extension FundInfoViewModel {
 extension FundInfoViewModel {
     // MARK: - Public methods
     func getNickname() -> String {
-        return fundDetailsFull?.manager?.username ?? ""
+        return fundDetailsFull?.owner?.username ?? ""
     }
     
     /// Get TableViewCellViewModel for IndexPath
@@ -160,10 +160,10 @@ extension FundInfoViewModel {
             let rowType = rows[indexPath.row]
             switch rowType {
             case .manager:
-                guard let manager = fundDetailsFull?.manager else { return nil }
-                return DetailManagerTableViewCellViewModel(manager: manager)
+                guard let profilePublic = fundDetailsFull?.owner else { return nil }
+                return DetailManagerTableViewCellViewModel(profilePublic: profilePublic)
             case .strategy:
-                return DefaultTableViewCellViewModel(title: "Strategy", subtitle: fundDetailsFull?.description)
+                return DefaultTableViewCellViewModel(title: "Strategy", subtitle: fundDetailsFull?.publicInfo?.description)
             }
         case .yourInvestment:
             return FundYourInvestmentTableViewCellViewModel(fundDetailsFull: fundDetailsFull, yourInvestmentProtocol: self)
@@ -173,10 +173,7 @@ extension FundInfoViewModel {
     }
     
     func fetch(completion: @escaping CompletionBlock) {
-        guard let currency = FundsAPI.Currency_v10FundsByIdGet(rawValue: getSelectedCurrency()) else { return completion(.failure(errorType: .apiError(message: nil))) }
-        
-        
-        FundsDataProvider.get(fundId: self.fundId, currencySecondary: currency, completion: { [weak self] (viewModel) in
+        FundsDataProvider.get(self.fundId, completion: { [weak self] (viewModel) in
             guard viewModel != nil else {
                 return completion(.failure(errorType: .apiError(message: nil)))
             }

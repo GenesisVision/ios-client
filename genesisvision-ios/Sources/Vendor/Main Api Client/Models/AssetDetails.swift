@@ -11,28 +11,24 @@ import Foundation
 
 open class AssetDetails: Codable {
 
-    public enum AssetType: String, Codable { 
-        case _none = "None"
-        case programs = "Programs"
-        case funds = "Funds"
-        case signals = "Signals"
-    }
     public var id: UUID?
     public var logo: String?
     public var color: String?
     public var title: String?
     public var url: String?
     public var assetType: AssetType?
+    public var programDetails: ProgramAssetDetails?
 
 
     
-    public init(id: UUID?, logo: String?, color: String?, title: String?, url: String?, assetType: AssetType?) {
+    public init(id: UUID?, logo: String?, color: String?, title: String?, url: String?, assetType: AssetType?, programDetails: ProgramAssetDetails?) {
         self.id = id
         self.logo = logo
         self.color = color
         self.title = title
         self.url = url
         self.assetType = assetType
+        self.programDetails = programDetails
     }
     
 
@@ -48,6 +44,7 @@ open class AssetDetails: Codable {
         try container.encodeIfPresent(title, forKey: "title")
         try container.encodeIfPresent(url, forKey: "url")
         try container.encodeIfPresent(assetType, forKey: "assetType")
+        try container.encodeIfPresent(programDetails, forKey: "programDetails")
     }
 
     // Decodable protocol methods
@@ -61,6 +58,7 @@ open class AssetDetails: Codable {
         title = try container.decodeIfPresent(String.self, forKey: "title")
         url = try container.decodeIfPresent(String.self, forKey: "url")
         assetType = try container.decodeIfPresent(AssetType.self, forKey: "assetType")
+        programDetails = try container.decodeIfPresent(ProgramAssetDetails.self, forKey: "programDetails")
     }
 }
 

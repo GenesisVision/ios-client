@@ -9,7 +9,7 @@
 import Foundation
 
 struct FundProfitStatisticTableViewCellViewModel {
-    let fundProfitChart: FundProfitChart
+    let fundProfitChart: FundProfitPercentCharts
 }
 
 extension FundProfitStatisticTableViewCellViewModel: CellViewModel {
@@ -17,17 +17,17 @@ extension FundProfitStatisticTableViewCellViewModel: CellViewModel {
         cell.titleLabel.text = "Statistics"
         
         cell.balanceTitleLabel.text = "Balance"
-        if let value = fundProfitChart.balance {
+        if let value = fundProfitChart.statistic?.balance {
             cell.balanceValueLabel.text = value.rounded(with: .gvt).toString() + " \(Constants.gvtString)"
         }
         
         cell.investorsCountTitleLabel.text = "Investors"
-        if let value = fundProfitChart.investors {
+        if let value = fundProfitChart.statistic?.investors {
             cell.investorsCountValueLabel.text = value.toString()
         }
         
         cell.startDateTitleLabel.text = "Start date"
-        if let value = fundProfitChart.creationDate {
+        if let value = fundProfitChart.statistic?.creationDate {
             cell.startDateValueLabel.text = value.toString()
         }
         
@@ -36,27 +36,27 @@ extension FundProfitStatisticTableViewCellViewModel: CellViewModel {
         cell.tradesSuccessCountStackView.isHidden = true
         
         cell.profitFactorPercentTitleLabel.text = "Profit change"
-        if let value = fundProfitChart.profitChangePercent {
+        if let value = fundProfitChart.statistic?.profitPercent {
             cell.profitFactorPercentValueLabel.text = value.rounded(with: .undefined).toString() + "%"
         }
         
         cell.sharpeRatioPercentTitleLabel.text = "Sharpe ratio"
-        if let value = fundProfitChart.sharpeRatio {
+        if let value = fundProfitChart.statistic?.sharpeRatio {
             cell.sharpeRatioPercentValueLabel.text = value.rounded(with: .undefined).toString()
         }
         
         cell.calmarRatioPercentTitleLabel.text = "Calmar ratio"
-        if let value = fundProfitChart.calmarRatio {
+        if let value = fundProfitChart.statistic?.calmarRatio {
             cell.calmarRatioPercentValueLabel.text = value.rounded(with: .undefined).toString()
         }
         
         cell.sortinoRatioPercentTitleLabel.text = "Sortino ratio"
-        if let value = fundProfitChart.sortinoRatio {
+        if let value = fundProfitChart.statistic?.sortinoRatio {
             cell.sortinoRatioPercentValueLabel.text = value.rounded(with: .undefined).toString()
         }
         
         cell.drawdownPercentTitleLabel.text = "Max drawdown"
-        if let value = fundProfitChart.maxDrawdown {
+        if let value = fundProfitChart.statistic?.maxDrawdown {
             cell.drawdownPercentValueLabel.text = value.rounded(with: .undefined).toString() + "%"
         }
     }

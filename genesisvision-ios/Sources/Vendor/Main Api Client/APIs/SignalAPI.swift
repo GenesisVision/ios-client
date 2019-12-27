@@ -12,219 +12,23 @@ import Alamofire
 
 open class SignalAPI {
     /**
-     Get copytrading accounts
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func v10SignalAccountsGet(authorization: String, completion: @escaping ((_ data: CopyTradingAccountsList?,_ error: Error?) -> Void)) {
-        v10SignalAccountsGetWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
-            completion(response?.body, error);
-        }
-    }
-
-
-    /**
-     Get copytrading accounts
-     - GET /v1.0/signal/accounts
-     - examples: [{contentType=application/json, example={
-  "total" : 2,
-  "accounts" : [ {
-    "freeMargin" : 1.4658129805029452,
-    "balance" : 0.8008281904610115,
-    "available" : 5.637376656633329,
-    "logo" : "logo",
-    "currency" : "Undefined",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "title" : "title",
-    "equity" : 6.027456183070403,
-    "marginLevel" : 5.962133916683182
-  }, {
-    "freeMargin" : 1.4658129805029452,
-    "balance" : 0.8008281904610115,
-    "available" : 5.637376656633329,
-    "logo" : "logo",
-    "currency" : "Undefined",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "title" : "title",
-    "equity" : 6.027456183070403,
-    "marginLevel" : 5.962133916683182
-  } ]
-}}]
-     
-     - parameter authorization: (header) JWT access token 
-
-     - returns: RequestBuilder<CopyTradingAccountsList> 
-     */
-    open class func v10SignalAccountsGetWithRequestBuilder(authorization: String) -> RequestBuilder<CopyTradingAccountsList> {
-        let path = "/v1.0/signal/accounts"
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
-
-        let requestBuilder: RequestBuilder<CopyTradingAccountsList>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
-    }
-
-    /**
-     Get subscribe to programs signals info
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func v10SignalAttachByIdInfoGet(id: UUID, authorization: String, completion: @escaping ((_ data: AttachToSignalProviderInfo?,_ error: Error?) -> Void)) {
-        v10SignalAttachByIdInfoGetWithRequestBuilder(id: id, authorization: authorization).execute { (response, error) -> Void in
-            completion(response?.body, error);
-        }
-    }
-
-
-    /**
-     Get subscribe to programs signals info
-     - GET /v1.0/signal/attach/{id}/info
-     - examples: [{contentType=application/json, example={
-  "minDepositCurrency" : "Undefined",
-  "hasSignalAccount" : true,
-  "volumeFee" : 0.8008281904610115,
-  "minDeposit" : 6.027456183070403,
-  "hasActiveSubscription" : true
-}}]
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-
-     - returns: RequestBuilder<AttachToSignalProviderInfo> 
-     */
-    open class func v10SignalAttachByIdInfoGetWithRequestBuilder(id: UUID, authorization: String) -> RequestBuilder<AttachToSignalProviderInfo> {
-        var path = "/v1.0/signal/attach/{id}/info"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
-
-        let requestBuilder: RequestBuilder<AttachToSignalProviderInfo>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
-    }
-
-    /**
-     Subscribe to programs signals
-     
-     - parameter id: (path) Program Id 
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body) Subscription settings (optional)
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func v10SignalAttachByIdPost(id: UUID, authorization: String, model: AttachToSignalProvider? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        v10SignalAttachByIdPostWithRequestBuilder(id: id, authorization: authorization, model: model).execute { (response, error) -> Void in
-            completion(error);
-        }
-    }
-
-
-    /**
-     Subscribe to programs signals
-     - POST /v1.0/signal/attach/{id}
-     
-     - parameter id: (path) Program Id 
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body) Subscription settings (optional)
-
-     - returns: RequestBuilder<Void> 
-     */
-    open class func v10SignalAttachByIdPostWithRequestBuilder(id: UUID, authorization: String, model: AttachToSignalProvider? = nil) -> RequestBuilder<Void> {
-        var path = "/v1.0/signal/attach/{id}"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
-
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
-
-        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
-    }
-
-    /**
-     Update signal subscription settings
-     
-     - parameter id: (path) Program id 
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body) Subscription settings (optional)
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func v10SignalByIdUpdatePost(id: UUID, authorization: String, model: AttachToSignalProvider? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        v10SignalByIdUpdatePostWithRequestBuilder(id: id, authorization: authorization, model: model).execute { (response, error) -> Void in
-            completion(error);
-        }
-    }
-
-
-    /**
-     Update signal subscription settings
-     - POST /v1.0/signal/{id}/update
-     
-     - parameter id: (path) Program id 
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body) Subscription settings (optional)
-
-     - returns: RequestBuilder<Void> 
-     */
-    open class func v10SignalByIdUpdatePostWithRequestBuilder(id: UUID, authorization: String, model: AttachToSignalProvider? = nil) -> RequestBuilder<Void> {
-        var path = "/v1.0/signal/{id}/update"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
-
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
-
-        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
-    }
-
-    /**
-     Unsubscribe from program signals
+     Subscribe to external signal using common account
      
      - parameter id: (path)  
      - parameter authorization: (header) JWT access token 
      - parameter model: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10SignalDetachByIdPost(id: UUID, authorization: String, model: DetachFromSignalProvider? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        v10SignalDetachByIdPostWithRequestBuilder(id: id, authorization: authorization, model: model).execute { (response, error) -> Void in
+    open class func attachSlaveToMasterExternalCommonAccount(id: UUID, authorization: String, model: AttachToExternalSignalProviderCommon? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        attachSlaveToMasterExternalCommonAccountWithRequestBuilder(id: id, authorization: authorization, model: model).execute { (response, error) -> Void in
             completion(error);
         }
     }
 
 
     /**
-     Unsubscribe from program signals
-     - POST /v1.0/signal/detach/{id}
+     Subscribe to external signal using common account
+     - POST /v2.0/signal/external/attach/{id}/common
      
      - parameter id: (path)  
      - parameter authorization: (header) JWT access token 
@@ -232,8 +36,8 @@ open class SignalAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func v10SignalDetachByIdPostWithRequestBuilder(id: UUID, authorization: String, model: DetachFromSignalProvider? = nil) -> RequestBuilder<Void> {
-        var path = "/v1.0/signal/detach/{id}"
+    open class func attachSlaveToMasterExternalCommonAccountWithRequestBuilder(id: UUID, authorization: String, model: AttachToExternalSignalProviderCommon? = nil) -> RequestBuilder<Void> {
+        var path = "/v2.0/signal/external/attach/{id}/common"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
@@ -258,8 +62,8 @@ open class SignalAPI {
      - parameter model: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10SignalExternalAttachByIdExternalPost(id: UUID, authorization: String, model: AttachToExternalSignalProviderExt? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        v10SignalExternalAttachByIdExternalPostWithRequestBuilder(id: id, authorization: authorization, model: model).execute { (response, error) -> Void in
+    open class func attachSlaveToMasterExternalPrivateAccount(id: UUID, authorization: String, model: AttachToExternalSignalProviderExt? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        attachSlaveToMasterExternalPrivateAccountWithRequestBuilder(id: id, authorization: authorization, model: model).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -267,7 +71,7 @@ open class SignalAPI {
 
     /**
      Subscribe to external signal account
-     - POST /v1.0/signal/external/attach/{id}/external
+     - POST /v2.0/signal/external/attach/{id}/private
      
      - parameter id: (path)  
      - parameter authorization: (header) JWT access token 
@@ -275,8 +79,8 @@ open class SignalAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func v10SignalExternalAttachByIdExternalPostWithRequestBuilder(id: UUID, authorization: String, model: AttachToExternalSignalProviderExt? = nil) -> RequestBuilder<Void> {
-        var path = "/v1.0/signal/external/attach/{id}/external"
+    open class func attachSlaveToMasterExternalPrivateAccountWithRequestBuilder(id: UUID, authorization: String, model: AttachToExternalSignalProviderExt? = nil) -> RequestBuilder<Void> {
+        var path = "/v2.0/signal/external/attach/{id}/private"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
@@ -294,40 +98,35 @@ open class SignalAPI {
     }
 
     /**
-     Create external signal account
+     Subscribe to signal provider
      
+     - parameter id: (path)  
      - parameter authorization: (header) JWT access token 
-     - parameter request: (body)  (optional)
+     - parameter model: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10SignalExternalCreatePost(authorization: String, request: NewExternalSignalAccountRequest? = nil, completion: @escaping ((_ data: ManagerProgramCreateResult?,_ error: Error?) -> Void)) {
-        v10SignalExternalCreatePostWithRequestBuilder(authorization: authorization, request: request).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func attachSlaveToMasterInternal(id: UUID, authorization: String, model: AttachToSignalProvider? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        attachSlaveToMasterInternalWithRequestBuilder(id: id, authorization: authorization, model: model).execute { (response, error) -> Void in
+            completion(error);
         }
     }
 
 
     /**
-     Create external signal account
-     - POST /v1.0/signal/external/create
-     - examples: [{contentType=application/json, example={
-  "twoFactor" : {
-    "sharedKey" : "sharedKey",
-    "authenticatorUri" : "authenticatorUri"
-  },
-  "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-  "twoFactorRequired" : true
-}}]
+     Subscribe to signal provider
+     - POST /v2.0/signal/attach/{id}
      
+     - parameter id: (path)  
      - parameter authorization: (header) JWT access token 
-     - parameter request: (body)  (optional)
+     - parameter model: (body)  (optional)
 
-     - returns: RequestBuilder<ManagerProgramCreateResult> 
+     - returns: RequestBuilder<Void> 
      */
-    open class func v10SignalExternalCreatePostWithRequestBuilder(authorization: String, request: NewExternalSignalAccountRequest? = nil) -> RequestBuilder<ManagerProgramCreateResult> {
-        let path = "/v1.0/signal/external/create"
+    open class func attachSlaveToMasterInternalWithRequestBuilder(id: UUID, authorization: String, model: AttachToSignalProvider? = nil) -> RequestBuilder<Void> {
+        var path = "/v2.0/signal/attach/{id}"
+        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: request)
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
 
         let url = NSURLComponents(string: URLString)
 
@@ -336,224 +135,9 @@ open class SignalAPI {
         ]
         let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
-        let requestBuilder: RequestBuilder<ManagerProgramCreateResult>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
-    }
-
-    /**
-     * enum for parameter sorting
-     */
-    public enum Sorting_v10SignalExternalGet: String { 
-        case byProfitAsc = "ByProfitAsc"
-        case byProfitDesc = "ByProfitDesc"
-        case byDrawdownAsc = "ByDrawdownAsc"
-        case byDrawdownDesc = "ByDrawdownDesc"
-        case byTradesAsc = "ByTradesAsc"
-        case byTradesDesc = "ByTradesDesc"
-        case bySubscribersAsc = "BySubscribersAsc"
-        case bySubscribersDesc = "BySubscribersDesc"
-        case byNewDesc = "ByNewDesc"
-        case byNewAsc = "ByNewAsc"
-        case byTitleAsc = "ByTitleAsc"
-        case byTitleDesc = "ByTitleDesc"
-    }
-
-    /**
-     * enum for parameter status
-     */
-    public enum Status_v10SignalExternalGet: String { 
-        case _none = "None"
-        case pending = "Pending"
-        case errorCreating = "ErrorCreating"
-        case active = "Active"
-        case closed = "Closed"
-        case archived = "Archived"
-        case closedDueToInactivity = "ClosedDueToInactivity"
-    }
-
-    /**
-     Accounts list
-     
-     - parameter authorization: (header)  (optional)
-     - parameter tags: (query)  (optional)
-     - parameter sorting: (query)  (optional)
-     - parameter statisticDateFrom: (query)  (optional)
-     - parameter statisticDateTo: (query)  (optional)
-     - parameter chartPointsCount: (query)  (optional)
-     - parameter mask: (query)  (optional)
-     - parameter facetId: (query)  (optional)
-     - parameter isFavorite: (query)  (optional)
-     - parameter isEnabled: (query)  (optional)
-     - parameter hasInvestorsForAll: (query)  (optional)
-     - parameter hasInvestorsForClosed: (query)  (optional)
-     - parameter ids: (query)  (optional)
-     - parameter forceUseIdsList: (query)  (optional)
-     - parameter managerId: (query)  (optional)
-     - parameter programManagerId: (query)  (optional)
-     - parameter status: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func v10SignalExternalGet(authorization: String? = nil, tags: [String]? = nil, sorting: Sorting_v10SignalExternalGet? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, isEnabled: Bool? = nil, hasInvestorsForAll: Bool? = nil, hasInvestorsForClosed: Bool? = nil, ids: [UUID]? = nil, forceUseIdsList: Bool? = nil, managerId: String? = nil, programManagerId: UUID? = nil, status: [String]? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: SignalAccountsList?,_ error: Error?) -> Void)) {
-        v10SignalExternalGetWithRequestBuilder(authorization: authorization, tags: tags, sorting: sorting, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: facetId, isFavorite: isFavorite, isEnabled: isEnabled, hasInvestorsForAll: hasInvestorsForAll, hasInvestorsForClosed: hasInvestorsForClosed, ids: ids, forceUseIdsList: forceUseIdsList, managerId: managerId, programManagerId: programManagerId, status: status, skip: skip, take: take).execute { (response, error) -> Void in
-            completion(response?.body, error);
-        }
-    }
-
-
-    /**
-     Accounts list
-     - GET /v1.0/signal/external
-     - examples: [{contentType=application/json, example={
-  "total" : 6,
-  "signalAccounts" : [ {
-    "color" : "color",
-    "manager" : {
-      "socialLinks" : [ {
-        "name" : "name",
-        "logo" : "logo",
-        "type" : "Twitter",
-        "value" : "value",
-        "url" : "url"
-      }, {
-        "name" : "name",
-        "logo" : "logo",
-        "type" : "Twitter",
-        "value" : "value",
-        "url" : "url"
-      } ],
-      "registrationDate" : "2000-01-23T04:56:07.000+00:00",
-      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "avatar" : "avatar",
-      "url" : "url",
-      "username" : "username"
-    },
-    "logo" : "logo",
-    "description" : "description",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "title" : "title",
-    "creationDate" : "2000-01-23T04:56:07.000+00:00",
-    "chart" : [ {
-      "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 0.8008281904610115
-    }, {
-      "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 0.8008281904610115
-    } ],
-    "url" : "url",
-    "tags" : [ {
-      "color" : "color",
-      "name" : "name"
-    }, {
-      "color" : "color",
-      "name" : "name"
-    } ],
-    "status" : "None"
-  }, {
-    "color" : "color",
-    "manager" : {
-      "socialLinks" : [ {
-        "name" : "name",
-        "logo" : "logo",
-        "type" : "Twitter",
-        "value" : "value",
-        "url" : "url"
-      }, {
-        "name" : "name",
-        "logo" : "logo",
-        "type" : "Twitter",
-        "value" : "value",
-        "url" : "url"
-      } ],
-      "registrationDate" : "2000-01-23T04:56:07.000+00:00",
-      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "avatar" : "avatar",
-      "url" : "url",
-      "username" : "username"
-    },
-    "logo" : "logo",
-    "description" : "description",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "title" : "title",
-    "creationDate" : "2000-01-23T04:56:07.000+00:00",
-    "chart" : [ {
-      "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 0.8008281904610115
-    }, {
-      "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 0.8008281904610115
-    } ],
-    "url" : "url",
-    "tags" : [ {
-      "color" : "color",
-      "name" : "name"
-    }, {
-      "color" : "color",
-      "name" : "name"
-    } ],
-    "status" : "None"
-  } ]
-}}]
-     
-     - parameter authorization: (header)  (optional)
-     - parameter tags: (query)  (optional)
-     - parameter sorting: (query)  (optional)
-     - parameter statisticDateFrom: (query)  (optional)
-     - parameter statisticDateTo: (query)  (optional)
-     - parameter chartPointsCount: (query)  (optional)
-     - parameter mask: (query)  (optional)
-     - parameter facetId: (query)  (optional)
-     - parameter isFavorite: (query)  (optional)
-     - parameter isEnabled: (query)  (optional)
-     - parameter hasInvestorsForAll: (query)  (optional)
-     - parameter hasInvestorsForClosed: (query)  (optional)
-     - parameter ids: (query)  (optional)
-     - parameter forceUseIdsList: (query)  (optional)
-     - parameter managerId: (query)  (optional)
-     - parameter programManagerId: (query)  (optional)
-     - parameter status: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
-
-     - returns: RequestBuilder<SignalAccountsList> 
-     */
-    open class func v10SignalExternalGetWithRequestBuilder(authorization: String? = nil, tags: [String]? = nil, sorting: Sorting_v10SignalExternalGet? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, isEnabled: Bool? = nil, hasInvestorsForAll: Bool? = nil, hasInvestorsForClosed: Bool? = nil, ids: [UUID]? = nil, forceUseIdsList: Bool? = nil, managerId: String? = nil, programManagerId: UUID? = nil, status: [String]? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<SignalAccountsList> {
-        let path = "/v1.0/signal/external"
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "Tags": tags, 
-            "Sorting": sorting?.rawValue, 
-            "StatisticDateFrom": statisticDateFrom?.encodeToJSON(), 
-            "StatisticDateTo": statisticDateTo?.encodeToJSON(), 
-            "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
-            "Mask": mask, 
-            "FacetId": facetId, 
-            "IsFavorite": isFavorite, 
-            "IsEnabled": isEnabled, 
-            "HasInvestorsForAll": hasInvestorsForAll, 
-            "HasInvestorsForClosed": hasInvestorsForClosed, 
-            "Ids": ids, 
-            "ForceUseIdsList": forceUseIdsList, 
-            "ManagerId": managerId, 
-            "ProgramManagerId": programManagerId, 
-            "Status": status, 
-            "Skip": skip?.encodeToJSON(), 
-            "Take": take?.encodeToJSON()
-        ])
-        
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
-
-        let requestBuilder: RequestBuilder<SignalAccountsList>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
     /**
@@ -561,11 +145,11 @@ open class SignalAPI {
      
      - parameter id: (path) Trade id 
      - parameter authorization: (header) JWT access token 
-     - parameter programId: (query) Provider program id (optional)
+     - parameter assetId: (query) Provider asset id (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10SignalTradesByIdClosePost(id: UUID, authorization: String, programId: UUID? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        v10SignalTradesByIdClosePostWithRequestBuilder(id: id, authorization: authorization, programId: programId).execute { (response, error) -> Void in
+    open class func closeTradeInternal(id: UUID, authorization: String, assetId: UUID? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        closeTradeInternalWithRequestBuilder(id: id, authorization: authorization, assetId: assetId).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -573,23 +157,23 @@ open class SignalAPI {
 
     /**
      Close signal trade
-     - POST /v1.0/signal/trades/{id}/close
+     - POST /v2.0/signal/trades/{id}/close
      
      - parameter id: (path) Trade id 
      - parameter authorization: (header) JWT access token 
-     - parameter programId: (query) Provider program id (optional)
+     - parameter assetId: (query) Provider asset id (optional)
 
      - returns: RequestBuilder<Void> 
      */
-    open class func v10SignalTradesByIdClosePostWithRequestBuilder(id: UUID, authorization: String, programId: UUID? = nil) -> RequestBuilder<Void> {
-        var path = "/v1.0/signal/trades/{id}/close"
+    open class func closeTradeInternalWithRequestBuilder(id: UUID, authorization: String, assetId: UUID? = nil) -> RequestBuilder<Void> {
+        var path = "/v2.0/signal/trades/{id}/close"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "programId": programId
+            "assetId": assetId
         ])
         
         let nillableHeaders: [String: Any?] = [
@@ -603,9 +187,93 @@ open class SignalAPI {
     }
 
     /**
+
+     - parameter id: (path)  
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func detachSlaveFromMasterExternal(id: UUID, authorization: String, model: DetachFromExternalSignalProvider? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        detachSlaveFromMasterExternalWithRequestBuilder(id: id, authorization: authorization, model: model).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     - POST /v2.0/signal/external/detach/{id}
+     
+     - parameter id: (path)  
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func detachSlaveFromMasterExternalWithRequestBuilder(id: UUID, authorization: String, model: DetachFromExternalSignalProvider? = nil) -> RequestBuilder<Void> {
+        var path = "/v2.0/signal/external/detach/{id}"
+        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+    }
+
+    /**
+     Unsubscribe from signal provider
+     
+     - parameter id: (path)  
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func detachSlaveFromMasterInternal(id: UUID, authorization: String, model: DetachFromSignalProvider? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        detachSlaveFromMasterInternalWithRequestBuilder(id: id, authorization: authorization, model: model).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Unsubscribe from signal provider
+     - POST /v2.0/signal/detach/{id}
+     
+     - parameter id: (path)  
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func detachSlaveFromMasterInternalWithRequestBuilder(id: UUID, authorization: String, model: DetachFromSignalProvider? = nil) -> RequestBuilder<Void> {
+        var path = "/v2.0/signal/detach/{id}"
+        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+    }
+
+    /**
      * enum for parameter sorting
      */
-    public enum Sorting_v10SignalTradesGet: String { 
+    public enum Sorting_getOpenSignalTrades: String { 
         case byDateAsc = "ByDateAsc"
         case byDateDesc = "ByDateDesc"
         case byTicketAsc = "ByTicketAsc"
@@ -631,78 +299,59 @@ open class SignalAPI {
     /**
      * enum for parameter accountCurrency
      */
-    public enum AccountCurrency_v10SignalTradesGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
+    public enum AccountCurrency_getOpenSignalTrades: String { 
+        case usd = "USD"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
         case doge = "DOGE"
         case bnb = "BNB"
-        case usd = "USD"
         case eur = "EUR"
     }
 
     /**
-     Get investors signals trades history
+     Get investors signals open trades
      
      - parameter authorization: (header) JWT access token 
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter symbol: (query)  (optional)
      - parameter sorting: (query)  (optional)
+     - parameter symbol: (query)  (optional)
      - parameter accountId: (query)  (optional)
      - parameter accountCurrency: (query)  (optional)
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10SignalTradesGet(authorization: String, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: Sorting_v10SignalTradesGet? = nil, accountId: UUID? = nil, accountCurrency: AccountCurrency_v10SignalTradesGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: TradesSignalViewModel?,_ error: Error?) -> Void)) {
-        v10SignalTradesGetWithRequestBuilder(authorization: authorization, dateFrom: dateFrom, dateTo: dateTo, symbol: symbol, sorting: sorting, accountId: accountId, accountCurrency: accountCurrency, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func getOpenSignalTrades(authorization: String, sorting: Sorting_getOpenSignalTrades? = nil, symbol: String? = nil, accountId: UUID? = nil, accountCurrency: AccountCurrency_getOpenSignalTrades? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: TradesSignalViewModel?,_ error: Error?) -> Void)) {
+        getOpenSignalTradesWithRequestBuilder(authorization: authorization, sorting: sorting, symbol: symbol, accountId: accountId, accountCurrency: accountCurrency, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
 
 
     /**
-     Get investors signals trades history
-     - GET /v1.0/signal/trades
+     Get investors signals open trades
+     - GET /v2.0/signal/trades/open
      - examples: [{contentType=application/json, example={
   "total" : 7,
   "showSwaps" : true,
-  "trades" : [ {
+  "showTickets" : true,
+  "items" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "originalCommissionCurrency" : "originalCommissionCurrency",
     "symbol" : "symbol",
-    "ticket" : "ticket",
-    "swap" : 1.4894159098541704,
     "originalCommission" : 1.2315135367772556,
     "totalCommission" : 7.061401241503109,
     "login" : "login",
-    "volume" : 9.301444243932576,
-    "totalCommissionByType" : [ {
-      "amount" : 1.4658129805029452,
-      "description" : "description",
-      "currency" : "Undefined",
-      "title" : "title",
-      "type" : "Undefined"
-    }, {
-      "amount" : 1.4658129805029452,
-      "description" : "description",
-      "currency" : "Undefined",
-      "title" : "title",
-      "type" : "Undefined"
-    } ],
     "priceCurrent" : 4.145608029883936,
-    "entry" : "In",
     "price" : 2.027123023002322,
     "showOriginalCommission" : true,
-    "tradingAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "currency" : "Undefined",
+    "currency" : null,
     "commission" : 1.0246457001441578,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "baseVolume" : 7.386281948385884,
@@ -716,29 +365,50 @@ open class SignalAPI {
       } ]
     },
     "profit" : 3.616076749251911,
+    "direction" : { },
+    "externalSignalAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "ticket" : "ticket",
+    "swap" : 1.4894159098541704,
+    "volume" : 9.301444243932576,
+    "totalCommissionByType" : [ {
+      "amount" : 9.301444243932576,
+      "description" : "description",
+      "currency" : null,
+      "title" : "title",
+      "type" : { }
+    }, {
+      "amount" : 9.301444243932576,
+      "description" : "description",
+      "currency" : null,
+      "title" : "title",
+      "type" : { }
+    } ],
+    "entry" : { },
+    "tradingAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "profitCurrency" : "profitCurrency",
     "providers" : [ {
       "volume" : 1.4658129805029452,
       "firstOrderDate" : "2000-01-23T04:56:07.000+00:00",
       "fees" : [ {
         "amount" : 2.3021358869347655,
-        "currency" : "Undefined",
-        "type" : "Undefined"
+        "currency" : { },
+        "type" : { }
       }, {
         "amount" : 2.3021358869347655,
-        "currency" : "Undefined",
-        "type" : "Undefined"
+        "currency" : { },
+        "type" : { }
       } ],
       "manager" : {
         "socialLinks" : [ {
           "name" : "name",
           "logo" : "logo",
-          "type" : "Twitter",
+          "type" : { },
           "value" : "value",
           "url" : "url"
         }, {
           "name" : "name",
           "logo" : "logo",
-          "type" : "Twitter",
+          "type" : { },
           "value" : "value",
           "url" : "url"
         } ],
@@ -754,6 +424,7 @@ open class SignalAPI {
         "level" : 0,
         "logo" : "logo",
         "title" : "title",
+        "type" : { },
         "url" : "url",
         "levelProgress" : 6.027456183070403
       },
@@ -764,24 +435,24 @@ open class SignalAPI {
       "firstOrderDate" : "2000-01-23T04:56:07.000+00:00",
       "fees" : [ {
         "amount" : 2.3021358869347655,
-        "currency" : "Undefined",
-        "type" : "Undefined"
+        "currency" : { },
+        "type" : { }
       }, {
         "amount" : 2.3021358869347655,
-        "currency" : "Undefined",
-        "type" : "Undefined"
+        "currency" : { },
+        "type" : { }
       } ],
       "manager" : {
         "socialLinks" : [ {
           "name" : "name",
           "logo" : "logo",
-          "type" : "Twitter",
+          "type" : { },
           "value" : "value",
           "url" : "url"
         }, {
           "name" : "name",
           "logo" : "logo",
-          "type" : "Twitter",
+          "type" : { },
           "value" : "value",
           "url" : "url"
         } ],
@@ -797,42 +468,24 @@ open class SignalAPI {
         "level" : 0,
         "logo" : "logo",
         "title" : "title",
+        "type" : { },
         "url" : "url",
         "levelProgress" : 6.027456183070403
       },
       "profit" : 5.637376656633329,
       "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
-    } ],
-    "direction" : "Buy"
+    } ]
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "originalCommissionCurrency" : "originalCommissionCurrency",
     "symbol" : "symbol",
-    "ticket" : "ticket",
-    "swap" : 1.4894159098541704,
     "originalCommission" : 1.2315135367772556,
     "totalCommission" : 7.061401241503109,
     "login" : "login",
-    "volume" : 9.301444243932576,
-    "totalCommissionByType" : [ {
-      "amount" : 1.4658129805029452,
-      "description" : "description",
-      "currency" : "Undefined",
-      "title" : "title",
-      "type" : "Undefined"
-    }, {
-      "amount" : 1.4658129805029452,
-      "description" : "description",
-      "currency" : "Undefined",
-      "title" : "title",
-      "type" : "Undefined"
-    } ],
     "priceCurrent" : 4.145608029883936,
-    "entry" : "In",
     "price" : 2.027123023002322,
     "showOriginalCommission" : true,
-    "tradingAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "currency" : "Undefined",
+    "currency" : null,
     "commission" : 1.0246457001441578,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "baseVolume" : 7.386281948385884,
@@ -846,29 +499,50 @@ open class SignalAPI {
       } ]
     },
     "profit" : 3.616076749251911,
+    "direction" : { },
+    "externalSignalAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "ticket" : "ticket",
+    "swap" : 1.4894159098541704,
+    "volume" : 9.301444243932576,
+    "totalCommissionByType" : [ {
+      "amount" : 9.301444243932576,
+      "description" : "description",
+      "currency" : null,
+      "title" : "title",
+      "type" : { }
+    }, {
+      "amount" : 9.301444243932576,
+      "description" : "description",
+      "currency" : null,
+      "title" : "title",
+      "type" : { }
+    } ],
+    "entry" : { },
+    "tradingAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "profitCurrency" : "profitCurrency",
     "providers" : [ {
       "volume" : 1.4658129805029452,
       "firstOrderDate" : "2000-01-23T04:56:07.000+00:00",
       "fees" : [ {
         "amount" : 2.3021358869347655,
-        "currency" : "Undefined",
-        "type" : "Undefined"
+        "currency" : { },
+        "type" : { }
       }, {
         "amount" : 2.3021358869347655,
-        "currency" : "Undefined",
-        "type" : "Undefined"
+        "currency" : { },
+        "type" : { }
       } ],
       "manager" : {
         "socialLinks" : [ {
           "name" : "name",
           "logo" : "logo",
-          "type" : "Twitter",
+          "type" : { },
           "value" : "value",
           "url" : "url"
         }, {
           "name" : "name",
           "logo" : "logo",
-          "type" : "Twitter",
+          "type" : { },
           "value" : "value",
           "url" : "url"
         } ],
@@ -884,6 +558,7 @@ open class SignalAPI {
         "level" : 0,
         "logo" : "logo",
         "title" : "title",
+        "type" : { },
         "url" : "url",
         "levelProgress" : 6.027456183070403
       },
@@ -894,24 +569,24 @@ open class SignalAPI {
       "firstOrderDate" : "2000-01-23T04:56:07.000+00:00",
       "fees" : [ {
         "amount" : 2.3021358869347655,
-        "currency" : "Undefined",
-        "type" : "Undefined"
+        "currency" : { },
+        "type" : { }
       }, {
         "amount" : 2.3021358869347655,
-        "currency" : "Undefined",
-        "type" : "Undefined"
+        "currency" : { },
+        "type" : { }
       } ],
       "manager" : {
         "socialLinks" : [ {
           "name" : "name",
           "logo" : "logo",
-          "type" : "Twitter",
+          "type" : { },
           "value" : "value",
           "url" : "url"
         }, {
           "name" : "name",
           "logo" : "logo",
-          "type" : "Twitter",
+          "type" : { },
           "value" : "value",
           "url" : "url"
         } ],
@@ -927,22 +602,19 @@ open class SignalAPI {
         "level" : 0,
         "logo" : "logo",
         "title" : "title",
+        "type" : { },
         "url" : "url",
         "levelProgress" : 6.027456183070403
       },
       "profit" : 5.637376656633329,
       "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
-    } ],
-    "direction" : "Buy"
-  } ],
-  "showTickets" : true
+    } ]
+  } ]
 }}]
      
      - parameter authorization: (header) JWT access token 
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter symbol: (query)  (optional)
      - parameter sorting: (query)  (optional)
+     - parameter symbol: (query)  (optional)
      - parameter accountId: (query)  (optional)
      - parameter accountCurrency: (query)  (optional)
      - parameter skip: (query)  (optional)
@@ -950,17 +622,15 @@ open class SignalAPI {
 
      - returns: RequestBuilder<TradesSignalViewModel> 
      */
-    open class func v10SignalTradesGetWithRequestBuilder(authorization: String, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: Sorting_v10SignalTradesGet? = nil, accountId: UUID? = nil, accountCurrency: AccountCurrency_v10SignalTradesGet? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<TradesSignalViewModel> {
-        let path = "/v1.0/signal/trades"
+    open class func getOpenSignalTradesWithRequestBuilder(authorization: String, sorting: Sorting_getOpenSignalTrades? = nil, symbol: String? = nil, accountId: UUID? = nil, accountCurrency: AccountCurrency_getOpenSignalTrades? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<TradesSignalViewModel> {
+        let path = "/v2.0/signal/trades/open"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "DateFrom": dateFrom?.encodeToJSON(), 
-            "DateTo": dateTo?.encodeToJSON(), 
-            "Symbol": symbol, 
             "Sorting": sorting?.rawValue, 
+            "Symbol": symbol, 
             "AccountId": accountId, 
             "AccountCurrency": accountCurrency?.rawValue, 
             "Skip": skip?.encodeToJSON(), 
@@ -980,19 +650,19 @@ open class SignalAPI {
     /**
      * enum for parameter accountCurrency
      */
-    public enum AccountCurrency_v10SignalTradesLogGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
+    public enum AccountCurrency_getSignalTradingLog: String { 
+        case usd = "USD"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
         case doge = "DOGE"
         case bnb = "BNB"
-        case usd = "USD"
         case eur = "EUR"
     }
 
@@ -1006,8 +676,8 @@ open class SignalAPI {
      - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10SignalTradesLogGet(authorization: String, accountId: UUID? = nil, accountCurrency: AccountCurrency_v10SignalTradesLogGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: SignalTradingEvents?,_ error: Error?) -> Void)) {
-        v10SignalTradesLogGetWithRequestBuilder(authorization: authorization, accountId: accountId, accountCurrency: accountCurrency, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func getSignalTradingLog(authorization: String, accountId: UUID? = nil, accountCurrency: AccountCurrency_getSignalTradingLog? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ItemsViewModelSignalTradingEvent?,_ error: Error?) -> Void)) {
+        getSignalTradingLogWithRequestBuilder(authorization: authorization, accountId: accountId, accountCurrency: accountCurrency, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -1015,10 +685,10 @@ open class SignalAPI {
 
     /**
      Get investors signals trading log
-     - GET /v1.0/signal/trades/log
+     - GET /v2.0/signal/trades/log
      - examples: [{contentType=application/json, example={
   "total" : 0,
-  "events" : [ {
+  "items" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "message" : "message"
   }, {
@@ -1033,10 +703,10 @@ open class SignalAPI {
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
 
-     - returns: RequestBuilder<SignalTradingEvents> 
+     - returns: RequestBuilder<ItemsViewModelSignalTradingEvent> 
      */
-    open class func v10SignalTradesLogGetWithRequestBuilder(authorization: String, accountId: UUID? = nil, accountCurrency: AccountCurrency_v10SignalTradesLogGet? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<SignalTradingEvents> {
-        let path = "/v1.0/signal/trades/log"
+    open class func getSignalTradingLogWithRequestBuilder(authorization: String, accountId: UUID? = nil, accountCurrency: AccountCurrency_getSignalTradingLog? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ItemsViewModelSignalTradingEvent> {
+        let path = "/v2.0/signal/trades/log"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
@@ -1053,378 +723,174 @@ open class SignalAPI {
         ]
         let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
-        let requestBuilder: RequestBuilder<SignalTradingEvents>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<ItemsViewModelSignalTradingEvent>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
     /**
-     * enum for parameter sorting
-     */
-    public enum Sorting_v10SignalTradesOpenGet: String { 
-        case byDateAsc = "ByDateAsc"
-        case byDateDesc = "ByDateDesc"
-        case byTicketAsc = "ByTicketAsc"
-        case byTicketDesc = "ByTicketDesc"
-        case bySymbolAsc = "BySymbolAsc"
-        case bySymbolDesc = "BySymbolDesc"
-        case byDirectionAsc = "ByDirectionAsc"
-        case byDirectionDesc = "ByDirectionDesc"
-        case byVolumeAsc = "ByVolumeAsc"
-        case byVolumeDesc = "ByVolumeDesc"
-        case byPriceAsc = "ByPriceAsc"
-        case byPriceDesc = "ByPriceDesc"
-        case byPriceCurrentAsc = "ByPriceCurrentAsc"
-        case byPriceCurrentDesc = "ByPriceCurrentDesc"
-        case byProfitAsc = "ByProfitAsc"
-        case byProfitDesc = "ByProfitDesc"
-        case byCommissionAsc = "ByCommissionAsc"
-        case byCommissionDesc = "ByCommissionDesc"
-        case bySwapAsc = "BySwapAsc"
-        case bySwapDesc = "BySwapDesc"
-    }
-
-    /**
-     * enum for parameter accountCurrency
-     */
-    public enum AccountCurrency_v10SignalTradesOpenGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
-        case btc = "BTC"
-        case ada = "ADA"
-        case usdt = "USDT"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case usd = "USD"
-        case eur = "EUR"
-    }
-
-    /**
-     Get investors signals open trades
+     Get subscriber accounts for subscribe to signal provider (common method for all signals)
      
+     - parameter id: (path)  
      - parameter authorization: (header) JWT access token 
-     - parameter sorting: (query)  (optional)
-     - parameter symbol: (query)  (optional)
-     - parameter accountId: (query)  (optional)
-     - parameter accountCurrency: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10SignalTradesOpenGet(authorization: String, sorting: Sorting_v10SignalTradesOpenGet? = nil, symbol: String? = nil, accountId: UUID? = nil, accountCurrency: AccountCurrency_v10SignalTradesOpenGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: TradesSignalViewModel?,_ error: Error?) -> Void)) {
-        v10SignalTradesOpenGetWithRequestBuilder(authorization: authorization, sorting: sorting, symbol: symbol, accountId: accountId, accountCurrency: accountCurrency, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func getSubscriberAccountsForAsset(id: UUID, authorization: String, completion: @escaping ((_ data: ItemsViewModelTradingAccountDetails?,_ error: Error?) -> Void)) {
+        getSubscriberAccountsForAssetWithRequestBuilder(id: id, authorization: authorization).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
 
 
     /**
-     Get investors signals open trades
-     - GET /v1.0/signal/trades/open
+     Get subscriber accounts for subscribe to signal provider (common method for all signals)
+     - GET /v2.0/signal/attach/{id}/accounts
      - examples: [{contentType=application/json, example={
-  "total" : 7,
-  "showSwaps" : true,
-  "trades" : [ {
-    "date" : "2000-01-23T04:56:07.000+00:00",
-    "originalCommissionCurrency" : "originalCommissionCurrency",
-    "symbol" : "symbol",
-    "ticket" : "ticket",
-    "swap" : 1.4894159098541704,
-    "originalCommission" : 1.2315135367772556,
-    "totalCommission" : 7.061401241503109,
-    "login" : "login",
-    "volume" : 9.301444243932576,
-    "totalCommissionByType" : [ {
-      "amount" : 1.4658129805029452,
-      "description" : "description",
-      "currency" : "Undefined",
-      "title" : "title",
-      "type" : "Undefined"
-    }, {
-      "amount" : 1.4658129805029452,
-      "description" : "description",
-      "currency" : "Undefined",
-      "title" : "title",
-      "type" : "Undefined"
-    } ],
-    "priceCurrent" : 4.145608029883936,
-    "entry" : "In",
-    "price" : 2.027123023002322,
-    "showOriginalCommission" : true,
-    "tradingAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "currency" : "Undefined",
-    "commission" : 1.0246457001441578,
+  "total" : 0,
+  "items" : [ {
+    "apiKey" : "apiKey",
+    "currency" : "USD",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "baseVolume" : 7.386281948385884,
-    "signalData" : {
-      "masters" : [ {
-        "share" : 6.84685269835264,
-        "login" : "login"
-      }, {
-        "share" : 6.84685269835264,
-        "login" : "login"
-      } ]
-    },
-    "profit" : 3.616076749251911,
-    "providers" : [ {
-      "volume" : 1.4658129805029452,
-      "firstOrderDate" : "2000-01-23T04:56:07.000+00:00",
-      "fees" : [ {
-        "amount" : 2.3021358869347655,
-        "currency" : "Undefined",
-        "type" : "Undefined"
-      }, {
-        "amount" : 2.3021358869347655,
-        "currency" : "Undefined",
-        "type" : "Undefined"
-      } ],
-      "manager" : {
-        "socialLinks" : [ {
-          "name" : "name",
-          "logo" : "logo",
-          "type" : "Twitter",
-          "value" : "value",
-          "url" : "url"
-        }, {
-          "name" : "name",
-          "logo" : "logo",
-          "type" : "Twitter",
-          "value" : "value",
-          "url" : "url"
-        } ],
-        "registrationDate" : "2000-01-23T04:56:07.000+00:00",
-        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-        "avatar" : "avatar",
-        "url" : "url",
-        "username" : "username"
-      },
-      "priceOpenAvg" : 5.962133916683182,
-      "program" : {
-        "color" : "color",
+    "login" : "login",
+    "asset" : {
+      "programDetails" : {
         "level" : 0,
-        "logo" : "logo",
-        "title" : "title",
-        "url" : "url",
         "levelProgress" : 6.027456183070403
       },
-      "profit" : 5.637376656633329,
-      "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
-    }, {
-      "volume" : 1.4658129805029452,
-      "firstOrderDate" : "2000-01-23T04:56:07.000+00:00",
-      "fees" : [ {
-        "amount" : 2.3021358869347655,
-        "currency" : "Undefined",
-        "type" : "Undefined"
-      }, {
-        "amount" : 2.3021358869347655,
-        "currency" : "Undefined",
-        "type" : "Undefined"
-      } ],
-      "manager" : {
-        "socialLinks" : [ {
-          "name" : "name",
-          "logo" : "logo",
-          "type" : "Twitter",
-          "value" : "value",
-          "url" : "url"
-        }, {
-          "name" : "name",
-          "logo" : "logo",
-          "type" : "Twitter",
-          "value" : "value",
-          "url" : "url"
-        } ],
-        "registrationDate" : "2000-01-23T04:56:07.000+00:00",
-        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-        "avatar" : "avatar",
-        "url" : "url",
-        "username" : "username"
-      },
-      "priceOpenAvg" : 5.962133916683182,
-      "program" : {
-        "color" : "color",
-        "level" : 0,
-        "logo" : "logo",
-        "title" : "title",
-        "url" : "url",
-        "levelProgress" : 6.027456183070403
-      },
-      "profit" : 5.637376656633329,
-      "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
-    } ],
-    "direction" : "Buy"
+      "color" : "color",
+      "logo" : "logo",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "title" : "title",
+      "url" : "url",
+      "assetType" : { }
+    }
   }, {
-    "date" : "2000-01-23T04:56:07.000+00:00",
-    "originalCommissionCurrency" : "originalCommissionCurrency",
-    "symbol" : "symbol",
-    "ticket" : "ticket",
-    "swap" : 1.4894159098541704,
-    "originalCommission" : 1.2315135367772556,
-    "totalCommission" : 7.061401241503109,
-    "login" : "login",
-    "volume" : 9.301444243932576,
-    "totalCommissionByType" : [ {
-      "amount" : 1.4658129805029452,
-      "description" : "description",
-      "currency" : "Undefined",
-      "title" : "title",
-      "type" : "Undefined"
-    }, {
-      "amount" : 1.4658129805029452,
-      "description" : "description",
-      "currency" : "Undefined",
-      "title" : "title",
-      "type" : "Undefined"
-    } ],
-    "priceCurrent" : 4.145608029883936,
-    "entry" : "In",
-    "price" : 2.027123023002322,
-    "showOriginalCommission" : true,
-    "tradingAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "currency" : "Undefined",
-    "commission" : 1.0246457001441578,
+    "apiKey" : "apiKey",
+    "currency" : "USD",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "baseVolume" : 7.386281948385884,
-    "signalData" : {
-      "masters" : [ {
-        "share" : 6.84685269835264,
-        "login" : "login"
-      }, {
-        "share" : 6.84685269835264,
-        "login" : "login"
-      } ]
-    },
-    "profit" : 3.616076749251911,
-    "providers" : [ {
-      "volume" : 1.4658129805029452,
-      "firstOrderDate" : "2000-01-23T04:56:07.000+00:00",
-      "fees" : [ {
-        "amount" : 2.3021358869347655,
-        "currency" : "Undefined",
-        "type" : "Undefined"
-      }, {
-        "amount" : 2.3021358869347655,
-        "currency" : "Undefined",
-        "type" : "Undefined"
-      } ],
-      "manager" : {
-        "socialLinks" : [ {
-          "name" : "name",
-          "logo" : "logo",
-          "type" : "Twitter",
-          "value" : "value",
-          "url" : "url"
-        }, {
-          "name" : "name",
-          "logo" : "logo",
-          "type" : "Twitter",
-          "value" : "value",
-          "url" : "url"
-        } ],
-        "registrationDate" : "2000-01-23T04:56:07.000+00:00",
-        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-        "avatar" : "avatar",
-        "url" : "url",
-        "username" : "username"
-      },
-      "priceOpenAvg" : 5.962133916683182,
-      "program" : {
-        "color" : "color",
+    "login" : "login",
+    "asset" : {
+      "programDetails" : {
         "level" : 0,
-        "logo" : "logo",
-        "title" : "title",
-        "url" : "url",
         "levelProgress" : 6.027456183070403
       },
-      "profit" : 5.637376656633329,
-      "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
-    }, {
-      "volume" : 1.4658129805029452,
-      "firstOrderDate" : "2000-01-23T04:56:07.000+00:00",
-      "fees" : [ {
-        "amount" : 2.3021358869347655,
-        "currency" : "Undefined",
-        "type" : "Undefined"
-      }, {
-        "amount" : 2.3021358869347655,
-        "currency" : "Undefined",
-        "type" : "Undefined"
-      } ],
-      "manager" : {
-        "socialLinks" : [ {
-          "name" : "name",
-          "logo" : "logo",
-          "type" : "Twitter",
-          "value" : "value",
-          "url" : "url"
-        }, {
-          "name" : "name",
-          "logo" : "logo",
-          "type" : "Twitter",
-          "value" : "value",
-          "url" : "url"
-        } ],
-        "registrationDate" : "2000-01-23T04:56:07.000+00:00",
-        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-        "avatar" : "avatar",
-        "url" : "url",
-        "username" : "username"
-      },
-      "priceOpenAvg" : 5.962133916683182,
-      "program" : {
-        "color" : "color",
-        "level" : 0,
-        "logo" : "logo",
-        "title" : "title",
-        "url" : "url",
-        "levelProgress" : 6.027456183070403
-      },
-      "profit" : 5.637376656633329,
-      "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
-    } ],
-    "direction" : "Buy"
-  } ],
-  "showTickets" : true
+      "color" : "color",
+      "logo" : "logo",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "title" : "title",
+      "url" : "url",
+      "assetType" : { }
+    }
+  } ]
 }}]
      
+     - parameter id: (path)  
      - parameter authorization: (header) JWT access token 
-     - parameter sorting: (query)  (optional)
-     - parameter symbol: (query)  (optional)
-     - parameter accountId: (query)  (optional)
-     - parameter accountCurrency: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
 
-     - returns: RequestBuilder<TradesSignalViewModel> 
+     - returns: RequestBuilder<ItemsViewModelTradingAccountDetails> 
      */
-    open class func v10SignalTradesOpenGetWithRequestBuilder(authorization: String, sorting: Sorting_v10SignalTradesOpenGet? = nil, symbol: String? = nil, accountId: UUID? = nil, accountCurrency: AccountCurrency_v10SignalTradesOpenGet? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<TradesSignalViewModel> {
-        let path = "/v1.0/signal/trades/open"
+    open class func getSubscriberAccountsForAssetWithRequestBuilder(id: UUID, authorization: String) -> RequestBuilder<ItemsViewModelTradingAccountDetails> {
+        var path = "/v2.0/signal/attach/{id}/accounts"
+        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "Sorting": sorting?.rawValue, 
-            "Symbol": symbol, 
-            "AccountId": accountId, 
-            "AccountCurrency": accountCurrency?.rawValue, 
-            "Skip": skip?.encodeToJSON(), 
-            "Take": take?.encodeToJSON()
-        ])
-        
+
         let nillableHeaders: [String: Any?] = [
             "Authorization": authorization
         ]
         let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
-        let requestBuilder: RequestBuilder<TradesSignalViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<ItemsViewModelTradingAccountDetails>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     Update signal subscription settings
+     
+     - parameter id: (path)  
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func updateExternalSubscriptionSettings(id: UUID, authorization: String, model: AttachToExternalSignalProviderExt? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        updateExternalSubscriptionSettingsWithRequestBuilder(id: id, authorization: authorization, model: model).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Update signal subscription settings
+     - POST /v2.0/signal/external/{id}/update
+     
+     - parameter id: (path)  
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func updateExternalSubscriptionSettingsWithRequestBuilder(id: UUID, authorization: String, model: AttachToExternalSignalProviderExt? = nil) -> RequestBuilder<Void> {
+        var path = "/v2.0/signal/external/{id}/update"
+        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+    }
+
+    /**
+     Update signal subscription settings
+     
+     - parameter id: (path)  
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func updateSubscriptionSettings(id: UUID, authorization: String, model: AttachToSignalProvider? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        updateSubscriptionSettingsWithRequestBuilder(id: id, authorization: authorization, model: model).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Update signal subscription settings
+     - POST /v2.0/signal/{id}/update
+     
+     - parameter id: (path)  
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func updateSubscriptionSettingsWithRequestBuilder(id: UUID, authorization: String, model: AttachToSignalProvider? = nil) -> RequestBuilder<Void> {
+        var path = "/v2.0/signal/{id}/update"
+        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
     }
 
 }

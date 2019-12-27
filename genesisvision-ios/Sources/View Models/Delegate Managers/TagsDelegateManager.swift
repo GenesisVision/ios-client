@@ -41,8 +41,8 @@ extension FilterTagsManager {
     }
 }
 
-class ProgramTagManager: NSObject, FilterTagsManager {
-    var values: [ProgramTag]?
+class TagManager: NSObject, FilterTagsManager {
+    var values: [Tag]?
     var selectedIdxs: [Int] = []
     
     override init() {
@@ -54,7 +54,7 @@ class ProgramTagManager: NSObject, FilterTagsManager {
     private func setup() {
         PlatformManager.shared.getPlatformInfo { [weak self] (platformInfo) in
             
-            guard let values = platformInfo?.enums?.program?.programTags else { return }
+            guard let values = platformInfo?.assetInfo?.programInfo?.tags else { return }
             
             self?.values = values
         }
@@ -93,7 +93,7 @@ class PlatformAssetManager: NSObject, FilterTagsManager {
     private func setup() {
         PlatformManager.shared.getPlatformInfo { [weak self] (platformInfo) in
             
-            guard let values = platformInfo?.enums?.fund?.assets else { return }
+            guard let values = platformInfo?.assetInfo?.fundInfo?.assets else { return }
             
             self?.values = values
         }
@@ -134,7 +134,7 @@ final class TagsDelegateManager: NSObject, UITableViewDelegate, UITableViewDataS
         
         switch filterType {
         case .programs:
-            self.manager = ProgramTagManager()
+            self.manager = TagManager()
         case .funds:
             self.manager = PlatformAssetManager()
         default:
@@ -165,7 +165,7 @@ final class TagsDelegateManager: NSObject, UITableViewDelegate, UITableViewDataS
             return cell
         }
         
-        if let manager = manager as? ProgramTagManager, let value = manager.values?[indexPath.row] {
+        if let manager = manager as? TagManager, let value = manager.values?[indexPath.row] {
             cell.configure(isSelected, tag: value)
         } else if let manager = manager as? PlatformAssetManager, let value = manager.values?[indexPath.row] {
             cell.configure(isSelected, asset: value)

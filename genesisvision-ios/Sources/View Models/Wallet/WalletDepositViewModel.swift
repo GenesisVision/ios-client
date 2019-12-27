@@ -28,10 +28,10 @@ final class WalletDepositViewModel {
     
     private var qrImage: UIImage?
     
-    var selectedCurrency: WalletData.Currency = .gvt
+    var selectedCurrency: Currency = .gvt
     var walletCurrencyDelegateManager: WalletDepositCurrencyDelegateManager?
     
-    var walletMultiSummary: WalletMultiSummary?
+    var walletSummary: WalletSummary?
     var selectedWallet: WalletData? {
         didSet {
             guard let selectedWallet = selectedWallet, let address = selectedWallet.depositAddress else { return }
@@ -41,31 +41,31 @@ final class WalletDepositViewModel {
     }
     
     // MARK: - Init
-    init(withRouter router: WalletDepositRouter, currency: CurrencyType, walletMultiSummary: WalletMultiSummary?) {
+    init(withRouter router: WalletDepositRouter, currency: CurrencyType, walletSummary: WalletSummary?) {
         self.router = router
-        self.walletMultiSummary = walletMultiSummary
+        self.walletSummary = walletSummary
         
         setup(currency: currency)
     }
     
     private func setup(currency: CurrencyType) {
-        if let selectedCurrency = WalletData.Currency(rawValue: currency.rawValue) {
+        if let selectedCurrency = Currency(rawValue: currency.rawValue) {
             self.selectedCurrency = selectedCurrency
             updateSelectedCurrency(selectedCurrency)
         }
     }
     
-    private func updateSelectedCurrency(_ selectedCurrency: WalletData.Currency) {
-        self.selectedWallet = walletMultiSummary?.wallets?.first(where: { $0.currency == selectedCurrency })
-        if let wallets = walletMultiSummary?.wallets {
+    private func updateSelectedCurrency(_ selectedCurrency: Currency) {
+        self.selectedWallet = walletSummary?.wallets?.first(where: { $0.currency == selectedCurrency })
+        if let wallets = walletSummary?.wallets {
             self.walletCurrencyDelegateManager = WalletDepositCurrencyDelegateManager(wallets)
         }
     }
     
     // MARK: - Public methods
     func updateWalletCurrencyIndex(_ selectedIndex: Int) {
-        guard let walletMultiSummary = walletMultiSummary,
-            let wallets = walletMultiSummary.wallets else { return }
+        guard let walletSummary = walletSummary,
+            let wallets = walletSummary.wallets else { return }
         selectedWallet = wallets[selectedIndex]
     }
     

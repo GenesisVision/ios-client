@@ -66,8 +66,6 @@ class WalletBalanceViewController: BaseViewControllerWithTableView {
             
             addFundsButton.setEnabled(viewModel.wallet?.isDepositEnabled ?? false)
             withdrawButton.setEnabled(viewModel.wallet?.isWithdrawalEnabled ?? false)
-        case .account:
-            tableView.contentInset.bottom = 82.0
         default:
             addFundsButton.isHidden = true
             withdrawButton.isHidden = true

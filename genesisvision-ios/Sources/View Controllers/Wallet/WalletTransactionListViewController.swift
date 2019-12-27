@@ -53,10 +53,7 @@ class WalletTransactionListViewController: BaseViewControllerWithTableView {
         if let imageName = viewModel.noDataImageName() {
             noDataImage = UIImage(named: imageName)
         }
-        
-        navigationTitleView = NavigationTitleView(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
-        addCurrencyTitleButton(CurrencyDelegateManager())
-        
+
         bottomViewType = .none
     }
     
@@ -92,34 +89,20 @@ class WalletTransactionListViewController: BaseViewControllerWithTableView {
         }
     }
     
-    private func openTransictionDetails(_ details: TransactionDetails, uuid: UUID) {
+    private func openTransictionDetails(_ details: TransactionViewModel) {
         bottomSheetController = BottomSheetController()
         bottomSheetController.initializeHeight = 450
         bottomSheetController.lineViewIsHidden = true
         
         let view = WalletTransactionView.viewFromNib()
-        view.configure(details, uuid: uuid)
+        view.configure(details)
         view.delegate = self
         bottomSheetController.addContentsView(view)
         bottomSheetController.present()
     }
     
-    private func showTransaction(_ uuid: UUID) {
-        showProgressHUD()
-        WalletDataProvider.getTransactionDetails(with: uuid, completion: { [weak self] (details) in
-            self?.hideAll()
-            
-            if let details = details {
-                self?.openTransictionDetails(details, uuid: uuid)
-            }
-        }) { (result) in
-            switch result {
-            case .success:
-                break
-            case .failure(let errorType):
-                ErrorHandler.handleError(with: errorType, viewController: self)
-            }
-        }
+    private func showTransaction(_ details: TransactionViewModel) {
+        self.openTransictionDetails(details)
     }
 }
 
@@ -131,10 +114,10 @@ extension WalletTransactionListViewController: UITableViewDelegate, UITableViewD
         
         guard viewModel.numberOfRows(in: indexPath.section) >= indexPath.row else { return }
 
-        if let model = viewModel.model(at: indexPath) as? WalletTransactionTableViewCellViewModel, let uuid = model.walletTransaction.id {
-            showTransaction(uuid)
-        } else if let model = viewModel.model(at: indexPath) as? WalletExternalTransactionTableViewCellViewModel, let uuid = model.walletTransaction.id {
-            showTransaction(uuid)
+        if let model = viewModel.model(at: indexPath) as? WalletTransactionTableViewCellViewModel {
+            showTransaction(model.walletTransaction)
+        } else if let model = viewModel.model(at: indexPath) as? WalletExternalTransactionTableViewCellViewModel {
+            showTransaction(model.walletTransaction)
         }
     }
     

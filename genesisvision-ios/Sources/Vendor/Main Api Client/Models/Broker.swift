@@ -19,14 +19,13 @@ open class Broker: Codable {
     public var fee: Double?
     public var leverageMin: Int?
     public var leverageMax: Int?
+    public var isKycRequired: Bool?
     public var accountTypes: [BrokerAccountType]?
-    public var isForex: Bool?
-    public var isSignalsAvailable: Bool?
-    public var tags: [ProgramTag]?
+    public var tags: [Tag]?
 
 
     
-    public init(name: String?, description: String?, logo: String?, terms: String?, assets: String?, fee: Double?, leverageMin: Int?, leverageMax: Int?, accountTypes: [BrokerAccountType]?, isForex: Bool?, isSignalsAvailable: Bool?, tags: [ProgramTag]?) {
+    public init(name: String?, description: String?, logo: String?, terms: String?, assets: String?, fee: Double?, leverageMin: Int?, leverageMax: Int?, isKycRequired: Bool?, accountTypes: [BrokerAccountType]?, tags: [Tag]?) {
         self.name = name
         self.description = description
         self.logo = logo
@@ -35,9 +34,8 @@ open class Broker: Codable {
         self.fee = fee
         self.leverageMin = leverageMin
         self.leverageMax = leverageMax
+        self.isKycRequired = isKycRequired
         self.accountTypes = accountTypes
-        self.isForex = isForex
-        self.isSignalsAvailable = isSignalsAvailable
         self.tags = tags
     }
     
@@ -56,9 +54,8 @@ open class Broker: Codable {
         try container.encodeIfPresent(fee, forKey: "fee")
         try container.encodeIfPresent(leverageMin, forKey: "leverageMin")
         try container.encodeIfPresent(leverageMax, forKey: "leverageMax")
+        try container.encodeIfPresent(isKycRequired, forKey: "isKycRequired")
         try container.encodeIfPresent(accountTypes, forKey: "accountTypes")
-        try container.encodeIfPresent(isForex, forKey: "isForex")
-        try container.encodeIfPresent(isSignalsAvailable, forKey: "isSignalsAvailable")
         try container.encodeIfPresent(tags, forKey: "tags")
     }
 
@@ -75,10 +72,9 @@ open class Broker: Codable {
         fee = try container.decodeIfPresent(Double.self, forKey: "fee")
         leverageMin = try container.decodeIfPresent(Int.self, forKey: "leverageMin")
         leverageMax = try container.decodeIfPresent(Int.self, forKey: "leverageMax")
+        isKycRequired = try container.decodeIfPresent(Bool.self, forKey: "isKycRequired")
         accountTypes = try container.decodeIfPresent([BrokerAccountType].self, forKey: "accountTypes")
-        isForex = try container.decodeIfPresent(Bool.self, forKey: "isForex")
-        isSignalsAvailable = try container.decodeIfPresent(Bool.self, forKey: "isSignalsAvailable")
-        tags = try container.decodeIfPresent([ProgramTag].self, forKey: "tags")
+        tags = try container.decodeIfPresent([Tag].self, forKey: "tags")
     }
 }
 

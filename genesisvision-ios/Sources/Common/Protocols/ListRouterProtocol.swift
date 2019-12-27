@@ -7,6 +7,7 @@
 //
 
 enum ListRouteType {
+    case share(url: String)
     case signIn
     case showAssetDetails(assetId: String, assetType: AssetType)
     case showAssetList(filterModel: FilterModel, assetType: AssetType)
@@ -20,6 +21,8 @@ protocol ListRouterProtocol {
 extension ListRouterProtocol where Self: Router {
     func show(routeType: ListRouteType) {
         switch routeType {
+        case .share(let url):
+            share(url)
         case .signIn:
             signInAction()
         case .showAssetDetails(let assetId, let assetType):

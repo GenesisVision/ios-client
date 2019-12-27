@@ -10,7 +10,15 @@ import UIKit
 
 class BaseNavigationController: UINavigationController {
     // MARK: - Variables
-    var isTranslucent: Bool = false
+    var isTranslucent: Bool = false {
+        didSet {
+            if isTranslucent {
+                navigationBar.setBackgroundImage(UIImage(), for: .default)
+            }
+            
+            navigationBar.isTranslucent = isTranslucent
+        }
+    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -18,11 +26,11 @@ class BaseNavigationController: UINavigationController {
 
         if isTranslucent {
             navigationBar.setBackgroundImage(UIImage(), for: .default)
-            navigationBar.shadowImage = UIImage()
         }
         
         navigationBar.isTranslucent = isTranslucent
         navigationBar.barTintColor = UIColor.BaseView.bg
+        navigationBar.shadowImage = UIImage()
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {

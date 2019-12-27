@@ -12,7 +12,7 @@ class ProgramTabmanRouter: TabmanRouter {
     var programViewController: ProgramViewController?
     
     // MARK: - Public methods
-    func getInfo(with programDetailsFull: ProgramDetailsFull) -> ProgramInfoViewController? {
+    func getInfo(with programDetailsFull: ProgramFollowDetailsFull) -> ProgramInfoViewController? {
         let viewController = ProgramInfoViewController()
         
         let router = ProgramInfoRouter(parentRouter: self)
@@ -46,7 +46,7 @@ class ProgramTabmanRouter: TabmanRouter {
         return viewController
     }
     
-    func getFullChart(with programDetailsFull: ProgramDetailsFull) -> ProgramDetailFullChartViewController? {
+    func getFullChart(with programDetailsFull: ProgramFollowDetailsFull) -> ProgramDetailFullChartViewController? {
         guard let viewController = ProgramDetailFullChartViewController.storyboardInstance(.program), let router = self.parentRouter as? ProgramRouter else { return nil }
         
         let viewModel = ProgramDetailFullChartViewModel(withRouter: router, programDetailsFull: programDetailsFull)
@@ -89,8 +89,8 @@ class ProgramTabmanRouter: TabmanRouter {
         return viewController
     }
     
-    func getEvents(with assetId: String) -> AllEventsViewController? {
-        guard let router = self.parentRouter as? ProgramRouter, let viewController = getEventsViewController(with: assetId, router: router, allowsSelection: true) else { return nil }
+    func getEvents(with assetId: String) -> EventListViewController? {
+        guard let router = self.parentRouter as? ProgramRouter, let viewController = getEventsViewController(with: assetId, router: router, allowsSelection: true, assetType: .program) else { return nil }
         
         return viewController
     }

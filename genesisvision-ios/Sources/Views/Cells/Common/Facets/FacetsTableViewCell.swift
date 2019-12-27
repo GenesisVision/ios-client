@@ -10,23 +10,17 @@ import UIKit
 
 class FacetsTableViewCell: UITableViewCell {
     
-    var facetsDelegateManager: FacetsDelegateManager?
+    var facetsDelegateManager = FacetsDelegateManager()
     
     var viewModel: ListViewModelProtocolWithFacets? {
         didSet {
             guard let viewModel = viewModel else { return }
             
-            facetsDelegateManager = viewModel.assetType == .program
-                ? ProgramFacetsDelegateManager(with: viewModel as! ProgramFacetsViewModel)
-                : FundFacetsDelegateManager(with: viewModel as! FundFacetsViewModel)
-
+            facetsDelegateManager.dataSource = viewModel
             collectionView.registerNibs(for: viewModel.cellModelsForRegistration)
-            if let facetsDelegateManager = facetsDelegateManager as? UICollectionViewDelegate {
-                collectionView.delegate = facetsDelegateManager
-            }
-            if let facetsDelegateManager = facetsDelegateManager as? UICollectionViewDataSource {
-                collectionView.dataSource = facetsDelegateManager
-            }
+            
+            collectionView.delegate = facetsDelegateManager
+            collectionView.dataSource = facetsDelegateManager
             
             collectionView.reloadData()
         }

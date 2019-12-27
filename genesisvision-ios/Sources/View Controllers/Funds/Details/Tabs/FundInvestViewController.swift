@@ -239,7 +239,7 @@ class FundInvestViewController: BaseViewController {
         let confirmViewModel = InvestWithdrawConfirmModel(title: "Confirm Invest",
                                                           subtitle: subtitle,
                                                           programLogo: nil,
-                                                          programTitle: viewModel.fundInvestInfo?.title,
+                                                          programTitle: "", //viewModel.fundInvestInfo.title, //FIXME:
                                                           managerName: nil,
                                                           firstTitle: amountToInvestTitleLabel.text,
                                                           firstValue: firstValue,

@@ -11,6 +11,7 @@ import UIKit
 class DetailManagerTableViewCell: UITableViewCell {
 
     // MARK: - Outlets
+    @IBOutlet weak var arrowImageView: UIImageView!
     @IBOutlet weak var managerImageView: UIImageView! {
         didSet {
             managerImageView.roundCorners()
@@ -31,6 +32,25 @@ class DetailManagerTableViewCell: UITableViewCell {
             dateLabel.isUserInteractionEnabled = false
         }
     }
+    
+    // MARK: - Lifecycle
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        backgroundColor = UIColor.BaseView.bg
+        contentView.backgroundColor = UIColor.BaseView.bg
+        tintColor = UIColor.Cell.title
+        accessoryView?.backgroundColor = UIColor.BaseView.bg
+        selectionStyle = .none
+    }
+}
+
+class DetailTradingAccountTableViewCell: UITableViewCell {
+
+    // MARK: - Outlets
+    @IBOutlet weak var logoImageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subtitleLabel: SubtitleLabel!
     
     // MARK: - Lifecycle
     override func awakeFromNib() {

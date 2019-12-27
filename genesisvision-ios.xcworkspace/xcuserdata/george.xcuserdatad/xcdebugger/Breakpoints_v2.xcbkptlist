@@ -7,80 +7,64 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "CC76E149-5526-4FB2-802E-79D4E56E57B1"
+            uuid = "B1B9D89D-0C98-45E6-BB6C-1A9B824103C0"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/View Models/Delegate Managers/DashboardFundListDelegateManager.swift"
+            filePath = "genesisvision-ios/Sources/Common/Protocols/ListViewModelProtocol.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
-            landmarkName = "scrollViewDidScroll(_:)"
+            startingLineNumber = "258"
+            endingLineNumber = "258"
+            landmarkName = "model(at:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "840DBEFB-C8EF-463B-B550-DEA9A5C3423D"
+            uuid = "CCBED883-15ED-4EC5-B896-C589DC459021"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/View Models/Delegate Managers/DashboardFundListDelegateManager.swift"
+            filePath = "genesisvision-ios/Sources/View Models/Wallet/WalletTabmanViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "scrollViewWillBeginDragging(_:)"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "setup(router:wallet:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "88C1436A-37A0-4A6C-A7C0-65D0804CDA1D"
+            uuid = "544ACA2D-05B0-4B39-AE99-DBEAB7586294"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/View Models/Delegate Managers/DashboardProgramListDelegateManager.swift"
+            filePath = "genesisvision-ios/Sources/View Models/Wallet/WalletTabmanViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
-            landmarkName = "scrollViewDidScroll(_:)"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "getDataSources()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "21E4E07B-43EF-4413-844B-E66905A41972"
+            uuid = "FDD9740B-2CBB-46C1-9751-6B3B5864DC78"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/View Models/Delegate Managers/DashboardProgramListDelegateManager.swift"
+            filePath = "genesisvision-ios/Sources/View Controllers/New Dashboard/CreateAccountViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "scrollViewWillBeginDragging(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "06F3354D-5750-4D33-88BF-980B85E1C4F9"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/View Controllers/Base/BaseViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "476"
-            endingLineNumber = "476"
-            landmarkName = "updateTheme()"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "checkActionButton()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -84,6 +84,15 @@ class ListDelegateManager<T: ListViewModelProtocol>: NSObject, UITableViewDelega
         return nil
     }
     
+    @available(iOS 13.0, *)
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let actionProvider: UIContextMenuActionProvider = { [weak self] _ in
+            return self?.viewModel?.getMenu(indexPath)
+        }
+
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: actionProvider)
+    }
+    
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let numberOfRows = viewModel?.numberOfRows(in: section) ?? 0

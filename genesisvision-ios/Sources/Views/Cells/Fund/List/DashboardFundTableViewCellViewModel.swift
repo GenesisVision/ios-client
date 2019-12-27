@@ -10,13 +10,13 @@ import Foundation
 import Kingfisher
 
 struct DashboardFundTableViewCellViewModel {
-    let fund: FundDetails
+    let fund: FundDetailsList
     weak var reloadDataProtocol: ReloadDataProtocol?
     weak var delegate: FavoriteStateChangeProtocol?
 }
 
 extension DashboardFundTableViewCellViewModel: CellViewModel {
     func setup(on cell: ProgramTableViewCell) {
-        cell.configure(dashboardFund: fund, delegate: delegate)
+        cell.configure(fund: fund, delegate: nil)
     }
 }

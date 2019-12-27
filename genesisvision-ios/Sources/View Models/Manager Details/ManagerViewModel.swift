@@ -9,7 +9,7 @@
 final class ManagerViewModel {
     // MARK: - Variables
     var managerId: String!
-    var managerProfileDetails: ManagerProfileDetails?
+    var publicProfile: PublicProfile?
     
     var router: ManagerRouter!
     
@@ -21,9 +21,9 @@ final class ManagerViewModel {
     }
 
     func fetch(completion: @escaping CompletionBlock) {
-        ManagersDataProvider.getManagerProfileDetails(managerId: managerId, completion: { [weak self] (viewModel) in
+        UsersDataProvider.get(with: managerId, completion: { [weak self] (viewModel) in
             guard let viewModel = viewModel else { return }
-            self?.managerProfileDetails = viewModel
+            self?.publicProfile = viewModel
             completion(.success)
         }, errorCompletion: completion)
     }

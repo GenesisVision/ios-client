@@ -12,12 +12,12 @@ class DashboardTabmanRouter: TabmanRouter {
     
     // MARK: - Public methods
     func getDashboard() -> DashboardViewController? {
-        let viewController = DashboardViewController()
-        
-        let navigationController = BaseNavigationController(rootViewController: viewController)
-        let router = DashboardRouter(parentRouter: self, navigationController: navigationController, dashboardViewController: viewController)
-        viewController.viewModel = DashboardViewModel(withRouter: router)
-        
-        return viewController
+//        let viewController = DashboardViewController()
+//        
+//        let navigationController = BaseNavigationController(rootViewController: viewController)
+//        let router = DashboardRouter(parentRouter: self, navigationController: navigationController, dashboardViewController: viewController)
+//        viewController.viewModel = DashboardViewModel(withRouter: router)
+//        
+//        return viewController
     }
 }

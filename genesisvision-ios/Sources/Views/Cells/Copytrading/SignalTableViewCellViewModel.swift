@@ -10,7 +10,7 @@ import Foundation
 import Kingfisher
 
 struct SignalTableViewCellViewModel {
-    let signal: SignalDetails
+    let signal: FollowDetailsFull
     weak var reloadDataProtocol: ReloadDataProtocol?
     weak var delegate: FavoriteStateChangeProtocol?
 }
@@ -24,7 +24,7 @@ extension SignalTableViewCellViewModel: CellViewModel {
             cell.titleLabel.text = title
         }
         
-        if let managerName = signal.manager?.username {
+        if let managerName = signal.owner?.username {
             cell.managerNameLabel.text = "by " + managerName
         }
         
@@ -32,34 +32,29 @@ extension SignalTableViewCellViewModel: CellViewModel {
             cell.assetId = programId
         }
         
-        if let level = signal.level {
-            cell.assetLogoImageView.levelButton.setTitle(level.toString(), for: .normal)
-        }
-        
-        if let levelProgress = signal.levelProgress {
-            cell.assetLogoImageView.levelButton.progress = levelProgress
-        }
+        cell.assetLogoImageView.levelButton.isHidden = true
+
         
         if let currency = signal.currency {
             cell.currencyLabel.text = currency.rawValue
         }
         
         cell.firstTitleLabel.text = "trades"
-        if let tradesCount = signal.personalDetails?.tradesCount {
+        if let tradesCount = signal.tradesCount {
             cell.firstValueLabel.text = tradesCount.toString()
         } else {
             cell.firstValueLabel.text = ""
         }
         
         cell.secondTitleLabel.text = "subscribers"
-        if let subscribers = signal.subscribers {
+        if let subscribers = signal.subscribersCount {
             cell.secondValueLabel.text = subscribers.toString()
         } else {
             cell.secondValueLabel.text = ""
         }
         
         cell.thirdTitleLabel.text = "start date"
-        if let subscriptionDate = signal.personalDetails?.subscriptionDate {
+        if let subscriptionDate = signal.creationDate {
             cell.thirdValueLabel.text = subscriptionDate.dateAndTimeToString()
         } else {
             cell.thirdValueLabel.text = ""
@@ -77,15 +72,15 @@ extension SignalTableViewCellViewModel: CellViewModel {
             cell.assetLogoImageView.profilePhotoImageView.backgroundColor = .clear
         }
         
-        if let profitPercent = signal.personalDetails?.profit {
-            let sign = profitPercent > 0 ? "+" : ""
-            cell.profitPercentLabel.text = sign + profitPercent.rounded(with: .undefined).toString() + "%"
-            cell.profitPercentLabel.textColor = profitPercent == 0 ? UIColor.Cell.title : profitPercent > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
-        }
+//        if let profitPercent = signal.personalDetails?.profit {
+//            let sign = profitPercent > 0 ? "+" : ""
+//            cell.profitPercentLabel.text = sign + profitPercent.rounded(with: .undefined).toString() + "%"
+//            cell.profitPercentLabel.textColor = profitPercent == 0 ? UIColor.Cell.title : profitPercent > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
+//        }
         
-        if let status = signal.personalDetails?.status {
+        if let status = signal.status {
             cell.statusButton.handleUserInteractionEnabled = false
-            cell.statusButton.setTitle(status.rawValue, for: .normal)
+            cell.statusButton.setTitle(status, for: .normal)
             cell.statusButton.layoutSubviews()
         }
     }

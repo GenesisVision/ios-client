@@ -9,31 +9,46 @@
 import UIKit
 import Charts
 
+struct AssetData {
+    var currency: CurrencyType?
+    var percent: Double
+    var name: String
+    var color: String
+    
+    init(_ currency: CurrencyType, model: DashboardAsset) {
+        self.color = model.color ?? ""
+        self.name = model.name ?? ""
+        self.percent = model.percent ?? 0.0
+        self.currency = currency
+    }
+    
+    init(_ currency: CurrencyType?, percent: Double, name: String, color: String) {
+        self.color = color
+        self.name = name
+        self.percent = percent
+        self.currency = currency
+    }
+}
+
 struct DashboardAssetsData: BaseData {
     var title: String
-    var showActionsView: Bool
     var type: CellActionType
     
-    let programs: Double
-    let funds: Double
-    let trading: Double
-    let wallet: Double
+    var items = [AssetData]()
     
-    init() {
-        title = "Assets"
-        showActionsView = false
-        type = .none
+    init(_ assets: DashboardAssets?, currency: CurrencyType) {
+        self.title = "Assets"
+        self.type = .none
         
-        programs = 40.0
-        funds = 10.0
-        trading = 20.0
-        wallet = 30.0
+        assets?.assets?.forEach({ (model) in
+            items.append(AssetData(currency, model: model))
+        })
     }
 }
 
 struct DashboardAssetsChartTableViewCellViewModel {
-    let data: DashboardAssetsData
-    weak var delegate: BaseCellProtocol?
+    let data: DashboardAssetsData?
+    weak var delegate: BaseTableViewProtocol?
 }
 extension DashboardAssetsChartTableViewCellViewModel: CellViewModel {
     func setup(on cell: DashboardAssetsChartTableViewCell) {
@@ -47,68 +62,42 @@ class DashboardAssetsChartTableViewCell: BaseTableViewCell {
     @IBOutlet weak var pieChartView: PieChartView!
     
     // MARK: - Public methods
-    func configure(_ data: DashboardAssetsData, delegate: BaseCellProtocol?) {
-        type = .none
+    func configure(_ data: DashboardAssetsData?, delegate: BaseTableViewProtocol?) {
+        guard let data = data else { return }
+        loaderView.stopAnimating()
+        loaderView.isHidden = true
         
+        self.type = data.type
         self.delegate = delegate
         
         titleLabel.text = data.title
-        actionsView.isHidden = !data.showActionsView
         
         labelsView.removeAllArrangedSubviews()
         
-        let programsItem = DashboardChartItemView.viewFromNib()
-        programsItem.circleView.backgroundColor = UIColor.Common.yellow
-        programsItem.titleLabel.text = "Programs"
-        programsItem.valueLabel.text = data.programs.toString() + "%"
-        
-        labelsView.addArrangedSubview(programsItem)
-        
-        let fundsItem = DashboardChartItemView.viewFromNib()
-        fundsItem.circleView.backgroundColor = UIColor.Common.blue
-        fundsItem.titleLabel.text = "Funds"
-        fundsItem.valueLabel.text = data.funds.toString() + "%"
-        
-        labelsView.addArrangedSubview(fundsItem)
-        
-        let tradingItem = DashboardChartItemView.viewFromNib()
-        tradingItem.circleView.backgroundColor = UIColor.Common.primary
-        tradingItem.titleLabel.text = "Trading"
-        tradingItem.valueLabel.text = data.trading.toString() + "%"
-        
-        labelsView.addArrangedSubview(tradingItem)
-        
-        let walletItem = DashboardChartItemView.viewFromNib()
-        walletItem.circleView.backgroundColor = UIColor.Common.red
-        walletItem.titleLabel.text = "Wallet"
-        walletItem.valueLabel.text = data.wallet.toString() + "%"
-        
-        labelsView.addArrangedSubview(walletItem)
+        data.items.forEach { (data) in
+            let chartItem = DashboardChartItemView.viewFromNib()
+            chartItem.circleView.backgroundColor = UIColor.hexColor(data.color)
+            chartItem.titleLabel.text = data.name
+            chartItem.valueLabel.text = data.percent.toString() + "%"
+            
+            labelsView.addArrangedSubview(chartItem)
+        }
         
         setDataCount(data)
     }
     
     func setDataCount(_ data: DashboardAssetsData) {
-        let entries = [PieChartDataEntry(value: data.programs),
-                       PieChartDataEntry(value: data.funds),
-                       PieChartDataEntry(value: data.trading),
-                       PieChartDataEntry(value: data.wallet)]
-        
+        var entries = [PieChartDataEntry]()
+        data.items.forEach { (data) in
+            entries.append(PieChartDataEntry(value: data.percent))
+        }
         let set = PieChartDataSet(entries: entries, label: "Assets")
         set.drawIconsEnabled = false
         set.sliceSpace = 2
         
-        set.colors = [UIColor.Common.yellow, UIColor.Common.blue, UIColor.Common.primary, UIColor.Common.red]
+        set.colors = data.items.map({ UIColor.hexColor($0.color) })
         
         let data = PieChartData(dataSet: set)
-//        let pFormatter = NumberFormatter()
-//        pFormatter.numberStyle = .percent
-//        pFormatter.maximumFractionDigits = 1
-//        pFormatter.multiplier = 1
-//        pFormatter.percentSymbol = " %"
-//        data.setValueFormatter(DefaultValueFormatter(formatter: pFormatter))
-//        data.setValueFont(UIFont.getFont(.light, size: 11))
-//        data.setValueTextColor(.white)
         data.highlightEnabled = false
         data.setDrawValues(false)
         pieChartView.data = data

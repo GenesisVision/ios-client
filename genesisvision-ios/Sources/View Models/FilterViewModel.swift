@@ -14,7 +14,7 @@ protocol FilterViewModelProtocol: class {
 }
 
 enum FilterType {
-    case programs, funds, dashboardPrograms, dashboardFunds
+    case programs, funds, follows
 }
 
 final class FilterViewModel {
@@ -70,10 +70,10 @@ final class FilterViewModel {
         switch filterType {
         case .programs:
             rows = [.levels, .currency, .sort, .dateRange, .tags]
+        case .follows:
+            rows = [.sort, .dateRange, .tags]
         case .funds:
             rows = [.sort, .dateRange, .assets]
-        case .dashboardFunds, .dashboardPrograms:
-            rows = [.sort, .dateRange, .onlyActive]
         }
         
         self.router = router
@@ -339,8 +339,7 @@ extension FilterViewModel: LevelsFilterViewProtocol {
         guard let vc = router.currentController as? BaseViewController else { return }
         
         let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
-        alert.view.tintColor = UIColor.Cell.headerBg
-        
+    
         var values: [String] = []
         for idx in Filters.minLevel...Filters.maxLevel - 1 {
             values.append("\(idx)")
@@ -373,7 +372,6 @@ extension FilterViewModel: LevelsFilterViewProtocol {
         guard let vc = router.currentController as? BaseViewController else { return }
         
         let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
-        alert.view.tintColor = UIColor.Cell.headerBg
         
         var values: [String] = []
         var minValue = 1
@@ -465,7 +463,6 @@ extension FilterViewModel: DateRangeViewProtocol {
         guard let vc = router.currentController as? BaseViewController else { return }
         
         let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
-        alert.view.tintColor = UIColor.Cell.headerBg
 
         if isFrom {
             alert.addDatePicker(mode: .date, date: dateFrom, minimumDate: nil, maximumDate: Date()) { [weak self] date in

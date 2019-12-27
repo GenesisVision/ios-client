@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FundAssetCollectionViewCell" id="gTV-IL-0wX" customClass="FundAssetCollectionViewCell" customModule="GV_DEBUG" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="409" height="92"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="409" height="92"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ThM-LS-Kro">
+                        <rect key="frame" x="0.0" y="0.0" width="409" height="92"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="bYW-nD-BZQ">
+                                <rect key="frame" x="16" y="0.0" width="377" height="92"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SnH-kP-e2d" customClass="UIImageView">
+                                        <rect key="frame" x="0.0" y="36" width="20" height="20"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="SnH-kP-e2d" secondAttribute="height" multiplier="1:1" id="V1z-Vn-PMR"/>
+                                            <constraint firstAttribute="width" constant="20" id="fgu-lG-umf"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0xB-Bw-Ofo" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                        <rect key="frame" x="28" y="21" width="316.5" height="50"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n4W-DZ-Mdf" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                        <rect key="frame" x="352.5" y="36" width="24.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="bYW-nD-BZQ" secondAttribute="trailing" constant="16" id="6Bm-S8-ya2"/>
+                            <constraint firstAttribute="bottom" secondItem="bYW-nD-BZQ" secondAttribute="bottom" id="FkP-ed-Vtg"/>
+                            <constraint firstItem="bYW-nD-BZQ" firstAttribute="leading" secondItem="ThM-LS-Kro" secondAttribute="leading" constant="16" id="K2n-Xu-dxK"/>
+                            <constraint firstItem="bYW-nD-BZQ" firstAttribute="top" secondItem="ThM-LS-Kro" secondAttribute="top" id="YFM-UQ-1P9"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="ThM-LS-Kro" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="UTk-ob-yoV"/>
+                <constraint firstAttribute="bottom" secondItem="ThM-LS-Kro" secondAttribute="bottom" id="cDm-R7-Hm8"/>
+                <constraint firstItem="ThM-LS-Kro" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="hj6-BQ-2oN"/>
+                <constraint firstAttribute="trailing" secondItem="ThM-LS-Kro" secondAttribute="trailing" id="kr2-r7-eZq"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="7Qi-f3-Ohx"/>
+            <size key="customSize" width="409" height="92"/>
+            <connections>
+                <outlet property="logoImageView" destination="SnH-kP-e2d" id="Lvv-Nh-G0a"/>
+                <outlet property="percentLabel" destination="n4W-DZ-Mdf" id="i1Q-eI-ONw"/>
+                <outlet property="symbolLabel" destination="0xB-Bw-Ofo" id="bhb-so-jYw"/>
+            </connections>
+            <point key="canvasLocation" x="397.82608695652175" y="150.66964285714286"/>
+        </collectionViewCell>
+    </objects>
+</document>

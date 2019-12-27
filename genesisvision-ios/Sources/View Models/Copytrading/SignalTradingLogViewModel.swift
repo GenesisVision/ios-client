@@ -184,7 +184,7 @@ extension SignalTradingLogViewModel {
         self.reloadDataProtocol?.didReloadData()
     }
     
-    private func saveEvents(_ eventsViewModel: SignalTradingEvents?, _ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [SignalTradingLogTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
+    private func saveEvents(_ eventsViewModel: ItemsViewModelSignalTradingEvent?, _ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [SignalTradingLogTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         
         guard eventsViewModel != nil else {
             return ErrorHandler.handleApiError(error: nil, completion: completionError)
@@ -193,7 +193,7 @@ extension SignalTradingLogViewModel {
         
         let totalCount = eventsViewModel?.total ?? 0
         
-        eventsViewModel?.events?.forEach({ (eventModel) in
+        eventsViewModel?.items?.forEach({ (eventModel) in
             let viewModel = SignalTradingLogTableViewCellViewModel(event: eventModel)
             viewModels.append(viewModel)
         })

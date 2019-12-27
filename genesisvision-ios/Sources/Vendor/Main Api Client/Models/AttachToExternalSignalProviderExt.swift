@@ -11,28 +11,23 @@ import Foundation
 
 open class AttachToExternalSignalProviderExt: Codable {
 
-    public enum Mode: String, Codable { 
-        case byBalance = "ByBalance"
-        case percent = "Percent"
-        case fixed = "Fixed"
-    }
     public enum FixedCurrency: String, Codable { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
+        case usd = "USD"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
         case doge = "DOGE"
         case bnb = "BNB"
-        case usd = "USD"
         case eur = "EUR"
     }
-    public var externalKeyId: UUID?
-    public var mode: Mode?
+    public var tradingAccountId: UUID?
+    public var mode: SubscriptionMode?
     public var percent: Double?
     public var openTolerancePercent: Double?
     public var fixedVolume: Double?
@@ -40,8 +35,8 @@ open class AttachToExternalSignalProviderExt: Codable {
 
 
     
-    public init(externalKeyId: UUID?, mode: Mode?, percent: Double?, openTolerancePercent: Double?, fixedVolume: Double?, fixedCurrency: FixedCurrency?) {
-        self.externalKeyId = externalKeyId
+    public init(tradingAccountId: UUID?, mode: SubscriptionMode?, percent: Double?, openTolerancePercent: Double?, fixedVolume: Double?, fixedCurrency: FixedCurrency?) {
+        self.tradingAccountId = tradingAccountId
         self.mode = mode
         self.percent = percent
         self.openTolerancePercent = openTolerancePercent
@@ -56,7 +51,7 @@ open class AttachToExternalSignalProviderExt: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(externalKeyId, forKey: "externalKeyId")
+        try container.encodeIfPresent(tradingAccountId, forKey: "tradingAccountId")
         try container.encodeIfPresent(mode, forKey: "mode")
         try container.encodeIfPresent(percent, forKey: "percent")
         try container.encodeIfPresent(openTolerancePercent, forKey: "openTolerancePercent")
@@ -69,8 +64,8 @@ open class AttachToExternalSignalProviderExt: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        externalKeyId = try container.decodeIfPresent(UUID.self, forKey: "externalKeyId")
-        mode = try container.decodeIfPresent(Mode.self, forKey: "mode")
+        tradingAccountId = try container.decodeIfPresent(UUID.self, forKey: "tradingAccountId")
+        mode = try container.decodeIfPresent(SubscriptionMode.self, forKey: "mode")
         percent = try container.decodeIfPresent(Double.self, forKey: "percent")
         openTolerancePercent = try container.decodeIfPresent(Double.self, forKey: "openTolerancePercent")
         fixedVolume = try container.decodeIfPresent(Double.self, forKey: "fixedVolume")

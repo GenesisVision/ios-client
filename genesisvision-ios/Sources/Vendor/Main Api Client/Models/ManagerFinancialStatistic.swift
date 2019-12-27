@@ -11,9 +11,6 @@ import Foundation
 
 open class ManagerFinancialStatistic: Codable {
 
-    public var deposit: Double?
-    public var withdraw: Double?
-    public var commissionRebate: Double?
     public var successFee: Double?
     public var entryFee: Double?
     public var profit: Double?
@@ -21,10 +18,7 @@ open class ManagerFinancialStatistic: Codable {
 
 
     
-    public init(deposit: Double?, withdraw: Double?, commissionRebate: Double?, successFee: Double?, entryFee: Double?, profit: Double?, balance: Double?) {
-        self.deposit = deposit
-        self.withdraw = withdraw
-        self.commissionRebate = commissionRebate
+    public init(successFee: Double?, entryFee: Double?, profit: Double?, balance: Double?) {
         self.successFee = successFee
         self.entryFee = entryFee
         self.profit = profit
@@ -38,9 +32,6 @@ open class ManagerFinancialStatistic: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(deposit, forKey: "deposit")
-        try container.encodeIfPresent(withdraw, forKey: "withdraw")
-        try container.encodeIfPresent(commissionRebate, forKey: "commissionRebate")
         try container.encodeIfPresent(successFee, forKey: "successFee")
         try container.encodeIfPresent(entryFee, forKey: "entryFee")
         try container.encodeIfPresent(profit, forKey: "profit")
@@ -52,9 +43,6 @@ open class ManagerFinancialStatistic: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        deposit = try container.decodeIfPresent(Double.self, forKey: "deposit")
-        withdraw = try container.decodeIfPresent(Double.self, forKey: "withdraw")
-        commissionRebate = try container.decodeIfPresent(Double.self, forKey: "commissionRebate")
         successFee = try container.decodeIfPresent(Double.self, forKey: "successFee")
         entryFee = try container.decodeIfPresent(Double.self, forKey: "entryFee")
         profit = try container.decodeIfPresent(Double.self, forKey: "profit")

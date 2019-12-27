@@ -8,44 +8,34 @@
 
 enum WalletRouteType {
     case withdraw(currencyType: CurrencyType)
-    case deposit(currencyType: CurrencyType, walletMultiSummary: WalletMultiSummary?)
+    case deposit(currencyType: CurrencyType, walletSummary: WalletSummary?)
     case programList
-    case transfer(from: CurrencyType, to: CurrencyType, walletMultiSummary: WalletMultiSummary?)
-    case withdrawAccount(currencyType: CurrencyType, accounts: [CopyTradingAccountInfo]?, walletMultiSummary: WalletMultiSummary?)
-    case depositAccount(currencyType: CurrencyType, accounts: [CopyTradingAccountInfo]?, walletMultiSummary: WalletMultiSummary?)
+    case transfer(from: CurrencyType, to: CurrencyType, walletSummary: WalletSummary?)
     case showAssetDetails(assetId: String, assetType: AssetType)
 }
 
-class WalletRouter: Router, SignalRouterProtocol {
+class WalletRouter: Router {
     
     var walletBalanceViewController: WalletBalanceViewController?
     var walletTabmanViewController: WalletViewController?
-    
-    var signalOpenTradesViewController: SignalOpenTradesViewController?
-    var signalTradesViewController: SignalTradesViewController?
-    var signalTradingLogViewController: SignalTradingLogViewController?
     
     // MARK: - Public methods
     func show(routeType: WalletRouteType) {
         switch routeType {
         case .withdraw(let currencyType):
             withdraw(currencyType)
-        case .deposit(let currencyType, let walletMultiSummary):
-            deposit(currencyType, walletMultiSummary: walletMultiSummary)
-        case .transfer(let from, let to, let walletMultiSummary):
-            transfer(from: from, to: to, walletMultiSummary: walletMultiSummary)
+        case .deposit(let currencyType, let walletSummary):
+            deposit(currencyType, walletSummary: walletSummary)
+        case .transfer(let from, let to, let walletSummary):
+            transfer(from: from, to: to, walletSummary: walletSummary)
         case .showAssetDetails(let assetId, let assetType):
             showAssetDetails(with: assetId, assetType: assetType)
         case .programList:
             showProgramList()
-        case .withdrawAccount(let currencyType, let accounts, let walletMultiSummary):
-            withdrawAccount(currencyType, accounts: accounts, walletMultiSummary: walletMultiSummary)
-        case .depositAccount(let currencyType, let accounts, let walletMultiSummary):
-            depositAccount(currencyType, accounts: accounts, walletMultiSummary: walletMultiSummary)
         }
     }
     
-    func getBalance(_ wallet: WalletData? = nil, account: CopyTradingAccountInfo? = nil) -> WalletBalanceViewController? {
+    func getBalance(_ wallet: WalletData? = nil, account: TradingAccountDetails? = nil) -> WalletBalanceViewController? {
         guard let viewController = WalletBalanceViewController.storyboardInstance(.wallet) else { return nil }
         let viewModel = WalletBalanceViewModel(withRouter: self, reloadDataProtocol: viewController, wallet: wallet, account: account)
         viewController.viewModel = viewModel
@@ -57,15 +47,6 @@ class WalletRouter: Router, SignalRouterProtocol {
         guard wallet == nil, let viewController = WalletListViewController.storyboardInstance(.wallet) else { return nil }
         
         let viewModel = WalletListViewModel(withRouter: self, reloadDataProtocol: viewController)
-        viewController.viewModel = viewModel
-        
-        return viewController
-    }
-    
-    func getCopytradingAccounts(_ wallet: WalletData? = nil) -> WalletCopytradingAccountListViewController? {
-        guard wallet == nil, let viewController = WalletCopytradingAccountListViewController.storyboardInstance(.wallet) else { return nil }
-        
-        let viewModel = WalletCopytradingAccountListViewModel(withRouter: self, reloadDataProtocol: viewController)
         viewController.viewModel = viewModel
         
         return viewController
@@ -104,38 +85,20 @@ class WalletRouter: Router, SignalRouterProtocol {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    private func deposit(_ currency: CurrencyType, walletMultiSummary: WalletMultiSummary?) {
+    private func deposit(_ currency: CurrencyType, walletSummary: WalletSummary?) {
         guard let viewController = WalletDepositViewController.storyboardInstance(.wallet) else { return }
         let router = WalletDepositRouter(parentRouter: self, navigationController: navigationController)
-        let viewModel = WalletDepositViewModel(withRouter: router, currency: currency, walletMultiSummary: walletMultiSummary)
+        let viewModel = WalletDepositViewModel(withRouter: router, currency: currency, walletSummary: walletSummary)
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    private func transfer(from: CurrencyType, to: CurrencyType, walletMultiSummary: WalletMultiSummary?) {
-        guard let walletMultiSummary = walletMultiSummary, let vc = topViewController() as? WalletProtocol else { return }
+    private func transfer(from: CurrencyType, to: CurrencyType, walletSummary: WalletSummary?) {
+        guard let walletSummary = walletSummary, let vc = topViewController() as? WalletProtocol else { return }
         
         guard let viewController = WalletTransferViewController.storyboardInstance(.wallet) else { return }
-        let viewModel = WalletTransferViewModel(withRouter: self, walletProtocol: vc, walletMultiSummary: walletMultiSummary)
-        viewController.viewModel = viewModel
-        viewController.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(viewController, animated: true)
-    }
-    
-    private func withdrawAccount(_ currency: CurrencyType, accounts: [CopyTradingAccountInfo]?, walletMultiSummary: WalletMultiSummary?) {
-        transferAccounts(currency: currency, accounts: accounts, walletMultiSummary: walletMultiSummary, type: .fromAccount)
-    }
-    
-    private func depositAccount(_ currency: CurrencyType, accounts: [CopyTradingAccountInfo]?, walletMultiSummary: WalletMultiSummary?) {
-        transferAccounts(currency: currency, accounts: accounts, walletMultiSummary: walletMultiSummary, type: .fromWallet)
-    }
-    
-    private func transferAccounts(currency: CurrencyType, accounts: [CopyTradingAccountInfo]?, walletMultiSummary: WalletMultiSummary?, type: WalletTransferType) {
-        guard let accounts = accounts, let wallets = walletMultiSummary?.wallets, let vc = topViewController() as? WalletProtocol else { return }
-        
-        guard let viewController = WalletAccountsTransferViewController.storyboardInstance(.wallet) else { return }
-        let viewModel = WalletsAccountsTransferViewModel(withRouter: self, walletProtocol: vc, accounts: accounts, wallets: wallets, type: type, currency: currency)
+        let viewModel = WalletTransferViewModel(withRouter: self, walletProtocol: vc, walletSummary: walletSummary)
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)

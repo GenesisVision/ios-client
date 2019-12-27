@@ -15,11 +15,11 @@ final class FundTabmanViewModel: TabmanViewModel {
     
     var fundDetailsFull: FundDetailsFull?
 
-    var сurrency: FundsAPI.Currency_v10FundsByIdGet?
+    var сurrency: FundsAPI.Currency_getFundDetails?
     weak var favoriteStateUpdatedProtocol: FavoriteStateUpdatedProtocol?
     
     var isFavorite: Bool {
-        return fundDetailsFull?.personalFundDetails?.isFavorite ?? false
+        return fundDetailsFull?.personalDetails?.isFavorite ?? false
     }
     
     // MARK: - Init
@@ -28,7 +28,7 @@ final class FundTabmanViewModel: TabmanViewModel {
         
         super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0)
         
-        сurrency = FundsAPI.Currency_v10FundsByIdGet(rawValue: getSelectedCurrency())
+        сurrency = FundsAPI.Currency_getFundDetails(rawValue: selectedPlatformCurrency)
         title = "Fund Details"
         backgroundColor = UIColor.Cell.bg
     }
@@ -61,7 +61,7 @@ final class FundTabmanViewModel: TabmanViewModel {
                 self.items?.append(TMBarItem(title: vc.viewModel.title.uppercased()))
             }
             
-            if let vc = router.getAssets(with: fundId) {
+            if let vc = router.getAssets() {
                 self.addController(vc)
                 self.items?.append(TMBarItem(title: vc.viewModel.title.uppercased()))
             }

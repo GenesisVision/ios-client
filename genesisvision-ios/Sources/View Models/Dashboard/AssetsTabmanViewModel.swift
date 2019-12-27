@@ -26,15 +26,9 @@ class AssetsTabmanViewModel: TabmanViewModel {
         self.searchBarEnable = searchBarEnable
         self.showFacets = showFacets
         
-        items = [TMBarItem(title: "Programs"),
-                 TMBarItem(title: "Funds")]
-        
-        if signalEnable, router is DashboardRouter {
-            items?.append(contentsOf: [TMBarItem(title: "Copytrading"),
-                                       TMBarItem(title: "Open trades"),
-                                       TMBarItem(title: "Trades history"),
-                                       TMBarItem(title: "Trading log")])
-        }
+        items = [TMBarItem(title: "Follow"),
+                 TMBarItem(title: "Funds"),
+                 TMBarItem(title: "Programs")]
         
         dataSource = AssetsPageboyViewControllerDataSource(router: router, showFacets: showFacets)
     }

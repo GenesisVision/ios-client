@@ -11,22 +11,12 @@ import Foundation
 
 open class UpdateSocialLinkViewModel: Codable {
 
-    public enum ModelType: String, Codable { 
-        case twitter = "Twitter"
-        case telegram = "Telegram"
-        case facebook = "Facebook"
-        case youtube = "Youtube"
-        case weChat = "WeChat"
-        case email = "Email"
-        case linkedIn = "LinkedIn"
-        case undefined = "Undefined"
-    }
-    public var type: ModelType?
+    public var type: SocialLinkType?
     public var value: String?
 
 
     
-    public init(type: ModelType?, value: String?) {
+    public init(type: SocialLinkType?, value: String?) {
         self.type = type
         self.value = value
     }
@@ -47,7 +37,7 @@ open class UpdateSocialLinkViewModel: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        type = try container.decodeIfPresent(ModelType.self, forKey: "type")
+        type = try container.decodeIfPresent(SocialLinkType.self, forKey: "type")
         value = try container.decodeIfPresent(String.self, forKey: "value")
     }
 }

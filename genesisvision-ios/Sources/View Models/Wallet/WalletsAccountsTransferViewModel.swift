@@ -19,10 +19,10 @@ final class WalletsAccountsTransferViewModel {
     
     private weak var walletProtocol: WalletProtocol?
     
-    var accounts: [CopyTradingAccountInfo]?
+    var accounts: [TradingAccountDetails]?
     var wallets: [WalletData]?
     
-    var selectedCurrency: CopyTradingAccountInfo.Currency?
+    var selectedCurrency: TradingAccountDetails.Currency?
 
     var selectedAccountDelegateManager: AccountsDepositCurrencyDelegateManager?
     var selectedWalletDelegateManager: WalletDepositCurrencyDelegateManager?
@@ -34,7 +34,7 @@ final class WalletsAccountsTransferViewModel {
     private var router: WalletRouter!
     
     // MARK: - Init
-    init(withRouter router: WalletRouter, walletProtocol: WalletProtocol, accounts: [CopyTradingAccountInfo], wallets: [WalletData], type: WalletTransferType, currency: CurrencyType) {
+    init(withRouter router: WalletRouter, walletProtocol: WalletProtocol, accounts: [TradingAccountDetails], wallets: [WalletData], type: WalletTransferType, currency: CurrencyType) {
         self.router = router
         self.walletProtocol = walletProtocol
         self.accounts = accounts
@@ -47,7 +47,7 @@ final class WalletsAccountsTransferViewModel {
     private func setup(_ currency: CurrencyType) {
         guard let accounts = accounts, let wallets = wallets else { return }
         
-        if let selectedCurrency = CopyTradingAccountInfo.Currency(rawValue: currency.rawValue) {
+        if let selectedCurrency = TradingAccountDetails.Currency(rawValue: currency.rawValue) {
             self.selectedCurrency = selectedCurrency
         }
         
@@ -129,7 +129,7 @@ final class WalletsAccountsTransferViewModel {
     
     func getCurrency(_ transferType: TransferType) -> CurrencyType? {
         guard let walletCurrency: WalletData.Currency = selectedWalletDelegateManager?.selected?.currency,
-            let accountCurrency: CopyTradingAccountInfo.Currency = selectedAccountDelegateManager?.selected?.currency,
+            let accountCurrency: TradingAccountDetails.Currency = selectedAccountDelegateManager?.selected?.currency,
             let walletCurrencyType = CurrencyType(rawValue: walletCurrency.rawValue),
             let accountCurrencyType = CurrencyType(rawValue: accountCurrency.rawValue) else { return nil }
         

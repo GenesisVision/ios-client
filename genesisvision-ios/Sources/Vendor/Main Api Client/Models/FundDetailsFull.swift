@@ -11,52 +11,28 @@ import Foundation
 
 open class FundDetailsFull: Codable {
 
-    public enum Status: String, Codable { 
-        case _none = "None"
-        case pending = "Pending"
-        case errorCreating = "ErrorCreating"
-        case active = "Active"
-        case closed = "Closed"
-        case archived = "Archived"
-        case closedDueToInactivity = "ClosedDueToInactivity"
-    }
-    public var entryFee: Double?
-    public var exitFee: Double?
-    public var managementFee: Double?
-    public var currentAssets: [FundAssetPartWithIcon]?
-    public var statistic: FundStatistic?
-    /** Fields for authorized user */
-    public var personalFundDetails: PersonalFundDetailsFull?
     public var id: UUID?
-    public var logo: String?
-    public var url: String?
-    public var color: String?
-    public var description: String?
-    public var title: String?
-    public var ipfsHash: String?
-    public var creationDate: Date?
-    public var status: Status?
-    public var manager: ProfilePublic?
+    public var publicInfo: AssetPublicDetails?
+    public var entryFeeSelected: Double?
+    public var entryFeeCurrent: Double?
+    public var exitFeeSelected: Double?
+    public var exitFeeCurrent: Double?
+    public var assetsStructure: [FundAssetInfo]?
+    public var personalDetails: PersonalFundDetails?
+    public var owner: ProfilePublic?
 
 
     
-    public init(entryFee: Double?, exitFee: Double?, managementFee: Double?, currentAssets: [FundAssetPartWithIcon]?, statistic: FundStatistic?, personalFundDetails: PersonalFundDetailsFull?, id: UUID?, logo: String?, url: String?, color: String?, description: String?, title: String?, ipfsHash: String?, creationDate: Date?, status: Status?, manager: ProfilePublic?) {
-        self.entryFee = entryFee
-        self.exitFee = exitFee
-        self.managementFee = managementFee
-        self.currentAssets = currentAssets
-        self.statistic = statistic
-        self.personalFundDetails = personalFundDetails
+    public init(id: UUID?, publicInfo: AssetPublicDetails?, entryFeeSelected: Double?, entryFeeCurrent: Double?, exitFeeSelected: Double?, exitFeeCurrent: Double?, assetsStructure: [FundAssetInfo]?, personalDetails: PersonalFundDetails?, owner: ProfilePublic?) {
         self.id = id
-        self.logo = logo
-        self.url = url
-        self.color = color
-        self.description = description
-        self.title = title
-        self.ipfsHash = ipfsHash
-        self.creationDate = creationDate
-        self.status = status
-        self.manager = manager
+        self.publicInfo = publicInfo
+        self.entryFeeSelected = entryFeeSelected
+        self.entryFeeCurrent = entryFeeCurrent
+        self.exitFeeSelected = exitFeeSelected
+        self.exitFeeCurrent = exitFeeCurrent
+        self.assetsStructure = assetsStructure
+        self.personalDetails = personalDetails
+        self.owner = owner
     }
     
 
@@ -66,22 +42,15 @@ open class FundDetailsFull: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(entryFee, forKey: "entryFee")
-        try container.encodeIfPresent(exitFee, forKey: "exitFee")
-        try container.encodeIfPresent(managementFee, forKey: "managementFee")
-        try container.encodeIfPresent(currentAssets, forKey: "currentAssets")
-        try container.encodeIfPresent(statistic, forKey: "statistic")
-        try container.encodeIfPresent(personalFundDetails, forKey: "personalFundDetails")
         try container.encodeIfPresent(id, forKey: "id")
-        try container.encodeIfPresent(logo, forKey: "logo")
-        try container.encodeIfPresent(url, forKey: "url")
-        try container.encodeIfPresent(color, forKey: "color")
-        try container.encodeIfPresent(description, forKey: "description")
-        try container.encodeIfPresent(title, forKey: "title")
-        try container.encodeIfPresent(ipfsHash, forKey: "ipfsHash")
-        try container.encodeIfPresent(creationDate, forKey: "creationDate")
-        try container.encodeIfPresent(status, forKey: "status")
-        try container.encodeIfPresent(manager, forKey: "manager")
+        try container.encodeIfPresent(publicInfo, forKey: "publicInfo")
+        try container.encodeIfPresent(entryFeeSelected, forKey: "entryFeeSelected")
+        try container.encodeIfPresent(entryFeeCurrent, forKey: "entryFeeCurrent")
+        try container.encodeIfPresent(exitFeeSelected, forKey: "exitFeeSelected")
+        try container.encodeIfPresent(exitFeeCurrent, forKey: "exitFeeCurrent")
+        try container.encodeIfPresent(assetsStructure, forKey: "assetsStructure")
+        try container.encodeIfPresent(personalDetails, forKey: "personalDetails")
+        try container.encodeIfPresent(owner, forKey: "owner")
     }
 
     // Decodable protocol methods
@@ -89,22 +58,15 @@ open class FundDetailsFull: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        entryFee = try container.decodeIfPresent(Double.self, forKey: "entryFee")
-        exitFee = try container.decodeIfPresent(Double.self, forKey: "exitFee")
-        managementFee = try container.decodeIfPresent(Double.self, forKey: "managementFee")
-        currentAssets = try container.decodeIfPresent([FundAssetPartWithIcon].self, forKey: "currentAssets")
-        statistic = try container.decodeIfPresent(FundStatistic.self, forKey: "statistic")
-        personalFundDetails = try container.decodeIfPresent(PersonalFundDetailsFull.self, forKey: "personalFundDetails")
         id = try container.decodeIfPresent(UUID.self, forKey: "id")
-        logo = try container.decodeIfPresent(String.self, forKey: "logo")
-        url = try container.decodeIfPresent(String.self, forKey: "url")
-        color = try container.decodeIfPresent(String.self, forKey: "color")
-        description = try container.decodeIfPresent(String.self, forKey: "description")
-        title = try container.decodeIfPresent(String.self, forKey: "title")
-        ipfsHash = try container.decodeIfPresent(String.self, forKey: "ipfsHash")
-        creationDate = try container.decodeIfPresent(Date.self, forKey: "creationDate")
-        status = try container.decodeIfPresent(Status.self, forKey: "status")
-        manager = try container.decodeIfPresent(ProfilePublic.self, forKey: "manager")
+        publicInfo = try container.decodeIfPresent(AssetPublicDetails.self, forKey: "publicInfo")
+        entryFeeSelected = try container.decodeIfPresent(Double.self, forKey: "entryFeeSelected")
+        entryFeeCurrent = try container.decodeIfPresent(Double.self, forKey: "entryFeeCurrent")
+        exitFeeSelected = try container.decodeIfPresent(Double.self, forKey: "exitFeeSelected")
+        exitFeeCurrent = try container.decodeIfPresent(Double.self, forKey: "exitFeeCurrent")
+        assetsStructure = try container.decodeIfPresent([FundAssetInfo].self, forKey: "assetsStructure")
+        personalDetails = try container.decodeIfPresent(PersonalFundDetails.self, forKey: "personalDetails")
+        owner = try container.decodeIfPresent(ProfilePublic.self, forKey: "owner")
     }
 }
 

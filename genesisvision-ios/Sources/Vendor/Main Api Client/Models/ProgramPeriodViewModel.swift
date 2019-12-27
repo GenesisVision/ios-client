@@ -11,15 +11,10 @@ import Foundation
 
 open class ProgramPeriodViewModel: Codable {
 
-    public enum Status: String, Codable { 
-        case planned = "Planned"
-        case inProccess = "InProccess"
-        case closed = "Closed"
-    }
     public var dateFrom: Date?
     public var dateTo: Date?
     public var periodLength: Double?
-    public var status: Status?
+    public var status: PeriodStatus?
     public var number: Int?
     public var profit: Double?
     public var balance: Double?
@@ -35,7 +30,7 @@ open class ProgramPeriodViewModel: Codable {
 
 
     
-    public init(dateFrom: Date?, dateTo: Date?, periodLength: Double?, status: Status?, number: Int?, profit: Double?, balance: Double?, investors: Int?, managerDeposit: Double?, managerWithdraw: Double?, managerCommissionRebate: Double?, investorsDeposit: Double?, investorsWithdraw: Double?, investorsProfitWithdraw: Double?, platformSuccessFee: Double?, managerStatistic: ManagerFinancialStatistic?) {
+    public init(dateFrom: Date?, dateTo: Date?, periodLength: Double?, status: PeriodStatus?, number: Int?, profit: Double?, balance: Double?, investors: Int?, managerDeposit: Double?, managerWithdraw: Double?, managerCommissionRebate: Double?, investorsDeposit: Double?, investorsWithdraw: Double?, investorsProfitWithdraw: Double?, platformSuccessFee: Double?, managerStatistic: ManagerFinancialStatistic?) {
         self.dateFrom = dateFrom
         self.dateTo = dateTo
         self.periodLength = periodLength
@@ -87,7 +82,7 @@ open class ProgramPeriodViewModel: Codable {
         dateFrom = try container.decodeIfPresent(Date.self, forKey: "dateFrom")
         dateTo = try container.decodeIfPresent(Date.self, forKey: "dateTo")
         periodLength = try container.decodeIfPresent(Double.self, forKey: "periodLength")
-        status = try container.decodeIfPresent(Status.self, forKey: "status")
+        status = try container.decodeIfPresent(PeriodStatus.self, forKey: "status")
         number = try container.decodeIfPresent(Int.self, forKey: "number")
         profit = try container.decodeIfPresent(Double.self, forKey: "profit")
         balance = try container.decodeIfPresent(Double.self, forKey: "balance")

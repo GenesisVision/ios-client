@@ -28,7 +28,7 @@ final class FundProfitViewModel {
     var dateTo: Date?
     var maxPointCount: Int = ApiKeys.maxPoint
     
-    private var fundProfitChart: FundProfitChart?
+    private var fundProfitChart: FundProfitPercentCharts?
     
     private var sections: [SectionType] = [.chart, .statistics]
     
@@ -44,11 +44,7 @@ final class FundProfitViewModel {
     }
     
     // MARK: - Public methods
-    func selectChartSimple(_ date: Date) {
-        if let result = fundProfitChart?.equityChart?.first(where: { $0.date == date }) {
-            print("selectChartSimple")
-            print(result)
-        }
+    func selectSimpleChartPoint(_ date: Date) {
     }
     
     func hideHeader(value: Bool = true) {
@@ -117,7 +113,7 @@ extension FundProfitViewModel {
         switch dataType {
         case .api:
             guard let fundId = fundId else { return completion(.failure(errorType: .apiError(message: nil))) }
-            FundsDataProvider.getProfitChart(with: fundId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, completion: { [weak self] (viewModel) in
+            FundsDataProvider.getProfitPercentCharts(with: fundId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, completion: { [weak self] (viewModel) in
                 guard viewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completion)
                 }

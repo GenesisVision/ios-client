@@ -23,18 +23,17 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="LLC-g3-c8M">
                                 <rect key="frame" x="0.0" y="0.0" width="378" height="30"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y9E-ju-4Z9" customClass="LargeTitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="42" height="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y9E-ju-4Z9" customClass="LargeTitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Why-Vg-hwd">
-                                        <rect key="frame" x="322" y="0.0" width="56" height="30"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Why-Vg-hwd">
+                                        <rect key="frame" x="348" y="0.0" width="30" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yXU-XX-Lvh" customClass="ShowAllButton" customModule="GV_DEBUG" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="56" height="30"/>
-                                                <state key="normal" title="show all"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -53,7 +52,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="zXN-iT-0VQ" secondAttribute="height" multiplier="1:1" id="Mx2-ft-qnQ"/>
-                                                    <constraint firstAttribute="width" constant="200" id="hVZ-Oa-b0t"/>
+                                                    <constraint firstAttribute="width" constant="150" id="hVZ-Oa-b0t"/>
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3FI-df-API">
@@ -75,9 +74,9 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="actionsView" destination="Why-Vg-hwd" id="adT-nc-3cU"/>
                 <outlet property="labelsView" destination="3FI-df-API" id="Le0-3D-0N5"/>
                 <outlet property="pieChartView" destination="zXN-iT-0VQ" id="Hm3-Wm-i4q"/>
+                <outlet property="rightButtonsView" destination="Why-Vg-hwd" id="NaK-wT-jZ5"/>
                 <outlet property="titleLabel" destination="y9E-ju-4Z9" id="Ogh-gp-GhA"/>
             </connections>
             <point key="canvasLocation" x="211.59420289855075" y="79.6875"/>

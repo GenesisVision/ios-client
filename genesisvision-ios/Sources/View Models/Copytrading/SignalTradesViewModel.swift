@@ -77,7 +77,8 @@ final class SignalTradesViewModel {
     }
     
     func close(_ tradeId: String) {
-        SignalDataProvider.close(with: tradeId) { [weak self] (result) in
+        //FIXME: 
+        SignalDataProvider.closeTrade(with: tradeId, assetId: tradeId) { [weak self] (result) in
             self?.refresh(completion: { (result) in
                 
             })
@@ -221,7 +222,7 @@ extension SignalTradesViewModel {
         
         let totalCount = tradesViewModel?.total ?? 0
         
-        tradesViewModel?.trades?.forEach({ (orderModel) in
+        tradesViewModel?.items?.forEach({ (orderModel) in
             let viewModel = SignalTradesTableViewCellViewModel(orderModel: orderModel, isOpenTrades: self.isOpenTrades, delegate: self.signalTradesProtocol)
             viewModels.append(viewModel)
         })
@@ -239,7 +240,7 @@ extension SignalTradesViewModel {
         } else {
             let sorting = sortingDelegateManager.manager?.getSelectedSorting()
             
-            SignalDataProvider.getTrades(from: dateFrom, dateTo: dateTo, sorting: sorting as? SignalAPI.Sorting_v10SignalTradesGet, currency: currency, skip: skip, take: take, completion: { [weak self ] (tradesViewModel) in
+            SignalDataProvider.getTrades(from: dateFrom, dateTo: dateTo, sorting: sorting as? SignalAPI.Sorting_getSignalTrades, currency: currency, skip: skip, take: take, completion: { [weak self ] (tradesViewModel) in
                 self?.saveTrades(tradesViewModel, completionSuccess, completionError)
             }, errorCompletion: completionError)
         }

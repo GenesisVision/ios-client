@@ -9,7 +9,7 @@
 import UIKit
 import IQKeyboardManagerSwift
 
-class SettingsViewController: BaseTableViewController, UINavigationControllerDelegate {
+class SettingsViewController: BaseTableViewController {
     // MARK: - View Model
     var viewModel: SettingsViewModel!
     
@@ -19,21 +19,17 @@ class SettingsViewController: BaseTableViewController, UINavigationControllerDel
             profileImageView.roundCorners()
         }
     }
-    
     @IBOutlet weak var profileAddImageView: UIImageView! {
         didSet {
             profileAddImageView.roundCorners()
         }
     }
     @IBOutlet weak var changePhotoButton: UIButton!
-    
-    
     @IBOutlet weak var profileNameLabel: TitleLabel! {
         didSet {
-            profileNameLabel.font = UIFont.getFont(.semibold, size: 26)
+            profileNameLabel.font = UIFont.getFont(.semibold, size: 17)
         }
     }
-    
     @IBOutlet weak var profileEmailLabel: SubtitleLabel!
     @IBOutlet weak var verifyView: UIView! {
         didSet {
@@ -47,11 +43,28 @@ class SettingsViewController: BaseTableViewController, UINavigationControllerDel
             verifyTextLabel.textColor = UIColor.Cell.redTitle
         }
     }
-    
+    @IBOutlet weak var platformCurrencyTitleLabel: TitleLabel! {
+        didSet {
+            platformCurrencyTitleLabel.text = "Platform currency"
+            platformCurrencyTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
+        }
+    }
+    @IBOutlet weak var platformCurrencyValueLabel: SubtitleLabel! {
+        didSet {
+            platformCurrencyValueLabel.text = ""
+        }
+    }
     @IBOutlet weak var changePasswordTitleLabel: TitleLabel! {
         didSet {
-            changePasswordTitleLabel.text = SettingsViewModel.SettingsRowType.changePassword.rawValue
+            changePasswordTitleLabel.text = SettingsViewModel.RowType.changePassword.rawValue
             changePasswordTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
+        }
+    }
+    @IBOutlet weak var publicProfileSwitch: UISwitch! {
+        didSet {
+            publicProfileSwitch.onTintColor = UIColor.primary
+            publicProfileSwitch.thumbTintColor = UIColor.Cell.switchThumbTint
+            publicProfileSwitch.tintColor = UIColor.Cell.switchTint
         }
     }
     @IBOutlet weak var passcodeSwitch: UISwitch! {
@@ -63,13 +76,13 @@ class SettingsViewController: BaseTableViewController, UINavigationControllerDel
     }
     @IBOutlet weak var passcodeTitleLabel: TitleLabel! {
         didSet {
-            passcodeTitleLabel.text = SettingsViewModel.SettingsRowType.passcode.rawValue
+            passcodeTitleLabel.text = SettingsViewModel.RowType.passcode.rawValue
             passcodeTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
     @IBOutlet weak var biometricIDTitleLabel: TitleLabel! {
         didSet {
-            biometricIDTitleLabel.text = SettingsViewModel.SettingsRowType.biometricID.rawValue
+            biometricIDTitleLabel.text = SettingsViewModel.RowType.biometricID.rawValue
             biometricIDTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
@@ -90,37 +103,42 @@ class SettingsViewController: BaseTableViewController, UINavigationControllerDel
     }
     @IBOutlet weak var twoFactorTitleLabel: TitleLabel! {
         didSet {
-            twoFactorTitleLabel.text = SettingsViewModel.SettingsRowType.twoFactor.rawValue
+            twoFactorTitleLabel.text = SettingsViewModel.RowType.twoFactor.rawValue
             twoFactorTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
     @IBOutlet weak var termsTitleLabel: TitleLabel! {
         didSet {
-            termsTitleLabel.text = SettingsViewModel.SettingsRowType.termsAndConditions.rawValue
+            termsTitleLabel.text = SettingsViewModel.RowType.termsAndConditions.rawValue
             termsTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
     @IBOutlet weak var privacyTitleLabel: TitleLabel! {
         didSet {
-            privacyTitleLabel.text = SettingsViewModel.SettingsRowType.privacyPolicy.rawValue
+            privacyTitleLabel.text = SettingsViewModel.RowType.privacyPolicy.rawValue
             privacyTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
     @IBOutlet weak var sendFeedbackTitleLabel: TitleLabel! {
         didSet {
-            sendFeedbackTitleLabel.text = SettingsViewModel.SettingsRowType.contactUs.rawValue
+            sendFeedbackTitleLabel.text = SettingsViewModel.RowType.contactUs.rawValue
             sendFeedbackTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
-    
     @IBOutlet weak var versionLabel: SubtitleLabel!
-    
     @IBOutlet weak var footerView: UITableViewHeaderFooterView!
     
     private var signOutBarButtonItem: UIBarButtonItem!
     
     // MARK: - Cells
+    @IBOutlet weak var kycStatusCell: TableViewCell!
+    @IBOutlet weak var publicProfileCell: TableViewCell!
+    @IBOutlet weak var currencyCell: TableViewCell!
+    
     @IBOutlet weak var changePasswordCell: TableViewCell!
+    
+    @IBOutlet weak var profileCell: TableViewCell!
+    
     @IBOutlet weak var passcodeCell: TableViewCell!
     @IBOutlet weak var biometricCell: TableViewCell!
     @IBOutlet weak var twoFactorCell: TableViewCell!
@@ -199,6 +217,7 @@ class SettingsViewController: BaseTableViewController, UINavigationControllerDel
     
     private func updateUI() {
         profileImageView.image = UIImage.profilePlaceholder
+        publicProfileSwitch.isOn = viewModel.isPublic
         
         if let verificationStatus = viewModel.verificationStatus {
             verifyView.isHidden = false
@@ -225,12 +244,10 @@ class SettingsViewController: BaseTableViewController, UINavigationControllerDel
         if let url = viewModel.avatarURL {
             profileImageView.kf.indicatorType = .activity
             profileImageView.kf.setImage(with: url, placeholder: UIImage.profilePlaceholder)
-            
-            profileAddImageView.isHidden = true
         }
         
-        if let name = viewModel.fullName {
-            profileNameLabel.text = name
+        if let username = viewModel.username {
+            profileNameLabel.text = username
         } else {
             profileNameLabel.text = "Profile"
         }
@@ -273,6 +290,10 @@ class SettingsViewController: BaseTableViewController, UINavigationControllerDel
         
         tableView.tableFooterView = footerView
         tableView.backgroundColor = UIColor.Cell.headerBg
+        
+        if let name = viewModel.currencyListViewModel.selected()?.name {
+            platformCurrencyValueLabel.text = name
+        }
     }
     
     private func setupTableConfiguration() {
@@ -293,7 +314,6 @@ class SettingsViewController: BaseTableViewController, UINavigationControllerDel
     
     private func feedbackMethod() {
         let alert = UIAlertController(title: "", message: String.Alerts.Feedback.alertTitle, preferredStyle: .alert)
-        alert.view.tintColor = UIColor.Cell.headerBg
         
         alert.addAction(UIAlertAction(title: String.Alerts.Feedback.websiteButtonText, style: .default, handler: { [weak self] (action) in
             self?.viewModel.sendFeedback()
@@ -308,9 +328,34 @@ class SettingsViewController: BaseTableViewController, UINavigationControllerDel
         present(alert, animated: true, completion: nil)
     }
     
+    private func changePlatformCurrency() {
+        self.view.endEditing(true)
+        bottomSheetController = BottomSheetController()
+
+        bottomSheetController.addNavigationBar(viewModel.currencyListViewModel.title)
+
+        bottomSheetController.addTableView { tableView in
+            tableView.separatorStyle = .none
+
+            tableView.registerNibs(for: viewModel.currencyListViewModel.cellModelsForRegistration)
+            tableView.delegate = viewModel.currencyListDataSource
+            tableView.dataSource = viewModel.currencyListDataSource
+            tableView.reloadData()
+        }
+
+        bottomSheetController.present()
+    }
+    
     // MARK: - Actions
     @IBAction func passcodeSwitchChangedAction(_ sender: UISwitch) {
         viewModel.enablePasscode(sender.isOn)
+    }
+    
+    @IBAction func publicProfileSwitchChangedAction(_ sender: UISwitch) {
+        showProgressHUD()
+        viewModel.publicChange(sender.isOn) { [weak self] (result) in
+            self?.hideAll()
+        }
     }
     
     @IBAction func biometricIDSwitchChangedAction(_ sender: UISwitch) {
@@ -321,11 +366,6 @@ class SettingsViewController: BaseTableViewController, UINavigationControllerDel
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
             self.viewModel.enableTwoFactor(sender.isOn)
         })
-    }
-    
-    @IBAction func changePhotoButtonAction(_ sender: UIButton) {
-        view.endEditing(true)
-        showImagePicker()
     }
 }
 
@@ -339,6 +379,10 @@ extension SettingsViewController {
         }
         
         switch fieldType {
+        case .profile:
+            viewModel.showProfile()
+        case .currency:
+            changePlatformCurrency()
         case .changePassword:
             viewModel.changePassword()
         case .termsAndConditions:
@@ -416,35 +460,23 @@ extension SettingsViewController: PasscodeProtocol {
     }
 }
 
-extension SettingsViewController: ImagePickerPresentable {
-    var choosePhotoButton: UIButton {
-        return changePhotoButton
+extension SettingsViewController: BaseTableViewProtocol {
+    func didSelect(_ type: DidSelectType, index: Int) {
+        switch type {
+        case .currency:
+            bottomSheetController.dismiss()
+            if let name = viewModel.currencyListViewModel.selected()?.name {
+                selectedPlatformCurrency = name
+                platformCurrencyValueLabel.text = name
+            }
+        default:
+            break
+        }
     }
     
-    func selected(pickedImage: UIImage?, pickedImageURL: URL?) {
-        viewModel.pickedImage = pickedImage
-        viewModel.pickedImageURL = pickedImageURL
-        
-        let oldImage = profileImageView.image
-        showProgressHUD()
-        viewModel.saveProfilePhoto { [weak self] (result) in
-            self?.hideAll()
-            DispatchQueue.main.async {
-                self?.profileImageView.image = nil
-            }
-            
-            switch result {
-            case .success:
-                DispatchQueue.main.async {
-                    self?.profileAddImageView.isHidden = true
-                    self?.profileImageView.image = pickedImage
-                }
-            case .failure(let errorType):
-                print(errorType)
-                DispatchQueue.main.async {
-                    self?.profileImageView.image = oldImage ?? UIImage.profilePlaceholder
-                }
-            }
+    func didReload(_ indexPath: IndexPath) {
+        if indexPath.section == 1, indexPath.row == 0, let name = viewModel.currencyListViewModel.selected()?.name, platformCurrencyValueLabel != nil {
+            platformCurrencyValueLabel.text = name
         }
     }
 }

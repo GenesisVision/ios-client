@@ -35,6 +35,7 @@ extension NotificationsSettingsGeneralTableViewCellViewModel: CellViewModel {
                 cell.titleLabel.text = "News and updates"
             case .platformEmergency:
                 cell.titleLabel.text = "Emergency notifications"
+                
             default:
                 break
             }

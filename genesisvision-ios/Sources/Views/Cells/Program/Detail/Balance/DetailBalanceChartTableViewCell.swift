@@ -140,7 +140,15 @@ extension DetailBalanceChartTableViewCell: ChartViewDelegate {
         chartViewProtocol?.chartValueSelected(date: date)
         
         if let model = chartModel as? FundBalanceChart {
-            if let result = model.balanceChart?.first(where: { $0.date == date }) {
+            //FIXME:
+            if let result = model.chart?.first(where: { (point) -> Bool in
+                if let pointDateInt = point.date {
+                    let pointDate = Date(timeIntervalSince1970: TimeInterval(integerLiteral: pointDateInt))
+                    return pointDate == date
+                } else {
+                    return false
+                }
+            }) {
                 roundedBackgroundView.isHidden = false
                 
                 if let managerFunds = result.managerFunds {
@@ -161,42 +169,50 @@ extension DetailBalanceChartTableViewCell: ChartViewDelegate {
                 
                 if let date = result.date {
                     dateValueLabel.isHidden = false
-                    dateValueLabel.text = date.dateAndTimeFormatString
+                    dateValueLabel.text = Date(timeIntervalSince1970: TimeInterval(bitPattern: UInt64(date))).dateAndTimeFormatString
                     dateValueLabel.sizeToFit()
                 }
             }
         } else if let model = chartModel as? ProgramBalanceChart {
-            if let result = model.balanceChart?.first(where: { $0.date == date }) {
+            //FIXME:
+            if let result = model.chart?.first(where: { (point) -> Bool in
+                if let pointDateInt = point.date {
+                    let pointDate = Date(timeIntervalSince1970: TimeInterval(integerLiteral: pointDateInt))
+                    return pointDate == date
+                } else {
+                    return false
+                }
+            }) {
                 guard let programCurrency = model.programCurrency else { return }
                 let currency = CurrencyType(rawValue: programCurrency.rawValue) ?? .gvt
                 
                 roundedBackgroundView.isHidden = false
                 
-                if let profit = result.profit {
-                    profitStackView.isHidden = false
-                    profitTitleLabel.isHidden = false
-                    profitValueLabel.isHidden = false
-                    
-                    profitValueLabel.text = profit.rounded(with: currency).toString()
-                }
-                
+//                if let profit = result.profit {
+//                    profitStackView.isHidden = false
+//                    profitTitleLabel.isHidden = false
+//                    profitValueLabel.isHidden = false
+//
+//                    profitValueLabel.text = profit.rounded(with: currency).toString()
+//                }
+//
                 if let managerFunds = result.managerFunds {
                     managersFundsTitleLabel.isHidden = false
                     managersFundsValueLabel.isHidden = false
-                    
+
                     managersFundsValueLabel.text = managerFunds.rounded(with: currency).toString()
                 }
-                
+
                 if let investorsFunds = result.investorsFunds {
                     investorsFundsTitleLabel.isHidden = false
                     investorsFundsValueLabel.isHidden = false
-                    
+
                     investorsFundsValueLabel.text = investorsFunds.rounded(with: currency).toString()
                 }
                 
                 if let date = result.date {
                     dateValueLabel.isHidden = false
-                    dateValueLabel.text = date.dateAndTimeFormatString
+                    dateValueLabel.text = Date(timeIntervalSince1970: TimeInterval(bitPattern: UInt64(date))).dateAndTimeFormatString
                 }
             }
         }

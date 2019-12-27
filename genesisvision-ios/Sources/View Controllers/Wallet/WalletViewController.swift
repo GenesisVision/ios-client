@@ -14,9 +14,6 @@ class WalletViewController: BaseTabmanViewController<WalletTabmanViewModel> {
     // MARK: - Variables
     private var moreBarButtonItem: UIBarButtonItem!
     
-    var currencyDelegateManager: CurrencyDelegateManager?
-    
-    var navigationTitleView: NavigationTitleView?
     var bottomSheetController: BottomSheetController!
     
     // MARK: - Lifecycle
@@ -24,12 +21,6 @@ class WalletViewController: BaseTabmanViewController<WalletTabmanViewModel> {
         super.viewDidLoad()
         
         setup()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        updateCurrencyButtonTitle()
     }
     
     // MARK: - Private methods
@@ -48,10 +39,6 @@ class WalletViewController: BaseTabmanViewController<WalletTabmanViewModel> {
         if viewModel.walletType == .all {
             moreBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_more_icon"), style: .done, target: self, action: #selector(moreBarButtonAction))
             navigationItem.rightBarButtonItem = moreBarButtonItem
-            
-            navigationTitleView = NavigationTitleView(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
-            
-            addCurrencyTitleButton(CurrencyDelegateManager())
         }
     }
     
@@ -67,53 +54,6 @@ class WalletViewController: BaseTabmanViewController<WalletTabmanViewModel> {
         bottomSheetController.initializeHeight = 120
         bottomSheetController.addContentsView(walletMoreButtonView)
         bottomSheetController.present()
-    }
-    
-    @objc private func currencyButtonAction() {
-        currencyDelegateManager?.updateSelectedIndex()
-        bottomSheetController = BottomSheetController()
-        bottomSheetController.initializeHeight = 250.0
-        
-        bottomSheetController.addNavigationBar("Preferred currency")
-        
-        bottomSheetController.addTableView { [weak self] tableView in
-            currencyDelegateManager?.tableView = tableView
-            tableView.separatorStyle = .none
-            
-            guard let currencyDelegateManager = self?.currencyDelegateManager else { return }
-            currencyDelegateManager.loadCurrencies()
-            tableView.registerNibs(for: currencyDelegateManager.cellModelsForRegistration)
-            tableView.delegate = currencyDelegateManager
-            tableView.dataSource = currencyDelegateManager
-        }
-        
-        bottomSheetController.present()
-    }
-}
-
-//Currency button
-extension WalletViewController {
-    private func addCurrencyTitleButton(_ currencyDelegateManager: CurrencyDelegateManager?) {
-        navigationTitleView?.currencyTitleButton.addTarget(self, action: #selector(currencyButtonAction), for: .touchUpInside)
-        self.currencyDelegateManager = currencyDelegateManager
-        currencyDelegateManager?.currencyDelegate = self
-        
-        navigationItem.titleView = navigationTitleView
-    }
-    
-    private func updateCurrencyButtonTitle() {
-        let selectedCurrency = getSelectedCurrency()
-        navigationTitleView?.currencyTitleButton.setTitle(selectedCurrency, for: .normal)
-        navigationTitleView?.currencyTitleButton.sizeToFit()
-    }
-}
-
-extension WalletViewController: CurrencyDelegateManagerDelegate {
-    func didSelectCurrency(at indexPath: IndexPath) {
-        updateCurrencyButtonTitle()
-        viewModel.reloadDetails()
-        
-        bottomSheetController.dismiss()
     }
 }
 

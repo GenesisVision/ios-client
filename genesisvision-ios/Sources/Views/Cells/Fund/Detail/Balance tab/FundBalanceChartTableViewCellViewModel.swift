@@ -19,20 +19,15 @@ extension FundBalanceChartTableViewCellViewModel: CellViewModel {
         
         cell.chartViewProtocol = chartViewProtocol
         
-        if let amountValue = fundBalanceChart.gvtBalance {
+        if let amountValue = fundBalanceChart.balance {
             cell.amountValueLabel.text = amountValue.rounded(with: .gvt).toString() + " \(Constants.gvtString)"
         } else {
             cell.amountValueLabel.isHidden = true
         }
+
+        cell.amountCurrencyLabel.isHidden = true
         
-        if let amountCurrency = fundBalanceChart.usdBalance {
-            let currencyType: CurrencyType = .usd
-            cell.amountCurrencyLabel.text = amountCurrency.rounded(with: currencyType).toString() + " " + currencyType.rawValue
-        } else {
-            cell.amountCurrencyLabel.isHidden = true
-        }
-        
-        if let balanceChartData = fundBalanceChart.balanceChart, balanceChartData.count > 0 {
+        if let balanceChartData = fundBalanceChart.chart, balanceChartData.count > 0 {
             cell.chartViewHeightConstraint.constant = 200.0
             cell.chartView.setup(fundBalanceChartData: balanceChartData, dateRangeModel: chartViewProtocol?.filterDateRangeModel)
             cell.chartView.isHidden = false

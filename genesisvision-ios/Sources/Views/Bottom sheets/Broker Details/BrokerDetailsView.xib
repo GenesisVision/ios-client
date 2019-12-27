@@ -74,11 +74,11 @@
                         <outlet property="titleLabel" destination="W6o-2S-oVS" id="51c-OI-x5b"/>
                     </connections>
                 </stackView>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J06-EE-htb">
-                    <rect key="frame" x="20" y="74" width="335" height="526"/>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J06-EE-htb">
+                    <rect key="frame" x="0.0" y="74" width="375" height="526"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="2JT-f6-nUD" customClass="BrokerDetailsStackView" customModule="GV_DEBUG" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="20" width="335" height="386"/>
+                            <rect key="frame" x="20" y="20" width="335" height="386"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="BDi-Bg-I18" customClass="DefaultStackView" customModule="GV_DEBUG" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="335" height="46"/>
@@ -233,11 +233,11 @@
                         </stackView>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="2JT-f6-nUD" firstAttribute="width" secondItem="J06-EE-htb" secondAttribute="width" id="TwR-Dh-dAG"/>
-                        <constraint firstItem="2JT-f6-nUD" firstAttribute="leading" secondItem="J06-EE-htb" secondAttribute="leading" id="W14-EZ-kdx"/>
+                        <constraint firstItem="2JT-f6-nUD" firstAttribute="width" secondItem="J06-EE-htb" secondAttribute="width" constant="-40" id="TwR-Dh-dAG"/>
+                        <constraint firstItem="2JT-f6-nUD" firstAttribute="leading" secondItem="J06-EE-htb" secondAttribute="leading" constant="20" id="W14-EZ-kdx"/>
                         <constraint firstItem="2JT-f6-nUD" firstAttribute="top" secondItem="J06-EE-htb" secondAttribute="top" constant="20" id="eMm-gG-5st"/>
                         <constraint firstAttribute="bottom" secondItem="2JT-f6-nUD" secondAttribute="bottom" id="qkZ-Re-lbe"/>
-                        <constraint firstAttribute="trailing" secondItem="2JT-f6-nUD" secondAttribute="trailing" id="vg0-Gg-CgL"/>
+                        <constraint firstAttribute="trailing" secondItem="2JT-f6-nUD" secondAttribute="trailing" constant="20" id="vg0-Gg-CgL"/>
                     </constraints>
                 </scrollView>
             </subviews>
@@ -246,10 +246,10 @@
                 <constraint firstItem="cg6-tF-Ojc" firstAttribute="top" secondItem="qHw-oO-uQZ" secondAttribute="top" constant="12" id="6Zl-mx-VHY"/>
                 <constraint firstItem="PWX-3e-Ilp" firstAttribute="trailing" secondItem="cg6-tF-Ojc" secondAttribute="trailing" constant="20" id="I5n-oW-Nse"/>
                 <constraint firstItem="PWX-3e-Ilp" firstAttribute="bottom" secondItem="J06-EE-htb" secondAttribute="bottom" id="eMr-w6-hYA"/>
-                <constraint firstItem="J06-EE-htb" firstAttribute="leading" secondItem="PWX-3e-Ilp" secondAttribute="leading" constant="20" id="kdZ-Rl-qfL"/>
+                <constraint firstItem="J06-EE-htb" firstAttribute="leading" secondItem="PWX-3e-Ilp" secondAttribute="leading" id="kdZ-Rl-qfL"/>
                 <constraint firstItem="cg6-tF-Ojc" firstAttribute="leading" secondItem="PWX-3e-Ilp" secondAttribute="leading" constant="20" id="lvm-5A-y0F"/>
                 <constraint firstItem="J06-EE-htb" firstAttribute="top" secondItem="cg6-tF-Ojc" secondAttribute="bottom" id="mTI-B7-u6b"/>
-                <constraint firstItem="PWX-3e-Ilp" firstAttribute="trailing" secondItem="J06-EE-htb" secondAttribute="trailing" constant="20" id="yfk-xL-JbF"/>
+                <constraint firstItem="PWX-3e-Ilp" firstAttribute="trailing" secondItem="J06-EE-htb" secondAttribute="trailing" id="yfk-xL-JbF"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="PWX-3e-Ilp"/>

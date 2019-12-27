@@ -241,24 +241,24 @@ extension DashboardFundListViewModel {
     
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [DashboardFundTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
 
-        DashboardDataProvider.getFundList(filterModel, skip: skip, take: take, completion: { [weak self] (fundList) in
-            guard let fundList = fundList else { return completionError(.failure(errorType: .apiError(message: nil))) }
-            
-            var viewModels = [DashboardFundTableViewCellViewModel]()
-            
-            let totalCount = fundList.total ?? 0
-            
-            fundList.funds?.forEach({ (fund) in
-                if let router = self?.router as? DashboardRouter {
-                    let dashboardTableViewCellModel = DashboardFundTableViewCellViewModel(fund: fund, reloadDataProtocol: router.fundListViewController, delegate:
-                        router.fundListViewController)
-                    viewModels.append(dashboardTableViewCellModel)
-                }
-            })
-            
-            completionSuccess(totalCount, viewModels)
-            completionError(.success)
-            }, errorCompletion: completionError)
+//        DashboardDataProvider.getFundList(filterModel, skip: skip, take: take, completion: { [weak self] (fundList) in
+//            guard let fundList = fundList else { return completionError(.failure(errorType: .apiError(message: nil))) }
+//
+//            var viewModels = [DashboardFundTableViewCellViewModel]()
+//
+//            let totalCount = fundList.total ?? 0
+//
+//            fundList.funds?.forEach({ (fund) in
+//                if let router = self?.router as? DashboardRouter {
+//                    let dashboardTableViewCellModel = DashboardFundTableViewCellViewModel(fund: fund, reloadDataProtocol: router.fundListViewController, delegate:
+//                        router.fundListViewController)
+//                    viewModels.append(dashboardTableViewCellModel)
+//                }
+//            })
+//
+//            completionSuccess(totalCount, viewModels)
+//            completionError(.success)
+//            }, errorCompletion: completionError)
     }
 }
 

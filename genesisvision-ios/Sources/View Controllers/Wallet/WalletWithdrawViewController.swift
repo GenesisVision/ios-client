@@ -264,7 +264,7 @@ class WalletWithdrawViewController: BaseViewController {
             let address = addressTextField.text,
             let twoFactorCode = twoFactorTextField.text,
             let selectedWallet = viewModel.selectedWallet,
-            let currency = CreateWithdrawalRequestModel.Currency(rawValue: selectedWallet.currency?.rawValue ?? "")
+            let currency = Currency(rawValue: selectedWallet.currency?.rawValue ?? "")
             else { return showErrorHUD(subtitle: "Enter withdraw amount and data, please") }
         
         showProgressHUD()

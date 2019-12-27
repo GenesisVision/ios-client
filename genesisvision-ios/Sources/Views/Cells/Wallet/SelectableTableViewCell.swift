@@ -11,7 +11,11 @@ import UIKit
 class SelectableTableViewCell: UITableViewCell {
     
     // MARK: - Variables
-    @IBOutlet weak var logoImageView: UIImageView!
+    @IBOutlet weak var logoImageView: UIImageView! {
+        didSet {
+            logoImageView.isHidden = true
+        }
+    }
     @IBOutlet weak var titleLabel: TitleLabel! {
         didSet {
             titleLabel.isHidden = true
@@ -46,40 +50,50 @@ class SelectableTableViewCell: UITableViewCell {
     }
     
     // MARK: - Public methods
-    func configure(_ wallet: WalletWithdrawalInfo? = nil, selected: Bool) {
-        setTitle(wallet?.description)
-        setSubtitle(wallet?.currency?.rawValue)
-        setImage(wallet?.logo)
+    func configure(_ model: WalletWithdrawalInfo? = nil, selected: Bool) {
+        setTitle(model?.description)
+        setSubtitle(model?.currency?.rawValue)
+        setImage(model?.logo)
         
         changeSelected(selected)
     }
     
-    func configure(_ wallet: WalletData? = nil, selected: Bool) {
-        setTitle(wallet?.title)
-        setSubtitle(wallet?.currency?.rawValue)
-        setImage(wallet?.logo)
+    func configure(_ model: WalletData? = nil, selected: Bool) {
+        setTitle(model?.title)
+        setSubtitle(model?.currency?.rawValue)
+        setImage(model?.logo)
         
         changeSelected(selected)
     }
     
-    func configure(_ account: CopyTradingAccountInfo? = nil, selected: Bool) {
-        setTitle(account?.title)
-        setSubtitle(account?.currency?.rawValue)
-        setImage(account?.logo)
+    func configure(_ model: TradingAccountDetails? = nil, selected: Bool) {
+        setTitle(model?.login)
+        setSubtitle(model?.currency?.rawValue)
+        setImage(model?.asset?.logo)
 
         changeSelected(selected)
     }
     
-    func configure(_ title: String? = nil, selected: Bool) {
-        setTitle(title)
-        setImage(nil)
+    func configure(_ model: Broker? = nil, selected: Bool) {
+        setTitle(model?.name)
+
+        changeSelected(selected)
+    }
+    
+    func configure(_ model: String? = nil, selected: Bool) {
+        setTitle(model)
         
         changeSelected(selected)
     }
 
-    func configure(_ title: Int? = nil, selected: Bool) {
-        setTitle(title?.toString())
-        setImage(nil)
+    func configure(_ model: Int? = nil, selected: Bool) {
+        setTitle(model?.toString())
+        
+        changeSelected(selected)
+    }
+    
+    func configure(_ model: BrokerAccountType? = nil, selected: Bool) {
+        setTitle(model?.name)
         
         changeSelected(selected)
     }

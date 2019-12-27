@@ -11,31 +11,18 @@ import Foundation
 
 open class OrderModel: Codable {
 
-    public enum Direction: String, Codable { 
-        case buy = "Buy"
-        case sell = "Sell"
-        case balance = "Balance"
-        case credit = "Credit"
-        case undefined = "Undefined"
-        case manualBalancing = "ManualBalancing"
-    }
-    public enum Entry: String, Codable { 
-        case _in = "In"
-        case out = "Out"
-        case _inout = "InOut"
-        case outBy = "OutBy"
-    }
     public var id: UUID?
     public var login: String?
     public var ticket: String?
     public var symbol: String?
     public var volume: Double?
     public var profit: Double?
-    public var direction: Direction?
+    public var profitCurrency: String?
+    public var direction: TradeDirectionType?
     public var date: Date?
     public var price: Double?
     public var priceCurrent: Double?
-    public var entry: Entry?
+    public var entry: TradeEntryType?
     /** Volume in account currency. Only filled when trade have zero commission (for paying fees with GVT) */
     public var baseVolume: Double?
     /** Huobi: sell - quote currency (right), buy - base symbol currency (left) */
@@ -47,16 +34,18 @@ open class OrderModel: Codable {
     public var showOriginalCommission: Bool?
     /** For signals */
     public var signalData: OrderModelSignalData?
+    public var externalSignalAccountId: UUID?
 
 
     
-    public init(id: UUID?, login: String?, ticket: String?, symbol: String?, volume: Double?, profit: Double?, direction: Direction?, date: Date?, price: Double?, priceCurrent: Double?, entry: Entry?, baseVolume: Double?, originalCommission: Double?, originalCommissionCurrency: String?, commission: Double?, swap: Double?, showOriginalCommission: Bool?, signalData: OrderModelSignalData?) {
+    public init(id: UUID?, login: String?, ticket: String?, symbol: String?, volume: Double?, profit: Double?, profitCurrency: String?, direction: TradeDirectionType?, date: Date?, price: Double?, priceCurrent: Double?, entry: TradeEntryType?, baseVolume: Double?, originalCommission: Double?, originalCommissionCurrency: String?, commission: Double?, swap: Double?, showOriginalCommission: Bool?, signalData: OrderModelSignalData?, externalSignalAccountId: UUID?) {
         self.id = id
         self.login = login
         self.ticket = ticket
         self.symbol = symbol
         self.volume = volume
         self.profit = profit
+        self.profitCurrency = profitCurrency
         self.direction = direction
         self.date = date
         self.price = price
@@ -69,6 +58,7 @@ open class OrderModel: Codable {
         self.swap = swap
         self.showOriginalCommission = showOriginalCommission
         self.signalData = signalData
+        self.externalSignalAccountId = externalSignalAccountId
     }
     
 
@@ -84,6 +74,7 @@ open class OrderModel: Codable {
         try container.encodeIfPresent(symbol, forKey: "symbol")
         try container.encodeIfPresent(volume, forKey: "volume")
         try container.encodeIfPresent(profit, forKey: "profit")
+        try container.encodeIfPresent(profitCurrency, forKey: "profitCurrency")
         try container.encodeIfPresent(direction, forKey: "direction")
         try container.encodeIfPresent(date, forKey: "date")
         try container.encodeIfPresent(price, forKey: "price")
@@ -96,6 +87,7 @@ open class OrderModel: Codable {
         try container.encodeIfPresent(swap, forKey: "swap")
         try container.encodeIfPresent(showOriginalCommission, forKey: "showOriginalCommission")
         try container.encodeIfPresent(signalData, forKey: "signalData")
+        try container.encodeIfPresent(externalSignalAccountId, forKey: "externalSignalAccountId")
     }
 
     // Decodable protocol methods
@@ -109,11 +101,12 @@ open class OrderModel: Codable {
         symbol = try container.decodeIfPresent(String.self, forKey: "symbol")
         volume = try container.decodeIfPresent(Double.self, forKey: "volume")
         profit = try container.decodeIfPresent(Double.self, forKey: "profit")
-        direction = try container.decodeIfPresent(Direction.self, forKey: "direction")
+        profitCurrency = try container.decodeIfPresent(String.self, forKey: "profitCurrency")
+        direction = try container.decodeIfPresent(TradeDirectionType.self, forKey: "direction")
         date = try container.decodeIfPresent(Date.self, forKey: "date")
         price = try container.decodeIfPresent(Double.self, forKey: "price")
         priceCurrent = try container.decodeIfPresent(Double.self, forKey: "priceCurrent")
-        entry = try container.decodeIfPresent(Entry.self, forKey: "entry")
+        entry = try container.decodeIfPresent(TradeEntryType.self, forKey: "entry")
         baseVolume = try container.decodeIfPresent(Double.self, forKey: "baseVolume")
         originalCommission = try container.decodeIfPresent(Double.self, forKey: "originalCommission")
         originalCommissionCurrency = try container.decodeIfPresent(String.self, forKey: "originalCommissionCurrency")
@@ -121,6 +114,7 @@ open class OrderModel: Codable {
         swap = try container.decodeIfPresent(Double.self, forKey: "swap")
         showOriginalCommission = try container.decodeIfPresent(Bool.self, forKey: "showOriginalCommission")
         signalData = try container.decodeIfPresent(OrderModelSignalData.self, forKey: "signalData")
+        externalSignalAccountId = try container.decodeIfPresent(UUID.self, forKey: "externalSignalAccountId")
     }
 }
 

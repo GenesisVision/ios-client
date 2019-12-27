@@ -11,25 +11,15 @@ import Foundation
 
 open class SocialLinkViewModel: Codable {
 
-    public enum ModelType: String, Codable { 
-        case twitter = "Twitter"
-        case telegram = "Telegram"
-        case facebook = "Facebook"
-        case youtube = "Youtube"
-        case weChat = "WeChat"
-        case email = "Email"
-        case linkedIn = "LinkedIn"
-        case undefined = "Undefined"
-    }
     public var url: String?
     public var logo: String?
     public var name: String?
     public var value: String?
-    public var type: ModelType?
+    public var type: SocialLinkType?
 
 
     
-    public init(url: String?, logo: String?, name: String?, value: String?, type: ModelType?) {
+    public init(url: String?, logo: String?, name: String?, value: String?, type: SocialLinkType?) {
         self.url = url
         self.logo = logo
         self.name = name
@@ -60,7 +50,7 @@ open class SocialLinkViewModel: Codable {
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
         name = try container.decodeIfPresent(String.self, forKey: "name")
         value = try container.decodeIfPresent(String.self, forKey: "value")
-        type = try container.decodeIfPresent(ModelType.self, forKey: "type")
+        type = try container.decodeIfPresent(SocialLinkType.self, forKey: "type")
     }
 }
 

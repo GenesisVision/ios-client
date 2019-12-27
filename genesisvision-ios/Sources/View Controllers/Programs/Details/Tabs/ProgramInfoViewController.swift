@@ -69,19 +69,19 @@ class ProgramInfoViewController: BaseViewControllerWithTableView {
     }
     
     // MARK: - Public methods
-    func updateDetails(with programDetailsFull: ProgramDetailsFull) {
+    func updateDetails(with programDetailsFull: ProgramFollowDetailsFull) {
         viewModel.updateDetails(with: programDetailsFull)
         reloadData()
     }
     
-    func showRequests(_ programRequests: ProgramRequests?) {
+    func showRequests(_ requests: ItemsViewModelAssetInvestmentRequest?) {
         bottomSheetController = BottomSheetController()
         bottomSheetController.initializeHeight = 300.0
         
         bottomSheetController.addNavigationBar("In requests")
         viewModel.inRequestsDelegateManager.inRequestsDelegate = self
         viewModel.inRequestsDelegateManager.requestSelectable = false
-        viewModel.inRequestsDelegateManager.programRequests = programRequests
+        viewModel.inRequestsDelegateManager.requests = requests
         
         bottomSheetController.addTableView { [weak self] tableView in
             tableView.registerNibs(for: viewModel.inRequestsDelegateManager.inRequestsCellModelsForRegistration)

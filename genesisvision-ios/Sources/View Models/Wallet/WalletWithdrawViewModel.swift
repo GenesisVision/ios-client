@@ -23,7 +23,7 @@ final class WalletWithdrawViewModel {
 
     private var router: WalletWithdrawRouter!
     
-    var selectedCurrency: WalletWithdrawalInfo.Currency = .gvt
+    var selectedCurrency: Currency = .gvt
     var walletCurrencyDelegateManager: WalletCurrencyDelegateManager?
     
     // MARK: - Init
@@ -34,7 +34,7 @@ final class WalletWithdrawViewModel {
         setup(currency)
     }
     
-    private func updateSelectedCurrency(_ selectedCurrency: WalletWithdrawalInfo.Currency) {
+    private func updateSelectedCurrency(_ selectedCurrency: Currency) {
         self.selectedWallet = withdrawalSummary?.wallets?.first(where: { $0.currency == selectedCurrency })
         if let wallets = withdrawalSummary?.wallets {
             self.walletCurrencyDelegateManager = WalletCurrencyDelegateManager(wallets)
@@ -42,7 +42,7 @@ final class WalletWithdrawViewModel {
     }
     
     private func setup(_ currency: CurrencyType) {
-        if let selectedCurrency = WalletWithdrawalInfo.Currency(rawValue: currency.rawValue) {
+        if let selectedCurrency = Currency(rawValue: currency.rawValue) {
             self.selectedCurrency = selectedCurrency
             updateSelectedCurrency(selectedCurrency)
         }
@@ -67,7 +67,7 @@ final class WalletWithdrawViewModel {
     }
     
     // MARK: - Navigation
-    func withdraw(with amount: Double, address: String, currency: CreateWithdrawalRequestModel.Currency, twoFactorCode: String, completion: @escaping CompletionBlock) {
+    func withdraw(with amount: Double, address: String, currency: Currency, twoFactorCode: String, completion: @escaping CompletionBlock) {
         WalletDataProvider.createWithdrawalRequest(with: amount, address: address, currency: currency, twoFactorCode: twoFactorCode, completion: completion)
     }
     

@@ -16,7 +16,7 @@ class ManagerTabmanViewController: BaseTabmanViewController<ManagerTabmanViewMod
     }
     
     // MARK: - Public Methods
-    func setup(_ managerProfileDetails: ManagerProfileDetails?) {
+    func setup(_ managerProfileDetails: PublicProfile?) {
         viewModel.setup(managerProfileDetails)
     }
 }

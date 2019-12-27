@@ -11,11 +11,11 @@ import Foundation
 final class ProgramViewModel {
     // MARK: - Variables
     var programId: String!
-    var programDetailsFull: ProgramDetailsFull?
+    var programDetailsFull: ProgramFollowDetailsFull?
     weak var reloadDataProtocol: ReloadDataProtocol?
     
     var isFavorite: Bool {
-        return programDetailsFull?.personalProgramDetails?.isFavorite ?? false
+        return programDetailsFull?.programDetails?.personalDetails?.isFavorite ?? false
     }
     
     var router: ProgramRouter!
@@ -35,11 +35,11 @@ final class ProgramViewModel {
     }
     
     func showNotificationSettings() {
-        router.show(routeType: .notificationSettings(assetId: programId, title: programDetailsFull?.title ?? "Program Settings"))
+        router.show(routeType: .notificationSettings(assetId: programId, title: programDetailsFull?.publicInfo?.title ?? "Program Settings"))
     }
     
     func showAboutLevels() {
-        guard let rawValue = programDetailsFull?.currency?.rawValue, let currency = PlatformAPI.Currency_v10PlatformLevelsGet(rawValue: rawValue) else {
+        guard let rawValue = programDetailsFull?.tradingAccountInfo?.currency?.rawValue, let currency = CurrencyType(rawValue: rawValue) else {
             return router.show(routeType: .aboutLevels(currency: .gvt))
         }
         
@@ -47,8 +47,7 @@ final class ProgramViewModel {
     }
     
     func fetch(completion: @escaping CompletionBlock) {
-        let сurrency = ProgramsAPI.CurrencySecondary_v10ProgramsByIdGet(rawValue: getSelectedCurrency())
-        ProgramsDataProvider.get(programId: programId, currencySecondary: сurrency, completion: { [weak self] (viewModel) in
+        ProgramsDataProvider.get(programId, completion: { [weak self] (viewModel) in
             guard let viewModel = viewModel else { return }
             self?.programDetailsFull = viewModel
             completion(.success)
@@ -59,12 +58,12 @@ final class ProgramViewModel {
     func changeFavorite(value: Bool? = nil, request: Bool = false, completion: @escaping CompletionBlock) {
         
         guard request else {
-            programDetailsFull?.personalProgramDetails?.isFavorite = value
+            programDetailsFull?.programDetails?.personalDetails?.isFavorite = value
             return completion(.success)
         }
         
         guard
-            let personalProgramDetails = programDetailsFull?.personalProgramDetails,
+            let personalProgramDetails = programDetailsFull?.programDetails?.personalDetails,
             let isFavorite = personalProgramDetails.isFavorite,
             let programId = programId
             else { return completion(.failure(errorType: .apiError(message: nil))) }
@@ -72,10 +71,10 @@ final class ProgramViewModel {
         ProgramsDataProvider.favorites(isFavorite: isFavorite, assetId: programId) { [weak self] (result) in
             switch result {
             case .success:
-                self?.programDetailsFull?.personalProgramDetails?.isFavorite = !isFavorite
+                self?.programDetailsFull?.programDetails?.personalDetails?.isFavorite = !isFavorite
             case .failure(let errorType):
                 print(errorType)
-                self?.programDetailsFull?.personalProgramDetails?.isFavorite = isFavorite
+                self?.programDetailsFull?.programDetails?.personalDetails?.isFavorite = isFavorite
             }
             
             completion(result)

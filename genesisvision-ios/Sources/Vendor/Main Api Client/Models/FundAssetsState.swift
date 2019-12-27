@@ -11,16 +11,16 @@ import Foundation
 
 open class FundAssetsState: Codable {
 
-    public var dateFrom: Date?
+    public var date: Int64?
+    public var value: Double?
     public var assets: [FundAssetPartWithIcon]?
-    public var otherPercent: Double?
 
 
     
-    public init(dateFrom: Date?, assets: [FundAssetPartWithIcon]?, otherPercent: Double?) {
-        self.dateFrom = dateFrom
+    public init(date: Int64?, value: Double?, assets: [FundAssetPartWithIcon]?) {
+        self.date = date
+        self.value = value
         self.assets = assets
-        self.otherPercent = otherPercent
     }
     
 
@@ -30,9 +30,9 @@ open class FundAssetsState: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(dateFrom, forKey: "dateFrom")
+        try container.encodeIfPresent(date, forKey: "date")
+        try container.encodeIfPresent(value, forKey: "value")
         try container.encodeIfPresent(assets, forKey: "assets")
-        try container.encodeIfPresent(otherPercent, forKey: "otherPercent")
     }
 
     // Decodable protocol methods
@@ -40,9 +40,9 @@ open class FundAssetsState: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        dateFrom = try container.decodeIfPresent(Date.self, forKey: "dateFrom")
+        date = try container.decodeIfPresent(Int64.self, forKey: "date")
+        value = try container.decodeIfPresent(Double.self, forKey: "value")
         assets = try container.decodeIfPresent([FundAssetPartWithIcon].self, forKey: "assets")
-        otherPercent = try container.decodeIfPresent(Double.self, forKey: "otherPercent")
     }
 }
 

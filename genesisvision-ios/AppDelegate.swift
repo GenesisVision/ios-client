@@ -114,11 +114,11 @@ extension AppDelegate {
     
     private func setupFirstScreen() {
         window = UIWindow(frame: UIScreen.main.bounds)
-        let vc = NewDashboardViewController()
-        let navController = BaseNavigationController(rootViewController: vc)
-        window?.rootViewController = navController
-//        let welcomeViewController = WelcomeViewController()
-//        window?.rootViewController = welcomeViewController
+//        let vc = NewDashboardViewController()
+//        let navController = BaseNavigationController(rootViewController: vc)
+//        window?.rootViewController = navController
+        let welcomeViewController = WelcomeViewController()
+        window?.rootViewController = welcomeViewController
         window?.makeKeyAndVisible()
     }
     

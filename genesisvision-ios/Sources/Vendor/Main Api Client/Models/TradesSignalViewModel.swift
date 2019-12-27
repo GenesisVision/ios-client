@@ -13,15 +13,15 @@ open class TradesSignalViewModel: Codable {
 
     public var showSwaps: Bool?
     public var showTickets: Bool?
-    public var trades: [OrderSignalModel]?
+    public var items: [OrderSignalModel]?
     public var total: Int?
 
 
     
-    public init(showSwaps: Bool?, showTickets: Bool?, trades: [OrderSignalModel]?, total: Int?) {
+    public init(showSwaps: Bool?, showTickets: Bool?, items: [OrderSignalModel]?, total: Int?) {
         self.showSwaps = showSwaps
         self.showTickets = showTickets
-        self.trades = trades
+        self.items = items
         self.total = total
     }
     
@@ -34,7 +34,7 @@ open class TradesSignalViewModel: Codable {
 
         try container.encodeIfPresent(showSwaps, forKey: "showSwaps")
         try container.encodeIfPresent(showTickets, forKey: "showTickets")
-        try container.encodeIfPresent(trades, forKey: "trades")
+        try container.encodeIfPresent(items, forKey: "items")
         try container.encodeIfPresent(total, forKey: "total")
     }
 
@@ -45,7 +45,7 @@ open class TradesSignalViewModel: Codable {
 
         showSwaps = try container.decodeIfPresent(Bool.self, forKey: "showSwaps")
         showTickets = try container.decodeIfPresent(Bool.self, forKey: "showTickets")
-        trades = try container.decodeIfPresent([OrderSignalModel].self, forKey: "trades")
+        items = try container.decodeIfPresent([OrderSignalModel].self, forKey: "items")
         total = try container.decodeIfPresent(Int.self, forKey: "total")
     }
 }

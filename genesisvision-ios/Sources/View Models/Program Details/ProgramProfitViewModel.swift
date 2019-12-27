@@ -27,8 +27,8 @@ final class ProgramProfitViewModel {
     var dateFrom: Date?
     var dateTo: Date?
     var maxPointCount: Int = ApiKeys.maxPoint
-    
-    private var programProfitChart: ProgramProfitChart?
+    var programCurrency: CurrencyType?
+    private var programProfitChart: ProgramProfitPercentCharts?
     
     private var sections: [SectionType] = [.chart, .statistics]
     
@@ -44,11 +44,7 @@ final class ProgramProfitViewModel {
     }
     
     // MARK: - Public methods
-    func selectChartSimple(_ date: Date) {
-        if let result = programProfitChart?.equityChart?.first(where: { $0.date == date }) {
-            print("selectChartSimple")
-            print(result)
-        }
+    func selectSimpleChartPoint(_ date: Date) {
     }
     
     func hideHeader(value: Bool = true) {
@@ -107,9 +103,13 @@ extension ProgramProfitViewModel {
             self.programProfitChartTableViewCellViewModel = ProgramProfitChartTableViewCellViewModel(programProfitChart: programProfitChart, chartViewProtocol: self.chartViewProtocol)
             return programProfitChartTableViewCellViewModel
         case .statistics:
-            self.programProfitStatisticTableViewCellViewModel = ProgramProfitStatisticTableViewCellViewModel(programProfitChart: programProfitChart)
-            return programProfitStatisticTableViewCellViewModel
+            if let programCurrency = programCurrency, let statistic = programProfitChart.statistic {
+                self.programProfitStatisticTableViewCellViewModel = ProgramProfitStatisticTableViewCellViewModel(currency: programCurrency, statistic: statistic)
+                return programProfitStatisticTableViewCellViewModel
+            }
         }
+        
+        return nil
     }
     
     // MARK: - Private methods
@@ -117,7 +117,7 @@ extension ProgramProfitViewModel {
         switch dataType {
         case .api:
             guard let programId = programId else { return completion(.failure(errorType: .apiError(message: nil))) }
-            ProgramsDataProvider.getProfitChart(with: programId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, completion: { [weak self] (viewModel) in
+            ProgramsDataProvider.getProfitPercentCharts(with: programId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, completion: { [weak self] (viewModel) in
                 guard viewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completion)
                 }

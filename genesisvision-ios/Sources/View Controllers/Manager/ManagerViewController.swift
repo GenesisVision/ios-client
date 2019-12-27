@@ -98,9 +98,9 @@ class ManagerViewController: BaseViewController {
             
             switch result {
             case .success:
-                if let managerProfileDetails = self?.viewModel.managerProfileDetails {
-                    self?.detailsTabmanViewController?.setup(managerProfileDetails)
-                    self?.headerViewController?.configure(managerProfileDetails)
+                if let publicProfile = self?.viewModel.publicProfile {
+                    self?.detailsTabmanViewController?.setup(publicProfile)
+                    self?.headerViewController?.configure(publicProfile)
                 }
             default:
                 break

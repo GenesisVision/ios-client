@@ -6,7 +6,7 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 enum ListViewState {
     case list, listWithSignIn
@@ -17,7 +17,7 @@ final class ListViewModel: ListViewModelProtocol {
     
     var assetType: AssetType
     
-    var programListDelegateManager: ListDelegateManager<ListViewModel>!
+    var assetListDelegateManager: ListDelegateManager<ListViewModel>!
     
     // MARK: - Variables
     var title: String = ""
@@ -57,7 +57,7 @@ final class ListViewModel: ListViewModelProtocol {
         self.showFacets = showFacets
         self.assetType = assetType
         
-        programListDelegateManager = ListDelegateManager(with: self)
+        assetListDelegateManager = ListDelegateManager(with: self)
         
         state = isLogin() ? .list : .listWithSignIn
 
@@ -84,6 +84,10 @@ final class ListViewModel: ListViewModelProtocol {
             title = "Funds"
             
             NotificationCenter.default.addObserver(self, selector: #selector(fundFavoriteStateChangeNotification(notification:)), name: .fundFavoriteStateChange, object: nil)
+        case .follow:
+            title = "Follow"
+            
+            NotificationCenter.default.addObserver(self, selector: #selector(followFavoriteStateChangeNotification(notification:)), name: .followFavoriteStateChange, object: nil)
         default:
             break
         }
@@ -106,6 +110,8 @@ final class ListViewModel: ListViewModelProtocol {
             NotificationCenter.default.removeObserver(self, name: .programFavoriteStateChange, object: nil)
         case .fund:
             NotificationCenter.default.removeObserver(self, name: .fundFavoriteStateChange, object: nil)
+        case .follow:
+            NotificationCenter.default.removeObserver(self, name: .followFavoriteStateChange, object: nil)
         default:
             break
         }
@@ -119,37 +125,57 @@ final class ListViewModel: ListViewModelProtocol {
             sections.insert(.facetList, at: 0)
         }
         
-        var programFacets: [ProgramFacet] = []
-        var fundFacets: [FundFacet] = []
+        var programFacets: [AssetFacet] = []
+        var fundFacets: [AssetFacet] = []
+        var followFacets: [AssetFacet] = []
         
-        if isLogin() {
-            programFacets.insert(ProgramFacet(sorting: nil, id: nil, title: "Favorites", description: nil, logo: nil, url: nil, sortType: nil, timeframe: nil), at: 0)
-            fundFacets.insert(FundFacet(sorting: nil, id: nil, title: "Favorites", description: nil, logo: nil, url: nil, sortType: nil, timeframe: nil), at: 0)
-        }
+        let favoritesFaset = AssetFacet(id: nil, title: "Favorites", description: nil, logo: nil, url: nil, sortType: nil, timeframe: nil, sorting: nil)
         
         switch assetType {
         case .program:
-            if let programsFacets = PlatformManager.shared.platformInfo?.programsFacets {
-                programFacets.append(contentsOf: programsFacets)
-                updateProgramFacets(programFacets)
+            if isLogin() {
+                programFacets.insert(favoritesFaset, at: 0)
+            }
+            if let facets = PlatformManager.shared.platformInfo?.assetInfo?.programInfo?.facets {
+                programFacets.append(contentsOf: facets)
+                updateFacets(programFacets)
             } else {
                 PlatformManager.shared.getPlatformInfo { [weak self] (platformInfo) in
-                    if let programsFacets = PlatformManager.shared.platformInfo?.programsFacets {
-                        programFacets.append(contentsOf: programsFacets)
-                        self?.updateProgramFacets(programFacets)
+                    if let facets = PlatformManager.shared.platformInfo?.assetInfo?.programInfo?.facets {
+                        programFacets.append(contentsOf: facets)
+                        self?.updateFacets(programFacets)
                         self?.reloadDataProtocol?.didReloadData()
                     }
                 }
             }
         case .fund:
-            if let fundsFacets = PlatformManager.shared.platformInfo?.fundsFacets {
-                fundFacets.append(contentsOf: fundsFacets)
-                updateFundFacets(fundFacets)
+            if isLogin() {
+                fundFacets.insert(favoritesFaset, at: 0)
+            }
+            if let facets = PlatformManager.shared.platformInfo?.assetInfo?.fundInfo?.facets {
+                fundFacets.append(contentsOf: facets)
+                updateFacets(fundFacets)
             } else {
                 PlatformManager.shared.getPlatformInfo { [weak self] (platformInfo) in
-                    if let fundsFacets = PlatformManager.shared.platformInfo?.fundsFacets {
-                        fundFacets.append(contentsOf: fundsFacets)
-                        self?.updateFundFacets(fundFacets)
+                    if let facets = PlatformManager.shared.platformInfo?.assetInfo?.fundInfo?.facets {
+                        fundFacets.append(contentsOf: facets)
+                        self?.updateFacets(fundFacets)
+                        self?.reloadDataProtocol?.didReloadData()
+                    }
+                }
+            }
+        case .follow:
+            if isLogin() {
+                followFacets.insert(favoritesFaset, at: 0)
+            }
+            if let facets = PlatformManager.shared.platformInfo?.assetInfo?.followInfo?.facets {
+                followFacets.append(contentsOf: facets)
+                updateFacets(followFacets)
+            } else {
+                PlatformManager.shared.getPlatformInfo { [weak self] (platformInfo) in
+                    if let facets = PlatformManager.shared.platformInfo?.assetInfo?.followInfo?.facets {
+                        followFacets.append(contentsOf: facets)
+                        self?.updateFacets(followFacets)
                         self?.reloadDataProtocol?.didReloadData()
                     }
                 }
@@ -159,13 +185,8 @@ final class ListViewModel: ListViewModelProtocol {
         }
     }
     
-    private func updateProgramFacets(_ facets: [ProgramFacet]) {
-        let facetsViewModel = ProgramFacetsViewModel(withRouter: router, facets: facets, assetType: assetType)
-        facetsViewModels = [FacetsTableViewCellViewModel(facetsViewModel: facetsViewModel)]
-    }
-    
-    private func updateFundFacets(_ facets: [FundFacet]) {
-        let facetsViewModel = FundFacetsViewModel(withRouter: router, facets: facets, assetType: assetType)
+    private func updateFacets(_ facets: [AssetFacet]) {
+        let facetsViewModel = FacetsViewModel(withRouter: router, facets: facets, assetType: assetType)
         facetsViewModels = [FacetsTableViewCellViewModel(facetsViewModel: facetsViewModel)]
     }
     
@@ -176,6 +197,8 @@ final class ListViewModel: ListViewModelProtocol {
             return "There are no programs"
         case .fund:
             return "There are no funds"
+        case .follow:
+            return "There are no follows"
         default:
             return "There are no assets"
         }
@@ -191,6 +214,8 @@ final class ListViewModel: ListViewModelProtocol {
             changeFavoriteProgram(value: value, assetId: assetId, request: request, completion: completion)
         case .fund:
             changeFavoriteFund(value: value, assetId: assetId, request: request, completion: completion)
+        case .follow:
+            changeFavoriteFollow(value: value, assetId: assetId, request: request, completion: completion)
         default:
             break
         }
@@ -240,34 +265,72 @@ final class ListViewModel: ListViewModelProtocol {
         }
     }
     
-    func updateViewModels(_ assetList: ProgramsList?) {
+    func changeFavoriteFollow(value: Bool, assetId: String, request: Bool = false, completion: @escaping CompletionBlock) {
+        guard request else {
+            guard let model = model(at: assetId) as? FollowTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
+            model.asset.personalDetails?.isFavorite = value
+            completion(.success)
+            return
+        }
+
+        FollowsDataProvider.favorites(isFavorite: !value, assetId: assetId) { [weak self] (result) in
+            switch result {
+            case .success:
+                guard let model = self?.model(at: assetId) as? FollowTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
+                model.asset.personalDetails?.isFavorite = value
+                completion(.success)
+            case .failure(let errorType):
+                print(errorType)
+                completion(result)
+            }
+        }
+    }
+    
+    func updateViewModels(_ assetList: ItemsViewModelProgramDetailsListItem?) {
         guard let assetList = assetList else { return }
         
         var viewModels = [ProgramTableViewCellViewModel]()
         
         let totalCount = assetList.total ?? 0
         
-        assetList.programs?.forEach({ (asset) in
-            guard let programListRouter = self.router as? ListRouter else { return }
+        assetList.items?.forEach({ (asset) in
+            guard let router = self.router as? ListRouter else { return }
             
-            let viewModel = ProgramTableViewCellViewModel(asset: asset, isRating: filterModel.facetTitle == "MostReliable", delegate: programListRouter.currentController as? FavoriteStateChangeProtocol)
+            let viewModel = ProgramTableViewCellViewModel(asset: asset, delegate: router.currentController as? FavoriteStateChangeProtocol)
             viewModels.append(viewModel)
         })
 
         self.updateFetchedData(totalCount: totalCount, viewModels)
     }
     
-    func updateViewModels(_ assetList: FundsList?) {
+    func updateViewModels(_ assetList: ItemsViewModelFundDetailsListItem?) {
         guard let assetList = assetList else { return }
 
         var viewModels = [FundTableViewCellViewModel]()
         
         let totalCount = assetList.total ?? 0
         
-        assetList.funds?.forEach({ (asset) in
-            guard let fundListRouter = self.router as? ListRouter else { return }
+        assetList.items?.forEach({ (asset) in
+            guard let router = self.router as? ListRouter else { return }
             
-            let viewModel = FundTableViewCellViewModel(asset: asset, delegate: fundListRouter.currentController as? FavoriteStateChangeProtocol)
+            let viewModel = FundTableViewCellViewModel(asset: asset, delegate: router.currentController as? FavoriteStateChangeProtocol)
+            viewModels.append(viewModel)
+        })
+        
+        self.updateFetchedData(totalCount: totalCount, viewModels)
+    }
+    
+    func updateViewModels(_ assetList: ItemsViewModelFollowDetailsListItem?) {
+        guard let assetList = assetList else { return }
+
+        var viewModels = [FollowTableViewCellViewModel]()
+        
+        let totalCount = assetList.total ?? 0
+        
+        assetList.items?.forEach({ (asset) in
+            guard let router = self.router as? ListRouter else { return }
+            
+            let viewModel = FollowTableViewCellViewModel(asset: asset, delegate: router.currentController as? FavoriteStateChangeProtocol)
             viewModels.append(viewModel)
         })
         
@@ -289,6 +352,47 @@ final class ListViewModel: ListViewModelProtocol {
                 self?.reloadDataProtocol?.didReloadData()
             }
         }
+    }
+    
+    @objc private func followFavoriteStateChangeNotification(notification: Notification) {
+        if let isFavorite = notification.userInfo?["isFavorite"] as? Bool, let assetId = notification.userInfo?["followId"] as? String {
+            changeFavorite(value: isFavorite, assetId: assetId) { [weak self] (result) in
+                self?.reloadDataProtocol?.didReloadData()
+            }
+        }
+    }
+    
+    @available(iOS 13.0, *)
+    func getMenu(_ indexPath: IndexPath) -> UIMenu? {
+        let share = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { [weak self] action in
+            
+            guard let assetType = self?.assetType else { return }
+            
+            var url: String?
+            
+            switch self?.assetType {
+            case .program:
+                if let model = self?.model(at: indexPath) as? ProgramTableViewCellViewModel, let name = model.asset.url {
+                    url = getRoute(assetType, name: name)
+                }
+            case .fund:
+                if let model = self?.model(at: indexPath) as? FundTableViewCellViewModel, let name = model.asset.url {
+                    url = getRoute(assetType, name: name)
+                }
+            case .follow:
+                if let model = self?.model(at: indexPath) as? FollowTableViewCellViewModel, let name = model.asset.url {
+                    url = getRoute(assetType, name: name)
+                }
+            default:
+                break
+            }
+            
+            if let url = url {
+                self?.router.show(routeType: .share(url: url))
+            }
+        }
+        
+        return UIMenu(title: "", children: [share])
     }
 }
 
@@ -360,10 +464,10 @@ extension ListViewModel {
                 
                 totalCount = assetList.total ?? 0
                 
-                assetList.programs?.forEach({ (asset) in
+                assetList.items?.forEach({ (asset) in
                     guard let listRouter = self?.router as? ListRouter else { return completionError(.failure(errorType: .apiError(message: nil))) }
                     
-                    let programTableViewCellViewModel = ProgramTableViewCellViewModel(asset: asset, isRating: false, delegate: listRouter.currentController as? FavoriteStateChangeProtocol)
+                    let programTableViewCellViewModel = ProgramTableViewCellViewModel(asset: asset, delegate: listRouter.currentController as? FavoriteStateChangeProtocol)
                     viewModels.append(programTableViewCellViewModel)
                 })
                 
@@ -376,11 +480,27 @@ extension ListViewModel {
 
                 totalCount = assetList.total ?? 0
                 
-                assetList.funds?.forEach({ (asset) in
+                assetList.items?.forEach({ (asset) in
                     guard let listRouter = self?.router as? ListRouter else { return completionError(.failure(errorType: .apiError(message: nil))) }
                     
                     let fundTableViewCellViewModel = FundTableViewCellViewModel(asset: asset, delegate: listRouter.currentController as? FavoriteStateChangeProtocol)
                     viewModels.append(fundTableViewCellViewModel)
+                })
+                
+                completionSuccess(totalCount, viewModels)
+                completionError(.success)
+                }, errorCompletion: completionError)
+        case .follow:
+            FollowsDataProvider.get(filterModel, skip: skip, take: take, completion: { [weak self] (assetList) in
+                guard let assetList = assetList else { return completionError(.failure(errorType: .apiError(message: nil))) }
+
+                totalCount = assetList.total ?? 0
+                
+                assetList.items?.forEach({ (asset) in
+                    guard let listRouter = self?.router as? ListRouter else { return completionError(.failure(errorType: .apiError(message: nil))) }
+                    
+                    let followTableViewCellViewModel = FollowTableViewCellViewModel(asset: asset, delegate: listRouter.currentController as? FavoriteStateChangeProtocol)
+                    viewModels.append(followTableViewCellViewModel)
                 })
                 
                 completionSuccess(totalCount, viewModels)

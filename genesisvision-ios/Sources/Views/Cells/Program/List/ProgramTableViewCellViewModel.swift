@@ -9,14 +9,4 @@
 import Foundation
 import Kingfisher
 
-struct ProgramTableViewCellViewModel {
-    let asset: ProgramDetails
-    let isRating: Bool
-    weak var delegate: FavoriteStateChangeProtocol?
-}
 
-extension ProgramTableViewCellViewModel: CellViewModel {
-    func setup(on cell: ProgramTableViewCell) {
-        cell.configure(program: asset, delegate: delegate, isRating: isRating)
-    }
-}

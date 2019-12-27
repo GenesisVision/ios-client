@@ -13,15 +13,17 @@ open class TradesViewModel: Codable {
 
     public var showSwaps: Bool?
     public var showTickets: Bool?
-    public var trades: [OrderModel]?
+    public var tradesDelay: TradesDelay?
+    public var items: [OrderModel]?
     public var total: Int?
 
 
     
-    public init(showSwaps: Bool?, showTickets: Bool?, trades: [OrderModel]?, total: Int?) {
+    public init(showSwaps: Bool?, showTickets: Bool?, tradesDelay: TradesDelay?, items: [OrderModel]?, total: Int?) {
         self.showSwaps = showSwaps
         self.showTickets = showTickets
-        self.trades = trades
+        self.tradesDelay = tradesDelay
+        self.items = items
         self.total = total
     }
     
@@ -34,7 +36,8 @@ open class TradesViewModel: Codable {
 
         try container.encodeIfPresent(showSwaps, forKey: "showSwaps")
         try container.encodeIfPresent(showTickets, forKey: "showTickets")
-        try container.encodeIfPresent(trades, forKey: "trades")
+        try container.encodeIfPresent(tradesDelay, forKey: "tradesDelay")
+        try container.encodeIfPresent(items, forKey: "items")
         try container.encodeIfPresent(total, forKey: "total")
     }
 
@@ -45,7 +48,8 @@ open class TradesViewModel: Codable {
 
         showSwaps = try container.decodeIfPresent(Bool.self, forKey: "showSwaps")
         showTickets = try container.decodeIfPresent(Bool.self, forKey: "showTickets")
-        trades = try container.decodeIfPresent([OrderModel].self, forKey: "trades")
+        tradesDelay = try container.decodeIfPresent(TradesDelay.self, forKey: "tradesDelay")
+        items = try container.decodeIfPresent([OrderModel].self, forKey: "items")
         total = try container.decodeIfPresent(Int.self, forKey: "total")
     }
 }

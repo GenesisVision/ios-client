@@ -17,7 +17,7 @@ extension FundYourInvestmentTableViewCellViewModel: CellViewModel {
     func setup(on cell: YourInvestmentTableViewCell) {
         cell.withdrawButton.setEnabled(false)
         
-        if let canWithdraw = fundDetailsFull?.personalFundDetails?.canWithdraw {
+        if let canWithdraw = fundDetailsFull?.personalDetails?.canWithdraw {
             cell.withdrawButton.setEnabled(canWithdraw)
         }
         
@@ -29,7 +29,7 @@ extension FundYourInvestmentTableViewCellViewModel: CellViewModel {
         
         cell.statusButton.handleUserInteractionEnabled = false
         
-        if let status = fundDetailsFull?.personalFundDetails?.status {
+        if let status = fundDetailsFull?.personalDetails?.status {
             cell.statusButton.setTitle(status.rawValue, for: .normal)
             cell.statusButton.layoutSubviews()
         } else {
@@ -44,7 +44,7 @@ extension FundYourInvestmentTableViewCellViewModel: CellViewModel {
         
         let currency: CurrencyType = .gvt
         
-        if let value = fundDetailsFull?.personalFundDetails?.value {
+        if let value = fundDetailsFull?.personalDetails?.value {
             cell.investedTitleLabel.text = "value"
             cell.investedValueLabel.text = value.rounded(with: currency).toString() + " " + currency.rawValue
         } else {
@@ -52,7 +52,7 @@ extension FundYourInvestmentTableViewCellViewModel: CellViewModel {
             cell.investedValueLabel.isHidden = true
         }
         
-        if let value = fundDetailsFull?.personalFundDetails?.pendingInput, value > 0 {
+        if let value = fundDetailsFull?.personalDetails?.pendingInput, value > 0 {
             cell.valueTitleLabel.text = "pending input"
             cell.valueLabel.text = value.rounded(with: currency).toString() + " " + currency.rawValue
         } else {
@@ -60,7 +60,7 @@ extension FundYourInvestmentTableViewCellViewModel: CellViewModel {
             cell.valueLabel.isHidden = true
         }
         
-        if let value = fundDetailsFull?.personalFundDetails?.pendingOutput, value > 0 {
+        if let value = fundDetailsFull?.personalDetails?.pendingOutput, value > 0 {
             cell.profitTitleLabel.text = "pending output"
             cell.profitValueLabel.text = value.rounded(with: currency).toString() + " " + currency.rawValue
         } else {

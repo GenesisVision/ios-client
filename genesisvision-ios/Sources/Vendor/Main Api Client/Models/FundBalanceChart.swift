@@ -11,18 +11,16 @@ import Foundation
 
 open class FundBalanceChart: Codable {
 
-    public var gvtBalance: Double?
-    public var usdBalance: Double?
     public var balance: Double?
-    public var balanceChart: [BalanceChartElement]?
+    public var color: String?
+    public var chart: [BalanceChartPoint]?
 
 
     
-    public init(gvtBalance: Double?, usdBalance: Double?, balance: Double?, balanceChart: [BalanceChartElement]?) {
-        self.gvtBalance = gvtBalance
-        self.usdBalance = usdBalance
+    public init(balance: Double?, color: String?, chart: [BalanceChartPoint]?) {
         self.balance = balance
-        self.balanceChart = balanceChart
+        self.color = color
+        self.chart = chart
     }
     
 
@@ -32,10 +30,9 @@ open class FundBalanceChart: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(gvtBalance, forKey: "gvtBalance")
-        try container.encodeIfPresent(usdBalance, forKey: "usdBalance")
         try container.encodeIfPresent(balance, forKey: "balance")
-        try container.encodeIfPresent(balanceChart, forKey: "balanceChart")
+        try container.encodeIfPresent(color, forKey: "color")
+        try container.encodeIfPresent(chart, forKey: "chart")
     }
 
     // Decodable protocol methods
@@ -43,10 +40,9 @@ open class FundBalanceChart: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        gvtBalance = try container.decodeIfPresent(Double.self, forKey: "gvtBalance")
-        usdBalance = try container.decodeIfPresent(Double.self, forKey: "usdBalance")
         balance = try container.decodeIfPresent(Double.self, forKey: "balance")
-        balanceChart = try container.decodeIfPresent([BalanceChartElement].self, forKey: "balanceChart")
+        color = try container.decodeIfPresent(String.self, forKey: "color")
+        chart = try container.decodeIfPresent([BalanceChartPoint].self, forKey: "chart")
     }
 }
 

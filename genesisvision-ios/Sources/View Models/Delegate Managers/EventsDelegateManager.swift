@@ -74,14 +74,14 @@ final class EventsDelegateManager: NSObject, UICollectionViewDelegate, UICollect
         
         let yOffset = scrollView.contentOffset.y
         
-        if let assetsViewController = viewModel?.router.dashboardAssetsViewController,
-            let pageboyDataSource = assetsViewController.viewModel.dataSource {
-            for controller in pageboyDataSource.controllers {
-                if let vc = controller as? BaseViewControllerWithTableView {
-                    vc.tableView?.isScrollEnabled = yOffset > 0.0
-                }
-            }
-        }
+//        if let assetsViewController = viewModel?.router.dashboardAssetsViewController,
+//            let pageboyDataSource = assetsViewController.viewModel.dataSource {
+//            for controller in pageboyDataSource.controllers {
+//                if let vc = controller as? BaseViewControllerWithTableView {
+//                    vc.tableView?.isScrollEnabled = yOffset > 0.0
+//                }
+//            }
+//        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {

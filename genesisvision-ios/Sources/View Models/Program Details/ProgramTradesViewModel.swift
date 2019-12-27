@@ -171,13 +171,13 @@ extension ProgramTradesViewModel {
             dateFormatter.timeStyle = .none
             dateFormatter.locale = Bundle.main.locale
             
-            guard let dateStr = model.orderModel.date?.onlyDateFormatString, let date = dateFormatter.date(from: dateStr) else { return }
+            guard let dateStr = model.orderModel?.date?.onlyDateFormatString, let date = dateFormatter.date(from: dateStr) else { return }
             
             if sections.index(forKey: date) == nil {
                 sections[date] = [model]
             } else {
                 sections[date]!.append(model)
-                sections[date] = sections[date]!.sorted(by: { $0.orderModel.date!.compare($1.orderModel.date!) == .orderedDescending })
+                sections[date] = sections[date]!.sorted(by: { $0.orderModel?.date!.compare(($1.orderModel?.date!)!) == .orderedDescending })
             }
         }
         
@@ -201,7 +201,7 @@ extension ProgramTradesViewModel {
         let sorting = sortingDelegateManager.manager?.getSelectedSorting()
         
         if isOpenTrades {
-            ProgramsDataProvider.getTradesOpen(with: programId, sorting: sorting as? ProgramsAPI.Sorting_v10ProgramsByIdTradesOpenGet, skip: skip, take: take, completion: { [weak self] (tradesViewModel) in
+            ProgramsDataProvider.getTradesOpen(with: programId, sorting: sorting as? ProgramsAPI.Sorting_getProgramOpenTrades, skip: skip, take: take, completion: { [weak self] (tradesViewModel) in
                 guard tradesViewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completionError)
                 }
@@ -209,8 +209,8 @@ extension ProgramTradesViewModel {
                 
                 let totalCount = tradesViewModel?.total ?? 0
                 
-                tradesViewModel?.trades?.forEach({ (orderModel) in
-                    let viewModel = CellViewModel(orderModel: orderModel, currencyType: self?.currencyType ?? .gvt)
+                tradesViewModel?.items?.forEach({ (orderModel) in
+                    let viewModel = CellViewModel(orderModel: orderModel, orderSignalModel: nil, currencyType: self?.currencyType ?? .gvt)
                     viewModels.append(viewModel)
                 })
                 
@@ -218,7 +218,7 @@ extension ProgramTradesViewModel {
                 completionError(.success)
             }, errorCompletion: completionError)
         } else {
-            ProgramsDataProvider.getTrades(with: programId, dateFrom: dateFrom, dateTo: dateTo, sorting: sorting as? ProgramsAPI.Sorting_v10ProgramsByIdTradesGet, skip: skip, take: take, completion: { [weak self] (tradesViewModel) in
+            ProgramsDataProvider.getTrades(with: programId, dateFrom: dateFrom, dateTo: dateTo, sorting: sorting as? ProgramsAPI.Sorting_getAssetTrades, skip: skip, take: take, completion: { [weak self] (tradesViewModel) in
                 guard tradesViewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completionError)
                 }
@@ -226,8 +226,8 @@ extension ProgramTradesViewModel {
                 
                 let totalCount = tradesViewModel?.total ?? 0
                 
-                tradesViewModel?.trades?.forEach({ (orderModel) in
-                    let viewModel = CellViewModel(orderModel: orderModel, currencyType: self?.currencyType ?? .gvt)
+                tradesViewModel?.items?.forEach({ (orderModel) in
+                    let viewModel = CellViewModel(orderModel: nil, orderSignalModel: orderModel, currencyType: self?.currencyType ?? .gvt)
                     viewModels.append(viewModel)
                 })
                 

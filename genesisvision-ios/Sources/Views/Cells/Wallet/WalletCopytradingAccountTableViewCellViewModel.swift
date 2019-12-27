@@ -9,14 +9,14 @@
 import UIKit.UIColor
 
 struct WalletCopytradingAccountTableViewCellViewModel {
-    let copyTradingAccountInfo: CopyTradingAccountInfo
+    let copyTradingAccountInfo: TradingAccountDetails
 }
 
 extension WalletCopytradingAccountTableViewCellViewModel: CellViewModel {
     func setup(on cell: WalletCopytradingAccountTableViewCell) {
         cell.iconImageView.image = UIImage.walletPlaceholder
         
-        if let logo = copyTradingAccountInfo.logo, let fileUrl = getFileURL(fileName: logo) {
+        if let logo = copyTradingAccountInfo.asset?.logo, let fileUrl = getFileURL(fileName: logo) {
             cell.iconImageView.kf.indicatorType = .activity
             cell.iconImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
             cell.iconImageView.backgroundColor = .clear

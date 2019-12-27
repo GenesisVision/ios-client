@@ -13,7 +13,7 @@ protocol SortingDelegate: class {
 }
 
 enum SortingType {
-    case programs, funds, dashboardPrograms, dashboardFunds, tradesOpen, trades, signalTradesOpen, signalTrades
+    case programs, funds, follows, tradesOpen, trades, signalTradesOpen
 }
 
 class SortingManager: NSObject {
@@ -34,45 +34,54 @@ class SortingManager: NSObject {
     }
     
     // MARK: - Private methods
-    private func getProgramsSelectedSorting() -> ProgramsAPI.Sorting_v10ProgramsGet {
+    private func getProgramsSelectedSorting() -> ProgramsAPI.Sorting_getPrograms {
+        let selectedValue = getSelectedSortingValue()
+        
+        switch selectedValue {
+        case "profit":
+            return highToLowValue ? .byProfitDesc : .byProfitAsc
+        case "equity":
+            return highToLowValue ? .byEquityDesc : .byEquityAsc
+        case "level":
+            return highToLowValue ? .byLevelDesc : .byLevelAsc
+        case "drawdown":
+            return highToLowValue ? .byDrawdownDesc : .byDrawdownAsc
+        case "investors":
+            return highToLowValue ? .byInvestorsDesc : .byInvestorsAsc
+        case "title":
+            return highToLowValue ? .byTitleDesc : .byTitleAsc
+        case "new":
+            return highToLowValue ? .byNewDesc : .byNewAsc
+        default:
+            return highToLowValue ? .byProfitDesc : .byProfitAsc
+        }
+    }
+    private func getFollowsSelectedSorting() -> FollowAPI.Sorting_getFollowAssets {
         let selectedValue = getSelectedSortingValue()
         
         switch selectedValue {
         case "profit":
             return highToLowValue ? .byProfitDesc : .byProfitAsc
         case "level":
-            return highToLowValue ? .byLevelDesc : .byLevelAsc
-        case "balance":
-            return highToLowValue ? .byBalanceDesc : .byBalanceAsc
+            return highToLowValue ? .bySubscribersDesc : .bySubscribersAsc
         case "drawdown":
             return highToLowValue ? .byDrawdownDesc : .byDrawdownAsc
-        case "end of period":
-            return highToLowValue ? .byEndOfPeriodDesc : .byEndOfPeriodAsc
         case "trades":
             return highToLowValue ? .byTradesDesc : .byTradesAsc
-        case "investors":
-            return highToLowValue ? .byInvestorsDesc : .byInvestorsAsc
         case "title":
             return highToLowValue ? .byTitleDesc : .byTitleAsc
         case "new":
             return highToLowValue ? .byNewDesc : .byNewAsc
-        case "investor":
-            return highToLowValue ? .byInvestorsDesc : .byInvestorsAsc
-        case "currency":
-            return highToLowValue ? .byCurrDesc : .byCurrAsc
         default:
             return highToLowValue ? .byProfitDesc : .byProfitAsc
         }
     }
-    
-    private func getFundsSelectedSorting() -> FundsAPI.Sorting_v10FundsGet {
+    private func getFundsSelectedSorting() -> FundsAPI.Sorting_getFunds {
         let selectedValue = getSelectedSortingValue()
         
         switch selectedValue {
         case "profit":
             return highToLowValue ? .byProfitDesc : .byProfitAsc
-        case "balance":
-            return highToLowValue ? .byBalanceDesc : .byBalanceAsc
         case "investors":
             return highToLowValue ? .byInvestorsDesc : .byInvestorsAsc
         case "drawdown":
@@ -85,60 +94,7 @@ class SortingManager: NSObject {
             return highToLowValue ? .byProfitDesc : .byProfitAsc
         }
     }
-    
-    private func getDashboardProgramsSelectedSorting() -> InvestorAPI.Sorting_v10InvestorProgramsGet {
-        let selectedValue = getSelectedSortingValue()
-        
-        switch selectedValue {
-        case "profit":
-            return highToLowValue ? .byProfitDesc : .byProfitAsc
-        case "level":
-            return highToLowValue ? .byLevelDesc : .byLevelAsc
-        case "balance":
-            return highToLowValue ? .byBalanceDesc : .byBalanceAsc
-        case "drawdown":
-            return highToLowValue ? .byDrawdownDesc : .byDrawdownAsc
-        case "end of period":
-            return highToLowValue ? .byEndOfPeriodDesc : .byEndOfPeriodAsc
-        case "trades":
-            return highToLowValue ? .byTradesDesc : .byTradesAsc
-        case "investors":
-            return highToLowValue ? .byInvestorsDesc : .byInvestorsAsc
-        case "title":
-            return highToLowValue ? .byTitleDesc : .byTitleAsc
-        case "new":
-            return highToLowValue ? .byNewDesc : .byNewAsc
-        case "investor":
-            return highToLowValue ? .byInvestorsDesc : .byInvestorsAsc
-        case "currency":
-            return highToLowValue ? .byCurrDesc : .byCurrAsc
-        default:
-            return highToLowValue ? .byProfitDesc : .byProfitAsc
-        }
-    }
-    
-    private func getDashboardFundsSelectedSorting() -> InvestorAPI.Sorting_v10InvestorFundsGet {
-        let selectedValue = getSelectedSortingValue()
-        
-        switch selectedValue {
-        case "profit":
-            return highToLowValue ? .byProfitDesc : .byProfitAsc
-        case "balance":
-            return highToLowValue ? .byBalanceDesc : .byBalanceAsc
-        case "investors":
-            return highToLowValue ? .byInvestorsDesc : .byInvestorsAsc
-        case "drawdown":
-            return highToLowValue ? .byDrawdownDesc : .byDrawdownAsc
-        case "title":
-            return highToLowValue ? .byTitleDesc : .byTitleAsc
-        case "new":
-            return highToLowValue ? .byNewDesc : .byNewAsc
-        default:
-            return highToLowValue ? .byProfitDesc : .byProfitAsc
-        }
-    }
-    
-    private func getTradesOpenSelectedSorting() -> ProgramsAPI.Sorting_v10ProgramsByIdTradesOpenGet {
+    private func getTradesOpenSelectedSorting() -> ProgramsAPI.Sorting_getProgramOpenTrades {
         let selectedValue = getSelectedSortingValue()
         
         switch selectedValue {
@@ -160,8 +116,7 @@ class SortingManager: NSObject {
             return highToLowValue ? .byDateDesc : .byDateAsc
         }
     }
-    
-    private func getTradesSelectedSorting() -> ProgramsAPI.Sorting_v10ProgramsByIdTradesGet {
+    private func getTradesSelectedSorting() -> ProgramsAPI.Sorting_getAssetTrades {
         let selectedValue = getSelectedSortingValue()
         
         switch selectedValue {
@@ -184,8 +139,7 @@ class SortingManager: NSObject {
             return highToLowValue ? .byDateDesc : .byDateAsc
         }
     }
-    
-    private func getSignalTradesOpenSelectedSorting() -> SignalAPI.Sorting_v10SignalTradesOpenGet {
+    private func getSignalTradesOpenSelectedSorting() -> SignalAPI.Sorting_getOpenSignalTrades {
         let selectedValue = getSelectedSortingValue()
         
         switch selectedValue {
@@ -203,30 +157,6 @@ class SortingManager: NSObject {
             return highToLowValue ? .byPriceDesc : .byPriceAsc
         case "profit":
             return highToLowValue ? .byProfitDesc : .byProfitAsc
-        default:
-            return highToLowValue ? .byDateDesc : .byDateAsc
-        }
-    }
-    
-    private func getSignalTradesSelectedSorting() -> SignalAPI.Sorting_v10SignalTradesGet {
-        let selectedValue = getSelectedSortingValue()
-        
-        switch selectedValue {
-        case "date":
-            return highToLowValue ? .byDateDesc : .byDateAsc
-        case "ticket":
-            return highToLowValue ? .byTicketDesc : .byTicketAsc
-        case "symbol":
-            return highToLowValue ? .bySymbolDesc : .bySymbolAsc
-        case "direction":
-            return highToLowValue ? .byDirectionDesc : .byDirectionAsc
-        case "volume":
-            return highToLowValue ? .byVolumeDesc : .byVolumeAsc
-        case "price":
-            return highToLowValue ? .byPriceDesc : .byPriceAsc
-        case "profit":
-            return highToLowValue ? .byProfitDesc : .byProfitAsc
-            
         default:
             return highToLowValue ? .byDateDesc : .byDateAsc
         }
@@ -234,11 +164,13 @@ class SortingManager: NSObject {
     
     private func setup() {
         switch sortingType {
-        case .programs, .dashboardPrograms:
-            sortingValues = ["profit", "level", "drawdown", "trades", "balance", "end of period", "title", "investors", "currency", "new"]
-        case .funds, .dashboardFunds:
-            sortingValues = ["profit", "balance", "investors", "drawdown", "title", "new"]
-        case .tradesOpen, .trades, .signalTrades, .signalTradesOpen:
+        case .programs:
+            sortingValues = ["profit", "equity", "level", "drawdown", "title", "investors", "new"]
+        case .follows:
+            sortingValues = ["profit", "level", "drawdown", "trades", "title", "new"]
+        case .funds:
+            sortingValues = ["profit", "investors", "drawdown", "title", "new"]
+        case .tradesOpen, .trades, .signalTradesOpen:
             sortingValues = ["date", "ticket", "symbol", "direction", "volume", "price", "profit"]
         }
     }
@@ -264,20 +196,16 @@ class SortingManager: NSObject {
         switch sortingType {
         case .programs:
             return getProgramsSelectedSorting()
+        case .follows:
+            return getFollowsSelectedSorting()
         case .funds:
             return getFundsSelectedSorting()
-        case .dashboardPrograms:
-            return getDashboardProgramsSelectedSorting()
-        case .dashboardFunds:
-            return getDashboardFundsSelectedSorting()
         case .tradesOpen:
             return getTradesOpenSelectedSorting()
         case .trades:
             return getTradesSelectedSorting()
         case .signalTradesOpen:
             return getSignalTradesOpenSelectedSorting()
-        case .signalTrades:
-            return getSignalTradesSelectedSorting()
         }
     }
 }

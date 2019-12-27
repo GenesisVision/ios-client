@@ -10,7 +10,7 @@ import Foundation
 import Kingfisher
 
 struct DashboardProgramTableViewCellViewModel {
-    let program: ProgramDetails
+    let program: ProgramDetailsFull
     weak var reloadDataProtocol: ReloadDataProtocol?
     weak var delegate: FavoriteStateChangeProtocol?
     weak var reinvestProtocol: SwitchProtocol?

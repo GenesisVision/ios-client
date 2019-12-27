@@ -16,7 +16,7 @@ protocol BasePageboyProtocol {
 
 class BasePageboyViewControllerDataSource: NSObject, PageboyViewControllerDataSource, BasePageboyProtocol {
     
-    var controllers = [BaseViewController]()
+    var controllers = [UIViewController]()
     
     init(router: Router, showFacets: Bool) {
         super.init()
@@ -30,10 +30,16 @@ class BasePageboyViewControllerDataSource: NSObject, PageboyViewControllerDataSo
         setup(router: router, wallet: wallet)
     }
     
-    init(router: Router, account: CopyTradingAccountInfo? = nil) {
+    init(router: Router, account: TradingAccountDetails? = nil) {
         super.init()
         
         setup(router: router, account: account)
+    }
+    
+    init(router: Router, dashboardTradingAsset: DashboardTradingAsset? = nil) {
+        super.init()
+        
+        setup(router: router, dashboardTradingAsset: dashboardTradingAsset)
     }
     
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
@@ -55,6 +61,9 @@ class BasePageboyViewControllerDataSource: NSObject, PageboyViewControllerDataSo
     internal func setup(router: Router, wallet: WalletData? = nil) {
     }
     
-    internal func setup(router: Router, account: CopyTradingAccountInfo? = nil) {
+    internal func setup(router: Router, account: TradingAccountDetails? = nil) {
+    }
+    
+    internal func setup(router: Router, dashboardTradingAsset: DashboardTradingAsset? = nil) {
     }
 }

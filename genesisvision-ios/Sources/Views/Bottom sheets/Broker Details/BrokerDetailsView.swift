@@ -8,16 +8,6 @@
 
 import UIKit
 
-struct BrokerDetailsModel {
-    var title: String?
-    var about: String?
-    var accountType: String?
-    var tradingPlatform: String?
-    var terms: String?
-    var leverage: String?
-    var assets: String?
-}
-
 protocol BrokerDetailsViewProtocol: class {
     func showTermsButtonDidPress(_ url: String?)
     func viewHeight(_ height: CGFloat)
@@ -28,7 +18,7 @@ class BrokerDetailsView: UIView {
     // MARK: - Variables
     weak var delegate: BrokerDetailsViewProtocol?
     
-    var model: BrokerDetailsModel?
+    var model: Broker?
     
     // MARK: - Outlets
     @IBOutlet weak var scrollView: UIScrollView!
@@ -43,43 +33,45 @@ class BrokerDetailsView: UIView {
     }
     
     // MARK: - Public Methods
-    func configure(_ model: BrokerDetailsModel, delegate: BrokerDetailsViewProtocol?) {
+    func configure(_ model: Broker?, delegate: BrokerDetailsViewProtocol?) {
         self.delegate = delegate
         self.model = model
         
-        if let title = self.model?.title {
+        if let title = self.model?.name {
             topStackView.titleLabel.text = title
         }
         
-        if let about = self.model?.about {
+        if let about = self.model?.description {
             stackView.aboutStackView.subtitleLabel.text = "About"
             stackView.aboutStackView.titleLabel.text = about
         }
-        if let accountType = self.model?.accountType {
+        if let accountTypes = self.model?.accountTypes?.first?.currencies?.joined(separator: ", ") {
             stackView.accountTypeStackView.subtitleLabel.text = "Account type"
-            stackView.accountTypeStackView.titleLabel.text = accountType
+            stackView.accountTypeStackView.titleLabel.text = accountTypes
         }
-        if let tradingPlatform = self.model?.tradingPlatform {
+        if let type = self.model?.accountTypes?.first?.type?.rawValue {
             stackView.tradingPlatformStackView.subtitleLabel.text = "Trading platform"
-            stackView.tradingPlatformStackView.titleLabel.text = tradingPlatform
+            stackView.tradingPlatformStackView.titleLabel.text = type
         }
-        if let terms = self.model?.terms {
-            print(terms)
-            stackView.termsStackView.subtitleLabel.text = "Terms"
-            stackView.termsStackView.titleLabel.text = "Read terms"
+        
+        stackView.termsStackView.subtitleLabel.text = "Terms"
+        stackView.termsStackView.titleLabel.text = "Read terms"
+        
+        if self.model?.terms != nil {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showTermsButtonAction))
+            tapGesture.numberOfTapsRequired = 1
+            stackView.termsStackView.titleLabel.addGestureRecognizer(tapGesture)
+            stackView.termsStackView.titleLabel.textColor = UIColor.primary
         }
-        if let leverage = self.model?.leverage {
+        
+        if let leverageMin = self.model?.leverageMin, let leverageMax = self.model?.leverageMax {
             stackView.leverageStackView.subtitleLabel.text = "Leverage"
-            stackView.leverageStackView.titleLabel.text = leverage
+            stackView.leverageStackView.titleLabel.text = leverageMin == leverageMax ? "1:\(leverageMin)" : "1:\(leverageMin) - 1:\(leverageMax)"
         }
         if let assets = self.model?.assets {
             stackView.assetsStackView.subtitleLabel.text = "Assets"
             stackView.assetsStackView.titleLabel.text = assets
         }
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showTermsButtonAction))
-        tapGesture.numberOfTapsRequired = 1
-        stackView.termsStackView.titleLabel.addGestureRecognizer(tapGesture)
     }
     
     // MARK: - Actions

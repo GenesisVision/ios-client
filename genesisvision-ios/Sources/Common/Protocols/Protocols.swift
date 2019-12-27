@@ -8,14 +8,16 @@
 
 import UIKit
 
-protocol BaseCellProtocol: class {
+protocol BaseTableViewProtocol: class {
     func action(_ type: CellActionType, actionType: ActionType)
     func didSelect(_ type: CellActionType, cellViewModel: CellViewAnyModel?)
     func didSelect(_ type: DidSelectType, index: Int)
     func didReload()
+    func didReload(_ indexPath: IndexPath)
+    func didShowInfiniteIndicator(_ value: Bool)
 }
 
-extension BaseCellProtocol {
+extension BaseTableViewProtocol{
     func action(_ type: CellActionType, actionType: ActionType) {
         
     }
@@ -28,19 +30,25 @@ extension BaseCellProtocol {
     func didReload() {
         
     }
+    func didReload(_ indexPath: IndexPath) {
+        
+    }
+    func didShowInfiniteIndicator(_ value: Bool) {
+        
+    }
 }
 
-extension BaseCellProtocol where Self: ListViewController {
+extension BaseTableViewProtocol where Self: ListViewController {
     func didReload() {
         hideHUD()
-        tableView.reloadData()
         refreshControl?.endRefreshing()
+        tableView.reloadData()
     }
 }
 
 @objc protocol BaseTableViewCellProtocol {
     weak var titleLabel: LargeTitleLabel! { get set }
-    weak var actionsView: UIStackView! { get set }
+    weak var rightButtonsView: UIStackView! { get set }
 }
 @objc protocol BaseTableViewCellWithCollection {
     weak var collectionView: UICollectionView! { get set }
@@ -61,9 +69,9 @@ protocol YourInvestmentProtocol: class {
 }
 
 protocol SignalRouterProtocol {
-    var signalOpenTradesViewController: SignalOpenTradesViewController? { get set }
-    var signalTradesViewController: SignalTradesViewController? { get set }
-    var signalTradingLogViewController: SignalTradingLogViewController? { get set }
+//    var signalOpenTradesViewController: SignalOpenTradesViewController? { get set }
+//    var signalTradesViewController: SignalTradesViewController? { get set }
+//    var signalTradingLogViewController: SignalTradingLogViewController? { get set }
 }
 
 protocol WalletActionsProtocol: class {
@@ -88,8 +96,8 @@ extension YourInvestmentProtocol {
 protocol NotificationsSettingsProtocol: class {
     func didChange(enable: Bool, settingId: String?)
     func didRemove(settingId: String?)
-    func didAdd(type: NotificationSettingViewModel.ModelType?)
-    func didAdd(assetId: String?, type: NotificationSettingViewModel.ModelType?, conditionType: NotificationSettingViewModel.ConditionType?, conditionAmount: Double?)
+    func didAdd(type: NotificationType?)
+    func didAdd(assetId: String?, type: NotificationType?, conditionType: NotificationSettingConditionType?, conditionAmount: Double?)
 }
 
 protocol SwitchProtocol: class {
@@ -100,6 +108,18 @@ protocol DelegateManagerProtocol: class {
     func delegateManagerScrollViewDidScroll(_ scrollView: UIScrollView)
     func delegateManagerScrollViewWillBeginDragging(_ scrollView: UIScrollView)
     func delegateManagerTableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
+}
+
+extension DelegateManagerProtocol {
+    func delegateManagerScrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+    }
+    func delegateManagerScrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        
+    }
+    func delegateManagerTableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+    }
 }
 
 protocol CurrencyDelegateManagerProtocol: UITableViewDelegate, UITableViewDataSource {
@@ -150,7 +170,7 @@ extension ViewModelWithTableView {func headerTitle(for section: Int) -> String? 
     }
     
     func headerHeight(for section: Int) -> CGFloat {
-        return 1.0
+        return 0.0
     }
     
     func numberOfSections() -> Int {

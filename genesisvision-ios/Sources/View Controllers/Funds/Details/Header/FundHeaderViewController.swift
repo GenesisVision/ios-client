@@ -93,19 +93,19 @@ class FundHeaderViewController: BaseViewController {
     }
     
     func configure(_ fundDetailsFull: FundDetailsFull?) {
-        if let title = fundDetailsFull?.title {
+        if let title = fundDetailsFull?.publicInfo?.title {
             titleLabel.text = title
         }
     
         bgImageView.image = UIImage.fundPlaceholder
         headerTitleImageView.image = UIImage.fundPlaceholder
         
-        if let color = fundDetailsFull?.color {
+        if let color = fundDetailsFull?.publicInfo?.color {
             bgImageView.backgroundColor = UIColor.hexColor(color)
             headerTitleImageView.backgroundColor = UIColor.hexColor(color)
         }
         
-        if let logo = fundDetailsFull?.logo, let fileUrl = getFileURL(fileName: logo) {
+        if let logo = fundDetailsFull?.publicInfo?.logo, let fileUrl = getFileURL(fileName: logo) {
             bgImageView.kf.indicatorType = .activity
             headerTitleImageView.kf.indicatorType = .activity
             
@@ -114,7 +114,7 @@ class FundHeaderViewController: BaseViewController {
             headerTitleImageView.kf.setImage(with: resource, placeholder: UIImage.fundPlaceholder)
         }
         
-        if let isInvested = fundDetailsFull?.personalFundDetails?.isInvested {
+        if let isInvested = fundDetailsFull?.personalDetails?.isInvested {
             self.investedImageView.isHidden = !isInvested
         }
     }

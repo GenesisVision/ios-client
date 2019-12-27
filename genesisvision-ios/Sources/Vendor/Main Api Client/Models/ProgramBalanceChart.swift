@@ -11,33 +11,18 @@ import Foundation
 
 open class ProgramBalanceChart: Codable {
 
-    public enum ProgramCurrency: String, Codable { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
-        case btc = "BTC"
-        case ada = "ADA"
-        case usdt = "USDT"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case usd = "USD"
-        case eur = "EUR"
-    }
-    public var gvtBalance: Double?
-    public var programCurrencyBalance: Double?
-    public var programCurrency: ProgramCurrency?
-    public var balanceChart: [ProgramBalanceChartElement]?
+    public var balance: Double?
+    public var programCurrency: Currency?
+    public var color: String?
+    public var chart: [BalanceChartPoint]?
 
 
     
-    public init(gvtBalance: Double?, programCurrencyBalance: Double?, programCurrency: ProgramCurrency?, balanceChart: [ProgramBalanceChartElement]?) {
-        self.gvtBalance = gvtBalance
-        self.programCurrencyBalance = programCurrencyBalance
+    public init(balance: Double?, programCurrency: Currency?, color: String?, chart: [BalanceChartPoint]?) {
+        self.balance = balance
         self.programCurrency = programCurrency
-        self.balanceChart = balanceChart
+        self.color = color
+        self.chart = chart
     }
     
 
@@ -47,10 +32,10 @@ open class ProgramBalanceChart: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(gvtBalance, forKey: "gvtBalance")
-        try container.encodeIfPresent(programCurrencyBalance, forKey: "programCurrencyBalance")
+        try container.encodeIfPresent(balance, forKey: "balance")
         try container.encodeIfPresent(programCurrency, forKey: "programCurrency")
-        try container.encodeIfPresent(balanceChart, forKey: "balanceChart")
+        try container.encodeIfPresent(color, forKey: "color")
+        try container.encodeIfPresent(chart, forKey: "chart")
     }
 
     // Decodable protocol methods
@@ -58,10 +43,10 @@ open class ProgramBalanceChart: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        gvtBalance = try container.decodeIfPresent(Double.self, forKey: "gvtBalance")
-        programCurrencyBalance = try container.decodeIfPresent(Double.self, forKey: "programCurrencyBalance")
-        programCurrency = try container.decodeIfPresent(ProgramCurrency.self, forKey: "programCurrency")
-        balanceChart = try container.decodeIfPresent([ProgramBalanceChartElement].self, forKey: "balanceChart")
+        balance = try container.decodeIfPresent(Double.self, forKey: "balance")
+        programCurrency = try container.decodeIfPresent(Currency.self, forKey: "programCurrency")
+        color = try container.decodeIfPresent(String.self, forKey: "color")
+        chart = try container.decodeIfPresent([BalanceChartPoint].self, forKey: "chart")
     }
 }
 

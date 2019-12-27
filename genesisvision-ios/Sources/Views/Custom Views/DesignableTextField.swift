@@ -9,7 +9,7 @@
 import UIKit
 
 protocol DesignableUITextFieldDelegate: class {
-    func textFieldDidClear()
+    func textFieldDidClear(_ textField: UITextField)
 }
 
 class DesignableUITextField: UITextField, UITextFieldDelegate {
@@ -136,6 +136,6 @@ class DesignableUITextField: UITextField, UITextFieldDelegate {
     // MARK: - Private methods
     @objc private func clearClicked(sender: UIButton) {
         text = ""
-        designableTextFieldDelegate?.textFieldDidClear()
+        designableTextFieldDelegate?.textFieldDidClear(self)
     }
 }

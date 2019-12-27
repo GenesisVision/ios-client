@@ -12,7 +12,7 @@ import Tabman
 final class ManagerTabmanViewModel: TabmanViewModel {
     // MARK: - Variables
     var managerId: String!
-    var managerProfileDetails: ManagerProfileDetails?
+    var publicProfile: PublicProfile?
 
     // MARK: - Init
     init(withRouter router: Router, managerId: String) {
@@ -26,29 +26,29 @@ final class ManagerTabmanViewModel: TabmanViewModel {
     
     // MARK: - Public methods
     func reloadDetails() {
-        if let vc = viewControllers.first as? ManagerInfoViewController, let managerProfileDetails = managerProfileDetails {
-            vc.viewModel.updateDetails(with: managerProfileDetails)
+        if let vc = viewControllers.first as? ManagerInfoViewController, let publicProfile = publicProfile {
+            vc.viewModel.updateDetails(with: publicProfile)
         }
     }
     
-    func updateDetails(_ managerProfileDetails: ManagerProfileDetails) {
+    func updateDetails(_ publicProfile: PublicProfile) {
         if let vc = viewControllers.first as? ManagerInfoViewController {
-            vc.viewModel.updateDetails(with: managerProfileDetails)
+            vc.viewModel.updateDetails(with: publicProfile)
         }
     }
     
-    func setup(_ viewModel: ManagerProfileDetails? = nil) {
+    func setup(_ viewModel: PublicProfile? = nil) {
         removeAllControllers()
         
         if let viewModel = viewModel {
-            self.managerProfileDetails = viewModel
+            self.publicProfile = viewModel
         }
         
         self.items = []
         
-        if let router = router as? ManagerTabmanRouter, let managerProfileDetails = managerProfileDetails, let uuid = managerProfileDetails.managerProfile?.id?.uuidString {
+        if let router = router as? ManagerTabmanRouter, let publicProfile = publicProfile, let uuid = publicProfile.id?.uuidString {
             
-            if let vc = router.getInfo(with: managerProfileDetails) {
+            if let vc = router.getInfo(with: publicProfile) {
                 self.addController(vc)
                 self.items?.append(TMBarItem(title: vc.viewModel.title.uppercased()))
             }

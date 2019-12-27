@@ -8,36 +8,35 @@
 
 import UIKit
 
-class SelectableListViewModel<T>: ListVMProtocol {
+class SelectableListViewModel<T>: ViewModelWithListProtocol {
     var viewModels = [CellViewAnyModel]()
     var canPullToRefresh: Bool = false
 
     var items: [T] = []
     var selectedIndex: Int = 0
-    var selected: T?
     
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [SelectableTableViewCellViewModel.self]
     }
     
-    weak var delegate: BaseCellProtocol?
-    init(_ delegate: BaseCellProtocol?, items: [T], selected: T?) {
+    weak var delegate: BaseTableViewProtocol?
+    init(_ delegate: BaseTableViewProtocol?, items: [T], selectedIndex: Int = 0) {
         self.delegate = delegate
         self.items = items
-        
-        updateSelectedIndex()
+        self.selectedIndex = selectedIndex
     }
     
-    func updateSelectedIndex() {
+    func selected() -> T? {
+        return items[selectedIndex]
     }
     
     // MARK: - TableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        self.selected = items[indexPath.row]
+        self.selectedIndex = indexPath.row
         
-        delegate?.didSelect(.none, index: 0)
+        delegate?.didSelect(.none, index: indexPath.row)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -51,10 +50,6 @@ class SelectableListViewModel<T>: ListVMProtocol {
             return UITableViewCell()
         }
 
-        let item = items[indexPath.row]
-        if isDebug {
-            print(item)
-        }
         let isSelected = indexPath.row == selectedIndex
         cell.configure("Test cell", selected: isSelected)
 
@@ -63,7 +58,6 @@ class SelectableListViewModel<T>: ListVMProtocol {
     
     func didSelect(at indexPath: IndexPath) {
         selectedIndex = indexPath.row
-        selected = items[selectedIndex]
     }
     
     func modelsCount() -> Int {
@@ -78,10 +72,16 @@ class SelectableListViewModel<T>: ListVMProtocol {
         let model = SelectableTableViewCellViewModel()
 
         guard let cell = tableView.dequeueReusableCell(withModel: model, for: indexPath) as? SelectableTableViewCell else {
-            return BaseTableViewCell()
+            let cell = BaseTableViewCell()
+            cell.loaderView.stopAnimating()
+            cell.contentView.backgroundColor = UIColor.BaseView.bg
+            cell.backgroundColor = UIColor.BaseView.bg
+            return cell
         }
 
         return cell
     }
+    
+    
 }
 

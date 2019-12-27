@@ -14,13 +14,12 @@ open class RateAPI {
     /**
      Get rate
      
-     - parameter exchange: (path)  
      - parameter from: (path)  
      - parameter to: (path)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10RateByExchangeByFromByToGet(exchange: String, from: String, to: String, completion: @escaping ((_ data: Double?,_ error: Error?) -> Void)) {
-        v10RateByExchangeByFromByToGetWithRequestBuilder(exchange: exchange, from: from, to: to).execute { (response, error) -> Void in
+    open class func getRate(from: String, to: String, completion: @escaping ((_ data: RateModel?,_ error: Error?) -> Void)) {
+        getRateWithRequestBuilder(from: from, to: to).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -28,17 +27,61 @@ open class RateAPI {
 
     /**
      Get rate
-     - GET /v1.0/rate/{exchange}/{from}/{to}
-     - examples: [{contentType=application/json, example=0.8008281904610115}]
+     - GET /v2.0/rate/{from}/{to}
+     - examples: [{contentType=application/json, example={
+  "rate" : 0.8008281904610115
+}}]
+     
+     - parameter from: (path)  
+     - parameter to: (path)  
+
+     - returns: RequestBuilder<RateModel> 
+     */
+    open class func getRateWithRequestBuilder(from: String, to: String) -> RequestBuilder<RateModel> {
+        var path = "/v2.0/rate/{from}/{to}"
+        path = path.replacingOccurrences(of: "{from}", with: "\(from)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{to}", with: "\(to)", options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+
+        let requestBuilder: RequestBuilder<RateModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Get rate by exchange
+     
+     - parameter exchange: (path)  
+     - parameter from: (path)  
+     - parameter to: (path)  
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getRateExchange(exchange: String, from: String, to: String, completion: @escaping ((_ data: RateModel?,_ error: Error?) -> Void)) {
+        getRateExchangeWithRequestBuilder(exchange: exchange, from: from, to: to).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Get rate by exchange
+     - GET /v2.0/rate/{exchange}/{from}/{to}
+     - examples: [{contentType=application/json, example={
+  "rate" : 0.8008281904610115
+}}]
      
      - parameter exchange: (path)  
      - parameter from: (path)  
      - parameter to: (path)  
 
-     - returns: RequestBuilder<Double> 
+     - returns: RequestBuilder<RateModel> 
      */
-    open class func v10RateByExchangeByFromByToGetWithRequestBuilder(exchange: String, from: String, to: String) -> RequestBuilder<Double> {
-        var path = "/v1.0/rate/{exchange}/{from}/{to}"
+    open class func getRateExchangeWithRequestBuilder(exchange: String, from: String, to: String) -> RequestBuilder<RateModel> {
+        var path = "/v2.0/rate/{exchange}/{from}/{to}"
         path = path.replacingOccurrences(of: "{exchange}", with: "\(exchange)", options: .literal, range: nil)
         path = path.replacingOccurrences(of: "{from}", with: "\(from)", options: .literal, range: nil)
         path = path.replacingOccurrences(of: "{to}", with: "\(to)", options: .literal, range: nil)
@@ -48,46 +91,7 @@ open class RateAPI {
         let url = NSURLComponents(string: URLString)
 
 
-        let requestBuilder: RequestBuilder<Double>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    /**
-     Get rate
-     
-     - parameter from: (path)  
-     - parameter to: (path)  
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func v10RateByFromByToGet(from: String, to: String, completion: @escaping ((_ data: Double?,_ error: Error?) -> Void)) {
-        v10RateByFromByToGetWithRequestBuilder(from: from, to: to).execute { (response, error) -> Void in
-            completion(response?.body, error);
-        }
-    }
-
-
-    /**
-     Get rate
-     - GET /v1.0/rate/{from}/{to}
-     - examples: [{contentType=application/json, example=0.8008281904610115}]
-     
-     - parameter from: (path)  
-     - parameter to: (path)  
-
-     - returns: RequestBuilder<Double> 
-     */
-    open class func v10RateByFromByToGetWithRequestBuilder(from: String, to: String) -> RequestBuilder<Double> {
-        var path = "/v1.0/rate/{from}/{to}"
-        path = path.replacingOccurrences(of: "{from}", with: "\(from)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{to}", with: "\(to)", options: .literal, range: nil)
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-
-
-        let requestBuilder: RequestBuilder<Double>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<RateModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
@@ -99,8 +103,8 @@ open class RateAPI {
      - parameter to: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10RateGet(from: [String]? = nil, to: [String]? = nil, completion: @escaping ((_ data: RatesModel?,_ error: Error?) -> Void)) {
-        v10RateGetWithRequestBuilder(from: from, to: to).execute { (response, error) -> Void in
+    open class func getRates(from: [String]? = nil, to: [String]? = nil, completion: @escaping ((_ data: RatesModel?,_ error: Error?) -> Void)) {
+        getRatesWithRequestBuilder(from: from, to: to).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -108,99 +112,99 @@ open class RateAPI {
 
     /**
      Get rates
-     - GET /v1.0/rate
+     - GET /v2.0/rate
      - examples: [{contentType=application/json, example={
   "rates" : {
     "Undefined" : [ {
       "rate" : 0.8008281904610115,
-      "currency" : "Undefined"
+      "currency" : { }
     }, {
       "rate" : 0.8008281904610115,
-      "currency" : "Undefined"
+      "currency" : { }
     } ],
     "EUR" : [ {
       "rate" : 0.8008281904610115,
-      "currency" : "Undefined"
+      "currency" : { }
     }, {
       "rate" : 0.8008281904610115,
-      "currency" : "Undefined"
+      "currency" : { }
     } ],
     "GVT" : [ {
       "rate" : 0.8008281904610115,
-      "currency" : "Undefined"
+      "currency" : { }
     }, {
       "rate" : 0.8008281904610115,
-      "currency" : "Undefined"
+      "currency" : { }
     } ],
     "BCH" : [ {
       "rate" : 0.8008281904610115,
-      "currency" : "Undefined"
+      "currency" : { }
     }, {
       "rate" : 0.8008281904610115,
-      "currency" : "Undefined"
+      "currency" : { }
     } ],
     "USD" : [ {
       "rate" : 0.8008281904610115,
-      "currency" : "Undefined"
+      "currency" : { }
     }, {
       "rate" : 0.8008281904610115,
-      "currency" : "Undefined"
+      "currency" : { }
     } ],
     "USDT" : [ {
       "rate" : 0.8008281904610115,
-      "currency" : "Undefined"
+      "currency" : { }
     }, {
       "rate" : 0.8008281904610115,
-      "currency" : "Undefined"
+      "currency" : { }
     } ],
     "DOGE" : [ {
       "rate" : 0.8008281904610115,
-      "currency" : "Undefined"
+      "currency" : { }
     }, {
       "rate" : 0.8008281904610115,
-      "currency" : "Undefined"
+      "currency" : { }
     } ],
     "BTC" : [ {
       "rate" : 0.8008281904610115,
-      "currency" : "Undefined"
+      "currency" : { }
     }, {
       "rate" : 0.8008281904610115,
-      "currency" : "Undefined"
+      "currency" : { }
     } ],
     "XRP" : [ {
       "rate" : 0.8008281904610115,
-      "currency" : "Undefined"
+      "currency" : { }
     }, {
       "rate" : 0.8008281904610115,
-      "currency" : "Undefined"
+      "currency" : { }
     } ],
     "BNB" : [ {
       "rate" : 0.8008281904610115,
-      "currency" : "Undefined"
+      "currency" : { }
     }, {
       "rate" : 0.8008281904610115,
-      "currency" : "Undefined"
+      "currency" : { }
     } ],
     "ETH" : [ {
       "rate" : 0.8008281904610115,
-      "currency" : "Undefined"
+      "currency" : { }
     }, {
       "rate" : 0.8008281904610115,
-      "currency" : "Undefined"
+      "currency" : { }
     } ],
     "LTC" : [ {
       "rate" : 0.8008281904610115,
-      "currency" : "Undefined"
+      "currency" : { }
     }, {
       "rate" : 0.8008281904610115,
-      "currency" : "Undefined"
+      "currency" : { }
     } ],
     "ADA" : [ {
       "rate" : 0.8008281904610115,
-      "currency" : "Undefined"
+      "currency" : { }
     }, {
       "rate" : 0.8008281904610115,
-      "currency" : "Undefined"
+      "currency" : { }
     } ]
   }
 }}]
@@ -210,8 +214,8 @@ open class RateAPI {
 
      - returns: RequestBuilder<RatesModel> 
      */
-    open class func v10RateGetWithRequestBuilder(from: [String]? = nil, to: [String]? = nil) -> RequestBuilder<RatesModel> {
-        let path = "/v1.0/rate"
+    open class func getRatesWithRequestBuilder(from: [String]? = nil, to: [String]? = nil) -> RequestBuilder<RatesModel> {
+        let path = "/v2.0/rate"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 

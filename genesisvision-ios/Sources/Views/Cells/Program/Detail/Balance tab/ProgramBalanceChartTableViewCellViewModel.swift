@@ -19,19 +19,19 @@ extension ProgramBalanceChartTableViewCellViewModel: CellViewModel {
         
         cell.chartViewProtocol = chartViewProtocol
         
-        if let amountValue = programBalanceChart.gvtBalance {
+        if let amountValue = programBalanceChart.balance {
             cell.amountValueLabel.text = amountValue.rounded(with: .gvt).toString() + " \(Constants.gvtString)"
         } else {
             cell.amountValueLabel.isHidden = true
         }
         
-        if let amountCurrency = programBalanceChart.programCurrencyBalance, let programCurrency = programBalanceChart.programCurrency, let currencyType = CurrencyType(rawValue: programCurrency.rawValue) {
+        if let amountCurrency = programBalanceChart.balance, let programCurrency = programBalanceChart.programCurrency, let currencyType = CurrencyType(rawValue: programCurrency.rawValue) {
             cell.amountCurrencyLabel.text = amountCurrency.rounded(with: currencyType).toString() + " " + currencyType.rawValue
         } else {
             cell.amountCurrencyLabel.isHidden = true
         }
         
-        if let balanceChartData = programBalanceChart.balanceChart, balanceChartData.count > 0 {
+        if let balanceChartData = programBalanceChart.chart, balanceChartData.count > 0 {
             cell.chartViewHeightConstraint.constant = 200.0
             cell.chartView.setup(programBalanceChartData: balanceChartData, dateRangeModel: chartViewProtocol?.filterDateRangeModel)
             cell.chartView.isHidden = false

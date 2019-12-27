@@ -14,15 +14,17 @@ open class ProgramWithdrawInfo: Codable {
     public var periodEnds: Date?
     public var title: String?
     public var availableToWithdraw: Double?
-    public var rate: Double?
+    public var isOwner: Bool?
+    public var withheldInvestment: Double?
 
 
     
-    public init(periodEnds: Date?, title: String?, availableToWithdraw: Double?, rate: Double?) {
+    public init(periodEnds: Date?, title: String?, availableToWithdraw: Double?, isOwner: Bool?, withheldInvestment: Double?) {
         self.periodEnds = periodEnds
         self.title = title
         self.availableToWithdraw = availableToWithdraw
-        self.rate = rate
+        self.isOwner = isOwner
+        self.withheldInvestment = withheldInvestment
     }
     
 
@@ -35,7 +37,8 @@ open class ProgramWithdrawInfo: Codable {
         try container.encodeIfPresent(periodEnds, forKey: "periodEnds")
         try container.encodeIfPresent(title, forKey: "title")
         try container.encodeIfPresent(availableToWithdraw, forKey: "availableToWithdraw")
-        try container.encodeIfPresent(rate, forKey: "rate")
+        try container.encodeIfPresent(isOwner, forKey: "isOwner")
+        try container.encodeIfPresent(withheldInvestment, forKey: "withheldInvestment")
     }
 
     // Decodable protocol methods
@@ -46,7 +49,8 @@ open class ProgramWithdrawInfo: Codable {
         periodEnds = try container.decodeIfPresent(Date.self, forKey: "periodEnds")
         title = try container.decodeIfPresent(String.self, forKey: "title")
         availableToWithdraw = try container.decodeIfPresent(Double.self, forKey: "availableToWithdraw")
-        rate = try container.decodeIfPresent(Double.self, forKey: "rate")
+        isOwner = try container.decodeIfPresent(Bool.self, forKey: "isOwner")
+        withheldInvestment = try container.decodeIfPresent(Double.self, forKey: "withheldInvestment")
     }
 }
 

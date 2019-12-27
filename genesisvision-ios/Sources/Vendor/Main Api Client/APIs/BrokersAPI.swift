@@ -12,21 +12,20 @@ import Alamofire
 
 open class BrokersAPI {
     /**
-     Get trade servers for program
+     Get brokers for creating trading accounts
      
-     - parameter programId: (path)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10BrokersByProgramIdGet(programId: UUID, completion: @escaping ((_ data: BrokersProgramInfo?,_ error: Error?) -> Void)) {
-        v10BrokersByProgramIdGetWithRequestBuilder(programId: programId).execute { (response, error) -> Void in
+    open class func getBrokers(completion: @escaping ((_ data: BrokersInfo?,_ error: Error?) -> Void)) {
+        getBrokersWithRequestBuilder().execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
 
 
     /**
-     Get trade servers for program
-     - GET /v1.0/brokers/{programId}
+     Get brokers for creating trading accounts
+     - GET /v2.0/brokers
      - examples: [{contentType=application/json, example={
   "brokers" : [ {
     "leverageMin" : 6,
@@ -35,35 +34,34 @@ open class BrokersAPI {
     "terms" : "terms",
     "fee" : 0.8008281904610115,
     "name" : "name",
-    "isForex" : true,
     "description" : "description",
     "logo" : "logo",
     "accountTypes" : [ {
       "name" : "name",
-      "isForex" : true,
       "description" : "description",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "isSignalsAvailable" : true,
-      "type" : "Undefined",
+      "type" : { },
       "leverages" : [ 5, 5 ],
       "minimumDepositsAmount" : {
         "key" : 5.637376656633329
       },
+      "isKycRequired" : true,
       "currencies" : [ "currencies", "currencies" ]
     }, {
       "name" : "name",
-      "isForex" : true,
       "description" : "description",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "isSignalsAvailable" : true,
-      "type" : "Undefined",
+      "type" : { },
       "leverages" : [ 5, 5 ],
       "minimumDepositsAmount" : {
         "key" : 5.637376656633329
       },
+      "isKycRequired" : true,
       "currencies" : [ "currencies", "currencies" ]
     } ],
-    "isSignalsAvailable" : true,
+    "isKycRequired" : true,
     "tags" : [ {
       "color" : "color",
       "name" : "name"
@@ -78,35 +76,271 @@ open class BrokersAPI {
     "terms" : "terms",
     "fee" : 0.8008281904610115,
     "name" : "name",
-    "isForex" : true,
     "description" : "description",
     "logo" : "logo",
     "accountTypes" : [ {
       "name" : "name",
-      "isForex" : true,
       "description" : "description",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "isSignalsAvailable" : true,
-      "type" : "Undefined",
+      "type" : { },
       "leverages" : [ 5, 5 ],
       "minimumDepositsAmount" : {
         "key" : 5.637376656633329
       },
+      "isKycRequired" : true,
       "currencies" : [ "currencies", "currencies" ]
     }, {
       "name" : "name",
-      "isForex" : true,
       "description" : "description",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "isSignalsAvailable" : true,
-      "type" : "Undefined",
+      "type" : { },
       "leverages" : [ 5, 5 ],
       "minimumDepositsAmount" : {
         "key" : 5.637376656633329
       },
+      "isKycRequired" : true,
       "currencies" : [ "currencies", "currencies" ]
     } ],
-    "isSignalsAvailable" : true,
+    "isKycRequired" : true,
+    "tags" : [ {
+      "color" : "color",
+      "name" : "name"
+    }, {
+      "color" : "color",
+      "name" : "name"
+    } ]
+  } ]
+}}]
+
+     - returns: RequestBuilder<BrokersInfo> 
+     */
+    open class func getBrokersWithRequestBuilder() -> RequestBuilder<BrokersInfo> {
+        let path = "/v2.0/brokers"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+
+        let requestBuilder: RequestBuilder<BrokersInfo>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Get brokers for creating external trading accounts
+     
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getBrokersExternal(completion: @escaping ((_ data: BrokersInfo?,_ error: Error?) -> Void)) {
+        getBrokersExternalWithRequestBuilder().execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Get brokers for creating external trading accounts
+     - GET /v2.0/brokers/external
+     - examples: [{contentType=application/json, example={
+  "brokers" : [ {
+    "leverageMin" : 6,
+    "leverageMax" : 1,
+    "assets" : "assets",
+    "terms" : "terms",
+    "fee" : 0.8008281904610115,
+    "name" : "name",
+    "description" : "description",
+    "logo" : "logo",
+    "accountTypes" : [ {
+      "name" : "name",
+      "description" : "description",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "isSignalsAvailable" : true,
+      "type" : { },
+      "leverages" : [ 5, 5 ],
+      "minimumDepositsAmount" : {
+        "key" : 5.637376656633329
+      },
+      "isKycRequired" : true,
+      "currencies" : [ "currencies", "currencies" ]
+    }, {
+      "name" : "name",
+      "description" : "description",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "isSignalsAvailable" : true,
+      "type" : { },
+      "leverages" : [ 5, 5 ],
+      "minimumDepositsAmount" : {
+        "key" : 5.637376656633329
+      },
+      "isKycRequired" : true,
+      "currencies" : [ "currencies", "currencies" ]
+    } ],
+    "isKycRequired" : true,
+    "tags" : [ {
+      "color" : "color",
+      "name" : "name"
+    }, {
+      "color" : "color",
+      "name" : "name"
+    } ]
+  }, {
+    "leverageMin" : 6,
+    "leverageMax" : 1,
+    "assets" : "assets",
+    "terms" : "terms",
+    "fee" : 0.8008281904610115,
+    "name" : "name",
+    "description" : "description",
+    "logo" : "logo",
+    "accountTypes" : [ {
+      "name" : "name",
+      "description" : "description",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "isSignalsAvailable" : true,
+      "type" : { },
+      "leverages" : [ 5, 5 ],
+      "minimumDepositsAmount" : {
+        "key" : 5.637376656633329
+      },
+      "isKycRequired" : true,
+      "currencies" : [ "currencies", "currencies" ]
+    }, {
+      "name" : "name",
+      "description" : "description",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "isSignalsAvailable" : true,
+      "type" : { },
+      "leverages" : [ 5, 5 ],
+      "minimumDepositsAmount" : {
+        "key" : 5.637376656633329
+      },
+      "isKycRequired" : true,
+      "currencies" : [ "currencies", "currencies" ]
+    } ],
+    "isKycRequired" : true,
+    "tags" : [ {
+      "color" : "color",
+      "name" : "name"
+    }, {
+      "color" : "color",
+      "name" : "name"
+    } ]
+  } ]
+}}]
+
+     - returns: RequestBuilder<BrokersInfo> 
+     */
+    open class func getBrokersExternalWithRequestBuilder() -> RequestBuilder<BrokersInfo> {
+        let path = "/v2.0/brokers/external"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+
+        let requestBuilder: RequestBuilder<BrokersInfo>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Get brokers for program
+     
+     - parameter programId: (path)  
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getBrokersForProgram(programId: UUID, completion: @escaping ((_ data: BrokersProgramInfo?,_ error: Error?) -> Void)) {
+        getBrokersForProgramWithRequestBuilder(programId: programId).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Get brokers for program
+     - GET /v2.0/brokers/{programId}
+     - examples: [{contentType=application/json, example={
+  "brokers" : [ {
+    "leverageMin" : 6,
+    "leverageMax" : 1,
+    "assets" : "assets",
+    "terms" : "terms",
+    "fee" : 0.8008281904610115,
+    "name" : "name",
+    "description" : "description",
+    "logo" : "logo",
+    "accountTypes" : [ {
+      "name" : "name",
+      "description" : "description",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "isSignalsAvailable" : true,
+      "type" : { },
+      "leverages" : [ 5, 5 ],
+      "minimumDepositsAmount" : {
+        "key" : 5.637376656633329
+      },
+      "isKycRequired" : true,
+      "currencies" : [ "currencies", "currencies" ]
+    }, {
+      "name" : "name",
+      "description" : "description",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "isSignalsAvailable" : true,
+      "type" : { },
+      "leverages" : [ 5, 5 ],
+      "minimumDepositsAmount" : {
+        "key" : 5.637376656633329
+      },
+      "isKycRequired" : true,
+      "currencies" : [ "currencies", "currencies" ]
+    } ],
+    "isKycRequired" : true,
+    "tags" : [ {
+      "color" : "color",
+      "name" : "name"
+    }, {
+      "color" : "color",
+      "name" : "name"
+    } ]
+  }, {
+    "leverageMin" : 6,
+    "leverageMax" : 1,
+    "assets" : "assets",
+    "terms" : "terms",
+    "fee" : 0.8008281904610115,
+    "name" : "name",
+    "description" : "description",
+    "logo" : "logo",
+    "accountTypes" : [ {
+      "name" : "name",
+      "description" : "description",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "isSignalsAvailable" : true,
+      "type" : { },
+      "leverages" : [ 5, 5 ],
+      "minimumDepositsAmount" : {
+        "key" : 5.637376656633329
+      },
+      "isKycRequired" : true,
+      "currencies" : [ "currencies", "currencies" ]
+    }, {
+      "name" : "name",
+      "description" : "description",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "isSignalsAvailable" : true,
+      "type" : { },
+      "leverages" : [ 5, 5 ],
+      "minimumDepositsAmount" : {
+        "key" : 5.637376656633329
+      },
+      "isKycRequired" : true,
+      "currencies" : [ "currencies", "currencies" ]
+    } ],
+    "isKycRequired" : true,
     "tags" : [ {
       "color" : "color",
       "name" : "name"
@@ -122,8 +356,8 @@ open class BrokersAPI {
 
      - returns: RequestBuilder<BrokersProgramInfo> 
      */
-    open class func v10BrokersByProgramIdGetWithRequestBuilder(programId: UUID) -> RequestBuilder<BrokersProgramInfo> {
-        var path = "/v1.0/brokers/{programId}"
+    open class func getBrokersForProgramWithRequestBuilder(programId: UUID) -> RequestBuilder<BrokersProgramInfo> {
+        var path = "/v2.0/brokers/{programId}"
         path = path.replacingOccurrences(of: "{programId}", with: "\(programId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -132,126 +366,6 @@ open class BrokersAPI {
 
 
         let requestBuilder: RequestBuilder<BrokersProgramInfo>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    /**
-     Get all trade servers
-     
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func v10BrokersGet(completion: @escaping ((_ data: BrokersInfo?,_ error: Error?) -> Void)) {
-        v10BrokersGetWithRequestBuilder().execute { (response, error) -> Void in
-            completion(response?.body, error);
-        }
-    }
-
-
-    /**
-     Get all trade servers
-     - GET /v1.0/brokers
-     - examples: [{contentType=application/json, example={
-  "brokers" : [ {
-    "leverageMin" : 6,
-    "leverageMax" : 1,
-    "assets" : "assets",
-    "terms" : "terms",
-    "fee" : 0.8008281904610115,
-    "name" : "name",
-    "isForex" : true,
-    "description" : "description",
-    "logo" : "logo",
-    "accountTypes" : [ {
-      "name" : "name",
-      "isForex" : true,
-      "description" : "description",
-      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "isSignalsAvailable" : true,
-      "type" : "Undefined",
-      "leverages" : [ 5, 5 ],
-      "minimumDepositsAmount" : {
-        "key" : 5.637376656633329
-      },
-      "currencies" : [ "currencies", "currencies" ]
-    }, {
-      "name" : "name",
-      "isForex" : true,
-      "description" : "description",
-      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "isSignalsAvailable" : true,
-      "type" : "Undefined",
-      "leverages" : [ 5, 5 ],
-      "minimumDepositsAmount" : {
-        "key" : 5.637376656633329
-      },
-      "currencies" : [ "currencies", "currencies" ]
-    } ],
-    "isSignalsAvailable" : true,
-    "tags" : [ {
-      "color" : "color",
-      "name" : "name"
-    }, {
-      "color" : "color",
-      "name" : "name"
-    } ]
-  }, {
-    "leverageMin" : 6,
-    "leverageMax" : 1,
-    "assets" : "assets",
-    "terms" : "terms",
-    "fee" : 0.8008281904610115,
-    "name" : "name",
-    "isForex" : true,
-    "description" : "description",
-    "logo" : "logo",
-    "accountTypes" : [ {
-      "name" : "name",
-      "isForex" : true,
-      "description" : "description",
-      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "isSignalsAvailable" : true,
-      "type" : "Undefined",
-      "leverages" : [ 5, 5 ],
-      "minimumDepositsAmount" : {
-        "key" : 5.637376656633329
-      },
-      "currencies" : [ "currencies", "currencies" ]
-    }, {
-      "name" : "name",
-      "isForex" : true,
-      "description" : "description",
-      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "isSignalsAvailable" : true,
-      "type" : "Undefined",
-      "leverages" : [ 5, 5 ],
-      "minimumDepositsAmount" : {
-        "key" : 5.637376656633329
-      },
-      "currencies" : [ "currencies", "currencies" ]
-    } ],
-    "isSignalsAvailable" : true,
-    "tags" : [ {
-      "color" : "color",
-      "name" : "name"
-    }, {
-      "color" : "color",
-      "name" : "name"
-    } ]
-  } ]
-}}]
-
-     - returns: RequestBuilder<BrokersInfo> 
-     */
-    open class func v10BrokersGetWithRequestBuilder() -> RequestBuilder<BrokersInfo> {
-        let path = "/v1.0/brokers"
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-
-
-        let requestBuilder: RequestBuilder<BrokersInfo>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }

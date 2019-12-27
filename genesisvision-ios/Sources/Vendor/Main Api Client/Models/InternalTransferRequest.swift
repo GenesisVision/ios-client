@@ -11,34 +11,16 @@ import Foundation
 
 open class InternalTransferRequest: Codable {
 
-    public enum SourceType: String, Codable { 
-        case undefined = "Undefined"
-        case wallet = "Wallet"
-        case copyTradingAccount = "CopyTradingAccount"
-        case genesisVisionPlatform = "GenesisVisionPlatform"
-        case signalProviderSettings = "SignalProviderSettings"
-        case program = "Program"
-        case fund = "Fund"
-    }
-    public enum DestinationType: String, Codable { 
-        case undefined = "Undefined"
-        case wallet = "Wallet"
-        case copyTradingAccount = "CopyTradingAccount"
-        case genesisVisionPlatform = "GenesisVisionPlatform"
-        case signalProviderSettings = "SignalProviderSettings"
-        case program = "Program"
-        case fund = "Fund"
-    }
     public var sourceId: UUID?
-    public var sourceType: SourceType?
+    public var sourceType: InternalTransferRequestType?
     public var destinationId: UUID?
-    public var destinationType: DestinationType?
+    public var destinationType: InternalTransferRequestType?
     public var amount: Double?
     public var transferAll: Bool?
 
 
     
-    public init(sourceId: UUID?, sourceType: SourceType?, destinationId: UUID?, destinationType: DestinationType?, amount: Double?, transferAll: Bool?) {
+    public init(sourceId: UUID?, sourceType: InternalTransferRequestType?, destinationId: UUID?, destinationType: InternalTransferRequestType?, amount: Double?, transferAll: Bool?) {
         self.sourceId = sourceId
         self.sourceType = sourceType
         self.destinationId = destinationId
@@ -68,9 +50,9 @@ open class InternalTransferRequest: Codable {
         let container = try decoder.container(keyedBy: String.self)
 
         sourceId = try container.decodeIfPresent(UUID.self, forKey: "sourceId")
-        sourceType = try container.decodeIfPresent(SourceType.self, forKey: "sourceType")
+        sourceType = try container.decodeIfPresent(InternalTransferRequestType.self, forKey: "sourceType")
         destinationId = try container.decodeIfPresent(UUID.self, forKey: "destinationId")
-        destinationType = try container.decodeIfPresent(DestinationType.self, forKey: "destinationType")
+        destinationType = try container.decodeIfPresent(InternalTransferRequestType.self, forKey: "destinationType")
         amount = try container.decodeIfPresent(Double.self, forKey: "amount")
         transferAll = try container.decodeIfPresent(Bool.self, forKey: "transferAll")
     }

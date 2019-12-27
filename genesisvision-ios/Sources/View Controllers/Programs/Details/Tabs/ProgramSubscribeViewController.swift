@@ -217,7 +217,6 @@ class ProgramSubscribeViewController: BaseViewController {
     
     private func showFollowTypes() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alert.view.tintColor = UIColor.Cell.headerBg
         
         let firstAction = UIAlertAction(title: "By balance", style: .default) { [weak self] (action) in
             self?.viewModel.changeMode(.byBalance)
@@ -242,7 +241,6 @@ class ProgramSubscribeViewController: BaseViewController {
     
     private func showUnfollowTypes() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alert.view.tintColor = UIColor.Cell.headerBg
         
         let firstAction = UIAlertAction(title: "Manual closing", style: .default) { [weak self] (action) in
             self?.viewModel.changeReason(._none)

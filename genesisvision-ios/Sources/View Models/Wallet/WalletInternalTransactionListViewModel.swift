@@ -160,9 +160,9 @@ extension WalletInternalTransactionListViewModel {
     /// Save [WalletTransaction] and total -> Return [WalletTransactionTableViewCellViewModel] or error
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [WalletTransactionTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         
-        let currency = WalletAPI.Currency_v10WalletMultiTransactionsGet(rawValue: wallet?.currency?.rawValue ?? "")
+        let currency = WalletAPI.Currency_getTransactionsInternal(rawValue: wallet?.currency?.rawValue ?? "")
         
-        WalletDataProvider.getMultiTransactions(currency: currency, skip: skip, take: take, completion: { (transactionsViewModel) in
+        WalletDataProvider.getTransactions(currency: currency, skip: skip, take: take, completion: { (transactionsViewModel) in
             guard transactionsViewModel != nil else {
                 return ErrorHandler.handleApiError(error: nil, completion: completionError)
             }
@@ -170,7 +170,7 @@ extension WalletInternalTransactionListViewModel {
             
             let totalCount = transactionsViewModel?.total ?? 0
             
-            transactionsViewModel?.transactions?.forEach({ (walletTransaction) in
+            transactionsViewModel?.items?.forEach({ (walletTransaction) in
                 let viewModel = WalletTransactionTableViewCellViewModel(walletTransaction: walletTransaction)
                 viewModels.append(viewModel)
             })

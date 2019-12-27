@@ -12,101 +12,120 @@ import Alamofire
 
 open class FundsAPI {
     /**
-     Get all supported assets for funds
+     Add to favorites
      
+     - parameter id: (path)  
+     - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10FundsAssetsGet(completion: @escaping ((_ data: PlatformAssets?,_ error: Error?) -> Void)) {
-        v10FundsAssetsGetWithRequestBuilder().execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func addToFavorites(id: UUID, authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
+        addToFavoritesWithRequestBuilder(id: id, authorization: authorization).execute { (response, error) -> Void in
+            completion(error);
         }
     }
 
 
     /**
-     Get all supported assets for funds
-     - GET /v1.0/funds/assets
-     - examples: [{contentType=application/json, example={
-  "assets" : [ {
-    "mandatoryFundPercent" : 6.84685269835264,
-    "color" : "color",
-    "name" : "name",
-    "icon" : "icon",
-    "description" : "description",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "asset" : "asset"
-  }, {
-    "mandatoryFundPercent" : 6.84685269835264,
-    "color" : "color",
-    "name" : "name",
-    "icon" : "icon",
-    "description" : "description",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "asset" : "asset"
-  } ]
-}}]
-
-     - returns: RequestBuilder<PlatformAssets> 
-     */
-    open class func v10FundsAssetsGetWithRequestBuilder() -> RequestBuilder<PlatformAssets> {
-        let path = "/v1.0/funds/assets"
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-
-
-        let requestBuilder: RequestBuilder<PlatformAssets>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    /**
-     Fund assets info
+     Add to favorites
+     - POST /v2.0/funds/{id}/favorite/add
      
      - parameter id: (path)  
-     - parameter completion: completion handler to receive the data and the error objects
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<Void> 
      */
-    open class func v10FundsByIdAssetsGet(id: UUID, completion: @escaping ((_ data: FundAssetsListInfo?,_ error: Error?) -> Void)) {
-        v10FundsByIdAssetsGetWithRequestBuilder(id: id).execute { (response, error) -> Void in
-            completion(response?.body, error);
-        }
-    }
-
-
-    /**
-     Fund assets info
-     - GET /v1.0/funds/{id}/assets
-     - examples: [{contentType=application/json, example={
-  "assets" : [ {
-    "symbol" : "symbol",
-    "current" : 6.027456183070403,
-    "icon" : "icon",
-    "asset" : "asset",
-    "target" : 0.8008281904610115
-  }, {
-    "symbol" : "symbol",
-    "current" : 6.027456183070403,
-    "icon" : "icon",
-    "asset" : "asset",
-    "target" : 0.8008281904610115
-  } ]
-}}]
-     
-     - parameter id: (path)  
-
-     - returns: RequestBuilder<FundAssetsListInfo> 
-     */
-    open class func v10FundsByIdAssetsGetWithRequestBuilder(id: UUID) -> RequestBuilder<FundAssetsListInfo> {
-        var path = "/v1.0/funds/{id}/assets"
+    open class func addToFavoritesWithRequestBuilder(id: UUID, authorization: String) -> RequestBuilder<Void> {
+        var path = "/v2.0/funds/{id}/favorite/add"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
 
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
-        let requestBuilder: RequestBuilder<FundAssetsListInfo>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     * enum for parameter currency
+     */
+    public enum Currency_getFundAbsoluteProfitChart: String { 
+        case usd = "USD"
+        case btc = "BTC"
+        case eth = "ETH"
+        case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
+        case bnb = "BNB"
+        case eur = "EUR"
+    }
+
+    /**
+     Fund absolute profit chart
+     
+     - parameter id: (path)  
+     - parameter dateFrom: (query)  (optional)
+     - parameter dateTo: (query)  (optional)
+     - parameter maxPointCount: (query)  (optional)
+     - parameter currency: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getFundAbsoluteProfitChart(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency_getFundAbsoluteProfitChart? = nil, completion: @escaping ((_ data: AbsoluteProfitChart?,_ error: Error?) -> Void)) {
+        getFundAbsoluteProfitChartWithRequestBuilder(id: id, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Fund absolute profit chart
+     - GET /v2.0/funds/{id}/charts/profit/absolute
+     - examples: [{contentType=application/json, example={
+  "profit" : 0.8008281904610115,
+  "chart" : [ {
+    "date" : 0,
+    "value" : 6.027456183070403
+  }, {
+    "date" : 0,
+    "value" : 6.027456183070403
+  } ]
+}}]
+     
+     - parameter id: (path)  
+     - parameter dateFrom: (query)  (optional)
+     - parameter dateTo: (query)  (optional)
+     - parameter maxPointCount: (query)  (optional)
+     - parameter currency: (query)  (optional)
+
+     - returns: RequestBuilder<AbsoluteProfitChart> 
+     */
+    open class func getFundAbsoluteProfitChartWithRequestBuilder(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency_getFundAbsoluteProfitChart? = nil) -> RequestBuilder<AbsoluteProfitChart> {
+        var path = "/v2.0/funds/{id}/charts/profit/absolute"
+        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "DateFrom": dateFrom?.encodeToJSON(), 
+            "DateTo": dateTo?.encodeToJSON(), 
+            "MaxPointCount": maxPointCount?.encodeToJSON(), 
+            "Currency": currency?.rawValue
+        ])
+        
+
+        let requestBuilder: RequestBuilder<AbsoluteProfitChart>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
@@ -114,19 +133,19 @@ open class FundsAPI {
     /**
      * enum for parameter currency
      */
-    public enum Currency_v10FundsByIdChartsBalanceGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
+    public enum Currency_getFundBalanceChart: String { 
+        case usd = "USD"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
         case doge = "DOGE"
         case bnb = "BNB"
-        case usd = "USD"
         case eur = "EUR"
     }
 
@@ -140,8 +159,8 @@ open class FundsAPI {
      - parameter currency: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10FundsByIdChartsBalanceGet(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency_v10FundsByIdChartsBalanceGet? = nil, completion: @escaping ((_ data: FundBalanceChart?,_ error: Error?) -> Void)) {
-        v10FundsByIdChartsBalanceGetWithRequestBuilder(id: id, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency).execute { (response, error) -> Void in
+    open class func getFundBalanceChart(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency_getFundBalanceChart? = nil, completion: @escaping ((_ data: FundBalanceChart?,_ error: Error?) -> Void)) {
+        getFundBalanceChartWithRequestBuilder(id: id, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -149,20 +168,19 @@ open class FundsAPI {
 
     /**
      Fund balance chart
-     - GET /v1.0/funds/{id}/charts/balance
+     - GET /v2.0/funds/{id}/charts/balance
      - examples: [{contentType=application/json, example={
-  "usdBalance" : 6.027456183070403,
-  "balance" : 1.4658129805029452,
-  "balanceChart" : [ {
-    "date" : "2000-01-23T04:56:07.000+00:00",
-    "investorsFunds" : 5.637376656633329,
-    "managerFunds" : 5.962133916683182
+  "balance" : 0.8008281904610115,
+  "color" : "color",
+  "chart" : [ {
+    "date" : 6,
+    "investorsFunds" : 5.962133916683182,
+    "managerFunds" : 1.4658129805029452
   }, {
-    "date" : "2000-01-23T04:56:07.000+00:00",
-    "investorsFunds" : 5.637376656633329,
-    "managerFunds" : 5.962133916683182
-  } ],
-  "gvtBalance" : 0.8008281904610115
+    "date" : 6,
+    "investorsFunds" : 5.962133916683182,
+    "managerFunds" : 1.4658129805029452
+  } ]
 }}]
      
      - parameter id: (path)  
@@ -173,8 +191,8 @@ open class FundsAPI {
 
      - returns: RequestBuilder<FundBalanceChart> 
      */
-    open class func v10FundsByIdChartsBalanceGetWithRequestBuilder(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency_v10FundsByIdChartsBalanceGet? = nil) -> RequestBuilder<FundBalanceChart> {
-        var path = "/v1.0/funds/{id}/charts/balance"
+    open class func getFundBalanceChartWithRequestBuilder(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency_getFundBalanceChart? = nil) -> RequestBuilder<FundBalanceChart> {
+        var path = "/v2.0/funds/{id}/charts/balance"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -196,285 +214,52 @@ open class FundsAPI {
     /**
      * enum for parameter currency
      */
-    public enum Currency_v10FundsByIdChartsProfitGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
+    public enum Currency_getFundDetails: String { 
+        case usd = "USD"
         case btc = "BTC"
-        case ada = "ADA"
+        case eth = "ETH"
         case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
         case xrp = "XRP"
         case bch = "BCH"
         case ltc = "LTC"
         case doge = "DOGE"
         case bnb = "BNB"
-        case usd = "USD"
         case eur = "EUR"
     }
 
     /**
-     Fund profit chart
-     
-     - parameter id: (path)  
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter maxPointCount: (query)  (optional)
-     - parameter currency: (query)  (optional)
-     - parameter chartAssetsCount: (query)  (optional, default to 3)
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func v10FundsByIdChartsProfitGet(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency_v10FundsByIdChartsProfitGet? = nil, chartAssetsCount: Int? = nil, completion: @escaping ((_ data: FundProfitChart?,_ error: Error?) -> Void)) {
-        v10FundsByIdChartsProfitGetWithRequestBuilder(id: id, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency, chartAssetsCount: chartAssetsCount).execute { (response, error) -> Void in
-            completion(response?.body, error);
-        }
-    }
-
-
-    /**
-     Fund profit chart
-     - GET /v1.0/funds/{id}/charts/profit
-     - examples: [{contentType=application/json, example={
-  "profitChangePercent" : 6.878052220127876,
-  "calmarRatio" : 3.353193347011243,
-  "timeframeGvtProfit" : 0.8851374739011653,
-  "timeframeUsdProfit" : 9.018348186070783,
-  "maxDrawdown" : 3.0937452626664474,
-  "creationDate" : "2000-01-23T04:56:07.000+00:00",
-  "equityChart" : [ {
-    "date" : "2000-01-23T04:56:07.000+00:00",
-    "value" : 0.8008281904610115
-  }, {
-    "date" : "2000-01-23T04:56:07.000+00:00",
-    "value" : 0.8008281904610115
-  } ],
-  "investors" : 6,
-  "totalGvtProfit" : 7.143538047012306,
-  "sortinoRatio" : 6.704019297950036,
-  "rebalances" : 6,
-  "profitPercent" : 3.5571952270680973,
-  "assetsStates" : [ {
-    "otherPercent" : 1.284659006116532,
-    "assets" : [ {
-      "color" : "color",
-      "icon" : "icon",
-      "name" : "name",
-      "asset" : "asset",
-      "percent" : 6.965117697638846
-    }, {
-      "color" : "color",
-      "icon" : "icon",
-      "name" : "name",
-      "asset" : "asset",
-      "percent" : 6.965117697638846
-    } ],
-    "dateFrom" : "2000-01-23T04:56:07.000+00:00"
-  }, {
-    "otherPercent" : 1.284659006116532,
-    "assets" : [ {
-      "color" : "color",
-      "icon" : "icon",
-      "name" : "name",
-      "asset" : "asset",
-      "percent" : 6.965117697638846
-    }, {
-      "color" : "color",
-      "icon" : "icon",
-      "name" : "name",
-      "asset" : "asset",
-      "percent" : 6.965117697638846
-    } ],
-    "dateFrom" : "2000-01-23T04:56:07.000+00:00"
-  } ],
-  "balance" : 2.8841621266687802,
-  "rate" : 7.058770351582356,
-  "totalUsdProfit" : 8.762042012749001,
-  "sharpeRatio" : 5.944895607614016
-}}]
-     
-     - parameter id: (path)  
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter maxPointCount: (query)  (optional)
-     - parameter currency: (query)  (optional)
-     - parameter chartAssetsCount: (query)  (optional, default to 3)
-
-     - returns: RequestBuilder<FundProfitChart> 
-     */
-    open class func v10FundsByIdChartsProfitGetWithRequestBuilder(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency_v10FundsByIdChartsProfitGet? = nil, chartAssetsCount: Int? = nil) -> RequestBuilder<FundProfitChart> {
-        var path = "/v1.0/funds/{id}/charts/profit"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "DateFrom": dateFrom?.encodeToJSON(), 
-            "DateTo": dateTo?.encodeToJSON(), 
-            "MaxPointCount": maxPointCount?.encodeToJSON(), 
-            "Currency": currency?.rawValue, 
-            "chartAssetsCount": chartAssetsCount?.encodeToJSON()
-        ])
-        
-
-        let requestBuilder: RequestBuilder<FundProfitChart>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    /**
-     Add to favorites
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func v10FundsByIdFavoriteAddPost(id: UUID, authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
-        v10FundsByIdFavoriteAddPostWithRequestBuilder(id: id, authorization: authorization).execute { (response, error) -> Void in
-            completion(error);
-        }
-    }
-
-
-    /**
-     Add to favorites
-     - POST /v1.0/funds/{id}/favorite/add
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-
-     - returns: RequestBuilder<Void> 
-     */
-    open class func v10FundsByIdFavoriteAddPostWithRequestBuilder(id: UUID, authorization: String) -> RequestBuilder<Void> {
-        var path = "/v1.0/funds/{id}/favorite/add"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
-
-        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
-    }
-
-    /**
-     Remove from favorites
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func v10FundsByIdFavoriteRemovePost(id: UUID, authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
-        v10FundsByIdFavoriteRemovePostWithRequestBuilder(id: id, authorization: authorization).execute { (response, error) -> Void in
-            completion(error);
-        }
-    }
-
-
-    /**
-     Remove from favorites
-     - POST /v1.0/funds/{id}/favorite/remove
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-
-     - returns: RequestBuilder<Void> 
-     */
-    open class func v10FundsByIdFavoriteRemovePostWithRequestBuilder(id: UUID, authorization: String) -> RequestBuilder<Void> {
-        var path = "/v1.0/funds/{id}/favorite/remove"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
-
-        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
-    }
-
-    /**
-     * enum for parameter currency
-     */
-    public enum Currency_v10FundsByIdGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
-        case btc = "BTC"
-        case ada = "ADA"
-        case usdt = "USDT"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case usd = "USD"
-        case eur = "EUR"
-    }
-
-    /**
-     Funds details
+     Fund details
      
      - parameter id: (path)  
      - parameter authorization: (header)  (optional)
      - parameter currency: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10FundsByIdGet(id: String, authorization: String? = nil, currency: Currency_v10FundsByIdGet? = nil, completion: @escaping ((_ data: FundDetailsFull?,_ error: Error?) -> Void)) {
-        v10FundsByIdGetWithRequestBuilder(id: id, authorization: authorization, currency: currency).execute { (response, error) -> Void in
+    open class func getFundDetails(id: String, authorization: String? = nil, currency: Currency_getFundDetails? = nil, completion: @escaping ((_ data: FundDetailsFull?,_ error: Error?) -> Void)) {
+        getFundDetailsWithRequestBuilder(id: id, authorization: authorization, currency: currency).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
 
 
     /**
-     Funds details
-     - GET /v1.0/funds/{id}
+     Fund details
+     - GET /v2.0/funds/{id}
      - examples: [{contentType=application/json, example={
-  "entryFee" : 0.8008281904610115,
-  "statistic" : {
-    "balanceGVT" : {
-      "amount" : 3.616076749251911,
-      "currency" : "Undefined"
-    },
-    "balance" : {
-      "amount" : 3.616076749251911,
-      "currency" : "Undefined"
-    },
-    "profitPercent" : 5.962133916683182,
-    "rebalancingCount" : 3,
-    "investedAmount" : 9.301444243932576,
-    "drawdownPercent" : 5.637376656633329,
-    "startDate" : "2000-01-23T04:56:07.000+00:00",
-    "startBalance" : 7.061401241503109,
-    "balanceSecondary" : {
-      "amount" : 3.616076749251911,
-      "currency" : "Undefined"
-    },
-    "investorsCount" : 2
-  },
-  "color" : "color",
-  "manager" : {
+  "owner" : {
     "socialLinks" : [ {
       "name" : "name",
       "logo" : "logo",
-      "type" : "Twitter",
+      "type" : { },
       "value" : "value",
       "url" : "url"
     }, {
       "name" : "name",
       "logo" : "logo",
-      "type" : "Twitter",
+      "type" : { },
       "value" : "value",
       "url" : "url"
     } ],
@@ -484,52 +269,55 @@ open class FundsAPI {
     "url" : "url",
     "username" : "username"
   },
-  "description" : "description",
-  "title" : "title",
-  "creationDate" : "2000-01-23T04:56:07.000+00:00",
-  "currentAssets" : [ {
-    "color" : "color",
+  "entryFeeCurrent" : 6.027456183070403,
+  "exitFeeSelected" : 1.4658129805029452,
+  "assetsStructure" : [ {
+    "symbol" : "symbol",
+    "current" : 2.3021358869347655,
     "icon" : "icon",
-    "name" : "name",
     "asset" : "asset",
-    "percent" : 6.965117697638846
+    "target" : 5.637376656633329
   }, {
-    "color" : "color",
+    "symbol" : "symbol",
+    "current" : 2.3021358869347655,
     "icon" : "icon",
-    "name" : "name",
     "asset" : "asset",
-    "percent" : 6.965117697638846
+    "target" : 5.637376656633329
   } ],
-  "personalFundDetails" : {
-    "canCloseAsset" : true,
-    "canCloseProgram" : true,
+  "publicInfo" : {
+    "typeExt" : { },
+    "color" : "color",
+    "description" : "description",
+    "logo" : "logo",
+    "isOwnAsset" : true,
+    "title" : "title",
+    "creationDate" : "2000-01-23T04:56:07.000+00:00",
+    "url" : "url",
+    "status" : "status"
+  },
+  "exitFeeCurrent" : 5.962133916683182,
+  "entryFeeSelected" : 0.8008281904610115,
+  "personalDetails" : {
+    "exitFeePersonal" : 7.386281948385884,
+    "pendingInOutCurrency" : "USD",
     "canWithdraw" : true,
-    "pendingOutputIsWithdrawAll" : true,
-    "nextReallocationPercents" : "2000-01-23T04:56:07.000+00:00",
     "canInvest" : true,
-    "canClosePeriod" : true,
-    "canReallocate" : true,
-    "pendingOutput" : 0.8851374739011653,
+    "nextReallocationPercents" : "2000-01-23T04:56:07.000+00:00",
+    "ownerActions" : {
+      "canClose" : true,
+      "canReallocate" : true
+    },
+    "pendingOutput" : 3.616076749251911,
     "hasNotifications" : true,
-    "pendingInput" : 7.143538047012306,
-    "isOwnProgram" : true,
-    "availableReallocationPercents" : 5,
-    "isFinishing" : true,
-    "value" : 6.704019297950036,
-    "profit" : 3.353193347011243,
-    "withdrawPercent" : 6.878052220127876,
-    "invested" : 3.0937452626664474,
+    "pendingInput" : 9.301444243932576,
+    "availableReallocationPercents" : 4,
+    "value" : 7.061401241503109,
+    "withdrawPercent" : 2.027123023002322,
     "isFavorite" : true,
     "isInvested" : true,
-    "status" : "Pending"
+    "status" : { }
   },
-  "url" : "url",
-  "exitFee" : 6.027456183070403,
-  "managementFee" : 1.4658129805029452,
-  "ipfsHash" : "ipfsHash",
-  "logo" : "logo",
-  "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-  "status" : "None"
+  "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
 }}]
      
      - parameter id: (path)  
@@ -538,8 +326,8 @@ open class FundsAPI {
 
      - returns: RequestBuilder<FundDetailsFull> 
      */
-    open class func v10FundsByIdGetWithRequestBuilder(id: String, authorization: String? = nil, currency: Currency_v10FundsByIdGet? = nil) -> RequestBuilder<FundDetailsFull> {
-        var path = "/v1.0/funds/{id}"
+    open class func getFundDetailsWithRequestBuilder(id: String, authorization: String? = nil, currency: Currency_getFundDetails? = nil) -> RequestBuilder<FundDetailsFull> {
+        var path = "/v2.0/funds/{id}"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -560,7 +348,358 @@ open class FundsAPI {
     }
 
     /**
-     Get history of asset part update requests.
+     * enum for parameter currency
+     */
+    public enum Currency_getFundProfitPercentCharts: String { 
+        case usd = "USD"
+        case btc = "BTC"
+        case eth = "ETH"
+        case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
+        case bnb = "BNB"
+        case eur = "EUR"
+    }
+
+    /**
+     Fund profit percent charts
+     
+     - parameter id: (path)  
+     - parameter dateFrom: (query)  (optional)
+     - parameter dateTo: (query)  (optional)
+     - parameter maxPointCount: (query)  (optional)
+     - parameter currency: (query)  (optional)
+     - parameter currencies: (query)  (optional)
+     - parameter chartAssetsCount: (query)  (optional, default to 3)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getFundProfitPercentCharts(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency_getFundProfitPercentCharts? = nil, currencies: [String]? = nil, chartAssetsCount: Int? = nil, completion: @escaping ((_ data: FundProfitPercentCharts?,_ error: Error?) -> Void)) {
+        getFundProfitPercentChartsWithRequestBuilder(id: id, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency, currencies: currencies, chartAssetsCount: chartAssetsCount).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Fund profit percent charts
+     - GET /v2.0/funds/{id}/charts/profit/percent
+     - examples: [{contentType=application/json, example={
+  "statistic" : {
+    "calmarRatio" : 2.3021358869347655,
+    "balance" : 6.027456183070403,
+    "profitPercent" : 1.4658129805029452,
+    "maxDrawdown" : 7.061401241503109,
+    "sharpeRatio" : 5.962133916683182,
+    "creationDate" : "2000-01-23T04:56:07.000+00:00",
+    "investors" : 0,
+    "sortinoRatio" : 5.637376656633329
+  },
+  "charts" : [ {
+    "color" : "color",
+    "currency" : { },
+    "chart" : [ {
+      "date" : 0,
+      "value" : 6.027456183070403
+    }, {
+      "date" : 0,
+      "value" : 6.027456183070403
+    } ]
+  }, {
+    "color" : "color",
+    "currency" : { },
+    "chart" : [ {
+      "date" : 0,
+      "value" : 6.027456183070403
+    }, {
+      "date" : 0,
+      "value" : 6.027456183070403
+    } ]
+  } ],
+  "assets" : [ {
+    "date" : 9,
+    "assets" : [ {
+      "color" : "color",
+      "icon" : "icon",
+      "name" : "name",
+      "asset" : "asset",
+      "percent" : 2.027123023002322
+    }, {
+      "color" : "color",
+      "icon" : "icon",
+      "name" : "name",
+      "asset" : "asset",
+      "percent" : 2.027123023002322
+    } ],
+    "value" : 3.616076749251911
+  }, {
+    "date" : 9,
+    "assets" : [ {
+      "color" : "color",
+      "icon" : "icon",
+      "name" : "name",
+      "asset" : "asset",
+      "percent" : 2.027123023002322
+    }, {
+      "color" : "color",
+      "icon" : "icon",
+      "name" : "name",
+      "asset" : "asset",
+      "percent" : 2.027123023002322
+    } ],
+    "value" : 3.616076749251911
+  } ]
+}}]
+     
+     - parameter id: (path)  
+     - parameter dateFrom: (query)  (optional)
+     - parameter dateTo: (query)  (optional)
+     - parameter maxPointCount: (query)  (optional)
+     - parameter currency: (query)  (optional)
+     - parameter currencies: (query)  (optional)
+     - parameter chartAssetsCount: (query)  (optional, default to 3)
+
+     - returns: RequestBuilder<FundProfitPercentCharts> 
+     */
+    open class func getFundProfitPercentChartsWithRequestBuilder(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency_getFundProfitPercentCharts? = nil, currencies: [String]? = nil, chartAssetsCount: Int? = nil) -> RequestBuilder<FundProfitPercentCharts> {
+        var path = "/v2.0/funds/{id}/charts/profit/percent"
+        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "DateFrom": dateFrom?.encodeToJSON(), 
+            "DateTo": dateTo?.encodeToJSON(), 
+            "MaxPointCount": maxPointCount?.encodeToJSON(), 
+            "Currency": currency?.rawValue, 
+            "currencies": currencies, 
+            "chartAssetsCount": chartAssetsCount?.encodeToJSON()
+        ])
+        
+
+        let requestBuilder: RequestBuilder<FundProfitPercentCharts>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     * enum for parameter sorting
+     */
+    public enum Sorting_getFunds: String { 
+        case byTitleAsc = "ByTitleAsc"
+        case byTitleDesc = "ByTitleDesc"
+        case bySizeAsc = "BySizeAsc"
+        case bySizeDesc = "BySizeDesc"
+        case byInvestorsAsc = "ByInvestorsAsc"
+        case byInvestorsDesc = "ByInvestorsDesc"
+        case byDrawdownAsc = "ByDrawdownAsc"
+        case byDrawdownDesc = "ByDrawdownDesc"
+        case byProfitAsc = "ByProfitAsc"
+        case byProfitDesc = "ByProfitDesc"
+        case byNewAsc = "ByNewAsc"
+        case byNewDesc = "ByNewDesc"
+        case byValueAsc = "ByValueAsc"
+        case byValueDesc = "ByValueDesc"
+    }
+
+    /**
+     * enum for parameter showIn
+     */
+    public enum ShowIn_getFunds: String { 
+        case usd = "USD"
+        case btc = "BTC"
+        case eth = "ETH"
+        case usdt = "USDT"
+        case gvt = "GVT"
+        case undefined = "Undefined"
+        case ada = "ADA"
+        case xrp = "XRP"
+        case bch = "BCH"
+        case ltc = "LTC"
+        case doge = "DOGE"
+        case bnb = "BNB"
+        case eur = "EUR"
+    }
+
+    /**
+     Funds list
+     
+     - parameter authorization: (header)  (optional)
+     - parameter sorting: (query)  (optional)
+     - parameter showIn: (query)  (optional)
+     - parameter assets: (query)  (optional)
+     - parameter dateFrom: (query)  (optional)
+     - parameter dateTo: (query)  (optional)
+     - parameter chartPointsCount: (query)  (optional)
+     - parameter facetId: (query)  (optional)
+     - parameter mask: (query)  (optional)
+     - parameter ownerId: (query)  (optional)
+     - parameter showFavorites: (query)  (optional)
+     - parameter skip: (query)  (optional)
+     - parameter take: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getFunds(authorization: String? = nil, sorting: Sorting_getFunds? = nil, showIn: ShowIn_getFunds? = nil, assets: [String]? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ItemsViewModelFundDetailsListItem?,_ error: Error?) -> Void)) {
+        getFundsWithRequestBuilder(authorization: authorization, sorting: sorting, showIn: showIn, assets: assets, dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, facetId: facetId, mask: mask, ownerId: ownerId, showFavorites: showFavorites, skip: skip, take: take).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Funds list
+     - GET /v2.0/funds
+     - examples: [{contentType=application/json, example={
+  "total" : 4,
+  "items" : [ {
+    "owner" : {
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "url" : "url",
+      "username" : "username"
+    },
+    "totalAssetsCount" : 2,
+    "statistic" : {
+      "drawdown" : 5.637376656633329,
+      "chart" : [ {
+        "date" : 0,
+        "value" : 6.027456183070403
+      }, {
+        "date" : 0,
+        "value" : 6.027456183070403
+      } ],
+      "profit" : 5.962133916683182
+    },
+    "color" : "color",
+    "topFundAssets" : [ {
+      "name" : "name",
+      "icon" : "icon",
+      "asset" : "asset",
+      "percent" : 1.4658129805029452
+    }, {
+      "name" : "name",
+      "icon" : "icon",
+      "asset" : "asset",
+      "percent" : 1.4658129805029452
+    } ],
+    "description" : "description",
+    "title" : "title",
+    "creationDate" : "2000-01-23T04:56:07.000+00:00",
+    "url" : "url",
+    "balance" : {
+      "amount" : 9.301444243932576,
+      "currency" : { }
+    },
+    "logo" : "logo",
+    "personalDetails" : {
+      "isOwnAsset" : true,
+      "isFavorite" : true
+    },
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "investorsCount" : 3,
+    "status" : "status"
+  }, {
+    "owner" : {
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "url" : "url",
+      "username" : "username"
+    },
+    "totalAssetsCount" : 2,
+    "statistic" : {
+      "drawdown" : 5.637376656633329,
+      "chart" : [ {
+        "date" : 0,
+        "value" : 6.027456183070403
+      }, {
+        "date" : 0,
+        "value" : 6.027456183070403
+      } ],
+      "profit" : 5.962133916683182
+    },
+    "color" : "color",
+    "topFundAssets" : [ {
+      "name" : "name",
+      "icon" : "icon",
+      "asset" : "asset",
+      "percent" : 1.4658129805029452
+    }, {
+      "name" : "name",
+      "icon" : "icon",
+      "asset" : "asset",
+      "percent" : 1.4658129805029452
+    } ],
+    "description" : "description",
+    "title" : "title",
+    "creationDate" : "2000-01-23T04:56:07.000+00:00",
+    "url" : "url",
+    "balance" : {
+      "amount" : 9.301444243932576,
+      "currency" : { }
+    },
+    "logo" : "logo",
+    "personalDetails" : {
+      "isOwnAsset" : true,
+      "isFavorite" : true
+    },
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "investorsCount" : 3,
+    "status" : "status"
+  } ]
+}}]
+     
+     - parameter authorization: (header)  (optional)
+     - parameter sorting: (query)  (optional)
+     - parameter showIn: (query)  (optional)
+     - parameter assets: (query)  (optional)
+     - parameter dateFrom: (query)  (optional)
+     - parameter dateTo: (query)  (optional)
+     - parameter chartPointsCount: (query)  (optional)
+     - parameter facetId: (query)  (optional)
+     - parameter mask: (query)  (optional)
+     - parameter ownerId: (query)  (optional)
+     - parameter showFavorites: (query)  (optional)
+     - parameter skip: (query)  (optional)
+     - parameter take: (query)  (optional)
+
+     - returns: RequestBuilder<ItemsViewModelFundDetailsListItem> 
+     */
+    open class func getFundsWithRequestBuilder(authorization: String? = nil, sorting: Sorting_getFunds? = nil, showIn: ShowIn_getFunds? = nil, assets: [String]? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ItemsViewModelFundDetailsListItem> {
+        let path = "/v2.0/funds"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "Sorting": sorting?.rawValue, 
+            "ShowIn": showIn?.rawValue, 
+            "Assets": assets, 
+            "DateFrom": dateFrom?.encodeToJSON(), 
+            "DateTo": dateTo?.encodeToJSON(), 
+            "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
+            "FacetId": facetId, 
+            "Mask": mask, 
+            "OwnerId": ownerId, 
+            "ShowFavorites": showFavorites, 
+            "Skip": skip?.encodeToJSON(), 
+            "Take": take?.encodeToJSON()
+        ])
+        
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<ItemsViewModelFundDetailsListItem>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     Get history of asset part update requests
      
      - parameter id: (path)  
      - parameter dateFrom: (query)  (optional)
@@ -569,32 +708,32 @@ open class FundsAPI {
      - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10FundsByIdReallocationsGet(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ReallocationsViewModel?,_ error: Error?) -> Void)) {
-        v10FundsByIdReallocationsGetWithRequestBuilder(id: id, dateFrom: dateFrom, dateTo: dateTo, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func getReallocatingHistory(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ItemsViewModelReallocationModel?,_ error: Error?) -> Void)) {
+        getReallocatingHistoryWithRequestBuilder(id: id, dateFrom: dateFrom, dateTo: dateTo, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
 
 
     /**
-     Get history of asset part update requests.
-     - GET /v1.0/funds/{id}/reallocations
+     Get history of asset part update requests
+     - GET /v2.0/funds/{id}/reallocations
      - examples: [{contentType=application/json, example={
   "total" : 0,
-  "reallocations" : [ {
+  "items" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "parts" : [ {
       "color" : "color",
       "icon" : "icon",
       "name" : "name",
       "asset" : "asset",
-      "percent" : 6.965117697638846
+      "percent" : 2.027123023002322
     }, {
       "color" : "color",
       "icon" : "icon",
       "name" : "name",
       "asset" : "asset",
-      "percent" : 6.965117697638846
+      "percent" : 2.027123023002322
     } ]
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
@@ -603,13 +742,13 @@ open class FundsAPI {
       "icon" : "icon",
       "name" : "name",
       "asset" : "asset",
-      "percent" : 6.965117697638846
+      "percent" : 2.027123023002322
     }, {
       "color" : "color",
       "icon" : "icon",
       "name" : "name",
       "asset" : "asset",
-      "percent" : 6.965117697638846
+      "percent" : 2.027123023002322
     } ]
   } ]
 }}]
@@ -620,10 +759,10 @@ open class FundsAPI {
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
 
-     - returns: RequestBuilder<ReallocationsViewModel> 
+     - returns: RequestBuilder<ItemsViewModelReallocationModel> 
      */
-    open class func v10FundsByIdReallocationsGetWithRequestBuilder(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ReallocationsViewModel> {
-        var path = "/v1.0/funds/{id}/reallocations"
+    open class func getReallocatingHistoryWithRequestBuilder(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ItemsViewModelReallocationModel> {
+        var path = "/v2.0/funds/{id}/reallocations"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -637,411 +776,37 @@ open class FundsAPI {
         ])
         
 
-        let requestBuilder: RequestBuilder<ReallocationsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<ItemsViewModelReallocationModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
-     * enum for parameter sorting
-     */
-    public enum Sorting_v10FundsGet: String { 
-        case byProfitAsc = "ByProfitAsc"
-        case byProfitDesc = "ByProfitDesc"
-        case byDrawdownAsc = "ByDrawdownAsc"
-        case byDrawdownDesc = "ByDrawdownDesc"
-        case byInvestorsAsc = "ByInvestorsAsc"
-        case byInvestorsDesc = "ByInvestorsDesc"
-        case byNewAsc = "ByNewAsc"
-        case byNewDesc = "ByNewDesc"
-        case byTitleAsc = "ByTitleAsc"
-        case byTitleDesc = "ByTitleDesc"
-        case byBalanceAsc = "ByBalanceAsc"
-        case byBalanceDesc = "ByBalanceDesc"
-    }
-
-    /**
-     * enum for parameter currencySecondary
-     */
-    public enum CurrencySecondary_v10FundsGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
-        case btc = "BTC"
-        case ada = "ADA"
-        case usdt = "USDT"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case usd = "USD"
-        case eur = "EUR"
-    }
-
-    /**
-     * enum for parameter currency
-     */
-    public enum Currency_v10FundsGet: String { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
-        case btc = "BTC"
-        case ada = "ADA"
-        case usdt = "USDT"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case usd = "USD"
-        case eur = "EUR"
-    }
-
-    /**
-     * enum for parameter status
-     */
-    public enum Status_v10FundsGet: String { 
-        case _none = "None"
-        case pending = "Pending"
-        case errorCreating = "ErrorCreating"
-        case active = "Active"
-        case closed = "Closed"
-        case archived = "Archived"
-        case closedDueToInactivity = "ClosedDueToInactivity"
-    }
-
-    /**
-     Funds list
+     Remove from favorites
      
-     - parameter authorization: (header)  (optional)
-     - parameter sorting: (query)  (optional)
-     - parameter currencySecondary: (query)  (optional)
-     - parameter currency: (query)  (optional)
-     - parameter assets: (query)  (optional)
-     - parameter statisticDateFrom: (query)  (optional)
-     - parameter statisticDateTo: (query)  (optional)
-     - parameter chartPointsCount: (query)  (optional)
-     - parameter mask: (query)  (optional)
-     - parameter facetId: (query)  (optional)
-     - parameter isFavorite: (query)  (optional)
-     - parameter isEnabled: (query)  (optional)
-     - parameter hasInvestorsForAll: (query)  (optional)
-     - parameter hasInvestorsForClosed: (query)  (optional)
-     - parameter ids: (query)  (optional)
-     - parameter forceUseIdsList: (query)  (optional)
-     - parameter managerId: (query)  (optional)
-     - parameter programManagerId: (query)  (optional)
-     - parameter status: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
+     - parameter id: (path)  
+     - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10FundsGet(authorization: String? = nil, sorting: Sorting_v10FundsGet? = nil, currencySecondary: CurrencySecondary_v10FundsGet? = nil, currency: Currency_v10FundsGet? = nil, assets: [String]? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, isEnabled: Bool? = nil, hasInvestorsForAll: Bool? = nil, hasInvestorsForClosed: Bool? = nil, ids: [UUID]? = nil, forceUseIdsList: Bool? = nil, managerId: String? = nil, programManagerId: UUID? = nil, status: [String]? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: FundsList?,_ error: Error?) -> Void)) {
-        v10FundsGetWithRequestBuilder(authorization: authorization, sorting: sorting, currencySecondary: currencySecondary, currency: currency, assets: assets, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: chartPointsCount, mask: mask, facetId: facetId, isFavorite: isFavorite, isEnabled: isEnabled, hasInvestorsForAll: hasInvestorsForAll, hasInvestorsForClosed: hasInvestorsForClosed, ids: ids, forceUseIdsList: forceUseIdsList, managerId: managerId, programManagerId: programManagerId, status: status, skip: skip, take: take).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func removeFromFavorites(id: UUID, authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
+        removeFromFavoritesWithRequestBuilder(id: id, authorization: authorization).execute { (response, error) -> Void in
+            completion(error);
         }
     }
 
 
     /**
-     Funds list
-     - GET /v1.0/funds
-     - examples: [{contentType=application/json, example={
-  "total" : 7,
-  "funds" : [ {
-    "totalAssetsCount" : 3,
-    "statistic" : {
-      "balanceGVT" : {
-        "amount" : 3.616076749251911,
-        "currency" : "Undefined"
-      },
-      "balance" : {
-        "amount" : 3.616076749251911,
-        "currency" : "Undefined"
-      },
-      "profitPercent" : 1.284659006116532,
-      "drawdownPercent" : 2.8841621266687802,
-      "balanceSecondary" : {
-        "amount" : 3.616076749251911,
-        "currency" : "Undefined"
-      },
-      "investorsCount" : 6
-    },
-    "color" : "color",
-    "manager" : {
-      "socialLinks" : [ {
-        "name" : "name",
-        "logo" : "logo",
-        "type" : "Twitter",
-        "value" : "value",
-        "url" : "url"
-      }, {
-        "name" : "name",
-        "logo" : "logo",
-        "type" : "Twitter",
-        "value" : "value",
-        "url" : "url"
-      } ],
-      "registrationDate" : "2000-01-23T04:56:07.000+00:00",
-      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "avatar" : "avatar",
-      "url" : "url",
-      "username" : "username"
-    },
-    "topFundAssets" : [ {
-      "name" : "name",
-      "icon" : "icon",
-      "asset" : "asset",
-      "percent" : 6.965117697638846
-    }, {
-      "name" : "name",
-      "icon" : "icon",
-      "asset" : "asset",
-      "percent" : 6.965117697638846
-    } ],
-    "description" : "description",
-    "title" : "title",
-    "creationDate" : "2000-01-23T04:56:07.000+00:00",
-    "url" : "url",
-    "dashboardAssetsDetails" : {
-      "share" : 9.301444243932576
-    },
-    "personalDetails" : {
-      "canCloseAsset" : true,
-      "canCloseProgram" : true,
-      "canWithdraw" : true,
-      "pendingOutputIsWithdrawAll" : true,
-      "nextReallocationPercents" : "2000-01-23T04:56:07.000+00:00",
-      "canInvest" : true,
-      "canClosePeriod" : true,
-      "canReallocate" : true,
-      "pendingOutput" : 0.8851374739011653,
-      "hasNotifications" : true,
-      "pendingInput" : 7.143538047012306,
-      "isOwnProgram" : true,
-      "availableReallocationPercents" : 5,
-      "isFinishing" : true,
-      "value" : 6.704019297950036,
-      "profit" : 3.353193347011243,
-      "withdrawPercent" : 6.878052220127876,
-      "invested" : 3.0937452626664474,
-      "isFavorite" : true,
-      "isInvested" : true,
-      "status" : "Pending"
-    },
-    "logo" : "logo",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "chart" : [ {
-      "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 0.8008281904610115
-    }, {
-      "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 0.8008281904610115
-    } ],
-    "status" : "None"
-  }, {
-    "totalAssetsCount" : 3,
-    "statistic" : {
-      "balanceGVT" : {
-        "amount" : 3.616076749251911,
-        "currency" : "Undefined"
-      },
-      "balance" : {
-        "amount" : 3.616076749251911,
-        "currency" : "Undefined"
-      },
-      "profitPercent" : 1.284659006116532,
-      "drawdownPercent" : 2.8841621266687802,
-      "balanceSecondary" : {
-        "amount" : 3.616076749251911,
-        "currency" : "Undefined"
-      },
-      "investorsCount" : 6
-    },
-    "color" : "color",
-    "manager" : {
-      "socialLinks" : [ {
-        "name" : "name",
-        "logo" : "logo",
-        "type" : "Twitter",
-        "value" : "value",
-        "url" : "url"
-      }, {
-        "name" : "name",
-        "logo" : "logo",
-        "type" : "Twitter",
-        "value" : "value",
-        "url" : "url"
-      } ],
-      "registrationDate" : "2000-01-23T04:56:07.000+00:00",
-      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "avatar" : "avatar",
-      "url" : "url",
-      "username" : "username"
-    },
-    "topFundAssets" : [ {
-      "name" : "name",
-      "icon" : "icon",
-      "asset" : "asset",
-      "percent" : 6.965117697638846
-    }, {
-      "name" : "name",
-      "icon" : "icon",
-      "asset" : "asset",
-      "percent" : 6.965117697638846
-    } ],
-    "description" : "description",
-    "title" : "title",
-    "creationDate" : "2000-01-23T04:56:07.000+00:00",
-    "url" : "url",
-    "dashboardAssetsDetails" : {
-      "share" : 9.301444243932576
-    },
-    "personalDetails" : {
-      "canCloseAsset" : true,
-      "canCloseProgram" : true,
-      "canWithdraw" : true,
-      "pendingOutputIsWithdrawAll" : true,
-      "nextReallocationPercents" : "2000-01-23T04:56:07.000+00:00",
-      "canInvest" : true,
-      "canClosePeriod" : true,
-      "canReallocate" : true,
-      "pendingOutput" : 0.8851374739011653,
-      "hasNotifications" : true,
-      "pendingInput" : 7.143538047012306,
-      "isOwnProgram" : true,
-      "availableReallocationPercents" : 5,
-      "isFinishing" : true,
-      "value" : 6.704019297950036,
-      "profit" : 3.353193347011243,
-      "withdrawPercent" : 6.878052220127876,
-      "invested" : 3.0937452626664474,
-      "isFavorite" : true,
-      "isInvested" : true,
-      "status" : "Pending"
-    },
-    "logo" : "logo",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "chart" : [ {
-      "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 0.8008281904610115
-    }, {
-      "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 0.8008281904610115
-    } ],
-    "status" : "None"
-  } ]
-}}]
+     Remove from favorites
+     - POST /v2.0/funds/{id}/favorite/remove
      
-     - parameter authorization: (header)  (optional)
-     - parameter sorting: (query)  (optional)
-     - parameter currencySecondary: (query)  (optional)
-     - parameter currency: (query)  (optional)
-     - parameter assets: (query)  (optional)
-     - parameter statisticDateFrom: (query)  (optional)
-     - parameter statisticDateTo: (query)  (optional)
-     - parameter chartPointsCount: (query)  (optional)
-     - parameter mask: (query)  (optional)
-     - parameter facetId: (query)  (optional)
-     - parameter isFavorite: (query)  (optional)
-     - parameter isEnabled: (query)  (optional)
-     - parameter hasInvestorsForAll: (query)  (optional)
-     - parameter hasInvestorsForClosed: (query)  (optional)
-     - parameter ids: (query)  (optional)
-     - parameter forceUseIdsList: (query)  (optional)
-     - parameter managerId: (query)  (optional)
-     - parameter programManagerId: (query)  (optional)
-     - parameter status: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
-
-     - returns: RequestBuilder<FundsList> 
-     */
-    open class func v10FundsGetWithRequestBuilder(authorization: String? = nil, sorting: Sorting_v10FundsGet? = nil, currencySecondary: CurrencySecondary_v10FundsGet? = nil, currency: Currency_v10FundsGet? = nil, assets: [String]? = nil, statisticDateFrom: Date? = nil, statisticDateTo: Date? = nil, chartPointsCount: Int? = nil, mask: String? = nil, facetId: String? = nil, isFavorite: Bool? = nil, isEnabled: Bool? = nil, hasInvestorsForAll: Bool? = nil, hasInvestorsForClosed: Bool? = nil, ids: [UUID]? = nil, forceUseIdsList: Bool? = nil, managerId: String? = nil, programManagerId: UUID? = nil, status: [String]? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<FundsList> {
-        let path = "/v1.0/funds"
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "Sorting": sorting?.rawValue, 
-            "CurrencySecondary": currencySecondary?.rawValue, 
-            "Currency": currency?.rawValue, 
-            "Assets": assets, 
-            "StatisticDateFrom": statisticDateFrom?.encodeToJSON(), 
-            "StatisticDateTo": statisticDateTo?.encodeToJSON(), 
-            "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
-            "Mask": mask, 
-            "FacetId": facetId, 
-            "IsFavorite": isFavorite, 
-            "IsEnabled": isEnabled, 
-            "HasInvestorsForAll": hasInvestorsForAll, 
-            "HasInvestorsForClosed": hasInvestorsForClosed, 
-            "Ids": ids, 
-            "ForceUseIdsList": forceUseIdsList, 
-            "ManagerId": managerId, 
-            "ProgramManagerId": programManagerId, 
-            "Status": status, 
-            "Skip": skip?.encodeToJSON(), 
-            "Take": take?.encodeToJSON()
-        ])
-        
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
-
-        let requestBuilder: RequestBuilder<FundsList>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
-    }
-
-    /**
-     Fund sets
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func v10FundsSetsGet(authorization: String, completion: @escaping ((_ data: FundSets?,_ error: Error?) -> Void)) {
-        v10FundsSetsGetWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
-            completion(response?.body, error);
-        }
-    }
-
-
-    /**
-     Fund sets
-     - GET /v1.0/funds/sets
-     - examples: [{contentType=application/json, example={
-  "sets" : [ {
-    "timeframe" : "Day",
-    "sortType" : "New",
-    "sorting" : "ByProfitAsc",
-    "description" : "description",
-    "logo" : "logo",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "title" : "title",
-    "url" : "url"
-  }, {
-    "timeframe" : "Day",
-    "sortType" : "New",
-    "sorting" : "ByProfitAsc",
-    "description" : "description",
-    "logo" : "logo",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "title" : "title",
-    "url" : "url"
-  } ],
-  "favoritesCount" : 0
-}}]
-     
+     - parameter id: (path)  
      - parameter authorization: (header) JWT access token 
 
-     - returns: RequestBuilder<FundSets> 
+     - returns: RequestBuilder<Void> 
      */
-    open class func v10FundsSetsGetWithRequestBuilder(authorization: String) -> RequestBuilder<FundSets> {
-        let path = "/v1.0/funds/sets"
+    open class func removeFromFavoritesWithRequestBuilder(id: UUID, authorization: String) -> RequestBuilder<Void> {
+        var path = "/v2.0/funds/{id}/favorite/remove"
+        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
@@ -1052,9 +817,9 @@ open class FundsAPI {
         ]
         let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
-        let requestBuilder: RequestBuilder<FundSets>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
 }

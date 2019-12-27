@@ -70,7 +70,7 @@ class EventDetailsView: UIView {
 
             if let assetType = details.assetType {
                 switch assetType {
-                case .funds:
+                case .fund:
                     assetStackView.assetLogoImageView?.profilePhotoImageView.image = UIImage.fundPlaceholder
                 default:
                     assetStackView.assetLogoImageView?.profilePhotoImageView.image = UIImage.programPlaceholder
@@ -157,7 +157,7 @@ class EventDetailsView: UIView {
         guard let assetId = event?.assetDetails?.id?.uuidString, let type = event?.assetDetails?.assetType else { return }
         var assetType: AssetType = .program
         switch type {
-        case .funds:
+        case .fund:
             assetType = .fund
         default:
             assetType = .program

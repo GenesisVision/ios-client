@@ -27,29 +27,30 @@ final class RatingTabmanViewModel: TabmanViewModel {
         self.showFacets = showFacets
         self.dataSource = RatingPageboyViewControllerDataSource(router: router, showFacets: showFacets)
         
-        ProgramsDataProvider.getLevelUpSummary(completion: { [weak self] (levelUpSummary) in
-            self?.updateItems(levelUpSummary)
-        }) { (result) in
-            switch result {
-            case .success:
-                break
-            case .failure(let errorType):
-                print(errorType)
-                ErrorHandler.handleError(with: errorType)
-            }
-        }
+//        BaseDataProvider.getProgramsLevels(<#T##currency: PlatformAPI.Currency_getProgramLevels##PlatformAPI.Currency_getProgramLevels#>, completion: <#T##(ProgramsLevelsInfo?) -> Void#>, errorCompletion: <#T##CompletionBlock##CompletionBlock##(CompletionResult) -> Void#>)
+//        ProgramsDataProvider.getLevelUpSummary(completion: { [weak self] (levelUpSummary) in
+//            self?.updateItems(levelUpSummary)
+//        }) { (result) in
+//            switch result {
+//            case .success:
+//                break
+//            case .failure(let errorType):
+//                print(errorType)
+//                ErrorHandler.handleError(with: errorType)
+//            }
+//        }
     }
     
-    func updateItems(_ levelUpSummary: LevelUpSummary?) {
-        guard let levelUpSummary = levelUpSummary, let levelData = levelUpSummary.levelData else { return }
+    func updateItems(_ levelsInfo: ProgramsLevelsInfo?) {
+        guard let levelsInfo = levelsInfo, let levels = levelsInfo.levels else { return }
         
-        self.filterModel.levelUpSummary = levelUpSummary
+        self.filterModel.levelsInfo = levelsInfo
         self.dataSource = RatingPageboyViewControllerDataSource(router: router, showFacets: showFacets)
         
         var items: [TMBarItem] = []
-        for data in levelData {
-            if let level = data.level {
-                items.append(TMBarItem(title: "\(level) ⤍ \(level + 1)"))
+        for level in levels {
+            if let levelValue = level.level {
+                items.append(TMBarItem(title: "\(levelValue) ⤍ \(levelValue + 1)"))
             }
         }
         

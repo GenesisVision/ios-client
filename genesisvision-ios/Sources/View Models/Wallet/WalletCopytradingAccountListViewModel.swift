@@ -17,7 +17,7 @@ final class WalletCopytradingAccountListViewModel {
     // MARK: - Variables
     var title: String = "Copytrading accounts"
     var totalCount = 0
-    var accounts: [CopyTradingAccountInfo]? {
+    var accounts: [TradingAccountDetails]? {
         didSet {
             router.walletTabmanViewController?.viewModel?.accounts = accounts
         }
@@ -126,6 +126,7 @@ extension WalletCopytradingAccountListViewModel {
 // MARK: - Fetch
 extension WalletCopytradingAccountListViewModel {
     func fetch() {
+        TradingAccountDataProvider.get
         SignalDataProvider.getAccounts(completion: { [weak self] (copyTradingAccountsViewModel) in
             guard copyTradingAccountsViewModel != nil else {
                 return

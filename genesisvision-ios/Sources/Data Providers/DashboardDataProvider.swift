@@ -9,99 +9,151 @@
 import Foundation
 
 class DashboardDataProvider: DataProvider {
-    static func getDashboardSummary(chartCurrency: InvestorAPI.ChartCurrency_v10InvestorGet?, from: Date?, to: Date?, balancePoints: Int?, programsPoints: Int?, eventsTake: Int?, requestsSkip: Int?, requestsTake: Int?, completion: @escaping (_ dashboardSummary: DashboardSummary?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        
+    // MARK: - Charts
+    static func getChart(with assets: [UUID]?, dateFrom: Date?, dateTo: Date?, chartPointsCount: Int?, showIn: DashboardAPI.ShowIn_getChart?, completion: @escaping (DashboardChart?) -> Void, errorCompletion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
-        
-        InvestorAPI.v10InvestorGet(authorization: authorization, chartCurrency: chartCurrency, from: from, to: to, balancePoints: balancePoints, programsPoints: programsPoints, eventsTake: eventsTake, requestsSkip: requestsSkip, requestsTake: requestsTake) { (viewModel, error) in
+
+        DashboardAPI.getChart(authorization: authorization, assets: assets, dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, showIn: showIn) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
     
-    static func getDashboardPortfolioChart(with currency: InvestorAPI.Currency_v10InvestorPortfolioChartGet? = nil, from: Date? = nil, to: Date? = nil, completion: @escaping (_ dashboardChartValue: DashboardChartValue?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getChartAssets(completion: @escaping (DashboardChartAssets?) -> Void, errorCompletion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        InvestorAPI.v10InvestorPortfolioChartGet(authorization: authorization, currency: currency, from: from, to: to) { (viewModel, error) in
+        DashboardAPI.getChartAssets(authorization: authorization) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+      
+    // MARK: - Holdings
+    static func getHoldings(_ topAssetsCount: Int?, completion: @escaping (DashboardAssets?) -> Void, errorCompletion: @escaping CompletionBlock) {
+
+        guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+
+        DashboardAPI.getHoldings(authorization: authorization, topAssetsCount: topAssetsCount) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
     
-    static func getEvents(with programId: String? = nil, from: Date? = nil, to: Date? = nil, type: InvestorAPI.EventType_v10InvestorInvestmentsEventsGet? = nil, assetType: InvestorAPI.AssetType_v10InvestorInvestmentsEventsGet? = nil, eventLocation: InvestorAPI.EventLocation_v10InvestorInvestmentsEventsGet, skip: Int, take: Int, completion: @escaping (_ events: InvestmentEventViewModels?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        
-        guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
-        
-        var uuid: UUID?
-        
-        if let programId = programId {
-            uuid = UUID(uuidString: programId)
-        }
-        
-        InvestorAPI.v10InvestorInvestmentsEventsGet(authorization: authorization, eventLocation: eventLocation, assetId: uuid, from: from, to: to, eventType: type, assetType: assetType, skip: skip, take: take) { (viewModel, error) in
+    // MARK: - Investing
+    static func getInvesting(_ currency: CurrencyType, eventsTake: Int?, completion: @escaping (DashboardInvestingDetails?) -> Void, errorCompletion: @escaping CompletionBlock) {
+
+        guard let authorization = AuthManager.authorizedToken, let currency = DashboardAPI.Currency_getInvestingDetails(rawValue: currency.rawValue) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+
+        DashboardAPI.getInvestingDetails(authorization: authorization, currency: currency, eventsTake: eventsTake) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
     
-    static func getProgramList(with sorting: InvestorAPI.Sorting_v10InvestorProgramsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: InvestorAPI.CurrencySecondary_v10InvestorProgramsGet? = nil, onlyActive: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ programList: ProgramsList?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getInvestingFunds(_ sorting: DashboardAPI.Sorting_getInvestingFunds? = nil, currency: CurrencyType?, status: DashboardAPI.Status_getInvestingFunds? = .active, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skip: Int?, take: Int?, completion: @escaping (ItemsViewModelFundInvestingDetailsList?) -> Void, errorCompletion: @escaping CompletionBlock) {
+
         guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
-        
-        var dashboardActionStatus: InvestorAPI.DashboardActionStatus_v10InvestorProgramsGet = .all
-        
-        if let onlyActive = onlyActive {
-            dashboardActionStatus = onlyActive ? .active : .all
+
+        var showIn: DashboardAPI.ShowIn_getInvestingFunds?
+        if let currency = currency {
+            showIn = DashboardAPI.ShowIn_getInvestingFunds(rawValue: currency.rawValue)
         }
         
-        InvestorAPI.v10InvestorProgramsGet(authorization: authorization,
-                                           sorting: sorting,
-                                           from: from,
-                                           to: to,
-                                           chartPointsCount: chartPointsCount,
-                                           currencySecondary: currencySecondary,
-                                           dashboardActionStatus: dashboardActionStatus,
-                                           skip: skip,
-                                           take: take) { (programList, error) in
-                                            DataProvider().responseHandler(programList, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        DashboardAPI.getInvestingFunds(authorization: authorization, sorting: sorting, showIn: showIn, status: status, dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, facetId: facetId, mask: mask, ownerId: ownerId, showFavorites: showFavorites, skip: skip, take: take) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
     
-    static func getSignalList(with sorting: InvestorAPI.Sorting_v10InvestorSignalsGet? = nil, from: Date? = nil, to: Date? = nil, chartPointsCount: Int? = nil, currencySecondary: InvestorAPI.CurrencySecondary_v10InvestorSignalsGet? = nil, actionStatus: InvestorAPI.ActionStatus_v10InvestorSignalsGet? = nil, dashboardActionStatus: InvestorAPI.DashboardActionStatus_v10InvestorSignalsGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ signalList: SignalsList?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getInvestingPrograms(_ sorting: DashboardAPI.Sorting_getInvestingPrograms? = nil, currency: CurrencyType?, status: DashboardAPI.Status_getInvestingPrograms? = .active, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skip: Int?, take: Int?, completion: @escaping (ItemsViewModelProgramInvestingDetailsList?) -> Void, errorCompletion: @escaping CompletionBlock) {
+
         guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+
+        var showIn: DashboardAPI.ShowIn_getInvestingPrograms?
+        if let currency = currency {
+            showIn = DashboardAPI.ShowIn_getInvestingPrograms(rawValue: currency.rawValue)
+        }
         
-        InvestorAPI.v10InvestorSignalsGet(authorization: authorization,
-                                           sorting: sorting,
-                                           from: from,
-                                           to: to,
-                                           chartPointsCount: chartPointsCount,
-                                           currencySecondary: currencySecondary,
-                                           actionStatus: actionStatus,
-                                           dashboardActionStatus: dashboardActionStatus,
-                                           skip: skip,
-                                           take: take) { (signalList, error) in
-                                            DataProvider().responseHandler(signalList, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        DashboardAPI.getInvestingPrograms(authorization: authorization, sorting: sorting, showIn: showIn, status: status, dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, facetId: facetId, mask: mask, ownerId: ownerId, showFavorites: showFavorites, skip: skip, take: take) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
     
-    static func getFundList(_ filterModel: FilterModel? = nil, currencySecondary: InvestorAPI.CurrencySecondary_v10InvestorFundsGet? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ programList: FundsList?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    // MARK: - Portfolio
+    static func getPortfolio(completion: @escaping (DashboardPortfolio?) -> Void, errorCompletion: @escaping CompletionBlock) {
+
         guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+
+        DashboardAPI.getPortfolio(authorization: authorization) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
+    // MARK: - Recommendations
+    static func getRecommendations(_ currency: CurrencyType, take: Int? = nil, completion: @escaping (CommonPublicAssetsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+
+        guard let authorization = AuthManager.authorizedToken, let currency = DashboardAPI.Currency_getRecommendations(rawValue: currency.rawValue) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+
+        DashboardAPI.getRecommendations(authorization: authorization, currency: currency, take: take) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
+    // MARK: - Summary
+    static func getSummary(_ currency: CurrencyType, completion: @escaping (DashboardSummary?) -> Void, errorCompletion: @escaping CompletionBlock) {
+
+        guard let authorization = AuthManager.authorizedToken, let currency = DashboardAPI.Currency_getSummary(rawValue: currency.rawValue) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+
         
-        let from = filterModel?.dateRangeModel.dateFrom
-        let to = filterModel?.dateRangeModel.dateTo
-        
-        var dashboardActionStatus: InvestorAPI.DashboardActionStatus_v10InvestorFundsGet = .all
-        
-        if let onlyActive = filterModel?.onlyActive {
-            dashboardActionStatus = onlyActive ? .active : .all
+        DashboardAPI.getSummary(authorization: authorization, currency: currency) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
+    // MARK: - Trading
+    static func getTrading(_ currency: CurrencyType, eventsTake: Int?, completion: @escaping (DashboardTradingDetails?) -> Void, errorCompletion: @escaping CompletionBlock) {
+
+        guard let authorization = AuthManager.authorizedToken, let currency = DashboardAPI.Currency_getTradingDetails(rawValue: currency.rawValue) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+
+        DashboardAPI.getTradingDetails(authorization: authorization, currency: currency, eventsTake: eventsTake) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
+    static func getMostProfitable(_ dateFrom: Date?, dateTo: Date?, chartPointsCount: Int?, currency: CurrencyType?, completion: @escaping (ItemsViewModelDashboardTradingAsset?) -> Void, errorCompletion: @escaping CompletionBlock) {
+
+        guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+
+        var showIn: DashboardAPI.ShowIn_getMostProfitableAssets?
+        if let currency = currency {
+            showIn = DashboardAPI.ShowIn_getMostProfitableAssets(rawValue: currency.rawValue)
         }
         
-        InvestorAPI.v10InvestorFundsGet(authorization: authorization,
-                                        sorting: nil,
-                                        from: from,
-                                        to: to,
-                                        chartPointsCount: nil,
-                                        currencySecondary: currencySecondary,
-                                        dashboardActionStatus: dashboardActionStatus,
-                                        skip: skip,
-                                        take: take) { (fundList, error) in
-                                            DataProvider().responseHandler(fundList, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        DashboardAPI.getMostProfitableAssets(authorization: authorization, dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, showIn: showIn) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
+    static func getPrivateTrading(_ dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, currency: CurrencyType?, status: DashboardAPI.Status_getPrivateTradingAssets? = .active, skip: Int?, take: Int?, completion: @escaping (ItemsViewModelDashboardTradingAsset?) -> Void, errorCompletion: @escaping CompletionBlock) {
+
+        guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        var showIn: DashboardAPI.ShowIn_getPrivateTradingAssets?
+        if let currency = currency {
+            showIn = DashboardAPI.ShowIn_getPrivateTradingAssets(rawValue: currency.rawValue)
+        }
+        
+        DashboardAPI.getPrivateTradingAssets(authorization: authorization, dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, showIn: showIn, status: status, skip: skip, take: take) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
+    static func getPublicTrading(_ dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, currency: CurrencyType?, status: DashboardAPI.Status_getPublicTradingAssets? = .active, skip: Int?, take: Int?, completion: @escaping (ItemsViewModelDashboardTradingAsset?) -> Void, errorCompletion: @escaping CompletionBlock) {
+
+        guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+
+        var showIn: DashboardAPI.ShowIn_getPublicTradingAssets?
+        if let currency = currency {
+            showIn = DashboardAPI.ShowIn_getPublicTradingAssets(rawValue: currency.rawValue)
+        }
+        
+        DashboardAPI.getPublicTradingAssets(authorization: authorization, dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, showIn: showIn, status: status, skip: skip, take: take) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
 }

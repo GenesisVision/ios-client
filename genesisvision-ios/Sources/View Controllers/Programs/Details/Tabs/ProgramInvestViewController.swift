@@ -246,9 +246,10 @@ class ProgramInvestViewController: BaseViewController {
         var subtitle = ""
         guard let currency = viewModel.selectedWalletFromDelegateManager?.selected?.currency else { return }
         
-        if let periodEnds = viewModel.programInvestInfo?.periodEnds?.defaultFormatString {
-            subtitle = "Your request will be processed at the end of the reporting period \(periodEnds)."
-        }
+        //FIXME:
+//        if let periodEnds = viewModel.programInvestInfo?.periodEnds?.defaultFormatString {
+//            subtitle = "Your request will be processed at the end of the reporting period \(periodEnds)."
+//        }
         
         var firstValue: String?
         if let amount = amountToInvestValueLabel.text {

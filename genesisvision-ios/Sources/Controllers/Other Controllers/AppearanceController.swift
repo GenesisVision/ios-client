@@ -152,6 +152,9 @@ struct AppearanceController {
     
     // TabBar
     private static func setupTabBar() {
+        UITabBar.appearance().layer.borderWidth = 0.0
+        UITabBar.appearance().clipsToBounds = true
+        
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.TabBar.unselected,
                                                           NSAttributedString.Key.font: UIFont.getFont(.bold, size: 8)], for: .normal)
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.TabBar.tint,

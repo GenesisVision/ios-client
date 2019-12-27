@@ -111,17 +111,18 @@ class WalletDepositViewController: BaseViewController {
         addressLabel.text = viewModel.getAddress()
         qrImageView.image = viewModel.getQRImage()
         
-        if let selectedWallet = viewModel.selectedWallet, let currency = selectedWallet.currency, let rateToGVT = selectedWallet.rateToGVT {
-            let currency = CurrencyType(rawValue: currency.rawValue) ?? .gvt
-            
-            amountToDepositCurrencyLabel.text = currency.rawValue
-            
-            amountToDepositGVTValueLabel.text = (amountToDepositValue / rateToGVT).rounded(with: .gvt).toString() + " " + Constants.gvtString
-            
-            if let title = selectedWallet.title {
-                selectedWalletCurrencyValueLabel.text = title + " | " + currency.rawValue
-            }
-        }
+        //FIXME:
+//        if let selectedWallet = viewModel.selectedWallet, let currency = selectedWallet.currency, let rateToGVT = selectedWallet.rateToGVT {
+//            let currency = CurrencyType(rawValue: currency.rawValue) ?? .gvt
+//            
+//            amountToDepositCurrencyLabel.text = currency.rawValue
+//            
+//            amountToDepositGVTValueLabel.text = (amountToDepositValue / rateToGVT).rounded(with: .gvt).toString() + " " + Constants.gvtString
+//            
+//            if let title = selectedWallet.title {
+//                selectedWalletCurrencyValueLabel.text = title + " | " + currency.rawValue
+//            }
+//        }
         
         if let walletCurrencyDelegateManager = viewModel?.walletCurrencyDelegateManager {
             walletCurrencyDelegateManager.currencyDelegate = self

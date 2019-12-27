@@ -150,13 +150,13 @@ class PortfolioViewController: BaseViewController {
                 changeCurrencyLabel.text = changeValueCurrency.rounded(with: selectedCurrency).toString() + " \(getSelectedCurrency())"
             }
         
-            if let programRequests = viewModel.programRequests {
+            if let requests = viewModel.requests {
                 inRequestsTitleLabel.text = "In Requests"
-                if let totalValue = programRequests.totalValue {
+                if let totalValue = requests.totalValue {
                     inRequestsValueLabel.text = totalValue.rounded(with: .gvt).toString() + " " + Constants.gvtString
                 }
                 
-                if let totalValue = programRequests.totalValue, let rate = dashboardChartValue.rate, let selectedCurrency = CurrencyType(rawValue: getSelectedCurrency()) {
+                if let totalValue = requests.totalValue, let rate = dashboardChartValue.rate, let selectedCurrency = CurrencyType(rawValue: getSelectedCurrency()) {
                     let inRequestsCurrency = totalValue * rate
                     inRequestsCurrencyLabel.text = inRequestsCurrency.rounded(with: selectedCurrency).toString() + " \(getSelectedCurrency())"
                 }
@@ -199,7 +199,7 @@ class PortfolioViewController: BaseViewController {
             topConstraint.isActive = true
         }
 
-        if let programRequests = viewModel.programRequests, let requests = programRequests.requests, requests.count == 0, inRequestsStackView.isHidden { return }
+        if let requests = viewModel.requests, let items = requests.items, items.count == 0, inRequestsStackView.isHidden { return }
         
         self.inRequestsButton.isHidden = value
         self.inRequestsStackView.isHidden = value
@@ -234,7 +234,7 @@ class PortfolioViewController: BaseViewController {
         }
         
         if let chartSimple = results.1, let selectedValue = chartSimple.value {
-            if let firstChartSimple = viewModel.dashboardChartValue?.balanceChart?.first, let firstValue = firstChartSimple.value, let rate = viewModel.dashboardChartValue?.rate {
+            if let firstSimpleChartPoint = viewModel.dashboardChartValue?.balanceChart?.first, let firstValue = firstSimpleChartPoint.value, let rate = viewModel.dashboardChartValue?.rate {
                 
                 let selectedValueInCurrency = selectedValue * rate
                 let changeValue = selectedValue - firstValue

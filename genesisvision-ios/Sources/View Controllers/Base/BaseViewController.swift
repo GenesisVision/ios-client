@@ -56,11 +56,7 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
         return BottomSheetController()
     }()
     
-    var currencyDelegateManager: CurrencyDelegateManager?
-    
     var refreshControl: UIRefreshControl?
-    
-    var navigationTitleView: NavigationTitleView?
     
     var sortButton: ActionButton = {
         let btn = ActionButton(type: .system)
@@ -174,12 +170,6 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
         view.backgroundColor = UIColor.BaseView.bg
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        updateCurrencyButtonTitle()
-    }
-    
     // MARK: - Public Methods
     func scrollToTop(_ scrollView: UIScrollView) {
         if let tableView = scrollView as? UITableView {
@@ -192,20 +182,6 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
     
     func updateData(from dateFrom: Date?, to dateTo: Date?) {
         //fetch()
-    }
-    
-    func addCurrencyTitleButton(_ currencyDelegateManager: CurrencyDelegateManager?) {
-        navigationTitleView?.currencyTitleButton.addTarget(target, action: action, for: .touchUpInside)
-        self.currencyDelegateManager = currencyDelegateManager
-        currencyDelegateManager?.currencyDelegate = self
-        
-        navigationItem.titleView = navigationTitleView
-    }
-    
-    func updateCurrencyButtonTitle() {
-        let selectedCurrency = getSelectedCurrency()
-        navigationTitleView?.currencyTitleButton.setTitle(selectedCurrency, for: .normal)
-        navigationTitleView?.currencyTitleButton.sizeToFit()
     }
     
     @objc func dateRangeButtonAction() {
@@ -256,27 +232,6 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
         bottomViewType = .none
         
         setupAutoLayout()
-    }
-    
-    @objc private func currencyButtonAction() {
-        currencyDelegateManager?.updateSelectedIndex()
-        bottomSheetController = BottomSheetController()
-        bottomSheetController.initializeHeight = 250.0
-        
-        bottomSheetController.addNavigationBar("Preferred currency")
-        
-        bottomSheetController.addTableView { [weak self] tableView in
-            currencyDelegateManager?.tableView = tableView
-            tableView.separatorStyle = .none
-            
-            guard let currencyDelegateManager = self?.currencyDelegateManager else { return }
-            currencyDelegateManager.loadCurrencies()
-            tableView.registerNibs(for: currencyDelegateManager.cellModelsForRegistration)
-            tableView.delegate = currencyDelegateManager
-            tableView.dataSource = currencyDelegateManager
-        }
-        
-        bottomSheetController.present()
     }
     
     func showBottomSheet(_ type: ErrorBottomSheetViewType, title: String? = nil, subtitle: String? = nil, initializeHeight: CGFloat? = 300.0, completion: SuccessCompletionBlock? = nil) {
@@ -415,7 +370,6 @@ extension BaseViewController: DateRangeViewProtocol {
     
     func showDatePicker(from dateFrom: Date, to dateTo: Date, isFrom: Bool) {
         let alert = UIAlertController(style: .actionSheet, title: nil, message: nil)
-        alert.view.tintColor = UIColor.Cell.headerBg
         
         if isFrom {
             alert.addDatePicker(mode: .date, date: dateFrom, minimumDate: nil, maximumDate: Date()) { [weak self] date in
@@ -435,25 +389,6 @@ extension BaseViewController: DateRangeViewProtocol {
         
         alert.addAction(title: "Done", style: .cancel)
         bottomSheetController.present(viewController: alert)
-    }
-}
-
-extension BaseViewController: CurrencyDelegateManagerDelegate {
-    func didSelectCurrency(at indexPath: IndexPath) {
-        updateCurrencyButtonTitle()
-        pullToRefresh()
-        
-        bottomSheetController.dismiss()
-    }
-}
-
-extension BaseViewController: CurrencyTitleButtonProtocol {
-    var target: Any? {
-        return self
-    }
-    
-    var action: Selector! {
-        return #selector(currencyButtonAction)
     }
 }
 

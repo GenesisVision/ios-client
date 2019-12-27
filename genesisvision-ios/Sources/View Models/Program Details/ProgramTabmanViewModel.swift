@@ -13,13 +13,13 @@ final class ProgramTabmanViewModel: TabmanViewModel {
     // MARK: - Variables
     var programId: String!
     
-    var programDetailsFull: ProgramDetailsFull?
+    var programDetailsFull: ProgramFollowDetailsFull?
 
-    var сurrency: ProgramsAPI.CurrencySecondary_v10ProgramsByIdGet?
+    var сurrency: ProgramsAPI.ProgramCurrency_getPrograms?
     weak var favoriteStateUpdatedProtocol: FavoriteStateUpdatedProtocol?
     
     var isFavorite: Bool {
-        return programDetailsFull?.personalProgramDetails?.isFavorite ?? false
+        return programDetailsFull?.programDetails?.personalDetails?.isFavorite ?? false
     }
     
     // MARK: - Init
@@ -28,7 +28,7 @@ final class ProgramTabmanViewModel: TabmanViewModel {
         
         super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0)
         
-        сurrency = ProgramsAPI.CurrencySecondary_v10ProgramsByIdGet(rawValue: getSelectedCurrency())
+        сurrency = ProgramsAPI.ProgramCurrency_getPrograms(rawValue: selectedPlatformCurrency)
         title = "Program Details"
         backgroundColor = UIColor.Cell.bg
     }
@@ -40,13 +40,13 @@ final class ProgramTabmanViewModel: TabmanViewModel {
         }
     }
     
-    func updateDetails(_ programDetailsFull: ProgramDetailsFull) {
+    func updateDetails(_ programDetailsFull: ProgramFollowDetailsFull) {
         if let vc = viewControllers.first as? ProgramInfoViewController {
             vc.viewModel.updateDetails(with: programDetailsFull)
         }
     }
     
-    func setup(_ viewModel: ProgramDetailsFull? = nil) {
+    func setup(_ viewModel: ProgramFollowDetailsFull? = nil) {
         removeAllControllers()
         
         if let viewModel = viewModel {
@@ -56,6 +56,7 @@ final class ProgramTabmanViewModel: TabmanViewModel {
         self.items = []
         
         if let router = router as? ProgramTabmanRouter, let programDetailsFull = programDetailsFull {
+            let programDetails = programDetailsFull.programDetails
             if let vc = router.getInfo(with: programDetailsFull) {
                 self.items?.append(TMBarItem(title: vc.viewModel.title.uppercased()))
                 self.addController(vc)
@@ -70,8 +71,11 @@ final class ProgramTabmanViewModel: TabmanViewModel {
                 self.items?.append(TMBarItem(title: vc.viewModel.title.uppercased()))
                 self.addController(vc)
             }
-            
-            if let tradesCount = programDetailsFull.statistic?.tradesCount, tradesCount > 0, let currency = programDetailsFull.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency), let tradesVC = router.getTrades(with: programId, currencyType: currencyType), let openTradesVC = router.getTradesOpen(with: programId, currencyType: currencyType) {
+
+            if let currency = programDetailsFull.tradingAccountInfo?.currency?.rawValue,
+                let currencyType = CurrencyType(rawValue: currency),
+                let tradesVC = router.getTrades(with: programId, currencyType: currencyType),
+                let openTradesVC = router.getTradesOpen(with: programId, currencyType: currencyType) {
                 self.items?.append(TMBarItem(title: openTradesVC.viewModel.title.uppercased()))
                 self.addController(openTradesVC)
                 
@@ -79,12 +83,12 @@ final class ProgramTabmanViewModel: TabmanViewModel {
                 self.addController(tradesVC)
             }
             
-            if let currency = programDetailsFull.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency), let vc = router.getPeriodHistory(with: programId, currency: currencyType) {
+            if let currency = programDetailsFull.tradingAccountInfo?.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency), let vc = router.getPeriodHistory(with: programId, currency: currencyType) {
                 self.items?.append(TMBarItem(title: vc.viewModel.title.uppercased()))
                 self.addController(vc)
             }
             
-            if let _ = programDetailsFull.personalProgramDetails, let vc = router.getEvents(with: programId) {
+            if let _ = programDetails?.personalDetails, let vc = router.getEvents(with: programId) {
                 self.items?.append(TMBarItem(title: vc.viewModel.title.uppercased()))
                 self.addController(vc)
             }

@@ -36,30 +36,19 @@ final class ProgramInfoViewModel {
     var requestSkip = 0
     var requestTake = ApiKeys.take
     
-    private var equityChart: [ChartSimple]?
-    public private(set) var programDetailsFull: ProgramDetailsFull? {
+    private var equityChart: [SimpleChartPoint]?
+    public private(set) var signalSubscription: SignalSubscription?
+    public private(set) var programDetailsFull: ProgramFollowDetailsFull? {
         didSet {
             sections = [.details, .investNow]
             
-            if let availableInvestment = programDetailsFull?.availableInvestmentBase {
+            if let availableInvestment = programDetailsFull?.programDetails?.availableInvestmentBase {
                 self.availableInvestment = availableInvestment
             }
             
-            if let isInvested = programDetailsFull?.personalProgramDetails?.isInvested, isInvested, let status = programDetailsFull?.personalProgramDetails?.status, status != .ended {
+            if let isInvested = programDetailsFull?.programDetails?.personalDetails?.isInvested, isInvested, let status = programDetailsFull?.programDetails?.personalDetails?.status, status != .ended {
                 if !sections.contains(.yourInvestment) {
                     sections.insert(.yourInvestment, at: 1)
-                }
-            }
-            
-            if signalEnable, let hasActiveSubscription = programDetailsFull?.personalProgramDetails?.signalSubscription?.hasActiveSubscription, hasActiveSubscription {
-                if !sections.contains(.subscriptionDetail) {
-                    sections.insert(.subscriptionDetail, at: 1)
-                }
-            }
-            
-            if signalEnable, let isSignalProgram = programDetailsFull?.isSignalProgram, isSignalProgram {
-                if !sections.contains(.signals) {
-                    sections.insert(.signals, at: 1)
                 }
             }
         }
@@ -86,7 +75,7 @@ final class ProgramInfoViewModel {
     // MARK: - Init
     init(withRouter router: ProgramInfoRouter,
          programId: String? = nil,
-         programDetailsFull: ProgramDetailsFull? = nil,
+         programDetailsFull: ProgramFollowDetailsFull? = nil,
          reloadDataProtocol: ReloadDataProtocol? = nil) {
         self.router = router
 
@@ -160,17 +149,17 @@ final class ProgramInfoViewModel {
 extension ProgramInfoViewModel {
     // MARK: - Public methods
     func showManagerVC() {
-        guard let managerId = programDetailsFull?.manager?.id?.uuidString else { return }
+        guard let managerId = programDetailsFull?.owner?.id?.uuidString else { return }
         router.show(routeType: .manager(managerId: managerId))
     }
     
     func invest() {
-        guard let programId = programId, let currency = programDetailsFull?.currency, let programCurrency = CurrencyType(rawValue: currency.rawValue) else { return }
+        guard let programId = programId, let currency = programDetailsFull?.tradingAccountInfo?.currency, let programCurrency = CurrencyType(rawValue: currency.rawValue) else { return }
         router.show(routeType: .invest(programId: programId, programCurrency: programCurrency))
     }
     
     func withdraw() {
-        guard let programId = programId, let currency = programDetailsFull?.currency, let programCurrency = CurrencyType(rawValue: currency.rawValue) else { return }
+        guard let programId = programId, let currency = programDetailsFull?.tradingAccountInfo?.currency, let programCurrency = CurrencyType(rawValue: currency.rawValue) else { return }
         router.show(routeType: .withdraw(programId: programId, programCurrency: programCurrency))
     }
     
@@ -205,12 +194,14 @@ extension ProgramInfoViewModel {
     }
     
     private func editSubscription() {
-        guard let signalSubscription = programDetailsFull?.personalProgramDetails?.signalSubscription else { return }
-        router.show(routeType: .editSubscribe(programId: programId, signalSubscription: signalSubscription))
+        //FIXME:
+//        guard let signalSettings = programDetailsFull?.signalSettings else { return }
+//        router.show(routeType: .editSubscribe(programId: programId, signalSubscription: signalSubscription))
     }
 
+    //FIXME:
     func createAccount(completion: @escaping CreateAccountCompletionBlock) {
-        guard let programId = programId, let currency = programDetailsFull?.currency, let programCurrency = CurrencyType(rawValue: currency.rawValue) else { return }
+        guard let programId = programId, let currency = programDetailsFull?.tradingAccountInfo?.currency, let programCurrency = CurrencyType(rawValue: currency.rawValue) else { return }
         
         router.show(routeType: .createAccount(programId: programId, programCurrency: programCurrency, completion: completion))
     }
@@ -220,7 +211,7 @@ extension ProgramInfoViewModel {
 extension ProgramInfoViewModel {
     // MARK: - Public methods
     func getNickname() -> String {
-        return programDetailsFull?.manager?.username ?? ""
+        return programDetailsFull?.owner?.username ?? ""
     }
     
     /// Get TableViewCellViewModel for IndexPath
@@ -235,31 +226,28 @@ extension ProgramInfoViewModel {
             let rowType = rows[indexPath.row]
             switch rowType {
             case .manager:
-                guard let manager = programDetailsFull?.manager else { return nil }
-                return DetailManagerTableViewCellViewModel(manager: manager)
+                guard let owner = programDetailsFull?.owner else { return nil }
+                return DetailManagerTableViewCellViewModel(profilePublic: owner)
             case .statistics:
-                return DetailStatisticsTableViewCellViewModel(programDetailsFull: programDetailsFull)
+                return DetailStatisticsTableViewCellViewModel(programFollowDetailsFull: programDetailsFull)
             case .strategy:
-                return DefaultTableViewCellViewModel(title: "Strategy", subtitle: programDetailsFull?.description)
+                return DefaultTableViewCellViewModel(title: "Strategy", subtitle: programDetailsFull?.publicInfo?.description)
             case .period:
-                return ProgramPeriodTableViewCellViewModel(periodDuration: programDetailsFull?.periodDuration, periodStarts: programDetailsFull?.periodStarts, periodEnds: programDetailsFull?.periodEnds)
+                return ProgramPeriodTableViewCellViewModel(periodDuration: programDetailsFull?.programDetails?.periodDuration, periodStarts: programDetailsFull?.programDetails?.periodStarts, periodEnds: programDetailsFull?.programDetails?.periodEnds)
             }
         case .yourInvestment:
             return ProgramYourInvestmentTableViewCellViewModel(programDetailsFull: programDetailsFull, yourInvestmentProtocol: self)
         case .investNow:
             return ProgramInvestNowTableViewCellViewModel(programDetailsFull: programDetailsFull, investNowProtocol: self)
         case .signals:
-            return InfoSignalsTableViewCellViewModel(programDetailsFull: programDetailsFull, type: .signal, infoSignalsProtocol: self)
+            return InfoSignalsTableViewCellViewModel(programDetailsFull: programDetailsFull, infoSignalsProtocol: self)
         case .subscriptionDetail:
-            return InfoSignalsTableViewCellViewModel(programDetailsFull: programDetailsFull, type: .subscription, infoSignalsProtocol: self)
+            return InfoSubscriptionTableViewCellViewModel(signalSubscription: signalSubscription, infoSignalsProtocol: self)
         }
     }
     
     func fetch(completion: @escaping CompletionBlock) {
-        guard let currency = ProgramsAPI.CurrencySecondary_v10ProgramsByIdGet(rawValue: getSelectedCurrency()) else { return completion(.failure(errorType: .apiError(message: nil))) }
-        
-        
-        ProgramsDataProvider.get(programId: self.programId, currencySecondary: currency, completion: { [weak self] (viewModel) in
+        ProgramsDataProvider.get(self.programId, completion: { [weak self] (viewModel) in
             guard viewModel != nil else {
                 return completion(.failure(errorType: .apiError(message: nil)))
             }
@@ -270,7 +258,7 @@ extension ProgramInfoViewModel {
         }, errorCompletion: completion)
     }
     
-    func updateDetails(with programDetailsFull: ProgramDetailsFull) {
+    func updateDetails(with programDetailsFull: ProgramFollowDetailsFull) {
         self.programDetailsFull = programDetailsFull
         self.reloadDataProtocol?.didReloadData()
     }
@@ -296,9 +284,9 @@ extension ProgramInfoViewModel: YourInvestmentProtocol {
     func didTapStatusButton() {
         guard let programId = programId else { return }
         
-        ProgramsDataProvider.getRequests(with: programId, skip: requestSkip, take: requestTake, completion: { [weak self] (programRequests) in
-            if let requests = programRequests?.requests, requests.count > 0, let parentRouter = self?.router.parentRouter as? ProgramTabmanRouter, let viewController = parentRouter.programInfoViewController {
-                viewController.showRequests(programRequests)
+        ProgramsDataProvider.getRequests(with: programId, skip: requestSkip, take: requestTake, completion: { [weak self] (requests) in
+            if let items = requests?.items, items.count > 0, let parentRouter = self?.router.parentRouter as? ProgramTabmanRouter, let viewController = parentRouter.programInfoViewController {
+                viewController.showRequests(requests)
             }
         }) { (result) in
             switch result {
@@ -338,13 +326,13 @@ extension ProgramInfoViewModel: InfoSignalsProtocol {
             router.signInAction()
             return
         }
-        
-        if let hasSignalAccount = programDetailsFull?.personalProgramDetails?.signalSubscription?.hasSignalAccount, !hasSignalAccount {
+        //FIXME:
+        if let isActive = programDetailsFull?.followDetails?.signalSettings?.isActive, !isActive {
             createAccount { [weak self] (selectedCurrencyType, depositAmount) in
                 self?.subscribe(true, initialDepositCurrency: selectedCurrencyType, initialDepositAmount: depositAmount)
             }
-        } else if let isFollowSignals = programDetailsFull?.personalProgramDetails?.signalSubscription?.hasActiveSubscription {
-            subscribe(isFollowSignals)
+        } else if let isActive = programDetailsFull?.followDetails?.signalSettings?.isActive {
+            subscribe(isActive)
         }
     }
     

@@ -25,7 +25,6 @@ extension UIViewController {
     // MARK: - Alerts
     func showAlertWithTitle(_ style: UIAlertController.Style = .alert, title: String?, message: String, actionTitle: String?, cancelTitle: String?, handler: (() -> Void)?, cancelHandler: (() -> Void)?) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: style)
-        alert.view.tintColor = UIColor.Cell.headerBg
         
         if actionTitle != nil {
             let action = UIAlertAction(title: actionTitle, style: .default) { (UIAlertAction) in
@@ -50,7 +49,6 @@ extension UIViewController {
     
     func showSettingsAlert(_ message: String) {
         let alert = UIAlertController(title: String.Alerts.PrivacySettings.alertTitle, message: message, preferredStyle: .alert)
-        alert.view.tintColor = UIColor.Cell.headerBg
         alert.addAction(UIAlertAction(title: String.Alerts.PrivacySettings.settingsButtonText, style: .default, handler: { [weak self] (_ action: UIAlertAction) -> Void in
             self?.openUrl(with: UIApplication.openSettingsURLString)
         }))
@@ -61,7 +59,6 @@ extension UIViewController {
     func showNewVersionAlert(_ newVersion: String) {
         let message = String.Alerts.NewVersionUpdate.alertMessage + "\(newVersion)"
         let alert = UIAlertController(title: String.Alerts.NewVersionUpdate.alertTitle, message: message, preferredStyle: .alert)
-        alert.view.tintColor = UIColor.Cell.headerBg
         alert.addAction(UIAlertAction(title: String.Alerts.NewVersionUpdate.updateButtonText, style: .default, handler: { [weak self] (_ action: UIAlertAction) -> Void in
             self?.openUrl(with: Urls.appStoreAddress)
         }))
@@ -81,7 +78,6 @@ extension UIViewController {
     func showTwoFactorEnableAlert(completion: @escaping (_ enable: Bool) -> Void) {
         let message = String.Alerts.TwoFactorEnable.alertMessage
         let alertController = UIAlertController(title: String.Alerts.TwoFactorEnable.alertTitle, message: message, preferredStyle: .alert)
-        alertController.view.tintColor = UIColor.Cell.headerBg
         
         alertController.addAction(UIAlertAction(title: String.Alerts.TwoFactorEnable.enableButtonText, style: .default, handler: { (_ action: UIAlertAction) -> Void in
             NotificationCenter.default.post(name: .twoFactorEnable, object: nil)
@@ -94,7 +90,6 @@ extension UIViewController {
     
     func showAlertWithDelay(text: String?, delay: Double, didShowed: (() -> Swift.Void)?) {
         let alertController = UIAlertController(title: nil, message: text, preferredStyle: .alert)
-        alertController.view.tintColor = UIColor.Cell.headerBg
         
         present(alertController, animated: true, completion: nil)
         
@@ -192,7 +187,7 @@ extension UIViewController {
                          cancelTitle: String?,
                          cancelHandler: (() -> Void)?) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
-        alert.view.tintColor = UIColor.Cell.headerBg
+        alert.view.tintColor = UIColor.Cell.title
         
         if let actionTitle = firstActionTitle {
             let action = UIAlertAction(title: actionTitle, style: .default) { (UIAlertAction) in

@@ -14,7 +14,6 @@ typealias CreateAccountCompletionBlock = (_ currency: CurrencyType, _ amount: Do
 typealias SuccessCompletionBlock = (_ success: Bool) -> Void
 
 final class Constants {
-    
     struct HudDelay {
         static let `default`: Double = 2.0
         static let error: Double = 2.0

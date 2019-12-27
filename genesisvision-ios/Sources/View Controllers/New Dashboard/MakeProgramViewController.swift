@@ -24,11 +24,62 @@ class MakeProgramViewController: BaseModalViewController {
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = UIColor.BaseView.bg
 
-        stackView.configure()
-        
-        viewModel = MakeProgramViewModel(self)
+        setup()
     }
-
+    
+    func setup() {
+        stackView.limitView.limitSwitch.addTarget(self, action: #selector(limitSwitchChanged), for: .valueChanged)
+        viewModel = MakeProgramViewModel(self)
+        
+        showProgressHUD()
+        viewModel.fetch()
+        
+        stackView.nameView.textField.delegate = self
+        stackView.nameView.textField.designableTextFieldDelegate = self
+        stackView.nameView.textField.addTarget(self, action: #selector(nameDidChange), for: .editingChanged)
+        stackView.nameView.subtitleValueLabel.textColor = UIColor.Cell.subtitle
+        
+        stackView.descriptionView.textView.textContainerInset = UIEdgeInsets(top: 0, left: -6, bottom: 0, right: -6)
+        stackView.descriptionView.textView.delegate = self
+        stackView.descriptionView.subtitleValueLabel.textColor = UIColor.Cell.subtitle
+        
+        stackView.stopOutView.textField.designableTextFieldDelegate = self
+        stackView.stopOutView.textField.addTarget(self, action: #selector(checkActionButton), for: .editingChanged)
+        
+        stackView.entryFeeView.textField.designableTextFieldDelegate = self
+        stackView.entryFeeView.textField.addTarget(self, action: #selector(checkActionButton), for: .editingChanged)
+        stackView.successFeeView.textField.designableTextFieldDelegate = self
+        stackView.successFeeView.textField.addTarget(self, action: #selector(checkActionButton), for: .editingChanged)
+    }
+    
+    func updateUI() {
+        stackView.configure(viewModel)
+    }
+    @objc func limitSwitchChanged(_ sender: UISwitch) {
+        stackView.limitView.amountView.isHidden = sender.isOn
+    }
+    @objc private func nameDidChange() {
+        if let text = stackView.nameView.textField.text {
+            let max = 20
+            let count = text.count
+            stackView.nameView.subtitleValueLabel.text = "\(count) / \(max)"
+            stackView.nameView.subtitleValueLabel.textColor = count < 4 || count > 20 ? UIColor.Common.red : UIColor.Cell.subtitle
+        }
+        checkActionButton()
+    }
+    
+    @objc func checkActionButton() {
+        guard let name = stackView.nameView.textField.text,
+            let description = stackView.descriptionView.textView.text,
+            let stopOut = stackView.stopOutView.textField.text,
+            let successFee = stackView.successFeeView.textField.text,
+            let entryFee = stackView.entryFeeView.textField.text else { return }
+        
+        let value = name.count >= 4 && name.count <= 20 && description.count >= 20 && description.count <= 500 && !stopOut.isEmpty && !successFee.isEmpty && !entryFee.isEmpty
+        
+        stackView.actionButton.setEnabled(value)
+    }
+    
     // MARK: - Actions
     @IBAction func addPhotoButtonAction(_ sender: UIButton) {
         view.endEditing(true)
@@ -37,7 +88,36 @@ class MakeProgramViewController: BaseModalViewController {
     @IBAction func makeProgramButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
         
-        dismiss(animated: true, completion: nil)
+        if let title = stackView.nameView.textField.text {
+            viewModel.request.title = title
+        }
+        if let description = stackView.descriptionView.textView.text {
+            viewModel.request.description = description
+        }
+        if let entryFee = stackView.entryFeeView.textField.text?.doubleValue {
+            viewModel.request.entryFee = entryFee
+        }
+        if let successFee = stackView.successFeeView.textField.text?.doubleValue {
+            viewModel.request.successFee = successFee
+        }
+        if let stopOutLevel = stackView.stopOutView.textField.text?.doubleValue {
+            viewModel.request.stopOutLevel = stopOutLevel
+        }
+        if let investmentLimit = stackView.limitView.textField.text?.doubleValue {
+            viewModel.request.investmentLimit = investmentLimit
+        }
+        
+        showProgressHUD()
+        viewModel.makeProgram { [weak self] (result) in
+            self?.hideAll()
+            
+            switch result {
+            case .success:
+                self?.dismiss(animated: true, completion: nil)
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self)
+            }
+        }
     }
     @IBAction func selectPeriodButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
@@ -77,6 +157,29 @@ class MakeProgramViewController: BaseModalViewController {
     }
 }
 
+extension MakeProgramViewController: UITextFieldDelegate, DesignableUITextFieldDelegate {
+    func textFieldDidClear(_ textField: UITextField) {
+        stackView.nameView.subtitleValueLabel.text = "0 / 20"
+        stackView.nameView.subtitleValueLabel.textColor = UIColor.Cell.subtitle
+        checkActionButton()
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        checkActionButton()
+    }
+}
+
+extension MakeProgramViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        if let text = stackView.descriptionView.textView.text {
+            let max = 500
+            let count = text.count
+            stackView.descriptionView.subtitleValueLabel.text = "\(count) / \(max)"
+            stackView.descriptionView.subtitleValueLabel.textColor = count < 20 || count > 500 ? UIColor.Common.red : UIColor.Cell.subtitle
+        }
+    }
+}
+
 extension MakeProgramViewController: ImagePickerPresentable {
     var choosePhotoButton: UIButton {
         return stackView.uploadLogoView.uploadLogoButton
@@ -97,26 +200,56 @@ extension MakeProgramViewController: ImagePickerPresentable {
     }
 }
 
-extension MakeProgramViewController: BaseCellProtocol {
+extension MakeProgramViewController: BaseTableViewProtocol {
+    func didReload() {
+        hideAll()
+        updateUI()
+    }
+    
     func didSelect(_ type: DidSelectType, index: Int) {
+        self.view.endEditing(true)
+        bottomSheetController.dismiss()
+
         switch type {
         case .periods:
-            stackView.periodView.textLabel.text = viewModel.periodsViewModel.selected?.toString()
+            viewModel.updatePeriods(index)
         case .tradesDelay:
-            stackView.tradesDelayView.textLabel.text = viewModel.tradesDelayViewModel.selected
+            viewModel.updateTrades(index)
         default:
             break
         }
         
-        bottomSheetController.dismiss()
+        updateUI()
     }
 }
 
+extension TradesDelay {
+    func getValue() -> String {
+        switch self {
+        case ._none:
+            return "Without"
+        case .fiveMinutes:
+            return "5 minutes"
+        case .fifteenMinutes:
+            return "15 minutes"
+        case .thirtyMinutes:
+            return "30 minutes"
+        case .oneHour:
+            return "1 hour"
+        case .sixHours:
+            return "6 hours"
+        }
+    }
+}
 class MakeProgramViewModel {
     // MARK: - Variables
     var pickedImage: UIImage?
     var pickedImageURL: URL?
-    var uploadedUuidString: String?
+    var uploadedUuidString: String? {
+        didSet {
+            request.logo = uploadedUuidString
+        }
+    }
     
     var periodsViewModel: PeriodListViewModel!
     var periodsDataSource: TableViewDataSource<PeriodListViewModel>!
@@ -124,16 +257,78 @@ class MakeProgramViewModel {
     var tradesDelayViewModel: TradesDelayListViewModel!
     var tradesDelayDataSource: TableViewDataSource<TradesDelayListViewModel>!
     
-    weak var delegate: BaseCellProtocol?
-    init(_ delegate: BaseCellProtocol?) {
+    var programAssetPlatformInfo: ProgramAssetPlatformInfo? {
+        didSet {
+            if let periods = programAssetPlatformInfo?.periods {
+                periodsViewModel = PeriodListViewModel(delegate, items: periods, selectedIndex: 0)
+                periodsDataSource = TableViewDataSource(periodsViewModel)
+                delegate?.didReload()
+            }
+        }
+    }
+    
+    lazy var currency = getPlatformCurrencyType()
+    
+    private let errorCompletion: ((CompletionResult) -> Void) = { (result) in
+       print(result)
+    }
+    var request = MakeTradingAccountProgram(id: nil, periodLength: nil, stopOutLevel: nil, investmentLimit: nil, tradesDelay: nil, entryFee: nil, successFee: nil, title: nil, description: nil, logo: nil)
+    
+    weak var delegate: BaseTableViewProtocol?
+    init(_ delegate: BaseTableViewProtocol?) {
         self.delegate = delegate
         
-        periodsViewModel = PeriodListViewModel(delegate, items: [1,3,5,7], selected: 1)
-        tradesDelayViewModel = TradesDelayListViewModel(delegate, items: ["1", "2", "3"], selected: "1")
-        periodsDataSource = TableViewDataSource(periodsViewModel)
+        let trades: [TradesDelay] = [._none, .fiveMinutes, .fifteenMinutes, .thirtyMinutes, .oneHour, .sixHours]
+        tradesDelayViewModel = TradesDelayListViewModel(delegate, items: trades, selectedIndex: 0)
         tradesDelayDataSource = TableViewDataSource(tradesDelayViewModel)
     }
     
+    func fetch() {
+        PlatformManager.shared.getPlatformInfo { [weak self] (model) in
+            guard let model = model?.assetInfo?.programInfo else { return }
+            self?.programAssetPlatformInfo = model
+        }
+    }
+    
+    func makeProgram(completion: @escaping CompletionBlock) {
+        saveProfilePhoto { [weak self] (result) in
+            switch result {
+            case .success:
+                AssetsDataProvider.makeAccountProgram(self?.request, completion: completion)
+            case .failure(let errorType):
+                print(errorType)
+                completion(result)
+            }
+        }
+    }
+    func updatePeriods(_ index: Int) {
+        periodsViewModel.selectedIndex = index
+        if let selected = periodsViewModel.selected() {
+            request.periodLength = selected
+        }
+    }
+    func updateTrades(_ index: Int) {
+        tradesDelayViewModel.selectedIndex = index
+        if let selected = tradesDelayViewModel.selected() {
+            request.tradesDelay = selected
+        }
+    }
+    func getPeriods() -> String {
+        guard let selected = periodsViewModel?.selected()?.toString() else { return "" }
+        return selected
+    }
+    func isEnablePeriodsSelector() -> Bool {
+        guard let count = periodsViewModel?.items.count else { return false }
+        return count > 1
+    }
+    func getTrades() -> String {
+        guard let selected = tradesDelayViewModel?.selected()?.rawValue else { return "" }
+        return selected
+    }
+    func isEnableTradesSelector() -> Bool {
+        guard let count = tradesDelayViewModel?.items.count else { return false }
+        return count > 1
+    }
     // MARK: - Public methods
     func saveProfilePhoto(completion: @escaping CompletionBlock) {
         guard let pickedImageURL = pickedImageURL else {
@@ -150,9 +345,6 @@ class MakeProgramViewModel {
 class PeriodListViewModel: SelectableListViewModel<Int> {
     var title = "Choose period"
     
-    override func updateSelectedIndex() {
-        self.selectedIndex = items.firstIndex{ $0 == self.selected } ?? 0
-    }
     override func cell(for indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
         let model = SelectableTableViewCellViewModel()
 
@@ -166,12 +358,9 @@ class PeriodListViewModel: SelectableListViewModel<Int> {
     }
     
 }
-class TradesDelayListViewModel: SelectableListViewModel<String> {
+class TradesDelayListViewModel: SelectableListViewModel<TradesDelay> {
     var title = "Choose trades delay"
     
-    override func updateSelectedIndex() {
-        self.selectedIndex = items.firstIndex{ $0 == self.selected } ?? 0
-    }
     override func cell(for indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
         let model = SelectableTableViewCellViewModel()
         
@@ -179,7 +368,7 @@ class TradesDelayListViewModel: SelectableListViewModel<String> {
         
         let item = items[indexPath.row]
         let isSelected = indexPath.row == selectedIndex
-        cell.configure(item, selected: isSelected)
+        cell.configure(item.rawValue, selected: isSelected)
         
         return cell
     }

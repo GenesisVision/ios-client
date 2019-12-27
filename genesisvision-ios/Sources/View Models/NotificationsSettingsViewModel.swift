@@ -435,15 +435,15 @@ final class NotificationsSettingsViewModel {
 }
 
 extension NotificationsSettingsViewModel: NotificationsSettingsProtocol {
-    func didAdd(type: NotificationSettingViewModel.ModelType?) {
+    func didAdd(type: NotificationType?) {
         router.currentController?.showProgressHUD()
         
-        let modelType = NotificationsAPI.ModelType_v10NotificationsSettingsAddPost(rawValue: type?.rawValue ?? "")
+        let type = NotificationsAPI.ModelType_addNotificationsSettings(rawValue: type?.rawValue ?? "")
         
-        NotificationsDataProvider.addSetting(assetId: assetId, type: modelType, completion: { [weak self] (uuidString) in
+        NotificationsDataProvider.addSetting(assetId: assetId, type: type, completion: { [weak self] (uuidString) in
             self?.router.currentController?.hideHUD()
             
-            if let uuidString = uuidString, let type = type, let viewModel = self?.settingsGeneralViewModels.first(where: { $0.setting.type == type }) {
+            if let uuidString = uuidString, let type = type, let viewModel = self?.settingsGeneralViewModels.first(where: { $0.setting.type?.rawValue == type.rawValue }) {
                 viewModel.setting.id = UUID(uuidString: uuidString)
             }
         }) { [weak self] (result) in
@@ -495,12 +495,12 @@ extension NotificationsSettingsViewModel: NotificationsSettingsProtocol {
         }
     }
     
-    func didAdd(assetId: String?, type: NotificationSettingViewModel.ModelType?, conditionType: NotificationSettingViewModel.ConditionType?, conditionAmount: Double?) {
+    func didAdd(assetId: String?, type: NotificationType?, conditionType: NotificationSettingConditionType?, conditionAmount: Double?) {
     
         router.currentController?.showProgressHUD()
         
-        let type = NotificationsAPI.ModelType_v10NotificationsSettingsAddPost(rawValue: type?.rawValue ?? "")
-        let conditionType = NotificationsAPI.ConditionType_v10NotificationsSettingsAddPost(rawValue: conditionType?.rawValue ?? "")
+        let type = NotificationsAPI.ModelType_addNotificationsSettings(rawValue: type?.rawValue ?? "")
+        let conditionType = NotificationsAPI.ConditionType_addNotificationsSettings(rawValue: conditionType?.rawValue ?? "")
         
         NotificationsDataProvider.addSetting(assetId: assetId, type: type, conditionType: conditionType, conditionAmount: conditionAmount, completion: { [weak self] (result) in
             self?.router.currentController?.hideHUD()

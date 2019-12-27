@@ -51,7 +51,7 @@ final class DashboardViewModel {
         self.router = router
         self.reloadDataProtocol = router.programListViewController
         assetsTabmanViewModel = AssetsTabmanViewModel(withRouter: router)
-        chartsTabmanViewModel = ChartsTabmanViewModel(withRouter: router, dashboardPortfolioChartValue: dashboard?.chart)
+//        chartsTabmanViewModel = ChartsTabmanViewModel(withRouter: router, dashboardPortfolioChartValue: dashboard?.chart)
         eventListViewModel = EventListViewModel(withRouter: router, events: events)
         
         NotificationCenter.default.addObserver(self, selector: #selector(enableTwoFactorNotification(notification:)), name: .twoFactorEnable, object: nil)
@@ -168,28 +168,28 @@ extension DashboardViewModel {
     private func fetch(_ completion: @escaping CompletionBlock) {
         isLoading = true
         
-        let chartCurrency = InvestorAPI.ChartCurrency_v10InvestorGet(rawValue: getSelectedCurrency())
-        let balancePoints = 30
-        let programsPoints = 7
+//        let chartCurrency = InvestorAPI.ChartCurrency_v10InvestorGet(rawValue: getSelectedCurrency())
+//        let balancePoints = 30
+//        let programsPoints = 7
         
-        DashboardDataProvider.getDashboardSummary(chartCurrency: chartCurrency, from: dateFrom, to: dateTo, balancePoints: balancePoints, programsPoints: programsPoints, eventsTake: eventsTake, requestsSkip: skip, requestsTake: requestsTake, completion: { [weak self] (dashboard) in
-            guard let dashboard = dashboard else { return completion(.failure(errorType: .apiError(message: nil))) }
-            self?.dashboard = dashboard
-            
-            completion(.success)
-        }, errorCompletion: completion)
+//        DashboardDataProvider.getDashboardSummary(chartCurrency: chartCurrency, from: dateFrom, to: dateTo, balancePoints: balancePoints, programsPoints: programsPoints, eventsTake: eventsTake, requestsSkip: skip, requestsTake: requestsTake, completion: { [weak self] (dashboard) in
+//            guard let dashboard = dashboard else { return completion(.failure(errorType: .apiError(message: nil))) }
+//            self?.dashboard = dashboard
+//
+//            completion(.success)
+//        }, errorCompletion: completion)
     }
     
     private func fetchEvents(_ completion: @escaping CompletionBlock) {
-        DashboardDataProvider.getEvents(with: nil, from: nil, to: nil, eventLocation: .dashboard, skip: skip, take: eventsTake, completion: { [weak self] (portfolioEvents) in
-            guard portfolioEvents != nil else {
-                return ErrorHandler.handleApiError(error: nil, completion: completion)
-            }
-            
-            self?.events = portfolioEvents?.events
-            
-            completion(.success)
-        }, errorCompletion: completion)
+//        DashboardDataProvider.getEvents(with: nil, from: nil, to: nil, eventLocation: .dashboard, skip: skip, take: eventsTake, completion: { [weak self] (portfolioEvents) in
+//            guard portfolioEvents != nil else {
+//                return ErrorHandler.handleApiError(error: nil, completion: completion)
+//            }
+//            
+//            self?.events = portfolioEvents?.events
+//            
+//            completion(.success)
+//        }, errorCompletion: completion)
     }
 }
 

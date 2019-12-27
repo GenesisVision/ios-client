@@ -16,9 +16,10 @@ final class FundInvestViewModel {
     var walletCurrency: CurrencyType?
     var labelPlaceholder: String = "0"
     
-    var fundInvestInfo: FundInvestInfo?
+//    var fundInvestInfo: FundInvestInfo?
 
-    var walletMultiSummary: WalletMultiSummary?
+    var walletId: UUID?
+    var walletSummary: WalletSummary?
     var selectedWalletFromDelegateManager: WalletDepositCurrencyDelegateManager?
     
     var rate: Double = 0.0
@@ -32,13 +33,13 @@ final class FundInvestViewModel {
         self.router = router
         self.fundId = fundId
         self.detailProtocol = detailProtocol
-        self.fundCurrency = CurrencyType(rawValue: getSelectedCurrency()) ?? .usd
+        self.fundCurrency = CurrencyType(rawValue: selectedPlatformCurrency) ?? .usd
     }
     
     // MARK: - Public methods
     func updateWalletCurrencyFromIndex(_ selectedIndex: Int, completion: @escaping CompletionBlock) {
-        guard let walletMultiSummary = walletMultiSummary,
-            let wallets = walletMultiSummary.wallets else { return }
+        guard let walletSummary = walletSummary,
+            let wallets = walletSummary.wallets else { return }
         
         self.selectedWalletFromDelegateManager?.selected = wallets[selectedIndex]
         self.selectedWalletFromDelegateManager?.selectedIndex = selectedIndex
@@ -49,14 +50,14 @@ final class FundInvestViewModel {
     }
     
     func getInfo(completion: @escaping CompletionBlock) {
-        guard let fundId = fundId,
-            let fundCurrencyValue = fundCurrency?.rawValue,
-            let currencySecondary = InvestorAPI.Currency_v10InvestorFundsByIdInvestInfoByCurrencyGet(rawValue: fundCurrencyValue)
-            else { return completion(.failure(errorType: .apiError(message: nil))) }
+//        guard let fundId = fundId,
+//            let fundCurrencyValue = fundCurrency?.rawValue,
+//            let currencySecondary = InvestorAPI.Currency_v10InvestorFundsByIdInvestInfoByCurrencyGet(rawValue: fundCurrencyValue)
+//            else { return completion(.failure(errorType: .apiError(message: nil))) }
         
         AuthManager.getWallet(completion: { [weak self] (wallet) in
             if let wallet = wallet, let wallets = wallet.wallets {
-                self?.walletMultiSummary = wallet
+                self?.walletSummary = wallet
                 self?.selectedWalletFromDelegateManager = WalletDepositCurrencyDelegateManager(wallets)
                 self?.selectedWalletFromDelegateManager?.walletId = 0
                 self?.selectedWalletFromDelegateManager?.selectedIndex = 0
@@ -64,15 +65,16 @@ final class FundInvestViewModel {
                 self?.walletCurrency = CurrencyType(rawValue: wallets[0].currency?.rawValue ?? "")
             }
             
-            FundsDataProvider.getInvestInfo(fundId: fundId, currencySecondary: currencySecondary, completion: { [weak self] (fundInvestInfo) in
-                guard let fundInvestInfo = fundInvestInfo else {
-                    return completion(.failure(errorType: .apiError(message: nil)))
-                }
-                
-                self?.fundInvestInfo = fundInvestInfo
-                self?.updateRate(completion: completion)
-                completion(.success)
-                }, errorCompletion: completion)
+            //FIXME:
+//            FundsDataProvider.getInvestInfo(fundId: fundId, currencySecondary: currencySecondary, completion: { [weak self] (fundInvestInfo) in
+//                guard let fundInvestInfo = fundInvestInfo else {
+//                    return completion(.failure(errorType: .apiError(message: nil)))
+//                }
+//
+//                self?.fundInvestInfo = fundInvestInfo
+//                self?.updateRate(completion: completion)
+//                completion(.success)
+//                }, errorCompletion: completion)
             }, completionError: completion)
     }
     
@@ -99,9 +101,10 @@ final class FundInvestViewModel {
     }
     
     func getMinInvestmentAmount() -> Double {
-        guard let minInvestmentAmount = fundInvestInfo?.minInvestmentAmount else { return 0.0 }
-        
-        return minInvestmentAmount
+//        guard let minInvestmentAmount = fundInvestInfo?.minInvestmentAmount else { return 0.0 }
+//
+//        return minInvestmentAmount
+        return 0.0 //FIXME:
     }
     
     func getSelectedWalletTitle() -> String {
@@ -123,15 +126,17 @@ final class FundInvestViewModel {
     }
     
     func getGVCommision() -> Double {
-        guard let gvCommission = fundInvestInfo?.gvCommission else { return 0.0 }
-        
-        return gvCommission
+//        guard let gvCommission = fundInvestInfo?.gvCommission else { return 0.0 }
+//
+//        return gvCommission
+        return 0.0 //FIXME:
     }
     
     func getEntryFee() -> Double {
-        guard let entryFee = fundInvestInfo?.entryFee else { return 0.0 }
-        
-        return entryFee
+//        guard let entryFee = fundInvestInfo?.entryFee else { return 0.0 }
+//
+//        return entryFee
+        return 0.0 //FIXME:
     }
     
     func getApproximateAmount(_ amount: Double) -> Double {
@@ -141,7 +146,7 @@ final class FundInvestViewModel {
     // MARK: - Private methods
     private func updateRate(completion: @escaping CompletionBlock) {
         RateDataProvider.getRate(from: self.selectedWalletFromDelegateManager?.selected?.currency?.rawValue ?? "", to: fundCurrency?.rawValue ?? "", completion: { [weak self] (rate) in
-            self?.rate = rate ?? 0.0
+            self?.rate = rate?.rate ?? 0.0
             completion(.success)
             }, errorCompletion: completion)
     }
@@ -163,12 +168,8 @@ final class FundInvestViewModel {
     // MARK: - Private methods
     // MARK: - API
     private func apiInvest(with value: Double, completion: @escaping CompletionBlock) {
-        guard let walletCurrency = self.selectedWalletFromDelegateManager?.selected?.currency?.rawValue else { return completion(.failure(errorType: .apiError(message: nil))) }
-        
-        let currency = InvestorAPI.Currency_v10InvestorFundsByIdInvestByAmountPost(rawValue: walletCurrency)
-        
-        FundsDataProvider.invest(withAmount: value, fundId: fundId, currency: currency, errorCompletion: { (result) in
+        FundsDataProvider.invest(withAmount: value, assetId: fundId, walletId: walletId) { (result) in
             completion(result)
-        })
+        }
     }
 }

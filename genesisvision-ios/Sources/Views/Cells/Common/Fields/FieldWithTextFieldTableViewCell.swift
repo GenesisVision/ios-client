@@ -44,7 +44,7 @@ class FieldWithTextFieldTableViewCell: PlateTableViewCell {
 }
 
 extension FieldWithTextFieldTableViewCell: DesignableUITextFieldDelegate {
-    func textFieldDidClear() {
+    func textFieldDidClear(_ textField: UITextField) {
         valueChanged?("")
     }
 }

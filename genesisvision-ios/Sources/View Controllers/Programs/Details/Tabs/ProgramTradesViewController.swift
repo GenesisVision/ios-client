@@ -16,7 +16,7 @@ class ProgramTradesViewController: BaseViewControllerWithTableView {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setup()
     }
     

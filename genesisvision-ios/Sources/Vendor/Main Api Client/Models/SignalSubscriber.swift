@@ -11,72 +11,23 @@ import Foundation
 
 open class SignalSubscriber: Codable {
 
-    public enum Status: String, Codable { 
-        case active = "Active"
-        case ended = "Ended"
-    }
-    public enum TotalCommissionCurrency: String, Codable { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
-        case btc = "BTC"
-        case ada = "ADA"
-        case usdt = "USDT"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case usd = "USD"
-        case eur = "EUR"
-    }
-    public enum TotalSuccessFeeCurrency: String, Codable { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
-        case btc = "BTC"
-        case ada = "ADA"
-        case usdt = "USDT"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case usd = "USD"
-        case eur = "EUR"
-    }
-    public enum TotalVolumeFeeCurrency: String, Codable { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
-        case btc = "BTC"
-        case ada = "ADA"
-        case usdt = "USDT"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case usd = "USD"
-        case eur = "EUR"
-    }
     public var number: Int?
     public var trades: Int?
     public var profit: Double?
     public var volume: Double?
     public var subscriptionDate: Date?
     public var unsubscriptionDate: Date?
-    public var status: Status?
+    public var status: SignalSubscriberStatus?
     public var totalCommissionAmount: Double?
-    public var totalCommissionCurrency: TotalCommissionCurrency?
+    public var totalCommissionCurrency: Currency?
     public var totalSuccessFeeAmount: Double?
-    public var totalSuccessFeeCurrency: TotalSuccessFeeCurrency?
+    public var totalSuccessFeeCurrency: Currency?
     public var totalVolumeFeeAmount: Double?
-    public var totalVolumeFeeCurrency: TotalVolumeFeeCurrency?
+    public var totalVolumeFeeCurrency: Currency?
 
 
     
-    public init(number: Int?, trades: Int?, profit: Double?, volume: Double?, subscriptionDate: Date?, unsubscriptionDate: Date?, status: Status?, totalCommissionAmount: Double?, totalCommissionCurrency: TotalCommissionCurrency?, totalSuccessFeeAmount: Double?, totalSuccessFeeCurrency: TotalSuccessFeeCurrency?, totalVolumeFeeAmount: Double?, totalVolumeFeeCurrency: TotalVolumeFeeCurrency?) {
+    public init(number: Int?, trades: Int?, profit: Double?, volume: Double?, subscriptionDate: Date?, unsubscriptionDate: Date?, status: SignalSubscriberStatus?, totalCommissionAmount: Double?, totalCommissionCurrency: Currency?, totalSuccessFeeAmount: Double?, totalSuccessFeeCurrency: Currency?, totalVolumeFeeAmount: Double?, totalVolumeFeeCurrency: Currency?) {
         self.number = number
         self.trades = trades
         self.profit = profit
@@ -125,13 +76,13 @@ open class SignalSubscriber: Codable {
         volume = try container.decodeIfPresent(Double.self, forKey: "volume")
         subscriptionDate = try container.decodeIfPresent(Date.self, forKey: "subscriptionDate")
         unsubscriptionDate = try container.decodeIfPresent(Date.self, forKey: "unsubscriptionDate")
-        status = try container.decodeIfPresent(Status.self, forKey: "status")
+        status = try container.decodeIfPresent(SignalSubscriberStatus.self, forKey: "status")
         totalCommissionAmount = try container.decodeIfPresent(Double.self, forKey: "totalCommissionAmount")
-        totalCommissionCurrency = try container.decodeIfPresent(TotalCommissionCurrency.self, forKey: "totalCommissionCurrency")
+        totalCommissionCurrency = try container.decodeIfPresent(Currency.self, forKey: "totalCommissionCurrency")
         totalSuccessFeeAmount = try container.decodeIfPresent(Double.self, forKey: "totalSuccessFeeAmount")
-        totalSuccessFeeCurrency = try container.decodeIfPresent(TotalSuccessFeeCurrency.self, forKey: "totalSuccessFeeCurrency")
+        totalSuccessFeeCurrency = try container.decodeIfPresent(Currency.self, forKey: "totalSuccessFeeCurrency")
         totalVolumeFeeAmount = try container.decodeIfPresent(Double.self, forKey: "totalVolumeFeeAmount")
-        totalVolumeFeeCurrency = try container.decodeIfPresent(TotalVolumeFeeCurrency.self, forKey: "totalVolumeFeeCurrency")
+        totalVolumeFeeCurrency = try container.decodeIfPresent(Currency.self, forKey: "totalVolumeFeeCurrency")
     }
 }
 

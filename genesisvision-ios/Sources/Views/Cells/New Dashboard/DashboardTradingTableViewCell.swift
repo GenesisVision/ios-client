@@ -8,12 +8,12 @@
 
 import UIKit
 
-struct DashboardTradingCellViewModel<ViewModelType: ViewModelWithCollection> {
+struct DashboardTradingCellViewModel<ViewModelType: CellViewModelWithCollection> {
     var viewModel: ViewModelType
+    let data: TradingHeaderData?
     var dataSource: CollectionViewDataSource<ViewModelType>!
-    let data: TradingHeaderData
-    weak var delegate: BaseCellProtocol?
-    init(_ viewModel: ViewModelType, data: TradingHeaderData, delegate: BaseCellProtocol?) {
+    weak var delegate: BaseTableViewProtocol?
+    init(_ viewModel: ViewModelType, data: TradingHeaderData?, delegate: BaseTableViewProtocol?) {
         self.viewModel = viewModel
         self.delegate = delegate
         self.data = data
@@ -24,23 +24,36 @@ struct DashboardTradingCellViewModel<ViewModelType: ViewModelWithCollection> {
 
 extension DashboardTradingCellViewModel: CellViewModel {
     func setup(on cell: DashboardTradingTableViewCell) {
+        if let data = data, data.isEmpty {
+            cell.emptyView.isHidden = !data.isEmpty
+            cell.labelsView.isHidden = data.isEmpty
+        }
+        
         cell.configure(viewModel, delegate: delegate, collectionViewDelegate: dataSource, collectionViewDataSource: dataSource, cellModelsForRegistration: viewModel.cellModelsForRegistration)
         cell.labelsView.configure(data)
+        cell.labelsView.changeLabelsView.dayLabel.valueLabel.isHidden = true
+        cell.labelsView.changeLabelsView.weekLabel.valueLabel.isHidden = true
+        cell.labelsView.changeLabelsView.monthLabel.valueLabel.isHidden = true
     }
 }
 
 class DashboardTradingTableViewCell: CellWithCollectionView {
+    @IBOutlet weak var emptyView: DashboardTradingEmptyView! {
+       didSet {
+           emptyView.isHidden = true
+       }
+    }
     @IBOutlet weak var labelsView: DashboardTradingLabelsView!
 }
-class TradingCollectionViewModel: ViewModelWithCollection {
+
+class TradingCollectionViewModel: CellViewModelWithCollection {
     var title: String
-    var showActionsView: Bool
     var type: CellActionType
 
     var viewModels = [CellViewAnyModel]()
 
     var canPullToRefresh: Bool = true
-
+    var details: DashboardTradingDetails?
     var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
         return []
     }
@@ -49,38 +62,46 @@ class TradingCollectionViewModel: ViewModelWithCollection {
         return [PortfolioEventCollectionViewCellViewModel.self]
     }
 
-    weak var delegate: BaseCellProtocol?
-    init(_ delegate: BaseCellProtocol?) {
+    weak var delegate: BaseTableViewProtocol?
+    init(_ details: DashboardTradingDetails?, delegate: BaseTableViewProtocol?) {
+        self.details = details
         self.delegate = delegate
         self.title = "Trading"
-        self.showActionsView = true
         self.type = .dashboardTrading
         
-        let viewModel = PortfolioEventCollectionViewCellViewModel(reloadDataProtocol: nil, event: InvestmentEventViewModel(title: "title", icon: nil, date: Date(), assetDetails: AssetDetails(id: nil, logo: nil, color: nil, title: "Asset", url: nil, assetType: .programs), amount: 20.0, currency: .btc, changeState: .increased, extendedInfo: nil, feesInfo: nil, totalFeesAmount: nil, totalFeesCurrency: nil))
-        viewModels.append(viewModel)
-        viewModels.append(viewModel)
-        viewModels.append(viewModel)
-        viewModels.append(viewModel)
-        viewModels.append(viewModel)
+        details?.events?.items?.forEach({ (viewModel) in
+            let viewModel = PortfolioEventCollectionViewCellViewModel(reloadDataProtocol: nil, event: viewModel)
+            viewModels.append(viewModel)
+        })
     }
     
     func didSelect(at indexPath: IndexPath) {
         delegate?.didSelect(type, cellViewModel: model(at: indexPath))
     }
     
-    func getActions() -> [UIButton] {
-        let showAllButton = UIButton(type: .system)
-        showAllButton.setTitle("show all", for: .normal)
-        showAllButton.setTitleColor(.primary, for: .normal)
-        showAllButton.addTarget(self, action: #selector(showAllButtonAction(_:)), for: .touchUpInside)
-        return [showAllButton]
-    }
-
-    @IBAction func addButtonAction(_ sender: UIButton) {
-        delegate?.action(type, actionType: .add)
+    func getCollectionViewHeight() -> CGFloat {
+        return self.details?.events?.items?.count ?? 0 > 0 ? 150 : 0
     }
     
+    func hideLoader() -> Bool {
+        return details?.equity != nil && details?.aum != nil
+    }
+    
+    // MARK: - Actions
     @IBAction func showAllButtonAction(_ sender: UIButton) {
         delegate?.action(type, actionType: .showAll)
+    }
+}
+
+extension TradingCollectionViewModel {
+    func getRightButtons() -> [UIButton] {
+        let showAllButton = UIButton(type: .system)
+        showAllButton.setTitle("details", for: .normal)
+        showAllButton.setImage(#imageLiteral(resourceName: "img_arrow_right_icon"), for: .normal)
+        showAllButton.imageEdgeInsets.left = 8.0
+        showAllButton.semanticContentAttribute = .forceRightToLeft
+        showAllButton.tintColor = UIColor.primary
+        showAllButton.addTarget(self, action: #selector(showAllButtonAction(_:)), for: .touchUpInside)
+        return [showAllButton]
     }
 }

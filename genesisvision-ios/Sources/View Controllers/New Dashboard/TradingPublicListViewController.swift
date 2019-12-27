@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TradingPublicListViewController: ListViewController, BaseCellProtocol {
+class TradingPublicListViewController: ListViewController {
     typealias ViewModel = TradingPublicListViewModel
     
     // MARK: - Variables
@@ -25,14 +25,18 @@ class TradingPublicListViewController: ListViewController, BaseCellProtocol {
         showProgressHUD()
         viewModel.fetch()
     }
-
+    override func pullToRefresh() {
+        super.pullToRefresh()
+        
+        viewModel.refresh()
+    }
     // MARK: - Methods
     private func setup() {
         addNewBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_add_photo_icon"), style: .done, target: self, action: #selector(addNewButtonAction))
         navigationItem.rightBarButtonItems = [addNewBarButtonItem]
         
-        viewModel = ViewModel(self)
-        
+//        viewModel = ViewModel(self, router: <#Router?#>)
+        isEnableInfiniteIndicator = true
         tableView.configure(with: .defaultConfiguration)
 
         dataSource = TableViewDataSource(viewModel)
@@ -49,9 +53,58 @@ class TradingPublicListViewController: ListViewController, BaseCellProtocol {
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true, completion: nil)
     }
+    
+    func showAsset(_ asset: AssetCollectionViewCellViewModel) {
+        var assetId = ""
+        let type = asset.type
+        
+        switch type {
+        case .program:
+            if let program = asset.asset.program {
+                assetId = program.id?.uuidString ?? ""
+            } else if let tradingAsset = asset.asset.tradingAsset, tradingAsset.assetType == type {
+                assetId = tradingAsset.id?.uuidString ?? ""
+            }
+        case .fund:
+            if let fund = asset.asset.fund {
+                assetId = fund.id?.uuidString ?? ""
+            } else if let tradingAsset = asset.asset.tradingAsset, tradingAsset.assetType == type {
+                assetId = tradingAsset.id?.uuidString ?? ""
+            }
+        case .follow:
+            if let follow = asset.asset.follow {
+                assetId = follow.id?.uuidString ?? ""
+            } else if let tradingAsset = asset.asset.tradingAsset, tradingAsset.assetType == type {
+                assetId = tradingAsset.id?.uuidString ?? ""
+            }
+        case ._none:
+            break
+        }
+        
+        if !assetId.isEmpty {
+            viewModel.router?.showAssetDetails(with: assetId, assetType: type)
+        }
+    }
 }
 
-class TradingPublicListViewModel: ListVMProtocol {
+extension TradingPublicListViewController: BaseTableViewProtocol {
+    func didShowInfiniteIndicator(_ value: Bool) {
+        showInfiniteIndicator(value)
+    }
+    
+    func didSelect(_ type: CellActionType, cellViewModel: CellViewAnyModel?) {
+        switch type {
+        case .tradingPublicList:
+            if let cellViewModel = cellViewModel as? AssetCollectionViewCellViewModel {
+                showAsset(cellViewModel)
+            }
+        default:
+            break
+        }
+    }
+}
+
+class TradingPublicListViewModel: ListViewModelWithPaging {
     var viewModels = [CellViewAnyModel]()
     
     var canPullToRefresh: Bool = true
@@ -59,19 +112,107 @@ class TradingPublicListViewModel: ListVMProtocol {
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [FundTableViewCellViewModel.self]
     }
-    weak var delegate: BaseCellProtocol?
-    init(_ delegate: BaseCellProtocol?) {
+    
+    var canFetchMoreResults: Bool = true
+    var totalCount: Int = 0
+    var skip: Int = 0
+    
+    lazy var currency = getPlatformCurrencyType()
+    private let errorCompletion: ((CompletionResult) -> Void) = { (result) in
+       print(result)
+    }
+    var router: Router?
+    weak var delegate: BaseTableViewProtocol?
+    init(_ router: Router?, delegate: BaseTableViewProtocol?) {
         self.delegate = delegate
+        self.router = router
     }
     
-    func fetch() {
-        let viewModel = FundTableViewCellViewModel(asset: FundDetails(totalAssetsCount: 1, topFundAssets: [FundAssetPercent(asset: "title", name: "name", percent: 10, icon: nil)], statistic: nil, personalDetails: nil, dashboardAssetsDetails: nil, id: nil, logo: nil, url: nil, color: nil, title: "title", description: "Descr", status: .active, creationDate: Date(), manager: nil, chart: nil), delegate: nil)
-        viewModels.append(viewModel)
-        viewModels.append(viewModel)
-        viewModels.append(viewModel)
-        viewModels.append(viewModel)
-        viewModels.append(viewModel)
-        
+    func fetch(_ refresh: Bool = false) {
+        if refresh {
+            skip = 0
+        }
+        var models = [TradingTableViewCellViewModel]()
+        DashboardDataProvider.getPublicTrading(currency: currency, status: .active, skip: skip, take: take(), completion: { [weak self] (model) in
+            guard let model = model else { return }
+            model.items?.forEach({ (asset) in
+                let viewModel = TradingTableViewCellViewModel(asset: asset, delegate: nil)
+                models.append(viewModel)
+            })
+            self?.updateViewModels(models, refresh: refresh, total: model.total)
+            }, errorCompletion: errorCompletion)
+    }
+    
+    func updateViewModels(_ models: [CellViewAnyModel], refresh: Bool, total: Int?) {
+        totalCount = total ?? 0
+        skip += take()
+        viewModels = refresh ? models : viewModels + models
         delegate?.didReload()
+    }
+    
+    func cellAnimations() -> Bool {
+        return true
+    }
+    
+    func showInfiniteIndicator(_ value: Bool) {
+        delegate?.didShowInfiniteIndicator(value)
+    }
+    
+    func didSelect(at indexPath: IndexPath) {
+        delegate?.didSelect(.tradingPublicList, cellViewModel: model(at: indexPath))
+    }
+    
+    @available(iOS 13.0, *)
+    func getMenu(_ indexPath: IndexPath) -> UIMenu? {
+        guard let model = model(at: indexPath) as? TradingTableViewCellViewModel,
+            let assetType = model.asset.assetType,
+            let actions = model.asset.actions else { return nil }
+        
+        var children = [UIAction]()
+        
+        if let name = model.asset.publicInfo?.url {
+            let share = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { [weak self] action in
+                let url = getRoute(assetType, name: name)
+                self?.router?.share(url)
+            }
+            children.append(share)
+        }
+        
+        if let assetType = model.asset.assetType, assetType == .program {
+            let closePriod = UIAction(title: "Close period", image: nil) { [weak self] action in
+                //TODO: Make signal action
+            }
+            children.append(closePriod)
+        }
+        
+        if let canMakeProgramFromSignalProvider = actions.canMakeProgramFromSignalProvider, canMakeProgramFromSignalProvider {
+            let makeProgram = UIAction(title: "Make program", image: nil) { [weak self] action in
+                //TODO: Make signal action
+            }
+            children.append(makeProgram)
+        }
+        
+        if let canMakeSignalProviderFromProgram = actions.canMakeSignalProviderFromProgram, canMakeSignalProviderFromProgram {
+            let makeSignal = UIAction(title: "Make a signal provider", image: nil) { [weak self] action in
+                //TODO: Make signal action
+            }
+            children.append(makeSignal)
+        }
+        
+        if let canChangePassword = actions.canChangePassword, canChangePassword {
+            let changePassword = UIAction(title: "Change password", image: nil) { [weak self] action in
+                //TODO: Make signal action
+            }
+            children.append(changePassword)
+        }
+        
+        let settings = UIAction(title: "Settings", image: nil) { [weak self] action in
+            //TODO: Make signal action
+        }
+        children.append(settings)
+        
+        guard !children.isEmpty else { return nil }
+        
+        return UIMenu(title: "", children: children)
     }
 }

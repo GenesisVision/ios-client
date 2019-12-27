@@ -11,16 +11,13 @@ import Foundation
 
 open class DetachFromSignalProvider: Codable {
 
-    public enum Mode: String, Codable { 
-        case _none = "None"
-        case providerCloseOnly = "ProviderCloseOnly"
-        case closeAllImmediately = "CloseAllImmediately"
-    }
-    public var mode: Mode?
+    public var tradingAccountId: UUID?
+    public var mode: SignalDetachMode?
 
 
     
-    public init(mode: Mode?) {
+    public init(tradingAccountId: UUID?, mode: SignalDetachMode?) {
+        self.tradingAccountId = tradingAccountId
         self.mode = mode
     }
     
@@ -31,6 +28,7 @@ open class DetachFromSignalProvider: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
+        try container.encodeIfPresent(tradingAccountId, forKey: "tradingAccountId")
         try container.encodeIfPresent(mode, forKey: "mode")
     }
 
@@ -39,7 +37,8 @@ open class DetachFromSignalProvider: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        mode = try container.decodeIfPresent(Mode.self, forKey: "mode")
+        tradingAccountId = try container.decodeIfPresent(UUID.self, forKey: "tradingAccountId")
+        mode = try container.decodeIfPresent(SignalDetachMode.self, forKey: "mode")
     }
 }
 

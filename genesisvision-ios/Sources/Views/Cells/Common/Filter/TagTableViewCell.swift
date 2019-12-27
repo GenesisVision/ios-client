@@ -41,7 +41,7 @@ class TagTableViewCell: UITableViewCell {
     }
     
     // MARK: - Public methods
-    func configure(_ selected: Bool, tag: ProgramTag? = nil) {
+    func configure(_ selected: Bool, tag: Tag? = nil) {
         logoImageView.isHidden = true
         
         if let title = tag?.name {

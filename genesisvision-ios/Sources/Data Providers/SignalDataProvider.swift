@@ -9,91 +9,97 @@
 import Foundation
 
 class SignalDataProvider: DataProvider {
-    static func getAccounts(completion: @escaping (_ copyTradingAccountsList: CopyTradingAccountsList?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        
-        guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
-        
-        SignalAPI.v10SignalAccountsGet(authorization: authorization) { (viewModel, error) in
-            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
-        }
-    }
-    
-    static func getInfo(with programId: String, completion: @escaping (_ attachToSignalProviderInfo: AttachToSignalProviderInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        guard let authorization = AuthManager.authorizedToken,
-            let uuid = UUID(uuidString: programId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
-        
-        SignalAPI.v10SignalAttachByIdInfoGet(id: uuid, authorization: authorization) { (viewModel, error) in
-            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
-        }
-    }
-    
-    static func subscribe(on programId: String, model: AttachToSignalProvider, completion: @escaping CompletionBlock) {
+    static func update(with programId: String, model: AttachToSignalProvider, completion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken,
             let uuid = UUID(uuidString: programId) else { return completion(.failure(errorType: .apiError(message: nil))) }
         
-        SignalAPI.v10SignalAttachByIdPost(id: uuid, authorization: authorization, model: model) { (error) in
+        SignalAPI.updateSubscriptionSettings(id: uuid, authorization: authorization, model: model) { (error) in
             DataProvider().responseHandler(error, completion: completion)
         }
     }
     
-    static func unsubscribe(with programId: String, mode: DetachFromSignalProvider.Mode?, completion: @escaping CompletionBlock) {
+    static func attach(on programId: String, model: AttachToSignalProvider, completion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken,
             let uuid = UUID(uuidString: programId) else { return completion(.failure(errorType: .apiError(message: nil))) }
-        let model = DetachFromSignalProvider(mode: mode)
-        SignalAPI.v10SignalDetachByIdPost(id: uuid, authorization: authorization, model: model) { (error) in
+        
+        SignalAPI.attachSlaveToMasterInternal(id: uuid, authorization: authorization, model: model) { (error) in
+            DataProvider().responseHandler(error, completion: completion)
+        }
+    }
+    static func attachAccounts(assetId: UUID, completion: @escaping (_ copyTradingAccountsList: ItemsViewModelTradingAccountDetails?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        
+        guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        SignalAPI.getSubscriberAccountsForAsset(id: assetId, authorization: authorization) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    static func attachExternalCommonAccount(uuid: UUID, model: AttachToExternalSignalProviderCommon? = nil, completion: @escaping CompletionBlock) {
+        
+        guard let authorization = AuthManager.authorizedToken else { return completion(.failure(errorType: .apiError(message: nil))) }
+        
+        SignalAPI.attachSlaveToMasterExternalCommonAccount(id: uuid, authorization: authorization, model: model) { (error) in
+            DataProvider().responseHandler(error, completion: completion)
+        }
+    }
+    static func attachExternalPrivateAccount(uuid: UUID, model: AttachToExternalSignalProviderExt? = nil, completion: @escaping CompletionBlock) {
+        
+        guard let authorization = AuthManager.authorizedToken else { return completion(.failure(errorType: .apiError(message: nil))) }
+        
+        SignalAPI.attachSlaveToMasterExternalPrivateAccount(id: uuid, authorization: authorization, model: model) { (error) in
+            DataProvider().responseHandler(error, completion: completion)
+        }
+    }
+
+    static func detach(with programId: String, model: DetachFromSignalProvider, completion: @escaping CompletionBlock) {
+        guard let authorization = AuthManager.authorizedToken,
+            let uuid = UUID(uuidString: programId) else { return completion(.failure(errorType: .apiError(message: nil))) }
+
+        SignalAPI.detachSlaveFromMasterInternal(id: uuid, authorization: authorization, model: model) { (error) in
+            DataProvider().responseHandler(error, completion: completion)
+        }
+    }
+    static func detachExternal(with programId: String, model: DetachFromExternalSignalProvider, completion: @escaping CompletionBlock) {
+        guard let authorization = AuthManager.authorizedToken,
+            let uuid = UUID(uuidString: programId) else { return completion(.failure(errorType: .apiError(message: nil))) }
+
+        SignalAPI.detachSlaveFromMasterExternal(id: uuid, authorization: authorization, model: model) { (error) in
             DataProvider().responseHandler(error, completion: completion)
         }
     }
     
-    static func update(with programId: String, model: AttachToSignalProvider? = nil, completion: @escaping CompletionBlock) {
+    static func closeTrade(with tradeId: String, assetId: String, completion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken,
-            let uuid = UUID(uuidString: programId) else { return completion(.failure(errorType: .apiError(message: nil))) }
+            let tradeUuid = UUID(uuidString: tradeId), let assetUuid = UUID(uuidString: assetId) else { return completion(.failure(errorType: .apiError(message: nil))) }
         
-        SignalAPI.v10SignalByIdUpdatePost(id: uuid, authorization: authorization, model: model) { (error) in
+        SignalAPI.closeTradeInternal(id: tradeUuid, authorization: authorization, assetId: assetUuid) { (error) in
             DataProvider().responseHandler(error, completion: completion)
         }
     }
     
-    static func getTradesLog(_ currency: CurrencyType? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ signalTradingEvents: SignalTradingEvents?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getTradesLog(_ currency: CurrencyType? = nil, accountId: UUID? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ signalTradingEvents: ItemsViewModelSignalTradingEvent?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
         guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        let accountCurrency = SignalAPI.AccountCurrency_v10SignalTradesLogGet(rawValue: currency?.rawValue ?? "")
+        let accountCurrency = SignalAPI.AccountCurrency_getSignalTradingLog(rawValue: currency?.rawValue ?? "")
         
-        SignalAPI.v10SignalTradesLogGet(authorization: authorization, accountCurrency: accountCurrency, skip: skip, take: take) { (viewModel, error) in
+        SignalAPI.getSignalTradingLog(authorization: authorization, accountId: accountId, accountCurrency: accountCurrency, skip: skip, take: take) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
     
-    static func getTradesOpen(with sorting: SignalAPI.Sorting_v10SignalTradesOpenGet?, symbol: String? = nil, currency: CurrencyType? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ tradesSignalViewModel: TradesSignalViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getTradesOpen(with sorting: SignalAPI.Sorting_getOpenSignalTrades?, symbol: String? = nil, accountId: UUID? = nil, currency: CurrencyType? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ tradesSignalViewModel: TradesSignalViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
         guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        let accountCurrency = SignalAPI.AccountCurrency_v10SignalTradesOpenGet(rawValue: currency?.rawValue ?? "")
+        let accountCurrency = SignalAPI.AccountCurrency_getOpenSignalTrades(rawValue: currency?.rawValue ?? "")
         
-        SignalAPI.v10SignalTradesOpenGet(authorization: authorization, sorting: sorting, symbol: symbol, accountCurrency: accountCurrency, skip: skip, take: take) { (viewModel, error) in
+        SignalAPI.getOpenSignalTrades(authorization: authorization, sorting: sorting, symbol: symbol, accountId: accountId, accountCurrency: accountCurrency, skip: skip, take: take) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
     
-    static func getTrades(from dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: SignalAPI.Sorting_v10SignalTradesGet? = nil, currency: CurrencyType? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ tradesSignalViewModel: TradesSignalViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        
-        guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
-        
-        let accountCurrency = SignalAPI.AccountCurrency_v10SignalTradesGet(rawValue: currency?.rawValue ?? "")
-        
-        SignalAPI.v10SignalTradesGet(authorization: authorization, dateFrom: dateFrom, dateTo: dateTo, symbol: symbol, sorting: sorting, accountCurrency: accountCurrency, skip: skip, take: take) { (viewModel, error) in
-            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
-        }
-    }
     
-    static func close(with programId: String, completion: @escaping CompletionBlock) {
-        guard let authorization = AuthManager.authorizedToken,
-            let uuid = UUID(uuidString: programId) else { return completion(.failure(errorType: .apiError(message: nil))) }
-        
-        SignalAPI.v10SignalTradesByIdClosePost(id: uuid, authorization: authorization) { (error) in
-            DataProvider().responseHandler(error, completion: completion)
-        }
-    }
+    
 }
 

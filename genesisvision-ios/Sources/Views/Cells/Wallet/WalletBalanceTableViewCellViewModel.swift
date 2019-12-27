@@ -12,7 +12,6 @@ struct WalletBalanceTableViewCellViewModel {
     let type: WalletBalanceType
     let grandTotal: WalletsGrandTotal?
     let selectedWallet: WalletData?
-    let account: CopyTradingAccountInfo?
 }
 
 extension WalletBalanceTableViewCellViewModel: CellViewModel {
@@ -21,22 +20,6 @@ extension WalletBalanceTableViewCellViewModel: CellViewModel {
         
         var balanceString = ""
         var percent: Double? = nil
-        
-        if let selectedWallet = account, let accountCurrency = selectedWallet.currency, let currencyType = CurrencyType(rawValue: accountCurrency.rawValue) {
-            switch type {
-            case .total:
-                if let balanceValue = selectedWallet.balance {
-                    balanceString = balanceValue.rounded(with: currencyType).toString() + " " + currencyType.rawValue
-                }
-            case .available:
-                if let totalBalanceValue = selectedWallet.balance, let balanceValue = selectedWallet.available {
-                    balanceString = balanceValue.rounded(with: currencyType).toString() + " " + currencyType.rawValue
-                    percent = totalBalanceValue == 0.0 ? 0.0 : balanceValue / totalBalanceValue
-                }
-            default:
-                break
-            }
-        }
         
         if let selectedWallet = selectedWallet, let walletCurrency = selectedWallet.currency, let currencyType = CurrencyType(rawValue: walletCurrency.rawValue) {
             switch type {
@@ -54,32 +37,32 @@ extension WalletBalanceTableViewCellViewModel: CellViewModel {
                     balanceString = balanceValue.rounded(with: currencyType).toString() + " " + currencyType.rawValue
                     percent = totalBalanceValue == 0.0 ? 0.0 : balanceValue / totalBalanceValue
                 }
-            case .pending:
-                if let totalBalanceValue = selectedWallet.total, let balanceValue = selectedWallet.pending {
+            case .trading:
+                if let totalBalanceValue = selectedWallet.total, let balanceValue = selectedWallet.trading {
                     balanceString = balanceValue.rounded(with: currencyType).toString() + " " + currencyType.rawValue
                     percent = totalBalanceValue == 0.0 ? 0.0 : balanceValue / totalBalanceValue
                 }
             }
         }
         
-        if let grandTotal = grandTotal, let walletCurrency = grandTotal.currencyCcy, let currencyType = CurrencyType(rawValue: walletCurrency.rawValue) {
+        if let grandTotal = grandTotal, let walletCurrency = grandTotal.currency, let currencyType = CurrencyType(rawValue: walletCurrency.rawValue) {
             switch type {
             case .total:
-                if let balanceValue = grandTotal.totalCcy {
+                if let balanceValue = grandTotal.total {
                     balanceString = balanceValue.rounded(with: currencyType).toString() + " " + currencyType.rawValue
                 }
             case .available:
-                if let totalBalanceValue = grandTotal.totalCcy, let balanceValue = grandTotal.availableCcy {
+                if let totalBalanceValue = grandTotal.total, let balanceValue = grandTotal.available {
                     balanceString = balanceValue.rounded(with: currencyType).toString() + " " + currencyType.rawValue
                     percent = totalBalanceValue == 0.0 ? 0.0 : balanceValue / totalBalanceValue
                 }
             case .invested:
-                if let totalBalanceValue = grandTotal.totalCcy, let balanceValue = grandTotal.investedCcy {
+                if let totalBalanceValue = grandTotal.total, let balanceValue = grandTotal.invested {
                     balanceString = balanceValue.rounded(with: currencyType).toString() + " " + currencyType.rawValue
                     percent = totalBalanceValue == 0.0 ? 0.0 : balanceValue / totalBalanceValue
                 }
-            case .pending:
-                if let totalBalanceValue = grandTotal.totalCcy, let balanceValue = grandTotal.pendingCcy {
+            case .trading:
+                if let totalBalanceValue = grandTotal.total, let balanceValue = grandTotal.trading {
                     balanceString = balanceValue.rounded(with: currencyType).toString() + " " + currencyType.rawValue
                     percent = totalBalanceValue == 0.0 ? 0.0 : balanceValue / totalBalanceValue
                 }

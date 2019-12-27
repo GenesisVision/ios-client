@@ -11,22 +11,16 @@ import Foundation
 
 open class WalletSummary: Codable {
 
-    public var totalBalanceGVT: Double?
-    public var totalBalanceCurrency: Double?
-    public var investedGVT: Double?
-    public var investedCurrency: Double?
-    public var availableGVT: Double?
-    public var availableCurrency: Double?
+    public var grandTotal: WalletsGrandTotal?
+    public var wallets: [WalletData]?
+    public var payFeesWithGvt: Bool?
 
 
     
-    public init(totalBalanceGVT: Double?, totalBalanceCurrency: Double?, investedGVT: Double?, investedCurrency: Double?, availableGVT: Double?, availableCurrency: Double?) {
-        self.totalBalanceGVT = totalBalanceGVT
-        self.totalBalanceCurrency = totalBalanceCurrency
-        self.investedGVT = investedGVT
-        self.investedCurrency = investedCurrency
-        self.availableGVT = availableGVT
-        self.availableCurrency = availableCurrency
+    public init(grandTotal: WalletsGrandTotal?, wallets: [WalletData]?, payFeesWithGvt: Bool?) {
+        self.grandTotal = grandTotal
+        self.wallets = wallets
+        self.payFeesWithGvt = payFeesWithGvt
     }
     
 
@@ -36,12 +30,9 @@ open class WalletSummary: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(totalBalanceGVT, forKey: "totalBalanceGVT")
-        try container.encodeIfPresent(totalBalanceCurrency, forKey: "totalBalanceCurrency")
-        try container.encodeIfPresent(investedGVT, forKey: "investedGVT")
-        try container.encodeIfPresent(investedCurrency, forKey: "investedCurrency")
-        try container.encodeIfPresent(availableGVT, forKey: "availableGVT")
-        try container.encodeIfPresent(availableCurrency, forKey: "availableCurrency")
+        try container.encodeIfPresent(grandTotal, forKey: "grandTotal")
+        try container.encodeIfPresent(wallets, forKey: "wallets")
+        try container.encodeIfPresent(payFeesWithGvt, forKey: "payFeesWithGvt")
     }
 
     // Decodable protocol methods
@@ -49,12 +40,9 @@ open class WalletSummary: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        totalBalanceGVT = try container.decodeIfPresent(Double.self, forKey: "totalBalanceGVT")
-        totalBalanceCurrency = try container.decodeIfPresent(Double.self, forKey: "totalBalanceCurrency")
-        investedGVT = try container.decodeIfPresent(Double.self, forKey: "investedGVT")
-        investedCurrency = try container.decodeIfPresent(Double.self, forKey: "investedCurrency")
-        availableGVT = try container.decodeIfPresent(Double.self, forKey: "availableGVT")
-        availableCurrency = try container.decodeIfPresent(Double.self, forKey: "availableCurrency")
+        grandTotal = try container.decodeIfPresent(WalletsGrandTotal.self, forKey: "grandTotal")
+        wallets = try container.decodeIfPresent([WalletData].self, forKey: "wallets")
+        payFeesWithGvt = try container.decodeIfPresent(Bool.self, forKey: "payFeesWithGvt")
     }
 }
 

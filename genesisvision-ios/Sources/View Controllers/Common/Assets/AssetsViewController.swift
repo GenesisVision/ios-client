@@ -46,7 +46,6 @@ class AssetsViewController: BaseTabmanViewController<AssetsTabmanViewModel>, UIS
         scrollToPage(.last, animated: true)
     }
     
-    
     deinit {
         NotificationCenter.default.removeObserver(self, name: .chooseFundList, object: nil)
         NotificationCenter.default.removeObserver(self, name: .chooseProgramList, object: nil)

@@ -19,7 +19,7 @@ class ProgramTabmanViewController: BaseTabmanViewController<ProgramTabmanViewMod
     }
     
     // MARK: - Public Methods
-    func setup(_ programDetailsFull: ProgramDetailsFull?) {
+    func setup(_ programDetailsFull: ProgramFollowDetailsFull?) {
         viewModel.setup(programDetailsFull)
     }
 }

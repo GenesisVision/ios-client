@@ -12,92 +12,13 @@ import Alamofire
 
 open class ProfileAPI {
     /**
-     Remove avatar
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func v10ProfileAvatarRemovePost(authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
-        v10ProfileAvatarRemovePostWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
-            completion(error);
-        }
-    }
-
-
-    /**
-     Remove avatar
-     - POST /v1.0/profile/avatar/remove
-     
-     - parameter authorization: (header) JWT access token 
-
-     - returns: RequestBuilder<Void> 
-     */
-    open class func v10ProfileAvatarRemovePostWithRequestBuilder(authorization: String) -> RequestBuilder<Void> {
-        let path = "/v1.0/profile/avatar/remove"
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
-
-        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
-    }
-
-    /**
-     Update avatar
-     
-     - parameter fileId: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func v10ProfileAvatarUpdateByFileIdPost(fileId: String, authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
-        v10ProfileAvatarUpdateByFileIdPostWithRequestBuilder(fileId: fileId, authorization: authorization).execute { (response, error) -> Void in
-            completion(error);
-        }
-    }
-
-
-    /**
-     Update avatar
-     - POST /v1.0/profile/avatar/update/{fileId}
-     
-     - parameter fileId: (path)  
-     - parameter authorization: (header) JWT access token 
-
-     - returns: RequestBuilder<Void> 
-     */
-    open class func v10ProfileAvatarUpdateByFileIdPostWithRequestBuilder(fileId: String, authorization: String) -> RequestBuilder<Void> {
-        var path = "/v1.0/profile/avatar/update/{fileId}"
-        path = path.replacingOccurrences(of: "{fileId}", with: "\(fileId)", options: .literal, range: nil)
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
-
-        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
-    }
-
-    /**
      Get full profile
      
      - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10ProfileGet(authorization: String, completion: @escaping ((_ data: ProfileFullViewModel?,_ error: Error?) -> Void)) {
-        v10ProfileGetWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
+    open class func getProfileFull(authorization: String, completion: @escaping ((_ data: ProfileFullViewModel?,_ error: Error?) -> Void)) {
+        getProfileFullWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -105,7 +26,7 @@ open class ProfileAPI {
 
     /**
      Get full profile
-     - GET /v1.0/profile
+     - GET /v2.0/profile
      - examples: [{contentType=application/json, example={
   "birthday" : "2000-01-23T04:56:07.000+00:00",
   "lastName" : "lastName",
@@ -113,7 +34,8 @@ open class ProfileAPI {
   "address" : "address",
   "gender" : true,
   "city" : "city",
-  "verificationStatus" : "NotVerified",
+  "verificationStatus" : { },
+  "isPublicInvestor" : true,
   "citizenship" : "citizenship",
   "about" : "about",
   "index" : "index",
@@ -132,8 +54,8 @@ open class ProfileAPI {
 
      - returns: RequestBuilder<ProfileFullViewModel> 
      */
-    open class func v10ProfileGetWithRequestBuilder(authorization: String) -> RequestBuilder<ProfileFullViewModel> {
-        let path = "/v1.0/profile"
+    open class func getProfileFullWithRequestBuilder(authorization: String) -> RequestBuilder<ProfileFullViewModel> {
+        let path = "/v2.0/profile"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
@@ -155,8 +77,8 @@ open class ProfileAPI {
      - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10ProfileHeaderGet(authorization: String, completion: @escaping ((_ data: ProfileHeaderViewModel?,_ error: Error?) -> Void)) {
-        v10ProfileHeaderGetWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
+    open class func getProfileHeader(authorization: String, completion: @escaping ((_ data: ProfileHeaderViewModel?,_ error: Error?) -> Void)) {
+        getProfileHeaderWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -164,34 +86,29 @@ open class ProfileAPI {
 
     /**
      Get header profile
-     - GET /v1.0/profile/header
+     - GET /v2.0/profile/header
      - examples: [{contentType=application/json, example={
-  "totalBalance" : 6.438423552598547,
-  "pending" : 1.284659006116532,
-  "available" : 6.965117697638846,
-  "notificationsCount" : 9,
-  "kycConfirmed" : true,
-  "availableGvt" : 9.018348186070783,
+  "isPublicInvestor" : true,
+  "isUserNameFilled" : true,
+  "notificationsCount" : 0,
   "avatar" : "avatar",
-  "investedGvt" : 8.762042012749001,
-  "favoritesCount" : 9,
   "isNewUser" : true,
+  "url" : "url",
+  "isForexAllowed" : true,
   "isTwoFactorEnabled" : true,
-  "allowForex" : true,
+  "countryCode" : "countryCode",
+  "isKycConfirmed" : true,
   "name" : "name",
   "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-  "userType" : "Investor",
-  "totalBalanceGvt" : 6.683562403749608,
-  "email" : "email",
-  "invested" : 3.5571952270680973
+  "email" : "email"
 }}]
      
      - parameter authorization: (header) JWT access token 
 
      - returns: RequestBuilder<ProfileHeaderViewModel> 
      */
-    open class func v10ProfileHeaderGetWithRequestBuilder(authorization: String) -> RequestBuilder<ProfileHeaderViewModel> {
-        let path = "/v1.0/profile/header"
+    open class func getProfileHeaderWithRequestBuilder(authorization: String) -> RequestBuilder<ProfileHeaderViewModel> {
+        let path = "/v2.0/profile/header"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
@@ -208,223 +125,13 @@ open class ProfileAPI {
     }
 
     /**
-     Add external exchange key
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func v10ProfileKeysAddPost(authorization: String, model: ExternalKeyAddViewModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        v10ProfileKeysAddPostWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
-            completion(error);
-        }
-    }
-
-
-    /**
-     Add external exchange key
-     - POST /v1.0/profile/keys/add
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
-
-     - returns: RequestBuilder<Void> 
-     */
-    open class func v10ProfileKeysAddPostWithRequestBuilder(authorization: String, model: ExternalKeyAddViewModel? = nil) -> RequestBuilder<Void> {
-        let path = "/v1.0/profile/keys/add"
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
-
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
-
-        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
-    }
-
-    /**
-     Delete external exchange key
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func v10ProfileKeysDeletePost(authorization: String, model: IdModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        v10ProfileKeysDeletePostWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
-            completion(error);
-        }
-    }
-
-
-    /**
-     Delete external exchange key
-     - POST /v1.0/profile/keys/delete
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
-
-     - returns: RequestBuilder<Void> 
-     */
-    open class func v10ProfileKeysDeletePostWithRequestBuilder(authorization: String, model: IdModel? = nil) -> RequestBuilder<Void> {
-        let path = "/v1.0/profile/keys/delete"
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
-
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
-
-        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
-    }
-
-    /**
-     Get external exchange keys
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func v10ProfileKeysGet(authorization: String, completion: @escaping ((_ data: ExternalKeysViewModel?,_ error: Error?) -> Void)) {
-        v10ProfileKeysGetWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
-            completion(response?.body, error);
-        }
-    }
-
-
-    /**
-     Get external exchange keys
-     - GET /v1.0/profile/keys
-     - examples: [{contentType=application/json, example={
-  "total" : 0,
-  "keys" : [ {
-    "dateAdd" : "2000-01-23T04:56:07.000+00:00",
-    "exchangeName" : "exchangeName",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "title" : "title"
-  }, {
-    "dateAdd" : "2000-01-23T04:56:07.000+00:00",
-    "exchangeName" : "exchangeName",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "title" : "title"
-  } ]
-}}]
-     
-     - parameter authorization: (header) JWT access token 
-
-     - returns: RequestBuilder<ExternalKeysViewModel> 
-     */
-    open class func v10ProfileKeysGetWithRequestBuilder(authorization: String) -> RequestBuilder<ExternalKeysViewModel> {
-        let path = "/v1.0/profile/keys"
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
-
-        let requestBuilder: RequestBuilder<ExternalKeysViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
-    }
-
-    /**
-     Update user personal details
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func v10ProfilePersonalUpdatePost(authorization: String, model: UpdatePersonalDetailViewModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        v10ProfilePersonalUpdatePostWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
-            completion(error);
-        }
-    }
-
-
-    /**
-     Update user personal details
-     - POST /v1.0/profile/personal/update
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
-
-     - returns: RequestBuilder<Void> 
-     */
-    open class func v10ProfilePersonalUpdatePostWithRequestBuilder(authorization: String, model: UpdatePersonalDetailViewModel? = nil) -> RequestBuilder<Void> {
-        let path = "/v1.0/profile/personal/update"
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
-
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
-
-        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
-    }
-
-    /**
-
-     - parameter authorization: (header) JWT access token 
-     - parameter token: (body)  (optional)
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func v10ProfilePushTokenPost(authorization: String, token: FcmTokenViewModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        v10ProfilePushTokenPostWithRequestBuilder(authorization: authorization, token: token).execute { (response, error) -> Void in
-            completion(error);
-        }
-    }
-
-
-    /**
-     - POST /v1.0/profile/push/token
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter token: (body)  (optional)
-
-     - returns: RequestBuilder<Void> 
-     */
-    open class func v10ProfilePushTokenPostWithRequestBuilder(authorization: String, token: FcmTokenViewModel? = nil) -> RequestBuilder<Void> {
-        let path = "/v1.0/profile/push/token"
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: token)
-
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
-
-        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
-    }
-
-    /**
      Get social links
      
      - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10ProfileSociallinksGet(authorization: String, completion: @escaping ((_ data: SocialLinksViewModel?,_ error: Error?) -> Void)) {
-        v10ProfileSociallinksGetWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
+    open class func getSocialLinks(authorization: String, completion: @escaping ((_ data: SocialLinksViewModel?,_ error: Error?) -> Void)) {
+        getSocialLinksWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -432,18 +139,18 @@ open class ProfileAPI {
 
     /**
      Get social links
-     - GET /v1.0/profile/sociallinks
+     - GET /v2.0/profile/sociallinks
      - examples: [{contentType=application/json, example={
   "socialLinks" : [ {
     "name" : "name",
     "logo" : "logo",
-    "type" : "Twitter",
+    "type" : { },
     "value" : "value",
     "url" : "url"
   }, {
     "name" : "name",
     "logo" : "logo",
-    "type" : "Twitter",
+    "type" : { },
     "value" : "value",
     "url" : "url"
   } ]
@@ -453,8 +160,8 @@ open class ProfileAPI {
 
      - returns: RequestBuilder<SocialLinksViewModel> 
      */
-    open class func v10ProfileSociallinksGetWithRequestBuilder(authorization: String) -> RequestBuilder<SocialLinksViewModel> {
-        let path = "/v1.0/profile/sociallinks"
+    open class func getSocialLinksWithRequestBuilder(authorization: String) -> RequestBuilder<SocialLinksViewModel> {
+        let path = "/v2.0/profile/sociallinks"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
@@ -471,107 +178,27 @@ open class ProfileAPI {
     }
 
     /**
-     Add or update social links
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func v10ProfileSociallinksUpdatePost(authorization: String, model: UpdateSocialLinkViewModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        v10ProfileSociallinksUpdatePostWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
-            completion(error);
-        }
-    }
-
-
-    /**
-     Add or update social links
-     - POST /v1.0/profile/sociallinks/update
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
-
-     - returns: RequestBuilder<Void> 
-     */
-    open class func v10ProfileSociallinksUpdatePostWithRequestBuilder(authorization: String, model: UpdateSocialLinkViewModel? = nil) -> RequestBuilder<Void> {
-        let path = "/v1.0/profile/sociallinks/update"
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
-
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
-
-        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
-    }
-
-    /**
-     Update profile
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func v10ProfileUpdatePost(authorization: String, model: UpdateProfileViewModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        v10ProfileUpdatePostWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
-            completion(error);
-        }
-    }
-
-
-    /**
-     Update profile
-     - POST /v1.0/profile/update
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
-
-     - returns: RequestBuilder<Void> 
-     */
-    open class func v10ProfileUpdatePostWithRequestBuilder(authorization: String, model: UpdateProfileViewModel? = nil) -> RequestBuilder<Void> {
-        let path = "/v1.0/profile/update"
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
-
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
-
-        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
-    }
-
-    /**
 
      - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10ProfileVerificationTokenPost(authorization: String, completion: @escaping ((_ data: String?,_ error: Error?) -> Void)) {
-        v10ProfileVerificationTokenPostWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
+    open class func getVerificationToken(authorization: String, completion: @escaping ((_ data: String?,_ error: Error?) -> Void)) {
+        getVerificationTokenWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
 
 
     /**
-     - POST /v1.0/profile/verification/token
+     - POST /v2.0/profile/verification/token
      - examples: [{contentType=application/json, example=""}]
      
      - parameter authorization: (header) JWT access token 
 
      - returns: RequestBuilder<String> 
      */
-    open class func v10ProfileVerificationTokenPostWithRequestBuilder(authorization: String) -> RequestBuilder<String> {
-        let path = "/v1.0/profile/verification/token"
+    open class func getVerificationTokenWithRequestBuilder(authorization: String) -> RequestBuilder<String> {
+        let path = "/v2.0/profile/verification/token"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
@@ -585,6 +212,397 @@ open class ProfileAPI {
         let requestBuilder: RequestBuilder<String>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     Remove avatar
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func removeAvatar(authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
+        removeAvatarWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Remove avatar
+     - POST /v2.0/profile/avatar/remove
+     
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func removeAvatarWithRequestBuilder(authorization: String) -> RequestBuilder<Void> {
+        let path = "/v2.0/profile/avatar/remove"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+
+     - parameter authorization: (header) JWT access token 
+     - parameter token: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func removeFcmToken(authorization: String, token: FcmTokenViewModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        removeFcmTokenWithRequestBuilder(authorization: authorization, token: token).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     - POST /v2.0/profile/push/token/remove
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter token: (body)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func removeFcmTokenWithRequestBuilder(authorization: String, token: FcmTokenViewModel? = nil) -> RequestBuilder<Void> {
+        let path = "/v2.0/profile/push/token/remove"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: token)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+    }
+
+    /**
+     Disable public investor profile
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func switchPublicInvestorOff(authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
+        switchPublicInvestorOffWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Disable public investor profile
+     - POST /v2.0/profile/investor/public/off
+     
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func switchPublicInvestorOffWithRequestBuilder(authorization: String) -> RequestBuilder<Void> {
+        let path = "/v2.0/profile/investor/public/off"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     Enable public investor profile
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func switchPublicInvestorOn(authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
+        switchPublicInvestorOnWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Enable public investor profile
+     - POST /v2.0/profile/investor/public/on
+     
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func switchPublicInvestorOnWithRequestBuilder(authorization: String) -> RequestBuilder<Void> {
+        let path = "/v2.0/profile/investor/public/on"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     Add or update all social links
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func updateAllSocialLinks(authorization: String, model: UpdateSocialLinksViewModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        updateAllSocialLinksWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Add or update all social links
+     - POST /v2.0/profile/sociallinks/all/update
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func updateAllSocialLinksWithRequestBuilder(authorization: String, model: UpdateSocialLinksViewModel? = nil) -> RequestBuilder<Void> {
+        let path = "/v2.0/profile/sociallinks/all/update"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+    }
+
+    /**
+     Update avatar
+     
+     - parameter fileId: (path)  
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func updateAvatar(fileId: String, authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
+        updateAvatarWithRequestBuilder(fileId: fileId, authorization: authorization).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Update avatar
+     - POST /v2.0/profile/avatar/update/{fileId}
+     
+     - parameter fileId: (path)  
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func updateAvatarWithRequestBuilder(fileId: String, authorization: String) -> RequestBuilder<Void> {
+        var path = "/v2.0/profile/avatar/update/{fileId}"
+        path = path.replacingOccurrences(of: "{fileId}", with: "\(fileId)", options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+
+     - parameter authorization: (header) JWT access token 
+     - parameter token: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func updateFcmToken(authorization: String, token: FcmTokenViewModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        updateFcmTokenWithRequestBuilder(authorization: authorization, token: token).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     - POST /v2.0/profile/push/token
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter token: (body)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func updateFcmTokenWithRequestBuilder(authorization: String, token: FcmTokenViewModel? = nil) -> RequestBuilder<Void> {
+        let path = "/v2.0/profile/push/token"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: token)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+    }
+
+    /**
+     Update user personal details
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func updatePersonalDetails(authorization: String, model: UpdatePersonalDetailViewModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        updatePersonalDetailsWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Update user personal details
+     - POST /v2.0/profile/personal/update
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func updatePersonalDetailsWithRequestBuilder(authorization: String, model: UpdatePersonalDetailViewModel? = nil) -> RequestBuilder<Void> {
+        let path = "/v2.0/profile/personal/update"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+    }
+
+    /**
+     Update profile
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func updateProfile(authorization: String, model: UpdateProfileViewModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        updateProfileWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Update profile
+     - POST /v2.0/profile/update
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func updateProfileWithRequestBuilder(authorization: String, model: UpdateProfileViewModel? = nil) -> RequestBuilder<Void> {
+        let path = "/v2.0/profile/update"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+    }
+
+    /**
+     Add or update social links
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func updateSocialLinks(authorization: String, model: UpdateSocialLinkViewModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        updateSocialLinksWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Add or update social links
+     - POST /v2.0/profile/sociallinks/update
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func updateSocialLinksWithRequestBuilder(authorization: String, model: UpdateSocialLinkViewModel? = nil) -> RequestBuilder<Void> {
+        let path = "/v2.0/profile/sociallinks/update"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
     }
 
 }

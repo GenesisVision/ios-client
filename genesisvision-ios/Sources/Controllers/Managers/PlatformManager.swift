@@ -36,9 +36,47 @@ class PlatformManager {
     public private(set) var platformInfo: PlatformInfo?
     public private(set) var filterConstants: FilterConstants?
     public private(set) var programsLevelsInfo: ProgramsLevelsInfo?
+    public private(set) var levelsParamsInfo: LevelsParamsInfo?
+    public private(set) var platformAssets: PlatformAssets?
     
     init() {
         filterConstants = getFilterConstants(nil)
+    }
+    
+    func getPlatformAssets(completion: @escaping (_ platformAssets: PlatformAssets?) -> Void) {
+        if let platformAssets = platformAssets {
+            completion(platformAssets)
+        }
+        
+        BaseDataProvider.getAllPlatformAssets(completion: { [weak self] (viewModel) in
+            self?.platformAssets = viewModel
+            completion(viewModel)
+        }) { (result) in
+            switch result {
+            case .success:
+                break
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType)
+            }
+        }
+    }
+    
+    func getLevelsParamsInfo(completion: @escaping (_ platformAssets: LevelsParamsInfo?) -> Void) {
+        if let levelsParamsInfo = levelsParamsInfo {
+            completion(levelsParamsInfo)
+        }
+        
+        BaseDataProvider.getLevelsParameters(completion: { [weak self] (viewModel) in
+            self?.levelsParamsInfo = viewModel
+            completion(viewModel)
+        }) { (result) in
+            switch result {
+            case .success:
+                break
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType)
+            }
+        }
     }
     
     func getPlatformInfo(completion: @escaping (_ platformInfo: PlatformInfo?) -> Void) {
@@ -59,14 +97,13 @@ class PlatformManager {
         }
     }
     
-    func getProgramsLevelsInfo(_ currency: PlatformAPI.Currency_v10PlatformLevelsGet, completion: @escaping (_ programsLevelsInfo: ProgramsLevelsInfo?) -> Void) {
+    func getProgramsLevelsInfo(_ currency: CurrencyType? = nil, completion: @escaping (_ programsLevelsInfo: ProgramsLevelsInfo?) -> Void) {
         if let programsLevelsInfo = programsLevelsInfo {
             completion(programsLevelsInfo)
         }
 
-        BaseDataProvider.getProgramsLevelsInfo(currency, completion: { [weak self] (viewModel) in
-            self?.programsLevelsInfo = viewModel
-            completion(viewModel)
+        BaseDataProvider.getProgramsLevels(currency, completion: { [weak self] (model) in
+            self?.programsLevelsInfo = model
         }) { (result) in
             switch result {
             case .success:

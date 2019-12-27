@@ -42,10 +42,10 @@ final class FundBalanceViewModel {
     }
     
     // MARK: - Public methods
-    func getSelectedFundBalanceChartElement(_ date: Date) -> BalanceChartElement? {
-        if let result = fundBalanceChart?.balanceChart?.first(where: { $0.date == date }) {
-            return result
-        }
+    func getSelectedFundBalanceChartElement(_ date: Date) -> BalanceChartPoint? {
+//        if let result = fundBalanceChart?.chart?.first(where: { $0.date == date }) {
+//            return result
+//        }
         
         return nil
     }

@@ -16,7 +16,7 @@ final class FundWithdrawViewModel {
     
     var fundWithdrawInfo: FundWithdrawInfo?
     
-    var walletMultiSummary: WalletMultiSummary?
+    var walletSummary: WalletSummary?
     var selectedWalletFromDelegateManager: WalletDepositCurrencyDelegateManager?
     var rate: Double = 0.0
     
@@ -35,8 +35,8 @@ final class FundWithdrawViewModel {
     
     // MARK: - Public methods
     func updateWalletCurrencyFromIndex(_ selectedIndex: Int, completion: @escaping CompletionBlock) {
-        guard let walletMultiSummary = walletMultiSummary,
-            let wallets = walletMultiSummary.wallets else { return }
+        guard let walletSummary = walletSummary,
+            let wallets = walletSummary.wallets else { return }
         
         self.selectedWalletFromDelegateManager?.selected = wallets[selectedIndex]
         self.selectedWalletFromDelegateManager?.selectedIndex = selectedIndex
@@ -45,13 +45,13 @@ final class FundWithdrawViewModel {
     }
     
     func getInfo(completion: @escaping CompletionBlock) {
-        var currency: InvestorAPI.Currency_v10InvestorFundsByIdWithdrawInfoByCurrencyGet = .gvt
+        var currency: InvestmentsAPI.Currency_getFundWithdrawInfo = .gvt
         
         guard let fundId = fundId else { return completion(.failure(errorType: .apiError(message: nil))) }
         
         AuthManager.getWallet(completion: { [weak self] (wallet) in
             if let wallet = wallet, let wallets = wallet.wallets {
-                self?.walletMultiSummary = wallet
+                self?.walletSummary = wallet
                 self?.selectedWalletFromDelegateManager = WalletDepositCurrencyDelegateManager(wallets)
                 self?.selectedWalletFromDelegateManager?.walletId = 0
                 self?.selectedWalletFromDelegateManager?.selectedIndex = 0
@@ -59,10 +59,10 @@ final class FundWithdrawViewModel {
             }
             
             if let walletCurrency = self?.selectedWalletFromDelegateManager?.selected?.currency?.rawValue {
-                currency = InvestorAPI.Currency_v10InvestorFundsByIdWithdrawInfoByCurrencyGet(rawValue: walletCurrency) ?? .gvt
+                currency = InvestmentsAPI.Currency_getFundWithdrawInfo(rawValue: walletCurrency) ?? .gvt
             }
             
-            FundsDataProvider.getWithdrawInfo(fundId: fundId, currency: currency, completion: { [weak self] (fundWithdrawInfo) in
+            FundsDataProvider.getWithdrawInfo(fundId, currency: currency, completion: { [weak self] (fundWithdrawInfo) in
                 guard let fundWithdrawInfo = fundWithdrawInfo else {
                     return completion(.failure(errorType: .apiError(message: nil)))
                 }
@@ -120,7 +120,7 @@ final class FundWithdrawViewModel {
     private func updateRate(completion: @escaping CompletionBlock) {
         //TODO: change "GVT"
         RateDataProvider.getRate(from: self.selectedWalletFromDelegateManager?.selected?.currency?.rawValue ?? "", to: "GVT", completion: { [weak self] (rate) in
-            self?.rate = rate ?? 0.0
+            self?.rate = rate?.rate ?? 0.0
             completion(.success)
             }, errorCompletion: completion)
     }
@@ -129,9 +129,9 @@ final class FundWithdrawViewModel {
     func withdraw(with amount: Double, completion: @escaping CompletionBlock) {
         guard let walletCurrency = self.selectedWalletFromDelegateManager?.selected?.currency?.rawValue else { return completion(.failure(errorType: .apiError(message: nil))) }
         
-        let currency = InvestorAPI.Currency_v10InvestorFundsByIdWithdrawByPercentPost(rawValue: walletCurrency)
+        let currency = InvestmentsAPI.Currency_withdrawFromFund(rawValue: walletCurrency)
         
-        FundsDataProvider.withdraw(withPercent: amount, fundId: fundId, currency: currency) { (result) in
+        FundsDataProvider.withdraw(withPercent: amount, assetId: fundId, currency: currency) { (result) in
             completion(result)
         }
     }

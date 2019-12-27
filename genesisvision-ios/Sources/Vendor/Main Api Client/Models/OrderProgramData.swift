@@ -17,16 +17,18 @@ open class OrderProgramData: Codable {
     public var color: String?
     public var url: String?
     public var logo: String?
+    public var type: AssetType?
 
 
     
-    public init(title: String?, level: Int?, levelProgress: Double?, color: String?, url: String?, logo: String?) {
+    public init(title: String?, level: Int?, levelProgress: Double?, color: String?, url: String?, logo: String?, type: AssetType?) {
         self.title = title
         self.level = level
         self.levelProgress = levelProgress
         self.color = color
         self.url = url
         self.logo = logo
+        self.type = type
     }
     
 
@@ -42,6 +44,7 @@ open class OrderProgramData: Codable {
         try container.encodeIfPresent(color, forKey: "color")
         try container.encodeIfPresent(url, forKey: "url")
         try container.encodeIfPresent(logo, forKey: "logo")
+        try container.encodeIfPresent(type, forKey: "type")
     }
 
     // Decodable protocol methods
@@ -55,6 +58,7 @@ open class OrderProgramData: Codable {
         color = try container.decodeIfPresent(String.self, forKey: "color")
         url = try container.decodeIfPresent(String.self, forKey: "url")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
+        type = try container.decodeIfPresent(AssetType.self, forKey: "type")
     }
 }
 

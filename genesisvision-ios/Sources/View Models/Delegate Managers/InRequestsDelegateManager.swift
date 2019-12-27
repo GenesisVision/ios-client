@@ -22,7 +22,7 @@ final class InRequestsDelegateManager: NSObject, UITableViewDelegate, UITableVie
         return [InRequestsTableViewCellViewModel.self]
     }
     
-    var programRequests: ProgramRequests?
+    var requests: ItemsViewModelAssetInvestmentRequest?
     
     // MARK: - Lifecycle
     override init() {
@@ -31,8 +31,8 @@ final class InRequestsDelegateManager: NSObject, UITableViewDelegate, UITableVie
     
     // MARK: - Private methods
     private func cancelRequest(at indexPath: IndexPath) {
-        if let request = programRequests?.requests?[indexPath.row], let canCancel = request.canCancelRequest, let requestid = request.id?.uuidString, canCancel {
-            ProgramRequestDataProvider.cancelRequest(requestId: requestid) { [weak self] (result) in
+        if let request = requests?.items?[indexPath.row], let canCancel = request.canCancelRequest, let requestid = request.id?.uuidString, canCancel {
+            RequestDataProvider.cancelRequest(requestId: requestid) { [weak self] (result) in
                 self?.inRequestsDelegate?.didCanceledRequest(completionResult: result)
             }
         }
@@ -46,25 +46,25 @@ final class InRequestsDelegateManager: NSObject, UITableViewDelegate, UITableVie
         }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return programRequests?.requests?.count ?? 0
+        return requests?.items?.count ?? 0
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let programRequests = programRequests?.requests else {
+        guard let requests = requests?.items else {
             return TableViewCell()
         }
         
-        let programRequest = programRequests[indexPath.row]
-        let model = InRequestsTableViewCellViewModel(programRequest: programRequest)
+        let request = requests[indexPath.row]
+        let model = InRequestsTableViewCellViewModel(request: request)
         
         return tableView.dequeueReusableCell(withModel: model, for: indexPath)
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        guard let programRequests = programRequests?.requests else {
+        guard let requests = requests?.items else {
             return false
         }
         
-        let programRequest = programRequests[indexPath.row]
+        let programRequest = requests[indexPath.row]
         return programRequest.canCancelRequest ?? false
     }
     

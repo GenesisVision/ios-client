@@ -24,7 +24,7 @@ final class ProgramSubscribeViewModel {
     var followType: FollowType = .follow
     
     var attachToSignal: AttachToSignalProvider!
-    var reasonMode: DetachFromSignalProvider.Mode = ._none
+    var reasonMode: SignalDetachMode = ._none
     
     var signalSubscription: SignalSubscription?
     
@@ -68,10 +68,24 @@ final class ProgramSubscribeViewModel {
         self.detailProtocol = detailProtocol
         self.followType = followType
         
-        self.signalSubscription = signalSubscription ?? SignalSubscription(hasSignalAccount: nil, hasActiveSubscription: nil, mode: .byBalance, percent: 10, openTolerancePercent: 0.5, fixedVolume: 100, fixedCurrency: .usd, totalProfit: nil, totalVolume: nil)
-        
-        self.attachToSignal = AttachToSignalProvider(initialDepositCurrency: .usd,
-                                                     initialDepositAmount: initialDepositAmount,
+        self.signalSubscription = signalSubscription ?? SignalSubscription(subscriberInfo: nil,
+                                                                           asset: nil,
+                                                                           status: nil,
+                                                                           subscriptionDate: nil,
+                                                                           unsubscriptionDate: nil,
+                                                                           hasSignalAccount: nil,
+                                                                           hasActiveSubscription: nil,
+                                                                           isExternal: nil,
+                                                                           mode: .byBalance,
+                                                                           detachMode: nil,
+                                                                           percent: 10,
+                                                                           openTolerancePercent: 0.5,
+                                                                           fixedVolume: 100,
+                                                                           fixedCurrency: .usd,
+                                                                           totalProfit: nil,
+                                                                           totalVolume: nil)
+        //FIXME: add tradingAccountId
+        self.attachToSignal = AttachToSignalProvider(tradingAccountId: nil,
                                                      mode: .byBalance,
                                                      percent: signalSubscription?.percent,
                                                      openTolerancePercent: signalSubscription?.openTolerancePercent,
@@ -80,8 +94,9 @@ final class ProgramSubscribeViewModel {
         
         self.reasonMode = ._none
         
-        if let initialDepositCurrency = initialDepositCurrency, let currency = AttachToSignalProvider.InitialDepositCurrency(rawValue: initialDepositCurrency.rawValue) {
-            self.attachToSignal.initialDepositCurrency = currency
+        if let initialDepositCurrency = initialDepositCurrency, let currency =
+            AttachToSignalProvider.FixedCurrency(rawValue: initialDepositCurrency.rawValue) {
+            self.attachToSignal.fixedCurrency = currency
         }
     }
     
@@ -110,18 +125,18 @@ final class ProgramSubscribeViewModel {
         return fixedCurrency.rawValue
     }
     
-    func getMode() -> SignalSubscription.Mode {
+    func getMode() -> SubscriptionMode {
         return signalSubscription?.mode ?? .byBalance
     }
-    func changeMode(_ mode: SignalSubscription.Mode) {
+    func changeMode(_ mode: SubscriptionMode) {
         signalSubscription?.mode = mode
     }
 
-    func getReason() -> DetachFromSignalProvider.Mode {
+    func getReason() -> SignalDetachMode {
         return reasonMode
     }
     
-    func changeReason(_ mode: DetachFromSignalProvider.Mode) {
+    func changeReason(_ mode: SignalDetachMode) {
         reasonMode = mode
     }
     
@@ -185,12 +200,11 @@ final class ProgramSubscribeViewModel {
             attachToSignal.fixedCurrency = AttachToSignalProvider.FixedCurrency(rawValue: fixedCurrency.rawValue)
         }
         if let mode = signalSubscription?.mode {
-            attachToSignal.mode = AttachToSignalProvider.Mode(rawValue: mode.rawValue)
+            attachToSignal.mode = SubscriptionMode(rawValue: mode.rawValue)
         }
         
         guard let programId = programId else { return completion(.failure(errorType: .apiError(message: nil))) }
-        
-        SignalDataProvider.subscribe(on: programId, model: attachToSignal, completion: completion)
+        SignalDataProvider.attach(on: programId, model: attachToSignal, completion: completion)
     }
     
     func update(completion: @escaping CompletionBlock) {
@@ -202,7 +216,7 @@ final class ProgramSubscribeViewModel {
             attachToSignal.fixedCurrency = AttachToSignalProvider.FixedCurrency(rawValue: fixedCurrency.rawValue)
         }
         if let mode = signalSubscription?.mode {
-            attachToSignal.mode = AttachToSignalProvider.Mode(rawValue: mode.rawValue)
+            attachToSignal.mode = SubscriptionMode(rawValue: mode.rawValue)
         }
         
         guard let programId = programId else { return completion(.failure(errorType: .apiError(message: nil))) }
@@ -213,13 +227,16 @@ final class ProgramSubscribeViewModel {
     func unsubscribe(completion: @escaping CompletionBlock) {
         guard let programId = programId else { return completion(.failure(errorType: .apiError(message: nil))) }
     
-        SignalDataProvider.unsubscribe(with: programId, mode: reasonMode, completion: completion)
+        //FIXME: add tradingAccountId
+        let model = DetachFromSignalProvider(tradingAccountId: nil, mode: reasonMode)
+        SignalDataProvider.detach(with: programId, model: model, completion: completion)
     }
     
     func goToBack() {
         detailProtocol?.didReload()
-        
-        if self.attachToSignal.initialDepositCurrency != nil {
+
+        //FIXME: fixedCurrency
+        if self.attachToSignal.fixedCurrency != nil {
             router.goToSecond()
         } else {
             router.goToBack()

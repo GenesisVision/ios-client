@@ -8,15 +8,8 @@
 
 import UIKit
 
-struct AssetModel: Hashable {
-    var logo: String?
-    var name: String?
-    var symbol: String?
-    var value: Int?
-}
-
 struct AddFundAssetTableViewCellViewModel {
-    let assetModel: AssetModel?
+    let assetModel: PlatformAsset?
     weak var delegate: AddFundAssetTableViewCellProtocol?
 }
 
@@ -27,7 +20,7 @@ extension AddFundAssetTableViewCellViewModel: CellViewModel {
 }
 
 protocol AddFundAssetTableViewCellProtocol: class {
-    func confirmAsset(_ asset: AssetModel?)
+    func confirmAsset(_ asset: PlatformAsset?)
 }
 
 class AddFundAssetTableViewCell: UITableViewCell {
@@ -39,32 +32,38 @@ class AddFundAssetTableViewCell: UITableViewCell {
     }
     @IBOutlet weak var titleLabel: TitleLabel!
     @IBOutlet weak var subtitleLabel: SubtitleLabel!
+    @IBOutlet weak var textfieldBgView: UIView! {
+        didSet {
+            textfieldBgView.backgroundColor = UIColor.Common.darkBackground
+        }
+    }
     @IBOutlet weak var textField: DesignableUITextField! {
         didSet {
             textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+            textField.isUserInteractionEnabled = false
         }
     }
     @IBOutlet weak var percentLabel: TitleLabel!
     @IBOutlet weak var decrementButton: UIButton! {
         didSet {
-            decrementButton.tintColor = UIColor.BaseView.bg
-            decrementButton.backgroundColor = UIColor.white
+            decrementButton.tintColor = UIColor.primary
+            decrementButton.backgroundColor = UIColor.Common.darkBackground
             decrementButton.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
             decrementButton.layer.cornerRadius = Constants.SystemSizes.cornerSize / 2
         }
     }
     @IBOutlet weak var incrementButton: UIButton! {
         didSet {
-            incrementButton.tintColor = UIColor.BaseView.bg
-            incrementButton.backgroundColor = UIColor.white
+            incrementButton.tintColor = UIColor.primary
+            incrementButton.backgroundColor = UIColor.Common.darkBackground
             incrementButton.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
             incrementButton.layer.cornerRadius = Constants.SystemSizes.cornerSize / 2
         }
     }
     
     weak var delegate: AddFundAssetTableViewCellProtocol?
-    var percentValue: Int = 0
-    var assetModel: AssetModel?
+    var percentValue: Double = 0
+    var assetModel: PlatformAsset?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -77,48 +76,48 @@ class AddFundAssetTableViewCell: UITableViewCell {
         selectionStyle = .none
     }
     
-    func configure(_ assetModel: AssetModel?, delegate: AddFundAssetTableViewCellProtocol?) {
+    func configure(_ assetModel: PlatformAsset?, delegate: AddFundAssetTableViewCellProtocol?) {
         self.delegate = delegate
         self.assetModel = assetModel
         
         logoImageView.image = #imageLiteral(resourceName: "img_wallet_usdt_icon")
         
-        if let logo = assetModel?.logo, let fileUrl = getFileURL(fileName: logo) {
+        if let logo = assetModel?.icon, let fileUrl = getFileURL(fileName: logo) {
             logoImageView.kf.indicatorType = .activity
             logoImageView.kf.setImage(with: fileUrl)
         }
         if let name = assetModel?.name {
             titleLabel.text = name
         }
-        if let symbol = assetModel?.symbol {
+        if let symbol = assetModel?.asset {
             subtitleLabel.text = symbol
         }
-        if let value = assetModel?.value {
+        if let value = assetModel?.mandatoryFundPercent {
             percentValue = value
             textField.text = percentValue.toString()
         }
     }
     
     @objc private func textFieldDidChange(_ textField: UITextField) {
-        percentValue = Int(textField.text?.doubleValue ?? 0.0)
-        assetModel?.value = percentValue
+        percentValue = textField.text?.doubleValue ?? 0.0
+        assetModel?.mandatoryFundPercent = percentValue
         delegate?.confirmAsset(assetModel)
     }
     
     // MARK: - Actions
     @IBAction func incrementButtonAction(_ sender: UIStepper) {
-        if assetModel?.symbol == "GVT" && percentValue > 97 || percentValue > 98 { return }
+        if assetModel?.asset == "GVT" && percentValue > 97 || percentValue > 98 { return }
         
         percentValue += 1
-        assetModel?.value = percentValue
+        assetModel?.mandatoryFundPercent = percentValue
         textField.text = percentValue.toString()
         delegate?.confirmAsset(assetModel)
     }
     @IBAction func decrementButtonAction(_ sender: UIStepper) {
-        if assetModel?.symbol == "GVT" && percentValue < 2 || percentValue < 1 { return }
+        if assetModel?.asset == "GVT" && percentValue < 2 || percentValue < 1 { return }
         
         percentValue -= 1
-        assetModel?.value = percentValue
+        assetModel?.mandatoryFundPercent = percentValue
         textField.text = percentValue.toString()
         delegate?.confirmAsset(assetModel)
     }

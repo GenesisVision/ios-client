@@ -137,12 +137,13 @@ class ProgramWithdrawViewController: BaseViewController {
             self.payoutDayValueLabel.text = periodEnds.onlyDateFormatString
         }
         
-        if let rate = viewModel.programWithdrawInfo?.rate {
-            let selectedCurrency = getSelectedCurrency()
-            let currency = CurrencyType(rawValue: selectedCurrency) ?? .gvt
-            let amountToWithdrawValueCurrencyString = (amountToWithdrawValue * rate).rounded(with: currency).toString()
-            self.amountToWithdrawCurrencyLabel.text = "≈" + amountToWithdrawValueCurrencyString + " " + selectedCurrency
-        }
+        // FIXME:
+//        if let rate = viewModel.programWithdrawInfo?.rate {
+//            let selectedCurrency = getSelectedCurrency()
+//            let currency = CurrencyType(rawValue: selectedCurrency) ?? .gvt
+//            let amountToWithdrawValueCurrencyString = (amountToWithdrawValue * rate).rounded(with: currency).toString()
+//            self.amountToWithdrawCurrencyLabel.text = "≈" + amountToWithdrawValueCurrencyString + " " + selectedCurrency
+//        }
         
         let withdrawButtonEnabled = amountToWithdrawValue > 0.0 && amountToWithdrawValue <= availableToWithdrawValue
         

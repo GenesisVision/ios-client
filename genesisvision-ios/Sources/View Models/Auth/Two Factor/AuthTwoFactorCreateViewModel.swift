@@ -58,7 +58,7 @@ final class AuthTwoFactorCreateViewModel {
     
     // MARK: - Private methods
     private func getSharedKey(completion: @escaping (_ sharedKey: String, _ authenticatorUri: String) -> Void, completionError: @escaping CompletionBlock) {
-        TwoFactorDataProvider.auth2faCreate(completion: { (viewModel) in
+        TwoFactorDataProvider.create(completion: { (viewModel) in
             guard let sharedKey = viewModel?.sharedKey, let authenticatorUri = viewModel?.authenticatorUri else { return completionError(.failure(errorType: .apiError(message: nil)))
             }
             

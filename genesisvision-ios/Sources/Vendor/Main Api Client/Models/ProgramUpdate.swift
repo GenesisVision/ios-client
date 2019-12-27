@@ -11,20 +11,36 @@ import Foundation
 
 open class ProgramUpdate: Codable {
 
+    public enum TradesDelay: String, Codable { 
+        case _none = "None"
+        case fiveMinutes = "FiveMinutes"
+        case fifteenMinutes = "FifteenMinutes"
+        case thirtyMinutes = "ThirtyMinutes"
+        case oneHour = "OneHour"
+        case sixHours = "SixHours"
+    }
     public var title: String?
     public var description: String?
     public var logo: String?
+    public var entryFee: Double?
+    public var exitFee: Double?
+    public var successFee: Double?
     public var stopOutLevel: Double?
     public var investmentLimit: Double?
+    public var tradesDelay: TradesDelay?
 
 
     
-    public init(title: String?, description: String?, logo: String?, stopOutLevel: Double?, investmentLimit: Double?) {
+    public init(title: String?, description: String?, logo: String?, entryFee: Double?, exitFee: Double?, successFee: Double?, stopOutLevel: Double?, investmentLimit: Double?, tradesDelay: TradesDelay?) {
         self.title = title
         self.description = description
         self.logo = logo
+        self.entryFee = entryFee
+        self.exitFee = exitFee
+        self.successFee = successFee
         self.stopOutLevel = stopOutLevel
         self.investmentLimit = investmentLimit
+        self.tradesDelay = tradesDelay
     }
     
 
@@ -37,8 +53,12 @@ open class ProgramUpdate: Codable {
         try container.encodeIfPresent(title, forKey: "title")
         try container.encodeIfPresent(description, forKey: "description")
         try container.encodeIfPresent(logo, forKey: "logo")
+        try container.encodeIfPresent(entryFee, forKey: "entryFee")
+        try container.encodeIfPresent(exitFee, forKey: "exitFee")
+        try container.encodeIfPresent(successFee, forKey: "successFee")
         try container.encodeIfPresent(stopOutLevel, forKey: "stopOutLevel")
         try container.encodeIfPresent(investmentLimit, forKey: "investmentLimit")
+        try container.encodeIfPresent(tradesDelay, forKey: "tradesDelay")
     }
 
     // Decodable protocol methods
@@ -49,8 +69,12 @@ open class ProgramUpdate: Codable {
         title = try container.decodeIfPresent(String.self, forKey: "title")
         description = try container.decodeIfPresent(String.self, forKey: "description")
         logo = try container.decodeIfPresent(String.self, forKey: "logo")
+        entryFee = try container.decodeIfPresent(Double.self, forKey: "entryFee")
+        exitFee = try container.decodeIfPresent(Double.self, forKey: "exitFee")
+        successFee = try container.decodeIfPresent(Double.self, forKey: "successFee")
         stopOutLevel = try container.decodeIfPresent(Double.self, forKey: "stopOutLevel")
         investmentLimit = try container.decodeIfPresent(Double.self, forKey: "investmentLimit")
+        tradesDelay = try container.decodeIfPresent(TradesDelay.self, forKey: "tradesDelay")
     }
 }
 

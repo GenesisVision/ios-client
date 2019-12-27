@@ -53,17 +53,18 @@ class ProgramViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         self.headerViewConstraint.constant = minHeaderHeight
-        self.navigationController?.isNavigationBarHidden = false
+        
+        if let navigationController = navigationController as? BaseNavigationController {
+            navigationController.isTranslucent = true
+        }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if let navigationController = navigationController as? BaseNavigationController {
+            navigationController.isTranslucent = false
+        }
     }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let programHeaderViewController = segue.destination as? ProgramHeaderViewController,
             segue.identifier == "ProgramHeaderViewControllerSegue" {
@@ -297,8 +298,8 @@ extension ProgramViewController: ProgramHeaderViewControllerProtocol {
         let aboutLevelView = AboutLevelView.viewFromNib()
         aboutLevelView.delegate = self
         
-        if let programDetailsFull = viewModel.programDetailsFull, let currency = programDetailsFull.currency, let selectedCurrency = PlatformAPI.Currency_v10PlatformLevelsGet(rawValue: currency.rawValue) {
-            aboutLevelView.configure(programDetailsFull.rating, level: programDetailsFull.level, currency: selectedCurrency)
+        if let programDetails = viewModel.programDetailsFull, let currency = programDetails.tradingAccountInfo?.currency, let selectedCurrency = CurrencyType(rawValue: currency.rawValue) {
+            aboutLevelView.configure(programDetails.programDetails?.level, currency: selectedCurrency)
         }
         
         bottomSheetController = BottomSheetController()

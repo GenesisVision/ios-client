@@ -9,58 +9,58 @@
 import UIKit
 
 struct InRequestsTableViewCellViewModel {
-    let programRequest: ProgramRequest
+    let request: AssetInvestmentRequest
 }
 
 extension InRequestsTableViewCellViewModel: CellViewModel {
     func setup(on cell: InRequestsTableViewCell) {
-        if let title = programRequest.title {
+        if let title = request.assetDetails?.title {
             cell.titleLabel.text = title
         }
         
         cell.iconImageView.image = UIImage.programPlaceholder
         
-        if let color = programRequest.color {
+        if let color = request.assetDetails?.color {
             cell.iconImageView.backgroundColor = UIColor.hexColor(color)
         }
         
-        if let fileName = programRequest.logo, let fileUrl = getFileURL(fileName: fileName) {
+        if let fileName = request.assetDetails?.logo, let fileUrl = getFileURL(fileName: fileName) {
             cell.iconImageView.kf.indicatorType = .activity
             cell.iconImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
         }
         
-        if let type = programRequest.type, let programType = programRequest.programType {
+        if let type = request.type, let assetType = request.assetDetails?.assetType {
+            cell.statusLabel.text = type.rawValue
+            
             switch type {
             case .invest:
                 cell.typeImageView.image = #imageLiteral(resourceName: "img_event_invest")
-                cell.statusLabel.text = "Invest"
             case .withdrawal:
                 cell.typeImageView.image = #imageLiteral(resourceName: "img_event_withdraw")
-                cell.statusLabel.text = "Withdraw"
             }
             
-            if type == .withdrawal, programType == .fund {
-                if let fundWithdrawPercent = programRequest.fundWithdrawPercent, let valueGvt = programRequest.valueGvt {
-                    let currency: CurrencyType = .gvt
-                    let text = "\(fundWithdrawPercent)% (≈" + valueGvt.rounded(with: currency).toString() + " " + Constants.gvtString + ")"
-                    cell.amountValueLabel.text = text
+            var text = ""
+            if type == .withdrawal, assetType == .fund {
+                if let amount = request.amount, let currencyValue = request.currency?.rawValue, let currency: CurrencyType = CurrencyType(rawValue: currencyValue) {
+                    text = amount.rounded(with: currency).toString() + " " + currencyValue
                 }
             } else {
                 switch type {
                 case .invest:
-                    cell.amountValueLabel.text = "-"
+                    text = "-"
                 case .withdrawal:
-                    cell.amountValueLabel.text = "+"
+                    text = "+"
                 }
                 
-                if let value = programRequest.value, let programCurrency = programRequest.currency, let currency = CurrencyType(rawValue: programCurrency.rawValue) {
-                    let text = cell.amountValueLabel.text ?? ""
-                    cell.amountValueLabel.text = text + value.rounded(with: currency).toString() + " \(currency.rawValue)"
+                if let amount = request.amount, let currencyValue = request.currency?.rawValue, let currency: CurrencyType = CurrencyType(rawValue: currencyValue) {
+                    text = text + amount.rounded(with: currency).toString() + " " + currencyValue
                 }
             }
+            
+            cell.amountValueLabel.text = text
         }
         
-        if let date = programRequest.date {
+        if let date = request.date {
             cell.dateLabel.text = date.onlyDateFormatString
         }
     }

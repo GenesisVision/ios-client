@@ -13,7 +13,11 @@ protocol ModalViewProtocol {
 }
 
 class ActionStackView: UIStackView {
-    @IBOutlet weak var actionButton: ActionButton!
+    @IBOutlet weak var actionButton: ActionButton! {
+        didSet {
+            actionButton.setEnabled(false)
+        }
+    }
     
     var action: () -> Void = {
         
@@ -32,13 +36,11 @@ class AttachStackView: ActionStackView {
     @IBOutlet weak var apiKeyView: TextFieldStackView!
     @IBOutlet weak var apiSecretView: TextFieldStackView!
     
-    func configure(_ action: @escaping () -> Void) {
-        self.action = action
-        
+    func configure(_ viewModel: AttachAccountViewModel) {
         exchangeTitle.text = "Exchange"
         exchangeView.titleLabel.text = "Exhange"
-        exchangeView.textLabel.text = "Binance"
-        exchangeView.selectButton.isEnabled = true
+        exchangeView.textLabel.text = viewModel.getExchange()
+        exchangeView.selectButton.isEnabled = viewModel.isEnableExchangeSelector()
         
         apiTitle.text = "API"
         apiKeyView.titleLabel.text = "Api key"
@@ -124,7 +126,7 @@ class SelectedAssetsStackView: UIStackView {
         collectionView.reloadData()
     }
 }
-class CreateAccountStackView: UIStackView {
+class CreateAccountStackView: ActionStackView {
     @IBOutlet weak var selectBrokerView: SelectBrokerStackView!
     @IBOutlet weak var mainSettingsTitle: LargeTitleLabel!
     
@@ -136,35 +138,38 @@ class CreateAccountStackView: UIStackView {
     @IBOutlet weak var fromView: SelectStackView!
     @IBOutlet weak var amountView: TextFieldStackView!
     
-    @IBOutlet weak var actionButton: ActionButton!
-    
     func configure(_ viewModel: CreateAccountViewModel) {
         selectBrokerView.configure(viewModel)
         
         mainSettingsTitle.text = "Main settings"
         
         accountTypeView.titleLabel.text = "Exhange"
-        accountTypeView.textLabel.text = "MetaTrader5"
-        accountTypeView.selectButton.isEnabled = true
+        accountTypeView.textLabel.text = viewModel.getAccountType()
+        accountTypeView.selectButton.isEnabled = viewModel.isEnableAccountTypeSelector()
         
         currencyView.titleLabel.text = "Currency"
-        currencyView.textLabel.text = "BTC"
-        currencyView.selectButton.isEnabled = true
+        currencyView.textLabel.text = viewModel.getCurrency()
+        currencyView.selectButton.isEnabled = viewModel.isEnableCurrencySelector()
         
         leverageView.titleLabel.text = "Broker's leverage"
-        leverageView.textLabel.text = "1"
-        leverageView.selectButton.isEnabled = true
+        leverageView.textLabel.text = viewModel.getLeverage()
+        leverageView.selectButton.isEnabled = viewModel.isEnableLeverageSelector()
         
         depositTitle.text = "Deposit details"
+        
         fromView.titleLabel.text = "From"
-        fromView.textLabel.text = "Bitcoin | BTC"
+        fromView.textLabel.text = viewModel.getSelectedWallet()
+        fromView.subtitleLabel.text = "Available in the wallet"
+        fromView.subtitleValueLabel.text = viewModel.getAvailable()
         fromView.selectButton.isEnabled = true
         
-        amountView.titleLabel.text = "Amount"
+        amountView.titleLabel.text = "Enter correct amount"
         amountView.textField.text = ""
+        amountView.subtitleLabel.text = "min. deposit"
+        amountView.subtitleValueLabel.text = viewModel.getMinDeposit()
     }
 }
-class CreateFundStackView: UIStackView {
+class CreateFundStackView: ActionStackView {
     @IBOutlet weak var mainSettingsTitle: LargeTitleLabel!
     @IBOutlet weak var nameView: TextFieldStackView!
     @IBOutlet weak var descriptionView: TextViewStackView!
@@ -188,8 +193,6 @@ class CreateFundStackView: UIStackView {
     @IBOutlet weak var fromView: SelectStackView!
     @IBOutlet weak var amountView: TextFieldStackView!
     
-    @IBOutlet weak var actionButton: ActionButton!
-    
     var viewModel: CreateFundViewModel?
     
     func configure(_ viewModel: CreateFundViewModel) {
@@ -198,11 +201,13 @@ class CreateFundStackView: UIStackView {
         mainSettingsTitle.text = "Main settings"
         nameView.titleLabel.text = "Name"
         nameView.textField.text = ""
-        nameView.subtitleLabel.text = "Requirement from 4 to 20 symbols"
+        nameView.subtitleLabel.text = "Minimum 4 symbols"
+        nameView.subtitleValueLabel.text = "0/20"
         
         descriptionView.titleLabel.text = "Description"
         descriptionView.textView.text = ""
-        descriptionView.subtitleLabel.text = "Requirement from 20 to 500 symbols"
+        descriptionView.subtitleLabel.text = "Minimum 20 symbols"
+        descriptionView.subtitleValueLabel.text = "0 / 500"
         
         uploadLogoView.logoStackView.isHidden = true
         
@@ -220,16 +225,24 @@ class CreateFundStackView: UIStackView {
         exitFeeView.subtitleLabel.text = "An exit fee is a fee charged to investors when they redeem shares from a GV Fund. The maximum exit fee is 0 %"
         
         depositTitle.text = "Deposit details"
+        
         fromView.titleLabel.text = "From"
-        fromView.textLabel.text = "Bitcoin | BTC"
+        fromView.textLabel.text = viewModel.getSelectedWallet()
+        fromView.subtitleLabel.text = "Available in the wallet"
+        fromView.subtitleValueLabel.text = viewModel.getAvailable()
         fromView.selectButton.isEnabled = true
+        
+        amountView.titleLabel.text = "Enter correct amount"
+        amountView.textField.text = ""
+        amountView.subtitleLabel.text = "min. deposit"
+        amountView.subtitleValueLabel.text = viewModel.getMinDeposit()
     }
     
-    func updateProgressView(_ assets: [AssetModel]?) {
+    func updateProgressView(_ assets: [PlatformAsset]?) {
         guard let assets = assets else { return }
         
         for (index, asset) in assets.enumerated() {
-            if let value = asset.value, asset.symbol != nil {
+            if let value = asset.mandatoryFundPercent, asset.asset != nil {
                 DispatchQueue.main.async {
                     self.progressView.setProgress(section: index, to: Float(Double(value) / 100))
                 }
@@ -259,7 +272,7 @@ extension CreateFundStackView: MultiProgressViewDataSource {
         return sectionView
     }
 }
-class MakeProgramStackView: UIStackView {
+class MakeProgramStackView: ActionStackView {
     @IBOutlet weak var mainSettingsTitle: LargeTitleLabel!
     @IBOutlet weak var nameView: TextFieldStackView!
     @IBOutlet weak var descriptionView: TextViewStackView!
@@ -275,20 +288,28 @@ class MakeProgramStackView: UIStackView {
     
     @IBOutlet weak var limitTitle: LargeTitleLabel!
     @IBOutlet weak var limitView: LimitStackView!
-    
-    @IBOutlet weak var actionButton: ActionButton!
-    
-    func configure() {
+
+    func configure(_ viewModel: MakeProgramViewModel) {
         mainSettingsTitle.text = "Main settings"
         nameView.titleLabel.text = "Name"
         nameView.textField.text = ""
-        nameView.subtitleLabel.text = "Requirement from 4 to 20 symbols"
+        nameView.subtitleLabel.text = "Minimum 4 symbols"
+        nameView.subtitleValueLabel.text = "0/20"
         
         descriptionView.titleLabel.text = "Description"
         descriptionView.textView.text = ""
-        descriptionView.subtitleLabel.text = "Requirement from 20 to 500 symbols"
+        descriptionView.subtitleLabel.text = "Minimum 20 symbols"
+        descriptionView.subtitleValueLabel.text = "0 / 500"
         
         uploadLogoView.logoStackView.isHidden = true
+        
+        periodView.titleLabel.text = "Period"
+        periodView.textLabel.text = viewModel.getPeriods()
+        periodView.selectButton.isEnabled = viewModel.isEnablePeriodsSelector()
+        
+        tradesDelayView.titleLabel.text = "Trades delay"
+        tradesDelayView.textLabel.text = viewModel.getTrades()
+        tradesDelayView.selectButton.isEnabled = viewModel.isEnableTradesSelector()
         
         feesSettingsTitle.text = "Fees settings"
         entryFeeView.titleLabel.text = "Entry fee"
@@ -302,9 +323,10 @@ class MakeProgramStackView: UIStackView {
         limitView.titleLabel.text = "Investment limit"
         limitView.textField.text = ""
         limitView.limitSwitch.isOn = false
+        limitView.subtitleLabel.text = "At any time you can enter or cancel certain limitations on av. to invest, or even prohibit new investments if your Investment limit is 0. If the investment limit you've entered is larger than the av. to invest value calculated for your current level, then you will only be able to attract the av. to invest value."
     }
 }
-class MakeSignalStackView: UIStackView {
+class MakeSignalStackView: ActionStackView {
     @IBOutlet weak var mainSettingsTitle: LargeTitleLabel!
     @IBOutlet weak var nameView: TextFieldStackView!
     @IBOutlet weak var descriptionView: TextViewStackView!
@@ -314,17 +336,17 @@ class MakeSignalStackView: UIStackView {
     @IBOutlet weak var volumeFeeView: TextFieldStackView!
     @IBOutlet weak var signalSuccessFeeView: TextFieldStackView!
     
-    @IBOutlet weak var actionButton: ActionButton!
-    
     func configure() {
         mainSettingsTitle.text = "Main settings"
         nameView.titleLabel.text = "Name"
         nameView.textField.text = ""
-        nameView.subtitleLabel.text = "Requirement from 4 to 20 symbols"
+        nameView.subtitleLabel.text = "Minimum 4 symbols"
+        nameView.subtitleValueLabel.text = "0/20"
         
         descriptionView.titleLabel.text = "Description"
         descriptionView.textView.text = ""
-        descriptionView.subtitleLabel.text = "Requirement from 20 to 500 symbols"
+        descriptionView.subtitleLabel.text = "Minimum 20 symbols"
+        descriptionView.subtitleValueLabel.text = "0 / 500"
         
         uploadLogoView.logoStackView.isHidden = true
         
@@ -340,9 +362,15 @@ class MakeSignalStackView: UIStackView {
 class LimitStackView: BaseStackView {
     @IBOutlet weak var limitSwitch: UISwitch! {
         didSet {
+            limitSwitch.isOn = false
             limitSwitch.onTintColor = UIColor.primary
             limitSwitch.thumbTintColor = UIColor.Cell.switchThumbTint
             limitSwitch.tintColor = UIColor.Cell.switchTint
+        }
+    }
+    @IBOutlet weak var amountView: UIStackView! {
+        didSet {
+            amountView.isHidden = true
         }
     }
     @IBOutlet weak var textField: DesignableUITextField! {
@@ -368,10 +396,19 @@ class TextFieldStackView: BaseStackView {
             textField.isSecureTextEntry = false
         }
     }
-    @IBOutlet weak var maxButton: UIButton!
+    @IBOutlet weak var maxButton: UIButton! {
+        didSet {
+            maxButton.setTitleColor(UIColor.Cell.title, for: .normal)
+            maxButton.titleLabel?.font = UIFont.getFont(.semibold, size: 12)
+        }
+    }
 }
 class TextViewStackView: BaseStackView {
-    @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var textView: UITextView! {
+        didSet {
+            textView.font = UIFont.getFont(.regular, size: 16)
+        }
+    }
 }
 class ImageViewStackView: BaseStackView {
     @IBOutlet weak var logoStackView: UIStackView!
@@ -422,7 +459,8 @@ class LabelWithTitle: UIStackView {
         }
     }
 }
-class LabelWithChart: UIStackView {
+
+class LabelWithCircle: UIStackView {
     @IBOutlet weak var circleView: UIView! {
         didSet {
             circleView.roundCorners()
@@ -446,9 +484,9 @@ class DashboardOverviewLabelsView: UIStackView {
             progressView.cornerRadius = 4.0
         }
     }
-    @IBOutlet weak var investedView: LabelWithChart!
-    @IBOutlet weak var tradingView: LabelWithChart!
-    @IBOutlet weak var walletsView: LabelWithChart!
+    @IBOutlet weak var investedView: LabelWithCircle!
+    @IBOutlet weak var tradingView: LabelWithCircle!
+    @IBOutlet weak var walletsView: LabelWithCircle!
     
     @IBOutlet weak var changeLabelsView: ChangeLabelsView!
     
@@ -503,12 +541,24 @@ class DashboardChartItemView: UIStackView {
 }
 
 // MARK: - Trading Cell
+class DashboardTradingEmptyView: UIStackView {
+    @IBOutlet weak var titleLabel: LargeTitleLabel!
+    
+    @IBOutlet weak var createAccountLabel: SubtitleLabel!
+    @IBOutlet weak var createFundLabel: SubtitleLabel!
+    
+    @IBOutlet weak var createAccountButton: ActionButton!
+    @IBOutlet weak var createFundButton: ActionButton!
+}
+
 class DashboardTradingLabelsView: UIStackView {
     @IBOutlet weak var yourEquityLabel: LabelWithTitle!
     @IBOutlet weak var aumLabel: LabelWithTitle!
     @IBOutlet weak var changeLabelsView: ChangeLabelsView!
     
-    func configure(_ data: TradingHeaderData) {
+    func configure(_ data: TradingHeaderData?) {
+        guard let data = data else { return }
+        
         let currency = data.currency
         
         yourEquityLabel.titleLabel.text = "your equity"
@@ -540,13 +590,23 @@ class DashboardTradingLabelsView: UIStackView {
 }
 
 // MARK: - Investing Cell
+class DashboardInvestingEmptyView: UIStackView {
+    @IBOutlet weak var titleLabel: LargeTitleLabel!
+    
+    @IBOutlet weak var subtitleLabel: SubtitleLabel!
+    
+    @IBOutlet weak var programsButton: ActionButton!
+    @IBOutlet weak var fundsButton: ActionButton!
+}
+
 class DashboardInvestingLabelsView: UIStackView {
     @IBOutlet weak var balanceLabel: LabelWithTitle!
     @IBOutlet weak var programsLabel: LabelWithTitle!
     @IBOutlet weak var fundsLabel: LabelWithTitle!
     @IBOutlet weak var changeLabelsView: ChangeLabelsView!
     
-    func configure(_ data: InvestingHeaderData) {
+    func configure(_ data: InvestingHeaderData?) {
+        guard let data = data else { return }
         let currency = data.currency
         
         balanceLabel.titleLabel.text = "balance"
@@ -554,11 +614,11 @@ class DashboardInvestingLabelsView: UIStackView {
         balanceLabel.valueLabel.font = UIFont.getFont(.semibold, size: 27.0)
         
         programsLabel.titleLabel.text = "programs"
-        programsLabel.valueLabel.text = data.programs.toString() + " " + currency.rawValue
+        programsLabel.valueLabel.text = data.programs.toString()
         programsLabel.valueLabel.font = UIFont.getFont(.semibold, size: 21.0)
         
         fundsLabel.titleLabel.text = "funds"
-        fundsLabel.valueLabel.text = data.funds.toString() + " " + currency.rawValue
+        fundsLabel.valueLabel.text = data.funds.toString()
         fundsLabel.valueLabel.font = UIFont.getFont(.semibold, size: 21.0)
         
         let day = data.profits.day

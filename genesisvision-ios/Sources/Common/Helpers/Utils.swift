@@ -177,7 +177,7 @@ func versionIsOld(currentVersionArray: [String], lastVersionArray: [String], idx
 func showNewVersionAlertIfNeeded(_ viewController: UIViewController) {
     PlatformManager.shared.getPlatformInfo(completion: { (model) in
         guard let platformInfo = model,
-            let iOSVersion = platformInfo.iOSVersion,
+            let iOSVersion = platformInfo.appVersionInfo?.iOS,
             let lastVersion = iOSVersion.lastVersion,
             newVersionIsAvailable(lastVersion) else { return }
         
@@ -205,14 +205,24 @@ func showTwoFactorEnableAlertIfNeeded(_ viewController: UIViewController, comple
     }
 }
 
-func getSelectedCurrency() -> String {
-    if let selectedCurrency = UserDefaults.standard.string(forKey: UserDefaultKeys.selectedCurrency) {
-        return selectedCurrency
+var selectedPlatformCurrency: String {
+    get {
+        guard let currency = UserDefaults.standard.string(forKey: UserDefaultKeys.selectedCurrency) else {
+            UserDefaults.standard.set(CurrencyType.usdt.rawValue, forKey: UserDefaultKeys.selectedCurrency)
+            return CurrencyType.usdt.rawValue
+        }
+        
+        return currency
     }
-    
-    return ProgramsAPI.CurrencySecondary_v10ProgramsGet.btc.rawValue
+    set {
+        UserDefaults.standard.set(newValue, forKey: UserDefaultKeys.selectedCurrency)
+    }
 }
 
-func updateSelectedCurrency(_ selectedCurrency: String) {
-    UserDefaults.standard.set(selectedCurrency, forKey: UserDefaultKeys.selectedCurrency)
+func getPlatformCurrencyType() -> CurrencyType {
+    if let currencyType = CurrencyType(rawValue: selectedPlatformCurrency) {
+        return currencyType
+    }
+    
+    return .usdt
 }

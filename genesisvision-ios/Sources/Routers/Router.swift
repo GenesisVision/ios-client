@@ -27,9 +27,15 @@ class Router {
     // MARK: - Variables
     var programsViewController: ProgramListViewController!
     var fundsViewController: FundListViewController!
+    var followsViewController: FollowListViewController!
     var managersViewController: ManagerListViewController!
 
-    var dashboardViewController: DashboardViewController!
+    var dashboardViewController: NewDashboardViewController!
+    var tradingViewController: TradingViewController!
+    var investingViewController: InvestingViewController!
+    
+    var tradingEventListViewController: TradingEventListViewController!
+    var investingEventListViewController: InvestingEventListViewController!
     
     var assetsViewController: AssetsViewController!
     
@@ -113,14 +119,12 @@ class Router {
     
     private func addDashboard(_ navigationController: inout BaseNavigationController, _ viewControllers: inout [UIViewController]) {
         
-        if let viewController = DashboardViewController.storyboardInstance(.dashboard) {
-            self.dashboardViewController = viewController
-            
-            navigationController = BaseNavigationController(rootViewController: viewController)
-            let router = DashboardRouter(parentRouter: self, navigationController: navigationController, dashboardViewController: viewController)
-            viewController.viewModel = DashboardViewModel(withRouter: router)
-        }
+        dashboardViewController = NewDashboardViewController()
         
+        navigationController = BaseNavigationController(rootViewController: self.dashboardViewController)
+        let router = DashboardRouter(parentRouter: self, navigationController: navigationController, dashboardViewController: self.dashboardViewController)
+        self.dashboardViewController.viewModel = NewDashboardViewModel(router)
+    
         navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_dashboard").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_dashboard").withRenderingMode(.alwaysOriginal)
         viewControllers.append(navigationController)
     }
@@ -147,7 +151,7 @@ class Router {
             navigationController = BaseNavigationController(rootViewController: settingsViewController)
             let router = SettingsRouter(parentRouter: self, navigationController: navigationController)
             router.settingsViewController = settingsViewController
-            settingsViewController.viewModel = SettingsViewModel(withRouter: router)
+            settingsViewController.viewModel = SettingsViewModel(withRouter: router, delegate: settingsViewController)
             navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_profile").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_profile").withRenderingMode(.alwaysOriginal)
             viewControllers.append(navigationController)
         }
@@ -155,6 +159,12 @@ class Router {
     
     private func showProgramList(with filterModel: FilterModel) {
         guard let viewController = getPrograms(with: filterModel) else { return }
+        
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func showFollowList(with filterModel: FilterModel) {
+        guard let viewController = getFollows(with: filterModel) else { return }
         
         navigationController?.pushViewController(viewController, animated: true)
     }
@@ -281,6 +291,15 @@ extension Router {
         getRootTabBar(parent: parent)?.selectedIndex = tabType.rawValue
     }
     
+    func share(_ url: String?) {
+        guard let url = url, let urlItem = URL(string: url) else { return }
+
+        let activityViewController =
+            UIActivityViewController(activityItems: [UIApplication.shared.canOpenURL(urlItem) ? urlItem : url], applicationActivities: nil)
+        
+        topViewController()?.present(activityViewController, animated: true, completion: nil)
+    }
+    
     func signInAction(_ navigationController: BaseNavigationController? = nil) {
         guard let viewController = SignInViewController.storyboardInstance(.auth) else { return }
         let router = SignInRouter(parentRouter: self, navigationController: navigationController)
@@ -294,19 +313,21 @@ extension Router {
     
     func showAssetDetails(with assetId: String, assetType: AssetType) {
         switch assetType {
-        case .program:
-            showProgramDetails(with: assetId)
-        case .signal:
+        case .program, .follow:
             showProgramDetails(with: assetId)
         case .fund:
             showFundDetails(with: assetId)
-        case .manager:
-            showManagerDetails(with: assetId)
+        default:
+            break
         }
     }
     
+    func showUserDetails(with userId: String) {
+        self.showManagerDetails(with: userId)
+    }
+    
     func showFilterVC(with listViewModel: ListViewModelProtocol, filterModel: FilterModel, filterType: FilterType, sortingType: SortingType) {
-        guard let viewController = FiltersViewController.storyboardInstance(.programs) else { return }
+        guard let viewController = FiltersViewController.storyboardInstance(.assets) else { return }
         let router = ProgramFilterRouter(parentRouter: self, navigationController: navigationController)
         router.currentController = viewController
         let viewModel = FilterViewModel(withRouter: router, sortingType: sortingType, filterViewModelProtocol: viewController, filterModel: filterModel, listViewModel: listViewModel, filterType: filterType)
@@ -315,13 +336,13 @@ extension Router {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    private func showProgramDetails(with programId: String) {
-        guard let viewController = getProgramViewController(with: programId) else { return }
+    private func showProgramDetails(with assetId: String) {
+        guard let viewController = getProgramViewController(with: assetId) else { return }
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    private func showFundDetails(with fundId: String) {
-        guard let viewController = getFundViewController(with: fundId) else { return }
+    private func showFundDetails(with assetId: String) {
+        guard let viewController = getFundViewController(with: assetId) else { return }
         navigationController?.pushViewController(viewController, animated: true)
     }
     
@@ -334,16 +355,19 @@ extension Router {
         switch assetType {
         case .program:
             showProgramList(with: filterModel)
-        case .signal:
-            break
+        case .follow:
+            showFollowList(with: filterModel)
         case .fund:
             showFundList(with: filterModel)
-        case .manager:
-            showManagerList(with: filterModel)
+        default:
+            break
+            //FIXME:
+//        case .manager:
+//            showManagerList(with: filterModel)
         }
     }
     
-    func showAboutLevels(_ currency: PlatformAPI.Currency_v10PlatformLevelsGet) {
+    func showAboutLevels(_ currency: CurrencyType) {
         guard let viewController = AboutLevelsViewController.storyboardInstance(.program) else { return }
         viewController.currency = currency
         navigationController?.pushViewController(viewController, animated: true)
@@ -364,20 +388,10 @@ extension Router {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    func showEvents(with assetId: String? = nil) {
-        guard let viewController = getEventsViewController(with: assetId) else { return }
+    func showEvents(with assetId: String? = nil, assetType: AssetType) {
+        guard let viewController = getEventsViewController(with: assetId, assetType: assetType) else { return }
         
         navigationController?.pushViewController(viewController, animated: true)
-    }
-    
-    func showCreateProgramVC() {
-        let tabmanViewController = CreateProgramTabmanViewController()
-        let router = CreateProgramTabmanRouter(parentRouter: self, tabmanViewController: tabmanViewController)
-        let viewModel = CreateProgramTabmanViewModel(withRouter: router)
-        tabmanViewController.viewModel = viewModel
-        tabmanViewController.hidesBottomBarWhenPushed = true
-        
-        navigationController?.pushViewController(tabmanViewController, animated: true)
     }
     
     func showPrivacy() {
@@ -408,12 +422,15 @@ extension Router {
 
 //Get View Controllers
 extension Router {
-    func getEventsViewController(with assetId: String? = nil, router: Router? = nil, allowsSelection: Bool = true) -> AllEventsViewController? {
-        guard let viewController = AllEventsViewController.storyboardInstance(.dashboard) else { return nil }
+    func getEventsViewController(with assetId: String? = nil, router: Router? = nil, allowsSelection: Bool = true, assetType: AssetType) -> EventListViewController? {
         
-        viewController.viewModel = AllEventsViewModel(withRouter: router ?? AllEventsRouter(parentRouter: self), assetId: assetId, reloadDataProtocol: viewController, allowsSelection: allowsSelection)
-        viewController.hidesBottomBarWhenPushed = true
-        return viewController
+        let vc = EventListViewController()
+        vc.viewModel = EventListViewModel(router ?? self, delegate: vc)
+        vc.viewModel.assetId = assetId
+        vc.viewModel.assetType = assetType
+        vc.title = "Events"
+        
+        return vc
     }
     
     func getProgramViewController(with programId: String) -> ProgramViewController? {
@@ -504,7 +521,7 @@ extension Router {
     }
     
     func getPrograms(with filterModel: FilterModel?, showFacets: Bool = false, parentRouter: Router? = nil) -> ProgramListViewController? {
-        guard let viewController = ProgramListViewController.storyboardInstance(.programs) else { return nil }
+        guard let viewController = ProgramListViewController.storyboardInstance(.assets) else { return nil }
         
         let router = ListRouter(parentRouter: parentRouter ?? self)
         router.currentController = viewController
@@ -515,9 +532,20 @@ extension Router {
         viewController.hidesBottomBarWhenPushed = true
         return viewController
     }
-    
+    func getFollows(with filterModel: FilterModel?, showFacets: Bool = false, parentRouter: Router? = nil) -> FollowListViewController? {
+        guard let viewController = FollowListViewController.storyboardInstance(.assets) else { return nil }
+        
+        let router = ListRouter(parentRouter: parentRouter ?? self)
+        router.currentController = viewController
+        let viewModel = ListViewModel(withRouter: router, reloadDataProtocol: viewController, filterModel: filterModel, showFacets: showFacets, assetType: .follow)
+        
+        viewController.viewModel = viewModel
+        
+        viewController.hidesBottomBarWhenPushed = true
+        return viewController
+    }
     func getFunds(with filterModel: FilterModel?, showFacets: Bool = false, parentRouter: Router? = nil) -> FundListViewController? {
-        guard let viewController = FundListViewController.storyboardInstance(.funds) else { return nil }
+        guard let viewController = FundListViewController.storyboardInstance(.assets) else { return nil }
         
         let router = ListRouter(parentRouter: parentRouter ?? self)
         router.currentController = viewController
@@ -542,31 +570,32 @@ extension Router {
 }
 
 //signal vc
+//FIXME:
 extension Router {
-    func getSignalTrades(with router: SignalRouterProtocol, currency: CurrencyType? = nil) -> SignalTradesViewController? {
-        guard let viewController = SignalTradesViewController.storyboardInstance(.dashboard) else { return nil }
-        viewController.tableViewStyle = .plain
-        let viewModel = SignalTradesViewModel(withRouter: router, reloadDataProtocol: viewController, isOpenTrades: false, currency: currency)
-        viewController.viewModel = viewModel
-        
-        return viewController
-    }
-    
-    func getSignalOpenTrades(with router: SignalRouterProtocol, currency: CurrencyType? = nil) -> SignalOpenTradesViewController? {
-        guard let viewController = SignalOpenTradesViewController.storyboardInstance(.dashboard) else { return nil }
-        viewController.tableViewStyle = .plain
-        let viewModel = SignalTradesViewModel(withRouter: router, reloadDataProtocol: viewController, isOpenTrades: true, signalTradesProtocol: viewController, currency: currency)
-        viewController.viewModel = viewModel
-        
-        return viewController
-    }
-    
-    func getSignalTradingLog(with router: SignalRouterProtocol, currency: CurrencyType? = nil) -> SignalTradingLogViewController? {
-        guard let viewController = SignalTradingLogViewController.storyboardInstance(.dashboard) else { return nil }
-        viewController.tableViewStyle = .plain
-        let viewModel = SignalTradingLogViewModel(withRouter: router, reloadDataProtocol: viewController, currency: currency)
-        viewController.viewModel = viewModel
-        
-        return viewController
-    }
+//    func getSignalTrades(with router: SignalRouterProtocol, currency: CurrencyType? = nil) -> SignalTradesViewController? {
+//        guard let viewController = SignalTradesViewController.storyboardInstance(.dashboard) else { return nil }
+//        viewController.tableViewStyle = .plain
+//        let viewModel = SignalTradesViewModel(withRouter: router, reloadDataProtocol: viewController, isOpenTrades: false, currency: currency)
+//        viewController.viewModel = viewModel
+//
+//        return viewController
+//    }
+//
+//    func getSignalOpenTrades(with router: SignalRouterProtocol, currency: CurrencyType? = nil) -> SignalOpenTradesViewController? {
+//        guard let viewController = SignalOpenTradesViewController.storyboardInstance(.dashboard) else { return nil }
+//        viewController.tableViewStyle = .plain
+//        let viewModel = SignalTradesViewModel(withRouter: router, reloadDataProtocol: viewController, isOpenTrades: true, signalTradesProtocol: viewController, currency: currency)
+//        viewController.viewModel = viewModel
+//
+//        return viewController
+//    }
+//
+//    func getSignalTradingLog(with router: SignalRouterProtocol, currency: CurrencyType? = nil) -> SignalTradingLogViewController? {
+//        guard let viewController = SignalTradingLogViewController.storyboardInstance(.dashboard) else { return nil }
+//        viewController.tableViewStyle = .plain
+//        let viewModel = SignalTradingLogViewModel(withRouter: router, reloadDataProtocol: viewController, currency: currency)
+//        viewController.viewModel = viewModel
+//
+//        return viewController
+//    }
 }

@@ -19,14 +19,14 @@ open class GeeTestDetails: Codable {
 
     public func encode(to encoder: Encoder) throws {
 
-        _ = encoder.container(keyedBy: String.self)
+        var container = encoder.container(keyedBy: String.self)
 
     }
 
     // Decodable protocol methods
 
     public required init(from decoder: Decoder) throws {
-        _ = try decoder.container(keyedBy: String.self)
+        let container = try decoder.container(keyedBy: String.self)
 
     }
 }

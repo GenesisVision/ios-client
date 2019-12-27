@@ -47,7 +47,7 @@ class CreateProgramTabmanRouter: TabmanRouter {
     }
     
     func getCreateProgramFirstVC(with tabmanViewModel: CreateProgramTabmanViewModel) -> CreateProgramFirstViewController? {
-        guard let viewController = CreateProgramFirstViewController.storyboardInstance(.programs) else { return  nil }
+        guard let viewController = CreateProgramFirstViewController.storyboardInstance(.assets) else { return  nil }
         createProgramFirstViewModel = CreateProgramFirstViewModel(withRouter: self, tabmanViewModel: tabmanViewModel, textFieldDelegate: viewController)
         viewController.viewModel = createProgramFirstViewModel
         createProgramFirstViewController = viewController
@@ -56,7 +56,7 @@ class CreateProgramTabmanRouter: TabmanRouter {
     }
 
     func getCreateProgramSecondVC(with tabmanViewModel: CreateProgramTabmanViewModel, brokersViewModel: BrokersInfo? = nil) -> CreateProgramSecondViewController? {
-        guard let viewController = CreateProgramSecondViewController.storyboardInstance(.programs) else { return  nil }
+        guard let viewController = CreateProgramSecondViewController.storyboardInstance(.assets) else { return  nil }
         createProgramSecondViewModel = CreateProgramSecondViewModel(withRouter: self, tabmanViewModel: tabmanViewModel, textFieldDelegate: viewController, brokersViewModel: brokersViewModel)
         viewController.viewModel = createProgramSecondViewModel
         createProgramSecondViewController = viewController
@@ -65,7 +65,7 @@ class CreateProgramTabmanRouter: TabmanRouter {
     }
 
     func getCreateProgramThirdVC(with tabmanViewModel: CreateProgramTabmanViewModel) -> CreateProgramThirdViewController? {
-        guard let viewController = CreateProgramThirdViewController.storyboardInstance(.programs) else { return  nil }
+        guard let viewController = CreateProgramThirdViewController.storyboardInstance(.assets) else { return  nil }
         createProgramThirdViewModel = CreateProgramThirdViewModel(withRouter: self, tabmanViewModel: tabmanViewModel, textFieldDelegate: viewController)
         viewController.viewModel = createProgramThirdViewModel
         createProgramThirdViewController = viewController

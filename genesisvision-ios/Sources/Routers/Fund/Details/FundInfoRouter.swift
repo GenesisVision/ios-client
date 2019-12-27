@@ -21,7 +21,7 @@ class FundInfoRouter: Router {
         case .withdraw(let fundId):
             withdraw(with: fundId)
         case .manager(let managerId):
-            showAssetDetails(with: managerId, assetType: .manager)
+            showAssetDetails(with: managerId, assetType: ._none)
         }
     }
     

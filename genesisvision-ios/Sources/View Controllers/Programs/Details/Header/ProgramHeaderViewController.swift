@@ -161,34 +161,35 @@ class ProgramHeaderViewController: BaseViewController {
         gradientView.backgroundColor = UIColor.Cell.bg.withAlphaComponent(offset)
     }
     
-    func configure(_ programDetailsFull: ProgramDetailsFull?) {
+    func configure(_ programDetailsFull: ProgramFollowDetailsFull?) {
+        let programDetails = programDetailsFull?.programDetails
         setupTags(programDetailsFull)
         
-        if let title = programDetailsFull?.title {
+        if let title = programDetailsFull?.publicInfo?.title {
             titleLabel.text = title
         }
         
-        if let currency = programDetailsFull?.currency {
+        if let currency = programDetailsFull?.tradingAccountInfo?.currency {
             currencyLabel.text = currency.rawValue
         }
         
-        if let level = programDetailsFull?.level {
+        if let level = programDetails?.level {
             levelButton.setTitle(level.toString(), for: .normal)
         }
         
-        if let levelProgress = programDetailsFull?.levelProgress {
+        if let levelProgress = programDetails?.levelProgress {
             levelButton.progress = levelProgress
         }
         
         bgImageView.image = UIImage.programPlaceholder
         headerTitleImageView.image = UIImage.programPlaceholder
         
-        if let color = programDetailsFull?.color {
+        if let color = programDetailsFull?.publicInfo?.color {
             bgImageView.backgroundColor = UIColor.hexColor(color)
             headerTitleImageView.backgroundColor = UIColor.hexColor(color)
     }
         
-        if let logo = programDetailsFull?.logo, let fileUrl = getFileURL(fileName: logo) {
+        if let logo = programDetailsFull?.publicInfo?.logo, let fileUrl = getFileURL(fileName: logo) {
             bgImageView.kf.indicatorType = .activity
             headerTitleImageView.kf.indicatorType = .activity
             
@@ -197,16 +198,12 @@ class ProgramHeaderViewController: BaseViewController {
             headerTitleImageView.kf.setImage(with: resource, placeholder: UIImage.programPlaceholder)
         }
         
-        if let isInvested = programDetailsFull?.personalProgramDetails?.isInvested {
+        if let isInvested = programDetails?.personalDetails?.isInvested {
             self.investedImageView.isHidden = !isInvested
-        }
-        
-        if let rating = programDetailsFull?.rating, let canLevelUp = rating.canLevelUp {
-            ratingTagLabel.isHidden = !canLevelUp
         }
     }
     
-    func setupTags(_ programDetailsFull: ProgramDetailsFull?) {
+    func setupTags(_ programDetailsFull: ProgramFollowDetailsFull?) {
         guard let programDetailsFull = programDetailsFull, let tags = programDetailsFull.tags, !tags.isEmpty else { return }
         
         let tagsCount = tags.count

@@ -9,23 +9,46 @@
 import UIKit
 
 struct ProfitChange {
-    let value: Double
-    let percent: Double
+    var value: Double
+    var percent: Double
+    
+    init(value: Double? = nil, percent: Double? = nil) {
+        self.value = value ?? 0.0
+        self.percent = percent ?? 0.0
+    }
+    
+    init(_ model: DashboardTimeframeProfit? = nil) {
+        self.value = model?.profit ?? 0.0
+        self.percent = model?.profitPercent ?? 0.0
+    }
 }
+
 struct Profits {
-    let day: ProfitChange
-    let week: ProfitChange
-    let month: ProfitChange
+    var day: ProfitChange
+    var week: ProfitChange
+    var month: ProfitChange
+    
+    init(_ model: DashboardProfits? = nil) {
+        day = ProfitChange(model?.day)
+        week = ProfitChange(model?.week)
+        month = ProfitChange(model?.month)
+    }
+    
+    init(day: ProfitChange, week: ProfitChange, month: ProfitChange) {
+        self.day = ProfitChange(value: day.value, percent: day.percent)
+        self.week = ProfitChange(value: week.value, percent: week.percent)
+        self.month = ProfitChange(value: month.value, percent: month.percent)
+    }
 }
+
 struct DashboardOverviewData: BaseData {
     var title: String
-    var showActionsView: Bool
     var type: CellActionType
     
-    let total: Double
-    let invested: Double
-    let trading: Double
-    let wallets: Double
+    var total: Double
+    var invested: Double
+    var trading: Double
+    var wallets: Double
     
     var investedProgress: Double {
         return invested/total
@@ -41,25 +64,23 @@ struct DashboardOverviewData: BaseData {
     
     var profits: Profits
     
-    let currency: CurrencyType
+    var currency: CurrencyType
     
-    init(_ model: BaseData) {
-//        TODO: parse
-//        self.total = model.total
-//        self.invested = model.invested
-//        self.trading = model.trading
-//        self.wallets = model.wallets
-//
-//        self.profits.0 = model.profits.day.profitPercent
-//        self.profits.1 = model.profits.week.profitPercent
-//        self.profits.2 = model.profits.month.profitPercent
+    init(_ model: DashboardSummary?, currency: CurrencyType) {
+        title = "Balance"
+        type = .none
         
-        self.init()
+        self.total = model?.total ?? 0.0
+        self.invested = model?.invested ?? 0.0
+        self.trading = model?.trading ?? 0.0
+        self.wallets = model?.wallets ?? 0.0
+        
+        self.profits = Profits(model?.profits)
+        self.currency = currency
     }
     
     init() {
         title = "Balance"
-        showActionsView = false
         type = .none
         
         total = 100.0
@@ -74,8 +95,8 @@ struct DashboardOverviewData: BaseData {
 }
 
 struct DashboardOverviewTableViewCellViewModel {
-    let data: DashboardOverviewData
-    weak var delegate: BaseCellProtocol?
+    let data: DashboardOverviewData?
+    weak var delegate: BaseTableViewProtocol?
 }
 extension DashboardOverviewTableViewCellViewModel: CellViewModel {
     func setup(on cell: DashboardOverviewTableViewCell) {
@@ -86,13 +107,21 @@ extension DashboardOverviewTableViewCellViewModel: CellViewModel {
 class DashboardOverviewTableViewCell: BaseTableViewCell {
     // MARK: - Outlets
     @IBOutlet weak var labelsView: DashboardOverviewLabelsView!
-    
-    func configure(_ data: DashboardOverviewData, delegate: BaseCellProtocol?) {
+   
+    func configure(_ data: DashboardOverviewData?, delegate: BaseTableViewProtocol?) {
+        guard let data = data else { return }
+        loaderView.stopAnimating()
+        loaderView.isHidden = true
+        
         self.type = .none
         self.delegate = delegate
     
         labelsView.configure(data)
         labelsView.progressView.dataSource = self
+        
+        labelsView.changeLabelsView.dayLabel.valueLabel.isHidden = true
+        labelsView.changeLabelsView.weekLabel.valueLabel.isHidden = true
+        labelsView.changeLabelsView.monthLabel.valueLabel.isHidden = true
         
         labelsView.progressView.setProgress(section: 0, to: Float(data.investedProgress))
         labelsView.progressView.setProgress(section: 1, to: Float(data.tradingProgress))

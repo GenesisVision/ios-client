@@ -81,17 +81,11 @@ class AboutLevelView: UIView {
     }
     
     // MARK: - Public Methods
-    func configure(_ programDetailsRating: ProgramDetailsRating?, level: Int?, currency: PlatformAPI.Currency_v10PlatformLevelsGet) {
-        guard let programDetailsRating = programDetailsRating, let level = level else { return }
+    //FIXME:
+    func configure(_ level: Int?, currency: CurrencyType) {
         
-        titleLabel.text = "Genesis Level \(level)"
-        
-        if let canLevelUp = programDetailsRating.canLevelUp, canLevelUp {
-            firstValueLabel.text = "Top 10%"
-        } else {
-            firstStackView.isHidden = true
-        }
-        
+        titleLabel.text = "Genesis Level \(level?.toString() ?? "")"
+    
         showProgressHUD()
         PlatformManager.shared.getProgramsLevelsInfo(currency) { [weak self] (programsLevelsInfo) in
             self?.hideHUD()

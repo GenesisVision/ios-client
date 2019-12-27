@@ -9,34 +9,34 @@
 import UIKit
 
 struct DetailStatisticsTableViewCellViewModel {
-    let programDetailsFull: ProgramDetailsFull?
+    let programFollowDetailsFull: ProgramFollowDetailsFull?
 }
 
 extension DetailStatisticsTableViewCellViewModel: CellViewModel {
     func setup(on cell: DetailStatisticsTableViewCell) {
-        guard let programDetailsFull = programDetailsFull else { return }
+        guard let programDetailsFull = programFollowDetailsFull else { return }
         
         if let fileName = programDetailsFull.brokerDetails?.logo, let fileUrl = getFileURL(fileName: fileName) {
             cell.brokerLogo.kf.indicatorType = .activity
             cell.brokerLogo.kf.setImage(with: fileUrl, placeholder: UIImage.profilePlaceholder)
         }
         
-        if let value = programDetailsFull.periodDuration {
+        if let value = programDetailsFull.programDetails?.periodDuration {
             cell.periodLabel.text = value.toString() + " d"
         }
-        if let value = programDetailsFull.ageDays {
+        if let value = programDetailsFull.programDetails?.ageDays {
             cell.ageLabel.text = value.toString() + " d"
         }
-        if let value = programDetailsFull.genesisRatio {
+        if let value = programDetailsFull.programDetails?.genesisRatio {
             cell.wpdLabel.text = value.toString()
         }
-        if let value = programDetailsFull.investmentScale {
+        if let value = programDetailsFull.programDetails?.investmentScale {
             cell.investmentScaleLabel.text = value.toString()
         }
-        if let value = programDetailsFull.volumeScale {
+        if let value = programDetailsFull.programDetails?.volumeScale {
             cell.volumeLabel.text = value.toString()
         }
-        if let min = programDetailsFull.leverageMin, let max = programDetailsFull.leverageMax {
+        if let min = programDetailsFull.tradingAccountInfo?.leverageMin, let max = programDetailsFull.tradingAccountInfo?.leverageMax {
             cell.leverageLabel.text = (min == max) ? "1:\(min)" : "1:\(min)-1:\(max)"
         }
     }

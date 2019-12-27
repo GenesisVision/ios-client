@@ -45,9 +45,6 @@ class FundAssetsViewController: BaseViewControllerWithTableView {
         setupTableConfiguration()
         
         setupNavigationBar()
-        
-        showProgressHUD()
-        fetch()
     }
     
     private func reloadData() {
@@ -55,25 +52,6 @@ class FundAssetsViewController: BaseViewControllerWithTableView {
             self.refreshControl?.endRefreshing()
             self.tableView?.reloadData()
         }
-    }
-    
-    override func fetch() {
-        viewModel.refresh { [weak self] (result) in
-            self?.hideAll()
-            
-            switch result {
-            case .success:
-                break
-            case .failure(let errorType):
-                ErrorHandler.handleError(with: errorType, viewController: self)
-            }
-        }
-    }
-    
-    override func pullToRefresh() {
-        super.pullToRefresh()
-        
-        fetch()
     }
 }
 
@@ -85,10 +63,6 @@ extension FundAssetsViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         return tableView.dequeueReusableCell(withModel: model, for: indexPath)
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath))
     }
     
     // MARK: - UITableViewDataSource

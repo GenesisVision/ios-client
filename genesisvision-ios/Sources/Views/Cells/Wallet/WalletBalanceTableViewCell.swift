@@ -56,7 +56,7 @@ class WalletBalanceTableViewCell: UITableViewCell {
             progressView.foregroundStrokeColor = UIColor.Common.purple
         case .invested:
             progressView.foregroundStrokeColor = UIColor.primary
-        case .pending:
+        case .trading:
             progressView.foregroundStrokeColor = UIColor.Common.yellow
         }
     }

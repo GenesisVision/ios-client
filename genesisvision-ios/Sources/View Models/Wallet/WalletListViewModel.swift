@@ -17,7 +17,7 @@ final class WalletListViewModel {
     // MARK: - Variables
     var title: String = "My wallets"
     
-    var wallet: WalletMultiSummary? {
+    var wallet: WalletSummary? {
         didSet {
             if let wallet = wallet, let wallets = wallet.wallets {
                 walletType = .wallet
@@ -118,7 +118,7 @@ extension WalletListViewModel {
     }
     
     func transfer() {
-        router.show(routeType: .transfer(from: .gvt, to: .btc, walletMultiSummary: wallet))
+        router.show(routeType: .transfer(from: .gvt, to: .btc, walletSummary: wallet))
     }
 }
 

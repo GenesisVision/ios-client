@@ -51,7 +51,7 @@ class AboutLevelsViewController: BaseViewController {
     
     @IBOutlet var levelStackViews: [LevelStackView]!
     
-    var currency: PlatformAPI.Currency_v10PlatformLevelsGet = .gvt
+    var currency: CurrencyType = .gvt
     
     // MARK: - Lifecycle
     override func viewDidLoad() {

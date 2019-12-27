@@ -11,11 +11,6 @@ import Foundation
 
 open class CaptchaDetails: Codable {
 
-    public enum CaptchaType: String, Codable { 
-        case _none = "None"
-        case pow = "Pow"
-        case geeTest = "GeeTest"
-    }
     public var captchaType: CaptchaType?
     public var id: UUID?
     public var route: String?

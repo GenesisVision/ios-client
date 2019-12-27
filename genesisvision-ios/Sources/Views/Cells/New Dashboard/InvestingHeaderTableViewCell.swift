@@ -10,37 +10,36 @@ import UIKit
 
 struct InvestingHeaderData: BaseData {
     var title: String
-    var showActionsView: Bool
     var type: CellActionType
     
-    let balance: Double
-    let programs: Double
-    let funds: Double
+    var balance: Double
+    var programs: Int
+    var funds: Int
     
     let profits: Profits
     
     let currency: CurrencyType
     
-    init(title: String? = nil, showActionsView: Bool? = nil) {
-        self.title = title ?? "Total"
-        self.showActionsView = showActionsView ?? false
-        self.type = .none
+    let isEmpty: Bool
+    
+    init(title: String? = nil, details: DashboardInvestingDetails?, currency: CurrencyType) {
+        type = .none
         
-        balance = 2000.0
-        programs = 1000.0
-        funds = 1000.0
+        isEmpty = details?.events?.items?.count == 0 && details?.programsCount == 0 && details?.fundsCount == 0
         
-        profits = Profits(day: ProfitChange(value: 2000, percent: 20),
-                          week: ProfitChange(value: 3000, percent: 30),
-                          month: ProfitChange(value: 5000, percent: 50))
+        self.title = title ?? ""
+        self.currency = currency
         
-        currency = .usd
+        balance = details?.equity ?? 0.0
+        programs = details?.programsCount ?? 0
+        funds = details?.fundsCount ?? 0
+        profits = Profits(details?.profits)
     }
 }
 
 struct InvestingHeaderTableViewCellViewModel {
     let data: InvestingHeaderData
-    weak var delegate: BaseCellProtocol?
+    weak var delegate: BaseTableViewProtocol?
 }
 extension InvestingHeaderTableViewCellViewModel: CellViewModel {
     func setup(on cell: InvestingHeaderTableViewCell) {
@@ -50,17 +49,37 @@ extension InvestingHeaderTableViewCellViewModel: CellViewModel {
 
 class InvestingHeaderTableViewCell: BaseTableViewCell {
     // MARK: - Outlets
+    @IBOutlet weak var emptyView: DashboardInvestingEmptyView! {
+       didSet {
+           emptyView.isHidden = true
+       }
+    }
     @IBOutlet weak var labelsView: DashboardInvestingLabelsView!
     
     // MARK: - Public methods
-    func configure(_ data: InvestingHeaderData, delegate: BaseCellProtocol?) {
+    func configure(_ data: InvestingHeaderData, delegate: BaseTableViewProtocol?) {
         self.delegate = delegate
-        type = .none
+        type = .dashboardInvesting
         
-        titleLabel.text = data.title
-        actionsView.isHidden = !data.showActionsView
+        loaderView.stopAnimating()
+        loaderView.isHidden = true
         
+        if data.isEmpty {
+            emptyView.isHidden = !data.isEmpty
+            labelsView.isHidden = data.isEmpty
+        }
+        
+        if !data.title.isEmpty {
+            titleLabel.text = data.title
+        } else {
+            titleLabel.isHidden = true
+        }
+
         labelsView.configure(data)
+        
+        labelsView.changeLabelsView.dayLabel.valueLabel.isHidden = true
+        labelsView.changeLabelsView.weekLabel.valueLabel.isHidden = true
+        labelsView.changeLabelsView.monthLabel.valueLabel.isHidden = true
     }
 }
 

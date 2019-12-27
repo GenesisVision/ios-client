@@ -11,14 +11,12 @@ import Foundation
 
 open class TwoFactorCodeModel: Codable {
 
-    public var twoFactorCode: String
-    public var password: String
+    public var twoFactorCode: String?
 
 
     
-    public init(twoFactorCode: String, password: String) {
+    public init(twoFactorCode: String?) {
         self.twoFactorCode = twoFactorCode
-        self.password = password
     }
     
 
@@ -28,8 +26,7 @@ open class TwoFactorCodeModel: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encode(twoFactorCode, forKey: "twoFactorCode")
-        try container.encode(password, forKey: "password")
+        try container.encodeIfPresent(twoFactorCode, forKey: "twoFactorCode")
     }
 
     // Decodable protocol methods
@@ -37,8 +34,7 @@ open class TwoFactorCodeModel: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        twoFactorCode = try container.decode(String.self, forKey: "twoFactorCode")
-        password = try container.decode(String.self, forKey: "password")
+        twoFactorCode = try container.decodeIfPresent(String.self, forKey: "twoFactorCode")
     }
 }
 

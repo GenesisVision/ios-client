@@ -11,12 +11,6 @@ import Foundation
 
 open class ProfileFullViewModel: Codable {
 
-    public enum VerificationStatus: String, Codable { 
-        case notVerified = "NotVerified"
-        case verified = "Verified"
-        case underReview = "UnderReview"
-        case rejected = "Rejected"
-    }
     public var id: UUID?
     public var email: String?
     public var firstName: String?
@@ -35,11 +29,12 @@ open class ProfileFullViewModel: Codable {
     public var index: String?
     public var citizenship: String?
     public var refUrl: String?
-    public var verificationStatus: VerificationStatus?
+    public var verificationStatus: UserVerificationStatus?
+    public var isPublicInvestor: Bool?
 
 
     
-    public init(id: UUID?, email: String?, firstName: String?, middleName: String?, lastName: String?, country: String?, city: String?, address: String?, phone: String?, phoneNumberConfirmed: Bool?, birthday: Date?, gender: Bool?, avatar: String?, about: String?, userName: String?, index: String?, citizenship: String?, refUrl: String?, verificationStatus: VerificationStatus?) {
+    public init(id: UUID?, email: String?, firstName: String?, middleName: String?, lastName: String?, country: String?, city: String?, address: String?, phone: String?, phoneNumberConfirmed: Bool?, birthday: Date?, gender: Bool?, avatar: String?, about: String?, userName: String?, index: String?, citizenship: String?, refUrl: String?, verificationStatus: UserVerificationStatus?, isPublicInvestor: Bool?) {
         self.id = id
         self.email = email
         self.firstName = firstName
@@ -59,6 +54,7 @@ open class ProfileFullViewModel: Codable {
         self.citizenship = citizenship
         self.refUrl = refUrl
         self.verificationStatus = verificationStatus
+        self.isPublicInvestor = isPublicInvestor
     }
     
 
@@ -87,6 +83,7 @@ open class ProfileFullViewModel: Codable {
         try container.encodeIfPresent(citizenship, forKey: "citizenship")
         try container.encodeIfPresent(refUrl, forKey: "refUrl")
         try container.encodeIfPresent(verificationStatus, forKey: "verificationStatus")
+        try container.encodeIfPresent(isPublicInvestor, forKey: "isPublicInvestor")
     }
 
     // Decodable protocol methods
@@ -112,7 +109,8 @@ open class ProfileFullViewModel: Codable {
         index = try container.decodeIfPresent(String.self, forKey: "index")
         citizenship = try container.decodeIfPresent(String.self, forKey: "citizenship")
         refUrl = try container.decodeIfPresent(String.self, forKey: "refUrl")
-        verificationStatus = try container.decodeIfPresent(VerificationStatus.self, forKey: "verificationStatus")
+        verificationStatus = try container.decodeIfPresent(UserVerificationStatus.self, forKey: "verificationStatus")
+        isPublicInvestor = try container.decodeIfPresent(Bool.self, forKey: "isPublicInvestor")
     }
 }
 

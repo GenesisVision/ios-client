@@ -8,9 +8,8 @@
 
 import UIKit
 
-class TradingPrivateShortListViewModel: ViewModelWithCollection {
+class TradingPrivateShortListViewModel: CellViewModelWithCollection {
     var title: String
-    var showActionsView: Bool
     var type: CellActionType
     
     var viewModels = [CellViewAnyModel]()
@@ -20,40 +19,110 @@ class TradingPrivateShortListViewModel: ViewModelWithCollection {
     var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
         return []
     }
-    
+    var details: ItemsViewModelDashboardTradingAsset?
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [PortfolioEventCollectionViewCellViewModel.self]
+        return [AssetCollectionViewCellViewModel.self]
     }
     
-    weak var delegate: BaseCellProtocol?
-    init(_ delegate: BaseCellProtocol?) {
+    var router: Router?
+    weak var delegate: BaseTableViewProtocol?
+    init(_ details: ItemsViewModelDashboardTradingAsset?, delegate: BaseTableViewProtocol?, router: Router?) {
+        self.details = details
+        self.router = router
         self.delegate = delegate
         title = "Private"
-        showActionsView = true
         type = .tradingPrivateList
         
-        let viewModel = PortfolioEventCollectionViewCellViewModel(reloadDataProtocol: nil, event: InvestmentEventViewModel(title: "title", icon: nil, date: Date(), assetDetails: AssetDetails(id: nil, logo: nil, color: nil, title: "Asset", url: nil, assetType: .programs), amount: 20.0, currency: .btc, changeState: .increased, extendedInfo: nil, feesInfo: nil, totalFeesAmount: nil, totalFeesCurrency: nil))
-        viewModels.append(viewModel)
-        viewModels.append(viewModel)
-        viewModels.append(viewModel)
-        viewModels.append(viewModel)
-        viewModels.append(viewModel)
+        details?.items?.forEach({ (viewModel) in
+            guard let assetType = viewModel.assetType else { return }
+            let asset = AssetDetailData()
+            asset.tradingAsset = viewModel
+            viewModels.append(AssetCollectionViewCellViewModel(type: assetType, asset: asset, delegate: nil))
+        })
     }
     
     func didSelect(at indexPath: IndexPath) {
         delegate?.didSelect(type, cellViewModel: model(at: indexPath))
     }
     
-    func getActions() -> [UIButton] {
+    @IBAction func showAllButtonAction(_ sender: UIButton) {
+        delegate?.action(type, actionType: .showAll)
+    }
+    
+    @IBAction func addButtonAction(_ sender: UIButton) {
+        delegate?.action(type, actionType: .add)
+    }
+}
+
+extension TradingPrivateShortListViewModel {
+    func getRightButtons() -> [UIButton] {
         let showAllButton = UIButton(type: .system)
         showAllButton.setTitle("show all", for: .normal)
         showAllButton.setTitleColor(.primary, for: .normal)
         showAllButton.addTarget(self, action: #selector(showAllButtonAction(_:)), for: .touchUpInside)
         return [showAllButton]
     }
-
-    @IBAction func showAllButtonAction(_ sender: UIButton) {
-        delegate?.action(type, actionType: .showAll)
+    
+    func makeLayout() -> UICollectionViewLayout {
+        return CustomLayout.defaultLayout(1, pagging: false)
+    }
+    
+    func getCollectionViewHeight() -> CGFloat {
+        return 250.0
+    }
+    
+    func getTotalCount() -> Int? {
+        return details?.total
+    }
+    
+    func getLeftButtons() -> [UIButton] {
+        let showAllButton = UIButton(type: .system)
+        showAllButton.setImage(#imageLiteral(resourceName: "img_add_photo_icon"), for: .normal)
+        showAllButton.addTarget(self, action: #selector(addButtonAction(_:)), for: .touchUpInside)
+        return [showAllButton]
+    }
+    
+    @available(iOS 13.0, *)
+    func getMenu(_ indexPath: IndexPath) -> UIMenu? {
+        guard let model = model(at: indexPath) as? AssetCollectionViewCellViewModel,
+            let tradingAsset = model.asset.tradingAsset,
+            let assetType = tradingAsset.assetType,
+            let actions = tradingAsset.actions else { return nil }
+        
+        var children = [UIAction]()
+        
+        if let name = tradingAsset.publicInfo?.url {
+            let share = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { [weak self] action in
+                let url = getRoute(assetType, name: name)
+                self?.router?.share(url)
+            }
+            children.append(share)
+        }
+        
+        if let canMakeProgramFromPrivateTradingAccount = actions.canMakeProgramFromPrivateTradingAccount, canMakeProgramFromPrivateTradingAccount {
+            let makeProgram = UIAction(title: "Make program", image: nil) { [weak self] action in
+                //TODO: Make signal action
+            }
+            children.append(makeProgram)
+        }
+        
+        if let canMakeSignalProviderFromPrivateTradingAccount = actions.canMakeSignalProviderFromPrivateTradingAccount, canMakeSignalProviderFromPrivateTradingAccount {
+            let makeSignal = UIAction(title: "Make signal", image: nil) { [weak self] action in
+                //TODO: Make signal action
+            }
+            children.append(makeSignal)
+        }
+        
+        if let canChangePassword = actions.canChangePassword, canChangePassword {
+            let changePassword = UIAction(title: "Change password", image: nil) { [weak self] action in
+                //TODO: Make signal action
+            }
+            children.append(changePassword)
+        }
+        
+        guard !children.isEmpty else { return nil }
+        
+        return UIMenu(title: "", children: children)
     }
 }
 

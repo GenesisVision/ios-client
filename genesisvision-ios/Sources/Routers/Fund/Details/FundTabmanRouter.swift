@@ -24,12 +24,12 @@ class FundTabmanRouter: TabmanRouter {
         return viewController
     }
     
-    func getAssets(with fundId: String) -> FundAssetsViewController? {
+    func getAssets() -> FundAssetsViewController? {
         guard let router = self.parentRouter as? FundRouter else { return nil }
         
         let viewController = FundAssetsViewController()
         router.currentController = viewController
-        let viewModel = FundAssetsViewModel(withRouter: router, fundId: fundId, reloadDataProtocol: viewController)
+        let viewModel = FundAssetsViewModel(withRouter: router, reloadDataProtocol: viewController)
         viewController.viewModel = viewModel
         
         return viewController
@@ -57,8 +57,8 @@ class FundTabmanRouter: TabmanRouter {
         return viewController
     }
     
-    func getEvents(with assetId: String) -> AllEventsViewController? {
-        guard let router = self.parentRouter as? FundRouter, let viewController = getEventsViewController(with: assetId, router: router, allowsSelection: false) else { return nil }
+    func getEvents(with assetId: String) -> EventListViewController? {
+        guard let router = self.parentRouter as? FundRouter, let viewController = getEventsViewController(with: assetId, router: router, allowsSelection: false, assetType: .fund) else { return nil }
         
         return viewController
     }

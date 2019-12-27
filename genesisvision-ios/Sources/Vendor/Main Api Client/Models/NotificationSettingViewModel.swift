@@ -11,46 +11,17 @@ import Foundation
 
 open class NotificationSettingViewModel: Codable {
 
-    public enum ModelType: String, Codable { 
-        case platformNewsAndUpdates = "PlatformNewsAndUpdates"
-        case platformEmergency = "PlatformEmergency"
-        case platformOther = "PlatformOther"
-        case profileUpdated = "ProfileUpdated"
-        case profilePwdUpdated = "ProfilePwdUpdated"
-        case profileVerification = "ProfileVerification"
-        case profile2FA = "Profile2FA"
-        case profileSecurity = "ProfileSecurity"
-        case tradingAccountPwdUpdated = "TradingAccountPwdUpdated"
-        case programNewsAndUpdates = "ProgramNewsAndUpdates"
-        case programEndOfPeriod = "ProgramEndOfPeriod"
-        case programCondition = "ProgramCondition"
-        case programExceedInvestmentLimit = "ProgramExceedInvestmentLimit"
-        case fundNewsAndUpdates = "FundNewsAndUpdates"
-        case fundEndOfPeriod = "FundEndOfPeriod"
-        case fundRebalancing = "FundRebalancing"
-        case managerNewProgram = "ManagerNewProgram"
-        case managerNewFund = "ManagerNewFund"
-        case managerNewExternalSignalAccount = "ManagerNewExternalSignalAccount"
-        case signals = "Signals"
-        case externalSignals = "ExternalSignals"
-    }
-    public enum ConditionType: String, Codable { 
-        case empty = "Empty"
-        case profit = "Profit"
-        case level = "Level"
-        case availableToInvest = "AvailableToInvest"
-    }
     public var id: UUID?
     public var isEnabled: Bool?
     public var assetId: UUID?
     public var managerId: UUID?
-    public var type: ModelType?
-    public var conditionType: ConditionType?
+    public var type: NotificationType?
+    public var conditionType: NotificationSettingConditionType?
     public var conditionAmount: Double?
 
 
     
-    public init(id: UUID?, isEnabled: Bool?, assetId: UUID?, managerId: UUID?, type: ModelType?, conditionType: ConditionType?, conditionAmount: Double?) {
+    public init(id: UUID?, isEnabled: Bool?, assetId: UUID?, managerId: UUID?, type: NotificationType?, conditionType: NotificationSettingConditionType?, conditionAmount: Double?) {
         self.id = id
         self.isEnabled = isEnabled
         self.assetId = assetId
@@ -85,8 +56,8 @@ open class NotificationSettingViewModel: Codable {
         isEnabled = try container.decodeIfPresent(Bool.self, forKey: "isEnabled")
         assetId = try container.decodeIfPresent(UUID.self, forKey: "assetId")
         managerId = try container.decodeIfPresent(UUID.self, forKey: "managerId")
-        type = try container.decodeIfPresent(ModelType.self, forKey: "type")
-        conditionType = try container.decodeIfPresent(ConditionType.self, forKey: "conditionType")
+        type = try container.decodeIfPresent(NotificationType.self, forKey: "type")
+        conditionType = try container.decodeIfPresent(NotificationSettingConditionType.self, forKey: "conditionType")
         conditionAmount = try container.decodeIfPresent(Double.self, forKey: "conditionAmount")
     }
 }

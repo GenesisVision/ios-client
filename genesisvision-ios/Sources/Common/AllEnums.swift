@@ -10,13 +10,17 @@ import UIKit
 
 enum CellActionType {
     case none
+    case dashboardNotifications
     case dashboardTrading
     case dashboardInvesting
     case dashboardRecommendation
+    
     case tradingEvents
     case tradingPublicList
     case tradingPrivateList
+    
     case investingEvents
+    case investingRequests
     case investingFunds
     case investingPrograms
     
@@ -30,8 +34,9 @@ enum CellActionType {
 
 enum DidSelectType {
     case none
-    case depositFrom
+    case walletFrom
     
+    case accountType
     case leverage
     case currency
     case exchange
@@ -47,6 +52,7 @@ enum ActionType {
     case showAll
     case add
     case showBrokerDetails
+    case updateNotificationsCount
 }
 
 // MARK: - Charts
@@ -107,15 +113,15 @@ enum DateRangeType: Int {
 }
 
 // MARK: - Currency
-typealias CurrencyType = ProgramsAPI.CurrencySecondary_v10ProgramsGet
-typealias SortingListType = ProgramsAPI.Sorting_v10ProgramsGet
+typealias CurrencyType = ProgramsAPI.ProgramCurrency_getPrograms
+typealias SortingListType = ProgramsAPI.Sorting_getPrograms
 
 extension CurrencyType {
     public var currencyLenght: Int {
         switch self {
         case .gvt: return 4
         case .eth, .btc: return 8
-        case .usd, .eur: return 2
+        case .usd, .eur, .usdt: return 2
         case .undefined: return 2 //for percent
         default:
             return 4
@@ -148,24 +154,16 @@ enum WalletTransferType {
     case fromAccount
 }
 
-enum AssetType: String {
-    case fund = "Fund"
-    case program = "Program"
-    case signal = "Signal"
-    case manager = "Manager"
-}
-
 enum WalletBalanceType: String {
     case total = "Total balance"
     case available = "Available"
     case invested = "Invested"
-    case pending = "Pending"
+    case trading = "Trading"
 }
 
 enum WalletType {
     case all
     case wallet
-    case account
 }
 
 // MARK: - CompletionsResult
@@ -193,8 +191,7 @@ enum StoryboardNames: String {
     case launch
     case profile
     case settings
-    case programs
-    case funds
+    case assets
     case auth
     case wallet
     case dashboard

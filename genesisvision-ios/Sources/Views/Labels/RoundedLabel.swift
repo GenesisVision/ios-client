@@ -11,6 +11,7 @@ import UIKit.UILabel
 class RoundedLabel: UILabel {
     
     var edgeInsets: UIEdgeInsets!
+    var cornerRadius: CGFloat?
 
     // MARK: - Lifecycle
     required init(coder aDecoder: NSCoder) {
@@ -42,7 +43,7 @@ class RoundedLabel: UILabel {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        layer.cornerRadius = bounds.size.height / 2
+        layer.cornerRadius = cornerRadius ?? bounds.size.height / 2
         layer.masksToBounds = true
     }
     

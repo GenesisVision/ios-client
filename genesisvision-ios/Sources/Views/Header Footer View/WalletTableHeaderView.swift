@@ -54,36 +54,36 @@ class WalletTableHeaderView: UITableViewHeaderFooterView {
     
     func configure(_ wallet: WalletSummary) {
         totalBalanceTitleLabel.text = "Total balance"
-        if let totalBalanceGVT = wallet.totalBalanceGVT {
+        if let totalBalanceGVT = wallet.grandTotal?.total {
             totalBalanceValueLabel.text = totalBalanceGVT.rounded(with: .gvt).toString() + " \(Constants.gvtString)"
         }
-        if let totalBalanceCurrency = wallet.totalBalanceCurrency, let selectedCurrency = CurrencyType(rawValue: getSelectedCurrency()) {
-            totalBalanceCurrencyLabel.text = totalBalanceCurrency.rounded(with: selectedCurrency).toString() + " \(getSelectedCurrency())"
+        if let totalBalanceCurrency = wallet.grandTotal?.total {
+            totalBalanceCurrencyLabel.text = totalBalanceCurrency.rounded(with: getPlatformCurrencyType()).toString() + " " + selectedPlatformCurrency
         }
         
-        if let totalBalanceGVT = wallet.totalBalanceGVT, let availableGVT = wallet.availableGVT {
+        if let totalBalanceGVT = wallet.grandTotal?.total, let availableGVT = wallet.grandTotal?.available {
             let percent = totalBalanceGVT == 0.0 ? 0.0 : availableGVT / totalBalanceGVT
             availableProgressView.setProgress(to: percent, withAnimation: true)
         }
         
         availableTitleLabel.text = "Available"
-        if let availableGVT = wallet.availableGVT {
+        if let availableGVT = wallet.grandTotal?.available {
             availableValueLabel.text = availableGVT.rounded(with: .gvt).toString() + " \(Constants.gvtString)"
         }
-        if let availableCurrency = wallet.availableCurrency, let selectedCurrency = CurrencyType(rawValue: getSelectedCurrency()) {
-            availableCurrencyLabel.text = availableCurrency.rounded(with: selectedCurrency).toString() + " \(getSelectedCurrency())"
+        if let availableCurrency = wallet.grandTotal?.available {
+            availableCurrencyLabel.text = availableCurrency.rounded(with: getPlatformCurrencyType()).toString() + " " + selectedPlatformCurrency
         }
         
-        if let totalBalanceGVT = wallet.totalBalanceGVT, let investedGVT = wallet.investedGVT {
+        if let totalBalanceGVT = wallet.grandTotal?.total, let investedGVT = wallet.grandTotal?.invested {
             let percent = totalBalanceGVT == 0.0 ? 0.0 : investedGVT / totalBalanceGVT
             investedProgressView.setProgress(to: percent, withAnimation: true)
         }
         investedTitleLabel.text = "Invested value"
-        if let investedGVT = wallet.investedGVT {
+        if let investedGVT = wallet.grandTotal?.invested {
             investedValueLabel.text = investedGVT.rounded(with: .gvt).toString() + " \(Constants.gvtString)"
         }
-        if let investedCurrency = wallet.investedCurrency, let selectedCurrency = CurrencyType(rawValue: getSelectedCurrency()) {
-            investedCurrencyLabel.text = investedCurrency.rounded(with: selectedCurrency).toString() + " \(getSelectedCurrency())"
+        if let investedCurrency = wallet.grandTotal?.invested {
+            investedCurrencyLabel.text = investedCurrency.rounded(with: getPlatformCurrencyType()).toString() + " " + selectedPlatformCurrency
         }
     }
 }

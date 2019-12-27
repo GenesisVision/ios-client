@@ -10,33 +10,32 @@ import UIKit
 
 struct TradingHeaderData: BaseData {
     var title: String
-    var showActionsView: Bool
     var type: CellActionType
     
-    let yourEquity: Double
-    let aum: Double
-    let profits: Profits
+    var yourEquity: Double
+    var aum: Double
+    var profits: Profits
     
     let currency: CurrencyType
     
-    init(title: String? = nil, showActionsView: Bool? = nil) {
+    let isEmpty: Bool
+    
+    init(title: String? = nil, details: DashboardTradingDetails?, currency: CurrencyType) {
         type = .none
-        self.title = title ?? "Total"
-        self.showActionsView = showActionsView ?? false
+        self.title = title ?? ""
         
-        yourEquity = 2000.0
-        aum = 1000.0
-        profits = Profits(day: ProfitChange(value: 2000, percent: 20),
-                          week: ProfitChange(value: 3000, percent: 30),
-                          month: ProfitChange(value: 5000, percent: 50))
+        isEmpty = details?.events?.items?.count == 0 && details?.total == 0.0 && details?.aum == 0.0
         
-        currency = .usd
+        self.currency = currency
+        yourEquity = details?.equity ?? 0.0
+        aum = details?.aum ?? 0.0
+        profits = Profits(details?.profits)
     }
 }
 
 struct TradingHeaderTableViewCellViewModel {
     let data: TradingHeaderData
-    weak var delegate: BaseCellProtocol?
+    weak var delegate: BaseTableViewProtocol?
 }
 extension TradingHeaderTableViewCellViewModel: CellViewModel {
     func setup(on cell: TradingHeaderTableViewCell) {
@@ -46,17 +45,36 @@ extension TradingHeaderTableViewCellViewModel: CellViewModel {
 
 class TradingHeaderTableViewCell: BaseTableViewCell {
     // MARK: - Outlets
+    @IBOutlet weak var emptyView: DashboardTradingEmptyView! {
+       didSet {
+           emptyView.isHidden = true
+       }
+    }
     @IBOutlet weak var labelsView: DashboardTradingLabelsView!
     
     // MARK: - Public methods
-    func configure(_ data: TradingHeaderData, delegate: BaseCellProtocol?) {
+    func configure(_ data: TradingHeaderData, delegate: BaseTableViewProtocol?) {
+        self.delegate = delegate
         type = .dashboardTrading
         
-        self.delegate = delegate
+        loaderView.stopAnimating()
+        loaderView.isHidden = true
         
-        titleLabel.text = data.title
-        actionsView.isHidden = !data.showActionsView
+        if data.isEmpty {
+            emptyView.isHidden = !data.isEmpty
+            labelsView.isHidden = data.isEmpty
+        }
+        
+        if !data.title.isEmpty {
+            titleLabel.text = data.title
+        } else {
+            titleLabel.isHidden = true
+        }
         
         labelsView.configure(data)
+        
+        labelsView.changeLabelsView.dayLabel.valueLabel.isHidden = true
+        labelsView.changeLabelsView.weekLabel.valueLabel.isHidden = true
+        labelsView.changeLabelsView.monthLabel.valueLabel.isHidden = true
     }
 }

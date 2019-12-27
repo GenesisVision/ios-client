@@ -9,69 +9,67 @@
 class AuthDataProvider: DataProvider {
     // MARK: - Public methods
     static func signIn(email: String, password: String, twoFactorCode: String? = nil, recoveryCode: String? = nil, client: String? = "iOS", captchaCheckResult: CaptchaCheckResult? = nil, completion: @escaping (_ token: String?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        let loginViewModel = LoginViewModel(password: password, rememberMe: true, twoFactorCode: twoFactorCode, recoveryCode: recoveryCode, client: client, email: email, captchaCheckResult: captchaCheckResult)
+        let model = LoginViewModel(password: password, rememberMe: true, twoFactorCode: twoFactorCode, recoveryCode: recoveryCode, client: client, email: email, captchaCheckResult: captchaCheckResult)
         
-        investorSignIn(with: loginViewModel, completion: completion, errorCompletion: errorCompletion)
+        AuthAPI.authorize(model: model) { (token, error) in
+            DataProvider().responseHandler(error, completion: { (result) in
+                switch result {
+                case .success:
+                    completion(token)
+                case .failure:
+                    errorCompletion(result)
+                }
+            })
+        }
     }
     
-    static func signUp(username: String, email: String, password: String, confirmPassword: String, captchaCheckResult: CaptchaCheckResult? = nil, completion: @escaping CompletionBlock) {
+    static func signUp(username: String, email: String, password: String, confirmPassword: String, refCode: String? = nil, isAuto: Bool? = nil, captchaCheckResult: CaptchaCheckResult? = nil, completion: @escaping CompletionBlock) {
         
-        investorSignUp(with: email, password: password, confirmPassword: confirmPassword, captchaCheckResult: captchaCheckResult, completion: completion)
+        let model = RegisterViewModel(password: password, confirmPassword: confirmPassword, userName: username, refCode: refCode, isAuto: isAuto, email: email, captchaCheckResult: captchaCheckResult)
+        
+        AuthAPI.register(model: model) { (error) in
+            DataProvider().responseHandler(error, completion: completion)
+        }
     }
     
+    // MARK: - Password
     static func forgotPassword(email: String, captchaCheckResult: CaptchaCheckResult? = nil, completion: @escaping CompletionBlock) {
         let forgotPasswordViewModel = ForgotPasswordViewModel(email: email, captchaCheckResult: captchaCheckResult)
         
-        investorForgotPassword(with: forgotPasswordViewModel, completion: completion)
+        AuthAPI.forgotPassword(model: forgotPasswordViewModel) { (error) in
+            DataProvider().responseHandler(error, completion: completion)
+        }
     }
-    
-    static func changePassword(oldPassword: String, password: String, confirmPassword: String, completion: @escaping (_ token: String?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func changePassword(oldPassword: String, password: String, confirmPassword: String, completion: @escaping (String?) -> Void, errorCompletion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
         let changePasswordViewModel = ChangePasswordViewModel(oldPassword: oldPassword, password: password, confirmPassword: confirmPassword)
-        AuthAPI.v10AuthPasswordChangePost(authorization: authorization, model: changePasswordViewModel) { (token, error) in
-            DataProvider().responseHandler(error, completion: { (result) in
-                switch result {
-                case .success:
-                    completion(token)
-                case .failure:
-                    errorCompletion(result)
-                }
-            })
-        }
-    }
-    
-    // MARK: - Private methods
-    // MARK: - Sign In
-    private static func investorSignIn(with model: LoginViewModel, completion: @escaping (_ token: String?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        
-        AuthAPI.v10AuthSigninInvestorPost(model: model) { (token, error) in
-            DataProvider().responseHandler(error, completion: { (result) in
-                switch result {
-                case .success:
-                    completion(token)
-                case .failure:
-                    errorCompletion(result)
-                }
-            })
-        }
-    }
-    
-    // MARK: - Sign Up
-    private static func investorSignUp(with email: String, password: String, confirmPassword: String, refCode: String? = nil, isAuto: Bool? = nil, captchaCheckResult: CaptchaCheckResult? = nil, completion: @escaping CompletionBlock) {
-        
-        let registerInvestorViewModel = RegisterInvestorViewModel(password: password, confirmPassword: confirmPassword, refCode: refCode, isAuto: isAuto, email: email, captchaCheckResult: captchaCheckResult)
 
-        AuthAPI.v10AuthSignupInvestorPost(model: registerInvestorViewModel) { (error) in
-            DataProvider().responseHandler(error, completion: completion)
+        AuthAPI.changePassword(authorization: authorization, model: changePasswordViewModel) { (token, error) in
+            DataProvider().responseHandler(error, completion: { (result) in
+                switch result {
+                case .success:
+                    completion(token)
+                case .failure:
+                    errorCompletion(result)
+                }
+            })
         }
     }
-    
-    // MARK: - Forgot Password
-    private static func investorForgotPassword(with forgotPasswordViewModel: ForgotPasswordViewModel, captchaCheckResult: CaptchaCheckResult? = nil, completion: @escaping CompletionBlock) {
-        AuthAPI.v10AuthPasswordForgotInvestorPost(model: forgotPasswordViewModel) { (error) in
-            DataProvider().responseHandler(error, completion: completion)
-        }
+    static func resetPassword(userId: String, code: String, password: String, confirmPassword: String, completion: @escaping (String?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        
+        let model = ResetPasswordViewModel(userId: userId, code: code, password: password, confirmPassword: confirmPassword)
+        
+        AuthAPI.resetPassword(model: model) { (token, error) in
+           DataProvider().responseHandler(error, completion: { (result) in
+               switch result {
+               case .success:
+                   completion(token)
+               case .failure:
+                   errorCompletion(result)
+               }
+           })
+       }
     }
 }
 

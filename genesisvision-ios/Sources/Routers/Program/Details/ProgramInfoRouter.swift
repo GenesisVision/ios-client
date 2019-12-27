@@ -11,7 +11,7 @@ import Foundation
 enum ProgramInfoRouteType {
     case invest(programId: String, programCurrency: CurrencyType)
     case withdraw(programId: String, programCurrency: CurrencyType)
-    case fullChart(programDetailsFull: ProgramDetailsFull)
+    case fullChart(programDetailsFull: ProgramFollowDetailsFull)
     case manager(managerId: String)
     case editSubscribe(programId: String, signalSubscription: SignalSubscription)
     case subscribe(programId: String, initialDepositCurrency: CurrencyType?, initialDepositAmount: Double?)
@@ -31,8 +31,8 @@ class ProgramInfoRouter: Router {
             withdraw(with: programId, programCurrency: programCurrency)
         case .fullChart(let programDetailsFull):
             fullChart(with: programDetailsFull)
-        case .manager(let managerId):
-            showAssetDetails(with: managerId, assetType: .manager)
+        case .manager(let userId):
+            showUserDetails(with: userId)
         case .editSubscribe(let programId, let signalSubscription):
             editSubscribe(programId, signalSubscription: signalSubscription)
         case .subscribe(let programId, let initialDepositCurrency, let initialDepositAmount):
@@ -63,7 +63,7 @@ class ProgramInfoRouter: Router {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    private func fullChart(with programDetailsFull: ProgramDetailsFull) {
+    private func fullChart(with programDetailsFull: ProgramFollowDetailsFull) {
         guard let viewController = ProgramDetailFullChartViewController.storyboardInstance(.program) else { return }
         let router = self.parentRouter?.parentRouter as! ProgramRouter
         let viewModel = ProgramDetailFullChartViewModel(withRouter: router, programDetailsFull: programDetailsFull)
@@ -84,24 +84,24 @@ class ProgramInfoRouter: Router {
     func editSubscribe(_ programId: String, signalSubscription: SignalSubscription) {
         guard let viewController = ProgramSubscribeViewController.storyboardInstance(.program) else { return }
         
-        let viewModel = ProgramSubscribeViewModel(withRouter: self, programId: programId, signalSubscription: signalSubscription, detailProtocol: programViewController, followType: .edit)
-        viewController.viewModel = viewModel
+//        let viewModel = ProgramSubscribeViewModel(withRouter: self, programId: programId, signalSubscription: signalSubscription, detailProtocol: programViewController, followType: .edit)
+//        viewController.viewModel = viewModel
         navigationController?.pushViewController(viewController, animated: true)
     }
     
     func subscribe(_ programId: String, initialDepositCurrency: CurrencyType?, initialDepositAmount: Double?) {
         guard let viewController = ProgramSubscribeViewController.storyboardInstance(.program) else { return }
         
-        let viewModel = ProgramSubscribeViewModel(withRouter: self, programId: programId, initialDepositCurrency: initialDepositCurrency, initialDepositAmount: initialDepositAmount, detailProtocol: programViewController, followType: .follow)
-        viewController.viewModel = viewModel
+//        let viewModel = ProgramSubscribeViewModel(withRouter: self, programId: programId, initialDepositCurrency: initialDepositCurrency, initialDepositAmount: initialDepositAmount, detailProtocol: programViewController, followType: .follow)
+//        viewController.viewModel = viewModel
         navigationController?.pushViewController(viewController, animated: true)
     }
     
     func unsubscribe(_ programId: String) {
         guard let viewController = ProgramSubscribeViewController.storyboardInstance(.program) else { return }
         
-        let viewModel = ProgramSubscribeViewModel(withRouter: self, programId: programId, detailProtocol: programViewController, followType: .unfollow)
-        viewController.viewModel = viewModel
+//        let viewModel = ProgramSubscribeViewModel(withRouter: self, programId: programId, detailProtocol: programViewController, followType: .unfollow)
+//        viewController.viewModel = viewModel
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

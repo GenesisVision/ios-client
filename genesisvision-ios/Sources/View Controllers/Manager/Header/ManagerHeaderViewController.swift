@@ -90,19 +90,19 @@ class ManagerHeaderViewController: BaseViewController {
         gradientView.backgroundColor = UIColor.Cell.bg.withAlphaComponent(offset)
     }
     
-    func configure(_ managerProfileDetails: ManagerProfileDetails?) {
-        if let username = managerProfileDetails?.managerProfile?.username {
+    func configure(_ publicProfile: PublicProfile?) {
+        if let username = publicProfile?.username {
             titleLabel.text = username
         }
         
-        if let regDate = managerProfileDetails?.managerProfile?.regDate {
+        if let regDate = publicProfile?.regDate {
             subtitleLabel.text = "Member since " + regDate.onlyDateFormatString
         }
         
         bgImageView.image = UIImage.profilePlaceholder
         headerTitleImageView.image = UIImage.profilePlaceholder
         
-        if let logo = managerProfileDetails?.managerProfile?.avatar, let fileUrl = getFileURL(fileName: logo) {
+        if let logo = publicProfile?.avatar, let fileUrl = getFileURL(fileName: logo) {
             bgImageView.kf.indicatorType = .activity
             headerTitleImageView.kf.indicatorType = .activity
             

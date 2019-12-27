@@ -6,13 +6,13 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 final class ManagerListViewModel: ListViewModelProtocol {
     var filterModel: FilterModel = FilterModel()
     
     // MARK: - Variables
-    var assetType: AssetType = .manager
+    var assetType: AssetType = ._none //FIXME: 
     var title: String = "Managers"
     
     internal var sections: [SectionType] = [.assetList]
@@ -72,20 +72,22 @@ final class ManagerListViewModel: ListViewModelProtocol {
         //TODO: in future
     }
     
-    func updateViewModels(_ managerList: ManagersList?) {
+    func updateViewModels(_ managerList: ItemsViewModelPublicProfile?) {
         guard let managerList = managerList else { return }
 
         var viewModels = [ManagerTableViewCellViewModel]()
         
         let totalCount = managerList.total ?? 0
         
-        managerList.managers?.forEach({ (manager) in
-            let managerTableViewCellViewModel = ManagerTableViewCellViewModel(manager: manager)
+        managerList.items?.forEach({ (profile) in
+            let managerTableViewCellViewModel = ManagerTableViewCellViewModel(profile: profile)
             viewModels.append(managerTableViewCellViewModel)
         })
         
         self.updateFetchedData(totalCount: totalCount, viewModels)
     }
+    
+    
 }
 
 // MARK: - Fetch

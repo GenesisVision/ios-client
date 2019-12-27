@@ -26,7 +26,7 @@ final class AuthTwoFactorDisableConfirmationViewModel: AuthTwoFactorConfirmation
     // MARK: - Public methods
     func confirm(twoFactorCode: String?, recoveryCode: String?, password: String, completion: @escaping (_ recoveryCodes: [String]?) -> Void, errorCompletion: @escaping CompletionBlock) {
 
-        TwoFactorDataProvider.auth2faDisable(twoFactorCode: twoFactorCode, recoveryCode: recoveryCode, password: password) { (result) in
+        TwoFactorDataProvider.disable(twoFactorCode: twoFactorCode, recoveryCode: recoveryCode, password: password) { (result) in
             switch result {
             case .success:
                 completion(nil)
@@ -37,7 +37,7 @@ final class AuthTwoFactorDisableConfirmationViewModel: AuthTwoFactorConfirmation
     }
     
     func confirm(twoFactorCode: String, password: String, completion: @escaping CompletionBlock) {
-        TwoFactorDataProvider.auth2faDisable(twoFactorCode: twoFactorCode, password: password, completion: completion)
+        TwoFactorDataProvider.disable(twoFactorCode: twoFactorCode, password: password, completion: completion)
     }
     
     // MARK: - Navigation

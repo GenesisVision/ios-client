@@ -12,7 +12,7 @@ final class SignalListViewModel: ListViewModelProtocol {
     // MARK: - Variables
     var title = "Signals"
     
-    var assetType: AssetType = .signal
+    var assetType: AssetType = .follow
     
     var signalListDelegateManager: ListDelegateManager<SignalListViewModel>!
     
@@ -271,32 +271,32 @@ extension SignalListViewModel {
         
         let chartPointsCount = filterModel.chartPointsCount
         
-        var currencySecondary: InvestorAPI.CurrencySecondary_v10InvestorSignalsGet?
-        if let newCurrency = InvestorAPI.CurrencySecondary_v10InvestorSignalsGet(rawValue: getSelectedCurrency()) {
-            currencySecondary = newCurrency
-        }
+//        var currencySecondary: InvestorAPI.CurrencySecondary_v10InvestorSignalsGet?
+//        if let newCurrency = InvestorAPI.CurrencySecondary_v10InvestorSignalsGet(rawValue: getSelectedCurrency()) {
+//            currencySecondary = newCurrency
+//        }
+//
+//        let actionStatus: InvestorAPI.ActionStatus_v10InvestorSignalsGet? = .none
+//        let dashboardActionStatus: InvestorAPI.DashboardActionStatus_v10InvestorSignalsGet? = filterModel.onlyActive ? .active : .all
         
-        let actionStatus: InvestorAPI.ActionStatus_v10InvestorSignalsGet? = .none
-        let dashboardActionStatus: InvestorAPI.DashboardActionStatus_v10InvestorSignalsGet? = filterModel.onlyActive ? .active : .all
-        
-        DashboardDataProvider.getSignalList(with: sorting as? InvestorAPI.Sorting_v10InvestorSignalsGet, from: dateFrom, to: dateTo, chartPointsCount: chartPointsCount, currencySecondary: currencySecondary, actionStatus: actionStatus, dashboardActionStatus: dashboardActionStatus, skip: skip, take: take, completion: { [weak self] (signalList) in
-            guard let signalList = signalList else { return completionError(.failure(errorType: .apiError(message: nil))) }
-            
-            var viewModels = [SignalTableViewCellViewModel]()
-            
-            let totalCount = signalList.total ?? 0
-            
-            signalList.programs?.forEach({ (signal) in
-                if let router = self?.router as? DashboardRouter {
-                    let dashboardTableViewCellModel = SignalTableViewCellViewModel(signal: signal, reloadDataProtocol: router.signalListViewController, delegate:
-                        router.signalListViewController)
-                    viewModels.append(dashboardTableViewCellModel)
-                }
-            })
-            
-            completionSuccess(totalCount, viewModels)
-            completionError(.success)
-        }, errorCompletion: completionError)
+//        DashboardDataProvider.getSignalList(with: sorting as? InvestorAPI.Sorting_v10InvestorSignalsGet, from: dateFrom, to: dateTo, chartPointsCount: chartPointsCount, currencySecondary: currencySecondary, actionStatus: actionStatus, dashboardActionStatus: dashboardActionStatus, skip: skip, take: take, completion: { [weak self] (signalList) in
+//            guard let signalList = signalList else { return completionError(.failure(errorType: .apiError(message: nil))) }
+//            
+//            var viewModels = [SignalTableViewCellViewModel]()
+//            
+//            let totalCount = signalList.total ?? 0
+//            
+//            signalList.programs?.forEach({ (signal) in
+//                if let router = self?.router as? DashboardRouter {
+//                    let dashboardTableViewCellModel = SignalTableViewCellViewModel(signal: signal, reloadDataProtocol: router.signalListViewController, delegate:
+//                        router.signalListViewController)
+//                    viewModels.append(dashboardTableViewCellModel)
+//                }
+//            })
+//            
+//            completionSuccess(totalCount, viewModels)
+//            completionError(.success)
+//        }, errorCompletion: completionError)
     }
 }
 

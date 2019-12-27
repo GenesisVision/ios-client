@@ -11,9 +11,6 @@ import Foundation
 
 open class PowDetails: Codable {
 
-    public enum SecureAlgorithm: String, Codable { 
-        case sha256 = "Sha256"
-    }
     public var secureAlgorithm: SecureAlgorithm?
     public var difficulty: Int?
     public var nonce: String?

@@ -38,7 +38,7 @@ extension Double {
     }
     
     func rounded(withCurrency currencyValue: String?) -> Double {
-        guard let currencyValue = currencyValue, let currency = ProgramDetailsFull.Currency(rawValue: currencyValue), let currencyType = CurrencyType(rawValue: currency.rawValue) else {
+        guard let currencyValue = currencyValue, let currencyType = CurrencyType(rawValue: currencyValue) else {
             return rounded(with: .usd)
         }
         

@@ -71,14 +71,14 @@ class FundInfoViewController: BaseViewControllerWithTableView {
         reloadData()
     }
     
-    func showRequests(_ programRequests: ProgramRequests?) {
+    func showRequests(_ requests: ItemsViewModelAssetInvestmentRequest?) {
         bottomSheetController = BottomSheetController()
         bottomSheetController.initializeHeight = 300.0
         
         bottomSheetController.addNavigationBar("In requests")
         viewModel.inRequestsDelegateManager.inRequestsDelegate = self
         viewModel.inRequestsDelegateManager.requestSelectable = false
-        viewModel.inRequestsDelegateManager.programRequests = programRequests
+        viewModel.inRequestsDelegateManager.requests = requests
         
         bottomSheetController.addTableView { [weak self] tableView in
             tableView.registerNibs(for: viewModel.inRequestsDelegateManager.inRequestsCellModelsForRegistration)

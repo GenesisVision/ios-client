@@ -83,7 +83,7 @@ class PlateTableViewCell: UITableViewCell {
 
         layer.insertSublayer(shape, at: 0)
 
-        backgroundColor = .clear
+        backgroundColor = UIColor.BaseView.bg
         contentView.backgroundColor = .clear
     }
 

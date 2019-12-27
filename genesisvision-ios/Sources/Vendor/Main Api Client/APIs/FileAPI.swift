@@ -17,8 +17,8 @@ open class FileAPI {
      - parameter id: (path)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10FileByIdGet(id: UUID, completion: @escaping ((_ error: Error?) -> Void)) {
-        v10FileByIdGetWithRequestBuilder(id: id).execute { (response, error) -> Void in
+    open class func getFile(id: UUID, completion: @escaping ((_ error: Error?) -> Void)) {
+        getFileWithRequestBuilder(id: id).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -26,14 +26,14 @@ open class FileAPI {
 
     /**
      Download file
-     - GET /v1.0/file/{id}
+     - GET /v2.0/file/{id}
      
      - parameter id: (path)  
 
      - returns: RequestBuilder<Void> 
      */
-    open class func v10FileByIdGetWithRequestBuilder(id: UUID) -> RequestBuilder<Void> {
-        var path = "/v1.0/file/{id}"
+    open class func getFileWithRequestBuilder(id: UUID) -> RequestBuilder<Void> {
+        var path = "/v2.0/file/{id}"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -47,62 +47,14 @@ open class FileAPI {
     }
 
     /**
-     Upload document
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter uploadedFile: (form) Upload File 
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func v10FileDocumentUploadPost(authorization: String, uploadedFile: URL, completion: @escaping ((_ data: UploadResult?,_ error: Error?) -> Void)) {
-        v10FileDocumentUploadPostWithRequestBuilder(authorization: authorization, uploadedFile: uploadedFile).execute { (response, error) -> Void in
-            completion(response?.body, error);
-        }
-    }
-
-
-    /**
-     Upload document
-     - POST /v1.0/file/document/upload
-     - examples: [{contentType=application/json, example={
-  "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
-}}]
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter uploadedFile: (form) Upload File 
-
-     - returns: RequestBuilder<UploadResult> 
-     */
-    open class func v10FileDocumentUploadPostWithRequestBuilder(authorization: String, uploadedFile: URL) -> RequestBuilder<UploadResult> {
-        let path = "/v1.0/file/document/upload"
-        let URLString = SwaggerClientAPI.basePath + path
-        let formParams: [String:Any?] = [
-            "uploadedFile": uploadedFile
-        ]
-
-        let nonNullParameters = APIHelper.rejectNil(formParams)
-        let parameters = APIHelper.convertBoolToString(nonNullParameters)
-
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
-
-        let requestBuilder: RequestBuilder<UploadResult>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
-    }
-
-    /**
      Upload file
      
      - parameter uploadedFile: (form) Upload File 
      - parameter authorization: (header)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func v10FileUploadPost(uploadedFile: URL, authorization: String? = nil, completion: @escaping ((_ data: UploadResult?,_ error: Error?) -> Void)) {
-        v10FileUploadPostWithRequestBuilder(uploadedFile: uploadedFile, authorization: authorization).execute { (response, error) -> Void in
+    open class func uploadFile(uploadedFile: URL, authorization: String? = nil, completion: @escaping ((_ data: UploadResult?,_ error: Error?) -> Void)) {
+        uploadFileWithRequestBuilder(uploadedFile: uploadedFile, authorization: authorization).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -110,7 +62,7 @@ open class FileAPI {
 
     /**
      Upload file
-     - POST /v1.0/file/upload
+     - POST /v2.0/file/upload
      - examples: [{contentType=application/json, example={
   "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
 }}]
@@ -120,8 +72,8 @@ open class FileAPI {
 
      - returns: RequestBuilder<UploadResult> 
      */
-    open class func v10FileUploadPostWithRequestBuilder(uploadedFile: URL, authorization: String? = nil) -> RequestBuilder<UploadResult> {
-        let path = "/v1.0/file/upload"
+    open class func uploadFileWithRequestBuilder(uploadedFile: URL, authorization: String? = nil) -> RequestBuilder<UploadResult> {
+        let path = "/v2.0/file/upload"
         let URLString = SwaggerClientAPI.basePath + path
         let formParams: [String:Any?] = [
             "uploadedFile": uploadedFile

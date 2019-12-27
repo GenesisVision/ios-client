@@ -8,36 +8,34 @@
 
 import UIKit
 
-class InvestingProgramsViewModel: ViewModelWithCollection {
+class InvestingProgramsViewModel: CellViewModelWithCollection {
     var title: String
-    var showActionsView: Bool
     var type: CellActionType
     
     var viewModels = [CellViewAnyModel]()
     
     var canPullToRefresh: Bool = true
-
+    var details: ItemsViewModelProgramInvestingDetailsList?
     var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
         return []
     }
     
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [PortfolioEventCollectionViewCellViewModel.self]
+        return [AssetCollectionViewCellViewModel.self]
     }
     
-    weak var delegate: BaseCellProtocol?
-    init(_ delegate: BaseCellProtocol?) {
+    weak var delegate: BaseTableViewProtocol?
+    init(_ details: ItemsViewModelProgramInvestingDetailsList?, delegate: BaseTableViewProtocol?) {
+        self.details = details
         self.delegate = delegate
         title = "Programs"
-        showActionsView = true
         type = .investingPrograms
         
-        let viewModel = PortfolioEventCollectionViewCellViewModel(reloadDataProtocol: nil, event: InvestmentEventViewModel(title: "title", icon: nil, date: Date(), assetDetails: AssetDetails(id: nil, logo: nil, color: nil, title: "Asset", url: nil, assetType: .programs), amount: 20.0, currency: .btc, changeState: .increased, extendedInfo: nil, feesInfo: nil, totalFeesAmount: nil, totalFeesCurrency: nil))
-        viewModels.append(viewModel)
-        viewModels.append(viewModel)
-        viewModels.append(viewModel)
-        viewModels.append(viewModel)
-        viewModels.append(viewModel)
+        details?.items?.forEach({ (viewModel) in
+            let asset = AssetDetailData()
+            asset.programInvesting = viewModel
+            viewModels.append(AssetCollectionViewCellViewModel(type: .program, asset: asset, delegate: nil))
+        })
     }
     
     func didSelect(at indexPath: IndexPath) {
@@ -50,7 +48,7 @@ class InvestingProgramsViewModel: ViewModelWithCollection {
 }
 
 extension InvestingProgramsViewModel {
-    func getActions() -> [UIButton] {
+    func getRightButtons() -> [UIButton] {
         let showAllButton = UIButton(type: .system)
         showAllButton.setTitle("show all", for: .normal)
         showAllButton.setTitleColor(.primary, for: .normal)
@@ -59,28 +57,14 @@ extension InvestingProgramsViewModel {
     }
     
     func makeLayout() -> UICollectionViewLayout {
-        var layout: UICollectionViewLayout!
-        if #available(iOS 13.0, *) {
-            layout = UICollectionViewCompositionalLayout { (section: Int, environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
-                let size = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1.0))
-                let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
-                let itemInset: NSDirectionalEdgeInsets = NSDirectionalEdgeInsets(top: 0.0, leading: Constants.SystemSizes.Cell.horizontalMarginValue, bottom: Constants.SystemSizes.Cell.verticalMarginValues, trailing: Constants.SystemSizes.Cell.horizontalMarginValue)
-                let sectionInset: NSDirectionalEdgeInsets = NSDirectionalEdgeInsets(top: 0.0, leading: 0.0, bottom: Constants.SystemSizes.Cell.verticalMarginValues, trailing: 0.0)
-                
-                item.contentInsets = itemInset
-                let group = NSCollectionLayoutGroup.vertical(layoutSize: size, subitem: item, count: 2)
-                let section = NSCollectionLayoutSection(group: group)
-                section.contentInsets = sectionInset
-                section.orthogonalScrollingBehavior = .groupPaging
-                return section
-            }
-        } else {
-            // Fallback on earlier versions
-        }
-        return layout
+        return CustomLayout.defaultLayout(1, pagging: false)
     }
     
     func getCollectionViewHeight() -> CGFloat {
-        return viewModels.count > 2 ? 300.0 : 150.0
+        return 250.0
+    }
+    
+    func getTotalCount() -> Int? {
+        return details?.total
     }
 }

@@ -23,13 +23,17 @@ class InvestingProgramListViewController: ListViewController {
         showProgressHUD()
         viewModel.fetch()
     }
-    
+    override func pullToRefresh() {
+        super.pullToRefresh()
+        
+        viewModel.refresh()
+    }
     // MARK: - Methods
     private func setup() {
         viewModel = ViewModel(self)
         
         tableView.configure(with: .defaultConfiguration)
-
+        isEnableInfiniteIndicator = true
         dataSource = TableViewDataSource(viewModel)
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
         tableView.delegate = dataSource
@@ -38,11 +42,13 @@ class InvestingProgramListViewController: ListViewController {
     }
 }
 
-extension InvestingProgramListViewController: BaseCellProtocol {
-
+extension InvestingProgramListViewController: BaseTableViewProtocol {
+    func didShowInfiniteIndicator(_ value: Bool) {
+        showInfiniteIndicator(value)
+    }
 }
 
-class InvestingProgramListViewModel: ListVMProtocol {
+class InvestingProgramListViewModel: ListViewModelWithPaging {
     var viewModels = [CellViewAnyModel]()
     
     var canPullToRefresh: Bool = true
@@ -50,20 +56,48 @@ class InvestingProgramListViewModel: ListVMProtocol {
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [FundTableViewCellViewModel.self]
     }
-    weak var delegate: BaseCellProtocol?
-    init(_ delegate: BaseCellProtocol?) {
+    var canFetchMoreResults: Bool = true
+    var totalCount: Int = 0
+    var skip: Int = 0
+    lazy var currency = getPlatformCurrencyType()
+    private let errorCompletion: ((CompletionResult) -> Void) = { (result) in
+       print(result)
+    }
+    weak var delegate: BaseTableViewProtocol?
+    init(_ delegate: BaseTableViewProtocol?) {
         self.delegate = delegate
     }
     
-    func fetch() {
-        let viewModel = FundTableViewCellViewModel(asset: FundDetails(totalAssetsCount: 1, topFundAssets: [FundAssetPercent(asset: "title", name: "name", percent: 10, icon: nil)], statistic: nil, personalDetails: nil, dashboardAssetsDetails: nil, id: nil, logo: nil, url: nil, color: nil, title: "title", description: "Descr", status: .active, creationDate: Date(), manager: nil, chart: nil), delegate: nil)
-        viewModels.append(viewModel)
-        viewModels.append(viewModel)
-        viewModels.append(viewModel)
-        viewModels.append(viewModel)
-        viewModels.append(viewModel)
-        
+    func fetch(_ refresh: Bool = false) {
+        if refresh {
+            skip = 0
+        }
+        var models = [ProgramInvestingTableViewCellViewModel]()
+        DashboardDataProvider.getInvestingPrograms(currency: currency, skip: skip, take: take(), completion: { [weak self] (model) in
+            guard let model = model else { return }
+            model.items?.forEach({ (asset) in
+                let viewModel = ProgramInvestingTableViewCellViewModel(asset: asset, delegate: nil)
+                models.append(viewModel)
+            })
+            self?.updateViewModels(models, refresh: refresh, total: model.total)
+            }, errorCompletion: errorCompletion)
+    }
+    
+    func updateViewModels(_ models: [CellViewAnyModel], refresh: Bool, total: Int?) {
+        totalCount = total ?? 0
+        skip += take()
+        viewModels = refresh ? models : viewModels + models
         delegate?.didReload()
     }
+    
+    func cellAnimations() -> Bool {
+        return true
+    }
+    
+    func showInfiniteIndicator(_ value: Bool) {
+        delegate?.didShowInfiniteIndicator(value)
+    }
+    
+    
 }
 

@@ -25,7 +25,7 @@ final class ManagerInfoViewModel {
     
     var managerId: String!
     
-    public private(set) var managerProfileDetails: ManagerProfileDetails?
+    public private(set) var publicProfile: PublicProfile?
 
     private var sections: [SectionType] = [.details]
     private var rows: [RowType] = [.info, .about]
@@ -40,7 +40,7 @@ final class ManagerInfoViewModel {
     // MARK: - Init
     init(withRouter router: Router,
          managerId: String? = nil,
-         managerProfileDetails: ManagerProfileDetails? = nil,
+         publicProfile: PublicProfile? = nil,
          reloadDataProtocol: ReloadDataProtocol? = nil) {
         self.router = router
         
@@ -48,8 +48,8 @@ final class ManagerInfoViewModel {
             self.managerId = managerId
         }
         
-        if let managerProfileDetails = managerProfileDetails, let managerId = managerProfileDetails.managerProfile?.id?.uuidString {
-            self.managerProfileDetails = managerProfileDetails
+        if let publicProfile = publicProfile, let managerId = publicProfile.id?.uuidString {
+            self.publicProfile = publicProfile
             self.managerId = managerId
         }
         
@@ -71,7 +71,7 @@ final class ManagerInfoViewModel {
     }
     
     func numberOfSections() -> Int {
-        guard managerProfileDetails != nil else {
+        guard publicProfile != nil else {
             return 0
         }
         
@@ -98,7 +98,7 @@ extension ManagerInfoViewModel {
     // MARK: - Public methods
     /// Get TableViewCellViewModel for IndexPath
     func model(at indexPath: IndexPath) -> CellViewAnyModel? {
-        guard managerProfileDetails != nil else {
+        guard publicProfile != nil else {
             return nil
         }
         
@@ -108,30 +108,29 @@ extension ManagerInfoViewModel {
             let rowType = rows[indexPath.row]
             switch rowType {
             case .info:
-                guard let assets = managerProfileDetails?.managerProfile?.assets else { return nil }
+                guard let assets = publicProfile?.assets else { return nil }
                 return  DefaultTableViewCellViewModel(title: "Assets", subtitle: assets.joined(separator: " | "))
             case .about:
-                guard let about = managerProfileDetails?.managerProfile?.about else { return nil }
+                guard let about = publicProfile?.about else { return nil }
                 return DefaultTableViewCellViewModel(title: "About", subtitle: about)
             }
         }
     }
     
     func fetch(completion: @escaping CompletionBlock) {
-
-        ManagersDataProvider.getManagerProfileDetails(managerId: self.managerId, completion: { [weak self] (viewModel) in
+        UsersDataProvider.get(with: self.managerId, completion: { [weak self] (viewModel) in
             guard viewModel != nil else {
                 return completion(.failure(errorType: .apiError(message: nil)))
             }
             
-            self?.managerProfileDetails = viewModel
+            self?.publicProfile = viewModel
             
             completion(.success)
             }, errorCompletion: completion)
     }
     
-    func updateDetails(with managerProfileDetails: ManagerProfileDetails) {
-        self.managerProfileDetails = managerProfileDetails
+    func updateDetails(with publicProfile: PublicProfile) {
+        self.publicProfile = publicProfile
         self.reloadDataProtocol?.didReloadData()
     }
 }

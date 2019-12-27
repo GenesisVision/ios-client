@@ -206,7 +206,7 @@ extension FundReallocateHistoryViewModel {
             
             let totalCount = reallocationsViewModel.total ?? 0
             
-            reallocationsViewModel.reallocations?.enumerated().forEach({ [weak self] (index, model) in
+            reallocationsViewModel.items?.enumerated().forEach({ [weak self] (index, model) in
                 let viewModel = CellViewModel(index: index, model: model, delegate: self?.delegate)
                 viewModels.append(viewModel)
             })

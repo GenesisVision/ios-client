@@ -11,10 +11,9 @@ import Foundation
 
 open class NewFundRequest: Codable {
 
-    public var exitFee: Double?
-    public var managementFee: Double?
     public var assets: [FundAssetPart]?
     public var entryFee: Double?
+    public var exitFee: Double?
     public var depositAmount: Double?
     public var depositWalletId: UUID?
     public var title: String?
@@ -23,11 +22,10 @@ open class NewFundRequest: Codable {
 
 
     
-    public init(exitFee: Double?, managementFee: Double?, assets: [FundAssetPart]?, entryFee: Double?, depositAmount: Double?, depositWalletId: UUID?, title: String?, description: String?, logo: String?) {
-        self.exitFee = exitFee
-        self.managementFee = managementFee
+    public init(assets: [FundAssetPart]?, entryFee: Double?, exitFee: Double?, depositAmount: Double?, depositWalletId: UUID?, title: String?, description: String?, logo: String?) {
         self.assets = assets
         self.entryFee = entryFee
+        self.exitFee = exitFee
         self.depositAmount = depositAmount
         self.depositWalletId = depositWalletId
         self.title = title
@@ -42,10 +40,9 @@ open class NewFundRequest: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(exitFee, forKey: "exitFee")
-        try container.encodeIfPresent(managementFee, forKey: "managementFee")
         try container.encodeIfPresent(assets, forKey: "assets")
         try container.encodeIfPresent(entryFee, forKey: "entryFee")
+        try container.encodeIfPresent(exitFee, forKey: "exitFee")
         try container.encodeIfPresent(depositAmount, forKey: "depositAmount")
         try container.encodeIfPresent(depositWalletId, forKey: "depositWalletId")
         try container.encodeIfPresent(title, forKey: "title")
@@ -58,10 +55,9 @@ open class NewFundRequest: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        exitFee = try container.decodeIfPresent(Double.self, forKey: "exitFee")
-        managementFee = try container.decodeIfPresent(Double.self, forKey: "managementFee")
         assets = try container.decodeIfPresent([FundAssetPart].self, forKey: "assets")
         entryFee = try container.decodeIfPresent(Double.self, forKey: "entryFee")
+        exitFee = try container.decodeIfPresent(Double.self, forKey: "exitFee")
         depositAmount = try container.decodeIfPresent(Double.self, forKey: "depositAmount")
         depositWalletId = try container.decodeIfPresent(UUID.self, forKey: "depositWalletId")
         title = try container.decodeIfPresent(String.self, forKey: "title")

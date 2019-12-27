@@ -11,18 +11,12 @@ import Foundation
 
 open class ErrorViewModel: Codable {
 
-    public enum Code: String, Codable { 
-        case internalServerError = "InternalServerError"
-        case validationError = "ValidationError"
-        case requiresTwoFactor = "RequiresTwoFactor"
-        case wrongCaptcha = "WrongCaptcha"
-    }
     public var errors: [ErrorMessage]?
-    public var code: Code?
+    public var code: ErrorCodes?
 
 
     
-    public init(errors: [ErrorMessage]?, code: Code?) {
+    public init(errors: [ErrorMessage]?, code: ErrorCodes?) {
         self.errors = errors
         self.code = code
     }
@@ -44,7 +38,7 @@ open class ErrorViewModel: Codable {
         let container = try decoder.container(keyedBy: String.self)
 
         errors = try container.decodeIfPresent([ErrorMessage].self, forKey: "errors")
-        code = try container.decodeIfPresent(Code.self, forKey: "code")
+        code = try container.decodeIfPresent(ErrorCodes.self, forKey: "code")
     }
 }
 

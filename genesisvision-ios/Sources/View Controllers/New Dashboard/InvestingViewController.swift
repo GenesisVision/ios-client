@@ -11,9 +11,15 @@ import UIKit
 class InvestingViewController: ListViewController {
     typealias ViewModel = InvestingViewModel
     
-    // MARK: - Variables
+    // MARK: - Veriables
     var viewModel: ViewModel!
     var dataSource: TableViewDataSource<ViewModel>!
+    var titleLabel = UILabel() {
+        didSet {
+            titleLabel.textColor = .white
+            titleLabel.font = UIFont.getFont(.regular, size: 17.0)
+        }
+    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -26,26 +32,80 @@ class InvestingViewController: ListViewController {
     
     // MARK: - Methods
     private func setup() {
-        viewModel = ViewModel(self)
+        title = "Investing"
         
         tableView.configure(with: .defaultConfiguration)
 
         dataSource = TableViewDataSource(viewModel)
+        dataSource.delegate = self
+        tableView.separatorStyle = .none
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
         tableView.delegate = dataSource
         tableView.dataSource = dataSource
         tableView.reloadData()
+        
+        titleLabel.text = viewModel.getTotalValue()
+        let titleView = UIStackView()
+        titleView.addArrangedSubview(titleLabel)
+        navigationItem.titleView = titleView
+        titleLabel.alpha = 0.0
+    }
+    
+    func showEvent(_ event: InvestmentEventViewModel) {
+        var count = 0
+
+        if let extendedInfo = event.extendedInfo, !extendedInfo.isEmpty {
+            count += extendedInfo.count
+        }
+
+        if let fees = event.feesInfo, !fees.isEmpty {
+            count += fees.count + 1
+        }
+
+        let height = Double((count + 1) * 40)
+
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.initializeHeight = CGFloat(230.0 + height)
+        bottomSheetController.lineViewIsHidden = true
+
+        let view = EventDetailsView.viewFromNib()
+        view.configure(event)
+        view.delegate = self
+        bottomSheetController.addContentsView(view)
+        bottomSheetController.present()
+    }
+}
+extension InvestingViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y <= 30.0 {
+            UIView.animate(withDuration: 0.3) {
+                self.titleLabel.alpha = 0.0
+            }
+        } else if scrollView.contentOffset.y > 30.0 {
+            UIView.animate(withDuration: 0.3) {
+                self.titleLabel.alpha = 1.0
+            }
+        }
+    }
+}
+extension InvestingViewController: DelegateManagerProtocol {
+    func delegateManagerScrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.scrollViewDidScroll(scrollView)
     }
 }
 
-extension InvestingViewController: BaseCellProtocol {
+extension InvestingViewController: BaseTableViewProtocol {
     func didSelect(_ type: CellActionType, cellViewModel: CellViewAnyModel?) {
         print("show all \(type)")
         
         switch type {
         case .investingEvents:
+            if let viewModel = cellViewModel as? PortfolioEventCollectionViewCellViewModel {
+                self.showEvent(viewModel.event)
+            }
+        case .investingRequests:
             let vc = BaseViewController()
-            vc.title = "Event"
+            vc.title = "Requests"
             navigationController?.pushViewController(vc, animated: true)
         case .investingPrograms:
             let vc = BaseViewController()
@@ -66,6 +126,8 @@ extension InvestingViewController: BaseCellProtocol {
         switch type {
         case .investingEvents:
             let vc = InvestingEventListViewController()
+            viewModel.router?.investingEventListViewController = vc
+            vc.viewModel = InvestingEventListViewModel(viewModel.router, delegate: vc)
             vc.title = "Events"
             navigationController?.pushViewController(vc, animated: true)
         case .investingPrograms:
@@ -80,9 +142,35 @@ extension InvestingViewController: BaseCellProtocol {
             break
         }
     }
+    
+    func didReload(_ indexPath: IndexPath) {
+        titleLabel.text = viewModel.getTotalValue()
+        hideHUD()
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+    }
 }
 
-class InvestingViewModel: ListVMProtocol {
+extension InvestingViewController: EventDetailsViewProtocol {
+    func closeButtonDidPress() {
+        bottomSheetController.dismiss()
+    }
+
+    func showAssetButtonDidPress(_ assetId: String, assetType: AssetType) {
+        bottomSheetController.dismiss()
+        viewModel.didSelectEvent(at: assetId, assetType: assetType)
+    }
+}
+
+class InvestingViewModel: ViewModelWithListProtocol {
+    enum RowType {
+        case overview
+        case requests
+        case events
+        case funds
+        case programs
+    }
+    private var rows: [RowType] = [.overview, .funds, .programs]
+    
     var viewModels = [CellViewAnyModel]()
     
     var canPullToRefresh: Bool = true
@@ -95,18 +183,120 @@ class InvestingViewModel: ListVMProtocol {
                 CellWithCollectionViewModel<InvestingFundsViewModel>.self,
         ]
     }
-    weak var delegate: BaseCellProtocol?
-    init(_ delegate: BaseCellProtocol?) {
-        self.delegate = delegate
+    
+    var details: DashboardInvestingDetails? {
+        didSet {
+            let overviewViewModel = InvestingHeaderTableViewCellViewModel(data: InvestingHeaderData(details: details, currency: currency), delegate: delegate)
+            viewModels.append(overviewViewModel)
+            reloadRow(.events)
+            
+            guard let count = details?.events?.items?.count, count > 0 else { return }
+            rows.insert(.events, at: 1)
+            let eventsViewModel = CellWithCollectionViewModel(InvestingEventsViewModel(details, delegate: delegate), delegate: delegate)
+            viewModels.append(eventsViewModel)
+            delegate?.didReload()
+        }
+    }
+    var requests: ItemsViewModelAssetInvestmentRequest? {
+        didSet {
+            guard let count = requests?.items?.count, count > 0 else { return }
+            rows.insert(.requests, at: 1)
+            let viewModel = CellWithCollectionViewModel(InvestingRequestsViewModel(requests, delegate: delegate), delegate: delegate)
+            viewModels.append(viewModel)
+            delegate?.didReload()
+        }
+    }
+    var fundInvesting: ItemsViewModelFundInvestingDetailsList? {
+        didSet {
+            guard let count = fundInvesting?.items?.count, count > 0 else { return }
+            
+            let viewModel = CellWithCollectionViewModel(InvestingFundsViewModel(fundInvesting, delegate: delegate), delegate: delegate)
+            viewModels.append(viewModel)
+            reloadRow(.funds)
+        }
+    }
+    var programInvesting: ItemsViewModelProgramInvestingDetailsList? {
+        didSet {
+            guard let count = programInvesting?.items?.count, count > 0 else { return }
+            
+            let viewModel = CellWithCollectionViewModel(InvestingProgramsViewModel(programInvesting, delegate: delegate), delegate: delegate)
+            viewModels.append(viewModel)
+            reloadRow(.programs)
+        }
+    }
+    private let errorCompletion: ((CompletionResult) -> Void) = { (result) in
+       print(result)
     }
     
+    lazy var currency = getPlatformCurrencyType()
+    
+    var router: DashboardRouter?
+    weak var delegate: BaseTableViewProtocol?
+    init(_ router: DashboardRouter?) {
+        self.delegate = router?.investingViewController
+        self.router = router
+    }
+    private func reloadRow(_ row: RowType) {
+        delegate?.didReload(IndexPath(row: rows.firstIndex(of: row) ?? 0, section: 0))
+    }
+    func getTotalValue() -> String {
+        if let total = details?.equity {
+            return total.toString() + " " + currency.rawValue
+        }
+        
+        return ""
+    }
     func fetch() {
-        viewModels.append(InvestingHeaderTableViewCellViewModel(data: InvestingHeaderData()))
-        viewModels.append(CellWithCollectionViewModel(InvestingRequestsViewModel(delegate), delegate: delegate))
-        viewModels.append(CellWithCollectionViewModel(InvestingEventsViewModel(delegate), delegate: delegate))
-        viewModels.append(CellWithCollectionViewModel(InvestingProgramsViewModel(delegate), delegate: delegate))
-        viewModels.append(CellWithCollectionViewModel(InvestingFundsViewModel(delegate), delegate: delegate))
+        viewModels = [CellViewAnyModel]()
+        
+        DashboardDataProvider.getInvesting(currency, eventsTake: 12, completion: { [weak self] (model) in
+            self?.details = model
+        }, errorCompletion: errorCompletion)
+        RequestDataProvider.getAllRequests(skip: 0, take: 12, completion: { [weak self] (model) in
+            self?.requests = model
+        }, errorCompletion: errorCompletion)
+        DashboardDataProvider.getInvestingFunds(currency: currency, skip: 0, take: 12, completion: { [weak self] (model) in
+            self?.fundInvesting = model
+        }, errorCompletion: errorCompletion)
+        DashboardDataProvider.getInvestingPrograms(currency: currency, skip: 0, take: 12, completion: { [weak self] (model) in
+            self?.programInvesting = model
+        }, errorCompletion: errorCompletion)
         
         delegate?.didReload()
     }
+    
+    func model(at indexPath: IndexPath) -> CellViewAnyModel? {
+        let type = rows[indexPath.row]
+        switch type {
+        case .overview:
+            return viewModels.first{ $0 is InvestingHeaderTableViewCellViewModel }
+        case .events:
+            return viewModels.first{ $0 is CellWithCollectionViewModel<InvestingEventsViewModel> }
+        case .requests:
+            return viewModels.first{ $0 is CellWithCollectionViewModel<InvestingRequestsViewModel> }
+        case .funds:
+            return viewModels.first{ $0 is CellWithCollectionViewModel<InvestingFundsViewModel> }
+        case .programs:
+            return viewModels.first{ $0 is CellWithCollectionViewModel<InvestingProgramsViewModel> }
+        }
+    }
+    
+    func modelsCount() -> Int {
+        return rows.count
+    }
+    func didSelectEvent(at assetId: String, assetType: AssetType) {
+        router?.showAssetDetails(with: assetId, assetType: assetType)
+    }
+    func didSelectRequest(at indexPath: IndexPath) {
+//        guard let requests = inRequestsDelegateManager.programRequests?.requests, !requests.isEmpty else {
+//            return
+//        }
+//
+//        let request = requests[indexPath.row]
+//        if let assetId = request.programId?.uuidString, let type = request.programType, let assetType = AssetType(rawValue: type.rawValue) {
+//            router.showAssetDetails(with: assetId, assetType: assetType)
+//        }
+    }
+    
+    
 }

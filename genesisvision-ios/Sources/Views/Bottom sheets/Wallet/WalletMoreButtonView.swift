@@ -41,7 +41,7 @@ class WalletMoreButtonView: UIView {
     }
     
     // MARK: - Public Methods
-    func configure(_ wallet: WalletMultiSummary?) {
+    func configure(_ wallet: WalletSummary?) {
         guard let wallet = wallet, let payFeesWithGvt = wallet.payFeesWithGvt else { return }
         
         titleLabel.text = "Using GVT to pay for fees"

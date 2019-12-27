@@ -38,7 +38,8 @@ extension WalletTableViewCellViewModel: CellViewModel {
             cell.amountLabel.text = ""
         }
         
-        if let amount = wallet.totalCcy, let currency = wallet.currencyCcy {
+        //FIXME: check wallet.currencyCcy -> wallet.currency
+        if let amount = wallet.totalCcy, let currency = wallet.currency {
             if let currency = CurrencyType(rawValue: currency.rawValue) {
                 cell.amountCcyLabel.text = amount.rounded(with: currency).toString() + " " + currency.rawValue
             }

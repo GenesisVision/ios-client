@@ -18,7 +18,7 @@ final class CurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewD
     weak var currencyDelegate: CurrencyDelegateManagerDelegate?
     
     var tableView: UITableView?
-    var currencies: [PlatformCurrency] = []
+    var currencies: [PlatformCurrencyInfo] = []
     
     var selectedRate: RateItem?
     var selectedIndex: Int = 0
@@ -36,7 +36,7 @@ final class CurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewD
         PlatformManager.shared.getPlatformInfo { (platformInfo) in
             guard let platformInfo = platformInfo else { return }
             
-            if let platformCurrencies = platformInfo.platformCurrencies {
+            if let platformCurrencies = platformInfo.commonInfo?.platformCurrencies {
                 self.currencies = platformCurrencies
                 self.updateSelectedIndex()
                 self.tableView?.reloadData()
@@ -45,17 +45,12 @@ final class CurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewD
     }
     
     func updateSelectedIndex() {
-        let selectedCurrency = getSelectedCurrency()
-        self.selectedIndex = currencies.firstIndex(where: { return $0.name == selectedCurrency } ) ?? 0
+        self.selectedIndex = currencies.firstIndex(where: { return $0.name == selectedPlatformCurrency } ) ?? 0
     }
     
     // MARK: - TableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        if let selectedCurrency = currencies[indexPath.row].name {
-            updateSelectedCurrency(selectedCurrency)
-        }
         
         currencyDelegate?.didSelectCurrency(at: indexPath)
     }
@@ -69,14 +64,14 @@ final class CurrencyDelegateManager: NSObject, UITableViewDelegate, UITableViewD
             let cell = UITableViewCell()
             return cell
         }
+        //FIXME: 
+//        let isSelected = indexPath.row == selectedIndex
+//        let currency = currencies[indexPath.row]
+//        let currencyValue = currency.name ?? ""
+//        let currencyRate = currency.rateToGvt ?? 0.0
+//        let subtitle = "1 GVT = \(currencyRate) " + currencyValue
         
-        let isSelected = indexPath.row == selectedIndex
-        let currency = currencies[indexPath.row]
-        let currencyValue = currency.name ?? ""
-        let currencyRate = currency.rateToGvt ?? 0.0
-        let subtitle = "1 GVT = \(currencyRate) " + currencyValue
-        
-        cell.configure(title: currencyValue, subtitle: subtitle, selected: isSelected)
+//        cell.configure(title: currencyValue, subtitle: subtitle, selected: isSelected)
         
         return cell
     }

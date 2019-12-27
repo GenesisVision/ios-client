@@ -11,45 +11,15 @@ import Foundation
 
 open class FeeDetails: Codable {
 
-    public enum ModelType: String, Codable { 
-        case undefined = "Undefined"
-        case gvProgramEntry = "GvProgramEntry"
-        case gvProgramSuccess = "GvProgramSuccess"
-        case gvFundEntry = "GvFundEntry"
-        case gvGmGvtHolderFee = "GvGmGvtHolderFee"
-        case managerProgramEntry = "ManagerProgramEntry"
-        case managerProgramSuccess = "ManagerProgramSuccess"
-        case managerFundEntry = "ManagerFundEntry"
-        case managerFundExit = "ManagerFundExit"
-        case gvWithdrawal = "GvWithdrawal"
-        case managerSignalMasterSuccessFee = "ManagerSignalMasterSuccessFee"
-        case managerSignalMasterVolumeFee = "ManagerSignalMasterVolumeFee"
-        case gvSignalSuccessFee = "GvSignalSuccessFee"
-    }
-    public enum Currency: String, Codable { 
-        case undefined = "Undefined"
-        case gvt = "GVT"
-        case eth = "ETH"
-        case btc = "BTC"
-        case ada = "ADA"
-        case usdt = "USDT"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case usd = "USD"
-        case eur = "EUR"
-    }
     public var title: String?
     public var description: String?
-    public var type: ModelType?
+    public var type: FeeType?
     public var amount: Double?
     public var currency: Currency?
 
 
     
-    public init(title: String?, description: String?, type: ModelType?, amount: Double?, currency: Currency?) {
+    public init(title: String?, description: String?, type: FeeType?, amount: Double?, currency: Currency?) {
         self.title = title
         self.description = description
         self.type = type
@@ -78,7 +48,7 @@ open class FeeDetails: Codable {
 
         title = try container.decodeIfPresent(String.self, forKey: "title")
         description = try container.decodeIfPresent(String.self, forKey: "description")
-        type = try container.decodeIfPresent(ModelType.self, forKey: "type")
+        type = try container.decodeIfPresent(FeeType.self, forKey: "type")
         amount = try container.decodeIfPresent(Double.self, forKey: "amount")
         currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
     }

@@ -10,9 +10,12 @@
 import UIKit
 
 final class SettingsViewModel {
-    enum SettingsRowType: String, EnumCollection {
+    enum RowType: String, EnumCollection {
         case profile = "Profile"
+        case kycStatus = "KYC Status"
+        case publicProfile = "Public investor's profile"
         
+        case currency = "Platform currency"
         case changePassword = "Change password"
         case passcode = "Passcode"
         case biometricID = "Touch ID"
@@ -27,8 +30,9 @@ final class SettingsViewModel {
         case none
     }
     
-    enum SettingsSectionType: String {
+    enum SectionType: String {
         case profile
+        case currency
         case security
         case darkTheme
         case feedback
@@ -41,6 +45,14 @@ final class SettingsViewModel {
     var pickedImageURL: URL?
     
     let biometricIDAuthManager = BiometricIDAuthManager.shared
+    
+    var currencyListViewModel: PlatformCurrencyListViewModel! {
+        didSet {
+            delegate?.didReload(IndexPath(row: 0, section: 1))
+        }
+    }
+    var currencyListDataSource: TableViewDataSource<PlatformCurrencyListViewModel>!
+    var platformCurrencies: [PlatformCurrencyInfo]?
     
     var enablePasscode: Bool {
         get {
@@ -102,8 +114,9 @@ final class SettingsViewModel {
     }
     private var profileModel: ProfileFullViewModel?
     
-    var sections: [SettingsSectionType] = [.profile, .security, .feedback]
-    var rows: [SettingsSectionType : [SettingsRowType]] = [.profile : [.profile],
+    var sections: [SectionType] = [.profile, .currency, .security, .feedback]
+    var rows: [SectionType : [RowType]] = [.profile : [.profile, .kycStatus, .publicProfile],
+                                                           .currency : [.currency],
                                                            .security : [.changePassword, .passcode, .biometricID, .twoFactor],
                                                            .feedback : [.termsAndConditions, .privacyPolicy, .contactUs]]
     
@@ -115,6 +128,10 @@ final class SettingsViewModel {
         return name.isEmpty ? nil : name
     }
     
+    var username: String? {
+        return self.profileModel?.userName
+    }
+    
     var avatarURL: URL? {
         guard let avatar = profileModel?.avatar,
             let avatarURL = getFileURL(fileName: avatar)
@@ -123,21 +140,29 @@ final class SettingsViewModel {
         return avatarURL
     }
     
+    var isPublic: Bool {
+        guard let isPublicInvestor = profileModel?.isPublicInvestor else { return false }
+        return isPublicInvestor
+    }
+    
     var email: String {
         guard let email = profileModel?.email else { return "" }
         
         return email
     }
     
-    var verificationStatus: ProfileFullViewModel.VerificationStatus? {
+    var verificationStatus: UserVerificationStatus? {
         guard let verificationStatus = profileModel?.verificationStatus else { return nil }
         
         return verificationStatus
     }
     
+    weak var delegate: BaseTableViewProtocol?
+    
     // MARK: - Init
-    init(withRouter router: SettingsRouter) {
+    init(withRouter router: SettingsRouter, delegate: BaseTableViewProtocol?) {
         self.router = router
+        self.delegate = delegate
         
         setup()
     }
@@ -153,7 +178,7 @@ final class SettingsViewModel {
                 self?.profileModel = profileModel
                 completion(.success)
             }
-            
+        
             completion(.failure(errorType: .apiError(message: nil)))
             }, completionError: completion)
     }
@@ -165,7 +190,7 @@ final class SettingsViewModel {
             }, completionError: completion)
     }
     
-    func rowType(at indexPath: IndexPath) -> SettingsRowType? {
+    func rowType(at indexPath: IndexPath) -> RowType? {
         let sectionType = sections[indexPath.section]
         
         guard let rows = rows[sectionType] else { return nil }
@@ -175,7 +200,7 @@ final class SettingsViewModel {
     
     func headerHeight(for section: Int) -> CGFloat {
         switch section {
-        case 0, 1:
+        case 0:
             return 0.0
         default:
             return 30.0
@@ -187,7 +212,9 @@ final class SettingsViewModel {
         guard let profileModel = profileModel else { return }
         router.show(routeType: .showProfile(profileModel))
     }
-    
+    func publicChange(_ value: Bool, completion: @escaping CompletionBlock) {
+        ProfileDataProvider.publicChange(value, completion: completion)
+    }
     func changePassword() {
         router.show(routeType: .changePassword)
     }
@@ -230,6 +257,15 @@ final class SettingsViewModel {
         NotificationCenter.default.addObserver(self, selector: #selector(signOutNotification(notification:)), name: .signOut, object: nil)
         
         fetchProfile { (result) in }
+        
+        PlatformManager.shared.getPlatformInfo { [weak self] (info) in
+            if let platformCurrencies = info?.commonInfo?.platformCurrencies {
+                self?.currencyListViewModel = PlatformCurrencyListViewModel(self?.delegate, items: platformCurrencies, selectedIndex: platformCurrencies.firstIndex(where:  { $0.name == selectedPlatformCurrency }) ?? 0)
+                if let currencyListViewModel = self?.currencyListViewModel {
+                    self?.currencyListDataSource = TableViewDataSource(currencyListViewModel)
+                }
+            }
+        }
     }
     
     private func clearData() {
@@ -246,6 +282,7 @@ final class SettingsViewModel {
         guard let pickedImageURL = pickedImageURL else {
             return completion(.failure(errorType: .apiError(message: nil)))
         }
+        
         BaseDataProvider.uploadImage(imageURL: pickedImageURL, completion: { (uploadResult) in
             guard let uploadResult = uploadResult, let uuidString = uploadResult.id?.uuidString else { return completion(.failure(errorType: .apiError(message: nil))) }
             
@@ -268,3 +305,24 @@ final class SettingsViewModel {
     }
 }
 
+class PlatformCurrencyListViewModel: SelectableListViewModel<PlatformCurrencyInfo> {
+    var title = "Choose currency"
+    
+    override func cell(for indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
+        let model = SelectableTableViewCellViewModel()
+        
+        guard let cell = tableView.dequeueReusableCell(withModel: model, for: indexPath) as? SelectableTableViewCell else { return UITableViewCell() }
+        
+        let item = items[indexPath.row]
+        let isSelected = indexPath.row == selectedIndex
+        cell.configure(item.name, selected: isSelected)
+        
+        return cell
+    }
+    
+    override func didSelect(at indexPath: IndexPath) {
+        super.didSelect(at: indexPath)
+
+        delegate?.didSelect(.currency, index: indexPath.row)
+    }
+}

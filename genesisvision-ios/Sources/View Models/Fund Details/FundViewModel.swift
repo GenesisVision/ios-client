@@ -15,7 +15,7 @@ final class FundViewModel {
     weak var reloadDataProtocol: ReloadDataProtocol?
     
     var isFavorite: Bool {
-        return fundDetailsFull?.personalFundDetails?.isFavorite ?? false
+        return fundDetailsFull?.personalDetails?.isFavorite ?? false
     }
     
     var router: FundRouter!
@@ -34,13 +34,11 @@ final class FundViewModel {
     }
     
     func showNotificationSettings() {
-        router.show(routeType: .notificationSettings(assetId: fundId, title: fundDetailsFull?.title ?? "Fund Settings"))
+        router.show(routeType: .notificationSettings(assetId: fundId, title: fundDetailsFull?.publicInfo?.title ?? "Fund Settings"))
     }
     
     func fetch(completion: @escaping CompletionBlock) {
-        let сurrency = FundsAPI.Currency_v10FundsByIdGet(rawValue: getSelectedCurrency())
-        
-        FundsDataProvider.get(fundId: fundId, currencySecondary: сurrency, completion: { [weak self] (viewModel) in
+        FundsDataProvider.get(fundId, completion: { [weak self] (viewModel) in
             guard let viewModel = viewModel else { return }
             self?.fundDetailsFull = viewModel
             completion(.success)
@@ -50,23 +48,23 @@ final class FundViewModel {
     // MARK: - Public methods
     func changeFavorite(value: Bool? = nil, request: Bool = false, completion: @escaping CompletionBlock) {
         guard request else {
-            fundDetailsFull?.personalFundDetails?.isFavorite = value
+            fundDetailsFull?.personalDetails?.isFavorite = value
             return completion(.success)
         }
         
         guard
-            let personalFundDetails = fundDetailsFull?.personalFundDetails,
-            let isFavorite = personalFundDetails.isFavorite,
+            let personalDetails = fundDetailsFull?.personalDetails,
+            let isFavorite = personalDetails.isFavorite,
             let assetId = fundId
             else { return completion(.failure(errorType: .apiError(message: nil))) }
         
         FundsDataProvider.favorites(isFavorite: isFavorite, assetId: assetId) { [weak self] (result) in
             switch result {
             case .success:
-                self?.fundDetailsFull?.personalFundDetails?.isFavorite = !isFavorite
+                self?.fundDetailsFull?.personalDetails?.isFavorite = !isFavorite
             case .failure(let errorType):
                 print(errorType)
-                self?.fundDetailsFull?.personalFundDetails?.isFavorite = isFavorite
+                self?.fundDetailsFull?.personalDetails?.isFavorite = isFavorite
             }
             
             completion(result)

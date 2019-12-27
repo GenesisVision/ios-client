@@ -35,6 +35,43 @@ class InfoSignalsTableViewCell: UITableViewCell {
     @IBOutlet weak var successFeeValueLabel: TitleLabel!
     @IBOutlet weak var successFeeTitleLabel: SubtitleLabel!
     
+    @IBOutlet weak var followButton: ActionButton!
+    @IBOutlet weak var editButton: UIButton! {
+        didSet {
+            editButton.isHidden = true
+        }
+    }
+    
+    weak var infoSignalsProtocol: InfoSignalsProtocol?
+    
+    // MARK: - Lifecycle
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        backgroundColor = UIColor.BaseView.bg
+        contentView.backgroundColor = UIColor.BaseView.bg
+        selectionStyle = .none
+    }
+    
+    // MARK: - Actions
+    @IBAction func followButtonAction(_ sender: UIButton) {
+        infoSignalsProtocol?.didTapFollowButton()
+    }
+    
+    // MARK: - Actions
+    @IBAction func editButtonAction(_ sender: UIButton) {
+        infoSignalsProtocol?.didTapEditButton()
+    }
+}
+
+
+class InfoSubscriptionTableViewCell: UITableViewCell {
+    // MARK: - Outlets
+    @IBOutlet weak var titleLabel: TitleLabel! {
+        didSet {
+            titleLabel.font = UIFont.getFont(.semibold, size: 18.0)
+        }
+    }
     //Subscription details
     @IBOutlet weak var subscriptionStackView: UIStackView! {
         didSet {
@@ -65,7 +102,6 @@ class InfoSignalsTableViewCell: UITableViewCell {
         }
     }
     @IBOutlet weak var typeTitleLabel: SubtitleLabel!
-    @IBOutlet weak var followButton: ActionButton!
     
     @IBOutlet weak var editButton: UIButton! {
         didSet {
@@ -85,10 +121,6 @@ class InfoSignalsTableViewCell: UITableViewCell {
     }
     
     // MARK: - Actions
-    @IBAction func followButtonAction(_ sender: UIButton) {
-        infoSignalsProtocol?.didTapFollowButton()
-    }
-    
     @IBAction func editButtonAction(_ sender: UIButton) {
         infoSignalsProtocol?.didTapEditButton()
     }

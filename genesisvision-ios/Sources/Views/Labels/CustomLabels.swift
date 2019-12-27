@@ -41,7 +41,7 @@ class LargeTitleLabel: CustomLabel {
     // MARK: - Lifecycle
     override func commonInit() {
         textColor = UIColor.Cell.title
-        font = UIFont.getFont(.semibold, size: 21.0)
+        font = UIFont.getFont(.semibold, size: 27.0)
     }
 }
 

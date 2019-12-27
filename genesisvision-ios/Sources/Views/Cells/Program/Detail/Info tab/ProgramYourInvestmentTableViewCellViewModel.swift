@@ -9,15 +9,16 @@
 import UIKit
 
 struct ProgramYourInvestmentTableViewCellViewModel {
-    let programDetailsFull: ProgramDetailsFull?
+    let programDetailsFull: ProgramFollowDetailsFull?
     weak var yourInvestmentProtocol: YourInvestmentProtocol?
 }
 
 extension ProgramYourInvestmentTableViewCellViewModel: CellViewModel {
     func setup(on cell: YourInvestmentTableViewCell) {
+        let programDetails = programDetailsFull?.programDetails
         cell.withdrawButton.setEnabled(false)
         
-        if let canWithdraw = programDetailsFull?.personalProgramDetails?.canWithdraw {
+        if let canWithdraw = programDetails?.personalDetails?.canWithdraw {
             cell.withdrawButton.setEnabled(canWithdraw)
         }
         
@@ -28,26 +29,26 @@ extension ProgramYourInvestmentTableViewCellViewModel: CellViewModel {
         cell.titleLabel.text = "Current period investment"
         cell.reinvestTitleLabel.text = "Reinvest profit"
         
-        if let status = programDetailsFull?.personalProgramDetails?.status?.rawValue {
+        if let status = programDetails?.personalDetails?.status?.rawValue {
             cell.statusButton.setTitle(status, for: .normal)
             cell.statusButton.layoutSubviews()
         } else {
             cell.statusButton.isHidden = true
         }
         
-        if let isReinvesting = programDetailsFull?.personalProgramDetails?.isReinvest {
+        if let isReinvesting = programDetails?.personalDetails?.isReinvest {
             cell.reinvestSwitch.isOn = isReinvesting
         }
         
-        let currency = CurrencyType(rawValue: programDetailsFull?.currency?.rawValue ?? "") ?? .usd
+        let currency = CurrencyType(rawValue: programDetailsFull?.tradingAccountInfo?.currency?.rawValue ?? "") ?? .usd
         
         cell.investedTitleLabel.isHidden = true
         cell.investedValueLabel.isHidden = true
         
         cell.profitTitleLabel.text = "profit"
-        if let profitPercent = programDetailsFull?.personalProgramDetails?.profit,
-            let value = programDetailsFull?.personalProgramDetails?.value,
-            let invested = programDetailsFull?.personalProgramDetails?.invested {
+        if let profitPercent = programDetails?.personalDetails?.profit,
+            let value = programDetails?.personalDetails?.value,
+            let invested = programDetails?.personalDetails?.invested {
             let profitValue = value - invested
             let sign = profitValue > 0 ? "+" : ""
             cell.profitValueLabel.text = sign + profitValue.rounded(with: currency).toString() + " " + currency.rawValue + " (\(profitPercent.rounded(with: .undefined).toString())%)"
@@ -55,7 +56,7 @@ extension ProgramYourInvestmentTableViewCellViewModel: CellViewModel {
         }
         
         cell.valueTitleLabel.text = "value"
-        if let value = programDetailsFull?.personalProgramDetails?.value {
+        if let value = programDetails?.personalDetails?.value {
             cell.valueLabel.text = value.rounded(with: currency).toString() + " " + currency.rawValue
         }
     }

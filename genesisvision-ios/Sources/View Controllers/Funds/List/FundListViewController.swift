@@ -52,7 +52,7 @@ class FundListViewController: BaseViewControllerWithTableView {
     }
     
     private func setup() {
-        viewModel.programListDelegateManager.delegate = self
+        viewModel.assetListDelegateManager.delegate = self
         registerForPreviewing()
 
         setupUI()
@@ -78,8 +78,8 @@ class FundListViewController: BaseViewControllerWithTableView {
         tableView.configure(with: .defaultConfiguration)
         tableView.contentInset.bottom = signInButtonEnable ? 82.0 : 0.0
         
-        tableView.delegate = self.viewModel?.programListDelegateManager
-        tableView.dataSource = self.viewModel?.programListDelegateManager
+        tableView.delegate = self.viewModel?.assetListDelegateManager
+        tableView.dataSource = self.viewModel?.assetListDelegateManager
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
         
         if viewModel.canPullToRefresh {

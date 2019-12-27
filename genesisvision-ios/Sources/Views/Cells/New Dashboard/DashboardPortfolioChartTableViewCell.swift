@@ -9,34 +9,43 @@
 import UIKit
 import Charts
 
-struct AssetData {
-    let currency: CurrencyType?
-    let percent: Double
-    let value: String
-    let color: String
+struct MoneyLocationData {
+    var color: String
+    var name: String
+    var percent: Double
+    
+    init(_ model: MoneyLocation) {
+        self.color = model.color ?? ""
+        self.name = model.name?.rawValue ?? ""
+        self.percent = model.percent ?? 0.0
+    }
+    
+    init(_ color: String, name: String, percent: Double) {
+        self.color = color
+        self.name = name
+        self.percent = percent
+    }
 }
+
 struct DashboardPortfolioData: BaseData {
     var title: String
-    var showActionsView: Bool
     var type: CellActionType
     
-    let assets: [AssetData]
+    var items = [MoneyLocationData]()
     
-    init() {
+    init(_ portfolio: DashboardPortfolio?) {
         title = "Portfolio"
-        showActionsView = false
         type = .none
-        
-        assets = [AssetData(currency: .btc, percent: 20.0, value: CurrencyType.btc.rawValue, color: "#fd5a18"),
-                  AssetData(currency: .eth, percent: 30.0, value: CurrencyType.eth.rawValue, color: "#ffc428"),
-                  AssetData(currency: .gvt, percent: 1.0, value: CurrencyType.gvt.rawValue, color: "#1b4448"),
-                  AssetData(currency: nil, percent: 49.0, value: "Other", color: "#bababa")]
+
+        portfolio?.distribution?.forEach({ (model) in
+            items.append(MoneyLocationData(model))
+        })
     }
 }
 
 struct DashboardPortfolioChartTableViewCellViewModel {
-    let data: DashboardPortfolioData
-    weak var delegate: BaseCellProtocol?
+    let data: DashboardPortfolioData?
+    weak var delegate: BaseTableViewProtocol?
 }
 extension DashboardPortfolioChartTableViewCellViewModel: CellViewModel {
     func setup(on cell: DashboardPortfolioChartTableViewCell) {
@@ -50,19 +59,22 @@ class DashboardPortfolioChartTableViewCell: BaseTableViewCell {
     @IBOutlet weak var pieChartView: PieChartView!
     
     // MARK: - Public methods
-    func configure(_ data: DashboardPortfolioData, delegate: BaseCellProtocol?) {
+    func configure(_ data: DashboardPortfolioData?, delegate: BaseTableViewProtocol?) {
+        guard let data = data else { return }
+        loaderView.stopAnimating()
+        loaderView.isHidden = true
+        
         self.type = data.type
         self.delegate = delegate
         
         titleLabel.text = data.title
-        actionsView.isHidden = !data.showActionsView
         
         currenciesView.removeAllArrangedSubviews()
         
-        data.assets.forEach { (data) in
+        data.items.forEach { (data) in
             let chartItem = DashboardChartItemView.viewFromNib()
             chartItem.circleView.backgroundColor = UIColor.hexColor(data.color)
-            chartItem.titleLabel.text = data.value
+            chartItem.titleLabel.text = data.name
             chartItem.valueLabel.text = data.percent.toString() + "%"
             
             currenciesView.addArrangedSubview(chartItem)
@@ -73,15 +85,14 @@ class DashboardPortfolioChartTableViewCell: BaseTableViewCell {
     
     func setDataCount(_ data: DashboardPortfolioData) {
         var entries = [PieChartDataEntry]()
-        data.assets.forEach { (data) in
+        data.items.forEach { (data) in
             entries.append(PieChartDataEntry(value: data.percent))
         }
-        
         let set = PieChartDataSet(entries: entries, label: "Portfolio")
         set.drawIconsEnabled = false
         set.sliceSpace = 2
         
-        set.colors = data.assets.map({ UIColor.hexColor($0.color) })
+        set.colors = data.items.map({ UIColor.hexColor($0.color) })
         
         let data = PieChartData(dataSet: set)
         data.highlightEnabled = false

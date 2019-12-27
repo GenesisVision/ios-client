@@ -11,11 +11,11 @@ import Foundation
 final class ProgramDetailFullChartViewModel {
     // MARK: - Variables
     var router: ProgramRouter!
-    var programDetailsFull: ProgramDetailsFull?
+    var programDetailsFull: ProgramFollowDetailsFull?
     var chartDurationType: ChartDurationType = .month
     
     // MARK: - Init
-    init(withRouter router: ProgramRouter, programDetailsFull: ProgramDetailsFull) {
+    init(withRouter router: ProgramRouter, programDetailsFull: ProgramFollowDetailsFull) {
         self.router = router
         self.programDetailsFull = programDetailsFull
     }
@@ -27,11 +27,11 @@ final class ProgramDetailFullChartViewModel {
     
     // MARK: - Public methods
     var title: String {
-        return programDetailsFull?.title ?? ""
+        return programDetailsFull?.publicInfo?.title ?? ""
     }
     
     var subtitle: String? {
-        guard let username = programDetailsFull?.manager?.username else {
+        guard let username = programDetailsFull?.owner?.username else {
             return nil
         }
         
@@ -53,7 +53,7 @@ final class ProgramDetailFullChartViewModel {
     }
     
     func getCurrencyValue() -> String {
-        if let currency = programDetailsFull?.currency?.rawValue {
+        if let currency = programDetailsFull?.tradingAccountInfo?.currency?.rawValue {
             return currency
         }
         

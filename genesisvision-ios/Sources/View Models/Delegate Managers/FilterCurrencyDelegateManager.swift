@@ -17,7 +17,7 @@ final class FilterCurrencyDelegateManager: NSObject, UITableViewDelegate, UITabl
     weak var delegate: FilterCurrencyDelegateManagerProtocol?
     
     var tableView: UITableView?
-    var currencies: [PlatformCurrency] = []
+    var currencies: [PlatformCurrencyInfo] = []
     
     var selectedIndex: Int = 0
     
@@ -47,9 +47,9 @@ final class FilterCurrencyDelegateManager: NSObject, UITableViewDelegate, UITabl
         PlatformManager.shared.getPlatformInfo { [weak self] (platformInfo) in
             guard let platformInfo = platformInfo else { return }
             
-            if let platformCurrencies = platformInfo.platformCurrencies {
+            if let platformCurrencies = platformInfo.commonInfo?.platformCurrencies {
                 self?.currencies.removeAll()
-                self?.currencies.append(PlatformCurrency(name: "All", rateToGvt: nil, color: nil))
+                self?.currencies.append(PlatformCurrencyInfo(name: "All", color: nil))
                 self?.currencies.append(contentsOf: platformCurrencies)
                 self?.tableView?.reloadData()
             }

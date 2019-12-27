@@ -11,12 +11,12 @@ class ManagerTabmanRouter: TabmanRouter {
     var managerInfoViewController: ManagerInfoViewController?
     
     // MARK: - Public methods
-    func getInfo(with managerProfileDetails: ManagerProfileDetails) -> ManagerInfoViewController? {
+    func getInfo(with publicProfile: PublicProfile) -> ManagerInfoViewController? {
         guard let viewController = ManagerInfoViewController.storyboardInstance(.manager) else { return nil }
         
         let router = Router(parentRouter: self)
         router.currentController = viewController
-        let viewModel = ManagerInfoViewModel(withRouter: router, managerProfileDetails: managerProfileDetails, reloadDataProtocol: viewController)
+        let viewModel = ManagerInfoViewModel(withRouter: router, publicProfile: publicProfile, reloadDataProtocol: viewController)
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         

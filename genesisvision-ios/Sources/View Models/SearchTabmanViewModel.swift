@@ -30,7 +30,7 @@ final class SearchTabmanViewModel: TabmanViewModel {
     }
     
     // MARK: - Public methods
-    func fetch(_ completionSuccess: @escaping (_ viewModel: SearchViewModel?) -> Void, completionError: @escaping CompletionBlock) {
+    func fetch(_ completionSuccess: @escaping (_ viewModel: CommonPublicAssetsViewModel?) -> Void, completionError: @escaping CompletionBlock) {
         SearchDataProvider.get(filterModel.mask, take: take, completion: { (viewModel) in
             completionSuccess(viewModel)
         }, errorCompletion: completionError)

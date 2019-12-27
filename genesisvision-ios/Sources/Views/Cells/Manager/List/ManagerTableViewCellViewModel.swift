@@ -9,22 +9,22 @@
 import UIKit
 
 struct ManagerTableViewCellViewModel {
-    let manager: ManagerProfile
+    let profile: PublicProfile
 }
 
 extension ManagerTableViewCellViewModel: CellViewModel {
     func setup(on cell: DetailManagerTableViewCell) {
-        if let registrationDate = manager.regDate {
+        if let registrationDate = profile.regDate {
             cell.dateLabel.text = "since " + registrationDate.onlyDateFormatString
         }
         
-        if let username = manager.username {
+        if let username = profile.username {
             cell.managerNameLabel.text = username
         }
         
         cell.managerImageView.image = UIImage.profilePlaceholder
         
-        if let fileName = manager.avatar, let fileUrl = getFileURL(fileName: fileName) {
+        if let fileName = profile.avatar, let fileUrl = getFileURL(fileName: fileName) {
             cell.managerImageView.kf.indicatorType = .activity
             cell.managerImageView.kf.setImage(with: fileUrl, placeholder: UIImage.profilePlaceholder)
         }

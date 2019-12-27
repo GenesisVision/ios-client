@@ -9,28 +9,65 @@
 import UIKit
 
 class ListViewController: UIViewController {
+    // MARK: - Variables
     var tableView: UITableView!
     
+    var fetchMoreActivityIndicator: UIActivityIndicatorView!
     var refreshControl: UIRefreshControl?
+    var isEnablePullToRefresh: Bool = true
+    var isEnableInfiniteIndicator: Bool = false {
+        didSet {
+            if isEnableInfiniteIndicator {
+                fetchMoreActivityIndicator = UIActivityIndicatorView(style: .gray)
+                fetchMoreActivityIndicator.frame = CGRect(x: 0, y: 0, width: 200, height: 60)
+                fetchMoreActivityIndicator.color = UIColor.primary
+                tableView.tableFooterView = fetchMoreActivityIndicator
+                fetchMoreActivityIndicator.startAnimating()
+            } else {
+                tableView.tableFooterView = UIView()
+            }
+        }
+    }
     
+    var bottomSheetController: BottomSheetController! = {
+        return BottomSheetController()
+    }()
+    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         addTableView()
     }
     
+    // MARK: - Methods
     func addTableView() {
         if tableView == nil {
             tableView = UITableView(frame: .zero, style: .plain)
+            tableView.backgroundColor = UIColor.BaseView.bg
+            tableView.separatorStyle = .none
+            
             self.view.addSubview(tableView)
             
             tableView.translatesAutoresizingMaskIntoConstraints = false
             
-            tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-            tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-            tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-            tableView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+            NSLayoutConstraint.activate([
+                tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+                tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+                tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+                tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
+            ])
+        
+            if isEnablePullToRefresh {
+                setupPullToRefresh(scrollView: tableView)
+            }
         }
+    }
+    
+    func showInfiniteIndicator(_ value: Bool) {
+        guard fetchMoreActivityIndicator != nil else { return }
+        
+        value ? fetchMoreActivityIndicator.startAnimating() : fetchMoreActivityIndicator.stopAnimating()
     }
 }
 

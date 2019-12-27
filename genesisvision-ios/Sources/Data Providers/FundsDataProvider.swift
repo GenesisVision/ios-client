@@ -9,116 +9,110 @@
 import UIKit
 
 class FundsDataProvider: DataProvider {
-    static func get(_ filterModel: FilterModel? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ fundsList: FundsList?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    // MARK: - Assets
+    static func get(_ filterModel: FilterModel? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (ItemsViewModelFundDetailsListItem?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
-        let statisticDateFrom = filterModel?.dateRangeModel.dateFrom
-        let statisticDateTo = filterModel?.dateRangeModel.dateTo
+        let dateFrom = filterModel?.dateRangeModel.dateFrom
+        let dateTo = filterModel?.dateRangeModel.dateTo
         
-        let sorting = filterModel?.sortingModel.selectedSorting as? FundsAPI.Sorting_v10FundsGet ?? FundsAPI.Sorting_v10FundsGet.byProfitDesc
+        let sorting = filterModel?.sortingModel.selectedSorting as? FundsAPI.Sorting_getFunds ?? FundsAPI.Sorting_getFunds.byProfitDesc
         
         let assets = filterModel?.tagsModel.selectedTags
         let mask = filterModel?.mask
-        let isFavorite = filterModel?.isFavorite
+        let showFavorites = filterModel?.isFavorite
         let facetId = filterModel?.facetId
-        let managerId = filterModel?.managerId
+        var ownerId: UUID?
+        if let managedId = filterModel?.managerId {
+            ownerId = UUID(uuidString: managedId)
+        }
         
-        var currencySecondary: FundsAPI.CurrencySecondary_v10FundsGet?
-        if let newCurrency = FundsAPI.CurrencySecondary_v10FundsGet(rawValue: getSelectedCurrency()) {
-            currencySecondary = newCurrency
+        var showIn: FundsAPI.ShowIn_getFunds?
+        if let newCurrency = FundsAPI.ShowIn_getFunds(rawValue: selectedPlatformCurrency) {
+            showIn = newCurrency
         }
         
         let authorization = AuthManager.authorizedToken
-
-        FundsAPI.v10FundsGet(authorization: authorization, sorting: sorting, currencySecondary: currencySecondary, assets: assets, statisticDateFrom: statisticDateFrom, statisticDateTo: statisticDateTo, chartPointsCount: nil, mask: mask, facetId: facetId, isFavorite: isFavorite, ids: nil, managerId: managerId, programManagerId: nil, skip: skip, take: take) { (viewModel, error) in
+        
+        FundsAPI.getFunds(authorization: authorization, sorting: sorting, showIn: showIn, assets: assets, dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: nil, facetId: facetId,  mask: mask, ownerId: ownerId, showFavorites: showFavorites, skip: skip, take: take) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
     
-    static func getSets(completion: @escaping (_ programSets: FundSets?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        
-        guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
-        
-        FundsAPI.v10FundsSetsGet(authorization: authorization) { (viewModel, error) in
-            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
-        }
-    }
-    
-    static func get(fundId: String, currencySecondary: FundsAPI.Currency_v10FundsByIdGet? = nil, completion: @escaping (_ fundDetailsFull: FundDetailsFull?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func get(_ assetId: String, currencySecondary: FundsAPI.Currency_getFundDetails? = nil, completion: @escaping (FundDetailsFull?) -> Void, errorCompletion: @escaping CompletionBlock) {
         let authorization = AuthManager.authorizedToken
         
-        FundsAPI.v10FundsByIdGet(id: fundId, authorization: authorization, currency: currencySecondary) { (viewModel, error) in
+        FundsAPI.getFundDetails(id: assetId, authorization: authorization, currency: currencySecondary) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
     
-    static func getAssets(fundId: String, completion: @escaping (_ fundAssetsListInfo: FundAssetsListInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        
-        guard let uuid = UUID(uuidString: fundId)
-            else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
-        
-        FundsAPI.v10FundsByIdAssetsGet(id: uuid) { (viewModel, error) in
-            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
-        }
-    }
-    
-    static func getInvestInfo(fundId: String, currencySecondary: InvestorAPI.Currency_v10InvestorFundsByIdInvestInfoByCurrencyGet, completion: @escaping (_ fundInvestInfo: FundInvestInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    // MARK: - Invest & Withdraw
+    static func getWithdrawInfo(_ assetId: String, currency: InvestmentsAPI.Currency_getFundWithdrawInfo, completion: @escaping (FundWithdrawInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken,
-            let uuid = UUID(uuidString: fundId)
+            let uuid = UUID(uuidString: assetId)
             else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        InvestorAPI.v10InvestorFundsByIdInvestInfoByCurrencyGet(id: uuid, currency: currencySecondary, authorization: authorization) { (fundInvestInfo, error) in
-            DataProvider().responseHandler(fundInvestInfo, error: error, successCompletion: completion, errorCompletion: errorCompletion)
-        }
-    }
-    
-    static func getWithdrawInfo(fundId: String, currency: InvestorAPI.Currency_v10InvestorFundsByIdWithdrawInfoByCurrencyGet, completion: @escaping (_ fundWithdrawInfo: FundWithdrawInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        guard let authorization = AuthManager.authorizedToken,
-            let uuid = UUID(uuidString: fundId)
-            else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
-        
-        InvestorAPI.v10InvestorFundsByIdWithdrawInfoByCurrencyGet(id: uuid, currency: currency, authorization: authorization) { (fundWithdrawInfo, error) in
+        InvestmentsAPI.getFundWithdrawInfo(id: uuid, authorization: authorization, currency: currency) { (fundWithdrawInfo, error) in
             DataProvider().responseHandler(fundWithdrawInfo, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
-    
-    static func invest(withAmount amount: Double, fundId: String?, currency: InvestorAPI.Currency_v10InvestorFundsByIdInvestByAmountPost? = nil, errorCompletion: @escaping CompletionBlock) {
+    static func withdraw(withPercent percent: Double, assetId: String?, currency: InvestmentsAPI.Currency_withdrawFromFund?, errorCompletion: @escaping CompletionBlock) {
+          guard let authorization = AuthManager.authorizedToken,
+              let assetId = assetId,
+              let uuid = UUID(uuidString: assetId)
+              else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+          
+          InvestmentsAPI.withdrawFromFund(id: uuid, authorization: authorization, percent: percent, currency: currency) { (error) in
+              DataProvider().responseHandler(error, completion: errorCompletion)
+          }
+      }
+    static func invest(withAmount amount: Double, assetId: String?, walletId: UUID? = nil, errorCompletion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken,
-            let fundId = fundId,
-            let uuid = UUID(uuidString: fundId)
+            let assetId = assetId,
+            let uuid = UUID(uuidString: assetId)
             else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        InvestorAPI.v10InvestorFundsByIdInvestByAmountPost(id: uuid, amount: amount, authorization: authorization, currency: currency) { (error) in
+        InvestmentsAPI.investIntoFund(id: uuid, authorization: authorization, amount: amount, walletId: walletId) { (error) in
             DataProvider().responseHandler(error, completion: errorCompletion)
         }
     }
     
-    static func withdraw(withPercent percent: Double, fundId: String?, currency: InvestorAPI.Currency_v10InvestorFundsByIdWithdrawByPercentPost?, errorCompletion: @escaping CompletionBlock) {
-        guard let authorization = AuthManager.authorizedToken,
-            let fundId = fundId,
-            let uuid = UUID(uuidString: fundId)
-            else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+    // MARK: - Charts
+    static func getProfitPercentCharts(with assetId: String, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: FundsAPI.Currency_getFundProfitPercentCharts? = nil, completion: @escaping (_ tradesChartViewModel: FundProfitPercentCharts?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        guard let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        InvestorAPI.v10InvestorFundsByIdWithdrawByPercentPost(id: uuid, percent: percent, authorization: authorization, currency: currency) { (error) in
-            DataProvider().responseHandler(error, completion: errorCompletion)
-        }
-    }
-    
-    static func getProfitChart(with fundId: String, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, completion: @escaping (_ tradesChartViewModel: FundProfitChart?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        guard let uuid = UUID(uuidString: fundId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
-        
-        FundsAPI.v10FundsByIdChartsProfitGet(id: uuid, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount) { (viewModel, error) in
+        FundsAPI.getFundProfitPercentCharts(id: uuid, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
     
-    static func getBalanceChart(with fundId: String, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, completion: @escaping (_ tradesChartViewModel: FundBalanceChart?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        guard let uuid = UUID(uuidString: fundId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+    static func getAbsoluteProfitChart(with assetId: String, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: FundsAPI.Currency_getFundAbsoluteProfitChart? = nil, completion: @escaping (_ tradesChartViewModel: AbsoluteProfitChart?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        guard let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        FundsAPI.v10FundsByIdChartsBalanceGet(id: uuid, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount) { (viewModel, error) in
+        FundsAPI.getFundAbsoluteProfitChart(id: uuid, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
     
+    static func getBalanceChart(with assetId: String, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: FundsAPI.Currency_getFundBalanceChart? = nil, completion: @escaping (_ tradesChartViewModel: FundBalanceChart?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        guard let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        FundsAPI.getFundBalanceChart(id: uuid, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+
+    // MARK: - Reallocate history
+    static func getReallocateHistory(with assetId: String?, dateFrom: Date? = nil, dateTo: Date? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ reallocationsViewModel: ItemsViewModelReallocationModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        
+        guard let assetId = assetId, let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        FundsAPI.getReallocatingHistory(id: uuid, dateFrom: dateFrom, dateTo: dateTo, skip: skip, take: take) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
+    // MARK: - Favorites
     static func favorites(isFavorite: Bool, assetId: String, completion: @escaping CompletionBlock) {
         guard let authorization = AuthManager.authorizedToken else { return completion(.failure(errorType: .apiError(message: nil))) }
         
@@ -127,20 +121,10 @@ class FundsDataProvider: DataProvider {
             : favoritesAdd(with: assetId, authorization: authorization, completion: completion)
     }
     
-    static func getRequests(with fundId: String, skip: Int, take: Int, completion: @escaping (_ programRequests: ProgramRequests?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        guard let authorization = AuthManager.authorizedToken,
-            let uuid = UUID(uuidString: fundId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
-        
-        InvestorAPI.v10InvestorProgramsByIdRequestsBySkipByTakeGet(id: uuid, skip: skip, take: take, authorization: authorization) { (viewModel, error) in
-            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
-        }
-    }
-    
-    // MARK: - Private methods
     private static func favoritesAdd(with assetId: String, authorization: String, completion: @escaping CompletionBlock) {
         guard let uuid = UUID(uuidString: assetId) else { return completion(.failure(errorType: .apiError(message: nil))) }
         
-        FundsAPI.v10FundsByIdFavoriteAddPost(id: uuid, authorization: authorization) { (error) in
+        FundsAPI.addToFavorites(id: uuid, authorization: authorization) { (error) in
             DataProvider().responseHandler(error, completion: { (result) in
                 switch result {
                 case .success:
@@ -157,7 +141,7 @@ class FundsDataProvider: DataProvider {
     private static func favoritesRemove(with assetId: String, authorization: String, completion: @escaping CompletionBlock) {
         guard let uuid = UUID(uuidString: assetId) else { return completion(.failure(errorType: .apiError(message: nil))) }
         
-        FundsAPI.v10FundsByIdFavoriteRemovePost(id: uuid, authorization: authorization) { (error) in
+        FundsAPI.removeFromFavorites(id: uuid, authorization: authorization) { (error) in
             DataProvider().responseHandler(error, completion: { (result) in
                 switch result {
                 case .success:
@@ -170,14 +154,4 @@ class FundsDataProvider: DataProvider {
             })
         }
     }
-
-    static func getReallocateHistory(with assetId: String?, dateFrom: Date? = nil, dateTo: Date? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ reallocationsViewModel: ReallocationsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        
-        guard let assetId = assetId, let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
-        
-        FundsAPI.v10FundsByIdReallocationsGet(id: uuid, dateFrom: dateFrom, dateTo: dateTo, skip: skip, take: take) { (viewModel, error) in
-            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
-        }
-    }
-    
 }

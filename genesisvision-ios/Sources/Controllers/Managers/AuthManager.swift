@@ -11,7 +11,7 @@ import UIKit.UIApplication
 class AuthManager {
     
     private static var profileViewModel: ProfileFullViewModel?
-    private static var walletViewModel: WalletMultiSummary?
+    private static var walletViewModel: WalletSummary?
     private static var ratesModel: RatesModel?
     private static var twoFactorStatus: TwoFactorStatus?
     
@@ -67,7 +67,7 @@ class AuthManager {
         }
     }
     
-    static func saveWalletViewModel(viewModel: WalletMultiSummary) {
+    static func saveWalletViewModel(viewModel: WalletSummary) {
         self.walletViewModel = viewModel
     }
     
@@ -84,7 +84,7 @@ class AuthManager {
             completion(profileViewModel)
         }
         
-        ProfileDataProvider.getProfileFull(completion: { (viewModel) in
+        ProfileDataProvider.getProfile(completion: { (viewModel) in
             if viewModel != nil  {
                 profileViewModel = viewModel
             }
@@ -130,15 +130,13 @@ class AuthManager {
         }
     }
     
-    static func getWallet(with currency: WalletAPI.Currency_v10WalletMultiByCurrencyGet? = nil, completion: @escaping (_ wallet: WalletMultiSummary?) -> Void, completionError: @escaping CompletionBlock) {
+    static func getWallet(with currency: CurrencyType? = nil, completion: @escaping (_ wallet: WalletSummary?) -> Void, completionError: @escaping CompletionBlock) {
         
         if let walletViewModel = walletViewModel {
             completion(walletViewModel)
         }
         
-        let selectedCurrency = WalletAPI.Currency_v10WalletMultiByCurrencyGet(rawValue: getSelectedCurrency()) ?? .gvt
-            
-        WalletDataProvider.getMulti(with: currency ?? selectedCurrency, completion: { (viewModel) in
+        WalletDataProvider.get(with: currency ?? getPlatformCurrencyType(), completion: { (viewModel) in
             if viewModel != nil  {
                 walletViewModel = viewModel
             }
@@ -152,7 +150,7 @@ class AuthManager {
             completion(twoFactorStatus)
         }
         
-        TwoFactorDataProvider.auth2faGetStatus(completion: { (viewModel) in
+        TwoFactorDataProvider.getStatus(completion: { (viewModel) in
             guard let viewModel = viewModel else { return completionError(.failure(errorType: .apiError(message: nil))) }
             
             twoFactorStatus = viewModel
@@ -163,7 +161,8 @@ class AuthManager {
     // MARK: - Private methods
     private func updateApiToken(completion: @escaping CompletionBlock)  {
         guard let token = AuthManager.authorizedToken else { return completion(.failure(errorType: .apiError(message: nil))) }
-        AuthAPI.v10AuthTokenUpdatePost(authorization: token) { (token, error) in
+        
+        AuthAPI.updateAuthToken(authorization: token) { (token, error) in
             guard token != nil else {
                 return ErrorHandler.handleApiError(error: error, completion: completion)
             }

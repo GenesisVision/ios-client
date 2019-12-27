@@ -8,14 +8,13 @@
 
 import UIKit
 
-class InvestingRequestsViewModel: ViewModelWithCollection {
+class InvestingRequestsViewModel: CellViewModelWithCollection {
     var title: String
-    var showActionsView: Bool
     var type: CellActionType
     
     var viewModels = [CellViewAnyModel]()
     var canPullToRefresh: Bool = true
-
+    var details: ItemsViewModelAssetInvestmentRequest?
     var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
         return []
     }
@@ -24,24 +23,23 @@ class InvestingRequestsViewModel: ViewModelWithCollection {
         return [PortfolioEventCollectionViewCellViewModel.self]
     }
     
-    weak var delegate: BaseCellProtocol?
-    init(_ delegate: BaseCellProtocol?) {
+    weak var delegate: BaseTableViewProtocol?
+    init(_ details: ItemsViewModelAssetInvestmentRequest?, delegate: BaseTableViewProtocol?) {
+        self.details = details
         self.delegate = delegate
         title = "Requests"
-        showActionsView = false
         type = .none
         
-        let model = PortfolioEventCollectionViewCellViewModel(reloadDataProtocol: nil, event: InvestmentEventViewModel(title: "title", icon: nil, date: Date(), assetDetails: AssetDetails(id: nil, logo: nil, color: nil, title: "Asset", url: nil, assetType: .programs), amount: 20.0, currency: .btc, changeState: .increased, extendedInfo: nil, feesInfo: nil, totalFeesAmount: nil, totalFeesCurrency: nil))
-        viewModels.append(model)
-        viewModels.append(model)
-        viewModels.append(model)
-        viewModels.append(model)
-        viewModels.append(model)
+//        details?.events?.items?.forEach({ (model) in
+//            viewModels.append(PortfolioEventCollectionViewCellViewModel(reloadDataProtocol: nil, event: model))
+//        })
     }
     
     func didSelect(at indexPath: IndexPath) {
         delegate?.didSelect(type, cellViewModel: model(at: indexPath))
     }
+    
+    
 }
 
 

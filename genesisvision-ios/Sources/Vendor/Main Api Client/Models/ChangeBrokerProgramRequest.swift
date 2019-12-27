@@ -11,14 +11,12 @@ import Foundation
 
 open class ChangeBrokerProgramRequest: Codable {
 
-    public var programId: UUID?
     public var newBrokerAccountTypeId: UUID?
     public var newLeverage: Int?
 
 
     
-    public init(programId: UUID?, newBrokerAccountTypeId: UUID?, newLeverage: Int?) {
-        self.programId = programId
+    public init(newBrokerAccountTypeId: UUID?, newLeverage: Int?) {
         self.newBrokerAccountTypeId = newBrokerAccountTypeId
         self.newLeverage = newLeverage
     }
@@ -30,7 +28,6 @@ open class ChangeBrokerProgramRequest: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(programId, forKey: "programId")
         try container.encodeIfPresent(newBrokerAccountTypeId, forKey: "newBrokerAccountTypeId")
         try container.encodeIfPresent(newLeverage, forKey: "newLeverage")
     }
@@ -40,7 +37,6 @@ open class ChangeBrokerProgramRequest: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        programId = try container.decodeIfPresent(UUID.self, forKey: "programId")
         newBrokerAccountTypeId = try container.decodeIfPresent(UUID.self, forKey: "newBrokerAccountTypeId")
         newLeverage = try container.decodeIfPresent(Int.self, forKey: "newLeverage")
     }

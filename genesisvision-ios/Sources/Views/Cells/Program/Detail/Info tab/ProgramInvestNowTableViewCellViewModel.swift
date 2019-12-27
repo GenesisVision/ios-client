@@ -9,17 +9,19 @@
 import Foundation
 
 struct ProgramInvestNowTableViewCellViewModel {
-    let programDetailsFull: ProgramDetailsFull?
+    let programDetailsFull: ProgramFollowDetailsFull?
     weak var investNowProtocol: InvestNowProtocol?
 }
 
 extension ProgramInvestNowTableViewCellViewModel: CellViewModel {
     func setup(on cell: InvestNowTableViewCell) {
-        if let canInvest = programDetailsFull?.personalProgramDetails?.canInvest, programDetailsFull?.availableInvestmentBase != 0 {
+        let programDetails = programDetailsFull?.programDetails
+        
+        if let canInvest = programDetails?.personalDetails?.canInvest, programDetails?.availableInvestmentBase != 0 {
             cell.investButton.setEnabled(canInvest)
         }
         
-        if let periodEnds = programDetailsFull?.periodEnds {
+        if let periodEnds = programDetails?.periodEnds {
             let periodEndsString = periodEnds.defaultFormatString
             cell.disclaimerLabel.text = "Your request will be processed at the end of the reporting period " + periodEndsString
         }
@@ -32,7 +34,7 @@ extension ProgramInvestNowTableViewCellViewModel: CellViewModel {
         cell.investButton.setTitle("Invest", for: .normal)
         
         cell.entryFeeTitleLabel.text = "entry fee"
-        if let entryFeeCurrent = programDetailsFull?.entryFeeCurrent, let entryFeeSelected = programDetailsFull?.entryFeeSelected {
+        if let entryFeeCurrent = programDetails?.entryFeeCurrent, let entryFeeSelected = programDetails?.entryFeeSelected {
             let entryFeeCurrentString = entryFeeCurrent.rounded(with: .undefined).toString() + "%"
             let entryFeeSelectedString = " (" + entryFeeSelected.rounded(with: .undefined).toString() + "%)"
             
@@ -40,17 +42,18 @@ extension ProgramInvestNowTableViewCellViewModel: CellViewModel {
         }
         
         cell.successFeeTitleLabel.text = "success fee"
-        if let successFee = programDetailsFull?.successFee {
+        if let successFee = programDetails?.successFeeCurrent {
             cell.successFeeValueLabel.text = successFee.rounded(with: .undefined).toString() + "%"
         }
         
         cell.investTitleLabel.text = "av. to invest"
-        if let availableInvestment = programDetailsFull?.availableInvestmentBase, let currency = programDetailsFull?.currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
+        if let availableInvestment = programDetails?.availableInvestmentBase, let currency = programDetailsFull?.tradingAccountInfo?.currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
             cell.investValueLabel.text = availableInvestment.rounded(with: currencyType).toString() + " " + currencyType.rawValue
         }
         
+        //FIXME: if selected != current => show (selected)
         cell.stopOutTitleLabel.text = "stop out"
-        if let stopOutLevel = programDetailsFull?.stopOutLevel {
+        if let stopOutLevel = programDetails?.stopOutLevelCurrent {
             cell.stopOutValueLabel.text = stopOutLevel.rounded(with: .undefined).toString() + "%"
         }
     }

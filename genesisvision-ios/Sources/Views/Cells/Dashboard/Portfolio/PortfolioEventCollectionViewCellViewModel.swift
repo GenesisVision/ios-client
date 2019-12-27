@@ -16,6 +16,7 @@ struct PortfolioEventCollectionViewCellViewModel {
 
 extension PortfolioEventCollectionViewCellViewModel: CellViewModel {
     func setup(on cell: PortfolioEventCollectionViewCell) {
+        cell.iconImageView.image = UIImage.eventPlaceholder
         if let fileName = event.icon, let fileUrl = getFileURL(fileName: fileName) {
             cell.typeImageView.kf.indicatorType = .activity
             cell.typeImageView.kf.setImage(with: fileUrl, placeholder: UIImage.eventPlaceholder)
@@ -27,7 +28,7 @@ extension PortfolioEventCollectionViewCellViewModel: CellViewModel {
         
         if let type = event.assetDetails?.assetType {
             switch type {
-            case .funds:
+            case .fund:
                 cell.iconImageView.image = UIImage.fundPlaceholder
             default:
                 cell.iconImageView.image = UIImage.programPlaceholder

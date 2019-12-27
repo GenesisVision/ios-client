@@ -9,9 +9,11 @@
 import Foundation
 
 class SearchDataProvider: DataProvider {
-    static func get(_ mask: String? = nil, take: Int? = nil, completion: @escaping (_ searchViewModel: SearchViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func get(_ mask: String? = nil, take: Int? = nil, completion: @escaping (_ searchViewModel: CommonPublicAssetsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
-        SearchAPI.v10SearchGet(mask: mask, take: take) { (viewModel, error) in
+        let authorization = AuthManager.authorizedToken
+        
+        SearchAPI.search(authorization: authorization, mask: mask, take: take) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
