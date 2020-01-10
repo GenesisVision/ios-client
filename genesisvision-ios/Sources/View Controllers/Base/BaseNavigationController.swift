@@ -31,6 +31,9 @@ class BaseNavigationController: UINavigationController {
         navigationBar.isTranslucent = isTranslucent
         navigationBar.barTintColor = UIColor.BaseView.bg
         navigationBar.shadowImage = UIImage()
+        
+        navigationController?.navigationBar.backIndicatorImage = #imageLiteral(resourceName: "img_back_arrow")
+        navigationController?.navigationBar.backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "img_back_arrow")
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {

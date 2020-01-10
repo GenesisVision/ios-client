@@ -19,24 +19,16 @@ class FundInfoViewController: BaseViewControllerWithTableView {
     @IBOutlet override var tableView: UITableView! {
         didSet {
             setupTableConfiguration()
-            tableView.isScrollEnabled = false
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        setupNavigationBar()
         
         setup()
-    }
-    
-    override func willMove(toParent parent: UIViewController?) {
-        setupNavigationBar()
+        
+        showProgressHUD()
+        fetch()
     }
     
     // MARK: - Private methods
@@ -52,7 +44,6 @@ class FundInfoViewController: BaseViewControllerWithTableView {
         tableView.configure(with: .defaultConfiguration)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.bounces = false
         tableView.separatorStyle = .none
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
         
@@ -158,19 +149,6 @@ extension FundInfoViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) {
             cell.contentView.backgroundColor = UIColor.BaseView.bg
-        }
-    }
-    
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        scrollView.isScrollEnabled = scrollView.contentOffset.y > -43.5
-    }
-    
-    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        let translation = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
-        if translation.y > 0 {
-            scrollView.isScrollEnabled = scrollView.contentOffset.y > -43.5
-        } else {
-            scrollView.isScrollEnabled = scrollView.contentOffset.y >= -43.5
         }
     }
 }

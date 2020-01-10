@@ -1,5 +1,5 @@
 //
-//  FundReallocateHistoryViewController.swift
+//  ProgramPeriodHistoryViewController.swift
 //  genesisvision-ios
 //
 //  Created by George on 21/07/2019.
@@ -8,22 +8,16 @@
 
 import UIKit
 
-class FundReallocateHistoryViewController: BaseViewControllerWithTableView {
+class ProgramPeriodHistoryViewController: BaseViewControllerWithTableView {
     
     // MARK: - View Model
-    var viewModel: FundReallocateHistoryViewModel!
+    var viewModel: ProgramPeriodHistoryViewModel!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setup()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        viewModel.hideHeader()
     }
     
     // MARK: - Private methods
@@ -39,7 +33,7 @@ class FundReallocateHistoryViewController: BaseViewControllerWithTableView {
     }
     
     private func setup() {
-        bottomViewType = .none
+        bottomViewType = .dateRange
         noDataTitle = viewModel.noDataText()
         setupTableConfiguration()
         
@@ -73,12 +67,15 @@ class FundReallocateHistoryViewController: BaseViewControllerWithTableView {
     }
     
     override func updateData(from dateFrom: Date?, to dateTo: Date?) {
+        viewModel.dateFrom = dateFrom
+        viewModel.dateTo = dateTo
+        
         showProgressHUD()
         fetch()
     }
 }
 
-extension FundReallocateHistoryViewController: UITableViewDelegate, UITableViewDataSource {
+extension ProgramPeriodHistoryViewController: UITableViewDelegate, UITableViewDataSource {
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let model = viewModel.model(for: indexPath) else {
@@ -112,32 +109,9 @@ extension FundReallocateHistoryViewController: UITableViewDelegate, UITableViewD
     }
 }
 
-extension FundReallocateHistoryViewController: ReloadDataProtocol {
+extension ProgramPeriodHistoryViewController: ReloadDataProtocol {
     func didReloadData() {
         reloadData()
         tabmanBarItems?.forEach({ $0.badgeValue = "\(viewModel.totalCount)" })
-    }
-}
-
-extension FundReallocateHistoryViewController: ReallocateHistoryTableViewCellProtocol {
-    func didTapSeeAllButton(_ index: Int) {
-        bottomSheetController = BottomSheetController()
-        bottomSheetController.initializeHeight = 300
-        
-        bottomSheetController.addNavigationBar("Assets")
-        
-        viewModel.didTapSeeAll(index)
-        
-        bottomSheetController.addTableView { [weak self] tableView in
-            viewModel.fundAssetsDelegateManager?.tableView = tableView
-            tableView.separatorStyle = .none
-            
-            guard let fundAssetsDelegateManager = self?.viewModel.fundAssetsDelegateManager else { return }
-            tableView.registerNibs(for: fundAssetsDelegateManager.cellModelsForRegistration)
-            tableView.delegate = fundAssetsDelegateManager
-            tableView.dataSource = fundAssetsDelegateManager
-        }
-        
-        bottomSheetController.present()
     }
 }

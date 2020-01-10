@@ -7,6 +7,7 @@
 //
 
 import UIKit.UITableView
+import Tabman
 import Pageboy
 
 class TableViewDataSourceAndDelegate: NSObject, UITableViewDataSource, UITableViewDelegate {
@@ -39,46 +40,23 @@ class TableViewDataSourceAndDelegate: NSObject, UITableViewDataSource, UITableVi
     }
 }
 
-class PageboyDataSource: NSObject, PageboyViewControllerDataSource {
-    var viewModel: TabmanViewModel!
+class PageboyDataSource: BasePageboyViewControllerDataSource, TMBarDataSource {
+    var viewModel: TabmanDataSourceProtocol?
     
-    init(viewModel: TabmanViewModel) {
+    // MARK: - Private methods
+    override func setup(_ viewModel: TabmanDataSourceProtocol?) {
         self.viewModel = viewModel
     }
     
-    func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
-        return viewModel.viewControllers.count
+    override func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
+        return viewModel?.getCount() ?? 0
+    }
+    override func viewController(for pageboyViewController: PageboyViewController, at index: PageboyViewController.PageIndex) -> UIViewController? {
+        return viewModel?.getViewController(index)
     }
     
-    func viewController(for pageboyViewController: PageboyViewController, at index: PageboyViewController.PageIndex) -> UIViewController? {
-        return viewModel.viewControllers[index]
-    }
-    
-    func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
-        return viewModel.defaultPage
+    func barItem(for bar: TMBar, at index: Int) -> TMBarItemable {
+        return viewModel?.getItem(index) ?? TMBarItem(title: "Empty")
     }
 }
 
-class PageboyDelegate: NSObject, PageboyViewControllerDelegate {
-    var viewModel: TabmanViewModel!
-    
-    init(viewModel: TabmanViewModel) {
-        self.viewModel = viewModel
-    }
-    
-    func pageboyViewController(_ pageboyViewController: PageboyViewController, didScrollToPageAt index: Int, direction: PageboyViewController.NavigationDirection, animated: Bool) {
-        
-    }
-    
-    func pageboyViewController(_ pageboyViewController: PageboyViewController, didScrollTo position: CGPoint, direction: PageboyViewController.NavigationDirection, animated: Bool) {
-        
-    }
-    
-    func pageboyViewController(_ pageboyViewController: PageboyViewController, willScrollToPageAt index: Int, direction: PageboyViewController.NavigationDirection, animated: Bool) {
-        
-    }
-    
-    func pageboyViewController(_ pageboyViewController: PageboyViewController, didReloadWith currentViewController: UIViewController, currentPageIndex: PageboyViewController.PageIndex) {
-        
-    }
-}

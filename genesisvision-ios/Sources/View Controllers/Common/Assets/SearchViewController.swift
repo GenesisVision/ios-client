@@ -6,33 +6,81 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import Tabman
+
+protocol SearchViewControllerProtocol: class {
+    func didClose()
+    func didSelect(_ assetId: String, assetType: AssetType)
+}
 
 class SearchViewController: BaseTabmanViewController<SearchTabmanViewModel> {
     // MARK: - Variables
     var pageboyDataSource: SearchPageboyViewControllerDataSource!
+    private var closeBarButtonItem: UIBarButtonItem?
     
+    var searchController = UISearchController()
+    var timer: Timer?
+    weak var searchProtocol: SearchViewControllerProtocol?
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.title = viewModel.title
-        
-        pageboyDataSource = SearchPageboyViewControllerDataSource(router: viewModel.router, showFacets: viewModel.showFacets)
+        pageboyDataSource = SearchPageboyViewControllerDataSource(router: viewModel.router, showFacets: viewModel.showFacets, searchProtocol: searchProtocol)
         self.dataSource = pageboyDataSource
+        
+        closeBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_close_icon"), style: .done, target: self, action: #selector(closeButtonAction(_:)))
+        navigationItem.rightBarButtonItem = closeBarButtonItem
+        
+        setupSearchBar()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
+    // MARK: - Private methods
+    private func setupSearchBar() {
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.autocapitalizationType = .none
+        
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        
+        //UI
+        searchController.searchBar.keyboardAppearance = .dark
+        searchController.searchBar.returnKeyType = .done
+        searchController.searchBar.showsCancelButton = false
+        searchController.searchBar.setImage(#imageLiteral(resourceName: "img_search_icon"), for: UISearchBar.Icon.search, state: .normal)
+        searchController.searchBar.isTranslucent = false
+        searchController.searchBar.searchBarStyle = .minimal
+        
+        searchController.searchBar.tintColor = UIColor.primary
+        searchController.searchBar.barTintColor = UIColor.primary
+        
+        searchController.searchBar.placeholder = "Search"
+        searchController.searchBar.inputView?.tintColor = UIColor.primary
+        
+        searchController.dimsBackgroundDuringPresentation = false
+        navigationItem.titleView = searchController.searchBar
+//        searchController.extendedLayoutIncludesOpaqueBars = true
+//        searchController.edgesForExtendedLayout = .all
+        extendedLayoutIncludesOpaqueBars = false
+        if #available(iOS 11.0, *) {
+            navigationItem.hidesSearchBarWhenScrolling = true
+        }
+
+        if let textfield = searchController.searchBar.value(forKey: "searchField") as? UITextField {
+            textfield.textColor = UIColor.primary
+        }
+        
+        definesPresentationContext = true
+    }
     // MARK: - Public methods
-    func performSearch() {
+    @objc func performSearch() {
         viewModel.fetch({ [weak self] (viewModel) in
-            if let viewModel = viewModel {
-                self?.updateControllers(viewModel)
-            }
+            self?.updateControllers(viewModel)
         }) { (result) in
             switch result {
             case .success:
@@ -53,14 +101,35 @@ class SearchViewController: BaseTabmanViewController<SearchTabmanViewModel> {
     
     private func updateControllers(_ searchViewModel: CommonPublicAssetsViewModel?) {
         for vc in pageboyDataSource.controllers {
-            if let vc = vc as? ProgramListViewController, let viewModel = vc.viewModel {
-                viewModel.updateViewModels(searchViewModel?.programs)
+            if let vc = vc as? ProgramListViewController, let viewModel = vc.viewModel, viewModel.assetType == .follow {
+                viewModel.updateViewModels(searchViewModel?.follows)
             } else if let vc = vc as? FundListViewController, let viewModel = vc.viewModel {
                 viewModel.updateViewModels(searchViewModel?.funds)
+            } else if let vc = vc as? ProgramListViewController, let viewModel = vc.viewModel, viewModel.assetType == .program {
+                viewModel.updateViewModels(searchViewModel?.programs)
             } else if let vc = vc as? ManagerListViewController, let viewModel = vc.viewModel as? ManagerListViewModel {
                 viewModel.updateViewModels(searchViewModel?.managers)
             }
         }
     }
+    
+    @IBAction func closeButtonAction(_ sender: Any) {
+        searchProtocol?.didClose()
+    }
 }
 
+extension SearchViewController: UISearchResultsUpdating, UISearchBarDelegate {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text, !text.trimmingCharacters(in: .whitespaces).isEmpty else {
+            viewModel.filterModel.mask = ""
+            clearResults()
+            timer?.invalidate()
+            return
+        }
+        viewModel.filterModel.mask = text
+
+        timer?.invalidate()
+
+        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(performSearch), userInfo: nil, repeats: false)
+    }
+}

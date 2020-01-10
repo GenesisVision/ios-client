@@ -11,7 +11,7 @@ import Foundation
 final class ProgramInvestViewModel {
     // MARK: - Variables
     var title: String = "Investment"
-    var programId: String?
+    var assetId: String?
     var programCurrency: CurrencyType?
     var walletCurrency: CurrencyType?
     var labelPlaceholder: String = "0"
@@ -29,9 +29,9 @@ final class ProgramInvestViewModel {
     private var router: ProgramInvestRouter!
     
     // MARK: - Init
-    init(withRouter router: ProgramInvestRouter, programId: String, programCurrency: CurrencyType, detailProtocol: DetailProtocol?) {
+    init(withRouter router: ProgramInvestRouter, assetId: String, programCurrency: CurrencyType, detailProtocol: DetailProtocol?) {
         self.router = router
-        self.programId = programId
+        self.assetId = assetId
         self.programCurrency = programCurrency
         self.detailProtocol = detailProtocol
         
@@ -54,7 +54,7 @@ final class ProgramInvestViewModel {
     }
     
     func getInfo(completion: @escaping CompletionBlock) {
-//        guard let programId = programId,
+//        guard let assetId = assetId,
 //            let programCurrencyValue = programCurrency?.rawValue
 //            let currencySecondary = InvestorAPI.Currency_investIntoProgram(rawValue: programCurrencyValue)
 //            else { return completion(.failure(errorType: .apiError(message: nil))) }
@@ -70,7 +70,7 @@ final class ProgramInvestViewModel {
                 }
                 
                 //FIXME:
-//                ProgramsDataProvider.getInvestInfo(programId: programId, currencySecondary: currencySecondary, completion: { [weak self] (programInvestInfo) in
+//                ProgramsDataProvider.getInvestInfo(assetId: assetId, currencySecondary: currencySecondary, completion: { [weak self] (programInvestInfo) in
 //                    guard let programInvestInfo = programInvestInfo else {
 //                        return completion(.failure(errorType: .apiError(message: nil)))
 //                    }
@@ -183,6 +183,6 @@ final class ProgramInvestViewModel {
     // MARK: - Private methods
     // MARK: - API
     private func apiInvest(with value: Double, completion: @escaping CompletionBlock) {
-        ProgramsDataProvider.invest(withAmount: value, assetId: programId, errorCompletion: completion)
+        ProgramsDataProvider.invest(withAmount: value, assetId: assetId, errorCompletion: completion)
     }
 }

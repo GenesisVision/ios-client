@@ -27,7 +27,7 @@ class WalletViewController: BaseTabmanViewController<WalletTabmanViewModel> {
     private func setup() {
         navigationItem.title = viewModel.title
         
-        dataSource = viewModel.getDataSources()
+        dataSource = viewModel.dataSource
         
         setupUI()
     }

@@ -19,27 +19,16 @@ class ProgramInfoViewController: BaseViewControllerWithTableView {
     @IBOutlet override var tableView: UITableView! {
         didSet {
             setupTableConfiguration()
-            tableView.isScrollEnabled = false
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
-        setupNavigationBar()
         setup()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-    }
-    
-    override func willMove(toParent parent: UIViewController?) {
-        setupNavigationBar()
+        
+        showProgressHUD()
+        fetch()
     }
     
     // MARK: - Private methods
@@ -55,7 +44,6 @@ class ProgramInfoViewController: BaseViewControllerWithTableView {
         tableView.configure(with: .defaultConfiguration)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.bounces = false
         tableView.separatorStyle = .none
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
         
@@ -101,6 +89,7 @@ class ProgramInfoViewController: BaseViewControllerWithTableView {
             case .success:
                 self?.reloadData()
             case .failure(let errorType):
+                self?.reloadData()
                 ErrorHandler.handleError(with: errorType, viewController: self)
             }
         }
@@ -165,19 +154,6 @@ extension ProgramInfoViewController: UITableViewDelegate, UITableViewDataSource 
             cell.accessoryView?.backgroundColor = UIColor.BaseView.bg
         }
     }
-    
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        scrollView.isScrollEnabled = scrollView.contentOffset.y > -43.5
-    }
-    
-    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        let translation = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
-        if translation.y > 0 {
-            scrollView.isScrollEnabled = scrollView.contentOffset.y > -43.5
-        } else {
-            scrollView.isScrollEnabled = scrollView.contentOffset.y >= -43.5
-        }
-    }
 }
 
 extension ProgramInfoViewController: ReloadDataProtocol {
@@ -200,5 +176,31 @@ extension ProgramInfoViewController: InRequestsDelegateManagerProtocol {
         default:
             break
         }
+    }
+}
+
+// MARK: - AboutLevelViewProtocol
+extension ProgramInfoViewController: AboutLevelViewProtocol {
+    func aboutLevelsButtonDidPress() {
+        bottomSheetController.dismiss()
+        
+        viewModel.showAboutLevels()
+    }
+}
+
+extension ProgramInfoViewController: ProgramHeaderProtocol {
+    func aboutLevelButtonDidPress() {
+        let aboutLevelView = AboutLevelView.viewFromNib()
+        aboutLevelView.delegate = self
+        
+        if let programDetails = viewModel.programDetailsFull, let currency = programDetails.tradingAccountInfo?.currency, let selectedCurrency = CurrencyType(rawValue: currency.rawValue) {
+            aboutLevelView.configure(programDetails.programDetails?.level, currency: selectedCurrency)
+        }
+        
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.lineViewIsHidden = true
+        bottomSheetController.initializeHeight = 270
+        bottomSheetController.addContentsView(aboutLevelView)
+        bottomSheetController.present()
     }
 }

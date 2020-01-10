@@ -62,8 +62,6 @@ extension InvestingEventsViewModel {
     func getCollectionViewHeight() -> CGFloat {
         return 170.0
     }
-    
-    
 }
 
 

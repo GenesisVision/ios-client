@@ -38,7 +38,7 @@ class AboutLevelView: UIView {
     }
     @IBOutlet weak var firstStackView: UIStackView! {
         didSet {
-            firstStackView.isHidden = false
+            firstStackView.isHidden = true
         }
     }
     
@@ -81,7 +81,6 @@ class AboutLevelView: UIView {
     }
     
     // MARK: - Public Methods
-    //FIXME:
     func configure(_ level: Int?, currency: CurrencyType) {
         
         titleLabel.text = "Genesis Level \(level?.toString() ?? "")"

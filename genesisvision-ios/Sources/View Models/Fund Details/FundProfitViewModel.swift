@@ -16,7 +16,7 @@ final class FundProfitViewModel {
     
     // MARK: - Variables
     var title: String = "Profit"
-    var fundId: String?
+    var assetId: String?
     
     var router: FundRouter!
     private weak var reloadDataProtocol: ReloadDataProtocol?
@@ -36,19 +36,15 @@ final class FundProfitViewModel {
     private var fundProfitStatisticTableViewCellViewModel: FundProfitStatisticTableViewCellViewModel?
     
     // MARK: - Init
-    init(withRouter router: FundRouter, fundId: String, reloadDataProtocol: ReloadDataProtocol?) {
+    init(withRouter router: FundRouter, assetId: String, reloadDataProtocol: ReloadDataProtocol?) {
         self.router = router
-        self.fundId = fundId
+        self.assetId = assetId
         self.reloadDataProtocol = reloadDataProtocol
         self.chartViewProtocol = router.currentController as? ChartViewProtocol
     }
     
     // MARK: - Public methods
     func selectSimpleChartPoint(_ date: Date) {
-    }
-    
-    func hideHeader(value: Bool = true) {
-        router.fundViewController.hideHeader(value)
     }
 }
 
@@ -112,8 +108,8 @@ extension FundProfitViewModel {
     private func fetch(_ completion: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-            guard let fundId = fundId else { return completion(.failure(errorType: .apiError(message: nil))) }
-            FundsDataProvider.getProfitPercentCharts(with: fundId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, completion: { [weak self] (viewModel) in
+            guard let assetId = assetId else { return completion(.failure(errorType: .apiError(message: nil))) }
+            FundsDataProvider.getProfitPercentCharts(with: assetId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, completion: { [weak self] (viewModel) in
                 guard viewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completion)
                 }

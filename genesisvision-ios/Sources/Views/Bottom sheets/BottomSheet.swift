@@ -158,7 +158,7 @@ open class BottomSheet {
         
         // MARK: - Open method
         open func present() {
-            let window = UIApplication.shared.windows[0] as UIWindow
+            let window = UIApplication.shared.windows[0]
             if let vc = window.rootViewController {
                 DispatchQueue.main.async {
                     vc.present(self, animated: true, completion: nil)
@@ -526,6 +526,7 @@ open class BottomSheet {
                                                       constant: 0)
             containerView.addConstraints([topConstraint, leftConstraint, rightConstraint, bottomConstraint])
             tableView.reloadData()
+            
             self.scrollView = tableView
         }
         

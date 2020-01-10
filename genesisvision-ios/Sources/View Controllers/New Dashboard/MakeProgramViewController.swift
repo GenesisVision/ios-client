@@ -50,6 +50,9 @@ class MakeProgramViewController: BaseModalViewController {
         stackView.entryFeeView.textField.addTarget(self, action: #selector(checkActionButton), for: .editingChanged)
         stackView.successFeeView.textField.designableTextFieldDelegate = self
         stackView.successFeeView.textField.addTarget(self, action: #selector(checkActionButton), for: .editingChanged)
+        
+        stackView.entryFeeView.textField.text = "0"
+        stackView.successFeeView.textField.text = "0"
     }
     
     func updateUI() {

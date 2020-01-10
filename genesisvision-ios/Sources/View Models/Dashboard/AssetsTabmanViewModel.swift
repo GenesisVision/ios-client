@@ -10,7 +10,11 @@ import Foundation
 import Tabman
 
 class AssetsTabmanViewModel: TabmanViewModel {
-    var dataSource: AssetsPageboyViewControllerDataSource!
+    enum TabType: String {
+        case follows = "Follows", funds = "Funds", programs = "Programs"
+    }
+    var tabTypes: [TabType] = [.follows, .funds, .programs]
+    var controllers = [TabType : UIViewController]()
     
     var filterModel: FilterModel = FilterModel()
     var searchBarEnable = false
@@ -20,16 +24,40 @@ class AssetsTabmanViewModel: TabmanViewModel {
     init(withRouter router: Router, searchBarEnable: Bool = false, showFacets: Bool = false) {
         super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0)
     
-        title = "Assets"
+        title = "Invest"
         font = UIFont.getFont(.semibold, size: 16)
         
         self.searchBarEnable = searchBarEnable
         self.showFacets = showFacets
         
-        items = [TMBarItem(title: "Follow"),
-                 TMBarItem(title: "Funds"),
-                 TMBarItem(title: "Programs")]
-        
-        dataSource = AssetsPageboyViewControllerDataSource(router: router, showFacets: showFacets)
+        self.tabTypes.forEach({ controllers[$0] = getViewController($0) })
+        self.dataSource = PageboyDataSource(self)
+    }
+    
+    func getViewController(_ type: TabType) -> UIViewController? {
+        switch type {
+        case .programs:
+            return controllers[type] ?? router.getPrograms(with: FilterModel(), showFacets: showFacets, parentRouter: router)
+        case .funds:
+            return controllers[type] ?? router.getFunds(with: FilterModel(), showFacets: showFacets, parentRouter: router)
+        case .follows:
+            return controllers[type] ?? router.getFollows(with: FilterModel(), showFacets: showFacets, parentRouter: router)
+        }
+    }
+}
+
+extension AssetsTabmanViewModel: TabmanDataSourceProtocol {
+    func getCount() -> Int {
+        return tabTypes.count
+    }
+    
+    func getItem(_ index: Int) -> TMBarItem? {
+        let type = tabTypes[index]
+    
+        return TMBarItem(title: type.rawValue)
+    }
+    
+    func getViewController(_ index: Int) -> UIViewController? {
+        return getViewController(tabTypes[index])
     }
 }

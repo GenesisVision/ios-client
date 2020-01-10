@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Tabman
 
 protocol BaseTableViewProtocol: class {
     func action(_ type: CellActionType, actionType: ActionType)
@@ -108,17 +109,17 @@ protocol DelegateManagerProtocol: class {
     func delegateManagerScrollViewDidScroll(_ scrollView: UIScrollView)
     func delegateManagerScrollViewWillBeginDragging(_ scrollView: UIScrollView)
     func delegateManagerTableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
+    func delegateManagerTableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
 }
 
 extension DelegateManagerProtocol {
     func delegateManagerScrollViewDidScroll(_ scrollView: UIScrollView) {
-        
     }
     func delegateManagerScrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        
     }
     func delegateManagerTableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
+    }
+    func delegateManagerTableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     }
 }
 
@@ -298,4 +299,10 @@ protocol WalletListViewModelProtocol {
 
 protocol WalletDelegateManagerProtocol: class {
     func didSelectWallet(at indexPath: IndexPath, walletId: Int)
+}
+
+protocol TabmanDataSourceProtocol {
+    func getCount() -> Int
+    func getItem(_ index: Int) -> TMBarItem?
+    func getViewController(_ index: Int) -> UIViewController?
 }

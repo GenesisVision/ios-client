@@ -15,7 +15,7 @@ final class FundBalanceViewModel {
     
     // MARK: - Variables
     var title: String = "Balance"
-    var fundId: String?
+    var assetId: String?
     
     var router: FundRouter!
     private weak var reloadDataProtocol: ReloadDataProtocol?
@@ -34,9 +34,9 @@ final class FundBalanceViewModel {
     private var fundBalanceChartTableViewCellViewModel:   ProgramBalanceChartTableViewCellViewModel?
     
     // MARK: - Init
-    init(withRouter router: FundRouter, fundId: String, reloadDataProtocol: ReloadDataProtocol?) {
+    init(withRouter router: FundRouter, assetId: String, reloadDataProtocol: ReloadDataProtocol?) {
         self.router = router
-        self.fundId = fundId
+        self.assetId = assetId
         self.reloadDataProtocol = reloadDataProtocol
         self.chartViewProtocol = router.currentController as? ChartViewProtocol
     }
@@ -48,10 +48,6 @@ final class FundBalanceViewModel {
 //        }
         
         return nil
-    }
-    
-    func hideHeader(value: Bool = true) {
-        router.fundViewController.hideHeader(value)
     }
 }
 
@@ -92,8 +88,8 @@ extension FundBalanceViewModel {
     private func fetch(_ completion: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-            guard let fundId = fundId else { return completion(.failure(errorType: .apiError(message: nil))) }
-            FundsDataProvider.getBalanceChart(with: fundId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, completion: { [weak self] (viewModel) in
+            guard let assetId = assetId else { return completion(.failure(errorType: .apiError(message: nil))) }
+            FundsDataProvider.getBalanceChart(with: assetId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, completion: { [weak self] (viewModel) in
                 guard viewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completion)
                 }

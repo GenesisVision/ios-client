@@ -219,10 +219,10 @@ class CreateFundStackView: ActionStackView {
         feesSettingsTitle.text = "Fees settings"
         entryFeeView.titleLabel.text = "Entry fee"
         entryFeeView.textField.text = ""
-        entryFeeView.subtitleLabel.text = "An entry fee is a fee charged to investors upon their investment to a GV Fund. The maximum entry fee is 0 %"
+        entryFeeView.subtitleLabel.text = "An entry fee is a fee charged to investors upon their investment to a GV Fund. The maximum entry fee is 10 %"
         exitFeeView.titleLabel.text = "Exit fee"
         exitFeeView.textField.text = ""
-        exitFeeView.subtitleLabel.text = "An exit fee is a fee charged to investors when they redeem shares from a GV Fund. The maximum exit fee is 0 %"
+        exitFeeView.subtitleLabel.text = "An exit fee is a fee charged to investors when they redeem shares from a GV Fund. The maximum exit fee is 10 %"
         
         depositTitle.text = "Deposit details"
         
@@ -368,6 +368,13 @@ class LimitStackView: BaseStackView {
             limitSwitch.tintColor = UIColor.Cell.switchTint
         }
     }
+    @IBOutlet weak var currencyLabel: TitleLabel! {
+        didSet {
+            currencyLabel.textColor = UIColor.Cell.subtitle
+            currencyLabel.font = UIFont.getFont(.semibold, size: 12)
+            currencyLabel.text = ""
+        }
+    }
     @IBOutlet weak var amountView: UIStackView! {
         didSet {
             amountView.isHidden = true
@@ -394,6 +401,13 @@ class TextFieldStackView: BaseStackView {
         didSet {
             textField.setClearButtonWhileEditing()
             textField.isSecureTextEntry = false
+        }
+    }
+    @IBOutlet weak var currencyLabel: TitleLabel! {
+        didSet {
+            currencyLabel.textColor = UIColor.Cell.subtitle
+            currencyLabel.font = UIFont.getFont(.semibold, size: 12)
+            currencyLabel.text = "%"
         }
     }
     @IBOutlet weak var maxButton: UIButton! {

@@ -15,7 +15,7 @@ final class ProgramBalanceViewModel {
     
     // MARK: - Variables
     var title: String = "Equity"
-    var programId: String?
+    var assetId: String?
     
     var router: ProgramRouter!
     private weak var reloadDataProtocol: ReloadDataProtocol?
@@ -34,9 +34,9 @@ final class ProgramBalanceViewModel {
     private var programBalanceChartTableViewCellViewModel:   ProgramBalanceChartTableViewCellViewModel?
     
     // MARK: - Init
-    init(withRouter router: ProgramRouter, programId: String, reloadDataProtocol: ReloadDataProtocol?) {
+    init(withRouter router: ProgramRouter, assetId: String, reloadDataProtocol: ReloadDataProtocol?) {
         self.router = router
-        self.programId = programId
+        self.assetId = assetId
         self.reloadDataProtocol = reloadDataProtocol
         self.chartViewProtocol = router.currentController as? ChartViewProtocol
     }
@@ -48,10 +48,6 @@ final class ProgramBalanceViewModel {
 //            print("selectProgramBalanceChartElement")
 //            print(result)
 //        }
-    }
-    
-    func hideHeader(value: Bool = true) {
-        router.programViewController.hideHeader(value)
     }
 }
 
@@ -92,9 +88,9 @@ extension ProgramBalanceViewModel {
     private func fetch(_ completion: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-            guard let programId = programId else { return completion(.failure(errorType: .apiError(message: nil))) }
+            guard let assetId = assetId else { return completion(.failure(errorType: .apiError(message: nil))) }
             
-            ProgramsDataProvider.getBalanceChart(with: programId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, completion: { [weak self] (viewModel) in
+            ProgramsDataProvider.getBalanceChart(with: assetId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, completion: { [weak self] (viewModel) in
                 guard viewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completion)
                 }

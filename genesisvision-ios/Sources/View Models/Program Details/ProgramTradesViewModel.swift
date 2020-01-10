@@ -13,7 +13,7 @@ final class ProgramTradesViewModel {
     typealias CellViewModel = ProgramTradesTableViewCellViewModel
     
     var title: String = "Trades"
-    var programId: String?
+    var assetId: String?
     
     var router: ProgramRouter!
     private weak var reloadDataProtocol: ReloadDataProtocol?
@@ -50,9 +50,9 @@ final class ProgramTradesViewModel {
     var isOpenTrades: Bool = false
     
     // MARK: - Init
-    init(withRouter router: ProgramRouter, programId: String, reloadDataProtocol: ReloadDataProtocol?, isOpenTrades: Bool? = false, currencyType: CurrencyType) {
+    init(withRouter router: ProgramRouter, assetId: String, reloadDataProtocol: ReloadDataProtocol?, isOpenTrades: Bool? = false, currencyType: CurrencyType) {
         self.router = router
-        self.programId = programId
+        self.assetId = assetId
         self.isOpenTrades = isOpenTrades ?? false
         self.reloadDataProtocol = reloadDataProtocol
         self.currencyType = currencyType
@@ -61,10 +61,6 @@ final class ProgramTradesViewModel {
         
         let sortingManager = SortingManager(self.isOpenTrades ? .tradesOpen : .trades)
         sortingDelegateManager = SortingDelegateManager(sortingManager)
-    }
-
-    func hideHeader(value: Bool = true) {
-        router.programViewController.hideHeader(value)
     }
 }
 
@@ -196,12 +192,12 @@ extension ProgramTradesViewModel {
     
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [CellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         
-        guard let programId = programId else { return completionError(.failure(errorType: .apiError(message: nil))) }
+        guard let assetId = assetId else { return completionError(.failure(errorType: .apiError(message: nil))) }
         
         let sorting = sortingDelegateManager.manager?.getSelectedSorting()
         
         if isOpenTrades {
-            ProgramsDataProvider.getTradesOpen(with: programId, sorting: sorting as? ProgramsAPI.Sorting_getProgramOpenTrades, skip: skip, take: take, completion: { [weak self] (tradesViewModel) in
+            ProgramsDataProvider.getTradesOpen(with: assetId, sorting: sorting as? ProgramsAPI.Sorting_getProgramOpenTrades, skip: skip, take: take, completion: { [weak self] (tradesViewModel) in
                 guard tradesViewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completionError)
                 }
@@ -218,7 +214,7 @@ extension ProgramTradesViewModel {
                 completionError(.success)
             }, errorCompletion: completionError)
         } else {
-            ProgramsDataProvider.getTrades(with: programId, dateFrom: dateFrom, dateTo: dateTo, sorting: sorting as? ProgramsAPI.Sorting_getAssetTrades, skip: skip, take: take, completion: { [weak self] (tradesViewModel) in
+            ProgramsDataProvider.getTrades(with: assetId, dateFrom: dateFrom, dateTo: dateTo, sorting: sorting as? ProgramsAPI.Sorting_getAssetTrades, skip: skip, take: take, completion: { [weak self] (tradesViewModel) in
                 guard tradesViewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completionError)
                 }

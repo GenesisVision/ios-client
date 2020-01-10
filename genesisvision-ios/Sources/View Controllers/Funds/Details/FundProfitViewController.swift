@@ -21,12 +21,6 @@ class FundProfitViewController: BaseViewControllerWithTableView {
         setup()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        viewModel.hideHeader()
-    }
-    
     // MARK: - Private methods
     private func setupTableConfiguration() {
         tableView.configure(with: .defaultConfiguration)

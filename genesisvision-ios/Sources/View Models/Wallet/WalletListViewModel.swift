@@ -41,8 +41,6 @@ final class WalletListViewModel {
     init(withRouter router: WalletRouter, reloadDataProtocol: ReloadDataProtocol? = nil) {
         self.router = router
         self.reloadDataProtocol = reloadDataProtocol
-        
-        setup()
     }
 }
 

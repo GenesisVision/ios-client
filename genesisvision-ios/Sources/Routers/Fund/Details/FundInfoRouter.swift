@@ -9,39 +9,39 @@
 import Foundation
 
 enum FundInfoRouteType {
-    case invest(fundId: String), withdraw(fundId: String), manager(managerId: String)
+    case invest(assetId: String), withdraw(assetId: String), manager(managerId: String)
 }
 
 class FundInfoRouter: Router {
     // MARK: - Public methods
     func show(routeType: FundInfoRouteType) {
         switch routeType {
-        case .invest(let fundId):
-            invest(with: fundId)
-        case .withdraw(let fundId):
-            withdraw(with: fundId)
+        case .invest(let assetId):
+            invest(with: assetId)
+        case .withdraw(let assetId):
+            withdraw(with: assetId)
         case .manager(let managerId):
             showAssetDetails(with: managerId, assetType: ._none)
         }
     }
     
     // MARK: - Private methods
-    func invest(with fundId: String) {
+    func invest(with assetId: String) {
         guard let fundViewController = parentRouter?.topViewController() as? FundViewController,
             let viewController = FundInvestViewController.storyboardInstance(.fund) else { return }
         
         let router = FundInvestRouter(parentRouter: self)
-        let viewModel = FundInvestViewModel(withRouter: router, fundId: fundId, detailProtocol: fundViewController)
+        let viewModel = FundInvestViewModel(withRouter: router, assetId: assetId, detailProtocol: fundViewController)
         viewController.viewModel = viewModel
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    func withdraw(with fundId: String) {
+    func withdraw(with assetId: String) {
         guard let fundViewController = parentRouter?.topViewController() as? FundViewController,
             let viewController = FundWithdrawViewController.storyboardInstance(.fund) else { return }
         
         let router = FundWithdrawRouter(parentRouter: self)
-        let viewModel = FundWithdrawViewModel(withRouter: router, fundId: fundId, detailProtocol: fundViewController)
+        let viewModel = FundWithdrawViewModel(withRouter: router, assetId: assetId, detailProtocol: fundViewController)
         viewController.viewModel = viewModel
         navigationController?.pushViewController(viewController, animated: true)
     }

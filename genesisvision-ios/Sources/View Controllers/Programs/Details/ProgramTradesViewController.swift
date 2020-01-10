@@ -1,56 +1,48 @@
 //
-//  FundBalanceViewController.swift
+//  ProgramTradesViewController.swift
 //  genesisvision-ios
 //
-//  Created by George on 25/10/2018.
+//  Created by George on 11/04/2018.
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
 import UIKit
-import Charts
 
-class FundBalanceViewController: BaseViewControllerWithTableView {
-    
+class ProgramTradesViewController: BaseViewControllerWithTableView {
+
     // MARK: - View Model
-    var viewModel: FundBalanceViewModel!
+    var viewModel: ProgramTradesViewModel!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setup()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        viewModel.hideHeader()
     }
     
     // MARK: - Private methods
     private func setupTableConfiguration() {
         tableView.configure(with: .defaultConfiguration)
+        tableView.allowsSelection = false
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
+        tableView.registerHeaderNib(for: viewModel.viewModelsForRegistration)
         
         setupPullToRefresh(scrollView: tableView)
-        
-        showInfiniteIndicator(value: false)
     }
     
     private func setup() {
-        bottomViewType = .dateRange
+        bottomViewType = viewModel.isOpenTrades ? .none : .dateRange
+        noDataTitle = viewModel.noDataText()
         setupTableConfiguration()
         
         setupNavigationBar()
-        
-        showProgressHUD()
-        fetch()
     }
     
     private func reloadData() {
         DispatchQueue.main.async {
+            self.refreshControl?.endRefreshing()
             self.tableView?.reloadData()
         }
     }
@@ -83,7 +75,7 @@ class FundBalanceViewController: BaseViewControllerWithTableView {
     }
 }
 
-extension FundBalanceViewController: UITableViewDelegate, UITableViewDataSource {
+extension ProgramTradesViewController: UITableViewDelegate, UITableViewDataSource {
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let model = viewModel.model(for: indexPath) else {
@@ -93,30 +85,33 @@ extension FundBalanceViewController: UITableViewDelegate, UITableViewDataSource 
         return tableView.dequeueReusableCell(withModel: model, for: indexPath)
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath))
+    }
+    
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfRows(in: section)
     }
-}
-
-extension FundBalanceViewController: ChartViewProtocol {
-    var filterDateRangeModel: FilterDateRangeModel? {
-        return dateRangeModel
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return viewModel.numberOfSections()
     }
     
-    func chartValueNothingSelected() {
-        tableView.isScrollEnabled = true
-        tableView.panGestureRecognizer.isEnabled = true
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return viewModel.headerHeight(for: section)
     }
     
-    func chartValueSelected(date: Date) {
-        tableView.isScrollEnabled = false
-        tableView.panGestureRecognizer.isEnabled = false
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeueReusableHeaderFooterView() as DateSectionTableHeaderView
+        header.headerLabel.text = viewModel.titleForHeader(in: section)
+        return header
     }
 }
 
-extension FundBalanceViewController: ReloadDataProtocol {
+extension ProgramTradesViewController: ReloadDataProtocol {
     func didReloadData() {
         reloadData()
+        tabmanBarItems?.forEach({ $0.badgeValue = "\(viewModel.totalCount)" })
     }
 }

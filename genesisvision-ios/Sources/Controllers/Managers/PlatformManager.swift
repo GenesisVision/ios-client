@@ -104,6 +104,7 @@ class PlatformManager {
 
         BaseDataProvider.getProgramsLevels(currency, completion: { [weak self] (model) in
             self?.programsLevelsInfo = model
+            completion(self?.programsLevelsInfo)
         }) { (result) in
             switch result {
             case .success:

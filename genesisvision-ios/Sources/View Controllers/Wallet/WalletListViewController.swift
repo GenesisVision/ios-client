@@ -55,7 +55,7 @@ class WalletListViewController: BaseViewControllerWithTableView {
     }
     
     private func setupUI() {
-       showInfiniteIndicator(value: false)
+        showInfiniteIndicator(value: false)
         
         noDataTitle = viewModel.noDataText()
         noDataButtonTitle = viewModel.noDataButtonTitle()

@@ -42,8 +42,8 @@ class AssetsPageboyViewControllerDataSource: BasePageboyViewControllerDataSource
         return viewController
     }
     
-    func getFollowList(with router: Router, filterModel: FilterModel? = nil, showFacets: Bool) -> FollowListViewController? {
-        guard let viewController = FollowListViewController.storyboardInstance(.assets) else { return nil }
+    func getFollowList(with router: Router, filterModel: FilterModel? = nil, showFacets: Bool) -> ProgramListViewController? {
+        guard let viewController = ProgramListViewController.storyboardInstance(.assets) else { return nil }
         router.followsViewController = viewController
         let listRouter = ListRouter(parentRouter: router)
         listRouter.currentController = viewController

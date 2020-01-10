@@ -8,32 +8,64 @@
 
 import UIKit.UINavigationController
 
-enum FundRouteType {
-    case notificationSettings(assetId: String, title: String)
-}
-
-class FundRouter: Router {
-    var fundViewController: FundViewController!
-    
-    var fundHeaderViewController: FundHeaderViewController?
-    var fundDetailsTabmanViewController: FundTabmanViewController?
-    
+class FundRouter: TabmanRouter {
+    // MARK: - Variables
+    var fundViewController: FundViewController?
+    var fundInfoViewController: FundInfoViewController?
     var fundBalanceViewController: FundBalanceViewController?
     var fundProfitViewController: FundProfitViewController?
     
-    // MARK: - Lifecycle
-    init(parentRouter: Router?, navigationController: UINavigationController?, fundViewController: FundViewController) {
-        super.init(parentRouter: parentRouter, navigationController: navigationController)
+    // MARK: - Public methods
+    func getInfo(with assetId: String) -> FundInfoViewController? {
+        let viewController = FundInfoViewController()
         
-        self.fundViewController = fundViewController
-        self.currentController = fundViewController
+        let router = FundInfoRouter(parentRouter: self)
+        router.fundsViewController = fundsViewController
+        router.currentController = viewController
+        let viewModel = FundInfoViewModel(withRouter: router, assetId: assetId, reloadDataProtocol: viewController)
+        viewController.viewModel = viewModel
+        viewController.hidesBottomBarWhenPushed = true
+        
+        fundInfoViewController = viewController
+        return viewController
     }
     
-    // MARK: - Public methods
-    func show(routeType: FundRouteType) {
-        switch routeType {
-        case .notificationSettings(let assetId, let title):
-            showAssetNotificationsSettings(assetId, title: title, type: .fund)
-        }
+    func getAssets() -> FundAssetsViewController? {
+        let viewController = FundAssetsViewController()
+        let viewModel = FundAssetsViewModel(withRouter: self, reloadDataProtocol: viewController)
+        viewController.viewModel = viewModel
+        
+        return viewController
+    }
+    
+    func getBalance(with assetId: String) -> FundBalanceViewController? {
+        let viewController = FundBalanceViewController()
+        let viewModel = FundBalanceViewModel(withRouter: self, assetId: assetId, reloadDataProtocol: viewController)
+        viewController.viewModel = viewModel
+        
+        return viewController
+    }
+    
+    func getProfit(with assetId: String) -> FundProfitViewController? {
+        let viewController = FundProfitViewController()
+        let viewModel = FundProfitViewModel(withRouter: self, assetId: assetId, reloadDataProtocol: viewController)
+        viewController.viewModel = viewModel
+        
+        return viewController
+    }
+    
+    func getEvents(with assetId: String) -> EventListViewController? {
+        guard let viewController = getEventsViewController(with: assetId, router: self, allowsSelection: false, assetType: .fund) else { return nil }
+        
+        return viewController
+    }
+    
+    func getReallocateHistory(with assetId: String) -> FundReallocateHistoryViewController? {
+
+        let viewController = FundReallocateHistoryViewController()
+        let viewModel = FundReallocateHistoryViewModel(withRouter: self, assetId: assetId, reloadDataProtocol: viewController, delegate: viewController)
+        viewController.viewModel = viewModel
+        
+        return viewController
     }
 }

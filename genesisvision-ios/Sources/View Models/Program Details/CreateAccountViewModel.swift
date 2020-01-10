@@ -11,23 +11,26 @@ import Foundation
 final class OldCreateAccountViewModel {
     // MARK: - Variables
     var title: String = "Account creation"
-    var programId: String?
+    var assetId: String?
     var programCurrency: CurrencyType?
     var labelPlaceholder: String = "0"
-    
+    var leverage: Int?
     var walletSummary: WalletSummary?
     var walletMultiAvailable: WalletMultiAvailable?
     var selectedWalletFromDelegateManager: WalletDepositCurrencyDelegateManager?
     
     var rate: Double = 0.0
     var completion: CreateAccountCompletionBlock?
+    var brokerId: UUID?
     
     private var router: ProgramInfoRouter!
     
     // MARK: - Init
-    init(withRouter router: ProgramInfoRouter, programId: String, programCurrency: CurrencyType, completion: @escaping CreateAccountCompletionBlock) {
+    init(withRouter router: ProgramInfoRouter, assetId: String, brokerId: UUID?, leverage: Int?, programCurrency: CurrencyType, completion: @escaping CreateAccountCompletionBlock) {
         self.router = router
-        self.programId = programId
+        self.brokerId = brokerId
+        self.leverage = leverage
+        self.assetId = assetId
         self.programCurrency = programCurrency
         self.completion = completion
     }
@@ -94,9 +97,15 @@ final class OldCreateAccountViewModel {
     }
     
     // MARK: - Navigation
-    func next(_ initialDepositAmount: Double) {
-        guard let programId = programId, let currency = selectedWalletFromDelegateManager?.selected?.currency, let currencyType = CurrencyType(rawValue: currency.rawValue) else { return }
-        router.show(routeType: .subscribe(programId: programId, initialDepositCurrency: currencyType, initialDepositAmount: initialDepositAmount))
+    func create(_ initialDepositAmount: Double) {
+        guard let wallet = selectedWalletFromDelegateManager?.selected else { return }
+        let request = NewTradingAccountRequest(depositAmount: initialDepositAmount, depositWalletId: wallet.id, currency: wallet.currency, leverage: leverage, brokerAccountTypeId: brokerId)
+        
+        AssetsDataProvider.createTradingAccount(request, completion: { [weak self] (viewModel) in
+            self?.completion?(viewModel?.id)
+        }) { (result) in
+            print(result)
+        }
     }
     
     func goToBack() {

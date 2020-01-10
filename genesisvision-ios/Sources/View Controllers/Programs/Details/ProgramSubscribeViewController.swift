@@ -13,6 +13,25 @@ class ProgramSubscribeViewController: BaseViewController {
     var viewModel: ProgramSubscribeViewModel!
     
     // MARK: - Labels
+    //Account Type
+    @IBOutlet weak var accountTypeStackView: UIStackView! {
+        didSet {
+            accountTypeStackView.isHidden = false
+        }
+    }
+    
+    @IBOutlet weak var accountTypeTitleLabel: SubtitleLabel! {
+        didSet {
+            accountTypeTitleLabel.text = "From"
+        }
+    }
+    @IBOutlet weak var accountTypeButton: UIButton!
+    @IBOutlet weak var accountTypeValueLabel: TitleLabel! {
+        didSet {
+            accountTypeValueLabel.font = UIFont.getFont(.regular, size: 18.0)
+        }
+    }
+    
     //Type
     @IBOutlet weak var typeTitleLabel: SubtitleLabel! {
         didSet {
@@ -30,7 +49,7 @@ class ProgramSubscribeViewController: BaseViewController {
             typeDescriptionLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
-
+    
     @IBOutlet weak var subscriptionStackView: UIStackView! {
         didSet {
             subscriptionStackView.isHidden = true
@@ -45,15 +64,25 @@ class ProgramSubscribeViewController: BaseViewController {
     }
     @IBOutlet weak var usdTitleLabel: SubtitleLabel! {
         didSet {
-            usdTitleLabel.text = "USD equivalent*"
+            usdTitleLabel.text = "USD equivalent *"
         }
     }
+    
     @IBOutlet weak var usdTextField: InputTextField! {
         didSet {
             usdTextField.delegate = self
             usdTextField.addTarget(self, action: #selector(usdTextFieldDidChange), for: .editingChanged)
         }
     }
+    
+    @IBOutlet weak var usdSubtitleLabel: SubtitleLabel! {
+        didSet {
+            usdSubtitleLabel.isHidden = true
+            usdSubtitleLabel.text = "* The minimum order size on Binance is 10 USDT"
+            usdSubtitleLabel.font = UIFont.getFont(.regular, size: 14.0)
+        }
+    }
+    
     
     //TODO: approximate value with rate etc
     @IBOutlet weak var usdCurrencyValueLabel: SubtitleLabel! {
@@ -103,13 +132,6 @@ class ProgramSubscribeViewController: BaseViewController {
         }
     }
     
-    @IBOutlet weak var disclaimerLabel: SubtitleLabel! {
-        didSet {
-            disclaimerLabel.isHidden = true
-            disclaimerLabel.text = "* The minimum order size on Binance is 10 USDT"
-            disclaimerLabel.font = UIFont.getFont(.regular, size: 14.0)
-        }
-    }
     
     // MARK: - Buttons
     @IBOutlet weak var subscribeButton: ActionButton!
@@ -151,7 +173,8 @@ class ProgramSubscribeViewController: BaseViewController {
     }
     
     private func updateUI() {
-        self.typeValueLabel.text = viewModel.getSelected()
+        self.accountTypeTitleLabel.text = viewModel.getSelectedAccountType()
+        self.typeValueLabel.text = viewModel.getSelectedType()
         self.typeDescriptionLabel.text = viewModel.getSelectedDescription()
         
         switch viewModel.followType {
@@ -183,13 +206,13 @@ class ProgramSubscribeViewController: BaseViewController {
     }
     
     private func updatedMode() {
-        typeValueLabel.text = viewModel.getSelected()
+        typeValueLabel.text = viewModel.getSelectedType()
         
         if viewModel.followType == .unfollow { return }
         
         usdStackView.isHidden = true
         volumeStackView.isHidden = true
-        disclaimerLabel.isHidden = true
+        usdSubtitleLabel.isHidden = true
         
         switch viewModel.getMode() {
         case .byBalance:
@@ -199,7 +222,7 @@ class ProgramSubscribeViewController: BaseViewController {
             volumeStackView.isHidden = false
         case .fixed:
             usdStackView.isHidden = false
-            disclaimerLabel.isHidden = false
+            usdSubtitleLabel.isHidden = false
         }
     }
     
@@ -277,6 +300,26 @@ class ProgramSubscribeViewController: BaseViewController {
         }
     }
     
+    @IBAction func selectAccountButtonAction(_ sender: UIButton) {
+        self.view.endEditing(true)
+        
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.initializeHeight = 275.0
+
+        bottomSheetController.addNavigationBar(viewModel.tradingAccountListViewModel.title)
+
+        bottomSheetController.addTableView { tableView in
+            tableView.separatorStyle = .none
+            
+            tableView.registerNibs(for: viewModel.tradingAccountListViewModel.cellModelsForRegistration)
+            tableView.delegate = viewModel.tradingAccountListDataSource
+            tableView.dataSource = viewModel.tradingAccountListDataSource
+            tableView.reloadData()
+        }
+
+        present(bottomSheetController, animated: true, completion: nil)
+    }
+    
     @IBAction func subscribeButtonAction(_ sender: UIButton) {
         subscribeMethod { [weak self] (result) in
             self?.hideAll()
@@ -324,4 +367,8 @@ extension ProgramSubscribeViewController: UITextFieldDelegate {
             break
         }
     }
+}
+
+extension ProgramSubscribeViewController: BaseTableViewProtocol {
+    
 }

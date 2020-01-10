@@ -13,7 +13,7 @@ final class FundReallocateHistoryViewModel {
     typealias CellViewModel = ReallocateHistoryTableViewCellViewModel
     
     var title: String = "Reallocate history"
-    var fundId: String?
+    var assetId: String?
     
     var router: FundRouter!
     private weak var reloadDataProtocol: ReloadDataProtocol?
@@ -53,15 +53,11 @@ final class FundReallocateHistoryViewModel {
     var isOpenTrades: Bool = false
     
     // MARK: - Init
-    init(withRouter router: FundRouter, fundId: String, reloadDataProtocol: ReloadDataProtocol?, delegate: ReallocateHistoryTableViewCellProtocol?) {
+    init(withRouter router: FundRouter, assetId: String, reloadDataProtocol: ReloadDataProtocol?, delegate: ReallocateHistoryTableViewCellProtocol?) {
         self.router = router
-        self.fundId = fundId
+        self.assetId = assetId
         self.reloadDataProtocol = reloadDataProtocol
         self.delegate = delegate
-    }
-    
-    func hideHeader(value: Bool = true) {
-        router.fundViewController.hideHeader(value)
     }
     
     func didTapSeeAll(_ index: Int) {
@@ -198,7 +194,7 @@ extension FundReallocateHistoryViewModel {
     
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [CellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         
-        FundsDataProvider.getReallocateHistory(with: fundId, completion: { (reallocationsViewModel) in
+        FundsDataProvider.getReallocateHistory(with: assetId, completion: { (reallocationsViewModel) in
             guard let reallocationsViewModel = reallocationsViewModel else {
                 return ErrorHandler.handleApiError(error: nil, completion: completionError)
             }

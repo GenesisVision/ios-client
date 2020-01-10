@@ -36,6 +36,7 @@ enum DidSelectType {
     case none
     case walletFrom
     
+    case tradingAccountType
     case accountType
     case leverage
     case currency

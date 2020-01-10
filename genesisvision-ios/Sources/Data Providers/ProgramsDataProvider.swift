@@ -75,7 +75,6 @@ class ProgramsDataProvider: DataProvider {
     }
     static func get(_ assetId: String, completion: @escaping (_ program: ProgramFollowDetailsFull?) -> Void, errorCompletion: @escaping CompletionBlock) {
         let authorization = AuthManager.authorizedToken
-        
         ProgramsAPI.getProgramDetails(id: assetId, authorization: authorization) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }

@@ -475,8 +475,6 @@ extension SettingsViewController: BaseTableViewProtocol {
     }
     
     func didReload(_ indexPath: IndexPath) {
-        if indexPath.section == 1, indexPath.row == 0, let name = viewModel.currencyListViewModel.selected()?.name, platformCurrencyValueLabel != nil {
-            platformCurrencyValueLabel.text = name
-        }
+        
     }
 }

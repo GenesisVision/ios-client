@@ -18,10 +18,23 @@ class BasePageboyViewControllerDataSource: NSObject, PageboyViewControllerDataSo
     
     var controllers = [UIViewController]()
     
+    
+    init(_ viewModel: TabmanDataSourceProtocol?) {
+        super.init()
+        
+        setup(viewModel)
+    }
+    
     init(router: Router, showFacets: Bool) {
         super.init()
         
         setup(router: router, showFacets: showFacets)
+    }
+    
+    init(router: Router, showFacets: Bool, searchProtocol: SearchViewControllerProtocol?) {
+        super.init()
+        
+        setup(router: router, showFacets: showFacets, searchProtocol: searchProtocol)
     }
     
     init(router: Router, wallet: WalletData? = nil) {
@@ -55,15 +68,18 @@ class BasePageboyViewControllerDataSource: NSObject, PageboyViewControllerDataSo
     }
     
     // MARK: - Private methods
+    internal func setup(_ viewModel: TabmanDataSourceProtocol?) {
+    }
+    internal func setup(router: Router, assetId: String? = nil) {
+    }
     internal func setup(router: Router, showFacets: Bool) {
     }
-    
+    internal func setup(router: Router, showFacets: Bool, searchProtocol: SearchViewControllerProtocol?) {
+    }
     internal func setup(router: Router, wallet: WalletData? = nil) {
     }
-    
     internal func setup(router: Router, account: TradingAccountDetails? = nil) {
     }
-    
     internal func setup(router: Router, dashboardTradingAsset: DashboardTradingAsset? = nil) {
     }
 }

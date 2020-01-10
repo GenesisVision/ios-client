@@ -8,25 +8,23 @@
 
 import UIKit.UINavigationController
 
-enum ManagerRouteType {
-}
-
-class ManagerRouter: Router {
-    var managerViewController: ManagerViewController!
-    
-    var managerHeaderViewController: ManagerHeaderViewController?
-    var managerDetailsTabmanViewController: ManagerTabmanViewController?
-    
-    // MARK: - Lifecycle
-    init(parentRouter: Router?, navigationController: UINavigationController?, managerViewController: ManagerViewController) {
-        super.init(parentRouter: parentRouter, navigationController: navigationController)
-        
-        self.managerViewController = managerViewController
-    }
+class ManagerRouter: TabmanRouter {
+    // MARK: - Variables
+    var managerViewController: ManagerViewController?
+    var managerInfoViewController: ManagerInfoViewController?
     
     // MARK: - Public methods
-    func show(routeType: ManagerRouteType) {
+    func getInfo(with managerId: String) -> ManagerInfoViewController? {
+        let vc = ManagerInfoViewController()
         
+        let router = Router(parentRouter: self)
+        router.currentController = vc
+        let viewModel = ManagerInfoViewModel(withRouter: router, managerId: managerId, reloadDataProtocol: vc)
+        vc.viewModel = viewModel
+        vc.hidesBottomBarWhenPushed = true
+        
+        managerInfoViewController = vc
+        return vc
     }
 }
 

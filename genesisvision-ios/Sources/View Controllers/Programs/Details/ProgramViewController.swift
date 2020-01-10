@@ -2,44 +2,19 @@
 //  ProgramViewController.swift
 //  genesisvision-ios
 //
-//  Created by George on 28/09/2018.
+//  Created by George on 07/05/2018.
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
 import UIKit
+import Tabman
 
-class ProgramViewController: BaseViewController {
+class ProgramViewController: BaseTabmanViewController<ProgramViewModel> {
     // MARK: - View Model
-    var viewModel: ProgramViewModel!
-    var isLoading: Bool = false
+    weak var programInfoViewControllerProtocol: FavoriteStateChangeProtocol?
 
-    // MARK: - Variables
-    @IBOutlet weak var scrollView: UIScrollView! {
-        didSet {
-            scrollView.delegate = self
-        }
-    }
-    
-    var minHeaderHeight: CGFloat = {
-        switch UIDevice.current.screenType {
-        case .iPhones_X_XS, .iPhone_XR, .iPhone_XSMax:
-            return 244.0
-        default:
-            return 200.0
-        }
-    }()
-    
-    var topConstant: CGFloat = 0.0
-    
-    @IBOutlet weak var headerViewConstraint: NSLayoutConstraint!
-    
-    var headerViewController: ProgramHeaderViewController?
-    var detailsTabmanViewController: ProgramTabmanViewController?
-    
-    @IBOutlet weak var detailsView: UIView!
     private var favoriteBarButtonItem: UIBarButtonItem!
     private var notificationsBarButtonItem: UIBarButtonItem!
-    
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -47,96 +22,15 @@ class ProgramViewController: BaseViewController {
         
         showProgressHUD()
         setup()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.headerViewConstraint.constant = minHeaderHeight
-        
-        if let navigationController = navigationController as? BaseNavigationController {
-            navigationController.isTranslucent = true
+        viewModel.fetch { [weak self] (result) in
+            self?.hideHUD()
+            self?.reloadData()
+            self?.title = self?.viewModel.title
         }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        if let navigationController = navigationController as? BaseNavigationController {
-            navigationController.isTranslucent = false
-        }
-    }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let programHeaderViewController = segue.destination as? ProgramHeaderViewController,
-            segue.identifier == "ProgramHeaderViewControllerSegue" {
-            self.viewModel?.router?.programHeaderViewController = programHeaderViewController
-            programHeaderViewController.delegate = self
-            self.headerViewController = programHeaderViewController
-        } else if let tabmanViewController = segue.destination as? ProgramTabmanViewController,
-            segue.identifier == "ProgramTabmanViewControllerSegue" {
-            
-            tabmanViewController.programInfoViewControllerProtocol = self
-            
-            let router = ProgramTabmanRouter(parentRouter: self.viewModel.router, tabmanViewController: tabmanViewController)
-            router.programViewController = self
-            let viewModel = ProgramTabmanViewModel(withRouter: router, programId: self.viewModel.programId)
-            viewModel.favoriteStateUpdatedProtocol = self
-            tabmanViewController.viewModel = viewModel
-            
-            self.viewModel?.router?.programDetailsTabmanViewController = tabmanViewController
-            detailsTabmanViewController = tabmanViewController
-        }
-    }
-    
-    override func pullToRefresh() {
-        super.pullToRefresh()
-        
-        fetch()
-    }
-    
-    // MARK: - Public methods
-    func hideHeader(_ value: Bool) {
-        let scrollOffset = CGPoint(x: 0.0, y: value ? minHeaderHeight - topConstant * 2 : -topConstant)
-        scrollView.setContentOffset(scrollOffset, animated: true)
     }
     
     // MARK: - Private methods
-    private func setup() {
-        showProgressHUD()
-        setupUI()
-        fetch()
-    }
-    
-    private func fetch() {
-        viewModel.fetch { [weak self] (result) in
-            self?.hideAll()
-            self?.isLoading = false
-            
-            switch result {
-            case .success:
-                if AuthManager.isLogin(), let isFavorite = self?.viewModel?.isFavorite {
-                    self?.favoriteBarButtonItem.image = isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon")
-                }
-                
-                if let programDetailsFull = self?.viewModel.programDetailsFull {
-                    self?.detailsTabmanViewController?.setup(programDetailsFull)
-                    self?.headerViewController?.configure(programDetailsFull)
-                }
-            default:
-                break
-            }
-        }
-    }
-    
     private func setupUI() {
-        let statusBarHeight = UIApplication.shared.statusBarFrame.height
-        topConstant = 44.0 + statusBarHeight
-        
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        scrollView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: -topConstant).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        
         guard AuthManager.isLogin() else { return }
         
         if let isFavorite = self.viewModel?.isFavorite {
@@ -152,6 +46,14 @@ class ProgramViewController: BaseViewController {
         viewModel.showNotificationSettings()
     }
     
+    private func setup() {
+        navigationItem.title = viewModel.title
+        
+        dataSource = viewModel.dataSource
+        
+        setupUI()
+    }
+    
     // MARK: - IBActions
     @objc func favoriteButtonAction() {
         guard let isFavorite = self.viewModel?.isFavorite else { return }
@@ -159,7 +61,7 @@ class ProgramViewController: BaseViewController {
         
         showProgressHUD()
         self.viewModel?.changeFavorite(value: isFavorite, request: true) { [weak self] (result) in
-            self?.hideAll()
+            self?.hideHUD()
             
             switch result {
             case .success:
@@ -172,76 +74,16 @@ class ProgramViewController: BaseViewController {
     }
 }
 
-extension ProgramViewController {
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        super.scrollViewDidScroll(scrollView)
-
-        let yOffset = scrollView.contentOffset.y + topConstant
+extension ProgramViewController: ReloadDataProtocol {
+    func didReloadData() {
         
-        let headerHeight = headerViewConstraint.constant - topConstant
-        if headerHeight - yOffset >= 0 && yOffset >= 0 {
-            headerViewController?.changeColorAlpha(offset: yOffset / headerHeight)
-        }
-        
-        if yOffset < 0 {
-            self.headerViewConstraint.constant += abs(yOffset)
-            
-            if self.headerViewConstraint.constant > 400.0 && !self.isLoading {
-                self.scrollView.panGestureRecognizer.isEnabled = false
-                self.scrollView.panGestureRecognizer.isEnabled = true
-                self.isLoading = true
-                self.pullToRefresh()
-            }
-        } else if yOffset > 0 && self.headerViewConstraint.constant >= minHeaderHeight {
-            self.headerViewConstraint.constant -= abs(yOffset)
-            if self.headerViewConstraint.constant < minHeaderHeight {
-                self.headerViewConstraint.constant = minHeaderHeight
-            }
-        }
-        
-        if scrollView == self.scrollView {
-            if let viewModel = viewModel.router.programDetailsTabmanViewController?.viewModel {
-                for controller in viewModel.viewControllers {
-                    if let vc = controller as? BaseViewControllerWithTableView {
-                        vc.tableView?.isScrollEnabled = yOffset >= detailsView.frame.origin.y - topConstant * 2
-                    }
-                }
-            }
-        }
-    }
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        animateHeaderView(scrollView.contentOffset.y)
-    }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        animateHeaderView(scrollView.contentOffset.y)
-    }
-    
-    private func animateHeaderView(_ contentOffsetY: CGFloat) {
-        let yOffset = contentOffsetY + topConstant
-        let headerHeight = headerViewConstraint.constant - topConstant
-        
-        if self.headerViewConstraint.constant > minHeaderHeight {
-            animateHeader(minHeaderHeight)
-        } else {
-            hideHeader(true)
-
-            if headerHeight - yOffset >= 0 && yOffset >= 0 {
-                headerViewController?.changeColorAlpha(offset: yOffset / headerHeight)
-            }
-        }
-    }
-    
-    func animateHeader(_ minHeaderHeight: CGFloat) {
-        self.headerViewConstraint.constant = minHeaderHeight
-        
-        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: {
-            self.view.layoutIfNeeded()
-        }, completion: nil)
     }
 }
-
+extension ProgramViewController: DetailProtocol {
+    func didReload() {
+        
+    }
+}
 extension ProgramViewController: FavoriteStateUpdatedProtocol {
     func didFavoriteStateUpdated() {
         DispatchQueue.main.async {
@@ -259,63 +101,177 @@ extension ProgramViewController: FavoriteStateUpdatedProtocol {
     }
 }
 
-// MARK: - FavoriteStateChangeProtocol
-extension ProgramViewController: FavoriteStateChangeProtocol {
-    var filterDateRangeModel: FilterDateRangeModel? {
-        return dateRangeModel
+final class ProgramViewModel: TabmanViewModel {
+    enum TabType: String {
+        case info = "Info"
+        case trades = "Trades"
+        case openPosition = "Open position"
+        case equity = "Equity"
+        case profit = "Profit"
+        case balance = "Balance"
+        
+        case periodHistory = "Period history"
+        
+        case events = "Events"
+    }
+    var tabTypes: [TabType] = []
+    var controllers = [TabType : UIViewController]()
+    
+    // MARK: - Variables
+    var assetId: String?
+    var assetType: AssetType = .program
+    
+    public private(set) var tradingAccounts: ItemsViewModelTradingAccountDetails?
+    public private(set) var signalSubscription: SignalSubscription?
+    
+    var programDetailsFull: ProgramFollowDetailsFull? {
+        didSet {
+            if programDetailsFull?.programDetails != nil {
+                title = programDetailsFull?.publicInfo?.title ?? ""
+                tabTypes = [.info, .profit, .trades, .openPosition, .periodHistory, .events]
+            } else if programDetailsFull?.followDetails != nil {
+                title = programDetailsFull?.publicInfo?.title ?? ""
+                tabTypes = [.info, .profit, .trades, .openPosition, .events]
+            }
+        }
     }
     
-    func didChangeFavoriteState(with assetID: String, value: Bool, request: Bool) {
-        showProgressHUD()
-        viewModel.changeFavorite(value: value, request: request) { (result) in
+    var isFavorite: Bool {
+        return programDetailsFull?.programDetails?.personalDetails?.isFavorite ?? false
+    }
+    weak var favoriteStateUpdatedProtocol: FavoriteStateUpdatedProtocol?
+    
+    weak var reloadDataProtocol: ReloadDataProtocol?
+    
+    // MARK: - Init
+    init(withRouter router: Router, assetId: String? = nil) {
+        super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0)
+        
+        self.tabTypes.forEach({ controllers[$0] = getViewController($0) })
+        self.dataSource = PageboyDataSource(self)
+        
+        self.assetId = assetId
+        self.title = ""
+        
+        font = UIFont.getFont(.semibold, size: 16)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(programFavoriteStateChangeNotification(notification:)), name: .programFavoriteStateChange, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .programFavoriteStateChange, object: nil)
+    }
+    
+    func getViewController(_ type: TabType) -> UIViewController? {
+        if let saved = controllers[type] { return saved }
+        let currency = getPlatformCurrencyType()
+        
+        guard let router = router as? ProgramRouter, let assetId = self.assetId else { return nil }
+        
+        switch type {
+        case .info:
+            return router.getInfo(with: assetId)
+        case .balance:
+            return router.getBalance(with: assetId)
+        case .profit:
+            return router.getProfit(with: assetId)
+        case .periodHistory:
+            return router.getPeriodHistory(with: assetId, currency: currency)
+        case .trades:
+            return router.getTrades(with: assetId, currencyType: currency)
+        case .openPosition:
+            return router.getTradesOpen(with: assetId, currencyType: currency)
+        case .events:
+            return router.getEvents(with: assetId)
+        default:
+            return nil
+        }
+    }
+}
+extension ProgramViewModel: TabmanDataSourceProtocol {
+    func getCount() -> Int {
+        return tabTypes.count
+    }
+    
+    func getItem(_ index: Int) -> TMBarItem? {
+        let type = tabTypes[index]
+    
+        return TMBarItem(title: type.rawValue)
+    }
+    
+    func getViewController(_ index: Int) -> UIViewController? {
+        return getViewController(tabTypes[index])
+    }
+}
+// MARK: - Actions
+extension ProgramViewModel {
+    // MARK: - Public methods
+    func showNotificationSettings() {
+        //FIXME: program or follow
+        router.showAssetNotificationsSettings(assetId, title: programDetailsFull?.publicInfo?.title ?? "Program Settings", type: .program)
+    }
+    
+    func showAboutLevels() {
+        guard let rawValue = programDetailsFull?.tradingAccountInfo?.currency?.rawValue, let currency = CurrencyType(rawValue: rawValue) else { return }
+        
+        router.showAboutLevels(currency)
+    }
+    
+    func fetch(_ completion: @escaping CompletionBlock) {
+        guard let assetId = self.assetId else { return }
+        
+        switch assetType {
+        case .program:
+            ProgramsDataProvider.get(assetId, completion: { [weak self] (viewModel) in
+                guard let viewModel = viewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
+                
+                self?.programDetailsFull = viewModel
+                completion(.success)
+            }, errorCompletion: completion)
+        case .follow:
+            FollowsDataProvider.get(assetId, completion: { [weak self] (viewModel) in
+                guard let viewModel = viewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
+                
+                self?.programDetailsFull = viewModel
+                completion(.success)
+            }, errorCompletion: completion)
+        default:
+            break
+        }
+        
+    }
+    
+    func changeFavorite(value: Bool? = nil, request: Bool = false, completion: @escaping CompletionBlock) {
+        guard request else {
+            programDetailsFull?.programDetails?.personalDetails?.isFavorite = value
+            return completion(.success)
+        }
+        
+        guard
+            let personalProgramDetails = programDetailsFull?.programDetails?.personalDetails,
+            let isFavorite = personalProgramDetails.isFavorite,
+            let assetId = assetId
+            else { return completion(.failure(errorType: .apiError(message: nil))) }
+        
+        ProgramsDataProvider.favorites(isFavorite: isFavorite, assetId: assetId) { [weak self] (result) in
+            switch result {
+            case .success:
+                self?.programDetailsFull?.programDetails?.personalDetails?.isFavorite = !isFavorite
+            case .failure(let errorType):
+                print(errorType)
+                self?.programDetailsFull?.programDetails?.personalDetails?.isFavorite = isFavorite
+            }
             
+            completion(result)
+        }
+    }
+    
+    // MARK: - Private methods
+    @objc private func programFavoriteStateChangeNotification(notification: Notification) {
+        if let isFavorite = notification.userInfo?["isFavorite"] as? Bool, let assetId = notification.userInfo?["programId"] as? String, assetId == self.assetId {
+            changeFavorite(value: isFavorite) { [weak self] (result) in
+                self?.reloadDataProtocol?.didReloadData()
+            }
         }
     }
 }
-
-extension ProgramViewController: DetailProtocol {
-    func didReload() {
-        fetch()
-    }
-}
-
-// MARK: - ReloadDataProtocol
-extension ProgramViewController: ReloadDataProtocol {
-    func didReloadData() {
-        if let programDetailsFull = viewModel.programDetailsFull {
-            headerViewController?.configure(programDetailsFull)
-        }
-        
-        if AuthManager.isLogin(), let isFavorite = self.viewModel?.isFavorite {
-            self.favoriteBarButtonItem.image = isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon")
-        }
-    }
-}
-
-// MARK: - ProgramHeaderViewControllerProtocol
-extension ProgramViewController: ProgramHeaderViewControllerProtocol {
-    func aboutLevelButtonDidPress() {
-        let aboutLevelView = AboutLevelView.viewFromNib()
-        aboutLevelView.delegate = self
-        
-        if let programDetails = viewModel.programDetailsFull, let currency = programDetails.tradingAccountInfo?.currency, let selectedCurrency = CurrencyType(rawValue: currency.rawValue) {
-            aboutLevelView.configure(programDetails.programDetails?.level, currency: selectedCurrency)
-        }
-        
-        bottomSheetController = BottomSheetController()
-        bottomSheetController.lineViewIsHidden = true
-        bottomSheetController.initializeHeight = 270
-        bottomSheetController.addContentsView(aboutLevelView)
-        bottomSheetController.present()
-    }
-}
-
-// MARK: - AboutLevelViewProtocol
-extension ProgramViewController: AboutLevelViewProtocol {
-    func aboutLevelsButtonDidPress() {
-        bottomSheetController.dismiss()
-        
-        viewModel.showAboutLevels()
-    }
-}
-

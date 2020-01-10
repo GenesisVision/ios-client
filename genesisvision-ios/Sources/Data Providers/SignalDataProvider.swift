@@ -26,11 +26,11 @@ class SignalDataProvider: DataProvider {
             DataProvider().responseHandler(error, completion: completion)
         }
     }
-    static func attachAccounts(assetId: UUID, completion: @escaping (_ copyTradingAccountsList: ItemsViewModelTradingAccountDetails?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func attachAccounts(assetId: String, completion: @escaping (_ copyTradingAccountsList: ItemsViewModelTradingAccountDetails?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
-        guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        guard let authorization = AuthManager.authorizedToken, let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        SignalAPI.getSubscriberAccountsForAsset(id: assetId, authorization: authorization) { (viewModel, error) in
+        SignalAPI.getSubscriberAccountsForAsset(id: uuid, authorization: authorization) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }

@@ -10,11 +10,13 @@ import UIKit
 import Tabman
 
 class AccountDetailViewController: BaseTabmanViewController<AccountDetailTabmanViewModel> {
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setup()
+        reloadData()
     }
     
     // MARK: - Private methods
@@ -33,7 +35,15 @@ class AccountDetailViewController: BaseTabmanViewController<AccountDetailTabmanV
 
 final class AccountDetailTabmanViewModel: TabmanViewModel {
     // MARK: - Variables
-    var dataSource: AccountDetailPageboyDataSource!
+    enum TabType: String {
+        case info = "Info"
+        case profit = "Profit"
+        case openPosition = "Open position"
+        case trades = "Trades"
+    }
+    
+    var tabTypes: [TabType] = [.info, .profit, .openPosition, .trades]
+    var controllers = [TabType : UIViewController]()
     
     var dashboardTradingAsset: DashboardTradingAsset?
     
@@ -41,16 +51,33 @@ final class AccountDetailTabmanViewModel: TabmanViewModel {
     init(withRouter router: Router, dashboardTradingAsset: DashboardTradingAsset? = nil) {
         super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0)
         
-        self.dataSource = AccountDetailPageboyDataSource(router: router, dashboardTradingAsset: dashboardTradingAsset)
+        self.tabTypes.forEach({ controllers[$0] = getViewController($0) })
+        self.dataSource = PageboyDataSource(self)
         self.dashboardTradingAsset = dashboardTradingAsset
         self.title = dashboardTradingAsset?.accountInfo?.title ?? ""
         
         font = UIFont.getFont(.semibold, size: 16)
+    }
+    
+    func getViewController(_ type: TabType) -> UIViewController? {
+        if let saved = controllers[type] { return saved }
         
-        items = [TMBarItem(title: "Info"),
-                 TMBarItem(title: "Statistics"),
-                 TMBarItem(title: "Open positions"),
-                 TMBarItem(title: "Trades")]
+        switch type {
+        case .info:
+            let vc = DetailInfoViewController<DetailInfoViewModel>()
+            let viewModel = DetailInfoViewModel(router, delegate: vc, dashboardTradingAsset: dashboardTradingAsset)
+            vc.viewModel = viewModel
+            return vc
+        case .profit:
+            guard let router = self.router as? AccountRouter, let assetId = dashboardTradingAsset?.id?.uuidString else { return nil }
+            return router.getProfit(with: assetId)
+        case .trades:
+            guard let router = self.router as? AccountRouter, let assetId = dashboardTradingAsset?.id?.uuidString else { return nil }
+            return router.getTrades(with: assetId, currencyType: getPlatformCurrencyType())
+        case .openPosition:
+            guard let router = self.router as? AccountRouter, let assetId = dashboardTradingAsset?.id?.uuidString else { return nil }
+            return router.getTradesOpen(with: assetId, currencyType: getPlatformCurrencyType())
+        }
     }
     
     // MARK: - Public methods
@@ -59,18 +86,19 @@ final class AccountDetailTabmanViewModel: TabmanViewModel {
     }
 }
 
-class AccountDetailPageboyDataSource: BasePageboyViewControllerDataSource {
-    var dashboardTradingAsset: DashboardTradingAsset?
+extension AccountDetailTabmanViewModel: TabmanDataSourceProtocol {
+    func getCount() -> Int {
+        return tabTypes.count
+    }
     
-    // MARK: - Private methods
-    internal override func setup(router: Router, dashboardTradingAsset: DashboardTradingAsset? = nil) {
-        self.dashboardTradingAsset = dashboardTradingAsset
-        
-        let vc = DetailInfoViewController<DetailInfoViewModel>()
-        let viewModel = DetailInfoViewModel(router, delegate: vc, dashboardTradingAsset: dashboardTradingAsset)
-        vc.viewModel = viewModel
-        
-        controllers.append(vc)
+    func getItem(_ index: Int) -> TMBarItem? {
+        let type = tabTypes[index]
+    
+        return TMBarItem(title: type.rawValue)
+    }
+    
+    func getViewController(_ index: Int) -> UIViewController? {
+        return getViewController(tabTypes[index])
     }
 }
 
@@ -84,14 +112,8 @@ class DetailInfoViewController<ViewModel: ViewModelWithListProtocol>: ListViewCo
         super.viewDidLoad()
         
         setup()
+        fetch()
     }
-    
-    override func pullToRefresh() {
-        super.pullToRefresh()
-        
-        viewModel.fetch()
-    }
-    
     private func setup() {
         setupPullToRefresh(scrollView: tableView)
         tableView.configure(with: .defaultConfiguration)
@@ -101,6 +123,22 @@ class DetailInfoViewController<ViewModel: ViewModelWithListProtocol>: ListViewCo
         tableView.delegate = dataSource
         tableView.dataSource = dataSource
         tableView.reloadData()
+    }
+    
+    private func reloadData() {
+        DispatchQueue.main.async {
+            self.tableView?.reloadData()
+        }
+    }
+    
+    override func pullToRefresh() {
+        super.pullToRefresh()
+        
+        viewModel.fetch()
+    }
+    
+    func fetch() {
+        reloadData()
     }
 }
 extension DetailInfoViewController: BaseTableViewProtocol {
@@ -135,6 +173,7 @@ class DetailInfoViewModel: ViewModelWithListProtocol {
     
     var canPullToRefresh: Bool = true
     //Models
+    var assetId: String?
     var dashboardTradingAsset: DashboardTradingAsset?
     
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
@@ -147,6 +186,7 @@ class DetailInfoViewModel: ViewModelWithListProtocol {
     init(_ router: Router?, delegate: BaseTableViewProtocol?, dashboardTradingAsset: DashboardTradingAsset?) {
         self.delegate = delegate
         self.router = router
+        self.assetId = dashboardTradingAsset?.id?.uuidString
         self.dashboardTradingAsset = dashboardTradingAsset
         
         if let type = dashboardTradingAsset?.accountInfo?.type {
@@ -167,9 +207,6 @@ class DetailInfoViewModel: ViewModelWithListProtocol {
     private func reloadRow(_ row: RowType) {
         let reloadRow = rows.firstIndex(of: row) ?? 0
         delegate?.didReload(IndexPath(row: reloadRow, section: 0))
-    }
-    
-    func fetch() {
     }
     
     func model(at indexPath: IndexPath) -> CellViewAnyModel? {
@@ -208,5 +245,63 @@ extension DetailInfoViewModel: TradingAccountActionsProtocol {
     
     func didTapWithdrawButton() {
         
+    }
+}
+
+class AccountRouter: TabmanRouter {
+    // MARK: - Variables
+    var programViewController: ProgramViewController?
+    var detailInfoViewController: DetailInfoViewController<DetailInfoViewModel>?
+    var tradeListViewController: AccountTradeListViewController?
+    var openTradeListViewController: AccountTradeListViewController?
+    
+    // MARK: - Public methods
+    func getInfo(with dashboardTradingAsset: DashboardTradingAsset?) -> DetailInfoViewController<DetailInfoViewModel>? {
+        let vc = DetailInfoViewController<DetailInfoViewModel>()
+        let viewModel = DetailInfoViewModel(self, delegate: vc, dashboardTradingAsset: dashboardTradingAsset)
+        vc.viewModel = viewModel
+        
+        vc.hidesBottomBarWhenPushed = true
+        
+        detailInfoViewController = vc
+        return vc
+    }
+    
+    func getTrades(with assetId: String, currencyType: CurrencyType) -> AccountTradeListViewController? {
+
+        let viewController = AccountTradeListViewController()
+        let viewModel = AccountTradeListViewModel(self, assetId: assetId, isOpenTrades: false, currency: currencyType, delegate: viewController)
+        viewController.viewModel = viewModel
+        tradeListViewController = viewController
+        return viewController
+    }
+    
+    func getTradesOpen(with assetId: String, currencyType: CurrencyType) -> AccountTradeListViewController? {
+
+        let viewController = AccountTradeListViewController()
+        let viewModel = AccountTradeListViewModel(self, assetId: assetId, isOpenTrades: true, currency: currencyType, delegate: viewController)
+        viewController.viewModel = viewModel
+        openTradeListViewController = viewController
+        return viewController
+    }
+    
+    func getBalance(with assetId: String) -> ProgramBalanceViewController? {
+//        guard let vc = currentController as? ProgramViewController else { return nil }
+        
+        let viewController = ProgramBalanceViewController()
+//        let viewModel = ProgramBalanceViewModel(withRouter: self, assetId: assetId, reloadDataProtocol: vc)
+//        viewController.viewModel = viewModel
+        
+        return viewController
+    }
+    
+    func getProfit(with assetId: String) -> ProgramProfitViewController? {
+        guard let vc = currentController as? ProgramViewController else { return nil }
+        
+        let viewController = ProgramProfitViewController()
+        let viewModel = ProgramProfitViewModel(withRouter: self, assetId: assetId, reloadDataProtocol: vc)
+        viewController.viewModel = viewModel
+        
+        return viewController
     }
 }

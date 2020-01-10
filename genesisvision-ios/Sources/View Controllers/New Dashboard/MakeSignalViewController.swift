@@ -43,11 +43,15 @@ class MakeSignalViewController: BaseModalViewController, BaseTableViewProtocol {
         stackView.volumeFeeView.textField.addTarget(self, action: #selector(checkActionButton), for: .editingChanged)
         stackView.signalSuccessFeeView.textField.designableTextFieldDelegate = self
         stackView.signalSuccessFeeView.textField.addTarget(self, action: #selector(checkActionButton), for: .editingChanged)
+        
+        stackView.volumeFeeView.textField.text = "0"
+        stackView.signalSuccessFeeView.textField.text = "0"
     }
     
     func setupUI() {
         stackView.configure()
     }
+    
     @objc private func nameDidChange() {
         if let text = stackView.nameView.textField.text {
             let max = 20

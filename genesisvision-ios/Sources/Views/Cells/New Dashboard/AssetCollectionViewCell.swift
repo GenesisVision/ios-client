@@ -12,7 +12,9 @@ class AssetDetailData {
     var program: ProgramDetailsListItem?
     var follow: FollowDetailsListItem?
     var fund: FundDetailsListItem?
+    
     var tradingAsset: DashboardTradingAsset?
+    
     var fundInvesting: FundInvestingDetailsList?
     var programInvesting: ProgramInvestingDetailsList?
 }

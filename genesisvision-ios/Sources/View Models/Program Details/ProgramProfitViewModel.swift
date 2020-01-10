@@ -16,9 +16,9 @@ final class ProgramProfitViewModel {
     
     // MARK: - Variables
     var title: String = "Profit"
-    var programId: String?
+    var assetId: String?
     
-    var router: ProgramRouter!
+    var router: Router!
     private weak var reloadDataProtocol: ReloadDataProtocol?
     private weak var chartViewProtocol: ChartViewProtocol?
     
@@ -36,19 +36,15 @@ final class ProgramProfitViewModel {
     private var programProfitStatisticTableViewCellViewModel: ProgramProfitStatisticTableViewCellViewModel?
     
     // MARK: - Init
-    init(withRouter router: ProgramRouter, programId: String, reloadDataProtocol: ReloadDataProtocol?) {
+    init(withRouter router: Router, assetId: String, reloadDataProtocol: ReloadDataProtocol?) {
         self.router = router
-        self.programId = programId
+        self.assetId = assetId
         self.reloadDataProtocol = reloadDataProtocol
         self.chartViewProtocol = router.currentController as? ChartViewProtocol
     }
     
     // MARK: - Public methods
     func selectSimpleChartPoint(_ date: Date) {
-    }
-    
-    func hideHeader(value: Bool = true) {
-        router.programViewController.hideHeader(value)
     }
 }
 
@@ -103,8 +99,8 @@ extension ProgramProfitViewModel {
             self.programProfitChartTableViewCellViewModel = ProgramProfitChartTableViewCellViewModel(programProfitChart: programProfitChart, chartViewProtocol: self.chartViewProtocol)
             return programProfitChartTableViewCellViewModel
         case .statistics:
-            if let programCurrency = programCurrency, let statistic = programProfitChart.statistic {
-                self.programProfitStatisticTableViewCellViewModel = ProgramProfitStatisticTableViewCellViewModel(currency: programCurrency, statistic: statistic)
+            if let statistic = programProfitChart.statistic {
+                self.programProfitStatisticTableViewCellViewModel = ProgramProfitStatisticTableViewCellViewModel(currency: programCurrency!, statistic: statistic)
                 return programProfitStatisticTableViewCellViewModel
             }
         }
@@ -116,8 +112,8 @@ extension ProgramProfitViewModel {
     private func fetch(_ completion: @escaping CompletionBlock) {
         switch dataType {
         case .api:
-            guard let programId = programId else { return completion(.failure(errorType: .apiError(message: nil))) }
-            ProgramsDataProvider.getProfitPercentCharts(with: programId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, completion: { [weak self] (viewModel) in
+            guard let assetId = assetId else { return completion(.failure(errorType: .apiError(message: nil))) }
+            ProgramsDataProvider.getProfitPercentCharts(with: assetId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, completion: { [weak self] (viewModel) in
                 guard viewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completion)
                 }

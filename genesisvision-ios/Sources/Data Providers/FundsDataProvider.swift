@@ -38,10 +38,12 @@ class FundsDataProvider: DataProvider {
         }
     }
     
-    static func get(_ assetId: String, currencySecondary: FundsAPI.Currency_getFundDetails? = nil, completion: @escaping (FundDetailsFull?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func get(_ assetId: String, currencyType: CurrencyType, completion: @escaping (FundDetailsFull?) -> Void, errorCompletion: @escaping CompletionBlock) {
         let authorization = AuthManager.authorizedToken
         
-        FundsAPI.getFundDetails(id: assetId, authorization: authorization, currency: currencySecondary) { (viewModel, error) in
+        guard let currency = FundsAPI.Currency_getFundDetails(rawValue: currencyType.rawValue) else { return completion(nil) }
+        
+        FundsAPI.getFundDetails(id: assetId, authorization: authorization, currency: currency) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }

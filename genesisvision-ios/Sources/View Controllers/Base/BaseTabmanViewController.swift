@@ -8,7 +8,6 @@
 
 import UIKit
 import Tabman
-import Pageboy
 import UIKit.UINavigationController
 
 class BaseTabmanViewController<T: TabmanViewModel>: TabmanViewController {
@@ -25,9 +24,7 @@ class BaseTabmanViewController<T: TabmanViewModel>: TabmanViewController {
 
     // MARK: - Private methods
     private func setup() {
-        viewModel.initializeViewControllers()
-        
-        dataSource = viewModel.pageboyDataSource
+        dataSource = viewModel.dataSource
         navigationItem.title = viewModel.title
         
         setupUI()
@@ -45,7 +42,7 @@ class BaseTabmanViewController<T: TabmanViewModel>: TabmanViewController {
         bar.layout.transitionStyle = .snap
         bar.layout.separatorColor = UIColor.primary
         bar.layout.contentInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-        
+
         bar.buttons.customize { (button) in
             button.tintColor = UIColor.Cell.subtitle
             button.selectedTintColor = UIColor.Cell.title
@@ -67,18 +64,9 @@ class BaseTabmanViewController<T: TabmanViewModel>: TabmanViewController {
             bar.indicator.overscrollBehavior = .compress
         }
         
-        addBar(bar, dataSource: self, at: .top)
+        addBar(bar, dataSource: viewModel.dataSource ?? self, at: .top)
     }
-    
-    override func pageboyViewController(_ pageboyViewController: PageboyViewController, didScrollToPageAt index: Int, direction: PageboyViewController.NavigationDirection, animated: Bool) {
-        super.pageboyViewController(pageboyViewController, didScrollToPageAt: index, direction: direction, animated: animated)
-        
-        //Only for managerVC
-        if let router = viewModel.router, let managerRouter = router.parentRouter as? ManagerRouter, index > 0 {
-            managerRouter.managerViewController.hideHeader(true)
-        }
-    }
-    
+
     // MARK: - Private methods
     @objc private func totalCountDidChangeNotification(notification: Notification) {
         print(tabmanBarItems?.count ?? "")

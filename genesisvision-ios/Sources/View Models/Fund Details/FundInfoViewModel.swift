@@ -15,6 +15,7 @@ final class FundInfoViewModel {
         case investNow
     }
     enum RowType {
+        case header
         case manager
         case strategy
     }
@@ -28,7 +29,7 @@ final class FundInfoViewModel {
     var inRequestsDelegateManager = InRequestsDelegateManager()
     
     var chartDurationType: ChartDurationType = .all
-    var fundId: String!
+    var assetId: String!
     var requestSkip = 0
     var requestTake = ApiKeys.take
     
@@ -46,29 +47,33 @@ final class FundInfoViewModel {
     var availableInvestment: Double = 0.0
     
     private var sections: [SectionType] = [.details, .investNow]
-    private var rows: [RowType] = [.manager, .strategy]
+    private var rows: [RowType] = [.header, .manager, .strategy]
     
     private var models: [CellViewAnyModel]?
     
     /// Return view models for registration cell Nib files
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [DetailManagerTableViewCellViewModel.self, DefaultTableViewCellViewModel.self, FundInvestNowTableViewCellViewModel.self, FundYourInvestmentTableViewCellViewModel.self]
+        return [FundHeaderTableViewCellViewModel.self,
+                DetailManagerTableViewCellViewModel.self,
+                DefaultTableViewCellViewModel.self,
+                FundInvestNowTableViewCellViewModel.self,
+                FundYourInvestmentTableViewCellViewModel.self]
     }
     
     // MARK: - Init
     init(withRouter router: FundInfoRouter,
-         fundId: String? = nil,
+         assetId: String? = nil,
          fundDetailsFull: FundDetailsFull? = nil,
          reloadDataProtocol: ReloadDataProtocol? = nil) {
         self.router = router
 
-        if let fundId = fundId {
-            self.fundId = fundId
+        if let assetId = assetId {
+            self.assetId = assetId
         }
         
-        if let fundDetailsFull = fundDetailsFull, let fundId = fundDetailsFull.id?.uuidString {
+        if let fundDetailsFull = fundDetailsFull, let assetId = fundDetailsFull.id?.uuidString {
             self.fundDetailsFull = fundDetailsFull
-            self.fundId = fundId
+            self.assetId = assetId
         }
         
         self.reloadDataProtocol = reloadDataProtocol
@@ -131,13 +136,13 @@ extension FundInfoViewModel {
     }
     
     func invest() {
-        guard let fundId = fundId else { return }
-        router.show(routeType: .invest(fundId: fundId))
+        guard let assetId = assetId else { return }
+        router.show(routeType: .invest(assetId: assetId))
     }
     
     func withdraw() {
-        guard let fundId = fundId else { return }
-        router.show(routeType: .withdraw(fundId: fundId))
+        guard let assetId = assetId else { return }
+        router.show(routeType: .withdraw(assetId: assetId))
     }
 }
 
@@ -159,6 +164,9 @@ extension FundInfoViewModel {
         case .details:
             let rowType = rows[indexPath.row]
             switch rowType {
+            case .header:
+                guard let fundDetailsFull = fundDetailsFull else { return nil }
+                return FundHeaderTableViewCellViewModel(details: fundDetailsFull)
             case .manager:
                 guard let profilePublic = fundDetailsFull?.owner else { return nil }
                 return DetailManagerTableViewCellViewModel(profilePublic: profilePublic)
@@ -173,7 +181,7 @@ extension FundInfoViewModel {
     }
     
     func fetch(completion: @escaping CompletionBlock) {
-        FundsDataProvider.get(self.fundId, completion: { [weak self] (viewModel) in
+        FundsDataProvider.get(self.assetId, currencyType: getPlatformCurrencyType(), completion: { [weak self] (viewModel) in
             guard viewModel != nil else {
                 return completion(.failure(errorType: .apiError(message: nil)))
             }

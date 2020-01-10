@@ -9,14 +9,14 @@
 import Foundation
 
 enum ProgramInfoRouteType {
-    case invest(programId: String, programCurrency: CurrencyType)
-    case withdraw(programId: String, programCurrency: CurrencyType)
+    case invest(assetId: String, programCurrency: CurrencyType)
+    case withdraw(assetId: String, programCurrency: CurrencyType)
     case fullChart(programDetailsFull: ProgramFollowDetailsFull)
     case manager(managerId: String)
-    case editSubscribe(programId: String, signalSubscription: SignalSubscription)
-    case subscribe(programId: String, initialDepositCurrency: CurrencyType?, initialDepositAmount: Double?)
-    case unsubscribe(programId: String)
-    case createAccount(programId: String, programCurrency: CurrencyType, completion: CreateAccountCompletionBlock)
+    case editSubscribe(assetId: String, signalSubscription: SignalSubscription)
+    case subscribe(assetId: String, currency: CurrencyType?, tradingAccountId: UUID?)
+    case unsubscribe(assetId: String)
+    case createAccount(assetId: String, brokerId: UUID?, leverage: Int?, programCurrency: CurrencyType, completion: CreateAccountCompletionBlock)
 }
 
 class ProgramInfoRouter: Router {
@@ -25,40 +25,40 @@ class ProgramInfoRouter: Router {
     // MARK: - Public methods
     func show(routeType: ProgramInfoRouteType) {
         switch routeType {
-        case .invest(let programId, let programCurrency):
-            invest(with: programId, programCurrency: programCurrency)
-        case .withdraw(let programId, let programCurrency):
-            withdraw(with: programId, programCurrency: programCurrency)
+        case .invest(let assetId, let programCurrency):
+            invest(with: assetId, programCurrency: programCurrency)
+        case .withdraw(let assetId, let programCurrency):
+            withdraw(with: assetId, programCurrency: programCurrency)
         case .fullChart(let programDetailsFull):
             fullChart(with: programDetailsFull)
         case .manager(let userId):
             showUserDetails(with: userId)
-        case .editSubscribe(let programId, let signalSubscription):
-            editSubscribe(programId, signalSubscription: signalSubscription)
-        case .subscribe(let programId, let initialDepositCurrency, let initialDepositAmount):
-            subscribe(programId, initialDepositCurrency: initialDepositCurrency, initialDepositAmount: initialDepositAmount)
-        case .unsubscribe(let programId):
-            unsubscribe(programId)
-        case .createAccount(let programId, let programCurrency, let completion):
-            createAccount(with: programId, programCurrency: programCurrency, completion: completion)
+        case .editSubscribe(let assetId, let signalSubscription):
+            editSubscribe(assetId, signalSubscription: signalSubscription)
+        case .subscribe(let assetId, let currency, let tradingAccountId):
+            subscribe(assetId, currency: currency, tradingAccountId: tradingAccountId)
+        case .unsubscribe(let assetId):
+            unsubscribe(assetId)
+        case .createAccount(let assetId, let brokerId, let leverage, let programCurrency, let completion):
+            createAccount(with: assetId, brokerId: brokerId, leverage: leverage, programCurrency: programCurrency, completion: completion)
         }
     }
     
     // MARK: - Private methods
-    func invest(with programId: String, programCurrency: CurrencyType) {
+    func invest(with assetId: String, programCurrency: CurrencyType) {
         guard let viewController = ProgramInvestViewController.storyboardInstance(.program) else { return }
         
         let router = ProgramInvestRouter(parentRouter: self)
-        let viewModel = ProgramInvestViewModel(withRouter: router, programId: programId, programCurrency: programCurrency, detailProtocol: programViewController)
+        let viewModel = ProgramInvestViewModel(withRouter: router, assetId: assetId, programCurrency: programCurrency, detailProtocol: programViewController)
         viewController.viewModel = viewModel
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    func withdraw(with programId: String, programCurrency: CurrencyType) {
+    func withdraw(with assetId: String, programCurrency: CurrencyType) {
         guard let viewController = ProgramWithdrawViewController.storyboardInstance(.program) else { return }
         
         let router = ProgramWithdrawRouter(parentRouter: self)
-        let viewModel = ProgramWithdrawViewModel(withRouter: router, programId: programId, programCurrency: programCurrency, detailProtocol: programViewController)
+        let viewModel = ProgramWithdrawViewModel(withRouter: router, assetId: assetId, programCurrency: programCurrency, detailProtocol: programViewController)
         viewController.viewModel = viewModel
         navigationController?.pushViewController(viewController, animated: true)
     }
@@ -73,35 +73,35 @@ class ProgramInfoRouter: Router {
         navigationController?.present(viewController: viewController)
     }
     
-    func createAccount(with programId: String, programCurrency: CurrencyType, completion: @escaping CreateAccountCompletionBlock) {
+    func createAccount(with assetId: String, brokerId: UUID?, leverage: Int?, programCurrency: CurrencyType, completion: @escaping CreateAccountCompletionBlock) {
         guard let viewController = OldCreateAccountViewController.storyboardInstance(.program) else { return }
         
-        let viewModel = OldCreateAccountViewModel(withRouter: self, programId: programId, programCurrency: programCurrency, completion: completion)
+        let viewModel = OldCreateAccountViewModel(withRouter: self, assetId: assetId, brokerId: brokerId, leverage: leverage, programCurrency: programCurrency, completion: completion)
         viewController.viewModel = viewModel
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    func editSubscribe(_ programId: String, signalSubscription: SignalSubscription) {
+    func editSubscribe(_ assetId: String, signalSubscription: SignalSubscription) {
         guard let viewController = ProgramSubscribeViewController.storyboardInstance(.program) else { return }
         
-//        let viewModel = ProgramSubscribeViewModel(withRouter: self, programId: programId, signalSubscription: signalSubscription, detailProtocol: programViewController, followType: .edit)
-//        viewController.viewModel = viewModel
+        let viewModel = ProgramSubscribeViewModel(withRouter: self, assetId: assetId, signalSubscription: signalSubscription, detailProtocol: programViewController, followType: .edit, delegate: viewController)
+        viewController.viewModel = viewModel
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    func subscribe(_ programId: String, initialDepositCurrency: CurrencyType?, initialDepositAmount: Double?) {
+    func subscribe(_ assetId: String, currency: CurrencyType?, tradingAccountId: UUID?) {
         guard let viewController = ProgramSubscribeViewController.storyboardInstance(.program) else { return }
         
-//        let viewModel = ProgramSubscribeViewModel(withRouter: self, programId: programId, initialDepositCurrency: initialDepositCurrency, initialDepositAmount: initialDepositAmount, detailProtocol: programViewController, followType: .follow)
-//        viewController.viewModel = viewModel
+        let viewModel = ProgramSubscribeViewModel(withRouter: self, assetId: assetId, tradingAccountId: tradingAccountId, сurrency: currency, detailProtocol: programViewController, followType: .follow, delegate: viewController)
+        viewController.viewModel = viewModel
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    func unsubscribe(_ programId: String) {
+    func unsubscribe(_ assetId: String) {
         guard let viewController = ProgramSubscribeViewController.storyboardInstance(.program) else { return }
         
-//        let viewModel = ProgramSubscribeViewModel(withRouter: self, programId: programId, detailProtocol: programViewController, followType: .unfollow)
-//        viewController.viewModel = viewModel
+        let viewModel = ProgramSubscribeViewModel(withRouter: self, assetId: assetId, detailProtocol: programViewController, followType: .unfollow, delegate: viewController)
+        viewController.viewModel = viewModel
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

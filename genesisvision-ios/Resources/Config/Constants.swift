@@ -10,7 +10,7 @@ import UIKit
 
 typealias ActionCompletionBlock = () -> Void
 typealias CompletionBlock = (_ result: CompletionResult) -> Void
-typealias CreateAccountCompletionBlock = (_ currency: CurrencyType, _ amount: Double) -> Void
+typealias CreateAccountCompletionBlock = (_ id: UUID?) -> Void
 typealias SuccessCompletionBlock = (_ success: Bool) -> Void
 
 final class Constants {

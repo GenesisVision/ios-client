@@ -11,7 +11,7 @@ import UIKit.UITableViewHeaderFooterView
 final class FundAssetsViewModel {
     // MARK: - Variables
     var title: String = "Structure"
-    var fundId: String?
+    var assetId: String?
     
     var router: FundRouter!
     private weak var reloadDataProtocol: ReloadDataProtocol?
@@ -37,10 +37,6 @@ final class FundAssetsViewModel {
         self.router = router
         self.assets = assets
         self.reloadDataProtocol = reloadDataProtocol
-    }
-    
-    func hideHeader(value: Bool = true) {
-        router.fundViewController.hideHeader(value)
     }
 }
 

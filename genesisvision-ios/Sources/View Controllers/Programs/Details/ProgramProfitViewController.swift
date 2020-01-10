@@ -1,5 +1,5 @@
 //
-//  ProgramBalanceViewController.swift
+//  ProgramProfitViewController.swift
 //  genesisvision-ios
 //
 //  Created by George on 02/10/2018.
@@ -9,22 +9,16 @@
 import UIKit
 import Charts
 
-class ProgramBalanceViewController: BaseViewControllerWithTableView {
+class ProgramProfitViewController: BaseViewControllerWithTableView {
     
     // MARK: - View Model
-    var viewModel: ProgramBalanceViewModel!
+    var viewModel: ProgramProfitViewModel!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setup()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        viewModel.hideHeader()
     }
     
     // MARK: - Private methods
@@ -34,7 +28,7 @@ class ProgramBalanceViewController: BaseViewControllerWithTableView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
-        
+
         setupPullToRefresh(scrollView: tableView)
         
         showInfiniteIndicator(value: false)
@@ -42,9 +36,12 @@ class ProgramBalanceViewController: BaseViewControllerWithTableView {
     
     private func setup() {
         bottomViewType = .dateRange
-        setupTableConfiguration()
         
+        setupTableConfiguration()
         setupNavigationBar()
+        
+        showProgressHUD()
+        fetch()
     }
     
     private func reloadData() {
@@ -81,23 +78,37 @@ class ProgramBalanceViewController: BaseViewControllerWithTableView {
     }
 }
 
-extension ProgramBalanceViewController: UITableViewDelegate, UITableViewDataSource {
+extension ProgramProfitViewController: UITableViewDelegate, UITableViewDataSource {
     // MARK: - UITableViewDelegate
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return viewModel.heightForHeader(in: section)
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = UIColor.Cell.headerBg
+        return view
+    }
+    
+    // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let model = viewModel.model(for: indexPath) else {
+        guard let model = viewModel.model(for: indexPath.section) else {
             return TableViewCell()
         }
         
         return tableView.dequeueReusableCell(withModel: model, for: indexPath)
     }
     
-    // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfRows(in: section)
     }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return viewModel.numberOfSections()
+    }
 }
 
-extension ProgramBalanceViewController: ChartViewProtocol {
+extension ProgramProfitViewController: ChartViewProtocol {
     var filterDateRangeModel: FilterDateRangeModel? {
         return dateRangeModel
     }

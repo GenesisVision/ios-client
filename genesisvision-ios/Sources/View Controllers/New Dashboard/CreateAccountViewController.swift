@@ -68,11 +68,12 @@ class CreateAccountViewController: BaseModalViewController {
         present(vc, animated: true, completion: nil)
     }
     @objc func checkActionButton() {
-        guard let amount = stackView.amountView.textField.text else { return }
-        
-        let value = !amount.isEmpty
-        
-        stackView.actionButton.setEnabled(value)
+        //FIXME: compare with aprox amount in USD
+        guard let amountText = stackView.amountView.textField.text, !amountText.isEmpty else { return
+            stackView.actionButton.setEnabled(false)
+        }
+    
+        stackView.actionButton.setEnabled(true)
     }
     // MARK: - Actions
     @IBAction func createAccountButtonAction(_ sender: UIButton) {
@@ -369,6 +370,11 @@ class CreateAccountViewModel {
             request.leverage = selected
         }
     }
+    func getMinDepositValue() -> Double? {
+        guard let currency = currencyListViewModel.selected(), let accountType = accountTypeListViewModel.selected(), let minDeposits = accountType.minimumDepositsAmount, let minDeposit = minDeposits[currency] else { return nil }
+        
+        return minDeposit
+    }
     func getMinDeposit() -> String {
         guard let currency = currencyListViewModel.selected(), let accountType = accountTypeListViewModel.selected(), let minDeposits = accountType.minimumDepositsAmount, let minDeposit = minDeposits[currency], let currencyType = CurrencyType(rawValue: currency) else { return "" }
         
@@ -408,117 +414,7 @@ class CreateAccountViewModel {
         return count > 1
     }
 }
-class ExchangeListViewModel: SelectableListViewModel<Broker> {
-    var title = "Choose exchange"
-    
-    var tableView: UITableView!
-    
-    override func cell(for indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
-        let model = SelectableTableViewCellViewModel()
 
-        guard let cell = tableView.dequeueReusableCell(withModel: model, for: indexPath) as? SelectableTableViewCell else { return UITableViewCell() }
-
-        let item = items[indexPath.row]
-        let isSelected = indexPath.row == selectedIndex
-        cell.configure(item, selected: isSelected)
-
-        return cell
-    }
-    
-    override func didSelect(at indexPath: IndexPath) {
-        super.didSelect(at: indexPath)
-        
-        delegate?.didSelect(.exchange, index: indexPath.row)
-    }
-}
-class AccountTypeListViewModel: SelectableListViewModel<BrokerAccountType> {
-    var title = "Choose account type"
-    
-    override func cell(for indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
-        let model = SelectableTableViewCellViewModel()
-        
-        guard let cell = tableView.dequeueReusableCell(withModel: model, for: indexPath) as? SelectableTableViewCell else { return UITableViewCell() }
-        
-        let item = items[indexPath.row]
-        let isSelected = indexPath.row == selectedIndex
-        cell.configure(item, selected: isSelected)
-        
-        return cell
-    }
-    
-    override func didSelect(at indexPath: IndexPath) {
-        super.didSelect(at: indexPath)
-
-        delegate?.didSelect(.accountType, index: indexPath.row)
-    }
-}
-class CurrencyListViewModel: SelectableListViewModel<String> {
-    var title = "Choose currency"
-    
-    override func cell(for indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
-        let model = SelectableTableViewCellViewModel()
-        
-        guard let cell = tableView.dequeueReusableCell(withModel: model, for: indexPath) as? SelectableTableViewCell else { return UITableViewCell() }
-        
-        let item = items[indexPath.row]
-        let isSelected = indexPath.row == selectedIndex
-        cell.configure(item, selected: isSelected)
-        
-        return cell
-    }
-    
-    override func didSelect(at indexPath: IndexPath) {
-        super.didSelect(at: indexPath)
-
-        delegate?.didSelect(.currency, index: indexPath.row)
-    }
-}
-class LeverageListViewModel: SelectableListViewModel<Int> {
-    var title = "Choose broker's leverage"
-    
-    override func cell(for indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
-        let model = SelectableTableViewCellViewModel()
-
-        guard let cell = tableView.dequeueReusableCell(withModel: model, for: indexPath) as? SelectableTableViewCell else { return UITableViewCell() }
-
-        let item = items[indexPath.row]
-        let isSelected = indexPath.row == selectedIndex
-        cell.configure(item, selected: isSelected)
-
-        return cell
-    }
-    
-    override func didSelect(at indexPath: IndexPath) {
-        super.didSelect(at: indexPath)
-        
-        delegate?.didSelect(.leverage, index: indexPath.row)
-    }
-}
-class FromListViewModel: SelectableListViewModel<WalletData> {
-    var title = "Choose wallet"
-    
-    override func cell(for indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
-        let model = SelectableTableViewCellViewModel()
-        
-        guard let cell = tableView.dequeueReusableCell(withModel: model, for: indexPath) as? SelectableTableViewCell else { return UITableViewCell() }
-        
-        let item = items[indexPath.row]
-        let isSelected = indexPath.row == selectedIndex
-        cell.configure(item, selected: isSelected)
-        
-        return cell
-    }
-    
-    override func didSelect(at indexPath: IndexPath) {
-        super.didSelect(at: indexPath)
-        
-        delegate?.didSelect(.walletFrom, index: indexPath.row)
-    }
-    
-    func updateSelected(_ currency: CurrencyType) {
-        self.selectedIndex = items.firstIndex(where: { $0.currency?.rawValue == currency.rawValue }) ?? 0
-    }
-}
 class BrokerCollectionViewModel: CellViewModelWithCollection {
     var title: String
     var type: CellActionType

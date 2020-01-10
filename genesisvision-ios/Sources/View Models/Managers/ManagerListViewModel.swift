@@ -80,14 +80,12 @@ final class ManagerListViewModel: ListViewModelProtocol {
         let totalCount = managerList.total ?? 0
         
         managerList.items?.forEach({ (profile) in
-            let managerTableViewCellViewModel = ManagerTableViewCellViewModel(profile: profile)
+            let managerTableViewCellViewModel = ManagerTableViewCellViewModel(profile: profile, selectable: true)
             viewModels.append(managerTableViewCellViewModel)
         })
         
         self.updateFetchedData(totalCount: totalCount, viewModels)
     }
-    
-    
 }
 
 // MARK: - Fetch

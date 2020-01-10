@@ -304,25 +304,3 @@ final class SettingsViewModel {
         forceSignOut()
     }
 }
-
-class PlatformCurrencyListViewModel: SelectableListViewModel<PlatformCurrencyInfo> {
-    var title = "Choose currency"
-    
-    override func cell(for indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
-        let model = SelectableTableViewCellViewModel()
-        
-        guard let cell = tableView.dequeueReusableCell(withModel: model, for: indexPath) as? SelectableTableViewCell else { return UITableViewCell() }
-        
-        let item = items[indexPath.row]
-        let isSelected = indexPath.row == selectedIndex
-        cell.configure(item.name, selected: isSelected)
-        
-        return cell
-    }
-    
-    override func didSelect(at indexPath: IndexPath) {
-        super.didSelect(at: indexPath)
-
-        delegate?.didSelect(.currency, index: indexPath.row)
-    }
-}

@@ -12,7 +12,7 @@ class ManagerListViewController: BaseViewControllerWithTableView {
     
     // MARK: - View Model
     var viewModel: ListViewModelProtocol!
-    
+    weak var searchProtocol: SearchViewControllerProtocol?
     // MARK: - Outlets
     @IBOutlet override var tableView: UITableView! {
         didSet {
@@ -182,3 +182,11 @@ extension ManagerListViewController: FavoriteStateChangeProtocol {
     }
 }
 
+
+extension ManagerListViewController: DelegateManagerProtocol {
+    func delegateManagerTableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let model = viewModel.model(at: indexPath) as? ManagerTableViewCellViewModel, let assetId = model.profile.id?.uuidString else { return }
+        
+        searchProtocol?.didSelect(assetId, assetType: ._none)
+    }
+}

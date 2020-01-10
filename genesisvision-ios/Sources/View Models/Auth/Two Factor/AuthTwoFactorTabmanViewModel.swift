@@ -9,6 +9,12 @@
 import Tabman
 
 final class AuthTwoFactorTabmanViewModel: TabmanViewModel {
+    enum TabType: String {
+        case howTo = "How to", getKey = "Get key", verify = "Verify"
+    }
+    var tabTypes: [TabType] = [.howTo, .getKey, .verify]
+    var controllers = [TabType : UIViewController]()
+    
     // MARK: - Variables
     var sharedKey: String?
     
@@ -21,34 +27,49 @@ final class AuthTwoFactorTabmanViewModel: TabmanViewModel {
         isScrollEnabled = false
         bounces = false
         compresses = true
-    }
-    
-    override func initializeViewControllers() {
-        setup()
-    }
-    
-    // MARK: - Private methods
-    private func setup() {
-        self.items = []
         
-        if let router = router as? AuthTwoFactorTabmanRouter {
-            if let vc = router.getTutorialVC(with: self) {
-                self.addController(vc)
-                self.items?.append(TMBarItem(title: vc.viewModel.title.uppercased()))
+        self.tabTypes.forEach({ controllers[$0] = getViewController($0) })
+        self.dataSource = PageboyDataSource(self)
+    }
+    
+    func getViewController(_ type: TabType) -> UIViewController? {
+        guard let router = router as? AuthTwoFactorTabmanRouter else { return nil }
+        
+        switch type {
+        case .howTo:
+            guard let saved = controllers[type] else {
+                return router.getTutorialVC(with: self)
             }
             
-            if let vc = router.getCreateVC(with: self) {
-                self.addController(vc)
-                self.items?.append(TMBarItem(title: vc.viewModel.title.uppercased()))
+            return saved
+        case .getKey:
+            guard let saved = controllers[type] else {
+                return router.getCreateVC(with: self)
             }
             
-            if let vc = router.getConfirmationVC(with: self) {
-                self.addController(vc)
-                self.items?.append(TMBarItem(title: vc.viewModel.title.uppercased()))
+            return saved
+        case .verify:
+            guard let saved = controllers[type] else {
+                return router.getConfirmationVC(with: self)
             }
             
-            reloadPages()
+            return saved
         }
     }
 }
 
+extension AuthTwoFactorTabmanViewModel: TabmanDataSourceProtocol {
+    func getCount() -> Int {
+        return tabTypes.count
+    }
+    
+    func getItem(_ index: Int) -> TMBarItem? {
+        let type = tabTypes[index]
+    
+        return TMBarItem(title: type.rawValue)
+    }
+    
+    func getViewController(_ index: Int) -> UIViewController? {
+        return getViewController(tabTypes[index])
+    }
+}

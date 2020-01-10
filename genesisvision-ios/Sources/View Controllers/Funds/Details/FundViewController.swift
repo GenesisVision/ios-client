@@ -7,39 +7,14 @@
 //
 
 import UIKit
+import Tabman
 
-class FundViewController: BaseViewController {
+class FundViewController: BaseTabmanViewController<FundViewModel> {
     // MARK: - View Model
-    var viewModel: FundViewModel!
-    var isLoading: Bool = false
+    weak var fundInfoViewControllerProtocol: FavoriteStateChangeProtocol?
 
-    // MARK: - Variables
-    @IBOutlet weak var scrollView: UIScrollView! {
-        didSet {
-            scrollView.delegate = self
-        }
-    }
-    
-    var minHeaderHeight: CGFloat = {
-        switch UIDevice.current.screenType {
-        case .iPhones_X_XS, .iPhone_XR, .iPhone_XSMax:
-            return 244.0
-        default:
-            return 200.0
-        }
-    }()
-    
-    var topConstant: CGFloat = 0.0
-    
-    @IBOutlet weak var headerViewConstraint: NSLayoutConstraint!
-    
-    var headerViewController: FundHeaderViewController?
-    var detailsTabmanViewController: FundTabmanViewController?
-    
-    @IBOutlet weak var detailsView: UIView!
     private var favoriteBarButtonItem: UIBarButtonItem!
     private var notificationsBarButtonItem: UIBarButtonItem!
-    
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -47,87 +22,15 @@ class FundViewController: BaseViewController {
         
         showProgressHUD()
         setup()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.headerViewConstraint.constant = minHeaderHeight
-        self.navigationController?.isNavigationBarHidden = false
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let headerViewController = segue.destination as? FundHeaderViewController,
-            segue.identifier == "FundHeaderViewControllerSegue" {
-            self.viewModel?.router?.fundHeaderViewController = headerViewController
-            self.headerViewController = headerViewController
-        } else if let tabmanViewController = segue.destination as? FundTabmanViewController,
-            segue.identifier == "FundTabmanViewControllerSegue" {
-            
-            tabmanViewController.fundInfoViewControllerProtocol = self
-            
-            let router = FundTabmanRouter(parentRouter: self.viewModel.router, tabmanViewController: tabmanViewController)
-            let viewModel = FundTabmanViewModel(withRouter: router, fundId: self.viewModel.fundId)
-            viewModel.favoriteStateUpdatedProtocol = self
-            tabmanViewController.viewModel = viewModel
-            
-            self.viewModel?.router?.fundDetailsTabmanViewController = tabmanViewController
-            detailsTabmanViewController = tabmanViewController
+        viewModel.fetch { [weak self] (result) in
+            self?.hideHUD()
+            self?.reloadData()
+            self?.title = self?.viewModel.title
         }
-    }
-    
-    override func pullToRefresh() {
-        super.pullToRefresh()
-        
-        fetch()
     }
     
     // MARK: - Private methods
-    private func setup() {
-        showProgressHUD()
-        setupUI()
-        fetch()
-    }
-    
-    private func fetch() {
-        viewModel.fetch { [weak self] (result) in
-            self?.hideAll()
-            self?.isLoading = false
-            
-            switch result {
-            case .success:
-                if AuthManager.isLogin(), let isFavorite = self?.viewModel?.isFavorite {
-                    self?.favoriteBarButtonItem.image = isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon")
-                }
-                
-                if let fundDetailsFull = self?.viewModel.fundDetailsFull {
-                    self?.detailsTabmanViewController?.setup(fundDetailsFull)
-                    self?.headerViewController?.configure(fundDetailsFull)
-                }
-            default:
-                break
-            }
-        }
-    }
-    
     private func setupUI() {
-        let statusBarHeight = UIApplication.shared.statusBarFrame.height
-        topConstant = 44.0 + statusBarHeight
-        
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        scrollView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: -topConstant).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        
         guard AuthManager.isLogin() else { return }
         
         if let isFavorite = self.viewModel?.isFavorite {
@@ -143,15 +46,22 @@ class FundViewController: BaseViewController {
         viewModel.showNotificationSettings()
     }
     
+    private func setup() {
+        navigationItem.title = viewModel.title
+        
+        dataSource = viewModel.dataSource
+        
+        setupUI()
+    }
+    
     // MARK: - IBActions
     @objc func favoriteButtonAction() {
         guard let isFavorite = self.viewModel?.isFavorite else { return }
         self.favoriteBarButtonItem.image = !isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon")
         
-        
         showProgressHUD()
         self.viewModel?.changeFavorite(value: isFavorite, request: true) { [weak self] (result) in
-            self?.hideAll()
+            self?.hideHUD()
             
             switch result {
             case .success:
@@ -162,83 +72,17 @@ class FundViewController: BaseViewController {
             }
         }
     }
-    
-    func hideHeader(_ value: Bool) {
-        let scrollOffset = CGPoint(x: 0.0, y: value ? minHeaderHeight - topConstant * 2 : -topConstant)
-        scrollView.setContentOffset(scrollOffset, animated: true)
-    }
 }
 
-extension FundViewController {
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        super.scrollViewDidScroll(scrollView)
-        
-        let yOffset = scrollView.contentOffset.y + topConstant
-        
-        let headerHeight = headerViewConstraint.constant - topConstant
-        if headerHeight - yOffset >= 0 && yOffset >= 0 {
-            headerViewController?.changeColorAlpha(offset: yOffset / headerHeight)
-        }
-
-        if yOffset < 0 {
-            self.headerViewConstraint.constant += abs(yOffset)
-
-            if self.headerViewConstraint.constant > 400.0 && !self.isLoading {
-                self.scrollView.panGestureRecognizer.isEnabled = false
-                self.scrollView.panGestureRecognizer.isEnabled = true
-                self.isLoading = true
-                self.pullToRefresh()
-            }
-        } else if yOffset > 0 && self.headerViewConstraint.constant >= minHeaderHeight {
-            self.headerViewConstraint.constant -= abs(yOffset)
-            if self.headerViewConstraint.constant < minHeaderHeight {
-                self.headerViewConstraint.constant = minHeaderHeight
-            }
-        }
-
-        if scrollView == self.scrollView {
-            if let viewModel = viewModel.router.fundDetailsTabmanViewController?.viewModel {
-                for controller in viewModel.viewControllers {
-                    if let vc = controller as? BaseViewControllerWithTableView {
-                        vc.tableView?.isScrollEnabled = yOffset >= detailsView.frame.origin.y - topConstant * 2
-                    }
-                }
-            }
-        }
-    }
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        animateHeaderView(scrollView.contentOffset.y)
-    }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        animateHeaderView(scrollView.contentOffset.y)
-    }
-    
-    private func animateHeaderView(_ contentOffsetY: CGFloat) {
-        let yOffset = contentOffsetY + topConstant
-        let headerHeight = headerViewConstraint.constant - topConstant
-        
-        if self.headerViewConstraint.constant > minHeaderHeight {
-            animateHeader(minHeaderHeight)
-        } else {
-            hideHeader(true)
-            
-            if headerHeight - yOffset >= 0 && yOffset >= 0 {
-                headerViewController?.changeColorAlpha(offset: yOffset / headerHeight)
-            }
-        }
-    }
-    
-    func animateHeader(_ minHeaderHeight: CGFloat) {
-        self.headerViewConstraint.constant = minHeaderHeight
-        
-        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: {
-            self.view.layoutIfNeeded()
-        }, completion: nil)
+extension FundViewController: ReloadDataProtocol {
+    func didReloadData() {
     }
 }
-
+extension FundViewController: DetailProtocol {
+    func didReload() {
+        
+    }
+}
 extension FundViewController: FavoriteStateUpdatedProtocol {
     func didFavoriteStateUpdated() {
         DispatchQueue.main.async {
@@ -256,35 +100,149 @@ extension FundViewController: FavoriteStateUpdatedProtocol {
     }
 }
 
-// MARK: - FavoriteStateChangeProtocol
-extension FundViewController: FavoriteStateChangeProtocol {
-    var filterDateRangeModel: FilterDateRangeModel? {
-        return dateRangeModel
+final class FundViewModel: TabmanViewModel {
+    enum TabType: String {
+        case info = "Info"
+        case equity = "Equity"
+        case profit = "Profit"
+        case balance = "Balance"
+        
+        case assets = "Assets"
+        case reallocateHistory = "Reallocate history"
+        
+        case events = "Events"
+    }
+    var tabTypes: [TabType] = []
+    var controllers = [TabType : UIViewController]()
+    
+    // MARK: - Variables
+    var assetId: String?
+    
+    public private(set) var tradingAccounts: ItemsViewModelTradingAccountDetails?
+    public private(set) var signalSubscription: SignalSubscription?
+    var fundDetailsFull: FundDetailsFull? {
+        didSet {
+            guard let details = fundDetailsFull else { return }
+            title = details.publicInfo?.title ?? ""
+            
+            tabTypes = [.info, .profit, .balance, .assets, .reallocateHistory, .events]
+        }
     }
     
-    func didChangeFavoriteState(with assetID: String, value: Bool, request: Bool) {
-        showProgressHUD()
-        viewModel.changeFavorite(value: value, request: request) { (result) in
-            
+    var isFavorite: Bool {
+        return fundDetailsFull?.personalDetails?.isFavorite ?? false
+    }
+    weak var favoriteStateUpdatedProtocol: FavoriteStateUpdatedProtocol?
+    
+    weak var reloadDataProtocol: ReloadDataProtocol?
+    
+    // MARK: - Init
+    init(withRouter router: Router, assetId: String? = nil) {
+        super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0)
+        
+        self.tabTypes.forEach({ controllers[$0] = getViewController($0) })
+        self.dataSource = PageboyDataSource(self)
+        
+        self.assetId = assetId
+        self.title = ""
+        
+        font = UIFont.getFont(.semibold, size: 16)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(fundFavoriteStateChangeNotification(notification:)), name: .fundFavoriteStateChange, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .fundFavoriteStateChange, object: nil)
+    }
+    
+    // MARK: - Public methods
+    func getViewController(_ type: TabType) -> UIViewController? {
+        if let saved = controllers[type] { return saved }
+        
+        guard let router = router as? FundRouter, let assetId = self.assetId else { return nil }
+        
+        switch type {
+        case .info:
+            return router.getInfo(with: assetId)
+        case .balance:
+            return router.getBalance(with: assetId)
+        case .profit:
+            return router.getProfit(with: assetId)
+        case .reallocateHistory:
+            return router.getReallocateHistory(with: assetId)
+        case .assets:
+            return router.getAssets()
+        case .events:
+            return router.getEvents(with: assetId)
+        default:
+            return nil
         }
     }
 }
-
-extension FundViewController: DetailProtocol {
-    func didReload() {
-        fetch()
+extension FundViewModel: TabmanDataSourceProtocol {
+    func getCount() -> Int {
+        return tabTypes.count
+    }
+    
+    func getItem(_ index: Int) -> TMBarItem? {
+        let type = tabTypes[index]
+    
+        return TMBarItem(title: type.rawValue)
+    }
+    
+    func getViewController(_ index: Int) -> UIViewController? {
+        return getViewController(tabTypes[index])
     }
 }
+// MARK: - Actions
+extension FundViewModel {
+    // MARK: - Public methods
+    func showNotificationSettings() {
+       router.showAssetNotificationsSettings(assetId, title: fundDetailsFull?.publicInfo?.title ?? "Fund Settings", type: .fund)
+    }
+    
+    func fetch(_ completion: @escaping CompletionBlock) {
+        guard let assetId = self.assetId else { return }
 
-// MARK: - ReloadDataProtocol
-extension FundViewController: ReloadDataProtocol {
-    func didReloadData() {
-        if let fundDetailsFull = viewModel.fundDetailsFull {
-            headerViewController?.configure(fundDetailsFull)
+        FundsDataProvider.get(assetId, currencyType: getPlatformCurrencyType(), completion: { [weak self] (viewModel) in
+            guard let viewModel = viewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
+            
+            self?.fundDetailsFull = viewModel
+            completion(.success)
+        }, errorCompletion: completion)
+    }
+    
+    func changeFavorite(value: Bool? = nil, request: Bool = false, completion: @escaping CompletionBlock) {
+        guard request else {
+            fundDetailsFull?.personalDetails?.isFavorite = value
+            return completion(.success)
         }
         
-        if AuthManager.isLogin(), let isFavorite = self.viewModel?.isFavorite {
-            self.favoriteBarButtonItem.image = isFavorite ? #imageLiteral(resourceName: "img_favorite_icon_selected") : #imageLiteral(resourceName: "img_favorite_icon")
+        guard
+            let personalDetails = fundDetailsFull?.personalDetails,
+            let isFavorite = personalDetails.isFavorite,
+            let assetId = assetId
+            else { return completion(.failure(errorType: .apiError(message: nil))) }
+        
+        FundsDataProvider.favorites(isFavorite: isFavorite, assetId: assetId) { [weak self] (result) in
+            switch result {
+            case .success:
+                self?.fundDetailsFull?.personalDetails?.isFavorite = !isFavorite
+            case .failure(let errorType):
+                print(errorType)
+                self?.fundDetailsFull?.personalDetails?.isFavorite = isFavorite
+            }
+            
+            completion(result)
+        }
+    }
+    
+    // MARK: - Private methods
+    @objc private func fundFavoriteStateChangeNotification(notification: Notification) {
+        if let isFavorite = notification.userInfo?["isFavorite"] as? Bool, let assetId = notification.userInfo?["fundId"] as? String, assetId == self.assetId {
+            changeFavorite(value: isFavorite) { [weak self] (result) in
+                self?.reloadDataProtocol?.didReloadData()
+            }
         }
     }
 }

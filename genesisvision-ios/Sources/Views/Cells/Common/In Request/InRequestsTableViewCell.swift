@@ -11,6 +11,16 @@ import UIKit
 class InRequestsTableViewCell: UITableViewCell {
 
     // MARK: - Outlets
+    @IBOutlet weak var redBackgroundView: UIView! {
+        didSet {
+            redBackgroundView.backgroundColor = UIColor.Cell.redTitle
+        }
+    }
+    @IBOutlet weak var contentBackgroundView: UIView! {
+        didSet {
+            contentBackgroundView.backgroundColor = UIColor.Cell.bg
+        }
+    }
     @IBOutlet weak var iconImageView: UIImageView! {
         didSet {
             iconImageView.roundCorners()
@@ -61,5 +71,23 @@ class InRequestsTableViewCell: UITableViewCell {
         accessoryView?.backgroundColor = UIColor.Cell.bg
         
         selectionStyle = .none
+        
+        animateSwipeHint()
+    }
+    
+    func animateSwipeHint() {
+        slideFromRight()
+    }
+    
+    func slideFromRight() {
+        UIView.animate(withDuration: 0.5, delay: 0.3, options: [.curveEaseOut], animations: {
+            self.contentBackgroundView.transform = CGAffineTransform(translationX: -50, y: 0)
+        }) { (success) in
+            UIView.animate(withDuration: 0.2, delay: 0, options: [.curveLinear], animations: {
+                self.contentBackgroundView.transform = CGAffineTransform.identity
+            }) { (success) in
+                
+            }
+        }
     }
 }

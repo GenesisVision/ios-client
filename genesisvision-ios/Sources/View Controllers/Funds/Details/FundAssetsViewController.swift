@@ -1,29 +1,24 @@
 //
-//  ProgramTradesViewController.swift
+//  FundAssetsViewController.swift
 //  genesisvision-ios
 //
-//  Created by George on 11/04/2018.
+//  Created by George on 29/10/2018.
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
 import UIKit
 
-class ProgramTradesViewController: BaseViewControllerWithTableView {
 
+class FundAssetsViewController: BaseViewControllerWithTableView {
+    
     // MARK: - View Model
-    var viewModel: ProgramTradesViewModel!
+    var viewModel: FundAssetsViewModel!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setup()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
-        viewModel.hideHeader()
+        setup()
     }
     
     // MARK: - Private methods
@@ -36,11 +31,11 @@ class ProgramTradesViewController: BaseViewControllerWithTableView {
         tableView.registerHeaderNib(for: viewModel.viewModelsForRegistration)
         
         setupPullToRefresh(scrollView: tableView)
+        
+        showInfiniteIndicator(value: false)
     }
     
     private func setup() {
-        bottomViewType = viewModel.isOpenTrades ? .none : .dateRange
-        noDataTitle = viewModel.noDataText()
         setupTableConfiguration()
         
         setupNavigationBar()
@@ -52,36 +47,9 @@ class ProgramTradesViewController: BaseViewControllerWithTableView {
             self.tableView?.reloadData()
         }
     }
-    
-    override func fetch() {
-        viewModel.refresh { [weak self] (result) in
-            self?.hideAll()
-            
-            switch result {
-            case .success:
-                break
-            case .failure(let errorType):
-                ErrorHandler.handleError(with: errorType, viewController: self)
-            }
-        }
-    }
-    
-    override func pullToRefresh() {
-        super.pullToRefresh()
-        
-        fetch()
-    }
-    
-    override func updateData(from dateFrom: Date?, to dateTo: Date?) {
-        viewModel.dateFrom = dateFrom
-        viewModel.dateTo = dateTo
-        
-        showProgressHUD()
-        fetch()
-    }
 }
 
-extension ProgramTradesViewController: UITableViewDelegate, UITableViewDataSource {
+extension FundAssetsViewController: UITableViewDelegate, UITableViewDataSource {
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let model = viewModel.model(for: indexPath) else {
@@ -89,10 +57,6 @@ extension ProgramTradesViewController: UITableViewDelegate, UITableViewDataSourc
         }
         
         return tableView.dequeueReusableCell(withModel: model, for: indexPath)
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath))
     }
     
     // MARK: - UITableViewDataSource
@@ -104,20 +68,29 @@ extension ProgramTradesViewController: UITableViewDelegate, UITableViewDataSourc
         return viewModel.numberOfSections()
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return viewModel.rowHeight(for: indexPath.row)
+    }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return viewModel.headerHeight(for: section)
     }
     
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 1.0
+    }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView() as DateSectionTableHeaderView
-        header.headerLabel.text = viewModel.titleForHeader(in: section)
+        let header = tableView.dequeueReusableHeaderFooterView() as FundAssetsHeaderView
+        header.configure(firstTitle: "Asset (symbol)", thirdTitle: "Target", fourthTitle: "Current")
         return header
     }
 }
 
-extension ProgramTradesViewController: ReloadDataProtocol {
+extension FundAssetsViewController: ReloadDataProtocol {
     func didReloadData() {
         reloadData()
         tabmanBarItems?.forEach({ $0.badgeValue = "\(viewModel.totalCount)" })
     }
 }
+

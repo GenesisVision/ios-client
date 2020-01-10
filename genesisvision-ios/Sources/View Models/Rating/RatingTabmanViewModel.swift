@@ -10,7 +10,7 @@ import Foundation
 import Tabman
 
 final class RatingTabmanViewModel: TabmanViewModel {
-    var dataSource: RatingPageboyViewControllerDataSource!
+    var tabTypes = [Int]()
     
     var filterModel: FilterModel = FilterModel()
     var searchBarEnable = false
@@ -25,27 +25,27 @@ final class RatingTabmanViewModel: TabmanViewModel {
         
         self.searchBarEnable = searchBarEnable
         self.showFacets = showFacets
-        self.dataSource = RatingPageboyViewControllerDataSource(router: router, showFacets: showFacets)
         
-//        BaseDataProvider.getProgramsLevels(<#T##currency: PlatformAPI.Currency_getProgramLevels##PlatformAPI.Currency_getProgramLevels#>, completion: <#T##(ProgramsLevelsInfo?) -> Void#>, errorCompletion: <#T##CompletionBlock##CompletionBlock##(CompletionResult) -> Void#>)
-//        ProgramsDataProvider.getLevelUpSummary(completion: { [weak self] (levelUpSummary) in
-//            self?.updateItems(levelUpSummary)
-//        }) { (result) in
-//            switch result {
-//            case .success:
-//                break
-//            case .failure(let errorType):
-//                print(errorType)
-//                ErrorHandler.handleError(with: errorType)
-//            }
-//        }
+        BaseDataProvider.getProgramsLevels(getPlatformCurrencyType(), completion: { [weak self] (viewModel) in
+            self?.updateItems(viewModel)
+        }) { (result) in
+            switch result {
+            case .success:
+                break
+            case .failure(let errorType):
+                print(errorType)
+                ErrorHandler.handleError(with: errorType)
+            }
+        }
     }
     
     func updateItems(_ levelsInfo: ProgramsLevelsInfo?) {
         guard let levelsInfo = levelsInfo, let levels = levelsInfo.levels else { return }
         
         self.filterModel.levelsInfo = levelsInfo
-        self.dataSource = RatingPageboyViewControllerDataSource(router: router, showFacets: showFacets)
+        self.dataSource = PageboyDataSource(self)
+        
+        tabTypes = levels.map({ $0.level ?? 0 })
         
         var items: [TMBarItem] = []
         for level in levels {
@@ -59,5 +59,32 @@ final class RatingTabmanViewModel: TabmanViewModel {
     
     func showAboutLevels() {
         router.showAboutLevels(.gvt)
+    }
+}
+
+extension RatingTabmanViewModel: TabmanDataSourceProtocol {
+    func getCount() -> Int {
+        return tabTypes.count
+    }
+    
+    func getItem(_ index: Int) -> TMBarItem? {
+        let type = tabTypes[index]
+    
+        return TMBarItem(title: type.rawValue)
+    }
+    
+    func getViewController(_ index: Int) -> UIViewController? {
+        let type = tabTypes[index]
+        
+        switch type {
+        case .info:
+            if let router = router as? ProgramTabmanRouter, let assetId = assetId, let vc = router.getInfo(with: assetId) {
+                return vc
+            }
+        default:
+            break
+        }
+        
+        return nil
     }
 }

@@ -10,21 +10,27 @@ import UIKit.UIColor
 import Tabman
 
 final class WalletTabmanViewModel: TabmanViewModel {
+    enum TabType: String {
+        case balance = "Balance"
+        case myWallets = "My Wallets"
+        case transactions = "Transactions"
+        case externalTransactions = "Deposits/Withdrawals"
+    }
+    var tabTypes: [TabType] = [.balance, .transactions, .externalTransactions]
+    var controllers = [TabType : UIViewController]()
+    
     // MARK: - Variables
-    var dataSource: BasePageboyViewControllerDataSource!
     var wallet: WalletData?
     var accounts: [TradingAccountDetails]?
-    var account: TradingAccountDetails?
     var multiWallet: WalletSummary?
     
     var walletType: WalletType = .all
     
     // MARK: - Init
-    init(withRouter router: Router, wallet: WalletData? = nil, account: TradingAccountDetails? = nil, walletType: WalletType) {
+    init(withRouter router: Router, wallet: WalletData? = nil, walletType: WalletType) {
         super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0)
         
         self.wallet = wallet
-        self.account = account
         self.walletType = walletType
         
         font = UIFont.getFont(.semibold, size: 16)
@@ -36,67 +42,56 @@ final class WalletTabmanViewModel: TabmanViewModel {
             if let title = wallet.title {
                 self.title = title
             }
-            
-            items = [TMBarItem(title: "Balance"),
-                     TMBarItem(title: "Transactions"),
-                     TMBarItem(title: "Deposits/Withdrawals")]
+            tabTypes = [.balance, .transactions, .externalTransactions]
         case .all:
             self.title = "Wallets"
-
-            items = [TMBarItem(title: "Balance"),
-                     TMBarItem(title: "My Wallets"),
-                     TMBarItem(title: "Transactions"),
-                     TMBarItem(title: "Deposits/Withdrawals")]
-        }
-    }
-    
-    func getDataSources() -> BasePageboyViewControllerDataSource {
-        switch walletType {
-        case .wallet:
-            dataSource = WalletPageboyViewControllerDataSource(router: router, wallet: wallet)
-        case .all:
-            dataSource = WalletPageboyViewControllerDataSource(router: router, wallet: nil)
+            tabTypes = [.balance, .myWallets, .transactions, .externalTransactions]
         }
         
-        return dataSource
+        self.tabTypes.forEach({ controllers[$0] = getViewController($0) })
+        self.dataSource = PageboyDataSource(self)
     }
     
     // MARK: - Public methods
     func reloadDetails() {
-        //TODO: 
-        let controllers = dataSource.controllers
-        if let walletBalanceViewController = controllers[0] as? WalletBalanceViewController, let walletListViewController = controllers[1] as? WalletListViewController {
-            walletBalanceViewController.viewModel.fetch()
-            walletListViewController.viewModel.fetch()
+        if let balanceVC = getViewController(.balance) as? WalletBalanceViewController {
+            balanceVC.viewModel.fetch()
+        }
+        if let myWalletsVC = getViewController(.myWallets) as? WalletListViewController {
+            myWalletsVC.viewModel.fetch()
         }
     }
-    
+    func getViewController(_ type: TabType) -> UIViewController? {
+        guard let router = router as? WalletRouter else { return nil }
+        
+        switch type {
+        case .balance:
+            return controllers[type] ?? router.getBalance(wallet)
+        case .myWallets:
+            return controllers[type] ?? router.getWallets(wallet)
+        case .transactions:
+            return controllers[type] ?? router.getInternalTransactions(wallet)
+        case .externalTransactions:
+            return controllers[type] ?? router.getExternalTransactions(wallet)
+        }
+    }
     func showAboutFees() {
         router.showAboutFees()
     }
 }
 
-class WalletPageboyViewControllerDataSource: BasePageboyViewControllerDataSource {
-    var wallet: WalletSummary?
+extension WalletTabmanViewModel: TabmanDataSourceProtocol {
+    func getCount() -> Int {
+        return tabTypes.count
+    }
     
-    // MARK: - Private methods
-    internal override func setup(router: Router, wallet: WalletData? = nil) {
-        if let router = router as? WalletRouter {
-            if let vc = router.getBalance(wallet) {
-                controllers.append(vc)
-            }
-            
-            if wallet == nil, let vc = router.getWallets(wallet) {
-                controllers.append(vc)
-            }
-            
-            if let vc = router.getInternalTransactions(wallet) {
-                controllers.append(vc)
-            }
-            
-            if let vc = router.getExternalTransactions(wallet) {
-                controllers.append(vc)
-            }
-        }
+    func getItem(_ index: Int) -> TMBarItem? {
+        let type = tabTypes[index]
+    
+        return TMBarItem(title: type.rawValue)
+    }
+    
+    func getViewController(_ index: Int) -> UIViewController? {
+        return getViewController(tabTypes[index])
     }
 }

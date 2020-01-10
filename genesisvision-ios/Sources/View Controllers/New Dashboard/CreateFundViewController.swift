@@ -42,6 +42,9 @@ class CreateFundViewController: BaseModalViewController {
         stackView.descriptionView.textView.textContainerInset = UIEdgeInsets(top: 0, left: -6, bottom: 0, right: -6)
         stackView.descriptionView.textView.delegate = self
         stackView.descriptionView.subtitleValueLabel.textColor = UIColor.Cell.subtitle
+        
+        stackView.entryFeeView.textField.text = "0"
+        stackView.exitFeeView.textField.text = "0"
     }
     
     func updateUI() {
@@ -154,6 +157,7 @@ extension CreateFundViewController: UITextFieldDelegate, DesignableUITextFieldDe
     func textFieldDidClear(_ textField: UITextField) {
         stackView.nameView.subtitleValueLabel.text = "0 / 20"
         stackView.nameView.subtitleValueLabel.textColor = UIColor.Cell.subtitle
+        checkActionButton()
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -169,6 +173,7 @@ extension CreateFundViewController: UITextViewDelegate {
             stackView.descriptionView.subtitleValueLabel.text = "\(count) / \(max)"
             stackView.descriptionView.subtitleValueLabel.textColor = count < 20 || count > 500 ? UIColor.Common.red : UIColor.Cell.subtitle
         }
+        checkActionButton()
     }
 }
 

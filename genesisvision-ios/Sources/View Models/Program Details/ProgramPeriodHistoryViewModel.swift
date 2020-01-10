@@ -13,7 +13,7 @@ final class ProgramPeriodHistoryViewModel {
     typealias CellViewModel = PeriodHistoryTableViewCellViewModel
     
     var title: String = "Period history"
-    var programId: String?
+    var assetId: String?
     
     var router: ProgramRouter!
     private weak var reloadDataProtocol: ReloadDataProtocol?
@@ -50,15 +50,11 @@ final class ProgramPeriodHistoryViewModel {
     var isOpenTrades: Bool = false
     
     // MARK: - Init
-    init(withRouter router: ProgramRouter, programId: String, reloadDataProtocol: ReloadDataProtocol?, currency: CurrencyType? = nil) {
+    init(withRouter router: ProgramRouter, assetId: String, reloadDataProtocol: ReloadDataProtocol?, currency: CurrencyType? = nil) {
         self.router = router
-        self.programId = programId
+        self.assetId = assetId
         self.reloadDataProtocol = reloadDataProtocol
         self.currency = currency
-    }
-    
-    func hideHeader(value: Bool = true) {
-        router.programViewController.hideHeader(value)
     }
 }
 
@@ -190,7 +186,7 @@ extension ProgramPeriodHistoryViewModel {
     
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [CellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         
-        ProgramsDataProvider.getPeriodHistory(with: programId, dateFrom: dateFrom, dateTo: dateTo, skip: skip, take: take, completion: { [weak self] (periodsViewModel) in
+        ProgramsDataProvider.getPeriodHistory(with: assetId, dateFrom: dateFrom, dateTo: dateTo, skip: skip, take: take, completion: { [weak self] (periodsViewModel) in
             guard let periodsViewModel = periodsViewModel else {
                 return ErrorHandler.handleApiError(error: nil, completion: completionError)
             }

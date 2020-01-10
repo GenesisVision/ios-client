@@ -17,7 +17,7 @@ final class ProgramSubscribeViewModel {
     }
     // MARK: - Variables
     var title: String = ""
-    var programId: String?
+    var assetId: String?
     var programCurrency: CurrencyType?
     var labelPlaceholder: String = "0"
     
@@ -28,8 +28,21 @@ final class ProgramSubscribeViewModel {
     
     var signalSubscription: SignalSubscription?
     
+    var tradingAccountListViewModel: TradingAccountListViewModel!
+    var tradingAccountListDataSource: TableViewDataSource<TradingAccountListViewModel>!
+    
+    var tradingAccounts: ItemsViewModelTradingAccountDetails? {
+        didSet {
+            if let items = tradingAccounts?.items, !items.isEmpty {
+                tradingAccountListViewModel = TradingAccountListViewModel(delegate, items: items, selectedIndex: 0)
+                tradingAccountListDataSource = TableViewDataSource(tradingAccountListViewModel)
+            }
+        }
+    }
+    
     private var router: ProgramInfoRouter!
     private weak var detailProtocol: DetailProtocol?
+    weak var delegate: BaseTableViewProtocol?
     
     var usd: Double {
         get {
@@ -61,13 +74,23 @@ final class ProgramSubscribeViewModel {
         }
     }
     
+    
     // MARK: - Init
-    init(withRouter router: ProgramInfoRouter, programId: String, initialDepositCurrency: CurrencyType? = nil, initialDepositAmount: Double? = nil, signalSubscription: SignalSubscription? = nil, detailProtocol: DetailProtocol?, followType: FollowType) {
+    init(withRouter router: ProgramInfoRouter,
+         assetId: String,
+         tradingAccountId: UUID? = nil,
+         сurrency: CurrencyType? = nil,
+         signalSubscription: SignalSubscription? = nil,
+         tradingAccounts: ItemsViewModelTradingAccountDetails? = nil,
+         detailProtocol: DetailProtocol?,
+         followType: FollowType,
+         delegate: BaseTableViewProtocol?) {
+        
         self.router = router
-        self.programId = programId
+        self.assetId = assetId
         self.detailProtocol = detailProtocol
         self.followType = followType
-        
+        self.tradingAccounts = tradingAccounts
         self.signalSubscription = signalSubscription ?? SignalSubscription(subscriberInfo: nil,
                                                                            asset: nil,
                                                                            status: nil,
@@ -84,19 +107,30 @@ final class ProgramSubscribeViewModel {
                                                                            fixedCurrency: .usd,
                                                                            totalProfit: nil,
                                                                            totalVolume: nil)
-        //FIXME: add tradingAccountId
-        self.attachToSignal = AttachToSignalProvider(tradingAccountId: nil,
-                                                     mode: .byBalance,
+    
+        var fixedCurrency: AttachToSignalProvider.FixedCurrency?
+        if let fixedCurrencyValue = signalSubscription?.fixedCurrency?.rawValue {
+            fixedCurrency = AttachToSignalProvider.FixedCurrency(rawValue: fixedCurrencyValue)
+        }
+        var accountId: UUID?
+        if let tradingAccountId = signalSubscription?.subscriberInfo?.tradingAccountId {
+            accountId = tradingAccountId
+        } else if let tradingAccountId = tradingAccountId {
+            accountId = tradingAccountId
+        }
+        
+        self.attachToSignal = AttachToSignalProvider(tradingAccountId: accountId,
+                                                     mode: signalSubscription?.mode,
                                                      percent: signalSubscription?.percent,
                                                      openTolerancePercent: signalSubscription?.openTolerancePercent,
                                                      fixedVolume: signalSubscription?.fixedVolume,
-                                                     fixedCurrency: nil)
+                                                     fixedCurrency: fixedCurrency)
         
         self.reasonMode = ._none
         
-        if let initialDepositCurrency = initialDepositCurrency, let currency =
-            AttachToSignalProvider.FixedCurrency(rawValue: initialDepositCurrency.rawValue) {
-            self.attachToSignal.fixedCurrency = currency
+        if let сurrency = сurrency, let fixedCurrency =
+            AttachToSignalProvider.FixedCurrency(rawValue: сurrency.rawValue) {
+            self.attachToSignal.fixedCurrency = fixedCurrency
         }
     }
     
@@ -110,13 +144,18 @@ final class ProgramSubscribeViewModel {
         }
     }
     
-    func getSelected() -> String {
+    func getSelectedType() -> String {
         switch followType {
         case .follow, .edit:
-            return getSelectedType()
+            return getSelectedMode()
         case .unfollow:
             return getSelectedReason()
         }
+    }
+    
+    func getSelectedAccountType() -> String {
+        guard let login = tradingAccountListViewModel.selected()?.login, let currency = tradingAccountListViewModel.selected()?.currency?.rawValue else { return "" }
+        return login + " | " + currency
     }
     
     func getFixedCurrency() -> String {
@@ -141,7 +180,7 @@ final class ProgramSubscribeViewModel {
     }
     
     // MARK: - Private methods
-    private func getSelectedType() -> String {
+    private func getSelectedMode() -> String {
         guard let mode = signalSubscription?.mode else { return "" }
         
         switch mode {
@@ -202,9 +241,12 @@ final class ProgramSubscribeViewModel {
         if let mode = signalSubscription?.mode {
             attachToSignal.mode = SubscriptionMode(rawValue: mode.rawValue)
         }
+        if let tradingAccountId = tradingAccountListViewModel.selected()?.id {
+            attachToSignal.tradingAccountId = tradingAccountId
+        }
         
-        guard let programId = programId else { return completion(.failure(errorType: .apiError(message: nil))) }
-        SignalDataProvider.attach(on: programId, model: attachToSignal, completion: completion)
+        guard let assetId = assetId else { return completion(.failure(errorType: .apiError(message: nil))) }
+        SignalDataProvider.attach(on: assetId, model: attachToSignal, completion: completion)
     }
     
     func update(completion: @escaping CompletionBlock) {
@@ -219,17 +261,20 @@ final class ProgramSubscribeViewModel {
             attachToSignal.mode = SubscriptionMode(rawValue: mode.rawValue)
         }
         
-        guard let programId = programId else { return completion(.failure(errorType: .apiError(message: nil))) }
+        if let tradingAccountId = tradingAccountListViewModel.selected()?.id {
+            attachToSignal.tradingAccountId = tradingAccountId
+        }
         
-        SignalDataProvider.update(with: programId, model: attachToSignal, completion: completion)
+        guard let assetId = assetId else { return completion(.failure(errorType: .apiError(message: nil))) }
+        
+        SignalDataProvider.update(with: assetId, model: attachToSignal, completion: completion)
     }
     
     func unsubscribe(completion: @escaping CompletionBlock) {
-        guard let programId = programId else { return completion(.failure(errorType: .apiError(message: nil))) }
+        guard let assetId = assetId, let tradingAccountId = tradingAccountListViewModel.selected()?.id else { return completion(.failure(errorType: .apiError(message: nil))) }
     
-        //FIXME: add tradingAccountId
-        let model = DetachFromSignalProvider(tradingAccountId: nil, mode: reasonMode)
-        SignalDataProvider.detach(with: programId, model: model, completion: completion)
+        let model = DetachFromSignalProvider(tradingAccountId: tradingAccountId, mode: reasonMode)
+        SignalDataProvider.detach(with: assetId, model: model, completion: completion)
     }
     
     func goToBack() {

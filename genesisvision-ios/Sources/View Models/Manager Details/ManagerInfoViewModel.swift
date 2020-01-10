@@ -13,6 +13,7 @@ final class ManagerInfoViewModel {
         case details
     }
     enum RowType {
+        case header
         case info
         case about
     }
@@ -28,28 +29,22 @@ final class ManagerInfoViewModel {
     public private(set) var publicProfile: PublicProfile?
 
     private var sections: [SectionType] = [.details]
-    private var rows: [RowType] = [.info, .about]
+    private var rows: [RowType] = [.header, .info, .about]
     
     private var models: [CellViewAnyModel]?
     
     /// Return view models for registration cell Nib files
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [DefaultTableViewCellViewModel.self]
+        return [DefaultTableViewCellViewModel.self, ManagerTableViewCellViewModel.self]
     }
     
     // MARK: - Init
     init(withRouter router: Router,
          managerId: String? = nil,
-         publicProfile: PublicProfile? = nil,
          reloadDataProtocol: ReloadDataProtocol? = nil) {
         self.router = router
         
         if let managerId = managerId {
-            self.managerId = managerId
-        }
-        
-        if let publicProfile = publicProfile, let managerId = publicProfile.id?.uuidString {
-            self.publicProfile = publicProfile
             self.managerId = managerId
         }
         
@@ -98,7 +93,7 @@ extension ManagerInfoViewModel {
     // MARK: - Public methods
     /// Get TableViewCellViewModel for IndexPath
     func model(at indexPath: IndexPath) -> CellViewAnyModel? {
-        guard publicProfile != nil else {
+        guard let publicProfile = publicProfile else {
             return nil
         }
         
@@ -107,11 +102,13 @@ extension ManagerInfoViewModel {
         case .details:
             let rowType = rows[indexPath.row]
             switch rowType {
+            case .header:
+                return ManagerTableViewCellViewModel(profile: publicProfile, selectable: false)
             case .info:
-                guard let assets = publicProfile?.assets else { return nil }
+                guard let assets = publicProfile.assets else { return nil }
                 return  DefaultTableViewCellViewModel(title: "Assets", subtitle: assets.joined(separator: " | "))
             case .about:
-                guard let about = publicProfile?.about else { return nil }
+                guard let about = publicProfile.about else { return nil }
                 return DefaultTableViewCellViewModel(title: "About", subtitle: about)
             }
         }

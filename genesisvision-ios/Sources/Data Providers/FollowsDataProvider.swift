@@ -10,7 +10,7 @@ import Foundation
 
 class FollowsDataProvider: DataProvider {
     // MARK: - Assets
-    static func get(_ filterModel: FilterModel? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ followList: ItemsViewModelFollowDetailsListItem?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func get(_ filterModel: FilterModel? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (ItemsViewModelFollowDetailsListItem?) -> Void, errorCompletion: @escaping CompletionBlock) {
         let tags = filterModel?.tagsModel.selectedTags
         
         let dateFrom = filterModel?.dateRangeModel.dateFrom
@@ -52,10 +52,10 @@ class FollowsDataProvider: DataProvider {
         }
     }
     
-    static func get(followId: String, currencySecondary: FundsAPI.Currency_getFundDetails? = nil, completion: @escaping (_ followDetailsFull: ProgramFollowDetailsFull?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func get(_ assetId: String, completion: @escaping (ProgramFollowDetailsFull?) -> Void, errorCompletion: @escaping CompletionBlock) {
         let authorization = AuthManager.authorizedToken
         
-        FollowAPI.getFollowAssetDetails(id: followId, authorization: authorization) { (viewModel, error) in
+        FollowAPI.getFollowAssetDetails(id: assetId, authorization: authorization) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
@@ -83,6 +83,16 @@ class FollowsDataProvider: DataProvider {
         guard let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
         FollowAPI.getBalanceChart(id: uuid, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
+    // MARK: - Subscription
+    static func getSubscriptions(with assetId: String, onlyActive: Bool? = nil, completion: @escaping (ItemsViewModelSignalSubscription?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        
+        guard let authorization = AuthManager.authorizedToken, let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        FollowAPI.getFollowSubscriptionsForAsset(id: uuid, authorization: authorization, onlyActive: onlyActive) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }

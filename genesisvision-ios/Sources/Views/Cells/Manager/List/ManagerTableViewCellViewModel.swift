@@ -10,6 +10,7 @@ import UIKit
 
 struct ManagerTableViewCellViewModel {
     let profile: PublicProfile
+    let selectable: Bool
 }
 
 extension ManagerTableViewCellViewModel: CellViewModel {
@@ -28,5 +29,8 @@ extension ManagerTableViewCellViewModel: CellViewModel {
             cell.managerImageView.kf.indicatorType = .activity
             cell.managerImageView.kf.setImage(with: fileUrl, placeholder: UIImage.profilePlaceholder)
         }
+        
+        cell.arrowImageView.isHidden = !selectable
+        cell.selectionStyle = selectable ? .default : .none
     }
 }

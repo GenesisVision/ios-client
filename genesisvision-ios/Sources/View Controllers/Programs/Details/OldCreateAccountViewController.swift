@@ -149,7 +149,7 @@ class OldCreateAccountViewController: BaseViewController {
     }
     
     private func createAccountMethod() {
-        viewModel.next(amountToDepositValue)
+        viewModel.create(amountToDepositValue)
     }
     
     @IBAction func selectedWalletCurrencyFromButtonAction(_ sender: UIButton) {

@@ -36,7 +36,7 @@ class TooltipButton: UIButton {
         if let delegate = delegate {
             delegate.showDidPress(tooltipText)
         } else {
-            let window = UIApplication.shared.windows[0] as UIWindow
+            let window = UIApplication.shared.windows[0]
             if let viewController = window.rootViewController as? BaseViewController {
                 viewController.showBottomSheet(.text, title: tooltipText, initializeHeight: 130, completion: nil)
             }

@@ -11,7 +11,7 @@ final class FundWithdrawViewModel {
     
     // MARK: - Variables
     var title: String = "Withdraw"
-    var fundId: String?
+    var assetId: String?
     var labelPlaceholder: String = "0"
     
     var fundWithdrawInfo: FundWithdrawInfo?
@@ -26,10 +26,10 @@ final class FundWithdrawViewModel {
     
     // MARK: - Init
     init(withRouter router: FundWithdrawRouter,
-         fundId: String,
+         assetId: String,
          detailProtocol: DetailProtocol?) {
         self.router = router
-        self.fundId = fundId
+        self.assetId = assetId
         self.detailProtocol = detailProtocol
     }
     
@@ -47,7 +47,7 @@ final class FundWithdrawViewModel {
     func getInfo(completion: @escaping CompletionBlock) {
         var currency: InvestmentsAPI.Currency_getFundWithdrawInfo = .gvt
         
-        guard let fundId = fundId else { return completion(.failure(errorType: .apiError(message: nil))) }
+        guard let assetId = assetId else { return completion(.failure(errorType: .apiError(message: nil))) }
         
         AuthManager.getWallet(completion: { [weak self] (wallet) in
             if let wallet = wallet, let wallets = wallet.wallets {
@@ -62,7 +62,7 @@ final class FundWithdrawViewModel {
                 currency = InvestmentsAPI.Currency_getFundWithdrawInfo(rawValue: walletCurrency) ?? .gvt
             }
             
-            FundsDataProvider.getWithdrawInfo(fundId, currency: currency, completion: { [weak self] (fundWithdrawInfo) in
+            FundsDataProvider.getWithdrawInfo(assetId, currency: currency, completion: { [weak self] (fundWithdrawInfo) in
                 guard let fundWithdrawInfo = fundWithdrawInfo else {
                     return completion(.failure(errorType: .apiError(message: nil)))
                 }
@@ -131,7 +131,7 @@ final class FundWithdrawViewModel {
         
         let currency = InvestmentsAPI.Currency_withdrawFromFund(rawValue: walletCurrency)
         
-        FundsDataProvider.withdraw(withPercent: amount, assetId: fundId, currency: currency) { (result) in
+        FundsDataProvider.withdraw(withPercent: amount, assetId: assetId, currency: currency) { (result) in
             completion(result)
         }
     }

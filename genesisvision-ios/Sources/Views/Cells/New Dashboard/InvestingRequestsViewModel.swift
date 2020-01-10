@@ -13,14 +13,14 @@ class InvestingRequestsViewModel: CellViewModelWithCollection {
     var type: CellActionType
     
     var viewModels = [CellViewAnyModel]()
-    var canPullToRefresh: Bool = true
+    var canPullToRefresh: Bool = false
     var details: ItemsViewModelAssetInvestmentRequest?
     var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
         return []
     }
     
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [PortfolioEventCollectionViewCellViewModel.self]
+        return []
     }
     
     weak var delegate: BaseTableViewProtocol?
@@ -28,18 +28,30 @@ class InvestingRequestsViewModel: CellViewModelWithCollection {
         self.details = details
         self.delegate = delegate
         title = "Requests"
-        type = .none
-        
-//        details?.events?.items?.forEach({ (model) in
-//            viewModels.append(PortfolioEventCollectionViewCellViewModel(reloadDataProtocol: nil, event: model))
-//        })
+        type = .investingRequests
     }
     
     func didSelect(at indexPath: IndexPath) {
         delegate?.didSelect(type, cellViewModel: model(at: indexPath))
     }
+}
     
+extension InvestingRequestsViewModel {
+    func getRightButtons() -> [UIButton] {
+        let showAllButton = UIButton(type: .system)
+        showAllButton.setImage(#imageLiteral(resourceName: "img_arrow_right_icon"), for: .normal)
+        showAllButton.tintColor = UIColor.primary
+        showAllButton.isUserInteractionEnabled = false
+        return [showAllButton]
+    }
     
+    func getTotalCount() -> Int? {
+        return details?.items?.count
+    }
+    
+    func getCollectionViewHeight() -> CGFloat {
+        return 0
+    }
 }
 
 

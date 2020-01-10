@@ -32,6 +32,7 @@ class ListDelegateManager<T: ListViewModelProtocol>: NSObject, UITableViewDelega
         }
         
         viewModel?.showDetail(at: indexPath)
+        delegate?.delegateManagerTableView(tableView, didSelectRowAt: indexPath)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -106,27 +107,6 @@ class ListDelegateManager<T: ListViewModelProtocol>: NSObject, UITableViewDelega
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel?.numberOfSections() ?? 0
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard let canPullToRefresh = viewModel?.canPullToRefresh, !canPullToRefresh else { return }
-        
-        delegate?.delegateManagerScrollViewDidScroll(scrollView)
-        print(scrollView.contentOffset.y)
-        scrollView.isScrollEnabled = scrollView.contentOffset.y > -0.0
-    }
-    
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        guard let canPullToRefresh = viewModel?.canPullToRefresh, !canPullToRefresh else { return }
-        
-        delegate?.delegateManagerScrollViewWillBeginDragging(scrollView)
-        print(scrollView.contentOffset.y)
-        let translation = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
-        if translation.y > 0 {
-            scrollView.isScrollEnabled = scrollView.contentOffset.y > -0.0
-        } else {
-            scrollView.isScrollEnabled = scrollView.contentOffset.y >= -0.0
-        }
     }
 }
 

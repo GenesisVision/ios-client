@@ -17,6 +17,7 @@ final class ProgramInfoViewModel {
         case subscriptionDetail
     }
     enum RowType {
+        case header
         case manager
         case statistics
         case strategy
@@ -26,66 +27,67 @@ final class ProgramInfoViewModel {
     // MARK: - Variables
     var title: String = "Info"
     
+    var assetType: AssetType = .program
+    
     private var router: ProgramInfoRouter
     private weak var reloadDataProtocol: ReloadDataProtocol?
     
     var inRequestsDelegateManager = InRequestsDelegateManager()
     
     var chartDurationType: ChartDurationType = .all
-    var programId: String!
+    var assetId: String!
     var requestSkip = 0
     var requestTake = ApiKeys.take
+    weak var programHeaderProtocol: ProgramHeaderProtocol?
     
     private var equityChart: [SimpleChartPoint]?
+    public private(set) var tradingAccounts: ItemsViewModelTradingAccountDetails?
     public private(set) var signalSubscription: SignalSubscription?
     public private(set) var programDetailsFull: ProgramFollowDetailsFull? {
         didSet {
-            sections = [.details, .investNow]
-            
-            if let availableInvestment = programDetailsFull?.programDetails?.availableInvestmentBase {
-                self.availableInvestment = availableInvestment
-            }
-            
-            if let isInvested = programDetailsFull?.programDetails?.personalDetails?.isInvested, isInvested, let status = programDetailsFull?.programDetails?.personalDetails?.status, status != .ended {
-                if !sections.contains(.yourInvestment) {
-                    sections.insert(.yourInvestment, at: 1)
-                }
-            }
+            router.programViewController.viewModel.programDetailsFull = programDetailsFull
         }
     }
     
-    var availableInvestment: Double = 0.0
+    var availableInvestment: Double {
+        return programDetailsFull?.programDetails?.availableInvestmentBase ?? 0.0
+    }
     
-    private var sections: [SectionType] = [.details, .investNow]
-    private var rows: [RowType] = [.manager, .statistics, .strategy, .period]
+    private var sections: [SectionType] = [.details]
+    private var rows: [RowType] = [.header, .manager, .statistics, .strategy, .period]
     
     private var models: [CellViewAnyModel]?
     
     /// Return view models for registration cell Nib files
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [DetailManagerTableViewCellViewModel.self,
+        return [ProgramHeaderTableViewCellViewModel.self,
+                DetailManagerTableViewCellViewModel.self,
                 DetailStatisticsTableViewCellViewModel.self,
                 DefaultTableViewCellViewModel.self,
                 ProgramPeriodTableViewCellViewModel.self,
                 ProgramInvestNowTableViewCellViewModel.self,
                 ProgramYourInvestmentTableViewCellViewModel.self,
-                InfoSignalsTableViewCellViewModel.self]
+                InfoSignalsTableViewCellViewModel.self,
+                InfoSubscriptionTableViewCellViewModel.self]
     }
     
     // MARK: - Init
     init(withRouter router: ProgramInfoRouter,
-         programId: String? = nil,
+         assetId: String? = nil,
          programDetailsFull: ProgramFollowDetailsFull? = nil,
          reloadDataProtocol: ReloadDataProtocol? = nil) {
         self.router = router
 
-        if let programId = programId {
-            self.programId = programId
+        if let assetId = assetId {
+            self.assetId = assetId
         }
         
-        if let programDetailsFull = programDetailsFull, let programId = programDetailsFull.id?.uuidString {
+        if let programDetailsFull = programDetailsFull, let assetId = programDetailsFull.id?.uuidString {
             self.programDetailsFull = programDetailsFull
-            self.programId = programId
+            self.assetId = assetId
+            getSignalSubscription { (result) in
+                
+            }
         }
         
         self.reloadDataProtocol = reloadDataProtocol
@@ -106,10 +108,6 @@ final class ProgramInfoViewModel {
     }
     
     func numberOfSections() -> Int {
-        guard programDetailsFull != nil else {
-            return 0
-        }
-        
         return sections.count
     }
     
@@ -122,6 +120,12 @@ final class ProgramInfoViewModel {
         default:
             return 1
         }
+    }
+    
+    func showAboutLevels() {
+        guard let rawValue = programDetailsFull?.tradingAccountInfo?.currency?.rawValue, let currency = CurrencyType(rawValue: rawValue) else { return }
+        
+        router.showAboutLevels(currency)
     }
     
     func didSelectRow(at indexPath: IndexPath) {
@@ -138,10 +142,31 @@ final class ProgramInfoViewModel {
         }
     }
     
-    func hideHeader(value: Bool = true) {
-        if let detailsRouter = router.parentRouter, let programRouter = detailsRouter.parentRouter as? ProgramRouter {
-            programRouter.programViewController.hideHeader(value)
+    func updateSections() {
+        sections = [SectionType]()
+        guard let programDetailsFull = programDetailsFull else { return }
+        sections.append(.details)
+
+        switch assetType {
+        case .program:
+            sections.append(.investNow)
+            
+            guard let programDetails = programDetailsFull.programDetails else { return }
+            if let isInvested = programDetails.personalDetails?.isInvested, isInvested, let status = programDetails.personalDetails?.status, status != .ended {
+                sections.append(.yourInvestment)
+            }
+        case .follow:
+            guard programDetailsFull.followDetails != nil else { return }
+            sections.append(.signals)
+            
+            if signalSubscription != nil {
+                sections.append(.subscriptionDetail)
+            }
+        default:
+            break
         }
+        
+        reloadDataProtocol?.didReloadData()
     }
 }
 
@@ -154,18 +179,18 @@ extension ProgramInfoViewModel {
     }
     
     func invest() {
-        guard let programId = programId, let currency = programDetailsFull?.tradingAccountInfo?.currency, let programCurrency = CurrencyType(rawValue: currency.rawValue) else { return }
-        router.show(routeType: .invest(programId: programId, programCurrency: programCurrency))
+        guard let assetId = assetId, let currency = programDetailsFull?.tradingAccountInfo?.currency, let programCurrency = CurrencyType(rawValue: currency.rawValue) else { return }
+        router.show(routeType: .invest(assetId: assetId, programCurrency: programCurrency))
     }
     
     func withdraw() {
-        guard let programId = programId, let currency = programDetailsFull?.tradingAccountInfo?.currency, let programCurrency = CurrencyType(rawValue: currency.rawValue) else { return }
-        router.show(routeType: .withdraw(programId: programId, programCurrency: programCurrency))
+        guard let assetId = assetId, let currency = programDetailsFull?.tradingAccountInfo?.currency, let programCurrency = CurrencyType(rawValue: currency.rawValue) else { return }
+        router.show(routeType: .withdraw(assetId: assetId, programCurrency: programCurrency))
     }
     
     private func reinvest(_ value: Bool) {
         if value {
-            ProgramsDataProvider.reinvestOn(with: self.programId) { (result) in
+            ProgramsDataProvider.reinvestOn(with: self.assetId) { (result) in
                 switch result {
                 case .success:
                     break
@@ -174,7 +199,7 @@ extension ProgramInfoViewModel {
                 }
             }
         } else {
-            ProgramsDataProvider.reinvestOff(with: self.programId) { (result) in
+            ProgramsDataProvider.reinvestOff(with: self.assetId) { (result) in
                 switch result {
                 case .success:
                     break
@@ -185,25 +210,23 @@ extension ProgramInfoViewModel {
         }
     }
     
-    private func subscribe(_ value: Bool, initialDepositCurrency: CurrencyType? = nil, initialDepositAmount: Double? = nil) {
-        guard let programId = programId else { return }
+    private func subscribe(_ value: Bool, currency: CurrencyType? = nil, tradingAccountId: UUID? = nil) {
+        guard let assetId = assetId else { return }
         
         value
-            ? router.show(routeType: .unsubscribe(programId: programId))
-            : router.show(routeType: .subscribe(programId: programId, initialDepositCurrency: initialDepositCurrency, initialDepositAmount: initialDepositAmount))
+            ? router.show(routeType: .unsubscribe(assetId: assetId))
+            : router.show(routeType: .subscribe(assetId: assetId, currency: currency, tradingAccountId: tradingAccountId))
     }
     
     private func editSubscription() {
-        //FIXME:
-//        guard let signalSettings = programDetailsFull?.signalSettings else { return }
-//        router.show(routeType: .editSubscribe(programId: programId, signalSubscription: signalSubscription))
+        guard let signalSubscription = signalSubscription else { return }
+        router.show(routeType: .editSubscribe(assetId: assetId, signalSubscription: signalSubscription))
     }
 
-    //FIXME:
     func createAccount(completion: @escaping CreateAccountCompletionBlock) {
-        guard let programId = programId, let currency = programDetailsFull?.tradingAccountInfo?.currency, let programCurrency = CurrencyType(rawValue: currency.rawValue) else { return }
+        guard let assetId = assetId, let currency = programDetailsFull?.tradingAccountInfo?.currency, let leverage = programDetailsFull?.tradingAccountInfo?.leverageMax, let programCurrency = CurrencyType(rawValue: currency.rawValue), let brokerId = programDetailsFull?.brokerDetails?.id else { return }
         
-        router.show(routeType: .createAccount(programId: programId, programCurrency: programCurrency, completion: completion))
+        router.show(routeType: .createAccount(assetId: assetId, brokerId: brokerId, leverage: leverage, programCurrency: programCurrency, completion: completion))
     }
 }
 
@@ -225,6 +248,9 @@ extension ProgramInfoViewModel {
         case .details:
             let rowType = rows[indexPath.row]
             switch rowType {
+            case .header:
+                guard let details = programDetailsFull else { return nil }
+                return ProgramHeaderTableViewCellViewModel(details: details, delegate: programHeaderProtocol)
             case .manager:
                 guard let owner = programDetailsFull?.owner else { return nil }
                 return DetailManagerTableViewCellViewModel(profilePublic: owner)
@@ -240,27 +266,63 @@ extension ProgramInfoViewModel {
         case .investNow:
             return ProgramInvestNowTableViewCellViewModel(programDetailsFull: programDetailsFull, investNowProtocol: self)
         case .signals:
-            return InfoSignalsTableViewCellViewModel(programDetailsFull: programDetailsFull, infoSignalsProtocol: self)
+            return InfoSignalsTableViewCellViewModel(programDetailsFull: programDetailsFull, isFollowed: signalSubscription != nil, infoSignalsProtocol: self)
         case .subscriptionDetail:
             return InfoSubscriptionTableViewCellViewModel(signalSubscription: signalSubscription, infoSignalsProtocol: self)
         }
     }
     
-    func fetch(completion: @escaping CompletionBlock) {
-        ProgramsDataProvider.get(self.programId, completion: { [weak self] (viewModel) in
-            guard viewModel != nil else {
-                return completion(.failure(errorType: .apiError(message: nil)))
+    func fetch(_ completion: @escaping CompletionBlock) {
+        switch assetType {
+        case .program:
+            ProgramsDataProvider.get(self.assetId, completion: { [weak self] (viewModel) in
+                guard let viewModel = viewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
+                
+                self?.programDetailsFull = viewModel
+                self?.getSignalSubscription(completion)
+            }, errorCompletion: completion)
+        case .follow:
+            FollowsDataProvider.get(self.assetId, completion: { [weak self] (viewModel) in
+                guard let viewModel = viewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
+                
+                self?.programDetailsFull = viewModel
+                self?.updateSections()
+                self?.getSignalSubscription(completion)
+            }, errorCompletion: completion)
+        default:
+            break
+        }
+    }
+    
+    func getSignalSubscription(_ completion: @escaping CompletionBlock) {
+        guard let assetId = assetId else { return }
+        FollowsDataProvider.getSubscriptions(with: assetId, onlyActive: true, completion: { [weak self] (viewModel) in
+            guard let viewModel = viewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
+            
+            if let signalSubscription = viewModel.items?.first {
+                self?.signalSubscription = signalSubscription
+                self?.updateSections()
             }
             
-            self?.programDetailsFull = viewModel
+            self?.getAccounts(completion)
+        }, errorCompletion: completion)
+    }
+    func getAccounts(_ completion: @escaping CompletionBlock) {
+        guard let assetId = assetId else { return }
+        SignalDataProvider.attachAccounts(assetId: assetId, completion: { [weak self] (viewModel) in
+            guard let viewModel = viewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
             
+            self?.tradingAccounts = viewModel
+            self?.updateSections()
             completion(.success)
         }, errorCompletion: completion)
     }
     
     func updateDetails(with programDetailsFull: ProgramFollowDetailsFull) {
         self.programDetailsFull = programDetailsFull
-        self.reloadDataProtocol?.didReloadData()
+        self.getSignalSubscription { [weak self] (result) in
+            self?.reloadDataProtocol?.didReloadData()
+        }
     }
 }
 
@@ -282,10 +344,10 @@ extension ProgramInfoViewModel: YourInvestmentProtocol {
     }
     
     func didTapStatusButton() {
-        guard let programId = programId else { return }
+        guard let assetId = assetId else { return }
         
-        ProgramsDataProvider.getRequests(with: programId, skip: requestSkip, take: requestTake, completion: { [weak self] (requests) in
-            if let items = requests?.items, items.count > 0, let parentRouter = self?.router.parentRouter as? ProgramTabmanRouter, let viewController = parentRouter.programInfoViewController {
+        ProgramsDataProvider.getRequests(with: assetId, skip: requestSkip, take: requestTake, completion: { [weak self] (requests) in
+            if let items = requests?.items, items.count > 0, let parentRouter = self?.router.parentRouter as? ProgramRouter, let viewController = parentRouter.programInfoViewController {
                 viewController.showRequests(requests)
             }
         }) { (result) in
@@ -326,13 +388,13 @@ extension ProgramInfoViewModel: InfoSignalsProtocol {
             router.signInAction()
             return
         }
-        //FIXME:
-        if let isActive = programDetailsFull?.followDetails?.signalSettings?.isActive, !isActive {
-            createAccount { [weak self] (selectedCurrencyType, depositAmount) in
-                self?.subscribe(true, initialDepositCurrency: selectedCurrencyType, initialDepositAmount: depositAmount)
+        
+        if signalSubscription != nil {
+            createAccount { [weak self] (accountId) in
+                self?.subscribe(true)
             }
-        } else if let isActive = programDetailsFull?.followDetails?.signalSettings?.isActive {
-            subscribe(isActive)
+        } else {
+            subscribe(false)
         }
     }
     

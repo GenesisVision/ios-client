@@ -15,11 +15,10 @@ class FundListViewController: BaseViewControllerWithTableView {
     
     // MARK: - View Model
     var viewModel: ListViewModel!
-    
+    weak var searchProtocol: SearchViewControllerProtocol?
     // MARK: - Outlets
     @IBOutlet override var tableView: UITableView! {
         didSet {
-            setupSignInButton()
             setupTableConfiguration()
         }
     }
@@ -29,6 +28,12 @@ class FundListViewController: BaseViewControllerWithTableView {
         super.viewDidLoad()
         
         setup()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setupSignInButton()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -48,7 +53,7 @@ class FundListViewController: BaseViewControllerWithTableView {
     // MARK: - Private methods
     private func setupSignInButton() {
         signInButtonEnable = viewModel.signInButtonEnable
-        signInButton.isHidden = !signInButtonEnable
+        signInButton.isHidden = !(signInButtonEnable && searchProtocol == nil)
     }
     
     private func setup() {
@@ -67,7 +72,7 @@ class FundListViewController: BaseViewControllerWithTableView {
         
         navigationItem.title = viewModel.title
         
-        bottomViewType = viewModel.bottomViewType
+        bottomViewType = searchProtocol == nil ? viewModel.bottomViewType : .none
         
         if signInButtonEnable {
             showNewVersionAlertIfNeeded(self)
@@ -135,6 +140,11 @@ extension FundListViewController {
 }
 
 extension FundListViewController: DelegateManagerProtocol {
+    func delegateManagerTableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let model = viewModel.model(at: indexPath) as? FundTableViewCellViewModel, let assetId = model.asset.id?.uuidString else { return }
+        searchProtocol?.didSelect(assetId, assetType: .fund)
+    }
+    
     func delegateManagerTableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath))
     }

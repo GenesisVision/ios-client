@@ -34,6 +34,7 @@ class TableViewCell: UITableViewCell {
         
         backgroundColor = UIColor.BaseView.bg
         contentView.backgroundColor = UIColor.BaseView.bg
+        selectionStyle = .none
     }
 }
 

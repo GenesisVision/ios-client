@@ -74,6 +74,78 @@ class InvestingViewController: ListViewController {
         bottomSheetController.addContentsView(view)
         bottomSheetController.present()
     }
+    
+    func showRequests(_ requests: ItemsViewModelAssetInvestmentRequest?) {
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.initializeHeight = 300.0
+        
+        bottomSheetController.addNavigationBar("In requests")
+        viewModel.inRequestsDelegateManager.inRequestsDelegate = self
+        viewModel.inRequestsDelegateManager.requestSelectable = false
+        viewModel.inRequestsDelegateManager.requests = requests
+        
+        bottomSheetController.addTableView { [weak self] tableView in
+            tableView.registerNibs(for: viewModel.inRequestsDelegateManager.inRequestsCellModelsForRegistration)
+            tableView.delegate = self?.viewModel.inRequestsDelegateManager
+            tableView.dataSource = self?.viewModel.inRequestsDelegateManager
+            tableView.separatorStyle = .none
+        }
+        
+        bottomSheetController.present()
+    }
+    
+    func showAsset(_ asset: AssetCollectionViewCellViewModel) {
+        var assetId = ""
+        let type = asset.type
+        
+        switch type {
+        case .program:
+            if let program = asset.asset.program, let id = program.id?.uuidString {
+                assetId = id
+            } else if let programInvesting = asset.asset.programInvesting, let id = programInvesting.id?.uuidString {
+                assetId = id
+            } else if let tradingAsset = asset.asset.tradingAsset, tradingAsset.assetType == type, let id = tradingAsset.id?.uuidString {
+                assetId = id
+            }
+        case .fund:
+            if let fund = asset.asset.fund, let id = fund.id?.uuidString {
+                assetId = id
+            } else if let fundInvesting = asset.asset.fundInvesting, let id = fundInvesting.id?.uuidString {
+                assetId = id
+            } else if let tradingAsset = asset.asset.tradingAsset, tradingAsset.assetType == type, let id = tradingAsset.id?.uuidString {
+                assetId = id
+            }
+        case .follow:
+            if let follow = asset.asset.follow {
+                assetId = follow.id?.uuidString ?? ""
+            } else if let tradingAsset = asset.asset.tradingAsset, tradingAsset.assetType == type {
+                assetId = tradingAsset.id?.uuidString ?? ""
+            }
+        case ._none:
+            break
+        }
+        
+        if !assetId.isEmpty {
+            viewModel.router?.showAssetDetails(with: assetId, assetType: type)
+        }
+    }
+}
+
+extension InvestingViewController: InRequestsDelegateManagerProtocol {
+    func didSelectRequest(at indexPath: IndexPath) {
+        
+    }
+    
+    func didCanceledRequest(completionResult: CompletionResult) {
+        bottomSheetController.dismiss()
+        
+        switch completionResult {
+        case .success:
+            viewModel.fetchRequests()
+        default:
+            break
+        }
+    }
 }
 extension InvestingViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -107,14 +179,10 @@ extension InvestingViewController: BaseTableViewProtocol {
             let vc = BaseViewController()
             vc.title = "Requests"
             navigationController?.pushViewController(vc, animated: true)
-        case .investingPrograms:
-            let vc = BaseViewController()
-            vc.title = "Program"
-            navigationController?.pushViewController(vc, animated: true)
-        case .investingFunds:
-            let vc = BaseViewController()
-            vc.title = "Fund"
-            navigationController?.pushViewController(vc, animated: true)
+        case .investingPrograms, .investingFunds:
+            if let cellViewModel = cellViewModel as? AssetCollectionViewCellViewModel {
+                showAsset(cellViewModel)
+            }
         default:
             break
         }
@@ -138,6 +206,8 @@ extension InvestingViewController: BaseTableViewProtocol {
             let vc = InvestingFundListViewController()
             vc.title = "Funds"
             navigationController?.pushViewController(vc, animated: true)
+        case .investingRequests:
+            showRequests(viewModel.requests)
         default:
             break
         }
@@ -175,6 +245,7 @@ class InvestingViewModel: ViewModelWithListProtocol {
     
     var canPullToRefresh: Bool = true
 
+    var inRequestsDelegateManager = InRequestsDelegateManager()
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [InvestingHeaderTableViewCellViewModel.self,
                 CellWithCollectionViewModel<InvestingRequestsViewModel>.self,
@@ -191,7 +262,8 @@ class InvestingViewModel: ViewModelWithListProtocol {
             reloadRow(.events)
             
             guard let count = details?.events?.items?.count, count > 0 else { return }
-            rows.insert(.events, at: 1)
+            rows.insert(.events, at: rows.contains(.requests) ? 2 : 1)
+            
             let eventsViewModel = CellWithCollectionViewModel(InvestingEventsViewModel(details, delegate: delegate), delegate: delegate)
             viewModels.append(eventsViewModel)
             delegate?.didReload()
@@ -252,9 +324,7 @@ class InvestingViewModel: ViewModelWithListProtocol {
         DashboardDataProvider.getInvesting(currency, eventsTake: 12, completion: { [weak self] (model) in
             self?.details = model
         }, errorCompletion: errorCompletion)
-        RequestDataProvider.getAllRequests(skip: 0, take: 12, completion: { [weak self] (model) in
-            self?.requests = model
-        }, errorCompletion: errorCompletion)
+        fetchRequests()
         DashboardDataProvider.getInvestingFunds(currency: currency, skip: 0, take: 12, completion: { [weak self] (model) in
             self?.fundInvesting = model
         }, errorCompletion: errorCompletion)
@@ -263,6 +333,12 @@ class InvestingViewModel: ViewModelWithListProtocol {
         }, errorCompletion: errorCompletion)
         
         delegate?.didReload()
+    }
+    
+    func fetchRequests() {
+        RequestDataProvider.getAllRequests(skip: 0, take: 12, completion: { [weak self] (model) in
+            self?.requests = model
+        }, errorCompletion: errorCompletion)
     }
     
     func model(at indexPath: IndexPath) -> CellViewAnyModel? {
@@ -280,23 +356,16 @@ class InvestingViewModel: ViewModelWithListProtocol {
             return viewModels.first{ $0 is CellWithCollectionViewModel<InvestingProgramsViewModel> }
         }
     }
-    
+    func didSelect(at indexPath: IndexPath) {
+        let type = rows[indexPath.row]
+        if type == .requests {
+            delegate?.action(.investingRequests, actionType: .showAll)
+        }
+    }
     func modelsCount() -> Int {
         return rows.count
     }
     func didSelectEvent(at assetId: String, assetType: AssetType) {
         router?.showAssetDetails(with: assetId, assetType: assetType)
     }
-    func didSelectRequest(at indexPath: IndexPath) {
-//        guard let requests = inRequestsDelegateManager.programRequests?.requests, !requests.isEmpty else {
-//            return
-//        }
-//
-//        let request = requests[indexPath.row]
-//        if let assetId = request.programId?.uuidString, let type = request.programType, let assetType = AssetType(rawValue: type.rawValue) {
-//            router.showAssetDetails(with: assetId, assetType: assetType)
-//        }
-    }
-    
-    
 }

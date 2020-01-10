@@ -230,7 +230,7 @@ protocol ListViewModelProtocol {
     func fetchMore(at indexPath: IndexPath) -> Bool
     func fetchMore()
     
-    func getDetailsViewController(with indexPath: IndexPath) -> BaseViewController?
+    func getDetailsViewController(with indexPath: IndexPath) -> UIViewController?
     func changeFavorite(value: Bool, assetId: String, request: Bool, completion: @escaping CompletionBlock)
     
     func logoImageName() -> String?
@@ -267,73 +267,54 @@ extension ListViewModelProtocol {
                 return viewModels[i]
             }
         case .follow:
-//            if let viewModels = viewModels as? [SignalTableViewCellViewModel], let i = viewModels.firstIndex(where: { $0.signal.id?.uuidString == assetId }) {
-//                return viewModels[i]
-//            }
+            if let viewModels = viewModels as? [FollowTableViewCellViewModel], let i = viewModels.firstIndex(where: { $0.asset.id?.uuidString == assetId }) {
+                return viewModels[i]
+            }
             return nil
         case .fund:
             if let viewModels = viewModels as? [FundTableViewCellViewModel], let i = viewModels.firstIndex(where: { $0.asset.id?.uuidString == assetId }) {
                 return viewModels[i]
             }
-        default: return nil
-            //FIXME:
-//        case .manager:
-//            if let viewModels = viewModels as? [ManagerTableViewCellViewModel], let i = viewModels.firstIndex(where: { $0.manager.id?.uuidString == assetId }) {
-//                return viewModels[i]
-//            }
+        case ._none:
+            //TODO: check it
+            if let viewModels = viewModels as? [ManagerTableViewCellViewModel], let i = viewModels.firstIndex(where: { $0.profile.id?.uuidString == assetId }) {
+                return viewModels[i]
+            }
         }
         
         return nil
     }
     
-    func getDetailsViewController(with indexPath: IndexPath) -> BaseViewController? {
+    func getDetailsViewController(with indexPath: IndexPath) -> UIViewController? {
         switch assetType {
         case .program:
-            guard let model = model(at: indexPath) as? ProgramTableViewCellViewModel else {
-                return nil
-            }
+            guard let model = model(at: indexPath) as? ProgramTableViewCellViewModel,
+                let assetId = model.asset.id?.uuidString,
+                let router = router as? Router
+                else { return nil }
             
-            let asset = model.asset
-            guard let programId = asset.id else { return nil}
-            guard let router = router as? Router else { return nil }
-            
-            return router.getProgramViewController(with: programId.uuidString)
+            return router.getProgramViewController(with: assetId, assetType: .program)
         case .follow:
-            //FIXME:
-            return nil
-//            guard let model = model(at: indexPath) as? SignalTableViewCellViewModel else {
-//                return nil
-//            }
-//
-//            let asset = model.signal
-//            guard let programId = asset.id else { return nil}
-//            guard let router = router as? Router else { return nil }
-//
-//            return router.getProgramViewController(with: programId.uuidString)
-            
+            guard let model = model(at: indexPath) as? FollowTableViewCellViewModel,
+                let assetId = model.asset.id?.uuidString,
+                let router = router as? Router
+                else { return nil }
+                
+            return router.getProgramViewController(with: assetId, assetType: .follow)
         case .fund:
-                guard let model = model(at: indexPath) as? FundTableViewCellViewModel else {
-                    return nil
-                }
-                
-                let asset = model.asset
-                guard let fundId = asset.id else { return nil}
-                guard let router = router as? Router else { return nil }
-                
-                return router.getFundViewController(with: fundId.uuidString)
-            default:
-                return nil
-                //FIXME:
-//        case .manager:
-//            guard let model = model(at: indexPath) as? ManagerTableViewCellViewModel else {
-//                return nil
-//            }
-//
-//            let manager = model.manager
-//            guard let managerId = manager.id else { return nil}
-//            guard let router = router as? Router else { return nil }
-//
-//            return router.getManagerViewController(with: managerId.uuidString)
+            guard let model = model(at: indexPath) as? FundTableViewCellViewModel,
+                let assetId = model.asset.id?.uuidString,
+                let router = router as? Router
+                else { return nil }
+            
+            return router.getFundViewController(with: assetId)
+        case ._none:
+            guard let model = model(at: indexPath) as? ManagerTableViewCellViewModel,
+                let managerId = model.profile.id?.uuidString,
+                let router = router as? Router
+                else { return nil }
+        
+            return router.getManagerViewController(with: managerId)
         }
     }
     
@@ -407,44 +388,31 @@ extension ListViewModelProtocol {
         switch assetType {
         case .program:
             showProgramDetail(at: indexPath)
-        case .follow: break
-            //FIXME:
-//            showSignalDetail(at: indexPath)
+        case .follow: 
+            showFollowDetail(at: indexPath)
         case .fund:
             showFundDetail(at: indexPath)
-        default: break
-            //FIXME:
-//        case .manager:
-//            showManagerDetail(at: indexPath)
+        case ._none:
+            showManagerDetail(at: indexPath)
         }
     }
     
     func showProgramDetail(at indexPath: IndexPath) {
-        guard let model = model(at: indexPath) as? ProgramTableViewCellViewModel else { return }
+        guard let model = model(at: indexPath) as? ProgramTableViewCellViewModel, let assetId = model.asset.id?.uuidString else { return }
         
-        let asset = model.asset
-        guard let assetId = asset.id else { return }
-        
-        router.show(routeType: .showAssetDetails(assetId: assetId.uuidString, assetType: assetType))
+        router.show(routeType: .showAssetDetails(assetId: assetId, assetType: assetType))
     }
     
-    //FIXME:
-//    func showSignalDetail(at indexPath: IndexPath) {
-//        guard let model = model(at: indexPath) as? SignalTableViewCellViewModel else { return }
-//
-//        let asset = model.signal
-//        guard let assetId = asset.id else { return }
-//
-//        router.show(routeType: .showAssetDetails(assetId: assetId.uuidString, assetType: assetType))
-//    }
+    func showFollowDetail(at indexPath: IndexPath) {
+        guard let model = model(at: indexPath) as? FollowTableViewCellViewModel, let assetId = model.asset.id?.uuidString else { return }
+
+        router.show(routeType: .showAssetDetails(assetId: assetId, assetType: assetType))
+    }
     
     func showFundDetail(at indexPath: IndexPath) {
-        guard let model = model(at: indexPath) as? FundTableViewCellViewModel else { return }
+        guard let model = model(at: indexPath) as? FundTableViewCellViewModel, let assetId = model.asset.id?.uuidString else { return }
         
-        let asset = model.asset
-        guard let assetId = asset.id else { return }
-        
-        router.show(routeType: .showAssetDetails(assetId: assetId.uuidString, assetType: assetType))
+        router.show(routeType: .showAssetDetails(assetId: assetId, assetType: assetType))
     }
     
     func showManagerDetail(at indexPath: IndexPath) {

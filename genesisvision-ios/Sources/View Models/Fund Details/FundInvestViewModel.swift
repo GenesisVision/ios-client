@@ -11,7 +11,7 @@ import Foundation
 final class FundInvestViewModel {
     // MARK: - Variables
     var title: String = "Investment"
-    var fundId: String?
+    var assetId: String?
     var fundCurrency: CurrencyType? = .usd
     var walletCurrency: CurrencyType?
     var labelPlaceholder: String = "0"
@@ -29,9 +29,9 @@ final class FundInvestViewModel {
     private var router: FundInvestRouter!
     
     // MARK: - Init
-    init(withRouter router: FundInvestRouter, fundId: String, detailProtocol: DetailProtocol?) {
+    init(withRouter router: FundInvestRouter, assetId: String, detailProtocol: DetailProtocol?) {
         self.router = router
-        self.fundId = fundId
+        self.assetId = assetId
         self.detailProtocol = detailProtocol
         self.fundCurrency = CurrencyType(rawValue: selectedPlatformCurrency) ?? .usd
     }
@@ -50,7 +50,7 @@ final class FundInvestViewModel {
     }
     
     func getInfo(completion: @escaping CompletionBlock) {
-//        guard let fundId = fundId,
+//        guard let assetId = assetId,
 //            let fundCurrencyValue = fundCurrency?.rawValue,
 //            let currencySecondary = InvestorAPI.Currency_v10InvestorFundsByIdInvestInfoByCurrencyGet(rawValue: fundCurrencyValue)
 //            else { return completion(.failure(errorType: .apiError(message: nil))) }
@@ -66,7 +66,7 @@ final class FundInvestViewModel {
             }
             
             //FIXME:
-//            FundsDataProvider.getInvestInfo(fundId: fundId, currencySecondary: currencySecondary, completion: { [weak self] (fundInvestInfo) in
+//            FundsDataProvider.getInvestInfo(assetId: assetId, currencySecondary: currencySecondary, completion: { [weak self] (fundInvestInfo) in
 //                guard let fundInvestInfo = fundInvestInfo else {
 //                    return completion(.failure(errorType: .apiError(message: nil)))
 //                }
@@ -168,7 +168,7 @@ final class FundInvestViewModel {
     // MARK: - Private methods
     // MARK: - API
     private func apiInvest(with value: Double, completion: @escaping CompletionBlock) {
-        FundsDataProvider.invest(withAmount: value, assetId: fundId, walletId: walletId) { (result) in
+        FundsDataProvider.invest(withAmount: value, assetId: assetId, walletId: walletId) { (result) in
             completion(result)
         }
     }

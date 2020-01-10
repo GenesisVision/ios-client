@@ -63,7 +63,7 @@ class SettingsRouter: Router {
     }
     
     private func enablePasscode(_ value: Bool) {
-        let window = UIApplication.shared.windows[0] as UIWindow
+        let window = UIApplication.shared.windows[0]
         guard let viewController = PasscodeViewController.storyboardInstance(.settings), let rootViewController = window.rootViewController, let settingsViewController = settingsViewController else { return }
         
         let router = Router(parentRouter: self, navigationController: navigationController)

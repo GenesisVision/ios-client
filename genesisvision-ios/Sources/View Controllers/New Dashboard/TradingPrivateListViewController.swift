@@ -100,7 +100,8 @@ class TradingPrivateListViewController: ListViewController {
     func showAccount(_ tradingAsset: DashboardTradingAsset) {
         if let router = viewModel.router {
             let viewController = AccountDetailViewController()
-            viewController.viewModel = AccountDetailTabmanViewModel(withRouter: router, dashboardTradingAsset: tradingAsset)
+            let accountRouter = AccountRouter(parentRouter: router)
+            viewController.viewModel = AccountDetailTabmanViewModel(withRouter: accountRouter, dashboardTradingAsset: tradingAsset)
             navigationController?.pushViewController(viewController, animated: true)
        }
     }
