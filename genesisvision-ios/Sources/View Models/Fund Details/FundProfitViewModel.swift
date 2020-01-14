@@ -8,7 +8,10 @@
 
 import UIKit.UITableView
 
-final class FundProfitViewModel {
+final class FundProfitViewModel: ViewModelWithListProtocol {
+    var canPullToRefresh: Bool = true
+    var viewModels: [CellViewAnyModel] = []
+    
     enum SectionType {
         case chart
         case statistics
@@ -27,7 +30,7 @@ final class FundProfitViewModel {
     var dateFrom: Date?
     var dateTo: Date?
     var maxPointCount: Int = ApiKeys.maxPoint
-    
+    private var currency: CurrencyType?
     private var fundProfitChart: FundProfitPercentCharts?
     
     private var sections: [SectionType] = [.chart, .statistics]
@@ -36,9 +39,10 @@ final class FundProfitViewModel {
     private var fundProfitStatisticTableViewCellViewModel: FundProfitStatisticTableViewCellViewModel?
     
     // MARK: - Init
-    init(withRouter router: FundRouter, assetId: String, reloadDataProtocol: ReloadDataProtocol?) {
+    init(withRouter router: FundRouter, assetId: String, reloadDataProtocol: ReloadDataProtocol?, currency: CurrencyType?) {
         self.router = router
         self.assetId = assetId
+        self.currency = currency
         self.reloadDataProtocol = reloadDataProtocol
         self.chartViewProtocol = router.currentController as? ChartViewProtocol
     }
@@ -69,7 +73,7 @@ extension FundProfitViewModel {
         return 1
     }
     
-    func heightForHeader(in section: Int) -> CGFloat {
+    func headerHeight(for section: Int) -> CGFloat {
         switch section {
         case 0:
             return 0.0
@@ -91,17 +95,21 @@ extension FundProfitViewModel {
     }
     
     /// Get TableViewCellViewModel for IndexPath
-    func model(for section: Int) -> CellViewAnyModel? {
+    func model(for indexPath: IndexPath) -> CellViewAnyModel? {
         guard let fundProfitChart = fundProfitChart else { return nil }
         
-        switch sections[section] {
+        switch sections[indexPath.section] {
         case .chart:
             self.fundProfitChartTableViewCellViewModel = FundProfitChartTableViewCellViewModel(fundProfitChart: fundProfitChart, chartViewProtocol: self.chartViewProtocol)
             return fundProfitChartTableViewCellViewModel
         case .statistics:
-            self.fundProfitStatisticTableViewCellViewModel = FundProfitStatisticTableViewCellViewModel(fundProfitChart: fundProfitChart)
-            return fundProfitStatisticTableViewCellViewModel
+            if let statistic = fundProfitChart.statistic, let currency = currency {
+                self.fundProfitStatisticTableViewCellViewModel = FundProfitStatisticTableViewCellViewModel(currency: currency, statistic: statistic)
+                return fundProfitStatisticTableViewCellViewModel
+            }
         }
+        
+        return nil
     }
     
     // MARK: - Private methods
@@ -109,7 +117,7 @@ extension FundProfitViewModel {
         switch dataType {
         case .api:
             guard let assetId = assetId else { return completion(.failure(errorType: .apiError(message: nil))) }
-            FundsDataProvider.getProfitPercentCharts(with: assetId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, completion: { [weak self] (viewModel) in
+            FundsDataProvider.getProfitPercentCharts(with: assetId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currencyType: getPlatformCurrencyType(), currencies: [selectedPlatformCurrency], completion: { [weak self] (viewModel) in
                 guard viewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completion)
                 }

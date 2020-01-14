@@ -16,7 +16,7 @@ extension WalletTransactionTableViewCellViewModel: CellViewModel {
     func setup(on cell: WalletTransactionTableViewCell) {
         cell.iconImageView.image = UIImage.eventPlaceholder
         
-        if let logo = walletTransaction.asset?.logo, let fileUrl = getFileURL(fileName: logo) {
+        if let logo = walletTransaction.amount?.first?.logo, let fileUrl = getFileURL(fileName: logo) {
             cell.iconImageView.kf.indicatorType = .activity
             cell.iconImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
             cell.iconImageView.backgroundColor = .clear
@@ -26,18 +26,17 @@ extension WalletTransactionTableViewCellViewModel: CellViewModel {
 
         cell.amountLabel.text = ""
         
-//        if let type = walletTransaction.type, let amount = walletTransaction.amount, let currencyFrom = walletTransaction.currencyFrom, let currency = CurrencyType(rawValue: currencyFrom.rawValue) {
-//            switch type {
-//            case .fee, .subscribeSignal, .receiveSignal:
-//                cell.amountLabel.text = amount.rounded(with: .btc).toString() + " " + currency.rawValue
-//            default:
-//                cell.amountLabel.text = amount.rounded(with: currency).toString() + " " + currency.rawValue
-//            }
-//
-//            cell.amountLabel.textColor = amount == 0 ? UIColor.Cell.title : amount > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
-//        } else {
+        if let amount = walletTransaction.amount?.first?.amount, let currencyFrom = walletTransaction.amount?.first?.currency, let currency = CurrencyType(rawValue: currencyFrom.rawValue) {
+            cell.amountLabel.text = amount.rounded(with: currency).toString() + " " + currency.rawValue
+
+            cell.amountLabel.textColor = amount == 0 ? UIColor.Cell.title : amount > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
+        } else {
             cell.amountLabel.isHidden = true
-//        }
+        }
+        
+        if walletTransaction.amount?.second != nil {
+            cell.amountLabel.textColor = UIColor.Cell.title
+        }
         
         if let information = walletTransaction.description {
             cell.titleLabel.text = information

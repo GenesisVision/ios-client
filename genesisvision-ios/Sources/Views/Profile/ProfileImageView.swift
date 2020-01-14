@@ -19,7 +19,6 @@ class ProfileImageView: UIView {
             profilePhotoImageView.contentMode = .scaleAspectFill
             profilePhotoImageView.clipsToBounds = true
             profilePhotoImageView.image = UIImage.profilePlaceholder
-            profilePhotoImageView.roundCorners(with: 6.0)
         }
     }
     
@@ -27,5 +26,7 @@ class ProfileImageView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        profilePhotoImageView.roundCorners(with: 6.0)
     }
 }

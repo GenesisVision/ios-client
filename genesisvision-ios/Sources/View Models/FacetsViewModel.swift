@@ -61,7 +61,7 @@ final class FacetsViewModel: ListViewModelProtocolWithFacets {
     func numberOfItems(in section: Int) -> Int {
         return facets?.count ?? 0
     }
-    func model(at indexPath: IndexPath) -> FacetCollectionViewCellViewModel? {
+    func model(for indexPath: IndexPath) -> FacetCollectionViewCellViewModel? {
         let facet = facets?[indexPath.row]
 
         let isFavoriteFacet = facet?.id == nil

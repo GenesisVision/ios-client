@@ -8,7 +8,11 @@
 
 import UIKit.UITableView
 
-final class ProgramBalanceViewModel {
+final class ProgramBalanceViewModel: ViewModelWithListProtocol {
+    var canPullToRefresh: Bool = true
+    
+    var viewModels: [CellViewAnyModel] = []
+    
     enum SectionType {
         case chart
     }
@@ -17,7 +21,7 @@ final class ProgramBalanceViewModel {
     var title: String = "Equity"
     var assetId: String?
     
-    var router: ProgramRouter!
+    var router: Router!
     private weak var reloadDataProtocol: ReloadDataProtocol?
     private weak var chartViewProtocol: ChartViewProtocol?
     
@@ -27,14 +31,22 @@ final class ProgramBalanceViewModel {
     var dateTo: Date?
     var maxPointCount: Int = ApiKeys.maxPoint
     
-    private var programBalanceChart: ProgramBalanceChart?
+    private var programBalanceChart: ProgramBalanceChart? {
+        didSet {
+            guard let programBalanceChart = programBalanceChart else { return }
+            
+            let programBalanceChartTableViewCellViewModel =  ProgramBalanceChartTableViewCellViewModel(programBalanceChart: programBalanceChart, chartViewProtocol: self.chartViewProtocol)
+            
+            viewModels = [programBalanceChartTableViewCellViewModel]
+        }
+    }
     
     private var sections: [SectionType] = [.chart]
     
-    private var programBalanceChartTableViewCellViewModel:   ProgramBalanceChartTableViewCellViewModel?
+    private var programBalanceChartTableViewCellViewModel: ProgramBalanceChartTableViewCellViewModel?
     
     // MARK: - Init
-    init(withRouter router: ProgramRouter, assetId: String, reloadDataProtocol: ReloadDataProtocol?) {
+    init(withRouter router: Router, assetId: String, reloadDataProtocol: ReloadDataProtocol?) {
         self.router = router
         self.assetId = assetId
         self.reloadDataProtocol = reloadDataProtocol
@@ -90,7 +102,7 @@ extension ProgramBalanceViewModel {
         case .api:
             guard let assetId = assetId else { return completion(.failure(errorType: .apiError(message: nil))) }
             
-            ProgramsDataProvider.getBalanceChart(with: assetId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, completion: { [weak self] (viewModel) in
+            ProgramsDataProvider.getBalanceChart(with: assetId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currencyType: getPlatformCurrencyType(), completion: { [weak self] (viewModel) in
                 guard viewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completion)
                 }

@@ -16,7 +16,7 @@ final class WalletTabmanViewModel: TabmanViewModel {
         case transactions = "Transactions"
         case externalTransactions = "Deposits/Withdrawals"
     }
-    var tabTypes: [TabType] = [.balance, .transactions, .externalTransactions]
+    var tabTypes: [TabType] = []
     var controllers = [TabType : UIViewController]()
     
     // MARK: - Variables

@@ -114,15 +114,13 @@ extension WalletTransactionListViewController: UITableViewDelegate, UITableViewD
         
         guard viewModel.numberOfRows(in: indexPath.section) >= indexPath.row else { return }
 
-        if let model = viewModel.model(at: indexPath) as? WalletTransactionTableViewCellViewModel {
-            showTransaction(model.walletTransaction)
-        } else if let model = viewModel.model(at: indexPath) as? WalletExternalTransactionTableViewCellViewModel {
+        if let model = viewModel.model(for: indexPath) as? WalletTransactionTableViewCellViewModel {
             showTransaction(model.walletTransaction)
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let model = viewModel.model(at: indexPath) else {
+        guard let model = viewModel.model(for: indexPath) else {
             return TableViewCell()
         }
 
@@ -164,6 +162,16 @@ extension WalletTransactionListViewController: ReloadDataProtocol {
 }
 
 extension WalletTransactionListViewController: WalletTransactionViewProtocol {
+    func openAssetDidPress(_ assetId: String, assetType: AssetType) {
+        bottomSheetController.dismiss()
+        viewModel.showAssetDetails(with: assetId, assetType: assetType)
+    }
+    
+    func openUrlButtonDidPress(_ url: String) {
+        bottomSheetController.dismiss()
+        openSafariVC(with: url)
+    }
+    
     func copyAddressButtonDidPress(_ address: String) {
         bottomSheetController.dismiss()
 

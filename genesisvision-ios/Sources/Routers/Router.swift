@@ -30,7 +30,7 @@ class Router {
     var followsViewController: ProgramListViewController!
     var managersViewController: ManagerListViewController!
 
-    var dashboardViewController: NewDashboardViewController!
+    var dashboardViewController: DashboardViewController!
     var tradingViewController: TradingViewController!
     var investingViewController: InvestingViewController!
     
@@ -108,12 +108,12 @@ class Router {
     
     private func addDashboard(_ navigationController: inout BaseNavigationController, _ viewControllers: inout [UIViewController]) {
         
-        dashboardViewController = NewDashboardViewController()
+        dashboardViewController = DashboardViewController()
         
         navigationController = BaseNavigationController(rootViewController: self.dashboardViewController)
         let router = DashboardRouter(parentRouter: self, navigationController: navigationController, dashboardViewController: self.dashboardViewController)
-        self.dashboardViewController.viewModel = NewDashboardViewModel(router)
-    
+        self.dashboardViewController.viewModel = DashboardViewModel(router)
+        navigationController.title = ""
         navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_dashboard").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_dashboard").withRenderingMode(.alwaysOriginal)
         viewControllers.append(navigationController)
     }
@@ -552,6 +552,20 @@ extension Router {
         viewController.viewModel = viewModel
         
         viewController.hidesBottomBarWhenPushed = true
+        return viewController
+    }
+    
+    func getProfitViewController(with viewModel: ViewModelWithListProtocol) -> ProfitViewController? {
+        let viewController = ProfitViewController()
+        viewController.viewModel = viewModel
+        
+        return viewController
+    }
+    
+    func getBalanceViewController(with viewModel: ViewModelWithListProtocol) -> BalanceViewController? {
+        let viewController = BalanceViewController()
+        viewController.viewModel = viewModel
+        
         return viewController
     }
 }

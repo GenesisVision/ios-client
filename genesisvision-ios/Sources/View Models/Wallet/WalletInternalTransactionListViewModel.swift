@@ -40,6 +40,10 @@ final class WalletInternalTransactionListViewModel: WalletListViewModelProtocol 
         self.reloadDataProtocol = reloadDataProtocol
         self.wallet = wallet
     }
+    
+    func showAssetDetails(with assetId: String, assetType: AssetType) {
+        router.showAssetDetails(with: assetId, assetType: assetType)
+    }
 }
 
 // MARK: - TableView
@@ -86,7 +90,7 @@ extension WalletInternalTransactionListViewModel {
     }
     
     /// Get TableViewCellViewModel for IndexPath
-    func model(at indexPath: IndexPath) -> CellViewAnyModel? {
+    func model(for indexPath: IndexPath) -> CellViewAnyModel? {
         let type = sections[indexPath.section]
         switch type {
         case .header:
@@ -185,7 +189,7 @@ extension WalletInternalTransactionListViewModel {
 // MARK: - Navigation
 extension WalletInternalTransactionListViewModel {
     func showDetail(at indexPath: IndexPath) {
-        //        guard let model: WalletTransactionTableViewCellViewModel = model(at: indexPath) as? WalletTransactionTableViewCellViewModel,
+        //        guard let model: WalletTransactionTableViewCellViewModel = model(for: indexPath) as? WalletTransactionTableViewCellViewModel,
         //            let program = model.walletTransaction.program,
         //            let programId = program.id
         //            else { return }

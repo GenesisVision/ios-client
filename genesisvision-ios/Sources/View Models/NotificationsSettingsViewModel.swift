@@ -74,7 +74,7 @@ final class NotificationsSettingsViewModel {
     
     // MARK: - Public methods
     /// Get TableViewCellViewModel for IndexPath
-    func model(at indexPath: IndexPath) -> CellViewAnyModel? {
+    func model(for indexPath: IndexPath) -> CellViewAnyModel? {
         guard sections.count > 0 else { return nil }
         
         let type = sections[indexPath.section]
@@ -113,7 +113,7 @@ final class NotificationsSettingsViewModel {
     
     func didHighlightRow(at indexPath: IndexPath) -> Bool {
         guard indexPath.section > 0 else { return false }
-        guard (model(at: indexPath) as? NotificationsSettingsCustomTableViewCellViewModel) != nil else { return true }
+        guard (model(for: indexPath) as? NotificationsSettingsCustomTableViewCellViewModel) != nil else { return true }
         
         return false
     }
@@ -137,7 +137,7 @@ final class NotificationsSettingsViewModel {
     }
     
     func removeCustomSetting(at indexPath: IndexPath) {
-        if let settingsCustomViewModel = model(at: indexPath) as? NotificationsSettingsCustomTableViewCellViewModel, let settingId = settingsCustomViewModel.setting.id?.uuidString {
+        if let settingsCustomViewModel = model(for: indexPath) as? NotificationsSettingsCustomTableViewCellViewModel, let settingId = settingsCustomViewModel.setting.id?.uuidString {
 
             removeNotification(settingId) { [weak self] (result) in
                 switch result {
@@ -193,10 +193,10 @@ final class NotificationsSettingsViewModel {
         
         switch sections[indexPath.section] {
         case .programs:
-            guard let viewModel = model(at: indexPath) as? NotificationsSettingsProgramTableViewCellViewModel, let assetId = viewModel.setting.assetId?.uuidString, let title = viewModel.setting.title else { return }
+            guard let viewModel = model(for: indexPath) as? NotificationsSettingsProgramTableViewCellViewModel, let assetId = viewModel.setting.assetId?.uuidString, let title = viewModel.setting.title else { return }
             router.showAssetNotificationsSettings(assetId, title: title, type: .program)
         case .funds:
-            guard let viewModel = model(at: indexPath) as? NotificationsSettingsFundTableViewCellViewModel, let assetId = viewModel.setting.assetId?.uuidString, let title = viewModel.setting.title else { return }
+            guard let viewModel = model(for: indexPath) as? NotificationsSettingsFundTableViewCellViewModel, let assetId = viewModel.setting.assetId?.uuidString, let title = viewModel.setting.title else { return }
             router.showAssetNotificationsSettings(assetId, title: title, type: .fund)
         case .managers:
             break

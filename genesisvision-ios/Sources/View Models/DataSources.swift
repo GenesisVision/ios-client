@@ -107,7 +107,7 @@ final class CollectionViewDataSource<ViewModel: ViewModelWithListProtocol>: NSOb
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let model = viewModel.model(at: indexPath) else {
+        guard let model = viewModel.model(for: indexPath) else {
             return UICollectionViewCell()
         }
         

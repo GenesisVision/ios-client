@@ -30,6 +30,14 @@ class ProgramViewController: BaseTabmanViewController<ProgramViewModel> {
     }
     
     // MARK: - Private methods
+    private func setup() {
+        navigationItem.title = viewModel.title
+        
+        dataSource = viewModel.dataSource
+        
+        setupUI()
+    }
+    
     private func setupUI() {
         guard AuthManager.isLogin() else { return }
         
@@ -44,14 +52,6 @@ class ProgramViewController: BaseTabmanViewController<ProgramViewModel> {
     
     @objc func notificationsButtonAction() {
         viewModel.showNotificationSettings()
-    }
-    
-    private func setup() {
-        navigationItem.title = viewModel.title
-        
-        dataSource = viewModel.dataSource
-        
-        setupUI()
     }
     
     // MARK: - IBActions
@@ -79,11 +79,6 @@ extension ProgramViewController: ReloadDataProtocol {
         
     }
 }
-extension ProgramViewController: DetailProtocol {
-    func didReload() {
-        
-    }
-}
 extension ProgramViewController: FavoriteStateUpdatedProtocol {
     func didFavoriteStateUpdated() {
         DispatchQueue.main.async {
@@ -104,14 +99,11 @@ extension ProgramViewController: FavoriteStateUpdatedProtocol {
 final class ProgramViewModel: TabmanViewModel {
     enum TabType: String {
         case info = "Info"
-        case trades = "Trades"
-        case openPosition = "Open position"
-        case equity = "Equity"
         case profit = "Profit"
         case balance = "Balance"
-        
+        case trades = "Trades"
+        case openPosition = "Open position"
         case periodHistory = "Period history"
-        
         case events = "Events"
     }
     var tabTypes: [TabType] = []
@@ -128,11 +120,12 @@ final class ProgramViewModel: TabmanViewModel {
         didSet {
             if programDetailsFull?.programDetails != nil {
                 title = programDetailsFull?.publicInfo?.title ?? ""
-                tabTypes = [.info, .profit, .trades, .openPosition, .periodHistory, .events]
+                tabTypes = [.info, .profit, .balance, .trades, .openPosition, .periodHistory, .events]
             } else if programDetailsFull?.followDetails != nil {
                 title = programDetailsFull?.publicInfo?.title ?? ""
-                tabTypes = [.info, .profit, .trades, .openPosition, .events]
+                tabTypes = [.info, .profit, .balance, .trades, .openPosition, .events]
             }
+            self.tabTypes.forEach({ controllers[$0] = getViewController($0) })
         }
     }
     
@@ -146,16 +139,14 @@ final class ProgramViewModel: TabmanViewModel {
     // MARK: - Init
     init(withRouter router: Router, assetId: String? = nil) {
         super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0)
-        
-        self.tabTypes.forEach({ controllers[$0] = getViewController($0) })
-        self.dataSource = PageboyDataSource(self)
-        
         self.assetId = assetId
         self.title = ""
         
         font = UIFont.getFont(.semibold, size: 16)
         
         NotificationCenter.default.addObserver(self, selector: #selector(programFavoriteStateChangeNotification(notification:)), name: .programFavoriteStateChange, object: nil)
+        
+        self.dataSource = PageboyDataSource(self)
     }
     
     deinit {
@@ -172,9 +163,14 @@ final class ProgramViewModel: TabmanViewModel {
         case .info:
             return router.getInfo(with: assetId)
         case .balance:
-            return router.getBalance(with: assetId)
+            let viewModel = ProgramBalanceViewModel(withRouter: router, assetId: assetId, reloadDataProtocol: router.programViewController)
+            
+            return router.getBalanceViewController(with: viewModel)
         case .profit:
-            return router.getProfit(with: assetId)
+            guard let currency = programDetailsFull?.tradingAccountInfo?.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency) else { return nil }
+            let viewModel = ProgramProfitViewModel(withRouter: router, assetId: assetId, reloadDataProtocol: router.programViewController, currency: currencyType)
+            
+            return router.getProfitViewController(with: viewModel)
         case .periodHistory:
             return router.getPeriodHistory(with: assetId, currency: currency)
         case .trades:

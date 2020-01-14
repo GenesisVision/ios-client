@@ -238,7 +238,7 @@ extension ProgramInfoViewModel {
     }
     
     /// Get TableViewCellViewModel for IndexPath
-    func model(at indexPath: IndexPath) -> CellViewAnyModel? {
+    func model(for indexPath: IndexPath) -> CellViewAnyModel? {
         guard programDetailsFull != nil else {
             return nil
         }
@@ -279,6 +279,7 @@ extension ProgramInfoViewModel {
                 guard let viewModel = viewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
                 
                 self?.programDetailsFull = viewModel
+                self?.updateSections()
                 self?.getSignalSubscription(completion)
             }, errorCompletion: completion)
         case .follow:

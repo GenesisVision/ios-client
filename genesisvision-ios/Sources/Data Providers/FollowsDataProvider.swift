@@ -61,12 +61,12 @@ class FollowsDataProvider: DataProvider {
     }
     
     // MARK: - Charts
-    static func getProfitPercentCharts(with assetId: String, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: FollowAPI.Currency_getProfitPercentCharts? = nil, completion: @escaping (ProgramProfitPercentCharts?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getProfitPercentCharts(with assetId: String, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: FollowAPI.Currency_getProfitPercentCharts? = nil, currencies: [String]?, completion: @escaping (ProgramProfitPercentCharts?) -> Void, errorCompletion: @escaping CompletionBlock) {
         guard let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
         let authorization = AuthManager.authorizedToken
         
-        FollowAPI.getProfitPercentCharts(id: uuid, authorization: authorization, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency, currencies: nil) { (viewModel, error) in
+        FollowAPI.getProfitPercentCharts(id: uuid, authorization: authorization, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency, currencies: currencies) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }

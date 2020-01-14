@@ -13,15 +13,15 @@ target 'genesisvision-ios' do
     
     pod 'DZNEmptyDataSet'
 
-    pod 'Kingfisher', '~> 4.0'
+    pod 'Kingfisher'
     
     pod 'Firebase/Core'
     pod 'Firebase/Messaging'
-    
+    pod 'Firebase/Analytics'
     pod 'Fabric'
     pod 'Crashlytics'
     
     pod 'ReachabilitySwift'
-    pod 'Tabman', '~> 2.6'
+    pod 'Tabman'
     pod 'NotificationBannerSwift'
 end

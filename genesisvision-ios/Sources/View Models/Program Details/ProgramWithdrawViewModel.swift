@@ -19,7 +19,7 @@ final class ProgramWithdrawViewModel {
     
     var programWithdrawInfo: ProgramWithdrawInfo?
     
-    private weak var detailProtocol: DetailProtocol?
+    private weak var detailProtocol: ReloadDataProtocol?
     
     private var router: ProgramWithdrawRouter!
     
@@ -27,7 +27,7 @@ final class ProgramWithdrawViewModel {
     init(withRouter router: ProgramWithdrawRouter,
          assetId: String,
          programCurrency: CurrencyType,
-         detailProtocol: DetailProtocol?) {
+         detailProtocol: ReloadDataProtocol?) {
         self.router = router
         self.assetId = assetId
         self.programCurrency = programCurrency
@@ -54,7 +54,7 @@ final class ProgramWithdrawViewModel {
     }
     
     func goToBack() {
-        detailProtocol?.didReload()
+        detailProtocol?.didReloadData()
         router.goToBack()
     }
     

@@ -10,12 +10,16 @@ import UIKit
 
 class WalletBalanceTableViewCell: UITableViewCell {
     // MARK: - Outlets
-    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var stackView: UIStackView! {
+        didSet {
+            stackView.alignment = .leading
+        }
+    }
     
     @IBOutlet weak var balanceTitleLabel: SubtitleLabel!
     @IBOutlet weak var balanceValueLabel: TitleLabel! {
         didSet {
-            balanceValueLabel.font = UIFont.getFont(.semibold, size: 26.0)
+            balanceValueLabel.font = UIFont.getFont(.semibold, size: 21.0)
         }
     }
     
@@ -24,8 +28,6 @@ class WalletBalanceTableViewCell: UITableViewCell {
             progressView.percentTextEnable = true
         }
     }
-    
-    
     
     // MARK: - Lifecycle
     override func awakeFromNib() {
@@ -38,20 +40,19 @@ class WalletBalanceTableViewCell: UITableViewCell {
     
     
     func configure(_ type: WalletBalanceType, balance: String, percent: Double? = nil, animated: Bool = true) {
-        stackView.alignment = .center
         progressView.isHidden = true
         balanceTitleLabel.text = type.rawValue
         balanceValueLabel.text = balance
         
         if let percent = percent {
-            stackView.alignment = .leading
             progressView.isHidden = false
             progressView.setProgress(to: percent, withAnimation: animated)
         }
         
         switch type {
         case .total:
-            break
+            stackView.alignment = .center
+            balanceValueLabel.font = UIFont.getFont(.semibold, size: 26.0)
         case .available:
             progressView.foregroundStrokeColor = UIColor.Common.purple
         case .invested:

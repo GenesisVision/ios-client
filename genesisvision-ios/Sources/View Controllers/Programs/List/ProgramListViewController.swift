@@ -146,9 +146,9 @@ extension ProgramListViewController {
 
 extension ProgramListViewController: DelegateManagerProtocol {
     func delegateManagerTableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let model = viewModel.model(at: indexPath) as? ProgramTableViewCellViewModel, let assetId = model.asset.id?.uuidString {
+        if let model = viewModel.model(for: indexPath) as? ProgramTableViewCellViewModel, let assetId = model.asset.id?.uuidString {
             searchProtocol?.didSelect(assetId, assetType: .program)
-        } else if let model = viewModel.model(at: indexPath) as? FollowTableViewCellViewModel, let assetId = model.asset.id?.uuidString {
+        } else if let model = viewModel.model(for: indexPath) as? FollowTableViewCellViewModel, let assetId = model.asset.id?.uuidString {
             searchProtocol?.didSelect(assetId, assetType: .follow)
         }
     }

@@ -43,5 +43,3 @@ extension PeriodHistoryTableViewCellViewModel: CellViewModel {
         }
     }
 }
-
-

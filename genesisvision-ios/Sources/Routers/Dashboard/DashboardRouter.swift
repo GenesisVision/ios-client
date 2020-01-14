@@ -12,7 +12,7 @@ enum DashboardRouteType {
     
 }
 
-class DashboardRouter: Router, SignalRouterProtocol, ListRouterProtocol {
+class DashboardRouter: Router, ListRouterProtocol {
 //    var signalOpenTradesViewController: SignalOpenTradesViewController?
 //    
 //    var signalTradesViewController: SignalTradesViewController?
@@ -21,7 +21,7 @@ class DashboardRouter: Router, SignalRouterProtocol, ListRouterProtocol {
 //    
 
     // MARK: - Lifecycle
-    init(parentRouter: Router?, navigationController: UINavigationController?, dashboardViewController: NewDashboardViewController) {
+    init(parentRouter: Router?, navigationController: UINavigationController?, dashboardViewController: DashboardViewController) {
         super.init(parentRouter: parentRouter, navigationController: navigationController)
         
         self.dashboardViewController = dashboardViewController

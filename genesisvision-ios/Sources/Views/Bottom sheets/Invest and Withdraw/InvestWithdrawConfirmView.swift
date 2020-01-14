@@ -42,7 +42,7 @@ class InvestWithdrawConfirmView: UIView {
     // MARK: - Outlets
     @IBOutlet weak var titleLabel: TitleLabel! {
         didSet {
-            titleLabel.font = UIFont.getFont(.semibold, size: 18.0)
+            titleLabel.font = UIFont.getFont(.semibold, size: 18)
             titleLabel.textColor = UIColor.Cell.bg
         }
     }

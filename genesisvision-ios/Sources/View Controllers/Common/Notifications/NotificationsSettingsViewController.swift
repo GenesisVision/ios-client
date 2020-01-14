@@ -89,7 +89,7 @@ extension NotificationsSettingsViewController: UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let model = viewModel.model(at: indexPath) else {
+        guard let model = viewModel.model(for: indexPath) else {
             return TableViewCell()
         }
         

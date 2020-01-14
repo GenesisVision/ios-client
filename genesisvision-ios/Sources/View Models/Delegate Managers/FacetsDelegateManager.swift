@@ -33,7 +33,7 @@ final class FacetsDelegateManager: NSObject, UICollectionViewDelegate, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let model = dataSource?.model(at: indexPath) else {
+        guard let model = dataSource?.model(for: indexPath) else {
             return UICollectionViewCell()
         }
         

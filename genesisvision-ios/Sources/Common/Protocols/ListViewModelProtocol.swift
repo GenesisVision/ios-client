@@ -14,10 +14,10 @@ protocol ListViewModelProtocolWithFacets {
 
     func didSelectFacet(at: IndexPath)
     func numberOfItems(in section: Int) -> Int
-    func model(at indexPath: IndexPath) -> FacetCollectionViewCellViewModel?
+    func model(for indexPath: IndexPath) -> FacetCollectionViewCellViewModel?
 }
 extension ListViewModelProtocolWithFacets {
-    func model(at indexPath: IndexPath) -> FacetCollectionViewCellViewModel? {
+    func model(for indexPath: IndexPath) -> FacetCollectionViewCellViewModel? {
         return nil
     }
 }
@@ -71,9 +71,10 @@ protocol ViewModelWithListProtocol {
     var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] { get }
     var cellModelsForRegistration: [CellViewAnyModel.Type] { get }
     
+    func fetch(completion: @escaping CompletionBlock)
     func fetch()
     
-    func model(at indexPath: IndexPath) -> CellViewAnyModel?
+    func model(for indexPath: IndexPath) -> CellViewAnyModel?
     func cell(for indexPath: IndexPath, tableView: UITableView) -> UITableViewCell
     
     func modelsCount() -> Int
@@ -99,16 +100,19 @@ extension ViewModelWithListProtocol {
     var cellModelsForRegistration: [CellViewAnyModel.Type] { return [] }
     var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] { return [] }
     
+    func fetch(completion: @escaping CompletionBlock) {
+        
+    }
     func fetch() {
         
     }
     
-    func model(at indexPath: IndexPath) -> CellViewAnyModel? {
+    func model(for indexPath: IndexPath) -> CellViewAnyModel? {
         return viewModels[indexPath.row]
     }
     
     func cell(for indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
-        guard let model = model(at: indexPath) else {
+        guard let model = model(for: indexPath) else {
             let cell = BaseTableViewCell()
             cell.loaderView.stopAnimating()
             cell.contentView.backgroundColor = UIColor.BaseView.bg
@@ -152,7 +156,6 @@ protocol ListViewModelWithPaging: ViewModelWithListProtocol {
     var canFetchMoreResults: Bool { get set }
     var skip: Int { get set }
     var totalCount: Int { get }
-    
     func refresh()
     func take() -> Int
     func fetchMore(at indexPath: IndexPath)
@@ -179,13 +182,9 @@ extension ListViewModelWithPaging {
 
 extension ListViewModelWithPaging where Self: ListViewController {
     func showInfiniteIndicator(_ value: Bool) {
-        guard value, fetchMoreActivityIndicator != nil else {
-            tableView.tableFooterView = UIView()
-            return
-        }
+        guard fetchMoreActivityIndicator != nil else { return }
         
-        fetchMoreActivityIndicator.startAnimating()
-        tableView.tableFooterView = fetchMoreActivityIndicator
+        value ? fetchMoreActivityIndicator.startAnimating() : fetchMoreActivityIndicator.stopAnimating()
     }
 }
 
@@ -216,8 +215,8 @@ protocol ListViewModelProtocol {
     
     func refresh(completion: @escaping CompletionBlock)
     
-    func model(at indexPath: IndexPath) -> CellViewAnyModel?
-    func model(at assetId: String) -> CellViewAnyModel?
+    func model(for indexPath: IndexPath) -> CellViewAnyModel?
+    func model(for assetId: String) -> CellViewAnyModel?
     func modelsCount() -> Int
     func numberOfSections() -> Int
     func numberOfRows(in section: Int) -> Int
@@ -248,7 +247,7 @@ extension ListViewModelProtocol {
     }
     
     /// Get TableViewCellViewModel for IndexPath
-    func model(at indexPath: IndexPath) -> CellViewAnyModel? {
+    func model(for indexPath: IndexPath) -> CellViewAnyModel? {
         let type = sections[indexPath.section]
         switch type {
         case .assetList:
@@ -260,7 +259,7 @@ extension ListViewModelProtocol {
         }
     }
     
-    func model(at assetId: String) -> CellViewAnyModel? {
+    func model(for assetId: String) -> CellViewAnyModel? {
         switch assetType {
         case .program:
             if let viewModels = viewModels as? [ProgramTableViewCellViewModel], let i = viewModels.firstIndex(where: { $0.asset.id?.uuidString == assetId }) {
@@ -288,28 +287,28 @@ extension ListViewModelProtocol {
     func getDetailsViewController(with indexPath: IndexPath) -> UIViewController? {
         switch assetType {
         case .program:
-            guard let model = model(at: indexPath) as? ProgramTableViewCellViewModel,
+            guard let model = model(for: indexPath) as? ProgramTableViewCellViewModel,
                 let assetId = model.asset.id?.uuidString,
                 let router = router as? Router
                 else { return nil }
             
             return router.getProgramViewController(with: assetId, assetType: .program)
         case .follow:
-            guard let model = model(at: indexPath) as? FollowTableViewCellViewModel,
+            guard let model = model(for: indexPath) as? FollowTableViewCellViewModel,
                 let assetId = model.asset.id?.uuidString,
                 let router = router as? Router
                 else { return nil }
                 
             return router.getProgramViewController(with: assetId, assetType: .follow)
         case .fund:
-            guard let model = model(at: indexPath) as? FundTableViewCellViewModel,
+            guard let model = model(for: indexPath) as? FundTableViewCellViewModel,
                 let assetId = model.asset.id?.uuidString,
                 let router = router as? Router
                 else { return nil }
             
             return router.getFundViewController(with: assetId)
         case ._none:
-            guard let model = model(at: indexPath) as? ManagerTableViewCellViewModel,
+            guard let model = model(for: indexPath) as? ManagerTableViewCellViewModel,
                 let managerId = model.profile.id?.uuidString,
                 let router = router as? Router
                 else { return nil }
@@ -398,25 +397,25 @@ extension ListViewModelProtocol {
     }
     
     func showProgramDetail(at indexPath: IndexPath) {
-        guard let model = model(at: indexPath) as? ProgramTableViewCellViewModel, let assetId = model.asset.id?.uuidString else { return }
+        guard let model = model(for: indexPath) as? ProgramTableViewCellViewModel, let assetId = model.asset.id?.uuidString else { return }
         
         router.show(routeType: .showAssetDetails(assetId: assetId, assetType: assetType))
     }
     
     func showFollowDetail(at indexPath: IndexPath) {
-        guard let model = model(at: indexPath) as? FollowTableViewCellViewModel, let assetId = model.asset.id?.uuidString else { return }
+        guard let model = model(for: indexPath) as? FollowTableViewCellViewModel, let assetId = model.asset.id?.uuidString else { return }
 
         router.show(routeType: .showAssetDetails(assetId: assetId, assetType: assetType))
     }
     
     func showFundDetail(at indexPath: IndexPath) {
-        guard let model = model(at: indexPath) as? FundTableViewCellViewModel, let assetId = model.asset.id?.uuidString else { return }
+        guard let model = model(for: indexPath) as? FundTableViewCellViewModel, let assetId = model.asset.id?.uuidString else { return }
         
         router.show(routeType: .showAssetDetails(assetId: assetId, assetType: assetType))
     }
     
     func showManagerDetail(at indexPath: IndexPath) {
-        guard let model = model(at: indexPath) as? ManagerTableViewCellViewModel else { return }
+        guard let model = model(for: indexPath) as? ManagerTableViewCellViewModel else { return }
         
         let manager = model.profile
         guard let assetId = manager.id else { return }

@@ -88,7 +88,7 @@ extension WalletListViewModel {
     }
     
     /// Get TableViewCellViewModel for IndexPath
-    func model(at indexPath: IndexPath) -> CellViewAnyModel? {
+    func model(for indexPath: IndexPath) -> CellViewAnyModel? {
         let type = sections[indexPath.section]
         switch type {
         case .header:
@@ -107,7 +107,7 @@ extension WalletListViewModel {
 // MARK: - Navigation
 extension WalletListViewModel {
     func showWallet(at indexPath: IndexPath) {
-        if let model = model(at: indexPath) as? WalletTableViewCellViewModel {
+        if let model = model(for: indexPath) as? WalletTableViewCellViewModel {
             let walletViewController = WalletViewController()
             walletViewController.viewModel = WalletTabmanViewModel(withRouter: router, wallet: model.wallet, walletType: .wallet)
             walletViewController.hidesBottomBarWhenPushed = true

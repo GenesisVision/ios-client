@@ -8,7 +8,11 @@
 
 import UIKit.UITableView
 
-final class ProgramProfitViewModel {
+final class ProgramProfitViewModel: ViewModelWithListProtocol {
+    var canPullToRefresh: Bool = true
+    
+    var viewModels: [CellViewAnyModel] = []
+    
     enum SectionType {
         case chart
         case statistics
@@ -27,7 +31,7 @@ final class ProgramProfitViewModel {
     var dateFrom: Date?
     var dateTo: Date?
     var maxPointCount: Int = ApiKeys.maxPoint
-    var programCurrency: CurrencyType?
+    private var currency: CurrencyType?
     private var programProfitChart: ProgramProfitPercentCharts?
     
     private var sections: [SectionType] = [.chart, .statistics]
@@ -36,9 +40,10 @@ final class ProgramProfitViewModel {
     private var programProfitStatisticTableViewCellViewModel: ProgramProfitStatisticTableViewCellViewModel?
     
     // MARK: - Init
-    init(withRouter router: Router, assetId: String, reloadDataProtocol: ReloadDataProtocol?) {
+    init(withRouter router: Router, assetId: String, reloadDataProtocol: ReloadDataProtocol?, currency: CurrencyType?) {
         self.router = router
         self.assetId = assetId
+        self.currency = currency
         self.reloadDataProtocol = reloadDataProtocol
         self.chartViewProtocol = router.currentController as? ChartViewProtocol
     }
@@ -69,7 +74,7 @@ extension ProgramProfitViewModel {
         return 1
     }
     
-    func heightForHeader(in section: Int) -> CGFloat {
+    func headerHeight(for section: Int) -> CGFloat {
         switch section {
         case 0:
             return 0.0
@@ -91,16 +96,16 @@ extension ProgramProfitViewModel {
     }
     
     /// Get TableViewCellViewModel for IndexPath
-    func model(for section: Int) -> CellViewAnyModel? {
+    func model(for indexPath: IndexPath) -> CellViewAnyModel? {
         guard let programProfitChart = programProfitChart else { return nil }
         
-        switch sections[section] {
+        switch sections[indexPath.section] {
         case .chart:
             self.programProfitChartTableViewCellViewModel = ProgramProfitChartTableViewCellViewModel(programProfitChart: programProfitChart, chartViewProtocol: self.chartViewProtocol)
             return programProfitChartTableViewCellViewModel
         case .statistics:
-            if let statistic = programProfitChart.statistic {
-                self.programProfitStatisticTableViewCellViewModel = ProgramProfitStatisticTableViewCellViewModel(currency: programCurrency!, statistic: statistic)
+            if let statistic = programProfitChart.statistic, let currency = currency {
+                self.programProfitStatisticTableViewCellViewModel = ProgramProfitStatisticTableViewCellViewModel(currency: currency, statistic: statistic)
                 return programProfitStatisticTableViewCellViewModel
             }
         }
@@ -113,7 +118,7 @@ extension ProgramProfitViewModel {
         switch dataType {
         case .api:
             guard let assetId = assetId else { return completion(.failure(errorType: .apiError(message: nil))) }
-            ProgramsDataProvider.getProfitPercentCharts(with: assetId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, completion: { [weak self] (viewModel) in
+            ProgramsDataProvider.getProfitPercentCharts(with: assetId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currencyType: getPlatformCurrencyType(), currencies: [selectedPlatformCurrency], completion: { [weak self] (viewModel) in
                 guard viewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completion)
                 }

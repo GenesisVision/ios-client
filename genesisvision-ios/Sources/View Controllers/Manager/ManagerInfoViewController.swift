@@ -84,7 +84,7 @@ class ManagerInfoViewController: BaseViewControllerWithTableView {
 extension ManagerInfoViewController: UITableViewDelegate, UITableViewDataSource {
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let model = viewModel.model(at: indexPath) else {
+        guard let model = viewModel.model(for: indexPath) else {
             return TableViewCell()
         }
         

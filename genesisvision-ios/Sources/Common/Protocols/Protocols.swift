@@ -69,10 +69,21 @@ protocol YourInvestmentProtocol: class {
     func didChangeSwitch(value: Bool)
 }
 
-protocol SignalRouterProtocol {
-//    var signalOpenTradesViewController: SignalOpenTradesViewController? { get set }
-//    var signalTradesViewController: SignalTradesViewController? { get set }
-//    var signalTradingLogViewController: SignalTradingLogViewController? { get set }
+protocol YourDepositProtocol: class {
+    func didTapWithdrawButton()
+    func didTapDepositButton()
+}
+
+protocol AccountMakeProgramProtocol: class {
+    func didTapMakeProgramButton()
+}
+
+protocol AccountMakeFollowProtocol: class {
+    func didTapMakeFollowButton()
+}
+
+protocol AccountSubscriptionsProtocol: class {
+    func didTapDetailsButton()
 }
 
 protocol WalletActionsProtocol: class {
@@ -136,16 +147,11 @@ protocol ReloadDataProtocol: class {
     func didReloadData()
 }
 
-protocol DetailProtocol: class {
-    func didReload()
-}
-
 protocol FavoriteStateChangeProtocol: class {
     var filterDateRangeModel: FilterDateRangeModel? { get }
     
     func didChangeFavoriteState(with assetID: String, value: Bool, request: Bool)
 }
-
 protocol FavoriteStateUpdatedProtocol: class {
     func didFavoriteStateUpdated()
 }
@@ -163,7 +169,7 @@ protocol ViewModelWithTableView {
     
     func numberOfSections() -> Int
     func numberOfRows(in section: Int) -> Int
-    func model(at indexPath: IndexPath) -> CellViewAnyModel?
+    func model(for indexPath: IndexPath) -> CellViewAnyModel?
 }
 
 extension ViewModelWithTableView {func headerTitle(for section: Int) -> String? {
@@ -182,7 +188,7 @@ extension ViewModelWithTableView {func headerTitle(for section: Int) -> String? 
         return 0
     }
     
-    func model(at indexPath: IndexPath) -> CellViewAnyModel? {
+    func model(for indexPath: IndexPath) -> CellViewAnyModel? {
         return nil
     }
 }
@@ -222,6 +228,7 @@ protocol UIViewControllerWithBottomSheet {
 
 protocol UIViewControllerWithFetching {
     var fetchMoreActivityIndicator: UIActivityIndicatorView! { get }
+    var isEnableInfiniteIndicator: Bool { get }
     
     func updateData()
     func fetch()
@@ -232,13 +239,9 @@ protocol UIViewControllerWithFetching {
 
 extension UIViewControllerWithFetching where Self: UITableViewController {
     func showInfiniteIndicator(value: Bool) {
-        guard value, fetchMoreActivityIndicator != nil else {
-            tableView.tableFooterView = UIView()
-            return
-        }
+        guard fetchMoreActivityIndicator != nil else { return }
         
-        fetchMoreActivityIndicator.startAnimating()
-        tableView.tableFooterView = fetchMoreActivityIndicator
+        value ? fetchMoreActivityIndicator.startAnimating() : fetchMoreActivityIndicator.stopAnimating()
     }
 }
 
@@ -289,7 +292,9 @@ protocol WalletListViewModelProtocol {
     func numberOfRows(in section: Int) -> Int
     func headerTitle(for section: Int) -> String?
     func headerHeight(for section: Int) -> CGFloat
-    func model(at indexPath: IndexPath) -> CellViewAnyModel?
+    func model(for indexPath: IndexPath) -> CellViewAnyModel?
+    
+    func showAssetDetails(with assetId: String, assetType: AssetType)
     
     func logoImageName() -> String
     func noDataText() -> String

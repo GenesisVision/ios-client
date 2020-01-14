@@ -154,7 +154,7 @@ extension FundInfoViewModel {
     }
     
     /// Get TableViewCellViewModel for IndexPath
-    func model(at indexPath: IndexPath) -> CellViewAnyModel? {
+    func model(for indexPath: IndexPath) -> CellViewAnyModel? {
         guard fundDetailsFull != nil else {
             return nil
         }

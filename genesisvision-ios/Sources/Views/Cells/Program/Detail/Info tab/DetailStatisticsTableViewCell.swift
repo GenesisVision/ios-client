@@ -11,13 +11,31 @@ import UIKit
 class DetailStatisticsTableViewCell: UITableViewCell {
 
     // MARK: - Outlets
+    @IBOutlet weak var topStackView: UIStackView! {
+        didSet {
+            topStackView.isHidden = true
+        }
+    }
+    @IBOutlet weak var bottomStackView: UIStackView! {
+        didSet {
+           bottomStackView.isHidden = true
+        }
+    }
+    
     @IBOutlet weak var periodLabel: TitleLabel!
+    @IBOutlet weak var periodStackView: UIStackView!
     @IBOutlet weak var ageLabel: TitleLabel!
+    @IBOutlet weak var ageStackView: UIStackView!
     @IBOutlet weak var wpdLabel: TitleLabel!
+    @IBOutlet weak var wpdStackView: UIStackView!
     @IBOutlet weak var investmentScaleLabel: TitleLabel!
+    @IBOutlet weak var investmentScaleStackView: UIStackView!
     @IBOutlet weak var leverageLabel: TitleLabel!
+    @IBOutlet weak var leverageStackView: UIStackView!
     @IBOutlet weak var volumeLabel: TitleLabel!
+    @IBOutlet weak var volumeStackView: UIStackView!
     @IBOutlet weak var brokerLogo: UIImageView!
+    @IBOutlet weak var brokerStackView: UIStackView!
     
     // MARK: - Lifecycle
     override func awakeFromNib() {

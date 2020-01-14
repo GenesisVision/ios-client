@@ -110,7 +110,7 @@ extension ManagerListViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let model = viewModel.model(at: indexPath) else {
+        guard let model = viewModel.model(for: indexPath) else {
             return TableViewCell()
         }
         
@@ -185,7 +185,7 @@ extension ManagerListViewController: FavoriteStateChangeProtocol {
 
 extension ManagerListViewController: DelegateManagerProtocol {
     func delegateManagerTableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let model = viewModel.model(at: indexPath) as? ManagerTableViewCellViewModel, let assetId = model.profile.id?.uuidString else { return }
+        guard let model = viewModel.model(for: indexPath) as? ManagerTableViewCellViewModel, let assetId = model.profile.id?.uuidString else { return }
         
         searchProtocol?.didSelect(assetId, assetType: ._none)
     }

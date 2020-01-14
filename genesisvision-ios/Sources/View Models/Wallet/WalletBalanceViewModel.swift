@@ -91,7 +91,7 @@ extension WalletBalanceViewModel {
         return nil
     }
     
-    func model(at indexPath: IndexPath) -> WalletBalanceTableViewCellViewModel? {
+    func model(for indexPath: IndexPath) -> WalletBalanceTableViewCellViewModel? {
         return viewModels[indexPath.row]
     }
 }

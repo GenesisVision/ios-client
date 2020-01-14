@@ -41,7 +41,7 @@ final class ProgramSubscribeViewModel {
     }
     
     private var router: ProgramInfoRouter!
-    private weak var detailProtocol: DetailProtocol?
+    private weak var detailProtocol: ReloadDataProtocol?
     weak var delegate: BaseTableViewProtocol?
     
     var usd: Double {
@@ -82,7 +82,7 @@ final class ProgramSubscribeViewModel {
          сurrency: CurrencyType? = nil,
          signalSubscription: SignalSubscription? = nil,
          tradingAccounts: ItemsViewModelTradingAccountDetails? = nil,
-         detailProtocol: DetailProtocol?,
+         detailProtocol: ReloadDataProtocol?,
          followType: FollowType,
          delegate: BaseTableViewProtocol?) {
         
@@ -278,7 +278,7 @@ final class ProgramSubscribeViewModel {
     }
     
     func goToBack() {
-        detailProtocol?.didReload()
+        detailProtocol?.didReloadData()
 
         //FIXME: fixedCurrency
         if self.attachToSignal.fixedCurrency != nil {

@@ -15,7 +15,7 @@ class ReachabilityManager {
     
     var notificationBanner: NotificationBanner?
     
-    let reachability = Reachability()!
+    let reachability = try! Reachability()
     
     init() {
         notificationBanner = NotificationBanner(title: String.Alerts.ErrorMessages.noInternetConnection, style: .danger)
@@ -42,7 +42,7 @@ class ReachabilityManager {
             print("Reachable via WiFi")
         case .cellular:
             print("Reachable via Cellular")
-        case .none:
+        default:
             if let notificationBanner = notificationBanner, notificationBanner.isDisplaying || notificationBanner.bannerQueue.numberOfBanners > 0 { return }
             
             notificationBanner?.haptic = .medium

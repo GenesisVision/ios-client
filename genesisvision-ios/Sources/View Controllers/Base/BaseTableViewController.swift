@@ -15,7 +15,19 @@ class BaseTableViewController: UITableViewController, UIViewControllerWithFetchi
     }()
     
     var fetchMoreActivityIndicator: UIActivityIndicatorView!
-    
+    var isEnableInfiniteIndicator: Bool = false {
+        didSet {
+            if isEnableInfiniteIndicator {
+                fetchMoreActivityIndicator = UIActivityIndicatorView(style: .gray)
+                fetchMoreActivityIndicator.frame = CGRect(x: 0, y: 0, width: 200, height: 60)
+                fetchMoreActivityIndicator.color = UIColor.primary
+                tableView.tableFooterView = fetchMoreActivityIndicator
+                fetchMoreActivityIndicator.startAnimating()
+            } else {
+                tableView.tableFooterView = UIView()
+            }
+        }
+    }
     var prefersLargeTitles: Bool = true {
         didSet {
             if #available(iOS 11.0, *) {
@@ -53,13 +65,9 @@ class BaseTableViewController: UITableViewController, UIViewControllerWithFetchi
     }
     
     func showInfiniteIndicator(value: Bool) {
-        guard value, fetchMoreActivityIndicator != nil else {
-            tableView.tableFooterView = UIView()
-            return
-        }
+        guard fetchMoreActivityIndicator != nil else { return }
         
-        fetchMoreActivityIndicator.startAnimating()
-        tableView.tableFooterView = fetchMoreActivityIndicator
+        value ? fetchMoreActivityIndicator.startAnimating() : fetchMoreActivityIndicator.stopAnimating()
     }
     
     func hideAll() {
@@ -70,11 +78,7 @@ class BaseTableViewController: UITableViewController, UIViewControllerWithFetchi
     func setupViews() {
         tableView.separatorStyle = .none
         
-        fetchMoreActivityIndicator = UIActivityIndicatorView(style: .gray)
-        fetchMoreActivityIndicator.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 44)
-        fetchMoreActivityIndicator.color = UIColor.primary
-        fetchMoreActivityIndicator.startAnimating()
-        tableView.tableFooterView = fetchMoreActivityIndicator
+        isEnableInfiniteIndicator = true
         
         tableView.backgroundColor = UIColor.BaseView.bg
         tableView.tableHeaderView?.backgroundColor = UIColor.Cell.headerBg

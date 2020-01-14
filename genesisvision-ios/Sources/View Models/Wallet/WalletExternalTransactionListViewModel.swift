@@ -22,7 +22,7 @@ final class WalletExternalTransactionListViewModel: WalletListViewModelProtocol 
     private var sections: [SectionType] = [.transactions]
     
     private var router: WalletRouter!
-    private var transactions = [WalletExternalTransactionTableViewCellViewModel]()
+    private var transactions = [WalletTransactionTableViewCellViewModel]()
     private weak var reloadDataProtocol: ReloadDataProtocol?
     
     var canFetchMoreResults = true
@@ -39,13 +39,17 @@ final class WalletExternalTransactionListViewModel: WalletListViewModelProtocol 
         self.reloadDataProtocol = reloadDataProtocol
         self.wallet = wallet
     }
+    
+    func showAssetDetails(with assetId: String, assetType: AssetType) {
+        router.showAssetDetails(with: assetId, assetType: assetType)
+    }
 }
 
 // MARK: - TableView
 extension WalletExternalTransactionListViewModel {
     /// Return view models for registration cell Nib files
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [WalletExternalTransactionTableViewCellViewModel.self]
+        return [WalletTransactionTableViewCellViewModel.self]
     }
     
     /// Return view models for registration header/footer Nib files
@@ -85,7 +89,7 @@ extension WalletExternalTransactionListViewModel {
     }
     
     /// Get TableViewCellViewModel for IndexPath
-    func model(at indexPath: IndexPath) -> CellViewAnyModel? {
+    func model(for indexPath: IndexPath) -> CellViewAnyModel? {
         let type = sections[indexPath.section]
         switch type {
         case .header:
@@ -120,7 +124,7 @@ extension WalletExternalTransactionListViewModel {
         
         canFetchMoreResults = false
         fetchTransactions({ [weak self] (totalCount, viewModels) in
-            var allViewModels = self?.transactions ?? [WalletExternalTransactionTableViewCellViewModel]()
+            var allViewModels = self?.transactions ?? [WalletTransactionTableViewCellViewModel]()
             
             viewModels.forEach({ (viewModel) in
                 allViewModels.append(viewModel)
@@ -146,8 +150,8 @@ extension WalletExternalTransactionListViewModel {
             }, completionError: completion)
     }
     
-    /// Update saved transactions (WalletExternalTransactionTableViewCellViewModel)
-    private func updateFetchedData(totalCount: Int, _ viewModels: [WalletExternalTransactionTableViewCellViewModel]) {
+    /// Update saved transactions (WalletTransactionTableViewCellViewModel)
+    private func updateFetchedData(totalCount: Int, _ viewModels: [WalletTransactionTableViewCellViewModel]) {
         self.transactions = viewModels
         self.totalCount = totalCount
         self.skip += self.take
@@ -155,8 +159,8 @@ extension WalletExternalTransactionListViewModel {
         self.reloadDataProtocol?.didReloadData()
     }
     
-    /// Save [WalletTransaction] and total -> Return [WalletExternalTransactionTableViewCellViewModel] or error
-    private func fetchTransactions(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [WalletExternalTransactionTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
+    /// Save [WalletTransaction] and total -> Return [WalletTransactionTableViewCellViewModel] or error
+    private func fetchTransactions(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [WalletTransactionTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
 
         let currency = WalletAPI.Currency_getTransactionsExternal(rawValue: wallet?.currency?.rawValue ?? "")
         
@@ -164,12 +168,12 @@ extension WalletExternalTransactionListViewModel {
             guard transactionsViewModel != nil else {
                 return ErrorHandler.handleApiError(error: nil, completion: completionError)
             }
-            var viewModels = [WalletExternalTransactionTableViewCellViewModel]()
+            var viewModels = [WalletTransactionTableViewCellViewModel]()
             
             let totalCount = transactionsViewModel?.total ?? 0
             
             transactionsViewModel?.items?.forEach({ (walletTransaction) in
-                let viewModel = WalletExternalTransactionTableViewCellViewModel(walletTransaction: walletTransaction)
+                let viewModel = WalletTransactionTableViewCellViewModel(walletTransaction: walletTransaction)
                 viewModels.append(viewModel)
             })
             
@@ -183,12 +187,12 @@ extension WalletExternalTransactionListViewModel {
 // MARK: - Navigation
 extension WalletExternalTransactionListViewModel {
     func showDetail(at indexPath: IndexPath) {
-        //        guard let model: WalletExternalTransactionTableViewCellViewModel = model(at: indexPath) as? WalletExternalTransactionTableViewCellViewModel,
-        //            let program = model.walletTransaction.program,
-        //            let programId = program.id
-        //            else { return }
-        //
-        //        router.show(routeType: .showProgramDetails(programId: programId.uuidString))
+        guard let model: WalletTransactionTableViewCellViewModel = model(for: indexPath) as? WalletTransactionTableViewCellViewModel,
+            let assetId = model.walletTransaction.asset?.id?.uuidString,
+            let assetType = model.walletTransaction.asset?.assetType
+            else { return }
+
+        router.showAssetDetails(with: assetId, assetType: assetType)
     }
 }
 

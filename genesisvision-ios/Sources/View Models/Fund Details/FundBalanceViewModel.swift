@@ -8,7 +8,10 @@
 
 import UIKit.UITableView
 
-final class FundBalanceViewModel {
+final class FundBalanceViewModel: ViewModelWithListProtocol {
+    var canPullToRefresh: Bool = true
+    var viewModels: [CellViewAnyModel] = []
+    
     enum SectionType {
         case chart
     }
@@ -17,7 +20,7 @@ final class FundBalanceViewModel {
     var title: String = "Balance"
     var assetId: String?
     
-    var router: FundRouter!
+    var router: Router!
     private weak var reloadDataProtocol: ReloadDataProtocol?
     private weak var chartViewProtocol: ChartViewProtocol?
     
@@ -34,7 +37,7 @@ final class FundBalanceViewModel {
     private var fundBalanceChartTableViewCellViewModel:   ProgramBalanceChartTableViewCellViewModel?
     
     // MARK: - Init
-    init(withRouter router: FundRouter, assetId: String, reloadDataProtocol: ReloadDataProtocol?) {
+    init(withRouter router: Router, assetId: String, reloadDataProtocol: ReloadDataProtocol?) {
         self.router = router
         self.assetId = assetId
         self.reloadDataProtocol = reloadDataProtocol
@@ -89,7 +92,7 @@ extension FundBalanceViewModel {
         switch dataType {
         case .api:
             guard let assetId = assetId else { return completion(.failure(errorType: .apiError(message: nil))) }
-            FundsDataProvider.getBalanceChart(with: assetId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, completion: { [weak self] (viewModel) in
+            FundsDataProvider.getBalanceChart(with: assetId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currencyType: getPlatformCurrencyType(), completion: { [weak self] (viewModel) in
                 guard viewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completion)
                 }

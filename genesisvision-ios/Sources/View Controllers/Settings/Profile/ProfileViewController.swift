@@ -156,6 +156,7 @@ class ProfileViewController: BaseTableViewController, UINavigationControllerDele
         }
         if let userName = viewModel.profileModel?.userName {
             usernameTextField.text = userName
+            title = userName
         } else {
             usernameTextField.text = ""
         }

@@ -160,7 +160,6 @@ extension UIViewController {
         configuration.entersReaderIfAvailable = false
         let safariViewController = SFSafariViewController(url: url, configuration: configuration)
         safariViewController.preferredBarTintColor = UIColor.BaseView.bg
-//        safariViewController.preferredControlTintColor = UIColor.primary
         if #available(iOS 11.0, *) {
             safariViewController.dismissButtonStyle = .close
         }

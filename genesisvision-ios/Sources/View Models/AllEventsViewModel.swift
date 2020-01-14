@@ -63,7 +63,7 @@ class EventListViewModel: ListViewModelWithPaging {
     }
     
     func didSelect(at indexPath: IndexPath) {
-        delegate?.didSelect(.tradingEvents, cellViewModel: model(at: indexPath))
+        delegate?.didSelect(.tradingEvents, cellViewModel: model(for: indexPath))
     }
     func didSelectEvent(at assetId: String, assetType: AssetType) {
         router?.showAssetDetails(with: assetId, assetType: assetType)

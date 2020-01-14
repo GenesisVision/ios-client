@@ -104,7 +104,7 @@ class ChartView: CombinedChartView {
     // MARK: - Public methods
     func setup(chartType: ChartType = .detail,
                lineChartData: [SimpleChartPoint]? = nil,
-//               barChartData: [ValueChartBar]? = nil,
+               //               barChartData: [ValueChartBar]? = nil,
                programBalanceChartData: [BalanceChartPoint]? = nil,
                fundBalanceChartData: [BalanceChartPoint]? = nil,
                name: String? = "DataSet",

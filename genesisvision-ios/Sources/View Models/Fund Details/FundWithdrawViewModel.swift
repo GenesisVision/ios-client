@@ -20,14 +20,14 @@ final class FundWithdrawViewModel {
     var selectedWalletFromDelegateManager: WalletDepositCurrencyDelegateManager?
     var rate: Double = 0.0
     
-    private weak var detailProtocol: DetailProtocol?
+    private weak var detailProtocol: ReloadDataProtocol?
     
     private var router: FundWithdrawRouter!
     
     // MARK: - Init
     init(withRouter router: FundWithdrawRouter,
          assetId: String,
-         detailProtocol: DetailProtocol?) {
+         detailProtocol: ReloadDataProtocol?) {
         self.router = router
         self.assetId = assetId
         self.detailProtocol = detailProtocol
@@ -137,7 +137,7 @@ final class FundWithdrawViewModel {
     }
     
     func goToBack() {
-        detailProtocol?.didReload()
+        detailProtocol?.didReloadData()
         router.goToBack()
     }
     

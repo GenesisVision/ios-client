@@ -78,11 +78,6 @@ extension FundViewController: ReloadDataProtocol {
     func didReloadData() {
     }
 }
-extension FundViewController: DetailProtocol {
-    func didReload() {
-        
-    }
-}
 extension FundViewController: FavoriteStateUpdatedProtocol {
     func didFavoriteStateUpdated() {
         DispatchQueue.main.async {
@@ -103,7 +98,7 @@ extension FundViewController: FavoriteStateUpdatedProtocol {
 final class FundViewModel: TabmanViewModel {
     enum TabType: String {
         case info = "Info"
-        case equity = "Equity"
+        
         case profit = "Profit"
         case balance = "Balance"
         
@@ -112,7 +107,7 @@ final class FundViewModel: TabmanViewModel {
         
         case events = "Events"
     }
-    var tabTypes: [TabType] = []
+    var tabTypes: [TabType] = [.info, .assets, .reallocateHistory, .profit, .balance, .events]
     var controllers = [TabType : UIViewController]()
     
     // MARK: - Variables
@@ -124,8 +119,6 @@ final class FundViewModel: TabmanViewModel {
         didSet {
             guard let details = fundDetailsFull else { return }
             title = details.publicInfo?.title ?? ""
-            
-            tabTypes = [.info, .profit, .balance, .assets, .reallocateHistory, .events]
         }
     }
     
@@ -140,15 +133,15 @@ final class FundViewModel: TabmanViewModel {
     init(withRouter router: Router, assetId: String? = nil) {
         super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0)
         
-        self.tabTypes.forEach({ controllers[$0] = getViewController($0) })
-        self.dataSource = PageboyDataSource(self)
-        
         self.assetId = assetId
         self.title = ""
         
         font = UIFont.getFont(.semibold, size: 16)
         
         NotificationCenter.default.addObserver(self, selector: #selector(fundFavoriteStateChangeNotification(notification:)), name: .fundFavoriteStateChange, object: nil)
+        
+        self.tabTypes.forEach({ controllers[$0] = getViewController($0) })
+        self.dataSource = PageboyDataSource(self)
     }
     
     deinit {
@@ -165,17 +158,19 @@ final class FundViewModel: TabmanViewModel {
         case .info:
             return router.getInfo(with: assetId)
         case .balance:
-            return router.getBalance(with: assetId)
+            let viewModel = FundBalanceViewModel(withRouter: router, assetId: assetId, reloadDataProtocol: router.fundViewController)
+            
+            return router.getBalanceViewController(with: viewModel)
         case .profit:
-            return router.getProfit(with: assetId)
+            let viewModel = FundProfitViewModel(withRouter: router, assetId: assetId, reloadDataProtocol: router.fundViewController, currency: getPlatformCurrencyType())
+            
+            return router.getProfitViewController(with: viewModel)
         case .reallocateHistory:
             return router.getReallocateHistory(with: assetId)
         case .assets:
             return router.getAssets()
         case .events:
             return router.getEvents(with: assetId)
-        default:
-            return nil
         }
     }
 }

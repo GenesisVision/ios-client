@@ -132,7 +132,11 @@ class SettingsViewController: BaseTableViewController {
     
     // MARK: - Cells
     @IBOutlet weak var kycStatusCell: TableViewCell!
-    @IBOutlet weak var publicProfileCell: TableViewCell!
+    @IBOutlet weak var publicProfileCell: TableViewCell! {
+        didSet {
+            publicProfileCell.isHidden = true
+        }
+    }
     @IBOutlet weak var currencyCell: TableViewCell!
     
     @IBOutlet weak var changePasswordCell: TableViewCell!

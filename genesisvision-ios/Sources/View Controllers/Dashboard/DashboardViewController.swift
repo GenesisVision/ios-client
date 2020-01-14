@@ -2,326 +2,346 @@
 //  DashboardViewController.swift
 //  genesisvision-ios
 //
-//  Created by George Shaginyan on 22.01.18.
-//  Copyright © 2018 Genesis Vision. All rights reserved.
+//  Created by George on 14.11.2019.
+//  Copyright © 2019 Genesis Vision. All rights reserved.
 //
 
 import UIKit
 
-class DashboardViewController: BaseViewController {}
-    // MARK: - View Model
-    var viewModel: DashboardViewModel!
-//
-//    // MARK: - Variables
-//    @IBOutlet weak var scrollView: UIScrollView! {
-//        didSet {
-//            scrollView.delegate = self
-//        }
-//    }
-//
-//    @IBOutlet weak var chartsView: UIView!
-//    @IBOutlet weak var eventsView: UIView!
-//    @IBOutlet weak var assetsView: UIView!
-//
-//    @IBOutlet weak var selectedChartAssetsView: SelectedChartAssetsView!
-//    @IBOutlet weak var selectedChartAssetsViewTopConstraint: NSLayoutConstraint!
-//    @IBOutlet weak var selectedChartAssetsViewBottomConstraint: NSLayoutConstraint! {
-//        didSet {
-//            switch UIDevice.current.screenType {
-//            case .iPhones_X_XS, .iPhone_XR, .iPhone_XSMax:
-//                selectedChartAssetsViewBottomConstraint.constant = -(49 + 34)
-//            default:
-//                selectedChartAssetsViewBottomConstraint.constant = -49
-//            }
-//        }
-//    }
-//
-//    var eventsViewHeightStart: CGFloat = 150.0
-//    var eventsViewHeightEnd: CGFloat = 220.0
-//
-//    var chartsViewHeightStart: CGFloat = 400.0
-//    var chartsViewHeightEnd: CGFloat = 100.0
-//
+class DashboardViewController: ListViewController {
+    typealias ViewModel = DashboardViewModel
+    
+    // MARK: - Veriables
+    var viewModel: ViewModel!
+    var dataSource: TableViewDataSource<ViewModel>!
+    var titleView = TitleView()
+    
     private var notificationsBarButtonItem: UIBarButtonItem!
-//
-//    @IBOutlet weak var chartsViewHeightConstraint: NSLayoutConstraint! {
-//        didSet {
-//            chartsViewHeightConstraint.constant = chartsViewHeightStart
-//        }
-//    }
-//    @IBOutlet weak var eventsViewHeightConstraint: NSLayoutConstraint! {
-//        didSet {
-//            eventsViewHeightConstraint.constant = eventsViewHeightEnd
-//        }
-//    }
-//
-//    // MARK: - Lifecycle
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//        setup()
-//    }
-//
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        NotificationCenter.default.addObserver(self, selector: #selector(tabBarDidScrollToTop(_:)), name: .tabBarDidScrollToTop, object: nil)
-//    }
-//
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        NotificationCenter.default.removeObserver(self, name: .tabBarDidScrollToTop, object: nil)
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setup()
+        showProgressHUD()
+        viewModel.fetch()
     }
-//
-//    deinit {
-//        NotificationCenter.default.removeObserver(self, name: .tabBarDidScrollToTop, object: nil)
-//    }
-//
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//
-//        view.bringSubviewToFront(selectedChartAssetsView)
-//    }
-//
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let vc = segue.destination as? AssetsViewController,
-//            segue.identifier == "AssetsViewControllerSegue" {
-//            vc.viewModel = viewModel.assetsTabmanViewModel
-//
-//            viewModel.router.dashboardAssetsViewController = vc
-//        } else if let vc = segue.destination as? EventsViewController,
-//            segue.identifier == "EventsViewControllerSegue" {
-//            viewModel.eventListViewModel?.reloadDataProtocol = vc
-//            vc.viewModel = viewModel.eventListViewModel
-//
-//            viewModel.router.eventsViewController = vc
-//        } else if let vc = segue.destination as? ChartsViewController,
-//            segue.identifier == "ChartsViewControllerSegue" {
-//            vc.viewModel = viewModel.chartsTabmanViewModel
-//
-//            viewModel.router.chartsViewController = vc
-//        }
-//    }
-//
-//    override func pullToRefresh() {
-//        super.pullToRefresh()
-//
-//        fetch()
-//        viewModel.updateLists()
-//    }
-//
-//    override func updateData(from dateFrom: Date?, to dateTo: Date?) {
-//        viewModel.dateFrom = dateFrom
-//        viewModel.dateTo = dateTo
-//
-//        showProgressHUD()
-//        fetch()
-//        viewModel.updateProgramList()
-//    }
-//
-//    // MARK: - Private methods
-//    private func setup() {
-//        setupPullToRefresh(scrollView: scrollView)
-//        bottomViewType = .dateRange
-//        bottomStackViewHiddable = false
-//        addBottomView()
-//
-//        setupUI()
-//    }
-//
-//    @objc private func tabBarDidScrollToTop(_ notification: Notification) {
-//        scrollToTop(scrollView)
-//    }
-//
-//    private func reloadData() {
-//        if let events = viewModel.dashboard?.events?.events, events.count > 0 {
-//            eventsView.isHidden = false
-//            eventsViewHeightConstraint.constant = eventsViewHeightEnd
-//        } else {
-//            eventsView.isHidden = true
-//            eventsViewHeightConstraint.constant = 0.0
-//        }
-//
-//        if let balanceChart = viewModel.dashboard?.chart?.balanceChart, balanceChart.count > 0 {
-//            viewModel.router.chartsViewController?.hideChart(false)
-//            chartsViewHeightConstraint.constant = chartsViewHeightStart
-//        } else {
-//            viewModel.router.chartsViewController?.hideChart(true)
-//            chartsViewHeightConstraint.constant = 250.0
-//        }
-//
-//        if let requests = viewModel.dashboard?.requests?.requests, requests.count > 0 {
-//            viewModel.router.chartsViewController?.hideInRequests(false)
-//        } else {
-//            viewModel.router.chartsViewController?.hideInRequests(true)
-//            chartsViewHeightConstraint.constant = chartsViewHeightConstraint.constant - 82.0
-//        }
-//
-        if let notificationsCount = viewModel.dashboard?.profileHeader?.notificationsCount {
-            UIApplication.shared.applicationIconBadgeNumber = notificationsCount
-            notificationsBarButtonItem = UIBarButtonItem(image: notificationsCount > 0 ? #imageLiteral(resourceName: "img_activeNotifications_icon") : #imageLiteral(resourceName: "img_notifications_icon"), style: .done, target: self, action: #selector(notificationsButtonAction))
-            navigationItem.leftBarButtonItems = [notificationsBarButtonItem]
-        }
-//    }
-//
-//    private func fetch() {
-//        viewModel.refresh { [weak self] (result) in
-//            DispatchQueue.main.async {
-//                self?.hideAll()
-//                self?.viewModel.isLoading = false
-//
-//                switch result {
-//                case .success:
-//                    self?.reloadData()
-//                case .failure(let errorType):
-//                    ErrorHandler.handleError(with: errorType, viewController: self)
-//                }
-//            }
-//        }
-//    }
-//
-//    private func setupUI() {
-//        navigationTitleView = NavigationTitleView(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
-//
+    
+    override func pullToRefresh() {
+        super.pullToRefresh()
+        
+        viewModel.fetch()
+    }
+    
+    private func setup() {
+        navigationItem.title = ""
+        
+        setupPullToRefresh(scrollView: tableView)
+        tableView.configure(with: .defaultConfiguration)
+
+        dataSource = TableViewDataSource(viewModel)
+        dataSource.delegate = self
+        tableView.registerNibs(for: viewModel.cellModelsForRegistration)
+        tableView.delegate = dataSource
+        tableView.dataSource = dataSource
+        tableView.reloadData()
+        
+        titleView.titleLabel.text = "Dashboard"
+        titleView.balanceLabel.text = viewModel.getTotalValue()
+        
+        navigationItem.titleView = titleView
+        
         notificationsBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_notifications_icon"), style: .done, target: self, action: #selector(notificationsButtonAction))
         navigationItem.leftBarButtonItems = [notificationsBarButtonItem]
-//        addCurrencyTitleButton(CurrencyDelegateManager())
-//    }
-//
-//    // MARK: - Public methods
-//    func showRequests(_ programRequests: ProgramRequests?) {
-//        bottomSheetController = BottomSheetController()
-//        bottomSheetController.initializeHeight = 300.0
-//
-//        bottomSheetController.addNavigationBar("In Requests")
-//        viewModel.inRequestsDelegateManager.programRequests = programRequests
-//        viewModel.inRequestsDelegateManager.inRequestsDelegate = self
-//
-//        bottomSheetController.addTableView { [weak self] tableView in
-//            tableView.registerNibs(for: viewModel.inRequestsDelegateManager.inRequestsCellModelsForRegistration)
-//            tableView.delegate = self?.viewModel.inRequestsDelegateManager
-//            tableView.dataSource = self?.viewModel.inRequestsDelegateManager
-//            tableView.separatorStyle = .none
-//        }
-//
-//        bottomSheetController.present()
-//    }
-//
-//    func showDetails(_ event: InvestmentEventViewModel) {
-//        var count = 0
-//
-//        if let extendedInfo = event.extendedInfo, !extendedInfo.isEmpty {
-//            count += extendedInfo.count
-//        }
-//
-//        if let fees = event.feesInfo, !fees.isEmpty {
-//            count += fees.count + 1
-//        }
-//
-//        let height = Double((count + 1) * 40)
-//
-//        bottomSheetController = BottomSheetController()
-//        bottomSheetController.initializeHeight = CGFloat(230.0 + height)
-//        bottomSheetController.lineViewIsHidden = true
-//
-//        let view = EventDetailsView.viewFromNib()
-//        view.configure(event)
-//        view.delegate = self
-//        bottomSheetController.addContentsView(view)
-//        bottomSheetController.present()
-//    }
-//
+    }
+    
     @objc func notificationsButtonAction() {
         viewModel.showNotificationList()
         UIApplication.shared.applicationIconBadgeNumber = 0
         notificationsBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_notifications_icon"), style: .done, target: self, action: #selector(notificationsButtonAction))
         navigationItem.leftBarButtonItems = [notificationsBarButtonItem]
     }
-//
-//    // MARK: - Private methods
-//    private func animateChartsView(_ yOffset: CGFloat) {
-//        let chartsH = chartsViewHeightStart - yOffset * 2
-//        if chartsH >= chartsViewHeightEnd && chartsH <= chartsViewHeightStart {
-//            chartsViewHeightConstraint.constant = chartsH
-//            viewModel.router.chartsViewController?.viewDidLayoutSubviews()
-//        }
-//    }
-//
-//    private func animateEventsView(_ yOffset: CGFloat) {
-//        let newHeight = eventsViewHeightStart + yOffset * 2
-//        if newHeight >= eventsViewHeightStart && newHeight <= eventsViewHeightEnd {
-//            eventsViewHeightConstraint.constant = newHeight
-//            viewModel.router.eventsViewController?.viewDidLayoutSubviews()
-//        }
-//    }
-//
-//    private func animateViews(_ yOffset: CGFloat) {
-//        animateChartsView(yOffset)
-//        animateEventsView(yOffset)
-//    }
-//}
-//
-//extension DashboardViewController {
-//    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        viewModel.deselectChart()
-//
-//        let yOffset = scrollView.contentOffset.y
-//        let viewHeight = eventsViewHeightConstraint.constant + chartsViewHeightConstraint.constant - 44.0
-//
-//        if yOffset >= viewHeight && self.filterStackView.alpha == 1.0 {
-//            UIView.animate(withDuration: 0.3, animations: {
-//                self.filterStackView.alpha = 0.0
-//            }) { (success) in
-//                self.filterStackView.isHidden = true
-//            }
-//        } else if yOffset < viewHeight && self.filterStackView.alpha == 0.0 {
-//            self.filterStackView.isHidden = false
-//
-//            UIView.animate(withDuration: 0.3, animations: {
-//                self.filterStackView.alpha = 1.0
-//            })
-//        }
-//
-//        if scrollView == self.scrollView {
-//            if let pageboyDataSource = viewModel.router.dashboardAssetsViewController?.viewModel.dataSource {
-//                for controller in pageboyDataSource.controllers {
-//                    if let vc = controller as? BaseViewControllerWithTableView {
-//                        vc.register3dTouch()
-//
-//                        vc.tableView?.isScrollEnabled = yOffset >= assetsView.frame.origin.y
-//                    }
-//                }
-//            }
-//        }
-//    }
-//}
-//
-//extension DashboardViewController: InRequestsDelegateManagerProtocol {
-//    func didSelectRequest(at indexPath: IndexPath) {
-//        bottomSheetController.dismiss()
-//
-//        viewModel.didSelectRequest(at: indexPath)
-//    }
-//
-//    func didCanceledRequest(completionResult: CompletionResult) {
-//        bottomSheetController.dismiss()
-//
-//        switch completionResult {
-//        case .success:
-//            self.showProgressHUD()
-//            self.fetch()
-//        case .failure(let errorType):
-//            ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
-//        }
-//    }
-//}
-//
-//extension DashboardViewController: EventDetailsViewProtocol {
-//    func closeButtonDidPress() {
-//        bottomSheetController.dismiss()
-//    }
-//
-//    func showAssetButtonDidPress(_ assetId: String, assetType: AssetType) {
-//        bottomSheetController.dismiss()
-//        viewModel.didSelectEvent(at: assetId, assetType: assetType)
-//    }
-//}
+}
+
+extension DashboardViewController: DelegateManagerProtocol {
+    func delegateManagerScrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.scrollViewDidScroll(scrollView)
+    }
+}
+
+extension DashboardViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        titleView.animate(scrollView.contentOffset.y, value: 40.0)
+    }
+}
+
+extension DashboardViewController: BaseTableViewProtocol {
+    func didSelect(_ type: CellActionType, cellViewModel: CellViewAnyModel?) {
+        print("select cell \(type)")
+        
+        switch type {
+        case .dashboardTrading, .dashboardInvesting:
+            if let viewModel = cellViewModel as? PortfolioEventCollectionViewCellViewModel {
+                self.showEvent(viewModel.event)
+            }
+        case .dashboardRecommendation:
+            if let cellViewModel = cellViewModel as? AssetCollectionViewCellViewModel {
+                self.showAsset(cellViewModel)
+            }
+        default:
+            break
+        }
+    }
+    
+    func action(_ type: CellActionType, actionType: ActionType) {
+        print("show all \(type)")
+        
+        switch type {
+        case .dashboardNotifications:
+            if let notificationsCount = viewModel.header?.notificationsCount {
+                UIApplication.shared.applicationIconBadgeNumber = notificationsCount
+                notificationsBarButtonItem = UIBarButtonItem(image: notificationsCount > 0 ? #imageLiteral(resourceName: "img_activeNotifications_icon") : #imageLiteral(resourceName: "img_notifications_icon"), style: .done, target: self, action: #selector(notificationsButtonAction))
+                navigationItem.leftBarButtonItems = [notificationsBarButtonItem]
+            }
+        case .dashboardTrading:
+            let vc = TradingViewController()
+            viewModel.router?.tradingViewController = vc
+            vc.viewModel = TradingViewModel(viewModel.router)
+            vc.title = ""
+            navigationController?.pushViewController(vc, animated: true)
+        case .dashboardInvesting:
+            let vc = InvestingViewController()
+            viewModel.router?.investingViewController = vc
+            vc.viewModel = InvestingViewModel(viewModel.router)
+            vc.title = ""
+            navigationController?.pushViewController(vc, animated: true)
+        default:
+            break
+        }
+    }
+    
+    func didReload(_ indexPath: IndexPath) {
+        titleView.balanceLabel.text = viewModel.getTotalValue()
+        hideHUD()
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+    }
+    
+    func showEvent(_ event: InvestmentEventViewModel) {
+        var count = 0
+
+        if let extendedInfo = event.extendedInfo, !extendedInfo.isEmpty {
+            count += extendedInfo.count
+        }
+
+        if let fees = event.feesInfo, !fees.isEmpty {
+            count += fees.count + 1
+        }
+
+        let height = Double((count + 1) * 40)
+
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.initializeHeight = CGFloat(230.0 + height)
+        bottomSheetController.lineViewIsHidden = true
+
+        let view = EventDetailsView.viewFromNib()
+        view.configure(event)
+        view.delegate = self
+        bottomSheetController.addContentsView(view)
+        bottomSheetController.present()
+    }
+    
+    func showAsset(_ asset: AssetCollectionViewCellViewModel) {
+        var assetId = ""
+        let type = asset.type
+        
+        switch type {
+        case .program:
+            assetId = asset.asset.program?.id?.uuidString ?? ""
+        case .fund:
+            assetId = asset.asset.fund?.id?.uuidString ?? ""
+        case .follow:
+            assetId = asset.asset.follow?.id?.uuidString ?? ""
+        case ._none:
+            break
+        }
+        
+        if !assetId.isEmpty {
+            viewModel.router?.showAssetDetails(with: assetId, assetType: type)
+        }
+    }
+}
+
+extension DashboardViewController: EventDetailsViewProtocol {
+    func closeButtonDidPress() {
+        bottomSheetController.dismiss()
+    }
+
+    func showAssetButtonDidPress(_ assetId: String, assetType: AssetType) {
+        bottomSheetController.dismiss()
+        viewModel.router?.showAssetDetails(with: assetId, assetType: assetType)
+    }
+}
+
+class DashboardViewModel: ViewModelWithListProtocol {
+    enum RowType {
+        case overview
+        case trading
+        case investing
+        case portfolio
+        case assets
+        case recommendations
+    }
+    
+    private var rows: [RowType] = [.overview, .investing, .trading, .portfolio, .assets, .recommendations]
+    var viewModels = [CellViewAnyModel]()
+    
+    var canPullToRefresh: Bool = true
+    //Models
+    var overview: DashboardSummary? {
+           didSet {
+            let viewModel = DashboardOverviewTableViewCellViewModel(data: DashboardOverviewData(overview, currency: currencyType), delegate: delegate)
+            viewModels.append(viewModel)
+            reloadRow(.overview)
+        }
+    }
+    var tradingDetails: DashboardTradingDetails? {
+        didSet {
+            let viewModel = DashboardTradingCellViewModel(TradingCollectionViewModel(tradingDetails, delegate: delegate), data: TradingHeaderData(title: "Trading", details: tradingDetails, currency: currencyType), delegate: delegate)
+            viewModels.append(viewModel)
+            reloadRow(.trading)
+        }
+    }
+    var investingDetails: DashboardInvestingDetails? {
+        didSet {
+            let viewModel = DashboardInvestingCellViewModel(InvestingCollectionViewModel(investingDetails, delegate: delegate), data: InvestingHeaderData(title: "Investing", details: investingDetails, currency: currencyType), delegate: delegate)
+            viewModels.append(viewModel)
+            reloadRow(.investing)
+        }
+    }
+    private var portfolio: DashboardPortfolio? {
+        didSet {
+            let viewModel = DashboardPortfolioChartTableViewCellViewModel(data: DashboardPortfolioData(portfolio), delegate: delegate)
+            viewModels.append(viewModel)
+            reloadRow(.portfolio)
+        }
+    }
+    private var assets: DashboardAssets? {
+        didSet {
+            let viewModel = DashboardAssetsChartTableViewCellViewModel(data: DashboardAssetsData(assets, currency: currencyType), delegate: delegate)
+            viewModels.append(viewModel)
+            reloadRow(.assets)
+        }
+    }
+    private var recommendations: CommonPublicAssetsViewModel? {
+        didSet {
+            let viewModel = CellWithCollectionViewModel(DashboardRecommendationsViewModel(recommendations, delegate: delegate), delegate: delegate)
+            viewModels.append(viewModel)
+            reloadRow(.recommendations)
+        }
+    }
+    var header: ProfileHeaderViewModel? {
+        didSet {
+            delegate?.action(.dashboardNotifications, actionType: .updateNotificationsCount)
+        }
+    }
+    var currencyType: CurrencyType {
+        return getPlatformCurrencyType()
+    }
+    
+    var cellModelsForRegistration: [CellViewAnyModel.Type] {
+        return [DashboardOverviewTableViewCellViewModel.self,
+                DashboardTradingCellViewModel<TradingCollectionViewModel>.self,
+                DashboardInvestingCellViewModel<InvestingCollectionViewModel>.self,
+                DashboardPortfolioChartTableViewCellViewModel.self,
+                DashboardAssetsChartTableViewCellViewModel.self,
+                CellWithCollectionViewModel<DashboardRecommendationsViewModel>.self]
+    }
+    var router: DashboardRouter?
+    weak var delegate: BaseTableViewProtocol?
+    init(_ router: DashboardRouter?) {
+        self.delegate = router?.dashboardViewController
+        self.router = router
+    }
+    
+    private let errorCompletion: ((CompletionResult) -> Void) = { (result) in
+       print(result)
+    }
+    private func reloadRow(_ row: RowType) {
+        let reloadRow = rows.firstIndex(of: row) ?? 0
+        delegate?.didReload(IndexPath(row: reloadRow, section: 0))
+    }
+    
+    func getTotalValue() -> String {
+        if let total = overview?.total {
+            return total.toString() + " " + currencyType.rawValue
+        }
+        
+        return ""
+    }
+    
+    func fetch() {
+        viewModels = [CellViewAnyModel]()
+        
+        DashboardDataProvider.getSummary(currencyType, completion: { [weak self] (model) in
+            self?.overview = model
+        }, errorCompletion: errorCompletion)
+        DashboardDataProvider.getTrading(currencyType, eventsTake: 12, completion: { [weak self] (model) in
+            self?.tradingDetails = model
+        }, errorCompletion: errorCompletion)
+        DashboardDataProvider.getInvesting(currencyType, eventsTake: 12, completion: { [weak self] (model) in
+            self?.investingDetails = model
+        }, errorCompletion: errorCompletion)
+        DashboardDataProvider.getPortfolio(completion: { [weak self] (model) in
+            self?.portfolio = model
+        }, errorCompletion: errorCompletion)
+        DashboardDataProvider.getHoldings(4, completion: { [weak self] (model) in
+            self?.assets = model
+        }, errorCompletion: errorCompletion)
+        DashboardDataProvider.getRecommendations(currencyType, take: 5, completion: { [weak self] (model) in
+            self?.recommendations = model
+        }, errorCompletion: errorCompletion)
+        
+        ProfileDataProvider.getHeader(completion: { [weak self] (viewModel) in
+            self?.header = viewModel
+        }, errorCompletion: errorCompletion)
+        
+        delegate?.didReload()
+    }
+    
+    func model(for indexPath: IndexPath) -> CellViewAnyModel? {
+        let type = rows[indexPath.row]
+        switch type {
+        case .overview:
+            return viewModels.first{ $0 is DashboardOverviewTableViewCellViewModel }
+        case .trading:
+            return viewModels.first{ $0 is DashboardTradingCellViewModel<TradingCollectionViewModel> }
+        case .investing:
+            return viewModels.first{ $0 is DashboardInvestingCellViewModel<InvestingCollectionViewModel> }
+        case .portfolio:
+            return viewModels.first{ $0 is DashboardPortfolioChartTableViewCellViewModel }
+        case .assets:
+            return viewModels.first{ $0 is DashboardAssetsChartTableViewCellViewModel }
+        case .recommendations:
+            return viewModels.first{ $0 is CellWithCollectionViewModel<DashboardRecommendationsViewModel>}
+        }
+    }
+    
+    func modelsCount() -> Int {
+        return rows.count
+    }
+    
+    func showNotificationList() {
+        router?.showNotificationList()
+    }
+    
+    func didSelect(at indexPath: IndexPath) {
+        let type = rows[indexPath.row]
+        switch type {
+        case .trading:
+            delegate?.action(.dashboardTrading, actionType: .showAll)
+        case .investing:
+            delegate?.action(.dashboardInvesting, actionType: .showAll)
+        default:
+            break
+        }
+    }
+}

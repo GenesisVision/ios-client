@@ -223,7 +223,7 @@ final class ListViewModel: ListViewModelProtocol {
     
     func changeFavoriteProgram(value: Bool, assetId: String, request: Bool = false, completion: @escaping CompletionBlock) {
         guard request else {
-            guard let model = model(at: assetId) as? ProgramTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
+            guard let model = model(for: assetId) as? ProgramTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
             model.asset.personalDetails?.isFavorite = value
             completion(.success)
             return
@@ -233,7 +233,7 @@ final class ListViewModel: ListViewModelProtocol {
         ProgramsDataProvider.favorites(isFavorite: !value, assetId: assetId) { [weak self] (result) in
             switch result {
             case .success:
-                guard let model = self?.model(at: assetId) as? ProgramTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
+                guard let model = self?.model(for: assetId) as? ProgramTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
                 model.asset.personalDetails?.isFavorite = value
                 completion(.success)
             case .failure(let errorType):
@@ -245,7 +245,7 @@ final class ListViewModel: ListViewModelProtocol {
     
     func changeFavoriteFund(value: Bool, assetId: String, request: Bool = false, completion: @escaping CompletionBlock) {
         guard request else {
-            guard let model = model(at: assetId) as? FundTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
+            guard let model = model(for: assetId) as? FundTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
             model.asset.personalDetails?.isFavorite = value
             completion(.success)
             return
@@ -255,7 +255,7 @@ final class ListViewModel: ListViewModelProtocol {
         FundsDataProvider.favorites(isFavorite: !value, assetId: assetId) { [weak self] (result) in
             switch result {
             case .success:
-                guard let model = self?.model(at: assetId) as? FundTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
+                guard let model = self?.model(for: assetId) as? FundTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
                 model.asset.personalDetails?.isFavorite = value
                 completion(.success)
             case .failure(let errorType):
@@ -267,7 +267,7 @@ final class ListViewModel: ListViewModelProtocol {
     
     func changeFavoriteFollow(value: Bool, assetId: String, request: Bool = false, completion: @escaping CompletionBlock) {
         guard request else {
-            guard let model = model(at: assetId) as? FollowTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
+            guard let model = model(for: assetId) as? FollowTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
             model.asset.personalDetails?.isFavorite = value
             completion(.success)
             return
@@ -276,7 +276,7 @@ final class ListViewModel: ListViewModelProtocol {
         FollowsDataProvider.favorites(isFavorite: !value, assetId: assetId) { [weak self] (result) in
             switch result {
             case .success:
-                guard let model = self?.model(at: assetId) as? FollowTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
+                guard let model = self?.model(for: assetId) as? FollowTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
                 model.asset.personalDetails?.isFavorite = value
                 completion(.success)
             case .failure(let errorType):
@@ -372,15 +372,15 @@ final class ListViewModel: ListViewModelProtocol {
             
             switch self?.assetType {
             case .program:
-                if let model = self?.model(at: indexPath) as? ProgramTableViewCellViewModel, let name = model.asset.url {
+                if let model = self?.model(for: indexPath) as? ProgramTableViewCellViewModel, let name = model.asset.url {
                     url = getRoute(assetType, name: name)
                 }
             case .fund:
-                if let model = self?.model(at: indexPath) as? FundTableViewCellViewModel, let name = model.asset.url {
+                if let model = self?.model(for: indexPath) as? FundTableViewCellViewModel, let name = model.asset.url {
                     url = getRoute(assetType, name: name)
                 }
             case .follow:
-                if let model = self?.model(at: indexPath) as? FollowTableViewCellViewModel, let name = model.asset.url {
+                if let model = self?.model(for: indexPath) as? FollowTableViewCellViewModel, let name = model.asset.url {
                     url = getRoute(assetType, name: name)
                 }
             default:

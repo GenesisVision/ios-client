@@ -92,7 +92,7 @@ extension ManagerInfoViewModel {
 extension ManagerInfoViewModel {
     // MARK: - Public methods
     /// Get TableViewCellViewModel for IndexPath
-    func model(at indexPath: IndexPath) -> CellViewAnyModel? {
+    func model(for indexPath: IndexPath) -> CellViewAnyModel? {
         guard let publicProfile = publicProfile else {
             return nil
         }

@@ -13,6 +13,19 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
     // MARK: - Veriables
     var tableView: UITableView!
     var fetchMoreActivityIndicator: UIActivityIndicatorView!
+    var isEnableInfiniteIndicator: Bool = false {
+        didSet {
+            if isEnableInfiniteIndicator {
+                fetchMoreActivityIndicator = UIActivityIndicatorView(style: .gray)
+                fetchMoreActivityIndicator.frame = CGRect(x: 0, y: 0, width: 200, height: 60)
+                fetchMoreActivityIndicator.color = UIColor.primary
+                tableView.tableFooterView = fetchMoreActivityIndicator
+                fetchMoreActivityIndicator.startAnimating()
+            } else {
+                tableView.tableFooterView = UIView()
+            }
+        }
+    }
     var tableViewStyle: UITableView.Style = .plain
     
     // MARK: - Lifecycle
@@ -40,13 +53,7 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
     
     private func setupViews() {
         tableView.separatorStyle = .none
-        
-        fetchMoreActivityIndicator = UIActivityIndicatorView(style: .gray)
-        fetchMoreActivityIndicator.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 44)
-        fetchMoreActivityIndicator.color = UIColor.primary
-        fetchMoreActivityIndicator.startAnimating()
-        tableView.tableFooterView = fetchMoreActivityIndicator
-        
+        isEnableInfiniteIndicator = true
         tableView.emptyDataSetDelegate = self
         tableView.emptyDataSetSource = self
         
@@ -74,13 +81,9 @@ class BaseViewControllerWithTableView: BaseViewController, UIViewControllerWithT
     }
     
     func showInfiniteIndicator(value: Bool) {
-        guard value, fetchMoreActivityIndicator != nil else {
-            tableView.tableFooterView = UIView()
-            return
-        }
+        guard fetchMoreActivityIndicator != nil else { return }
         
-        fetchMoreActivityIndicator.startAnimating()
-        tableView.tableFooterView = fetchMoreActivityIndicator
+        value ? fetchMoreActivityIndicator.startAnimating() : fetchMoreActivityIndicator.stopAnimating()
     }
     
     func register3dTouch() {

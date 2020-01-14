@@ -24,16 +24,16 @@ final class ProgramInvestViewModel {
     var rate: Double = 0.0
     var levelsParamsInfo: LevelsParamsInfo?
     
-    private weak var detailProtocol: DetailProtocol?
+    private weak var reloadDataProtocol: ReloadDataProtocol?
     
     private var router: ProgramInvestRouter!
     
     // MARK: - Init
-    init(withRouter router: ProgramInvestRouter, assetId: String, programCurrency: CurrencyType, detailProtocol: DetailProtocol?) {
+    init(withRouter router: ProgramInvestRouter, assetId: String, programCurrency: CurrencyType, detailProtocol: ReloadDataProtocol?) {
         self.router = router
         self.assetId = assetId
         self.programCurrency = programCurrency
-        self.detailProtocol = detailProtocol
+        self.reloadDataProtocol = detailProtocol
         
         PlatformManager.shared.getLevelsParamsInfo { [weak self] (levelsParamsInfo) in
             self?.levelsParamsInfo = levelsParamsInfo
@@ -167,12 +167,12 @@ final class ProgramInvestViewModel {
     }
     
     func showInvestmentRequestedVC(investedAmount: Double) {
-        detailProtocol?.didReload()
+        reloadDataProtocol?.didReloadData()
         router.show(routeType: .investmentRequested(investedAmount: investedAmount))
     }
     
     func goToBack() {
-        detailProtocol?.didReload()
+        reloadDataProtocol?.didReloadData()
         router.goToBack()
     }
     

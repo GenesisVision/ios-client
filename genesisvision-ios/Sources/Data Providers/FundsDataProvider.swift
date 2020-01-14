@@ -80,24 +80,27 @@ class FundsDataProvider: DataProvider {
     }
     
     // MARK: - Charts
-    static func getProfitPercentCharts(with assetId: String, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: FundsAPI.Currency_getFundProfitPercentCharts? = nil, completion: @escaping (_ tradesChartViewModel: FundProfitPercentCharts?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        guard let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+    static func getProfitPercentCharts(with assetId: String, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currencyType: CurrencyType, currencies: [String], completion: @escaping (_ tradesChartViewModel: FundProfitPercentCharts?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
-        FundsAPI.getFundProfitPercentCharts(id: uuid, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency) { (viewModel, error) in
+        guard let currency = FundsAPI.Currency_getFundProfitPercentCharts(rawValue: currencyType.rawValue), let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        FundsAPI.getFundProfitPercentCharts(id: uuid, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency, currencies: currencies) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
     
-    static func getAbsoluteProfitChart(with assetId: String, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: FundsAPI.Currency_getFundAbsoluteProfitChart? = nil, completion: @escaping (_ tradesChartViewModel: AbsoluteProfitChart?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        guard let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+    static func getAbsoluteProfitChart(with assetId: String, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currencyType: CurrencyType, completion: @escaping (_ tradesChartViewModel: AbsoluteProfitChart?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        
+        guard let currency = FundsAPI.Currency_getFundAbsoluteProfitChart(rawValue: currencyType.rawValue), let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
         FundsAPI.getFundAbsoluteProfitChart(id: uuid, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
     
-    static func getBalanceChart(with assetId: String, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: FundsAPI.Currency_getFundBalanceChart? = nil, completion: @escaping (_ tradesChartViewModel: FundBalanceChart?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        guard let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+    static func getBalanceChart(with assetId: String, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currencyType: CurrencyType, completion: @escaping (_ tradesChartViewModel: FundBalanceChart?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        
+        guard let currency = FundsAPI.Currency_getFundBalanceChart(rawValue: currencyType.rawValue), let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
         FundsAPI.getFundBalanceChart(id: uuid, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)

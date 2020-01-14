@@ -137,16 +137,20 @@ class ProgramsDataProvider: DataProvider {
         }
     }
     
-    static func getTrades(with assetId: String?, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: ProgramsAPI.Sorting_getAssetTrades? = nil, accountId: UUID? = nil, accountCurrency: ProgramsAPI.AccountCurrency_getAssetTrades? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ tradesViewModel: TradesSignalViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getTrades(with assetId: String?, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: ProgramsAPI.Sorting_getAssetTrades? = nil, accountId: UUID? = nil, accountCurrencyType: CurrencyType? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ tradesViewModel: TradesSignalViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
         guard let assetId = assetId, let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
          
+        let accountCurrency = ProgramsAPI.AccountCurrency_getAssetTrades(rawValue: accountCurrencyType?.rawValue ?? "")
+            
         ProgramsAPI.getAssetTrades(id: uuid, dateFrom: dateFrom, dateTo: dateTo, symbol: symbol, sorting: sorting, accountId: accountId, accountCurrency: accountCurrency, skip: skip, take: take) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
     
-    static func exportTrades(with assetId: String?, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String?, sorting: ProgramsAPI.Sorting_exportProgramTrades?, accountId: UUID?, accountCurrency: ProgramsAPI.AccountCurrency_exportProgramTrades?, skip: Int? = nil, take: Int? = nil, completion: @escaping (Data?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func exportTrades(with assetId: String?, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String?, sorting: ProgramsAPI.Sorting_exportProgramTrades?, accountId: UUID?, accountCurrencyType: CurrencyType? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (Data?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        
+        let accountCurrency = ProgramsAPI.AccountCurrency_exportProgramTrades(rawValue: accountCurrencyType?.rawValue ?? "")
         
         guard let assetId = assetId, let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
@@ -205,24 +209,26 @@ class ProgramsDataProvider: DataProvider {
     
     
     // MARK: - Charts
-    static func getProfitPercentCharts(with assetId: String, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, completion: @escaping (_ data: ProgramProfitPercentCharts?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        guard let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+    static func getProfitPercentCharts(with assetId: String, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currencyType: CurrencyType, currencies: [String]?, completion: @escaping (_ data: ProgramProfitPercentCharts?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
-        ProgramsAPI.getProgramProfitPercentCharts(id: uuid, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount) { (viewModel, error) in
+        guard let currency = ProgramsAPI.Currency_getProgramProfitPercentCharts(rawValue: currencyType.rawValue), let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        ProgramsAPI.getProgramProfitPercentCharts(id: uuid, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency, currencies: currencies) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
-    static func getBalanceChart(with assetId: String, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, completion: @escaping (_ data: ProgramBalanceChart?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        guard let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+    static func getBalanceChart(with assetId: String, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currencyType: CurrencyType, completion: @escaping (_ data: ProgramBalanceChart?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
-        ProgramsAPI.getProgramBalanceChart(id: uuid, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount) { (viewModel, error) in
+        guard let currency = ProgramsAPI.Currency_getProgramBalanceChart(rawValue: currencyType.rawValue), let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        ProgramsAPI.getProgramBalanceChart(id: uuid, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
-    static func getAbsoluteProfitChart(with assetId: String, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, completion: @escaping (_ data: AbsoluteProfitChart?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        guard let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+    static func getAbsoluteProfitChart(with assetId: String, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currencyType: CurrencyType, completion: @escaping (_ data: AbsoluteProfitChart?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        guard let currency = ProgramsAPI.Currency_getProgramAbsoluteProfitChart(rawValue: currencyType.rawValue), let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        ProgramsAPI.getProgramAbsoluteProfitChart(id: uuid, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount) { (viewModel, error) in
+        ProgramsAPI.getProgramAbsoluteProfitChart(id: uuid, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }

@@ -42,12 +42,6 @@ extension ManagerViewController: ReloadDataProtocol {
         
     }
 }
-extension ManagerViewController: DetailProtocol {
-    func didReload() {
-        
-    }
-}
-
 final class ManagerViewModel: TabmanViewModel {
     enum TabType: String {
         case info = "Info"
@@ -55,7 +49,7 @@ final class ManagerViewModel: TabmanViewModel {
         case follows = "Follows"
         case funds = "Funds"
     }
-    var tabTypes: [TabType] = []
+    var tabTypes: [TabType] = [.info, .programs, .follows, .funds]
     var controllers = [TabType : UIViewController]()
     
     // MARK: - Variables
@@ -64,7 +58,6 @@ final class ManagerViewModel: TabmanViewModel {
     var publicProfile: PublicProfile? {
         didSet {
             guard let publicProfile = publicProfile else { return }
-            tabTypes = [.info, .programs, .follows, .funds]
             title = publicProfile.username ?? ""
         }
     }
@@ -75,13 +68,13 @@ final class ManagerViewModel: TabmanViewModel {
     init(withRouter router: Router, managerId: String? = nil) {
         super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0)
         
-        self.tabTypes.forEach({ controllers[$0] = getViewController($0) })
-        self.dataSource = PageboyDataSource(self)
-        
         self.managerId = managerId
         self.title = ""
         
         font = UIFont.getFont(.semibold, size: 16)
+        
+        self.tabTypes.forEach({ controllers[$0] = getViewController($0) })
+        self.dataSource = PageboyDataSource(self)
     }
     
     func getViewController(_ type: TabType) -> UIViewController? {
