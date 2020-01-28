@@ -52,7 +52,6 @@ class AssetsViewController: BaseTabmanViewController<AssetsTabmanViewModel> {
         let searchViewModel = SearchTabmanViewModel(withRouter: router)
         searchViewModel.filterModel.mask = ""
         searchViewController.viewModel = searchViewModel
-        
         searchNavController = BaseNavigationController(rootViewController: searchViewController)
         present(searchNavController!, animated: true, completion: nil)
     }

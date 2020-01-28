@@ -36,7 +36,7 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uoi-7R-Wln">
                                             <rect key="frame" x="0.0" y="5" width="40" height="40"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="40" id="G6X-MG-GuJ"/>
+                                                <constraint firstAttribute="height" constant="40" id="O9l-7f-VuE"/>
                                                 <constraint firstAttribute="width" secondItem="uoi-7R-Wln" secondAttribute="height" multiplier="1:1" id="kE0-Wq-mLV"/>
                                             </constraints>
                                         </imageView>
@@ -57,7 +57,7 @@
                                         <constraint firstItem="uoi-7R-Wln" firstAttribute="centerY" secondItem="czN-Vf-G8C" secondAttribute="centerY" id="zmy-na-kx1"/>
                                     </constraints>
                                     <connections>
-                                        <outlet property="imageHeightConstraint" destination="G6X-MG-GuJ" id="sqo-xL-SgD"/>
+                                        <outlet property="imageWidthConstraint" destination="O9l-7f-VuE" id="ku3-rV-ReF"/>
                                         <outlet property="levelButton" destination="E7N-ej-5DM" id="rhF-Mo-CHZ"/>
                                         <outlet property="profilePhotoImageView" destination="uoi-7R-Wln" id="Edj-6j-s0K"/>
                                     </connections>
@@ -68,7 +68,7 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="X6d-mz-O5d">
                                             <rect key="frame" x="0.0" y="0.0" width="66.5" height="16.5"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UserName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H7j-OK-aQd" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UserName" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H7j-OK-aQd" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="66.5" height="16.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="14"/>

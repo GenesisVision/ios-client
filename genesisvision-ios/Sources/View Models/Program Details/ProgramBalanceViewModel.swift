@@ -8,9 +8,8 @@
 
 import UIKit.UITableView
 
-final class ProgramBalanceViewModel: ViewModelWithListProtocol {
+final class ProgramBalanceViewModel: ViewModelWithListProtocol, ViewModelWithFilter {
     var canPullToRefresh: Bool = true
-    
     var viewModels: [CellViewAnyModel] = []
     
     enum SectionType {
@@ -52,15 +51,6 @@ final class ProgramBalanceViewModel: ViewModelWithListProtocol {
         self.reloadDataProtocol = reloadDataProtocol
         self.chartViewProtocol = router.currentController as? ChartViewProtocol
     }
-    
-    // MARK: - Public methods
-    func selectProgramBalanceChartElement(_ date: Date) {
-        //FIXME:
-//        if let result = programBalanceChart?.chart?.first(where: { $0.date == date }) {
-//            print("selectProgramBalanceChartElement")
-//            print(result)
-//        }
-    }
 }
 
 // MARK: - TableView
@@ -88,7 +78,7 @@ extension ProgramBalanceViewModel {
     }
     
     /// Get TableViewCellViewModel for IndexPath
-    func model(for indexPath: IndexPath) -> ProgramBalanceChartTableViewCellViewModel? {
+    func model(for indexPath: IndexPath) -> CellViewAnyModel? {
         guard let programBalanceChart = programBalanceChart else { return nil }
         
         let programBalanceChartTableViewCellViewModel =  ProgramBalanceChartTableViewCellViewModel(programBalanceChart: programBalanceChart, chartViewProtocol: self.chartViewProtocol)
@@ -98,21 +88,16 @@ extension ProgramBalanceViewModel {
     
     // MARK: - Private methods
     private func fetch(_ completion: @escaping CompletionBlock) {
-        switch dataType {
-        case .api:
-            guard let assetId = assetId else { return completion(.failure(errorType: .apiError(message: nil))) }
+        guard let assetId = assetId else { return completion(.failure(errorType: .apiError(message: nil))) }
+        
+        ProgramsDataProvider.getBalanceChart(with: assetId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currencyType: getPlatformCurrencyType(), completion: { [weak self] (viewModel) in
+            guard viewModel != nil else {
+                return ErrorHandler.handleApiError(error: nil, completion: completion)
+            }
             
-            ProgramsDataProvider.getBalanceChart(with: assetId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currencyType: getPlatformCurrencyType(), completion: { [weak self] (viewModel) in
-                guard viewModel != nil else {
-                    return ErrorHandler.handleApiError(error: nil, completion: completion)
-                }
-                
-                self?.programBalanceChart = viewModel
-                self?.reloadDataProtocol?.didReloadData()
-                completion(.success)
-            }, errorCompletion: completion)
-        case .fake:
-            break
-        }
+            self?.programBalanceChart = viewModel
+            self?.reloadDataProtocol?.didReloadData()
+            completion(.success)
+        }, errorCompletion: completion)
     }
 }

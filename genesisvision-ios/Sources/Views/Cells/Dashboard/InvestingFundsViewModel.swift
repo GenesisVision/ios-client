@@ -31,9 +31,7 @@ class InvestingFundsViewModel: CellViewModelWithCollection {
         type = .investingFunds
         
         details?.items?.forEach({ (viewModel) in
-            let asset = AssetDetailData()
-            asset.fundInvesting = viewModel
-            viewModels.append(AssetCollectionViewCellViewModel(type: .fund, asset: asset, delegate: nil))
+            viewModels.append(AssetCollectionViewCellViewModel(type: .fund, asset: viewModel, delegate: nil))
         })
     }
     

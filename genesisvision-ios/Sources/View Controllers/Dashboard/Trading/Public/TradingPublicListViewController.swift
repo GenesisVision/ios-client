@@ -13,7 +13,6 @@ class TradingPublicListViewController: ListViewController {
     
     // MARK: - Variables
     var viewModel: ViewModel!
-    var dataSource: TableViewDataSource<ViewModel>!
     
     private var addNewBarButtonItem: UIBarButtonItem!
     
@@ -35,14 +34,12 @@ class TradingPublicListViewController: ListViewController {
         addNewBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_add_photo_icon"), style: .done, target: self, action: #selector(addNewButtonAction))
         navigationItem.rightBarButtonItems = [addNewBarButtonItem]
         
-//        viewModel = ViewModel(self, router: <#Router?#>)
         isEnableInfiniteIndicator = true
         tableView.configure(with: .defaultConfiguration)
 
-        dataSource = TableViewDataSource(viewModel)
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
-        tableView.delegate = dataSource
-        tableView.dataSource = dataSource
+        tableView.delegate = viewModel.dataSource
+        tableView.dataSource = viewModel.dataSource
         tableView.reloadData()
     }
     
@@ -54,36 +51,9 @@ class TradingPublicListViewController: ListViewController {
         present(nav, animated: true, completion: nil)
     }
     
-    func showAsset(_ asset: AssetCollectionViewCellViewModel) {
-        var assetId = ""
-        let type = asset.type
-        
-        switch type {
-        case .program:
-            if let program = asset.asset.program {
-                assetId = program.id?.uuidString ?? ""
-            } else if let tradingAsset = asset.asset.tradingAsset, tradingAsset.assetType == type {
-                assetId = tradingAsset.id?.uuidString ?? ""
-            }
-        case .fund:
-            if let fund = asset.asset.fund {
-                assetId = fund.id?.uuidString ?? ""
-            } else if let tradingAsset = asset.asset.tradingAsset, tradingAsset.assetType == type {
-                assetId = tradingAsset.id?.uuidString ?? ""
-            }
-        case .follow:
-            if let follow = asset.asset.follow {
-                assetId = follow.id?.uuidString ?? ""
-            } else if let tradingAsset = asset.asset.tradingAsset, tradingAsset.assetType == type {
-                assetId = tradingAsset.id?.uuidString ?? ""
-            }
-        case ._none:
-            break
-        }
-        
-        if !assetId.isEmpty {
-            viewModel.router?.showAssetDetails(with: assetId, assetType: type)
-        }
+    func showAsset(_ asset: TradingTableViewCellViewModel) {
+        guard let assetId = asset.asset.id?.uuidString, let type = asset.asset.assetType else { return }
+        viewModel.router?.showAssetDetails(with: assetId, assetType: type)
     }
 }
 
@@ -95,8 +65,20 @@ extension TradingPublicListViewController: BaseTableViewProtocol {
     func didSelect(_ type: CellActionType, cellViewModel: CellViewAnyModel?) {
         switch type {
         case .tradingPublicList:
-            if let cellViewModel = cellViewModel as? AssetCollectionViewCellViewModel {
+            if let cellViewModel = cellViewModel as? TradingTableViewCellViewModel {
                 showAsset(cellViewModel)
+            }
+        case .makeSignal:
+            if let cellViewModel = cellViewModel as? TradingTableViewCellViewModel {
+                makeSignal(cellViewModel.asset)
+            }
+        case .makeProgram:
+            if let cellViewModel = cellViewModel as? TradingTableViewCellViewModel {
+                makeProgram(cellViewModel.asset)
+            }
+        case .closePeriod:
+            if let cellViewModel = cellViewModel as? TradingTableViewCellViewModel {
+                closePeriod(cellViewModel.asset)
             }
         default:
             break
@@ -104,13 +86,55 @@ extension TradingPublicListViewController: BaseTableViewProtocol {
     }
 }
 
+// MARK: - Actions
+extension TradingPublicListViewController {
+    private func makeProgram(_ asset: DashboardTradingAsset) {
+        guard let vc = MakeProgramViewController.storyboardInstance(.dashboard) else { return }
+        vc.title = "Make program"
+        vc.viewModel.request.id = asset.id
+        let nav = BaseNavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true, completion: nil)
+    }
+    private func makeSignal(_ asset: DashboardTradingAsset) {
+        guard let vc = MakeSignalViewController.storyboardInstance(.dashboard) else { return }
+        vc.title = "Make signal"
+        vc.viewModel.request.id = asset.id
+        let nav = BaseNavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true, completion: nil)
+    }
+    private func changePassword(_ asset: DashboardTradingAsset) {
+        //TODO:
+    }
+    private func openSettings(_ asset: DashboardTradingAsset) {
+        //TODO:
+    }
+    private func closePeriod(_ asset: DashboardTradingAsset) {
+        guard let assetId = asset.id?.uuidString else { return }
+        let model = TradingAccountPwdUpdate(password: nil, twoFactorCode: nil)
+        showProgressHUD()
+        AssetsDataProvider.closeCurrentPeriod(assetId, model: model) { [weak self] (result) in
+            self?.hideHUD()
+            switch result {
+            case .success:
+                break
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
+            }
+        }
+    }
+}
+
 class TradingPublicListViewModel: ListViewModelWithPaging {
+    lazy var dataSource: TableViewDataSource = TableViewDataSource(self)
+    
     var viewModels = [CellViewAnyModel]()
     
     var canPullToRefresh: Bool = true
 
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [FundTableViewCellViewModel.self]
+        return [TradingTableViewCellViewModel.self]
     }
     
     var canFetchMoreResults: Bool = true
@@ -133,7 +157,7 @@ class TradingPublicListViewModel: ListViewModelWithPaging {
             skip = 0
         }
         var models = [TradingTableViewCellViewModel]()
-        DashboardDataProvider.getPublicTrading(currency: currency, status: .active, skip: skip, take: take(), completion: { [weak self] (model) in
+        DashboardDataProvider.getPublicTrading(currency: currency, status: .all, skip: skip, take: take(), completion: { [weak self] (model) in
             guard let model = model else { return }
             model.items?.forEach({ (asset) in
                 let viewModel = TradingTableViewCellViewModel(asset: asset, delegate: nil)
@@ -179,35 +203,35 @@ class TradingPublicListViewModel: ListViewModelWithPaging {
         }
         
         if let assetType = model.asset.assetType, assetType == .program {
-            let closePriod = UIAction(title: "Close period", image: nil) { [weak self] action in
-                //TODO: Make signal action
+            let closePeriod = UIAction(title: "Close period", image: nil) { [weak self] action in
+                self?.delegate?.didSelect(.closePeriod, cellViewModel: model)
             }
-            children.append(closePriod)
+            children.append(closePeriod)
         }
         
         if let canMakeProgramFromSignalProvider = actions.canMakeProgramFromSignalProvider, canMakeProgramFromSignalProvider {
             let makeProgram = UIAction(title: "Make program", image: nil) { [weak self] action in
-                //TODO: Make signal action
+                self?.delegate?.didSelect(.makeProgram, cellViewModel: model)
             }
             children.append(makeProgram)
         }
         
         if let canMakeSignalProviderFromProgram = actions.canMakeSignalProviderFromProgram, canMakeSignalProviderFromProgram {
             let makeSignal = UIAction(title: "Make a signal provider", image: nil) { [weak self] action in
-                //TODO: Make signal action
+                self?.delegate?.didSelect(.makeSignal, cellViewModel: model)
             }
             children.append(makeSignal)
         }
         
         if let canChangePassword = actions.canChangePassword, canChangePassword {
             let changePassword = UIAction(title: "Change password", image: nil) { [weak self] action in
-                //TODO: Make signal action
+                self?.delegate?.didSelect(.changePassword, cellViewModel: model)
             }
             children.append(changePassword)
         }
         
         let settings = UIAction(title: "Settings", image: nil) { [weak self] action in
-            //TODO: Make signal action
+            self?.delegate?.didSelect(.openSettings, cellViewModel: model)
         }
         children.append(settings)
         

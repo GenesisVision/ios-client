@@ -9,11 +9,8 @@
 import UIKit
 
 class BaseListViewController<ViewModel: ListViewModelWithPaging>: ListViewController {
-//    typealias ViewModel = InvestingProgramListViewModel
-    
     // MARK: - Variables
     var viewModel: ViewModel!
-    var dataSource: TableViewDataSource<ViewModel>!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -32,10 +29,9 @@ class BaseListViewController<ViewModel: ListViewModelWithPaging>: ListViewContro
     private func setup() {
         tableView.configure(with: .defaultConfiguration)
         isEnableInfiniteIndicator = true
-        dataSource = TableViewDataSource(viewModel)
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
-        tableView.delegate = dataSource
-        tableView.dataSource = dataSource
+        tableView.delegate = viewModel.dataSource
+        tableView.dataSource = viewModel.dataSource
         tableView.reloadData()
     }
     
@@ -49,7 +45,6 @@ class InvestingProgramListViewController: ListViewController {
     
     // MARK: - Variables
     var viewModel: ViewModel!
-    var dataSource: TableViewDataSource<ViewModel>!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -68,10 +63,9 @@ class InvestingProgramListViewController: ListViewController {
     private func setup() {
         tableView.configure(with: .defaultConfiguration)
         isEnableInfiniteIndicator = true
-        dataSource = TableViewDataSource(viewModel)
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
-        tableView.delegate = dataSource
-        tableView.dataSource = dataSource
+        tableView.delegate = viewModel.dataSource
+        tableView.dataSource = viewModel.dataSource
         tableView.reloadData()
     }
     
@@ -99,6 +93,7 @@ extension InvestingProgramListViewController: BaseTableViewProtocol {
 }
 
 class InvestingProgramListViewModel: ListViewModelWithPaging {
+    lazy var dataSource: TableViewDataSource = TableViewDataSource(self)
     var viewModels = [CellViewAnyModel]()
     
     var canPullToRefresh: Bool = true
@@ -125,7 +120,7 @@ class InvestingProgramListViewModel: ListViewModelWithPaging {
             skip = 0
         }
         var models = [ProgramInvestingTableViewCellViewModel]()
-        DashboardDataProvider.getInvestingPrograms(currency: currency, skip: skip, take: take(), completion: { [weak self] (model) in
+        DashboardDataProvider.getInvestingPrograms(currency: currency, status: .all, skip: skip, take: take(), completion: { [weak self] (model) in
             guard let model = model else { return }
             model.items?.forEach({ (asset) in
                 let viewModel = ProgramInvestingTableViewCellViewModel(asset: asset, delegate: nil)

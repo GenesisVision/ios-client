@@ -17,6 +17,14 @@ extension Float: JSONEncodable {
 
 extension Int: JSONEncodable {
     func encodeToJSON() -> Any { return self as Any }
+    
+    func getDays() -> String {
+        guard self > 1 else {
+            return "\(self) day"
+        }
+        
+        return "\(self) days"
+    }
 }
 
 extension Int32: JSONEncodable {
@@ -29,6 +37,14 @@ extension Int64: JSONEncodable {
 
 extension Double: JSONEncodable {
     func encodeToJSON() -> Any { return self as Any }
+    
+    func getDays() -> String {
+        guard self > 1 else {
+            return self.toString() + " day"
+        }
+        
+        return self.toString() + " days"
+    }
 }
 
 extension String: JSONEncodable {

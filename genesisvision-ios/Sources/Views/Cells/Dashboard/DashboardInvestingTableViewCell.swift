@@ -60,7 +60,7 @@ class InvestingCollectionViewModel: CellViewModelWithCollection {
     }
     
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [PortfolioEventCollectionViewCellViewModel.self]
+        return [EventCollectionViewCellViewModel.self]
     }
     
     weak var delegate: BaseTableViewProtocol?
@@ -71,7 +71,7 @@ class InvestingCollectionViewModel: CellViewModelWithCollection {
         self.type = .dashboardInvesting
         
         details?.events?.items?.forEach({ (viewModel) in
-            let viewModel = PortfolioEventCollectionViewCellViewModel(reloadDataProtocol: nil, event: viewModel)
+            let viewModel = EventCollectionViewCellViewModel(reloadDataProtocol: nil, event: viewModel)
             viewModels.append(viewModel)
         })
     }
@@ -98,9 +98,11 @@ extension InvestingCollectionViewModel {
     func getRightButtons() -> [UIButton] {
         let showAllButton = UIButton(type: .system)
         showAllButton.setTitle("details", for: .normal)
-        showAllButton.setImage(#imageLiteral(resourceName: "img_arrow_right_icon"), for: .normal)
-        showAllButton.imageEdgeInsets.left = 8.0
-        showAllButton.semanticContentAttribute = .forceRightToLeft
+        if #available(iOS 13.0, *) {
+            showAllButton.semanticContentAttribute = .forceRightToLeft
+            showAllButton.setImage(#imageLiteral(resourceName: "img_arrow_right_icon"), for: .normal)
+            showAllButton.imageEdgeInsets.left = 8.0
+        }
         showAllButton.tintColor = UIColor.primary
         showAllButton.addTarget(self, action: #selector(showAllButtonAction(_:)), for: .touchUpInside)
         return [showAllButton]

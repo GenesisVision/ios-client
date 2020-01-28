@@ -1,5 +1,5 @@
 //
-//  AllEventsViewController.swift
+//  EventsViewController.swift
 //  genesisvision-ios
 //
 //  Created by George on 16/10/2018.
@@ -13,7 +13,6 @@ class EventListViewController: ListViewController {
     
     // MARK: - Variables
     var viewModel: ViewModel!
-    var dataSource: TableViewDataSource<ViewModel>!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -35,10 +34,9 @@ class EventListViewController: ListViewController {
         isEnableInfiniteIndicator = true
         tableView.configure(with: .defaultConfiguration)
         
-        dataSource = TableViewDataSource(viewModel)
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
-        tableView.delegate = dataSource
-        tableView.dataSource = dataSource
+        tableView.delegate = viewModel.dataSource
+        tableView.dataSource = viewModel.dataSource
         tableView.reloadData()
     }
     
@@ -81,7 +79,7 @@ extension EventListViewController: BaseTableViewProtocol {
     func didSelect(_ type: CellActionType, cellViewModel: CellViewAnyModel?) {
         switch type {
         case .tradingEvents:
-            if let viewModel = cellViewModel as? PortfolioEventTableViewCellViewModel {
+            if let viewModel = cellViewModel as? EventTableViewCellViewModel {
                 self.showEvent(viewModel.event)
             }
         default:

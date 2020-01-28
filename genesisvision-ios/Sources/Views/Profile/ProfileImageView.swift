@@ -9,16 +9,16 @@
 import UIKit.UIView
 
 class ProfileImageView: UIView {
-    @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint! {
+    @IBOutlet weak var imageWidthConstraint: NSLayoutConstraint! {
         didSet {
-            imageHeightConstraint.constant = 40.0
+            imageWidthConstraint.constant = 40.0
         }
     }
     @IBOutlet weak var profilePhotoImageView: UIImageView! {
         didSet {
-            profilePhotoImageView.contentMode = .scaleAspectFill
             profilePhotoImageView.clipsToBounds = true
             profilePhotoImageView.image = UIImage.profilePlaceholder
+            profilePhotoImageView.contentMode = .scaleAspectFit
         }
     }
     

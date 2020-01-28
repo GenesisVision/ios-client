@@ -12,8 +12,8 @@ class AccountRouter: TabmanRouter {
     var accountInfoViewController: AccountInfoViewController?
     var accountBalanceViewController: BalanceViewController?
     var accountProfitViewController: ProfitViewController?
-    var tradeListViewController: ProgramTradesViewController? //FIXIT:
-    var openTradeListViewController: ProgramTradesViewController? //FIXIT:
+    var tradeListViewController: TradesViewController?
+    var openTradeListViewController: TradesViewController?
     
     // MARK: - Public methods
     func getInfo(with assetId: String) -> AccountInfoViewController? {
@@ -30,23 +30,21 @@ class AccountRouter: TabmanRouter {
         return viewController
     }
     
-    func getTrades(with assetId: String, currencyType: CurrencyType) -> AccountListViewController? {
-        return nil
-        //FIXIT:
-//        let viewController = AccountListViewController()
-//        let viewModel = AccountTradeListViewModel(self, assetId: assetId, isOpenTrades: false, currency: currencyType, delegate: viewController)
-//        viewController.viewModel = viewModel
-//        tradeListViewController = viewController
-//        return viewController
+    func getTrades(with assetId: String, currencyType: CurrencyType) -> TradesViewController? {
+
+        let viewController = TradesViewController()
+        let viewModel = AccountTradesViewModel(withRouter: self, assetId: assetId, reloadDataProtocol: viewController, currencyType: currencyType)
+        viewController.viewModel = viewModel
+        
+        return viewController
     }
     
-    func getTradesOpen(with assetId: String, currencyType: CurrencyType) -> AccountListViewController? {
-        return nil
-        //FIXIT:
-//        let viewController = AccountListViewController()
-//        let viewModel = AccountTradeListViewModel(self, assetId: assetId, isOpenTrades: true, currency: currencyType, delegate: viewController)
-//        viewController.viewModel = viewModel
-//        openTradeListViewController = viewController
-//        return viewController
+    func getTradesOpen(with assetId: String, currencyType: CurrencyType) -> TradesViewController? {
+
+        let viewController = TradesViewController()
+        let viewModel = AccountTradesViewModel(withRouter: self, assetId: assetId, reloadDataProtocol: viewController, isOpenTrades: true, currencyType: currencyType)
+        viewController.viewModel = viewModel
+        
+        return viewController
     }
 }

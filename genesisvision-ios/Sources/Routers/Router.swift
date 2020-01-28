@@ -407,7 +407,7 @@ extension Router {
         vc.viewModel = EventListViewModel(router ?? self, delegate: vc)
         vc.viewModel.assetId = assetId
         vc.viewModel.assetType = assetType
-        vc.title = "Events"
+        vc.title = "History"
         
         return vc
     }

@@ -21,18 +21,18 @@ class TradingEventsViewModel: CellViewModelWithCollection {
     }
     
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [PortfolioEventCollectionViewCellViewModel.self]
+        return [EventCollectionViewCellViewModel.self]
     }
     var details: DashboardTradingDetails?
     weak var delegate: BaseTableViewProtocol?
     init(_ details: DashboardTradingDetails?, delegate: BaseTableViewProtocol?) {
         self.details = details
         self.delegate = delegate
-        title = "Events"
+        title = "History"
         type = .tradingEvents
         
         details?.events?.items?.forEach({ (model) in
-            viewModels.append(PortfolioEventCollectionViewCellViewModel(reloadDataProtocol: nil, event: model))
+            viewModels.append(EventCollectionViewCellViewModel(reloadDataProtocol: nil, event: model))
         })
     }
     

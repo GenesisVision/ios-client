@@ -35,6 +35,17 @@ final class AccountInfoViewModel {
     public private(set) var accountDetailsFull: PrivateTradingAccountFull? {
         didSet {
             router.accountViewController.viewModel.accountDetailsFull = accountDetailsFull
+            router.accountViewController.didReloadData()
+            updateSections()
+        }
+    }
+    public private(set) var programDetailsFull: ProgramDetailsFull? {
+        didSet {
+            updateSections()
+        }
+    }
+    public private(set) var followDetailsFull: FollowDetailsFull? {
+        didSet {
             updateSections()
         }
     }
@@ -45,7 +56,11 @@ final class AccountInfoViewModel {
     
     /// Return view models for registration cell Nib files
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [DetailStatisticsTableViewCellViewModel.self]
+        return [DetailStatisticsTableViewCellViewModel.self,
+                ProgramYourInvestmentTableViewCellViewModel.self,
+                ProgramPeriodTableViewCellViewModel.self,
+                ProgramInfoTableViewCellViewModel.self,
+                FollowInfoTableViewCellViewModel.self]
     }
     
     // MARK: - Init
@@ -69,7 +84,7 @@ final class AccountInfoViewModel {
         case 0:
             return 0.0
         default:
-            return 30.0
+            return Constants.headerHeight
         }
     }
     
@@ -93,8 +108,9 @@ final class AccountInfoViewModel {
     
     func updateSections() {
         sections = [SectionType]()
-        guard let accountDetailsFull = accountDetailsFull else { return }
+        guard accountDetailsFull != nil else { return }
         sections.append(.account)
+        sections.append(.yourDeposit)
 
         reloadDataProtocol?.didReloadData()
     }
@@ -142,13 +158,15 @@ extension AccountInfoViewModel {
         let sectionType = sections[indexPath.section]
         switch sectionType {
         case .account:
-            break
+            return DetailStatisticsTableViewCellViewModel(details: accountDetailsFull)
         case .yourDeposit:
-            break
+            return ProgramYourInvestmentTableViewCellViewModel(details: accountDetailsFull, yourInvestmentProtocol: self)
         case .makeProgram:
-            break
+            guard let programDetailsFull = programDetailsFull else { return nil }
+            return ProgramInfoTableViewCellViewModel(asset: programDetailsFull, assetId: accountDetailsFull?.id?.uuidString, delegate: self)
         case .makeFollow:
-            break
+            guard let followDetailsFull = followDetailsFull else { return nil }
+            return FollowInfoTableViewCellViewModel(asset: followDetailsFull, assetId: accountDetailsFull?.id?.uuidString, delegate: self)
         case .subscriptionDetail:
             break
         }
@@ -162,51 +180,55 @@ extension AccountInfoViewModel {
             
             self?.accountDetailsFull = viewModel
             self?.updateSections()
-            self?.getSignalSubscription(completion)
-        }, errorCompletion: completion)
-    }
-    
-    func getSignalSubscription(_ completion: @escaping CompletionBlock) {
-        guard let assetId = assetId else { return }
-        FollowsDataProvider.getSubscriptions(with: assetId, onlyActive: true, completion: { [weak self] (viewModel) in
-            guard let viewModel = viewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
-            
-            if let signalSubscription = viewModel.items?.first {
-                self?.signalSubscription = signalSubscription
-                self?.updateSections()
-            }
-            
-            self?.getAccounts(completion)
-        }, errorCompletion: completion)
-    }
-    
-    func getAccounts(_ completion: @escaping CompletionBlock) {
-        guard let assetId = assetId else { return }
-        SignalDataProvider.attachAccounts(assetId: assetId, completion: { [weak self] (viewModel) in
-            guard let viewModel = viewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
-            
-            self?.tradingAccounts = viewModel
-            self?.updateSections()
             completion(.success)
         }, errorCompletion: completion)
     }
 }
-
-extension AccountInfoViewModel: ReloadDataProtocol {
-    func didReloadData() {
-        fetch { [weak self] (result) in
-            self?.reloadDataProtocol?.didReloadData()
+extension AccountInfoViewModel: TradingInfoViewProtocol {
+    func didTapManageAction(_ assetType: AssetType) {
+        switch assetType {
+        case .program:
+            makeProgram { [weak self] (id) in
+                self?.didReloadData()
+            }
+        case .follow:
+            makeFollow { [weak self] (id) in
+                self?.didReloadData()
+            }
+        default:
+            break
+        }
+    }
+    
+    func didTapMainAction(_ assetType: AssetType) {
+        switch assetType {
+        case .program:
+            makeProgram { [weak self] (id) in
+                self?.didReloadData()
+            }
+        case .follow:
+            makeFollow { [weak self] (id) in
+                self?.didReloadData()
+            }
+        default:
+            break
         }
     }
 }
-
-extension AccountInfoViewModel: YourDepositProtocol {
+extension AccountInfoViewModel: YourInvestmentProtocol {
     func didTapDepositButton() {
         deposit()
     }
     
     func didTapWithdrawButton() {
         withdraw()
+    }
+}
+extension AccountInfoViewModel: ReloadDataProtocol {
+    func didReloadData() {
+        fetch { [weak self] (result) in
+            self?.reloadDataProtocol?.didReloadData()
+        }
     }
 }
 
@@ -246,96 +268,5 @@ extension AccountInfoViewModel: InvestNowProtocol {
         }
         
 //        invest()
-    }
-}
-
-class OldDetailInfoViewModel: ViewModelWithListProtocol {
-    enum RowType {
-        case details
-        case creationDate
-        case leverage
-        case currency
-        case actions
-    }
-    
-    var title = "Info"
-    
-    private var rows: [RowType] = []
-    var viewModels = [CellViewAnyModel]()
-    
-    var canPullToRefresh: Bool = true
-    //Models
-    var assetId: String?
-    var dashboardTradingAsset: DashboardTradingAsset?
-    
-    var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [DefaultTableViewCellViewModel.self,
-                DetailTradingAccountTableViewCellViewModel.self,
-                TradingAccountActionsTableViewCellViewModel.self]
-    }
-    var router: Router?
-    weak var delegate: BaseTableViewProtocol?
-    init(_ router: Router?, delegate: BaseTableViewProtocol?, dashboardTradingAsset: DashboardTradingAsset?) {
-        self.delegate = delegate
-        self.router = router
-        self.assetId = dashboardTradingAsset?.id?.uuidString
-        self.dashboardTradingAsset = dashboardTradingAsset
-        
-        if let type = dashboardTradingAsset?.accountInfo?.type {
-            switch type {
-            case .externalTradingAccount:
-                rows = [.details, .creationDate]
-            case .tradingAccount:
-                rows = [.details, .creationDate, .leverage, .currency, .actions]
-            default:
-                break
-            }
-        }
-    }
-    
-    private let errorCompletion: ((CompletionResult) -> Void) = { (result) in
-       print(result)
-    }
-    private func reloadRow(_ row: RowType) {
-        let reloadRow = rows.firstIndex(of: row) ?? 0
-        delegate?.didReload(IndexPath(row: reloadRow, section: 0))
-    }
-    
-    func model(for indexPath: IndexPath) -> CellViewAnyModel? {
-        let type = rows[indexPath.row]
-        switch type {
-        case .details:
-            guard let dashboardTradingAsset = dashboardTradingAsset else { return nil }
-            return DetailTradingAccountTableViewCellViewModel(dashboardTradingAsset: dashboardTradingAsset)
-        case .creationDate:
-            guard let creationDate = dashboardTradingAsset?.accountInfo?.creationDate else { return nil }
-            return DefaultTableViewCellViewModel(title: "Creation date", subtitle: creationDate.dateAndTimeToString())
-        case .leverage:
-            guard let leverage = dashboardTradingAsset?.accountInfo?.leverage?.toString() else { return nil }
-            return DefaultTableViewCellViewModel(title: "Leverage", subtitle: "1:\(leverage)")
-        case .currency:
-            guard let currency = dashboardTradingAsset?.accountInfo?.currency?.rawValue else { return nil }
-            return DefaultTableViewCellViewModel(title: "Currency", subtitle: currency)
-        case .actions:
-            return TradingAccountActionsTableViewCellViewModel(delegate: self)
-        }
-    }
-    
-    func modelsCount() -> Int {
-        return rows.count
-    }
-    
-    func didSelect(at indexPath: IndexPath) {
-        
-    }
-}
-
-extension OldDetailInfoViewModel: TradingAccountActionsProtocol {
-    func didTapDepositButton() {
-        
-    }
-    
-    func didTapWithdrawButton() {
-        
     }
 }

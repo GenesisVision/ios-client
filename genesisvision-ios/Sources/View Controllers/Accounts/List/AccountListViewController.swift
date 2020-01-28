@@ -13,7 +13,6 @@ class AccountListViewController: ListViewController {
     
     // MARK: - Variables
     var viewModel: ViewModel!
-    var dataSource: TableViewDataSource<ViewModel>!
     
     private var addNewBarButtonItem: UIBarButtonItem!
     // MARK: - Lifecycle
@@ -24,20 +23,21 @@ class AccountListViewController: ListViewController {
         showProgressHUD()
         viewModel.fetch()
     }
+    
     override func pullToRefresh() {
         super.pullToRefresh()
         
         viewModel.refresh()
     }
+    
     // MARK: - Methods
     private func setup() {
         isEnableInfiniteIndicator = true
         tableView.configure(with: .defaultConfiguration)
 
-        dataSource = TableViewDataSource(viewModel)
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
-        tableView.delegate = dataSource
-        tableView.dataSource = dataSource
+        tableView.delegate = viewModel.dataSource
+        tableView.dataSource = viewModel.dataSource
         tableView.reloadData()
     }
 }
@@ -52,7 +52,9 @@ extension AccountListViewController: BaseTableViewProtocol {
 }
 
 class AccountTradeListViewModel: ListViewModelWithPaging {
-    typealias CellViewModel = ProgramTradesTableViewCellViewModel
+    lazy var dataSource: TableViewDataSource = TableViewDataSource(self)
+    
+    typealias CellViewModel = TradesTableViewCellViewModel
     
     var viewModels = [CellViewAnyModel]()
     
@@ -105,16 +107,16 @@ class AccountTradeListViewModel: ListViewModelWithPaging {
             AccountsDataProvider.getTradesOpen(with: assetId, sorting: sorting as? TradingaccountAPI.Sorting_getOpenTrades, symbol: nil, accountId: nil, currency: currency, skip: skip, take: take(), completion: { [weak self] (tradesViewModel) in
                 guard let tradesViewModel = tradesViewModel, let total = tradesViewModel.total else { return }
                 tradesViewModel.items?.forEach({ (model) in
-                    let viewModel = CellViewModel(orderModel: model, orderSignalModel: nil, currencyType: currency)
+                    let viewModel = CellViewModel(orderModel: model, currencyType: currency)
                     models.append(viewModel)
                 })
                 self?.updateViewModels(models, refresh: refresh, total: total)
             }, errorCompletion: errorCompletion)
         } else {
-            AccountsDataProvider.getTrades(from: assetId, dateFrom: dateFrom, dateTo: dateTo, symbol: nil, sorting: sorting as? TradingaccountAPI.Sorting_getTrades, accountId: nil, currency: currency, skip: skip, take: take(), completion: { [weak self] (tradesViewModel) in
+            AccountsDataProvider.getTrades(with: assetId, dateFrom: dateFrom, dateTo: dateTo, symbol: nil, sorting: sorting as? TradingaccountAPI.Sorting_getTrades, accountId: nil, currency: currency, skip: skip, take: take(), completion: { [weak self] (tradesViewModel) in
                 guard let tradesViewModel = tradesViewModel, let total = tradesViewModel.total else { return }
                 tradesViewModel.items?.forEach({ (model) in
-                    let viewModel = CellViewModel(orderModel: nil, orderSignalModel: model, currencyType: currency)
+                    let viewModel = CellViewModel(orderModel: model, currencyType: currency)
                     models.append(viewModel)
                 })
                 self?.updateViewModels(models, refresh: refresh, total: total)

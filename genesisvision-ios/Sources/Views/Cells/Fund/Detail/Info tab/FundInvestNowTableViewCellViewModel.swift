@@ -23,7 +23,7 @@ extension FundInvestNowTableViewCellViewModel: CellViewModel {
         
         cell.investNowProtocol = investNowProtocol
         
-        cell.titleLabel.text = "Invest Now"
+        cell.titleLabel.text = "Invest now"
         cell.investButton.setTitle("Invest", for: .normal)
         
          if let entryFee = fundDetailsFull?.entryFeeCurrent {

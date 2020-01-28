@@ -440,6 +440,7 @@ extension ListViewModel {
         
         fetch({ [weak self] (totalCount, viewModels) in
             self?.updateFetchedData(totalCount: totalCount, viewModels)
+            completion(.success)
             }, completionError: completion)
     }
     
@@ -472,7 +473,6 @@ extension ListViewModel {
                 })
                 
                 completionSuccess(totalCount, viewModels)
-                completionError(.success)
                 }, errorCompletion: completionError)
         case .fund:
             FundsDataProvider.get(filterModel, skip: skip, take: take, completion: { [weak self] (assetList) in
@@ -488,7 +488,6 @@ extension ListViewModel {
                 })
                 
                 completionSuccess(totalCount, viewModels)
-                completionError(.success)
                 }, errorCompletion: completionError)
         case .follow:
             FollowsDataProvider.get(filterModel, skip: skip, take: take, completion: { [weak self] (assetList) in
@@ -504,7 +503,6 @@ extension ListViewModel {
                 })
                 
                 completionSuccess(totalCount, viewModels)
-                completionError(.success)
                 }, errorCompletion: completionError)
         default:
             break

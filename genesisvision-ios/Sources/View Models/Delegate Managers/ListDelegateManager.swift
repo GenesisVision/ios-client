@@ -45,6 +45,14 @@ class ListDelegateManager<T: ListViewModelProtocol>: NSObject, UITableViewDelega
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         delegate?.delegateManagerTableView(tableView, willDisplay: cell, forRowAt: indexPath)
+
+        let transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        cell.transform = transform
+        cell.alpha = 0.0
+        UIView.animate(withDuration: 0.3) {
+            cell.transform = .identity
+            cell.alpha = 1.0
+        }
     }
     
     func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {

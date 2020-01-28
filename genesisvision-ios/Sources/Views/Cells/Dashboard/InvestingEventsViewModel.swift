@@ -23,7 +23,7 @@ class InvestingEventsViewModel: CellViewModelWithCollection {
     }
     
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [PortfolioEventCollectionViewCellViewModel.self]
+        return [EventCollectionViewCellViewModel.self]
     }
     
     var details: DashboardInvestingDetails?
@@ -31,11 +31,11 @@ class InvestingEventsViewModel: CellViewModelWithCollection {
     init(_ details: DashboardInvestingDetails?, delegate: BaseTableViewProtocol?) {
         self.details = details
         self.delegate = delegate
-        title = "Events"
+        title = "History"
         type = .investingEvents
         
         details?.events?.items?.forEach({ (model) in
-            viewModels.append(PortfolioEventCollectionViewCellViewModel(reloadDataProtocol: nil, event: model))
+            viewModels.append(EventCollectionViewCellViewModel(reloadDataProtocol: nil, event: model))
         })
     }
     

@@ -1,5 +1,5 @@
 //
-//  ProgramTradesTableViewCell.swift
+//  TradesTableViewCell.swift
 //  genesisvision-ios
 //
 //  Created by George on 11/04/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProgramTradesTableViewCell: UITableViewCell {
+class TradesTableViewCell: UITableViewCell {
 
     // MARK: - Labels
     @IBOutlet weak var entryImageView: UIImageView! {

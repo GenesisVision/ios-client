@@ -30,7 +30,7 @@ extension ProgramInvestNowTableViewCellViewModel: CellViewModel {
         
         cell.investNowProtocol = investNowProtocol
         
-        cell.titleLabel.text = "Invest Now"
+        cell.titleLabel.text = "Invest now"
         cell.investButton.setTitle("Invest", for: .normal)
         
         cell.entryFeeTitleLabel.text = "entry fee"

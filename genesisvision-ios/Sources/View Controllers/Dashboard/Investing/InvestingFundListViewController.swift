@@ -13,7 +13,6 @@ class InvestingFundListViewController: ListViewController {
     
     // MARK: - Variables
     var viewModel: ViewModel!
-    var dataSource: TableViewDataSource<ViewModel>!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -32,10 +31,9 @@ class InvestingFundListViewController: ListViewController {
     private func setup() {
         tableView.configure(with: .defaultConfiguration)
         isEnableInfiniteIndicator = true
-        dataSource = TableViewDataSource(viewModel)
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
-        tableView.delegate = dataSource
-        tableView.dataSource = dataSource
+        tableView.delegate = viewModel.dataSource
+        tableView.dataSource = viewModel.dataSource
         tableView.reloadData()
     }
     
@@ -63,6 +61,8 @@ extension InvestingFundListViewController: BaseTableViewProtocol {
 }
 
 class InvestingFundListViewModel: ListViewModelWithPaging {
+    lazy var dataSource: TableViewDataSource = TableViewDataSource(self)
+    
     var viewModels = [CellViewAnyModel]()
     
     var canPullToRefresh: Bool = true
@@ -89,7 +89,7 @@ class InvestingFundListViewModel: ListViewModelWithPaging {
             skip = 0
         }
         var models = [FundInvestingTableViewCellViewModel]()
-        DashboardDataProvider.getInvestingFunds(currency: currency, skip: skip, take: take(), completion: { [weak self] (model) in
+        DashboardDataProvider.getInvestingFunds(currency: currency, status: .all, skip: skip, take: take(), completion: { [weak self] (model) in
             guard let model = model else { return }
             model.items?.forEach({ (asset) in
                 let viewModel = FundInvestingTableViewCellViewModel(asset: asset, delegate: nil)
@@ -115,7 +115,5 @@ class InvestingFundListViewModel: ListViewModelWithPaging {
     func showInfiniteIndicator(_ value: Bool) {
         delegate?.didShowInfiniteIndicator(value)
     }
-    
-    
 }
 

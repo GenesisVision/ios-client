@@ -1,21 +1,19 @@
 //
-//  PortfolioEventCollectionViewCellViewModel.swift
+//  PortfolioEventTableViewCellViewModel.swift
 //  genesisvision-ios
 //
-//  Created by George on 20/09/2018.
+//  Created by George on 10/10/2018.
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
-import Foundation
-import Kingfisher
+import UIKit.UIColor
 
-struct PortfolioEventCollectionViewCellViewModel {
-    weak var reloadDataProtocol: ReloadDataProtocol?
+struct EventTableViewCellViewModel {
     let event: InvestmentEventViewModel
 }
 
-extension PortfolioEventCollectionViewCellViewModel: CellViewModel {
-    func setup(on cell: PortfolioEventCollectionViewCell) {
+extension EventTableViewCellViewModel: CellViewModel {
+    func setup(on cell: EventTableViewCell) {
         cell.iconImageView.image = UIImage.eventPlaceholder
         if let fileName = event.icon, let fileUrl = getFileURL(fileName: fileName) {
             cell.typeImageView.kf.indicatorType = .activity
@@ -48,33 +46,28 @@ extension PortfolioEventCollectionViewCellViewModel: CellViewModel {
             let amount = extendedInfo.amount,
             let currency = extendedInfo.currency,
             let currencyType = CurrencyType(rawValue: currency.rawValue) {
-            cell.balanceStackView.isHidden = false
-            
-            cell.balanceValueLabel.text = amount.rounded(with: currencyType).toString() + " \(currencyType.rawValue)"
-            
-            cell.balanceValueLabel.textColor = UIColor.Cell.title
-        } else if let amount = event.amount,
-            let currency = event.currency,
-            let currencyType = CurrencyType(rawValue: currency.rawValue),
-            let changeState = event.changeState {
-            cell.balanceStackView.isHidden = false
-            
-            cell.balanceValueLabel.text = amount.rounded(with: currencyType).toString() + " \(currencyType.rawValue)"
-            
+            let text = amount.rounded(with: currencyType).toString() + " \(currencyType.rawValue)"
+            cell.amountLabel.text = text
+            cell.amountLabel.textColor = UIColor.Cell.title
+            cell.amountLabel.isHidden = false
+        } else if let amount = event.amount, let currency = event.currency, let currencyType = CurrencyType(rawValue: currency.rawValue), let changeState = event.changeState {
+            let text = amount.rounded(with: currencyType).toString() + " \(currencyType.rawValue)"
+            cell.amountLabel.text = text
+            cell.amountLabel.isHidden = false
             switch changeState {
             case .increased:
-                cell.balanceValueLabel.textColor = UIColor.Cell.greenTitle
+                cell.amountLabel.textColor = UIColor.Cell.greenTitle
             case .decreased:
-                cell.balanceValueLabel.textColor = UIColor.Cell.redTitle
+                cell.amountLabel.textColor = UIColor.Cell.redTitle
             default:
-                cell.balanceValueLabel.textColor = UIColor.Cell.title
+                cell.amountLabel.textColor = UIColor.Cell.title
             }
         } else {
-            cell.balanceStackView.isHidden = true
+            cell.amountLabel.isHidden = true
         }
         
         if let date = event.date {
-            cell.dateLabel.text = date.dateAndTimeFormatString
+            cell.dateLabel.text = date.onlyTimeFormatString
         }
     }
 }

@@ -47,4 +47,24 @@ class DetailStatisticsTableViewCell: UITableViewCell {
         accessoryView?.backgroundColor = UIColor.BaseView.bg
         selectionStyle = .none
     }
+    
+    func addToStackView(_ stackView: UIStackView, value: String, header: String) {
+        stackView.isHidden = false
+        
+        let sibtitleLabel = SubtitleLabel()
+        sibtitleLabel.text = header
+        sibtitleLabel.textAlignment = .left
+        
+        let titleLabel = TitleLabel()
+        titleLabel.text = value
+        titleLabel.textAlignment = .left
+        
+        let vStack = UIStackView(arrangedSubviews: [titleLabel, sibtitleLabel])
+        vStack.axis = .vertical
+        vStack.spacing = 8.0
+        vStack.alignment = .leading
+        vStack.distribution = .fillProportionally
+
+        stackView.addArrangedSubview(vStack)
+    }
 }

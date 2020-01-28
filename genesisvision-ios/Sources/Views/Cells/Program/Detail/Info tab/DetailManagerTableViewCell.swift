@@ -48,7 +48,11 @@ class DetailManagerTableViewCell: UITableViewCell {
 class DetailTradingAccountTableViewCell: UITableViewCell {
 
     // MARK: - Outlets
-    @IBOutlet weak var logoImageView: UIImageView!
+    @IBOutlet weak var logoImageView: UIImageView! {
+        didSet {
+            logoImageView.contentMode = .scaleAspectFit
+        }
+    }
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: SubtitleLabel!
     

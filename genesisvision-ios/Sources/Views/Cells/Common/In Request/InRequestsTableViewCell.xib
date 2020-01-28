@@ -17,7 +17,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="377" height="122"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ws0-OK-Hjv">
+                    <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ws0-OK-Hjv">
                         <rect key="frame" x="0.0" y="0.0" width="377" height="122"/>
                         <color key="backgroundColor" red="0.92156862745098034" green="0.23137254901960785" blue="0.3529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>

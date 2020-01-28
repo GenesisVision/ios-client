@@ -23,7 +23,7 @@ class WalletListViewController: BaseViewControllerWithTableView {
     // MARK: - Buttons
     @IBOutlet weak var transferButton: ActionButton! {
         didSet {
-            transferButton.isHidden = true
+            transferButton.isHidden = false
         }
     }
     

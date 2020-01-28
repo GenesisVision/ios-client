@@ -63,11 +63,7 @@ extension FundAssetsViewModel {
     func numberOfRows(in section: Int) -> Int {
         return modelsCount()
     }
-    
-    func isMetaTrader5() -> Bool {
-        return true
-    }
-    
+
     func rowHeight(for row: Int) -> CGFloat {
         return 50.0
     }

@@ -8,7 +8,7 @@
 
 import UIKit.UITableView
 
-final class ProgramProfitViewModel: ViewModelWithListProtocol {
+final class ProgramProfitViewModel: ViewModelWithListProtocol, ViewModelWithFilter {
     var canPullToRefresh: Bool = true
     
     var viewModels: [CellViewAnyModel] = []
@@ -115,20 +115,15 @@ extension ProgramProfitViewModel {
     
     // MARK: - Private methods
     private func fetch(_ completion: @escaping CompletionBlock) {
-        switch dataType {
-        case .api:
-            guard let assetId = assetId else { return completion(.failure(errorType: .apiError(message: nil))) }
-            ProgramsDataProvider.getProfitPercentCharts(with: assetId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currencyType: getPlatformCurrencyType(), currencies: [selectedPlatformCurrency], completion: { [weak self] (viewModel) in
-                guard viewModel != nil else {
-                    return ErrorHandler.handleApiError(error: nil, completion: completion)
-                }
-                
-                self?.programProfitChart = viewModel
-                self?.reloadDataProtocol?.didReloadData()
-                completion(.success)
-                }, errorCompletion: completion)
-        case .fake:
-            break
-        }
+        guard let assetId = assetId else { return completion(.failure(errorType: .apiError(message: nil))) }
+        ProgramsDataProvider.getProfitPercentCharts(with: assetId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currencyType: getPlatformCurrencyType(), currencies: [selectedPlatformCurrency], completion: { [weak self] (viewModel) in
+            guard viewModel != nil else {
+                return ErrorHandler.handleApiError(error: nil, completion: completion)
+            }
+            
+            self?.programProfitChart = viewModel
+            self?.reloadDataProtocol?.didReloadData()
+            completion(.success)
+            }, errorCompletion: completion)
     }
 }

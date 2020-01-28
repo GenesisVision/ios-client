@@ -12,7 +12,7 @@ final class ProgramDetailFullChartViewModel {
     // MARK: - Variables
     var router: ProgramRouter!
     var programDetailsFull: ProgramFollowDetailsFull?
-    var chartDurationType: ChartDurationType = .month
+    var chartDurationType: ChartDurationType = .all
     
     // MARK: - Init
     init(withRouter router: ProgramRouter, programDetailsFull: ProgramFollowDetailsFull) {

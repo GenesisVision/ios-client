@@ -89,7 +89,8 @@ class AttachStackView: ActionStackView {
         exchangeTitle.text = "Exchange"
         exchangeView.titleLabel.text = "Exhange"
         exchangeView.textLabel.text = viewModel.getExchange()
-        exchangeView.selectButton.isEnabled = viewModel.isEnableExchangeSelector()
+        exchangeView.selectButton.isHidden = !viewModel.isEnableExchangeSelector()
+        exchangeView.textLabel.textColor = viewModel.isEnableExchangeSelector() ? UIColor.Cell.title : UIColor.Cell.subtitle
         
         apiTitle.text = "API"
         apiKeyView.titleLabel.text = "Api key"
@@ -194,15 +195,18 @@ class CreateAccountStackView: ActionStackView {
         
         accountTypeView.titleLabel.text = "Exhange"
         accountTypeView.textLabel.text = viewModel.getAccountType()
-        accountTypeView.selectButton.isEnabled = viewModel.isEnableAccountTypeSelector()
+        accountTypeView.selectButton.isHidden = !viewModel.isEnableAccountTypeSelector()
+        accountTypeView.textLabel.textColor = viewModel.isEnableAccountTypeSelector() ? UIColor.Cell.title : UIColor.Cell.subtitle
         
         currencyView.titleLabel.text = "Currency"
         currencyView.textLabel.text = viewModel.getCurrency()
-        currencyView.selectButton.isEnabled = viewModel.isEnableCurrencySelector()
+        currencyView.selectButton.isHidden = !viewModel.isEnableCurrencySelector()
+        currencyView.textLabel.textColor = viewModel.isEnableCurrencySelector() ? UIColor.Cell.title : UIColor.Cell.subtitle
         
         leverageView.titleLabel.text = "Broker's leverage"
         leverageView.textLabel.text = viewModel.getLeverage()
-        leverageView.selectButton.isEnabled = viewModel.isEnableLeverageSelector()
+        leverageView.selectButton.isHidden = !viewModel.isEnableLeverageSelector()
+        leverageView.textLabel.textColor = viewModel.isEnableLeverageSelector() ? UIColor.Cell.title : UIColor.Cell.subtitle
         
         depositTitle.text = "Deposit details"
         
@@ -214,6 +218,8 @@ class CreateAccountStackView: ActionStackView {
         
         amountView.titleLabel.text = "Enter correct amount"
         amountView.textField.text = ""
+        amountView.approxLabel.text = ""
+        amountView.currencyLabel.text = viewModel.getSelectedWalletCurrency()
         amountView.subtitleLabel.text = "min. deposit"
         amountView.subtitleValueLabel.text = viewModel.getMinDeposit()
     }
@@ -283,6 +289,8 @@ class CreateFundStackView: ActionStackView {
         
         amountView.titleLabel.text = "Enter correct amount"
         amountView.textField.text = ""
+        amountView.approxLabel.text = ""
+        amountView.currencyLabel.text = viewModel.getSelectedWalletCurrency()
         amountView.subtitleLabel.text = "min. deposit"
         amountView.subtitleValueLabel.text = viewModel.getMinDeposit()
     }
@@ -354,11 +362,13 @@ class MakeProgramStackView: ActionStackView {
         
         periodView.titleLabel.text = "Period"
         periodView.textLabel.text = viewModel.getPeriods()
-        periodView.selectButton.isEnabled = viewModel.isEnablePeriodsSelector()
+        periodView.selectButton.isHidden = !viewModel.isEnablePeriodsSelector()
+        periodView.textLabel.textColor = viewModel.isEnablePeriodsSelector() ? UIColor.Cell.title : UIColor.Cell.subtitle
         
         tradesDelayView.titleLabel.text = "Trades delay"
         tradesDelayView.textLabel.text = viewModel.getTrades()
-        tradesDelayView.selectButton.isEnabled = viewModel.isEnableTradesSelector()
+        tradesDelayView.selectButton.isHidden = !viewModel.isEnableTradesSelector()
+        tradesDelayView.textLabel.textColor = viewModel.isEnableTradesSelector() ? UIColor.Cell.title : UIColor.Cell.subtitle
         
         feesSettingsTitle.text = "Fees settings"
         entryFeeView.titleLabel.text = "Entry fee"
@@ -457,6 +467,13 @@ class TextFieldStackView: BaseStackView {
             currencyLabel.textColor = UIColor.Cell.subtitle
             currencyLabel.font = UIFont.getFont(.semibold, size: 12)
             currencyLabel.text = "%"
+        }
+    }
+    @IBOutlet weak var approxLabel: TitleLabel! {
+        didSet {
+            approxLabel.textColor = UIColor.Cell.subtitle
+            approxLabel.font = UIFont.getFont(.semibold, size: 12)
+            approxLabel.textAlignment = .left
         }
     }
     @IBOutlet weak var maxButton: UIButton! {

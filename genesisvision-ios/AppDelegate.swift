@@ -35,8 +35,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        guard let passcodeViewController = passcodeViewController, topViewController() == passcodeViewController else { return }
-        
+        guard let passcodeViewController = passcodeViewController else { return }
+
         if let resignActiveTime = resignActiveTime, Date().timeIntervalSince(resignActiveTime) < Security.timeInterval {
             passcodeViewController.dismiss(animated: true, completion: nil)
             self.resignActiveTime = nil
@@ -46,10 +46,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
-        if (topViewController() as? PasscodeViewController) != nil {
-            return
-        }
-        
         if UserDefaults.standard.bool(forKey: UserDefaultKeys.passcodeEnable) {
             resignActiveTime = Date()
             showPasscodeVC()
@@ -60,26 +56,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 // MARK: - Setup
 extension AppDelegate {
     private func showPasscodeVC() {
-        if (topViewController() as? PasscodeViewController) != nil {
-            return
-        }
-        
+        guard let vc = topViewController() else { return }
+        if vc is PasscodeViewController { return }
+
         if UserDefaults.standard.bool(forKey: UserDefaultKeys.passcodeEnable) {
-            let window = UIApplication.shared.windows[0]
-            if let viewController = PasscodeViewController.storyboardInstance(.settings), let vc = window.rootViewController {
+            if let viewController = PasscodeViewController.storyboardInstance(.settings) {
                 let router = Router(parentRouter: nil)
                 viewController.viewModel = PasscodeViewModel(withRouter: router)
-                
+
                 viewController.delegate = self
                 viewController.passcodeState = .openApp
                 viewController.modalTransitionStyle = .crossDissolve
-                viewController.modalPresentationStyle = .overCurrentContext
+                viewController.modalPresentationStyle = .overFullScreen
                 passcodeViewController = viewController
                 vc.present(viewController, animated: true, completion: nil)
             }
         }
     }
-    
+
     private func setup(_ application: UIApplication) {
         FirebaseApp.configure()
         SwaggerClientAPI.basePath = ApiKeys.basePath
@@ -94,7 +88,7 @@ extension AppDelegate {
         showPasscodeVC()
         setupNotifications(application)
     }
-    
+
     //Push Notifications
     private func setupNotifications(_ application: UIApplication) {
         Messaging.messaging().delegate = self
@@ -103,7 +97,7 @@ extension AppDelegate {
             UNUserNotificationCenter.current().delegate = self
             
             let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-            UNUserNotificationCenter.current().requestAuthorization(options: authOptions, completionHandler: {_, _ in })
+            UNUserNotificationCenter.current().requestAuthorization(options: authOptions, completionHandler: { _, _ in })
         } else {
             let settings: UIUserNotificationSettings =
                 UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
@@ -111,7 +105,7 @@ extension AppDelegate {
         }
         application.registerForRemoteNotifications()
     }
-    
+
     private func setupFirstScreen() {
         window = UIWindow(frame: UIScreen.main.bounds)
 
@@ -119,21 +113,30 @@ extension AppDelegate {
         window?.rootViewController = welcomeViewController
         window?.makeKeyAndVisible()
     }
-    
+
     private func topViewController() -> UIViewController? {
-        if let topController = UIApplication.shared.keyWindow?.rootViewController {
-            while let presentedViewController = topController.presentedViewController {
-                return presentedViewController
-            }
+        let window = UIApplication.shared.windows[0]
+        
+        guard let vc = window.rootViewController else {
+            return nil
+        }
+    
+        if let nav = vc.presentedViewController as? UINavigationController {
+            return nav
+        }
+        if let nav = vc.presentedViewController?.presentedViewController as? UINavigationController {
+            return nav
         }
         
-        return nil
+        return vc
     }
 }
 
 extension AppDelegate: PasscodeProtocol {
     func passcodeAction(_ action: PasscodeActionType) {
         switch action {
+        case .closed:
+            passcodeViewController = nil
         default:
             resignActiveTime = nil
         }

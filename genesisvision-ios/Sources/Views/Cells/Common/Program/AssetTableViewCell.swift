@@ -527,7 +527,9 @@ extension AssetContentView {
             assetLogoImageView.profilePhotoImageView.backgroundColor = UIColor.hexColor(color)
         }
         
-        if let title = asset.accountInfo?.title {
+        if let title = asset.publicInfo?.title {
+            titleLabel.text = title
+        } else if let title = asset.accountInfo?.title {
             titleLabel.text = title
         }
         
@@ -542,6 +544,7 @@ extension AssetContentView {
             if let level = asset.publicInfo?.programDetails?.level {
                 assetLogoImageView.levelButton.setTitle(level.toString(), for: .normal)
             }
+            
             assetLogoImageView.profilePhotoImageView.image = UIImage.programPlaceholder
             if let logo = asset.publicInfo?.logo, let fileUrl = getFileURL(fileName: logo) {
                 assetLogoImageView.profilePhotoImageView.kf.indicatorType = .activity
@@ -596,11 +599,11 @@ extension AssetContentView {
             }
             
             if let logo = asset.broker?.logo, let fileUrl = getFileURL(fileName: logo) {
-                assetLogoImageView.imageHeightConstraint.constant = 60.0
                 assetLogoImageView.profilePhotoImageView.contentMode = .scaleAspectFit
                 assetLogoImageView.profilePhotoImageView.kf.indicatorType = .activity
                 assetLogoImageView.profilePhotoImageView.kf.setImage(with: fileUrl)
                 assetLogoImageView.profilePhotoImageView.backgroundColor = .clear
+                assetLogoImageView.imageWidthConstraint.constant = 60.0
             }
         default:
             break
@@ -620,13 +623,12 @@ extension AssetContentView {
         if let leverage = asset.accountInfo?.leverage {
             secondValueLabel.text = "1:" + leverage.toString()
         } else {
-            secondValueLabel.text = ""
+            secondValueLabel.text = "0"
         }
 
         thirdTitleLabel.text = "Age"
         if let creationDate = asset.accountInfo?.creationDate {
-            let date = Date()
-            let duration = date.daysSinceDate(fromDate: creationDate)
+            let duration = Date().daysSinceDate(fromDate: creationDate)
             thirdValueLabel.text = duration
         } else {
             thirdValueLabel.text = ""

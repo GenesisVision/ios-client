@@ -32,9 +32,7 @@ class InvestingProgramsViewModel: CellViewModelWithCollection {
         type = .investingPrograms
         
         details?.items?.forEach({ (viewModel) in
-            let asset = AssetDetailData()
-            asset.programInvesting = viewModel
-            viewModels.append(AssetCollectionViewCellViewModel(type: .program, asset: asset, delegate: nil))
+            viewModels.append(AssetCollectionViewCellViewModel(type: .program, asset: viewModel, delegate: nil))
         })
     }
     

@@ -38,7 +38,7 @@ class ChartView: CombinedChartView {
     
     private var chartType: ChartType = .detail
     
-    private var dateRangeType: DateRangeType = .month
+    private var dateRangeType: DateRangeType = .all
     private var dateFrom: Date?
     private var dateTo: Date?
     
@@ -477,7 +477,7 @@ class ChartView: CombinedChartView {
             return 5
         case .year:
             return 6
-        case .allTime:
+        case .all:
             return 6
         case .custom:
             return 6

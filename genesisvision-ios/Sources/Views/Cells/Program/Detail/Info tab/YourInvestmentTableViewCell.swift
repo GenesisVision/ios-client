@@ -13,11 +13,7 @@ class YourInvestmentTableViewCell: UITableViewCell {
     weak var yourInvestmentProtocol: YourInvestmentProtocol?
 
     // MARK: - Outlets
-    @IBOutlet weak var titleLabel: TitleLabel! {
-        didSet {
-            titleLabel.font = UIFont.getFont(.semibold, size: 18.0)
-        }
-    }
+    @IBOutlet weak var titleLabel: LargeTitleLabel!
     
     @IBOutlet weak var statusButton: StatusButton!
     
@@ -34,6 +30,11 @@ class YourInvestmentTableViewCell: UITableViewCell {
         didSet {
             withdrawButton.configure(with: .darkClear)
             withdrawButton.setEnabled(AuthManager.isLogin())
+        }
+    }
+    @IBOutlet weak var depositButton: ActionButton! {
+        didSet {
+            depositButton.isHidden = true
         }
     }
     
@@ -74,6 +75,10 @@ class YourInvestmentTableViewCell: UITableViewCell {
     // MARK: - Actions
     @IBAction func withdrawButtonAction(_ sender: UIButton) {
         yourInvestmentProtocol?.didTapWithdrawButton()
+    }
+    
+    @IBAction func depositButtonAction(_ sender: UIButton) {
+        yourInvestmentProtocol?.didTapDepositButton()
     }
     
     @IBAction func reinvestSwitchAction(_ sender: UISwitch) {

@@ -1,5 +1,5 @@
 //
-//  PortfolioEventCollectionViewCell.swift
+//  EventCollectionViewCell.swift
 //  genesisvision-ios
 //
 //  Created by George on 21/08/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PortfolioEventCollectionViewCell: BaseCollectionViewCell {
+class EventCollectionViewCell: BaseCollectionViewCell {
 
     // MARK: - Outlets
     @IBOutlet weak var iconImageView: UIImageView! {

@@ -13,7 +13,6 @@ class TradingEventListViewController: ListViewController {
     
     // MARK: - Variables
     var viewModel: ViewModel!
-    var dataSource: TableViewDataSource<ViewModel>!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -35,10 +34,9 @@ class TradingEventListViewController: ListViewController {
         isEnableInfiniteIndicator = true
         tableView.configure(with: .defaultConfiguration)
         
-        dataSource = TableViewDataSource(viewModel)
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
-        tableView.delegate = dataSource
-        tableView.dataSource = dataSource
+        tableView.delegate = viewModel.dataSource
+        tableView.dataSource = viewModel.dataSource
         tableView.reloadData()
     }
     
@@ -82,7 +80,7 @@ extension TradingEventListViewController: BaseTableViewProtocol {
     func didSelect(_ type: CellActionType, cellViewModel: CellViewAnyModel?) {
         switch type {
         case .tradingEvents:
-            if let viewModel = cellViewModel as? PortfolioEventTableViewCellViewModel {
+            if let viewModel = cellViewModel as? EventTableViewCellViewModel {
                 self.showEvent(viewModel.event)
             }
         default:
@@ -95,12 +93,13 @@ extension TradingEventListViewController: BaseTableViewProtocol {
 }
 
 class TradingEventListViewModel: ListViewModelWithPaging {
+    lazy var dataSource: TableViewDataSource = TableViewDataSource(self)
     var viewModels = [CellViewAnyModel]()
-    var title = "Events"
+    var title = "History"
     var canPullToRefresh: Bool = true
 
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [PortfolioEventTableViewCellViewModel.self]
+        return [EventTableViewCellViewModel.self]
     }
     var from: Date?
     var to: Date?
@@ -125,11 +124,11 @@ class TradingEventListViewModel: ListViewModelWithPaging {
         if refresh {
             skip = 0
         }
-        var models = [PortfolioEventTableViewCellViewModel]()
+        var models = [EventTableViewCellViewModel]()
         EventsDataProvider.get(eventLocation: .dashboard, from: from, to: to, eventType: .all, assetType: .all, eventGroup: .tradingHistory, skip: skip, take: take(), completion: { [weak self] (model) in
             guard let model = model else { return }
             model.events?.forEach({ (event) in
-                let viewModel = PortfolioEventTableViewCellViewModel(event: event)
+                let viewModel = EventTableViewCellViewModel(event: event)
                 models.append(viewModel)
             })
             self?.updateViewModels(models, refresh: refresh, total: model.total)
@@ -152,6 +151,4 @@ class TradingEventListViewModel: ListViewModelWithPaging {
     func showInfiniteIndicator(_ value: Bool) {
         delegate?.didShowInfiniteIndicator(value)
     }
-    
-    
 }

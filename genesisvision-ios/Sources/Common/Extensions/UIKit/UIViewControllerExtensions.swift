@@ -186,7 +186,6 @@ extension UIViewController {
                          cancelTitle: String?,
                          cancelHandler: (() -> Void)?) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
-        alert.view.tintColor = UIColor.Cell.title
         
         if let actionTitle = firstActionTitle {
             let action = UIAlertAction(title: actionTitle, style: .default) { (UIAlertAction) in

@@ -63,6 +63,10 @@ extension CellViewModelWithCollection {
         return 150.0
     }
 }
+protocol ViewModelWithFilter {
+    var dateFrom: Date? { get set }
+    var dateTo: Date? { get set }
+}
 
 // MARK: - ListViewModelProtocol
 protocol ViewModelWithListProtocol {
@@ -82,6 +86,14 @@ protocol ViewModelWithListProtocol {
     func numberOfRows(in section: Int) -> Int
     func headerTitle(for section: Int) -> String?
     func headerHeight(for section: Int) -> CGFloat
+    func headerView(_ tableView: UITableView, for section: Int) -> UIView?
+    
+    //CollectionView
+    func itemsCountPercent() -> CGFloat
+    func insetForSection(for section: Int) -> UIEdgeInsets?
+    func sizeForItem(at indexPath: IndexPath) -> CGSize?
+    func minimumLineSpacing(for section: Int) -> CGFloat?
+    func minimumInteritemSpacing(for section: Int) -> CGFloat?
     
     func didSelect(at indexPath: IndexPath)
     func cellAnimations() -> Bool
@@ -142,8 +154,32 @@ extension ViewModelWithListProtocol {
         return 0.0
     }
     
+    func headerView(_ tableView: UITableView, for section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = UIColor.Cell.headerBg
+        return view
+    }
+    
     func didSelect(at indexPath: IndexPath) {
         
+    }
+    
+    
+    //Collection View
+    func itemsCountPercent() -> CGFloat {
+        return 0.75
+    }
+    func insetForSection(for section: Int) -> UIEdgeInsets? {
+        return nil
+    }
+    func sizeForItem(at indexPath: IndexPath) -> CGSize? {
+        return nil
+    }
+    func minimumLineSpacing(for section: Int) -> CGFloat? {
+        return nil
+    }
+    func minimumInteritemSpacing(for section: Int) -> CGFloat? {
+        return nil
     }
     
     @available(iOS 13.0, *)
@@ -153,6 +189,7 @@ extension ViewModelWithListProtocol {
 }
 
 protocol ListViewModelWithPaging: ViewModelWithListProtocol {
+    var dataSource: TableViewDataSource { get }
     var canFetchMoreResults: Bool { get set }
     var skip: Int { get set }
     var totalCount: Int { get }
@@ -178,8 +215,17 @@ extension ListViewModelWithPaging {
     func refresh() {
         fetch(true)
     }
+    
+    
 }
 
+extension ListViewModelWithPaging {
+    func showInfiniteIndicator(_ value: Bool) {
+    }
+    
+    func fetch(_ refresh: Bool) {
+    }
+}
 extension ListViewModelWithPaging where Self: ListViewController {
     func showInfiniteIndicator(_ value: Bool) {
         guard fetchMoreActivityIndicator != nil else { return }

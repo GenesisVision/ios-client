@@ -13,7 +13,6 @@ class TradingPrivateListViewController: ListViewController {
     
     // MARK: - Variables
     var viewModel: ViewModel!
-    var dataSource: TableViewDataSource<ViewModel>!
     
     private var addNewBarButtonItem: UIBarButtonItem!
     // MARK: - Lifecycle
@@ -37,10 +36,9 @@ class TradingPrivateListViewController: ListViewController {
         isEnableInfiniteIndicator = true
         tableView.configure(with: .defaultConfiguration)
 
-        dataSource = TableViewDataSource(viewModel)
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
-        tableView.delegate = dataSource
-        tableView.dataSource = dataSource
+        tableView.delegate = viewModel.dataSource
+        tableView.dataSource = viewModel.dataSource
         tableView.reloadData()
     }
     
@@ -53,7 +51,7 @@ class TradingPrivateListViewController: ListViewController {
     }
     private func attachAccount() {
         guard let vc = AttachAccountViewController.storyboardInstance(.dashboard) else { return }
-        vc.title = "Attach account"
+        vc.title = "Attach external account"
         let nav = BaseNavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true, completion: nil)
@@ -73,7 +71,6 @@ class TradingPrivateListViewController: ListViewController {
         present(nav, animated: true, completion: nil)
     }
     
-    
     @objc private func addNewButtonAction() {
         showActionSheet(with: nil,
                         message: nil,
@@ -81,17 +78,9 @@ class TradingPrivateListViewController: ListViewController {
                         firstHandler: { [weak self] in
                             self?.createAccount()
             },
-                        secondActionTitle: "Attach account",
+                        secondActionTitle: "Attach external account",
                         secondHandler: { [weak self] in
                             self?.attachAccount()
-            },
-                        thirdActionTitle: "Make program",
-                        thirdHandler: { [weak self] in
-                            self?.makeProgram()
-            },
-                        fourthActionTitle: "Make signal",
-                        fourthHandler: { [weak self] in
-                            self?.makeSignal()
             },
                         cancelTitle: "Cancel",
                         cancelHandler: nil)
@@ -101,6 +90,7 @@ class TradingPrivateListViewController: ListViewController {
         if let router = viewModel.router, let assetId = tradingAsset.id?.uuidString {
             let viewController = AccountViewController()
             let accountRouter = AccountRouter(parentRouter: router)
+            accountRouter.accountViewController = viewController
             viewController.viewModel = AccountTabmanViewModel(withRouter: accountRouter, assetId: assetId)
             navigationController?.pushViewController(viewController, animated: true)
        }
@@ -124,6 +114,7 @@ extension TradingPrivateListViewController: BaseTableViewProtocol {
 }
 
 class TradingPrivateListViewModel: ListViewModelWithPaging {
+    lazy var dataSource: TableViewDataSource = TableViewDataSource(self)
     var viewModels = [CellViewAnyModel]()
     
     var canPullToRefresh: Bool = true
@@ -153,7 +144,7 @@ class TradingPrivateListViewModel: ListViewModelWithPaging {
             skip = 0
         }
         var models = [TradingTableViewCellViewModel]()
-        DashboardDataProvider.getPrivateTrading(currency: currency, status: .active, skip: skip, take: take(), completion: { [weak self] (model) in
+        DashboardDataProvider.getPrivateTrading(currency: currency, status: .all, skip: skip, take: take(), completion: { [weak self] (model) in
             guard let model = model else { return }
             model.items?.forEach({ (asset) in
                 let viewModel = TradingTableViewCellViewModel(asset: asset, delegate: nil)
@@ -200,21 +191,21 @@ class TradingPrivateListViewModel: ListViewModelWithPaging {
         
         if let canMakeProgramFromPrivateTradingAccount = actions.canMakeProgramFromPrivateTradingAccount, canMakeProgramFromPrivateTradingAccount {
             let makeProgram = UIAction(title: "Make program", image: nil) { [weak self] action in
-                //TODO: Make signal action
+                self?.delegate?.didSelect(.makeProgram, cellViewModel: model)
             }
             children.append(makeProgram)
         }
         
         if let canMakeSignalProviderFromPrivateTradingAccount = actions.canMakeSignalProviderFromPrivateTradingAccount, canMakeSignalProviderFromPrivateTradingAccount {
             let makeSignal = UIAction(title: "Make signal", image: nil) { [weak self] action in
-                //TODO: Make signal action
+                self?.delegate?.didSelect(.makeSignal, cellViewModel: model)
             }
             children.append(makeSignal)
         }
         
         if let canChangePassword = actions.canChangePassword, canChangePassword {
             let changePassword = UIAction(title: "Change password", image: nil) { [weak self] action in
-                //TODO: Make signal action
+                self?.delegate?.didSelect(.changePassword, cellViewModel: model)
             }
             children.append(changePassword)
         }

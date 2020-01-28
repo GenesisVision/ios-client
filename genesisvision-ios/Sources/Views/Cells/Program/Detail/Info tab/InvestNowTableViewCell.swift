@@ -15,11 +15,7 @@ protocol InvestNowProtocol: class {
 
 class InvestNowTableViewCell: UITableViewCell {
     // MARK: - Outlets
-    @IBOutlet weak var titleLabel: TitleLabel! {
-        didSet {
-            titleLabel.font = UIFont.getFont(.semibold, size: 18.0)
-        }
-    }
+    @IBOutlet weak var titleLabel: LargeTitleLabel!
     
     @IBOutlet weak var investStackView: UIStackView!
     @IBOutlet weak var investValueLabel: TitleLabel!

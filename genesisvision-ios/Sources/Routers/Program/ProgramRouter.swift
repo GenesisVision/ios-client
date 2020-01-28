@@ -31,18 +31,18 @@ class ProgramRouter: TabmanRouter {
         return viewController
     }
     
-    func getTrades(with assetId: String, currencyType: CurrencyType) -> ProgramTradesViewController? {
+    func getTrades(with assetId: String, currencyType: CurrencyType) -> TradesViewController? {
 
-        let viewController = ProgramTradesViewController()
+        let viewController = TradesViewController()
         let viewModel = ProgramTradesViewModel(withRouter: self, assetId: assetId, reloadDataProtocol: viewController, currencyType: currencyType)
         viewController.viewModel = viewModel
         
         return viewController
     }
     
-    func getTradesOpen(with assetId: String, currencyType: CurrencyType) -> ProgramTradesViewController? {
+    func getTradesOpen(with assetId: String, currencyType: CurrencyType) -> TradesViewController? {
 
-        let viewController = ProgramTradesViewController()
+        let viewController = TradesViewController()
         let viewModel = ProgramTradesViewModel(withRouter: self, assetId: assetId, reloadDataProtocol: viewController, isOpenTrades: true, currencyType: currencyType)
         viewController.viewModel = viewModel
         

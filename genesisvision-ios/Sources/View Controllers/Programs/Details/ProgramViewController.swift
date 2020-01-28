@@ -104,7 +104,7 @@ final class ProgramViewModel: TabmanViewModel {
         case trades = "Trades"
         case openPosition = "Open position"
         case periodHistory = "Period history"
-        case events = "Events"
+        case events = "My history"
     }
     var tabTypes: [TabType] = []
     var controllers = [TabType : UIViewController]()
@@ -179,8 +179,6 @@ final class ProgramViewModel: TabmanViewModel {
             return router.getTradesOpen(with: assetId, currencyType: currency)
         case .events:
             return router.getEvents(with: assetId)
-        default:
-            return nil
         }
     }
 }

@@ -127,7 +127,7 @@ extension AttachAccountViewController: BaseTableViewProtocol {
 class AttachAccountViewModel {
     // MARK: - Variables
     var exchangeListViewModel: ExchangeListViewModel!
-    var exchangeListDataSource: TableViewDataSource<ExchangeListViewModel>!
+    var exchangeListDataSource: TableViewDataSource!
     
     var brokersInfo: BrokersInfo? {
         didSet {

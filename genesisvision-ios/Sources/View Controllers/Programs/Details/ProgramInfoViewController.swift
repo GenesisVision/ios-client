@@ -164,7 +164,7 @@ extension ProgramInfoViewController: ReloadDataProtocol {
 
 extension ProgramInfoViewController: InRequestsDelegateManagerProtocol {
     func didSelectRequest(at indexPath: IndexPath) {
-        
+        //FIXIT:
     }
     
     func didCanceledRequest(completionResult: CompletionResult) {
@@ -193,7 +193,7 @@ extension ProgramInfoViewController: ProgramHeaderProtocol {
         let aboutLevelView = AboutLevelView.viewFromNib()
         aboutLevelView.delegate = self
         
-        if let programDetails = viewModel.programDetailsFull, let currency = programDetails.tradingAccountInfo?.currency, let selectedCurrency = CurrencyType(rawValue: currency.rawValue) {
+        if let programDetails = viewModel.programFollowDetailsFull, let currency = programDetails.tradingAccountInfo?.currency, let selectedCurrency = CurrencyType(rawValue: currency.rawValue) {
             aboutLevelView.configure(programDetails.programDetails?.level, currency: selectedCurrency)
         }
         

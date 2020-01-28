@@ -68,11 +68,18 @@ class CreateAccountViewController: BaseModalViewController {
         present(vc, animated: true, completion: nil)
     }
     @objc func checkActionButton() {
-        //FIXME: compare with aprox amount in USD
-        guard let amountText = stackView.amountView.textField.text, !amountText.isEmpty else { return
+        guard let amountText = stackView.amountView.textField.text, !amountText.isEmpty, let value = amountText.doubleValue else {
+            stackView.amountView.approxLabel.text = ""
+            stackView.actionButton.setEnabled(false)
+            return
+        }
+        
+        stackView.amountView.approxLabel.text = viewModel.getApproxString(value)
+        
+        guard let minDeposit = viewModel.getMinDepositValue(), let exchangedValue = viewModel.exchangeValueInCurrency(value), exchangedValue >= minDeposit else { return
             stackView.actionButton.setEnabled(false)
         }
-    
+        
         stackView.actionButton.setEnabled(true)
     }
     // MARK: - Actions
@@ -240,16 +247,16 @@ extension CreateAccountViewController: BaseTableViewProtocol {
 class CreateAccountViewModel {
     // MARK: - Variables
     var accountTypeListViewModel: AccountTypeListViewModel!
-    var accountTypeListDataSource: TableViewDataSource<AccountTypeListViewModel>!
+    var accountTypeListDataSource: TableViewDataSource!
     
     var currencyListViewModel: CurrencyListViewModel!
-    var currencyListDataSource: TableViewDataSource<CurrencyListViewModel>!
+    var currencyListDataSource: TableViewDataSource!
     
     var leverageListViewModel: LeverageListViewModel!
-    var leverageListDataSource: TableViewDataSource<LeverageListViewModel>!
+    var leverageListDataSource: TableViewDataSource!
     
     var fromListViewModel: FromListViewModel!
-    var fromListDataSource: TableViewDataSource<FromListViewModel>!
+    var fromListDataSource: TableViewDataSource!
     
     var brokerCollectionViewModel: BrokerCollectionViewModel!
     var brokerCollectionDataSource: CollectionViewDataSource<BrokerCollectionViewModel>!
@@ -269,7 +276,7 @@ class CreateAccountViewModel {
                 let currencies = accountType?.currencies
                 currencyListViewModel = CurrencyListViewModel(delegate, items: currencies ?? [], selectedIndex: 0)
                 currencyListDataSource = TableViewDataSource(currencyListViewModel)
-                
+                updateRates()
                 updateWalletFrom()
                 
                 let leverages = accountType?.leverages
@@ -279,7 +286,7 @@ class CreateAccountViewModel {
         }
     }
     
-    var rateModel: RateModel?
+    var ratesModel: RatesModel?
     var walletSummary: WalletSummary? {
         didSet {
             if let wallets = walletSummary?.wallets, !wallets.isEmpty {
@@ -318,7 +325,13 @@ class CreateAccountViewModel {
             self?.minAmounts = model
         }
     }
-    
+    func updateRates() {
+        RateDataProvider.getRates(from: [currencyListViewModel.selected() ?? ""], to: [Currency.gvt.rawValue, Currency.btc.rawValue, Currency.eth.rawValue, Currency.usdt.rawValue], completion: { [weak self] (ratesModel) in
+            self?.ratesModel = ratesModel
+        }) { (result) in
+            
+        }
+    }
     func createAccount(completion: @escaping CompletionBlock) {
         AssetsDataProvider.createTradingAccount(request, completion: { [weak self] (model) in
             self?.createResultModel = model
@@ -352,7 +365,7 @@ class CreateAccountViewModel {
 
         currencyListViewModel = CurrencyListViewModel(delegate, items: accountType.currencies ?? [], selectedIndex: 0)
         currencyListDataSource = TableViewDataSource(currencyListViewModel)
-        
+        updateRates()
         updateWalletFrom()
         
         leverageListViewModel = LeverageListViewModel(delegate, items: accountType.leverages ?? [], selectedIndex: 0)
@@ -363,6 +376,7 @@ class CreateAccountViewModel {
         if let currency = currencyListViewModel.selected() {
             request.currency = Currency(rawValue: currency)
         }
+        updateRates()
     }
     func updateLeverage(_ index: Int) {
         leverageListViewModel.selectedIndex = index
@@ -384,6 +398,11 @@ class CreateAccountViewModel {
         guard let fromListViewModel = fromListViewModel, let selected = fromListViewModel.selected(), let title = selected.title, let currency = selected.currency?.rawValue else { return "" }
         
         return "\(currency) | \(title)"
+    }
+    func getSelectedWalletCurrency() -> String {
+        guard let currency = fromListViewModel.selected()?.currency?.rawValue else { return "" }
+        
+        return currency
     }
     func getAvailable() -> String {
         guard let selected = fromListViewModel?.selected(), let currency = selected.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency), let available = fromListViewModel?.selected()?.available else { return "" }
@@ -412,6 +431,40 @@ class CreateAccountViewModel {
     func isEnableCurrencySelector() -> Bool {
         guard let count = currencyListViewModel?.items.count else { return false }
         return count > 1
+    }
+    func getRate() -> Double? {
+        guard let rates = ratesModel?.rates, let currency = Currency(rawValue: getCurrency()), let fromCurrency = fromListViewModel.selected()?.currency, currency != fromCurrency else { return nil }
+        
+        var rate: Double?
+        switch currency {
+        case .btc:
+            rate = rates.BTC?.first(where: { $0.currency == fromCurrency })?.rate
+        case .eth:
+            rate = rates.ETH?.first(where: { $0.currency == fromCurrency })?.rate
+        case .gvt:
+            rate = rates.GVT?.first(where: { $0.currency == fromCurrency })?.rate
+        case .usdt:
+            rate = rates.USDT?.first(where: { $0.currency == fromCurrency })?.rate
+        case .usd:
+            rate = rates.USD?.first(where: { $0.currency == fromCurrency })?.rate
+        default:
+            break
+        }
+        
+        return rate != 0 ? rate : nil
+    }
+    func getApproxString(_ value: Double) -> String {
+        let currencyTypeValue = getCurrency()
+        guard let currencyType = CurrencyType(rawValue: currencyTypeValue), let rate = getRate() else { return "" }
+        
+        
+        let text = "≈" + (value / rate).rounded(with: currencyType).toString() + " " + currencyTypeValue
+        return text
+    }
+    
+    func exchangeValueInCurrency(_ value: Double) -> Double? {
+        guard let rate = getRate() else { return nil }
+        return value / rate
     }
 }
 
@@ -456,8 +509,6 @@ class BrokerCollectionViewModel: CellViewModelWithCollection {
         selectedIndex = indexPath.row
         delegate?.didSelect(.selectBroker, index: indexPath.row)
     }
-    
-    
 }
 
 extension BrokerCollectionViewModel: BrokerCollectionViewCellViewModelProtocol {
@@ -474,8 +525,12 @@ extension BrokerCollectionViewModel: BrokerCollectionViewCellViewModelProtocol {
     }
 }
 extension BrokerCollectionViewModel {
+    func itemsCountPercent() -> CGFloat {
+        return 0.5
+    }
+    
     func getCollectionViewHeight() -> CGFloat {
-        return 200.0
+        return 220.0
     }
     
     func makeLayout() -> UICollectionViewLayout {

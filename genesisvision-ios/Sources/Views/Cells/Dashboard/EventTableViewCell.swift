@@ -1,5 +1,5 @@
 //
-//  PortfolioEventTableViewCell.swift
+//  EventTableViewCell.swift
 //  genesisvision-ios
 //
 //  Created by George on 10/10/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PortfolioEventTableViewCell: UITableViewCell {
+class EventTableViewCell: UITableViewCell {
 
     // MARK: - Outlets
     @IBOutlet weak var iconImageView: UIImageView! {

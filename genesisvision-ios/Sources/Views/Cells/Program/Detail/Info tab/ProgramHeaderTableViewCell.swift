@@ -62,7 +62,7 @@ class ProgramHeaderTableViewCell: UITableViewCell {
         backgroundColor = UIColor.BaseView.bg
         contentView.backgroundColor = UIColor.BaseView.bg
         
-        assetLogoImageView.imageHeightConstraint.constant = 120.0
+        assetLogoImageView.imageWidthConstraint.constant = 120.0
     }
  
     func animateLevelButton() {

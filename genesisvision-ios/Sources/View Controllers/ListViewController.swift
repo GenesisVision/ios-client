@@ -43,7 +43,7 @@ class ListViewController: UIViewController {
     // MARK: - Methods
     func addTableView() {
         if tableView == nil {
-            tableView = UITableView(frame: .zero, style: .plain)
+            tableView = UITableView(frame: .zero, style: .grouped)
             tableView.backgroundColor = UIColor.BaseView.bg
             tableView.separatorStyle = .none
             
@@ -58,6 +58,10 @@ class ListViewController: UIViewController {
                 tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
             ])
         
+            var frame = CGRect.zero
+            frame.size.height = .leastNormalMagnitude
+            tableView.tableHeaderView = UIView(frame: frame)
+            
             if isEnablePullToRefresh {
                 setupPullToRefresh(scrollView: tableView)
             }

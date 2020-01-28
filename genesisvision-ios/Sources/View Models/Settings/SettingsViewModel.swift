@@ -51,7 +51,7 @@ final class SettingsViewModel {
             delegate?.didReload(IndexPath(row: 0, section: 1))
         }
     }
-    var currencyListDataSource: TableViewDataSource<PlatformCurrencyListViewModel>!
+    var currencyListDataSource: TableViewDataSource!
     var platformCurrencies: [PlatformCurrencyInfo]?
     
     var enablePasscode: Bool {
@@ -203,7 +203,7 @@ final class SettingsViewModel {
         case 0:
             return 0.0
         default:
-            return 30.0
+            return Constants.headerHeight
         }
     }
     

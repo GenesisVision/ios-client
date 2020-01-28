@@ -406,6 +406,8 @@ extension SettingsViewController {
         }
         
         switch fieldType {
+        case .publicProfile:
+            return publicProfileCell.isHidden ? 0.0 : 60.0
         case .profile:
             return UITableView.automaticDimension
         case .biometricID:

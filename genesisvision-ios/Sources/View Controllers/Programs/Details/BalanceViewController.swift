@@ -36,8 +36,8 @@ class BalanceViewController: BaseViewControllerWithTableView {
     
     private func setup() {
         bottomViewType = .dateRange
-        setupTableConfiguration()
         
+        setupTableConfiguration()
         setupNavigationBar()
     }
     
@@ -67,8 +67,10 @@ class BalanceViewController: BaseViewControllerWithTableView {
     }
     
     override func updateData(from dateFrom: Date?, to dateTo: Date?) {
-//        viewModel.dateFrom = dateFrom
-//        viewModel.dateTo = dateTo
+        if var viewModel = viewModel as? ViewModelWithFilter {
+            viewModel.dateFrom = dateFrom
+            viewModel.dateTo = dateTo
+        }
         
         showProgressHUD()
         fetch()

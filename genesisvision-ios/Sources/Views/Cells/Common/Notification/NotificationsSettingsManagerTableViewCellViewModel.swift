@@ -9,7 +9,6 @@
 import Foundation
 import UIKit.UIImage
 
-
 struct NotificationsSettingsManagerTableViewCellViewModel {
     let setting: ManagerNotificationSettingList
 }

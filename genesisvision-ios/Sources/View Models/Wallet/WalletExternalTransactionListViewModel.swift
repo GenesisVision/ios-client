@@ -147,6 +147,7 @@ extension WalletExternalTransactionListViewModel {
         
         fetchTransactions({ [weak self] (totalCount, viewModels) in
             self?.updateFetchedData(totalCount: totalCount, viewModels)
+            completion(.success)
             }, completionError: completion)
     }
     
@@ -178,7 +179,6 @@ extension WalletExternalTransactionListViewModel {
             })
             
             completionSuccess(totalCount, viewModels)
-            completionError(.success)
         }, errorCompletion: completionError)
     }
 }

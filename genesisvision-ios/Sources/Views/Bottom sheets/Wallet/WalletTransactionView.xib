@@ -116,7 +116,7 @@
                                                                 <constraint firstAttribute="trailing" secondItem="zeR-Ao-l3d" secondAttribute="trailing" id="tsw-hd-b0J"/>
                                                             </constraints>
                                                             <connections>
-                                                                <outlet property="imageHeightConstraint" destination="RqH-YF-A10" id="Adb-pF-ZbR"/>
+                                                                <outlet property="imageWidthConstraint" destination="RqH-YF-A10" id="Adb-pF-ZbR"/>
                                                                 <outlet property="levelButton" destination="zeR-Ao-l3d" id="4tm-k4-tQD"/>
                                                                 <outlet property="profilePhotoImageView" destination="AfB-Rx-P0a" id="no4-Dx-roh"/>
                                                             </connections>

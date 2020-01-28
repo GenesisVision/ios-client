@@ -161,6 +161,7 @@ extension FundInfoViewController: ReloadDataProtocol {
 
 extension FundInfoViewController: InRequestsDelegateManagerProtocol {
     func didSelectRequest(at indexPath: IndexPath) {
+        
     }
     
     func didCanceledRequest(completionResult: CompletionResult) {

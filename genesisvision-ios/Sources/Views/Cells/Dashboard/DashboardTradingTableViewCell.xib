@@ -18,28 +18,28 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="IN3-mN-NkQ">
-                        <rect key="frame" x="0.0" y="0.0" width="683" height="402"/>
+                        <rect key="frame" x="0.0" y="0.0" width="683" height="422"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="WPV-Pi-TM7">
-                                <rect key="frame" x="0.0" y="0.0" width="683" height="242"/>
+                                <rect key="frame" x="0.0" y="0.0" width="683" height="262"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CZk-Vv-YRR">
-                                        <rect key="frame" x="20" y="20" width="643" height="30"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CZk-Vv-YRR">
+                                        <rect key="frame" x="20" y="20" width="643" height="50"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="KGH-FJ-u2S">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Ld8-9B-gOu">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mvh-aY-bMT" customClass="LargeTitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="5" width="42" height="20.5"/>
+                                                                <rect key="frame" x="0.0" y="15" width="42" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WjK-wL-fZj" customClass="RoundedLabel" customModule="GV_DEBUG" customModuleProvider="target">
-                                                                <rect key="frame" x="58" y="5" width="10.5" height="20"/>
+                                                                <rect key="frame" x="58" y="15" width="10.5" height="20"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="20" id="VTD-cQ-rlb"/>
                                                                 </constraints>
@@ -48,7 +48,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Mdb-hD-0fK">
-                                                                <rect key="frame" x="84.5" y="0.0" width="290.5" height="30"/>
+                                                                <rect key="frame" x="84.5" y="0.0" width="290.5" height="50"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="24" id="udi-Mj-mBv"/>
                                                                 </constraints>
@@ -57,18 +57,18 @@
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Szt-p3-5jl">
-                                                <rect key="frame" x="613" y="0.0" width="30" height="30"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="pxE-3J-URE">
+                                                <rect key="frame" x="435.5" y="0.0" width="207.5" height="50"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vhj-5S-Ufe" customClass="ShowAllButton" customModule="GV_DEBUG" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
-                                                    </button>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Szt-p3-5jl">
+                                                        <rect key="frame" x="0.0" y="0.0" width="207.5" height="50"/>
+                                                    </stackView>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
                                     </stackView>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="A3x-pa-amd" customClass="DashboardTradingEmptyView" customModule="GV_DEBUG" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="60" width="643" height="186"/>
+                                        <rect key="frame" x="20" y="80" width="643" height="186"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="mc6-I5-0re">
                                                 <rect key="frame" x="0.0" y="0.0" width="643" height="186"/>
@@ -130,7 +130,7 @@
                                         </connections>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="npQ-zU-Kez" customClass="DashboardTradingLabelsView" customModule="GV_DEBUG" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="70" width="643" height="172"/>
+                                        <rect key="frame" x="20" y="90" width="643" height="172"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Jfn-8y-pPn" customClass="LabelWithTitle" customModule="GV_DEBUG" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="643" height="44"/>
@@ -312,12 +312,12 @@
                                 <directionalEdgeInsets key="directionalLayoutMargins" top="20" leading="20" bottom="0.0" trailing="20"/>
                             </stackView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="GAv-LG-qKb">
-                                <rect key="frame" x="0.0" y="252" width="683" height="150"/>
+                                <rect key="frame" x="0.0" y="272" width="683" height="150"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="nJR-57-dit"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jfy-wD-vqM">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jfy-wD-vqM">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>

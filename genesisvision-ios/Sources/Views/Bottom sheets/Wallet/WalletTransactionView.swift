@@ -282,7 +282,7 @@ extension WalletTransactionView {
 class TopStackView: UIStackView {
     @IBOutlet weak var iconImageView: UIImageView! {
         didSet {
-            iconImageView.contentMode = .scaleAspectFill
+            iconImageView.contentMode = .scaleAspectFit
             iconImageView.clipsToBounds = true
             iconImageView.image = UIImage.eventPlaceholder
             iconImageView.roundCorners()

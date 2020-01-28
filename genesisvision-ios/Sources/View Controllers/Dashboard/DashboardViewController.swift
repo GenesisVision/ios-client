@@ -13,7 +13,6 @@ class DashboardViewController: ListViewController {
     
     // MARK: - Veriables
     var viewModel: ViewModel!
-    var dataSource: TableViewDataSource<ViewModel>!
     var titleView = TitleView()
     
     private var notificationsBarButtonItem: UIBarButtonItem!
@@ -38,11 +37,10 @@ class DashboardViewController: ListViewController {
         setupPullToRefresh(scrollView: tableView)
         tableView.configure(with: .defaultConfiguration)
 
-        dataSource = TableViewDataSource(viewModel)
-        dataSource.delegate = self
+        viewModel.dataSource.delegate = self
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
-        tableView.delegate = dataSource
-        tableView.dataSource = dataSource
+        tableView.delegate = viewModel.dataSource
+        tableView.dataSource = viewModel.dataSource
         tableView.reloadData()
         
         titleView.titleLabel.text = "Dashboard"
@@ -80,7 +78,7 @@ extension DashboardViewController: BaseTableViewProtocol {
         
         switch type {
         case .dashboardTrading, .dashboardInvesting:
-            if let viewModel = cellViewModel as? PortfolioEventCollectionViewCellViewModel {
+            if let viewModel = cellViewModel as? EventCollectionViewCellViewModel {
                 self.showEvent(viewModel.event)
             }
         case .dashboardRecommendation:
@@ -107,12 +105,14 @@ extension DashboardViewController: BaseTableViewProtocol {
             viewModel.router?.tradingViewController = vc
             vc.viewModel = TradingViewModel(viewModel.router)
             vc.title = ""
+            vc.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(vc, animated: true)
         case .dashboardInvesting:
             let vc = InvestingViewController()
             viewModel.router?.investingViewController = vc
             vc.viewModel = InvestingViewModel(viewModel.router)
             vc.title = ""
+            vc.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(vc, animated: true)
         default:
             break
@@ -122,7 +122,7 @@ extension DashboardViewController: BaseTableViewProtocol {
     func didReload(_ indexPath: IndexPath) {
         titleView.balanceLabel.text = viewModel.getTotalValue()
         hideHUD()
-        tableView.reloadRows(at: [indexPath], with: .automatic)
+        tableView.reloadSections([indexPath.section], with: .automatic)
     }
     
     func showEvent(_ event: InvestmentEventViewModel) {
@@ -150,23 +150,9 @@ extension DashboardViewController: BaseTableViewProtocol {
     }
     
     func showAsset(_ asset: AssetCollectionViewCellViewModel) {
-        var assetId = ""
+        let assetId = asset.getAssetId()
         let type = asset.type
-        
-        switch type {
-        case .program:
-            assetId = asset.asset.program?.id?.uuidString ?? ""
-        case .fund:
-            assetId = asset.asset.fund?.id?.uuidString ?? ""
-        case .follow:
-            assetId = asset.asset.follow?.id?.uuidString ?? ""
-        case ._none:
-            break
-        }
-        
-        if !assetId.isEmpty {
-            viewModel.router?.showAssetDetails(with: assetId, assetType: type)
-        }
+        viewModel.router?.showAssetDetails(with: assetId, assetType: type)
     }
 }
 
@@ -182,7 +168,9 @@ extension DashboardViewController: EventDetailsViewProtocol {
 }
 
 class DashboardViewModel: ViewModelWithListProtocol {
-    enum RowType {
+    lazy var dataSource: TableViewDataSource = TableViewDataSource(self)
+    
+    enum SectionType {
         case overview
         case trading
         case investing
@@ -191,7 +179,7 @@ class DashboardViewModel: ViewModelWithListProtocol {
         case recommendations
     }
     
-    private var rows: [RowType] = [.overview, .investing, .trading, .portfolio, .assets, .recommendations]
+    private var sections: [SectionType] = [.overview, .investing, .trading, .portfolio, .assets, .recommendations]
     var viewModels = [CellViewAnyModel]()
     
     var canPullToRefresh: Bool = true
@@ -200,42 +188,42 @@ class DashboardViewModel: ViewModelWithListProtocol {
            didSet {
             let viewModel = DashboardOverviewTableViewCellViewModel(data: DashboardOverviewData(overview, currency: currencyType), delegate: delegate)
             viewModels.append(viewModel)
-            reloadRow(.overview)
+            reloadSection(.overview)
         }
     }
     var tradingDetails: DashboardTradingDetails? {
         didSet {
             let viewModel = DashboardTradingCellViewModel(TradingCollectionViewModel(tradingDetails, delegate: delegate), data: TradingHeaderData(title: "Trading", details: tradingDetails, currency: currencyType), delegate: delegate)
             viewModels.append(viewModel)
-            reloadRow(.trading)
+            reloadSection(.trading)
         }
     }
     var investingDetails: DashboardInvestingDetails? {
         didSet {
             let viewModel = DashboardInvestingCellViewModel(InvestingCollectionViewModel(investingDetails, delegate: delegate), data: InvestingHeaderData(title: "Investing", details: investingDetails, currency: currencyType), delegate: delegate)
             viewModels.append(viewModel)
-            reloadRow(.investing)
+            reloadSection(.investing)
         }
     }
     private var portfolio: DashboardPortfolio? {
         didSet {
             let viewModel = DashboardPortfolioChartTableViewCellViewModel(data: DashboardPortfolioData(portfolio), delegate: delegate)
             viewModels.append(viewModel)
-            reloadRow(.portfolio)
+            reloadSection(.portfolio)
         }
     }
     private var assets: DashboardAssets? {
         didSet {
             let viewModel = DashboardAssetsChartTableViewCellViewModel(data: DashboardAssetsData(assets, currency: currencyType), delegate: delegate)
             viewModels.append(viewModel)
-            reloadRow(.assets)
+            reloadSection(.assets)
         }
     }
     private var recommendations: CommonPublicAssetsViewModel? {
         didSet {
             let viewModel = CellWithCollectionViewModel(DashboardRecommendationsViewModel(recommendations, delegate: delegate), delegate: delegate)
             viewModels.append(viewModel)
-            reloadRow(.recommendations)
+            reloadSection(.recommendations)
         }
     }
     var header: ProfileHeaderViewModel? {
@@ -265,9 +253,9 @@ class DashboardViewModel: ViewModelWithListProtocol {
     private let errorCompletion: ((CompletionResult) -> Void) = { (result) in
        print(result)
     }
-    private func reloadRow(_ row: RowType) {
-        let reloadRow = rows.firstIndex(of: row) ?? 0
-        delegate?.didReload(IndexPath(row: reloadRow, section: 0))
+    private func reloadSection(_ section: SectionType) {
+        let reloadSection = sections.firstIndex(of: section) ?? 0
+        delegate?.didReload(IndexPath(row: 0, section: reloadSection))
     }
     
     func getTotalValue() -> String {
@@ -308,7 +296,7 @@ class DashboardViewModel: ViewModelWithListProtocol {
     }
     
     func model(for indexPath: IndexPath) -> CellViewAnyModel? {
-        let type = rows[indexPath.row]
+        let type = sections[indexPath.section]
         switch type {
         case .overview:
             return viewModels.first{ $0 is DashboardOverviewTableViewCellViewModel }
@@ -325,8 +313,21 @@ class DashboardViewModel: ViewModelWithListProtocol {
         }
     }
     
-    func modelsCount() -> Int {
-        return rows.count
+    func headerHeight(for section: Int) -> CGFloat {
+        switch section {
+        case 0:
+            return 0.0
+        default:
+            return Constants.headerHeight
+        }
+    }
+    
+    func numberOfRows(in section: Int) -> Int {
+        return 1
+    }
+    
+    func numberOfSections() -> Int {
+        return sections.count
     }
     
     func showNotificationList() {
@@ -334,7 +335,7 @@ class DashboardViewModel: ViewModelWithListProtocol {
     }
     
     func didSelect(at indexPath: IndexPath) {
-        let type = rows[indexPath.row]
+        let type = sections[indexPath.section]
         switch type {
         case .trading:
             delegate?.action(.dashboardTrading, actionType: .showAll)

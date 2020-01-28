@@ -35,9 +35,7 @@ class TradingPrivateShortListViewModel: CellViewModelWithCollection {
         
         details?.items?.forEach({ (viewModel) in
             guard let assetType = viewModel.assetType else { return }
-            let asset = AssetDetailData()
-            asset.tradingAsset = viewModel
-            viewModels.append(AssetCollectionViewCellViewModel(type: assetType, asset: asset, delegate: nil))
+            viewModels.append(AssetCollectionViewCellViewModel(type: assetType, asset: viewModel, delegate: nil))
         })
     }
     
@@ -85,7 +83,7 @@ extension TradingPrivateShortListViewModel {
     @available(iOS 13.0, *)
     func getMenu(_ indexPath: IndexPath) -> UIMenu? {
         guard let model = model(for: indexPath) as? AssetCollectionViewCellViewModel,
-            let tradingAsset = model.asset.tradingAsset,
+            let tradingAsset = model.asset as? DashboardTradingAsset,
             let assetType = tradingAsset.assetType,
             let actions = tradingAsset.actions else { return nil }
         

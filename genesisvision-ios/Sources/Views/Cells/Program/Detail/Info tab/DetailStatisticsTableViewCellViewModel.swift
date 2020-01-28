@@ -9,55 +9,66 @@
 import UIKit
 
 struct DetailStatisticsTableViewCellViewModel {
-    let programFollowDetailsFull: ProgramFollowDetailsFull?
+    let details: Codable?
 }
 
 extension DetailStatisticsTableViewCellViewModel: CellViewModel {
     func setup(on cell: DetailStatisticsTableViewCell) {
-        guard let programDetailsFull = programFollowDetailsFull else { return }
-        
-        if let fileName = programDetailsFull.brokerDetails?.logo, let fileUrl = getFileURL(fileName: fileName) {
+        if let details = details as? ProgramFollowDetailsFull {
+            setupProgramFollowDetails(details, cell: cell)
+        } else if let details = details as? PrivateTradingAccountFull {
+            setupPrivateTradingAccount(details, cell: cell)
+        }
+    }
+    func setupPrivateTradingAccount(_ details: PrivateTradingAccountFull, cell: DetailStatisticsTableViewCell) {
+        if let fileName = details.brokerDetails?.logo, let fileUrl = getFileURL(fileName: fileName) {
             cell.brokerLogo.kf.indicatorType = .activity
             cell.brokerLogo.kf.setImage(with: fileUrl, placeholder: UIImage.profilePlaceholder)
         } else {
             cell.brokerStackView.isHidden = true
         }
         
-        if let value = programDetailsFull.programDetails?.periodDuration {
-            cell.topStackView.isHidden = false
-            cell.periodLabel.text = value.toString() + " d"
-        } else {
-            cell.periodStackView.isHidden = true
+        cell.topStackView.removeAllArrangedSubviews()
+        cell.bottomStackView.removeAllArrangedSubviews()
+        
+        if let value = details.tradingAccountInfo?.currency?.rawValue {
+            cell.addToStackView(cell.bottomStackView, value: value, header: "currency")
         }
-        if let value = programDetailsFull.programDetails?.ageDays {
-            cell.topStackView.isHidden = false
-            cell.ageLabel.text = value.toString() + " d"
-        } else {
-            cell.ageStackView.isHidden = true
+        if let leverage = details.tradingAccountInfo?.leverage {
+            cell.addToStackView(cell.bottomStackView, value: "1:\(leverage)", header: "leverage")
         }
-        if let value = programDetailsFull.programDetails?.genesisRatio {
-            cell.topStackView.isHidden = false
-            cell.wpdLabel.text = value.toString()
-        } else {
-            cell.wpdStackView.isHidden = true
+        if let creationDate = details.publicInfo?.creationDate {
+            let duration = Date().daysSinceDate(fromDate: creationDate)
+            cell.addToStackView(cell.bottomStackView, value: duration, header: "age")
         }
-        if let value = programDetailsFull.programDetails?.investmentScale {
-            cell.bottomStackView.isHidden = false
-            cell.investmentScaleLabel.text = value.toString()
+    }
+    func setupProgramFollowDetails(_ details: ProgramFollowDetailsFull, cell: DetailStatisticsTableViewCell) {
+        if let fileName = details.brokerDetails?.logo, let fileUrl = getFileURL(fileName: fileName) {
+            cell.brokerLogo.kf.indicatorType = .activity
+            cell.brokerLogo.kf.setImage(with: fileUrl, placeholder: UIImage.profilePlaceholder)
         } else {
-            cell.investmentScaleStackView.isHidden = true
+            cell.brokerStackView.isHidden = true
         }
-        if let value = programDetailsFull.programDetails?.volumeScale {
-            cell.bottomStackView.isHidden = false
-            cell.volumeLabel.text = value.toString()
-        } else {
-            cell.volumeStackView.isHidden = true
+        cell.topStackView.removeAllArrangedSubviews()
+        cell.bottomStackView.removeAllArrangedSubviews()
+        if let value = details.programDetails?.investmentScale {
+            cell.addToStackView(cell.topStackView, value: value.toString(), header: "invest. ratio")
         }
-        if let min = programDetailsFull.tradingAccountInfo?.leverageMin, let max = programDetailsFull.tradingAccountInfo?.leverageMax {
-            cell.bottomStackView.isHidden = false
-            cell.leverageLabel.text = (min == max) ? "1:\(min)" : "1:\(min)-1:\(max)"
-        } else {
-            cell.leverageStackView.isHidden = true
+        if let value = details.programDetails?.periodDuration {
+            cell.addToStackView(cell.topStackView, value: value.getDays(), header: "period")
+        }
+        if let value = details.programDetails?.genesisRatio {
+            cell.addToStackView(cell.topStackView, value: value.toString(), header: "genesis ratio")
+        }
+        
+        if let value = details.programDetails?.volumeScale {
+            cell.addToStackView(cell.bottomStackView, value: value.toString(), header: "volume scale")
+        }
+        if let min = details.tradingAccountInfo?.leverageMin, let max = details.tradingAccountInfo?.leverageMax {
+            cell.addToStackView(cell.bottomStackView, value: (min == max) ? "1:\(min)" : "1:\(min)-1:\(max)", header: "leverage")
+        }
+        if let value = details.programDetails?.ageDays {
+            cell.addToStackView(cell.bottomStackView, value: value.getDays(), header: "age")
         }
     }
 }

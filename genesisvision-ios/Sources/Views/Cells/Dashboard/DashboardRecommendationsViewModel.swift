@@ -32,19 +32,13 @@ class DashboardRecommendationsViewModel: CellViewModelWithCollection {
         self.type = .dashboardRecommendation
         
         details?.programs?.items?.forEach({ (viewModel) in
-            let asset = AssetDetailData()
-            asset.program = viewModel
-            viewModels.append(AssetCollectionViewCellViewModel(type: .program, asset: asset, delegate: nil))
+            viewModels.append(AssetCollectionViewCellViewModel(type: .program, asset: viewModel, delegate: nil))
         })
         details?.follows?.items?.forEach({ (viewModel) in
-            let asset = AssetDetailData()
-            asset.follow = viewModel
-            viewModels.append(AssetCollectionViewCellViewModel(type: .follow, asset: asset, delegate: nil))
+            viewModels.append(AssetCollectionViewCellViewModel(type: .follow, asset: viewModel, delegate: nil))
         })
         details?.funds?.items?.forEach({ (viewModel) in
-            let asset = AssetDetailData()
-            asset.fund = viewModel
-            viewModels.append(AssetCollectionViewCellViewModel(type: .fund, asset: asset, delegate: nil))
+            viewModels.append(AssetCollectionViewCellViewModel(type: .fund, asset: viewModel, delegate: nil))
         })
     }
     

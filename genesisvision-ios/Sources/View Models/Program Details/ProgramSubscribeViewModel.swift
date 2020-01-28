@@ -29,7 +29,7 @@ final class ProgramSubscribeViewModel {
     var signalSubscription: SignalSubscription?
     
     var tradingAccountListViewModel: TradingAccountListViewModel!
-    var tradingAccountListDataSource: TableViewDataSource<TradingAccountListViewModel>!
+    var tradingAccountListDataSource: TableViewDataSource!
     
     var tradingAccounts: ItemsViewModelTradingAccountDetails? {
         didSet {

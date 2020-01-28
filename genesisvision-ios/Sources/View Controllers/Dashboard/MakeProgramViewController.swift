@@ -255,10 +255,10 @@ class MakeProgramViewModel {
     }
     
     var periodsViewModel: PeriodListViewModel!
-    var periodsDataSource: TableViewDataSource<PeriodListViewModel>!
+    var periodsDataSource: TableViewDataSource!
     
     var tradesDelayViewModel: TradesDelayListViewModel!
-    var tradesDelayDataSource: TableViewDataSource<TradesDelayListViewModel>!
+    var tradesDelayDataSource: TableViewDataSource!
     
     var programAssetPlatformInfo: ProgramAssetPlatformInfo? {
         didSet {

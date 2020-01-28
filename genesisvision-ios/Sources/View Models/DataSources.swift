@@ -8,12 +8,15 @@
 
 import UIKit
 
-class TableViewDataSource<ViewModel: ViewModelWithListProtocol>: NSObject, UITableViewDataSource, UITableViewDelegate {
-    var viewModel: ViewModel
+class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
+    var viewModel: ViewModelWithListProtocol
     
     weak var delegate: DelegateManagerProtocol?
     
-    init(_ viewModel: ViewModel) {
+    init(_ viewModel: ViewModelWithListProtocol) {
+        self.viewModel = viewModel
+    }
+    init(_ viewModel: TradesViewModelProtocol) {
         self.viewModel = viewModel
     }
 
@@ -71,6 +74,14 @@ class TableViewDataSource<ViewModel: ViewModelWithListProtocol>: NSObject, UITab
         if let viewModel = viewModel as? ListViewModelWithPaging {
             viewModel.fetchMore(at: indexPath)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return viewModel.headerHeight(for: section)
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return viewModel.headerView(tableView, for: section)
     }
     
     @available(iOS 13.0, *)
@@ -134,6 +145,23 @@ final class CollectionViewDataSource<ViewModel: ViewModelWithListProtocol>: NSOb
         if let cell = collectionView.cellForItem(at: indexPath) {
             cell.backgroundColor = UIColor.Cell.bg
         }
+    }
+    
+    func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return viewModel.insetForSection(for: section)
+            ?? UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0.0, right: 16.0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return viewModel.sizeForItem(at: indexPath) ?? CGSize(width: collectionView.frame.width * viewModel.itemsCountPercent(), height: collectionView.frame.height)
+    }
+    
+    func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return viewModel.minimumLineSpacing(for: section) ?? Constants.SystemSizes.Cell.horizontalMarginValue
+    }
+    
+    func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return viewModel.minimumInteritemSpacing(for: section) ?? Constants.SystemSizes.Cell.horizontalMarginValue * 2
     }
     
     @available(iOS 13.0, *)

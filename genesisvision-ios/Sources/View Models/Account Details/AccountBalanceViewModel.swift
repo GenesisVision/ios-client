@@ -8,9 +8,8 @@
 
 import UIKit.UITableView
 
-final class AccountBalanceViewModel: ViewModelWithListProtocol {
+final class AccountBalanceViewModel: ViewModelWithListProtocol, ViewModelWithFilter {
     var canPullToRefresh: Bool = true
-    
     var viewModels: [CellViewAnyModel] = []
     
     enum SectionType {
@@ -44,15 +43,6 @@ final class AccountBalanceViewModel: ViewModelWithListProtocol {
         self.reloadDataProtocol = reloadDataProtocol
         self.chartViewProtocol = router.currentController as? ChartViewProtocol
     }
-    
-    // MARK: - Public methods
-    func selectAccountBalanceChartElement(_ date: Date) {
-        //FIXME:
-//        if let result = accountBalanceChart?.chart?.first(where: { $0.date == date }) {
-//            print("selectAccountBalanceChartElement")
-//            print(result)
-//        }
-    }
 }
 
 // MARK: - TableView
@@ -80,31 +70,26 @@ extension AccountBalanceViewModel {
     }
     
     /// Get TableViewCellViewModel for IndexPath
-    func model(for indexPath: IndexPath) -> AccountBalanceChartTableViewCellViewModel? {
+    func model(for indexPath: IndexPath) -> CellViewAnyModel? {
         guard let accountBalanceChart = accountBalanceChart else { return nil }
-        
+
         let accountBalanceChartTableViewCellViewModel =  AccountBalanceChartTableViewCellViewModel(accountBalanceChart: accountBalanceChart, currencyType: getPlatformCurrencyType(), chartViewProtocol: self.chartViewProtocol)
-        
+
         return accountBalanceChartTableViewCellViewModel
     }
     
     // MARK: - Private methods
     private func fetch(_ completion: @escaping CompletionBlock) {
-        switch dataType {
-        case .api:
-            guard let assetId = assetId else { return completion(.failure(errorType: .apiError(message: nil))) }
+        guard let assetId = assetId else { return completion(.failure(errorType: .apiError(message: nil))) }
+        
+        AccountsDataProvider.getBalanceChart(with: assetId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currencyType: getPlatformCurrencyType(), completion: { [weak self] (viewModel) in
+            guard viewModel != nil else {
+                return ErrorHandler.handleApiError(error: nil, completion: completion)
+            }
             
-            AccountsDataProvider.getBalanceChart(with: assetId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currencyType: getPlatformCurrencyType(), completion: { [weak self] (viewModel) in
-                guard viewModel != nil else {
-                    return ErrorHandler.handleApiError(error: nil, completion: completion)
-                }
-                
-                self?.accountBalanceChart = viewModel
-                self?.reloadDataProtocol?.didReloadData()
-                completion(.success)
-            }, errorCompletion: completion)
-        case .fake:
-            break
-        }
+            self?.accountBalanceChart = viewModel
+            self?.reloadDataProtocol?.didReloadData()
+            completion(.success)
+        }, errorCompletion: completion)
     }
 }

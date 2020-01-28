@@ -30,9 +30,7 @@ class TradingPublicShortListViewModel: CellViewModelWithCollection {
         
         details?.items?.forEach({ (viewModel) in
             guard let assetType = viewModel.assetType else { return }
-            let asset = AssetDetailData()
-            asset.tradingAsset = viewModel
-            viewModels.append(AssetCollectionViewCellViewModel(type: assetType, asset: asset, delegate: nil))
+            viewModels.append(AssetCollectionViewCellViewModel(type: assetType, asset: viewModel, delegate: nil))
         })
     }
     
@@ -63,7 +61,7 @@ extension TradingPublicShortListViewModel {
     }
     
     func getCollectionViewHeight() -> CGFloat {
-        return 300.0
+        return 250.0
     }
     
     func getTotalCount() -> Int? {
@@ -80,7 +78,7 @@ extension TradingPublicShortListViewModel {
     @available(iOS 13.0, *)
     func getMenu(_ indexPath: IndexPath) -> UIMenu? {
         guard let model = model(for: indexPath) as? AssetCollectionViewCellViewModel,
-        let tradingAsset = model.asset.tradingAsset,
+        let tradingAsset = model.asset as? DashboardTradingAsset,
         let assetType = tradingAsset.assetType,
         let actions = tradingAsset.actions else { return nil }
     
@@ -95,10 +93,10 @@ extension TradingPublicShortListViewModel {
         }
         
         if let assetType = tradingAsset.assetType, assetType == .program {
-            let closePriod = UIAction(title: "Close period", image: nil) { [weak self] action in
+            let closePeriod = UIAction(title: "Close period", image: nil) { [weak self] action in
                 //TODO: Make signal action
             }
-            children.append(closePriod)
+            children.append(closePeriod)
         }
         
         if let canMakeProgramFromSignalProvider = actions.canMakeProgramFromSignalProvider, canMakeProgramFromSignalProvider {

@@ -8,7 +8,7 @@
 
 import UIKit.UITableView
 
-final class FundBalanceViewModel: ViewModelWithListProtocol {
+final class FundBalanceViewModel: ViewModelWithListProtocol, ViewModelWithFilter {
     var canPullToRefresh: Bool = true
     var viewModels: [CellViewAnyModel] = []
     
@@ -79,7 +79,7 @@ extension FundBalanceViewModel {
     }
     
     /// Get TableViewCellViewModel for IndexPath
-    func model(for indexPath: IndexPath) -> FundBalanceChartTableViewCellViewModel? {
+    func model(for indexPath: IndexPath) -> CellViewAnyModel? {
         guard let fundBalanceChart = fundBalanceChart else { return nil }
         
         let fundBalanceChartTableViewCellViewModel =  FundBalanceChartTableViewCellViewModel(fundBalanceChart: fundBalanceChart, chartViewProtocol: self.chartViewProtocol)

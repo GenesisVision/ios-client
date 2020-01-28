@@ -8,36 +8,48 @@
 
 import UIKit
 
-class AssetDetailData {
-    var program: ProgramDetailsListItem?
-    var follow: FollowDetailsListItem?
-    var fund: FundDetailsListItem?
-    
-    var tradingAsset: DashboardTradingAsset?
-    
-    var fundInvesting: FundInvestingDetailsList?
-    var programInvesting: ProgramInvestingDetailsList?
-}
-
 struct AssetCollectionViewCellViewModel {
     let type: AssetType
-    let asset: AssetDetailData
+    let asset: Codable?
     weak var delegate: FavoriteStateChangeProtocol?
+    
+    func getAssetId() -> String {
+        var assetId: String = ""
+        if let program = asset as? ProgramDetailsListItem, let id = program.id?.uuidString {
+            assetId = id
+        } else if let programInvesting = asset as? ProgramInvestingDetailsList, let id = programInvesting.id?.uuidString {
+            assetId = id
+        } else if let tradingAsset = asset as? DashboardTradingAsset, tradingAsset.assetType == type, let id = tradingAsset.id?.uuidString {
+            assetId = id
+        } else if let fund = asset as? FundDetailsListItem, let id = fund.id?.uuidString {
+            assetId = id
+        } else if let fundInvesting = asset as? FundInvestingDetailsList, let id = fundInvesting.id?.uuidString {
+            assetId = id
+        } else if let tradingAsset = asset as? DashboardTradingAsset, tradingAsset.assetType == type, let id = tradingAsset.id?.uuidString {
+            assetId = id
+        } else if let follow = asset as? FollowDetailsListItem {
+            assetId = follow.id?.uuidString ?? ""
+        } else if let tradingAsset = asset as? DashboardTradingAsset, tradingAsset.assetType == type {
+            assetId = tradingAsset.id?.uuidString ?? ""
+        }
+        
+        return assetId
+    }
 }
 
 extension AssetCollectionViewCellViewModel: CellViewModel {
     func setup(on cell: AssetCollectionViewCell) {
-        if let program = asset.program {
+        if let program = asset as? ProgramDetailsListItem {
             cell.configure(program: program, delegate: delegate)
-        } else if let follow = asset.follow {
+        } else if let follow = asset as? FollowDetailsListItem {
             cell.configure(follow: follow, delegate: delegate)
-        } else if let fund = asset.fund {
+        } else if let fund = asset as? FundDetailsListItem {
             cell.configure(fund: fund, delegate: delegate)
-        } else if let trading = asset.tradingAsset {
+        } else if let trading = asset as? DashboardTradingAsset {
             cell.configure(trading: trading, delegate: delegate)
-        } else if let fundInvesting = asset.fundInvesting {
+        } else if let fundInvesting = asset as? FundInvestingDetailsList {
             cell.configure(fundInvesting: fundInvesting, delegate: delegate)
-        } else if let programInvesting = asset.programInvesting {
+        } else if let programInvesting = asset as? ProgramInvestingDetailsList {
             cell.configure(programInvesting: programInvesting, delegate: delegate)
         }
     }

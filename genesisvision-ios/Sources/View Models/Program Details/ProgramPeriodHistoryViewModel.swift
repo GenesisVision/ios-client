@@ -83,10 +83,6 @@ extension ProgramPeriodHistoryViewModel {
         return section.count
     }
     
-    func isMetaTrader5() -> Bool {
-        return true
-    }
-    
     func headerHeight(for section: Int) -> CGFloat {
         return sortedSections.count > 0 ? 30.0 : 0.0
     }
@@ -142,6 +138,7 @@ extension ProgramPeriodHistoryViewModel {
         
         fetch({ [weak self] (totalCount, viewModels) in
             self?.updateFetchedData(totalCount: totalCount, viewModels: viewModels)
+            completion(.success)
             }, completionError: completion)
     }
     
@@ -200,7 +197,6 @@ extension ProgramPeriodHistoryViewModel {
             })
             
             completionSuccess(totalCount, viewModels)
-            completionError(.success)
         }, errorCompletion: completionError)
     }
 }

@@ -25,22 +25,46 @@ class CustomLayout {
         var layout: UICollectionViewLayout!
         if #available(iOS 13.0, *) {
             layout = UICollectionViewCompositionalLayout { (section: Int, environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
-                let size = NSCollectionLayoutSize(widthDimension: .fractionalWidth(fractionalWidth), heightDimension: .fractionalHeight(1.0))
-                let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
-                let itemInset: NSDirectionalEdgeInsets = NSDirectionalEdgeInsets(top: 0.0, leading: Constants.SystemSizes.Cell.horizontalMarginValue / 2, bottom: Constants.SystemSizes.Cell.verticalMarginValues, trailing: Constants.SystemSizes.Cell.horizontalMarginValue / 2)
-                let sectionInset: NSDirectionalEdgeInsets = NSDirectionalEdgeInsets(top: 0.0, leading: Constants.SystemSizes.Cell.horizontalMarginValue, bottom: Constants.SystemSizes.Cell.verticalMarginValues, trailing: Constants.SystemSizes.Cell.horizontalMarginValue)
                 
+                let itemInset = NSDirectionalEdgeInsets(top: 0.0, leading: Constants.SystemSizes.Cell.horizontalMarginValue / 2, bottom: Constants.SystemSizes.Cell.verticalMarginValues, trailing: Constants.SystemSizes.Cell.horizontalMarginValue / 2)
+                let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
                 item.contentInsets = itemInset
+                
+                let size = NSCollectionLayoutSize(widthDimension: .fractionalWidth(fractionalWidth), heightDimension: .absolute(150.0))//.fractionalHeight(1.0))
                 let group = NSCollectionLayoutGroup.vertical(layoutSize: size, subitem: item, count: vCount)
+                
+                let sectionInset = NSDirectionalEdgeInsets(top: 0.0, leading: Constants.SystemSizes.Cell.horizontalMarginValue, bottom: Constants.SystemSizes.Cell.verticalMarginValues, trailing: Constants.SystemSizes.Cell.horizontalMarginValue)
                 let section = NSCollectionLayoutSection(group: group)
                 section.contentInsets = sectionInset
                 section.orthogonalScrollingBehavior = pagging ? .groupPaging : .continuous
+                
                 return section
-//                let sectionInset: NSDirectionalEdgeInsets = NSDirectionalEdgeInsets(top: 0.0, leading: 0.0, bottom: Constants.SystemSizes.Cell.verticalMarginValues, trailing: 0.0)
             }
         } else {
-            // Fallback on earlier versions
+            layout = UICollectionViewFlowLayout()
+            // FIXIT:
         }
+        
+        if let layout = layout as? UICollectionViewFlowLayout {
+            layout.scrollDirection = .horizontal
+        }
+        
         return layout
     }
+}
+
+
+class CustomCollectionViewLayout: UICollectionViewLayout {
+    fileprivate let numberOfColumns = 3
+    fileprivate let cellPadding: CGFloat = 6
+    fileprivate let cellHeight: CGFloat = 150
+    weak var delegate: CustomCollectionViewDelegate?
+}
+
+protocol CustomCollectionViewDelegate: class {
+    func theNumberOfItemsInCollectionView() -> Int
+}
+
+extension CustomCollectionViewDelegate {
+    
 }

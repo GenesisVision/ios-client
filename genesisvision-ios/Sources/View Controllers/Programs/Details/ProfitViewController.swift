@@ -39,9 +39,6 @@ class ProfitViewController: BaseViewControllerWithTableView {
         
         setupTableConfiguration()
         setupNavigationBar()
-        
-        showProgressHUD()
-        fetch()
     }
     
     private func reloadData() {
@@ -70,8 +67,10 @@ class ProfitViewController: BaseViewControllerWithTableView {
     }
     
     override func updateData(from dateFrom: Date?, to dateTo: Date?) {
-//        viewModel.dateFrom = dateFrom
-//        viewModel.dateTo = dateTo
+        if var viewModel = viewModel as? ViewModelWithFilter {
+            viewModel.dateFrom = dateFrom
+            viewModel.dateTo = dateTo
+        }
         
         showProgressHUD()
         fetch()

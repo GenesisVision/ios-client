@@ -1,5 +1,5 @@
 //
-//  ProgramTradesViewController.swift
+//  TradesViewController.swift
 //  genesisvision-ios
 //
 //  Created by George on 11/04/2018.
@@ -8,15 +8,14 @@
 
 import UIKit
 
-class ProgramTradesViewController: BaseViewControllerWithTableView {
-
+class TradesViewController: BaseViewControllerWithTableView {
     // MARK: - View Model
-    var viewModel: ProgramTradesViewModel!
+    var viewModel: TradesViewModelProtocol!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setup()
     }
     
@@ -24,8 +23,8 @@ class ProgramTradesViewController: BaseViewControllerWithTableView {
     private func setupTableConfiguration() {
         tableView.configure(with: .defaultConfiguration)
         tableView.allowsSelection = false
-        tableView.delegate = self
-        tableView.dataSource = self
+        tableView.delegate = viewModel.dataSource
+        tableView.dataSource = viewModel.dataSource
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
         tableView.registerHeaderNib(for: viewModel.viewModelsForRegistration)
         
@@ -75,41 +74,7 @@ class ProgramTradesViewController: BaseViewControllerWithTableView {
     }
 }
 
-extension ProgramTradesViewController: UITableViewDelegate, UITableViewDataSource {
-    // MARK: - UITableViewDelegate
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let model = viewModel.model(for: indexPath) else {
-            return TableViewCell()
-        }
-        
-        return tableView.dequeueReusableCell(withModel: model, for: indexPath)
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath))
-    }
-    
-    // MARK: - UITableViewDataSource
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfRows(in: section)
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.numberOfSections()
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return viewModel.headerHeight(for: section)
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView() as DateSectionTableHeaderView
-        header.headerLabel.text = viewModel.titleForHeader(in: section)
-        return header
-    }
-}
-
-extension ProgramTradesViewController: ReloadDataProtocol {
+extension TradesViewController: ReloadDataProtocol {
     func didReloadData() {
         reloadData()
         tabmanBarItems?.forEach({ $0.badgeValue = "\(viewModel.totalCount)" })

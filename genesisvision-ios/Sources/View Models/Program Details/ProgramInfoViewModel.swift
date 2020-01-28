@@ -10,10 +10,20 @@ import UIKit.UITableViewHeaderFooterView
 
 final class ProgramInfoViewModel {
     enum SectionType {
+        case publicInfo
+        case account
+        
+        case yourDeposit
+        
+        case makeProgram
+        case makeFollow
+        
         case details
         case signals
+        
         case yourInvestment
         case investNow
+        
         case subscriptionDetail
     }
     enum RowType {
@@ -43,14 +53,16 @@ final class ProgramInfoViewModel {
     private var equityChart: [SimpleChartPoint]?
     public private(set) var tradingAccounts: ItemsViewModelTradingAccountDetails?
     public private(set) var signalSubscription: SignalSubscription?
-    public private(set) var programDetailsFull: ProgramFollowDetailsFull? {
+    public private(set) var programFollowDetailsFull: ProgramFollowDetailsFull? {
         didSet {
-            router.programViewController.viewModel.programDetailsFull = programDetailsFull
+            router.programViewController.viewModel.programDetailsFull = programFollowDetailsFull
         }
     }
-    
+    public private(set) var programDetailsFull: ProgramDetailsFull?
+    public private(set) var followDetailsFull: FollowDetailsFull?
+
     var availableInvestment: Double {
-        return programDetailsFull?.programDetails?.availableInvestmentBase ?? 0.0
+        return programFollowDetailsFull?.programDetails?.availableInvestmentBase ?? 0.0
     }
     
     private var sections: [SectionType] = [.details]
@@ -61,6 +73,7 @@ final class ProgramInfoViewModel {
     /// Return view models for registration cell Nib files
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [ProgramHeaderTableViewCellViewModel.self,
+                
                 DetailManagerTableViewCellViewModel.self,
                 DetailStatisticsTableViewCellViewModel.self,
                 DefaultTableViewCellViewModel.self,
@@ -68,7 +81,10 @@ final class ProgramInfoViewModel {
                 ProgramInvestNowTableViewCellViewModel.self,
                 ProgramYourInvestmentTableViewCellViewModel.self,
                 InfoSignalsTableViewCellViewModel.self,
-                InfoSubscriptionTableViewCellViewModel.self]
+                InfoSubscriptionTableViewCellViewModel.self,
+                
+                ProgramInfoTableViewCellViewModel.self,
+                FollowInfoTableViewCellViewModel.self]
     }
     
     // MARK: - Init
@@ -83,7 +99,7 @@ final class ProgramInfoViewModel {
         }
         
         if let programDetailsFull = programDetailsFull, let assetId = programDetailsFull.id?.uuidString {
-            self.programDetailsFull = programDetailsFull
+            self.programFollowDetailsFull = programDetailsFull
             self.assetId = assetId
             getSignalSubscription { (result) in
                 
@@ -103,7 +119,7 @@ final class ProgramInfoViewModel {
         case 0:
             return 0.0
         default:
-            return 30.0
+            return Constants.headerHeight
         }
     }
     
@@ -123,7 +139,7 @@ final class ProgramInfoViewModel {
     }
     
     func showAboutLevels() {
-        guard let rawValue = programDetailsFull?.tradingAccountInfo?.currency?.rawValue, let currency = CurrencyType(rawValue: rawValue) else { return }
+        guard let rawValue = programFollowDetailsFull?.tradingAccountInfo?.currency?.rawValue, let currency = CurrencyType(rawValue: rawValue) else { return }
         
         router.showAboutLevels(currency)
     }
@@ -144,7 +160,7 @@ final class ProgramInfoViewModel {
     
     func updateSections() {
         sections = [SectionType]()
-        guard let programDetailsFull = programDetailsFull else { return }
+        guard let programDetailsFull = programFollowDetailsFull else { return }
         sections.append(.details)
 
         switch assetType {
@@ -174,17 +190,17 @@ final class ProgramInfoViewModel {
 extension ProgramInfoViewModel {
     // MARK: - Public methods
     func showManagerVC() {
-        guard let managerId = programDetailsFull?.owner?.id?.uuidString else { return }
+        guard let managerId = programFollowDetailsFull?.owner?.id?.uuidString else { return }
         router.show(routeType: .manager(managerId: managerId))
     }
     
     func invest() {
-        guard let assetId = assetId, let currency = programDetailsFull?.tradingAccountInfo?.currency, let programCurrency = CurrencyType(rawValue: currency.rawValue) else { return }
+        guard let assetId = assetId, let currency = programFollowDetailsFull?.tradingAccountInfo?.currency, let programCurrency = CurrencyType(rawValue: currency.rawValue) else { return }
         router.show(routeType: .invest(assetId: assetId, programCurrency: programCurrency))
     }
     
     func withdraw() {
-        guard let assetId = assetId, let currency = programDetailsFull?.tradingAccountInfo?.currency, let programCurrency = CurrencyType(rawValue: currency.rawValue) else { return }
+        guard let assetId = assetId, let currency = programFollowDetailsFull?.tradingAccountInfo?.currency, let programCurrency = CurrencyType(rawValue: currency.rawValue) else { return }
         router.show(routeType: .withdraw(assetId: assetId, programCurrency: programCurrency))
     }
     
@@ -224,7 +240,7 @@ extension ProgramInfoViewModel {
     }
 
     func createAccount(completion: @escaping CreateAccountCompletionBlock) {
-        guard let assetId = assetId, let currency = programDetailsFull?.tradingAccountInfo?.currency, let leverage = programDetailsFull?.tradingAccountInfo?.leverageMax, let programCurrency = CurrencyType(rawValue: currency.rawValue), let brokerId = programDetailsFull?.brokerDetails?.id else { return }
+        guard let assetId = assetId, let currency = programFollowDetailsFull?.tradingAccountInfo?.currency, let leverage = programFollowDetailsFull?.tradingAccountInfo?.leverageMax, let programCurrency = CurrencyType(rawValue: currency.rawValue), let brokerId = programFollowDetailsFull?.brokerDetails?.id else { return }
         
         router.show(routeType: .createAccount(assetId: assetId, brokerId: brokerId, leverage: leverage, programCurrency: programCurrency, completion: completion))
     }
@@ -234,41 +250,50 @@ extension ProgramInfoViewModel {
 extension ProgramInfoViewModel {
     // MARK: - Public methods
     func getNickname() -> String {
-        return programDetailsFull?.owner?.username ?? ""
+        return programFollowDetailsFull?.owner?.username ?? ""
     }
     
     /// Get TableViewCellViewModel for IndexPath
     func model(for indexPath: IndexPath) -> CellViewAnyModel? {
-        guard programDetailsFull != nil else {
-            return nil
-        }
-        
+//        guard let programFollowDetailsFull = programFollowDetailsFull else { return nil }
         let sectionType = sections[indexPath.section]
         switch sectionType {
         case .details:
             let rowType = rows[indexPath.row]
             switch rowType {
             case .header:
-                guard let details = programDetailsFull else { return nil }
+                guard let details = programFollowDetailsFull else { return nil }
                 return ProgramHeaderTableViewCellViewModel(details: details, delegate: programHeaderProtocol)
             case .manager:
-                guard let owner = programDetailsFull?.owner else { return nil }
+                guard let owner = programFollowDetailsFull?.owner else { return nil }
                 return DetailManagerTableViewCellViewModel(profilePublic: owner)
             case .statistics:
-                return DetailStatisticsTableViewCellViewModel(programFollowDetailsFull: programDetailsFull)
+                return DetailStatisticsTableViewCellViewModel(details: programFollowDetailsFull)
             case .strategy:
-                return DefaultTableViewCellViewModel(title: "Strategy", subtitle: programDetailsFull?.publicInfo?.description)
+                return DefaultTableViewCellViewModel(title: "Strategy", subtitle: programFollowDetailsFull?.publicInfo?.description)
             case .period:
-                return ProgramPeriodTableViewCellViewModel(periodDuration: programDetailsFull?.programDetails?.periodDuration, periodStarts: programDetailsFull?.programDetails?.periodStarts, periodEnds: programDetailsFull?.programDetails?.periodEnds)
+                return ProgramPeriodTableViewCellViewModel(periodDuration: programFollowDetailsFull?.programDetails?.periodDuration, periodStarts: programFollowDetailsFull?.programDetails?.periodStarts, periodEnds: programFollowDetailsFull?.programDetails?.periodEnds)
             }
         case .yourInvestment:
-            return ProgramYourInvestmentTableViewCellViewModel(programDetailsFull: programDetailsFull, yourInvestmentProtocol: self)
+            return ProgramYourInvestmentTableViewCellViewModel(details: programFollowDetailsFull, yourInvestmentProtocol: self)
         case .investNow:
-            return ProgramInvestNowTableViewCellViewModel(programDetailsFull: programDetailsFull, investNowProtocol: self)
+            return ProgramInvestNowTableViewCellViewModel(programDetailsFull: programFollowDetailsFull, investNowProtocol: self)
         case .signals:
-            return InfoSignalsTableViewCellViewModel(programDetailsFull: programDetailsFull, isFollowed: signalSubscription != nil, infoSignalsProtocol: self)
+            return InfoSignalsTableViewCellViewModel(programDetailsFull: programFollowDetailsFull, isFollowed: signalSubscription != nil, infoSignalsProtocol: self)
         case .subscriptionDetail:
             return InfoSubscriptionTableViewCellViewModel(signalSubscription: signalSubscription, infoSignalsProtocol: self)
+//        case .account:
+//            return DetailStatisticsTableViewCellViewModel(details: accountDetailsFull)
+//        case .yourDeposit:
+//            return ProgramYourInvestmentTableViewCellViewModel(details: accountDetailsFull, yourInvestmentProtocol: self)
+        case .makeProgram:
+            guard let programDetailsFull = programDetailsFull else { return nil }
+            return ProgramInfoTableViewCellViewModel(asset: programDetailsFull, assetId: programFollowDetailsFull?.id?.uuidString, delegate: self)
+        case .makeFollow:
+            guard let followDetailsFull = followDetailsFull else { return nil }
+            return FollowInfoTableViewCellViewModel(asset: followDetailsFull, assetId: programFollowDetailsFull?.id?.uuidString, delegate: self)
+        default:
+            return nil
         }
     }
     
@@ -278,7 +303,7 @@ extension ProgramInfoViewModel {
             ProgramsDataProvider.get(self.assetId, completion: { [weak self] (viewModel) in
                 guard let viewModel = viewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
                 
-                self?.programDetailsFull = viewModel
+                self?.programFollowDetailsFull = viewModel
                 self?.updateSections()
                 self?.getSignalSubscription(completion)
             }, errorCompletion: completion)
@@ -286,7 +311,7 @@ extension ProgramInfoViewModel {
             FollowsDataProvider.get(self.assetId, completion: { [weak self] (viewModel) in
                 guard let viewModel = viewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
                 
-                self?.programDetailsFull = viewModel
+                self?.programFollowDetailsFull = viewModel
                 self?.updateSections()
                 self?.getSignalSubscription(completion)
             }, errorCompletion: completion)
@@ -320,10 +345,20 @@ extension ProgramInfoViewModel {
     }
     
     func updateDetails(with programDetailsFull: ProgramFollowDetailsFull) {
-        self.programDetailsFull = programDetailsFull
+        self.programFollowDetailsFull = programDetailsFull
         self.getSignalSubscription { [weak self] (result) in
             self?.reloadDataProtocol?.didReloadData()
         }
+    }
+}
+
+extension ProgramInfoViewModel: TradingInfoViewProtocol {
+    func didTapMainAction(_ assetType: AssetType) {
+        //TODO:
+    }
+    
+    func didTapManageAction(_ assetType: AssetType) {
+        //TODO:
     }
 }
 

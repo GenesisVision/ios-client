@@ -14,6 +14,8 @@ typealias CreateAccountCompletionBlock = (_ id: UUID?) -> Void
 typealias SuccessCompletionBlock = (_ success: Bool) -> Void
 
 final class Constants {
+    static let headerHeight: CGFloat = 20.0
+    
     struct HudDelay {
         static let `default`: Double = 2.0
         static let error: Double = 2.0

@@ -13,7 +13,6 @@ class TradingViewController: ListViewController {
     
     // MARK: - Veriables
     var viewModel: ViewModel!
-    var dataSource: TableViewDataSource<ViewModel>!
     let titleView = TitleView()
     
     // MARK: - Lifecycle
@@ -29,12 +28,11 @@ class TradingViewController: ListViewController {
     private func setup() {
         tableView.configure(with: .defaultConfiguration)
 
-        dataSource = TableViewDataSource(viewModel)
-        dataSource.delegate = self
+        viewModel.dataSource.delegate = self
         tableView.separatorStyle = .none
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
-        tableView.delegate = dataSource
-        tableView.dataSource = dataSource
+        tableView.delegate = viewModel.dataSource
+        tableView.dataSource = viewModel.dataSource
         tableView.reloadData()
         
         titleView.titleLabel.text = "Trading"
@@ -59,7 +57,7 @@ class TradingViewController: ListViewController {
     }
     private func attachAccount() {
         guard let vc = AttachAccountViewController.storyboardInstance(.dashboard) else { return }
-        vc.title = "Attach account"
+        vc.title = "Attach external account"
         let nav = BaseNavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true, completion: nil)
@@ -71,7 +69,7 @@ class TradingViewController: ListViewController {
                         firstHandler: { [weak self] in
                             self?.createAccount()
             },
-                        secondActionTitle: "Attach account",
+                        secondActionTitle: "Attach external account",
                         secondHandler: { [weak self] in
                             self?.attachAccount()
             },
@@ -122,7 +120,7 @@ extension TradingViewController: BaseTableViewProtocol {
             let vc = TradingEventListViewController()
             viewModel.router?.tradingEventListViewController = vc
             vc.viewModel = TradingEventListViewModel(viewModel.router, delegate: vc)
-            vc.title = "Events"
+            vc.title = "My history"
             navigationController?.pushViewController(vc, animated: true)
         case .tradingPublicList:
             switch actionType {
@@ -156,7 +154,7 @@ extension TradingViewController: BaseTableViewProtocol {
     func didSelect(_ type: CellActionType, cellViewModel: CellViewAnyModel?) {
         switch type {
         case .tradingEvents:
-            if let viewModel = cellViewModel as? PortfolioEventCollectionViewCellViewModel {
+            if let viewModel = cellViewModel as? EventCollectionViewCellViewModel {
                 self.showEvent(viewModel.event)
             }
         case .tradingPublicList:
@@ -164,7 +162,7 @@ extension TradingViewController: BaseTableViewProtocol {
                 showAsset(cellViewModel)
             }
         case .tradingPrivateList:
-            if let cellViewModel = cellViewModel as? AssetCollectionViewCellViewModel, cellViewModel.type == ._none, let tradingAsset = cellViewModel.asset.tradingAsset {
+            if let cellViewModel = cellViewModel as? AssetCollectionViewCellViewModel, cellViewModel.type == ._none, let tradingAsset = cellViewModel.asset as? DashboardTradingAsset {
                 showAccount(tradingAsset)
             }
         default:
@@ -173,40 +171,15 @@ extension TradingViewController: BaseTableViewProtocol {
     }
     
     func showAsset(_ asset: AssetCollectionViewCellViewModel) {
-        var assetId = ""
+        let assetId = asset.getAssetId()
         let type = asset.type
-        
-        switch type {
-        case .program:
-            if let program = asset.asset.program {
-                assetId = program.id?.uuidString ?? ""
-            } else if let tradingAsset = asset.asset.tradingAsset, tradingAsset.assetType == type {
-                assetId = tradingAsset.id?.uuidString ?? ""
-            }
-        case .fund:
-            if let fund = asset.asset.fund {
-                assetId = fund.id?.uuidString ?? ""
-            } else if let tradingAsset = asset.asset.tradingAsset, tradingAsset.assetType == type {
-                assetId = tradingAsset.id?.uuidString ?? ""
-            }
-        case .follow:
-            if let follow = asset.asset.follow {
-                assetId = follow.id?.uuidString ?? ""
-            } else if let tradingAsset = asset.asset.tradingAsset, tradingAsset.assetType == type {
-                assetId = tradingAsset.id?.uuidString ?? ""
-            }
-        case ._none:
-            break
-        }
-        
-        if !assetId.isEmpty {
-            viewModel.router?.showAssetDetails(with: assetId, assetType: type)
-        }
+        viewModel.router?.showAssetDetails(with: assetId, assetType: type)
     }
     func showAccount(_ tradingAsset: DashboardTradingAsset) {
         if let router = viewModel.router, let assetId = tradingAsset.id?.uuidString {
             let viewController = AccountViewController()
             let accountRouter = AccountRouter(parentRouter: router)
+            accountRouter.accountViewController = viewController
             viewController.viewModel = AccountTabmanViewModel(withRouter: accountRouter, assetId: assetId)
             navigationController?.pushViewController(viewController, animated: true)
        }
@@ -215,7 +188,7 @@ extension TradingViewController: BaseTableViewProtocol {
     func didReload(_ indexPath: IndexPath) {
         titleView.balanceLabel.text = viewModel.getTotalValue()
         hideHUD()
-        tableView.reloadRows(at: [indexPath], with: .automatic)
+        tableView.reloadSections([indexPath.section], with: .automatic)
     }
 }
 
@@ -231,13 +204,15 @@ extension TradingViewController: EventDetailsViewProtocol {
 }
 
 class TradingViewModel: ViewModelWithListProtocol {
-    enum RowType {
+    lazy var dataSource: TableViewDataSource = TableViewDataSource(self)
+    
+    enum SectionType {
         case overview
         case events
         case publicTrading
         case privateTrading
     }
-    private var rows: [RowType] = [.overview, .publicTrading, .privateTrading]
+    private var sections: [SectionType] = [.overview, .publicTrading, .privateTrading]
     var viewModels = [CellViewAnyModel]()
     
     var canPullToRefresh: Bool = true
@@ -252,11 +227,11 @@ class TradingViewModel: ViewModelWithListProtocol {
         didSet {
             let overviewViewModel = TradingHeaderTableViewCellViewModel(data: TradingHeaderData(details: details, currency: currency), delegate: delegate)
             viewModels.append(overviewViewModel)
-            reloadRow(.events)
+            reloadSection(.events)
             
             guard let count = details?.events?.items?.count, count > 0 else { return }
             
-            rows.insert(.events, at: 1)
+            sections.insert(.events, at: 1)
             let eventsViewModel = CellWithCollectionViewModel(TradingEventsViewModel(details, delegate: delegate), delegate: delegate)
             viewModels.append(eventsViewModel)
             delegate?.didReload()
@@ -267,7 +242,7 @@ class TradingViewModel: ViewModelWithListProtocol {
             guard let count = publicTrading?.items?.count, count > 0 else { return }
             let viewModel = CellWithCollectionViewModel(TradingPublicShortListViewModel(publicTrading, delegate: delegate, router: router), delegate: delegate)
             viewModels.append(viewModel)
-            reloadRow(.publicTrading)
+            reloadSection(.publicTrading)
         }
     }
     var privateTrading: ItemsViewModelDashboardTradingAsset? {
@@ -275,7 +250,7 @@ class TradingViewModel: ViewModelWithListProtocol {
             guard let count = privateTrading?.items?.count, count > 0 else { return }
             let viewModel = CellWithCollectionViewModel(TradingPrivateShortListViewModel(privateTrading, delegate: delegate, router: router), delegate: delegate)
             viewModels.append(viewModel)
-            reloadRow(.privateTrading)
+            reloadSection(.privateTrading)
         }
     }
     
@@ -290,8 +265,9 @@ class TradingViewModel: ViewModelWithListProtocol {
         self.delegate = router?.tradingViewController
         self.router = router
     }
-    private func reloadRow(_ row: RowType) {
-        delegate?.didReload(IndexPath(row: rows.firstIndex(of: row) ?? 0, section: 0))
+    private func reloadSection(_ section: SectionType) {
+        let reloadSection = sections.firstIndex(of: section) ?? 0
+        delegate?.didReload(IndexPath(row: 0, section: reloadSection))
     }
     func getTotalValue() -> String {
         if let total = details?.equity {
@@ -317,7 +293,7 @@ class TradingViewModel: ViewModelWithListProtocol {
     }
     
     func model(for indexPath: IndexPath) -> CellViewAnyModel? {
-        let type = rows[indexPath.row]
+        let type = sections[indexPath.section]
         switch type {
         case .overview:
             return viewModels.first{ $0 is TradingHeaderTableViewCellViewModel }
@@ -332,8 +308,21 @@ class TradingViewModel: ViewModelWithListProtocol {
     func didSelectEvent(at assetId: String, assetType: AssetType) {
         router?.showAssetDetails(with: assetId, assetType: assetType)
     }
-    func modelsCount() -> Int {
-        return rows.count
+    func headerHeight(for section: Int) -> CGFloat {
+        switch section {
+        case 0:
+            return 0.0
+        default:
+            return Constants.headerHeight
+        }
+    }
+    
+    func numberOfRows(in section: Int) -> Int {
+        return 1
+    }
+    
+    func numberOfSections() -> Int {
+        return sections.count
     }
     
 }

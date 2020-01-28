@@ -13,7 +13,6 @@ class InvestingViewController: ListViewController {
     
     // MARK: - Veriables
     var viewModel: ViewModel!
-    var dataSource: TableViewDataSource<ViewModel>!
     let titleView = TitleView()
     
     // MARK: - Lifecycle
@@ -29,12 +28,11 @@ class InvestingViewController: ListViewController {
     private func setup() {
         tableView.configure(with: .defaultConfiguration)
 
-        dataSource = TableViewDataSource(viewModel)
-        dataSource.delegate = self
+        viewModel.dataSource.delegate = self
         tableView.separatorStyle = .none
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
-        tableView.delegate = dataSource
-        tableView.dataSource = dataSource
+        tableView.delegate = viewModel.dataSource
+        tableView.dataSource = viewModel.dataSource
         tableView.reloadData()
         
         titleView.titleLabel.text = "Investing"
@@ -73,7 +71,7 @@ class InvestingViewController: ListViewController {
         
         bottomSheetController.addNavigationBar("In requests")
         viewModel.inRequestsDelegateManager.inRequestsDelegate = self
-        viewModel.inRequestsDelegateManager.requestSelectable = false
+        viewModel.inRequestsDelegateManager.requestSelectable = true
         viewModel.inRequestsDelegateManager.requests = requests
         
         bottomSheetController.addTableView { [weak self] tableView in
@@ -87,45 +85,16 @@ class InvestingViewController: ListViewController {
     }
     
     func showAsset(_ asset: AssetCollectionViewCellViewModel) {
-        var assetId = ""
+        let assetId = asset.getAssetId()
         let type = asset.type
-        
-        switch type {
-        case .program:
-            if let program = asset.asset.program, let id = program.id?.uuidString {
-                assetId = id
-            } else if let programInvesting = asset.asset.programInvesting, let id = programInvesting.id?.uuidString {
-                assetId = id
-            } else if let tradingAsset = asset.asset.tradingAsset, tradingAsset.assetType == type, let id = tradingAsset.id?.uuidString {
-                assetId = id
-            }
-        case .fund:
-            if let fund = asset.asset.fund, let id = fund.id?.uuidString {
-                assetId = id
-            } else if let fundInvesting = asset.asset.fundInvesting, let id = fundInvesting.id?.uuidString {
-                assetId = id
-            } else if let tradingAsset = asset.asset.tradingAsset, tradingAsset.assetType == type, let id = tradingAsset.id?.uuidString {
-                assetId = id
-            }
-        case .follow:
-            if let follow = asset.asset.follow {
-                assetId = follow.id?.uuidString ?? ""
-            } else if let tradingAsset = asset.asset.tradingAsset, tradingAsset.assetType == type {
-                assetId = tradingAsset.id?.uuidString ?? ""
-            }
-        case ._none:
-            break
-        }
-        
-        if !assetId.isEmpty {
-            viewModel.router?.showAssetDetails(with: assetId, assetType: type)
-        }
+        viewModel.router?.showAssetDetails(with: assetId, assetType: type)
     }
 }
 
 extension InvestingViewController: InRequestsDelegateManagerProtocol {
     func didSelectRequest(at indexPath: IndexPath) {
-        
+        //FIXIT:
+//        viewModel.inRequestsDelegateManager.
     }
     
     func didCanceledRequest(completionResult: CompletionResult) {
@@ -158,7 +127,7 @@ extension InvestingViewController: BaseTableViewProtocol {
         
         switch type {
         case .investingEvents:
-            if let viewModel = cellViewModel as? PortfolioEventCollectionViewCellViewModel {
+            if let viewModel = cellViewModel as? EventCollectionViewCellViewModel {
                 self.showEvent(viewModel.event)
             }
         case .investingRequests:
@@ -182,7 +151,7 @@ extension InvestingViewController: BaseTableViewProtocol {
             let vc = InvestingEventListViewController()
             viewModel.router?.investingEventListViewController = vc
             vc.viewModel = InvestingEventListViewModel(viewModel.router, delegate: vc)
-            vc.title = "Events"
+            vc.title = "History"
             navigationController?.pushViewController(vc, animated: true)
         case .investingPrograms:
             let vc = InvestingProgramListViewController()
@@ -204,7 +173,7 @@ extension InvestingViewController: BaseTableViewProtocol {
     func didReload(_ indexPath: IndexPath) {
         titleView.balanceLabel.text = viewModel.getTotalValue()
         hideHUD()
-        tableView.reloadRows(at: [indexPath], with: .automatic)
+        tableView.reloadSections([indexPath.section], with: .automatic)
     }
 }
 
@@ -220,14 +189,16 @@ extension InvestingViewController: EventDetailsViewProtocol {
 }
 
 class InvestingViewModel: ViewModelWithListProtocol {
-    enum RowType {
+    lazy var dataSource: TableViewDataSource = TableViewDataSource(self)
+    
+    enum SectionType {
         case overview
         case requests
         case events
         case funds
         case programs
     }
-    private var rows: [RowType] = [.overview, .funds, .programs]
+    private var sections: [SectionType] = [.overview, .funds, .programs]
     
     var viewModels = [CellViewAnyModel]()
     
@@ -247,10 +218,10 @@ class InvestingViewModel: ViewModelWithListProtocol {
         didSet {
             let overviewViewModel = InvestingHeaderTableViewCellViewModel(data: InvestingHeaderData(details: details, currency: currency), delegate: delegate)
             viewModels.append(overviewViewModel)
-            reloadRow(.events)
+            reloadSection(.events)
             
             guard let count = details?.events?.items?.count, count > 0 else { return }
-            rows.insert(.events, at: rows.contains(.requests) ? 2 : 1)
+            sections.insert(.events, at: sections.contains(.requests) ? 2 : 1)
             
             let eventsViewModel = CellWithCollectionViewModel(InvestingEventsViewModel(details, delegate: delegate), delegate: delegate)
             viewModels.append(eventsViewModel)
@@ -260,7 +231,7 @@ class InvestingViewModel: ViewModelWithListProtocol {
     var requests: ItemsViewModelAssetInvestmentRequest? {
         didSet {
             guard let count = requests?.items?.count, count > 0 else { return }
-            rows.insert(.requests, at: 1)
+            sections.insert(.requests, at: 1)
             let viewModel = CellWithCollectionViewModel(InvestingRequestsViewModel(requests, delegate: delegate), delegate: delegate)
             viewModels.append(viewModel)
             delegate?.didReload()
@@ -272,7 +243,7 @@ class InvestingViewModel: ViewModelWithListProtocol {
             
             let viewModel = CellWithCollectionViewModel(InvestingFundsViewModel(fundInvesting, delegate: delegate), delegate: delegate)
             viewModels.append(viewModel)
-            reloadRow(.funds)
+            reloadSection(.funds)
         }
     }
     var programInvesting: ItemsViewModelProgramInvestingDetailsList? {
@@ -281,7 +252,7 @@ class InvestingViewModel: ViewModelWithListProtocol {
             
             let viewModel = CellWithCollectionViewModel(InvestingProgramsViewModel(programInvesting, delegate: delegate), delegate: delegate)
             viewModels.append(viewModel)
-            reloadRow(.programs)
+            reloadSection(.programs)
         }
     }
     private let errorCompletion: ((CompletionResult) -> Void) = { (result) in
@@ -296,8 +267,9 @@ class InvestingViewModel: ViewModelWithListProtocol {
         self.delegate = router?.investingViewController
         self.router = router
     }
-    private func reloadRow(_ row: RowType) {
-        delegate?.didReload(IndexPath(row: rows.firstIndex(of: row) ?? 0, section: 0))
+    private func reloadSection(_ section: SectionType) {
+        let reloadSection = sections.firstIndex(of: section) ?? 0
+        delegate?.didReload(IndexPath(row: 0, section: reloadSection))
     }
     func getTotalValue() -> String {
         if let total = details?.equity {
@@ -313,10 +285,10 @@ class InvestingViewModel: ViewModelWithListProtocol {
             self?.details = model
         }, errorCompletion: errorCompletion)
         fetchRequests()
-        DashboardDataProvider.getInvestingFunds(currency: currency, skip: 0, take: 12, completion: { [weak self] (model) in
+        DashboardDataProvider.getInvestingFunds(currency: currency, status: .active, skip: 0, take: 12, completion: { [weak self] (model) in
             self?.fundInvesting = model
         }, errorCompletion: errorCompletion)
-        DashboardDataProvider.getInvestingPrograms(currency: currency, skip: 0, take: 12, completion: { [weak self] (model) in
+        DashboardDataProvider.getInvestingPrograms(currency: currency, status: .active, skip: 0, take: 12, completion: { [weak self] (model) in
             self?.programInvesting = model
         }, errorCompletion: errorCompletion)
         
@@ -330,7 +302,7 @@ class InvestingViewModel: ViewModelWithListProtocol {
     }
     
     func model(for indexPath: IndexPath) -> CellViewAnyModel? {
-        let type = rows[indexPath.row]
+        let type = sections[indexPath.section]
         switch type {
         case .overview:
             return viewModels.first{ $0 is InvestingHeaderTableViewCellViewModel }
@@ -345,13 +317,26 @@ class InvestingViewModel: ViewModelWithListProtocol {
         }
     }
     func didSelect(at indexPath: IndexPath) {
-        let type = rows[indexPath.row]
+        let type = sections[indexPath.section]
         if type == .requests {
             delegate?.action(.investingRequests, actionType: .showAll)
         }
     }
-    func modelsCount() -> Int {
-        return rows.count
+    func headerHeight(for section: Int) -> CGFloat {
+        switch section {
+        case 0:
+            return 0.0
+        default:
+            return Constants.headerHeight
+        }
+    }
+    
+    func numberOfRows(in section: Int) -> Int {
+        return 1
+    }
+    
+    func numberOfSections() -> Int {
+        return sections.count
     }
     func didSelectEvent(at assetId: String, assetType: AssetType) {
         router?.showAssetDetails(with: assetId, assetType: assetType)

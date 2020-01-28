@@ -65,13 +65,24 @@ protocol NodataProtocol {
 
 protocol YourInvestmentProtocol: class {
     func didTapWithdrawButton()
+    func didTapDepositButton()
     func didTapStatusButton()
     func didChangeSwitch(value: Bool)
 }
 
-protocol YourDepositProtocol: class {
-    func didTapWithdrawButton()
-    func didTapDepositButton()
+extension YourInvestmentProtocol {
+    func didTapWithdrawButton() {
+        
+    }
+    func didTapDepositButton() {
+        
+    }
+    func didTapStatusButton() {
+        
+    }
+    func didChangeSwitch(value: Bool) {
+        
+    }
 }
 
 protocol AccountMakeProgramProtocol: class {
@@ -90,19 +101,6 @@ protocol WalletActionsProtocol: class {
     func didTapWithdrawButton()
     func didTapAddFundsButton()
     func didTapTransferButton()
-}
-
-extension YourInvestmentProtocol {
-    func didTapWithdrawButton() {
-        
-    }
-    func didTapStatusButton() {
-        
-    }
-    
-    func didChangeSwitch(value: Bool) {
-        
-    }
 }
 
 protocol NotificationsSettingsProtocol: class {

@@ -59,12 +59,12 @@ class AccountInfoViewController: BaseViewControllerWithTableView {
     override func fetch() {
         viewModel.fetch { [weak self] (result) in
             self?.hideAll()
+            self?.reloadData()
             
             switch result {
             case .success:
-                self?.reloadData()
+                break
             case .failure(let errorType):
-                self?.reloadData()
                 ErrorHandler.handleError(with: errorType, viewController: self)
             }
         }
@@ -134,60 +134,5 @@ extension AccountInfoViewController: UITableViewDelegate, UITableViewDataSource 
 extension AccountInfoViewController: ReloadDataProtocol {
     func didReloadData() {
         reloadData()
-    }
-}
-
-class OldDetailInfoViewController<ViewModel: ViewModelWithListProtocol>: ListViewController {
-    // MARK: - Veriables
-    var viewModel: ViewModel!
-    var dataSource: TableViewDataSource<ViewModel>!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setup()
-        fetch()
-    }
-    private func setup() {
-        setupPullToRefresh(scrollView: tableView)
-        tableView.configure(with: .defaultConfiguration)
-
-        dataSource = TableViewDataSource(viewModel)
-        tableView.registerNibs(for: viewModel.cellModelsForRegistration)
-        tableView.delegate = dataSource
-        tableView.dataSource = dataSource
-        tableView.reloadData()
-    }
-    
-    private func reloadData() {
-        DispatchQueue.main.async {
-            self.tableView?.reloadData()
-        }
-    }
-    
-    override func pullToRefresh() {
-        super.pullToRefresh()
-        
-        viewModel.fetch()
-    }
-    
-    func fetch() {
-        reloadData()
-    }
-}
-extension OldDetailInfoViewController: BaseTableViewProtocol {
-    func didSelect(_ type: CellActionType, cellViewModel: CellViewAnyModel?) {
-        print("select cell \(type)")
-        
-    }
-    
-    func action(_ type: CellActionType, actionType: ActionType) {
-        print("show all \(type)")
-        
-    }
-    
-    func didReload(_ indexPath: IndexPath) {
-        hideHUD()
-        tableView.reloadRows(at: [indexPath], with: .automatic)
     }
 }

@@ -19,7 +19,7 @@ class DateRangeView: UIView {
     // MARK: - Variables
     weak var delegate: DateRangeViewProtocol?
     
-    var dateRangeType: DateRangeType = .month
+    var dateRangeType: DateRangeType = .all
     
     var dateFrom: Date? {
         didSet {
@@ -71,7 +71,7 @@ class DateRangeView: UIView {
     }
     @IBOutlet weak var allTimeButton: DateRangeButton! {
         didSet {
-            let dateRangeType = DateRangeType.allTime
+            let dateRangeType = DateRangeType.all
             allTimeButton.setTitle(dateRangeType.getButtonTitle(), for: .normal)
             allTimeButton.tag = dateRangeType.rawValue
         }
@@ -133,7 +133,7 @@ class DateRangeView: UIView {
     
     // MARK: - Public methods
     func reset() {
-        dateRangeType = .month
+        dateRangeType = .all
         changeDateRangeType()
     }
     // MARK: - Private methods
@@ -174,7 +174,7 @@ class DateRangeView: UIView {
             dateTo = Date()
             dateFrom = dateTo?.removeYears(1)
             yearButton.isSelected = true
-        case .allTime:
+        case .all:
             dateFrom = nil
             dateTo = nil
             allTimeButton.isSelected = true

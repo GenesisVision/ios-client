@@ -73,7 +73,7 @@ class CellWithCollectionView: BaseTableViewCell {
     }
     
     func setupCollectionView(_ collectionViewDelegate: UICollectionViewDelegate, _ collectionViewDataSource: UICollectionViewDataSource, cellModelsForRegistration: [CellViewAnyModel.Type], layout: UICollectionViewLayout) {
-        collectionView.collectionViewLayout = layout
+//        collectionView.collectionViewLayout = layout
         collectionView.delegate = collectionViewDelegate
         collectionView.dataSource = collectionViewDataSource
         

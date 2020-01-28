@@ -34,6 +34,11 @@ class CreateFundViewController: BaseModalViewController {
         viewModel.fetch()
         
         stackView.amountView.maxButton.addTarget(self, action: #selector(copyMaxValueButtonAction), for: .touchUpInside)
+        
+        stackView.amountView.textField.designableTextFieldDelegate = self
+        stackView.amountView.textField.delegate = self
+        stackView.amountView.textField.addTarget(self, action: #selector(checkActionButton), for: .editingChanged)
+        
         stackView.nameView.textField.delegate = self
         stackView.nameView.textField.designableTextFieldDelegate = self
         stackView.nameView.textField.addTarget(self, action: #selector(nameDidChange), for: .editingChanged)
@@ -62,14 +67,26 @@ class CreateFundViewController: BaseModalViewController {
     }
     
     @objc func checkActionButton() {
+        guard let amountText = stackView.amountView.textField.text, !amountText.isEmpty, let value = amountText.doubleValue else {
+            stackView.amountView.approxLabel.text = ""
+            stackView.actionButton.setEnabled(false)
+            return
+        }
+        
+        stackView.amountView.approxLabel.text = viewModel.getApproxString(value)
+        
+        guard let minDeposit = viewModel.getMinDepositValue(), let exchangedValue = viewModel.exchangeValueInCurrency(value), exchangedValue >= minDeposit else { return
+            stackView.actionButton.setEnabled(false)
+        }
+        
         guard let name = stackView.nameView.textField.text,
             let description = stackView.descriptionView.textView.text,
             let exitFee = stackView.exitFeeView.textField.text,
             let entryFee = stackView.entryFeeView.textField.text else { return }
         
-        let value = name.count >= 4 && name.count <= 20 && description.count >= 20 && description.count <= 500 && !exitFee.isEmpty && !entryFee.isEmpty
+        let enable = name.count >= 4 && name.count <= 20 && description.count >= 20 && description.count <= 500 && !exitFee.isEmpty && !entryFee.isEmpty
         
-        stackView.actionButton.setEnabled(value)
+        stackView.actionButton.setEnabled(enable)
     }
     
     // MARK: - Actions
@@ -238,12 +255,12 @@ class CreateFundViewModel {
     var assetCollectionDataSource: CollectionViewDataSource<AssetCollectionViewModel>!
     
     var addAssetListViewModel: AddAssetListViewModel!
-    var addAssetListDataSource: TableViewDataSource<AddAssetListViewModel>!
+    var addAssetListDataSource: TableViewDataSource!
     
     var fromListViewModel: FromListViewModel!
-    var fromListDataSource: TableViewDataSource<FromListViewModel>!
+    var fromListDataSource: TableViewDataSource!
     
-    var rateModel: RateModel?
+    var ratesModel: RatesModel?
     var walletSummary: WalletSummary? {
         didSet {
             if let wallets = walletSummary?.wallets, !wallets.isEmpty {
@@ -286,25 +303,56 @@ class CreateFundViewModel {
             self?.twoFactorStatus = twoFactorStatus
         }, errorCompletion: errorCompletion)
     }
-    func updateRate() {
-        guard let walletCurrency = fromListViewModel.selected()?.currency?.rawValue else { return }
-        RateDataProvider.getRate(from: walletCurrency, to: Constants.gvtString, completion: { [weak self] (rateModel) in
-            self?.rateModel = rateModel
-        }, errorCompletion: errorCompletion)
+    func updateRates() {
+        RateDataProvider.getRates(from: [Currency.gvt.rawValue], to: [Currency.gvt.rawValue, Currency.btc.rawValue, Currency.eth.rawValue, Currency.usdt.rawValue], completion: { [weak self] (ratesModel) in
+            self?.ratesModel = ratesModel
+        }) { (result) in
+            
+        }
     }
     func getMinDeposit() -> String {
         guard let minDeposit = createFundInfo?.minDeposit else { return "" }
         let currencyType: CurrencyType = .gvt
         return minDeposit.rounded(with: currencyType).toString() + " " + currencyType.rawValue
     }
+    func getMinDepositValue() -> Double? {
+        guard let minDeposit = createFundInfo?.minDeposit else { return nil }
+
+        return minDeposit
+    }
     func getSelectedWallet() -> String {
         guard let selected = fromListViewModel.selected(), let title = selected.title, let currency = selected.currency?.rawValue else { return "" }
         
         return "\(currency) | \(title)"
     }
+    func getSelectedWalletCurrency() -> String {
+        guard let currency = fromListViewModel.selected()?.currency?.rawValue else { return "" }
+        
+        return currency
+    }
     func getAvailable() -> String {
         guard let selected = fromListViewModel?.selected(), let currency = selected.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency), let available = fromListViewModel?.selected()?.available else { return "" }
         return available.rounded(with: currencyType).toString() + " " + currencyType.rawValue
+    }
+    func getRate() -> Double? {
+        guard let rates = ratesModel?.rates, let fromCurrency = fromListViewModel.selected()?.currency, fromCurrency != Currency.gvt else { return nil }
+        
+        let rate = rates.GVT?.first(where: { $0.currency == fromCurrency })?.rate
+        
+        return rate != 0 ? rate : nil
+    }
+    func getApproxString(_ value: Double) -> String {
+        let currency = CurrencyType.gvt
+        guard let rate = getRate() else { return "" }
+        
+        
+        let text = "≈" + (value / rate).rounded(with: currency).toString() + " " + currency.rawValue
+        return text
+    }
+    
+    func exchangeValueInCurrency(_ value: Double) -> Double? {
+        guard let rate = getRate() else { return nil }
+        return value / rate
     }
     func createFund(completion: @escaping CompletionBlock) {
         saveProfilePhoto { [weak self] (result) in
@@ -320,7 +368,7 @@ class CreateFundViewModel {
     
     func updateWallet(_ index: Int) {
         request.depositWalletId = fromListViewModel?.selected()?.id
-        updateRate()
+        updateRates()
     }
     
     // MARK: - Public methods

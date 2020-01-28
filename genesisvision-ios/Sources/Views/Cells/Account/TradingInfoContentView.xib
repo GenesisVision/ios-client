@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" id="Vcs-Mk-drJ" customClass="TradingInfoContentView">
+            <rect key="frame" x="0.0" y="0.0" width="280" height="311"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="DFw-KT-EY5">
+                    <rect key="frame" x="0.0" y="0.0" width="280" height="40"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JLX-9M-xnJ" customClass="LargeTitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="136" height="0.0"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ny3-vx-DtX" customClass="StatusButton" customModule="GV_DEBUG" customModuleProvider="target">
+                            <rect key="frame" x="250" y="0.0" width="30" height="30"/>
+                            <connections>
+                                <action selector="manageButtonAction:" destination="Vcs-Mk-drJ" eventType="touchUpInside" id="YkW-Qv-Fm3"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="usH-Tt-sRd">
+                    <rect key="frame" x="0.0" y="60" width="280" height="161"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="U5v-dv-DgW">
+                            <rect key="frame" x="0.0" y="0.0" width="280" height="70.5"/>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="vbb-Ur-7Qi">
+                            <rect key="frame" x="0.0" y="90.5" width="280" height="70.5"/>
+                        </stackView>
+                    </subviews>
+                </stackView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H61-22-vbX" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="241" width="280" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="i2k-NR-br6">
+                    <rect key="frame" x="0.0" y="261" width="280" height="50"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ASv-sF-TzA" customClass="ActionButton" customModule="GV_DEBUG" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="280" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="8o6-a3-vp0"/>
+                            </constraints>
+                            <inset key="contentEdgeInsets" minX="0.0" minY="12" maxX="0.0" maxY="12"/>
+                            <connections>
+                                <action selector="mainButtonAction:" destination="Vcs-Mk-drJ" eventType="touchUpInside" id="Gxb-4i-rej"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="eQt-2F-k66"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="NTo-aA-lEA"/>
+            <connections>
+                <outlet property="bottomStackView" destination="vbb-Ur-7Qi" id="xi1-DT-rq7"/>
+                <outlet property="disclaimerLabel" destination="H61-22-vbX" id="RZk-rA-w1r"/>
+                <outlet property="mainButton" destination="ASv-sF-TzA" id="Nsx-zU-lbz"/>
+                <outlet property="manageButton" destination="Ny3-vx-DtX" id="8yi-qO-D50"/>
+                <outlet property="titleLabel" destination="JLX-9M-xnJ" id="qDH-Tg-eXa"/>
+                <outlet property="topStackView" destination="U5v-dv-DgW" id="vUO-Lh-LyO"/>
+            </connections>
+            <point key="canvasLocation" x="135" y="150"/>
+        </stackView>
+    </objects>
+</document>

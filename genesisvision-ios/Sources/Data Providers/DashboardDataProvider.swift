@@ -46,7 +46,7 @@ class DashboardDataProvider: DataProvider {
         }
     }
     
-    static func getInvestingFunds(_ sorting: DashboardAPI.Sorting_getInvestingFunds? = nil, currency: CurrencyType?, status: DashboardAPI.Status_getInvestingFunds? = .active, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skip: Int?, take: Int?, completion: @escaping (ItemsViewModelFundInvestingDetailsList?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getInvestingFunds(_ sorting: DashboardAPI.Sorting_getInvestingFunds? = nil, currency: CurrencyType?, status: DashboardAPI.Status_getInvestingFunds?, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skip: Int?, take: Int?, completion: @escaping (ItemsViewModelFundInvestingDetailsList?) -> Void, errorCompletion: @escaping CompletionBlock) {
 
         guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
 
@@ -60,7 +60,7 @@ class DashboardDataProvider: DataProvider {
         }
     }
     
-    static func getInvestingPrograms(_ sorting: DashboardAPI.Sorting_getInvestingPrograms? = nil, currency: CurrencyType?, status: DashboardAPI.Status_getInvestingPrograms? = .active, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skip: Int?, take: Int?, completion: @escaping (ItemsViewModelProgramInvestingDetailsList?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getInvestingPrograms(_ sorting: DashboardAPI.Sorting_getInvestingPrograms? = nil, currency: CurrencyType?, status: DashboardAPI.Status_getInvestingPrograms?, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skip: Int?, take: Int?, completion: @escaping (ItemsViewModelProgramInvestingDetailsList?) -> Void, errorCompletion: @escaping CompletionBlock) {
 
         guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
 
@@ -129,7 +129,7 @@ class DashboardDataProvider: DataProvider {
         }
     }
     
-    static func getPrivateTrading(_ dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, currency: CurrencyType?, status: DashboardAPI.Status_getPrivateTradingAssets? = .active, skip: Int?, take: Int?, completion: @escaping (ItemsViewModelDashboardTradingAsset?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getPrivateTrading(_ dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, currency: CurrencyType?, status: DashboardAPI.Status_getPrivateTradingAssets?, skip: Int?, take: Int?, completion: @escaping (ItemsViewModelDashboardTradingAsset?) -> Void, errorCompletion: @escaping CompletionBlock) {
 
         guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
@@ -143,7 +143,7 @@ class DashboardDataProvider: DataProvider {
         }
     }
     
-    static func getPublicTrading(_ dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, currency: CurrencyType?, status: DashboardAPI.Status_getPublicTradingAssets? = .active, skip: Int?, take: Int?, completion: @escaping (ItemsViewModelDashboardTradingAsset?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getPublicTrading(_ dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, currency: CurrencyType?, status: DashboardAPI.Status_getPublicTradingAssets?, skip: Int?, take: Int?, completion: @escaping (ItemsViewModelDashboardTradingAsset?) -> Void, errorCompletion: @escaping CompletionBlock) {
 
         guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
 

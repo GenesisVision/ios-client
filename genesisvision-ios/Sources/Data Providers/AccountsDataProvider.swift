@@ -52,7 +52,7 @@ class AccountsDataProvider: DataProvider {
     }
     
     // MARK: - Trades
-    static func getTrades(from id: String, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: TradingaccountAPI.Sorting_getTrades? = nil, accountId: UUID? = nil, currency: CurrencyType? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (TradesSignalViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getTrades(with id: String, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: TradingaccountAPI.Sorting_getTrades? = nil, accountId: UUID? = nil, currency: CurrencyType? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (TradesSignalViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
         guard let uuid = UUID(uuidString: id), let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         

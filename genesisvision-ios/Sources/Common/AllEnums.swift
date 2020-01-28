@@ -30,6 +30,10 @@ enum CellActionType {
     case attachAccount
     case makeProgram
     case makeSignal
+    
+    case changePassword
+    case closePeriod
+    case openSettings
 }
 
 enum DidSelectType {
@@ -75,7 +79,7 @@ enum DateRangeType: Int {
     case week
     case month
     case year
-    case allTime
+    case all
     case custom
     
     func getString() -> String {
@@ -88,7 +92,7 @@ enum DateRangeType: Int {
             return "Last month"
         case .year:
             return "Last year"
-        case .allTime:
+        case .all:
             return "All time"
         case .custom:
             return "Custom"
@@ -105,7 +109,7 @@ enum DateRangeType: Int {
             return "Month"
         case .year:
             return "Year"
-        case .allTime:
+        case .all:
             return "All time"
         case .custom:
             return "Custom"

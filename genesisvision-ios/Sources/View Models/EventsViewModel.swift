@@ -9,12 +9,14 @@
 import UIKit
 
 class EventListViewModel: ListViewModelWithPaging {
+    lazy var dataSource: TableViewDataSource = TableViewDataSource(self)
+    
     var viewModels = [CellViewAnyModel]()
-    var title = "Events"
+    var title = "History"
     var canPullToRefresh: Bool = true
 
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [PortfolioEventTableViewCellViewModel.self]
+        return [EventTableViewCellViewModel.self]
     }
     var from: Date?
     var to: Date?
@@ -42,13 +44,13 @@ class EventListViewModel: ListViewModelWithPaging {
         if refresh {
             skip = 0
         }
-        var models = [PortfolioEventTableViewCellViewModel]()
+        var models = [EventTableViewCellViewModel]()
         
         let assetType = EventsAPI.AssetType_getEvents(rawValue: self.assetType.rawValue)
         EventsDataProvider.get(assetId, eventLocation: assetId == nil ? .eventsAll : .asset, from: from, to: to, eventType: .all, assetType: assetType, assetsIds: nil, forceFilterByIds: nil, eventGroup: .none, skip: skip, take: take(), completion: { [weak self] (model) in
             guard let model = model else { return }
             model.events?.forEach({ (event) in
-                let viewModel = PortfolioEventTableViewCellViewModel(event: event)
+                let viewModel = EventTableViewCellViewModel(event: event)
                 models.append(viewModel)
             })
             self?.updateViewModels(models, refresh: refresh, total: model.total)

@@ -15,13 +15,7 @@ class AccountViewController: BaseTabmanViewController<AccountTabmanViewModel> {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        showProgressHUD()
         setup()
-        viewModel.fetch { [weak self] (result) in
-            self?.hideHUD()
-            self?.reloadData()
-            self?.title = self?.viewModel.title
-        }
     }
     
     // MARK: - Private methods
@@ -39,7 +33,7 @@ class AccountViewController: BaseTabmanViewController<AccountTabmanViewModel> {
 }
 extension AccountViewController: ReloadDataProtocol {
     func didReloadData() {
-        
+        self.title = viewModel.title
     }
 }
 final class AccountTabmanViewModel: TabmanViewModel {
@@ -57,15 +51,18 @@ final class AccountTabmanViewModel: TabmanViewModel {
     
     var assetId: String?
     
-    var accountDetailsFull: PrivateTradingAccountFull?
+    var accountDetailsFull: PrivateTradingAccountFull? {
+        didSet {
+            title = accountDetailsFull?.publicInfo?.title ?? ""
+        }
+    }
     
     // MARK: - Init
     init(withRouter router: Router, assetId: String) {
         super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0)
-        
+        self.router = router
         self.assetId = assetId
-        self.title = ""
-    
+        
         font = UIFont.getFont(.semibold, size: 16)
         
         self.dataSource = PageboyDataSource(self)
@@ -85,7 +82,8 @@ final class AccountTabmanViewModel: TabmanViewModel {
             
             return router.getBalanceViewController(with: viewModel)
         case .profit:
-            guard let currency = accountDetailsFull?.tradingAccountInfo?.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency) else { return nil }
+            let currency = accountDetailsFull?.tradingAccountInfo?.currency?.rawValue
+            let currencyType = CurrencyType(rawValue: currency ?? "USD")
             let viewModel = AccountProfitViewModel(withRouter: router, assetId: assetId, reloadDataProtocol: router.accountViewController, currency: currencyType)
             
             return router.getProfitViewController(with: viewModel)
@@ -110,19 +108,5 @@ extension AccountTabmanViewModel: TabmanDataSourceProtocol {
     
     func getViewController(_ index: Int) -> UIViewController? {
         return getViewController(tabTypes[index])
-    }
-}
-
-// MARK: - Actions
-extension AccountTabmanViewModel {
-    // MARK: - Public methods
-    func fetch(_ completion: @escaping CompletionBlock) {
-        guard let assetId = self.assetId else { return }
-        AccountsDataProvider.get(assetId, completion: { [weak self] (viewModel) in
-            guard let viewModel = viewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
-            
-            self?.accountDetailsFull = viewModel
-            completion(.success)
-        }, errorCompletion: completion)
     }
 }
