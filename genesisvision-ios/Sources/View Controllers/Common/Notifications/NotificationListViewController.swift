@@ -66,7 +66,7 @@ class NotificationListViewController: BaseViewControllerWithTableView {
     private func reloadData() {
         DispatchQueue.main.async {
             self.refreshControl?.endRefreshing()
-            self.tableView?.reloadData()
+            self.tableView?.reloadDataSmoothly()
         }
     }
     
@@ -102,6 +102,8 @@ extension NotificationListViewController: UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath))
+        
+        cell.willDisplay()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -432,6 +432,7 @@ extension ListViewModel {
     func refresh(completion: @escaping CompletionBlock) {
         if let mask = filterModel.mask, mask.isEmpty {
             updateFetchedData(totalCount: 0, [])
+            completion(.success)
             return
         }
         

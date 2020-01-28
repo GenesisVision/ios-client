@@ -226,3 +226,4 @@ func getPlatformCurrencyType() -> CurrencyType {
     
     return .usdt
 }
+

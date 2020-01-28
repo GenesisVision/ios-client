@@ -12,13 +12,15 @@ final class ManagerListViewModel: ListViewModelProtocol {
     var filterModel: FilterModel = FilterModel()
     
     // MARK: - Variables
-    var assetType: AssetType = ._none //FIXME: 
+    var assetType: AssetType = ._none 
     var title: String = "Managers"
     
     internal var sections: [SectionType] = [.assetList]
     
     var router: ListRouterProtocol!
-
+    
+    var assetListDelegateManager: ListDelegateManager<ListViewModel>!
+    
     private weak var reloadDataProtocol: ReloadDataProtocol?
     var canPullToRefresh = true
     var canFetchMoreResults = true

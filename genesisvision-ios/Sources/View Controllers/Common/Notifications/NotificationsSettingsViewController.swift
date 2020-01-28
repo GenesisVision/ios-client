@@ -65,7 +65,7 @@ class NotificationsSettingsViewController: BaseViewControllerWithTableView {
     private func reloadData() {
         DispatchQueue.main.async {
             self.hideAll()
-            self.tableView?.reloadData()
+            self.tableView?.reloadDataSmoothly()
         }
     }
     

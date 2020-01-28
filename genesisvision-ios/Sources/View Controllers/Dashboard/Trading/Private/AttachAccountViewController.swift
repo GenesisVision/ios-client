@@ -89,7 +89,7 @@ class AttachAccountViewController: BaseModalViewController {
             tableView.registerNibs(for: viewModel.exchangeListViewModel.cellModelsForRegistration)
             tableView.delegate = viewModel.exchangeListDataSource
             tableView.dataSource = viewModel.exchangeListDataSource
-            tableView.reloadData()
+            tableView.reloadDataSmoothly()
         }
 
         present(bottomSheetController, animated: true, completion: nil)

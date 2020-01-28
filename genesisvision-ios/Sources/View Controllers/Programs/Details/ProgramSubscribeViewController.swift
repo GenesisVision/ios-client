@@ -314,7 +314,7 @@ class ProgramSubscribeViewController: BaseViewController {
             tableView.registerNibs(for: viewModel.tradingAccountListViewModel.cellModelsForRegistration)
             tableView.delegate = viewModel.tradingAccountListDataSource
             tableView.dataSource = viewModel.tradingAccountListDataSource
-            tableView.reloadData()
+            tableView.reloadDataSmoothly()
         }
 
         present(bottomSheetController, animated: true, completion: nil)

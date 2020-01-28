@@ -19,7 +19,7 @@ class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDelegate 
     init(_ viewModel: TradesViewModelProtocol) {
         self.viewModel = viewModel
     }
-
+    
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let numberOfRows = viewModel.numberOfRows(in: section)
@@ -55,25 +55,21 @@ class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
         guard viewModel.cellAnimations(), let cell = tableView.cellForRow(at: indexPath) else { return }
         
-        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1.0, options: [.curveEaseOut, .beginFromCurrentState], animations: {
-            cell.alpha = 0.8
-            cell.transform = cell.transform.scaledBy(x: 0.96, y: 0.96)
-        }, completion: nil)
+        cell.didHighlight()
     }
     
     func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
         guard viewModel.cellAnimations(), let cell = tableView.cellForRow(at: indexPath) else { return }
         
-        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1.0, options: [.curveEaseOut, .beginFromCurrentState], animations: {
-            cell.alpha = 1
-            cell.transform = .identity
-        }, completion: nil)
+        cell.didUnhighlight()
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if let viewModel = viewModel as? ListViewModelWithPaging {
             viewModel.fetchMore(at: indexPath)
         }
+        
+        cell.willDisplay()
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

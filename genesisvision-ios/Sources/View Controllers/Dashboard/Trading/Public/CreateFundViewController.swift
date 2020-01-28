@@ -103,7 +103,7 @@ class CreateFundViewController: BaseModalViewController {
             tableView.registerNibs(for: viewModel.addAssetListViewModel.cellModelsForRegistration)
             tableView.delegate = viewModel.addAssetListDataSource
             tableView.dataSource = viewModel.addAssetListDataSource
-            tableView.reloadData()
+            tableView.reloadDataSmoothly()
         }
 
         present(bottomSheetController, animated: true, completion: nil)
@@ -163,7 +163,7 @@ class CreateFundViewController: BaseModalViewController {
             tableView.registerNibs(for: viewModel.fromListViewModel.cellModelsForRegistration)
             tableView.delegate = viewModel.fromListDataSource
             tableView.dataSource = viewModel.fromListDataSource
-            tableView.reloadData()
+            tableView.reloadDataSmoothly()
         }
 
         present(bottomSheetController, animated: true, completion: nil)

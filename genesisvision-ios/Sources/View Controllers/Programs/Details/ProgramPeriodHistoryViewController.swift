@@ -43,7 +43,7 @@ class ProgramPeriodHistoryViewController: BaseViewControllerWithTableView {
     private func reloadData() {
         DispatchQueue.main.async {
             self.refreshControl?.endRefreshing()
-            self.tableView?.reloadData()
+            self.tableView?.reloadDataSmoothly()
         }
     }
     
@@ -87,6 +87,8 @@ extension ProgramPeriodHistoryViewController: UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath))
+        
+        cell.willDisplay()
     }
     
     // MARK: - UITableViewDataSource

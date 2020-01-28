@@ -51,7 +51,7 @@ final class FilterCurrencyDelegateManager: NSObject, UITableViewDelegate, UITabl
                 self?.currencies.removeAll()
                 self?.currencies.append(PlatformCurrencyInfo(name: "All", color: nil))
                 self?.currencies.append(contentsOf: platformCurrencies)
-                self?.tableView?.reloadData()
+                self?.tableView?.reloadDataSmoothly()
             }
         }
     }

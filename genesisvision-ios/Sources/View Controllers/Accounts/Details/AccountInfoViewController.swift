@@ -52,7 +52,7 @@ class AccountInfoViewController: BaseViewControllerWithTableView {
     
     private func reloadData() {
         DispatchQueue.main.async {
-            self.tableView?.reloadData()
+            self.tableView?.reloadDataSmoothly()
         }
     }
     

@@ -643,11 +643,11 @@ class DashboardTradingLabelsView: UIStackView {
         
         yourEquityLabel.titleLabel.text = "your equity"
         yourEquityLabel.valueLabel.text = data.yourEquity.toString() + " " + currency.rawValue
-        yourEquityLabel.valueLabel.font = UIFont.getFont(.semibold, size: 21.0)
+        yourEquityLabel.valueLabel.font = UIFont.getFont(.semibold, size: 18.0)
         
         aumLabel.titleLabel.text = "AUM"
         aumLabel.valueLabel.text = data.aum.toString() + " " + currency.rawValue
-        aumLabel.valueLabel.font = UIFont.getFont(.semibold, size: 21.0)
+        aumLabel.valueLabel.font = UIFont.getFont(.semibold, size: 18.0)
         
         let day = data.profits.day
         changeLabelsView.dayLabel.titleLabel.text = "day"
@@ -692,15 +692,15 @@ class DashboardInvestingLabelsView: UIStackView {
         
         balanceLabel.titleLabel.text = "balance"
         balanceLabel.valueLabel.text = data.balance.toString() + " " + currency.rawValue
-        balanceLabel.valueLabel.font = UIFont.getFont(.semibold, size: 21.0)
+        balanceLabel.valueLabel.font = UIFont.getFont(.semibold, size: 18.0)
         
         programsLabel.titleLabel.text = "programs"
         programsLabel.valueLabel.text = data.programs.toString()
-        programsLabel.valueLabel.font = UIFont.getFont(.semibold, size: 21.0)
+        programsLabel.valueLabel.font = UIFont.getFont(.semibold, size: 18.0)
         
         fundsLabel.titleLabel.text = "funds"
         fundsLabel.valueLabel.text = data.funds.toString()
-        fundsLabel.valueLabel.font = UIFont.getFont(.semibold, size: 21.0)
+        fundsLabel.valueLabel.font = UIFont.getFont(.semibold, size: 18.0)
         
         let day = data.profits.day
         changeLabelsView.dayLabel.titleLabel.text = "day"

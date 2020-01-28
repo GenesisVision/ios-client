@@ -82,6 +82,7 @@ extension AccountTradesViewModel {
     func fetch(completion: @escaping CompletionBlock) {
         fetch({ [weak self] (totalCount, viewModels) in
             self?.updateFetchedData(totalCount: totalCount, viewModels: viewModels)
+            completion(.success)
             }, completionError: completion)
     }
     

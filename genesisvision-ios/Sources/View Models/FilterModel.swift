@@ -36,9 +36,9 @@ struct FilterLevelModel {
 }
 
 struct FilterDateRangeModel {
-    var dateRangeType: DateRangeType = .all
-    var dateFrom: Date?
-    var dateTo: Date?
+    var dateRangeType: DateRangeType = .month
+    var dateFrom: Date? = Date().removeMonths(1)
+    var dateTo: Date? = Date()
 }
 
 struct FilterCurrencyModel {

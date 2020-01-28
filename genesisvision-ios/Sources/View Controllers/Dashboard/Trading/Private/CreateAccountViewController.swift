@@ -115,7 +115,7 @@ class CreateAccountViewController: BaseModalViewController {
             tableView.registerNibs(for: viewModel.accountTypeListViewModel.cellModelsForRegistration)
             tableView.delegate = viewModel.accountTypeListDataSource
             tableView.dataSource = viewModel.accountTypeListDataSource
-            tableView.reloadData()
+            tableView.reloadDataSmoothly()
         }
 
         present(bottomSheetController, animated: true, completion: nil)
@@ -133,7 +133,7 @@ class CreateAccountViewController: BaseModalViewController {
             tableView.registerNibs(for: viewModel.currencyListViewModel.cellModelsForRegistration)
             tableView.delegate = viewModel.currencyListDataSource
             tableView.dataSource = viewModel.currencyListDataSource
-            tableView.reloadData()
+            tableView.reloadDataSmoothly()
         }
 
         present(bottomSheetController, animated: true, completion: nil)
@@ -151,7 +151,7 @@ class CreateAccountViewController: BaseModalViewController {
             tableView.registerNibs(for: viewModel.leverageListViewModel.cellModelsForRegistration)
             tableView.delegate = viewModel.leverageListDataSource
             tableView.dataSource = viewModel.leverageListDataSource
-            tableView.reloadData()
+            tableView.reloadDataSmoothly()
         }
 
         present(bottomSheetController, animated: true, completion: nil)
@@ -169,7 +169,7 @@ class CreateAccountViewController: BaseModalViewController {
             tableView.registerNibs(for: viewModel.fromListViewModel.cellModelsForRegistration)
             tableView.delegate = viewModel.fromListDataSource
             tableView.dataSource = viewModel.fromListDataSource
-            tableView.reloadData()
+            tableView.reloadDataSmoothly()
         }
 
         present(bottomSheetController, animated: true, completion: nil)

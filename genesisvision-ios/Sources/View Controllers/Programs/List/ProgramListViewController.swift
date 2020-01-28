@@ -99,10 +99,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     private func reloadData() {
         DispatchQueue.main.async {
             self.refreshControl?.endRefreshing()
-
-            UIView.setAnimationsEnabled(false)
-            self.tableView?.reloadData()
-            UIView.setAnimationsEnabled(true)
+            self.tableView.reloadDataSmoothly()
         }
     }
     

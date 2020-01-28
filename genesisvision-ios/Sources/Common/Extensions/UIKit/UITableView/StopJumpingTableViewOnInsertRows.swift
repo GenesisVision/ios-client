@@ -10,17 +10,19 @@ import UIKit.UITableView
 
 extension UITableView {
     func reloadDataSmoothly() {
-        UIView.setAnimationsEnabled(false)
-        CATransaction.begin()
+//        self.reloadSections(IndexSet(integer: 1), with: .fade)
         
-        CATransaction.setCompletionBlock { () -> Void in
-            UIView.setAnimationsEnabled(true)
-        }
+//        let range = NSMakeRange(0, self.numberOfSections)
+//        let sections = NSIndexSet(indexesIn: range)
+//        self.reloadSections(sections as IndexSet, with: .none)
         
-        reloadData()
-        beginUpdates()
-        endUpdates()
-        
-        CATransaction.commit()
+//        UIView.setAnimationsEnabled(false)
+//        self.reloadData()
+//        UIView.setAnimationsEnabled(true)
+//
+        UIView.transition(with: self,
+                          duration: 0.3,
+                          options: .transitionCrossDissolve,
+                          animations: { self.reloadData() })
     }
 }

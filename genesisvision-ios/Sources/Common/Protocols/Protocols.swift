@@ -43,7 +43,7 @@ extension BaseTableViewProtocol where Self: ListViewController {
     func didReload() {
         hideHUD()
         refreshControl?.endRefreshing()
-        tableView.reloadData()
+        tableView.reloadDataSmoothly()
     }
 }
 
@@ -160,8 +160,6 @@ protocol CurrencyTitleButtonProtocol {
 }
 
 protocol ViewModelWithTableView {
-    var tableViewDataSourceAndDelegate: TableViewDataSourceAndDelegate! { get }
-    
     func headerTitle(for section: Int) -> String?
     func headerHeight(for section: Int) -> CGFloat
     

@@ -43,7 +43,7 @@ class FundReallocateHistoryViewController: BaseViewControllerWithTableView {
     private func reloadData() {
         DispatchQueue.main.async {
             self.refreshControl?.endRefreshing()
-            self.tableView?.reloadData()
+            self.tableView?.reloadDataSmoothly()
         }
     }
     
@@ -84,6 +84,8 @@ extension FundReallocateHistoryViewController: UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath))
+        
+        cell.willDisplay()
     }
     
     // MARK: - UITableViewDataSource

@@ -46,32 +46,20 @@ class ListDelegateManager<T: ListViewModelProtocol>: NSObject, UITableViewDelega
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         delegate?.delegateManagerTableView(tableView, willDisplay: cell, forRowAt: indexPath)
 
-        let transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-        cell.transform = transform
-        cell.alpha = 0.0
-        UIView.animate(withDuration: 0.3) {
-            cell.transform = .identity
-            cell.alpha = 1.0
-        }
+        cell.willDisplay()
     }
     
     func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
         guard cellAnimations, let cell = tableView.cellForRow(at: indexPath) else { return }
         
-        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1.0, options: [.curveEaseOut, .beginFromCurrentState], animations: {
-            cell.alpha = 0.8
-            cell.transform = cell.transform.scaledBy(x: 0.96, y: 0.96)
-        }, completion: nil)
+        cell.didHighlight()
         
     }
     
     func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
         guard cellAnimations, let cell = tableView.cellForRow(at: indexPath) else { return }
         
-        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1.0, options: [.curveEaseOut, .beginFromCurrentState], animations: {
-            cell.alpha = 1
-            cell.transform = .identity
-        }, completion: nil)
+        cell.didUnhighlight()
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

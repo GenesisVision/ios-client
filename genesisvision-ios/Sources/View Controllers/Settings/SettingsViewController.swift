@@ -257,7 +257,7 @@ class SettingsViewController: BaseTableViewController {
         }
         
         profileEmailLabel.text = viewModel.email
-        tableView?.reloadData()
+        tableView?.reloadDataSmoothly()
     }
     
     @objc private func twoFactorChangeNotification(notification: Notification) {
@@ -344,7 +344,7 @@ class SettingsViewController: BaseTableViewController {
             tableView.registerNibs(for: viewModel.currencyListViewModel.cellModelsForRegistration)
             tableView.delegate = viewModel.currencyListDataSource
             tableView.dataSource = viewModel.currencyListDataSource
-            tableView.reloadData()
+            tableView.reloadDataSmoothly()
         }
 
         bottomSheetController.present()

@@ -525,7 +525,7 @@ open class BottomSheet {
                                                       multiplier: 1,
                                                       constant: 0)
             containerView.addConstraints([topConstraint, leftConstraint, rightConstraint, bottomConstraint])
-            tableView.reloadData()
+            tableView.reloadDataSmoothly()
             
             self.scrollView = tableView
         }

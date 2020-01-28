@@ -11,7 +11,7 @@ import UIKit
 class ManagerListViewController: BaseViewControllerWithTableView {
     
     // MARK: - View Model
-    var viewModel: ListViewModelProtocol!
+    var viewModel: ManagerListViewModel!
     weak var searchProtocol: SearchViewControllerProtocol?
     // MARK: - Outlets
     @IBOutlet override var tableView: UITableView! {
@@ -54,8 +54,8 @@ class ManagerListViewController: BaseViewControllerWithTableView {
         tableView.configure(with: .defaultConfiguration)
         tableView.contentInset.bottom = 0.0
         
-        tableView.delegate = self
-        tableView.dataSource = self
+        tableView.delegate = viewModel.assetListDelegateManager
+        tableView.dataSource = viewModel.assetListDelegateManager
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
         
         if viewModel.canPullToRefresh {
@@ -66,10 +66,7 @@ class ManagerListViewController: BaseViewControllerWithTableView {
     private func reloadData() {
         DispatchQueue.main.async {
             self.refreshControl?.endRefreshing()
-            
-            UIView.setAnimationsEnabled(false)
-            self.tableView?.reloadData()
-            UIView.setAnimationsEnabled(true)
+            self.tableView.reloadDataSmoothly()
         }
     }
     override func fetch() {
@@ -119,6 +116,8 @@ extension ManagerListViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         showInfiniteIndicator(value: viewModel.fetchMore(at: indexPath))
+        
+        cell.willDisplay()
     }
     
     // MARK: - UITableViewDataSource

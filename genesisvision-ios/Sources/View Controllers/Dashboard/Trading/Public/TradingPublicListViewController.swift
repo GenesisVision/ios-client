@@ -40,7 +40,7 @@ class TradingPublicListViewController: ListViewController {
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
         tableView.delegate = viewModel.dataSource
         tableView.dataSource = viewModel.dataSource
-        tableView.reloadData()
+        tableView.reloadDataSmoothly()
     }
     
     @objc private func addNewButtonAction() {

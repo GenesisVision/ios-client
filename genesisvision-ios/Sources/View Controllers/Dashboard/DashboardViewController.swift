@@ -41,7 +41,7 @@ class DashboardViewController: ListViewController {
         tableView.registerNibs(for: viewModel.cellModelsForRegistration)
         tableView.delegate = viewModel.dataSource
         tableView.dataSource = viewModel.dataSource
-        tableView.reloadData()
+        tableView.reloadDataSmoothly()
         
         titleView.titleLabel.text = "Dashboard"
         titleView.balanceLabel.text = viewModel.getTotalValue()

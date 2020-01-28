@@ -10,36 +10,6 @@ import UIKit.UITableView
 import Tabman
 import Pageboy
 
-class TableViewDataSourceAndDelegate: NSObject, UITableViewDataSource, UITableViewDelegate {
-    var viewModel: ViewModelWithTableView!
-    
-    init(viewModel: ViewModelWithTableView) {
-        self.viewModel = viewModel
-    }
-    
-    // MARK: - UITableViewDataSource
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let model = viewModel.model(for: indexPath) else {
-            return TableViewCell()
-        }
-        
-        return tableView.dequeueReusableCell(withModel: model, for: indexPath)
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfRows(in: section)
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.numberOfSections()
-    }
-    
-    // MARK: - UITableViewDelegate
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-}
-
 class PageboyDataSource: BasePageboyViewControllerDataSource, TMBarDataSource {
     var viewModel: TabmanDataSourceProtocol?
     

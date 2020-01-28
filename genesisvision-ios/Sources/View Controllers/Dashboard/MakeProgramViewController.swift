@@ -135,7 +135,7 @@ class MakeProgramViewController: BaseModalViewController {
             tableView.registerNibs(for: viewModel.periodsViewModel.cellModelsForRegistration)
             tableView.delegate = viewModel.periodsDataSource
             tableView.dataSource = viewModel.periodsDataSource
-            tableView.reloadData()
+            tableView.reloadDataSmoothly()
         }
 
         present(bottomSheetController, animated: true, completion: nil)
@@ -153,7 +153,7 @@ class MakeProgramViewController: BaseModalViewController {
             tableView.registerNibs(for: viewModel.tradesDelayViewModel.cellModelsForRegistration)
             tableView.delegate = viewModel.tradesDelayDataSource
             tableView.dataSource = viewModel.tradesDelayDataSource
-            tableView.reloadData()
+            tableView.reloadDataSmoothly()
         }
 
         present(bottomSheetController, animated: true, completion: nil)
