@@ -72,7 +72,8 @@ class TradingHeaderTableViewCell: BaseTableViewCell {
         }
         
         labelsView.configure(data)
-        
+        labelsView.yourEquityLabel.titleLabel.isHidden = true
+        labelsView.yourEquityLabel.valueLabel.textAlignment = .center
         labelsView.changeLabelsView.dayLabel.valueLabel.isHidden = true
         labelsView.changeLabelsView.weekLabel.valueLabel.isHidden = true
         labelsView.changeLabelsView.monthLabel.valueLabel.isHidden = true

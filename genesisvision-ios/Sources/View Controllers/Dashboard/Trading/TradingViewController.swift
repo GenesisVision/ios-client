@@ -34,6 +34,7 @@ class TradingViewController: ListViewController {
         tableView.delegate = viewModel.dataSource
         tableView.dataSource = viewModel.dataSource
         tableView.reloadDataSmoothly()
+        tableView.backgroundColor = UIColor.Cell.headerBg
         
         titleView.titleLabel.text = "Trading"
         titleView.balanceLabel.text = viewModel.getTotalValue()
@@ -44,6 +45,7 @@ class TradingViewController: ListViewController {
     private func createFund() {
         guard let vc = CreateFundViewController.storyboardInstance(.dashboard) else { return }
         vc.title = "Create Fund"
+        vc.viewModel = CreateFundViewModel(vc, addAssetsProtocol: vc)
         let nav = BaseNavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true, completion: nil)
@@ -188,7 +190,7 @@ extension TradingViewController: BaseTableViewProtocol {
     func didReload(_ indexPath: IndexPath) {
         titleView.balanceLabel.text = viewModel.getTotalValue()
         hideHUD()
-        tableView.reloadSections([indexPath.section], with: .automatic)
+        tableView.reloadSections([indexPath.section], with: .fade)
     }
 }
 
@@ -309,12 +311,7 @@ class TradingViewModel: ViewModelWithListProtocol {
         router?.showAssetDetails(with: assetId, assetType: assetType)
     }
     func headerHeight(for section: Int) -> CGFloat {
-        switch section {
-        case 0:
-            return 0.0
-        default:
-            return Constants.headerHeight
-        }
+        return 0.0
     }
     
     func numberOfRows(in section: Int) -> Int {

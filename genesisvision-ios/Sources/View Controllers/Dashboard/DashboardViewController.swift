@@ -42,6 +42,7 @@ class DashboardViewController: ListViewController {
         tableView.delegate = viewModel.dataSource
         tableView.dataSource = viewModel.dataSource
         tableView.reloadDataSmoothly()
+        tableView.backgroundColor = UIColor.Cell.headerBg
         
         titleView.titleLabel.text = "Dashboard"
         titleView.balanceLabel.text = viewModel.getTotalValue()
@@ -122,7 +123,7 @@ extension DashboardViewController: BaseTableViewProtocol {
     func didReload(_ indexPath: IndexPath) {
         titleView.balanceLabel.text = viewModel.getTotalValue()
         hideHUD()
-        tableView.reloadSections([indexPath.section], with: .automatic)
+        tableView.reloadSections([indexPath.section], with: .fade)
     }
     
     func showEvent(_ event: InvestmentEventViewModel) {
@@ -314,12 +315,7 @@ class DashboardViewModel: ViewModelWithListProtocol {
     }
     
     func headerHeight(for section: Int) -> CGFloat {
-        switch section {
-        case 0:
-            return 0.0
-        default:
-            return Constants.headerHeight
-        }
+        return 0.0
     }
     
     func numberOfRows(in section: Int) -> Int {

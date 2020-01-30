@@ -35,7 +35,7 @@ class TradingPrivateShortListViewModel: CellViewModelWithCollection {
         
         details?.items?.forEach({ (viewModel) in
             guard let assetType = viewModel.assetType else { return }
-            viewModels.append(AssetCollectionViewCellViewModel(type: assetType, asset: viewModel, delegate: nil))
+            viewModels.append(AssetCollectionViewCellViewModel(type: assetType, asset: viewModel, filterProtocol: nil, favoriteProtocol: nil))
         })
     }
     
@@ -59,10 +59,6 @@ extension TradingPrivateShortListViewModel {
         showAllButton.setTitleColor(.primary, for: .normal)
         showAllButton.addTarget(self, action: #selector(showAllButtonAction(_:)), for: .touchUpInside)
         return [showAllButton]
-    }
-    
-    func makeLayout() -> UICollectionViewLayout {
-        return CustomLayout.defaultLayout(1, pagging: false)
     }
     
     func getCollectionViewHeight() -> CGFloat {

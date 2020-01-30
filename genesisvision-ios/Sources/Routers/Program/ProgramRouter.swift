@@ -21,7 +21,7 @@ class ProgramRouter: TabmanRouter {
         let router = ProgramInfoRouter(parentRouter: self)
         router.programViewController = programViewController
         router.currentController = viewController
-        let viewModel = ProgramInfoViewModel(withRouter: router, assetId: assetId, reloadDataProtocol: viewController)
+        let viewModel = ProgramInfoViewModel(withRouter: router, assetId: assetId, delegate: viewController)
         viewModel.programHeaderProtocol = viewController
         viewModel.assetType = assetType 
         viewController.viewModel = viewModel

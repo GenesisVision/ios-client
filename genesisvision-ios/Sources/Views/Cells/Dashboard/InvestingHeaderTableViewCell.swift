@@ -76,6 +76,8 @@ class InvestingHeaderTableViewCell: BaseTableViewCell {
         }
 
         labelsView.configure(data)
+        labelsView.balanceLabel.titleLabel.isHidden = true
+        labelsView.balanceLabel.valueLabel.textAlignment = .center
         labelsView.bottomStackView.isHidden = true
         labelsView.changeLabelsView.dayLabel.valueLabel.isHidden = true
         labelsView.changeLabelsView.weekLabel.valueLabel.isHidden = true

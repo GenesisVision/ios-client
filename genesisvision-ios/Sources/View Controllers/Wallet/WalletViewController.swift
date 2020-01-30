@@ -14,7 +14,13 @@ class WalletViewController: BaseTabmanViewController<WalletTabmanViewModel> {
     // MARK: - Variables
     private var moreBarButtonItem: UIBarButtonItem!
     
-    var bottomSheetController: BottomSheetController!
+    lazy var bottomSheetController: BottomSheetController = {
+        let vc = BottomSheetController()
+        vc.lineViewIsHidden = true
+        vc.initializeHeight = 120
+        return vc
+       
+    }()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -49,9 +55,6 @@ class WalletViewController: BaseTabmanViewController<WalletTabmanViewModel> {
         walletMoreButtonView.delegate = self
         walletMoreButtonView.configure(wallet)
         
-        bottomSheetController = BottomSheetController()
-        bottomSheetController.lineViewIsHidden = true
-        bottomSheetController.initializeHeight = 120
         bottomSheetController.addContentsView(walletMoreButtonView)
         bottomSheetController.present()
     }

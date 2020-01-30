@@ -29,7 +29,7 @@ class ListViewController: UIViewController {
         }
     }
     
-    var bottomSheetController: BottomSheetController! = {
+    lazy var bottomSheetController: BottomSheetController = {
         return BottomSheetController()
     }()
     

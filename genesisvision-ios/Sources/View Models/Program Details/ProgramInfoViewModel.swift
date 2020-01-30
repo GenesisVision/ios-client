@@ -8,7 +8,7 @@
 
 import UIKit.UITableViewHeaderFooterView
 
-final class ProgramInfoViewModel {
+final class ProgramInfoViewModel: ViewModelWithListProtocol {
     enum SectionType {
         case publicInfo
         case account
@@ -36,12 +36,14 @@ final class ProgramInfoViewModel {
 
     // MARK: - Variables
     var title: String = "Info"
+    var canPullToRefresh: Bool = true
     
     var assetType: AssetType = .program
     
-    private var router: ProgramInfoRouter
-    private weak var reloadDataProtocol: ReloadDataProtocol?
+    lazy var dataSource: TableViewDataSource = TableViewDataSource(self)
     
+    private var router: ProgramInfoRouter
+
     var inRequestsDelegateManager = InRequestsDelegateManager()
     
     var chartDurationType: ChartDurationType = .all
@@ -68,7 +70,7 @@ final class ProgramInfoViewModel {
     private var sections: [SectionType] = [.details]
     private var rows: [RowType] = [.header, .manager, .statistics, .strategy, .period]
     
-    private var models: [CellViewAnyModel]?
+    var viewModels: [CellViewAnyModel] = []
     
     /// Return view models for registration cell Nib files
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
@@ -86,12 +88,12 @@ final class ProgramInfoViewModel {
                 ProgramInfoTableViewCellViewModel.self,
                 FollowInfoTableViewCellViewModel.self]
     }
-    
+    weak var delegate: BaseTableViewProtocol?
     // MARK: - Init
     init(withRouter router: ProgramInfoRouter,
          assetId: String? = nil,
          programDetailsFull: ProgramFollowDetailsFull? = nil,
-         reloadDataProtocol: ReloadDataProtocol? = nil) {
+         delegate: BaseTableViewProtocol? = nil) {
         self.router = router
 
         if let assetId = assetId {
@@ -106,7 +108,7 @@ final class ProgramInfoViewModel {
             }
         }
         
-        self.reloadDataProtocol = reloadDataProtocol
+        self.delegate = delegate
     }
     
     // MARK: - Public methods
@@ -182,7 +184,7 @@ final class ProgramInfoViewModel {
             break
         }
         
-        reloadDataProtocol?.didReloadData()
+        delegate?.didReload()
     }
 }
 
@@ -347,7 +349,7 @@ extension ProgramInfoViewModel {
     func updateDetails(with programDetailsFull: ProgramFollowDetailsFull) {
         self.programFollowDetailsFull = programDetailsFull
         self.getSignalSubscription { [weak self] (result) in
-            self?.reloadDataProtocol?.didReloadData()
+            self?.delegate?.didReload()
         }
     }
 }
@@ -365,7 +367,7 @@ extension ProgramInfoViewModel: TradingInfoViewProtocol {
 extension ProgramInfoViewModel: ReloadDataProtocol {
     func didReloadData() {
         fetch { [weak self] (result) in
-            self?.reloadDataProtocol?.didReloadData()
+            self?.delegate?.didReload()
         }
     }
 }

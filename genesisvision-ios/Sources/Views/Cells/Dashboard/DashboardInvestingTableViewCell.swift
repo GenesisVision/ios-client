@@ -10,7 +10,7 @@ import UIKit
 
 struct DashboardInvestingCellViewModel<ViewModelType: CellViewModelWithCollection> {
     var viewModel: ViewModelType
-    var dataSource: CollectionViewDataSource<ViewModelType>!
+    var dataSource: CollectionViewDataSource!
     let data: InvestingHeaderData?
     
     weak var delegate: BaseTableViewProtocol?
@@ -29,7 +29,7 @@ extension DashboardInvestingCellViewModel: CellViewModel {
             cell.labelsView.isHidden = data.isEmpty
         }
         
-        cell.configure(viewModel, delegate: delegate, collectionViewDelegate: dataSource, collectionViewDataSource: dataSource, cellModelsForRegistration: viewModel.cellModelsForRegistration)
+        cell.configure(viewModel, delegate: delegate, collectionDataSourceProtocol: dataSource, cellModelsForRegistration: viewModel.cellModelsForRegistration)
         
         cell.labelsView.configure(data)
         cell.labelsView.changeLabelsView.dayLabel.valueLabel.isHidden = true

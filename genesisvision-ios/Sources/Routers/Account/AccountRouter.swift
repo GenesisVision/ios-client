@@ -22,7 +22,7 @@ class AccountRouter: TabmanRouter {
         let router = AccountInfoRouter(parentRouter: self)
         router.accountViewController = accountViewController
         router.currentController = viewController
-        let viewModel = AccountInfoViewModel(withRouter: router, assetId: assetId, reloadDataProtocol: viewController)
+        let viewModel = AccountInfoViewModel(withRouter: router, assetId: assetId, delegate: viewController)
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         

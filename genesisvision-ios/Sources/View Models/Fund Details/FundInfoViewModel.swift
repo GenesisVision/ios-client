@@ -8,7 +8,7 @@
 
 import UIKit.UITableViewHeaderFooterView
 
-final class FundInfoViewModel {
+final class FundInfoViewModel: ViewModelWithListProtocol {
     enum SectionType {
         case details
         case yourInvestment
@@ -22,6 +22,10 @@ final class FundInfoViewModel {
 
     // MARK: - Variables
     var title: String = "Info"
+    
+    var canPullToRefresh: Bool = true
+    
+    lazy var dataSource: TableViewDataSource = TableViewDataSource(self)
     
     private var router: FundInfoRouter
     private weak var reloadDataProtocol: ReloadDataProtocol?
@@ -49,7 +53,7 @@ final class FundInfoViewModel {
     private var sections: [SectionType] = [.details, .investNow]
     private var rows: [RowType] = [.header, .manager, .strategy]
     
-    private var models: [CellViewAnyModel]?
+    var viewModels: [CellViewAnyModel] = []
     
     /// Return view models for registration cell Nib files
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
@@ -59,7 +63,7 @@ final class FundInfoViewModel {
                 FundInvestNowTableViewCellViewModel.self,
                 FundYourInvestmentTableViewCellViewModel.self]
     }
-    
+    weak var delegate: BaseTableViewProtocol?
     // MARK: - Init
     init(withRouter router: FundInfoRouter,
          assetId: String? = nil,

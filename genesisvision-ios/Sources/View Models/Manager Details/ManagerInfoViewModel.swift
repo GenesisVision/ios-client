@@ -8,7 +8,7 @@
 
 import UIKit.UITableViewHeaderFooterView
 
-final class ManagerInfoViewModel {
+final class ManagerInfoViewModel: ViewModelWithListProtocol {
     enum SectionType {
         case details
     }
@@ -21,8 +21,11 @@ final class ManagerInfoViewModel {
     // MARK: - Variables
     var title: String = "Info"
     
+    var canPullToRefresh: Bool = true
+    
+    lazy var dataSource: TableViewDataSource = TableViewDataSource(self)
+    
     private var router: Router
-    private weak var reloadDataProtocol: ReloadDataProtocol?
     
     var managerId: String!
     
@@ -31,24 +34,25 @@ final class ManagerInfoViewModel {
     private var sections: [SectionType] = [.details]
     private var rows: [RowType] = [.header, .info, .about]
     
-    private var models: [CellViewAnyModel]?
+    
+    var viewModels: [CellViewAnyModel] = []
     
     /// Return view models for registration cell Nib files
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [DefaultTableViewCellViewModel.self, ManagerTableViewCellViewModel.self]
     }
-    
+    weak var delegate: BaseTableViewProtocol?
     // MARK: - Init
     init(withRouter router: Router,
          managerId: String? = nil,
-         reloadDataProtocol: ReloadDataProtocol? = nil) {
+         delegate: BaseTableViewProtocol? = nil) {
         self.router = router
         
         if let managerId = managerId {
             self.managerId = managerId
         }
         
-        self.reloadDataProtocol = reloadDataProtocol
+        self.delegate = delegate
     }
     
     // MARK: - Public methods
@@ -128,14 +132,14 @@ extension ManagerInfoViewModel {
     
     func updateDetails(with publicProfile: PublicProfile) {
         self.publicProfile = publicProfile
-        self.reloadDataProtocol?.didReloadData()
+        self.delegate?.didReload()
     }
 }
 
 extension ManagerInfoViewModel: ReloadDataProtocol {
     func didReloadData() {
         fetch { [weak self] (result) in
-            self?.reloadDataProtocol?.didReloadData()
+            self?.delegate?.didReload()
         }
     }
 }

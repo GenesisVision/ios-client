@@ -106,7 +106,7 @@ class AddFundAssetTableViewCell: UITableViewCell {
     
     // MARK: - Actions
     @IBAction func incrementButtonAction(_ sender: UIStepper) {
-        if assetModel?.asset == "GVT" && percentValue > 97 || percentValue > 98 { return }
+        if assetModel?.asset == "GVT" && percentValue > 98 || percentValue > 98 { return }
         
         percentValue += 1
         assetModel?.mandatoryFundPercent = percentValue

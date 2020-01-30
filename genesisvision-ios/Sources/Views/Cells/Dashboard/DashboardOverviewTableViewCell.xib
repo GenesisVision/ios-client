@@ -18,16 +18,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="VBK-Rp-VIg">
-                        <rect key="frame" x="20" y="20" width="772" height="350"/>
+                        <rect key="frame" x="20" y="20" width="772" height="330"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="unX-55-Pex" customClass="DashboardOverviewLabelsView" customModule="GV_DEBUG" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="772" height="350"/>
+                                <rect key="frame" x="0.0" y="0.0" width="772" height="330"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="4vW-LK-ogz">
-                                        <rect key="frame" x="0.0" y="0.0" width="772" height="92"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="772" height="72"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="ixG-Eh-wzi" customClass="LabelWithTitle" customModule="GV_DEBUG" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="48" width="772" height="44"/>
+                                                <rect key="frame" x="0.0" y="28" width="772" height="44"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N56-ob-JMS" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
                                                         <rect key="frame" x="361" y="0.0" width="50" height="21"/>
@@ -56,7 +56,7 @@
                                         </subviews>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Va-vR-L20" customClass="MultiProgressView" customModule="GV_DEBUG" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="112" width="772" height="20"/>
+                                        <rect key="frame" x="0.0" y="92" width="772" height="20"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="Bdv-gS-2Ia"/>
@@ -71,7 +71,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3Dz-fJ-zDj">
-                                        <rect key="frame" x="0.0" y="152" width="772" height="74"/>
+                                        <rect key="frame" x="0.0" y="132" width="772" height="74"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="azK-oY-t8H">
                                                 <rect key="frame" x="0.0" y="0.0" width="252" height="74"/>
@@ -220,7 +220,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="e0X-mk-PMA" customClass="ChangeLabelsView" customModule="GV_DEBUG" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="246" width="772" height="104"/>
+                                        <rect key="frame" x="0.0" y="226" width="772" height="104"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="P1i-01-JX6" customClass="LabelWithTitle" customModule="GV_DEBUG" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="252" height="104"/>
@@ -358,7 +358,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="VBK-Rp-VIg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="0ks-v2-ek8"/>
-                    <constraint firstAttribute="bottom" secondItem="VBK-Rp-VIg" secondAttribute="bottom" id="2IC-Ar-yns"/>
+                    <constraint firstAttribute="bottom" secondItem="VBK-Rp-VIg" secondAttribute="bottom" constant="20" id="2IC-Ar-yns"/>
                     <constraint firstAttribute="trailing" secondItem="VBK-Rp-VIg" secondAttribute="trailing" constant="20" id="5eB-qb-hgb"/>
                     <constraint firstItem="VBK-Rp-VIg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="Vdo-mn-jNT"/>
                 </constraints>

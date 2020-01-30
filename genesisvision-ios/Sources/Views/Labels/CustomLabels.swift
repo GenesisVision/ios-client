@@ -33,7 +33,7 @@ class TitleLabel: CustomLabel {
     // MARK: - Lifecycle
     override func commonInit() {
         textColor = UIColor.Cell.title
-        font = UIFont.getFont(.semibold, size: 14.0)
+        font = UIFont.getFont(.regular, size: 14.0)
     }
 }
 

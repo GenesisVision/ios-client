@@ -46,6 +46,7 @@ class TradingPublicListViewController: ListViewController {
     @objc private func addNewButtonAction() {
         guard let vc = CreateFundViewController.storyboardInstance(.dashboard) else { return }
         vc.title = "Create Fund"
+        vc.viewModel = CreateFundViewModel(vc, addAssetsProtocol: vc)
         let nav = BaseNavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true, completion: nil)
@@ -160,7 +161,7 @@ class TradingPublicListViewModel: ListViewModelWithPaging {
         DashboardDataProvider.getPublicTrading(currency: currency, status: .all, skip: skip, take: take(), completion: { [weak self] (model) in
             guard let model = model else { return }
             model.items?.forEach({ (asset) in
-                let viewModel = TradingTableViewCellViewModel(asset: asset, delegate: nil)
+                let viewModel = TradingTableViewCellViewModel(asset: asset, filterProtocol: nil)//FIXIT:
                 models.append(viewModel)
             })
             self?.updateViewModels(models, refresh: refresh, total: model.total)

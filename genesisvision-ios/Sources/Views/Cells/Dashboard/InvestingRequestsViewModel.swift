@@ -54,6 +54,10 @@ extension InvestingRequestsViewModel {
     func getCollectionViewHeight() -> CGFloat {
         return 0
     }
+    
+    func headerHeight(for section: Int) -> CGFloat {
+        return 0.0
+    }
 }
 
 

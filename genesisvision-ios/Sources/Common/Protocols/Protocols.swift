@@ -144,10 +144,11 @@ protocol WalletProtocol: class {
 protocol ReloadDataProtocol: class {
     func didReloadData()
 }
+protocol FilterChangedProtocol: class {
+    var filterDateRangeModel: FilterDateRangeModel? { get }
+}
 
 protocol FavoriteStateChangeProtocol: class {
-    var filterDateRangeModel: FilterDateRangeModel? { get }
-    
     func didChangeFavoriteState(with assetID: String, value: Bool, request: Bool)
 }
 protocol FavoriteStateUpdatedProtocol: class {
@@ -219,7 +220,7 @@ extension Hidable where Self: UIViewController {
 }
 
 protocol UIViewControllerWithBottomSheet {
-    var bottomSheetController: BottomSheetController! { get }
+    var bottomSheetController: BottomSheetController { get }
 }
 
 protocol UIViewControllerWithFetching {

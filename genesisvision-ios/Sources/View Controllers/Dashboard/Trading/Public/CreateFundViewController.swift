@@ -12,7 +12,7 @@ class CreateFundViewController: BaseModalViewController {
     typealias ViewModel = CreateFundViewModel
     
     // MARK: - Variables
-    var viewModel: ViewModel!
+    var viewModel: ViewModel?
     
     // MARK: - Outlets
     @IBOutlet weak var stackView: CreateFundStackView!
@@ -28,10 +28,11 @@ class CreateFundViewController: BaseModalViewController {
     }
     
     func setup() {
-        viewModel = CreateFundViewModel(self, addAssetsProtocol: self)
+        viewModel?.addAssetListViewModel.delegate = self
+        viewModel?.updateRates()
         
         showProgressHUD()
-        viewModel.fetch()
+        viewModel?.fetch()
         
         stackView.amountView.maxButton.addTarget(self, action: #selector(copyMaxValueButtonAction), for: .touchUpInside)
         
@@ -49,12 +50,18 @@ class CreateFundViewController: BaseModalViewController {
         stackView.descriptionView.subtitleValueLabel.textColor = UIColor.Cell.subtitle
         
         stackView.entryFeeView.textField.text = "0"
+        stackView.entryFeeView.textField.addTarget(self, action: #selector(feeDidChange), for: .editingChanged)
         stackView.exitFeeView.textField.text = "0"
+        stackView.exitFeeView.textField.addTarget(self, action: #selector(feeDidChange), for: .editingChanged)
     }
     
     func updateUI() {
-        stackView.configure(viewModel)
-        viewModel.addAssetListViewModel.setup(self)
+        if let viewModel = viewModel {
+            stackView.configure(viewModel)
+        }
+    }
+    @objc private func feeDidChange() {
+        checkActionButton()
     }
     @objc private func nameDidChange() {
         if let text = stackView.nameView.textField.text {
@@ -67,26 +74,43 @@ class CreateFundViewController: BaseModalViewController {
     }
     
     @objc func checkActionButton() {
-        guard let amountText = stackView.amountView.textField.text, !amountText.isEmpty, let value = amountText.doubleValue else {
+        var isEnable = false
+        
+        if let value = stackView.nameView.textField.text {
+            viewModel?.request.title = value
+        }
+        if let value = stackView.descriptionView.textView.text {
+            viewModel?.request.description = value
+        }
+        if let value = stackView.exitFeeView.textField.text?.doubleValue {
+            viewModel?.request.exitFee = value
+        }
+        if let value = stackView.entryFeeView.textField.text?.doubleValue {
+            viewModel?.request.entryFee = value
+        }
+        if let value = stackView.amountView.textField.text?.doubleValue {
+            viewModel?.request.depositAmount = value
+            stackView.amountView.approxLabel.text = viewModel?.getApproxString(value)
+        } else {
             stackView.amountView.approxLabel.text = ""
-            stackView.actionButton.setEnabled(false)
-            return
         }
         
-        stackView.amountView.approxLabel.text = viewModel.getApproxString(value)
-        
-        guard let minDeposit = viewModel.getMinDepositValue(), let exchangedValue = viewModel.exchangeValueInCurrency(value), exchangedValue >= minDeposit else { return
-            stackView.actionButton.setEnabled(false)
-        }
-        
-        guard let name = stackView.nameView.textField.text,
+        if
+            let value = stackView.amountView.textField.text?.doubleValue,
+            let minDeposit = viewModel?.getMinDepositValue(),
+            let exchangedValue = viewModel?.exchangeValueInCurrency(value),
+            exchangedValue >= minDeposit,
+            let name = stackView.nameView.textField.text,
             let description = stackView.descriptionView.textView.text,
-            let exitFee = stackView.exitFeeView.textField.text,
-            let entryFee = stackView.entryFeeView.textField.text else { return }
+            stackView.exitFeeView.textField.text?.doubleValue != nil,
+            stackView.entryFeeView.textField.text?.doubleValue != nil,
+            4...20 ~= name.count,
+            20...500 ~= description.count,
+            viewModel?.addAssetListViewModel.isFull() ?? false {
+            isEnable = true
+        }
         
-        let enable = name.count >= 4 && name.count <= 20 && description.count >= 20 && description.count <= 500 && !exitFee.isEmpty && !entryFee.isEmpty
-        
-        stackView.actionButton.setEnabled(enable)
+        stackView.actionButton.setEnabled(isEnable)
     }
     
     // MARK: - Actions
@@ -95,21 +119,23 @@ class CreateFundViewController: BaseModalViewController {
         bottomSheetController = BottomSheetController()
         bottomSheetController.initializeHeight = 400.0
 
-        bottomSheetController.addNavigationBar(viewModel.addAssetListViewModel.title)
+        bottomSheetController.addNavigationBar(viewModel?.addAssetListViewModel.title)
 
         bottomSheetController.addTableView { tableView in
             tableView.separatorStyle = .none
 
-            tableView.registerNibs(for: viewModel.addAssetListViewModel.cellModelsForRegistration)
-            tableView.delegate = viewModel.addAssetListDataSource
-            tableView.dataSource = viewModel.addAssetListDataSource
+            if let cellModelsForRegistration = viewModel?.addAssetListViewModel.cellModelsForRegistration {
+                tableView.registerNibs(for: cellModelsForRegistration)
+            }
+            tableView.delegate = viewModel?.addAssetListDataSource
+            tableView.dataSource = viewModel?.addAssetListDataSource
             tableView.reloadDataSmoothly()
         }
 
         present(bottomSheetController, animated: true, completion: nil)
     }
     @IBAction func copyMaxValueButtonAction(_ sender: UIButton) {
-        if let wallet = viewModel.fromListViewModel?.selected(), let currency = wallet.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency), let availableInWalletFromValue = wallet.available {
+        if let wallet = viewModel?.fromListViewModel?.selected(), let currency = wallet.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency), let availableInWalletFromValue = wallet.available {
             
             stackView.amountView.textField.text = availableInWalletFromValue.rounded(with: currencyType).toString(withoutFormatter: true)
         }
@@ -121,29 +147,15 @@ class CreateFundViewController: BaseModalViewController {
     @IBAction func createFundButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
         
-        if let title = stackView.nameView.textField.text {
-            viewModel.request.title = title
-        }
-        if let description = stackView.descriptionView.textView.text {
-            viewModel.request.description = description
-        }
-        if let entryFee = stackView.entryFeeView.textField.text?.doubleValue {
-            viewModel.request.entryFee = entryFee
-        }
-        if let exitFee = stackView.exitFeeView.textField.text?.doubleValue {
-            viewModel.request.exitFee = exitFee
-        }
-        if let depositAmount = stackView.amountView.textField.text?.doubleValue {
-            viewModel.request.depositAmount = depositAmount
-        }
-        
         showProgressHUD()
-        viewModel.createFund { [weak self] (result) in
+        viewModel?.createFund { [weak self] (result) in
             self?.hideAll()
             
             switch result {
             case .success:
-                self?.dismiss(animated: true, completion: nil)
+                DispatchQueue.main.async {
+                    self?.dismiss(animated: true, completion: nil)
+                }
             case .failure(let errorType):
                 ErrorHandler.handleError(with: errorType, viewController: self)
             }
@@ -155,15 +167,17 @@ class CreateFundViewController: BaseModalViewController {
         bottomSheetController = BottomSheetController()
         bottomSheetController.initializeHeight = 275.0
 
-        bottomSheetController.addNavigationBar(viewModel.fromListViewModel.title)
+        bottomSheetController.addNavigationBar(viewModel?.fromListViewModel.title)
 
         bottomSheetController.addTableView { tableView in
             tableView.separatorStyle = .none
             
-            tableView.registerNibs(for: viewModel.fromListViewModel.cellModelsForRegistration)
-            tableView.delegate = viewModel.fromListDataSource
-            tableView.dataSource = viewModel.fromListDataSource
-            tableView.reloadDataSmoothly()
+            if let cellModelsForRegistration = viewModel?.fromListViewModel.cellModelsForRegistration {
+                tableView.registerNibs(for: cellModelsForRegistration)
+            }
+            tableView.delegate = viewModel?.fromListDataSource
+            tableView.dataSource = viewModel?.fromListDataSource
+//            tableView.reloadDataSmoothly()
         }
 
         present(bottomSheetController, animated: true, completion: nil)
@@ -201,7 +215,7 @@ extension CreateFundViewController: BaseTableViewProtocol {
         
         switch type {
         case .walletFrom:
-            viewModel.updateWallet(index)
+            viewModel?.updateWallet(index)
         default:
             break
         }
@@ -219,10 +233,11 @@ extension CreateFundViewController: AddAssetListViewModelProtocol {
     func addAssets(_ assets: [PlatformAsset]?) {
         guard let assets = assets else { return }
         
-        viewModel.request.assets = assets.map { FundAssetPart(id: $0.id, percent: $0.mandatoryFundPercent ) }
-        viewModel.assetCollectionViewModel.assets = assets
+        viewModel?.request.assets = assets.map { FundAssetPart(id: $0.id, percent: $0.mandatoryFundPercent ) }
+        viewModel?.assetCollectionViewModel.assets = assets
         stackView.updateProgressView(assets)
         stackView.assetStackView.collectionView.reloadData()
+        checkActionButton()
     }
 }
 extension CreateFundViewController: ImagePickerPresentable {
@@ -233,8 +248,8 @@ extension CreateFundViewController: ImagePickerPresentable {
     func selected(pickedImage: UIImage?, pickedImageURL: URL?) {
         guard let pickedImage = pickedImage, let pickedImageURL = pickedImageURL else { return }
         
-        viewModel.pickedImage = pickedImage
-        viewModel.pickedImageURL = pickedImageURL
+        viewModel?.pickedImage = pickedImage
+        viewModel?.pickedImageURL = pickedImageURL
         
         stackView.uploadLogoView.uploadLogoButton.isHidden = true
         stackView.uploadLogoView.logoStackView.isHidden = false
@@ -252,7 +267,7 @@ class CreateFundViewModel {
         }
     }
     var assetCollectionViewModel: AssetCollectionViewModel!
-    var assetCollectionDataSource: CollectionViewDataSource<AssetCollectionViewModel>!
+    var assetCollectionDataSource: CollectionViewDataSource!
     
     var addAssetListViewModel: AddAssetListViewModel!
     var addAssetListDataSource: TableViewDataSource!
@@ -266,6 +281,7 @@ class CreateFundViewModel {
             if let wallets = walletSummary?.wallets, !wallets.isEmpty {
                 fromListViewModel = FromListViewModel(delegate, items: wallets, selectedIndex: 0)
                 fromListDataSource = TableViewDataSource(fromListViewModel)
+                request.depositWalletId = fromListViewModel?.selected()?.id
             }
         }
     }
@@ -351,10 +367,14 @@ class CreateFundViewModel {
     }
     
     func exchangeValueInCurrency(_ value: Double) -> Double? {
-        guard let rate = getRate() else { return nil }
+        guard let rate = getRate() else { return value }
         return value / rate
     }
     func createFund(completion: @escaping CompletionBlock) {
+        guard pickedImageURL != nil else {
+            AssetsDataProvider.createFund(request, completion: completion)
+            return
+        }
         saveProfilePhoto { [weak self] (result) in
             switch result {
             case .success:
@@ -431,14 +451,14 @@ class AssetCollectionViewModel: CellViewModelWithCollection {
     }
     
     func getCollectionViewHeight() -> CGFloat {
-        return 70.0
+        return 50.0
     }
-    
-    func makeLayout() -> UICollectionViewLayout {
-        return CustomLayout.defaultLayout(3, pagging: false)
+    func sizeForItem(at indexPath: IndexPath, frame: CGRect) -> CGSize {
+        return CGSize(width: frame.width * 0.35, height: frame.height)
     }
-    
-    
+    func insetForSection(for section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0.0, right: 16.0)
+    }
 }
 protocol AddAssetListViewModelProtocol: class {
     func addAssets(_ assets: [PlatformAsset]?)
@@ -457,9 +477,7 @@ final class AddAssetListViewModel: ViewModelWithListProtocol {
     var assets: [PlatformAsset] = [PlatformAsset]()
     weak var delegate: AddAssetListViewModelProtocol?
 
-    func setup(_ delegate: AddAssetListViewModelProtocol?) {
-        self.delegate = delegate
-        
+    init() {
         PlatformManager.shared.getPlatformAssets { [weak self] (model) in
             if let assets = model?.assets {
                 self?.assets = assets
@@ -484,7 +502,14 @@ final class AddAssetListViewModel: ViewModelWithListProtocol {
         self.delegate?.addAssets(addedAssets)
     }
     
+    private func getMandatoryFundPercent() -> Double {
+        let sum = assets.map({($0.mandatoryFundPercent ?? 0.0)}).reduce(0.0, +)
+        return sum
+    }
     
+    func isFull() -> Bool {
+        return getMandatoryFundPercent() == 100.0
+    }
 }
 extension AddAssetListViewModel: AddFundAssetTableViewCellProtocol {
     func confirmAsset(_ asset: PlatformAsset?) {

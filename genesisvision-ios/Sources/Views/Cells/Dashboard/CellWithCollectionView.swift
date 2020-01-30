@@ -10,7 +10,7 @@ import UIKit
 
 struct CellWithCollectionViewModel<ViewModel: CellViewModelWithCollection> {
     var viewModel: ViewModel
-    var dataSource: CollectionViewDataSource<ViewModel>!
+    var dataSource: CollectionViewDataSource!
     
     weak var delegate: BaseTableViewProtocol?
     init(_ viewModel: ViewModel, delegate: BaseTableViewProtocol?) {
@@ -22,7 +22,7 @@ struct CellWithCollectionViewModel<ViewModel: CellViewModelWithCollection> {
 }
 extension CellWithCollectionViewModel: CellViewModel {
     func setup(on cell: CellWithCollectionView) {
-        cell.configure(viewModel, delegate: delegate, collectionViewDelegate: dataSource, collectionViewDataSource: dataSource, cellModelsForRegistration: viewModel.cellModelsForRegistration)
+        cell.configure(viewModel, delegate: delegate, collectionDataSourceProtocol: dataSource, cellModelsForRegistration: viewModel.cellModelsForRegistration)
     }
 }
 
@@ -39,7 +39,7 @@ class CellWithCollectionView: BaseTableViewCell {
     }
     
     // MARK: - Methods
-    func configure(_ viewModel: CellViewModelWithCollection, delegate: BaseTableViewProtocol?, collectionViewDelegate: UICollectionViewDelegate, collectionViewDataSource: UICollectionViewDataSource, cellModelsForRegistration: [CellViewAnyModel.Type]) {
+    func configure(_ viewModel: CellViewModelWithCollection, delegate: BaseTableViewProtocol?, collectionDataSourceProtocol: CollectionDataSourceProtocol, cellModelsForRegistration: [CellViewAnyModel.Type]) {
         if viewModel.hideLoader() {
             loaderView.stopAnimating()
             loaderView.isHidden = true
@@ -51,6 +51,7 @@ class CellWithCollectionView: BaseTableViewCell {
         self.titleLabel.text = viewModel.title
         
         self.collectionHeightConstraint.constant = viewModel.getCollectionViewHeight()
+        self.setNeedsUpdateConstraints()
         
         rightButtonsView.removeAllArrangedSubviews()
         viewModel.getRightButtons().forEach { (btn) in
@@ -69,13 +70,13 @@ class CellWithCollectionView: BaseTableViewCell {
             countLabel.text = count.toString()
         }
         
-        setupCollectionView(collectionViewDelegate, collectionViewDataSource, cellModelsForRegistration: cellModelsForRegistration, layout: viewModel.makeLayout())
+        setupCollectionView(collectionDataSourceProtocol, cellModelsForRegistration: cellModelsForRegistration)
     }
     
-    func setupCollectionView(_ collectionViewDelegate: UICollectionViewDelegate, _ collectionViewDataSource: UICollectionViewDataSource, cellModelsForRegistration: [CellViewAnyModel.Type], layout: UICollectionViewLayout) {
-//        collectionView.collectionViewLayout = layout
-        collectionView.delegate = collectionViewDelegate
-        collectionView.dataSource = collectionViewDataSource
+    func setupCollectionView(_ collectionDataSourceProtocol: CollectionDataSourceProtocol, cellModelsForRegistration: [CellViewAnyModel.Type]) {
+        
+        collectionView.delegate = collectionDataSourceProtocol
+        collectionView.dataSource = collectionDataSourceProtocol
         
         collectionView.isPagingEnabled = false
         

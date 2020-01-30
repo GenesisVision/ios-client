@@ -11,7 +11,8 @@ import UIKit
 struct AssetCollectionViewCellViewModel {
     let type: AssetType
     let asset: Codable?
-    weak var delegate: FavoriteStateChangeProtocol?
+    weak var filterProtocol: FilterChangedProtocol?
+    weak var favoriteProtocol: FavoriteStateChangeProtocol?
     
     func getAssetId() -> String {
         var assetId: String = ""
@@ -39,18 +40,18 @@ struct AssetCollectionViewCellViewModel {
 
 extension AssetCollectionViewCellViewModel: CellViewModel {
     func setup(on cell: AssetCollectionViewCell) {
-        if let program = asset as? ProgramDetailsListItem {
-            cell.configure(program: program, delegate: delegate)
-        } else if let follow = asset as? FollowDetailsListItem {
-            cell.configure(follow: follow, delegate: delegate)
-        } else if let fund = asset as? FundDetailsListItem {
-            cell.configure(fund: fund, delegate: delegate)
-        } else if let trading = asset as? DashboardTradingAsset {
-            cell.configure(trading: trading, delegate: delegate)
-        } else if let fundInvesting = asset as? FundInvestingDetailsList {
-            cell.configure(fundInvesting: fundInvesting, delegate: delegate)
-        } else if let programInvesting = asset as? ProgramInvestingDetailsList {
-            cell.configure(programInvesting: programInvesting, delegate: delegate)
+        if let asset = asset as? ProgramDetailsListItem {
+            cell.configure(asset, filterProtocol: filterProtocol, favoriteProtocol: favoriteProtocol)
+        } else if let asset = asset as? FollowDetailsListItem {
+            cell.configure(asset, filterProtocol: filterProtocol, favoriteProtocol: favoriteProtocol)
+        } else if let asset = asset as? FundDetailsListItem {
+            cell.configure(asset, filterProtocol: filterProtocol, favoriteProtocol: favoriteProtocol)
+        } else if let asset = asset as? DashboardTradingAsset {
+            cell.configure(asset, filterProtocol: filterProtocol)
+        } else if let asset = asset as? FundInvestingDetailsList {
+            cell.configure(asset, filterProtocol: filterProtocol, favoriteProtocol: favoriteProtocol)
+        } else if let asset = asset as? ProgramInvestingDetailsList {
+            cell.configure(asset, filterProtocol: filterProtocol, favoriteProtocol: favoriteProtocol)
         }
     }
 }
@@ -60,17 +61,12 @@ class AssetCollectionViewCell: BaseCollectionViewCell {
     // MARK: - Views
     @IBOutlet weak var stackView: UIStackView!
     
-    var cellContentView: AssetContentView!
+    var cellContentView: ContentViewProtocol!
     
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-    }
-    
-    func loadContentView() {
-        stackView.removeAllArrangedSubviews()
-        cellContentView = AssetContentView.viewFromNib()
-        stackView.addArrangedSubview(cellContentView)
+        
     }
     
     // MARK: - Public methods
@@ -78,56 +74,99 @@ class AssetCollectionViewCell: BaseCollectionViewCell {
     /// - Parameters:
     ///   - asset: FundDetailsList
     ///   - delegate: FavoriteStateChangeProtocol
-    func configure(fund asset: FundDetailsListItem, delegate: FavoriteStateChangeProtocol?) {
-        loadContentView()
-        cellContentView.configure(fund: asset, delegate: delegate)
+    func configure(_ asset: FundDetailsListItem, filterProtocol: FilterChangedProtocol?, favoriteProtocol: FavoriteStateChangeProtocol?) {
+        stackView.removeAllArrangedSubviews()
+        cellContentView = FundContentView.viewFromNib()
+        if let cellContentView = cellContentView as? FundContentView {
+            stackView.addArrangedSubview(cellContentView)
+            cellContentView.configure(asset, filterProtocol: filterProtocol, favoriteProtocol: favoriteProtocol)
+        }
     }
     
     /// Program
     /// - Parameters:
     ///   - asset: ProgramDetailsList
     ///   - delegate: FavoriteStateChangeProtocol
-    func configure(program asset: ProgramDetailsListItem, delegate: FavoriteStateChangeProtocol?) {
-        loadContentView()
-        cellContentView.configure(program: asset, delegate: delegate)
-    }
-    
-    /// Trading
-    /// - Parameters:
-    ///   - asset: DashboardTradingAsset
-    ///   - delegate: FavoriteStateChangeProtocol
-    func configure(trading asset: DashboardTradingAsset, delegate: FavoriteStateChangeProtocol?) {
-        loadContentView()
-        cellContentView.configure(trading: asset, delegate: delegate)
+    func configure(_ asset: ProgramDetailsListItem, filterProtocol: FilterChangedProtocol?, favoriteProtocol: FavoriteStateChangeProtocol?) {
+        stackView.removeAllArrangedSubviews()
+        cellContentView = ProgramContentView.viewFromNib()
+        if let cellContentView = cellContentView as? ProgramContentView {
+            stackView.addArrangedSubview(cellContentView)
+            cellContentView.configure(asset, filterProtocol: filterProtocol, favoriteProtocol: favoriteProtocol)
+        }
     }
     
     /// Follow
     /// - Parameters:
     ///   - asset: FollowDetailsList
     ///   - delegate: FavoriteStateChangeProtocol
-    func configure(follow asset: FollowDetailsListItem, delegate: FavoriteStateChangeProtocol?) {
-        loadContentView()
-        cellContentView.configure(follow: asset, delegate: delegate)
+    func configure(_ asset: FollowDetailsListItem, filterProtocol: FilterChangedProtocol?, favoriteProtocol: FavoriteStateChangeProtocol?) {
+        stackView.removeAllArrangedSubviews()
+        cellContentView = FollowContentView.viewFromNib()
+        if let cellContentView = cellContentView as? FollowContentView {
+            stackView.addArrangedSubview(cellContentView)
+            cellContentView.configure(asset, filterProtocol: filterProtocol, favoriteProtocol: favoriteProtocol)
+        }
     }
-    
     
     /// FundInvesting
     /// - Parameters:
     ///   - asset: FundInvestingDetailsList
     ///   - delegate: FavoriteStateChangeProtocol
-    func configure(fundInvesting asset: FundInvestingDetailsList, delegate: FavoriteStateChangeProtocol?) {
-        loadContentView()
-        cellContentView.configure(fund: asset, delegate: delegate)
+    func configure(_ asset: FundInvestingDetailsList, filterProtocol: FilterChangedProtocol?, favoriteProtocol: FavoriteStateChangeProtocol?) {
+        stackView.removeAllArrangedSubviews()
+        cellContentView = FundInvestingContentView.viewFromNib()
+        if let cellContentView = cellContentView as? FundInvestingContentView {
+            stackView.addArrangedSubview(cellContentView)
+            cellContentView.configure(asset, filterProtocol: filterProtocol, favoriteProtocol: favoriteProtocol)
+        }
     }
     
     /// ProgramInvesting
     /// - Parameters:
     ///   - asset: ProgramInvestingDetailsList
     ///   - delegate: FavoriteStateChangeProtocol
-    func configure(programInvesting asset: ProgramInvestingDetailsList, delegate: FavoriteStateChangeProtocol?) {
-        loadContentView()
-        cellContentView.configure(program: asset, delegate: delegate)
+    func configure(_ asset: ProgramInvestingDetailsList, filterProtocol: FilterChangedProtocol?, favoriteProtocol: FavoriteStateChangeProtocol?) {
+        stackView.removeAllArrangedSubviews()
+        cellContentView = ProgramInvestingContentView.viewFromNib()
+        if let cellContentView = cellContentView as? ProgramInvestingContentView {
+            stackView.addArrangedSubview(cellContentView)
+            cellContentView.configure(asset, filterProtocol: filterProtocol, favoriteProtocol: favoriteProtocol)
+        }
     }
     
     
+    /// DashboardTrading
+    /// - Parameters:
+    ///   - asset: DashboardTradingAsset
+    ///   - delegate: FavoriteStateChangeProtocol
+    func configure(_ asset: DashboardTradingAsset, filterProtocol: FilterChangedProtocol?) {
+        stackView.removeAllArrangedSubviews()
+        switch asset.assetType {
+        case .program:
+            cellContentView = ProgramTradingContentView.viewFromNib()
+            if let cellContentView = cellContentView as? ProgramTradingContentView {
+                stackView.addArrangedSubview(cellContentView)
+                cellContentView.configure(programTrading: asset, filterProtocol: filterProtocol)
+            }
+        case .follow:
+            cellContentView = FollowTradingContentView.viewFromNib()
+            if let cellContentView = cellContentView as? FollowTradingContentView {
+                stackView.addArrangedSubview(cellContentView)
+                cellContentView.configure(followTrading: asset, filterProtocol: filterProtocol)
+            }
+        case .fund:
+            cellContentView = FundTradingContentView.viewFromNib()
+            if let cellContentView = cellContentView as? FundTradingContentView {
+                stackView.addArrangedSubview(cellContentView)
+                cellContentView.configure(fundTrading: asset, filterProtocol: filterProtocol)
+            }
+        default:
+            cellContentView = PrivateTradingContentView.viewFromNib()
+            if let cellContentView = cellContentView as? PrivateTradingContentView {
+                stackView.addArrangedSubview(cellContentView)
+                cellContentView.configure(asset, filterProtocol: filterProtocol)
+            }
+        }
+    }    
 }

@@ -68,27 +68,28 @@ class CreateAccountViewController: BaseModalViewController {
         present(vc, animated: true, completion: nil)
     }
     @objc func checkActionButton() {
-        guard let amountText = stackView.amountView.textField.text, !amountText.isEmpty, let value = amountText.doubleValue else {
+        var isEnable = false
+        
+        if let value = stackView.amountView.textField.text?.doubleValue {
+            viewModel?.request.depositAmount = value
+            stackView.amountView.approxLabel.text = viewModel?.getApproxString(value)
+        } else {
             stackView.amountView.approxLabel.text = ""
-            stackView.actionButton.setEnabled(false)
-            return
         }
         
-        stackView.amountView.approxLabel.text = viewModel.getApproxString(value)
-        
-        guard let minDeposit = viewModel.getMinDepositValue(), let exchangedValue = viewModel.exchangeValueInCurrency(value), exchangedValue >= minDeposit else { return
-            stackView.actionButton.setEnabled(false)
+        if
+            let value = stackView.amountView.textField.text?.doubleValue,
+            let minDeposit = viewModel?.getMinDepositValue(),
+            let exchangedValue = viewModel?.exchangeValueInCurrency(value),
+            exchangedValue >= minDeposit {
+            isEnable = true
         }
         
-        stackView.actionButton.setEnabled(true)
+        stackView.actionButton.setEnabled(isEnable)
     }
     // MARK: - Actions
     @IBAction func createAccountButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
-        
-        if let depositAmount = stackView.amountView.textField.text?.doubleValue {
-            viewModel.request.depositAmount = depositAmount
-        }
         
         showProgressHUD()
         viewModel.createAccount { [weak self] (result) in
@@ -218,22 +219,22 @@ extension CreateAccountViewController: BaseTableViewProtocol {
     func didSelect(_ type: DidSelectType, index: Int) {
         self.view.endEditing(true)
         
-        if type == .showBrokerDetails {
+        switch type {
+        case .showBrokerDetails:
             showBrokerDetails(index)
             return
-        }
-        
-        bottomSheetController.dismiss()
-    
-        switch type {
         case .accountType:
             viewModel.updateAccountType(index)
+            bottomSheetController.dismiss()
         case .currency:
             viewModel.updateCurrency(index)
+            bottomSheetController.dismiss()
         case .leverage:
             viewModel.updateLeverage(index)
+            bottomSheetController.dismiss()
         case .walletFrom:
             viewModel.updateWalletFrom(index)
+            bottomSheetController.dismiss()
         case .selectBroker:
             viewModel.updateBroker()
         default:
@@ -259,7 +260,7 @@ class CreateAccountViewModel {
     var fromListDataSource: TableViewDataSource!
     
     var brokerCollectionViewModel: BrokerCollectionViewModel!
-    var brokerCollectionDataSource: CollectionViewDataSource<BrokerCollectionViewModel>!
+    var brokerCollectionDataSource: CollectionViewDataSource!
     
     var brokersInfo: BrokersInfo? {
         didSet {
@@ -525,16 +526,15 @@ extension BrokerCollectionViewModel: BrokerCollectionViewCellViewModelProtocol {
     }
 }
 extension BrokerCollectionViewModel {
-    func itemsCountPercent() -> CGFloat {
-        return 0.5
+    func sizeForItem(at indexPath: IndexPath, frame: CGRect) -> CGSize {
+        return CGSize(width: frame.width * 0.5, height: frame.height)
     }
     
     func getCollectionViewHeight() -> CGFloat {
-        return 220.0
+        return 160.0
     }
-    
-    func makeLayout() -> UICollectionViewLayout {
-        return CustomLayout.defaultLayout(2)
+    func insetForSection(for section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0.0, right: 16.0)
     }
 }
 

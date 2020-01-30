@@ -1,5 +1,5 @@
 //
-//  StopJumpingTableViewOnInsertRows.swift
+//  UITableView+ReloadData.swift
 //  genesisvision-ios
 //
 //  Created by George on 03/04/2018.

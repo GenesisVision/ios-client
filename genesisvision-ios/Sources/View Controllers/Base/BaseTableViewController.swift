@@ -10,7 +10,7 @@ import UIKit
 
 class BaseTableViewController: UITableViewController, UIViewControllerWithFetching, Hidable, UIViewControllerWithBottomSheet {
     // MARK: - Variables
-    var bottomSheetController: BottomSheetController! = {
+    lazy var bottomSheetController: BottomSheetController = {
         return BottomSheetController()
     }()
     

@@ -108,20 +108,17 @@ class SelectBrokerStackView: UIStackView {
     func configure(_ viewModel: CreateAccountViewModel) {
         selectBrokerTitle.text = viewModel.brokerCollectionViewModel.title
         setupCollectionView(viewModel.brokerCollectionDataSource,
-                            viewModel.brokerCollectionDataSource,
-                            cellModelsForRegistration: viewModel.brokerCollectionViewModel.cellModelsForRegistration,
-                            layout: viewModel.brokerCollectionViewModel.makeLayout())
+                            cellModelsForRegistration: viewModel.brokerCollectionViewModel.cellModelsForRegistration)
         
         collectionHeightConstraint.constant = viewModel.brokerCollectionViewModel.getCollectionViewHeight()
+        self.layoutIfNeeded()
     }
     
-    func setupCollectionView(_ collectionViewDelegate: UICollectionViewDelegate,
-                   _ collectionViewDataSource: UICollectionViewDataSource,
-                   cellModelsForRegistration: [CellViewAnyModel.Type],
-                   layout: UICollectionViewLayout) {
-        collectionView.collectionViewLayout = layout
-        collectionView.delegate = collectionViewDelegate
-        collectionView.dataSource = collectionViewDataSource
+    func setupCollectionView(_ collectionDataSourceProtocol: CollectionDataSourceProtocol,
+                   cellModelsForRegistration: [CellViewAnyModel.Type]) {
+        
+        collectionView.delegate = collectionDataSourceProtocol
+        collectionView.dataSource = collectionDataSourceProtocol
         
         collectionView.isPagingEnabled = false
         
@@ -145,20 +142,17 @@ class SelectedAssetsStackView: UIStackView {
     
     func configure(_ viewModel: CreateFundViewModel) {
         setupCollectionView(viewModel.assetCollectionDataSource,
-                            viewModel.assetCollectionDataSource,
-                            cellModelsForRegistration: viewModel.assetCollectionViewModel.cellModelsForRegistration,
-                            layout: viewModel.assetCollectionViewModel.makeLayout())
+                            cellModelsForRegistration: viewModel.assetCollectionViewModel.cellModelsForRegistration)
         
         collectionHeightConstraint.constant = viewModel.assetCollectionViewModel.getCollectionViewHeight()
+        self.layoutIfNeeded()
     }
     
-    func setupCollectionView(_ collectionViewDelegate: UICollectionViewDelegate,
-                   _ collectionViewDataSource: UICollectionViewDataSource,
-                   cellModelsForRegistration: [CellViewAnyModel.Type],
-                   layout: UICollectionViewLayout) {
-        collectionView.collectionViewLayout = layout
-        collectionView.delegate = collectionViewDelegate
-        collectionView.dataSource = collectionViewDataSource
+    func setupCollectionView(_ collectionDataSourceProtocol: CollectionDataSourceProtocol,
+                   cellModelsForRegistration: [CellViewAnyModel.Type]) {
+        
+        collectionView.delegate = collectionDataSourceProtocol
+        collectionView.dataSource = collectionDataSourceProtocol
         
         collectionView.isPagingEnabled = false
         
@@ -255,28 +249,29 @@ class CreateFundStackView: ActionStackView {
         
         mainSettingsTitle.text = "Main settings"
         nameView.titleLabel.text = "Name"
-        nameView.textField.text = ""
+        nameView.textField.text = viewModel.request.title ?? ""
         nameView.subtitleLabel.text = "Minimum 4 symbols"
         nameView.subtitleValueLabel.text = "0/20"
         
         descriptionView.titleLabel.text = "Description"
-        descriptionView.textView.text = ""
+        descriptionView.textView.text = viewModel.request.description ?? ""
         descriptionView.subtitleLabel.text = "Minimum 20 symbols"
         descriptionView.subtitleValueLabel.text = "0 / 500"
         
         uploadLogoView.logoStackView.isHidden = true
         
         progressView.dataSource = self
+        updateProgressView(viewModel.assetCollectionViewModel.assets)
         
         assetSelectionTitle.text = viewModel.assetCollectionViewModel.title
         assetStackView.configure(viewModel)
         
         feesSettingsTitle.text = "Fees settings"
         entryFeeView.titleLabel.text = "Entry fee"
-        entryFeeView.textField.text = ""
+        entryFeeView.textField.text = viewModel.request.entryFee?.toString() ?? ""
         entryFeeView.subtitleLabel.text = "An entry fee is a fee charged to investors upon their investment to a GV Fund. The maximum entry fee is 10 %"
         exitFeeView.titleLabel.text = "Exit fee"
-        exitFeeView.textField.text = ""
+        exitFeeView.textField.text = viewModel.request.exitFee?.toString() ?? ""
         exitFeeView.subtitleLabel.text = "An exit fee is a fee charged to investors when they redeem shares from a GV Fund. The maximum exit fee is 10 %"
         
         depositTitle.text = "Deposit details"
@@ -288,8 +283,8 @@ class CreateFundStackView: ActionStackView {
         fromView.selectButton.isEnabled = true
         
         amountView.titleLabel.text = "Enter correct amount"
-        amountView.textField.text = ""
-        amountView.approxLabel.text = ""
+        amountView.textField.text = viewModel.request.depositAmount?.toString() ?? ""
+        amountView.approxLabel.text = viewModel.getApproxString(viewModel.request.depositAmount ?? 0.0)
         amountView.currencyLabel.text = viewModel.getSelectedWalletCurrency()
         amountView.subtitleLabel.text = "min. deposit"
         amountView.subtitleValueLabel.text = viewModel.getMinDeposit()
@@ -528,11 +523,7 @@ class MainSettingsView: UIStackView {
 }
 class LabelWithTitle: UIStackView {
     @IBOutlet weak var titleLabel: SubtitleLabel!
-    @IBOutlet weak var valueLabel: TitleLabel! {
-        didSet {
-            valueLabel.font = UIFont.getFont(.regular, size: 14.0)
-        }
-    }
+    @IBOutlet weak var valueLabel: TitleLabel!
     @IBOutlet weak var percentValueLabel: TitleLabel! {
         didSet {
             percentValueLabel.font = UIFont.getFont(.bold, size: 14.0)

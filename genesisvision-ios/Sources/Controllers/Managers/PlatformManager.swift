@@ -44,10 +44,6 @@ class PlatformManager {
     }
     
     func getPlatformAssets(completion: @escaping (_ platformAssets: PlatformAssets?) -> Void) {
-        if let platformAssets = platformAssets {
-            completion(platformAssets)
-        }
-        
         BaseDataProvider.getAllPlatformAssets(completion: { [weak self] (viewModel) in
             self?.platformAssets = viewModel
             completion(viewModel)
@@ -62,10 +58,6 @@ class PlatformManager {
     }
     
     func getLevelsParamsInfo(completion: @escaping (_ platformAssets: LevelsParamsInfo?) -> Void) {
-        if let levelsParamsInfo = levelsParamsInfo {
-            completion(levelsParamsInfo)
-        }
-        
         BaseDataProvider.getLevelsParameters(completion: { [weak self] (viewModel) in
             self?.levelsParamsInfo = viewModel
             completion(viewModel)
@@ -80,10 +72,6 @@ class PlatformManager {
     }
     
     func getPlatformInfo(completion: @escaping (_ platformInfo: PlatformInfo?) -> Void) {
-        if let platformInfo = platformInfo {
-            completion(platformInfo)
-        }
-        
         BaseDataProvider.getPlatformInfo(completion: { [weak self] (viewModel) in
             self?.platformInfo = viewModel
             completion(viewModel)
@@ -98,10 +86,6 @@ class PlatformManager {
     }
     
     func getProgramsLevelsInfo(_ currency: CurrencyType? = nil, completion: @escaping (_ programsLevelsInfo: ProgramsLevelsInfo?) -> Void) {
-        if let programsLevelsInfo = programsLevelsInfo {
-            completion(programsLevelsInfo)
-        }
-
         BaseDataProvider.getProgramsLevels(currency, completion: { [weak self] (model) in
             self?.programsLevelsInfo = model
             completion(self?.programsLevelsInfo)

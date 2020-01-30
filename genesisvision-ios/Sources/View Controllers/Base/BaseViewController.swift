@@ -52,7 +52,7 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
     var dateRangeModel: FilterDateRangeModel = FilterDateRangeModel()
     
     // MARK: - Veriables
-    var bottomSheetController: BottomSheetController! = {
+    lazy var bottomSheetController: BottomSheetController = {
         return BottomSheetController()
     }()
     
@@ -186,7 +186,7 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
     
     @objc func dateRangeButtonAction() {
         dateRangeView.delegate = self
-        bottomSheetController = BottomSheetController()
+//        bottomSheetController = BottomSheetController()
         bottomSheetController.addNavigationBar("Date range")
         bottomSheetController.initializeHeight = 370
         bottomSheetController.addContentsView(dateRangeView)

@@ -32,13 +32,13 @@ class DashboardRecommendationsViewModel: CellViewModelWithCollection {
         self.type = .dashboardRecommendation
         
         details?.programs?.items?.forEach({ (viewModel) in
-            viewModels.append(AssetCollectionViewCellViewModel(type: .program, asset: viewModel, delegate: nil))
+            viewModels.append(AssetCollectionViewCellViewModel(type: .program, asset: viewModel, filterProtocol: nil, favoriteProtocol: nil))
         })
         details?.follows?.items?.forEach({ (viewModel) in
-            viewModels.append(AssetCollectionViewCellViewModel(type: .follow, asset: viewModel, delegate: nil))
+            viewModels.append(AssetCollectionViewCellViewModel(type: .follow, asset: viewModel, filterProtocol: nil, favoriteProtocol: nil))
         })
         details?.funds?.items?.forEach({ (viewModel) in
-            viewModels.append(AssetCollectionViewCellViewModel(type: .fund, asset: viewModel, delegate: nil))
+            viewModels.append(AssetCollectionViewCellViewModel(type: .fund, asset: viewModel, filterProtocol: nil, favoriteProtocol: nil))
         })
     }
     
@@ -56,10 +56,6 @@ class DashboardRecommendationsViewModel: CellViewModelWithCollection {
 extension DashboardRecommendationsViewModel {
     func getRightButtons() -> [UIButton] {
         return []
-    }
-    
-    func makeLayout() -> UICollectionViewLayout {
-        return CustomLayout.defaultLayout(1)
     }
     
     func getCollectionViewHeight() -> CGFloat {

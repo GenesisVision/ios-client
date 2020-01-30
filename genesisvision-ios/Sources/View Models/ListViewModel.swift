@@ -296,7 +296,7 @@ final class ListViewModel: ListViewModelProtocol {
         assetList.items?.forEach({ (asset) in
             guard let router = self.router as? ListRouter else { return }
             
-            let viewModel = ProgramTableViewCellViewModel(asset: asset, delegate: router.currentController as? FavoriteStateChangeProtocol)
+            let viewModel = ProgramTableViewCellViewModel(asset: asset, filterProtocol: router.currentController as? FilterChangedProtocol, favoriteProtocol: router.currentController as? FavoriteStateChangeProtocol) //FIXIT:
             viewModels.append(viewModel)
         })
 
@@ -313,7 +313,7 @@ final class ListViewModel: ListViewModelProtocol {
         assetList.items?.forEach({ (asset) in
             guard let router = self.router as? ListRouter else { return }
             
-            let viewModel = FundTableViewCellViewModel(asset: asset, delegate: router.currentController as? FavoriteStateChangeProtocol)
+            let viewModel = FundTableViewCellViewModel(asset: asset, filterProtocol: router.currentController as? FilterChangedProtocol, favoriteProtocol: router.currentController as? FavoriteStateChangeProtocol) //FIXIT:b
             viewModels.append(viewModel)
         })
         
@@ -330,7 +330,7 @@ final class ListViewModel: ListViewModelProtocol {
         assetList.items?.forEach({ (asset) in
             guard let router = self.router as? ListRouter else { return }
             
-            let viewModel = FollowTableViewCellViewModel(asset: asset, delegate: router.currentController as? FavoriteStateChangeProtocol)
+            let viewModel = FollowTableViewCellViewModel(asset: asset, filterProtocol: router.currentController as? FilterChangedProtocol, favoriteProtocol: router.currentController as? FavoriteStateChangeProtocol) //FIXIT:
             viewModels.append(viewModel)
         })
         
@@ -469,7 +469,7 @@ extension ListViewModel {
                 assetList.items?.forEach({ (asset) in
                     guard let listRouter = self?.router as? ListRouter else { return completionError(.failure(errorType: .apiError(message: nil))) }
                     
-                    let programTableViewCellViewModel = ProgramTableViewCellViewModel(asset: asset, delegate: listRouter.currentController as? FavoriteStateChangeProtocol)
+                    let programTableViewCellViewModel = ProgramTableViewCellViewModel(asset: asset, filterProtocol: listRouter.currentController as? FilterChangedProtocol, favoriteProtocol: listRouter.currentController as? FavoriteStateChangeProtocol) //FIXIT:
                     viewModels.append(programTableViewCellViewModel)
                 })
                 
@@ -484,7 +484,7 @@ extension ListViewModel {
                 assetList.items?.forEach({ (asset) in
                     guard let listRouter = self?.router as? ListRouter else { return completionError(.failure(errorType: .apiError(message: nil))) }
                     
-                    let fundTableViewCellViewModel = FundTableViewCellViewModel(asset: asset, delegate: listRouter.currentController as? FavoriteStateChangeProtocol)
+                    let fundTableViewCellViewModel = FundTableViewCellViewModel(asset: asset, filterProtocol: listRouter.currentController as? FilterChangedProtocol, favoriteProtocol: listRouter.currentController as? FavoriteStateChangeProtocol) //FIXIT:
                     viewModels.append(fundTableViewCellViewModel)
                 })
                 
@@ -499,7 +499,7 @@ extension ListViewModel {
                 assetList.items?.forEach({ (asset) in
                     guard let listRouter = self?.router as? ListRouter else { return completionError(.failure(errorType: .apiError(message: nil))) }
                     
-                    let followTableViewCellViewModel = FollowTableViewCellViewModel(asset: asset, delegate: listRouter.currentController as? FavoriteStateChangeProtocol)
+                    let followTableViewCellViewModel = FollowTableViewCellViewModel(asset: asset, filterProtocol: listRouter.currentController as? FilterChangedProtocol, favoriteProtocol: listRouter.currentController as? FavoriteStateChangeProtocol) //FIXIT:
                     viewModels.append(followTableViewCellViewModel)
                 })
                 

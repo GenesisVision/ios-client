@@ -11,7 +11,7 @@ import UIKit
 struct DashboardTradingCellViewModel<ViewModelType: CellViewModelWithCollection> {
     var viewModel: ViewModelType
     let data: TradingHeaderData?
-    var dataSource: CollectionViewDataSource<ViewModelType>!
+    var dataSource: CollectionViewDataSource!
     weak var delegate: BaseTableViewProtocol?
     init(_ viewModel: ViewModelType, data: TradingHeaderData?, delegate: BaseTableViewProtocol?) {
         self.viewModel = viewModel
@@ -29,7 +29,7 @@ extension DashboardTradingCellViewModel: CellViewModel {
             cell.labelsView.isHidden = data.isEmpty
         }
         
-        cell.configure(viewModel, delegate: delegate, collectionViewDelegate: dataSource, collectionViewDataSource: dataSource, cellModelsForRegistration: viewModel.cellModelsForRegistration)
+        cell.configure(viewModel, delegate: delegate, collectionDataSourceProtocol: dataSource, cellModelsForRegistration: viewModel.cellModelsForRegistration)
         cell.labelsView.configure(data)
         cell.labelsView.changeLabelsView.dayLabel.valueLabel.isHidden = true
         cell.labelsView.changeLabelsView.weekLabel.valueLabel.isHidden = true
@@ -81,10 +81,6 @@ class TradingCollectionViewModel: CellViewModelWithCollection {
     
     func getCollectionViewHeight() -> CGFloat {
         return self.details?.events?.items?.count ?? 0 > 0 ? 150 : 0
-    }
-    
-    func makeLayout() -> UICollectionViewLayout {
-        return CustomLayout.defaultLayout(1, pagging: false, vCount: 1)
     }
     
     func hideLoader() -> Bool {

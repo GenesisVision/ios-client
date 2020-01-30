@@ -101,11 +101,14 @@ class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDelegate 
     }
 }
 
-final class CollectionViewDataSource<ViewModel: ViewModelWithListProtocol>: NSObject, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    var viewModel: ViewModel
+protocol CollectionDataSourceProtocol: UICollectionViewDelegate, UICollectionViewDataSource {
+}
+
+final class CollectionViewDataSource: NSObject, CollectionDataSourceProtocol, UICollectionViewDelegateFlowLayout {
+    var viewModel: ViewModelWithListProtocol
     
     // MARK: - Lifecycle
-    init(_ viewModel: ViewModel) {
+    init(_ viewModel: ViewModelWithListProtocol) {
         self.viewModel = viewModel
     }
     
@@ -145,19 +148,18 @@ final class CollectionViewDataSource<ViewModel: ViewModelWithListProtocol>: NSOb
     
     func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return viewModel.insetForSection(for: section)
-            ?? UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0.0, right: 16.0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return viewModel.sizeForItem(at: indexPath) ?? CGSize(width: collectionView.frame.width * viewModel.itemsCountPercent(), height: collectionView.frame.height)
+        return viewModel.sizeForItem(at: indexPath, frame: collectionView.frame)
     }
     
     func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return viewModel.minimumLineSpacing(for: section) ?? Constants.SystemSizes.Cell.horizontalMarginValue
+        return viewModel.minimumLineSpacing(for: section)
     }
     
     func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return viewModel.minimumInteritemSpacing(for: section) ?? Constants.SystemSizes.Cell.horizontalMarginValue * 2
+        return viewModel.minimumInteritemSpacing(for: section)
     }
     
     @available(iOS 13.0, *)

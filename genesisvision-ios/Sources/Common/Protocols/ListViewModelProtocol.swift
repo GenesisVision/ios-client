@@ -35,7 +35,7 @@ extension BaseData {
 protocol CellViewModelWithCollection: BaseData, ViewModelWithListProtocol {
     func getRightButtons() -> [UIButton]
     func getLeftButtons() -> [UIButton]
-    func makeLayout() -> UICollectionViewLayout
+
     func getCollectionViewHeight() -> CGFloat
     func getTotalCount() -> Int?
     func hideLoader() -> Bool
@@ -54,11 +54,7 @@ extension CellViewModelWithCollection {
     func getRightButtons() -> [UIButton] {
         return []
     }
-    
-    func makeLayout() -> UICollectionViewLayout {
-        return CustomLayout.defaultLayout()
-    }
-    
+
     func getCollectionViewHeight() -> CGFloat {
         return 150.0
     }
@@ -89,11 +85,10 @@ protocol ViewModelWithListProtocol {
     func headerView(_ tableView: UITableView, for section: Int) -> UIView?
     
     //CollectionView
-    func itemsCountPercent() -> CGFloat
-    func insetForSection(for section: Int) -> UIEdgeInsets?
-    func sizeForItem(at indexPath: IndexPath) -> CGSize?
-    func minimumLineSpacing(for section: Int) -> CGFloat?
-    func minimumInteritemSpacing(for section: Int) -> CGFloat?
+    func insetForSection(for section: Int) -> UIEdgeInsets
+    func sizeForItem(at indexPath: IndexPath, frame: CGRect) -> CGSize
+    func minimumLineSpacing(for section: Int) -> CGFloat
+    func minimumInteritemSpacing(for section: Int) -> CGFloat
     
     func didSelect(at indexPath: IndexPath)
     func cellAnimations() -> Bool
@@ -166,20 +161,17 @@ extension ViewModelWithListProtocol {
     
     
     //Collection View
-    func itemsCountPercent() -> CGFloat {
-        return 0.75
+    func insetForSection(for section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0.0, left: 16.0, bottom: 16.0, right: 16.0)
     }
-    func insetForSection(for section: Int) -> UIEdgeInsets? {
-        return nil
+    func sizeForItem(at indexPath: IndexPath, frame: CGRect) -> CGSize {
+        return CGSize(width: frame.width * 0.75, height: frame.height - 16.0)
     }
-    func sizeForItem(at indexPath: IndexPath) -> CGSize? {
-        return nil
+    func minimumLineSpacing(for section: Int) -> CGFloat {
+        return 16.0
     }
-    func minimumLineSpacing(for section: Int) -> CGFloat? {
-        return nil
-    }
-    func minimumInteritemSpacing(for section: Int) -> CGFloat? {
-        return nil
+    func minimumInteritemSpacing(for section: Int) -> CGFloat {
+        return 16.0
     }
     
     @available(iOS 13.0, *)

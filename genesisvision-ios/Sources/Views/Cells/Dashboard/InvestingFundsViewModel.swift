@@ -31,7 +31,7 @@ class InvestingFundsViewModel: CellViewModelWithCollection {
         type = .investingFunds
         
         details?.items?.forEach({ (viewModel) in
-            viewModels.append(AssetCollectionViewCellViewModel(type: .fund, asset: viewModel, delegate: nil))
+            viewModels.append(AssetCollectionViewCellViewModel(type: .fund, asset: viewModel, filterProtocol: nil, favoriteProtocol: nil))//FIXIT:
         })
     }
     
@@ -51,10 +51,6 @@ extension InvestingFundsViewModel {
         showAllButton.setTitleColor(.primary, for: .normal)
         showAllButton.addTarget(self, action: #selector(showAllButtonAction(_:)), for: .touchUpInside)
         return [showAllButton]
-    }
-    
-    func makeLayout() -> UICollectionViewLayout {
-        return CustomLayout.defaultLayout(1, pagging: false)
     }
     
     func getCollectionViewHeight() -> CGFloat {

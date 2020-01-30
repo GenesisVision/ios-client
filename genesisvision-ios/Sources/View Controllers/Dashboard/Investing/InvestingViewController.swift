@@ -21,7 +21,7 @@ class InvestingViewController: ListViewController {
         
         setup()
         showProgressHUD()
-        viewModel.fetch()
+        fetch()
     }
     
     // MARK: - Methods
@@ -34,6 +34,7 @@ class InvestingViewController: ListViewController {
         tableView.delegate = viewModel.dataSource
         tableView.dataSource = viewModel.dataSource
         tableView.reloadDataSmoothly()
+        tableView.backgroundColor = UIColor.Cell.headerBg
         
         titleView.titleLabel.text = "Investing"
         titleView.balanceLabel.text = viewModel.getTotalValue()
@@ -88,6 +89,16 @@ class InvestingViewController: ListViewController {
         let assetId = asset.getAssetId()
         let type = asset.type
         viewModel.router?.showAssetDetails(with: assetId, assetType: type)
+    }
+    
+    func fetch() {
+        viewModel.fetch()
+    }
+    
+    override func pullToRefresh() {
+        super.pullToRefresh()
+        
+        fetch()
     }
 }
 
@@ -173,7 +184,7 @@ extension InvestingViewController: BaseTableViewProtocol {
     func didReload(_ indexPath: IndexPath) {
         titleView.balanceLabel.text = viewModel.getTotalValue()
         hideHUD()
-        tableView.reloadSections([indexPath.section], with: .automatic)
+        tableView.reloadSections([indexPath.section], with: .fade)
     }
 }
 
@@ -323,12 +334,7 @@ class InvestingViewModel: ViewModelWithListProtocol {
         }
     }
     func headerHeight(for section: Int) -> CGFloat {
-        switch section {
-        case 0:
-            return 0.0
-        default:
-            return Constants.headerHeight
-        }
+        return 0.0
     }
     
     func numberOfRows(in section: Int) -> Int {

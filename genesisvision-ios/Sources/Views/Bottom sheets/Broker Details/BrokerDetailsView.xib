@@ -80,16 +80,16 @@
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="2JT-f6-nUD" customClass="BrokerDetailsStackView" customModule="GV_DEBUG" customModuleProvider="target">
                             <rect key="frame" x="20" y="20" width="335" height="386"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="BDi-Bg-I18" customClass="DefaultStackView" customModule="GV_DEBUG" customModuleProvider="target">
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="BDi-Bg-I18" customClass="DefaultStackView" customModule="GV_DEBUG" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="335" height="46"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CfA-xo-FUs" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CfA-xo-FUs" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="335" height="14.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fez-eb-FOY" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fez-eb-FOY" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="22.5" width="335" height="23.5"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="20"/>
@@ -236,7 +236,7 @@
                         <constraint firstItem="2JT-f6-nUD" firstAttribute="width" secondItem="J06-EE-htb" secondAttribute="width" constant="-40" id="TwR-Dh-dAG"/>
                         <constraint firstItem="2JT-f6-nUD" firstAttribute="leading" secondItem="J06-EE-htb" secondAttribute="leading" constant="20" id="W14-EZ-kdx"/>
                         <constraint firstItem="2JT-f6-nUD" firstAttribute="top" secondItem="J06-EE-htb" secondAttribute="top" constant="20" id="eMm-gG-5st"/>
-                        <constraint firstAttribute="bottom" secondItem="2JT-f6-nUD" secondAttribute="bottom" id="qkZ-Re-lbe"/>
+                        <constraint firstAttribute="bottom" secondItem="2JT-f6-nUD" secondAttribute="bottom" constant="20" id="qkZ-Re-lbe"/>
                         <constraint firstAttribute="trailing" secondItem="2JT-f6-nUD" secondAttribute="trailing" constant="20" id="vg0-Gg-CgL"/>
                     </constraints>
                 </scrollView>

@@ -19,7 +19,7 @@ class ManagerRouter: TabmanRouter {
         
         let router = Router(parentRouter: self)
         router.currentController = vc
-        let viewModel = ManagerInfoViewModel(withRouter: router, managerId: managerId, reloadDataProtocol: vc)
+        let viewModel = ManagerInfoViewModel(withRouter: router, managerId: managerId, delegate: vc)
         vc.viewModel = viewModel
         vc.hidesBottomBarWhenPushed = true
         

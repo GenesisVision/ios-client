@@ -8,7 +8,7 @@
 
 import UIKit.UITableViewHeaderFooterView
 
-final class AccountInfoViewModel {
+final class AccountInfoViewModel: ViewModelWithListProtocol {
     enum SectionType {
         case account
         case yourDeposit
@@ -22,9 +22,11 @@ final class AccountInfoViewModel {
 
     // MARK: - Variables
     var title: String = "Info"
+    var canPullToRefresh: Bool = true
+    
+    lazy var dataSource: TableViewDataSource = TableViewDataSource(self)
     
     private var router: AccountInfoRouter
-    private weak var reloadDataProtocol: ReloadDataProtocol?
     
     var chartDurationType: ChartDurationType = .all
     var assetId: String!
@@ -51,8 +53,7 @@ final class AccountInfoViewModel {
     }
     
     private var sections: [SectionType] = []
-    
-    private var models: [CellViewAnyModel]?
+    var viewModels: [CellViewAnyModel] = []
     
     /// Return view models for registration cell Nib files
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
@@ -62,16 +63,16 @@ final class AccountInfoViewModel {
                 ProgramInfoTableViewCellViewModel.self,
                 FollowInfoTableViewCellViewModel.self]
     }
-    
+    weak var delegate: BaseTableViewProtocol?
     // MARK: - Init
-    init(withRouter router: AccountInfoRouter, assetId: String? = nil, reloadDataProtocol: ReloadDataProtocol? = nil) {
+    init(withRouter router: AccountInfoRouter, assetId: String? = nil, delegate: BaseTableViewProtocol? = nil) {
         self.router = router
 
         if let assetId = assetId {
             self.assetId = assetId
         }
         
-        self.reloadDataProtocol = reloadDataProtocol
+        self.delegate = delegate
     }
     
     // MARK: - Public methods
@@ -80,12 +81,7 @@ final class AccountInfoViewModel {
     }
     
     func headerHeight(for section: Int) -> CGFloat {
-        switch section {
-        case 0:
-            return 0.0
-        default:
-            return Constants.headerHeight
-        }
+        return 0.0
     }
     
     func numberOfSections() -> Int {
@@ -112,7 +108,7 @@ final class AccountInfoViewModel {
         sections.append(.account)
         sections.append(.yourDeposit)
 
-        reloadDataProtocol?.didReloadData()
+        delegate?.didReload()
     }
 }
 
@@ -227,7 +223,7 @@ extension AccountInfoViewModel: YourInvestmentProtocol {
 extension AccountInfoViewModel: ReloadDataProtocol {
     func didReloadData() {
         fetch { [weak self] (result) in
-            self?.reloadDataProtocol?.didReloadData()
+            self?.delegate?.didReload()
         }
     }
 }
