@@ -31,7 +31,8 @@ class InvestingFundsViewModel: CellViewModelWithCollection {
         type = .investingFunds
         
         details?.items?.forEach({ (viewModel) in
-            viewModels.append(AssetCollectionViewCellViewModel(type: .fund, asset: viewModel, filterProtocol: nil, favoriteProtocol: nil))//FIXIT:
+            //FIXIT: Add filterProtocol, favoriteProtocol
+            viewModels.append(AssetCollectionViewCellViewModel(type: .fund, asset: viewModel, filterProtocol: nil, favoriteProtocol: nil))
         })
     }
     

@@ -20,10 +20,11 @@ open class DashboardTradingAsset: Codable {
     public var signalInfo: DashboardTradingAssetSignalDetails?
     public var broker: DashboardTradingAssetBrokerDetails?
     public var actions: DashboardTradingAssetActions?
+    public var tags: [Tag]?
 
 
     
-    public init(id: UUID?, assetType: AssetType?, assetTypeExt: AssetTypeExt?, statistic: ProfitChart?, publicInfo: DashboardTradingAssetPublicDetails?, accountInfo: DashboardTradingAssetCommonDetails?, signalInfo: DashboardTradingAssetSignalDetails?, broker: DashboardTradingAssetBrokerDetails?, actions: DashboardTradingAssetActions?) {
+    public init(id: UUID?, assetType: AssetType?, assetTypeExt: AssetTypeExt?, statistic: ProfitChart?, publicInfo: DashboardTradingAssetPublicDetails?, accountInfo: DashboardTradingAssetCommonDetails?, signalInfo: DashboardTradingAssetSignalDetails?, broker: DashboardTradingAssetBrokerDetails?, actions: DashboardTradingAssetActions?, tags: [Tag]?) {
         self.id = id
         self.assetType = assetType
         self.assetTypeExt = assetTypeExt
@@ -33,6 +34,7 @@ open class DashboardTradingAsset: Codable {
         self.signalInfo = signalInfo
         self.broker = broker
         self.actions = actions
+        self.tags = tags
     }
     
 
@@ -51,6 +53,7 @@ open class DashboardTradingAsset: Codable {
         try container.encodeIfPresent(signalInfo, forKey: "signalInfo")
         try container.encodeIfPresent(broker, forKey: "broker")
         try container.encodeIfPresent(actions, forKey: "actions")
+        try container.encodeIfPresent(tags, forKey: "tags")
     }
 
     // Decodable protocol methods
@@ -67,6 +70,7 @@ open class DashboardTradingAsset: Codable {
         signalInfo = try container.decodeIfPresent(DashboardTradingAssetSignalDetails.self, forKey: "signalInfo")
         broker = try container.decodeIfPresent(DashboardTradingAssetBrokerDetails.self, forKey: "broker")
         actions = try container.decodeIfPresent(DashboardTradingAssetActions.self, forKey: "actions")
+        tags = try container.decodeIfPresent([Tag].self, forKey: "tags")
     }
 }
 

@@ -22,10 +22,11 @@ open class ProgramFollowOwnerActions: Codable {
     public var canMakeSignalProviderFromProgram: Bool?
     public var canEditSignalProviderSettings: Bool?
     public var isEnoughMoneyToCreateProgram: Bool?
+    public var canConfirm2FA: Bool?
 
 
     
-    public init(canClose: Bool?, canClosePeriod: Bool?, canChangePassword: Bool?, canTransferMoney: Bool?, canMakeProgramFromPrivateTradingAccount: Bool?, canMakeSignalProviderFromPrivateTradingAccount: Bool?, canMakeSignalProviderFromPrivateExternalTradingAccount: Bool?, canMakeProgramFromSignalProvider: Bool?, canMakeSignalProviderFromProgram: Bool?, canEditSignalProviderSettings: Bool?, isEnoughMoneyToCreateProgram: Bool?) {
+    public init(canClose: Bool?, canClosePeriod: Bool?, canChangePassword: Bool?, canTransferMoney: Bool?, canMakeProgramFromPrivateTradingAccount: Bool?, canMakeSignalProviderFromPrivateTradingAccount: Bool?, canMakeSignalProviderFromPrivateExternalTradingAccount: Bool?, canMakeProgramFromSignalProvider: Bool?, canMakeSignalProviderFromProgram: Bool?, canEditSignalProviderSettings: Bool?, isEnoughMoneyToCreateProgram: Bool?, canConfirm2FA: Bool?) {
         self.canClose = canClose
         self.canClosePeriod = canClosePeriod
         self.canChangePassword = canChangePassword
@@ -37,6 +38,7 @@ open class ProgramFollowOwnerActions: Codable {
         self.canMakeSignalProviderFromProgram = canMakeSignalProviderFromProgram
         self.canEditSignalProviderSettings = canEditSignalProviderSettings
         self.isEnoughMoneyToCreateProgram = isEnoughMoneyToCreateProgram
+        self.canConfirm2FA = canConfirm2FA
     }
     
 
@@ -57,6 +59,7 @@ open class ProgramFollowOwnerActions: Codable {
         try container.encodeIfPresent(canMakeSignalProviderFromProgram, forKey: "canMakeSignalProviderFromProgram")
         try container.encodeIfPresent(canEditSignalProviderSettings, forKey: "canEditSignalProviderSettings")
         try container.encodeIfPresent(isEnoughMoneyToCreateProgram, forKey: "isEnoughMoneyToCreateProgram")
+        try container.encodeIfPresent(canConfirm2FA, forKey: "canConfirm2FA")
     }
 
     // Decodable protocol methods
@@ -75,6 +78,7 @@ open class ProgramFollowOwnerActions: Codable {
         canMakeSignalProviderFromProgram = try container.decodeIfPresent(Bool.self, forKey: "canMakeSignalProviderFromProgram")
         canEditSignalProviderSettings = try container.decodeIfPresent(Bool.self, forKey: "canEditSignalProviderSettings")
         isEnoughMoneyToCreateProgram = try container.decodeIfPresent(Bool.self, forKey: "isEnoughMoneyToCreateProgram")
+        canConfirm2FA = try container.decodeIfPresent(Bool.self, forKey: "canConfirm2FA")
     }
 }
 

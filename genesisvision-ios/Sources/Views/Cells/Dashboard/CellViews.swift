@@ -170,6 +170,11 @@ class SelectedAssetsStackView: UIStackView {
         collectionView.reloadData()
     }
 }
+class DepositStackView: UIStackView {
+    @IBOutlet weak var depositTitle: LargeTitleLabel!
+    @IBOutlet weak var fromView: SelectStackView!
+    @IBOutlet weak var amountView: TextFieldStackView!
+}
 class CreateAccountStackView: ActionStackView {
     @IBOutlet weak var selectBrokerView: SelectBrokerStackView!
     @IBOutlet weak var mainSettingsTitle: LargeTitleLabel!
@@ -178,9 +183,7 @@ class CreateAccountStackView: ActionStackView {
     @IBOutlet weak var currencyView: SelectStackView!
     @IBOutlet weak var leverageView: SelectStackView!
     
-    @IBOutlet weak var depositTitle: LargeTitleLabel!
-    @IBOutlet weak var fromView: SelectStackView!
-    @IBOutlet weak var amountView: TextFieldStackView!
+    @IBOutlet weak var depositView: DepositStackView!
     
     func configure(_ viewModel: CreateAccountViewModel) {
         selectBrokerView.configure(viewModel)
@@ -202,20 +205,24 @@ class CreateAccountStackView: ActionStackView {
         leverageView.selectButton.isHidden = !viewModel.isEnableLeverageSelector()
         leverageView.textLabel.textColor = viewModel.isEnableLeverageSelector() ? UIColor.Cell.title : UIColor.Cell.subtitle
         
-        depositTitle.text = "Deposit details"
+        depositView.isHidden = !viewModel.isDepositRequired()
         
-        fromView.titleLabel.text = "From"
-        fromView.textLabel.text = viewModel.getSelectedWallet()
-        fromView.subtitleLabel.text = "Available in the wallet"
-        fromView.subtitleValueLabel.text = viewModel.getAvailable()
-        fromView.selectButton.isEnabled = true
-        
-        amountView.titleLabel.text = "Enter correct amount"
-        amountView.textField.text = ""
-        amountView.approxLabel.text = ""
-        amountView.currencyLabel.text = viewModel.getSelectedWalletCurrency()
-        amountView.subtitleLabel.text = "min. deposit"
-        amountView.subtitleValueLabel.text = viewModel.getMinDeposit()
+        if viewModel.isDepositRequired() {
+            depositView.depositTitle.text = "Deposit details"
+            
+            depositView.fromView.titleLabel.text = "From"
+            depositView.fromView.textLabel.text = viewModel.getSelectedWallet()
+            depositView.fromView.subtitleLabel.text = "Available in the wallet"
+            depositView.fromView.subtitleValueLabel.text = viewModel.getAvailable()
+            depositView.fromView.selectButton.isEnabled = true
+            
+            depositView.amountView.titleLabel.text = "Enter correct amount"
+            depositView.amountView.textField.text = ""
+            depositView.amountView.approxLabel.text = ""
+            depositView.amountView.currencyLabel.text = viewModel.getSelectedWalletCurrency()
+            depositView.amountView.subtitleLabel.text = "min. deposit"
+            depositView.amountView.subtitleValueLabel.text = viewModel.getMinDeposit()
+        }
     }
 }
 class CreateFundStackView: ActionStackView {
@@ -238,9 +245,7 @@ class CreateFundStackView: ActionStackView {
     @IBOutlet weak var entryFeeView: TextFieldStackView!
     @IBOutlet weak var exitFeeView: TextFieldStackView!
     
-    @IBOutlet weak var depositTitle: LargeTitleLabel!
-    @IBOutlet weak var fromView: SelectStackView!
-    @IBOutlet weak var amountView: TextFieldStackView!
+    @IBOutlet weak var depositView: DepositStackView!
     
     var viewModel: CreateFundViewModel?
     
@@ -274,20 +279,20 @@ class CreateFundStackView: ActionStackView {
         exitFeeView.textField.text = viewModel.request.exitFee?.toString() ?? ""
         exitFeeView.subtitleLabel.text = "An exit fee is a fee charged to investors when they redeem shares from a GV Fund. The maximum exit fee is 10 %"
         
-        depositTitle.text = "Deposit details"
+        depositView.depositTitle.text = "Deposit details"
         
-        fromView.titleLabel.text = "From"
-        fromView.textLabel.text = viewModel.getSelectedWallet()
-        fromView.subtitleLabel.text = "Available in the wallet"
-        fromView.subtitleValueLabel.text = viewModel.getAvailable()
-        fromView.selectButton.isEnabled = true
+        depositView.fromView.titleLabel.text = "From"
+        depositView.fromView.textLabel.text = viewModel.getSelectedWallet()
+        depositView.fromView.subtitleLabel.text = "Available in the wallet"
+        depositView.fromView.subtitleValueLabel.text = viewModel.getAvailable()
+        depositView.fromView.selectButton.isEnabled = true
         
-        amountView.titleLabel.text = "Enter correct amount"
-        amountView.textField.text = viewModel.request.depositAmount?.toString() ?? ""
-        amountView.approxLabel.text = viewModel.getApproxString(viewModel.request.depositAmount ?? 0.0)
-        amountView.currencyLabel.text = viewModel.getSelectedWalletCurrency()
-        amountView.subtitleLabel.text = "min. deposit"
-        amountView.subtitleValueLabel.text = viewModel.getMinDeposit()
+        depositView.amountView.titleLabel.text = "Enter correct amount"
+        depositView.amountView.textField.text = viewModel.request.depositAmount?.toString() ?? ""
+        depositView.amountView.approxLabel.text = viewModel.getApproxString(viewModel.request.depositAmount ?? 0.0)
+        depositView.amountView.currencyLabel.text = viewModel.getSelectedWalletCurrency()
+        depositView.amountView.subtitleLabel.text = "min. deposit"
+        depositView.amountView.subtitleValueLabel.text = viewModel.getMinDeposit()
     }
     
     func updateProgressView(_ assets: [PlatformAsset]?) {

@@ -104,8 +104,14 @@ class InvestingViewController: ListViewController {
 
 extension InvestingViewController: InRequestsDelegateManagerProtocol {
     func didSelectRequest(at indexPath: IndexPath) {
-        //FIXIT:
-//        viewModel.inRequestsDelegateManager.
+        guard let requests = viewModel.inRequestsDelegateManager.requests?.items, !requests.isEmpty else {
+            return
+        }
+
+        let request = requests[indexPath.row]
+        if let assetId = request.assetDetails?.id?.uuidString, let assetType = request.assetDetails?.assetType {
+            viewModel.router?.showAssetDetails(with: assetId, assetType: assetType)
+        }
     }
     
     func didCanceledRequest(completionResult: CompletionResult) {

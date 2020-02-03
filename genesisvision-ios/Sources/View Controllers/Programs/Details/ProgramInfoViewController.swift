@@ -95,7 +95,7 @@ extension ProgramInfoViewController: BaseTableViewProtocol {
 }
 extension ProgramInfoViewController: InRequestsDelegateManagerProtocol {
     func didSelectRequest(at indexPath: IndexPath) {
-        //FIXIT:
+        
     }
     
     func didCanceledRequest(completionResult: CompletionResult) {

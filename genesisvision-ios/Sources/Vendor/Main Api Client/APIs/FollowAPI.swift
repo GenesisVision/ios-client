@@ -185,12 +185,13 @@ open class FollowAPI {
      - parameter sorting: (query)  (optional)
      - parameter accountId: (query)  (optional)
      - parameter accountCurrency: (query)  (optional)
+     - parameter isFollow: (query)  (optional)
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getAssetTrades(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: Sorting_getAssetTrades? = nil, accountId: UUID? = nil, accountCurrency: AccountCurrency_getAssetTrades? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: TradesSignalViewModel?,_ error: Error?) -> Void)) {
-        getAssetTradesWithRequestBuilder(id: id, dateFrom: dateFrom, dateTo: dateTo, symbol: symbol, sorting: sorting, accountId: accountId, accountCurrency: accountCurrency, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func getAssetTrades(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: Sorting_getAssetTrades? = nil, accountId: UUID? = nil, accountCurrency: AccountCurrency_getAssetTrades? = nil, isFollow: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: TradesSignalViewModel?,_ error: Error?) -> Void)) {
+        getAssetTradesWithRequestBuilder(id: id, dateFrom: dateFrom, dateTo: dateTo, symbol: symbol, sorting: sorting, accountId: accountId, accountCurrency: accountCurrency, isFollow: isFollow, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -207,30 +208,11 @@ open class FollowAPI {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "originalCommissionCurrency" : "originalCommissionCurrency",
     "symbol" : "symbol",
+    "ticket" : "ticket",
+    "swap" : 1.4894159098541704,
     "originalCommission" : 1.2315135367772556,
     "totalCommission" : 7.061401241503109,
     "login" : "login",
-    "priceCurrent" : 4.145608029883936,
-    "price" : 2.027123023002322,
-    "showOriginalCommission" : true,
-    "currency" : null,
-    "commission" : 1.0246457001441578,
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "baseVolume" : 7.386281948385884,
-    "signalData" : {
-      "masters" : [ {
-        "share" : 6.84685269835264,
-        "login" : "login"
-      }, {
-        "share" : 6.84685269835264,
-        "login" : "login"
-      } ]
-    },
-    "profit" : 3.616076749251911,
-    "direction" : { },
-    "externalSignalAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "ticket" : "ticket",
-    "swap" : 1.4894159098541704,
     "volume" : 9.301444243932576,
     "totalCommissionByType" : [ {
       "amount" : 9.301444243932576,
@@ -245,9 +227,26 @@ open class FollowAPI {
       "title" : "title",
       "type" : { }
     } ],
+    "priceCurrent" : 4.145608029883936,
     "entry" : { },
+    "price" : 2.027123023002322,
+    "showOriginalCommission" : true,
     "tradingAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "currency" : null,
     "profitCurrency" : "profitCurrency",
+    "commission" : 1.0246457001441578,
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "baseVolume" : 7.386281948385884,
+    "signalData" : {
+      "masters" : [ {
+        "share" : 6.84685269835264,
+        "login" : "login"
+      }, {
+        "share" : 6.84685269835264,
+        "login" : "login"
+      } ]
+    },
+    "profit" : 3.616076749251911,
     "providers" : [ {
       "volume" : 1.4658129805029452,
       "firstOrderDate" : "2000-01-23T04:56:07.000+00:00",
@@ -336,35 +335,17 @@ open class FollowAPI {
       },
       "profit" : 5.637376656633329,
       "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
-    } ]
+    } ],
+    "direction" : { }
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "originalCommissionCurrency" : "originalCommissionCurrency",
     "symbol" : "symbol",
+    "ticket" : "ticket",
+    "swap" : 1.4894159098541704,
     "originalCommission" : 1.2315135367772556,
     "totalCommission" : 7.061401241503109,
     "login" : "login",
-    "priceCurrent" : 4.145608029883936,
-    "price" : 2.027123023002322,
-    "showOriginalCommission" : true,
-    "currency" : null,
-    "commission" : 1.0246457001441578,
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "baseVolume" : 7.386281948385884,
-    "signalData" : {
-      "masters" : [ {
-        "share" : 6.84685269835264,
-        "login" : "login"
-      }, {
-        "share" : 6.84685269835264,
-        "login" : "login"
-      } ]
-    },
-    "profit" : 3.616076749251911,
-    "direction" : { },
-    "externalSignalAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "ticket" : "ticket",
-    "swap" : 1.4894159098541704,
     "volume" : 9.301444243932576,
     "totalCommissionByType" : [ {
       "amount" : 9.301444243932576,
@@ -379,9 +360,26 @@ open class FollowAPI {
       "title" : "title",
       "type" : { }
     } ],
+    "priceCurrent" : 4.145608029883936,
     "entry" : { },
+    "price" : 2.027123023002322,
+    "showOriginalCommission" : true,
     "tradingAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "currency" : null,
     "profitCurrency" : "profitCurrency",
+    "commission" : 1.0246457001441578,
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "baseVolume" : 7.386281948385884,
+    "signalData" : {
+      "masters" : [ {
+        "share" : 6.84685269835264,
+        "login" : "login"
+      }, {
+        "share" : 6.84685269835264,
+        "login" : "login"
+      } ]
+    },
+    "profit" : 3.616076749251911,
     "providers" : [ {
       "volume" : 1.4658129805029452,
       "firstOrderDate" : "2000-01-23T04:56:07.000+00:00",
@@ -470,7 +468,8 @@ open class FollowAPI {
       },
       "profit" : 5.637376656633329,
       "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
-    } ]
+    } ],
+    "direction" : { }
   } ]
 }}]
      
@@ -481,12 +480,13 @@ open class FollowAPI {
      - parameter sorting: (query)  (optional)
      - parameter accountId: (query)  (optional)
      - parameter accountCurrency: (query)  (optional)
+     - parameter isFollow: (query)  (optional)
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<TradesSignalViewModel> 
      */
-    open class func getAssetTradesWithRequestBuilder(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: Sorting_getAssetTrades? = nil, accountId: UUID? = nil, accountCurrency: AccountCurrency_getAssetTrades? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<TradesSignalViewModel> {
+    open class func getAssetTradesWithRequestBuilder(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: Sorting_getAssetTrades? = nil, accountId: UUID? = nil, accountCurrency: AccountCurrency_getAssetTrades? = nil, isFollow: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<TradesSignalViewModel> {
         var path = "/v2.0/follow/{id}/trades"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
@@ -500,6 +500,7 @@ open class FollowAPI {
             "Sorting": sorting?.rawValue, 
             "AccountId": accountId, 
             "AccountCurrency": accountCurrency?.rawValue, 
+            "IsFollow": isFollow, 
             "Skip": skip?.encodeToJSON(), 
             "Take": take?.encodeToJSON()
         ])
@@ -676,6 +677,7 @@ open class FollowAPI {
             "minimumDepositsAmount" : {
               "key" : 5.637376656633329
             },
+            "isDepositRequired" : true,
             "isKycRequired" : true,
             "currencies" : [ "currencies", "currencies" ]
           }, {
@@ -688,6 +690,7 @@ open class FollowAPI {
             "minimumDepositsAmount" : {
               "key" : 5.637376656633329
             },
+            "isDepositRequired" : true,
             "isKycRequired" : true,
             "currencies" : [ "currencies", "currencies" ]
           } ],
@@ -743,6 +746,7 @@ open class FollowAPI {
     "canMakeSignalProviderFromPrivateExternalTradingAccount" : true,
     "canTransferMoney" : true,
     "canMakeProgramFromPrivateTradingAccount" : true,
+    "canConfirm2FA" : true,
     "canClosePeriod" : true,
     "canMakeProgramFromSignalProvider" : true
   },

@@ -16,6 +16,7 @@ public enum InvestmentEventType: String, Codable {
     case assetPeriodEndedDueToStopOut = "AssetPeriodEndedDueToStopOut"
     case assetBrokerChanged = "AssetBrokerChanged"
     case assetEnterInvestment = "AssetEnterInvestment"
+    case assetSubscriptionEdit = "AssetSubscriptionEdit"
     case assetInvestByInvestor = "AssetInvestByInvestor"
     case assetWithdrawalByInvestor = "AssetWithdrawalByInvestor"
     case assetReallocation = "AssetReallocation"
@@ -27,6 +28,5 @@ public enum InvestmentEventType: String, Codable {
     case assetUnsubscribeByInvestor = "AssetUnsubscribeByInvestor"
     case assetTradeOpen = "AssetTradeOpen"
     case assetTradeClosed = "AssetTradeClosed"
-    case assetSubscriptionEdit = "AssetSubscriptionEdit"
 
 }

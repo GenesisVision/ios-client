@@ -345,30 +345,11 @@ open class SignalAPI {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "originalCommissionCurrency" : "originalCommissionCurrency",
     "symbol" : "symbol",
+    "ticket" : "ticket",
+    "swap" : 1.4894159098541704,
     "originalCommission" : 1.2315135367772556,
     "totalCommission" : 7.061401241503109,
     "login" : "login",
-    "priceCurrent" : 4.145608029883936,
-    "price" : 2.027123023002322,
-    "showOriginalCommission" : true,
-    "currency" : null,
-    "commission" : 1.0246457001441578,
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "baseVolume" : 7.386281948385884,
-    "signalData" : {
-      "masters" : [ {
-        "share" : 6.84685269835264,
-        "login" : "login"
-      }, {
-        "share" : 6.84685269835264,
-        "login" : "login"
-      } ]
-    },
-    "profit" : 3.616076749251911,
-    "direction" : { },
-    "externalSignalAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "ticket" : "ticket",
-    "swap" : 1.4894159098541704,
     "volume" : 9.301444243932576,
     "totalCommissionByType" : [ {
       "amount" : 9.301444243932576,
@@ -383,9 +364,26 @@ open class SignalAPI {
       "title" : "title",
       "type" : { }
     } ],
+    "priceCurrent" : 4.145608029883936,
     "entry" : { },
+    "price" : 2.027123023002322,
+    "showOriginalCommission" : true,
     "tradingAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "currency" : null,
     "profitCurrency" : "profitCurrency",
+    "commission" : 1.0246457001441578,
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "baseVolume" : 7.386281948385884,
+    "signalData" : {
+      "masters" : [ {
+        "share" : 6.84685269835264,
+        "login" : "login"
+      }, {
+        "share" : 6.84685269835264,
+        "login" : "login"
+      } ]
+    },
+    "profit" : 3.616076749251911,
     "providers" : [ {
       "volume" : 1.4658129805029452,
       "firstOrderDate" : "2000-01-23T04:56:07.000+00:00",
@@ -474,35 +472,17 @@ open class SignalAPI {
       },
       "profit" : 5.637376656633329,
       "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
-    } ]
+    } ],
+    "direction" : { }
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "originalCommissionCurrency" : "originalCommissionCurrency",
     "symbol" : "symbol",
+    "ticket" : "ticket",
+    "swap" : 1.4894159098541704,
     "originalCommission" : 1.2315135367772556,
     "totalCommission" : 7.061401241503109,
     "login" : "login",
-    "priceCurrent" : 4.145608029883936,
-    "price" : 2.027123023002322,
-    "showOriginalCommission" : true,
-    "currency" : null,
-    "commission" : 1.0246457001441578,
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "baseVolume" : 7.386281948385884,
-    "signalData" : {
-      "masters" : [ {
-        "share" : 6.84685269835264,
-        "login" : "login"
-      }, {
-        "share" : 6.84685269835264,
-        "login" : "login"
-      } ]
-    },
-    "profit" : 3.616076749251911,
-    "direction" : { },
-    "externalSignalAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "ticket" : "ticket",
-    "swap" : 1.4894159098541704,
     "volume" : 9.301444243932576,
     "totalCommissionByType" : [ {
       "amount" : 9.301444243932576,
@@ -517,9 +497,26 @@ open class SignalAPI {
       "title" : "title",
       "type" : { }
     } ],
+    "priceCurrent" : 4.145608029883936,
     "entry" : { },
+    "price" : 2.027123023002322,
+    "showOriginalCommission" : true,
     "tradingAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "currency" : null,
     "profitCurrency" : "profitCurrency",
+    "commission" : 1.0246457001441578,
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "baseVolume" : 7.386281948385884,
+    "signalData" : {
+      "masters" : [ {
+        "share" : 6.84685269835264,
+        "login" : "login"
+      }, {
+        "share" : 6.84685269835264,
+        "login" : "login"
+      } ]
+    },
+    "profit" : 3.616076749251911,
     "providers" : [ {
       "volume" : 1.4658129805029452,
       "firstOrderDate" : "2000-01-23T04:56:07.000+00:00",
@@ -608,7 +605,8 @@ open class SignalAPI {
       },
       "profit" : 5.637376656633329,
       "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
-    } ]
+    } ],
+    "direction" : { }
   } ]
 }}]
      

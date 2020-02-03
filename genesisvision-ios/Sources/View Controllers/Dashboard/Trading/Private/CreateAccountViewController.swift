@@ -33,10 +33,10 @@ class CreateAccountViewController: BaseModalViewController {
     func setup() {
         viewModel = CreateAccountViewModel(self)
         
-        stackView.amountView.maxButton.addTarget(self, action: #selector(copyMaxValueButtonAction), for: .touchUpInside)
-        stackView.amountView.textField.designableTextFieldDelegate = self
-        stackView.amountView.textField.delegate = self
-        stackView.amountView.textField.addTarget(self, action: #selector(checkActionButton), for: .editingChanged)
+        stackView.depositView.amountView.maxButton.addTarget(self, action: #selector(copyMaxValueButtonAction), for: .touchUpInside)
+        stackView.depositView.amountView.textField.designableTextFieldDelegate = self
+        stackView.depositView.amountView.textField.delegate = self
+        stackView.depositView.amountView.textField.addTarget(self, action: #selector(checkActionButton), for: .editingChanged)
         
         showProgressHUD()
         viewModel.fetch()
@@ -70,15 +70,15 @@ class CreateAccountViewController: BaseModalViewController {
     @objc func checkActionButton() {
         var isEnable = false
         
-        if let value = stackView.amountView.textField.text?.doubleValue {
+        if let value = stackView.depositView.amountView.textField.text?.doubleValue {
             viewModel?.request.depositAmount = value
-            stackView.amountView.approxLabel.text = viewModel?.getApproxString(value)
+            stackView.depositView.amountView.approxLabel.text = viewModel?.getApproxString(value)
         } else {
-            stackView.amountView.approxLabel.text = ""
+            stackView.depositView.amountView.approxLabel.text = ""
         }
         
         if
-            let value = stackView.amountView.textField.text?.doubleValue,
+            let value = stackView.depositView.amountView.textField.text?.doubleValue,
             let minDeposit = viewModel?.getMinDepositValue(),
             let exchangedValue = viewModel?.exchangeValueInCurrency(value),
             exchangedValue >= minDeposit {
@@ -178,7 +178,7 @@ class CreateAccountViewController: BaseModalViewController {
     @IBAction func copyMaxValueButtonAction(_ sender: UIButton) {
         if let wallet = viewModel.fromListViewModel?.selected(), let currency = wallet.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency), let availableInWalletFromValue = wallet.available {
             
-            stackView.amountView.textField.text = availableInWalletFromValue.rounded(with: currencyType).toString(withoutFormatter: true)
+            stackView.depositView.amountView.textField.text = availableInWalletFromValue.rounded(with: currencyType).toString(withoutFormatter: true)
         }
     }
 }
@@ -237,6 +237,9 @@ extension CreateAccountViewController: BaseTableViewProtocol {
             bottomSheetController.dismiss()
         case .selectBroker:
             viewModel.updateBroker()
+            if !viewModel.isDepositRequired() {
+                stackView.actionButton.setEnabled(true)
+            }
         default:
             break
         }
@@ -271,18 +274,19 @@ class CreateAccountViewModel {
                 let accountTypes = broker.accountTypes
                 accountTypeListViewModel = AccountTypeListViewModel(delegate, items: accountTypes ?? [], selectedIndex: 0)
                 accountTypeListDataSource = TableViewDataSource(accountTypeListViewModel)
-                
+                updateAccountType(0)
                 let accountType = accountTypes?.first
                 
                 let currencies = accountType?.currencies
                 currencyListViewModel = CurrencyListViewModel(delegate, items: currencies ?? [], selectedIndex: 0)
                 currencyListDataSource = TableViewDataSource(currencyListViewModel)
-                updateRates()
+                updateCurrency(0)
                 updateWalletFrom()
                 
                 let leverages = accountType?.leverages
                 leverageListViewModel = LeverageListViewModel(delegate, items: leverages ?? [], selectedIndex: 0)
                 leverageListDataSource = TableViewDataSource(leverageListViewModel)
+                updateLeverage(0)
             }
         }
     }
@@ -293,6 +297,7 @@ class CreateAccountViewModel {
             if let wallets = walletSummary?.wallets, !wallets.isEmpty {
                 fromListViewModel = FromListViewModel(delegate, items: wallets, selectedIndex: 0)
                 fromListDataSource = TableViewDataSource(fromListViewModel)
+                updateWalletFrom(0)
             }
         }
     }
@@ -350,6 +355,7 @@ class CreateAccountViewModel {
     func updateWalletFrom() {
         if let fromListViewModel = fromListViewModel, let currencyListViewModel = currencyListViewModel {
             fromListViewModel.selectedIndex = fromListViewModel.items.firstIndex(where: { $0.currency?.rawValue == currencyListViewModel.selected() }) ?? 0
+            request.depositWalletId = fromListViewModel.selected()?.id
         }
     }
     
@@ -366,11 +372,12 @@ class CreateAccountViewModel {
 
         currencyListViewModel = CurrencyListViewModel(delegate, items: accountType.currencies ?? [], selectedIndex: 0)
         currencyListDataSource = TableViewDataSource(currencyListViewModel)
-        updateRates()
+        updateCurrency(0)
         updateWalletFrom()
         
         leverageListViewModel = LeverageListViewModel(delegate, items: accountType.leverages ?? [], selectedIndex: 0)
         leverageListDataSource = TableViewDataSource(leverageListViewModel)
+        updateLeverage(0)
     }
     func updateCurrency(_ index: Int) {
         currencyListViewModel.selectedIndex = index
@@ -385,6 +392,13 @@ class CreateAccountViewModel {
             request.leverage = selected
         }
     }
+    
+    func isDepositRequired() -> Bool {
+        let accountType = accountTypeListViewModel.selected()
+        
+        return accountType?.isDepositRequired ?? true
+    }
+    
     func getMinDepositValue() -> Double? {
         guard let currency = currencyListViewModel.selected(), let accountType = accountTypeListViewModel.selected(), let minDeposits = accountType.minimumDepositsAmount, let minDeposit = minDeposits[currency] else { return nil }
         
@@ -537,5 +551,3 @@ extension BrokerCollectionViewModel {
         return UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0.0, right: 16.0)
     }
 }
-
-

@@ -17,12 +17,11 @@ final class ProgramInvestViewModel {
     var labelPlaceholder: String = "0"
 
     var walletSummary: WalletSummary?
-//    var levelsParamsInfo: LevelsParamsInfo?
-//    var walletAvailable: WalletMultiAvailable?
+    var levelsParamsInfo: LevelsParamsInfo?
+    var investmentCommission: Double?
     var selectedWalletFromDelegateManager: WalletDepositCurrencyDelegateManager?
     
     var rate: Double = 0.0
-    var levelsParamsInfo: LevelsParamsInfo?
     
     private weak var reloadDataProtocol: ReloadDataProtocol?
     
@@ -34,10 +33,6 @@ final class ProgramInvestViewModel {
         self.assetId = assetId
         self.programCurrency = programCurrency
         self.reloadDataProtocol = detailProtocol
-        
-        PlatformManager.shared.getLevelsParamsInfo { [weak self] (levelsParamsInfo) in
-            self?.levelsParamsInfo = levelsParamsInfo
-        }
     }
     
     // MARK: - Public methods
@@ -54,30 +49,22 @@ final class ProgramInvestViewModel {
     }
     
     func getInfo(completion: @escaping CompletionBlock) {
-//        guard let assetId = assetId,
-//            let programCurrencyValue = programCurrency?.rawValue
-//            let currencySecondary = InvestorAPI.Currency_investIntoProgram(rawValue: programCurrencyValue)
-//            else { return completion(.failure(errorType: .apiError(message: nil))) }
-        
-            AuthManager.getWallet(completion: { [weak self] (wallet) in
-                if let wallet = wallet, let wallets = wallet.wallets {
-                    self?.walletSummary = wallet
-                    self?.selectedWalletFromDelegateManager = WalletDepositCurrencyDelegateManager(wallets)
-                    self?.selectedWalletFromDelegateManager?.walletId = 0
-                    self?.selectedWalletFromDelegateManager?.selectedIndex = 0
-                    self?.selectedWalletFromDelegateManager?.selected = wallets[0]
-                    self?.walletCurrency = CurrencyType(rawValue: wallets[0].currency?.rawValue ?? "")
+        AuthManager.getWallet(completion: { [weak self] (wallet) in
+            if let wallet = wallet, let wallets = wallet.wallets {
+                self?.walletSummary = wallet
+                self?.selectedWalletFromDelegateManager = WalletDepositCurrencyDelegateManager(wallets)
+                self?.selectedWalletFromDelegateManager?.walletId = 0
+                self?.selectedWalletFromDelegateManager?.selectedIndex = 0
+                self?.selectedWalletFromDelegateManager?.selected = wallets[0]
+                self?.walletCurrency = CurrencyType(rawValue: wallets[0].currency?.rawValue ?? "")
+            }
+            PlatformManager.shared.getLevelsParamsInfo { [weak self] (viewModel) in
+                self?.levelsParamsInfo = viewModel
+                PlatformManager.shared.getPlatformInfo { [weak self] (platformCommonInfo) in
+                    self?.investmentCommission = platformCommonInfo?.commonInfo?.platformCommission?.investment
+                    self?.updateRate(completion: completion)
                 }
-                
-                //FIXME:
-//                ProgramsDataProvider.getInvestInfo(assetId: assetId, currencySecondary: currencySecondary, completion: { [weak self] (programInvestInfo) in
-//                    guard let programInvestInfo = programInvestInfo else {
-//                        return completion(.failure(errorType: .apiError(message: nil)))
-//                    }
-//
-//                    self?.programInvestInfo = programInvestInfo
-//                    self?.updateRate(completion: completion)
-//                    }, errorCompletion: completion)
+            }
             }, completionError: completion)
     }
     

@@ -20,10 +20,11 @@ open class BrokerAccountType: Codable {
     public var minimumDepositsAmount: [String:Double]?
     public var isKycRequired: Bool?
     public var isSignalsAvailable: Bool?
+    public var isDepositRequired: Bool?
 
 
     
-    public init(id: UUID?, name: String?, description: String?, type: BrokerTradeServerType?, leverages: [Int]?, currencies: [String]?, minimumDepositsAmount: [String:Double]?, isKycRequired: Bool?, isSignalsAvailable: Bool?) {
+    public init(id: UUID?, name: String?, description: String?, type: BrokerTradeServerType?, leverages: [Int]?, currencies: [String]?, minimumDepositsAmount: [String:Double]?, isKycRequired: Bool?, isSignalsAvailable: Bool?, isDepositRequired: Bool?) {
         self.id = id
         self.name = name
         self.description = description
@@ -33,6 +34,7 @@ open class BrokerAccountType: Codable {
         self.minimumDepositsAmount = minimumDepositsAmount
         self.isKycRequired = isKycRequired
         self.isSignalsAvailable = isSignalsAvailable
+        self.isDepositRequired = isDepositRequired
     }
     
 
@@ -51,6 +53,7 @@ open class BrokerAccountType: Codable {
         try container.encodeIfPresent(minimumDepositsAmount, forKey: "minimumDepositsAmount")
         try container.encodeIfPresent(isKycRequired, forKey: "isKycRequired")
         try container.encodeIfPresent(isSignalsAvailable, forKey: "isSignalsAvailable")
+        try container.encodeIfPresent(isDepositRequired, forKey: "isDepositRequired")
     }
 
     // Decodable protocol methods
@@ -67,6 +70,7 @@ open class BrokerAccountType: Codable {
         minimumDepositsAmount = try container.decodeIfPresent([String:Double].self, forKey: "minimumDepositsAmount")
         isKycRequired = try container.decodeIfPresent(Bool.self, forKey: "isKycRequired")
         isSignalsAvailable = try container.decodeIfPresent(Bool.self, forKey: "isSignalsAvailable")
+        isDepositRequired = try container.decodeIfPresent(Bool.self, forKey: "isDepositRequired")
     }
 }
 

@@ -501,7 +501,7 @@
                                                                     </stackView>
                                                                 </subviews>
                                                             </stackView>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="mOd-1p-xfr">
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="mOd-1p-xfr" customClass="DepositStackView" customModule="GV_DEBUG" customModuleProvider="target">
                                                                 <rect key="frame" x="20" y="255" width="335" height="292.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deposit details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UYP-8n-98s" customClass="LargeTitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
@@ -701,6 +701,11 @@
                                                                         </connections>
                                                                     </stackView>
                                                                 </subviews>
+                                                                <connections>
+                                                                    <outlet property="amountView" destination="31R-fW-GZE" id="jHH-vO-6PF"/>
+                                                                    <outlet property="depositTitle" destination="UYP-8n-98s" id="H7S-dL-ksz"/>
+                                                                    <outlet property="fromView" destination="BO5-Cl-YXB" id="rgQ-pS-yxT"/>
+                                                                </connections>
                                                             </stackView>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="35l-L9-Vy6" customClass="ActionButton" customModule="GV_DEBUG" customModuleProvider="target">
                                                                 <rect key="frame" x="20" y="567.5" width="335" height="50"/>
@@ -722,15 +727,13 @@
                                                 </subviews>
                                                 <connections>
                                                     <outlet property="actionButton" destination="35l-L9-Vy6" id="NNe-hG-97g"/>
-                                                    <outlet property="amountView" destination="31R-fW-GZE" id="jxw-6i-LZe"/>
                                                     <outlet property="assetSelectionTitle" destination="FPf-lG-GN2" id="hIE-k4-dFy"/>
                                                     <outlet property="assetStackView" destination="HhI-Bm-1x9" id="ex4-EQ-pFf"/>
-                                                    <outlet property="depositTitle" destination="UYP-8n-98s" id="KL2-qd-f2p"/>
+                                                    <outlet property="depositView" destination="mOd-1p-xfr" id="jbO-fo-QrP"/>
                                                     <outlet property="descriptionView" destination="mkJ-FB-rSh" id="L2Q-j3-9AR"/>
                                                     <outlet property="entryFeeView" destination="xPx-7d-d1l" id="WFS-Kg-w0y"/>
                                                     <outlet property="exitFeeView" destination="jNY-Xp-FWW" id="Hzk-Mw-ogX"/>
                                                     <outlet property="feesSettingsTitle" destination="Ux6-VH-l7y" id="Giz-3Z-d6l"/>
-                                                    <outlet property="fromView" destination="BO5-Cl-YXB" id="lz8-48-m1K"/>
                                                     <outlet property="mainSettingsTitle" destination="lua-BH-zob" id="3lY-is-wMQ"/>
                                                     <outlet property="nameView" destination="cvs-a4-Tyu" id="IcD-Qz-J0d"/>
                                                     <outlet property="progressView" destination="yFP-WA-LlC" id="J3w-TV-wZO"/>
@@ -1062,7 +1065,7 @@
                                                                     </stackView>
                                                                 </subviews>
                                                             </stackView>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="aQE-o0-cbD">
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="aQE-o0-cbD" customClass="DepositStackView" customModule="GV_DEBUG" customModuleProvider="target">
                                                                 <rect key="frame" x="20" y="288" width="335" height="292.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deposit details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y8c-48-6fY" customClass="LargeTitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
@@ -1262,6 +1265,11 @@
                                                                         </connections>
                                                                     </stackView>
                                                                 </subviews>
+                                                                <connections>
+                                                                    <outlet property="amountView" destination="wAg-Dp-Edq" id="30H-Oo-zsT"/>
+                                                                    <outlet property="depositTitle" destination="y8c-48-6fY" id="5Wr-h1-Qjs"/>
+                                                                    <outlet property="fromView" destination="99P-fT-Kxh" id="guk-0l-hg1"/>
+                                                                </connections>
                                                             </stackView>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JVH-IS-EXd" customClass="ActionButton" customModule="GV_DEBUG" customModuleProvider="target">
                                                                 <rect key="frame" x="20" y="600.5" width="335" height="50"/>
@@ -1284,10 +1292,8 @@
                                                 <connections>
                                                     <outlet property="accountTypeView" destination="wMt-bQ-Sp4" id="lEs-px-prh"/>
                                                     <outlet property="actionButton" destination="JVH-IS-EXd" id="AWt-1H-OfE"/>
-                                                    <outlet property="amountView" destination="wAg-Dp-Edq" id="eMx-q4-VGn"/>
                                                     <outlet property="currencyView" destination="ffE-cb-WCC" id="GtV-HB-0wF"/>
-                                                    <outlet property="depositTitle" destination="y8c-48-6fY" id="pNV-zY-FQv"/>
-                                                    <outlet property="fromView" destination="99P-fT-Kxh" id="02q-je-80H"/>
+                                                    <outlet property="depositView" destination="aQE-o0-cbD" id="KXD-TS-vg0"/>
                                                     <outlet property="leverageView" destination="TLA-ni-pk2" id="ca4-8t-RWf"/>
                                                     <outlet property="mainSettingsTitle" destination="45N-GA-9wx" id="MdW-jh-M9N"/>
                                                     <outlet property="selectBrokerView" destination="Oh7-e2-PZw" id="fQP-k1-Rjr"/>

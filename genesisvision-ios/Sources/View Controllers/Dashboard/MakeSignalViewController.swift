@@ -162,10 +162,7 @@ class MakeSignalViewModel {
     }
     
     // MARK: - Public methods
-    func saveProfilePhoto(completion: @escaping CompletionBlock) {
-        guard let pickedImageURL = pickedImageURL else {
-            return completion(.failure(errorType: .apiError(message: nil)))
-        }
+    func saveImage(_ pickedImageURL: URL, completion: @escaping (CompletionBlock)) {
         BaseDataProvider.uploadImage(imageURL: pickedImageURL, completion: { [weak self] (uploadResult) in
             guard let uploadResult = uploadResult, let uuidString = uploadResult.id?.uuidString else { return completion(.failure(errorType: .apiError(message: nil))) }
             
@@ -175,7 +172,11 @@ class MakeSignalViewModel {
     }
     
     func makeSignal(completion: @escaping CompletionBlock) {
-        saveProfilePhoto { [weak self] (result) in
+        guard let pickedImageURL = pickedImageURL else {
+            AssetsDataProvider.makeAccountSignalProvider(request, completion: completion)
+            return
+        }
+        saveImage(pickedImageURL) { [weak self] (result) in
             switch result {
             case .success:
                 AssetsDataProvider.makeAccountSignalProvider(self?.request, completion: completion)

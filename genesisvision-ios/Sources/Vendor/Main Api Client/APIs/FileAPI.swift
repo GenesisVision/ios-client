@@ -12,13 +12,23 @@ import Alamofire
 
 open class FileAPI {
     /**
+     * enum for parameter quality
+     */
+    public enum Quality_getFile: String { 
+        case low = "Low"
+        case medium = "Medium"
+        case high = "High"
+    }
+
+    /**
      Download file
      
      - parameter id: (path)  
+     - parameter quality: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getFile(id: UUID, completion: @escaping ((_ error: Error?) -> Void)) {
-        getFileWithRequestBuilder(id: id).execute { (response, error) -> Void in
+    open class func getFile(id: UUID, quality: Quality_getFile? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        getFileWithRequestBuilder(id: id, quality: quality).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -29,17 +39,21 @@ open class FileAPI {
      - GET /v2.0/file/{id}
      
      - parameter id: (path)  
+     - parameter quality: (query)  (optional)
 
      - returns: RequestBuilder<Void> 
      */
-    open class func getFileWithRequestBuilder(id: UUID) -> RequestBuilder<Void> {
+    open class func getFileWithRequestBuilder(id: UUID, quality: Quality_getFile? = nil) -> RequestBuilder<Void> {
         var path = "/v2.0/file/{id}"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
-
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "quality": quality?.rawValue
+        ])
+        
 
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 

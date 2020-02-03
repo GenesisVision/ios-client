@@ -39,11 +39,10 @@ open class OrderSignalModel: Codable {
     public var showOriginalCommission: Bool?
     /** For signals */
     public var signalData: OrderModelSignalData?
-    public var externalSignalAccountId: UUID?
 
 
     
-    public init(providers: [OrderSignalProgramInfo]?, totalCommission: Double?, totalCommissionByType: [FeeDetails]?, tradingAccountId: UUID?, currency: Currency?, id: UUID?, login: String?, ticket: String?, symbol: String?, volume: Double?, profit: Double?, profitCurrency: String?, direction: TradeDirectionType?, date: Date?, price: Double?, priceCurrent: Double?, entry: TradeEntryType?, baseVolume: Double?, originalCommission: Double?, originalCommissionCurrency: String?, commission: Double?, swap: Double?, showOriginalCommission: Bool?, signalData: OrderModelSignalData?, externalSignalAccountId: UUID?) {
+    public init(providers: [OrderSignalProgramInfo]?, totalCommission: Double?, totalCommissionByType: [FeeDetails]?, tradingAccountId: UUID?, currency: Currency?, id: UUID?, login: String?, ticket: String?, symbol: String?, volume: Double?, profit: Double?, profitCurrency: String?, direction: TradeDirectionType?, date: Date?, price: Double?, priceCurrent: Double?, entry: TradeEntryType?, baseVolume: Double?, originalCommission: Double?, originalCommissionCurrency: String?, commission: Double?, swap: Double?, showOriginalCommission: Bool?, signalData: OrderModelSignalData?) {
         self.providers = providers
         self.totalCommission = totalCommission
         self.totalCommissionByType = totalCommissionByType
@@ -68,7 +67,6 @@ open class OrderSignalModel: Codable {
         self.swap = swap
         self.showOriginalCommission = showOriginalCommission
         self.signalData = signalData
-        self.externalSignalAccountId = externalSignalAccountId
     }
     
 
@@ -102,7 +100,6 @@ open class OrderSignalModel: Codable {
         try container.encodeIfPresent(swap, forKey: "swap")
         try container.encodeIfPresent(showOriginalCommission, forKey: "showOriginalCommission")
         try container.encodeIfPresent(signalData, forKey: "signalData")
-        try container.encodeIfPresent(externalSignalAccountId, forKey: "externalSignalAccountId")
     }
 
     // Decodable protocol methods
@@ -134,7 +131,6 @@ open class OrderSignalModel: Codable {
         swap = try container.decodeIfPresent(Double.self, forKey: "swap")
         showOriginalCommission = try container.decodeIfPresent(Bool.self, forKey: "showOriginalCommission")
         signalData = try container.decodeIfPresent(OrderModelSignalData.self, forKey: "signalData")
-        externalSignalAccountId = try container.decodeIfPresent(UUID.self, forKey: "externalSignalAccountId")
     }
 }
 

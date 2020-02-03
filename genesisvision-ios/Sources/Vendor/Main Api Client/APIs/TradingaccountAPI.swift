@@ -67,12 +67,13 @@ open class TradingaccountAPI {
      - parameter sorting: (query)  (optional)
      - parameter accountId: (query)  (optional)
      - parameter accountCurrency: (query)  (optional)
+     - parameter isFollow: (query)  (optional)
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func exportTrades(id: UUID, authorization: String, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: Sorting_exportTrades? = nil, accountId: UUID? = nil, accountCurrency: AccountCurrency_exportTrades? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: Data?,_ error: Error?) -> Void)) {
-        exportTradesWithRequestBuilder(id: id, authorization: authorization, dateFrom: dateFrom, dateTo: dateTo, symbol: symbol, sorting: sorting, accountId: accountId, accountCurrency: accountCurrency, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func exportTrades(id: UUID, authorization: String, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: Sorting_exportTrades? = nil, accountId: UUID? = nil, accountCurrency: AccountCurrency_exportTrades? = nil, isFollow: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: Data?,_ error: Error?) -> Void)) {
+        exportTradesWithRequestBuilder(id: id, authorization: authorization, dateFrom: dateFrom, dateTo: dateTo, symbol: symbol, sorting: sorting, accountId: accountId, accountCurrency: accountCurrency, isFollow: isFollow, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -91,12 +92,13 @@ open class TradingaccountAPI {
      - parameter sorting: (query)  (optional)
      - parameter accountId: (query)  (optional)
      - parameter accountCurrency: (query)  (optional)
+     - parameter isFollow: (query)  (optional)
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<Data> 
      */
-    open class func exportTradesWithRequestBuilder(id: UUID, authorization: String, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: Sorting_exportTrades? = nil, accountId: UUID? = nil, accountCurrency: AccountCurrency_exportTrades? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<Data> {
+    open class func exportTradesWithRequestBuilder(id: UUID, authorization: String, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: Sorting_exportTrades? = nil, accountId: UUID? = nil, accountCurrency: AccountCurrency_exportTrades? = nil, isFollow: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<Data> {
         var path = "/v2.0/tradingaccount/{id}/trades/export"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
@@ -110,6 +112,7 @@ open class TradingaccountAPI {
             "Sorting": sorting?.rawValue, 
             "AccountId": accountId, 
             "AccountCurrency": accountCurrency?.rawValue, 
+            "IsFollow": isFollow, 
             "Skip": skip?.encodeToJSON(), 
             "Take": take?.encodeToJSON()
         ])
@@ -370,7 +373,6 @@ open class TradingaccountAPI {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "originalCommissionCurrency" : "originalCommissionCurrency",
     "symbol" : "symbol",
-    "externalSignalAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "ticket" : "ticket",
     "swap" : 9.301444243932576,
     "originalCommission" : 2.3021358869347655,
@@ -399,7 +401,6 @@ open class TradingaccountAPI {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "originalCommissionCurrency" : "originalCommissionCurrency",
     "symbol" : "symbol",
-    "externalSignalAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "ticket" : "ticket",
     "swap" : 9.301444243932576,
     "originalCommission" : 2.3021358869347655,
@@ -632,12 +633,13 @@ open class TradingaccountAPI {
      - parameter sorting: (query)  (optional)
      - parameter accountId: (query)  (optional)
      - parameter accountCurrency: (query)  (optional)
+     - parameter isFollow: (query)  (optional)
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getTrades(id: UUID, authorization: String, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: Sorting_getTrades? = nil, accountId: UUID? = nil, accountCurrency: AccountCurrency_getTrades? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: TradesSignalViewModel?,_ error: Error?) -> Void)) {
-        getTradesWithRequestBuilder(id: id, authorization: authorization, dateFrom: dateFrom, dateTo: dateTo, symbol: symbol, sorting: sorting, accountId: accountId, accountCurrency: accountCurrency, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func getTrades(id: UUID, authorization: String, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: Sorting_getTrades? = nil, accountId: UUID? = nil, accountCurrency: AccountCurrency_getTrades? = nil, isFollow: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: TradesSignalViewModel?,_ error: Error?) -> Void)) {
+        getTradesWithRequestBuilder(id: id, authorization: authorization, dateFrom: dateFrom, dateTo: dateTo, symbol: symbol, sorting: sorting, accountId: accountId, accountCurrency: accountCurrency, isFollow: isFollow, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -654,30 +656,11 @@ open class TradingaccountAPI {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "originalCommissionCurrency" : "originalCommissionCurrency",
     "symbol" : "symbol",
+    "ticket" : "ticket",
+    "swap" : 1.4894159098541704,
     "originalCommission" : 1.2315135367772556,
     "totalCommission" : 7.061401241503109,
     "login" : "login",
-    "priceCurrent" : 4.145608029883936,
-    "price" : 2.027123023002322,
-    "showOriginalCommission" : true,
-    "currency" : null,
-    "commission" : 1.0246457001441578,
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "baseVolume" : 7.386281948385884,
-    "signalData" : {
-      "masters" : [ {
-        "share" : 6.84685269835264,
-        "login" : "login"
-      }, {
-        "share" : 6.84685269835264,
-        "login" : "login"
-      } ]
-    },
-    "profit" : 3.616076749251911,
-    "direction" : { },
-    "externalSignalAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "ticket" : "ticket",
-    "swap" : 1.4894159098541704,
     "volume" : 9.301444243932576,
     "totalCommissionByType" : [ {
       "amount" : 9.301444243932576,
@@ -692,9 +675,26 @@ open class TradingaccountAPI {
       "title" : "title",
       "type" : { }
     } ],
+    "priceCurrent" : 4.145608029883936,
     "entry" : { },
+    "price" : 2.027123023002322,
+    "showOriginalCommission" : true,
     "tradingAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "currency" : null,
     "profitCurrency" : "profitCurrency",
+    "commission" : 1.0246457001441578,
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "baseVolume" : 7.386281948385884,
+    "signalData" : {
+      "masters" : [ {
+        "share" : 6.84685269835264,
+        "login" : "login"
+      }, {
+        "share" : 6.84685269835264,
+        "login" : "login"
+      } ]
+    },
+    "profit" : 3.616076749251911,
     "providers" : [ {
       "volume" : 1.4658129805029452,
       "firstOrderDate" : "2000-01-23T04:56:07.000+00:00",
@@ -783,35 +783,17 @@ open class TradingaccountAPI {
       },
       "profit" : 5.637376656633329,
       "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
-    } ]
+    } ],
+    "direction" : { }
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "originalCommissionCurrency" : "originalCommissionCurrency",
     "symbol" : "symbol",
+    "ticket" : "ticket",
+    "swap" : 1.4894159098541704,
     "originalCommission" : 1.2315135367772556,
     "totalCommission" : 7.061401241503109,
     "login" : "login",
-    "priceCurrent" : 4.145608029883936,
-    "price" : 2.027123023002322,
-    "showOriginalCommission" : true,
-    "currency" : null,
-    "commission" : 1.0246457001441578,
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "baseVolume" : 7.386281948385884,
-    "signalData" : {
-      "masters" : [ {
-        "share" : 6.84685269835264,
-        "login" : "login"
-      }, {
-        "share" : 6.84685269835264,
-        "login" : "login"
-      } ]
-    },
-    "profit" : 3.616076749251911,
-    "direction" : { },
-    "externalSignalAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "ticket" : "ticket",
-    "swap" : 1.4894159098541704,
     "volume" : 9.301444243932576,
     "totalCommissionByType" : [ {
       "amount" : 9.301444243932576,
@@ -826,9 +808,26 @@ open class TradingaccountAPI {
       "title" : "title",
       "type" : { }
     } ],
+    "priceCurrent" : 4.145608029883936,
     "entry" : { },
+    "price" : 2.027123023002322,
+    "showOriginalCommission" : true,
     "tradingAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "currency" : null,
     "profitCurrency" : "profitCurrency",
+    "commission" : 1.0246457001441578,
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "baseVolume" : 7.386281948385884,
+    "signalData" : {
+      "masters" : [ {
+        "share" : 6.84685269835264,
+        "login" : "login"
+      }, {
+        "share" : 6.84685269835264,
+        "login" : "login"
+      } ]
+    },
+    "profit" : 3.616076749251911,
     "providers" : [ {
       "volume" : 1.4658129805029452,
       "firstOrderDate" : "2000-01-23T04:56:07.000+00:00",
@@ -917,7 +916,8 @@ open class TradingaccountAPI {
       },
       "profit" : 5.637376656633329,
       "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
-    } ]
+    } ],
+    "direction" : { }
   } ]
 }}]
      
@@ -929,12 +929,13 @@ open class TradingaccountAPI {
      - parameter sorting: (query)  (optional)
      - parameter accountId: (query)  (optional)
      - parameter accountCurrency: (query)  (optional)
+     - parameter isFollow: (query)  (optional)
      - parameter skip: (query)  (optional)
      - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<TradesSignalViewModel> 
      */
-    open class func getTradesWithRequestBuilder(id: UUID, authorization: String, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: Sorting_getTrades? = nil, accountId: UUID? = nil, accountCurrency: AccountCurrency_getTrades? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<TradesSignalViewModel> {
+    open class func getTradesWithRequestBuilder(id: UUID, authorization: String, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: Sorting_getTrades? = nil, accountId: UUID? = nil, accountCurrency: AccountCurrency_getTrades? = nil, isFollow: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<TradesSignalViewModel> {
         var path = "/v2.0/tradingaccount/{id}/trades"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
@@ -948,6 +949,7 @@ open class TradingaccountAPI {
             "Sorting": sorting?.rawValue, 
             "AccountId": accountId, 
             "AccountCurrency": accountCurrency?.rawValue, 
+            "IsFollow": isFollow, 
             "Skip": skip?.encodeToJSON(), 
             "Take": take?.encodeToJSON()
         ])
@@ -1004,7 +1006,9 @@ open class TradingaccountAPI {
     "canMakeSignalProviderFromProgram" : true,
     "canMakeSignalProviderFromPrivateExternalTradingAccount" : true,
     "canTransferMoney" : true,
+    "canMakeDemoDeposit" : true,
     "canMakeProgramFromPrivateTradingAccount" : true,
+    "canConfirm2FA" : true,
     "canMakeProgramFromSignalProvider" : true
   },
   "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",

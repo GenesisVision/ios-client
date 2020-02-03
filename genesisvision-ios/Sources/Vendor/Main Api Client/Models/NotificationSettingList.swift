@@ -15,14 +15,16 @@ open class NotificationSettingList: Codable {
     public var settingsProgram: [ProgramNotificationSettingList]?
     public var settingsFund: [FundNotificationSettingList]?
     public var settingsManager: [ManagerNotificationSettingList]?
+    public var settingsFollow: [FollowNotificationSettingList]?
 
 
     
-    public init(settingsGeneral: [NotificationSettingViewModel]?, settingsProgram: [ProgramNotificationSettingList]?, settingsFund: [FundNotificationSettingList]?, settingsManager: [ManagerNotificationSettingList]?) {
+    public init(settingsGeneral: [NotificationSettingViewModel]?, settingsProgram: [ProgramNotificationSettingList]?, settingsFund: [FundNotificationSettingList]?, settingsManager: [ManagerNotificationSettingList]?, settingsFollow: [FollowNotificationSettingList]?) {
         self.settingsGeneral = settingsGeneral
         self.settingsProgram = settingsProgram
         self.settingsFund = settingsFund
         self.settingsManager = settingsManager
+        self.settingsFollow = settingsFollow
     }
     
 
@@ -36,6 +38,7 @@ open class NotificationSettingList: Codable {
         try container.encodeIfPresent(settingsProgram, forKey: "settingsProgram")
         try container.encodeIfPresent(settingsFund, forKey: "settingsFund")
         try container.encodeIfPresent(settingsManager, forKey: "settingsManager")
+        try container.encodeIfPresent(settingsFollow, forKey: "settingsFollow")
     }
 
     // Decodable protocol methods
@@ -47,6 +50,7 @@ open class NotificationSettingList: Codable {
         settingsProgram = try container.decodeIfPresent([ProgramNotificationSettingList].self, forKey: "settingsProgram")
         settingsFund = try container.decodeIfPresent([FundNotificationSettingList].self, forKey: "settingsFund")
         settingsManager = try container.decodeIfPresent([ManagerNotificationSettingList].self, forKey: "settingsManager")
+        settingsFollow = try container.decodeIfPresent([FollowNotificationSettingList].self, forKey: "settingsFollow")
     }
 }
 

@@ -16,15 +16,17 @@ open class FundAssetInfo: Codable {
     public var icon: String?
     public var target: Double?
     public var current: Double?
+    public var url: String?
 
 
     
-    public init(asset: String?, symbol: String?, icon: String?, target: Double?, current: Double?) {
+    public init(asset: String?, symbol: String?, icon: String?, target: Double?, current: Double?, url: String?) {
         self.asset = asset
         self.symbol = symbol
         self.icon = icon
         self.target = target
         self.current = current
+        self.url = url
     }
     
 
@@ -39,6 +41,7 @@ open class FundAssetInfo: Codable {
         try container.encodeIfPresent(icon, forKey: "icon")
         try container.encodeIfPresent(target, forKey: "target")
         try container.encodeIfPresent(current, forKey: "current")
+        try container.encodeIfPresent(url, forKey: "url")
     }
 
     // Decodable protocol methods
@@ -51,6 +54,7 @@ open class FundAssetInfo: Codable {
         icon = try container.decodeIfPresent(String.self, forKey: "icon")
         target = try container.decodeIfPresent(Double.self, forKey: "target")
         current = try container.decodeIfPresent(Double.self, forKey: "current")
+        url = try container.decodeIfPresent(String.self, forKey: "url")
     }
 }
 
