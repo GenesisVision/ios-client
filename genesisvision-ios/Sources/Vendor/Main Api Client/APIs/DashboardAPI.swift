@@ -989,18 +989,29 @@ open class DashboardAPI {
     },
     "actions" : {
       "canAddRequestWithdraw" : true,
-      "isEnoughMoneyToCreateProgram" : true,
-      "canChangePassword" : true,
+      "canClose" : true,
       "canEditSignalProviderSettings" : true,
-      "canMakeSignalProviderFromPrivateTradingAccount" : true,
-      "canMakeSignalProviderFromProgram" : true,
       "canMakeSignalProviderFromPrivateExternalTradingAccount" : true,
       "canTransferMoney" : true,
+      "canMakeDemoDeposit" : true,
       "canMakeProgramFromPrivateTradingAccount" : true,
       "canMakeProgramFromSignalProvider" : true,
+      "isEnoughMoneyToCreateProgram" : true,
+      "canChangePassword" : true,
+      "canMakeSignalProviderFromPrivateTradingAccount" : true,
+      "canMakeSignalProviderFromProgram" : true,
+      "hasTerminal" : true,
+      "canConfirm2FA" : true,
       "canAddRequestInvest" : true
     },
-    "assetType" : { }
+    "assetType" : { },
+    "tags" : [ {
+      "color" : "color",
+      "name" : "name"
+    }, {
+      "color" : "color",
+      "name" : "name"
+    } ]
   }, {
     "accountInfo" : {
       "leverage" : 1,
@@ -1060,18 +1071,29 @@ open class DashboardAPI {
     },
     "actions" : {
       "canAddRequestWithdraw" : true,
-      "isEnoughMoneyToCreateProgram" : true,
-      "canChangePassword" : true,
+      "canClose" : true,
       "canEditSignalProviderSettings" : true,
-      "canMakeSignalProviderFromPrivateTradingAccount" : true,
-      "canMakeSignalProviderFromProgram" : true,
       "canMakeSignalProviderFromPrivateExternalTradingAccount" : true,
       "canTransferMoney" : true,
+      "canMakeDemoDeposit" : true,
       "canMakeProgramFromPrivateTradingAccount" : true,
       "canMakeProgramFromSignalProvider" : true,
+      "isEnoughMoneyToCreateProgram" : true,
+      "canChangePassword" : true,
+      "canMakeSignalProviderFromPrivateTradingAccount" : true,
+      "canMakeSignalProviderFromProgram" : true,
+      "hasTerminal" : true,
+      "canConfirm2FA" : true,
       "canAddRequestInvest" : true
     },
-    "assetType" : { }
+    "assetType" : { },
+    "tags" : [ {
+      "color" : "color",
+      "name" : "name"
+    }, {
+      "color" : "color",
+      "name" : "name"
+    } ]
   } ]
 }}]
      
@@ -1107,7 +1129,7 @@ open class DashboardAPI {
     }
 
     /**
-     Money distribution in percents. Empty list if no money at all
+     Money distribution in percents
      
      - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
@@ -1120,7 +1142,7 @@ open class DashboardAPI {
 
 
     /**
-     Money distribution in percents. Empty list if no money at all
+     Money distribution in percents
      - GET /v2.0/dashboard/portfolio
      - examples: [{contentType=application/json, example={
   "distribution" : [ {
@@ -1264,18 +1286,29 @@ open class DashboardAPI {
     },
     "actions" : {
       "canAddRequestWithdraw" : true,
-      "isEnoughMoneyToCreateProgram" : true,
-      "canChangePassword" : true,
+      "canClose" : true,
       "canEditSignalProviderSettings" : true,
-      "canMakeSignalProviderFromPrivateTradingAccount" : true,
-      "canMakeSignalProviderFromProgram" : true,
       "canMakeSignalProviderFromPrivateExternalTradingAccount" : true,
       "canTransferMoney" : true,
+      "canMakeDemoDeposit" : true,
       "canMakeProgramFromPrivateTradingAccount" : true,
       "canMakeProgramFromSignalProvider" : true,
+      "isEnoughMoneyToCreateProgram" : true,
+      "canChangePassword" : true,
+      "canMakeSignalProviderFromPrivateTradingAccount" : true,
+      "canMakeSignalProviderFromProgram" : true,
+      "hasTerminal" : true,
+      "canConfirm2FA" : true,
       "canAddRequestInvest" : true
     },
-    "assetType" : { }
+    "assetType" : { },
+    "tags" : [ {
+      "color" : "color",
+      "name" : "name"
+    }, {
+      "color" : "color",
+      "name" : "name"
+    } ]
   }, {
     "accountInfo" : {
       "leverage" : 1,
@@ -1335,18 +1368,29 @@ open class DashboardAPI {
     },
     "actions" : {
       "canAddRequestWithdraw" : true,
-      "isEnoughMoneyToCreateProgram" : true,
-      "canChangePassword" : true,
+      "canClose" : true,
       "canEditSignalProviderSettings" : true,
-      "canMakeSignalProviderFromPrivateTradingAccount" : true,
-      "canMakeSignalProviderFromProgram" : true,
       "canMakeSignalProviderFromPrivateExternalTradingAccount" : true,
       "canTransferMoney" : true,
+      "canMakeDemoDeposit" : true,
       "canMakeProgramFromPrivateTradingAccount" : true,
       "canMakeProgramFromSignalProvider" : true,
+      "isEnoughMoneyToCreateProgram" : true,
+      "canChangePassword" : true,
+      "canMakeSignalProviderFromPrivateTradingAccount" : true,
+      "canMakeSignalProviderFromProgram" : true,
+      "hasTerminal" : true,
+      "canConfirm2FA" : true,
       "canAddRequestInvest" : true
     },
-    "assetType" : { }
+    "assetType" : { },
+    "tags" : [ {
+      "color" : "color",
+      "name" : "name"
+    }, {
+      "color" : "color",
+      "name" : "name"
+    } ]
   } ]
 }}]
      
@@ -1496,18 +1540,29 @@ open class DashboardAPI {
     },
     "actions" : {
       "canAddRequestWithdraw" : true,
-      "isEnoughMoneyToCreateProgram" : true,
-      "canChangePassword" : true,
+      "canClose" : true,
       "canEditSignalProviderSettings" : true,
-      "canMakeSignalProviderFromPrivateTradingAccount" : true,
-      "canMakeSignalProviderFromProgram" : true,
       "canMakeSignalProviderFromPrivateExternalTradingAccount" : true,
       "canTransferMoney" : true,
+      "canMakeDemoDeposit" : true,
       "canMakeProgramFromPrivateTradingAccount" : true,
       "canMakeProgramFromSignalProvider" : true,
+      "isEnoughMoneyToCreateProgram" : true,
+      "canChangePassword" : true,
+      "canMakeSignalProviderFromPrivateTradingAccount" : true,
+      "canMakeSignalProviderFromProgram" : true,
+      "hasTerminal" : true,
+      "canConfirm2FA" : true,
       "canAddRequestInvest" : true
     },
-    "assetType" : { }
+    "assetType" : { },
+    "tags" : [ {
+      "color" : "color",
+      "name" : "name"
+    }, {
+      "color" : "color",
+      "name" : "name"
+    } ]
   }, {
     "accountInfo" : {
       "leverage" : 1,
@@ -1567,18 +1622,29 @@ open class DashboardAPI {
     },
     "actions" : {
       "canAddRequestWithdraw" : true,
-      "isEnoughMoneyToCreateProgram" : true,
-      "canChangePassword" : true,
+      "canClose" : true,
       "canEditSignalProviderSettings" : true,
-      "canMakeSignalProviderFromPrivateTradingAccount" : true,
-      "canMakeSignalProviderFromProgram" : true,
       "canMakeSignalProviderFromPrivateExternalTradingAccount" : true,
       "canTransferMoney" : true,
+      "canMakeDemoDeposit" : true,
       "canMakeProgramFromPrivateTradingAccount" : true,
       "canMakeProgramFromSignalProvider" : true,
+      "isEnoughMoneyToCreateProgram" : true,
+      "canChangePassword" : true,
+      "canMakeSignalProviderFromPrivateTradingAccount" : true,
+      "canMakeSignalProviderFromProgram" : true,
+      "hasTerminal" : true,
+      "canConfirm2FA" : true,
       "canAddRequestInvest" : true
     },
-    "assetType" : { }
+    "assetType" : { },
+    "tags" : [ {
+      "color" : "color",
+      "name" : "name"
+    }, {
+      "color" : "color",
+      "name" : "name"
+    } ]
   } ]
 }}]
      

@@ -276,12 +276,14 @@ open class FundsAPI {
     "current" : 2.3021358869347655,
     "icon" : "icon",
     "asset" : "asset",
+    "url" : "url",
     "target" : 5.637376656633329
   }, {
     "symbol" : "symbol",
     "current" : 2.3021358869347655,
     "icon" : "icon",
     "asset" : "asset",
+    "url" : "url",
     "target" : 5.637376656633329
   } ],
   "publicInfo" : {
@@ -533,6 +535,7 @@ open class FundsAPI {
      - parameter sorting: (query)  (optional)
      - parameter showIn: (query)  (optional)
      - parameter assets: (query)  (optional)
+     - parameter includeWithInvestments: (query)  (optional)
      - parameter dateFrom: (query)  (optional)
      - parameter dateTo: (query)  (optional)
      - parameter chartPointsCount: (query)  (optional)
@@ -544,8 +547,8 @@ open class FundsAPI {
      - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getFunds(authorization: String? = nil, sorting: Sorting_getFunds? = nil, showIn: ShowIn_getFunds? = nil, assets: [String]? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ItemsViewModelFundDetailsListItem?,_ error: Error?) -> Void)) {
-        getFundsWithRequestBuilder(authorization: authorization, sorting: sorting, showIn: showIn, assets: assets, dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, facetId: facetId, mask: mask, ownerId: ownerId, showFavorites: showFavorites, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func getFunds(authorization: String? = nil, sorting: Sorting_getFunds? = nil, showIn: ShowIn_getFunds? = nil, assets: [String]? = nil, includeWithInvestments: Bool? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ItemsViewModelFundDetailsListItem?,_ error: Error?) -> Void)) {
+        getFundsWithRequestBuilder(authorization: authorization, sorting: sorting, showIn: showIn, assets: assets, includeWithInvestments: includeWithInvestments, dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, facetId: facetId, mask: mask, ownerId: ownerId, showFavorites: showFavorites, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -655,6 +658,7 @@ open class FundsAPI {
      - parameter sorting: (query)  (optional)
      - parameter showIn: (query)  (optional)
      - parameter assets: (query)  (optional)
+     - parameter includeWithInvestments: (query)  (optional)
      - parameter dateFrom: (query)  (optional)
      - parameter dateTo: (query)  (optional)
      - parameter chartPointsCount: (query)  (optional)
@@ -667,7 +671,7 @@ open class FundsAPI {
 
      - returns: RequestBuilder<ItemsViewModelFundDetailsListItem> 
      */
-    open class func getFundsWithRequestBuilder(authorization: String? = nil, sorting: Sorting_getFunds? = nil, showIn: ShowIn_getFunds? = nil, assets: [String]? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ItemsViewModelFundDetailsListItem> {
+    open class func getFundsWithRequestBuilder(authorization: String? = nil, sorting: Sorting_getFunds? = nil, showIn: ShowIn_getFunds? = nil, assets: [String]? = nil, includeWithInvestments: Bool? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ItemsViewModelFundDetailsListItem> {
         let path = "/v2.0/funds"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -677,6 +681,7 @@ open class FundsAPI {
             "Sorting": sorting?.rawValue, 
             "ShowIn": showIn?.rawValue, 
             "Assets": assets, 
+            "IncludeWithInvestments": includeWithInvestments, 
             "DateFrom": dateFrom?.encodeToJSON(), 
             "DateTo": dateTo?.encodeToJSON(), 
             "ChartPointsCount": chartPointsCount?.encodeToJSON(), 

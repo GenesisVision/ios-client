@@ -23,6 +23,7 @@ public enum NotificationType: String, Codable {
     case programEndOfPeriod = "ProgramEndOfPeriod"
     case programCondition = "ProgramCondition"
     case programExceedInvestmentLimit = "ProgramExceedInvestmentLimit"
+    case followNewsAndUpdates = "FollowNewsAndUpdates"
     case fundNewsAndUpdates = "FundNewsAndUpdates"
     case fundEndOfPeriod = "FundEndOfPeriod"
     case fundRebalancing = "FundRebalancing"

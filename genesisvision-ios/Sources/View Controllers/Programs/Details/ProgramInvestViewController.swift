@@ -243,13 +243,8 @@ class ProgramInvestViewController: BaseViewController {
         
         confirmView = InvestWithdrawConfirmView.viewFromNib()
         
-        var subtitle = ""
+        let subtitle = "Your request will be processed at the end of the reporting period."
         guard let currency = viewModel.selectedWalletFromDelegateManager?.selected?.currency else { return }
-        
-        //FIXME:
-//        if let periodEnds = viewModel.programInvestInfo?.periodEnds?.defaultFormatString {
-//            subtitle = "Your request will be processed at the end of the reporting period \(periodEnds)."
-//        }
         
         var firstValue: String?
         if let amount = amountToInvestValueLabel.text {

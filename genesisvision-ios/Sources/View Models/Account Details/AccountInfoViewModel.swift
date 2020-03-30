@@ -126,13 +126,11 @@ extension AccountInfoViewModel {
     }
     
     func makeFollow(completion: @escaping CreateAccountCompletionBlock) {
-        //FIXIT:
         guard let assetId = assetId else { return }
         router.show(routeType: .createFollow(assetId: assetId, completion: completion))
     }
     
     func makeProgram(completion: @escaping CreateAccountCompletionBlock) {
-        //FIXIT:
         guard let assetId = assetId else { return }
         router.show(routeType: .createProgram(assetId: assetId, completion: completion))
     }

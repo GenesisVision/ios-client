@@ -34,11 +34,11 @@ class CreateFundViewController: BaseModalViewController {
         showProgressHUD()
         viewModel?.fetch()
         
-        stackView.amountView.maxButton.addTarget(self, action: #selector(copyMaxValueButtonAction), for: .touchUpInside)
+        stackView.depositView.amountView.maxButton.addTarget(self, action: #selector(copyMaxValueButtonAction), for: .touchUpInside)
         
-        stackView.amountView.textField.designableTextFieldDelegate = self
-        stackView.amountView.textField.delegate = self
-        stackView.amountView.textField.addTarget(self, action: #selector(checkActionButton), for: .editingChanged)
+        stackView.depositView.amountView.textField.designableTextFieldDelegate = self
+        stackView.depositView.amountView.textField.delegate = self
+        stackView.depositView.amountView.textField.addTarget(self, action: #selector(checkActionButton), for: .editingChanged)
         
         stackView.nameView.textField.delegate = self
         stackView.nameView.textField.designableTextFieldDelegate = self
@@ -88,15 +88,15 @@ class CreateFundViewController: BaseModalViewController {
         if let value = stackView.entryFeeView.textField.text?.doubleValue {
             viewModel?.request.entryFee = value
         }
-        if let value = stackView.amountView.textField.text?.doubleValue {
+        if let value = stackView.depositView.amountView.textField.text?.doubleValue {
             viewModel?.request.depositAmount = value
-            stackView.amountView.approxLabel.text = viewModel?.getApproxString(value)
+            stackView.depositView.amountView.approxLabel.text = viewModel?.getApproxString(value)
         } else {
-            stackView.amountView.approxLabel.text = ""
+            stackView.depositView.amountView.approxLabel.text = ""
         }
         
         if
-            let value = stackView.amountView.textField.text?.doubleValue,
+            let value = stackView.depositView.amountView.textField.text?.doubleValue,
             let minDeposit = viewModel?.getMinDepositValue(),
             let exchangedValue = viewModel?.exchangeValueInCurrency(value),
             exchangedValue >= minDeposit,
@@ -137,7 +137,7 @@ class CreateFundViewController: BaseModalViewController {
     @IBAction func copyMaxValueButtonAction(_ sender: UIButton) {
         if let wallet = viewModel?.fromListViewModel?.selected(), let currency = wallet.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency), let availableInWalletFromValue = wallet.available {
             
-            stackView.amountView.textField.text = availableInWalletFromValue.rounded(with: currencyType).toString(withoutFormatter: true)
+            stackView.depositView.amountView.textField.text = availableInWalletFromValue.rounded(with: currencyType).toString(withoutFormatter: true)
         }
     }
     @IBAction func addPhotoButtonAction(_ sender: UIButton) {
@@ -371,11 +371,11 @@ class CreateFundViewModel {
         return value / rate
     }
     func createFund(completion: @escaping CompletionBlock) {
-        guard pickedImageURL != nil else {
+        guard let pickedImageURL = pickedImageURL else {
             AssetsDataProvider.createFund(request, completion: completion)
             return
         }
-        saveProfilePhoto { [weak self] (result) in
+        saveImage(pickedImageURL) { [weak self] (result) in
             switch result {
             case .success:
                 AssetsDataProvider.createFund(self?.request, completion: completion)
@@ -392,10 +392,7 @@ class CreateFundViewModel {
     }
     
     // MARK: - Public methods
-    func saveProfilePhoto(completion: @escaping (CompletionBlock)) {
-        guard let pickedImageURL = pickedImageURL else {
-            return completion(.failure(errorType: .apiError(message: nil)))
-        }
+    func saveImage(_ pickedImageURL: URL, completion: @escaping (CompletionBlock)) {
         BaseDataProvider.uploadImage(imageURL: pickedImageURL, completion: { [weak self] (uploadResult) in
             guard let uploadResult = uploadResult, let uuidString = uploadResult.id?.uuidString else { return completion(.failure(errorType: .apiError(message: nil))) }
             
@@ -433,7 +430,7 @@ class AssetCollectionViewModel: CellViewModelWithCollection {
             }
             
             if value < 100 {
-                viewModels.append(FundAssetCollectionViewCellViewModel(assetModel: PlatformAsset(id: nil, name: nil, asset: nil, description: nil, icon: nil, color: nil, mandatoryFundPercent: 100 - value)))
+                viewModels.append(FundAssetCollectionViewCellViewModel(assetModel: PlatformAsset(id: nil, name: nil, asset: nil, description: nil, icon: nil, color: nil, mandatoryFundPercent: 100 - value, url: nil)))
             }
         }
     }

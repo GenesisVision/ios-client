@@ -31,6 +31,7 @@ open class EventsAPI {
         case assetPeriodEndedDueToStopOut = "AssetPeriodEndedDueToStopOut"
         case assetBrokerChanged = "AssetBrokerChanged"
         case assetEnterInvestment = "AssetEnterInvestment"
+        case assetSubscriptionEdit = "AssetSubscriptionEdit"
         case assetInvestByInvestor = "AssetInvestByInvestor"
         case assetWithdrawalByInvestor = "AssetWithdrawalByInvestor"
         case assetReallocation = "AssetReallocation"
@@ -42,7 +43,6 @@ open class EventsAPI {
         case assetUnsubscribeByInvestor = "AssetUnsubscribeByInvestor"
         case assetTradeOpen = "AssetTradeOpen"
         case assetTradeClosed = "AssetTradeClosed"
-        case assetSubscriptionEdit = "AssetSubscriptionEdit"
     }
 
     /**

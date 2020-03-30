@@ -47,7 +47,8 @@ final class AuthTwoFactorEnableConfirmationViewModel: AuthTwoFactorConfirmationV
         guard let sharedKey = tabmanViewModel.sharedKey, let twoFactorCode = twoFactorCode else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
         TwoFactorDataProvider.confirm(twoFactorCode: twoFactorCode, sharedKey: sharedKey, password: password, completion: { (viewModel) in
-            guard let codes = viewModel?.codes else { return completion(nil) }
+            guard let codes = viewModel?.codes, let token = viewModel?.authToken else { return completion(nil) }
+            AuthManager.authorizedToken = token
             
             let recoveryCodes: [String] = codes.map({ return $0.code ?? "" })
             

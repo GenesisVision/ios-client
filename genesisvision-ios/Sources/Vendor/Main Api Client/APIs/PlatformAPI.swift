@@ -34,7 +34,8 @@ open class PlatformAPI {
     "icon" : "icon",
     "description" : "description",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "asset" : "asset"
+    "asset" : "asset",
+    "url" : "url"
   }, {
     "mandatoryFundPercent" : 0.8008281904610115,
     "color" : "color",
@@ -42,7 +43,8 @@ open class PlatformAPI {
     "icon" : "icon",
     "description" : "description",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "asset" : "asset"
+    "asset" : "asset",
+    "url" : "url"
   } ]
 }}]
 
@@ -153,6 +155,68 @@ open class PlatformAPI {
         let requestBuilder: RequestBuilder<String>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Get platform events
+     
+     - parameter take: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getPlatformEvents(take: Int? = nil, completion: @escaping ((_ data: PlatformEvents?,_ error: Error?) -> Void)) {
+        getPlatformEventsWithRequestBuilder(take: take).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Get platform events
+     - GET /v2.0/platform/events
+     - examples: [{contentType=application/json, example={
+  "events" : [ {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "color" : "color",
+    "icon" : "icon",
+    "text" : "text",
+    "title" : "title",
+    "type" : { },
+    "value" : "value",
+    "assetUrl" : "assetUrl",
+    "userUrl" : "userUrl",
+    "assetType" : { }
+  }, {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "color" : "color",
+    "icon" : "icon",
+    "text" : "text",
+    "title" : "title",
+    "type" : { },
+    "value" : "value",
+    "assetUrl" : "assetUrl",
+    "userUrl" : "userUrl",
+    "assetType" : { }
+  } ]
+}}]
+     
+     - parameter take: (query)  (optional)
+
+     - returns: RequestBuilder<PlatformEvents> 
+     */
+    open class func getPlatformEventsWithRequestBuilder(take: Int? = nil) -> RequestBuilder<PlatformEvents> {
+        let path = "/v2.0/platform/events"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "take": take?.encodeToJSON()
+        ])
+        
+
+        let requestBuilder: RequestBuilder<PlatformEvents>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
@@ -444,7 +508,8 @@ open class PlatformAPI {
         "icon" : "icon",
         "description" : "description",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-        "asset" : "asset"
+        "asset" : "asset",
+        "url" : "url"
       }, {
         "mandatoryFundPercent" : 0.8008281904610115,
         "color" : "color",
@@ -452,7 +517,8 @@ open class PlatformAPI {
         "icon" : "icon",
         "description" : "description",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-        "asset" : "asset"
+        "asset" : "asset",
+        "url" : "url"
       } ],
       "createFundInfo" : {
         "maxExitFee" : 5.637376656633329,
@@ -500,6 +566,391 @@ open class PlatformAPI {
 
 
         let requestBuilder: RequestBuilder<PlatformInfo>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Platform landing info
+     
+     - parameter eventsTake: (query)  (optional)
+     - parameter followTake: (query)  (optional)
+     - parameter programsTake: (query)  (optional)
+     - parameter fundsTake: (query)  (optional)
+     - parameter newsTake: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getPlatformLandingInfo(eventsTake: Int? = nil, followTake: Int? = nil, programsTake: Int? = nil, fundsTake: Int? = nil, newsTake: Int? = nil, completion: @escaping ((_ data: LandingInfo?,_ error: Error?) -> Void)) {
+        getPlatformLandingInfoWithRequestBuilder(eventsTake: eventsTake, followTake: followTake, programsTake: programsTake, fundsTake: fundsTake, newsTake: newsTake).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Platform landing info
+     - GET /v2.0/platform/landing
+     - examples: [{contentType=application/json, example={
+  "news" : [ {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "logo" : "logo",
+    "title" : "title",
+    "body" : "body",
+    "url" : "url",
+    "isHot" : true
+  }, {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "logo" : "logo",
+    "title" : "title",
+    "body" : "body",
+    "url" : "url",
+    "isHot" : true
+  } ],
+  "follows" : {
+    "total" : 6,
+    "items" : [ {
+      "leverageMin" : 1,
+      "owner" : {
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "url" : "url",
+        "username" : "username"
+      },
+      "brokerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "statistic" : {
+        "drawdown" : 5.637376656633329,
+        "chart" : [ {
+          "date" : 0,
+          "value" : 6.027456183070403
+        }, {
+          "date" : 0,
+          "value" : 6.027456183070403
+        } ],
+        "profit" : 5.962133916683182
+      },
+      "color" : "color",
+      "isExternal" : true,
+      "subscribersCount" : 7,
+      "brokerType" : { },
+      "description" : "description",
+      "title" : "title",
+      "creationDate" : "2000-01-23T04:56:07.000+00:00",
+      "url" : "url",
+      "tags" : [ {
+        "color" : "color",
+        "name" : "name"
+      }, {
+        "color" : "color",
+        "name" : "name"
+      } ],
+      "tradesCount" : 1,
+      "leverageMax" : 1,
+      "logo" : "logo",
+      "personalDetails" : {
+        "isOwnAsset" : true,
+        "isFavorite" : true
+      },
+      "currency" : "USD",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "status" : "status"
+    }, {
+      "leverageMin" : 1,
+      "owner" : {
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "url" : "url",
+        "username" : "username"
+      },
+      "brokerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "statistic" : {
+        "drawdown" : 5.637376656633329,
+        "chart" : [ {
+          "date" : 0,
+          "value" : 6.027456183070403
+        }, {
+          "date" : 0,
+          "value" : 6.027456183070403
+        } ],
+        "profit" : 5.962133916683182
+      },
+      "color" : "color",
+      "isExternal" : true,
+      "subscribersCount" : 7,
+      "brokerType" : { },
+      "description" : "description",
+      "title" : "title",
+      "creationDate" : "2000-01-23T04:56:07.000+00:00",
+      "url" : "url",
+      "tags" : [ {
+        "color" : "color",
+        "name" : "name"
+      }, {
+        "color" : "color",
+        "name" : "name"
+      } ],
+      "tradesCount" : 1,
+      "leverageMax" : 1,
+      "logo" : "logo",
+      "personalDetails" : {
+        "isOwnAsset" : true,
+        "isFavorite" : true
+      },
+      "currency" : "USD",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "status" : "status"
+    } ]
+  },
+  "funds" : {
+    "total" : 4,
+    "items" : [ {
+      "owner" : {
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "url" : "url",
+        "username" : "username"
+      },
+      "totalAssetsCount" : 2,
+      "statistic" : {
+        "drawdown" : 5.637376656633329,
+        "chart" : [ {
+          "date" : 0,
+          "value" : 6.027456183070403
+        }, {
+          "date" : 0,
+          "value" : 6.027456183070403
+        } ],
+        "profit" : 5.962133916683182
+      },
+      "color" : "color",
+      "topFundAssets" : [ {
+        "name" : "name",
+        "icon" : "icon",
+        "asset" : "asset",
+        "percent" : 1.4658129805029452
+      }, {
+        "name" : "name",
+        "icon" : "icon",
+        "asset" : "asset",
+        "percent" : 1.4658129805029452
+      } ],
+      "description" : "description",
+      "title" : "title",
+      "creationDate" : "2000-01-23T04:56:07.000+00:00",
+      "url" : "url",
+      "balance" : {
+        "amount" : 9.301444243932576,
+        "currency" : { }
+      },
+      "logo" : "logo",
+      "personalDetails" : {
+        "isOwnAsset" : true,
+        "isFavorite" : true
+      },
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "investorsCount" : 3,
+      "status" : "status"
+    }, {
+      "owner" : {
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "url" : "url",
+        "username" : "username"
+      },
+      "totalAssetsCount" : 2,
+      "statistic" : {
+        "drawdown" : 5.637376656633329,
+        "chart" : [ {
+          "date" : 0,
+          "value" : 6.027456183070403
+        }, {
+          "date" : 0,
+          "value" : 6.027456183070403
+        } ],
+        "profit" : 5.962133916683182
+      },
+      "color" : "color",
+      "topFundAssets" : [ {
+        "name" : "name",
+        "icon" : "icon",
+        "asset" : "asset",
+        "percent" : 1.4658129805029452
+      }, {
+        "name" : "name",
+        "icon" : "icon",
+        "asset" : "asset",
+        "percent" : 1.4658129805029452
+      } ],
+      "description" : "description",
+      "title" : "title",
+      "creationDate" : "2000-01-23T04:56:07.000+00:00",
+      "url" : "url",
+      "balance" : {
+        "amount" : 9.301444243932576,
+        "currency" : { }
+      },
+      "logo" : "logo",
+      "personalDetails" : {
+        "isOwnAsset" : true,
+        "isFavorite" : true
+      },
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "investorsCount" : 3,
+      "status" : "status"
+    } ]
+  },
+  "programs" : {
+    "total" : 9,
+    "items" : [ {
+      "owner" : {
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "url" : "url",
+        "username" : "username"
+      },
+      "periodDuration" : 1,
+      "brokerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "statistic" : {
+        "drawdown" : 5.637376656633329,
+        "chart" : [ {
+          "date" : 0,
+          "value" : 6.027456183070403
+        }, {
+          "date" : 0,
+          "value" : 6.027456183070403
+        } ],
+        "profit" : 5.962133916683182
+      },
+      "color" : "color",
+      "level" : 0,
+      "entryFeeCurrent" : 7.061401241503109,
+      "description" : "description",
+      "entryFeeSelected" : 2.3021358869347655,
+      "title" : "title",
+      "creationDate" : "2000-01-23T04:56:07.000+00:00",
+      "url" : "url",
+      "periodStarts" : "2000-01-23T04:56:07.000+00:00",
+      "tags" : [ {
+        "color" : "color",
+        "name" : "name"
+      }, {
+        "color" : "color",
+        "name" : "name"
+      } ],
+      "balance" : {
+        "amount" : 9.301444243932576,
+        "currency" : { }
+      },
+      "periodEnds" : "2000-01-23T04:56:07.000+00:00",
+      "logo" : "logo",
+      "availableToInvest" : 5.962133916683182,
+      "personalDetails" : {
+        "isReinvest" : true,
+        "isOwnAsset" : true,
+        "isFavorite" : true
+      },
+      "currency" : { },
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "levelProgress" : 6.027456183070403,
+      "investorsCount" : 5,
+      "status" : "status"
+    }, {
+      "owner" : {
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "url" : "url",
+        "username" : "username"
+      },
+      "periodDuration" : 1,
+      "brokerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "statistic" : {
+        "drawdown" : 5.637376656633329,
+        "chart" : [ {
+          "date" : 0,
+          "value" : 6.027456183070403
+        }, {
+          "date" : 0,
+          "value" : 6.027456183070403
+        } ],
+        "profit" : 5.962133916683182
+      },
+      "color" : "color",
+      "level" : 0,
+      "entryFeeCurrent" : 7.061401241503109,
+      "description" : "description",
+      "entryFeeSelected" : 2.3021358869347655,
+      "title" : "title",
+      "creationDate" : "2000-01-23T04:56:07.000+00:00",
+      "url" : "url",
+      "periodStarts" : "2000-01-23T04:56:07.000+00:00",
+      "tags" : [ {
+        "color" : "color",
+        "name" : "name"
+      }, {
+        "color" : "color",
+        "name" : "name"
+      } ],
+      "balance" : {
+        "amount" : 9.301444243932576,
+        "currency" : { }
+      },
+      "periodEnds" : "2000-01-23T04:56:07.000+00:00",
+      "logo" : "logo",
+      "availableToInvest" : 5.962133916683182,
+      "personalDetails" : {
+        "isReinvest" : true,
+        "isOwnAsset" : true,
+        "isFavorite" : true
+      },
+      "currency" : { },
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "levelProgress" : 6.027456183070403,
+      "investorsCount" : 5,
+      "status" : "status"
+    } ]
+  },
+  "events" : [ {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "color" : "color",
+    "icon" : "icon",
+    "text" : "text",
+    "title" : "title",
+    "type" : { },
+    "value" : "value",
+    "assetUrl" : "assetUrl",
+    "userUrl" : "userUrl",
+    "assetType" : { }
+  }, {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "color" : "color",
+    "icon" : "icon",
+    "text" : "text",
+    "title" : "title",
+    "type" : { },
+    "value" : "value",
+    "assetUrl" : "assetUrl",
+    "userUrl" : "userUrl",
+    "assetType" : { }
+  } ]
+}}]
+     
+     - parameter eventsTake: (query)  (optional)
+     - parameter followTake: (query)  (optional)
+     - parameter programsTake: (query)  (optional)
+     - parameter fundsTake: (query)  (optional)
+     - parameter newsTake: (query)  (optional)
+
+     - returns: RequestBuilder<LandingInfo> 
+     */
+    open class func getPlatformLandingInfoWithRequestBuilder(eventsTake: Int? = nil, followTake: Int? = nil, programsTake: Int? = nil, fundsTake: Int? = nil, newsTake: Int? = nil) -> RequestBuilder<LandingInfo> {
+        let path = "/v2.0/platform/landing"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "eventsTake": eventsTake?.encodeToJSON(), 
+            "followTake": followTake?.encodeToJSON(), 
+            "programsTake": programsTake?.encodeToJSON(), 
+            "fundsTake": fundsTake?.encodeToJSON(), 
+            "newsTake": newsTake?.encodeToJSON()
+        ])
+        
+
+        let requestBuilder: RequestBuilder<LandingInfo>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
@@ -690,6 +1141,44 @@ open class PlatformAPI {
         
 
         let requestBuilder: RequestBuilder<CaptchaDetails>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Sitemap info
+     
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getSitemapInfo(completion: @escaping ((_ data: SiteMapInfo?,_ error: Error?) -> Void)) {
+        getSitemapInfoWithRequestBuilder().execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Sitemap info
+     - GET /v2.0/platform/sitemap
+     - examples: [{contentType=application/json, example={
+  "funds" : [ "funds", "funds" ],
+  "programs" : [ "programs", "programs" ],
+  "follow" : [ "follow", "follow" ],
+  "actives" : [ "actives", "actives" ],
+  "users" : [ "users", "users" ]
+}}]
+
+     - returns: RequestBuilder<SiteMapInfo> 
+     */
+    open class func getSitemapInfoWithRequestBuilder() -> RequestBuilder<SiteMapInfo> {
+        let path = "/v2.0/platform/sitemap"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+
+        let requestBuilder: RequestBuilder<SiteMapInfo>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }

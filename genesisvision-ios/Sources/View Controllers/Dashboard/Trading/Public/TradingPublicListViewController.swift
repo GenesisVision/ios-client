@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TradingPublicListViewController: ListViewController {
+class TradingPublicListViewController: ListViewController, DashboardTradingAcionsProtocol {
     typealias ViewModel = TradingPublicListViewModel
     
     // MARK: - Variables
@@ -87,46 +87,6 @@ extension TradingPublicListViewController: BaseTableViewProtocol {
     }
 }
 
-// MARK: - Actions
-extension TradingPublicListViewController {
-    private func makeProgram(_ asset: DashboardTradingAsset) {
-        guard let vc = MakeProgramViewController.storyboardInstance(.dashboard) else { return }
-        vc.title = "Make program"
-        vc.viewModel.request.id = asset.id
-        let nav = BaseNavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .fullScreen
-        present(nav, animated: true, completion: nil)
-    }
-    private func makeSignal(_ asset: DashboardTradingAsset) {
-        guard let vc = MakeSignalViewController.storyboardInstance(.dashboard) else { return }
-        vc.title = "Make signal"
-        vc.viewModel.request.id = asset.id
-        let nav = BaseNavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .fullScreen
-        present(nav, animated: true, completion: nil)
-    }
-    private func changePassword(_ asset: DashboardTradingAsset) {
-        //TODO:
-    }
-    private func openSettings(_ asset: DashboardTradingAsset) {
-        //TODO:
-    }
-    private func closePeriod(_ asset: DashboardTradingAsset) {
-        guard let assetId = asset.id?.uuidString else { return }
-        let model = TradingAccountPwdUpdate(password: nil, twoFactorCode: nil)
-        showProgressHUD()
-        AssetsDataProvider.closeCurrentPeriod(assetId, model: model) { [weak self] (result) in
-            self?.hideHUD()
-            switch result {
-            case .success:
-                break
-            case .failure(let errorType):
-                ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
-            }
-        }
-    }
-}
-
 class TradingPublicListViewModel: ListViewModelWithPaging {
     lazy var dataSource: TableViewDataSource = TableViewDataSource(self)
     
@@ -161,7 +121,8 @@ class TradingPublicListViewModel: ListViewModelWithPaging {
         DashboardDataProvider.getPublicTrading(currency: currency, status: .all, skip: skip, take: take(), completion: { [weak self] (model) in
             guard let model = model else { return }
             model.items?.forEach({ (asset) in
-                let viewModel = TradingTableViewCellViewModel(asset: asset, filterProtocol: nil)//FIXIT:
+                //FIXIT: Add filterProtocol
+                let viewModel = TradingTableViewCellViewModel(asset: asset, filterProtocol: nil)
                 models.append(viewModel)
             })
             self?.updateViewModels(models, refresh: refresh, total: model.total)

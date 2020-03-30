@@ -14,7 +14,10 @@ open class DashboardTradingAssetActions: Codable {
     public var canAddRequestInvest: Bool?
     public var canAddRequestWithdraw: Bool?
     public var canTransferMoney: Bool?
+    public var canMakeDemoDeposit: Bool?
     public var canChangePassword: Bool?
+    public var canClose: Bool?
+    public var hasTerminal: Bool?
     public var canMakeProgramFromPrivateTradingAccount: Bool?
     public var canMakeSignalProviderFromPrivateTradingAccount: Bool?
     public var canMakeSignalProviderFromPrivateExternalTradingAccount: Bool?
@@ -22,14 +25,18 @@ open class DashboardTradingAssetActions: Codable {
     public var canMakeSignalProviderFromProgram: Bool?
     public var canEditSignalProviderSettings: Bool?
     public var isEnoughMoneyToCreateProgram: Bool?
+    public var canConfirm2FA: Bool?
 
 
     
-    public init(canAddRequestInvest: Bool?, canAddRequestWithdraw: Bool?, canTransferMoney: Bool?, canChangePassword: Bool?, canMakeProgramFromPrivateTradingAccount: Bool?, canMakeSignalProviderFromPrivateTradingAccount: Bool?, canMakeSignalProviderFromPrivateExternalTradingAccount: Bool?, canMakeProgramFromSignalProvider: Bool?, canMakeSignalProviderFromProgram: Bool?, canEditSignalProviderSettings: Bool?, isEnoughMoneyToCreateProgram: Bool?) {
+    public init(canAddRequestInvest: Bool?, canAddRequestWithdraw: Bool?, canTransferMoney: Bool?, canMakeDemoDeposit: Bool?, canChangePassword: Bool?, canClose: Bool?, hasTerminal: Bool?, canMakeProgramFromPrivateTradingAccount: Bool?, canMakeSignalProviderFromPrivateTradingAccount: Bool?, canMakeSignalProviderFromPrivateExternalTradingAccount: Bool?, canMakeProgramFromSignalProvider: Bool?, canMakeSignalProviderFromProgram: Bool?, canEditSignalProviderSettings: Bool?, isEnoughMoneyToCreateProgram: Bool?, canConfirm2FA: Bool?) {
         self.canAddRequestInvest = canAddRequestInvest
         self.canAddRequestWithdraw = canAddRequestWithdraw
         self.canTransferMoney = canTransferMoney
+        self.canMakeDemoDeposit = canMakeDemoDeposit
         self.canChangePassword = canChangePassword
+        self.canClose = canClose
+        self.hasTerminal = hasTerminal
         self.canMakeProgramFromPrivateTradingAccount = canMakeProgramFromPrivateTradingAccount
         self.canMakeSignalProviderFromPrivateTradingAccount = canMakeSignalProviderFromPrivateTradingAccount
         self.canMakeSignalProviderFromPrivateExternalTradingAccount = canMakeSignalProviderFromPrivateExternalTradingAccount
@@ -37,6 +44,7 @@ open class DashboardTradingAssetActions: Codable {
         self.canMakeSignalProviderFromProgram = canMakeSignalProviderFromProgram
         self.canEditSignalProviderSettings = canEditSignalProviderSettings
         self.isEnoughMoneyToCreateProgram = isEnoughMoneyToCreateProgram
+        self.canConfirm2FA = canConfirm2FA
     }
     
 
@@ -49,7 +57,10 @@ open class DashboardTradingAssetActions: Codable {
         try container.encodeIfPresent(canAddRequestInvest, forKey: "canAddRequestInvest")
         try container.encodeIfPresent(canAddRequestWithdraw, forKey: "canAddRequestWithdraw")
         try container.encodeIfPresent(canTransferMoney, forKey: "canTransferMoney")
+        try container.encodeIfPresent(canMakeDemoDeposit, forKey: "canMakeDemoDeposit")
         try container.encodeIfPresent(canChangePassword, forKey: "canChangePassword")
+        try container.encodeIfPresent(canClose, forKey: "canClose")
+        try container.encodeIfPresent(hasTerminal, forKey: "hasTerminal")
         try container.encodeIfPresent(canMakeProgramFromPrivateTradingAccount, forKey: "canMakeProgramFromPrivateTradingAccount")
         try container.encodeIfPresent(canMakeSignalProviderFromPrivateTradingAccount, forKey: "canMakeSignalProviderFromPrivateTradingAccount")
         try container.encodeIfPresent(canMakeSignalProviderFromPrivateExternalTradingAccount, forKey: "canMakeSignalProviderFromPrivateExternalTradingAccount")
@@ -57,6 +68,7 @@ open class DashboardTradingAssetActions: Codable {
         try container.encodeIfPresent(canMakeSignalProviderFromProgram, forKey: "canMakeSignalProviderFromProgram")
         try container.encodeIfPresent(canEditSignalProviderSettings, forKey: "canEditSignalProviderSettings")
         try container.encodeIfPresent(isEnoughMoneyToCreateProgram, forKey: "isEnoughMoneyToCreateProgram")
+        try container.encodeIfPresent(canConfirm2FA, forKey: "canConfirm2FA")
     }
 
     // Decodable protocol methods
@@ -67,7 +79,10 @@ open class DashboardTradingAssetActions: Codable {
         canAddRequestInvest = try container.decodeIfPresent(Bool.self, forKey: "canAddRequestInvest")
         canAddRequestWithdraw = try container.decodeIfPresent(Bool.self, forKey: "canAddRequestWithdraw")
         canTransferMoney = try container.decodeIfPresent(Bool.self, forKey: "canTransferMoney")
+        canMakeDemoDeposit = try container.decodeIfPresent(Bool.self, forKey: "canMakeDemoDeposit")
         canChangePassword = try container.decodeIfPresent(Bool.self, forKey: "canChangePassword")
+        canClose = try container.decodeIfPresent(Bool.self, forKey: "canClose")
+        hasTerminal = try container.decodeIfPresent(Bool.self, forKey: "hasTerminal")
         canMakeProgramFromPrivateTradingAccount = try container.decodeIfPresent(Bool.self, forKey: "canMakeProgramFromPrivateTradingAccount")
         canMakeSignalProviderFromPrivateTradingAccount = try container.decodeIfPresent(Bool.self, forKey: "canMakeSignalProviderFromPrivateTradingAccount")
         canMakeSignalProviderFromPrivateExternalTradingAccount = try container.decodeIfPresent(Bool.self, forKey: "canMakeSignalProviderFromPrivateExternalTradingAccount")
@@ -75,6 +90,7 @@ open class DashboardTradingAssetActions: Codable {
         canMakeSignalProviderFromProgram = try container.decodeIfPresent(Bool.self, forKey: "canMakeSignalProviderFromProgram")
         canEditSignalProviderSettings = try container.decodeIfPresent(Bool.self, forKey: "canEditSignalProviderSettings")
         isEnoughMoneyToCreateProgram = try container.decodeIfPresent(Bool.self, forKey: "isEnoughMoneyToCreateProgram")
+        canConfirm2FA = try container.decodeIfPresent(Bool.self, forKey: "canConfirm2FA")
     }
 }
 

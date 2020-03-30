@@ -663,6 +663,49 @@ open class AssetsAPI {
     }
 
     /**
+     Make demo trading account deposit
+     
+     - parameter id: (path)  
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func makeDemoTradingAccountDeposit(id: UUID, authorization: String, model: TradingAccountDemoDeposit? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
+        makeDemoTradingAccountDepositWithRequestBuilder(id: id, authorization: authorization, model: model).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Make demo trading account deposit
+     - POST /v2.0/assets/tradingaccounts/{id}/demo/deposit
+     
+     - parameter id: (path)  
+     - parameter authorization: (header) JWT access token 
+     - parameter model: (body)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func makeDemoTradingAccountDepositWithRequestBuilder(id: UUID, authorization: String, model: TradingAccountDemoDeposit? = nil) -> RequestBuilder<Void> {
+        var path = "/v2.0/assets/tradingaccounts/{id}/demo/deposit"
+        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+    }
+
+    /**
      Make external trading account signal provider
      
      - parameter authorization: (header) JWT access token 

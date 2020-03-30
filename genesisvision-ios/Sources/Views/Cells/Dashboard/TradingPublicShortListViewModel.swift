@@ -30,7 +30,8 @@ class TradingPublicShortListViewModel: CellViewModelWithCollection {
         
         details?.items?.forEach({ (viewModel) in
             guard let assetType = viewModel.assetType else { return }
-            viewModels.append(AssetCollectionViewCellViewModel(type: assetType, asset: viewModel, filterProtocol: nil, favoriteProtocol: nil))//FIXIT:
+            //FIXIT: Add filterProtocol, favoriteProtocol
+            viewModels.append(AssetCollectionViewCellViewModel(type: assetType, asset: viewModel, filterProtocol: nil, favoriteProtocol: nil))
         })
     }
     

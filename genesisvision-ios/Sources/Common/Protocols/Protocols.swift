@@ -308,3 +308,50 @@ protocol TabmanDataSourceProtocol {
     func getItem(_ index: Int) -> TMBarItem?
     func getViewController(_ index: Int) -> UIViewController?
 }
+
+// MARK: - DashboardTradingAcionsProtocol
+protocol DashboardTradingAcionsProtocol {
+    func makeProgram(_ asset: DashboardTradingAsset)
+    func makeSignal(_ asset: DashboardTradingAsset)
+    func changePassword(_ asset: DashboardTradingAsset)
+    func openSettings(_ asset: DashboardTradingAsset)
+    func closePeriod(_ asset: DashboardTradingAsset)
+}
+extension DashboardTradingAcionsProtocol where Self: ListViewController {
+    func makeProgram(_ asset: DashboardTradingAsset) {
+        guard let vc = MakeProgramViewController.storyboardInstance(.dashboard) else { return }
+        vc.title = "Make program"
+        vc.viewModel.request.id = asset.id
+        let nav = BaseNavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true, completion: nil)
+    }
+    func makeSignal(_ asset: DashboardTradingAsset) {
+        guard let vc = MakeSignalViewController.storyboardInstance(.dashboard) else { return }
+        vc.title = "Make signal"
+        vc.viewModel.request.id = asset.id
+        let nav = BaseNavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true, completion: nil)
+    }
+    func changePassword(_ asset: DashboardTradingAsset) {
+        //TODO:
+    }
+    func openSettings(_ asset: DashboardTradingAsset) {
+        //TODO:
+    }
+    func closePeriod(_ asset: DashboardTradingAsset) {
+        guard let assetId = asset.id?.uuidString else { return }
+        let model = TradingAccountPwdUpdate(password: nil, twoFactorCode: nil)
+        showProgressHUD()
+        AssetsDataProvider.closeCurrentPeriod(assetId, model: model) { [weak self] (result) in
+            self?.hideHUD()
+            switch result {
+            case .success:
+                break
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
+            }
+        }
+    }
+}

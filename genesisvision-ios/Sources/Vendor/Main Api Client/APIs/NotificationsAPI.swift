@@ -29,6 +29,7 @@ open class NotificationsAPI {
         case programEndOfPeriod = "ProgramEndOfPeriod"
         case programCondition = "ProgramCondition"
         case programExceedInvestmentLimit = "ProgramExceedInvestmentLimit"
+        case followNewsAndUpdates = "FollowNewsAndUpdates"
         case fundNewsAndUpdates = "FundNewsAndUpdates"
         case fundEndOfPeriod = "FundEndOfPeriod"
         case fundRebalancing = "FundRebalancing"
@@ -535,6 +536,53 @@ open class NotificationsAPI {
       "type" : { }
     } ]
   } ],
+  "settingsFollow" : [ {
+    "color" : "color",
+    "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "logo" : "logo",
+    "settingsGeneral" : [ {
+      "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "isEnabled" : true,
+      "conditionAmount" : 0.8008281904610115,
+      "conditionType" : { },
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "type" : { }
+    }, {
+      "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "isEnabled" : true,
+      "conditionAmount" : 0.8008281904610115,
+      "conditionType" : { },
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "type" : { }
+    } ],
+    "title" : "title",
+    "url" : "url"
+  }, {
+    "color" : "color",
+    "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "logo" : "logo",
+    "settingsGeneral" : [ {
+      "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "isEnabled" : true,
+      "conditionAmount" : 0.8008281904610115,
+      "conditionType" : { },
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "type" : { }
+    }, {
+      "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "isEnabled" : true,
+      "conditionAmount" : 0.8008281904610115,
+      "conditionType" : { },
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "type" : { }
+    } ],
+    "title" : "title",
+    "url" : "url"
+  } ],
   "settingsManager" : [ {
     "about" : "about",
     "settingsGeneral" : [ {
@@ -667,6 +715,44 @@ open class NotificationsAPI {
         let requestBuilder: RequestBuilder<NotificationSettingList>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+    }
+
+    /**
+     Read all notification
+     
+     - parameter authorization: (header) JWT access token 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func readAllNotification(authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
+        readAllNotificationWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+
+    /**
+     Read all notification
+     - POST /v2.0/notifications/all/read
+     
+     - parameter authorization: (header) JWT access token 
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func readAllNotificationWithRequestBuilder(authorization: String) -> RequestBuilder<Void> {
+        let path = "/v2.0/notifications/all/read"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
     /**

@@ -123,7 +123,8 @@ class InvestingProgramListViewModel: ListViewModelWithPaging {
         DashboardDataProvider.getInvestingPrograms(currency: currency, status: .all, skip: skip, take: take(), completion: { [weak self] (model) in
             guard let model = model else { return }
             model.items?.forEach({ (asset) in
-                let viewModel = ProgramInvestingTableViewCellViewModel(asset: asset, filterProtocol: nil, favoriteProtocol: nil) //FIXIT:
+                //FIXIT: Add filterProtocol, favoriteProtocol
+                let viewModel = ProgramInvestingTableViewCellViewModel(asset: asset, filterProtocol: nil, favoriteProtocol: nil)
                 models.append(viewModel)
             })
             self?.updateViewModels(models, refresh: refresh, total: model.total)

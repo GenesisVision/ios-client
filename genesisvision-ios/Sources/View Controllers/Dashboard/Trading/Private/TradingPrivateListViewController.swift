@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TradingPrivateListViewController: ListViewController {
+class TradingPrivateListViewController: ListViewController, DashboardTradingAcionsProtocol {
     typealias ViewModel = TradingPrivateListViewModel
     
     // MARK: - Variables
@@ -56,20 +56,6 @@ class TradingPrivateListViewController: ListViewController {
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true, completion: nil)
     }
-    private func makeProgram() {
-        guard let vc = MakeProgramViewController.storyboardInstance(.dashboard) else { return }
-        vc.title = "Make program"
-        let nav = BaseNavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .fullScreen
-        present(nav, animated: true, completion: nil)
-    }
-    private func makeSignal() {
-        guard let vc = MakeSignalViewController.storyboardInstance(.dashboard) else { return }
-        vc.title = "Make signal"
-        let nav = BaseNavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .fullScreen
-        present(nav, animated: true, completion: nil)
-    }
     
     @objc private func addNewButtonAction() {
         showActionSheet(with: nil,
@@ -100,6 +86,18 @@ class TradingPrivateListViewController: ListViewController {
 extension TradingPrivateListViewController: BaseTableViewProtocol {
     func didSelect(_ type: CellActionType, cellViewModel: CellViewAnyModel?) {
         switch type {
+        case .makeSignal:
+            if let cellViewModel = cellViewModel as? TradingTableViewCellViewModel {
+                makeSignal(cellViewModel.asset)
+            }
+        case .makeProgram:
+            if let cellViewModel = cellViewModel as? TradingTableViewCellViewModel {
+                makeProgram(cellViewModel.asset)
+            }
+        case .changePassword:
+            if let cellViewModel = cellViewModel as? TradingTableViewCellViewModel {
+                changePassword(cellViewModel.asset)
+            }
         case .tradingPrivateList:
             if let cellViewModel = cellViewModel as? TradingTableViewCellViewModel {
                 showAccount(cellViewModel.asset)
@@ -147,7 +145,8 @@ class TradingPrivateListViewModel: ListViewModelWithPaging {
         DashboardDataProvider.getPrivateTrading(currency: currency, status: .all, skip: skip, take: take(), completion: { [weak self] (model) in
             guard let model = model else { return }
             model.items?.forEach({ (asset) in
-                let viewModel = TradingTableViewCellViewModel(asset: asset, filterProtocol: nil)//FIXIT:
+                //FIXIT: Add filterProtocol
+                let viewModel = TradingTableViewCellViewModel(asset: asset, filterProtocol: nil)
                 models.append(viewModel)
             })
             self?.updateViewModels(models, refresh: refresh, total: model.total)
