@@ -8,41 +8,18 @@
 import Foundation
 
 
+public struct WalletSummary: Codable {
 
-open class WalletSummary: Codable {
 
     public var grandTotal: WalletsGrandTotal?
+
     public var wallets: [WalletData]?
-    public var payFeesWithGvt: Bool?
 
-
-    
-    public init(grandTotal: WalletsGrandTotal?, wallets: [WalletData]?, payFeesWithGvt: Bool?) {
+    public var genesisMarketsDiscountPercent: Double?
+    public init(grandTotal: WalletsGrandTotal? = nil, wallets: [WalletData]? = nil, genesisMarketsDiscountPercent: Double? = nil) { 
         self.grandTotal = grandTotal
         self.wallets = wallets
-        self.payFeesWithGvt = payFeesWithGvt
-    }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(grandTotal, forKey: "grandTotal")
-        try container.encodeIfPresent(wallets, forKey: "wallets")
-        try container.encodeIfPresent(payFeesWithGvt, forKey: "payFeesWithGvt")
+        self.genesisMarketsDiscountPercent = genesisMarketsDiscountPercent
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        grandTotal = try container.decodeIfPresent(WalletsGrandTotal.self, forKey: "grandTotal")
-        wallets = try container.decodeIfPresent([WalletData].self, forKey: "wallets")
-        payFeesWithGvt = try container.decodeIfPresent(Bool.self, forKey: "payFeesWithGvt")
-    }
 }
-

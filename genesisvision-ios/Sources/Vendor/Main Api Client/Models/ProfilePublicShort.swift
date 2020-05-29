@@ -8,41 +8,23 @@
 import Foundation
 
 
+public struct ProfilePublicShort: Codable {
 
-open class ProfilePublicShort: Codable {
 
-    public var id: UUID?
+    public var _id: UUID?
+
     public var username: String?
+
     public var url: String?
-
-
-    
-    public init(id: UUID?, username: String?, url: String?) {
-        self.id = id
+    public init(_id: UUID? = nil, username: String? = nil, url: String? = nil) { 
+        self._id = _id
         self.username = username
         self.url = url
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(id, forKey: "id")
-        try container.encodeIfPresent(username, forKey: "username")
-        try container.encodeIfPresent(url, forKey: "url")
+    public enum CodingKeys: String, CodingKey { 
+        case _id = "id"
+        case username
+        case url
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        id = try container.decodeIfPresent(UUID.self, forKey: "id")
-        username = try container.decodeIfPresent(String.self, forKey: "username")
-        url = try container.decodeIfPresent(String.self, forKey: "url")
-    }
 }
-

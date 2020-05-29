@@ -8,37 +8,15 @@
 import Foundation
 
 
+public struct SignalProviderSubscribers: Codable {
 
-open class SignalProviderSubscribers: Codable {
 
     public var subscribers: [SignalSubscriber]?
+
     public var total: Int?
-
-
-    
-    public init(subscribers: [SignalSubscriber]?, total: Int?) {
+    public init(subscribers: [SignalSubscriber]? = nil, total: Int? = nil) { 
         self.subscribers = subscribers
         self.total = total
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(subscribers, forKey: "subscribers")
-        try container.encodeIfPresent(total, forKey: "total")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        subscribers = try container.decodeIfPresent([SignalSubscriber].self, forKey: "subscribers")
-        total = try container.decodeIfPresent(Int.self, forKey: "total")
-    }
 }
-

@@ -7,7 +7,58 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		18099AFD55D5395CE47D60A3 /* Pods_genesisvision_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C27C45D024CDE259719CEEA9 /* Pods_genesisvision_ios.framework */; };
+		198124232464504A00F286FE /* GuidesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198124222464504900F286FE /* GuidesAPI.swift */; };
+		198124252464506E00F286FE /* SocialAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198124242464506E00F286FE /* SocialAPI.swift */; };
+		19812427246450A600F286FE /* AssetInvestmentRequestItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19812426246450A600F286FE /* AssetInvestmentRequestItemsViewModel.swift */; };
+		19812429246450B800F286FE /* BetaTestingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19812428246450B800F286FE /* BetaTestingType.swift */; };
+		1981242B246450CE00F286FE /* Body.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1981242A246450CE00F286FE /* Body.swift */; };
+		1981242D246450E700F286FE /* DashboardActionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1981242C246450E600F286FE /* DashboardActionStatus.swift */; };
+		1981242F2464510C00F286FE /* DashboardTradingAssetItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1981242E2464510C00F286FE /* DashboardTradingAssetItemsViewModel.swift */; };
+		198124312464516800F286FE /* EditPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198124302464516800F286FE /* EditPost.swift */; };
+		198124332464518600F286FE /* EditablePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198124322464518600F286FE /* EditablePost.swift */; };
+		19812435246451CD00F286FE /* FollowDetailsListItemItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19812434246451CD00F286FE /* FollowDetailsListItemItemsViewModel.swift */; };
+		19812437246451E600F286FE /* FollowFilterSorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19812436246451E600F286FE /* FollowFilterSorting.swift */; };
+		19812439246451FF00F286FE /* FundDetailsListItemItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19812438246451FF00F286FE /* FundDetailsListItemItemsViewModel.swift */; };
+		1981243B2464521C00F286FE /* FundInvestingDetailsListItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1981243A2464521C00F286FE /* FundInvestingDetailsListItemsViewModel.swift */; };
+		1981243D2464522F00F286FE /* FundsFilterSorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1981243C2464522F00F286FE /* FundsFilterSorting.swift */; };
+		1981243F2464523F00F286FE /* Guide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1981243E2464523F00F286FE /* Guide.swift */; };
+		198124412464524700F286FE /* GuidesCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198124402464524700F286FE /* GuidesCategory.swift */; };
+		198124432464525100F286FE /* GuidesCategoryItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198124422464525100F286FE /* GuidesCategoryItemsViewModel.swift */; };
+		198124452464528D00F286FE /* InvestmentEventViewModelItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198124442464528D00F286FE /* InvestmentEventViewModelItemsViewModel.swift */; };
+		19812447246452AC00F286FE /* LimitWithoutKyc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19812446246452AC00F286FE /* LimitWithoutKyc.swift */; };
+		198124492464535C00F286FE /* NewPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198124482464535C00F286FE /* NewPost.swift */; };
+		1981244B2464536600F286FE /* NewPostImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1981244A2464536600F286FE /* NewPostImage.swift */; };
+		198124522464585D00F286FE /* PostActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1981244C2464585C00F286FE /* PostActions.swift */; };
+		198124532464585D00F286FE /* PostImageResize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1981244D2464585C00F286FE /* PostImageResize.swift */; };
+		198124542464585D00F286FE /* PostTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1981244E2464585D00F286FE /* PostTag.swift */; };
+		198124552464585D00F286FE /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1981244F2464585D00F286FE /* Post.swift */; };
+		198124562464585D00F286FE /* PostItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198124502464585D00F286FE /* PostItemsViewModel.swift */; };
+		198124572464585D00F286FE /* PostImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198124512464585D00F286FE /* PostImage.swift */; };
+		198124592464587F00F286FE /* ProgramInvestingDetailsListItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198124582464587F00F286FE /* ProgramInvestingDetailsListItemsViewModel.swift */; };
+		1981245B2464589300F286FE /* ProgramDetailsListItemItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1981245A2464589300F286FE /* ProgramDetailsListItemItemsViewModel.swift */; };
+		1981245D246458AA00F286FE /* ProgramsFilterSorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1981245C246458AA00F286FE /* ProgramsFilterSorting.swift */; };
+		19812460246458BE00F286FE /* PublicProfileItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1981245E246458BE00F286FE /* PublicProfileItemsViewModel.swift */; };
+		19812461246458BE00F286FE /* PublicProfilePersonalDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1981245F246458BE00F286FE /* PublicProfilePersonalDetails.swift */; };
+		19812464246458E100F286FE /* RePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19812462246458E100F286FE /* RePost.swift */; };
+		19812465246458E100F286FE /* ReallocationModelItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19812463246458E100F286FE /* ReallocationModelItemsViewModel.swift */; };
+		19812467246458F900F286FE /* ReferralFriendItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19812466246458F900F286FE /* ReferralFriendItemsViewModel.swift */; };
+		198124692464590A00F286FE /* RewardDetailsItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198124682464590A00F286FE /* RewardDetailsItemsViewModel.swift */; };
+		1981246C2464592200F286FE /* SignalTradingEventItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1981246A2464592200F286FE /* SignalTradingEventItemsViewModel.swift */; };
+		1981246F2464593300F286FE /* SignalSubscriptionItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1981246E2464593300F286FE /* SignalSubscriptionItemsViewModel.swift */; };
+		198124732464595300F286FE /* SocialPostTagType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198124702464595300F286FE /* SocialPostTagType.swift */; };
+		198124742464595300F286FE /* SocialViewMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198124712464595300F286FE /* SocialViewMode.swift */; };
+		198124752464595300F286FE /* SocialSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198124722464595300F286FE /* SocialSummary.swift */; };
+		198124782464596500F286FE /* TradeAssetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198124762464596500F286FE /* TradeAssetData.swift */; };
+		198124792464596500F286FE /* TradeSorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198124772464596500F286FE /* TradeSorting.swift */; };
+		1981247C2464597B00F286FE /* TradingAccountMaxCreateAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1981247A2464597B00F286FE /* TradingAccountMaxCreateAmount.swift */; };
+		1981247D2464597B00F286FE /* TradingAccountDetailsItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1981247B2464597B00F286FE /* TradingAccountDetailsItemsViewModel.swift */; };
+		1981247F2464598C00F286FE /* TransactionViewModelItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1981247E2464598C00F286FE /* TransactionViewModelItemsViewModel.swift */; };
+		198124822464599D00F286FE /* UserDetailsListItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198124802464599C00F286FE /* UserDetailsListItemsViewModel.swift */; };
+		198124832464599D00F286FE /* UserFeedMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198124812464599C00F286FE /* UserFeedMode.swift */; };
+		19812486246459A900F286FE /* UsersFilterSorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19812484246459A900F286FE /* UsersFilterSorting.swift */; };
+		19812487246459A900F286FE /* UsersFilterTimeframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19812485246459A900F286FE /* UsersFilterTimeframe.swift */; };
+		19812489246459B900F286FE /* UtmSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19812488246459B900F286FE /* UtmSource.swift */; };
+		1981248B24645B3400F286FE /* SignalSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1981248A24645B3400F286FE /* SignalSubscription.swift */; };
 		5E026FF322D3497F00C555CC /* TagsDelegateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E026FF222D3497F00C555CC /* TagsDelegateManager.swift */; };
 		5E026FF722D3531900C555CC /* TagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E026FF622D3531900C555CC /* TagTableViewCell.swift */; };
 		5E026FF922D3532400C555CC /* TagTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E026FF822D3532400C555CC /* TagTableViewCellViewModel.swift */; };
@@ -763,6 +814,7 @@
 		5EFDEAB8238FFECA00AF3AC1 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFDEAB7238FFECA00AF3AC1 /* BaseTableViewCell.swift */; };
 		5EFDEABA238FFF2E00AF3AC1 /* CellViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFDEAB9238FFF2E00AF3AC1 /* CellViews.swift */; };
 		5EFE7C412181E78700D385C8 /* FundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFE7C3D2181E78500D385C8 /* FundViewController.swift */; };
+		DF07DC4C1CE24BCF09E34B39 /* Pods_genesisvision_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 275306FFD93861F4EC21FED6 /* Pods_genesisvision_ios.framework */; };
 		FC0E20062044123F00872BE5 /* PhotoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E20052044123F00872BE5 /* PhotoHeaderView.swift */; };
 		FC0E200A2044357800872BE5 /* WalletDepositViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E20092044357800872BE5 /* WalletDepositViewController.swift */; };
 		FC0E200C2044358200872BE5 /* WalletWithdrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E200B2044358200872BE5 /* WalletWithdrawViewController.swift */; };
@@ -895,10 +947,60 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1259E2D024633207C023BB6B /* Pods-genesisvision-ios.debug investor.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.debug investor.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.debug investor.xcconfig"; sourceTree = "<group>"; };
-		382A460F742C4CFCF1959337 /* Pods-genesisvision-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.release.xcconfig"; sourceTree = "<group>"; };
-		440418927E7D91879582B66E /* Pods-genesisvision-ios.release dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.release dev.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.release dev.xcconfig"; sourceTree = "<group>"; };
-		48CE503E3E1E1FE94C4379A5 /* Pods-genesisvision-ios.release manager.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.release manager.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.release manager.xcconfig"; sourceTree = "<group>"; };
+		198124222464504900F286FE /* GuidesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuidesAPI.swift; sourceTree = "<group>"; };
+		198124242464506E00F286FE /* SocialAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAPI.swift; sourceTree = "<group>"; };
+		19812426246450A600F286FE /* AssetInvestmentRequestItemsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetInvestmentRequestItemsViewModel.swift; sourceTree = "<group>"; };
+		19812428246450B800F286FE /* BetaTestingType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetaTestingType.swift; sourceTree = "<group>"; };
+		1981242A246450CE00F286FE /* Body.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Body.swift; sourceTree = "<group>"; };
+		1981242C246450E600F286FE /* DashboardActionStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardActionStatus.swift; sourceTree = "<group>"; };
+		1981242E2464510C00F286FE /* DashboardTradingAssetItemsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardTradingAssetItemsViewModel.swift; sourceTree = "<group>"; };
+		198124302464516800F286FE /* EditPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditPost.swift; sourceTree = "<group>"; };
+		198124322464518600F286FE /* EditablePost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditablePost.swift; sourceTree = "<group>"; };
+		19812434246451CD00F286FE /* FollowDetailsListItemItemsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowDetailsListItemItemsViewModel.swift; sourceTree = "<group>"; };
+		19812436246451E600F286FE /* FollowFilterSorting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowFilterSorting.swift; sourceTree = "<group>"; };
+		19812438246451FF00F286FE /* FundDetailsListItemItemsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FundDetailsListItemItemsViewModel.swift; sourceTree = "<group>"; };
+		1981243A2464521C00F286FE /* FundInvestingDetailsListItemsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FundInvestingDetailsListItemsViewModel.swift; sourceTree = "<group>"; };
+		1981243C2464522F00F286FE /* FundsFilterSorting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FundsFilterSorting.swift; sourceTree = "<group>"; };
+		1981243E2464523F00F286FE /* Guide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Guide.swift; sourceTree = "<group>"; };
+		198124402464524700F286FE /* GuidesCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuidesCategory.swift; sourceTree = "<group>"; };
+		198124422464525100F286FE /* GuidesCategoryItemsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuidesCategoryItemsViewModel.swift; sourceTree = "<group>"; };
+		198124442464528D00F286FE /* InvestmentEventViewModelItemsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestmentEventViewModelItemsViewModel.swift; sourceTree = "<group>"; };
+		19812446246452AC00F286FE /* LimitWithoutKyc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LimitWithoutKyc.swift; sourceTree = "<group>"; };
+		198124482464535C00F286FE /* NewPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPost.swift; sourceTree = "<group>"; };
+		1981244A2464536600F286FE /* NewPostImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPostImage.swift; sourceTree = "<group>"; };
+		1981244C2464585C00F286FE /* PostActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostActions.swift; sourceTree = "<group>"; };
+		1981244D2464585C00F286FE /* PostImageResize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostImageResize.swift; sourceTree = "<group>"; };
+		1981244E2464585D00F286FE /* PostTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTag.swift; sourceTree = "<group>"; };
+		1981244F2464585D00F286FE /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		198124502464585D00F286FE /* PostItemsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostItemsViewModel.swift; sourceTree = "<group>"; };
+		198124512464585D00F286FE /* PostImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostImage.swift; sourceTree = "<group>"; };
+		198124582464587F00F286FE /* ProgramInvestingDetailsListItemsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramInvestingDetailsListItemsViewModel.swift; sourceTree = "<group>"; };
+		1981245A2464589300F286FE /* ProgramDetailsListItemItemsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramDetailsListItemItemsViewModel.swift; sourceTree = "<group>"; };
+		1981245C246458AA00F286FE /* ProgramsFilterSorting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramsFilterSorting.swift; sourceTree = "<group>"; };
+		1981245E246458BE00F286FE /* PublicProfileItemsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicProfileItemsViewModel.swift; sourceTree = "<group>"; };
+		1981245F246458BE00F286FE /* PublicProfilePersonalDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicProfilePersonalDetails.swift; sourceTree = "<group>"; };
+		19812462246458E100F286FE /* RePost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RePost.swift; sourceTree = "<group>"; };
+		19812463246458E100F286FE /* ReallocationModelItemsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReallocationModelItemsViewModel.swift; sourceTree = "<group>"; };
+		19812466246458F900F286FE /* ReferralFriendItemsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReferralFriendItemsViewModel.swift; sourceTree = "<group>"; };
+		198124682464590A00F286FE /* RewardDetailsItemsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardDetailsItemsViewModel.swift; sourceTree = "<group>"; };
+		1981246A2464592200F286FE /* SignalTradingEventItemsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalTradingEventItemsViewModel.swift; sourceTree = "<group>"; };
+		1981246E2464593300F286FE /* SignalSubscriptionItemsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalSubscriptionItemsViewModel.swift; sourceTree = "<group>"; };
+		198124702464595300F286FE /* SocialPostTagType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialPostTagType.swift; sourceTree = "<group>"; };
+		198124712464595300F286FE /* SocialViewMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialViewMode.swift; sourceTree = "<group>"; };
+		198124722464595300F286FE /* SocialSummary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialSummary.swift; sourceTree = "<group>"; };
+		198124762464596500F286FE /* TradeAssetData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeAssetData.swift; sourceTree = "<group>"; };
+		198124772464596500F286FE /* TradeSorting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeSorting.swift; sourceTree = "<group>"; };
+		1981247A2464597B00F286FE /* TradingAccountMaxCreateAmount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradingAccountMaxCreateAmount.swift; sourceTree = "<group>"; };
+		1981247B2464597B00F286FE /* TradingAccountDetailsItemsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradingAccountDetailsItemsViewModel.swift; sourceTree = "<group>"; };
+		1981247E2464598C00F286FE /* TransactionViewModelItemsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionViewModelItemsViewModel.swift; sourceTree = "<group>"; };
+		198124802464599C00F286FE /* UserDetailsListItemsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailsListItemsViewModel.swift; sourceTree = "<group>"; };
+		198124812464599C00F286FE /* UserFeedMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserFeedMode.swift; sourceTree = "<group>"; };
+		19812484246459A900F286FE /* UsersFilterSorting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersFilterSorting.swift; sourceTree = "<group>"; };
+		19812485246459A900F286FE /* UsersFilterTimeframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersFilterTimeframe.swift; sourceTree = "<group>"; };
+		19812488246459B900F286FE /* UtmSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtmSource.swift; sourceTree = "<group>"; };
+		1981248A24645B3400F286FE /* SignalSubscription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalSubscription.swift; sourceTree = "<group>"; };
+		275306FFD93861F4EC21FED6 /* Pods_genesisvision_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_genesisvision_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		288F5D4CC66E0FF4B863BCD0 /* Pods-genesisvision-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.debug.xcconfig"; path = "Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		5E026FF222D3497F00C555CC /* TagsDelegateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsDelegateManager.swift; sourceTree = "<group>"; };
 		5E026FF622D3531900C555CC /* TagTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTableViewCell.swift; sourceTree = "<group>"; };
 		5E026FF822D3532400C555CC /* TagTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTableViewCellViewModel.swift; sourceTree = "<group>"; };
@@ -1659,13 +1761,8 @@
 		5EFDEAB7238FFECA00AF3AC1 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		5EFDEAB9238FFF2E00AF3AC1 /* CellViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellViews.swift; sourceTree = "<group>"; };
 		5EFE7C3D2181E78500D385C8 /* FundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundViewController.swift; sourceTree = "<group>"; };
-		8737ED0E7816D5D1CCBE38C0 /* Pods-genesisvision-ios.release prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.release prod.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.release prod.xcconfig"; sourceTree = "<group>"; };
-		8F9668BC4E53DD9E931E3B04 /* Pods-genesisvision-ios.release investor.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.release investor.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.release investor.xcconfig"; sourceTree = "<group>"; };
-		96C81368C3DDE44C91DB5BCD /* Pods-genesisvision-ios.debug manager.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.debug manager.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.debug manager.xcconfig"; sourceTree = "<group>"; };
-		9BC2DBBE8A09CC7F14740EBC /* Pods-genesisvision-ios.debug tournament.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.debug tournament.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.debug tournament.xcconfig"; sourceTree = "<group>"; };
-		A9EC4EBE41F68E940AF6A93A /* Pods-genesisvision-ios.release tournament.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.release tournament.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.release tournament.xcconfig"; sourceTree = "<group>"; };
-		C27C45D024CDE259719CEEA9 /* Pods_genesisvision_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_genesisvision_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D4A2436FDA06220328E9292C /* Pods-genesisvision-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		A6C4AD19B7C4980B347D6556 /* Pods-genesisvision-ios.release prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.release prod.xcconfig"; path = "Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.release prod.xcconfig"; sourceTree = "<group>"; };
+		E6793C6131153B9FEF56421D /* Pods-genesisvision-ios.release dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.release dev.xcconfig"; path = "Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.release dev.xcconfig"; sourceTree = "<group>"; };
 		FC0E20052044123F00872BE5 /* PhotoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoHeaderView.swift; sourceTree = "<group>"; };
 		FC0E20092044357800872BE5 /* WalletDepositViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDepositViewController.swift; sourceTree = "<group>"; };
 		FC0E200B2044358200872BE5 /* WalletWithdrawViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletWithdrawViewController.swift; sourceTree = "<group>"; };
@@ -1760,7 +1857,7 @@
 		FCB8DFCE2010F99200698D18 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		FCBD22C12019EACA000B8E38 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		FCBD2326201A2582000B8E38 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
-		FCC9DD24200DF2C3008825EC /* Genesis Vision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "Genesis Vision.app"; path = "GV DEBUG.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCC9DD24200DF2C3008825EC /* GV DEBUG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GV DEBUG.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCC9DD27200DF2C3008825EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FCC9DD3B200DFA5E008825EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FCC9DD41200DFA5E008825EC /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -1803,30 +1900,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				5EC7B88720D16093007720D1 /* LocalAuthentication.framework in Frameworks */,
-				18099AFD55D5395CE47D60A3 /* Pods_genesisvision_ios.framework in Frameworks */,
+				DF07DC4C1CE24BCF09E34B39 /* Pods_genesisvision_ios.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		450E0AA731BC9B9D261CAA3B /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				D4A2436FDA06220328E9292C /* Pods-genesisvision-ios.debug.xcconfig */,
-				382A460F742C4CFCF1959337 /* Pods-genesisvision-ios.release.xcconfig */,
-				96C81368C3DDE44C91DB5BCD /* Pods-genesisvision-ios.debug manager.xcconfig */,
-				1259E2D024633207C023BB6B /* Pods-genesisvision-ios.debug investor.xcconfig */,
-				9BC2DBBE8A09CC7F14740EBC /* Pods-genesisvision-ios.debug tournament.xcconfig */,
-				48CE503E3E1E1FE94C4379A5 /* Pods-genesisvision-ios.release manager.xcconfig */,
-				8F9668BC4E53DD9E931E3B04 /* Pods-genesisvision-ios.release investor.xcconfig */,
-				A9EC4EBE41F68E940AF6A93A /* Pods-genesisvision-ios.release tournament.xcconfig */,
-				440418927E7D91879582B66E /* Pods-genesisvision-ios.release dev.xcconfig */,
-				8737ED0E7816D5D1CCBE38C0 /* Pods-genesisvision-ios.release prod.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		5E0AD0E821813E8700DC76AA /* Funds */ = {
 			isa = PBXGroup;
 			children = (
@@ -1914,7 +1994,9 @@
 			children = (
 				5EB06A2E239D3129003AB3FB /* AssetsAPI.swift */,
 				5EB06A25239D3125003AB3FB /* AuthAPI.swift */,
+				198124222464504900F286FE /* GuidesAPI.swift */,
 				5EB06A2B239D3127003AB3FB /* BrokersAPI.swift */,
+				198124242464506E00F286FE /* SocialAPI.swift */,
 				5EB06A23239D3125003AB3FB /* DashboardAPI.swift */,
 				5EB06A28239D3126003AB3FB /* EventsAPI.swift */,
 				5EB06A2F239D3129003AB3FB /* FileAPI.swift */,
@@ -1941,9 +2023,58 @@
 				5EF9F92623E322FE00542E1E /* LandingInfo.swift */,
 				5EF9F92423E322FC00542E1E /* PlatformEvent.swift */,
 				5EF9F92723E322FE00542E1E /* PlatformEventType.swift */,
+				19812434246451CD00F286FE /* FollowDetailsListItemItemsViewModel.swift */,
+				1981245C246458AA00F286FE /* ProgramsFilterSorting.swift */,
+				198124682464590A00F286FE /* RewardDetailsItemsViewModel.swift */,
+				19812466246458F900F286FE /* ReferralFriendItemsViewModel.swift */,
+				1981246E2464593300F286FE /* SignalSubscriptionItemsViewModel.swift */,
+				198124322464518600F286FE /* EditablePost.swift */,
+				1981246A2464592200F286FE /* SignalTradingEventItemsViewModel.swift */,
+				1981245E246458BE00F286FE /* PublicProfileItemsViewModel.swift */,
+				198124702464595300F286FE /* SocialPostTagType.swift */,
+				1981247E2464598C00F286FE /* TransactionViewModelItemsViewModel.swift */,
+				198124802464599C00F286FE /* UserDetailsListItemsViewModel.swift */,
+				198124812464599C00F286FE /* UserFeedMode.swift */,
+				19812488246459B900F286FE /* UtmSource.swift */,
+				198124722464595300F286FE /* SocialSummary.swift */,
+				1981247B2464597B00F286FE /* TradingAccountDetailsItemsViewModel.swift */,
+				19812484246459A900F286FE /* UsersFilterSorting.swift */,
+				19812485246459A900F286FE /* UsersFilterTimeframe.swift */,
+				1981247A2464597B00F286FE /* TradingAccountMaxCreateAmount.swift */,
+				198124712464595300F286FE /* SocialViewMode.swift */,
+				198124762464596500F286FE /* TradeAssetData.swift */,
+				198124772464596500F286FE /* TradeSorting.swift */,
+				1981245F246458BE00F286FE /* PublicProfilePersonalDetails.swift */,
+				19812463246458E100F286FE /* ReallocationModelItemsViewModel.swift */,
+				19812462246458E100F286FE /* RePost.swift */,
+				1981245A2464589300F286FE /* ProgramDetailsListItemItemsViewModel.swift */,
+				198124482464535C00F286FE /* NewPost.swift */,
+				1981244F2464585D00F286FE /* Post.swift */,
+				1981244C2464585C00F286FE /* PostActions.swift */,
+				198124582464587F00F286FE /* ProgramInvestingDetailsListItemsViewModel.swift */,
+				198124512464585D00F286FE /* PostImage.swift */,
+				1981244D2464585C00F286FE /* PostImageResize.swift */,
+				198124502464585D00F286FE /* PostItemsViewModel.swift */,
+				1981244E2464585D00F286FE /* PostTag.swift */,
+				19812438246451FF00F286FE /* FundDetailsListItemItemsViewModel.swift */,
+				198124442464528D00F286FE /* InvestmentEventViewModelItemsViewModel.swift */,
+				1981244A2464536600F286FE /* NewPostImage.swift */,
 				5EF9F92823E322FF00542E1E /* PlatformNews.swift */,
+				1981243C2464522F00F286FE /* FundsFilterSorting.swift */,
+				198124402464524700F286FE /* GuidesCategory.swift */,
+				19812446246452AC00F286FE /* LimitWithoutKyc.swift */,
+				198124422464525100F286FE /* GuidesCategoryItemsViewModel.swift */,
+				198124302464516800F286FE /* EditPost.swift */,
+				1981243E2464523F00F286FE /* Guide.swift */,
+				1981243A2464521C00F286FE /* FundInvestingDetailsListItemsViewModel.swift */,
+				19812436246451E600F286FE /* FollowFilterSorting.swift */,
+				1981242C246450E600F286FE /* DashboardActionStatus.swift */,
+				19812428246450B800F286FE /* BetaTestingType.swift */,
 				5EF9F92323E322FC00542E1E /* SiteMapInfo.swift */,
+				19812426246450A600F286FE /* AssetInvestmentRequestItemsViewModel.swift */,
+				1981242A246450CE00F286FE /* Body.swift */,
 				5EF9F91E23E322F000542E1E /* FollowNotificationSettingList.swift */,
+				1981242E2464510C00F286FE /* DashboardTradingAssetItemsViewModel.swift */,
 				5EF9F91F23E322F000542E1E /* PlatformEvents.swift */,
 				5EF9F91D23E322EF00542E1E /* TradingAccountDemoDeposit.swift */,
 				5E7CBA6323B38B09008A52FE /* UpdateSocialLinksViewModel.swift */,
@@ -2138,6 +2269,7 @@
 				5E39F6EC23A3F92E0073DAD5 /* SocialLinkType.swift */,
 				5E39F67423A3F9200073DAD5 /* SocialLinkViewModel.swift */,
 				5E39F6B323A3F9280073DAD5 /* SubscriptionMode.swift */,
+				1981248A24645B3400F286FE /* SignalSubscription.swift */,
 				5E39F6A223A3F9260073DAD5 /* Tag.swift */,
 				5E39F66323A3F91E0073DAD5 /* Timeframe.swift */,
 				5E39F65923A3F91D0073DAD5 /* TradeDirectionType.swift */,
@@ -3155,9 +3287,19 @@
 			isa = PBXGroup;
 			children = (
 				5EC7B88620D16093007720D1 /* LocalAuthentication.framework */,
-				C27C45D024CDE259719CEEA9 /* Pods_genesisvision_ios.framework */,
+				275306FFD93861F4EC21FED6 /* Pods_genesisvision_ios.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CE4BFE008E7A929ACC4946B7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				288F5D4CC66E0FF4B863BCD0 /* Pods-genesisvision-ios.debug.xcconfig */,
+				E6793C6131153B9FEF56421D /* Pods-genesisvision-ios.release dev.xcconfig */,
+				A6C4AD19B7C4980B347D6556 /* Pods-genesisvision-ios.release prod.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		FC0E20082044352000872BE5 /* Header Footer View */ = {
@@ -3543,15 +3685,15 @@
 				FCC9DD26200DF2C3008825EC /* genesisvision-ios */,
 				5E8724CA20E0B7E3007A1E16 /* Genesis VisionUITests */,
 				FCC9DD25200DF2C3008825EC /* Products */,
-				450E0AA731BC9B9D261CAA3B /* Pods */,
 				B8DB3D95241F1BF35C1AA19C /* Frameworks */,
+				CE4BFE008E7A929ACC4946B7 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
 		FCC9DD25200DF2C3008825EC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FCC9DD24200DF2C3008825EC /* Genesis Vision.app */,
+				FCC9DD24200DF2C3008825EC /* GV DEBUG.app */,
 				5E8724C920E0B7E3007A1E16 /* Genesis VisionUITests.xctest */,
 			);
 			name = Products;
@@ -3863,12 +4005,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FCC9DD36200DF2C3008825EC /* Build configuration list for PBXNativeTarget "genesisvision-ios" */;
 			buildPhases = (
-				A12657B758EFDE7D97B01CDB /* [CP] Check Pods Manifest.lock */,
+				C81963FCD4E51CCE4B1EA283 /* [CP] Check Pods Manifest.lock */,
 				FCC9DD20200DF2C3008825EC /* Sources */,
 				FCC9DD21200DF2C3008825EC /* Frameworks */,
 				FCC9DD22200DF2C3008825EC /* Resources */,
-				B464ADF115E51593640A44B7 /* [CP] Embed Pods Frameworks */,
 				5E3A987C21C92B9700279DDE /* ShellScript */,
+				750771F2971064F350062A56 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -3876,7 +4018,7 @@
 			);
 			name = "genesisvision-ios";
 			productName = "genesisvision-ios";
-			productReference = FCC9DD24200DF2C3008825EC /* Genesis Vision.app */;
+			productReference = FCC9DD24200DF2C3008825EC /* GV DEBUG.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -4060,31 +4202,13 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/Fabric/run\"\n";
 		};
-		A12657B758EFDE7D97B01CDB /* [CP] Check Pods Manifest.lock */ = {
+		750771F2971064F350062A56 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-genesisvision-ios-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B464ADF115E51593640A44B7 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AutoInsetter/AutoInsetter.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
@@ -4125,7 +4249,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C81963FCD4E51CCE4B1EA283 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-genesisvision-ios-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -4181,10 +4327,12 @@
 				FC7D87B420446F17002FC943 /* String+Сonversion.swift in Sources */,
 				5EA4B366237D5A9D001545CA /* CellWithCollectionView.swift in Sources */,
 				5E39F7B323A3F9300073DAD5 /* ProgramAssetPlatformInfo.swift in Sources */,
+				1981242D246450E700F286FE /* DashboardActionStatus.swift in Sources */,
 				5ED3B47B210898810026C123 /* СhoosePhotoView.swift in Sources */,
 				5ED1ED4B2211B4B100031AD4 /* WalletBalanceTableViewCell.swift in Sources */,
 				5E39F74723A3F92F0073DAD5 /* Timeframe.swift in Sources */,
 				FC83DF5D203D887E00A8F8CE /* ProgramWithdrawViewController.swift in Sources */,
+				198124232464504A00F286FE /* GuidesAPI.swift in Sources */,
 				5E39F61423A3F8A60073DAD5 /* AttachToExternalSignalProviderCommon.swift in Sources */,
 				FC83DF5B203D886F00A8F8CE /* ProgramInvestViewController.swift in Sources */,
 				5E6D681F2076587E00299408 /* ProgramInvestSuccessViewModel.swift in Sources */,
@@ -4200,6 +4348,7 @@
 				5EA09B9A2292D04800123B5D /* ListDelegateManager.swift in Sources */,
 				5E39F76A23A3F9300073DAD5 /* DashboardTradingAsset.swift in Sources */,
 				5E39F74823A3F92F0073DAD5 /* WalletDepositSummary.swift in Sources */,
+				198124742464595300F286FE /* SocialViewMode.swift in Sources */,
 				FC140FE52030168100B71E7F /* CodableHelper.swift in Sources */,
 				5EB8E9DE2072654A00F46A8A /* AuthForgotPasswordInfoViewModel.swift in Sources */,
 				5EDAA71222E5067C00F7BF71 /* PeriodHistoryTableViewCell.swift in Sources */,
@@ -4222,6 +4371,7 @@
 				5E27EC48218758AC00C6CF5C /* FundAssetTableViewCellViewModel.swift in Sources */,
 				5E39F78323A3F9300073DAD5 /* PersonalFundDetails.swift in Sources */,
 				5E6D68212076588E00299408 /* ProgramWithdrawSuccessViewModel.swift in Sources */,
+				19812464246458E100F286FE /* RePost.swift in Sources */,
 				5EB8E9DA2072590200F46A8A /* InfoViewModel.swift in Sources */,
 				FCB8DFC62010F64200698D18 /* SignInViewController.swift in Sources */,
 				5E11DFD521B93CDF00B2B6EE /* AboutLevelsViewController.swift in Sources */,
@@ -4230,6 +4380,7 @@
 				5E39F76423A3F9300073DAD5 /* ItemsViewModelTransactionViewModel.swift in Sources */,
 				5E39F76823A3F9300073DAD5 /* PrivateTradingAccountType.swift in Sources */,
 				5E39F7CF23A3F9300073DAD5 /* TradingAccountAssetPlatformInfo.swift in Sources */,
+				19812427246450A600F286FE /* AssetInvestmentRequestItemsViewModel.swift in Sources */,
 				5E39F70D23A3F92F0073DAD5 /* RewardDetails.swift in Sources */,
 				5E1770A7220D19E700669D84 /* WalletTabmanViewModel.swift in Sources */,
 				5E9C74DD22C99D6B003604ED /* DetailStatisticsTableViewCellViewModel.swift in Sources */,
@@ -4243,6 +4394,7 @@
 				5E7CBA6223B29A7E008A52FE /* Color.swift in Sources */,
 				5EAC11B420B81AFB0057A2D2 /* AuthChangePasswordViewModel.swift in Sources */,
 				5E106387213D69AF008A0E8B /* BaseExtensions.swift in Sources */,
+				198124492464535C00F286FE /* NewPost.swift in Sources */,
 				5E39F72A23A3F92F0073DAD5 /* FacetSortType.swift in Sources */,
 				5E39F60E23A3F8A60073DAD5 /* AssetPlatformInfo.swift in Sources */,
 				5EFB235F238AAF3C00CD7480 /* TradingHeaderTableViewCell.swift in Sources */,
@@ -4264,10 +4416,13 @@
 				5E12B39520BEF25E00302730 /* TwoFactorDataProvider.swift in Sources */,
 				5EEFD850221468FF005E7E9F /* WalletMoreButtonView.swift in Sources */,
 				FC0E20102044359D00872BE5 /* WalletWithdrawViewModel.swift in Sources */,
+				1981245B2464589300F286FE /* ProgramDetailsListItemItemsViewModel.swift in Sources */,
 				5E39F78D23A3F9300073DAD5 /* ProgramProfitPercentCharts.swift in Sources */,
+				19812447246452AC00F286FE /* LimitWithoutKyc.swift in Sources */,
 				FCB178702045C47A00A482B7 /* WalletDataProvider.swift in Sources */,
 				FCA19A2B201ACE0400157AD6 /* SignUpRouter.swift in Sources */,
 				5E39F7CD23A3F9300073DAD5 /* FollowCreateAssetPlatformInfo.swift in Sources */,
+				198124692464590A00F286FE /* RewardDetailsItemsViewModel.swift in Sources */,
 				5EA274DF2162F0D6008CAF77 /* ProgramBalanceViewModel.swift in Sources */,
 				FC140FE82030168100B71E7F /* JSONEncodableEncoding.swift in Sources */,
 				5E70428F23CCFF0E00D8950F /* AccountInfoViewController.swift in Sources */,
@@ -4279,6 +4434,7 @@
 				5E39F7B123A3F9300073DAD5 /* PlatformCommissionInfo.swift in Sources */,
 				5E39F79E23A3F9300073DAD5 /* SignalDataMaster.swift in Sources */,
 				5E39F71623A3F92F0073DAD5 /* SignalTradingEvent.swift in Sources */,
+				19812429246450B800F286FE /* BetaTestingType.swift in Sources */,
 				5E69AC8223DA0542000AB692 /* TradingInfoContentView.swift in Sources */,
 				5EC1C3B72288178A0024008E /* WalletDepositCurrencyDelegateManager.swift in Sources */,
 				5E39F79F23A3F9300073DAD5 /* ItemsViewModelDashboardTradingAsset.swift in Sources */,
@@ -4326,6 +4482,7 @@
 				5EA173D120A082AE00905253 /* TabmanViewModel.swift in Sources */,
 				5E39F59923A3CE0C0073DAD5 /* DashboardAssetsChartTableViewCell.swift in Sources */,
 				5EF14D9A2181FBCD00B3843A /* FundWithdrawViewModel.swift in Sources */,
+				198124432464525100F286FE /* GuidesCategoryItemsViewModel.swift in Sources */,
 				5ED1ED422210F26000031AD4 /* WalletTabmanRouter.swift in Sources */,
 				5E0AD0EC21813EE300DC76AA /* FundListViewController.swift in Sources */,
 				5E12B38920BEEB5F00302730 /* AuthTwoFactorSuccessEnableViewModel.swift in Sources */,
@@ -4341,6 +4498,7 @@
 				5EF9F92123E322F100542E1E /* FollowNotificationSettingList.swift in Sources */,
 				5EF9F91723E10DBE00542E1E /* ProgramContentView.swift in Sources */,
 				5E39F77123A3F9300073DAD5 /* ProgramDetailsListItem.swift in Sources */,
+				198124522464585D00F286FE /* PostActions.swift in Sources */,
 				5E39F7C823A3F9300073DAD5 /* InvestmentEventItemViewModel.swift in Sources */,
 				5EA274D32162B582008CAF77 /* ProgramYourInvestmentTableViewCellViewModel.swift in Sources */,
 				5E87E765208F638E00141269 /* Tooltips.swift in Sources */,
@@ -4351,7 +4509,9 @@
 				5E39F7BD23A3F9300073DAD5 /* ProgramMinInvestAmount.swift in Sources */,
 				5E6845E221EF7D9900DA8607 /* DateSectionTableHeaderView.swift in Sources */,
 				FC27233020498959005225F2 /* ToggleTorchButton.swift in Sources */,
+				198124572464585D00F286FE /* PostImage.swift in Sources */,
 				5EA274CA21628297008CAF77 /* DetailBalanceChartTableViewCell.swift in Sources */,
+				1981242B246450CE00F286FE /* Body.swift in Sources */,
 				5E39F7C623A3F9300073DAD5 /* ReferralFriend.swift in Sources */,
 				5E1770A5220D197800669D84 /* WalletTabmanViewController.swift in Sources */,
 				5E39F79123A3F9300073DAD5 /* LoginViewModel.swift in Sources */,
@@ -4384,8 +4544,10 @@
 				5EFB2380238C010F00CD7480 /* InvestingHeaderTableViewCell.swift in Sources */,
 				5EB932112146999400EE01A2 /* DetailManagerTableViewCellViewModel.swift in Sources */,
 				5EAD3512214FD5D40057450C /* AssetsPageboyViewControllerDataSource.swift in Sources */,
+				19812437246451E600F286FE /* FollowFilterSorting.swift in Sources */,
 				5EC7B88220D14C9C007720D1 /* SettingsViewModel.swift in Sources */,
 				FCB8DFCB2010F6B100698D18 /* Protocols.swift in Sources */,
+				1981246C2464592200F286FE /* SignalTradingEventItemsViewModel.swift in Sources */,
 				5E39F70E23A3F92F0073DAD5 /* PowDetails.swift in Sources */,
 				5E39F79623A3F9300073DAD5 /* RateItem.swift in Sources */,
 				5E39F78E23A3F9300073DAD5 /* TransactionInternalType.swift in Sources */,
@@ -4409,10 +4571,12 @@
 				5EDAA57422E4F9A800F7BF71 /* FundReallocateHistoryViewModel.swift in Sources */,
 				5E0ACEC5217FC4C500DC76AA /* FundsDataProvider.swift in Sources */,
 				5E36652220D948B700195CBE /* PasscodeViewController.swift in Sources */,
+				198124732464595300F286FE /* SocialPostTagType.swift in Sources */,
 				5EBBEAEC2100CE2D0034E4CB /* BrokersDataProvider.swift in Sources */,
 				5EB8E9D820723D7E00F46A8A /* ForgetPasswordRouter.swift in Sources */,
 				5EFB2383238C055400CD7480 /* InvestingRequestsViewModel.swift in Sources */,
 				5E0E1BA922227F17001F3C4E /* WalletTransferViewModel.swift in Sources */,
+				19812486246459A900F286FE /* UsersFilterSorting.swift in Sources */,
 				5E39F79D23A3F9300073DAD5 /* PersonalProgramDetails.swift in Sources */,
 				FC900E5C204EA852007E9142 /* RoundingExtensions.swift in Sources */,
 				5E70428023CCF61100D8950F /* AccountInfoRouter.swift in Sources */,
@@ -4428,6 +4592,7 @@
 				5E39F7B623A3F9300073DAD5 /* TradesViewModel.swift in Sources */,
 				5E39F79023A3F9300073DAD5 /* NotificationType.swift in Sources */,
 				5E39F60523A3F8A60073DAD5 /* AndroidVersion.swift in Sources */,
+				198124832464599D00F286FE /* UserFeedMode.swift in Sources */,
 				FC0E20202044459500872BE5 /* UIImageViewExtension.swift in Sources */,
 				5E18CE0720C1952A008FE5B5 /* AuthTwoFactorDisableRouter.swift in Sources */,
 				5E5C66EE207FAF700076F630 /* ProgramDetailFullChartViewController.swift in Sources */,
@@ -4446,11 +4611,13 @@
 				5E39F78723A3F9300073DAD5 /* ProgramFollowDetailsFullTradingAccountDetails.swift in Sources */,
 				5E39F5EF23A3F8A60073DAD5 /* AssetFacet.swift in Sources */,
 				5EA1FE2C21A30EC200308D81 /* FacetsDelegateManager.swift in Sources */,
+				19812439246451FF00F286FE /* FundDetailsListItemItemsViewModel.swift in Sources */,
 				5E39F7B823A3F9300073DAD5 /* LevelsParamsInfo.swift in Sources */,
 				5E541D3A238DD5E600B38244 /* TradingEventsViewModel.swift in Sources */,
 				5E39F70F23A3F92F0073DAD5 /* ItemsViewModelPublicProfile.swift in Sources */,
 				5E39F74F23A3F92F0073DAD5 /* ProgramsLevelsInfo.swift in Sources */,
 				5E39F78B23A3F9300073DAD5 /* FundNotificationSettingList.swift in Sources */,
+				19812460246458BE00F286FE /* PublicProfileItemsViewModel.swift in Sources */,
 				5EF9F90F23E10D7900542E1E /* FundContentView.swift in Sources */,
 				5E39F70623A3F92F0073DAD5 /* TwoFactorStatus.swift in Sources */,
 				FCA19A45201AE86900157AD6 /* WalletRouter.swift in Sources */,
@@ -4524,6 +4691,7 @@
 				5E39F6FD23A3F92F0073DAD5 /* PowResult.swift in Sources */,
 				5E39F61523A3F8A60073DAD5 /* AssetDetails.swift in Sources */,
 				5E70426623CCEBE900D8950F /* AccountProfitViewModel.swift in Sources */,
+				198124792464596500F286FE /* TradeSorting.swift in Sources */,
 				5E7CBA6423B38B09008A52FE /* UpdateSocialLinksViewModel.swift in Sources */,
 				FC140FEA2030168100B71E7F /* Models.swift in Sources */,
 				5E39F5FC23A3F8A60073DAD5 /* AssetInvestmentStatus.swift in Sources */,
@@ -4540,6 +4708,7 @@
 				5E39F73A23A3F92F0073DAD5 /* ForgotPasswordViewModel.swift in Sources */,
 				5ECA620921C8216C00CA9C8C /* FilterModel.swift in Sources */,
 				5E39F5EB23A3F8A60073DAD5 /* BrokerTradeServerType.swift in Sources */,
+				198124562464585D00F286FE /* PostItemsViewModel.swift in Sources */,
 				5E0E1B9B2221A0CC001F3C4E /* InfoSignalsTableViewCell.swift in Sources */,
 				FC83DF61203D896C00A8F8CE /* ProgramWithdrawViewModel.swift in Sources */,
 				5E39F73623A3F92F0073DAD5 /* TradingAccountCreateResult.swift in Sources */,
@@ -4564,9 +4733,11 @@
 				5E39F75423A3F92F0073DAD5 /* PeriodStatus.swift in Sources */,
 				5EB06A35239D312A003AB3FB /* ProgramsAPI.swift in Sources */,
 				5EC0CAFB23CB42E6003D0818 /* TradingViewController.swift in Sources */,
+				1981243B2464521C00F286FE /* FundInvestingDetailsListItemsViewModel.swift in Sources */,
 				5EF14D9F2181FC5500B3843A /* FundWithdrawRouter.swift in Sources */,
 				5E21663923A9101A001BB512 /* FundAssetDetails.swift in Sources */,
 				5E39F77323A3F9300073DAD5 /* ManagerNotificationSettingList.swift in Sources */,
+				198124552464585D00F286FE /* Post.swift in Sources */,
 				5E39F77E23A3F9300073DAD5 /* ProgramWithdrawInfo.swift in Sources */,
 				5EC0CB0B23CB42E6003D0818 /* InvestingFundListViewController.swift in Sources */,
 				5E8340E9207E39C5004A29F1 /* TradesTableViewCellViewModel.swift in Sources */,
@@ -4619,6 +4790,7 @@
 				5EA274D12162B567008CAF77 /* ProgramProfitChartTableViewCellViewModel.swift in Sources */,
 				5E39F79A23A3F9300073DAD5 /* ProgramCreateAssetPlatformInfo.swift in Sources */,
 				5E826AE9238563A600116DD7 /* DashboardRecommendationsViewModel.swift in Sources */,
+				198124542464585D00F286FE /* PostTag.swift in Sources */,
 				5E93E70421D1A5370020DE55 /* NotificationListTableViewCellViewModel.swift in Sources */,
 				FCB8DFCF2010F99200698D18 /* AuthManager.swift in Sources */,
 				5EAD0AB92090AB2300A92B49 /* MarkerView.swift in Sources */,
@@ -4661,13 +4833,17 @@
 				5EB9320E214697FF00EE01A2 /* DetailManagerTableViewCell.swift in Sources */,
 				5E5BC190218667E3009E4BA3 /* FundAssetsViewController.swift in Sources */,
 				5E39F71023A3F92F0073DAD5 /* ResendConfirmationViewModel.swift in Sources */,
+				198124592464587F00F286FE /* ProgramInvestingDetailsListItemsViewModel.swift in Sources */,
 				5E39F71223A3F92F0073DAD5 /* TradesSignalViewModel.swift in Sources */,
 				5E39F72723A3F92F0073DAD5 /* NewExternalTradingAccountRequest.swift in Sources */,
 				5EFB2375238AC2B600CD7480 /* TradingPrivateShortListViewModel.swift in Sources */,
+				1981242F2464510C00F286FE /* DashboardTradingAssetItemsViewModel.swift in Sources */,
+				198124532464585D00F286FE /* PostImageResize.swift in Sources */,
 				FC5E904A202169DC000E4A90 /* FilterViewController.swift in Sources */,
 				FCA19A25201AA8C000157AD6 /* Router.swift in Sources */,
 				5EA274BA2162823F008CAF77 /* InvestNowTableViewCell.swift in Sources */,
 				5EEA460D21F61B4500D6730D /* NotificationsAPI.swift in Sources */,
+				1981246F2464593300F286FE /* SignalSubscriptionItemsViewModel.swift in Sources */,
 				5EA8B9C021B4528C0074EA2C /* ListRouter.swift in Sources */,
 				5EB06A50239EA1FE003AB3FB /* UsersDataProvider.swift in Sources */,
 				5E5BBE6A218228E6009E4BA3 /* FundProfitChartTableViewCellViewModel.swift in Sources */,
@@ -4682,6 +4858,7 @@
 				5E96D77821D30B1500BFB842 /* CreateNotificationViewController.swift in Sources */,
 				5E93E6FE21D1A5370020DE55 /* NotificationListTableViewCell.swift in Sources */,
 				5E7FC746207B6337001617FD /* BalanceLabel.swift in Sources */,
+				198124822464599D00F286FE /* UserDetailsListItemsViewModel.swift in Sources */,
 				5E39F72123A3F92F0073DAD5 /* DashboardTradingAssetActions.swift in Sources */,
 				5E36652420D94B0A00195CBE /* PasscodeViewModel.swift in Sources */,
 				5E17709E220D05A900669D84 /* WalletTableViewCell.swift in Sources */,
@@ -4696,10 +4873,15 @@
 				5E39F7BE23A3F9300073DAD5 /* SignalDetachMode.swift in Sources */,
 				5EDAA71A22E5068600F7BF71 /* ReallocateHistoryTableViewCell.swift in Sources */,
 				5E39F74423A3F92F0073DAD5 /* ItemsViewModelRewardDetails.swift in Sources */,
+				19812435246451CD00F286FE /* FollowDetailsListItemItemsViewModel.swift in Sources */,
 				5E19A1D62063A5DE0010014A /* UITableViewCellExtension.swift in Sources */,
+				19812467246458F900F286FE /* ReferralFriendItemsViewModel.swift in Sources */,
 				5EA274DD2162DF33008CAF77 /* ProfitViewController.swift in Sources */,
+				198124252464506E00F286FE /* SocialAPI.swift in Sources */,
+				198124452464528D00F286FE /* InvestmentEventViewModelItemsViewModel.swift in Sources */,
 				5E39F61023A3F8A60073DAD5 /* BrokerAccountType.swift in Sources */,
 				5E39F71723A3F92F0073DAD5 /* ProgramFollowDetailsFull.swift in Sources */,
+				19812487246459A900F286FE /* UsersFilterTimeframe.swift in Sources */,
 				FC0E201C2044459500872BE5 /* CIColorExtension.swift in Sources */,
 				5EF9F92A23E322FF00542E1E /* PlatformEvent.swift in Sources */,
 				5E39F71C23A3F92F0073DAD5 /* TwoFactorCodeModel.swift in Sources */,
@@ -4709,6 +4891,7 @@
 				5E39F75623A3F92F0073DAD5 /* ProgramLevelInfo.swift in Sources */,
 				5EAC11B620B8587D0057A2D2 /* AuthTwoFactorSignInViewModel.swift in Sources */,
 				5E39F7BA23A3F9300073DAD5 /* RecoveryCode.swift in Sources */,
+				1981243F2464523F00F286FE /* Guide.swift in Sources */,
 				5E18CE0320C03E3A008FE5B5 /* AuthTwoFactorTabmanViewModel.swift in Sources */,
 				5E14CDA521B5829400388616 /* RatingPageboyViewControllerDataSource.swift in Sources */,
 				FC4C519B2048055A0042CEE1 /* ProgramRequestsRouter.swift in Sources */,
@@ -4720,6 +4903,7 @@
 				5E9C74DE22C99D6B003604ED /* DetailStatisticsTableViewCell.swift in Sources */,
 				5EF9F92C23E322FF00542E1E /* LandingInfo.swift in Sources */,
 				5EF22570206E486B00D2CB12 /* UIDevice.swift in Sources */,
+				1981247C2464597B00F286FE /* TradingAccountMaxCreateAmount.swift in Sources */,
 				5E826ADF23855EB700116DD7 /* DashboardInvestingTableViewCell.swift in Sources */,
 				5EA173D320A0883000905253 /* TabmanRouter.swift in Sources */,
 				FCC9DD8A200E63D2008825EC /* UIViewControllerExtensions.swift in Sources */,
@@ -4754,12 +4938,14 @@
 				5E27EC4A218758AC00C6CF5C /* FundAssetTableViewCell.swift in Sources */,
 				5EA1FE2A21A3004C00308D81 /* FacetCollectionViewCellViewModel.swift in Sources */,
 				5EED8A4C2386ADFD001C3D54 /* MultiProgressView.swift in Sources */,
+				1981247D2464597B00F286FE /* TradingAccountDetailsItemsViewModel.swift in Sources */,
 				5EF9F92923E322FF00542E1E /* SiteMapInfo.swift in Sources */,
 				5E69AC8A23DB047C000AB692 /* AccountTradesViewModel.swift in Sources */,
 				FC140FE92030168100B71E7F /* JSONEncodingHelper.swift in Sources */,
 				FCA19A31201ADF9800157AD6 /* AuthSignInViewModel.swift in Sources */,
 				5E70428123CCF61100D8950F /* AccountRouter.swift in Sources */,
 				5E39F7A023A3F9300073DAD5 /* FundWithdrawInfo.swift in Sources */,
+				1981244B2464536600F286FE /* NewPostImage.swift in Sources */,
 				5E395A2D2065613800A6B779 /* GradientView.swift in Sources */,
 				5EA274DB2162DF19008CAF77 /* BalanceViewController.swift in Sources */,
 				FCC9DD7A200E4CCF008825EC /* BaseNavigationController.swift in Sources */,
@@ -4802,11 +4988,13 @@
 				5E39F7BF23A3F9300073DAD5 /* UpdateSocialLinkViewModel.swift in Sources */,
 				FCA5707420274BD0001942F3 /* Bundle+Locale.swift in Sources */,
 				FC27232B20498959005225F2 /* QRCodeReaderViewController.swift in Sources */,
+				1981247F2464598C00F286FE /* TransactionViewModelItemsViewModel.swift in Sources */,
 				5EA274CD2162B53B008CAF77 /* ProgramBalanceChartTableViewCellViewModel.swift in Sources */,
 				5EF9F91923E10DC700542E1E /* ProgramInvestingContentView.swift in Sources */,
 				5E39F7A423A3F9300073DAD5 /* OrderSignalFee.swift in Sources */,
 				5E39F7DD23A3F9300073DAD5 /* DashboardInvestingDetails.swift in Sources */,
 				5E5BC29C21868FD7009E4BA3 /* FundAssetsHeaderView.swift in Sources */,
+				198124412464524700F286FE /* GuidesCategory.swift in Sources */,
 				5E39F75023A3F92F0073DAD5 /* InternalTransferRequest.swift in Sources */,
 				5EA8B9BA21B4391D0074EA2C /* ManagerListViewController.swift in Sources */,
 				5E39F59B23A3CE0C0073DAD5 /* DashboardPortfolioChartTableViewCell.swift in Sources */,
@@ -4815,6 +5003,7 @@
 				5E897730206E987B0015FD26 /* ReachabilityManager.swift in Sources */,
 				FCBD2327201A2582000B8E38 /* ProfileViewModel.swift in Sources */,
 				5E39F7C323A3F9300073DAD5 /* ErrorViewModel.swift in Sources */,
+				198124312464516800F286FE /* EditPost.swift in Sources */,
 				5E93E70121D1A5370020DE55 /* NotificationsSettingsProgramTableViewCellViewModel.swift in Sources */,
 				5E70429C23CD082700D8950F /* AccountProfitChartTableViewCellViewModel.swift in Sources */,
 				5E39F78023A3F9300073DAD5 /* SignalProviderSubscribers.swift in Sources */,
@@ -4837,6 +5026,7 @@
 				5E39F60323A3F8A60073DAD5 /* ChangePasswordViewModel.swift in Sources */,
 				5E39F61123A3F8A60073DAD5 /* AssetGuestActions.swift in Sources */,
 				FCB2C4EA2010BAAA0012AA58 /* String+Localized.swift in Sources */,
+				198124332464518600F286FE /* EditablePost.swift in Sources */,
 				5E39F72223A3F92F0073DAD5 /* WithdrawalSummary.swift in Sources */,
 				5EB06A3B239D312A003AB3FB /* FundsAPI.swift in Sources */,
 				5E7B03502067B6A300D8F3BA /* NumpadButton.swift in Sources */,
@@ -4864,8 +5054,10 @@
 				5EA274BE21628253008CAF77 /* YourInvestmentTableViewCell.swift in Sources */,
 				FCA19A39201AE02F00157AD6 /* SignInRouter.swift in Sources */,
 				5EE0075D217871BB0045B890 /* ManagerInfoViewModel.swift in Sources */,
+				1981248B24645B3400F286FE /* SignalSubscription.swift in Sources */,
 				5E026FF922D3532400C555CC /* TagTableViewCellViewModel.swift in Sources */,
 				5E39F76C23A3F9300073DAD5 /* FilterItemInfo.swift in Sources */,
+				1981245D246458AA00F286FE /* ProgramsFilterSorting.swift in Sources */,
 				5E44E5A82289808400865A85 /* PlatformAPI.swift in Sources */,
 				FCB8DFC42010F5EC00698D18 /* SignUpViewController.swift in Sources */,
 				5E39F73B23A3F92F0073DAD5 /* ProgramPeriodsViewModel.swift in Sources */,
@@ -4873,6 +5065,7 @@
 				5E39F72623A3F92F0073DAD5 /* DashboardTradingAssetPublicDetails.swift in Sources */,
 				5E1770A3220D18DA00669D84 /* WalletBalanceViewController.swift in Sources */,
 				5E0E1B9D2221A0CC001F3C4E /* InfoSignalsTableViewCellViewModel.swift in Sources */,
+				19812461246458BE00F286FE /* PublicProfilePersonalDetails.swift in Sources */,
 				5E1770A1220D05BC00669D84 /* WalletTableViewCellViewModel.swift in Sources */,
 				FC4964152015445E00104CEB /* WalletViewController.swift in Sources */,
 				5E12B39120BEEC1400302730 /* AuthTwoFactorConfirmateViewController.swift in Sources */,
@@ -4892,21 +5085,25 @@
 				5E39F73523A3F92F0073DAD5 /* FundAssetsState.swift in Sources */,
 				5EF14D8F2181F80200B3843A /* FundInfoViewModel.swift in Sources */,
 				5EDAA57622E4F9D000F7BF71 /* ProgramPeriodHistoryViewModel.swift in Sources */,
+				19812465246458E100F286FE /* ReallocationModelItemsViewModel.swift in Sources */,
 				5EC1C3B1228807540024008E /* ProgramSubscribeViewController.swift in Sources */,
 				5E39F72B23A3F92F0073DAD5 /* ItemsViewModelProgramInvestingDetailsList.swift in Sources */,
 				5E39F7C123A3F9300073DAD5 /* UserCommissionData.swift in Sources */,
 				5E39F77723A3F9300073DAD5 /* FundChartStatistic.swift in Sources */,
 				5EC0CB0523CB42E6003D0818 /* TradingPrivateListViewController.swift in Sources */,
+				198124782464596500F286FE /* TradeAssetData.swift in Sources */,
 				5EFB2387238C057700CD7480 /* InvestingProgramsViewModel.swift in Sources */,
 				5EEC1ACB2175FD08007D77ED /* NotificationsDataProvider.swift in Sources */,
 				5E39F60C23A3F8A60073DAD5 /* AndroidAppVersion.swift in Sources */,
 				FC27232920498959005225F2 /* QRCodeReaderView.swift in Sources */,
+				19812489246459B900F286FE /* UtmSource.swift in Sources */,
 				5E69AC8523DA4EED000AB692 /* DefaultHeaderTableViewCell.swift in Sources */,
 				5EA274D52162B5AB008CAF77 /* ProgramInvestNowTableViewCellViewModel.swift in Sources */,
 				5E39F5EE23A3F8A60073DAD5 /* DashboardAssetChart.swift in Sources */,
 				5E6C0CF02109A8D900B7F844 /* ManagerViewController.swift in Sources */,
 				5E39F78A23A3F9300073DAD5 /* ErrorMessage.swift in Sources */,
 				5E39F75F23A3F92F0073DAD5 /* InvestmentEventType.swift in Sources */,
+				1981243D2464522F00F286FE /* FundsFilterSorting.swift in Sources */,
 				5E1813822061D36700481646 /* UIAlertController+Extensions.swift in Sources */,
 				5EB06A3F239D312A003AB3FB /* BrokersAPI.swift in Sources */,
 				5E39F7A923A3F9300073DAD5 /* OrderModelSignalData.swift in Sources */,
@@ -4915,6 +5112,7 @@
 				5E0E1BA722225D56001F3C4E /* WalletTransferViewController.swift in Sources */,
 				5E39F73E23A3F92F0073DAD5 /* WalletWithdrawalInfo.swift in Sources */,
 				5E39F77223A3F9300073DAD5 /* FundDetailsFull.swift in Sources */,
+				198124752464595300F286FE /* SocialSummary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4984,7 +5182,7 @@
 		};
 		5E541D3E238EAA7A00B38244 /* Release PROD */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8737ED0E7816D5D1CCBE38C0 /* Pods-genesisvision-ios.release prod.xcconfig */;
+			baseConfigurationReference = A6C4AD19B7C4980B347D6556 /* Pods-genesisvision-ios.release prod.xcconfig */;
 			buildSettings = {
 				APP_DISPLAY_NAME = "Genesis Vision";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -5265,7 +5463,7 @@
 		};
 		FC08FA682018933500BC1417 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D4A2436FDA06220328E9292C /* Pods-genesisvision-ios.debug.xcconfig */;
+			baseConfigurationReference = 288F5D4CC66E0FF4B863BCD0 /* Pods-genesisvision-ios.debug.xcconfig */;
 			buildSettings = {
 				APP_DISPLAY_NAME = "GV DEBUG";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -5346,7 +5544,7 @@
 		};
 		FC11DD5820319A7800C32873 /* Release DEV */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 440418927E7D91879582B66E /* Pods-genesisvision-ios.release dev.xcconfig */;
+			baseConfigurationReference = E6793C6131153B9FEF56421D /* Pods-genesisvision-ios.release dev.xcconfig */;
 			buildSettings = {
 				APP_DISPLAY_NAME = "GV DEV";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

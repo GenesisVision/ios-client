@@ -8,41 +8,18 @@
 import Foundation
 
 
+public struct AmountRowCell: Codable {
 
-open class AmountRowCell: Codable {
 
     public var first: AmountItem?
+
     public var second: AmountItem?
+
     public var title: String?
-
-
-    
-    public init(first: AmountItem?, second: AmountItem?, title: String?) {
+    public init(first: AmountItem? = nil, second: AmountItem? = nil, title: String? = nil) { 
         self.first = first
         self.second = second
         self.title = title
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(first, forKey: "first")
-        try container.encodeIfPresent(second, forKey: "second")
-        try container.encodeIfPresent(title, forKey: "title")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        first = try container.decodeIfPresent(AmountItem.self, forKey: "first")
-        second = try container.decodeIfPresent(AmountItem.self, forKey: "second")
-        title = try container.decodeIfPresent(String.self, forKey: "title")
-    }
 }
-

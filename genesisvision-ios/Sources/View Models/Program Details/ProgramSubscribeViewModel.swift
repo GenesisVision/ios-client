@@ -31,7 +31,7 @@ final class ProgramSubscribeViewModel {
     var tradingAccountListViewModel: TradingAccountListViewModel!
     var tradingAccountListDataSource: TableViewDataSource!
     
-    var tradingAccounts: ItemsViewModelTradingAccountDetails? {
+    var tradingAccounts: TradingAccountDetailsItemsViewModel? {
         didSet {
             if let items = tradingAccounts?.items, !items.isEmpty {
                 tradingAccountListViewModel = TradingAccountListViewModel(delegate, items: items, selectedIndex: 0)
@@ -79,9 +79,9 @@ final class ProgramSubscribeViewModel {
     init(withRouter router: ProgramInfoRouter,
          assetId: String,
          tradingAccountId: UUID? = nil,
-         сurrency: CurrencyType? = nil,
+         сurrency: Currency? = nil,
          signalSubscription: SignalSubscription? = nil,
-         tradingAccounts: ItemsViewModelTradingAccountDetails? = nil,
+         tradingAccounts: TradingAccountDetailsItemsViewModel? = nil,
          detailProtocol: ReloadDataProtocol?,
          followType: FollowType,
          delegate: BaseTableViewProtocol?) {
@@ -108,9 +108,9 @@ final class ProgramSubscribeViewModel {
                                                                            totalProfit: nil,
                                                                            totalVolume: nil)
     
-        var fixedCurrency: AttachToSignalProvider.FixedCurrency?
+        var fixedCurrency: Currency?
         if let fixedCurrencyValue = signalSubscription?.fixedCurrency?.rawValue {
-            fixedCurrency = AttachToSignalProvider.FixedCurrency(rawValue: fixedCurrencyValue)
+            fixedCurrency = Currency(rawValue: fixedCurrencyValue)
         }
         var accountId: UUID?
         if let tradingAccountId = signalSubscription?.subscriberInfo?.tradingAccountId {
@@ -128,9 +128,8 @@ final class ProgramSubscribeViewModel {
         
         self.reasonMode = ._none
         
-        if let сurrency = сurrency, let fixedCurrency =
-            AttachToSignalProvider.FixedCurrency(rawValue: сurrency.rawValue) {
-            self.attachToSignal.fixedCurrency = fixedCurrency
+        if let сurrency = сurrency {
+            self.attachToSignal.fixedCurrency = сurrency
         }
     }
     
@@ -236,12 +235,12 @@ final class ProgramSubscribeViewModel {
         attachToSignal.openTolerancePercent = signalSubscription?.openTolerancePercent
 
         if let fixedCurrency = signalSubscription?.fixedCurrency {
-            attachToSignal.fixedCurrency = AttachToSignalProvider.FixedCurrency(rawValue: fixedCurrency.rawValue)
+            attachToSignal.fixedCurrency = Currency(rawValue: fixedCurrency.rawValue)
         }
         if let mode = signalSubscription?.mode {
             attachToSignal.mode = SubscriptionMode(rawValue: mode.rawValue)
         }
-        if let tradingAccountId = tradingAccountListViewModel.selected()?.id {
+        if let tradingAccountId = tradingAccountListViewModel.selected()?._id {
             attachToSignal.tradingAccountId = tradingAccountId
         }
         
@@ -255,13 +254,13 @@ final class ProgramSubscribeViewModel {
         attachToSignal.openTolerancePercent = signalSubscription?.openTolerancePercent
 
         if let fixedCurrency = signalSubscription?.fixedCurrency {
-            attachToSignal.fixedCurrency = AttachToSignalProvider.FixedCurrency(rawValue: fixedCurrency.rawValue)
+            attachToSignal.fixedCurrency = Currency(rawValue: fixedCurrency.rawValue)
         }
         if let mode = signalSubscription?.mode {
             attachToSignal.mode = SubscriptionMode(rawValue: mode.rawValue)
         }
         
-        if let tradingAccountId = tradingAccountListViewModel.selected()?.id {
+        if let tradingAccountId = tradingAccountListViewModel.selected()?._id {
             attachToSignal.tradingAccountId = tradingAccountId
         }
         
@@ -271,7 +270,7 @@ final class ProgramSubscribeViewModel {
     }
     
     func unsubscribe(completion: @escaping CompletionBlock) {
-        guard let assetId = assetId, let tradingAccountId = tradingAccountListViewModel.selected()?.id else { return completion(.failure(errorType: .apiError(message: nil))) }
+        guard let assetId = assetId, let tradingAccountId = tradingAccountListViewModel.selected()?._id else { return completion(.failure(errorType: .apiError(message: nil))) }
     
         let model = DetachFromSignalProvider(tradingAccountId: tradingAccountId, mode: reasonMode)
         SignalDataProvider.detach(with: assetId, model: model, completion: completion)

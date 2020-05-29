@@ -8,49 +8,39 @@
 import Foundation
 
 
+public struct TradesViewModel: Codable {
 
-open class TradesViewModel: Codable {
 
     public var showSwaps: Bool?
+
     public var showTickets: Bool?
+
+    public var showDate: Bool?
+
+    public var showDirection: Bool?
+
+    public var showPrice: Bool?
+
+    public var showPriceOpen: Bool?
+
+    public var showProfit: Bool?
+
     public var tradesDelay: TradesDelay?
+
     public var items: [OrderModel]?
+
     public var total: Int?
-
-
-    
-    public init(showSwaps: Bool?, showTickets: Bool?, tradesDelay: TradesDelay?, items: [OrderModel]?, total: Int?) {
+    public init(showSwaps: Bool? = nil, showTickets: Bool? = nil, showDate: Bool? = nil, showDirection: Bool? = nil, showPrice: Bool? = nil, showPriceOpen: Bool? = nil, showProfit: Bool? = nil, tradesDelay: TradesDelay? = nil, items: [OrderModel]? = nil, total: Int? = nil) { 
         self.showSwaps = showSwaps
         self.showTickets = showTickets
+        self.showDate = showDate
+        self.showDirection = showDirection
+        self.showPrice = showPrice
+        self.showPriceOpen = showPriceOpen
+        self.showProfit = showProfit
         self.tradesDelay = tradesDelay
         self.items = items
         self.total = total
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(showSwaps, forKey: "showSwaps")
-        try container.encodeIfPresent(showTickets, forKey: "showTickets")
-        try container.encodeIfPresent(tradesDelay, forKey: "tradesDelay")
-        try container.encodeIfPresent(items, forKey: "items")
-        try container.encodeIfPresent(total, forKey: "total")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        showSwaps = try container.decodeIfPresent(Bool.self, forKey: "showSwaps")
-        showTickets = try container.decodeIfPresent(Bool.self, forKey: "showTickets")
-        tradesDelay = try container.decodeIfPresent(TradesDelay.self, forKey: "tradesDelay")
-        items = try container.decodeIfPresent([OrderModel].self, forKey: "items")
-        total = try container.decodeIfPresent(Int.self, forKey: "total")
-    }
 }
-

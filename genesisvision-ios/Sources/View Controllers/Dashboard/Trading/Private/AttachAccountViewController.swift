@@ -134,7 +134,7 @@ class AttachAccountViewModel {
             if let brokers = brokersInfo?.brokers {
                 exchangeListViewModel = ExchangeListViewModel(delegate, items: brokers, selectedIndex: 0)
                 exchangeListDataSource = TableViewDataSource(exchangeListViewModel)
-                request.brokerAccountTypeId = exchangeListViewModel.selected()?.accountTypes?.first?.id
+                request.brokerAccountTypeId = exchangeListViewModel.selected()?.accountTypes?.first?._id
                 delegate?.didReload()
             }
         }
@@ -161,7 +161,7 @@ class AttachAccountViewModel {
     }
     func updateExchange(_ index: Int) {
         exchangeListViewModel.selectedIndex = index
-        request.brokerAccountTypeId = exchangeListViewModel.selected()?.accountTypes?.first?.id
+        request.brokerAccountTypeId = exchangeListViewModel.selected()?.accountTypes?.first?._id
     }
     func attachAccount(completion: @escaping CompletionBlock) {
         AssetsDataProvider.createExternalTradingAccount(request, completion: { [weak self] (model) in

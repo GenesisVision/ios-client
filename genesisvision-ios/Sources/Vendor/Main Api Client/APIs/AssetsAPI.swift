@@ -13,14 +13,16 @@ import Alamofire
 open class AssetsAPI {
     /**
      Cancel changing broker in existing program
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
+     - parameter _id: (path)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func cancelChangeBroker(id: UUID, authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
-        cancelChangeBrokerWithRequestBuilder(id: id, authorization: authorization).execute { (response, error) -> Void in
-            completion(error);
+    open class func cancelChangeBroker(_id: UUID, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        cancelChangeBrokerWithRequestBuilder(_id: _id).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
         }
     }
 
@@ -28,41 +30,40 @@ open class AssetsAPI {
     /**
      Cancel changing broker in existing program
      - POST /v2.0/assets/programs/{id}/broker/change/cancel
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter _id: (path)  
 
      - returns: RequestBuilder<Void> 
      */
-    open class func cancelChangeBrokerWithRequestBuilder(id: UUID, authorization: String) -> RequestBuilder<Void> {
+    open class func cancelChangeBrokerWithRequestBuilder(_id: UUID) -> RequestBuilder<Void> {
         var path = "/v2.0/assets/programs/{id}/broker/change/cancel"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
      Change broker in existing program
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter request: (body)  (optional)
+     - parameter _id: (path)       - parameter body: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func changeBroker(id: UUID, authorization: String, request: ChangeBrokerProgramRequest? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        changeBrokerWithRequestBuilder(id: id, authorization: authorization, request: request).execute { (response, error) -> Void in
-            completion(error);
+    open class func changeBroker(_id: UUID, body: ChangeBrokerProgramRequest? = nil, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        changeBrokerWithRequestBuilder(_id: _id, body: body).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
         }
     }
 
@@ -70,42 +71,40 @@ open class AssetsAPI {
     /**
      Change broker in existing program
      - POST /v2.0/assets/programs/{id}/broker/change
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter request: (body)  (optional)
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter _id: (path)       - parameter body: (body)  (optional)
 
      - returns: RequestBuilder<Void> 
      */
-    open class func changeBrokerWithRequestBuilder(id: UUID, authorization: String, request: ChangeBrokerProgramRequest? = nil) -> RequestBuilder<Void> {
+    open class func changeBrokerWithRequestBuilder(_id: UUID, body: ChangeBrokerProgramRequest? = nil) -> RequestBuilder<Void> {
         var path = "/v2.0/assets/programs/{id}/broker/change"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: request)
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
     /**
      Change trading account password
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
+     - parameter _id: (path)       - parameter body: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func changeTradingAccountPassword(id: UUID, authorization: String, model: TradingAccountPwdUpdate? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        changeTradingAccountPasswordWithRequestBuilder(id: id, authorization: authorization, model: model).execute { (response, error) -> Void in
-            completion(error);
+    open class func changeTradingAccountPassword(_id: UUID, body: TradingAccountPwdUpdate? = nil, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        changeTradingAccountPasswordWithRequestBuilder(_id: _id, body: body).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
         }
     }
 
@@ -113,41 +112,40 @@ open class AssetsAPI {
     /**
      Change trading account password
      - POST /v2.0/assets/tradingaccounts/{id}/password/change
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter _id: (path)       - parameter body: (body)  (optional)
 
      - returns: RequestBuilder<Void> 
      */
-    open class func changeTradingAccountPasswordWithRequestBuilder(id: UUID, authorization: String, model: TradingAccountPwdUpdate? = nil) -> RequestBuilder<Void> {
+    open class func changeTradingAccountPasswordWithRequestBuilder(_id: UUID, body: TradingAccountPwdUpdate? = nil) -> RequestBuilder<Void> {
         var path = "/v2.0/assets/tradingaccounts/{id}/password/change"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
     /**
      Close current period
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
+     - parameter _id: (path)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func closeCurrentPeriod(id: UUID, authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
-        closeCurrentPeriodWithRequestBuilder(id: id, authorization: authorization).execute { (response, error) -> Void in
-            completion(error);
+    open class func closeCurrentPeriod(_id: UUID, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        closeCurrentPeriodWithRequestBuilder(_id: _id).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
         }
     }
 
@@ -155,41 +153,40 @@ open class AssetsAPI {
     /**
      Close current period
      - POST /v2.0/assets/programs/{id}/period/close
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter _id: (path)  
 
      - returns: RequestBuilder<Void> 
      */
-    open class func closeCurrentPeriodWithRequestBuilder(id: UUID, authorization: String) -> RequestBuilder<Void> {
+    open class func closeCurrentPeriodWithRequestBuilder(_id: UUID) -> RequestBuilder<Void> {
         var path = "/v2.0/assets/programs/{id}/period/close"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
      Close existing fund
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
+     - parameter _id: (path)       - parameter body: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func closeFund(id: UUID, authorization: String, model: TwoFactorCodeModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        closeFundWithRequestBuilder(id: id, authorization: authorization, model: model).execute { (response, error) -> Void in
-            completion(error);
+    open class func closeFund(_id: UUID, body: TwoFactorCodeModel? = nil, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        closeFundWithRequestBuilder(_id: _id, body: body).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
         }
     }
 
@@ -197,42 +194,40 @@ open class AssetsAPI {
     /**
      Close existing fund
      - POST /v2.0/assets/funds/{id}/close
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter _id: (path)       - parameter body: (body)  (optional)
 
      - returns: RequestBuilder<Void> 
      */
-    open class func closeFundWithRequestBuilder(id: UUID, authorization: String, model: TwoFactorCodeModel? = nil) -> RequestBuilder<Void> {
+    open class func closeFundWithRequestBuilder(_id: UUID, body: TwoFactorCodeModel? = nil) -> RequestBuilder<Void> {
         var path = "/v2.0/assets/funds/{id}/close"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
     /**
      Close existing investment program
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
+     - parameter _id: (path)       - parameter body: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func closeInvestmentProgram(id: UUID, authorization: String, model: TwoFactorCodeModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        closeInvestmentProgramWithRequestBuilder(id: id, authorization: authorization, model: model).execute { (response, error) -> Void in
-            completion(error);
+    open class func closeInvestmentProgram(_id: UUID, body: TwoFactorCodeModel? = nil, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        closeInvestmentProgramWithRequestBuilder(_id: _id, body: body).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
         }
     }
 
@@ -240,41 +235,40 @@ open class AssetsAPI {
     /**
      Close existing investment program
      - POST /v2.0/assets/programs/{id}/close
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter _id: (path)       - parameter body: (body)  (optional)
 
      - returns: RequestBuilder<Void> 
      */
-    open class func closeInvestmentProgramWithRequestBuilder(id: UUID, authorization: String, model: TwoFactorCodeModel? = nil) -> RequestBuilder<Void> {
+    open class func closeInvestmentProgramWithRequestBuilder(_id: UUID, body: TwoFactorCodeModel? = nil) -> RequestBuilder<Void> {
         var path = "/v2.0/assets/programs/{id}/close"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
     /**
      Close trading account
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
+     - parameter _id: (path)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func closeTradingAccount(id: UUID, authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
-        closeTradingAccountWithRequestBuilder(id: id, authorization: authorization).execute { (response, error) -> Void in
-            completion(error);
+    open class func closeTradingAccount(_id: UUID, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        closeTradingAccountWithRequestBuilder(_id: _id).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
         }
     }
 
@@ -282,41 +276,40 @@ open class AssetsAPI {
     /**
      Close trading account
      - POST /v2.0/assets/tradingaccounts/{id}/close
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter _id: (path)  
 
      - returns: RequestBuilder<Void> 
      */
-    open class func closeTradingAccountWithRequestBuilder(id: UUID, authorization: String) -> RequestBuilder<Void> {
+    open class func closeTradingAccountWithRequestBuilder(_id: UUID) -> RequestBuilder<Void> {
         var path = "/v2.0/assets/tradingaccounts/{id}/close"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
      Confirm 2FA for program if required (for brokers like Huobi)
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
+     - parameter _id: (path)       - parameter body: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func confirmProgram2FA(id: UUID, authorization: String, model: TwoFactorCodeModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        confirmProgram2FAWithRequestBuilder(id: id, authorization: authorization, model: model).execute { (response, error) -> Void in
-            completion(error);
+    open class func confirmProgram2FA(_id: UUID, body: TwoFactorCodeModel? = nil, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        confirmProgram2FAWithRequestBuilder(_id: _id, body: body).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
         }
     }
 
@@ -324,41 +317,36 @@ open class AssetsAPI {
     /**
      Confirm 2FA for program if required (for brokers like Huobi)
      - POST /v2.0/assets/programs/{id}/2fa/confirm
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter _id: (path)       - parameter body: (body)  (optional)
 
      - returns: RequestBuilder<Void> 
      */
-    open class func confirmProgram2FAWithRequestBuilder(id: UUID, authorization: String, model: TwoFactorCodeModel? = nil) -> RequestBuilder<Void> {
+    open class func confirmProgram2FAWithRequestBuilder(_id: UUID, body: TwoFactorCodeModel? = nil) -> RequestBuilder<Void> {
         var path = "/v2.0/assets/programs/{id}/2fa/confirm"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
     /**
      Create external trading account
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter request: (body)  (optional)
+     - parameter body: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func createExternalTradingAccount(authorization: String, request: NewExternalTradingAccountRequest? = nil, completion: @escaping ((_ data: TradingAccountCreateResult?,_ error: Error?) -> Void)) {
-        createExternalTradingAccountWithRequestBuilder(authorization: authorization, request: request).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func createExternalTradingAccount(body: NewExternalTradingAccountRequest? = nil, completion: @escaping ((_ data: TradingAccountCreateResult?,_ error: Error?) -> Void)) {
+        createExternalTradingAccountWithRequestBuilder(body: body).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
@@ -366,6 +354,9 @@ open class AssetsAPI {
     /**
      Create external trading account
      - POST /v2.0/assets/tradingaccounts/external/create
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "twoFactor" : {
     "sharedKey" : "sharedKey",
@@ -374,39 +365,34 @@ open class AssetsAPI {
   "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "twoFactorRequired" : true
 }}]
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter request: (body)  (optional)
+     - parameter body: (body)  (optional)
 
      - returns: RequestBuilder<TradingAccountCreateResult> 
      */
-    open class func createExternalTradingAccountWithRequestBuilder(authorization: String, request: NewExternalTradingAccountRequest? = nil) -> RequestBuilder<TradingAccountCreateResult> {
+    open class func createExternalTradingAccountWithRequestBuilder(body: NewExternalTradingAccountRequest? = nil) -> RequestBuilder<TradingAccountCreateResult> {
         let path = "/v2.0/assets/tradingaccounts/external/create"
         let URLString = SwaggerClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: request)
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<TradingAccountCreateResult>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
     /**
      Create fund
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter request: (body)  (optional)
+     - parameter body: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func createFund(authorization: String, request: NewFundRequest? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        createFundWithRequestBuilder(authorization: authorization, request: request).execute { (response, error) -> Void in
-            completion(error);
+    open class func createFund(body: NewFundRequest? = nil, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        createFundWithRequestBuilder(body: body).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
         }
     }
 
@@ -414,39 +400,33 @@ open class AssetsAPI {
     /**
      Create fund
      - POST /v2.0/assets/funds/create
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter request: (body)  (optional)
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter body: (body)  (optional)
 
      - returns: RequestBuilder<Void> 
      */
-    open class func createFundWithRequestBuilder(authorization: String, request: NewFundRequest? = nil) -> RequestBuilder<Void> {
+    open class func createFundWithRequestBuilder(body: NewFundRequest? = nil) -> RequestBuilder<Void> {
         let path = "/v2.0/assets/funds/create"
         let URLString = SwaggerClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: request)
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
     /**
      Create trading account
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter request: (body)  (optional)
+     - parameter body: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func createTradingAccount(authorization: String, request: NewTradingAccountRequest? = nil, completion: @escaping ((_ data: TradingAccountCreateResult?,_ error: Error?) -> Void)) {
-        createTradingAccountWithRequestBuilder(authorization: authorization, request: request).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func createTradingAccount(body: NewTradingAccountRequest? = nil, completion: @escaping ((_ data: TradingAccountCreateResult?,_ error: Error?) -> Void)) {
+        createTradingAccountWithRequestBuilder(body: body).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
@@ -454,6 +434,9 @@ open class AssetsAPI {
     /**
      Create trading account
      - POST /v2.0/assets/tradingaccounts/create
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "twoFactor" : {
     "sharedKey" : "sharedKey",
@@ -462,39 +445,30 @@ open class AssetsAPI {
   "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "twoFactorRequired" : true
 }}]
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter request: (body)  (optional)
+     - parameter body: (body)  (optional)
 
      - returns: RequestBuilder<TradingAccountCreateResult> 
      */
-    open class func createTradingAccountWithRequestBuilder(authorization: String, request: NewTradingAccountRequest? = nil) -> RequestBuilder<TradingAccountCreateResult> {
+    open class func createTradingAccountWithRequestBuilder(body: NewTradingAccountRequest? = nil) -> RequestBuilder<TradingAccountCreateResult> {
         let path = "/v2.0/assets/tradingaccounts/create"
         let URLString = SwaggerClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: request)
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<TradingAccountCreateResult>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
     /**
      Get program data for levels calculator
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
+     - parameter _id: (path)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getLevelsCalculator(id: UUID, authorization: String, completion: @escaping ((_ data: ProgramLevelInfo?,_ error: Error?) -> Void)) {
-        getLevelsCalculatorWithRequestBuilder(id: id, authorization: authorization).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getLevelsCalculator(_id: UUID, completion: @escaping ((_ data: ProgramLevelInfo?,_ error: Error?) -> Void)) {
+        getLevelsCalculatorWithRequestBuilder(_id: _id).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
@@ -502,6 +476,9 @@ open class AssetsAPI {
     /**
      Get program data for levels calculator
      - GET /v2.0/assets/programs/{id}/levels/info
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "weightedVolumeScale" : 5.637376656633329,
   "isKycPassed" : true,
@@ -513,40 +490,33 @@ open class AssetsAPI {
   "managerBalance" : 2.3021358869347655,
   "totalAvailableToInvest" : 9.301444243932576
 }}]
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
+     - parameter _id: (path)  
 
      - returns: RequestBuilder<ProgramLevelInfo> 
      */
-    open class func getLevelsCalculatorWithRequestBuilder(id: UUID, authorization: String) -> RequestBuilder<ProgramLevelInfo> {
+    open class func getLevelsCalculatorWithRequestBuilder(_id: UUID) -> RequestBuilder<ProgramLevelInfo> {
         var path = "/v2.0/assets/programs/{id}/levels/info"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<ProgramLevelInfo>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
      Get 2FA for program if needed
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
+     - parameter _id: (path)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getProgram2FA(id: UUID, authorization: String, completion: @escaping ((_ data: TwoFactorAuthenticator?,_ error: Error?) -> Void)) {
-        getProgram2FAWithRequestBuilder(id: id, authorization: authorization).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getProgram2FA(_id: UUID, completion: @escaping ((_ data: TwoFactorAuthenticator?,_ error: Error?) -> Void)) {
+        getProgram2FAWithRequestBuilder(_id: _id).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
@@ -554,44 +524,44 @@ open class AssetsAPI {
     /**
      Get 2FA for program if needed
      - GET /v2.0/assets/programs/{id}/2fa/get
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "sharedKey" : "sharedKey",
   "authenticatorUri" : "authenticatorUri"
 }}]
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
+     - parameter _id: (path)  
 
      - returns: RequestBuilder<TwoFactorAuthenticator> 
      */
-    open class func getProgram2FAWithRequestBuilder(id: UUID, authorization: String) -> RequestBuilder<TwoFactorAuthenticator> {
+    open class func getProgram2FAWithRequestBuilder(_id: UUID) -> RequestBuilder<TwoFactorAuthenticator> {
         var path = "/v2.0/assets/programs/{id}/2fa/get"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<TwoFactorAuthenticator>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
      Create an investment program
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter request: (body)  (optional)
+     - parameter body: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func makeAccountProgram(authorization: String, request: MakeTradingAccountProgram? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        makeAccountProgramWithRequestBuilder(authorization: authorization, request: request).execute { (response, error) -> Void in
-            completion(error);
+    open class func makeAccountProgram(body: MakeTradingAccountProgram? = nil, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        makeAccountProgramWithRequestBuilder(body: body).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
         }
     }
 
@@ -599,39 +569,37 @@ open class AssetsAPI {
     /**
      Create an investment program
      - POST /v2.0/assets/programs/fromaccount/create
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter request: (body)  (optional)
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter body: (body)  (optional)
 
      - returns: RequestBuilder<Void> 
      */
-    open class func makeAccountProgramWithRequestBuilder(authorization: String, request: MakeTradingAccountProgram? = nil) -> RequestBuilder<Void> {
+    open class func makeAccountProgramWithRequestBuilder(body: MakeTradingAccountProgram? = nil) -> RequestBuilder<Void> {
         let path = "/v2.0/assets/programs/fromaccount/create"
         let URLString = SwaggerClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: request)
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
     /**
      Make account signal provider
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter request: (body)  (optional)
+     - parameter body: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func makeAccountSignalProvider(authorization: String, request: MakeTradingAccountSignalProvider? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        makeAccountSignalProviderWithRequestBuilder(authorization: authorization, request: request).execute { (response, error) -> Void in
-            completion(error);
+    open class func makeAccountSignalProvider(body: MakeTradingAccountSignalProvider? = nil, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        makeAccountSignalProviderWithRequestBuilder(body: body).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
         }
     }
 
@@ -639,40 +607,37 @@ open class AssetsAPI {
     /**
      Make account signal provider
      - POST /v2.0/assets/signal/create
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter request: (body)  (optional)
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter body: (body)  (optional)
 
      - returns: RequestBuilder<Void> 
      */
-    open class func makeAccountSignalProviderWithRequestBuilder(authorization: String, request: MakeTradingAccountSignalProvider? = nil) -> RequestBuilder<Void> {
+    open class func makeAccountSignalProviderWithRequestBuilder(body: MakeTradingAccountSignalProvider? = nil) -> RequestBuilder<Void> {
         let path = "/v2.0/assets/signal/create"
         let URLString = SwaggerClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: request)
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
     /**
      Make demo trading account deposit
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
+     - parameter _id: (path)       - parameter body: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func makeDemoTradingAccountDeposit(id: UUID, authorization: String, model: TradingAccountDemoDeposit? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        makeDemoTradingAccountDepositWithRequestBuilder(id: id, authorization: authorization, model: model).execute { (response, error) -> Void in
-            completion(error);
+    open class func makeDemoTradingAccountDeposit(_id: UUID, body: TradingAccountDemoDeposit? = nil, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        makeDemoTradingAccountDepositWithRequestBuilder(_id: _id, body: body).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
         }
     }
 
@@ -680,41 +645,40 @@ open class AssetsAPI {
     /**
      Make demo trading account deposit
      - POST /v2.0/assets/tradingaccounts/{id}/demo/deposit
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter _id: (path)       - parameter body: (body)  (optional)
 
      - returns: RequestBuilder<Void> 
      */
-    open class func makeDemoTradingAccountDepositWithRequestBuilder(id: UUID, authorization: String, model: TradingAccountDemoDeposit? = nil) -> RequestBuilder<Void> {
+    open class func makeDemoTradingAccountDepositWithRequestBuilder(_id: UUID, body: TradingAccountDemoDeposit? = nil) -> RequestBuilder<Void> {
         var path = "/v2.0/assets/tradingaccounts/{id}/demo/deposit"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
     /**
      Make external trading account signal provider
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter request: (body)  (optional)
+     - parameter body: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func makeExternalAccountSignalProvider(authorization: String, request: MakeTradingAccountSignalProvider? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        makeExternalAccountSignalProviderWithRequestBuilder(authorization: authorization, request: request).execute { (response, error) -> Void in
-            completion(error);
+    open class func makeExternalAccountSignalProvider(body: MakeTradingAccountSignalProvider? = nil, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        makeExternalAccountSignalProviderWithRequestBuilder(body: body).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
         }
     }
 
@@ -722,39 +686,37 @@ open class AssetsAPI {
     /**
      Make external trading account signal provider
      - POST /v2.0/assets/tradingaccounts/external/fromaccount/create
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter request: (body)  (optional)
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter body: (body)  (optional)
 
      - returns: RequestBuilder<Void> 
      */
-    open class func makeExternalAccountSignalProviderWithRequestBuilder(authorization: String, request: MakeTradingAccountSignalProvider? = nil) -> RequestBuilder<Void> {
+    open class func makeExternalAccountSignalProviderWithRequestBuilder(body: MakeTradingAccountSignalProvider? = nil) -> RequestBuilder<Void> {
         let path = "/v2.0/assets/tradingaccounts/external/fromaccount/create"
         let URLString = SwaggerClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: request)
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
     /**
      Create an investment program
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter request: (body)  (optional)
+     - parameter body: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func makeSignalProviderProgram(authorization: String, request: MakeSignalProviderProgram? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        makeSignalProviderProgramWithRequestBuilder(authorization: authorization, request: request).execute { (response, error) -> Void in
-            completion(error);
+    open class func makeSignalProviderProgram(body: MakeSignalProviderProgram? = nil, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        makeSignalProviderProgramWithRequestBuilder(body: body).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
         }
     }
 
@@ -762,40 +724,37 @@ open class AssetsAPI {
     /**
      Create an investment program
      - POST /v2.0/assets/programs/fromsignalprovider/create
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter request: (body)  (optional)
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter body: (body)  (optional)
 
      - returns: RequestBuilder<Void> 
      */
-    open class func makeSignalProviderProgramWithRequestBuilder(authorization: String, request: MakeSignalProviderProgram? = nil) -> RequestBuilder<Void> {
+    open class func makeSignalProviderProgramWithRequestBuilder(body: MakeSignalProviderProgram? = nil) -> RequestBuilder<Void> {
         let path = "/v2.0/assets/programs/fromsignalprovider/create"
         let URLString = SwaggerClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: request)
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
     /**
      Update investment program/fund details
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
+     - parameter _id: (path)       - parameter body: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func updateAsset(id: UUID, authorization: String, model: ProgramUpdate? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        updateAssetWithRequestBuilder(id: id, authorization: authorization, model: model).execute { (response, error) -> Void in
-            completion(error);
+    open class func updateAsset(_id: UUID, body: ProgramUpdate? = nil, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        updateAssetWithRequestBuilder(_id: _id, body: body).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
         }
     }
 
@@ -803,42 +762,40 @@ open class AssetsAPI {
     /**
      Update investment program/fund details
      - POST /v2.0/assets/follow/{id}/update
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter _id: (path)       - parameter body: (body)  (optional)
 
      - returns: RequestBuilder<Void> 
      */
-    open class func updateAssetWithRequestBuilder(id: UUID, authorization: String, model: ProgramUpdate? = nil) -> RequestBuilder<Void> {
+    open class func updateAssetWithRequestBuilder(_id: UUID, body: ProgramUpdate? = nil) -> RequestBuilder<Void> {
         var path = "/v2.0/assets/follow/{id}/update"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
     /**
      Update investment program/fund details
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
+     - parameter _id: (path)       - parameter body: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func updateAsset_0(id: UUID, authorization: String, model: ProgramUpdate? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        updateAsset_0WithRequestBuilder(id: id, authorization: authorization, model: model).execute { (response, error) -> Void in
-            completion(error);
+    open class func updateAsset_0(_id: UUID, body: ProgramUpdate? = nil, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        updateAsset_0WithRequestBuilder(_id: _id, body: body).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
         }
     }
 
@@ -846,42 +803,40 @@ open class AssetsAPI {
     /**
      Update investment program/fund details
      - POST /v2.0/assets/funds/{id}/update
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter _id: (path)       - parameter body: (body)  (optional)
 
      - returns: RequestBuilder<Void> 
      */
-    open class func updateAsset_0WithRequestBuilder(id: UUID, authorization: String, model: ProgramUpdate? = nil) -> RequestBuilder<Void> {
+    open class func updateAsset_0WithRequestBuilder(_id: UUID, body: ProgramUpdate? = nil) -> RequestBuilder<Void> {
         var path = "/v2.0/assets/funds/{id}/update"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
     /**
      Update investment program/fund details
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
+     - parameter _id: (path)       - parameter body: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func updateAsset_1(id: UUID, authorization: String, model: ProgramUpdate? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        updateAsset_1WithRequestBuilder(id: id, authorization: authorization, model: model).execute { (response, error) -> Void in
-            completion(error);
+    open class func updateAsset_1(_id: UUID, body: ProgramUpdate? = nil, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        updateAsset_1WithRequestBuilder(_id: _id, body: body).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
         }
     }
 
@@ -889,42 +844,40 @@ open class AssetsAPI {
     /**
      Update investment program/fund details
      - POST /v2.0/assets/programs/{id}/update
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter _id: (path)       - parameter body: (body)  (optional)
 
      - returns: RequestBuilder<Void> 
      */
-    open class func updateAsset_1WithRequestBuilder(id: UUID, authorization: String, model: ProgramUpdate? = nil) -> RequestBuilder<Void> {
+    open class func updateAsset_1WithRequestBuilder(_id: UUID, body: ProgramUpdate? = nil) -> RequestBuilder<Void> {
         var path = "/v2.0/assets/programs/{id}/update"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
     /**
      Update fund assets parts
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter assets: (body)  (optional)
+     - parameter _id: (path)       - parameter body: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func updateFundAssets(id: UUID, authorization: String, assets: [FundAssetPart]? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        updateFundAssetsWithRequestBuilder(id: id, authorization: authorization, assets: assets).execute { (response, error) -> Void in
-            completion(error);
+    open class func updateFundAssets(_id: UUID, body: [FundAssetPart]? = nil, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        updateFundAssetsWithRequestBuilder(_id: _id, body: body).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
         }
     }
 
@@ -932,41 +885,40 @@ open class AssetsAPI {
     /**
      Update fund assets parts
      - POST /v2.0/assets/funds/{id}/assets/update
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter assets: (body)  (optional)
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter _id: (path)       - parameter body: (body)  (optional)
 
      - returns: RequestBuilder<Void> 
      */
-    open class func updateFundAssetsWithRequestBuilder(id: UUID, authorization: String, assets: [FundAssetPart]? = nil) -> RequestBuilder<Void> {
+    open class func updateFundAssetsWithRequestBuilder(_id: UUID, body: [FundAssetPart]? = nil) -> RequestBuilder<Void> {
         var path = "/v2.0/assets/funds/{id}/assets/update"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: assets)
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
     /**
      Edit account signal settings
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter request: (body)  (optional)
+     - parameter body: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func updateSignalProviderSettings(authorization: String, request: CreateSignalProvider? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        updateSignalProviderSettingsWithRequestBuilder(authorization: authorization, request: request).execute { (response, error) -> Void in
-            completion(error);
+    open class func updateSignalProviderSettings(body: CreateSignalProvider? = nil, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        updateSignalProviderSettingsWithRequestBuilder(body: body).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
         }
     }
 
@@ -974,27 +926,23 @@ open class AssetsAPI {
     /**
      Edit account signal settings
      - POST /v2.0/assets/signal/edit
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter request: (body)  (optional)
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter body: (body)  (optional)
 
      - returns: RequestBuilder<Void> 
      */
-    open class func updateSignalProviderSettingsWithRequestBuilder(authorization: String, request: CreateSignalProvider? = nil) -> RequestBuilder<Void> {
+    open class func updateSignalProviderSettingsWithRequestBuilder(body: CreateSignalProvider? = nil) -> RequestBuilder<Void> {
         let path = "/v2.0/assets/signal/edit"
         let URLString = SwaggerClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: request)
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
 }

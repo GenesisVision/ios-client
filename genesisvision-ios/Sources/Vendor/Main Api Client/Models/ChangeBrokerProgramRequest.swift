@@ -8,37 +8,15 @@
 import Foundation
 
 
+public struct ChangeBrokerProgramRequest: Codable {
 
-open class ChangeBrokerProgramRequest: Codable {
 
     public var newBrokerAccountTypeId: UUID?
+
     public var newLeverage: Int?
-
-
-    
-    public init(newBrokerAccountTypeId: UUID?, newLeverage: Int?) {
+    public init(newBrokerAccountTypeId: UUID? = nil, newLeverage: Int? = nil) { 
         self.newBrokerAccountTypeId = newBrokerAccountTypeId
         self.newLeverage = newLeverage
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(newBrokerAccountTypeId, forKey: "newBrokerAccountTypeId")
-        try container.encodeIfPresent(newLeverage, forKey: "newLeverage")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        newBrokerAccountTypeId = try container.decodeIfPresent(UUID.self, forKey: "newBrokerAccountTypeId")
-        newLeverage = try container.decodeIfPresent(Int.self, forKey: "newLeverage")
-    }
 }
-

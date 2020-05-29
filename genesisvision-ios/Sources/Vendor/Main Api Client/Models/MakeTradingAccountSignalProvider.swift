@@ -8,53 +8,35 @@
 import Foundation
 
 
+public struct MakeTradingAccountSignalProvider: Codable {
 
-open class MakeTradingAccountSignalProvider: Codable {
 
-    public var id: UUID?
+    public var _id: UUID?
+
     public var volumeFee: Double?
+
     public var successFee: Double?
+
     public var title: String?
-    public var description: String?
+
+    public var _description: String?
+
     public var logo: String?
-
-
-    
-    public init(id: UUID?, volumeFee: Double?, successFee: Double?, title: String?, description: String?, logo: String?) {
-        self.id = id
+    public init(_id: UUID? = nil, volumeFee: Double? = nil, successFee: Double? = nil, title: String? = nil, _description: String? = nil, logo: String? = nil) { 
+        self._id = _id
         self.volumeFee = volumeFee
         self.successFee = successFee
         self.title = title
-        self.description = description
+        self._description = _description
         self.logo = logo
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(id, forKey: "id")
-        try container.encodeIfPresent(volumeFee, forKey: "volumeFee")
-        try container.encodeIfPresent(successFee, forKey: "successFee")
-        try container.encodeIfPresent(title, forKey: "title")
-        try container.encodeIfPresent(description, forKey: "description")
-        try container.encodeIfPresent(logo, forKey: "logo")
+    public enum CodingKeys: String, CodingKey { 
+        case _id = "id"
+        case volumeFee
+        case successFee
+        case title
+        case _description = "description"
+        case logo
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        id = try container.decodeIfPresent(UUID.self, forKey: "id")
-        volumeFee = try container.decodeIfPresent(Double.self, forKey: "volumeFee")
-        successFee = try container.decodeIfPresent(Double.self, forKey: "successFee")
-        title = try container.decodeIfPresent(String.self, forKey: "title")
-        description = try container.decodeIfPresent(String.self, forKey: "description")
-        logo = try container.decodeIfPresent(String.self, forKey: "logo")
-    }
 }
-

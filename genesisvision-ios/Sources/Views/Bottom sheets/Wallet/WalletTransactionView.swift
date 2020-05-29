@@ -69,7 +69,7 @@ class WalletTransactionView: UIView {
     // MARK: - Public Methods
     func configure(_ model: TransactionViewModel) {
         self.scrollView.contentInset.bottom = 40.0
-        self.uuid = model.id
+        self.uuid = model._id
         self.transactionDetails = model
         
         setup(model)
@@ -103,7 +103,7 @@ class WalletTransactionView: UIView {
     }
     
     @IBAction func openAssetAction(_ sender: UIButton) {
-        if let assetId = transactionDetails?.asset?.id?.uuidString, let assetType = transactionDetails?.asset?.assetType {
+        if let assetId = transactionDetails?.asset?._id?.uuidString, let assetType = transactionDetails?.asset?.assetType {
             delegate?.openAssetDidPress(assetId, assetType: assetType)
         }
     }
@@ -123,14 +123,14 @@ extension WalletTransactionView {
         
         if let asset = model.asset {
             assetStackView.isHidden = false
-            if let description = asset.description {
+            if let description = asset._description {
                 assetStackView.headerLabel.text = description
             }
             assetStackView.assetLogoImageView?.profilePhotoImageView.image = UIImage.programPlaceholder
             if let color = asset.color {
                 assetStackView.assetLogoImageView?.profilePhotoImageView?.backgroundColor = UIColor.hexColor(color)
             }
-            if let logo = asset.logo, let fileUrl = getFileURL(fileName: logo) {
+            if let logo = asset.logoUrl, let fileUrl = getFileURL(fileName: logo) {
                 assetStackView.assetLogoImageView?.profilePhotoImageView.kf.indicatorType = .activity
                 assetStackView.assetLogoImageView?.profilePhotoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
                 assetStackView.assetLogoImageView?.profilePhotoImageView.backgroundColor = .clear
@@ -168,7 +168,7 @@ extension WalletTransactionView {
                     amountStackView.firstStackView.titleLabel.text = currency
                 }
                 
-                if let logo = amount.logo, let fileUrl = getFileURL(fileName: logo) {
+                if let logo = amount.logoUrl, let fileUrl = getFileURL(fileName: logo) {
                     amountStackView.firstStackView.iconImageView.kf.indicatorType = .activity
                     amountStackView.firstStackView.iconImageView.kf.setImage(with: fileUrl, placeholder: UIImage.walletPlaceholder)
                     amountStackView.firstStackView.iconImageView.backgroundColor = .clear
@@ -185,7 +185,7 @@ extension WalletTransactionView {
                     amountStackView.secondStackView.titleLabel.text = currency
                 }
                 
-                if let logo = amount.logo, let fileUrl = getFileURL(fileName: logo) {
+                if let logo = amount.logoUrl, let fileUrl = getFileURL(fileName: logo) {
                     amountStackView.secondStackView.iconImageView.kf.indicatorType = .activity
                     amountStackView.secondStackView.iconImageView.kf.setImage(with: fileUrl, placeholder: UIImage.walletPlaceholder)
                     amountStackView.secondStackView.iconImageView.backgroundColor = .clear

@@ -100,7 +100,7 @@ final class WalletTransferViewModel {
     
     // MARK: - Navigation
     func transfer(with amount: Double, completion: @escaping CompletionBlock) {
-        guard let sourceId = selectedWalletFromDelegateManager?.selected?.id, let destinationId = selectedWalletToDelegateManager?.selected?.id else { return }
+        guard let sourceId = selectedWalletFromDelegateManager?.selected?._id, let destinationId = selectedWalletToDelegateManager?.selected?._id else { return }
         
         WalletDataProvider.transfer(sourceId: sourceId, destinationId: destinationId, amount: amount, completion: completion)
     }

@@ -7,11 +7,9 @@
 
 import Foundation
 
-
 public enum ErrorCodes: String, Codable {
     case internalServerError = "InternalServerError"
     case validationError = "ValidationError"
     case requiresTwoFactor = "RequiresTwoFactor"
     case wrongCaptcha = "WrongCaptcha"
-
 }

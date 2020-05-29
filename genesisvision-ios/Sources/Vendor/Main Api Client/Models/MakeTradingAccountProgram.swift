@@ -8,24 +8,30 @@
 import Foundation
 
 
+public struct MakeTradingAccountProgram: Codable {
 
-open class MakeTradingAccountProgram: Codable {
 
-    public var id: UUID?
+    public var _id: UUID?
+
     public var periodLength: Int?
+
     public var stopOutLevel: Double?
+
     public var investmentLimit: Double?
+
     public var tradesDelay: TradesDelay?
+
     public var entryFee: Double?
+
     public var successFee: Double?
+
     public var title: String?
-    public var description: String?
+
+    public var _description: String?
+
     public var logo: String?
-
-
-    
-    public init(id: UUID?, periodLength: Int?, stopOutLevel: Double?, investmentLimit: Double?, tradesDelay: TradesDelay?, entryFee: Double?, successFee: Double?, title: String?, description: String?, logo: String?) {
-        self.id = id
+    public init(_id: UUID? = nil, periodLength: Int? = nil, stopOutLevel: Double? = nil, investmentLimit: Double? = nil, tradesDelay: TradesDelay? = nil, entryFee: Double? = nil, successFee: Double? = nil, title: String? = nil, _description: String? = nil, logo: String? = nil) { 
+        self._id = _id
         self.periodLength = periodLength
         self.stopOutLevel = stopOutLevel
         self.investmentLimit = investmentLimit
@@ -33,44 +39,20 @@ open class MakeTradingAccountProgram: Codable {
         self.entryFee = entryFee
         self.successFee = successFee
         self.title = title
-        self.description = description
+        self._description = _description
         self.logo = logo
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(id, forKey: "id")
-        try container.encodeIfPresent(periodLength, forKey: "periodLength")
-        try container.encodeIfPresent(stopOutLevel, forKey: "stopOutLevel")
-        try container.encodeIfPresent(investmentLimit, forKey: "investmentLimit")
-        try container.encodeIfPresent(tradesDelay, forKey: "tradesDelay")
-        try container.encodeIfPresent(entryFee, forKey: "entryFee")
-        try container.encodeIfPresent(successFee, forKey: "successFee")
-        try container.encodeIfPresent(title, forKey: "title")
-        try container.encodeIfPresent(description, forKey: "description")
-        try container.encodeIfPresent(logo, forKey: "logo")
+    public enum CodingKeys: String, CodingKey { 
+        case _id = "id"
+        case periodLength
+        case stopOutLevel
+        case investmentLimit
+        case tradesDelay
+        case entryFee
+        case successFee
+        case title
+        case _description = "description"
+        case logo
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        id = try container.decodeIfPresent(UUID.self, forKey: "id")
-        periodLength = try container.decodeIfPresent(Int.self, forKey: "periodLength")
-        stopOutLevel = try container.decodeIfPresent(Double.self, forKey: "stopOutLevel")
-        investmentLimit = try container.decodeIfPresent(Double.self, forKey: "investmentLimit")
-        tradesDelay = try container.decodeIfPresent(TradesDelay.self, forKey: "tradesDelay")
-        entryFee = try container.decodeIfPresent(Double.self, forKey: "entryFee")
-        successFee = try container.decodeIfPresent(Double.self, forKey: "successFee")
-        title = try container.decodeIfPresent(String.self, forKey: "title")
-        description = try container.decodeIfPresent(String.self, forKey: "description")
-        logo = try container.decodeIfPresent(String.self, forKey: "logo")
-    }
 }
-

@@ -41,7 +41,7 @@ class BrokerDetailsView: UIView {
             topStackView.titleLabel.text = title
         }
         
-        if let about = self.model?.description {
+        if let about = self.model?._description {
             stackView.aboutStackView.subtitleLabel.text = "About"
             stackView.aboutStackView.titleLabel.text = about
         }

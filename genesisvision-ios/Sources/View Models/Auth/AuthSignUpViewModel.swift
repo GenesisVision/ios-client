@@ -48,11 +48,11 @@ final class AuthSignUpViewModel {
             
             switch captchaType {
             case .pow:
-                guard let powId = model.id?.uuidString, let pow = model.pow, let nonce = pow.nonce, let difficulty = pow.difficulty else { return completion(.failure(errorType: .apiError(message: nil))) }
+                guard let powId = model._id?.uuidString, let pow = model.pow, let nonce = pow.nonce, let difficulty = pow.difficulty else { return completion(.failure(errorType: .apiError(message: nil))) }
                 
                 captcha_hash(email, nonce: nonce, difficulty: difficulty, completion: { (result) in
                     let powResult = PowResult(_prefix: result)
-                    let captchaCheckResult = CaptchaCheckResult(id: powId.lowercased(), pow: powResult, geeTest: nil)
+                    let captchaCheckResult = CaptchaCheckResult(_id: powId.lowercased(), pow: powResult, geeTest: nil)
                     self?.signUp(username: username, email: email, password: password, confirmPassword: confirmPassword, captchaCheckResult: captchaCheckResult, completion: completion)
                 })
             default:

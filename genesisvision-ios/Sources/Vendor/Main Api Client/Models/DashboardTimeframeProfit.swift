@@ -8,37 +8,15 @@
 import Foundation
 
 
+public struct DashboardTimeframeProfit: Codable {
 
-open class DashboardTimeframeProfit: Codable {
 
     public var profit: Double?
+
     public var profitPercent: Double?
-
-
-    
-    public init(profit: Double?, profitPercent: Double?) {
+    public init(profit: Double? = nil, profitPercent: Double? = nil) { 
         self.profit = profit
         self.profitPercent = profitPercent
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(profit, forKey: "profit")
-        try container.encodeIfPresent(profitPercent, forKey: "profitPercent")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        profit = try container.decodeIfPresent(Double.self, forKey: "profit")
-        profitPercent = try container.decodeIfPresent(Double.self, forKey: "profitPercent")
-    }
 }
-

@@ -18,13 +18,13 @@ class InvestingFundsViewModel: CellViewModelWithCollection {
     var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
         return []
     }
-    var details: ItemsViewModelFundInvestingDetailsList?
+    var details: FundInvestingDetailsListItemsViewModel?
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [AssetCollectionViewCellViewModel.self]
     }
     
     weak var delegate: BaseTableViewProtocol?
-    init(_ details: ItemsViewModelFundInvestingDetailsList?, delegate: BaseTableViewProtocol?) {
+    init(_ details: FundInvestingDetailsListItemsViewModel?, delegate: BaseTableViewProtocol?) {
         self.details = details
         self.delegate = delegate
         title = "Funds"

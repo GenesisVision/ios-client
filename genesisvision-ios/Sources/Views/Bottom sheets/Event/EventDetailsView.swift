@@ -59,7 +59,7 @@ class EventDetailsView: UIView {
         topStackView.titleLabel.text = event.title
         topStackView.subtitleLabel.text = event.date?.dateAndTimeFormatString
 
-        if let logo = event.icon, let fileUrl = getFileURL(fileName: logo) {
+        if let logo = event.logoUrl, let fileUrl = getFileURL(fileName: logo) {
             topStackView.iconImageView.kf.indicatorType = .activity
             topStackView.iconImageView.kf.setImage(with: fileUrl, placeholder: UIImage.eventPlaceholder)
             topStackView.iconImageView.backgroundColor = .clear
@@ -80,7 +80,7 @@ class EventDetailsView: UIView {
             if let color = details.color {
                 assetStackView.assetLogoImageView?.profilePhotoImageView?.backgroundColor = UIColor.hexColor(color)
             }
-            if let logo = details.logo, let fileUrl = getFileURL(fileName: logo) {
+            if let logo = details.logoUrl, let fileUrl = getFileURL(fileName: logo) {
                 assetStackView.assetLogoImageView?.profilePhotoImageView.kf.indicatorType = .activity
                 assetStackView.assetLogoImageView?.profilePhotoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
                 assetStackView.assetLogoImageView?.profilePhotoImageView.backgroundColor = .clear
@@ -154,7 +154,7 @@ class EventDetailsView: UIView {
     }
     
     @IBAction func showAssetButtonAction(_ sender: UIButton) {
-        guard let assetId = event?.assetDetails?.id?.uuidString, let type = event?.assetDetails?.assetType else { return }
+        guard let assetId = event?.assetDetails?._id?.uuidString, let type = event?.assetDetails?.assetType else { return }
         var assetType: AssetType = .program
         switch type {
         case .fund:

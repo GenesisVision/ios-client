@@ -8,33 +8,12 @@
 import Foundation
 
 
+public struct ProgramsLevelsInfo: Codable {
 
-open class ProgramsLevelsInfo: Codable {
 
     public var levels: [LevelInfo]?
-
-
-    
-    public init(levels: [LevelInfo]?) {
+    public init(levels: [LevelInfo]? = nil) { 
         self.levels = levels
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(levels, forKey: "levels")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        levels = try container.decodeIfPresent([LevelInfo].self, forKey: "levels")
-    }
 }
-

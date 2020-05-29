@@ -43,6 +43,6 @@ class NotificationsSettingsGeneralTableViewCell: UITableViewCell {
     
     // MARK: - Actions
     @IBAction func changeSwitchAction(_ sender: UISwitch) {
-        sender.isOn ? settingsProtocol?.didAdd(type: setting?.type) : settingsProtocol?.didRemove(settingId: setting?.id?.uuidString)
+        sender.isOn ? settingsProtocol?.didAdd(type: setting?.type) : settingsProtocol?.didRemove(settingId: setting?._id?.uuidString)
     }
 }

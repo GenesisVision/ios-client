@@ -95,7 +95,7 @@ class MakeProgramViewController: BaseModalViewController {
             viewModel.request.title = title
         }
         if let description = stackView.descriptionView.textView.text {
-            viewModel.request.description = description
+            viewModel.request._description = description
         }
         if let entryFee = stackView.entryFeeView.textField.text?.doubleValue {
             viewModel.request.entryFee = entryFee
@@ -275,7 +275,7 @@ class MakeProgramViewModel {
     private let errorCompletion: ((CompletionResult) -> Void) = { (result) in
        print(result)
     }
-    var request = MakeTradingAccountProgram(id: nil, periodLength: nil, stopOutLevel: nil, investmentLimit: nil, tradesDelay: nil, entryFee: nil, successFee: nil, title: nil, description: nil, logo: nil)
+    var request = MakeTradingAccountProgram(_id: nil, periodLength: nil, stopOutLevel: nil, investmentLimit: nil, tradesDelay: nil, entryFee: nil, successFee: nil, title: nil,_description: nil, logo: nil)
     
     weak var delegate: BaseTableViewProtocol?
     init(_ delegate: BaseTableViewProtocol?) {
@@ -334,11 +334,11 @@ class MakeProgramViewModel {
     }
     // MARK: - Public methods
     func saveProfilePhoto(completion: @escaping CompletionBlock) {
-        guard let pickedImageURL = pickedImageURL else {
-            return completion(.failure(errorType: .apiError(message: nil)))
-        }
-        BaseDataProvider.uploadImage(imageURL: pickedImageURL, completion: { [weak self] (uploadResult) in
-            guard let uploadResult = uploadResult, let uuidString = uploadResult.id?.uuidString else { return completion(.failure(errorType: .apiError(message: nil))) }
+        
+        guard let pickedImage = pickedImage?.pngData() else { return completion(.failure(errorType: .apiError(message: nil))) }
+        
+        BaseDataProvider.uploadImage(imageData: pickedImage, completion: { [weak self] (uploadResult) in
+            guard let uploadResult = uploadResult, let uuidString = uploadResult._id?.uuidString else { return completion(.failure(errorType: .apiError(message: nil))) }
             
             self?.uploadedUuidString = uuidString
             completion(.success)

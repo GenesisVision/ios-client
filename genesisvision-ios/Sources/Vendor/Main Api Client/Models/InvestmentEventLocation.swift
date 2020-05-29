@@ -7,10 +7,8 @@
 
 import Foundation
 
-
 public enum InvestmentEventLocation: String, Codable {
     case asset = "Asset"
     case dashboard = "Dashboard"
     case eventsAll = "EventsAll"
-
 }

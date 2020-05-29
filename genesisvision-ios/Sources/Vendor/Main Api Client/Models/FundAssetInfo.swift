@@ -8,53 +8,27 @@
 import Foundation
 
 
+public struct FundAssetInfo: Codable {
 
-open class FundAssetInfo: Codable {
 
     public var asset: String?
+
     public var symbol: String?
-    public var icon: String?
+
+    public var logoUrl: String?
+
     public var target: Double?
+
     public var current: Double?
+
     public var url: String?
-
-
-    
-    public init(asset: String?, symbol: String?, icon: String?, target: Double?, current: Double?, url: String?) {
+    public init(asset: String? = nil, symbol: String? = nil, logoUrl: String? = nil, target: Double? = nil, current: Double? = nil, url: String? = nil) { 
         self.asset = asset
         self.symbol = symbol
-        self.icon = icon
+        self.logoUrl = logoUrl
         self.target = target
         self.current = current
         self.url = url
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(asset, forKey: "asset")
-        try container.encodeIfPresent(symbol, forKey: "symbol")
-        try container.encodeIfPresent(icon, forKey: "icon")
-        try container.encodeIfPresent(target, forKey: "target")
-        try container.encodeIfPresent(current, forKey: "current")
-        try container.encodeIfPresent(url, forKey: "url")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        asset = try container.decodeIfPresent(String.self, forKey: "asset")
-        symbol = try container.decodeIfPresent(String.self, forKey: "symbol")
-        icon = try container.decodeIfPresent(String.self, forKey: "icon")
-        target = try container.decodeIfPresent(Double.self, forKey: "target")
-        current = try container.decodeIfPresent(Double.self, forKey: "current")
-        url = try container.decodeIfPresent(String.self, forKey: "url")
-    }
 }
-

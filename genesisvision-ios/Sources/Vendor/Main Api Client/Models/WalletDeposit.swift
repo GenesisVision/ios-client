@@ -8,37 +8,15 @@
 import Foundation
 
 
+public struct WalletDeposit: Codable {
 
-open class WalletDeposit: Codable {
 
     public var currency: Currency?
+
     public var depositAddress: String?
-
-
-    
-    public init(currency: Currency?, depositAddress: String?) {
+    public init(currency: Currency? = nil, depositAddress: String? = nil) { 
         self.currency = currency
         self.depositAddress = depositAddress
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(currency, forKey: "currency")
-        try container.encodeIfPresent(depositAddress, forKey: "depositAddress")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
-        depositAddress = try container.decodeIfPresent(String.self, forKey: "depositAddress")
-    }
 }
-

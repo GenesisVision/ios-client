@@ -16,7 +16,7 @@ class InvestingRequestsViewModel: CellViewModelWithCollection {
     
     var viewModels = [CellViewAnyModel]()
     var canPullToRefresh: Bool = false
-    var details: ItemsViewModelAssetInvestmentRequest?
+    var details: AssetInvestmentRequestItemsViewModel?
     var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
         return []
     }
@@ -26,7 +26,7 @@ class InvestingRequestsViewModel: CellViewModelWithCollection {
     }
     
     weak var delegate: BaseTableViewProtocol?
-    init(_ details: ItemsViewModelAssetInvestmentRequest?, delegate: BaseTableViewProtocol?) {
+    init(_ details: AssetInvestmentRequestItemsViewModel?, delegate: BaseTableViewProtocol?) {
         self.details = details
         self.delegate = delegate
         title = "Requests"

@@ -16,7 +16,7 @@ extension WalletTableViewCellViewModel: CellViewModel {
     func setup(on cell: WalletTableViewCell) {
         cell.iconImageView.image = UIImage.walletPlaceholder
         
-        if let logo = wallet.logo, let fileUrl = getFileURL(fileName: logo) {
+        if let logo = wallet.logoUrl, let fileUrl = getFileURL(fileName: logo) {
             cell.iconImageView.kf.indicatorType = .activity
             cell.iconImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
             cell.iconImageView.backgroundColor = .clear

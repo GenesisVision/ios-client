@@ -8,41 +8,61 @@
 import Foundation
 
 
+public struct ProgramDetailsListItem: Codable {
 
-open class ProgramDetailsListItem: Codable {
 
-    public var id: UUID?
-    public var logo: String?
+    public var _id: UUID?
+
+    public var logoUrl: String?
+
     public var url: String?
-    public var description: String?
+
+    public var _description: String?
+
     public var color: String?
+
     public var title: String?
+
     public var creationDate: Date?
+
     public var currency: Currency?
+
     public var level: Int?
+
     public var levelProgress: Double?
+
     public var periodDuration: Int?
+
     public var availableToInvest: Double?
+
     public var investorsCount: Int?
+
     public var periodStarts: Date?
+
     public var periodEnds: Date?
+
     public var status: String?
+
     public var entryFeeSelected: Double?
+
     public var entryFeeCurrent: Double?
+
     public var brokerId: UUID?
+
     public var owner: ProfilePublicShort?
+
     public var personalDetails: PersonalProgramDetailsList?
+
     public var tags: [Tag]?
+
     public var statistic: ProfitChart?
+
     public var balance: AmountWithCurrency?
-
-
-    
-    public init(id: UUID?, logo: String?, url: String?, description: String?, color: String?, title: String?, creationDate: Date?, currency: Currency?, level: Int?, levelProgress: Double?, periodDuration: Int?, availableToInvest: Double?, investorsCount: Int?, periodStarts: Date?, periodEnds: Date?, status: String?, entryFeeSelected: Double?, entryFeeCurrent: Double?, brokerId: UUID?, owner: ProfilePublicShort?, personalDetails: PersonalProgramDetailsList?, tags: [Tag]?, statistic: ProfitChart?, balance: AmountWithCurrency?) {
-        self.id = id
-        self.logo = logo
+    public init(_id: UUID? = nil, logoUrl: String? = nil, url: String? = nil, _description: String? = nil, color: String? = nil, title: String? = nil, creationDate: Date? = nil, currency: Currency? = nil, level: Int? = nil, levelProgress: Double? = nil, periodDuration: Int? = nil, availableToInvest: Double? = nil, investorsCount: Int? = nil, periodStarts: Date? = nil, periodEnds: Date? = nil, status: String? = nil, entryFeeSelected: Double? = nil, entryFeeCurrent: Double? = nil, brokerId: UUID? = nil, owner: ProfilePublicShort? = nil, personalDetails: PersonalProgramDetailsList? = nil, tags: [Tag]? = nil, statistic: ProfitChart? = nil, balance: AmountWithCurrency? = nil) { 
+        self._id = _id
+        self.logoUrl = logoUrl
         self.url = url
-        self.description = description
+        self._description = _description
         self.color = color
         self.title = title
         self.creationDate = creationDate
@@ -64,69 +84,31 @@ open class ProgramDetailsListItem: Codable {
         self.statistic = statistic
         self.balance = balance
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(id, forKey: "id")
-        try container.encodeIfPresent(logo, forKey: "logo")
-        try container.encodeIfPresent(url, forKey: "url")
-        try container.encodeIfPresent(description, forKey: "description")
-        try container.encodeIfPresent(color, forKey: "color")
-        try container.encodeIfPresent(title, forKey: "title")
-        try container.encodeIfPresent(creationDate, forKey: "creationDate")
-        try container.encodeIfPresent(currency, forKey: "currency")
-        try container.encodeIfPresent(level, forKey: "level")
-        try container.encodeIfPresent(levelProgress, forKey: "levelProgress")
-        try container.encodeIfPresent(periodDuration, forKey: "periodDuration")
-        try container.encodeIfPresent(availableToInvest, forKey: "availableToInvest")
-        try container.encodeIfPresent(investorsCount, forKey: "investorsCount")
-        try container.encodeIfPresent(periodStarts, forKey: "periodStarts")
-        try container.encodeIfPresent(periodEnds, forKey: "periodEnds")
-        try container.encodeIfPresent(status, forKey: "status")
-        try container.encodeIfPresent(entryFeeSelected, forKey: "entryFeeSelected")
-        try container.encodeIfPresent(entryFeeCurrent, forKey: "entryFeeCurrent")
-        try container.encodeIfPresent(brokerId, forKey: "brokerId")
-        try container.encodeIfPresent(owner, forKey: "owner")
-        try container.encodeIfPresent(personalDetails, forKey: "personalDetails")
-        try container.encodeIfPresent(tags, forKey: "tags")
-        try container.encodeIfPresent(statistic, forKey: "statistic")
-        try container.encodeIfPresent(balance, forKey: "balance")
+    public enum CodingKeys: String, CodingKey { 
+        case _id = "id"
+        case logoUrl
+        case url
+        case _description = "description"
+        case color
+        case title
+        case creationDate
+        case currency
+        case level
+        case levelProgress
+        case periodDuration
+        case availableToInvest
+        case investorsCount
+        case periodStarts
+        case periodEnds
+        case status
+        case entryFeeSelected
+        case entryFeeCurrent
+        case brokerId
+        case owner
+        case personalDetails
+        case tags
+        case statistic
+        case balance
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        id = try container.decodeIfPresent(UUID.self, forKey: "id")
-        logo = try container.decodeIfPresent(String.self, forKey: "logo")
-        url = try container.decodeIfPresent(String.self, forKey: "url")
-        description = try container.decodeIfPresent(String.self, forKey: "description")
-        color = try container.decodeIfPresent(String.self, forKey: "color")
-        title = try container.decodeIfPresent(String.self, forKey: "title")
-        creationDate = try container.decodeIfPresent(Date.self, forKey: "creationDate")
-        currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
-        level = try container.decodeIfPresent(Int.self, forKey: "level")
-        levelProgress = try container.decodeIfPresent(Double.self, forKey: "levelProgress")
-        periodDuration = try container.decodeIfPresent(Int.self, forKey: "periodDuration")
-        availableToInvest = try container.decodeIfPresent(Double.self, forKey: "availableToInvest")
-        investorsCount = try container.decodeIfPresent(Int.self, forKey: "investorsCount")
-        periodStarts = try container.decodeIfPresent(Date.self, forKey: "periodStarts")
-        periodEnds = try container.decodeIfPresent(Date.self, forKey: "periodEnds")
-        status = try container.decodeIfPresent(String.self, forKey: "status")
-        entryFeeSelected = try container.decodeIfPresent(Double.self, forKey: "entryFeeSelected")
-        entryFeeCurrent = try container.decodeIfPresent(Double.self, forKey: "entryFeeCurrent")
-        brokerId = try container.decodeIfPresent(UUID.self, forKey: "brokerId")
-        owner = try container.decodeIfPresent(ProfilePublicShort.self, forKey: "owner")
-        personalDetails = try container.decodeIfPresent(PersonalProgramDetailsList.self, forKey: "personalDetails")
-        tags = try container.decodeIfPresent([Tag].self, forKey: "tags")
-        statistic = try container.decodeIfPresent(ProfitChart.self, forKey: "statistic")
-        balance = try container.decodeIfPresent(AmountWithCurrency.self, forKey: "balance")
-    }
 }
-

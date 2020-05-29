@@ -7,11 +7,9 @@
 
 import Foundation
 
-
 public enum MultiWalletTransactionStatus: String, Codable {
     case done = "Done"
     case pending = "Pending"
     case canceled = "Canceled"
     case error = "Error"
-
 }

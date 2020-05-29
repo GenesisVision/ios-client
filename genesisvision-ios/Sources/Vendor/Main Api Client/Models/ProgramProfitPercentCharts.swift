@@ -7,39 +7,16 @@
 
 import Foundation
 
-
 /** For programs and follows */
+public struct ProgramProfitPercentCharts: Codable {
 
-open class ProgramProfitPercentCharts: Codable {
 
     public var statistic: ProgramChartStatistic?
+
     public var charts: [SimpleChart]?
-
-
-    
-    public init(statistic: ProgramChartStatistic?, charts: [SimpleChart]?) {
+    public init(statistic: ProgramChartStatistic? = nil, charts: [SimpleChart]? = nil) { 
         self.statistic = statistic
         self.charts = charts
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(statistic, forKey: "statistic")
-        try container.encodeIfPresent(charts, forKey: "charts")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        statistic = try container.decodeIfPresent(ProgramChartStatistic.self, forKey: "statistic")
-        charts = try container.decodeIfPresent([SimpleChart].self, forKey: "charts")
-    }
 }
-

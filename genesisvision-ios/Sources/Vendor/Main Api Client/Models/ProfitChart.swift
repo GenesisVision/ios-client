@@ -8,41 +8,18 @@
 import Foundation
 
 
+public struct ProfitChart: Codable {
 
-open class ProfitChart: Codable {
 
     public var chart: [SimpleChartPoint]?
+
     public var profit: Double?
+
     public var drawdown: Double?
-
-
-    
-    public init(chart: [SimpleChartPoint]?, profit: Double?, drawdown: Double?) {
+    public init(chart: [SimpleChartPoint]? = nil, profit: Double? = nil, drawdown: Double? = nil) { 
         self.chart = chart
         self.profit = profit
         self.drawdown = drawdown
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(chart, forKey: "chart")
-        try container.encodeIfPresent(profit, forKey: "profit")
-        try container.encodeIfPresent(drawdown, forKey: "drawdown")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        chart = try container.decodeIfPresent([SimpleChartPoint].self, forKey: "chart")
-        profit = try container.decodeIfPresent(Double.self, forKey: "profit")
-        drawdown = try container.decodeIfPresent(Double.self, forKey: "drawdown")
-    }
 }
-

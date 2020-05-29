@@ -8,25 +8,33 @@
 import Foundation
 
 
+public struct UpdatePersonalDetailViewModel: Codable {
 
-open class UpdatePersonalDetailViewModel: Codable {
 
     public var firstName: String?
+
     public var middleName: String?
+
     public var lastName: String?
+
     public var birthday: Date?
+
     public var citizenship: String?
+
     public var gender: Bool?
+
     public var documentId: String?
+
     public var phoneNumber: String?
+
     public var country: String?
+
     public var city: String?
+
     public var address: String?
+
     public var index: String?
-
-
-    
-    public init(firstName: String?, middleName: String?, lastName: String?, birthday: Date?, citizenship: String?, gender: Bool?, documentId: String?, phoneNumber: String?, country: String?, city: String?, address: String?, index: String?) {
+    public init(firstName: String? = nil, middleName: String? = nil, lastName: String? = nil, birthday: Date? = nil, citizenship: String? = nil, gender: Bool? = nil, documentId: String? = nil, phoneNumber: String? = nil, country: String? = nil, city: String? = nil, address: String? = nil, index: String? = nil) { 
         self.firstName = firstName
         self.middleName = middleName
         self.lastName = lastName
@@ -40,45 +48,5 @@ open class UpdatePersonalDetailViewModel: Codable {
         self.address = address
         self.index = index
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(firstName, forKey: "firstName")
-        try container.encodeIfPresent(middleName, forKey: "middleName")
-        try container.encodeIfPresent(lastName, forKey: "lastName")
-        try container.encodeIfPresent(birthday, forKey: "birthday")
-        try container.encodeIfPresent(citizenship, forKey: "citizenship")
-        try container.encodeIfPresent(gender, forKey: "gender")
-        try container.encodeIfPresent(documentId, forKey: "documentId")
-        try container.encodeIfPresent(phoneNumber, forKey: "phoneNumber")
-        try container.encodeIfPresent(country, forKey: "country")
-        try container.encodeIfPresent(city, forKey: "city")
-        try container.encodeIfPresent(address, forKey: "address")
-        try container.encodeIfPresent(index, forKey: "index")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        firstName = try container.decodeIfPresent(String.self, forKey: "firstName")
-        middleName = try container.decodeIfPresent(String.self, forKey: "middleName")
-        lastName = try container.decodeIfPresent(String.self, forKey: "lastName")
-        birthday = try container.decodeIfPresent(Date.self, forKey: "birthday")
-        citizenship = try container.decodeIfPresent(String.self, forKey: "citizenship")
-        gender = try container.decodeIfPresent(Bool.self, forKey: "gender")
-        documentId = try container.decodeIfPresent(String.self, forKey: "documentId")
-        phoneNumber = try container.decodeIfPresent(String.self, forKey: "phoneNumber")
-        country = try container.decodeIfPresent(String.self, forKey: "country")
-        city = try container.decodeIfPresent(String.self, forKey: "city")
-        address = try container.decodeIfPresent(String.self, forKey: "address")
-        index = try container.decodeIfPresent(String.self, forKey: "index")
-    }
 }
-

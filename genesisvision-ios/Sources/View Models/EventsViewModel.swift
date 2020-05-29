@@ -46,7 +46,8 @@ class EventListViewModel: ListViewModelWithPaging {
         }
         var models = [EventTableViewCellViewModel]()
         
-        let assetType = EventsAPI.AssetType_getEvents(rawValue: self.assetType.rawValue)
+        let assetType = AssetFilterType(rawValue: self.assetType.rawValue)
+        
         EventsDataProvider.get(assetId, eventLocation: assetId == nil ? .eventsAll : .asset, from: from, to: to, eventType: .all, assetType: assetType, assetsIds: nil, forceFilterByIds: nil, eventGroup: .none, skip: skip, take: take(), completion: { [weak self] (model) in
             guard let model = model else { return }
             model.events?.forEach({ (event) in

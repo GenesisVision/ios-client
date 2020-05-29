@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum InternalTransferRequestType: String, Codable {
     case undefined = "Undefined"
     case wallet = "Wallet"
@@ -15,5 +14,4 @@ public enum InternalTransferRequestType: String, Codable {
     case privateTradingAccount = "PrivateTradingAccount"
     case signalTradingAccount = "SignalTradingAccount"
     case publicTradingAccount = "PublicTradingAccount"
-
 }

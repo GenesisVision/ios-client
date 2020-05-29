@@ -44,7 +44,7 @@ final class FacetsViewModel: ListViewModelProtocolWithFacets {
             filterModel.facetSorting = facetSorting
         }
         
-        if let uuid = facet.id?.uuidString {
+        if let uuid = facet._id?.uuidString {
             filterModel.facetId = uuid
         }
         
@@ -64,7 +64,7 @@ final class FacetsViewModel: ListViewModelProtocolWithFacets {
     func model(for indexPath: IndexPath) -> FacetCollectionViewCellViewModel? {
         let facet = facets?[indexPath.row]
 
-        let isFavoriteFacet = facet?.id == nil
+        let isFavoriteFacet = facet?._id == nil
         let model = FacetCollectionViewCellViewModel(facet: facet, isFavoriteFacet: isFavoriteFacet)
         return model
     }

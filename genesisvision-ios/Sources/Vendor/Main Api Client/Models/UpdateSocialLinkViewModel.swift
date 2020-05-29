@@ -8,37 +8,15 @@
 import Foundation
 
 
+public struct UpdateSocialLinkViewModel: Codable {
 
-open class UpdateSocialLinkViewModel: Codable {
 
     public var type: SocialLinkType?
+
     public var value: String?
-
-
-    
-    public init(type: SocialLinkType?, value: String?) {
+    public init(type: SocialLinkType? = nil, value: String? = nil) { 
         self.type = type
         self.value = value
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(type, forKey: "type")
-        try container.encodeIfPresent(value, forKey: "value")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        type = try container.decodeIfPresent(SocialLinkType.self, forKey: "type")
-        value = try container.decodeIfPresent(String.self, forKey: "value")
-    }
 }
-

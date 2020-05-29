@@ -14,14 +14,14 @@ class TradingPublicShortListViewModel: CellViewModelWithCollection {
     var title: String
     
     var viewModels = [CellViewAnyModel]()
-    var details: ItemsViewModelDashboardTradingAsset?
+    var details: DashboardTradingAssetItemsViewModel?
     
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [AssetCollectionViewCellViewModel.self]
     }
     var router: Router?
     weak var delegate: BaseTableViewProtocol?
-    init(_ details: ItemsViewModelDashboardTradingAsset?, delegate: BaseTableViewProtocol?, router: Router?) {
+    init(_ details: DashboardTradingAssetItemsViewModel?, delegate: BaseTableViewProtocol?, router: Router?) {
         self.delegate = delegate
         self.router = router
         self.details = details

@@ -321,7 +321,7 @@ extension DashboardTradingAcionsProtocol where Self: ListViewController {
     func makeProgram(_ asset: DashboardTradingAsset) {
         guard let vc = MakeProgramViewController.storyboardInstance(.dashboard) else { return }
         vc.title = "Make program"
-        vc.viewModel.request.id = asset.id
+        vc.viewModel.request._id = asset._id
         let nav = BaseNavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true, completion: nil)
@@ -329,7 +329,7 @@ extension DashboardTradingAcionsProtocol where Self: ListViewController {
     func makeSignal(_ asset: DashboardTradingAsset) {
         guard let vc = MakeSignalViewController.storyboardInstance(.dashboard) else { return }
         vc.title = "Make signal"
-        vc.viewModel.request.id = asset.id
+        vc.viewModel.request._id = asset._id
         let nav = BaseNavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true, completion: nil)
@@ -341,7 +341,7 @@ extension DashboardTradingAcionsProtocol where Self: ListViewController {
         //TODO:
     }
     func closePeriod(_ asset: DashboardTradingAsset) {
-        guard let assetId = asset.id?.uuidString else { return }
+        guard let assetId = asset._id?.uuidString else { return }
         let model = TradingAccountPwdUpdate(password: nil, twoFactorCode: nil)
         showProgressHUD()
         AssetsDataProvider.closeCurrentPeriod(assetId, model: model) { [weak self] (result) in

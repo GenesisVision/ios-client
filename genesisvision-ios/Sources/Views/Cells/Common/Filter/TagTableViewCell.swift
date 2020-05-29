@@ -53,7 +53,7 @@ class TagTableViewCell: UITableViewCell {
     }
     
     func configure(_ selected: Bool, asset: PlatformAsset? = nil) {
-        if let logo = asset?.icon, let fileUrl = getFileURL(fileName: logo) {
+        if let logo = asset?.logoUrl, let fileUrl = getFileURL(fileName: logo) {
             logoImageView.isHidden = false
             
             let placeholder = UIImage.fundPlaceholder

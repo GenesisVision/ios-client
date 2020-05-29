@@ -7,9 +7,7 @@
 
 import Foundation
 
-
 public enum InvestmentRequestType: String, Codable {
     case invest = "Invest"
     case withdrawal = "Withdrawal"
-
 }

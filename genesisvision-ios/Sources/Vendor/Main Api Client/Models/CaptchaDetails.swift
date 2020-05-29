@@ -8,49 +8,31 @@
 import Foundation
 
 
+public struct CaptchaDetails: Codable {
 
-open class CaptchaDetails: Codable {
 
     public var captchaType: CaptchaType?
-    public var id: UUID?
+
+    public var _id: UUID?
+
     public var route: String?
+
     public var pow: PowDetails?
+
     public var geeTest: GeeTestDetails?
-
-
-    
-    public init(captchaType: CaptchaType?, id: UUID?, route: String?, pow: PowDetails?, geeTest: GeeTestDetails?) {
+    public init(captchaType: CaptchaType? = nil, _id: UUID? = nil, route: String? = nil, pow: PowDetails? = nil, geeTest: GeeTestDetails? = nil) { 
         self.captchaType = captchaType
-        self.id = id
+        self._id = _id
         self.route = route
         self.pow = pow
         self.geeTest = geeTest
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(captchaType, forKey: "captchaType")
-        try container.encodeIfPresent(id, forKey: "id")
-        try container.encodeIfPresent(route, forKey: "route")
-        try container.encodeIfPresent(pow, forKey: "pow")
-        try container.encodeIfPresent(geeTest, forKey: "geeTest")
+    public enum CodingKeys: String, CodingKey { 
+        case captchaType
+        case _id = "id"
+        case route
+        case pow
+        case geeTest
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        captchaType = try container.decodeIfPresent(CaptchaType.self, forKey: "captchaType")
-        id = try container.decodeIfPresent(UUID.self, forKey: "id")
-        route = try container.decodeIfPresent(String.self, forKey: "route")
-        pow = try container.decodeIfPresent(PowDetails.self, forKey: "pow")
-        geeTest = try container.decodeIfPresent(GeeTestDetails.self, forKey: "geeTest")
-    }
 }
-

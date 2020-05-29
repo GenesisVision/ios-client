@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum BrokerTradeServerType: String, Codable {
     case undefined = "Undefined"
     case metaTrader4 = "MetaTrader4"
@@ -20,5 +19,4 @@ public enum BrokerTradeServerType: String, Codable {
     case huobi = "Huobi"
     case exante = "Exante"
     case binanceFollow = "BinanceFollow"
-
 }

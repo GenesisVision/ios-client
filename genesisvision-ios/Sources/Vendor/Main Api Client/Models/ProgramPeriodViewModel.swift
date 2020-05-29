@@ -8,35 +8,50 @@
 import Foundation
 
 
+public struct ProgramPeriodViewModel: Codable {
 
-open class ProgramPeriodViewModel: Codable {
 
     public var dateFrom: Date?
+
     public var dateTo: Date?
+
     public var periodLength: Double?
+
     public var status: PeriodStatus?
+
     public var number: Int?
+
     public var profit: Double?
+
+    public var profitPercent: Double?
+
     public var balance: Double?
+
     public var investors: Int?
+
     public var managerDeposit: Double?
+
     public var managerWithdraw: Double?
+
     public var managerCommissionRebate: Double?
+
     public var investorsDeposit: Double?
+
     public var investorsWithdraw: Double?
+
     public var investorsProfitWithdraw: Double?
+
     public var platformSuccessFee: Double?
+
     public var managerStatistic: ManagerFinancialStatistic?
-
-
-    
-    public init(dateFrom: Date?, dateTo: Date?, periodLength: Double?, status: PeriodStatus?, number: Int?, profit: Double?, balance: Double?, investors: Int?, managerDeposit: Double?, managerWithdraw: Double?, managerCommissionRebate: Double?, investorsDeposit: Double?, investorsWithdraw: Double?, investorsProfitWithdraw: Double?, platformSuccessFee: Double?, managerStatistic: ManagerFinancialStatistic?) {
+    public init(dateFrom: Date? = nil, dateTo: Date? = nil, periodLength: Double? = nil, status: PeriodStatus? = nil, number: Int? = nil, profit: Double? = nil, profitPercent: Double? = nil, balance: Double? = nil, investors: Int? = nil, managerDeposit: Double? = nil, managerWithdraw: Double? = nil, managerCommissionRebate: Double? = nil, investorsDeposit: Double? = nil, investorsWithdraw: Double? = nil, investorsProfitWithdraw: Double? = nil, platformSuccessFee: Double? = nil, managerStatistic: ManagerFinancialStatistic? = nil) { 
         self.dateFrom = dateFrom
         self.dateTo = dateTo
         self.periodLength = periodLength
         self.status = status
         self.number = number
         self.profit = profit
+        self.profitPercent = profitPercent
         self.balance = balance
         self.investors = investors
         self.managerDeposit = managerDeposit
@@ -48,53 +63,5 @@ open class ProgramPeriodViewModel: Codable {
         self.platformSuccessFee = platformSuccessFee
         self.managerStatistic = managerStatistic
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(dateFrom, forKey: "dateFrom")
-        try container.encodeIfPresent(dateTo, forKey: "dateTo")
-        try container.encodeIfPresent(periodLength, forKey: "periodLength")
-        try container.encodeIfPresent(status, forKey: "status")
-        try container.encodeIfPresent(number, forKey: "number")
-        try container.encodeIfPresent(profit, forKey: "profit")
-        try container.encodeIfPresent(balance, forKey: "balance")
-        try container.encodeIfPresent(investors, forKey: "investors")
-        try container.encodeIfPresent(managerDeposit, forKey: "managerDeposit")
-        try container.encodeIfPresent(managerWithdraw, forKey: "managerWithdraw")
-        try container.encodeIfPresent(managerCommissionRebate, forKey: "managerCommissionRebate")
-        try container.encodeIfPresent(investorsDeposit, forKey: "investorsDeposit")
-        try container.encodeIfPresent(investorsWithdraw, forKey: "investorsWithdraw")
-        try container.encodeIfPresent(investorsProfitWithdraw, forKey: "investorsProfitWithdraw")
-        try container.encodeIfPresent(platformSuccessFee, forKey: "platformSuccessFee")
-        try container.encodeIfPresent(managerStatistic, forKey: "managerStatistic")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        dateFrom = try container.decodeIfPresent(Date.self, forKey: "dateFrom")
-        dateTo = try container.decodeIfPresent(Date.self, forKey: "dateTo")
-        periodLength = try container.decodeIfPresent(Double.self, forKey: "periodLength")
-        status = try container.decodeIfPresent(PeriodStatus.self, forKey: "status")
-        number = try container.decodeIfPresent(Int.self, forKey: "number")
-        profit = try container.decodeIfPresent(Double.self, forKey: "profit")
-        balance = try container.decodeIfPresent(Double.self, forKey: "balance")
-        investors = try container.decodeIfPresent(Int.self, forKey: "investors")
-        managerDeposit = try container.decodeIfPresent(Double.self, forKey: "managerDeposit")
-        managerWithdraw = try container.decodeIfPresent(Double.self, forKey: "managerWithdraw")
-        managerCommissionRebate = try container.decodeIfPresent(Double.self, forKey: "managerCommissionRebate")
-        investorsDeposit = try container.decodeIfPresent(Double.self, forKey: "investorsDeposit")
-        investorsWithdraw = try container.decodeIfPresent(Double.self, forKey: "investorsWithdraw")
-        investorsProfitWithdraw = try container.decodeIfPresent(Double.self, forKey: "investorsProfitWithdraw")
-        platformSuccessFee = try container.decodeIfPresent(Double.self, forKey: "platformSuccessFee")
-        managerStatistic = try container.decodeIfPresent(ManagerFinancialStatistic.self, forKey: "managerStatistic")
-    }
 }
-

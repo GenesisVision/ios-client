@@ -8,41 +8,21 @@
 import Foundation
 
 
+public struct PersonalProgramDetailsList: Codable {
 
-open class PersonalProgramDetailsList: Codable {
 
     public var isOwnAsset: Bool?
+
     public var isFavorite: Bool?
+
     public var isReinvest: Bool?
 
-
-    
-    public init(isOwnAsset: Bool?, isFavorite: Bool?, isReinvest: Bool?) {
+    public var isAutoJoin: Bool?
+    public init(isOwnAsset: Bool? = nil, isFavorite: Bool? = nil, isReinvest: Bool? = nil, isAutoJoin: Bool? = nil) { 
         self.isOwnAsset = isOwnAsset
         self.isFavorite = isFavorite
         self.isReinvest = isReinvest
-    }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(isOwnAsset, forKey: "isOwnAsset")
-        try container.encodeIfPresent(isFavorite, forKey: "isFavorite")
-        try container.encodeIfPresent(isReinvest, forKey: "isReinvest")
+        self.isAutoJoin = isAutoJoin
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        isOwnAsset = try container.decodeIfPresent(Bool.self, forKey: "isOwnAsset")
-        isFavorite = try container.decodeIfPresent(Bool.self, forKey: "isFavorite")
-        isReinvest = try container.decodeIfPresent(Bool.self, forKey: "isReinvest")
-    }
 }
-

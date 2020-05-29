@@ -355,20 +355,20 @@ class CreateAccountViewModel {
     func updateWalletFrom() {
         if let fromListViewModel = fromListViewModel, let currencyListViewModel = currencyListViewModel {
             fromListViewModel.selectedIndex = fromListViewModel.items.firstIndex(where: { $0.currency?.rawValue == currencyListViewModel.selected() }) ?? 0
-            request.depositWalletId = fromListViewModel.selected()?.id
+            request.depositWalletId = fromListViewModel.selected()?._id
         }
     }
     
     func updateWalletFrom(_ index: Int) {
         fromListViewModel.selectedIndex = index
-        request.depositWalletId = fromListViewModel.selected()?.id
+        request.depositWalletId = fromListViewModel.selected()?._id
     }
     
     func updateAccountType(_ index: Int) {
         accountTypeListViewModel.selectedIndex = index
         
         guard let accountType = accountTypeListViewModel.selected() else { return }
-        request.brokerAccountTypeId = accountType.id
+        request.brokerAccountTypeId = accountType._id
 
         currencyListViewModel = CurrencyListViewModel(delegate, items: accountType.currencies ?? [], selectedIndex: 0)
         currencyListDataSource = TableViewDataSource(currencyListViewModel)
@@ -453,15 +453,15 @@ class CreateAccountViewModel {
         var rate: Double?
         switch currency {
         case .btc:
-            rate = rates.BTC?.first(where: { $0.currency == fromCurrency })?.rate
+            rate = rates["BTC"]?.first(where: { $0.currency == fromCurrency })?.rate
         case .eth:
-            rate = rates.ETH?.first(where: { $0.currency == fromCurrency })?.rate
+            rate = rates["ETH"]?.first(where: { $0.currency == fromCurrency })?.rate
         case .gvt:
-            rate = rates.GVT?.first(where: { $0.currency == fromCurrency })?.rate
+            rate = rates["GVT"]?.first(where: { $0.currency == fromCurrency })?.rate
         case .usdt:
-            rate = rates.USDT?.first(where: { $0.currency == fromCurrency })?.rate
+            rate = rates["USDT"]?.first(where: { $0.currency == fromCurrency })?.rate
         case .usd:
-            rate = rates.USD?.first(where: { $0.currency == fromCurrency })?.rate
+            rate = rates["USD"]?.first(where: { $0.currency == fromCurrency })?.rate
         default:
             break
         }

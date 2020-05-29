@@ -8,37 +8,15 @@
 import Foundation
 
 
+public struct TradingAccountMinCreateAmount: Codable {
 
-open class TradingAccountMinCreateAmount: Codable {
 
     public var serverType: BrokerTradeServerType?
+
     public var minDepositCreateAsset: [AmountWithCurrency]?
-
-
-    
-    public init(serverType: BrokerTradeServerType?, minDepositCreateAsset: [AmountWithCurrency]?) {
+    public init(serverType: BrokerTradeServerType? = nil, minDepositCreateAsset: [AmountWithCurrency]? = nil) { 
         self.serverType = serverType
         self.minDepositCreateAsset = minDepositCreateAsset
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(serverType, forKey: "serverType")
-        try container.encodeIfPresent(minDepositCreateAsset, forKey: "minDepositCreateAsset")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        serverType = try container.decodeIfPresent(BrokerTradeServerType.self, forKey: "serverType")
-        minDepositCreateAsset = try container.decodeIfPresent([AmountWithCurrency].self, forKey: "minDepositCreateAsset")
-    }
 }
-

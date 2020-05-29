@@ -7,8 +7,6 @@
 
 import Foundation
 
-
 public enum SecureAlgorithm: String, Codable {
     case sha256 = "Sha256"
-
 }

@@ -8,53 +8,35 @@
 import Foundation
 
 
+public struct ProfilePublic: Codable {
 
-open class ProfilePublic: Codable {
 
-    public var id: UUID?
+    public var _id: UUID?
+
     public var username: String?
-    public var avatar: String?
+
+    public var logoUrl: String?
+
     public var registrationDate: Date?
+
     public var url: String?
+
     public var socialLinks: [SocialLinkViewModel]?
-
-
-    
-    public init(id: UUID?, username: String?, avatar: String?, registrationDate: Date?, url: String?, socialLinks: [SocialLinkViewModel]?) {
-        self.id = id
+    public init(_id: UUID? = nil, username: String? = nil, logoUrl: String? = nil, registrationDate: Date? = nil, url: String? = nil, socialLinks: [SocialLinkViewModel]? = nil) { 
+        self._id = _id
         self.username = username
-        self.avatar = avatar
+        self.logoUrl = logoUrl
         self.registrationDate = registrationDate
         self.url = url
         self.socialLinks = socialLinks
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(id, forKey: "id")
-        try container.encodeIfPresent(username, forKey: "username")
-        try container.encodeIfPresent(avatar, forKey: "avatar")
-        try container.encodeIfPresent(registrationDate, forKey: "registrationDate")
-        try container.encodeIfPresent(url, forKey: "url")
-        try container.encodeIfPresent(socialLinks, forKey: "socialLinks")
+    public enum CodingKeys: String, CodingKey { 
+        case _id = "id"
+        case username
+        case logoUrl
+        case registrationDate
+        case url
+        case socialLinks
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        id = try container.decodeIfPresent(UUID.self, forKey: "id")
-        username = try container.decodeIfPresent(String.self, forKey: "username")
-        avatar = try container.decodeIfPresent(String.self, forKey: "avatar")
-        registrationDate = try container.decodeIfPresent(Date.self, forKey: "registrationDate")
-        url = try container.decodeIfPresent(String.self, forKey: "url")
-        socialLinks = try container.decodeIfPresent([SocialLinkViewModel].self, forKey: "socialLinks")
-    }
 }
-

@@ -7,9 +7,7 @@
 
 import Foundation
 
-
 public enum EventGroupType: String, Codable {
     case investmentHistory = "InvestmentHistory"
     case tradingHistory = "TradingHistory"
-
 }

@@ -122,7 +122,7 @@ DEPENDENCIES:
   - Tabman
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - AutoInsetter
     - Charts
@@ -188,4 +188,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: fb4f19fc7877e1f0728a609b95bd1975ee06bbea
 
-COCOAPODS: 1.5.2
+COCOAPODS: 1.9.1

@@ -53,13 +53,12 @@ final class ProfileViewModel {
                                            .socialLinks : [.twitter, .telegram, .facebook, .linkedin, .youtube, .wechat, .email]]
     
     var pickedImage: UIImage?
-    var pickedImageURL: URL?
     
     var username: String?
     var about: String?
     
     var avatarURL: URL? {
-        guard let avatar = profileModel?.avatar,
+        guard let avatar = profileModel?.logoUrl,
             let avatarURL = getFileURL(fileName: avatar)
             else { return nil }
         
@@ -122,7 +121,7 @@ final class ProfileViewModel {
     }
     
     func getAvatarURL() -> URL? {
-        guard let avatar = profileModel?.avatar,
+        guard let avatar = profileModel?.logoUrl,
             let avatarURL = getFileURL(fileName: avatar)
             else { return nil }
         
@@ -189,17 +188,17 @@ final class ProfileViewModel {
     }
     
     func saveProfilePhoto(completion: @escaping CompletionBlock) {
-        guard let pickedImageURL = pickedImageURL else {
+        guard let pickedImage = pickedImage?.pngData() else {
             return completion(.failure(errorType: .apiError(message: nil)))
         }
         
-        BaseDataProvider.uploadImage(imageURL: pickedImageURL, completion: { (uploadResult) in
-            guard let uploadResult = uploadResult, let uuidString = uploadResult.id?.uuidString else { return completion(.failure(errorType: .apiError(message: nil))) }
+        BaseDataProvider.uploadImage(imageData: pickedImage, completion: { (uploadResult) in
+            guard let uploadResult = uploadResult, let uuidString = uploadResult._id?.uuidString else { return completion(.failure(errorType: .apiError(message: nil))) }
             
             ProfileDataProvider.updateProfileAvatar(fileId: uuidString, completion: { [weak self] (result) in
                 switch result {
                 case .success:
-                    self?.profileModel?.avatar = uuidString
+                    self?.profileModel?.logoUrl = uuidString
                     completion(.success)
                 case .failure(let errorType):
                     print(errorType)

@@ -8,37 +8,15 @@
 import Foundation
 
 
+public struct FundOwnerActions: Codable {
 
-open class FundOwnerActions: Codable {
 
     public var canClose: Bool?
+
     public var canReallocate: Bool?
-
-
-    
-    public init(canClose: Bool?, canReallocate: Bool?) {
+    public init(canClose: Bool? = nil, canReallocate: Bool? = nil) { 
         self.canClose = canClose
         self.canReallocate = canReallocate
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(canClose, forKey: "canClose")
-        try container.encodeIfPresent(canReallocate, forKey: "canReallocate")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        canClose = try container.decodeIfPresent(Bool.self, forKey: "canClose")
-        canReallocate = try container.decodeIfPresent(Bool.self, forKey: "canReallocate")
-    }
 }
-

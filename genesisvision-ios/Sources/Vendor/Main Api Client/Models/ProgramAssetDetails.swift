@@ -8,37 +8,15 @@
 import Foundation
 
 
+public struct ProgramAssetDetails: Codable {
 
-open class ProgramAssetDetails: Codable {
 
     public var level: Int?
+
     public var levelProgress: Double?
-
-
-    
-    public init(level: Int?, levelProgress: Double?) {
+    public init(level: Int? = nil, levelProgress: Double? = nil) { 
         self.level = level
         self.levelProgress = levelProgress
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(level, forKey: "level")
-        try container.encodeIfPresent(levelProgress, forKey: "levelProgress")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        level = try container.decodeIfPresent(Int.self, forKey: "level")
-        levelProgress = try container.decodeIfPresent(Double.self, forKey: "levelProgress")
-    }
 }
-

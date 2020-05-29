@@ -8,49 +8,45 @@
 import Foundation
 
 
+public struct SignalSubscription: Codable {
 
-open class SignalSubscription: Codable {
 
-    public enum DetachMode: String, Codable { 
-        case _none = "None"
-        case providerCloseOnly = "ProviderCloseOnly"
-        case closeAllImmediately = "CloseAllImmediately"
-    }
-    public enum FixedCurrency: String, Codable { 
-        case usd = "USD"
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case eur = "EUR"
-    }
     public var subscriberInfo: SignalSubscriberInfo?
+
     public var asset: AssetDetails?
+
     public var status: String?
+
     public var subscriptionDate: Date?
+
     public var unsubscriptionDate: Date?
+
     public var hasSignalAccount: Bool?
+
     public var hasActiveSubscription: Bool?
+
     public var isExternal: Bool?
+
     public var mode: SubscriptionMode?
-    public var detachMode: DetachMode?
+
+    public var detachMode: SignalDetachMode?
+
     public var percent: Double?
+
     public var openTolerancePercent: Double?
+
     public var fixedVolume: Double?
-    public var fixedCurrency: FixedCurrency?
+
+    public var fixedCurrency: Currency?
+
     public var totalProfit: Double?
+
     public var totalVolume: Double?
 
+    public var successFeePersonal: Double?
 
-    
-    public init(subscriberInfo: SignalSubscriberInfo?, asset: AssetDetails?, status: String?, subscriptionDate: Date?, unsubscriptionDate: Date?, hasSignalAccount: Bool?, hasActiveSubscription: Bool?, isExternal: Bool?, mode: SubscriptionMode?, detachMode: DetachMode?, percent: Double?, openTolerancePercent: Double?, fixedVolume: Double?, fixedCurrency: FixedCurrency?, totalProfit: Double?, totalVolume: Double?) {
+    public var volumeFeePersonal: Double?
+    public init(subscriberInfo: SignalSubscriberInfo? = nil, asset: AssetDetails? = nil, status: String? = nil, subscriptionDate: Date? = nil, unsubscriptionDate: Date? = nil, hasSignalAccount: Bool? = nil, hasActiveSubscription: Bool? = nil, isExternal: Bool? = nil, mode: SubscriptionMode? = nil, detachMode: SignalDetachMode? = nil, percent: Double? = nil, openTolerancePercent: Double? = nil, fixedVolume: Double? = nil, fixedCurrency: Currency? = nil, totalProfit: Double? = nil, totalVolume: Double? = nil, successFeePersonal: Double? = nil, volumeFeePersonal: Double? = nil) { 
         self.subscriberInfo = subscriberInfo
         self.asset = asset
         self.status = status
@@ -67,54 +63,8 @@ open class SignalSubscription: Codable {
         self.fixedCurrency = fixedCurrency
         self.totalProfit = totalProfit
         self.totalVolume = totalVolume
-    }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(subscriberInfo, forKey: "subscriberInfo")
-        try container.encodeIfPresent(asset, forKey: "asset")
-        try container.encodeIfPresent(status, forKey: "status")
-        try container.encodeIfPresent(subscriptionDate, forKey: "subscriptionDate")
-        try container.encodeIfPresent(unsubscriptionDate, forKey: "unsubscriptionDate")
-        try container.encodeIfPresent(hasSignalAccount, forKey: "hasSignalAccount")
-        try container.encodeIfPresent(hasActiveSubscription, forKey: "hasActiveSubscription")
-        try container.encodeIfPresent(isExternal, forKey: "isExternal")
-        try container.encodeIfPresent(mode, forKey: "mode")
-        try container.encodeIfPresent(detachMode, forKey: "detachMode")
-        try container.encodeIfPresent(percent, forKey: "percent")
-        try container.encodeIfPresent(openTolerancePercent, forKey: "openTolerancePercent")
-        try container.encodeIfPresent(fixedVolume, forKey: "fixedVolume")
-        try container.encodeIfPresent(fixedCurrency, forKey: "fixedCurrency")
-        try container.encodeIfPresent(totalProfit, forKey: "totalProfit")
-        try container.encodeIfPresent(totalVolume, forKey: "totalVolume")
+        self.successFeePersonal = successFeePersonal
+        self.volumeFeePersonal = volumeFeePersonal
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        subscriberInfo = try container.decodeIfPresent(SignalSubscriberInfo.self, forKey: "subscriberInfo")
-        asset = try container.decodeIfPresent(AssetDetails.self, forKey: "asset")
-        status = try container.decodeIfPresent(String.self, forKey: "status")
-        subscriptionDate = try container.decodeIfPresent(Date.self, forKey: "subscriptionDate")
-        unsubscriptionDate = try container.decodeIfPresent(Date.self, forKey: "unsubscriptionDate")
-        hasSignalAccount = try container.decodeIfPresent(Bool.self, forKey: "hasSignalAccount")
-        hasActiveSubscription = try container.decodeIfPresent(Bool.self, forKey: "hasActiveSubscription")
-        isExternal = try container.decodeIfPresent(Bool.self, forKey: "isExternal")
-        mode = try container.decodeIfPresent(SubscriptionMode.self, forKey: "mode")
-        detachMode = try container.decodeIfPresent(DetachMode.self, forKey: "detachMode")
-        percent = try container.decodeIfPresent(Double.self, forKey: "percent")
-        openTolerancePercent = try container.decodeIfPresent(Double.self, forKey: "openTolerancePercent")
-        fixedVolume = try container.decodeIfPresent(Double.self, forKey: "fixedVolume")
-        fixedCurrency = try container.decodeIfPresent(FixedCurrency.self, forKey: "fixedCurrency")
-        totalProfit = try container.decodeIfPresent(Double.self, forKey: "totalProfit")
-        totalVolume = try container.decodeIfPresent(Double.self, forKey: "totalVolume")
-    }
 }
-

@@ -8,45 +8,21 @@
 import Foundation
 
 
+public struct FollowCreateAssetPlatformInfo: Codable {
 
-open class FollowCreateAssetPlatformInfo: Codable {
 
     public var minVolumeFee: Double?
+
     public var maxVolumeFee: Double?
+
     public var minSuccessFee: Double?
+
     public var maxSuccessFee: Double?
-
-
-    
-    public init(minVolumeFee: Double?, maxVolumeFee: Double?, minSuccessFee: Double?, maxSuccessFee: Double?) {
+    public init(minVolumeFee: Double? = nil, maxVolumeFee: Double? = nil, minSuccessFee: Double? = nil, maxSuccessFee: Double? = nil) { 
         self.minVolumeFee = minVolumeFee
         self.maxVolumeFee = maxVolumeFee
         self.minSuccessFee = minSuccessFee
         self.maxSuccessFee = maxSuccessFee
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(minVolumeFee, forKey: "minVolumeFee")
-        try container.encodeIfPresent(maxVolumeFee, forKey: "maxVolumeFee")
-        try container.encodeIfPresent(minSuccessFee, forKey: "minSuccessFee")
-        try container.encodeIfPresent(maxSuccessFee, forKey: "maxSuccessFee")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        minVolumeFee = try container.decodeIfPresent(Double.self, forKey: "minVolumeFee")
-        maxVolumeFee = try container.decodeIfPresent(Double.self, forKey: "maxVolumeFee")
-        minSuccessFee = try container.decodeIfPresent(Double.self, forKey: "minSuccessFee")
-        maxSuccessFee = try container.decodeIfPresent(Double.self, forKey: "maxSuccessFee")
-    }
 }
-

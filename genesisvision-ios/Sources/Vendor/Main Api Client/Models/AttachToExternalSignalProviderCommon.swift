@@ -8,50 +8,23 @@
 import Foundation
 
 
+public struct AttachToExternalSignalProviderCommon: Codable {
 
-open class AttachToExternalSignalProviderCommon: Codable {
 
-    public enum InitialDepositCurrency: String, Codable { 
-        case usd = "USD"
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case eur = "EUR"
-    }
-    public enum FixedCurrency: String, Codable { 
-        case usd = "USD"
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case eur = "EUR"
-    }
-    public var initialDepositCurrency: InitialDepositCurrency?
+    public var initialDepositCurrency: Currency?
+
     public var initialDepositAmount: Double?
+
     public var mode: SubscriptionMode?
+
     public var percent: Double?
+
     public var openTolerancePercent: Double?
+
     public var fixedVolume: Double?
-    public var fixedCurrency: FixedCurrency?
 
-
-    
-    public init(initialDepositCurrency: InitialDepositCurrency?, initialDepositAmount: Double?, mode: SubscriptionMode?, percent: Double?, openTolerancePercent: Double?, fixedVolume: Double?, fixedCurrency: FixedCurrency?) {
+    public var fixedCurrency: Currency?
+    public init(initialDepositCurrency: Currency? = nil, initialDepositAmount: Double? = nil, mode: SubscriptionMode? = nil, percent: Double? = nil, openTolerancePercent: Double? = nil, fixedVolume: Double? = nil, fixedCurrency: Currency? = nil) { 
         self.initialDepositCurrency = initialDepositCurrency
         self.initialDepositAmount = initialDepositAmount
         self.mode = mode
@@ -60,35 +33,5 @@ open class AttachToExternalSignalProviderCommon: Codable {
         self.fixedVolume = fixedVolume
         self.fixedCurrency = fixedCurrency
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(initialDepositCurrency, forKey: "initialDepositCurrency")
-        try container.encodeIfPresent(initialDepositAmount, forKey: "initialDepositAmount")
-        try container.encodeIfPresent(mode, forKey: "mode")
-        try container.encodeIfPresent(percent, forKey: "percent")
-        try container.encodeIfPresent(openTolerancePercent, forKey: "openTolerancePercent")
-        try container.encodeIfPresent(fixedVolume, forKey: "fixedVolume")
-        try container.encodeIfPresent(fixedCurrency, forKey: "fixedCurrency")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        initialDepositCurrency = try container.decodeIfPresent(InitialDepositCurrency.self, forKey: "initialDepositCurrency")
-        initialDepositAmount = try container.decodeIfPresent(Double.self, forKey: "initialDepositAmount")
-        mode = try container.decodeIfPresent(SubscriptionMode.self, forKey: "mode")
-        percent = try container.decodeIfPresent(Double.self, forKey: "percent")
-        openTolerancePercent = try container.decodeIfPresent(Double.self, forKey: "openTolerancePercent")
-        fixedVolume = try container.decodeIfPresent(Double.self, forKey: "fixedVolume")
-        fixedCurrency = try container.decodeIfPresent(FixedCurrency.self, forKey: "fixedCurrency")
-    }
 }
-

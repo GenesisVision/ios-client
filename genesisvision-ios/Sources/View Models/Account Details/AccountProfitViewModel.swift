@@ -115,9 +115,9 @@ extension AccountProfitViewModel {
     
     // MARK: - Private methods
     private func fetch(_ completion: @escaping CompletionBlock) {
-        guard let assetId = assetId else { return completion(.failure(errorType: .apiError(message: nil))) }
+        guard let assetId = assetId, let currency = Currency(rawValue: selectedPlatformCurrency) else { return completion(.failure(errorType: .apiError(message: nil))) }
 
-        AccountsDataProvider.getProfitPercentCharts(with: assetId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currencyType: getPlatformCurrencyType(), currencies: [selectedPlatformCurrency], completion: { [weak self] (viewModel) in
+        AccountsDataProvider.getProfitPercentCharts(with: assetId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currencyType: getPlatformCurrencyType(), currencies: [currency], completion: { [weak self] (viewModel) in
             guard viewModel != nil else {
                 return ErrorHandler.handleApiError(error: nil, completion: completion)
             }

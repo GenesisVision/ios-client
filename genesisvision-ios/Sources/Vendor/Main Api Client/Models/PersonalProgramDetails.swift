@@ -8,36 +8,58 @@
 import Foundation
 
 
+public struct PersonalProgramDetails: Codable {
 
-open class PersonalProgramDetails: Codable {
 
     public var isFavorite: Bool?
+
     public var isReinvest: Bool?
+
+    public var isAutoJoin: Bool?
+
     public var isInvested: Bool?
+
     public var canInvest: Bool?
+
     public var canWithdraw: Bool?
+
+    public var canChangeReinvest: Bool?
+
     public var hasNotifications: Bool?
+
     public var showTwoFactorButton: Bool?
+
     public var value: Double?
+
     public var profit: Double?
+
     public var profitPercent: Double?
+
     public var invested: Double?
+
     public var pendingInput: Double?
+
     public var pendingOutput: Double?
+
     public var pendingOutputIsWithdrawAll: Bool?
+
     public var status: AssetInvestmentStatus?
+
     public var successFeePersonal: Double?
+
+    public var managementFeePersonal: Double?
+
     public var migration: MigrationRequest?
+
     public var subscribedAccounts: Int?
-
-
-    
-    public init(isFavorite: Bool?, isReinvest: Bool?, isInvested: Bool?, canInvest: Bool?, canWithdraw: Bool?, hasNotifications: Bool?, showTwoFactorButton: Bool?, value: Double?, profit: Double?, profitPercent: Double?, invested: Double?, pendingInput: Double?, pendingOutput: Double?, pendingOutputIsWithdrawAll: Bool?, status: AssetInvestmentStatus?, successFeePersonal: Double?, migration: MigrationRequest?, subscribedAccounts: Int?) {
+    public init(isFavorite: Bool? = nil, isReinvest: Bool? = nil, isAutoJoin: Bool? = nil, isInvested: Bool? = nil, canInvest: Bool? = nil, canWithdraw: Bool? = nil, canChangeReinvest: Bool? = nil, hasNotifications: Bool? = nil, showTwoFactorButton: Bool? = nil, value: Double? = nil, profit: Double? = nil, profitPercent: Double? = nil, invested: Double? = nil, pendingInput: Double? = nil, pendingOutput: Double? = nil, pendingOutputIsWithdrawAll: Bool? = nil, status: AssetInvestmentStatus? = nil, successFeePersonal: Double? = nil, managementFeePersonal: Double? = nil, migration: MigrationRequest? = nil, subscribedAccounts: Int? = nil) { 
         self.isFavorite = isFavorite
         self.isReinvest = isReinvest
+        self.isAutoJoin = isAutoJoin
         self.isInvested = isInvested
         self.canInvest = canInvest
         self.canWithdraw = canWithdraw
+        self.canChangeReinvest = canChangeReinvest
         self.hasNotifications = hasNotifications
         self.showTwoFactorButton = showTwoFactorButton
         self.value = value
@@ -49,60 +71,9 @@ open class PersonalProgramDetails: Codable {
         self.pendingOutputIsWithdrawAll = pendingOutputIsWithdrawAll
         self.status = status
         self.successFeePersonal = successFeePersonal
+        self.managementFeePersonal = managementFeePersonal
         self.migration = migration
         self.subscribedAccounts = subscribedAccounts
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(isFavorite, forKey: "isFavorite")
-        try container.encodeIfPresent(isReinvest, forKey: "isReinvest")
-        try container.encodeIfPresent(isInvested, forKey: "isInvested")
-        try container.encodeIfPresent(canInvest, forKey: "canInvest")
-        try container.encodeIfPresent(canWithdraw, forKey: "canWithdraw")
-        try container.encodeIfPresent(hasNotifications, forKey: "hasNotifications")
-        try container.encodeIfPresent(showTwoFactorButton, forKey: "showTwoFactorButton")
-        try container.encodeIfPresent(value, forKey: "value")
-        try container.encodeIfPresent(profit, forKey: "profit")
-        try container.encodeIfPresent(profitPercent, forKey: "profitPercent")
-        try container.encodeIfPresent(invested, forKey: "invested")
-        try container.encodeIfPresent(pendingInput, forKey: "pendingInput")
-        try container.encodeIfPresent(pendingOutput, forKey: "pendingOutput")
-        try container.encodeIfPresent(pendingOutputIsWithdrawAll, forKey: "pendingOutputIsWithdrawAll")
-        try container.encodeIfPresent(status, forKey: "status")
-        try container.encodeIfPresent(successFeePersonal, forKey: "successFeePersonal")
-        try container.encodeIfPresent(migration, forKey: "migration")
-        try container.encodeIfPresent(subscribedAccounts, forKey: "subscribedAccounts")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        isFavorite = try container.decodeIfPresent(Bool.self, forKey: "isFavorite")
-        isReinvest = try container.decodeIfPresent(Bool.self, forKey: "isReinvest")
-        isInvested = try container.decodeIfPresent(Bool.self, forKey: "isInvested")
-        canInvest = try container.decodeIfPresent(Bool.self, forKey: "canInvest")
-        canWithdraw = try container.decodeIfPresent(Bool.self, forKey: "canWithdraw")
-        hasNotifications = try container.decodeIfPresent(Bool.self, forKey: "hasNotifications")
-        showTwoFactorButton = try container.decodeIfPresent(Bool.self, forKey: "showTwoFactorButton")
-        value = try container.decodeIfPresent(Double.self, forKey: "value")
-        profit = try container.decodeIfPresent(Double.self, forKey: "profit")
-        profitPercent = try container.decodeIfPresent(Double.self, forKey: "profitPercent")
-        invested = try container.decodeIfPresent(Double.self, forKey: "invested")
-        pendingInput = try container.decodeIfPresent(Double.self, forKey: "pendingInput")
-        pendingOutput = try container.decodeIfPresent(Double.self, forKey: "pendingOutput")
-        pendingOutputIsWithdrawAll = try container.decodeIfPresent(Bool.self, forKey: "pendingOutputIsWithdrawAll")
-        status = try container.decodeIfPresent(AssetInvestmentStatus.self, forKey: "status")
-        successFeePersonal = try container.decodeIfPresent(Double.self, forKey: "successFeePersonal")
-        migration = try container.decodeIfPresent(MigrationRequest.self, forKey: "migration")
-        subscribedAccounts = try container.decodeIfPresent(Int.self, forKey: "subscribedAccounts")
-    }
 }
-

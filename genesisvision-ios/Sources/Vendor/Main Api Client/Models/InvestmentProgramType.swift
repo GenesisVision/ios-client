@@ -7,9 +7,7 @@
 
 import Foundation
 
-
 public enum InvestmentProgramType: String, Codable {
     case program = "Program"
     case fund = "Fund"
-
 }

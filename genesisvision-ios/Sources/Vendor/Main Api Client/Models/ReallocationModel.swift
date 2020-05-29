@@ -8,37 +8,15 @@
 import Foundation
 
 
+public struct ReallocationModel: Codable {
 
-open class ReallocationModel: Codable {
 
     public var date: Date?
+
     public var parts: [FundAssetPartWithIcon]?
-
-
-    
-    public init(date: Date?, parts: [FundAssetPartWithIcon]?) {
+    public init(date: Date? = nil, parts: [FundAssetPartWithIcon]? = nil) { 
         self.date = date
         self.parts = parts
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(date, forKey: "date")
-        try container.encodeIfPresent(parts, forKey: "parts")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        date = try container.decodeIfPresent(Date.self, forKey: "date")
-        parts = try container.decodeIfPresent([FundAssetPartWithIcon].self, forKey: "parts")
-    }
 }
-

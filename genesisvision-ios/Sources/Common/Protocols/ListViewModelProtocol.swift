@@ -300,21 +300,21 @@ extension ListViewModelProtocol {
     func model(for assetId: String) -> CellViewAnyModel? {
         switch assetType {
         case .program:
-            if let viewModels = viewModels as? [ProgramTableViewCellViewModel], let i = viewModels.firstIndex(where: { $0.asset.id?.uuidString == assetId }) {
+            if let viewModels = viewModels as? [ProgramTableViewCellViewModel], let i = viewModels.firstIndex(where: { $0.asset._id?.uuidString == assetId }) {
                 return viewModels[i]
             }
         case .follow:
-            if let viewModels = viewModels as? [FollowTableViewCellViewModel], let i = viewModels.firstIndex(where: { $0.asset.id?.uuidString == assetId }) {
+            if let viewModels = viewModels as? [FollowTableViewCellViewModel], let i = viewModels.firstIndex(where: { $0.asset._id?.uuidString == assetId }) {
                 return viewModels[i]
             }
             return nil
         case .fund:
-            if let viewModels = viewModels as? [FundTableViewCellViewModel], let i = viewModels.firstIndex(where: { $0.asset.id?.uuidString == assetId }) {
+            if let viewModels = viewModels as? [FundTableViewCellViewModel], let i = viewModels.firstIndex(where: { $0.asset._id?.uuidString == assetId }) {
                 return viewModels[i]
             }
         case ._none:
             //TODO: check it
-            if let viewModels = viewModels as? [ManagerTableViewCellViewModel], let i = viewModels.firstIndex(where: { $0.profile.id?.uuidString == assetId }) {
+            if let viewModels = viewModels as? [ManagerTableViewCellViewModel], let i = viewModels.firstIndex(where: { $0.profile._id?.uuidString == assetId }) {
                 return viewModels[i]
             }
         }
@@ -326,28 +326,28 @@ extension ListViewModelProtocol {
         switch assetType {
         case .program:
             guard let model = model(for: indexPath) as? ProgramTableViewCellViewModel,
-                let assetId = model.asset.id?.uuidString,
+                let assetId = model.asset._id?.uuidString,
                 let router = router as? Router
                 else { return nil }
             
             return router.getProgramViewController(with: assetId, assetType: .program)
         case .follow:
             guard let model = model(for: indexPath) as? FollowTableViewCellViewModel,
-                let assetId = model.asset.id?.uuidString,
+                let assetId = model.asset._id?.uuidString,
                 let router = router as? Router
                 else { return nil }
                 
             return router.getProgramViewController(with: assetId, assetType: .follow)
         case .fund:
             guard let model = model(for: indexPath) as? FundTableViewCellViewModel,
-                let assetId = model.asset.id?.uuidString,
+                let assetId = model.asset._id?.uuidString,
                 let router = router as? Router
                 else { return nil }
             
             return router.getFundViewController(with: assetId)
         case ._none:
             guard let model = model(for: indexPath) as? ManagerTableViewCellViewModel,
-                let managerId = model.profile.id?.uuidString,
+                let managerId = model.profile._id?.uuidString,
                 let router = router as? Router
                 else { return nil }
         
@@ -435,19 +435,19 @@ extension ListViewModelProtocol {
     }
     
     func showProgramDetail(at indexPath: IndexPath) {
-        guard let model = model(for: indexPath) as? ProgramTableViewCellViewModel, let assetId = model.asset.id?.uuidString else { return }
+        guard let model = model(for: indexPath) as? ProgramTableViewCellViewModel, let assetId = model.asset._id?.uuidString else { return }
         
         router.show(routeType: .showAssetDetails(assetId: assetId, assetType: assetType))
     }
     
     func showFollowDetail(at indexPath: IndexPath) {
-        guard let model = model(for: indexPath) as? FollowTableViewCellViewModel, let assetId = model.asset.id?.uuidString else { return }
+        guard let model = model(for: indexPath) as? FollowTableViewCellViewModel, let assetId = model.asset._id?.uuidString else { return }
 
         router.show(routeType: .showAssetDetails(assetId: assetId, assetType: assetType))
     }
     
     func showFundDetail(at indexPath: IndexPath) {
-        guard let model = model(for: indexPath) as? FundTableViewCellViewModel, let assetId = model.asset.id?.uuidString else { return }
+        guard let model = model(for: indexPath) as? FundTableViewCellViewModel, let assetId = model.asset._id?.uuidString else { return }
         
         router.show(routeType: .showAssetDetails(assetId: assetId, assetType: assetType))
     }
@@ -456,7 +456,7 @@ extension ListViewModelProtocol {
         guard let model = model(for: indexPath) as? ManagerTableViewCellViewModel else { return }
         
         let manager = model.profile
-        guard let assetId = manager.id else { return }
+        guard let assetId = manager._id else { return }
         
         router.show(routeType: .showAssetDetails(assetId: assetId.uuidString, assetType: assetType))
     }

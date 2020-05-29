@@ -9,7 +9,7 @@
 import Foundation
 
 struct NotificationsSettingsGeneralTableViewCellViewModel {
-    let setting: NotificationSettingViewModel
+    var setting: NotificationSettingViewModel
     weak var settingsProtocol: NotificationsSettingsProtocol?
 }
 

@@ -58,7 +58,7 @@ extension PrivateTradingContentView: ContentViewProtocol {
     ///   - asset: DashboardTradingAsset
     func configure(_ asset: DashboardTradingAsset, filterProtocol: FilterChangedProtocol?) {
         self.filterProtocol = filterProtocol
-        if let assetId = asset.id?.uuidString {
+        if let assetId = asset._id?.uuidString {
             self.assetId = assetId
         }
         
@@ -98,7 +98,7 @@ extension PrivateTradingContentView: ContentViewProtocol {
             titleLabel.text = title
         }
         
-        if let logo = asset.broker?.logo, let fileUrl = getFileURL(fileName: logo) {
+        if let logo = asset.broker?.logoUrl, let fileUrl = getFileURL(fileName: logo) {
             photoImageView.contentMode = .scaleAspectFit
             photoImageView.kf.indicatorType = .activity
             photoImageView.kf.setImage(with: fileUrl)

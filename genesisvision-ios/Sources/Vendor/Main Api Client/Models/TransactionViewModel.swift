@@ -8,25 +8,30 @@
 import Foundation
 
 
+public struct TransactionViewModel: Codable {
 
-open class TransactionViewModel: Codable {
 
-    public var id: UUID?
+    public var _id: UUID?
+
     public var date: Date?
-    public var description: String?
+
+    public var _description: String?
+
     public var amount: AmountRowCell?
+
     public var detailsTitle: String?
+
     public var asset: TransactionAssetDetails?
+
     public var details: [TransactionDetailItem]?
+
     public var actions: TransactionDetailsActions?
+
     public var status: MultiWalletTransactionStatus?
-
-
-    
-    public init(id: UUID?, date: Date?, description: String?, amount: AmountRowCell?, detailsTitle: String?, asset: TransactionAssetDetails?, details: [TransactionDetailItem]?, actions: TransactionDetailsActions?, status: MultiWalletTransactionStatus?) {
-        self.id = id
+    public init(_id: UUID? = nil, date: Date? = nil, _description: String? = nil, amount: AmountRowCell? = nil, detailsTitle: String? = nil, asset: TransactionAssetDetails? = nil, details: [TransactionDetailItem]? = nil, actions: TransactionDetailsActions? = nil, status: MultiWalletTransactionStatus? = nil) { 
+        self._id = _id
         self.date = date
-        self.description = description
+        self._description = _description
         self.amount = amount
         self.detailsTitle = detailsTitle
         self.asset = asset
@@ -34,39 +39,16 @@ open class TransactionViewModel: Codable {
         self.actions = actions
         self.status = status
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(id, forKey: "id")
-        try container.encodeIfPresent(date, forKey: "date")
-        try container.encodeIfPresent(description, forKey: "description")
-        try container.encodeIfPresent(amount, forKey: "amount")
-        try container.encodeIfPresent(detailsTitle, forKey: "detailsTitle")
-        try container.encodeIfPresent(asset, forKey: "asset")
-        try container.encodeIfPresent(details, forKey: "details")
-        try container.encodeIfPresent(actions, forKey: "actions")
-        try container.encodeIfPresent(status, forKey: "status")
+    public enum CodingKeys: String, CodingKey { 
+        case _id = "id"
+        case date
+        case _description = "description"
+        case amount
+        case detailsTitle
+        case asset
+        case details
+        case actions
+        case status
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        id = try container.decodeIfPresent(UUID.self, forKey: "id")
-        date = try container.decodeIfPresent(Date.self, forKey: "date")
-        description = try container.decodeIfPresent(String.self, forKey: "description")
-        amount = try container.decodeIfPresent(AmountRowCell.self, forKey: "amount")
-        detailsTitle = try container.decodeIfPresent(String.self, forKey: "detailsTitle")
-        asset = try container.decodeIfPresent(TransactionAssetDetails.self, forKey: "asset")
-        details = try container.decodeIfPresent([TransactionDetailItem].self, forKey: "details")
-        actions = try container.decodeIfPresent(TransactionDetailsActions.self, forKey: "actions")
-        status = try container.decodeIfPresent(MultiWalletTransactionStatus.self, forKey: "status")
-    }
 }
-

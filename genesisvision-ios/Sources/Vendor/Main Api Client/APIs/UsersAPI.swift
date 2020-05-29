@@ -13,13 +13,12 @@ import Alamofire
 open class UsersAPI {
     /**
      Public profile
-     
-     - parameter id: (path)  
+     - parameter _id: (path)       - parameter logoQuality: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getManagerProfile(id: String, completion: @escaping ((_ data: PublicProfile?,_ error: Error?) -> Void)) {
-        getManagerProfileWithRequestBuilder(id: id).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getManagerProfile(_id: String, logoQuality: ImageQuality? = nil, completion: @escaping ((_ data: PublicProfile?,_ error: Error?) -> Void)) {
+        getManagerProfileWithRequestBuilder(_id: _id, logoQuality: logoQuality).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
@@ -27,41 +26,54 @@ open class UsersAPI {
     /**
      Public profile
      - GET /v2.0/users/{id}
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "socialLinks" : [ {
     "name" : "name",
-    "logo" : "logo",
-    "type" : { },
+    "type" : "Undefined",
     "value" : "value",
-    "url" : "url"
+    "url" : "url",
+    "logoUrl" : "logoUrl"
   }, {
     "name" : "name",
-    "logo" : "logo",
-    "type" : { },
+    "type" : "Undefined",
     "value" : "value",
-    "url" : "url"
+    "url" : "url",
+    "logoUrl" : "logoUrl"
   } ],
   "assets" : [ "assets", "assets" ],
+  "followers" : 7,
+  "following" : 1,
   "about" : "about",
   "regDate" : "2000-01-23T04:56:07.000+00:00",
+  "personalDetails" : {
+    "isFollow" : true,
+    "canCommentPosts" : true,
+    "canWritePost" : true,
+    "canFollow" : true
+  },
   "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-  "avatar" : "avatar",
+  "logoUrl" : "logoUrl",
   "url" : "url",
   "username" : "username"
 }}]
-     
-     - parameter id: (path)  
+     - parameter _id: (path)       - parameter logoQuality: (query)  (optional)
 
      - returns: RequestBuilder<PublicProfile> 
      */
-    open class func getManagerProfileWithRequestBuilder(id: String) -> RequestBuilder<PublicProfile> {
+    open class func getManagerProfileWithRequestBuilder(_id: String, logoQuality: ImageQuality? = nil) -> RequestBuilder<PublicProfile> {
         var path = "/v2.0/users/{id}"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "logoQuality": logoQuality
+        ])
 
         let requestBuilder: RequestBuilder<PublicProfile>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
@@ -69,42 +81,13 @@ open class UsersAPI {
     }
 
     /**
-     * enum for parameter sorting
-     */
-    public enum Sorting_getUsersList: String { 
-        case byNameAsc = "ByNameAsc"
-        case byNameDesc = "ByNameDesc"
-        case byAgeAsc = "ByAgeAsc"
-        case byAgeDesc = "ByAgeDesc"
-        case byAumAsc = "ByAumAsc"
-        case byAumDesc = "ByAumDesc"
-        case byFollowersAsc = "ByFollowersAsc"
-        case byFollowersDesc = "ByFollowersDesc"
-        case byInvestorsAsc = "ByInvestorsAsc"
-        case byInvestorsDesc = "ByInvestorsDesc"
-        case byPopularityAsc = "ByPopularityAsc"
-        case byPopularityDesc = "ByPopularityDesc"
-        case byProfitAsc = "ByProfitAsc"
-        case byProfitDesc = "ByProfitDesc"
-        case byTradingProfitAsc = "ByTradingProfitAsc"
-        case byTradingProfitDesc = "ByTradingProfitDesc"
-        case byInvestingProfitAsc = "ByInvestingProfitAsc"
-        case byInvestingProfitDesc = "ByInvestingProfitDesc"
-    }
-
-    /**
      Get users list
-     
-     - parameter facetId: (query)  (optional)
-     - parameter sorting: (query)  (optional)
-     - parameter tags: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
+     - parameter sorting: (query)  (optional)     - parameter timeframe: (query)  (optional)     - parameter tags: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getUsersList(facetId: String? = nil, sorting: Sorting_getUsersList? = nil, tags: [String]? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ItemsViewModelUserDetailsList?,_ error: Error?) -> Void)) {
-        getUsersListWithRequestBuilder(facetId: facetId, sorting: sorting, tags: tags, skip: skip, take: take).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getUsersList(sorting: UsersFilterSorting? = nil, timeframe: UsersFilterTimeframe? = nil, tags: [String]? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: UserDetailsListItemsViewModel?,_ error: Error?) -> Void)) {
+        getUsersListWithRequestBuilder(sorting: sorting, timeframe: timeframe, tags: tags, skip: skip, take: take).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
@@ -112,29 +95,20 @@ open class UsersAPI {
     /**
      Get users list
      - GET /v2.0/users/list
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
-  "total" : 7,
+  "total" : 5,
   "items" : [ {
-    "tradingProfit" : 5.637376656633329,
-    "socialLinks" : [ {
-      "name" : "name",
-      "logo" : "logo",
-      "type" : { },
-      "value" : "value",
-      "url" : "url"
-    }, {
-      "name" : "name",
-      "logo" : "logo",
-      "type" : { },
-      "value" : "value",
-      "url" : "url"
-    } ],
+    "assetsUnderManagement" : 0.8008281904610115,
     "totalProfit" : 5.962133916683182,
     "regDate" : "2000-01-23T04:56:07.000+00:00",
-    "avatar" : "avatar",
+    "followersCount" : 1,
     "userId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "investingProfit" : 2.3021358869347655,
+    "logoUrl" : "logoUrl",
     "url" : "url",
+    "username" : "username",
     "tags" : [ {
       "color" : "color",
       "name" : "name"
@@ -142,31 +116,16 @@ open class UsersAPI {
       "color" : "color",
       "name" : "name"
     } ],
-    "assetsUnderManagement" : 0.8008281904610115,
-    "followersCount" : 1,
-    "username" : "username",
     "investorsCount" : 6
   }, {
-    "tradingProfit" : 5.637376656633329,
-    "socialLinks" : [ {
-      "name" : "name",
-      "logo" : "logo",
-      "type" : { },
-      "value" : "value",
-      "url" : "url"
-    }, {
-      "name" : "name",
-      "logo" : "logo",
-      "type" : { },
-      "value" : "value",
-      "url" : "url"
-    } ],
+    "assetsUnderManagement" : 0.8008281904610115,
     "totalProfit" : 5.962133916683182,
     "regDate" : "2000-01-23T04:56:07.000+00:00",
-    "avatar" : "avatar",
+    "followersCount" : 1,
     "userId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "investingProfit" : 2.3021358869347655,
+    "logoUrl" : "logoUrl",
     "url" : "url",
+    "username" : "username",
     "tags" : [ {
       "color" : "color",
       "name" : "name"
@@ -174,37 +133,27 @@ open class UsersAPI {
       "color" : "color",
       "name" : "name"
     } ],
-    "assetsUnderManagement" : 0.8008281904610115,
-    "followersCount" : 1,
-    "username" : "username",
     "investorsCount" : 6
   } ]
 }}]
-     
-     - parameter facetId: (query)  (optional)
-     - parameter sorting: (query)  (optional)
-     - parameter tags: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
+     - parameter sorting: (query)  (optional)     - parameter timeframe: (query)  (optional)     - parameter tags: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
 
-     - returns: RequestBuilder<ItemsViewModelUserDetailsList> 
+     - returns: RequestBuilder<UserDetailsListItemsViewModel> 
      */
-    open class func getUsersListWithRequestBuilder(facetId: String? = nil, sorting: Sorting_getUsersList? = nil, tags: [String]? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ItemsViewModelUserDetailsList> {
+    open class func getUsersListWithRequestBuilder(sorting: UsersFilterSorting? = nil, timeframe: UsersFilterTimeframe? = nil, tags: [String]? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<UserDetailsListItemsViewModel> {
         let path = "/v2.0/users/list"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "FacetId": facetId, 
-            "Sorting": sorting?.rawValue, 
-            "Tags": tags, 
-            "Skip": skip?.encodeToJSON(), 
-            "Take": take?.encodeToJSON()
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "Sorting": sorting, 
+                        "Timeframe": timeframe, 
+                        "Tags": tags, 
+                        "Skip": skip?.encodeToJSON(), 
+                        "Take": take?.encodeToJSON()
         ])
-        
 
-        let requestBuilder: RequestBuilder<ItemsViewModelUserDetailsList>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<UserDetailsListItemsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }

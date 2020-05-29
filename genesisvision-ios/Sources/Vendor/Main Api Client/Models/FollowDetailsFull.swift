@@ -8,45 +8,21 @@
 import Foundation
 
 
+public struct FollowDetailsFull: Codable {
 
-open class FollowDetailsFull: Codable {
 
     public var tradesCount: Int?
+
     public var signalSettings: AssetSignalSettings?
+
     public var subscribersCount: Int?
+
     public var personalDetails: PersonalFollowDetailsFull?
-
-
-    
-    public init(tradesCount: Int?, signalSettings: AssetSignalSettings?, subscribersCount: Int?, personalDetails: PersonalFollowDetailsFull?) {
+    public init(tradesCount: Int? = nil, signalSettings: AssetSignalSettings? = nil, subscribersCount: Int? = nil, personalDetails: PersonalFollowDetailsFull? = nil) { 
         self.tradesCount = tradesCount
         self.signalSettings = signalSettings
         self.subscribersCount = subscribersCount
         self.personalDetails = personalDetails
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(tradesCount, forKey: "tradesCount")
-        try container.encodeIfPresent(signalSettings, forKey: "signalSettings")
-        try container.encodeIfPresent(subscribersCount, forKey: "subscribersCount")
-        try container.encodeIfPresent(personalDetails, forKey: "personalDetails")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        tradesCount = try container.decodeIfPresent(Int.self, forKey: "tradesCount")
-        signalSettings = try container.decodeIfPresent(AssetSignalSettings.self, forKey: "signalSettings")
-        subscribersCount = try container.decodeIfPresent(Int.self, forKey: "subscribersCount")
-        personalDetails = try container.decodeIfPresent(PersonalFollowDetailsFull.self, forKey: "personalDetails")
-    }
 }
-

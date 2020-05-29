@@ -8,33 +8,12 @@
 import Foundation
 
 
+public struct OrderModelSignalData: Codable {
 
-open class OrderModelSignalData: Codable {
 
     public var masters: [SignalDataMaster]?
-
-
-    
-    public init(masters: [SignalDataMaster]?) {
+    public init(masters: [SignalDataMaster]? = nil) { 
         self.masters = masters
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(masters, forKey: "masters")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        masters = try container.decodeIfPresent([SignalDataMaster].self, forKey: "masters")
-    }
 }
-

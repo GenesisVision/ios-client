@@ -53,7 +53,7 @@ final class ProgramInfoViewModel: ViewModelWithListProtocol {
     weak var programHeaderProtocol: ProgramHeaderProtocol?
     
     private var equityChart: [SimpleChartPoint]?
-    public private(set) var tradingAccounts: ItemsViewModelTradingAccountDetails?
+    public private(set) var tradingAccounts: TradingAccountDetailsItemsViewModel?
     public private(set) var signalSubscription: SignalSubscription?
     public private(set) var programFollowDetailsFull: ProgramFollowDetailsFull? {
         didSet {
@@ -100,7 +100,7 @@ final class ProgramInfoViewModel: ViewModelWithListProtocol {
             self.assetId = assetId
         }
         
-        if let programDetailsFull = programDetailsFull, let assetId = programDetailsFull.id?.uuidString {
+        if let programDetailsFull = programDetailsFull, let assetId = programDetailsFull._id?.uuidString {
             self.programFollowDetailsFull = programDetailsFull
             self.assetId = assetId
             getSignalSubscription { (result) in
@@ -192,7 +192,7 @@ final class ProgramInfoViewModel: ViewModelWithListProtocol {
 extension ProgramInfoViewModel {
     // MARK: - Public methods
     func showManagerVC() {
-        guard let managerId = programFollowDetailsFull?.owner?.id?.uuidString else { return }
+        guard let managerId = programFollowDetailsFull?.owner?._id?.uuidString else { return }
         router.show(routeType: .manager(managerId: managerId))
     }
     
@@ -242,7 +242,7 @@ extension ProgramInfoViewModel {
     }
 
     func createAccount(completion: @escaping CreateAccountCompletionBlock) {
-        guard let assetId = assetId, let currency = programFollowDetailsFull?.tradingAccountInfo?.currency, let leverage = programFollowDetailsFull?.tradingAccountInfo?.leverageMax, let programCurrency = CurrencyType(rawValue: currency.rawValue), let brokerId = programFollowDetailsFull?.brokerDetails?.id else { return }
+        guard let assetId = assetId, let currency = programFollowDetailsFull?.tradingAccountInfo?.currency, let leverage = programFollowDetailsFull?.tradingAccountInfo?.leverageMax, let programCurrency = CurrencyType(rawValue: currency.rawValue), let brokerId = programFollowDetailsFull?.brokerDetails?._id else { return }
         
         router.show(routeType: .createAccount(assetId: assetId, brokerId: brokerId, leverage: leverage, programCurrency: programCurrency, completion: completion))
     }
@@ -272,7 +272,7 @@ extension ProgramInfoViewModel {
             case .statistics:
                 return DetailStatisticsTableViewCellViewModel(details: programFollowDetailsFull)
             case .strategy:
-                return DefaultTableViewCellViewModel(title: "Strategy", subtitle: programFollowDetailsFull?.publicInfo?.description)
+                return DefaultTableViewCellViewModel(title: "Strategy", subtitle: programFollowDetailsFull?.publicInfo?._description)
             case .period:
                 return ProgramPeriodTableViewCellViewModel(periodDuration: programFollowDetailsFull?.programDetails?.periodDuration, periodStarts: programFollowDetailsFull?.programDetails?.periodStarts, periodEnds: programFollowDetailsFull?.programDetails?.periodEnds)
             }
@@ -290,10 +290,10 @@ extension ProgramInfoViewModel {
 //            return ProgramYourInvestmentTableViewCellViewModel(details: accountDetailsFull, yourInvestmentProtocol: self)
         case .makeProgram:
             guard let programDetailsFull = programDetailsFull else { return nil }
-            return ProgramInfoTableViewCellViewModel(asset: programDetailsFull, assetId: programFollowDetailsFull?.id?.uuidString, delegate: self)
+            return ProgramInfoTableViewCellViewModel(asset: programDetailsFull, assetId: programFollowDetailsFull?._id?.uuidString, delegate: self)
         case .makeFollow:
             guard let followDetailsFull = followDetailsFull else { return nil }
-            return FollowInfoTableViewCellViewModel(asset: followDetailsFull, assetId: programFollowDetailsFull?.id?.uuidString, delegate: self)
+            return FollowInfoTableViewCellViewModel(asset: followDetailsFull, assetId: programFollowDetailsFull?._id?.uuidString, delegate: self)
         default:
             return nil
         }

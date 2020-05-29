@@ -8,49 +8,24 @@
 import Foundation
 
 
+public struct NotificationSettingList: Codable {
 
-open class NotificationSettingList: Codable {
 
     public var settingsGeneral: [NotificationSettingViewModel]?
+
     public var settingsProgram: [ProgramNotificationSettingList]?
+
     public var settingsFund: [FundNotificationSettingList]?
+
     public var settingsManager: [ManagerNotificationSettingList]?
+
     public var settingsFollow: [FollowNotificationSettingList]?
-
-
-    
-    public init(settingsGeneral: [NotificationSettingViewModel]?, settingsProgram: [ProgramNotificationSettingList]?, settingsFund: [FundNotificationSettingList]?, settingsManager: [ManagerNotificationSettingList]?, settingsFollow: [FollowNotificationSettingList]?) {
+    public init(settingsGeneral: [NotificationSettingViewModel]? = nil, settingsProgram: [ProgramNotificationSettingList]? = nil, settingsFund: [FundNotificationSettingList]? = nil, settingsManager: [ManagerNotificationSettingList]? = nil, settingsFollow: [FollowNotificationSettingList]? = nil) { 
         self.settingsGeneral = settingsGeneral
         self.settingsProgram = settingsProgram
         self.settingsFund = settingsFund
         self.settingsManager = settingsManager
         self.settingsFollow = settingsFollow
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(settingsGeneral, forKey: "settingsGeneral")
-        try container.encodeIfPresent(settingsProgram, forKey: "settingsProgram")
-        try container.encodeIfPresent(settingsFund, forKey: "settingsFund")
-        try container.encodeIfPresent(settingsManager, forKey: "settingsManager")
-        try container.encodeIfPresent(settingsFollow, forKey: "settingsFollow")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        settingsGeneral = try container.decodeIfPresent([NotificationSettingViewModel].self, forKey: "settingsGeneral")
-        settingsProgram = try container.decodeIfPresent([ProgramNotificationSettingList].self, forKey: "settingsProgram")
-        settingsFund = try container.decodeIfPresent([FundNotificationSettingList].self, forKey: "settingsFund")
-        settingsManager = try container.decodeIfPresent([ManagerNotificationSettingList].self, forKey: "settingsManager")
-        settingsFollow = try container.decodeIfPresent([FollowNotificationSettingList].self, forKey: "settingsFollow")
-    }
 }
-

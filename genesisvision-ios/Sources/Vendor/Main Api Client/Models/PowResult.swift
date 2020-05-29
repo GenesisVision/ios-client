@@ -8,33 +8,15 @@
 import Foundation
 
 
+public struct PowResult: Codable {
 
-open class PowResult: Codable {
 
     public var _prefix: String?
-
-
-    
-    public init(_prefix: String?) {
+    public init(_prefix: String? = nil) { 
         self._prefix = _prefix
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(_prefix, forKey: "prefix")
+    public enum CodingKeys: String, CodingKey { 
+        case _prefix = "prefix"
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        _prefix = try container.decodeIfPresent(String.self, forKey: "prefix")
-    }
 }
-

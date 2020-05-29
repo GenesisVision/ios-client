@@ -8,37 +8,15 @@
 import Foundation
 
 
+public struct LevelInfo: Codable {
 
-open class LevelInfo: Codable {
 
     public var level: Int?
+
     public var investmentLimit: Double?
-
-
-    
-    public init(level: Int?, investmentLimit: Double?) {
+    public init(level: Int? = nil, investmentLimit: Double? = nil) { 
         self.level = level
         self.investmentLimit = investmentLimit
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(level, forKey: "level")
-        try container.encodeIfPresent(investmentLimit, forKey: "investmentLimit")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        level = try container.decodeIfPresent(Int.self, forKey: "level")
-        investmentLimit = try container.decodeIfPresent(Double.self, forKey: "investmentLimit")
-    }
 }
-

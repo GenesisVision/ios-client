@@ -22,7 +22,7 @@ final class InRequestsDelegateManager: NSObject, UITableViewDelegate, UITableVie
         return [InRequestsTableViewCellViewModel.self]
     }
     
-    var requests: ItemsViewModelAssetInvestmentRequest?
+    var requests: AssetInvestmentRequestItemsViewModel?
     
     // MARK: - Lifecycle
     override init() {
@@ -31,7 +31,7 @@ final class InRequestsDelegateManager: NSObject, UITableViewDelegate, UITableVie
     
     // MARK: - Private methods
     private func cancelRequest(at indexPath: IndexPath) {
-        if let request = requests?.items?[indexPath.row], let canCancel = request.canCancelRequest, let requestid = request.id?.uuidString, canCancel {
+        if let request = requests?.items?[indexPath.row], let canCancel = request.canCancelRequest, let requestid = request._id?.uuidString, canCancel {
             RequestDataProvider.cancelRequest(requestId: requestid) { [weak self] (result) in
                 self?.inRequestsDelegate?.didCanceledRequest(completionResult: result)
             }

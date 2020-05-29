@@ -8,33 +8,12 @@
 import Foundation
 
 
+public struct PlatformEvents: Codable {
 
-open class PlatformEvents: Codable {
 
     public var events: [PlatformEvent]?
-
-
-    
-    public init(events: [PlatformEvent]?) {
+    public init(events: [PlatformEvent]? = nil) { 
         self.events = events
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(events, forKey: "events")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        events = try container.decodeIfPresent([PlatformEvent].self, forKey: "events")
-    }
 }
-

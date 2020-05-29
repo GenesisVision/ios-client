@@ -113,7 +113,7 @@ final class ProgramViewModel: TabmanViewModel {
     var assetId: String?
     var assetType: AssetType = .program
     
-    public private(set) var tradingAccounts: ItemsViewModelTradingAccountDetails?
+    public private(set) var tradingAccounts: TradingAccountDetailsItemsViewModel?
     public private(set) var signalSubscription: SignalSubscription?
     
     var programDetailsFull: ProgramFollowDetailsFull? {

@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum AssetTypeExt: String, Codable {
     case _none = "None"
     case program = "Program"
@@ -15,5 +14,4 @@ public enum AssetTypeExt: String, Codable {
     case fund = "Fund"
     case signalTradingAccount = "SignalTradingAccount"
     case externalSignalTradingAccount = "ExternalSignalTradingAccount"
-
 }

@@ -118,8 +118,8 @@ enum DateRangeType: Int {
 }
 
 // MARK: - Currency
-typealias CurrencyType = ProgramsAPI.ProgramCurrency_getPrograms
-typealias SortingListType = ProgramsAPI.Sorting_getPrograms
+typealias CurrencyType = Currency
+typealias SortingListType = ProgramsFilterSorting
 
 extension CurrencyType {
     public var currencyLenght: Int {

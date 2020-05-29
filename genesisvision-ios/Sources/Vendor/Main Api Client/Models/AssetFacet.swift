@@ -8,61 +8,43 @@
 import Foundation
 
 
+public struct AssetFacet: Codable {
 
-open class AssetFacet: Codable {
 
-    public var id: UUID?
+    public var _id: UUID?
+
     public var title: String?
-    public var description: String?
-    public var logo: String?
+
+    public var _description: String?
+
+    public var logoUrl: String?
+
     public var url: String?
+
     public var sortType: FacetSortType?
+
     public var timeframe: Timeframe?
+
     public var sorting: String?
-
-
-    
-    public init(id: UUID?, title: String?, description: String?, logo: String?, url: String?, sortType: FacetSortType?, timeframe: Timeframe?, sorting: String?) {
-        self.id = id
+    public init(_id: UUID? = nil, title: String? = nil, _description: String? = nil, logoUrl: String? = nil, url: String? = nil, sortType: FacetSortType? = nil, timeframe: Timeframe? = nil, sorting: String? = nil) { 
+        self._id = _id
         self.title = title
-        self.description = description
-        self.logo = logo
+        self._description = _description
+        self.logoUrl = logoUrl
         self.url = url
         self.sortType = sortType
         self.timeframe = timeframe
         self.sorting = sorting
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(id, forKey: "id")
-        try container.encodeIfPresent(title, forKey: "title")
-        try container.encodeIfPresent(description, forKey: "description")
-        try container.encodeIfPresent(logo, forKey: "logo")
-        try container.encodeIfPresent(url, forKey: "url")
-        try container.encodeIfPresent(sortType, forKey: "sortType")
-        try container.encodeIfPresent(timeframe, forKey: "timeframe")
-        try container.encodeIfPresent(sorting, forKey: "sorting")
+    public enum CodingKeys: String, CodingKey { 
+        case _id = "id"
+        case title
+        case _description = "description"
+        case logoUrl
+        case url
+        case sortType
+        case timeframe
+        case sorting
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        id = try container.decodeIfPresent(UUID.self, forKey: "id")
-        title = try container.decodeIfPresent(String.self, forKey: "title")
-        description = try container.decodeIfPresent(String.self, forKey: "description")
-        logo = try container.decodeIfPresent(String.self, forKey: "logo")
-        url = try container.decodeIfPresent(String.self, forKey: "url")
-        sortType = try container.decodeIfPresent(FacetSortType.self, forKey: "sortType")
-        timeframe = try container.decodeIfPresent(Timeframe.self, forKey: "timeframe")
-        sorting = try container.decodeIfPresent(String.self, forKey: "sorting")
-    }
 }
-

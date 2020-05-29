@@ -8,22 +8,26 @@
 import Foundation
 
 
+public struct AssetInvestmentRequest: Codable {
 
-open class AssetInvestmentRequest: Codable {
 
-    public var id: UUID?
+    public var _id: UUID?
+
     public var date: Date?
+
     public var amount: Double?
+
     public var currency: Currency?
+
     public var type: InvestmentRequestType?
+
     public var status: InvestmentRequestStatus?
+
     public var canCancelRequest: Bool?
+
     public var assetDetails: AssetRequestDetails?
-
-
-    
-    public init(id: UUID?, date: Date?, amount: Double?, currency: Currency?, type: InvestmentRequestType?, status: InvestmentRequestStatus?, canCancelRequest: Bool?, assetDetails: AssetRequestDetails?) {
-        self.id = id
+    public init(_id: UUID? = nil, date: Date? = nil, amount: Double? = nil, currency: Currency? = nil, type: InvestmentRequestType? = nil, status: InvestmentRequestStatus? = nil, canCancelRequest: Bool? = nil, assetDetails: AssetRequestDetails? = nil) { 
+        self._id = _id
         self.date = date
         self.amount = amount
         self.currency = currency
@@ -32,37 +36,15 @@ open class AssetInvestmentRequest: Codable {
         self.canCancelRequest = canCancelRequest
         self.assetDetails = assetDetails
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(id, forKey: "id")
-        try container.encodeIfPresent(date, forKey: "date")
-        try container.encodeIfPresent(amount, forKey: "amount")
-        try container.encodeIfPresent(currency, forKey: "currency")
-        try container.encodeIfPresent(type, forKey: "type")
-        try container.encodeIfPresent(status, forKey: "status")
-        try container.encodeIfPresent(canCancelRequest, forKey: "canCancelRequest")
-        try container.encodeIfPresent(assetDetails, forKey: "assetDetails")
+    public enum CodingKeys: String, CodingKey { 
+        case _id = "id"
+        case date
+        case amount
+        case currency
+        case type
+        case status
+        case canCancelRequest
+        case assetDetails
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        id = try container.decodeIfPresent(UUID.self, forKey: "id")
-        date = try container.decodeIfPresent(Date.self, forKey: "date")
-        amount = try container.decodeIfPresent(Double.self, forKey: "amount")
-        currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
-        type = try container.decodeIfPresent(InvestmentRequestType.self, forKey: "type")
-        status = try container.decodeIfPresent(InvestmentRequestStatus.self, forKey: "status")
-        canCancelRequest = try container.decodeIfPresent(Bool.self, forKey: "canCancelRequest")
-        assetDetails = try container.decodeIfPresent(AssetRequestDetails.self, forKey: "assetDetails")
-    }
 }
-

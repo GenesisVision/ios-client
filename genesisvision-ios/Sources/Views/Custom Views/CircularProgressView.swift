@@ -52,7 +52,7 @@ class CircularProgressView: UIView {
                 ? 0.0
                 : progressConstant
         
-        let percentText = (progress * 100).rounded(toPlaces: 0).toString() + "%"
+        let percentText = (progress * 100.0).rounded(toPlaces: 0).toString() + "%"
         percentLabel.text = percentText
         percentLabel.sizeToFit()
         

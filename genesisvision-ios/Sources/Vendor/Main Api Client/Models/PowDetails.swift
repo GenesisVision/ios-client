@@ -8,41 +8,18 @@
 import Foundation
 
 
+public struct PowDetails: Codable {
 
-open class PowDetails: Codable {
 
     public var secureAlgorithm: SecureAlgorithm?
+
     public var difficulty: Int?
+
     public var nonce: String?
-
-
-    
-    public init(secureAlgorithm: SecureAlgorithm?, difficulty: Int?, nonce: String?) {
+    public init(secureAlgorithm: SecureAlgorithm? = nil, difficulty: Int? = nil, nonce: String? = nil) { 
         self.secureAlgorithm = secureAlgorithm
         self.difficulty = difficulty
         self.nonce = nonce
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(secureAlgorithm, forKey: "secureAlgorithm")
-        try container.encodeIfPresent(difficulty, forKey: "difficulty")
-        try container.encodeIfPresent(nonce, forKey: "nonce")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        secureAlgorithm = try container.decodeIfPresent(SecureAlgorithm.self, forKey: "secureAlgorithm")
-        difficulty = try container.decodeIfPresent(Int.self, forKey: "difficulty")
-        nonce = try container.decodeIfPresent(String.self, forKey: "nonce")
-    }
 }
-

@@ -8,53 +8,27 @@
 import Foundation
 
 
+public struct ManagerNotificationSettingList: Codable {
 
-open class ManagerNotificationSettingList: Codable {
 
     public var managerId: UUID?
+
     public var url: String?
+
     public var username: String?
-    public var avatar: String?
+
+    public var logoUrl: String?
+
     public var about: String?
+
     public var settingsGeneral: [NotificationSettingViewModel]?
-
-
-    
-    public init(managerId: UUID?, url: String?, username: String?, avatar: String?, about: String?, settingsGeneral: [NotificationSettingViewModel]?) {
+    public init(managerId: UUID? = nil, url: String? = nil, username: String? = nil, logoUrl: String? = nil, about: String? = nil, settingsGeneral: [NotificationSettingViewModel]? = nil) { 
         self.managerId = managerId
         self.url = url
         self.username = username
-        self.avatar = avatar
+        self.logoUrl = logoUrl
         self.about = about
         self.settingsGeneral = settingsGeneral
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(managerId, forKey: "managerId")
-        try container.encodeIfPresent(url, forKey: "url")
-        try container.encodeIfPresent(username, forKey: "username")
-        try container.encodeIfPresent(avatar, forKey: "avatar")
-        try container.encodeIfPresent(about, forKey: "about")
-        try container.encodeIfPresent(settingsGeneral, forKey: "settingsGeneral")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        managerId = try container.decodeIfPresent(UUID.self, forKey: "managerId")
-        url = try container.decodeIfPresent(String.self, forKey: "url")
-        username = try container.decodeIfPresent(String.self, forKey: "username")
-        avatar = try container.decodeIfPresent(String.self, forKey: "avatar")
-        about = try container.decodeIfPresent(String.self, forKey: "about")
-        settingsGeneral = try container.decodeIfPresent([NotificationSettingViewModel].self, forKey: "settingsGeneral")
-    }
 }
-

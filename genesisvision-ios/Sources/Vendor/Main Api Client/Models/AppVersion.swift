@@ -8,37 +8,15 @@
 import Foundation
 
 
+public struct AppVersion: Codable {
 
-open class AppVersion: Codable {
 
     public var iOS: IOsAppVersion?
+
     public var android: AndroidAppVersion?
-
-
-    
-    public init(iOS: IOsAppVersion?, android: AndroidAppVersion?) {
+    public init(iOS: IOsAppVersion? = nil, android: AndroidAppVersion? = nil) { 
         self.iOS = iOS
         self.android = android
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(iOS, forKey: "iOS")
-        try container.encodeIfPresent(android, forKey: "android")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        iOS = try container.decodeIfPresent(IOsAppVersion.self, forKey: "iOS")
-        android = try container.decodeIfPresent(AndroidAppVersion.self, forKey: "android")
-    }
 }
-

@@ -8,65 +8,47 @@
 import Foundation
 
 
+public struct TransactionAssetDetails: Codable {
 
-open class TransactionAssetDetails: Codable {
 
-    public var description: String?
+    public var _description: String?
+
     public var manager: String?
-    public var id: UUID?
-    public var logo: String?
+
+    public var _id: UUID?
+
+    public var logoUrl: String?
+
     public var color: String?
+
     public var title: String?
+
     public var url: String?
+
     public var assetType: AssetType?
+
     public var programDetails: ProgramAssetDetails?
-
-
-    
-    public init(description: String?, manager: String?, id: UUID?, logo: String?, color: String?, title: String?, url: String?, assetType: AssetType?, programDetails: ProgramAssetDetails?) {
-        self.description = description
+    public init(_description: String? = nil, manager: String? = nil, _id: UUID? = nil, logoUrl: String? = nil, color: String? = nil, title: String? = nil, url: String? = nil, assetType: AssetType? = nil, programDetails: ProgramAssetDetails? = nil) { 
+        self._description = _description
         self.manager = manager
-        self.id = id
-        self.logo = logo
+        self._id = _id
+        self.logoUrl = logoUrl
         self.color = color
         self.title = title
         self.url = url
         self.assetType = assetType
         self.programDetails = programDetails
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(description, forKey: "description")
-        try container.encodeIfPresent(manager, forKey: "manager")
-        try container.encodeIfPresent(id, forKey: "id")
-        try container.encodeIfPresent(logo, forKey: "logo")
-        try container.encodeIfPresent(color, forKey: "color")
-        try container.encodeIfPresent(title, forKey: "title")
-        try container.encodeIfPresent(url, forKey: "url")
-        try container.encodeIfPresent(assetType, forKey: "assetType")
-        try container.encodeIfPresent(programDetails, forKey: "programDetails")
+    public enum CodingKeys: String, CodingKey { 
+        case _description = "description"
+        case manager
+        case _id = "id"
+        case logoUrl
+        case color
+        case title
+        case url
+        case assetType
+        case programDetails
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        description = try container.decodeIfPresent(String.self, forKey: "description")
-        manager = try container.decodeIfPresent(String.self, forKey: "manager")
-        id = try container.decodeIfPresent(UUID.self, forKey: "id")
-        logo = try container.decodeIfPresent(String.self, forKey: "logo")
-        color = try container.decodeIfPresent(String.self, forKey: "color")
-        title = try container.decodeIfPresent(String.self, forKey: "title")
-        url = try container.decodeIfPresent(String.self, forKey: "url")
-        assetType = try container.decodeIfPresent(AssetType.self, forKey: "assetType")
-        programDetails = try container.decodeIfPresent(ProgramAssetDetails.self, forKey: "programDetails")
-    }
 }
-

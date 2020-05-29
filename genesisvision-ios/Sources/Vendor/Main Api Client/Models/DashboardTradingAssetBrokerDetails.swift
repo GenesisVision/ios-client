@@ -8,45 +8,27 @@
 import Foundation
 
 
+public struct DashboardTradingAssetBrokerDetails: Codable {
 
-open class DashboardTradingAssetBrokerDetails: Codable {
 
-    public var id: UUID?
-    public var logo: String?
+    public var _id: UUID?
+
+    public var logoUrl: String?
+
     public var name: String?
+
     public var type: BrokerTradeServerType?
-
-
-    
-    public init(id: UUID?, logo: String?, name: String?, type: BrokerTradeServerType?) {
-        self.id = id
-        self.logo = logo
+    public init(_id: UUID? = nil, logoUrl: String? = nil, name: String? = nil, type: BrokerTradeServerType? = nil) { 
+        self._id = _id
+        self.logoUrl = logoUrl
         self.name = name
         self.type = type
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(id, forKey: "id")
-        try container.encodeIfPresent(logo, forKey: "logo")
-        try container.encodeIfPresent(name, forKey: "name")
-        try container.encodeIfPresent(type, forKey: "type")
+    public enum CodingKeys: String, CodingKey { 
+        case _id = "id"
+        case logoUrl
+        case name
+        case type
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        id = try container.decodeIfPresent(UUID.self, forKey: "id")
-        logo = try container.decodeIfPresent(String.self, forKey: "logo")
-        name = try container.decodeIfPresent(String.self, forKey: "name")
-        type = try container.decodeIfPresent(BrokerTradeServerType.self, forKey: "type")
-    }
 }
-

@@ -45,7 +45,7 @@ final class FundWithdrawViewModel {
     }
     
     func getInfo(completion: @escaping CompletionBlock) {
-        var currency: InvestmentsAPI.Currency_getFundWithdrawInfo = .gvt
+        var currency: Currency = .gvt
         
         guard let assetId = assetId else { return completion(.failure(errorType: .apiError(message: nil))) }
         
@@ -59,7 +59,7 @@ final class FundWithdrawViewModel {
             }
             
             if let walletCurrency = self?.selectedWalletFromDelegateManager?.selected?.currency?.rawValue {
-                currency = InvestmentsAPI.Currency_getFundWithdrawInfo(rawValue: walletCurrency) ?? .gvt
+                currency = Currency(rawValue: walletCurrency) ?? .gvt
             }
             
             FundsDataProvider.getWithdrawInfo(assetId, currency: currency, completion: { [weak self] (fundWithdrawInfo) in
@@ -127,11 +127,9 @@ final class FundWithdrawViewModel {
     
     // MARK: - Navigation
     func withdraw(with amount: Double, completion: @escaping CompletionBlock) {
-        guard let walletCurrency = self.selectedWalletFromDelegateManager?.selected?.currency?.rawValue else { return completion(.failure(errorType: .apiError(message: nil))) }
+        guard let walletCurrency = self.selectedWalletFromDelegateManager?.selected?.currency else { return completion(.failure(errorType: .apiError(message: nil))) }
         
-        let currency = InvestmentsAPI.Currency_withdrawFromFund(rawValue: walletCurrency)
-        
-        FundsDataProvider.withdraw(withPercent: amount, assetId: assetId, currency: currency) { (result) in
+        FundsDataProvider.withdraw(withPercent: amount, assetId: assetId, currency: walletCurrency) { (result) in
             completion(result)
         }
     }

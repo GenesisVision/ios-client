@@ -24,7 +24,7 @@ extension InRequestsTableViewCellViewModel: CellViewModel {
             cell.iconImageView.backgroundColor = UIColor.hexColor(color)
         }
         
-        if let fileName = request.assetDetails?.logo, let fileUrl = getFileURL(fileName: fileName) {
+        if let fileName = request.assetDetails?.logoUrl, let fileUrl = getFileURL(fileName: fileName) {
             cell.iconImageView.kf.indicatorType = .activity
             cell.iconImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
         }

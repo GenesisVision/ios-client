@@ -8,49 +8,24 @@
 import Foundation
 
 
+public struct DashboardInvestingDetails: Codable {
 
-open class DashboardInvestingDetails: Codable {
 
     public var equity: Double?
+
     public var programsCount: Int?
+
     public var fundsCount: Int?
+
     public var profits: DashboardProfits?
-    public var events: ItemsViewModelInvestmentEventViewModel?
 
-
-    
-    public init(equity: Double?, programsCount: Int?, fundsCount: Int?, profits: DashboardProfits?, events: ItemsViewModelInvestmentEventViewModel?) {
+    public var events: InvestmentEventViewModelItemsViewModel?
+    public init(equity: Double? = nil, programsCount: Int? = nil, fundsCount: Int? = nil, profits: DashboardProfits? = nil, events: InvestmentEventViewModelItemsViewModel? = nil) { 
         self.equity = equity
         self.programsCount = programsCount
         self.fundsCount = fundsCount
         self.profits = profits
         self.events = events
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(equity, forKey: "equity")
-        try container.encodeIfPresent(programsCount, forKey: "programsCount")
-        try container.encodeIfPresent(fundsCount, forKey: "fundsCount")
-        try container.encodeIfPresent(profits, forKey: "profits")
-        try container.encodeIfPresent(events, forKey: "events")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        equity = try container.decodeIfPresent(Double.self, forKey: "equity")
-        programsCount = try container.decodeIfPresent(Int.self, forKey: "programsCount")
-        fundsCount = try container.decodeIfPresent(Int.self, forKey: "fundsCount")
-        profits = try container.decodeIfPresent(DashboardProfits.self, forKey: "profits")
-        events = try container.decodeIfPresent(ItemsViewModelInvestmentEventViewModel.self, forKey: "events")
-    }
 }
-

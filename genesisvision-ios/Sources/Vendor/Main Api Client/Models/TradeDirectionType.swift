@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum TradeDirectionType: String, Codable {
     case buy = "Buy"
     case sell = "Sell"
@@ -15,5 +14,4 @@ public enum TradeDirectionType: String, Codable {
     case credit = "Credit"
     case undefined = "Undefined"
     case manualBalancing = "ManualBalancing"
-
 }

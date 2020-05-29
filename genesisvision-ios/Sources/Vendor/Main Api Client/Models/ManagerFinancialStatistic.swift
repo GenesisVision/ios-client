@@ -8,45 +8,21 @@
 import Foundation
 
 
+public struct ManagerFinancialStatistic: Codable {
 
-open class ManagerFinancialStatistic: Codable {
 
     public var successFee: Double?
+
     public var entryFee: Double?
+
     public var profit: Double?
+
     public var balance: Double?
-
-
-    
-    public init(successFee: Double?, entryFee: Double?, profit: Double?, balance: Double?) {
+    public init(successFee: Double? = nil, entryFee: Double? = nil, profit: Double? = nil, balance: Double? = nil) { 
         self.successFee = successFee
         self.entryFee = entryFee
         self.profit = profit
         self.balance = balance
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(successFee, forKey: "successFee")
-        try container.encodeIfPresent(entryFee, forKey: "entryFee")
-        try container.encodeIfPresent(profit, forKey: "profit")
-        try container.encodeIfPresent(balance, forKey: "balance")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        successFee = try container.decodeIfPresent(Double.self, forKey: "successFee")
-        entryFee = try container.decodeIfPresent(Double.self, forKey: "entryFee")
-        profit = try container.decodeIfPresent(Double.self, forKey: "profit")
-        balance = try container.decodeIfPresent(Double.self, forKey: "balance")
-    }
 }
-

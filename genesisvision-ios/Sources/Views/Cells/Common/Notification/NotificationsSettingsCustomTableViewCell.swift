@@ -52,6 +52,6 @@ class NotificationsSettingsCustomTableViewCell: UITableViewCell {
     // MARK: - Actions
     @IBAction func switchButtonAction(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        settingsProtocol?.didChange(enable: sender.isSelected, settingId: setting?.id?.uuidString)
+        settingsProtocol?.didChange(enable: sender.isSelected, settingId: setting?._id?.uuidString)
     }
 }

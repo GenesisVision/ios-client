@@ -8,37 +8,12 @@
 import Foundation
 
 
+public struct UsersPlatformInfo: Codable {
 
-open class UsersPlatformInfo: Codable {
 
-    public var facets: [AssetFacet]?
     public var tags: [Tag]?
-
-
-    
-    public init(facets: [AssetFacet]?, tags: [Tag]?) {
-        self.facets = facets
+    public init(tags: [Tag]? = nil) { 
         self.tags = tags
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(facets, forKey: "facets")
-        try container.encodeIfPresent(tags, forKey: "tags")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        facets = try container.decodeIfPresent([AssetFacet].self, forKey: "facets")
-        tags = try container.decodeIfPresent([Tag].self, forKey: "tags")
-    }
 }
-

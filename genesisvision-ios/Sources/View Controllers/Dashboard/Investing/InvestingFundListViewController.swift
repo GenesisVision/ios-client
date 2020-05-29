@@ -38,7 +38,7 @@ class InvestingFundListViewController: ListViewController {
     }
     
     func show(_ model: FundInvestingDetailsList) {
-        if let router = viewModel.router, let uuiString = model.id?.uuidString {
+        if let router = viewModel.router, let uuiString = model._id?.uuidString {
             router.showAssetDetails(with: uuiString, assetType: .fund)
        }
     }

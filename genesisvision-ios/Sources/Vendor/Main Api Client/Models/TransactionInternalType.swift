@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum TransactionInternalType: String, Codable {
     case all = "All"
     case investment = "Investment"
@@ -19,5 +18,4 @@ public enum TransactionInternalType: String, Codable {
     case follow = "Follow"
     case tradingAccounts = "TradingAccounts"
     case agentReward = "AgentReward"
-
 }

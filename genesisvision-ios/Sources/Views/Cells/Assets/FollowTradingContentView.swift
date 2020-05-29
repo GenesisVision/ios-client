@@ -64,7 +64,7 @@ extension FollowTradingContentView: ContentViewProtocol {
     func configure(followTrading asset: DashboardTradingAsset, filterProtocol: FilterChangedProtocol?) {
         self.filterProtocol = filterProtocol
 
-        if let assetId = asset.id?.uuidString {
+        if let assetId = asset._id?.uuidString {
             self.assetId = assetId
         }
         
@@ -94,7 +94,7 @@ extension FollowTradingContentView: ContentViewProtocol {
         }
         
         photoImageView.image = UIImage.programPlaceholder
-        if let logo = asset.publicInfo?.logo, let fileUrl = getFileURL(fileName: logo) {
+        if let logo = asset.publicInfo?.logoUrl, let fileUrl = getFileURL(fileName: logo) {
             photoImageView.kf.indicatorType = .activity
             photoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
             photoImageView.backgroundColor = .clear

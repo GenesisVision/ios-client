@@ -8,49 +8,24 @@
 import Foundation
 
 
+public struct PlatformInfo: Codable {
 
-open class PlatformInfo: Codable {
 
     public var appVersionInfo: AppVersion?
+
     public var filters: FilterInfo?
+
     public var assetInfo: AssetPlatformInfo?
+
     public var usersInfo: UsersPlatformInfo?
+
     public var commonInfo: PlatformCommonInfo?
-
-
-    
-    public init(appVersionInfo: AppVersion?, filters: FilterInfo?, assetInfo: AssetPlatformInfo?, usersInfo: UsersPlatformInfo?, commonInfo: PlatformCommonInfo?) {
+    public init(appVersionInfo: AppVersion? = nil, filters: FilterInfo? = nil, assetInfo: AssetPlatformInfo? = nil, usersInfo: UsersPlatformInfo? = nil, commonInfo: PlatformCommonInfo? = nil) { 
         self.appVersionInfo = appVersionInfo
         self.filters = filters
         self.assetInfo = assetInfo
         self.usersInfo = usersInfo
         self.commonInfo = commonInfo
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(appVersionInfo, forKey: "appVersionInfo")
-        try container.encodeIfPresent(filters, forKey: "filters")
-        try container.encodeIfPresent(assetInfo, forKey: "assetInfo")
-        try container.encodeIfPresent(usersInfo, forKey: "usersInfo")
-        try container.encodeIfPresent(commonInfo, forKey: "commonInfo")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        appVersionInfo = try container.decodeIfPresent(AppVersion.self, forKey: "appVersionInfo")
-        filters = try container.decodeIfPresent(FilterInfo.self, forKey: "filters")
-        assetInfo = try container.decodeIfPresent(AssetPlatformInfo.self, forKey: "assetInfo")
-        usersInfo = try container.decodeIfPresent(UsersPlatformInfo.self, forKey: "usersInfo")
-        commonInfo = try container.decodeIfPresent(PlatformCommonInfo.self, forKey: "commonInfo")
-    }
 }
-

@@ -8,37 +8,23 @@
 import Foundation
 
 
+public struct TradingAccountPwdUpdate: Codable {
 
-open class TradingAccountPwdUpdate: Codable {
 
     public var password: String?
+
     public var twoFactorCode: String?
 
-
-    
-    public init(password: String?, twoFactorCode: String?) {
+    public var _id: UUID?
+    public init(password: String? = nil, twoFactorCode: String? = nil, _id: UUID? = nil) { 
         self.password = password
         self.twoFactorCode = twoFactorCode
+        self._id = _id
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(password, forKey: "password")
-        try container.encodeIfPresent(twoFactorCode, forKey: "twoFactorCode")
+    public enum CodingKeys: String, CodingKey { 
+        case password
+        case twoFactorCode
+        case _id = "id"
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        password = try container.decodeIfPresent(String.self, forKey: "password")
-        twoFactorCode = try container.decodeIfPresent(String.self, forKey: "twoFactorCode")
-    }
 }
-

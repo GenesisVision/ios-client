@@ -8,37 +8,15 @@
 import Foundation
 
 
+public struct PlatformUrlInfo: Codable {
 
-open class PlatformUrlInfo: Codable {
 
     public var type: PlatformUrlType?
+
     public var url: String?
-
-
-    
-    public init(type: PlatformUrlType?, url: String?) {
+    public init(type: PlatformUrlType? = nil, url: String? = nil) { 
         self.type = type
         self.url = url
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(type, forKey: "type")
-        try container.encodeIfPresent(url, forKey: "url")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        type = try container.decodeIfPresent(PlatformUrlType.self, forKey: "type")
-        url = try container.decodeIfPresent(String.self, forKey: "url")
-    }
 }
-

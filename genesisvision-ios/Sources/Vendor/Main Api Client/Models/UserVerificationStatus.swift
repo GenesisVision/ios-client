@@ -7,11 +7,9 @@
 
 import Foundation
 
-
 public enum UserVerificationStatus: String, Codable {
     case notVerified = "NotVerified"
     case verified = "Verified"
     case underReview = "UnderReview"
     case rejected = "Rejected"
-
 }

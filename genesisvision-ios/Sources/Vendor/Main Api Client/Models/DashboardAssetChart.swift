@@ -8,41 +8,18 @@
 import Foundation
 
 
+public struct DashboardAssetChart: Codable {
 
-open class DashboardAssetChart: Codable {
 
     public var assetId: UUID?
+
     public var color: String?
+
     public var chart: [SimpleChartPoint]?
-
-
-    
-    public init(assetId: UUID?, color: String?, chart: [SimpleChartPoint]?) {
+    public init(assetId: UUID? = nil, color: String? = nil, chart: [SimpleChartPoint]? = nil) { 
         self.assetId = assetId
         self.color = color
         self.chart = chart
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(assetId, forKey: "assetId")
-        try container.encodeIfPresent(color, forKey: "color")
-        try container.encodeIfPresent(chart, forKey: "chart")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        assetId = try container.decodeIfPresent(UUID.self, forKey: "assetId")
-        color = try container.decodeIfPresent(String.self, forKey: "color")
-        chart = try container.decodeIfPresent([SimpleChartPoint].self, forKey: "chart")
-    }
 }
-

@@ -8,21 +8,25 @@
 import Foundation
 
 
+public struct OrderSignalProgramInfo: Codable {
 
-open class OrderSignalProgramInfo: Codable {
 
     public var manager: ProfilePublic?
+
     public var program: OrderProgramData?
+
     public var programId: UUID?
+
     public var volume: Double?
+
     public var priceOpenAvg: Double?
+
     public var profit: Double?
+
     public var firstOrderDate: Date?
+
     public var fees: [OrderSignalFee]?
-
-
-    
-    public init(manager: ProfilePublic?, program: OrderProgramData?, programId: UUID?, volume: Double?, priceOpenAvg: Double?, profit: Double?, firstOrderDate: Date?, fees: [OrderSignalFee]?) {
+    public init(manager: ProfilePublic? = nil, program: OrderProgramData? = nil, programId: UUID? = nil, volume: Double? = nil, priceOpenAvg: Double? = nil, profit: Double? = nil, firstOrderDate: Date? = nil, fees: [OrderSignalFee]? = nil) { 
         self.manager = manager
         self.program = program
         self.programId = programId
@@ -32,37 +36,5 @@ open class OrderSignalProgramInfo: Codable {
         self.firstOrderDate = firstOrderDate
         self.fees = fees
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(manager, forKey: "manager")
-        try container.encodeIfPresent(program, forKey: "program")
-        try container.encodeIfPresent(programId, forKey: "programId")
-        try container.encodeIfPresent(volume, forKey: "volume")
-        try container.encodeIfPresent(priceOpenAvg, forKey: "priceOpenAvg")
-        try container.encodeIfPresent(profit, forKey: "profit")
-        try container.encodeIfPresent(firstOrderDate, forKey: "firstOrderDate")
-        try container.encodeIfPresent(fees, forKey: "fees")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        manager = try container.decodeIfPresent(ProfilePublic.self, forKey: "manager")
-        program = try container.decodeIfPresent(OrderProgramData.self, forKey: "program")
-        programId = try container.decodeIfPresent(UUID.self, forKey: "programId")
-        volume = try container.decodeIfPresent(Double.self, forKey: "volume")
-        priceOpenAvg = try container.decodeIfPresent(Double.self, forKey: "priceOpenAvg")
-        profit = try container.decodeIfPresent(Double.self, forKey: "profit")
-        firstOrderDate = try container.decodeIfPresent(Date.self, forKey: "firstOrderDate")
-        fees = try container.decodeIfPresent([OrderSignalFee].self, forKey: "fees")
-    }
 }
-

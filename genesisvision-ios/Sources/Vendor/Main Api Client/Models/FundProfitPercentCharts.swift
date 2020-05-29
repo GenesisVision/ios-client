@@ -8,41 +8,18 @@
 import Foundation
 
 
+public struct FundProfitPercentCharts: Codable {
 
-open class FundProfitPercentCharts: Codable {
 
     public var statistic: FundChartStatistic?
+
     public var charts: [SimpleChart]?
+
     public var assets: [FundAssetsState]?
-
-
-    
-    public init(statistic: FundChartStatistic?, charts: [SimpleChart]?, assets: [FundAssetsState]?) {
+    public init(statistic: FundChartStatistic? = nil, charts: [SimpleChart]? = nil, assets: [FundAssetsState]? = nil) { 
         self.statistic = statistic
         self.charts = charts
         self.assets = assets
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(statistic, forKey: "statistic")
-        try container.encodeIfPresent(charts, forKey: "charts")
-        try container.encodeIfPresent(assets, forKey: "assets")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        statistic = try container.decodeIfPresent(FundChartStatistic.self, forKey: "statistic")
-        charts = try container.decodeIfPresent([SimpleChart].self, forKey: "charts")
-        assets = try container.decodeIfPresent([FundAssetsState].self, forKey: "assets")
-    }
 }
-

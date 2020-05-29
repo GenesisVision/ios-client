@@ -8,33 +8,12 @@
 import Foundation
 
 
+public struct TwoFactorStatus: Codable {
 
-open class TwoFactorStatus: Codable {
 
     public var twoFactorEnabled: Bool?
-
-
-    
-    public init(twoFactorEnabled: Bool?) {
+    public init(twoFactorEnabled: Bool? = nil) { 
         self.twoFactorEnabled = twoFactorEnabled
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(twoFactorEnabled, forKey: "twoFactorEnabled")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        twoFactorEnabled = try container.decodeIfPresent(Bool.self, forKey: "twoFactorEnabled")
-    }
 }
-

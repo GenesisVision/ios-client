@@ -259,7 +259,7 @@ class CreateFundStackView: ActionStackView {
         nameView.subtitleValueLabel.text = "0/20"
         
         descriptionView.titleLabel.text = "Description"
-        descriptionView.textView.text = viewModel.request.description ?? ""
+        descriptionView.textView.text = viewModel.request._description ?? ""
         descriptionView.subtitleLabel.text = "Minimum 20 symbols"
         descriptionView.subtitleValueLabel.text = "0 / 500"
         

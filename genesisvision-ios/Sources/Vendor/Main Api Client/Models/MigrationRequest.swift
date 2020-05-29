@@ -8,41 +8,18 @@
 import Foundation
 
 
+public struct MigrationRequest: Codable {
 
-open class MigrationRequest: Codable {
 
     public var dateCreate: Date?
+
     public var newLeverage: Int?
+
     public var newBroker: Broker?
-
-
-    
-    public init(dateCreate: Date?, newLeverage: Int?, newBroker: Broker?) {
+    public init(dateCreate: Date? = nil, newLeverage: Int? = nil, newBroker: Broker? = nil) { 
         self.dateCreate = dateCreate
         self.newLeverage = newLeverage
         self.newBroker = newBroker
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(dateCreate, forKey: "dateCreate")
-        try container.encodeIfPresent(newLeverage, forKey: "newLeverage")
-        try container.encodeIfPresent(newBroker, forKey: "newBroker")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        dateCreate = try container.decodeIfPresent(Date.self, forKey: "dateCreate")
-        newLeverage = try container.decodeIfPresent(Int.self, forKey: "newLeverage")
-        newBroker = try container.decodeIfPresent(Broker.self, forKey: "newBroker")
-    }
 }
-

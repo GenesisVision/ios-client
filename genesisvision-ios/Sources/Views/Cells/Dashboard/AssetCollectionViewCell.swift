@@ -16,22 +16,22 @@ struct AssetCollectionViewCellViewModel {
     
     func getAssetId() -> String {
         var assetId: String = ""
-        if let program = asset as? ProgramDetailsListItem, let id = program.id?.uuidString {
+        if let program = asset as? ProgramDetailsListItem, let id = program._id?.uuidString {
             assetId = id
-        } else if let programInvesting = asset as? ProgramInvestingDetailsList, let id = programInvesting.id?.uuidString {
+        } else if let programInvesting = asset as? ProgramInvestingDetailsList, let id = programInvesting._id?.uuidString {
             assetId = id
-        } else if let tradingAsset = asset as? DashboardTradingAsset, tradingAsset.assetType == type, let id = tradingAsset.id?.uuidString {
+        } else if let tradingAsset = asset as? DashboardTradingAsset, tradingAsset.assetType == type, let id = tradingAsset._id?.uuidString {
             assetId = id
-        } else if let fund = asset as? FundDetailsListItem, let id = fund.id?.uuidString {
+        } else if let fund = asset as? FundDetailsListItem, let id = fund._id?.uuidString {
             assetId = id
-        } else if let fundInvesting = asset as? FundInvestingDetailsList, let id = fundInvesting.id?.uuidString {
+        } else if let fundInvesting = asset as? FundInvestingDetailsList, let id = fundInvesting._id?.uuidString {
             assetId = id
-        } else if let tradingAsset = asset as? DashboardTradingAsset, tradingAsset.assetType == type, let id = tradingAsset.id?.uuidString {
+        } else if let tradingAsset = asset as? DashboardTradingAsset, tradingAsset.assetType == type, let id = tradingAsset._id?.uuidString {
             assetId = id
         } else if let follow = asset as? FollowDetailsListItem {
-            assetId = follow.id?.uuidString ?? ""
+            assetId = follow._id?.uuidString ?? ""
         } else if let tradingAsset = asset as? DashboardTradingAsset, tradingAsset.assetType == type {
-            assetId = tradingAsset.id?.uuidString ?? ""
+            assetId = tradingAsset._id?.uuidString ?? ""
         }
         
         return assetId

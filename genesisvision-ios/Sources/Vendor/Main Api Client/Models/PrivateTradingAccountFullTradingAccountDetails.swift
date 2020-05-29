@@ -8,36 +8,27 @@
 import Foundation
 
 
+public struct PrivateTradingAccountFullTradingAccountDetails: Codable {
 
-open class PrivateTradingAccountFullTradingAccountDetails: Codable {
 
-    public enum Currency: String, Codable { 
-        case usd = "USD"
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case eur = "EUR"
-    }
     public var currency: Currency?
+
     public var leverage: Int?
+
     public var apiKey: String?
+
     public var login: String?
+
     public var balance: Double?
+
     public var type: PrivateTradingAccountType?
+
     public var subscriptions: Int?
+
     public var isExternal: Bool?
 
-
-    
-    public init(currency: Currency?, leverage: Int?, apiKey: String?, login: String?, balance: Double?, type: PrivateTradingAccountType?, subscriptions: Int?, isExternal: Bool?) {
+    public var showTradingLog: Bool?
+    public init(currency: Currency? = nil, leverage: Int? = nil, apiKey: String? = nil, login: String? = nil, balance: Double? = nil, type: PrivateTradingAccountType? = nil, subscriptions: Int? = nil, isExternal: Bool? = nil, showTradingLog: Bool? = nil) { 
         self.currency = currency
         self.leverage = leverage
         self.apiKey = apiKey
@@ -46,38 +37,7 @@ open class PrivateTradingAccountFullTradingAccountDetails: Codable {
         self.type = type
         self.subscriptions = subscriptions
         self.isExternal = isExternal
-    }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(currency, forKey: "currency")
-        try container.encodeIfPresent(leverage, forKey: "leverage")
-        try container.encodeIfPresent(apiKey, forKey: "apiKey")
-        try container.encodeIfPresent(login, forKey: "login")
-        try container.encodeIfPresent(balance, forKey: "balance")
-        try container.encodeIfPresent(type, forKey: "type")
-        try container.encodeIfPresent(subscriptions, forKey: "subscriptions")
-        try container.encodeIfPresent(isExternal, forKey: "isExternal")
+        self.showTradingLog = showTradingLog
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
-        leverage = try container.decodeIfPresent(Int.self, forKey: "leverage")
-        apiKey = try container.decodeIfPresent(String.self, forKey: "apiKey")
-        login = try container.decodeIfPresent(String.self, forKey: "login")
-        balance = try container.decodeIfPresent(Double.self, forKey: "balance")
-        type = try container.decodeIfPresent(PrivateTradingAccountType.self, forKey: "type")
-        subscriptions = try container.decodeIfPresent(Int.self, forKey: "subscriptions")
-        isExternal = try container.decodeIfPresent(Bool.self, forKey: "isExternal")
-    }
 }
-

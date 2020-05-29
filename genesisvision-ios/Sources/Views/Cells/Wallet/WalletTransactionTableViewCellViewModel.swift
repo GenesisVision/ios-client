@@ -16,7 +16,7 @@ extension WalletTransactionTableViewCellViewModel: CellViewModel {
     func setup(on cell: WalletTransactionTableViewCell) {
         cell.iconImageView.image = UIImage.eventPlaceholder
         
-        if let logo = walletTransaction.amount?.first?.logo, let fileUrl = getFileURL(fileName: logo) {
+        if let logo = walletTransaction.amount?.first?.logoUrl, let fileUrl = getFileURL(fileName: logo) {
             cell.iconImageView.kf.indicatorType = .activity
             cell.iconImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
             cell.iconImageView.backgroundColor = .clear
@@ -38,7 +38,7 @@ extension WalletTransactionTableViewCellViewModel: CellViewModel {
             cell.amountLabel.textColor = UIColor.Cell.title
         }
         
-        if let information = walletTransaction.description {
+        if let information = walletTransaction._description {
             cell.titleLabel.text = information
         } else {
             cell.titleLabel.isHidden = true

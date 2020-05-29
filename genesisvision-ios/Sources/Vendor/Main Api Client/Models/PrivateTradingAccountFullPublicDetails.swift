@@ -8,41 +8,18 @@
 import Foundation
 
 
+public struct PrivateTradingAccountFullPublicDetails: Codable {
 
-open class PrivateTradingAccountFullPublicDetails: Codable {
 
     public var title: String?
+
     public var creationDate: Date?
+
     public var status: DashboardTradingAssetStatus?
-
-
-    
-    public init(title: String?, creationDate: Date?, status: DashboardTradingAssetStatus?) {
+    public init(title: String? = nil, creationDate: Date? = nil, status: DashboardTradingAssetStatus? = nil) { 
         self.title = title
         self.creationDate = creationDate
         self.status = status
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(title, forKey: "title")
-        try container.encodeIfPresent(creationDate, forKey: "creationDate")
-        try container.encodeIfPresent(status, forKey: "status")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        title = try container.decodeIfPresent(String.self, forKey: "title")
-        creationDate = try container.decodeIfPresent(Date.self, forKey: "creationDate")
-        status = try container.decodeIfPresent(DashboardTradingAssetStatus.self, forKey: "status")
-    }
 }
-

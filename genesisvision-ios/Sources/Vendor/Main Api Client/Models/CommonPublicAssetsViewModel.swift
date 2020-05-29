@@ -8,45 +8,21 @@
 import Foundation
 
 
-
-open class CommonPublicAssetsViewModel: Codable {
-
-    public var programs: ItemsViewModelProgramDetailsListItem?
-    public var funds: ItemsViewModelFundDetailsListItem?
-    public var follows: ItemsViewModelFollowDetailsListItem?
-    public var managers: ItemsViewModelPublicProfile?
+public struct CommonPublicAssetsViewModel: Codable {
 
 
-    
-    public init(programs: ItemsViewModelProgramDetailsListItem?, funds: ItemsViewModelFundDetailsListItem?, follows: ItemsViewModelFollowDetailsListItem?, managers: ItemsViewModelPublicProfile?) {
+    public var programs: ProgramDetailsListItemItemsViewModel?
+
+    public var funds: FundDetailsListItemItemsViewModel?
+
+    public var follows: FollowDetailsListItemItemsViewModel?
+
+    public var managers: PublicProfileItemsViewModel?
+    public init(programs: ProgramDetailsListItemItemsViewModel? = nil, funds: FundDetailsListItemItemsViewModel? = nil, follows: FollowDetailsListItemItemsViewModel? = nil, managers: PublicProfileItemsViewModel? = nil) { 
         self.programs = programs
         self.funds = funds
         self.follows = follows
         self.managers = managers
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(programs, forKey: "programs")
-        try container.encodeIfPresent(funds, forKey: "funds")
-        try container.encodeIfPresent(follows, forKey: "follows")
-        try container.encodeIfPresent(managers, forKey: "managers")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        programs = try container.decodeIfPresent(ItemsViewModelProgramDetailsListItem.self, forKey: "programs")
-        funds = try container.decodeIfPresent(ItemsViewModelFundDetailsListItem.self, forKey: "funds")
-        follows = try container.decodeIfPresent(ItemsViewModelFollowDetailsListItem.self, forKey: "follows")
-        managers = try container.decodeIfPresent(ItemsViewModelPublicProfile.self, forKey: "managers")
-    }
 }
-

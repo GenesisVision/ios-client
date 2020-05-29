@@ -343,7 +343,8 @@ class ChartView: CombinedChartView {
             let investorsFunds = values[i].investorsFunds ?? 0.0
             let managerFunds = values[i].managerFunds ?? 0.0
             let yValue = investorsFunds + managerFunds
-            return ChartDataEntry(x: Double(values[i].date ?? 0), y: yValue)
+            let date = Double(values[i].date?.timeIntervalSince1970 ?? 0)
+            return ChartDataEntry(x: date, y: yValue)
         }
         lineChartDataSet = LineChartDataSet(entries: profitDataEntry, label: "Profit Chart")
         lineChartDataSet.setColor(UIColor.Chart.dark)
@@ -359,7 +360,8 @@ class ChartView: CombinedChartView {
             let investorsFunds = values[i].investorsFunds ?? 0.0
             let managerFunds = values[i].managerFunds ?? 0.0
             let yValue = investorsFunds + managerFunds
-            return ChartDataEntry(x: Double(values[i].date ?? 0), y: yValue)
+            let date = Double(values[i].date?.timeIntervalSince1970 ?? 0)
+            return ChartDataEntry(x: date, y: yValue)
         }
         lineChartDataSet = LineChartDataSet(entries: investorsFundsDataEntry, label: "Investors Funds Chart")
         lineChartDataSet.setColor(UIColor.Chart.middle)
@@ -373,7 +375,8 @@ class ChartView: CombinedChartView {
         
         let managerFundsDataEntry = (0..<values.count).map { (i) -> ChartDataEntry in
             let yValue = values[i].managerFunds ?? 0.0
-            return ChartDataEntry(x: Double(values[i].date ?? 0), y: yValue)
+            let date = Double(values[i].date?.timeIntervalSince1970 ?? 0)
+            return ChartDataEntry(x: date, y: yValue)
         }
         lineChartDataSet = LineChartDataSet(entries: managerFundsDataEntry, label: "Manager Funds Chart")
         lineChartDataSet.setColor(UIColor.Chart.dark)
@@ -395,7 +398,8 @@ class ChartView: CombinedChartView {
             let investorsFunds = values[i].investorsFunds ?? 0.0
             let managerFunds = values[i].managerFunds ?? 0.0
             let yValue = investorsFunds + managerFunds
-            return ChartDataEntry(x: Double(values[i].date ?? 0), y: yValue)
+            let date = Double(values[i].date?.timeIntervalSince1970 ?? 0)
+            return ChartDataEntry(x: date, y: yValue)
         }
         lineChartDataSet = LineChartDataSet(entries: investorsFundsDataEntry, label: "Investors Funds Chart")
         lineChartDataSet.setColor(UIColor.Chart.middle)
@@ -409,7 +413,8 @@ class ChartView: CombinedChartView {
         
         let managerFundsDataEntry = (0..<values.count).map { (i) -> ChartDataEntry in
             let yValue = values[i].managerFunds ?? 0.0
-            return ChartDataEntry(x: Double(values[i].date ?? 0), y: yValue)
+            let date = Double(values[i].date?.timeIntervalSince1970 ?? 0)
+            return ChartDataEntry(x: date, y: yValue)
         }
         lineChartDataSet = LineChartDataSet(entries: managerFundsDataEntry, label: "Manager Funds Chart")
         lineChartDataSet.setColor(UIColor.Chart.dark)
@@ -428,7 +433,9 @@ class ChartView: CombinedChartView {
     private func generateLineChartData(_ values: [SimpleChartPoint]) -> LineChartData {
 
         let totalDataEntry = (0..<values.count).map { (i) -> ChartDataEntry in
-            return ChartDataEntry(x: Double(values[i].date ?? 0), y: values[i].value ?? 0)
+            let x = Double(values[i].date?.timeIntervalSince1970 ?? 0)
+            let y = values[i].value ?? 0
+            return ChartDataEntry(x: x, y: y)
         }
 
         lineChartDataSet = LineChartDataSet(entries: totalDataEntry, label: "Line Profit")

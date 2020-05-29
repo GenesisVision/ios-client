@@ -8,22 +8,27 @@
 import Foundation
 
 
+public struct ProgramLevelInfo: Codable {
 
-open class ProgramLevelInfo: Codable {
 
     public var isKycPassed: Bool?
+
     public var level: Int?
+
     public var levelProgressPercent: Double?
+
     public var genesisRatio: Double?
+
     public var programAge: Double?
+
     public var weightedVolumeScale: Double?
+
     public var managerBalance: Double?
+
     public var investmentScale: Double?
+
     public var totalAvailableToInvest: Double?
-
-
-    
-    public init(isKycPassed: Bool?, level: Int?, levelProgressPercent: Double?, genesisRatio: Double?, programAge: Double?, weightedVolumeScale: Double?, managerBalance: Double?, investmentScale: Double?, totalAvailableToInvest: Double?) {
+    public init(isKycPassed: Bool? = nil, level: Int? = nil, levelProgressPercent: Double? = nil, genesisRatio: Double? = nil, programAge: Double? = nil, weightedVolumeScale: Double? = nil, managerBalance: Double? = nil, investmentScale: Double? = nil, totalAvailableToInvest: Double? = nil) { 
         self.isKycPassed = isKycPassed
         self.level = level
         self.levelProgressPercent = levelProgressPercent
@@ -34,39 +39,5 @@ open class ProgramLevelInfo: Codable {
         self.investmentScale = investmentScale
         self.totalAvailableToInvest = totalAvailableToInvest
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(isKycPassed, forKey: "isKycPassed")
-        try container.encodeIfPresent(level, forKey: "level")
-        try container.encodeIfPresent(levelProgressPercent, forKey: "levelProgressPercent")
-        try container.encodeIfPresent(genesisRatio, forKey: "genesisRatio")
-        try container.encodeIfPresent(programAge, forKey: "programAge")
-        try container.encodeIfPresent(weightedVolumeScale, forKey: "weightedVolumeScale")
-        try container.encodeIfPresent(managerBalance, forKey: "managerBalance")
-        try container.encodeIfPresent(investmentScale, forKey: "investmentScale")
-        try container.encodeIfPresent(totalAvailableToInvest, forKey: "totalAvailableToInvest")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        isKycPassed = try container.decodeIfPresent(Bool.self, forKey: "isKycPassed")
-        level = try container.decodeIfPresent(Int.self, forKey: "level")
-        levelProgressPercent = try container.decodeIfPresent(Double.self, forKey: "levelProgressPercent")
-        genesisRatio = try container.decodeIfPresent(Double.self, forKey: "genesisRatio")
-        programAge = try container.decodeIfPresent(Double.self, forKey: "programAge")
-        weightedVolumeScale = try container.decodeIfPresent(Double.self, forKey: "weightedVolumeScale")
-        managerBalance = try container.decodeIfPresent(Double.self, forKey: "managerBalance")
-        investmentScale = try container.decodeIfPresent(Double.self, forKey: "investmentScale")
-        totalAvailableToInvest = try container.decodeIfPresent(Double.self, forKey: "totalAvailableToInvest")
-    }
 }
-

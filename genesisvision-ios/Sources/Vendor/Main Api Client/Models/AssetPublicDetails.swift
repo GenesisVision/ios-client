@@ -8,25 +8,33 @@
 import Foundation
 
 
+public struct AssetPublicDetails: Codable {
 
-open class AssetPublicDetails: Codable {
 
     public var title: String?
-    public var description: String?
+
+    public var _description: String?
+
     public var logo: String?
+
+    public var logoUrl: String?
+
     public var url: String?
+
     public var color: String?
+
     public var creationDate: Date?
+
     public var status: String?
+
     public var isOwnAsset: Bool?
+
     public var typeExt: AssetTypeExt?
-
-
-    
-    public init(title: String?, description: String?, logo: String?, url: String?, color: String?, creationDate: Date?, status: String?, isOwnAsset: Bool?, typeExt: AssetTypeExt?) {
+    public init(title: String? = nil, _description: String? = nil, logo: String? = nil, logoUrl: String? = nil, url: String? = nil, color: String? = nil, creationDate: Date? = nil, status: String? = nil, isOwnAsset: Bool? = nil, typeExt: AssetTypeExt? = nil) { 
         self.title = title
-        self.description = description
+        self._description = _description
         self.logo = logo
+        self.logoUrl = logoUrl
         self.url = url
         self.color = color
         self.creationDate = creationDate
@@ -34,39 +42,17 @@ open class AssetPublicDetails: Codable {
         self.isOwnAsset = isOwnAsset
         self.typeExt = typeExt
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(title, forKey: "title")
-        try container.encodeIfPresent(description, forKey: "description")
-        try container.encodeIfPresent(logo, forKey: "logo")
-        try container.encodeIfPresent(url, forKey: "url")
-        try container.encodeIfPresent(color, forKey: "color")
-        try container.encodeIfPresent(creationDate, forKey: "creationDate")
-        try container.encodeIfPresent(status, forKey: "status")
-        try container.encodeIfPresent(isOwnAsset, forKey: "isOwnAsset")
-        try container.encodeIfPresent(typeExt, forKey: "typeExt")
+    public enum CodingKeys: String, CodingKey { 
+        case title
+        case _description = "description"
+        case logo
+        case logoUrl
+        case url
+        case color
+        case creationDate
+        case status
+        case isOwnAsset
+        case typeExt
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        title = try container.decodeIfPresent(String.self, forKey: "title")
-        description = try container.decodeIfPresent(String.self, forKey: "description")
-        logo = try container.decodeIfPresent(String.self, forKey: "logo")
-        url = try container.decodeIfPresent(String.self, forKey: "url")
-        color = try container.decodeIfPresent(String.self, forKey: "color")
-        creationDate = try container.decodeIfPresent(Date.self, forKey: "creationDate")
-        status = try container.decodeIfPresent(String.self, forKey: "status")
-        isOwnAsset = try container.decodeIfPresent(Bool.self, forKey: "isOwnAsset")
-        typeExt = try container.decodeIfPresent(AssetTypeExt.self, forKey: "typeExt")
-    }
 }
-

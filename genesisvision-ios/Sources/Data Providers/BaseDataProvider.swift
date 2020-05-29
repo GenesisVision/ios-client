@@ -55,10 +55,9 @@ class BaseDataProvider: DataProvider {
     }
     
     // MARK: - Files
-    static func uploadImage(imageURL: URL, completion: @escaping (_ uploadResult: UploadResult?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+    static func uploadImage(imageData: Data, completion: @escaping (_ uploadResult: UploadResult?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
-        FileAPI.uploadFile(uploadedFile: imageURL, authorization: authorization) { (model, error) in
+        FileAPI.uploadFile(uploadedFile: imageData) { (model, error) in
             DataProvider().responseHandler(model, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }

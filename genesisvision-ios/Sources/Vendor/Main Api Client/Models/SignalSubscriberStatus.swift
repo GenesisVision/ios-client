@@ -7,9 +7,7 @@
 
 import Foundation
 
-
 public enum SignalSubscriberStatus: String, Codable {
     case active = "Active"
     case ended = "Ended"
-
 }

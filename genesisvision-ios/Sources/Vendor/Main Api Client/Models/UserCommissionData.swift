@@ -8,49 +8,24 @@
 import Foundation
 
 
+public struct UserCommissionData: Codable {
 
-open class UserCommissionData: Codable {
 
     public var isPayingCommissionInGvt: Bool?
+
     public var gvtHolderTradingFee: Double?
+
     public var gvtHolderDiscount: Double?
+
     public var regularTradingFee: Double?
+
     public var regularDiscount: Double?
-
-
-    
-    public init(isPayingCommissionInGvt: Bool?, gvtHolderTradingFee: Double?, gvtHolderDiscount: Double?, regularTradingFee: Double?, regularDiscount: Double?) {
+    public init(isPayingCommissionInGvt: Bool? = nil, gvtHolderTradingFee: Double? = nil, gvtHolderDiscount: Double? = nil, regularTradingFee: Double? = nil, regularDiscount: Double? = nil) { 
         self.isPayingCommissionInGvt = isPayingCommissionInGvt
         self.gvtHolderTradingFee = gvtHolderTradingFee
         self.gvtHolderDiscount = gvtHolderDiscount
         self.regularTradingFee = regularTradingFee
         self.regularDiscount = regularDiscount
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(isPayingCommissionInGvt, forKey: "isPayingCommissionInGvt")
-        try container.encodeIfPresent(gvtHolderTradingFee, forKey: "gvtHolderTradingFee")
-        try container.encodeIfPresent(gvtHolderDiscount, forKey: "gvtHolderDiscount")
-        try container.encodeIfPresent(regularTradingFee, forKey: "regularTradingFee")
-        try container.encodeIfPresent(regularDiscount, forKey: "regularDiscount")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        isPayingCommissionInGvt = try container.decodeIfPresent(Bool.self, forKey: "isPayingCommissionInGvt")
-        gvtHolderTradingFee = try container.decodeIfPresent(Double.self, forKey: "gvtHolderTradingFee")
-        gvtHolderDiscount = try container.decodeIfPresent(Double.self, forKey: "gvtHolderDiscount")
-        regularTradingFee = try container.decodeIfPresent(Double.self, forKey: "regularTradingFee")
-        regularDiscount = try container.decodeIfPresent(Double.self, forKey: "regularDiscount")
-    }
 }
-

@@ -8,33 +8,12 @@
 import Foundation
 
 
+public struct SocialLinksViewModel: Codable {
 
-open class SocialLinksViewModel: Codable {
 
     public var socialLinks: [SocialLinkViewModel]?
-
-
-    
-    public init(socialLinks: [SocialLinkViewModel]?) {
+    public init(socialLinks: [SocialLinkViewModel]? = nil) { 
         self.socialLinks = socialLinks
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(socialLinks, forKey: "socialLinks")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        socialLinks = try container.decodeIfPresent([SocialLinkViewModel].self, forKey: "socialLinks")
-    }
 }
-

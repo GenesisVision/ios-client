@@ -13,17 +13,12 @@ import Alamofire
 open class PartnershipAPI {
     /**
      Export rewards history.
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
+     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func exportHistory(authorization: String, dateFrom: Date? = nil, dateTo: Date? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: Data?,_ error: Error?) -> Void)) {
-        exportHistoryWithRequestBuilder(authorization: authorization, dateFrom: dateFrom, dateTo: dateTo, skip: skip, take: take).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func exportHistory(dateFrom: Date? = nil, dateTo: Date? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: Data?,_ error: Error?) -> Void)) {
+        exportHistoryWithRequestBuilder(dateFrom: dateFrom, dateTo: dateTo, skip: skip, take: take).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
@@ -31,68 +26,39 @@ open class PartnershipAPI {
     /**
      Export rewards history.
      - GET /v2.0/partnership/rewards/history/export
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example=""}]
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
+     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<Data> 
      */
-    open class func exportHistoryWithRequestBuilder(authorization: String, dateFrom: Date? = nil, dateTo: Date? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<Data> {
+    open class func exportHistoryWithRequestBuilder(dateFrom: Date? = nil, dateTo: Date? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<Data> {
         let path = "/v2.0/partnership/rewards/history/export"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "DateFrom": dateFrom?.encodeToJSON(), 
-            "DateTo": dateTo?.encodeToJSON(), 
-            "Skip": skip?.encodeToJSON(), 
-            "Take": take?.encodeToJSON()
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "DateFrom": dateFrom?.encodeToJSON(), 
+                        "DateTo": dateTo?.encodeToJSON(), 
+                        "Skip": skip?.encodeToJSON(), 
+                        "Take": take?.encodeToJSON()
         ])
-        
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<Data>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
-    }
-
-    /**
-     * enum for parameter currency
-     */
-    public enum Currency_getDetails: String { 
-        case usd = "USD"
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case eur = "EUR"
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
      Get partnership details.
-     
-     - parameter authorization: (header) JWT access token 
      - parameter currency: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getDetails(authorization: String, currency: Currency_getDetails? = nil, completion: @escaping ((_ data: PartnershipDetails?,_ error: Error?) -> Void)) {
-        getDetailsWithRequestBuilder(authorization: authorization, currency: currency).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getDetails(currency: Currency? = nil, completion: @escaping ((_ data: PartnershipDetails?,_ error: Error?) -> Void)) {
+        getDetailsWithRequestBuilder(currency: currency).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
@@ -100,50 +66,40 @@ open class PartnershipAPI {
     /**
      Get partnership details.
      - GET /v2.0/partnership/details
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "totalAmount" : 1.4658129805029452,
   "totalReferralsL1" : 0,
   "totalReferralsL2" : 6
 }}]
-     
-     - parameter authorization: (header) JWT access token 
      - parameter currency: (query)  (optional)
 
      - returns: RequestBuilder<PartnershipDetails> 
      */
-    open class func getDetailsWithRequestBuilder(authorization: String, currency: Currency_getDetails? = nil) -> RequestBuilder<PartnershipDetails> {
+    open class func getDetailsWithRequestBuilder(currency: Currency? = nil) -> RequestBuilder<PartnershipDetails> {
         let path = "/v2.0/partnership/details"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "currency": currency?.rawValue
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "currency": currency
         ])
-        
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<PartnershipDetails>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
      Get agent friends (referrals and second level referrals).
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
+     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getReferrals(authorization: String, dateFrom: Date? = nil, dateTo: Date? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ItemsViewModelReferralFriend?,_ error: Error?) -> Void)) {
-        getReferralsWithRequestBuilder(authorization: authorization, dateFrom: dateFrom, dateTo: dateTo, skip: skip, take: take).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getReferrals(dateFrom: Date? = nil, dateTo: Date? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ReferralFriendItemsViewModel?,_ error: Error?) -> Void)) {
+        getReferralsWithRequestBuilder(dateFrom: dateFrom, dateTo: dateTo, skip: skip, take: take).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
@@ -151,6 +107,9 @@ open class PartnershipAPI {
     /**
      Get agent friends (referrals and second level referrals).
      - GET /v2.0/partnership/referrals
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "total" : 0,
   "items" : [ {
@@ -161,51 +120,35 @@ open class PartnershipAPI {
     "emailMask" : "emailMask"
   } ]
 }}]
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
+     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
 
-     - returns: RequestBuilder<ItemsViewModelReferralFriend> 
+     - returns: RequestBuilder<ReferralFriendItemsViewModel> 
      */
-    open class func getReferralsWithRequestBuilder(authorization: String, dateFrom: Date? = nil, dateTo: Date? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ItemsViewModelReferralFriend> {
+    open class func getReferralsWithRequestBuilder(dateFrom: Date? = nil, dateTo: Date? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ReferralFriendItemsViewModel> {
         let path = "/v2.0/partnership/referrals"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "DateFrom": dateFrom?.encodeToJSON(), 
-            "DateTo": dateTo?.encodeToJSON(), 
-            "Skip": skip?.encodeToJSON(), 
-            "Take": take?.encodeToJSON()
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "DateFrom": dateFrom?.encodeToJSON(), 
+                        "DateTo": dateTo?.encodeToJSON(), 
+                        "Skip": skip?.encodeToJSON(), 
+                        "Take": take?.encodeToJSON()
         ])
-        
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
-        let requestBuilder: RequestBuilder<ItemsViewModelReferralFriend>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<ReferralFriendItemsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
      Get history of agent rewards.
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
+     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getRewardsHistory(authorization: String, dateFrom: Date? = nil, dateTo: Date? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ItemsViewModelRewardDetails?,_ error: Error?) -> Void)) {
-        getRewardsHistoryWithRequestBuilder(authorization: authorization, dateFrom: dateFrom, dateTo: dateTo, skip: skip, take: take).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getRewardsHistory(dateFrom: Date? = nil, dateTo: Date? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: RewardDetailsItemsViewModel?,_ error: Error?) -> Void)) {
+        getRewardsHistoryWithRequestBuilder(dateFrom: dateFrom, dateTo: dateTo, skip: skip, take: take).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
@@ -213,48 +156,40 @@ open class PartnershipAPI {
     /**
      Get history of agent rewards.
      - GET /v2.0/partnership/rewards/history
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "total" : 6,
   "items" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "amount" : 0.8008281904610115,
-    "currency" : { }
+    "currency" : "Undefined"
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "amount" : 0.8008281904610115,
-    "currency" : { }
+    "currency" : "Undefined"
   } ]
 }}]
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
+     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
 
-     - returns: RequestBuilder<ItemsViewModelRewardDetails> 
+     - returns: RequestBuilder<RewardDetailsItemsViewModel> 
      */
-    open class func getRewardsHistoryWithRequestBuilder(authorization: String, dateFrom: Date? = nil, dateTo: Date? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ItemsViewModelRewardDetails> {
+    open class func getRewardsHistoryWithRequestBuilder(dateFrom: Date? = nil, dateTo: Date? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<RewardDetailsItemsViewModel> {
         let path = "/v2.0/partnership/rewards/history"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "DateFrom": dateFrom?.encodeToJSON(), 
-            "DateTo": dateTo?.encodeToJSON(), 
-            "Skip": skip?.encodeToJSON(), 
-            "Take": take?.encodeToJSON()
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "DateFrom": dateFrom?.encodeToJSON(), 
+                        "DateTo": dateTo?.encodeToJSON(), 
+                        "Skip": skip?.encodeToJSON(), 
+                        "Take": take?.encodeToJSON()
         ])
-        
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
-        let requestBuilder: RequestBuilder<ItemsViewModelRewardDetails>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<RewardDetailsItemsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
 }

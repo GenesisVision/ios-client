@@ -8,37 +8,15 @@
 import Foundation
 
 
+public struct InvestmentEventViewModels: Codable {
 
-open class InvestmentEventViewModels: Codable {
 
     public var events: [InvestmentEventViewModel]?
+
     public var total: Int?
-
-
-    
-    public init(events: [InvestmentEventViewModel]?, total: Int?) {
+    public init(events: [InvestmentEventViewModel]? = nil, total: Int? = nil) { 
         self.events = events
         self.total = total
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(events, forKey: "events")
-        try container.encodeIfPresent(total, forKey: "total")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        events = try container.decodeIfPresent([InvestmentEventViewModel].self, forKey: "events")
-        total = try container.decodeIfPresent(Int.self, forKey: "total")
-    }
 }
-

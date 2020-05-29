@@ -157,10 +157,10 @@ extension AccountInfoViewModel {
             return ProgramYourInvestmentTableViewCellViewModel(details: accountDetailsFull, yourInvestmentProtocol: self)
         case .makeProgram:
             guard let programDetailsFull = programDetailsFull else { return nil }
-            return ProgramInfoTableViewCellViewModel(asset: programDetailsFull, assetId: accountDetailsFull?.id?.uuidString, delegate: self)
+            return ProgramInfoTableViewCellViewModel(asset: programDetailsFull, assetId: accountDetailsFull?._id?.uuidString, delegate: self)
         case .makeFollow:
             guard let followDetailsFull = followDetailsFull else { return nil }
-            return FollowInfoTableViewCellViewModel(asset: followDetailsFull, assetId: accountDetailsFull?.id?.uuidString, delegate: self)
+            return FollowInfoTableViewCellViewModel(asset: followDetailsFull, assetId: accountDetailsFull?._id?.uuidString, delegate: self)
         case .subscriptionDetail:
             break
         }

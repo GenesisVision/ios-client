@@ -178,7 +178,7 @@ extension TradingViewController: BaseTableViewProtocol {
         viewModel.router?.showAssetDetails(with: assetId, assetType: type)
     }
     func showAccount(_ tradingAsset: DashboardTradingAsset) {
-        if let router = viewModel.router, let assetId = tradingAsset.id?.uuidString {
+        if let router = viewModel.router, let assetId = tradingAsset._id?.uuidString {
             let viewController = AccountViewController()
             let accountRouter = AccountRouter(parentRouter: router)
             accountRouter.accountViewController = viewController
@@ -239,7 +239,7 @@ class TradingViewModel: ViewModelWithListProtocol {
             delegate?.didReload()
         }
     }
-    var publicTrading: ItemsViewModelDashboardTradingAsset? {
+    var publicTrading: DashboardTradingAssetItemsViewModel? {
         didSet {
             guard let count = publicTrading?.items?.count, count > 0 else { return }
             let viewModel = CellWithCollectionViewModel(TradingPublicShortListViewModel(publicTrading, delegate: delegate, router: router), delegate: delegate)
@@ -247,7 +247,7 @@ class TradingViewModel: ViewModelWithListProtocol {
             reloadSection(.publicTrading)
         }
     }
-    var privateTrading: ItemsViewModelDashboardTradingAsset? {
+    var privateTrading: DashboardTradingAssetItemsViewModel? {
         didSet {
             guard let count = privateTrading?.items?.count, count > 0 else { return }
             let viewModel = CellWithCollectionViewModel(TradingPrivateShortListViewModel(privateTrading, delegate: delegate, router: router), delegate: delegate)

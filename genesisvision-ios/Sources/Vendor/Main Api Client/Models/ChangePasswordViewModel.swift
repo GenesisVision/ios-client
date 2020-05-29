@@ -8,41 +8,18 @@
 import Foundation
 
 
+public struct ChangePasswordViewModel: Codable {
 
-open class ChangePasswordViewModel: Codable {
 
     public var oldPassword: String
+
     public var password: String
+
     public var confirmPassword: String?
-
-
-    
-    public init(oldPassword: String, password: String, confirmPassword: String?) {
+    public init(oldPassword: String, password: String, confirmPassword: String? = nil) { 
         self.oldPassword = oldPassword
         self.password = password
         self.confirmPassword = confirmPassword
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encode(oldPassword, forKey: "oldPassword")
-        try container.encode(password, forKey: "password")
-        try container.encodeIfPresent(confirmPassword, forKey: "confirmPassword")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        oldPassword = try container.decode(String.self, forKey: "oldPassword")
-        password = try container.decode(String.self, forKey: "password")
-        confirmPassword = try container.decodeIfPresent(String.self, forKey: "confirmPassword")
-    }
 }
-

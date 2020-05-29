@@ -8,26 +8,35 @@
 import Foundation
 
 
+public struct SignalSubscriber: Codable {
 
-open class SignalSubscriber: Codable {
 
     public var number: Int?
+
     public var trades: Int?
+
     public var profit: Double?
+
     public var volume: Double?
+
     public var subscriptionDate: Date?
+
     public var unsubscriptionDate: Date?
+
     public var status: SignalSubscriberStatus?
+
     public var totalCommissionAmount: Double?
+
     public var totalCommissionCurrency: Currency?
+
     public var totalSuccessFeeAmount: Double?
+
     public var totalSuccessFeeCurrency: Currency?
+
     public var totalVolumeFeeAmount: Double?
+
     public var totalVolumeFeeCurrency: Currency?
-
-
-    
-    public init(number: Int?, trades: Int?, profit: Double?, volume: Double?, subscriptionDate: Date?, unsubscriptionDate: Date?, status: SignalSubscriberStatus?, totalCommissionAmount: Double?, totalCommissionCurrency: Currency?, totalSuccessFeeAmount: Double?, totalSuccessFeeCurrency: Currency?, totalVolumeFeeAmount: Double?, totalVolumeFeeCurrency: Currency?) {
+    public init(number: Int? = nil, trades: Int? = nil, profit: Double? = nil, volume: Double? = nil, subscriptionDate: Date? = nil, unsubscriptionDate: Date? = nil, status: SignalSubscriberStatus? = nil, totalCommissionAmount: Double? = nil, totalCommissionCurrency: Currency? = nil, totalSuccessFeeAmount: Double? = nil, totalSuccessFeeCurrency: Currency? = nil, totalVolumeFeeAmount: Double? = nil, totalVolumeFeeCurrency: Currency? = nil) { 
         self.number = number
         self.trades = trades
         self.profit = profit
@@ -42,47 +51,5 @@ open class SignalSubscriber: Codable {
         self.totalVolumeFeeAmount = totalVolumeFeeAmount
         self.totalVolumeFeeCurrency = totalVolumeFeeCurrency
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(number, forKey: "number")
-        try container.encodeIfPresent(trades, forKey: "trades")
-        try container.encodeIfPresent(profit, forKey: "profit")
-        try container.encodeIfPresent(volume, forKey: "volume")
-        try container.encodeIfPresent(subscriptionDate, forKey: "subscriptionDate")
-        try container.encodeIfPresent(unsubscriptionDate, forKey: "unsubscriptionDate")
-        try container.encodeIfPresent(status, forKey: "status")
-        try container.encodeIfPresent(totalCommissionAmount, forKey: "totalCommissionAmount")
-        try container.encodeIfPresent(totalCommissionCurrency, forKey: "totalCommissionCurrency")
-        try container.encodeIfPresent(totalSuccessFeeAmount, forKey: "totalSuccessFeeAmount")
-        try container.encodeIfPresent(totalSuccessFeeCurrency, forKey: "totalSuccessFeeCurrency")
-        try container.encodeIfPresent(totalVolumeFeeAmount, forKey: "totalVolumeFeeAmount")
-        try container.encodeIfPresent(totalVolumeFeeCurrency, forKey: "totalVolumeFeeCurrency")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        number = try container.decodeIfPresent(Int.self, forKey: "number")
-        trades = try container.decodeIfPresent(Int.self, forKey: "trades")
-        profit = try container.decodeIfPresent(Double.self, forKey: "profit")
-        volume = try container.decodeIfPresent(Double.self, forKey: "volume")
-        subscriptionDate = try container.decodeIfPresent(Date.self, forKey: "subscriptionDate")
-        unsubscriptionDate = try container.decodeIfPresent(Date.self, forKey: "unsubscriptionDate")
-        status = try container.decodeIfPresent(SignalSubscriberStatus.self, forKey: "status")
-        totalCommissionAmount = try container.decodeIfPresent(Double.self, forKey: "totalCommissionAmount")
-        totalCommissionCurrency = try container.decodeIfPresent(Currency.self, forKey: "totalCommissionCurrency")
-        totalSuccessFeeAmount = try container.decodeIfPresent(Double.self, forKey: "totalSuccessFeeAmount")
-        totalSuccessFeeCurrency = try container.decodeIfPresent(Currency.self, forKey: "totalSuccessFeeCurrency")
-        totalVolumeFeeAmount = try container.decodeIfPresent(Double.self, forKey: "totalVolumeFeeAmount")
-        totalVolumeFeeCurrency = try container.decodeIfPresent(Currency.self, forKey: "totalVolumeFeeCurrency")
-    }
 }
-

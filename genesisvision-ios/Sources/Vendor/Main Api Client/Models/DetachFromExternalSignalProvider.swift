@@ -8,33 +8,12 @@
 import Foundation
 
 
+public struct DetachFromExternalSignalProvider: Codable {
 
-open class DetachFromExternalSignalProvider: Codable {
 
     public var tradingAccountId: UUID?
-
-
-    
-    public init(tradingAccountId: UUID?) {
+    public init(tradingAccountId: UUID? = nil) { 
         self.tradingAccountId = tradingAccountId
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(tradingAccountId, forKey: "tradingAccountId")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        tradingAccountId = try container.decodeIfPresent(UUID.self, forKey: "tradingAccountId")
-    }
 }
-

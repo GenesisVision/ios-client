@@ -8,32 +8,47 @@
 import Foundation
 
 
+public struct WalletData: Codable {
 
-open class WalletData: Codable {
 
     public var pending: Double?
+
     public var total: Double?
+
     public var availableCcy: Double?
+
     public var investedCcy: Double?
+
     public var tradingCcy: Double?
+
     public var pendingCcy: Double?
+
     public var totalCcy: Double?
-    public var id: UUID?
+
+    public var _id: UUID?
+
     public var title: String?
-    public var logo: String?
+
+    public var logoUrl: String?
+
     public var isDepositEnabled: Bool?
+
     public var isWithdrawalEnabled: Bool?
+
     public var withdrawalCommission: Double?
+
     public var depositAddress: String?
+
     public var depositUrlCoindirect: String?
+
     public var currency: Currency?
+
     public var available: Double?
+
     public var invested: Double?
+
     public var trading: Double?
-
-
-    
-    public init(pending: Double?, total: Double?, availableCcy: Double?, investedCcy: Double?, tradingCcy: Double?, pendingCcy: Double?, totalCcy: Double?, id: UUID?, title: String?, logo: String?, isDepositEnabled: Bool?, isWithdrawalEnabled: Bool?, withdrawalCommission: Double?, depositAddress: String?, depositUrlCoindirect: String?, currency: Currency?, available: Double?, invested: Double?, trading: Double?) {
+    public init(pending: Double? = nil, total: Double? = nil, availableCcy: Double? = nil, investedCcy: Double? = nil, tradingCcy: Double? = nil, pendingCcy: Double? = nil, totalCcy: Double? = nil, _id: UUID? = nil, title: String? = nil, logoUrl: String? = nil, isDepositEnabled: Bool? = nil, isWithdrawalEnabled: Bool? = nil, withdrawalCommission: Double? = nil, depositAddress: String? = nil, depositUrlCoindirect: String? = nil, currency: Currency? = nil, available: Double? = nil, invested: Double? = nil, trading: Double? = nil) { 
         self.pending = pending
         self.total = total
         self.availableCcy = availableCcy
@@ -41,9 +56,9 @@ open class WalletData: Codable {
         self.tradingCcy = tradingCcy
         self.pendingCcy = pendingCcy
         self.totalCcy = totalCcy
-        self.id = id
+        self._id = _id
         self.title = title
-        self.logo = logo
+        self.logoUrl = logoUrl
         self.isDepositEnabled = isDepositEnabled
         self.isWithdrawalEnabled = isWithdrawalEnabled
         self.withdrawalCommission = withdrawalCommission
@@ -54,59 +69,26 @@ open class WalletData: Codable {
         self.invested = invested
         self.trading = trading
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(pending, forKey: "pending")
-        try container.encodeIfPresent(total, forKey: "total")
-        try container.encodeIfPresent(availableCcy, forKey: "availableCcy")
-        try container.encodeIfPresent(investedCcy, forKey: "investedCcy")
-        try container.encodeIfPresent(tradingCcy, forKey: "tradingCcy")
-        try container.encodeIfPresent(pendingCcy, forKey: "pendingCcy")
-        try container.encodeIfPresent(totalCcy, forKey: "totalCcy")
-        try container.encodeIfPresent(id, forKey: "id")
-        try container.encodeIfPresent(title, forKey: "title")
-        try container.encodeIfPresent(logo, forKey: "logo")
-        try container.encodeIfPresent(isDepositEnabled, forKey: "isDepositEnabled")
-        try container.encodeIfPresent(isWithdrawalEnabled, forKey: "isWithdrawalEnabled")
-        try container.encodeIfPresent(withdrawalCommission, forKey: "withdrawalCommission")
-        try container.encodeIfPresent(depositAddress, forKey: "depositAddress")
-        try container.encodeIfPresent(depositUrlCoindirect, forKey: "depositUrlCoindirect")
-        try container.encodeIfPresent(currency, forKey: "currency")
-        try container.encodeIfPresent(available, forKey: "available")
-        try container.encodeIfPresent(invested, forKey: "invested")
-        try container.encodeIfPresent(trading, forKey: "trading")
+    public enum CodingKeys: String, CodingKey { 
+        case pending
+        case total
+        case availableCcy
+        case investedCcy
+        case tradingCcy
+        case pendingCcy
+        case totalCcy
+        case _id = "id"
+        case title
+        case logoUrl
+        case isDepositEnabled
+        case isWithdrawalEnabled
+        case withdrawalCommission
+        case depositAddress
+        case depositUrlCoindirect
+        case currency
+        case available
+        case invested
+        case trading
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        pending = try container.decodeIfPresent(Double.self, forKey: "pending")
-        total = try container.decodeIfPresent(Double.self, forKey: "total")
-        availableCcy = try container.decodeIfPresent(Double.self, forKey: "availableCcy")
-        investedCcy = try container.decodeIfPresent(Double.self, forKey: "investedCcy")
-        tradingCcy = try container.decodeIfPresent(Double.self, forKey: "tradingCcy")
-        pendingCcy = try container.decodeIfPresent(Double.self, forKey: "pendingCcy")
-        totalCcy = try container.decodeIfPresent(Double.self, forKey: "totalCcy")
-        id = try container.decodeIfPresent(UUID.self, forKey: "id")
-        title = try container.decodeIfPresent(String.self, forKey: "title")
-        logo = try container.decodeIfPresent(String.self, forKey: "logo")
-        isDepositEnabled = try container.decodeIfPresent(Bool.self, forKey: "isDepositEnabled")
-        isWithdrawalEnabled = try container.decodeIfPresent(Bool.self, forKey: "isWithdrawalEnabled")
-        withdrawalCommission = try container.decodeIfPresent(Double.self, forKey: "withdrawalCommission")
-        depositAddress = try container.decodeIfPresent(String.self, forKey: "depositAddress")
-        depositUrlCoindirect = try container.decodeIfPresent(String.self, forKey: "depositUrlCoindirect")
-        currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
-        available = try container.decodeIfPresent(Double.self, forKey: "available")
-        invested = try container.decodeIfPresent(Double.self, forKey: "invested")
-        trading = try container.decodeIfPresent(Double.self, forKey: "trading")
-    }
 }
-

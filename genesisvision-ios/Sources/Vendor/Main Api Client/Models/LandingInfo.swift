@@ -8,49 +8,24 @@
 import Foundation
 
 
+public struct LandingInfo: Codable {
 
-open class LandingInfo: Codable {
 
     public var events: [PlatformEvent]?
+
     public var news: [PlatformNews]?
-    public var follows: ItemsViewModelFollowDetailsListItem?
-    public var programs: ItemsViewModelProgramDetailsListItem?
-    public var funds: ItemsViewModelFundDetailsListItem?
 
+    public var follows: FollowDetailsListItemItemsViewModel?
 
-    
-    public init(events: [PlatformEvent]?, news: [PlatformNews]?, follows: ItemsViewModelFollowDetailsListItem?, programs: ItemsViewModelProgramDetailsListItem?, funds: ItemsViewModelFundDetailsListItem?) {
+    public var programs: ProgramDetailsListItemItemsViewModel?
+
+    public var funds: FundDetailsListItemItemsViewModel?
+    public init(events: [PlatformEvent]? = nil, news: [PlatformNews]? = nil, follows: FollowDetailsListItemItemsViewModel? = nil, programs: ProgramDetailsListItemItemsViewModel? = nil, funds: FundDetailsListItemItemsViewModel? = nil) { 
         self.events = events
         self.news = news
         self.follows = follows
         self.programs = programs
         self.funds = funds
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(events, forKey: "events")
-        try container.encodeIfPresent(news, forKey: "news")
-        try container.encodeIfPresent(follows, forKey: "follows")
-        try container.encodeIfPresent(programs, forKey: "programs")
-        try container.encodeIfPresent(funds, forKey: "funds")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        events = try container.decodeIfPresent([PlatformEvent].self, forKey: "events")
-        news = try container.decodeIfPresent([PlatformNews].self, forKey: "news")
-        follows = try container.decodeIfPresent(ItemsViewModelFollowDetailsListItem.self, forKey: "follows")
-        programs = try container.decodeIfPresent(ItemsViewModelProgramDetailsListItem.self, forKey: "programs")
-        funds = try container.decodeIfPresent(ItemsViewModelFundDetailsListItem.self, forKey: "funds")
-    }
 }
-

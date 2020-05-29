@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum NotificationType: String, Codable {
     case platformNewsAndUpdates = "PlatformNewsAndUpdates"
     case platformEmergency = "PlatformEmergency"
@@ -33,5 +32,4 @@ public enum NotificationType: String, Codable {
     case managerNewSignalProvider = "ManagerNewSignalProvider"
     case signals = "Signals"
     case externalSignals = "ExternalSignals"
-
 }

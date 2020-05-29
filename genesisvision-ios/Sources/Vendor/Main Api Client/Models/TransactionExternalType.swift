@@ -7,11 +7,9 @@
 
 import Foundation
 
-
 public enum TransactionExternalType: String, Codable {
     case all = "All"
     case withdrawal = "Withdrawal"
     case deposit = "Deposit"
     case platform = "Platform"
-
 }

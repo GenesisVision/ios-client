@@ -7,9 +7,7 @@
 
 import Foundation
 
-
 public enum DashboardAssetStatus: String, Codable {
     case all = "All"
     case active = "Active"
-
 }

@@ -137,7 +137,7 @@ final class NotificationsSettingsViewModel {
     }
     
     func removeCustomSetting(at indexPath: IndexPath) {
-        if let settingsCustomViewModel = model(for: indexPath) as? NotificationsSettingsCustomTableViewCellViewModel, let settingId = settingsCustomViewModel.setting.id?.uuidString {
+        if let settingsCustomViewModel = model(for: indexPath) as? NotificationsSettingsCustomTableViewCellViewModel, let settingId = settingsCustomViewModel.setting._id?.uuidString {
 
             removeNotification(settingId) { [weak self] (result) in
                 switch result {
@@ -327,19 +327,19 @@ final class NotificationsSettingsViewModel {
         
         settingsGeneralViewModels.removeAll()
         
-        let newsAndUpdatesSetting = NotificationSettingViewModel(id: nil, isEnabled: false, assetId: nil, managerId: nil, type: .platformNewsAndUpdates, conditionType: .empty, conditionAmount: 0)
+        var newsAndUpdatesSetting = NotificationSettingViewModel(_id: nil, isEnabled: false, assetId: nil, managerId: nil, type: .platformNewsAndUpdates, conditionType: .empty, conditionAmount: 0)
         
-        let emergencySettings = NotificationSettingViewModel(id: nil, isEnabled: false, assetId: nil, managerId: nil, type: .platformEmergency, conditionType: .empty, conditionAmount: 0)
+        var emergencySettings = NotificationSettingViewModel(_id: nil, isEnabled: false, assetId: nil, managerId: nil, type: .platformEmergency, conditionType: .empty, conditionAmount: 0)
         
         if let settings = settingsGeneral, settings.count > 0 {
             settings.forEach({ (setting) in
                 if let type = setting.type {
                     switch type {
                     case .platformNewsAndUpdates:
-                        newsAndUpdatesSetting.id = setting.id
+                        newsAndUpdatesSetting._id = setting._id
                         newsAndUpdatesSetting.isEnabled = setting.isEnabled
                     case .platformEmergency:
-                        emergencySettings.id = setting.id
+                        emergencySettings._id = setting._id
                         emergencySettings.isEnabled = setting.isEnabled
                     default:
                         break
@@ -362,20 +362,20 @@ final class NotificationsSettingsViewModel {
         
         settingsGeneralViewModels.removeAll()
         
-        let programNewsAndUpdates = NotificationSettingViewModel(id: nil, isEnabled: false, assetId: uuid, managerId: nil, type: .programNewsAndUpdates, conditionType: .empty, conditionAmount: 0)
+        var programNewsAndUpdates = NotificationSettingViewModel(_id: nil, isEnabled: false, assetId: uuid, managerId: nil, type: .programNewsAndUpdates, conditionType: .empty, conditionAmount: 0)
         
-        let programEndOfPeriod = NotificationSettingViewModel(id: nil, isEnabled: false, assetId: uuid, managerId: nil, type: .programEndOfPeriod, conditionType: .empty, conditionAmount: 0)
+        var programEndOfPeriod = NotificationSettingViewModel(_id: nil, isEnabled: false, assetId: uuid, managerId: nil, type: .programEndOfPeriod, conditionType: .empty, conditionAmount: 0)
         
         if let settings = settingsGeneral, settings.count > 0 {
             settings.forEach({ (setting) in
                 if let type = setting.type {
                     switch type {
                     case .programNewsAndUpdates:
-                        programNewsAndUpdates.id = setting.id
+                        programNewsAndUpdates._id = setting._id
                         programNewsAndUpdates.assetId = setting.assetId
                         programNewsAndUpdates.isEnabled = setting.isEnabled
                     case .programEndOfPeriod:
-                        programEndOfPeriod.id = setting.id
+                        programEndOfPeriod._id = setting._id
                         programEndOfPeriod.assetId = setting.assetId
                         programEndOfPeriod.isEnabled = setting.isEnabled
                     default:
@@ -403,20 +403,20 @@ final class NotificationsSettingsViewModel {
         
         settingsGeneralViewModels.removeAll()
         
-        let fundNewsAndUpdates = NotificationSettingViewModel(id: nil, isEnabled: false, assetId: uuid, managerId: nil, type: .fundNewsAndUpdates, conditionType: .empty, conditionAmount: 0)
+        var fundNewsAndUpdates = NotificationSettingViewModel(_id: nil, isEnabled: false, assetId: uuid, managerId: nil, type: .fundNewsAndUpdates, conditionType: .empty, conditionAmount: 0)
         
-        let fundRebalancing = NotificationSettingViewModel(id: nil, isEnabled: false, assetId: uuid, managerId: nil, type: .fundRebalancing, conditionType: .empty, conditionAmount: 0)
+        var fundRebalancing = NotificationSettingViewModel(_id: nil, isEnabled: false, assetId: uuid, managerId: nil, type: .fundRebalancing, conditionType: .empty, conditionAmount: 0)
         
         if let settings = settingsGeneral, settings.count > 0 {
             settings.forEach({ (setting) in
                 if let type = setting.type {
                     switch type {
                     case .fundNewsAndUpdates:
-                        fundNewsAndUpdates.id = setting.id
+                        fundNewsAndUpdates._id = setting._id
                         fundNewsAndUpdates.assetId = setting.assetId
                         fundNewsAndUpdates.isEnabled = setting.isEnabled
                     case .fundRebalancing:
-                        fundRebalancing.id = setting.id
+                        fundRebalancing._id = setting._id
                         fundRebalancing.assetId = setting.assetId
                         fundRebalancing.isEnabled = setting.isEnabled
                     default:
@@ -442,9 +442,10 @@ extension NotificationsSettingsViewModel: NotificationsSettingsProtocol {
         
         NotificationsDataProvider.addSetting(assetId: assetId, type: type, completion: { [weak self] (uuidString) in
             self?.router.currentController?.hideHUD()
-            
-            if let uuidString = uuidString, let type = type, let viewModel = self?.settingsGeneralViewModels.first(where: { $0.setting.type?.rawValue == type.rawValue }) {
-                viewModel.setting.id = UUID(uuidString: uuidString)
+                        
+            if let uuidString = uuidString, let type = type {
+                var viewModel = self?.settingsGeneralViewModels.first(where: { $0.setting.type?.rawValue == type.rawValue })
+                viewModel?.setting._id = UUID(uuidString: uuidString)
             }
         }) { [weak self] (result) in
             self?.router.currentController?.hideHUD()

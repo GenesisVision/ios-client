@@ -8,19 +8,21 @@
 import Foundation
 
 
+public struct ProgramAssetPlatformInfo: Codable {
 
-open class ProgramAssetPlatformInfo: Codable {
 
     public var facets: [AssetFacet]?
+
     public var tags: [Tag]?
+
     public var availableProgramCurrencies: [String]?
+
     public var minInvestAmounts: [ProgramMinInvestAmount]?
+
     public var periods: [Int]?
+
     public var createProgramInfo: ProgramCreateAssetPlatformInfo?
-
-
-    
-    public init(facets: [AssetFacet]?, tags: [Tag]?, availableProgramCurrencies: [String]?, minInvestAmounts: [ProgramMinInvestAmount]?, periods: [Int]?, createProgramInfo: ProgramCreateAssetPlatformInfo?) {
+    public init(facets: [AssetFacet]? = nil, tags: [Tag]? = nil, availableProgramCurrencies: [String]? = nil, minInvestAmounts: [ProgramMinInvestAmount]? = nil, periods: [Int]? = nil, createProgramInfo: ProgramCreateAssetPlatformInfo? = nil) { 
         self.facets = facets
         self.tags = tags
         self.availableProgramCurrencies = availableProgramCurrencies
@@ -28,33 +30,5 @@ open class ProgramAssetPlatformInfo: Codable {
         self.periods = periods
         self.createProgramInfo = createProgramInfo
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(facets, forKey: "facets")
-        try container.encodeIfPresent(tags, forKey: "tags")
-        try container.encodeIfPresent(availableProgramCurrencies, forKey: "availableProgramCurrencies")
-        try container.encodeIfPresent(minInvestAmounts, forKey: "minInvestAmounts")
-        try container.encodeIfPresent(periods, forKey: "periods")
-        try container.encodeIfPresent(createProgramInfo, forKey: "createProgramInfo")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        facets = try container.decodeIfPresent([AssetFacet].self, forKey: "facets")
-        tags = try container.decodeIfPresent([Tag].self, forKey: "tags")
-        availableProgramCurrencies = try container.decodeIfPresent([String].self, forKey: "availableProgramCurrencies")
-        minInvestAmounts = try container.decodeIfPresent([ProgramMinInvestAmount].self, forKey: "minInvestAmounts")
-        periods = try container.decodeIfPresent([Int].self, forKey: "periods")
-        createProgramInfo = try container.decodeIfPresent(ProgramCreateAssetPlatformInfo.self, forKey: "createProgramInfo")
-    }
 }
-

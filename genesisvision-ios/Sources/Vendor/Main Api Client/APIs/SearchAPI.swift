@@ -13,15 +13,12 @@ import Alamofire
 open class SearchAPI {
     /**
      Program / fund / manager search
-     
-     - parameter authorization: (header)  (optional)
-     - parameter mask: (query)  (optional)
-     - parameter take: (query)  (optional)
+     - parameter mask: (query)  (optional)     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func search(authorization: String? = nil, mask: String? = nil, take: Int? = nil, completion: @escaping ((_ data: CommonPublicAssetsViewModel?,_ error: Error?) -> Void)) {
-        searchWithRequestBuilder(authorization: authorization, mask: mask, take: take).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func search(mask: String? = nil, take: Int? = nil, completion: @escaping ((_ data: CommonPublicAssetsViewModel?,_ error: Error?) -> Void)) {
+        searchWithRequestBuilder(mask: mask, take: take).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
@@ -29,95 +26,52 @@ open class SearchAPI {
     /**
      Program / fund / manager search
      - GET /v2.0/search
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "follows" : {
     "total" : 6,
     "items" : [ {
       "leverageMin" : 1,
-      "owner" : {
-        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-        "url" : "url",
-        "username" : "username"
-      },
       "brokerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "statistic" : {
-        "drawdown" : 5.637376656633329,
-        "chart" : [ {
-          "date" : 0,
-          "value" : 6.027456183070403
-        }, {
-          "date" : 0,
-          "value" : 6.027456183070403
-        } ],
-        "profit" : 5.962133916683182
-      },
       "color" : "color",
       "isExternal" : true,
       "subscribersCount" : 7,
-      "brokerType" : { },
+      "brokerType" : "Undefined",
       "description" : "description",
       "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
+      "logoUrl" : "logoUrl",
       "url" : "url",
-      "tags" : [ {
-        "color" : "color",
-        "name" : "name"
-      }, {
-        "color" : "color",
-        "name" : "name"
-      } ],
+      "tags" : [ null, null ],
       "tradesCount" : 1,
       "leverageMax" : 1,
-      "logo" : "logo",
       "personalDetails" : {
         "isOwnAsset" : true,
         "isFavorite" : true
       },
-      "currency" : "USD",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "status" : "status"
     }, {
       "leverageMin" : 1,
-      "owner" : {
-        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-        "url" : "url",
-        "username" : "username"
-      },
       "brokerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "statistic" : {
-        "drawdown" : 5.637376656633329,
-        "chart" : [ {
-          "date" : 0,
-          "value" : 6.027456183070403
-        }, {
-          "date" : 0,
-          "value" : 6.027456183070403
-        } ],
-        "profit" : 5.962133916683182
-      },
       "color" : "color",
       "isExternal" : true,
       "subscribersCount" : 7,
-      "brokerType" : { },
+      "brokerType" : "Undefined",
       "description" : "description",
       "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
+      "logoUrl" : "logoUrl",
       "url" : "url",
-      "tags" : [ {
-        "color" : "color",
-        "name" : "name"
-      }, {
-        "color" : "color",
-        "name" : "name"
-      } ],
+      "tags" : [ null, null ],
       "tradesCount" : 1,
       "leverageMax" : 1,
-      "logo" : "logo",
       "personalDetails" : {
         "isOwnAsset" : true,
         "isFavorite" : true
       },
-      "currency" : "USD",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "status" : "status"
     } ]
@@ -125,44 +79,26 @@ open class SearchAPI {
   "funds" : {
     "total" : 4,
     "items" : [ {
-      "owner" : {
-        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-        "url" : "url",
-        "username" : "username"
-      },
       "totalAssetsCount" : 2,
-      "statistic" : {
-        "drawdown" : 5.637376656633329,
-        "chart" : [ {
-          "date" : 0,
-          "value" : 6.027456183070403
-        }, {
-          "date" : 0,
-          "value" : 6.027456183070403
-        } ],
-        "profit" : 5.962133916683182
-      },
       "color" : "color",
       "topFundAssets" : [ {
         "name" : "name",
-        "icon" : "icon",
         "asset" : "asset",
-        "percent" : 1.4658129805029452
+        "percent" : 1.4658129805029452,
+        "logoUrl" : "logoUrl",
+        "url" : "url"
       }, {
         "name" : "name",
-        "icon" : "icon",
         "asset" : "asset",
-        "percent" : 1.4658129805029452
+        "percent" : 1.4658129805029452,
+        "logoUrl" : "logoUrl",
+        "url" : "url"
       } ],
       "description" : "description",
       "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
+      "logoUrl" : "logoUrl",
       "url" : "url",
-      "balance" : {
-        "amount" : 9.301444243932576,
-        "currency" : { }
-      },
-      "logo" : "logo",
       "personalDetails" : {
         "isOwnAsset" : true,
         "isFavorite" : true
@@ -171,44 +107,26 @@ open class SearchAPI {
       "investorsCount" : 3,
       "status" : "status"
     }, {
-      "owner" : {
-        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-        "url" : "url",
-        "username" : "username"
-      },
       "totalAssetsCount" : 2,
-      "statistic" : {
-        "drawdown" : 5.637376656633329,
-        "chart" : [ {
-          "date" : 0,
-          "value" : 6.027456183070403
-        }, {
-          "date" : 0,
-          "value" : 6.027456183070403
-        } ],
-        "profit" : 5.962133916683182
-      },
       "color" : "color",
       "topFundAssets" : [ {
         "name" : "name",
-        "icon" : "icon",
         "asset" : "asset",
-        "percent" : 1.4658129805029452
+        "percent" : 1.4658129805029452,
+        "logoUrl" : "logoUrl",
+        "url" : "url"
       }, {
         "name" : "name",
-        "icon" : "icon",
         "asset" : "asset",
-        "percent" : 1.4658129805029452
+        "percent" : 1.4658129805029452,
+        "logoUrl" : "logoUrl",
+        "url" : "url"
       } ],
       "description" : "description",
       "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
+      "logoUrl" : "logoUrl",
       "url" : "url",
-      "balance" : {
-        "amount" : 9.301444243932576,
-        "currency" : { }
-      },
-      "logo" : "logo",
       "personalDetails" : {
         "isOwnAsset" : true,
         "isFavorite" : true
@@ -231,11 +149,11 @@ open class SearchAPI {
       "statistic" : {
         "drawdown" : 5.637376656633329,
         "chart" : [ {
-          "date" : 0,
-          "value" : 6.027456183070403
+          "date" : "2000-01-23T04:56:07.000+00:00",
+          "value" : 0.8008281904610115
         }, {
-          "date" : 0,
-          "value" : 6.027456183070403
+          "date" : "2000-01-23T04:56:07.000+00:00",
+          "value" : 0.8008281904610115
         } ],
         "profit" : 5.962133916683182
       },
@@ -246,6 +164,7 @@ open class SearchAPI {
       "entryFeeSelected" : 2.3021358869347655,
       "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
+      "logoUrl" : "logoUrl",
       "url" : "url",
       "periodStarts" : "2000-01-23T04:56:07.000+00:00",
       "tags" : [ {
@@ -257,17 +176,17 @@ open class SearchAPI {
       } ],
       "balance" : {
         "amount" : 9.301444243932576,
-        "currency" : { }
+        "currency" : "Undefined"
       },
       "periodEnds" : "2000-01-23T04:56:07.000+00:00",
-      "logo" : "logo",
       "availableToInvest" : 5.962133916683182,
       "personalDetails" : {
         "isReinvest" : true,
+        "isAutoJoin" : true,
         "isOwnAsset" : true,
         "isFavorite" : true
       },
-      "currency" : { },
+      "currency" : "Undefined",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "levelProgress" : 6.027456183070403,
       "investorsCount" : 5,
@@ -283,11 +202,11 @@ open class SearchAPI {
       "statistic" : {
         "drawdown" : 5.637376656633329,
         "chart" : [ {
-          "date" : 0,
-          "value" : 6.027456183070403
+          "date" : "2000-01-23T04:56:07.000+00:00",
+          "value" : 0.8008281904610115
         }, {
-          "date" : 0,
-          "value" : 6.027456183070403
+          "date" : "2000-01-23T04:56:07.000+00:00",
+          "value" : 0.8008281904610115
         } ],
         "profit" : 5.962133916683182
       },
@@ -298,6 +217,7 @@ open class SearchAPI {
       "entryFeeSelected" : 2.3021358869347655,
       "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
+      "logoUrl" : "logoUrl",
       "url" : "url",
       "periodStarts" : "2000-01-23T04:56:07.000+00:00",
       "tags" : [ {
@@ -309,17 +229,17 @@ open class SearchAPI {
       } ],
       "balance" : {
         "amount" : 9.301444243932576,
-        "currency" : { }
+        "currency" : "Undefined"
       },
       "periodEnds" : "2000-01-23T04:56:07.000+00:00",
-      "logo" : "logo",
       "availableToInvest" : 5.962133916683182,
       "personalDetails" : {
         "isReinvest" : true,
+        "isAutoJoin" : true,
         "isOwnAsset" : true,
         "isFavorite" : true
       },
-      "currency" : { },
+      "currency" : "Undefined",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "levelProgress" : 6.027456183070403,
       "investorsCount" : 5,
@@ -327,78 +247,85 @@ open class SearchAPI {
     } ]
   },
   "managers" : {
-    "total" : 7,
+    "total" : 4,
     "items" : [ {
       "socialLinks" : [ {
         "name" : "name",
-        "logo" : "logo",
-        "type" : { },
+        "type" : "Undefined",
         "value" : "value",
-        "url" : "url"
+        "url" : "url",
+        "logoUrl" : "logoUrl"
       }, {
         "name" : "name",
-        "logo" : "logo",
-        "type" : { },
+        "type" : "Undefined",
         "value" : "value",
-        "url" : "url"
+        "url" : "url",
+        "logoUrl" : "logoUrl"
       } ],
       "assets" : [ "assets", "assets" ],
+      "followers" : 7,
+      "following" : 1,
       "about" : "about",
       "regDate" : "2000-01-23T04:56:07.000+00:00",
+      "personalDetails" : {
+        "isFollow" : true,
+        "canCommentPosts" : true,
+        "canWritePost" : true,
+        "canFollow" : true
+      },
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "avatar" : "avatar",
+      "logoUrl" : "logoUrl",
       "url" : "url",
       "username" : "username"
     }, {
       "socialLinks" : [ {
         "name" : "name",
-        "logo" : "logo",
-        "type" : { },
+        "type" : "Undefined",
         "value" : "value",
-        "url" : "url"
+        "url" : "url",
+        "logoUrl" : "logoUrl"
       }, {
         "name" : "name",
-        "logo" : "logo",
-        "type" : { },
+        "type" : "Undefined",
         "value" : "value",
-        "url" : "url"
+        "url" : "url",
+        "logoUrl" : "logoUrl"
       } ],
       "assets" : [ "assets", "assets" ],
+      "followers" : 7,
+      "following" : 1,
       "about" : "about",
       "regDate" : "2000-01-23T04:56:07.000+00:00",
+      "personalDetails" : {
+        "isFollow" : true,
+        "canCommentPosts" : true,
+        "canWritePost" : true,
+        "canFollow" : true
+      },
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "avatar" : "avatar",
+      "logoUrl" : "logoUrl",
       "url" : "url",
       "username" : "username"
     } ]
   }
 }}]
-     
-     - parameter authorization: (header)  (optional)
-     - parameter mask: (query)  (optional)
-     - parameter take: (query)  (optional)
+     - parameter mask: (query)  (optional)     - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<CommonPublicAssetsViewModel> 
      */
-    open class func searchWithRequestBuilder(authorization: String? = nil, mask: String? = nil, take: Int? = nil) -> RequestBuilder<CommonPublicAssetsViewModel> {
+    open class func searchWithRequestBuilder(mask: String? = nil, take: Int? = nil) -> RequestBuilder<CommonPublicAssetsViewModel> {
         let path = "/v2.0/search"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "mask": mask, 
-            "take": take?.encodeToJSON()
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "mask": mask, 
+                        "take": take?.encodeToJSON()
         ])
-        
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<CommonPublicAssetsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
 }

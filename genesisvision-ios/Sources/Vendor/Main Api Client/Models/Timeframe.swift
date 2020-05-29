@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum Timeframe: String, Codable {
     case day = "Day"
     case week = "Week"
@@ -15,5 +14,4 @@ public enum Timeframe: String, Codable {
     case threeMonths = "ThreeMonths"
     case year = "Year"
     case allTime = "AllTime"
-
 }

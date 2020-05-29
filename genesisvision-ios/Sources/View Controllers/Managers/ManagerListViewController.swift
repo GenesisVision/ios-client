@@ -184,7 +184,7 @@ extension ManagerListViewController: FavoriteStateChangeProtocol {
 
 extension ManagerListViewController: DelegateManagerProtocol {
     func delegateManagerTableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let model = viewModel.model(for: indexPath) as? ManagerTableViewCellViewModel, let assetId = model.profile.id?.uuidString else { return }
+        guard let model = viewModel.model(for: indexPath) as? ManagerTableViewCellViewModel, let assetId = model.profile._id?.uuidString else { return }
         
         searchProtocol?.didSelect(assetId, assetType: ._none)
     }

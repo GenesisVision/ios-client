@@ -8,41 +8,18 @@
 import Foundation
 
 
+public struct DashboardAsset: Codable {
 
-open class DashboardAsset: Codable {
 
     public var name: String?
+
     public var color: String?
+
     public var percent: Double?
-
-
-    
-    public init(name: String?, color: String?, percent: Double?) {
+    public init(name: String? = nil, color: String? = nil, percent: Double? = nil) { 
         self.name = name
         self.color = color
         self.percent = percent
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(name, forKey: "name")
-        try container.encodeIfPresent(color, forKey: "color")
-        try container.encodeIfPresent(percent, forKey: "percent")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        name = try container.decodeIfPresent(String.self, forKey: "name")
-        color = try container.decodeIfPresent(String.self, forKey: "color")
-        percent = try container.decodeIfPresent(Double.self, forKey: "percent")
-    }
 }
-

@@ -8,41 +8,18 @@
 import Foundation
 
 
+public struct FundCreateAssetPlatformInfo: Codable {
 
-open class FundCreateAssetPlatformInfo: Codable {
 
     public var maxEntryFee: Double?
+
     public var maxExitFee: Double?
+
     public var minDeposit: Double?
-
-
-    
-    public init(maxEntryFee: Double?, maxExitFee: Double?, minDeposit: Double?) {
+    public init(maxEntryFee: Double? = nil, maxExitFee: Double? = nil, minDeposit: Double? = nil) { 
         self.maxEntryFee = maxEntryFee
         self.maxExitFee = maxExitFee
         self.minDeposit = minDeposit
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(maxEntryFee, forKey: "maxEntryFee")
-        try container.encodeIfPresent(maxExitFee, forKey: "maxExitFee")
-        try container.encodeIfPresent(minDeposit, forKey: "minDeposit")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        maxEntryFee = try container.decodeIfPresent(Double.self, forKey: "maxEntryFee")
-        maxExitFee = try container.decodeIfPresent(Double.self, forKey: "maxExitFee")
-        minDeposit = try container.decodeIfPresent(Double.self, forKey: "minDeposit")
-    }
 }
-

@@ -8,33 +8,19 @@
 import Foundation
 
 
+public struct TradingAccountDemoDeposit: Codable {
 
-open class TradingAccountDemoDeposit: Codable {
 
     public var amount: Double?
 
-
-    
-    public init(amount: Double?) {
+    public var _id: UUID?
+    public init(amount: Double? = nil, _id: UUID? = nil) { 
         self.amount = amount
+        self._id = _id
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(amount, forKey: "amount")
+    public enum CodingKeys: String, CodingKey { 
+        case amount
+        case _id = "id"
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        amount = try container.decodeIfPresent(Double.self, forKey: "amount")
-    }
 }
-

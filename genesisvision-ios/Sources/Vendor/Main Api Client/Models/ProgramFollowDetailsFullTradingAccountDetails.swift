@@ -8,68 +8,35 @@
 import Foundation
 
 
+public struct ProgramFollowDetailsFullTradingAccountDetails: Codable {
 
-open class ProgramFollowDetailsFullTradingAccountDetails: Codable {
 
-    public enum Currency: String, Codable { 
-        case usd = "USD"
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case eur = "EUR"
-    }
-    public var id: UUID?
+    public var _id: UUID?
+
     public var login: String?
+
     public var currency: Currency?
+
     public var leverageMin: Int?
+
     public var leverageMax: Int?
+
     public var balance: Double?
-
-
-    
-    public init(id: UUID?, login: String?, currency: Currency?, leverageMin: Int?, leverageMax: Int?, balance: Double?) {
-        self.id = id
+    public init(_id: UUID? = nil, login: String? = nil, currency: Currency? = nil, leverageMin: Int? = nil, leverageMax: Int? = nil, balance: Double? = nil) { 
+        self._id = _id
         self.login = login
         self.currency = currency
         self.leverageMin = leverageMin
         self.leverageMax = leverageMax
         self.balance = balance
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(id, forKey: "id")
-        try container.encodeIfPresent(login, forKey: "login")
-        try container.encodeIfPresent(currency, forKey: "currency")
-        try container.encodeIfPresent(leverageMin, forKey: "leverageMin")
-        try container.encodeIfPresent(leverageMax, forKey: "leverageMax")
-        try container.encodeIfPresent(balance, forKey: "balance")
+    public enum CodingKeys: String, CodingKey { 
+        case _id = "id"
+        case login
+        case currency
+        case leverageMin
+        case leverageMax
+        case balance
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        id = try container.decodeIfPresent(UUID.self, forKey: "id")
-        login = try container.decodeIfPresent(String.self, forKey: "login")
-        currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
-        leverageMin = try container.decodeIfPresent(Int.self, forKey: "leverageMin")
-        leverageMax = try container.decodeIfPresent(Int.self, forKey: "leverageMax")
-        balance = try container.decodeIfPresent(Double.self, forKey: "balance")
-    }
 }
-

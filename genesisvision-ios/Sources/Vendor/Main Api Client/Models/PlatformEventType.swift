@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum PlatformEventType: String, Codable {
     case undefined = "Undefined"
     case programStarted = "ProgramStarted"
@@ -16,5 +15,4 @@ public enum PlatformEventType: String, Codable {
     case periodEnded = "PeriodEnded"
     case fundReallocated = "FundReallocated"
     case followTrade = "FollowTrade"
-
 }

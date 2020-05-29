@@ -86,7 +86,7 @@ extension FundTradingContentView: ContentViewProtocol {
     ///   - asset: DashboardTradingAsset
     func configure(fundTrading asset: DashboardTradingAsset, filterProtocol: FilterChangedProtocol?) {
         self.filterProtocol = filterProtocol
-        if let assetId = asset.id?.uuidString {
+        if let assetId = asset._id?.uuidString {
             self.assetId = assetId
         }
         
@@ -116,7 +116,7 @@ extension FundTradingContentView: ContentViewProtocol {
         }
         
         photoImageView.image = UIImage.fundPlaceholder
-        if let logo = asset.publicInfo?.logo, let fileUrl = getFileURL(fileName: logo) {
+        if let logo = asset.publicInfo?.logoUrl, let fileUrl = getFileURL(fileName: logo) {
             photoImageView.kf.indicatorType = .activity
             photoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.fundPlaceholder)
             photoImageView.backgroundColor = .clear
@@ -176,7 +176,7 @@ extension FundTradingContentView {
         fundBottomStackView.isHidden = false
         
         firstFundAssetView.isHidden = true
-        if let logo = topFundAssets[0].icon, let fileUrl = getFileURL(fileName: logo), let percent = topFundAssets[0].percent {
+        if let logo = topFundAssets[0].logoUrl, let fileUrl = getFileURL(fileName: logo), let percent = topFundAssets[0].percent {
             firstFundAssetView.isHidden = false
             firstFundAssetView.assetLogoImageView.kf.indicatorType = .activity
             firstFundAssetView.assetLogoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.fundPlaceholder)
@@ -185,7 +185,7 @@ extension FundTradingContentView {
         }
         
         secondFundAssetView.isHidden = true
-        if totalAssetsCount > 1, let logo = topFundAssets[1].icon, let fileUrl = getFileURL(fileName: logo), let percent = topFundAssets[1].percent {
+        if totalAssetsCount > 1, let logo = topFundAssets[1].logoUrl, let fileUrl = getFileURL(fileName: logo), let percent = topFundAssets[1].percent {
             secondFundAssetView.isHidden = false
             secondFundAssetView.assetLogoImageView.kf.indicatorType = .activity
             secondFundAssetView.assetLogoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.fundPlaceholder)
@@ -194,7 +194,7 @@ extension FundTradingContentView {
         }
         
         thirdFundAssetView.isHidden = true
-        if totalAssetsCount > 2, let logo = topFundAssets[2].icon, let fileUrl = getFileURL(fileName: logo), let percent = topFundAssets[2].percent {
+        if totalAssetsCount > 2, let logo = topFundAssets[2].logoUrl, let fileUrl = getFileURL(fileName: logo), let percent = topFundAssets[2].percent {
             thirdFundAssetView.isHidden = false
             thirdFundAssetView.assetLogoImageView.kf.indicatorType = .activity
             thirdFundAssetView.assetLogoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.fundPlaceholder)

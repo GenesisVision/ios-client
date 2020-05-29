@@ -8,37 +8,15 @@
 import Foundation
 
 
+public struct ErrorMessage: Codable {
 
-open class ErrorMessage: Codable {
 
     public var message: String?
+
     public var property: String?
-
-
-    
-    public init(message: String?, property: String?) {
+    public init(message: String? = nil, property: String? = nil) { 
         self.message = message
         self.property = property
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(message, forKey: "message")
-        try container.encodeIfPresent(property, forKey: "property")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        message = try container.decodeIfPresent(String.self, forKey: "message")
-        property = try container.decodeIfPresent(String.self, forKey: "property")
-    }
 }
-

@@ -7,10 +7,8 @@
 
 import Foundation
 
-
 public enum ChangeState: String, Codable {
     case notChanged = "NotChanged"
     case increased = "Increased"
     case decreased = "Decreased"
-
 }

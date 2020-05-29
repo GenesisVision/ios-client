@@ -8,37 +8,15 @@
 import Foundation
 
 
+public struct FundAssetDetails: Codable {
 
-open class FundAssetDetails: Codable {
 
     public var topFundAssets: [FundAssetPercent]?
+
     public var totalAssetsCount: Int?
-
-
-    
-    public init(topFundAssets: [FundAssetPercent]?, totalAssetsCount: Int?) {
+    public init(topFundAssets: [FundAssetPercent]? = nil, totalAssetsCount: Int? = nil) { 
         self.topFundAssets = topFundAssets
         self.totalAssetsCount = totalAssetsCount
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(topFundAssets, forKey: "topFundAssets")
-        try container.encodeIfPresent(totalAssetsCount, forKey: "totalAssetsCount")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        topFundAssets = try container.decodeIfPresent([FundAssetPercent].self, forKey: "topFundAssets")
-        totalAssetsCount = try container.decodeIfPresent(Int.self, forKey: "totalAssetsCount")
-    }
 }
-

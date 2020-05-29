@@ -21,7 +21,7 @@ extension DetailStatisticsTableViewCellViewModel: CellViewModel {
         }
     }
     func setupPrivateTradingAccount(_ details: PrivateTradingAccountFull, cell: DetailStatisticsTableViewCell) {
-        if let fileName = details.brokerDetails?.logo, let fileUrl = getFileURL(fileName: fileName) {
+        if let fileName = details.brokerDetails?.logoUrl, let fileUrl = getFileURL(fileName: fileName) {
             cell.brokerLogo.kf.indicatorType = .activity
             cell.brokerLogo.kf.setImage(with: fileUrl, placeholder: UIImage.profilePlaceholder)
         } else {
@@ -43,7 +43,7 @@ extension DetailStatisticsTableViewCellViewModel: CellViewModel {
         }
     }
     func setupProgramFollowDetails(_ details: ProgramFollowDetailsFull, cell: DetailStatisticsTableViewCell) {
-        if let fileName = details.brokerDetails?.logo, let fileUrl = getFileURL(fileName: fileName) {
+        if let fileName = details.brokerDetails?.logoUrl, let fileUrl = getFileURL(fileName: fileName) {
             cell.brokerLogo.kf.indicatorType = .activity
             cell.brokerLogo.kf.setImage(with: fileUrl, placeholder: UIImage.profilePlaceholder)
         } else {

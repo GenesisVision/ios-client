@@ -8,28 +8,39 @@
 import Foundation
 
 
+public struct DashboardTradingAssetActions: Codable {
 
-open class DashboardTradingAssetActions: Codable {
 
     public var canAddRequestInvest: Bool?
+
     public var canAddRequestWithdraw: Bool?
+
     public var canTransferMoney: Bool?
+
     public var canMakeDemoDeposit: Bool?
+
     public var canChangePassword: Bool?
+
     public var canClose: Bool?
+
     public var hasTerminal: Bool?
+
     public var canMakeProgramFromPrivateTradingAccount: Bool?
+
     public var canMakeSignalProviderFromPrivateTradingAccount: Bool?
+
     public var canMakeSignalProviderFromPrivateExternalTradingAccount: Bool?
+
     public var canMakeProgramFromSignalProvider: Bool?
+
     public var canMakeSignalProviderFromProgram: Bool?
+
     public var canEditSignalProviderSettings: Bool?
+
     public var isEnoughMoneyToCreateProgram: Bool?
+
     public var canConfirm2FA: Bool?
-
-
-    
-    public init(canAddRequestInvest: Bool?, canAddRequestWithdraw: Bool?, canTransferMoney: Bool?, canMakeDemoDeposit: Bool?, canChangePassword: Bool?, canClose: Bool?, hasTerminal: Bool?, canMakeProgramFromPrivateTradingAccount: Bool?, canMakeSignalProviderFromPrivateTradingAccount: Bool?, canMakeSignalProviderFromPrivateExternalTradingAccount: Bool?, canMakeProgramFromSignalProvider: Bool?, canMakeSignalProviderFromProgram: Bool?, canEditSignalProviderSettings: Bool?, isEnoughMoneyToCreateProgram: Bool?, canConfirm2FA: Bool?) {
+    public init(canAddRequestInvest: Bool? = nil, canAddRequestWithdraw: Bool? = nil, canTransferMoney: Bool? = nil, canMakeDemoDeposit: Bool? = nil, canChangePassword: Bool? = nil, canClose: Bool? = nil, hasTerminal: Bool? = nil, canMakeProgramFromPrivateTradingAccount: Bool? = nil, canMakeSignalProviderFromPrivateTradingAccount: Bool? = nil, canMakeSignalProviderFromPrivateExternalTradingAccount: Bool? = nil, canMakeProgramFromSignalProvider: Bool? = nil, canMakeSignalProviderFromProgram: Bool? = nil, canEditSignalProviderSettings: Bool? = nil, isEnoughMoneyToCreateProgram: Bool? = nil, canConfirm2FA: Bool? = nil) { 
         self.canAddRequestInvest = canAddRequestInvest
         self.canAddRequestWithdraw = canAddRequestWithdraw
         self.canTransferMoney = canTransferMoney
@@ -46,51 +57,5 @@ open class DashboardTradingAssetActions: Codable {
         self.isEnoughMoneyToCreateProgram = isEnoughMoneyToCreateProgram
         self.canConfirm2FA = canConfirm2FA
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(canAddRequestInvest, forKey: "canAddRequestInvest")
-        try container.encodeIfPresent(canAddRequestWithdraw, forKey: "canAddRequestWithdraw")
-        try container.encodeIfPresent(canTransferMoney, forKey: "canTransferMoney")
-        try container.encodeIfPresent(canMakeDemoDeposit, forKey: "canMakeDemoDeposit")
-        try container.encodeIfPresent(canChangePassword, forKey: "canChangePassword")
-        try container.encodeIfPresent(canClose, forKey: "canClose")
-        try container.encodeIfPresent(hasTerminal, forKey: "hasTerminal")
-        try container.encodeIfPresent(canMakeProgramFromPrivateTradingAccount, forKey: "canMakeProgramFromPrivateTradingAccount")
-        try container.encodeIfPresent(canMakeSignalProviderFromPrivateTradingAccount, forKey: "canMakeSignalProviderFromPrivateTradingAccount")
-        try container.encodeIfPresent(canMakeSignalProviderFromPrivateExternalTradingAccount, forKey: "canMakeSignalProviderFromPrivateExternalTradingAccount")
-        try container.encodeIfPresent(canMakeProgramFromSignalProvider, forKey: "canMakeProgramFromSignalProvider")
-        try container.encodeIfPresent(canMakeSignalProviderFromProgram, forKey: "canMakeSignalProviderFromProgram")
-        try container.encodeIfPresent(canEditSignalProviderSettings, forKey: "canEditSignalProviderSettings")
-        try container.encodeIfPresent(isEnoughMoneyToCreateProgram, forKey: "isEnoughMoneyToCreateProgram")
-        try container.encodeIfPresent(canConfirm2FA, forKey: "canConfirm2FA")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        canAddRequestInvest = try container.decodeIfPresent(Bool.self, forKey: "canAddRequestInvest")
-        canAddRequestWithdraw = try container.decodeIfPresent(Bool.self, forKey: "canAddRequestWithdraw")
-        canTransferMoney = try container.decodeIfPresent(Bool.self, forKey: "canTransferMoney")
-        canMakeDemoDeposit = try container.decodeIfPresent(Bool.self, forKey: "canMakeDemoDeposit")
-        canChangePassword = try container.decodeIfPresent(Bool.self, forKey: "canChangePassword")
-        canClose = try container.decodeIfPresent(Bool.self, forKey: "canClose")
-        hasTerminal = try container.decodeIfPresent(Bool.self, forKey: "hasTerminal")
-        canMakeProgramFromPrivateTradingAccount = try container.decodeIfPresent(Bool.self, forKey: "canMakeProgramFromPrivateTradingAccount")
-        canMakeSignalProviderFromPrivateTradingAccount = try container.decodeIfPresent(Bool.self, forKey: "canMakeSignalProviderFromPrivateTradingAccount")
-        canMakeSignalProviderFromPrivateExternalTradingAccount = try container.decodeIfPresent(Bool.self, forKey: "canMakeSignalProviderFromPrivateExternalTradingAccount")
-        canMakeProgramFromSignalProvider = try container.decodeIfPresent(Bool.self, forKey: "canMakeProgramFromSignalProvider")
-        canMakeSignalProviderFromProgram = try container.decodeIfPresent(Bool.self, forKey: "canMakeSignalProviderFromProgram")
-        canEditSignalProviderSettings = try container.decodeIfPresent(Bool.self, forKey: "canEditSignalProviderSettings")
-        isEnoughMoneyToCreateProgram = try container.decodeIfPresent(Bool.self, forKey: "isEnoughMoneyToCreateProgram")
-        canConfirm2FA = try container.decodeIfPresent(Bool.self, forKey: "canConfirm2FA")
-    }
 }
-

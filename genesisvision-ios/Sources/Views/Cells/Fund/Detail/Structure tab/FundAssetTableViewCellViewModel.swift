@@ -17,7 +17,7 @@ extension FundAssetTableViewCellViewModel: CellViewModel {
     func setup(on cell: FundAssetTableViewCell) {
         cell.assetLogoImageView.image = nil
         
-        if let icon = fundAssetInfo.icon, let fileUrl = getFileURL(fileName: icon) {
+        if let icon = fundAssetInfo.logoUrl, let fileUrl = getFileURL(fileName: icon) {
             cell.assetLogoImageView.kf.indicatorType = .activity
             cell.assetLogoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.fundPlaceholder)
         }
@@ -56,7 +56,7 @@ extension FundReallocateTableViewCellViewModel: CellViewModel {
     func setup(on cell: FundAssetTableViewCell) {
         cell.assetLogoImageView.image = nil
         
-        if let icon = fundAssetInfo.icon, let fileUrl = getFileURL(fileName: icon) {
+        if let icon = fundAssetInfo.logoUrl, let fileUrl = getFileURL(fileName: icon) {
             cell.assetLogoImageView.kf.indicatorType = .activity
             cell.assetLogoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.fundPlaceholder)
         }

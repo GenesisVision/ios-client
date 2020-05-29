@@ -12,76 +12,38 @@ import Alamofire
 
 open class WalletAPI {
     /**
-
      - parameter txId: (path)  
-     - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func cancelWithdrawalRequest(txId: UUID, authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
-        cancelWithdrawalRequestWithRequestBuilder(txId: txId, authorization: authorization).execute { (response, error) -> Void in
-            completion(error);
+    open class func cancelWithdrawalRequest(txId: UUID, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        cancelWithdrawalRequestWithRequestBuilder(txId: txId).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
         }
     }
 
 
     /**
      - POST /v2.0/wallet/withdraw/request/cancel/{txId}
-     
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - parameter txId: (path)  
-     - parameter authorization: (header) JWT access token 
 
      - returns: RequestBuilder<Void> 
      */
-    open class func cancelWithdrawalRequestWithRequestBuilder(txId: UUID, authorization: String) -> RequestBuilder<Void> {
+    open class func cancelWithdrawalRequestWithRequestBuilder(txId: UUID) -> RequestBuilder<Void> {
         var path = "/v2.0/wallet/withdraw/request/cancel/{txId}"
-        path = path.replacingOccurrences(of: "{txId}", with: "\(txId)", options: .literal, range: nil)
+        let txIdPreEscape = "\(txId)"
+        let txIdPostEscape = txIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{txId}", with: txIdPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
-
-        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
-    }
-
-    /**
-
-     - parameter requestId: (query)  (optional)
-     - parameter code: (query)  (optional)
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func confirmWithdrawalRequestByCode(requestId: UUID? = nil, code: String? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        confirmWithdrawalRequestByCodeWithRequestBuilder(requestId: requestId, code: code).execute { (response, error) -> Void in
-            completion(error);
-        }
-    }
-
-
-    /**
-     - POST /v2.0/wallet/withdraw/request/confirm
-     
-     - parameter requestId: (query)  (optional)
-     - parameter code: (query)  (optional)
-
-     - returns: RequestBuilder<Void> 
-     */
-    open class func confirmWithdrawalRequestByCodeWithRequestBuilder(requestId: UUID? = nil, code: String? = nil) -> RequestBuilder<Void> {
-        let path = "/v2.0/wallet/withdraw/request/confirm"
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "requestId": requestId, 
-            "code": code
-        ])
-        
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
@@ -89,72 +51,88 @@ open class WalletAPI {
     }
 
     /**
-
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
+     - parameter requestId: (query)  (optional)     - parameter code: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func createWithdrawalRequest(authorization: String, model: CreateWithdrawalRequestModel? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        createWithdrawalRequestWithRequestBuilder(authorization: authorization, model: model).execute { (response, error) -> Void in
-            completion(error);
+    open class func confirmWithdrawalRequestByCode(requestId: UUID? = nil, code: String? = nil, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        confirmWithdrawalRequestByCodeWithRequestBuilder(requestId: requestId, code: code).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
+        }
+    }
+
+
+    /**
+     - POST /v2.0/wallet/withdraw/request/confirm
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter requestId: (query)  (optional)     - parameter code: (query)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func confirmWithdrawalRequestByCodeWithRequestBuilder(requestId: UUID? = nil, code: String? = nil) -> RequestBuilder<Void> {
+        let path = "/v2.0/wallet/withdraw/request/confirm"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "requestId": requestId, 
+                        "code": code
+        ])
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     - parameter body: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func createWithdrawalRequest(body: CreateWithdrawalRequestModel? = nil, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        createWithdrawalRequestWithRequestBuilder(body: body).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
         }
     }
 
 
     /**
      - POST /v2.0/wallet/withdraw/request/new
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter model: (body)  (optional)
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter body: (body)  (optional)
 
      - returns: RequestBuilder<Void> 
      */
-    open class func createWithdrawalRequestWithRequestBuilder(authorization: String, model: CreateWithdrawalRequestModel? = nil) -> RequestBuilder<Void> {
+    open class func createWithdrawalRequestWithRequestBuilder(body: CreateWithdrawalRequestModel? = nil) -> RequestBuilder<Void> {
         let path = "/v2.0/wallet/withdraw/request/new"
         let URLString = SwaggerClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: model)
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
-    }
-
-    /**
-     * enum for parameter currency
-     */
-    public enum Currency_getAccountsAvailable: String { 
-        case usd = "USD"
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case eur = "EUR"
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
     /**
      Accounts available
-     
      - parameter currency: (path)  
-     - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getAccountsAvailable(currency: Currency_getAccountsAvailable, authorization: String, completion: @escaping ((_ data: WalletMultiAvailable?,_ error: Error?) -> Void)) {
-        getAccountsAvailableWithRequestBuilder(currency: currency, authorization: authorization).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getAccountsAvailable(currency: Currency, completion: @escaping ((_ data: WalletMultiAvailable?,_ error: Error?) -> Void)) {
+        getAccountsAvailableWithRequestBuilder(currency: currency).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
@@ -162,56 +140,53 @@ open class WalletAPI {
     /**
      Accounts available
      - GET /v2.0/wallet/accounts/{currency}/available
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "wallets" : [ {
     "rate" : 6.027456183070403,
     "available" : 0.8008281904610115,
-    "logo" : "logo",
-    "currency" : { },
+    "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "title" : "title"
+    "title" : "title",
+    "logoUrl" : "logoUrl"
   }, {
     "rate" : 6.027456183070403,
     "available" : 0.8008281904610115,
-    "logo" : "logo",
-    "currency" : { },
+    "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "title" : "title"
+    "title" : "title",
+    "logoUrl" : "logoUrl"
   } ]
 }}]
-     
      - parameter currency: (path)  
-     - parameter authorization: (header) JWT access token 
 
      - returns: RequestBuilder<WalletMultiAvailable> 
      */
-    open class func getAccountsAvailableWithRequestBuilder(currency: Currency_getAccountsAvailable, authorization: String) -> RequestBuilder<WalletMultiAvailable> {
+    open class func getAccountsAvailableWithRequestBuilder(currency: Currency) -> RequestBuilder<WalletMultiAvailable> {
         var path = "/v2.0/wallet/accounts/{currency}/available"
-        path = path.replacingOccurrences(of: "{currency}", with: "\(currency.rawValue)", options: .literal, range: nil)
+        let currencyPreEscape = "\(currency)"
+        let currencyPostEscape = currencyPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{currency}", with: currencyPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<WalletMultiAvailable>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
      GenesisMarkets commission data
-     
-     - parameter authorization: (header) JWT access token 
+
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getGMCommissionData(authorization: String, completion: @escaping ((_ data: UserCommissionData?,_ error: Error?) -> Void)) {
-        getGMCommissionDataWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getGMCommissionData(completion: @escaping ((_ data: UserCommissionData?,_ error: Error?) -> Void)) {
+        getGMCommissionDataWithRequestBuilder().execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
@@ -219,6 +194,9 @@ open class WalletAPI {
     /**
      GenesisMarkets commission data
      - GET /v2.0/wallet/fee/gvtholding
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "regularTradingFee" : 1.4658129805029452,
   "regularDiscount" : 5.962133916683182,
@@ -226,72 +204,29 @@ open class WalletAPI {
   "isPayingCommissionInGvt" : true,
   "gvtHolderTradingFee" : 0.8008281904610115
 }}]
-     
-     - parameter authorization: (header) JWT access token 
 
      - returns: RequestBuilder<UserCommissionData> 
      */
-    open class func getGMCommissionDataWithRequestBuilder(authorization: String) -> RequestBuilder<UserCommissionData> {
+    open class func getGMCommissionDataWithRequestBuilder() -> RequestBuilder<UserCommissionData> {
         let path = "/v2.0/wallet/fee/gvtholding"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<UserCommissionData>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
-    }
-
-    /**
-     * enum for parameter transactionType
-     */
-    public enum TransactionType_getTransactionsExternal: String { 
-        case all = "All"
-        case withdrawal = "Withdrawal"
-        case deposit = "Deposit"
-        case platform = "Platform"
-    }
-
-    /**
-     * enum for parameter currency
-     */
-    public enum Currency_getTransactionsExternal: String { 
-        case usd = "USD"
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case eur = "EUR"
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
      External transactions
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter transactionType: (query)  (optional)
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter currency: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
+     - parameter transactionType: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter currency: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getTransactionsExternal(authorization: String, transactionType: TransactionType_getTransactionsExternal? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, currency: Currency_getTransactionsExternal? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ItemsViewModelTransactionViewModel?,_ error: Error?) -> Void)) {
-        getTransactionsExternalWithRequestBuilder(authorization: authorization, transactionType: transactionType, dateFrom: dateFrom, dateTo: dateTo, currency: currency, skip: skip, take: take).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getTransactionsExternal(transactionType: TransactionExternalType? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, currency: Currency? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: TransactionViewModelItemsViewModel?,_ error: Error?) -> Void)) {
+        getTransactionsExternalWithRequestBuilder(transactionType: transactionType, dateFrom: dateFrom, dateTo: dateTo, currency: currency, skip: skip, take: take).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
@@ -299,6 +234,9 @@ open class WalletAPI {
     /**
      External transactions
      - GET /v2.0/wallet/transactions/external
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "total" : 6,
   "items" : [ {
@@ -307,15 +245,9 @@ open class WalletAPI {
       "title" : "title",
       "first" : {
         "amount" : 0.8008281904610115,
-        "color" : { },
-        "logo" : "logo",
-        "currency" : { }
-      },
-      "second" : {
-        "amount" : 0.8008281904610115,
-        "color" : { },
-        "logo" : "logo",
-        "currency" : { }
+        "color" : "White",
+        "currency" : "Undefined",
+        "logoUrl" : "logoUrl"
       }
     },
     "description" : "description",
@@ -340,32 +272,26 @@ open class WalletAPI {
       "manager" : "manager",
       "color" : "color",
       "description" : "description",
-      "logo" : "logo",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "title" : "title",
+      "logoUrl" : "logoUrl",
       "url" : "url",
-      "assetType" : { }
+      "assetType" : "None"
     },
     "actions" : {
       "canResend" : true,
       "canCancel" : true
     },
-    "status" : { }
+    "status" : "Done"
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "amount" : {
       "title" : "title",
       "first" : {
         "amount" : 0.8008281904610115,
-        "color" : { },
-        "logo" : "logo",
-        "currency" : { }
-      },
-      "second" : {
-        "amount" : 0.8008281904610115,
-        "color" : { },
-        "logo" : "logo",
-        "currency" : { }
+        "color" : "White",
+        "currency" : "Undefined",
+        "logoUrl" : "logoUrl"
       }
     },
     "description" : "description",
@@ -390,105 +316,50 @@ open class WalletAPI {
       "manager" : "manager",
       "color" : "color",
       "description" : "description",
-      "logo" : "logo",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "title" : "title",
+      "logoUrl" : "logoUrl",
       "url" : "url",
-      "assetType" : { }
+      "assetType" : "None"
     },
     "actions" : {
       "canResend" : true,
       "canCancel" : true
     },
-    "status" : { }
+    "status" : "Done"
   } ]
 }}]
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter transactionType: (query)  (optional)
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter currency: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
+     - parameter transactionType: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter currency: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
 
-     - returns: RequestBuilder<ItemsViewModelTransactionViewModel> 
+     - returns: RequestBuilder<TransactionViewModelItemsViewModel> 
      */
-    open class func getTransactionsExternalWithRequestBuilder(authorization: String, transactionType: TransactionType_getTransactionsExternal? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, currency: Currency_getTransactionsExternal? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ItemsViewModelTransactionViewModel> {
+    open class func getTransactionsExternalWithRequestBuilder(transactionType: TransactionExternalType? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, currency: Currency? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<TransactionViewModelItemsViewModel> {
         let path = "/v2.0/wallet/transactions/external"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "TransactionType": transactionType?.rawValue, 
-            "DateFrom": dateFrom?.encodeToJSON(), 
-            "DateTo": dateTo?.encodeToJSON(), 
-            "Currency": currency?.rawValue, 
-            "Skip": skip?.encodeToJSON(), 
-            "Take": take?.encodeToJSON()
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "TransactionType": transactionType, 
+                        "DateFrom": dateFrom?.encodeToJSON(), 
+                        "DateTo": dateTo?.encodeToJSON(), 
+                        "Currency": currency, 
+                        "Skip": skip?.encodeToJSON(), 
+                        "Take": take?.encodeToJSON()
         ])
-        
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
-        let requestBuilder: RequestBuilder<ItemsViewModelTransactionViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<TransactionViewModelItemsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
-    }
-
-    /**
-     * enum for parameter transactionType
-     */
-    public enum TransactionType_getTransactionsInternal: String { 
-        case all = "All"
-        case investment = "Investment"
-        case withdrawal = "Withdrawal"
-        case conversion = "Conversion"
-        case commission = "Commission"
-        case program = "Program"
-        case fund = "Fund"
-        case follow = "Follow"
-        case tradingAccounts = "TradingAccounts"
-        case agentReward = "AgentReward"
-    }
-
-    /**
-     * enum for parameter currency
-     */
-    public enum Currency_getTransactionsInternal: String { 
-        case usd = "USD"
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case eur = "EUR"
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
      Internal transactions
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter transactionType: (query)  (optional)
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter currency: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
+     - parameter transactionType: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter currency: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getTransactionsInternal(authorization: String, transactionType: TransactionType_getTransactionsInternal? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, currency: Currency_getTransactionsInternal? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ItemsViewModelTransactionViewModel?,_ error: Error?) -> Void)) {
-        getTransactionsInternalWithRequestBuilder(authorization: authorization, transactionType: transactionType, dateFrom: dateFrom, dateTo: dateTo, currency: currency, skip: skip, take: take).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getTransactionsInternal(transactionType: TransactionInternalType? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, currency: Currency? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: TransactionViewModelItemsViewModel?,_ error: Error?) -> Void)) {
+        getTransactionsInternalWithRequestBuilder(transactionType: transactionType, dateFrom: dateFrom, dateTo: dateTo, currency: currency, skip: skip, take: take).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
@@ -496,6 +367,9 @@ open class WalletAPI {
     /**
      Internal transactions
      - GET /v2.0/wallet/transactions/internal
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "total" : 6,
   "items" : [ {
@@ -504,15 +378,9 @@ open class WalletAPI {
       "title" : "title",
       "first" : {
         "amount" : 0.8008281904610115,
-        "color" : { },
-        "logo" : "logo",
-        "currency" : { }
-      },
-      "second" : {
-        "amount" : 0.8008281904610115,
-        "color" : { },
-        "logo" : "logo",
-        "currency" : { }
+        "color" : "White",
+        "currency" : "Undefined",
+        "logoUrl" : "logoUrl"
       }
     },
     "description" : "description",
@@ -537,32 +405,26 @@ open class WalletAPI {
       "manager" : "manager",
       "color" : "color",
       "description" : "description",
-      "logo" : "logo",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "title" : "title",
+      "logoUrl" : "logoUrl",
       "url" : "url",
-      "assetType" : { }
+      "assetType" : "None"
     },
     "actions" : {
       "canResend" : true,
       "canCancel" : true
     },
-    "status" : { }
+    "status" : "Done"
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "amount" : {
       "title" : "title",
       "first" : {
         "amount" : 0.8008281904610115,
-        "color" : { },
-        "logo" : "logo",
-        "currency" : { }
-      },
-      "second" : {
-        "amount" : 0.8008281904610115,
-        "color" : { },
-        "logo" : "logo",
-        "currency" : { }
+        "color" : "White",
+        "currency" : "Undefined",
+        "logoUrl" : "logoUrl"
       }
     },
     "description" : "description",
@@ -587,138 +449,99 @@ open class WalletAPI {
       "manager" : "manager",
       "color" : "color",
       "description" : "description",
-      "logo" : "logo",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "title" : "title",
+      "logoUrl" : "logoUrl",
       "url" : "url",
-      "assetType" : { }
+      "assetType" : "None"
     },
     "actions" : {
       "canResend" : true,
       "canCancel" : true
     },
-    "status" : { }
+    "status" : "Done"
   } ]
 }}]
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter transactionType: (query)  (optional)
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter currency: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
+     - parameter transactionType: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter currency: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
 
-     - returns: RequestBuilder<ItemsViewModelTransactionViewModel> 
+     - returns: RequestBuilder<TransactionViewModelItemsViewModel> 
      */
-    open class func getTransactionsInternalWithRequestBuilder(authorization: String, transactionType: TransactionType_getTransactionsInternal? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, currency: Currency_getTransactionsInternal? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ItemsViewModelTransactionViewModel> {
+    open class func getTransactionsInternalWithRequestBuilder(transactionType: TransactionInternalType? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, currency: Currency? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<TransactionViewModelItemsViewModel> {
         let path = "/v2.0/wallet/transactions/internal"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "TransactionType": transactionType?.rawValue, 
-            "DateFrom": dateFrom?.encodeToJSON(), 
-            "DateTo": dateTo?.encodeToJSON(), 
-            "Currency": currency?.rawValue, 
-            "Skip": skip?.encodeToJSON(), 
-            "Take": take?.encodeToJSON()
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "TransactionType": transactionType, 
+                        "DateFrom": dateFrom?.encodeToJSON(), 
+                        "DateTo": dateTo?.encodeToJSON(), 
+                        "Currency": currency, 
+                        "Skip": skip?.encodeToJSON(), 
+                        "Take": take?.encodeToJSON()
         ])
-        
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
-        let requestBuilder: RequestBuilder<ItemsViewModelTransactionViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<TransactionViewModelItemsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
 
-     - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getUserWithdrawalSummary(authorization: String, completion: @escaping ((_ data: WithdrawalSummary?,_ error: Error?) -> Void)) {
-        getUserWithdrawalSummaryWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getUserWithdrawalSummary(completion: @escaping ((_ data: WithdrawalSummary?,_ error: Error?) -> Void)) {
+        getUserWithdrawalSummaryWithRequestBuilder().execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
 
     /**
      - GET /v2.0/wallet/withdraw/info
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "wallets" : [ {
     "rateToGvt" : 1.4658129805029452,
     "description" : "description",
-    "logo" : "logo",
-    "currency" : { },
+    "currency" : "Undefined",
     "commission" : 6.027456183070403,
+    "logoUrl" : "logoUrl",
     "availableToWithdrawal" : 5.962133916683182
   }, {
     "rateToGvt" : 1.4658129805029452,
     "description" : "description",
-    "logo" : "logo",
-    "currency" : { },
+    "currency" : "Undefined",
     "commission" : 6.027456183070403,
+    "logoUrl" : "logoUrl",
     "availableToWithdrawal" : 5.962133916683182
   } ],
   "availableToWithdrawal" : 0.8008281904610115
 }}]
-     
-     - parameter authorization: (header) JWT access token 
 
      - returns: RequestBuilder<WithdrawalSummary> 
      */
-    open class func getUserWithdrawalSummaryWithRequestBuilder(authorization: String) -> RequestBuilder<WithdrawalSummary> {
+    open class func getUserWithdrawalSummaryWithRequestBuilder() -> RequestBuilder<WithdrawalSummary> {
         let path = "/v2.0/wallet/withdraw/info"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<WithdrawalSummary>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
-    }
-
-    /**
-     * enum for parameter currency
-     */
-    public enum Currency_getWalletAvailable: String { 
-        case usd = "USD"
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case eur = "EUR"
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
      Wallet available
-     
      - parameter currency: (path)  
-     - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getWalletAvailable(currency: Currency_getWalletAvailable, authorization: String, completion: @escaping ((_ data: WalletMultiAvailable?,_ error: Error?) -> Void)) {
-        getWalletAvailableWithRequestBuilder(currency: currency, authorization: authorization).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getWalletAvailable(currency: Currency, completion: @escaping ((_ data: WalletMultiAvailable?,_ error: Error?) -> Void)) {
+        getWalletAvailableWithRequestBuilder(currency: currency).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
@@ -726,76 +549,53 @@ open class WalletAPI {
     /**
      Wallet available
      - GET /v2.0/wallet/{currency}/available
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "wallets" : [ {
     "rate" : 6.027456183070403,
     "available" : 0.8008281904610115,
-    "logo" : "logo",
-    "currency" : { },
+    "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "title" : "title"
+    "title" : "title",
+    "logoUrl" : "logoUrl"
   }, {
     "rate" : 6.027456183070403,
     "available" : 0.8008281904610115,
-    "logo" : "logo",
-    "currency" : { },
+    "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "title" : "title"
+    "title" : "title",
+    "logoUrl" : "logoUrl"
   } ]
 }}]
-     
      - parameter currency: (path)  
-     - parameter authorization: (header) JWT access token 
 
      - returns: RequestBuilder<WalletMultiAvailable> 
      */
-    open class func getWalletAvailableWithRequestBuilder(currency: Currency_getWalletAvailable, authorization: String) -> RequestBuilder<WalletMultiAvailable> {
+    open class func getWalletAvailableWithRequestBuilder(currency: Currency) -> RequestBuilder<WalletMultiAvailable> {
         var path = "/v2.0/wallet/{currency}/available"
-        path = path.replacingOccurrences(of: "{currency}", with: "\(currency.rawValue)", options: .literal, range: nil)
+        let currencyPreEscape = "\(currency)"
+        let currencyPostEscape = currencyPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{currency}", with: currencyPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<WalletMultiAvailable>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
-    }
-
-    /**
-     * enum for parameter currency
-     */
-    public enum Currency_getWalletSummary: String { 
-        case usd = "USD"
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case eur = "EUR"
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
      Wallet summary
-     
      - parameter currency: (path)  
-     - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getWalletSummary(currency: Currency_getWalletSummary, authorization: String, completion: @escaping ((_ data: WalletSummary?,_ error: Error?) -> Void)) {
-        getWalletSummaryWithRequestBuilder(currency: currency, authorization: authorization).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getWalletSummary(currency: Currency, completion: @escaping ((_ data: WalletSummary?,_ error: Error?) -> Void)) {
+        getWalletSummaryWithRequestBuilder(currency: currency).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
@@ -803,15 +603,17 @@ open class WalletAPI {
     /**
      Wallet summary
      - GET /v2.0/wallet/{currency}
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "grandTotal" : {
     "trading" : 1.4658129805029452,
     "total" : 5.962133916683182,
     "available" : 0.8008281904610115,
-    "currency" : { },
+    "currency" : "Undefined",
     "invested" : 6.027456183070403
   },
-  "payFeesWithGvt" : true,
   "wallets" : [ {
     "trading" : 1.4894159098541704,
     "totalCcy" : 4.145608029883936,
@@ -823,10 +625,9 @@ open class WalletAPI {
     "isWithdrawalEnabled" : true,
     "title" : "title",
     "isDepositEnabled" : true,
+    "logoUrl" : "logoUrl",
     "total" : 2.3021358869347655,
     "tradingCcy" : 3.616076749251911,
-    "logo" : "logo",
-    "currency" : null,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "depositUrlCoindirect" : "depositUrlCoindirect",
     "pendingCcy" : 2.027123023002322,
@@ -843,166 +644,87 @@ open class WalletAPI {
     "isWithdrawalEnabled" : true,
     "title" : "title",
     "isDepositEnabled" : true,
+    "logoUrl" : "logoUrl",
     "total" : 2.3021358869347655,
     "tradingCcy" : 3.616076749251911,
-    "logo" : "logo",
-    "currency" : null,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "depositUrlCoindirect" : "depositUrlCoindirect",
     "pendingCcy" : 2.027123023002322,
     "invested" : 1.0246457001441578,
     "investedCcy" : 9.301444243932576
-  } ]
+  } ],
+  "genesisMarketsDiscountPercent" : 6.84685269835264
 }}]
-     
      - parameter currency: (path)  
-     - parameter authorization: (header) JWT access token 
 
      - returns: RequestBuilder<WalletSummary> 
      */
-    open class func getWalletSummaryWithRequestBuilder(currency: Currency_getWalletSummary, authorization: String) -> RequestBuilder<WalletSummary> {
+    open class func getWalletSummaryWithRequestBuilder(currency: Currency) -> RequestBuilder<WalletSummary> {
         var path = "/v2.0/wallet/{currency}"
-        path = path.replacingOccurrences(of: "{currency}", with: "\(currency.rawValue)", options: .literal, range: nil)
+        let currencyPreEscape = "\(currency)"
+        let currencyPostEscape = currencyPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{currency}", with: currencyPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<WalletSummary>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
-
      - parameter txId: (path)  
-     - parameter authorization: (header) JWT access token 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func resendWithdrawalRequestEmail(txId: UUID, authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
-        resendWithdrawalRequestEmailWithRequestBuilder(txId: txId, authorization: authorization).execute { (response, error) -> Void in
-            completion(error);
+    open class func resendWithdrawalRequestEmail(txId: UUID, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        resendWithdrawalRequestEmailWithRequestBuilder(txId: txId).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
         }
     }
 
 
     /**
      - POST /v2.0/wallet/withdraw/request/resend/{txId}
-     
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - parameter txId: (path)  
-     - parameter authorization: (header) JWT access token 
 
      - returns: RequestBuilder<Void> 
      */
-    open class func resendWithdrawalRequestEmailWithRequestBuilder(txId: UUID, authorization: String) -> RequestBuilder<Void> {
+    open class func resendWithdrawalRequestEmailWithRequestBuilder(txId: UUID) -> RequestBuilder<Void> {
         var path = "/v2.0/wallet/withdraw/request/resend/{txId}"
-        path = path.replacingOccurrences(of: "{txId}", with: "\(txId)", options: .literal, range: nil)
+        let txIdPreEscape = "\(txId)"
+        let txIdPostEscape = txIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{txId}", with: txIdPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
-    }
-
-    /**
-     Disable paying platform fees with GVT
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func switchPayFeeInGvtOff(authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
-        switchPayFeeInGvtOffWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
-            completion(error);
-        }
-    }
-
-
-    /**
-     Disable paying platform fees with GVT
-     - POST /v2.0/wallet/paygvtfee/off
-     
-     - parameter authorization: (header) JWT access token 
-
-     - returns: RequestBuilder<Void> 
-     */
-    open class func switchPayFeeInGvtOffWithRequestBuilder(authorization: String) -> RequestBuilder<Void> {
-        let path = "/v2.0/wallet/paygvtfee/off"
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
-
-        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
-    }
-
-    /**
-     Enable paying platform fees with GVT
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func switchPayFeeInGvtOn(authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
-        switchPayFeeInGvtOnWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
-            completion(error);
-        }
-    }
-
-
-    /**
-     Enable paying platform fees with GVT
-     - POST /v2.0/wallet/paygvtfee/on
-     
-     - parameter authorization: (header) JWT access token 
-
-     - returns: RequestBuilder<Void> 
-     */
-    open class func switchPayFeeInGvtOnWithRequestBuilder(authorization: String) -> RequestBuilder<Void> {
-        let path = "/v2.0/wallet/paygvtfee/on"
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
-
-        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
      Transfer money
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter request: (body)  (optional)
+     - parameter body: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func transfer(authorization: String, request: InternalTransferRequest? = nil, completion: @escaping ((_ error: Error?) -> Void)) {
-        transferWithRequestBuilder(authorization: authorization, request: request).execute { (response, error) -> Void in
-            completion(error);
+    open class func transfer(body: InternalTransferRequest? = nil, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        transferWithRequestBuilder(body: body).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
         }
     }
 
@@ -1010,38 +732,33 @@ open class WalletAPI {
     /**
      Transfer money
      - POST /v2.0/wallet/transfer
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter request: (body)  (optional)
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter body: (body)  (optional)
 
      - returns: RequestBuilder<Void> 
      */
-    open class func transferWithRequestBuilder(authorization: String, request: InternalTransferRequest? = nil) -> RequestBuilder<Void> {
+    open class func transferWithRequestBuilder(body: InternalTransferRequest? = nil) -> RequestBuilder<Void> {
         let path = "/v2.0/wallet/transfer"
         let URLString = SwaggerClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: request)
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
     /**
      Update deposit wallets
-     
-     - parameter authorization: (header) JWT access token 
+
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func updateDepositWallets(authorization: String, completion: @escaping ((_ data: WalletDepositSummary?,_ error: Error?) -> Void)) {
-        updateDepositWalletsWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func updateDepositWallets(completion: @escaping ((_ data: WalletDepositSummary?,_ error: Error?) -> Void)) {
+        updateDepositWalletsWithRequestBuilder().execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
@@ -1049,35 +766,31 @@ open class WalletAPI {
     /**
      Update deposit wallets
      - POST /v2.0/wallet/deposit/update
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "wallets" : [ {
     "depositAddress" : "depositAddress",
-    "currency" : { }
+    "currency" : "Undefined"
   }, {
     "depositAddress" : "depositAddress",
-    "currency" : { }
+    "currency" : "Undefined"
   } ]
 }}]
-     
-     - parameter authorization: (header) JWT access token 
 
      - returns: RequestBuilder<WalletDepositSummary> 
      */
-    open class func updateDepositWalletsWithRequestBuilder(authorization: String) -> RequestBuilder<WalletDepositSummary> {
+    open class func updateDepositWalletsWithRequestBuilder() -> RequestBuilder<WalletDepositSummary> {
         let path = "/v2.0/wallet/deposit/update"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<WalletDepositSummary>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
 }

@@ -8,37 +8,15 @@
 import Foundation
 
 
+public struct ResendConfirmationViewModel: Codable {
 
-open class ResendConfirmationViewModel: Codable {
 
     public var email: String
+
     public var captchaCheckResult: CaptchaCheckResult?
-
-
-    
-    public init(email: String, captchaCheckResult: CaptchaCheckResult?) {
+    public init(email: String, captchaCheckResult: CaptchaCheckResult? = nil) { 
         self.email = email
         self.captchaCheckResult = captchaCheckResult
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encode(email, forKey: "email")
-        try container.encodeIfPresent(captchaCheckResult, forKey: "captchaCheckResult")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        email = try container.decode(String.self, forKey: "email")
-        captchaCheckResult = try container.decodeIfPresent(CaptchaCheckResult.self, forKey: "captchaCheckResult")
-    }
 }
-

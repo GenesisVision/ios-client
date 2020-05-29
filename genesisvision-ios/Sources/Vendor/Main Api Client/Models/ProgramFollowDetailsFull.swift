@@ -8,23 +8,28 @@
 import Foundation
 
 
+public struct ProgramFollowDetailsFull: Codable {
 
-open class ProgramFollowDetailsFull: Codable {
 
-    public var id: UUID?
+    public var _id: UUID?
+
     public var publicInfo: AssetPublicDetails?
+
     public var tradingAccountInfo: ProgramFollowDetailsFullTradingAccountDetails?
+
     public var owner: ProfilePublic?
+
     public var brokerDetails: BrokerDetails?
+
     public var tags: [Tag]?
+
     public var programDetails: ProgramDetailsFull?
+
     public var followDetails: FollowDetailsFull?
+
     public var ownerActions: ProgramFollowOwnerActions?
-
-
-    
-    public init(id: UUID?, publicInfo: AssetPublicDetails?, tradingAccountInfo: ProgramFollowDetailsFullTradingAccountDetails?, owner: ProfilePublic?, brokerDetails: BrokerDetails?, tags: [Tag]?, programDetails: ProgramDetailsFull?, followDetails: FollowDetailsFull?, ownerActions: ProgramFollowOwnerActions?) {
-        self.id = id
+    public init(_id: UUID? = nil, publicInfo: AssetPublicDetails? = nil, tradingAccountInfo: ProgramFollowDetailsFullTradingAccountDetails? = nil, owner: ProfilePublic? = nil, brokerDetails: BrokerDetails? = nil, tags: [Tag]? = nil, programDetails: ProgramDetailsFull? = nil, followDetails: FollowDetailsFull? = nil, ownerActions: ProgramFollowOwnerActions? = nil) { 
+        self._id = _id
         self.publicInfo = publicInfo
         self.tradingAccountInfo = tradingAccountInfo
         self.owner = owner
@@ -34,39 +39,16 @@ open class ProgramFollowDetailsFull: Codable {
         self.followDetails = followDetails
         self.ownerActions = ownerActions
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(id, forKey: "id")
-        try container.encodeIfPresent(publicInfo, forKey: "publicInfo")
-        try container.encodeIfPresent(tradingAccountInfo, forKey: "tradingAccountInfo")
-        try container.encodeIfPresent(owner, forKey: "owner")
-        try container.encodeIfPresent(brokerDetails, forKey: "brokerDetails")
-        try container.encodeIfPresent(tags, forKey: "tags")
-        try container.encodeIfPresent(programDetails, forKey: "programDetails")
-        try container.encodeIfPresent(followDetails, forKey: "followDetails")
-        try container.encodeIfPresent(ownerActions, forKey: "ownerActions")
+    public enum CodingKeys: String, CodingKey { 
+        case _id = "id"
+        case publicInfo
+        case tradingAccountInfo
+        case owner
+        case brokerDetails
+        case tags
+        case programDetails
+        case followDetails
+        case ownerActions
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        id = try container.decodeIfPresent(UUID.self, forKey: "id")
-        publicInfo = try container.decodeIfPresent(AssetPublicDetails.self, forKey: "publicInfo")
-        tradingAccountInfo = try container.decodeIfPresent(ProgramFollowDetailsFullTradingAccountDetails.self, forKey: "tradingAccountInfo")
-        owner = try container.decodeIfPresent(ProfilePublic.self, forKey: "owner")
-        brokerDetails = try container.decodeIfPresent(BrokerDetails.self, forKey: "brokerDetails")
-        tags = try container.decodeIfPresent([Tag].self, forKey: "tags")
-        programDetails = try container.decodeIfPresent(ProgramDetailsFull.self, forKey: "programDetails")
-        followDetails = try container.decodeIfPresent(FollowDetailsFull.self, forKey: "followDetails")
-        ownerActions = try container.decodeIfPresent(ProgramFollowOwnerActions.self, forKey: "ownerActions")
-    }
 }
-

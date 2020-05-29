@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum TradesDelay: String, Codable {
     case _none = "None"
     case fiveMinutes = "FiveMinutes"
@@ -15,5 +14,4 @@ public enum TradesDelay: String, Codable {
     case thirtyMinutes = "ThirtyMinutes"
     case oneHour = "OneHour"
     case sixHours = "SixHours"
-
 }

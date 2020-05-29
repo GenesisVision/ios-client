@@ -165,9 +165,7 @@ extension WalletInternalTransactionListViewModel {
     /// Save [WalletTransaction] and total -> Return [WalletTransactionTableViewCellViewModel] or error
     private func fetch(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [WalletTransactionTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
         
-        let currency = WalletAPI.Currency_getTransactionsInternal(rawValue: wallet?.currency?.rawValue ?? "")
-        
-        WalletDataProvider.getTransactions(currency: currency, skip: skip, take: take, completion: { (transactionsViewModel) in
+        WalletDataProvider.getTransactions(currency: wallet?.currency, skip: skip, take: take, completion: { (transactionsViewModel) in
             guard transactionsViewModel != nil else {
                 return ErrorHandler.handleApiError(error: nil, completion: completionError)
             }

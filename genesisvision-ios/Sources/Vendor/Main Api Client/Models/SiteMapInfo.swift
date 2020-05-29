@@ -8,49 +8,24 @@
 import Foundation
 
 
+public struct SiteMapInfo: Codable {
 
-open class SiteMapInfo: Codable {
 
     public var programs: [String]?
+
     public var funds: [String]?
+
     public var follow: [String]?
+
     public var users: [String]?
+
     public var actives: [String]?
-
-
-    
-    public init(programs: [String]?, funds: [String]?, follow: [String]?, users: [String]?, actives: [String]?) {
+    public init(programs: [String]? = nil, funds: [String]? = nil, follow: [String]? = nil, users: [String]? = nil, actives: [String]? = nil) { 
         self.programs = programs
         self.funds = funds
         self.follow = follow
         self.users = users
         self.actives = actives
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(programs, forKey: "programs")
-        try container.encodeIfPresent(funds, forKey: "funds")
-        try container.encodeIfPresent(follow, forKey: "follow")
-        try container.encodeIfPresent(users, forKey: "users")
-        try container.encodeIfPresent(actives, forKey: "actives")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        programs = try container.decodeIfPresent([String].self, forKey: "programs")
-        funds = try container.decodeIfPresent([String].self, forKey: "funds")
-        follow = try container.decodeIfPresent([String].self, forKey: "follow")
-        users = try container.decodeIfPresent([String].self, forKey: "users")
-        actives = try container.decodeIfPresent([String].self, forKey: "actives")
-    }
 }
-

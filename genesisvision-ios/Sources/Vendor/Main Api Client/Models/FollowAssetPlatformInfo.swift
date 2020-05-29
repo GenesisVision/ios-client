@@ -8,45 +8,21 @@
 import Foundation
 
 
+public struct FollowAssetPlatformInfo: Codable {
 
-open class FollowAssetPlatformInfo: Codable {
 
     public var facets: [AssetFacet]?
+
     public var tags: [Tag]?
+
     public var createFollowInfo: FollowCreateAssetPlatformInfo?
+
     public var subscribeFixedCurrencies: [String]?
-
-
-    
-    public init(facets: [AssetFacet]?, tags: [Tag]?, createFollowInfo: FollowCreateAssetPlatformInfo?, subscribeFixedCurrencies: [String]?) {
+    public init(facets: [AssetFacet]? = nil, tags: [Tag]? = nil, createFollowInfo: FollowCreateAssetPlatformInfo? = nil, subscribeFixedCurrencies: [String]? = nil) { 
         self.facets = facets
         self.tags = tags
         self.createFollowInfo = createFollowInfo
         self.subscribeFixedCurrencies = subscribeFixedCurrencies
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(facets, forKey: "facets")
-        try container.encodeIfPresent(tags, forKey: "tags")
-        try container.encodeIfPresent(createFollowInfo, forKey: "createFollowInfo")
-        try container.encodeIfPresent(subscribeFixedCurrencies, forKey: "subscribeFixedCurrencies")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        facets = try container.decodeIfPresent([AssetFacet].self, forKey: "facets")
-        tags = try container.decodeIfPresent([Tag].self, forKey: "tags")
-        createFollowInfo = try container.decodeIfPresent(FollowCreateAssetPlatformInfo.self, forKey: "createFollowInfo")
-        subscribeFixedCurrencies = try container.decodeIfPresent([String].self, forKey: "subscribeFixedCurrencies")
-    }
 }
-

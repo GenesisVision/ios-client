@@ -92,10 +92,11 @@ class SearchViewController: BaseTabmanViewController<SearchTabmanViewModel> {
     }
     
     func clearResults() {
-        let searchViewModel = CommonPublicAssetsViewModel(programs: ItemsViewModelProgramDetailsListItem(items: [], total: 0),
-                                              funds: ItemsViewModelFundDetailsListItem(items: [], total: 0),
-                                              follows: ItemsViewModelFollowDetailsListItem(items: [], total: 0),
-                                              managers: ItemsViewModelPublicProfile(items: [], total: 0))
+        
+        let searchViewModel = CommonPublicAssetsViewModel(programs: ProgramDetailsListItemItemsViewModel(items: [], total: 0),
+                                                          funds: FundDetailsListItemItemsViewModel(items: [], total: 0),
+                                                          follows: FollowDetailsListItemItemsViewModel(items: [], total: 0),
+                                                          managers: PublicProfileItemsViewModel(items: [], total: 0))
         self.updateControllers(searchViewModel)
     }
     
@@ -107,7 +108,7 @@ class SearchViewController: BaseTabmanViewController<SearchTabmanViewModel> {
                 viewModel.updateViewModels(searchViewModel?.funds)
             } else if let vc = vc as? ProgramListViewController, let viewModel = vc.viewModel, viewModel.assetType == .program {
                 viewModel.updateViewModels(searchViewModel?.programs)
-            } else if let vc = vc as? ManagerListViewController, let viewModel = vc.viewModel as? ManagerListViewModel {
+            } else if let vc = vc as? ManagerListViewController, let viewModel = vc.viewModel {
                 viewModel.updateViewModels(searchViewModel?.managers)
             }
         }

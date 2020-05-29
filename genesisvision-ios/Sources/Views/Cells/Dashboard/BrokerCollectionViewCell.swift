@@ -41,7 +41,7 @@ class BrokerCollectionViewCell: BaseCollectionViewCell {
         self.delegate = delegate
         self.broker = broker
         
-        if let logo = broker?.logo, let fileUrl = getFileURL(fileName: logo) {
+        if let logo = broker?.logoUrl, let fileUrl = getFileURL(fileName: logo) {
             logoImageView.kf.indicatorType = .activity
             logoImageView.kf.setImage(with: fileUrl)
         }

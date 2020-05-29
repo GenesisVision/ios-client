@@ -19,14 +19,14 @@ class TradingPrivateShortListViewModel: CellViewModelWithCollection {
     var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
         return []
     }
-    var details: ItemsViewModelDashboardTradingAsset?
+    var details: DashboardTradingAssetItemsViewModel?
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [AssetCollectionViewCellViewModel.self]
     }
     
     var router: Router?
     weak var delegate: BaseTableViewProtocol?
-    init(_ details: ItemsViewModelDashboardTradingAsset?, delegate: BaseTableViewProtocol?, router: Router?) {
+    init(_ details: DashboardTradingAssetItemsViewModel?, delegate: BaseTableViewProtocol?, router: Router?) {
         self.details = details
         self.router = router
         self.delegate = delegate

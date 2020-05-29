@@ -100,7 +100,7 @@ extension ProgramContentView: ContentViewProtocol {
         self.filterProtocol = filterProtocol
         self.favoriteProtocol = favoriteProtocol
         
-        if let assetId = asset.id?.uuidString {
+        if let assetId = asset._id?.uuidString {
             self.assetId = assetId
         }
         
@@ -180,7 +180,7 @@ extension ProgramContentView: ContentViewProtocol {
         
         assetLogoImageView.profilePhotoImageView.image = UIImage.programPlaceholder
         
-        if let logo = asset.logo, let fileUrl = getFileURL(fileName: logo) {
+        if let logo = asset.logoUrl, let fileUrl = getFileURL(fileName: logo) {
             assetLogoImageView.profilePhotoImageView.kf.indicatorType = .activity
             assetLogoImageView.profilePhotoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
             assetLogoImageView.profilePhotoImageView.backgroundColor = .clear

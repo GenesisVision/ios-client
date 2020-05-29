@@ -13,14 +13,16 @@ import Alamofire
 open class FundsAPI {
     /**
      Add to favorites
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
+     - parameter _id: (path)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func addToFavorites(id: UUID, authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
-        addToFavoritesWithRequestBuilder(id: id, authorization: authorization).execute { (response, error) -> Void in
-            completion(error);
+    open class func addToFavorites(_id: UUID, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        addToFavoritesWithRequestBuilder(_id: _id).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
         }
     }
 
@@ -28,62 +30,36 @@ open class FundsAPI {
     /**
      Add to favorites
      - POST /v2.0/funds/{id}/favorite/add
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter _id: (path)  
 
      - returns: RequestBuilder<Void> 
      */
-    open class func addToFavoritesWithRequestBuilder(id: UUID, authorization: String) -> RequestBuilder<Void> {
+    open class func addToFavoritesWithRequestBuilder(_id: UUID) -> RequestBuilder<Void> {
         var path = "/v2.0/funds/{id}/favorite/add"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
-    }
-
-    /**
-     * enum for parameter currency
-     */
-    public enum Currency_getFundAbsoluteProfitChart: String { 
-        case usd = "USD"
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case eur = "EUR"
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
      Fund absolute profit chart
-     
-     - parameter id: (path)  
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter maxPointCount: (query)  (optional)
-     - parameter currency: (query)  (optional)
+     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter maxPointCount: (query)  (optional)     - parameter currency: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getFundAbsoluteProfitChart(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency_getFundAbsoluteProfitChart? = nil, completion: @escaping ((_ data: AbsoluteProfitChart?,_ error: Error?) -> Void)) {
-        getFundAbsoluteProfitChartWithRequestBuilder(id: id, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getFundAbsoluteProfitChart(_id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency? = nil, completion: @escaping ((_ data: AbsoluteProfitChart?,_ error: Error?) -> Void)) {
+        getFundAbsoluteProfitChartWithRequestBuilder(_id: _id, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
@@ -91,39 +67,37 @@ open class FundsAPI {
     /**
      Fund absolute profit chart
      - GET /v2.0/funds/{id}/charts/profit/absolute
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "profit" : 0.8008281904610115,
   "chart" : [ {
-    "date" : 0,
-    "value" : 6.027456183070403
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "value" : 0.8008281904610115
   }, {
-    "date" : 0,
-    "value" : 6.027456183070403
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "value" : 0.8008281904610115
   } ]
 }}]
-     
-     - parameter id: (path)  
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter maxPointCount: (query)  (optional)
-     - parameter currency: (query)  (optional)
+     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter maxPointCount: (query)  (optional)     - parameter currency: (query)  (optional)
 
      - returns: RequestBuilder<AbsoluteProfitChart> 
      */
-    open class func getFundAbsoluteProfitChartWithRequestBuilder(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency_getFundAbsoluteProfitChart? = nil) -> RequestBuilder<AbsoluteProfitChart> {
+    open class func getFundAbsoluteProfitChartWithRequestBuilder(_id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency? = nil) -> RequestBuilder<AbsoluteProfitChart> {
         var path = "/v2.0/funds/{id}/charts/profit/absolute"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "DateFrom": dateFrom?.encodeToJSON(), 
-            "DateTo": dateTo?.encodeToJSON(), 
-            "MaxPointCount": maxPointCount?.encodeToJSON(), 
-            "Currency": currency?.rawValue
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "DateFrom": dateFrom?.encodeToJSON(), 
+                        "DateTo": dateTo?.encodeToJSON(), 
+                        "MaxPointCount": maxPointCount?.encodeToJSON(), 
+                        "Currency": currency
         ])
-        
 
         let requestBuilder: RequestBuilder<AbsoluteProfitChart>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
@@ -131,37 +105,13 @@ open class FundsAPI {
     }
 
     /**
-     * enum for parameter currency
-     */
-    public enum Currency_getFundBalanceChart: String { 
-        case usd = "USD"
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case eur = "EUR"
-    }
-
-    /**
      Fund balance chart
-     
-     - parameter id: (path)  
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter maxPointCount: (query)  (optional)
-     - parameter currency: (query)  (optional)
+     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter maxPointCount: (query)  (optional)     - parameter currency: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getFundBalanceChart(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency_getFundBalanceChart? = nil, completion: @escaping ((_ data: FundBalanceChart?,_ error: Error?) -> Void)) {
-        getFundBalanceChartWithRequestBuilder(id: id, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getFundBalanceChart(_id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency? = nil, completion: @escaping ((_ data: FundBalanceChart?,_ error: Error?) -> Void)) {
+        getFundBalanceChartWithRequestBuilder(_id: _id, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
@@ -169,42 +119,40 @@ open class FundsAPI {
     /**
      Fund balance chart
      - GET /v2.0/funds/{id}/charts/balance
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "balance" : 0.8008281904610115,
   "color" : "color",
   "chart" : [ {
-    "date" : 6,
-    "investorsFunds" : 5.962133916683182,
-    "managerFunds" : 1.4658129805029452
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "investorsFunds" : 1.4658129805029452,
+    "managerFunds" : 6.027456183070403
   }, {
-    "date" : 6,
-    "investorsFunds" : 5.962133916683182,
-    "managerFunds" : 1.4658129805029452
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "investorsFunds" : 1.4658129805029452,
+    "managerFunds" : 6.027456183070403
   } ]
 }}]
-     
-     - parameter id: (path)  
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter maxPointCount: (query)  (optional)
-     - parameter currency: (query)  (optional)
+     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter maxPointCount: (query)  (optional)     - parameter currency: (query)  (optional)
 
      - returns: RequestBuilder<FundBalanceChart> 
      */
-    open class func getFundBalanceChartWithRequestBuilder(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency_getFundBalanceChart? = nil) -> RequestBuilder<FundBalanceChart> {
+    open class func getFundBalanceChartWithRequestBuilder(_id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency? = nil) -> RequestBuilder<FundBalanceChart> {
         var path = "/v2.0/funds/{id}/charts/balance"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "DateFrom": dateFrom?.encodeToJSON(), 
-            "DateTo": dateTo?.encodeToJSON(), 
-            "MaxPointCount": maxPointCount?.encodeToJSON(), 
-            "Currency": currency?.rawValue
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "DateFrom": dateFrom?.encodeToJSON(), 
+                        "DateTo": dateTo?.encodeToJSON(), 
+                        "MaxPointCount": maxPointCount?.encodeToJSON(), 
+                        "Currency": currency
         ])
-        
 
         let requestBuilder: RequestBuilder<FundBalanceChart>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
@@ -212,35 +160,13 @@ open class FundsAPI {
     }
 
     /**
-     * enum for parameter currency
-     */
-    public enum Currency_getFundDetails: String { 
-        case usd = "USD"
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case eur = "EUR"
-    }
-
-    /**
      Fund details
-     
-     - parameter id: (path)  
-     - parameter authorization: (header)  (optional)
-     - parameter currency: (query)  (optional)
+     - parameter _id: (path)       - parameter currency: (query)  (optional)     - parameter logoQuality: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getFundDetails(id: String, authorization: String? = nil, currency: Currency_getFundDetails? = nil, completion: @escaping ((_ data: FundDetailsFull?,_ error: Error?) -> Void)) {
-        getFundDetailsWithRequestBuilder(id: id, authorization: authorization, currency: currency).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getFundDetails(_id: String, currency: Currency? = nil, logoQuality: ImageQuality? = nil, completion: @escaping ((_ data: FundDetailsFull?,_ error: Error?) -> Void)) {
+        getFundDetailsWithRequestBuilder(_id: _id, currency: currency, logoQuality: logoQuality).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
@@ -248,24 +174,27 @@ open class FundsAPI {
     /**
      Fund details
      - GET /v2.0/funds/{id}
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "owner" : {
     "socialLinks" : [ {
       "name" : "name",
-      "logo" : "logo",
-      "type" : { },
+      "type" : "Undefined",
       "value" : "value",
-      "url" : "url"
+      "url" : "url",
+      "logoUrl" : "logoUrl"
     }, {
       "name" : "name",
-      "logo" : "logo",
-      "type" : { },
+      "type" : "Undefined",
       "value" : "value",
-      "url" : "url"
+      "url" : "url",
+      "logoUrl" : "logoUrl"
     } ],
     "registrationDate" : "2000-01-23T04:56:07.000+00:00",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "avatar" : "avatar",
+    "logoUrl" : "logoUrl",
     "url" : "url",
     "username" : "username"
   },
@@ -274,26 +203,27 @@ open class FundsAPI {
   "assetsStructure" : [ {
     "symbol" : "symbol",
     "current" : 2.3021358869347655,
-    "icon" : "icon",
     "asset" : "asset",
+    "logoUrl" : "logoUrl",
     "url" : "url",
     "target" : 5.637376656633329
   }, {
     "symbol" : "symbol",
     "current" : 2.3021358869347655,
-    "icon" : "icon",
     "asset" : "asset",
+    "logoUrl" : "logoUrl",
     "url" : "url",
     "target" : 5.637376656633329
   } ],
   "publicInfo" : {
-    "typeExt" : { },
+    "typeExt" : "None",
     "color" : "color",
     "description" : "description",
     "logo" : "logo",
     "isOwnAsset" : true,
     "title" : "title",
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
+    "logoUrl" : "logoUrl",
     "url" : "url",
     "status" : "status"
   },
@@ -301,7 +231,7 @@ open class FundsAPI {
   "entryFeeSelected" : 0.8008281904610115,
   "personalDetails" : {
     "exitFeePersonal" : 7.386281948385884,
-    "pendingInOutCurrency" : "USD",
+    "pendingInOutCurrency" : "Undefined",
     "canWithdraw" : true,
     "canInvest" : true,
     "nextReallocationPercents" : "2000-01-23T04:56:07.000+00:00",
@@ -317,72 +247,40 @@ open class FundsAPI {
     "withdrawPercent" : 2.027123023002322,
     "isFavorite" : true,
     "isInvested" : true,
-    "status" : { }
+    "status" : "Pending"
   },
   "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
 }}]
-     
-     - parameter id: (path)  
-     - parameter authorization: (header)  (optional)
-     - parameter currency: (query)  (optional)
+     - parameter _id: (path)       - parameter currency: (query)  (optional)     - parameter logoQuality: (query)  (optional)
 
      - returns: RequestBuilder<FundDetailsFull> 
      */
-    open class func getFundDetailsWithRequestBuilder(id: String, authorization: String? = nil, currency: Currency_getFundDetails? = nil) -> RequestBuilder<FundDetailsFull> {
+    open class func getFundDetailsWithRequestBuilder(_id: String, currency: Currency? = nil, logoQuality: ImageQuality? = nil) -> RequestBuilder<FundDetailsFull> {
         var path = "/v2.0/funds/{id}"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "currency": currency?.rawValue
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "currency": currency, 
+                        "logoQuality": logoQuality
         ])
-        
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<FundDetailsFull>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
-    }
-
-    /**
-     * enum for parameter currency
-     */
-    public enum Currency_getFundProfitPercentCharts: String { 
-        case usd = "USD"
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case eur = "EUR"
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
      Fund profit percent charts
-     
-     - parameter id: (path)  
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter maxPointCount: (query)  (optional)
-     - parameter currency: (query)  (optional)
-     - parameter currencies: (query)  (optional)
-     - parameter chartAssetsCount: (query)  (optional, default to 3)
+     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter maxPointCount: (query)  (optional)     - parameter currency: (query)  (optional)     - parameter currencies: (query)  (optional)     - parameter chartAssetsCount: (query)  (optional, default to 3)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getFundProfitPercentCharts(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency_getFundProfitPercentCharts? = nil, currencies: [String]? = nil, chartAssetsCount: Int? = nil, completion: @escaping ((_ data: FundProfitPercentCharts?,_ error: Error?) -> Void)) {
-        getFundProfitPercentChartsWithRequestBuilder(id: id, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency, currencies: currencies, chartAssetsCount: chartAssetsCount).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getFundProfitPercentCharts(_id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency? = nil, currencies: [Currency]? = nil, chartAssetsCount: Int? = nil, completion: @escaping ((_ data: FundProfitPercentCharts?,_ error: Error?) -> Void)) {
+        getFundProfitPercentChartsWithRequestBuilder(_id: _id, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency, currencies: currencies, chartAssetsCount: chartAssetsCount).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
@@ -390,6 +288,9 @@ open class FundsAPI {
     /**
      Fund profit percent charts
      - GET /v2.0/funds/{id}/charts/profit/percent
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "statistic" : {
     "calmarRatio" : 2.3021358869347655,
@@ -403,86 +304,83 @@ open class FundsAPI {
   },
   "charts" : [ {
     "color" : "color",
-    "currency" : { },
+    "currency" : "Undefined",
     "chart" : [ {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "value" : 0.8008281904610115
     }, {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "value" : 0.8008281904610115
     } ]
   }, {
     "color" : "color",
-    "currency" : { },
+    "currency" : "Undefined",
     "chart" : [ {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "value" : 0.8008281904610115
     }, {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "value" : 0.8008281904610115
     } ]
   } ],
   "assets" : [ {
-    "date" : 9,
+    "date" : "2000-01-23T04:56:07.000+00:00",
     "assets" : [ {
       "color" : "color",
-      "icon" : "icon",
       "name" : "name",
       "asset" : "asset",
-      "percent" : 2.027123023002322
+      "percent" : 3.616076749251911,
+      "logoUrl" : "logoUrl",
+      "url" : "url"
     }, {
       "color" : "color",
-      "icon" : "icon",
       "name" : "name",
       "asset" : "asset",
-      "percent" : 2.027123023002322
+      "percent" : 3.616076749251911,
+      "logoUrl" : "logoUrl",
+      "url" : "url"
     } ],
-    "value" : 3.616076749251911
+    "value" : 9.301444243932576
   }, {
-    "date" : 9,
+    "date" : "2000-01-23T04:56:07.000+00:00",
     "assets" : [ {
       "color" : "color",
-      "icon" : "icon",
       "name" : "name",
       "asset" : "asset",
-      "percent" : 2.027123023002322
+      "percent" : 3.616076749251911,
+      "logoUrl" : "logoUrl",
+      "url" : "url"
     }, {
       "color" : "color",
-      "icon" : "icon",
       "name" : "name",
       "asset" : "asset",
-      "percent" : 2.027123023002322
+      "percent" : 3.616076749251911,
+      "logoUrl" : "logoUrl",
+      "url" : "url"
     } ],
-    "value" : 3.616076749251911
+    "value" : 9.301444243932576
   } ]
 }}]
-     
-     - parameter id: (path)  
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter maxPointCount: (query)  (optional)
-     - parameter currency: (query)  (optional)
-     - parameter currencies: (query)  (optional)
-     - parameter chartAssetsCount: (query)  (optional, default to 3)
+     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter maxPointCount: (query)  (optional)     - parameter currency: (query)  (optional)     - parameter currencies: (query)  (optional)     - parameter chartAssetsCount: (query)  (optional, default to 3)
 
      - returns: RequestBuilder<FundProfitPercentCharts> 
      */
-    open class func getFundProfitPercentChartsWithRequestBuilder(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency_getFundProfitPercentCharts? = nil, currencies: [String]? = nil, chartAssetsCount: Int? = nil) -> RequestBuilder<FundProfitPercentCharts> {
+    open class func getFundProfitPercentChartsWithRequestBuilder(_id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency? = nil, currencies: [Currency]? = nil, chartAssetsCount: Int? = nil) -> RequestBuilder<FundProfitPercentCharts> {
         var path = "/v2.0/funds/{id}/charts/profit/percent"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "DateFrom": dateFrom?.encodeToJSON(), 
-            "DateTo": dateTo?.encodeToJSON(), 
-            "MaxPointCount": maxPointCount?.encodeToJSON(), 
-            "Currency": currency?.rawValue, 
-            "currencies": currencies, 
-            "chartAssetsCount": chartAssetsCount?.encodeToJSON()
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "DateFrom": dateFrom?.encodeToJSON(), 
+                        "DateTo": dateTo?.encodeToJSON(), 
+                        "MaxPointCount": maxPointCount?.encodeToJSON(), 
+                        "Currency": currency, 
+                        "currencies": currencies, 
+                        "chartAssetsCount": chartAssetsCount?.encodeToJSON()
         ])
-        
 
         let requestBuilder: RequestBuilder<FundProfitPercentCharts>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
@@ -490,66 +388,13 @@ open class FundsAPI {
     }
 
     /**
-     * enum for parameter sorting
-     */
-    public enum Sorting_getFunds: String { 
-        case byTitleAsc = "ByTitleAsc"
-        case byTitleDesc = "ByTitleDesc"
-        case bySizeAsc = "BySizeAsc"
-        case bySizeDesc = "BySizeDesc"
-        case byInvestorsAsc = "ByInvestorsAsc"
-        case byInvestorsDesc = "ByInvestorsDesc"
-        case byDrawdownAsc = "ByDrawdownAsc"
-        case byDrawdownDesc = "ByDrawdownDesc"
-        case byProfitAsc = "ByProfitAsc"
-        case byProfitDesc = "ByProfitDesc"
-        case byNewAsc = "ByNewAsc"
-        case byNewDesc = "ByNewDesc"
-        case byValueAsc = "ByValueAsc"
-        case byValueDesc = "ByValueDesc"
-    }
-
-    /**
-     * enum for parameter showIn
-     */
-    public enum ShowIn_getFunds: String { 
-        case usd = "USD"
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case eur = "EUR"
-    }
-
-    /**
      Funds list
-     
-     - parameter authorization: (header)  (optional)
-     - parameter sorting: (query)  (optional)
-     - parameter showIn: (query)  (optional)
-     - parameter assets: (query)  (optional)
-     - parameter includeWithInvestments: (query)  (optional)
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter chartPointsCount: (query)  (optional)
-     - parameter facetId: (query)  (optional)
-     - parameter mask: (query)  (optional)
-     - parameter ownerId: (query)  (optional)
-     - parameter showFavorites: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
+     - parameter sorting: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter assets: (query)  (optional)     - parameter includeWithInvestments: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter facetId: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter ownerId: (query)  (optional)     - parameter showFavorites: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getFunds(authorization: String? = nil, sorting: Sorting_getFunds? = nil, showIn: ShowIn_getFunds? = nil, assets: [String]? = nil, includeWithInvestments: Bool? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ItemsViewModelFundDetailsListItem?,_ error: Error?) -> Void)) {
-        getFundsWithRequestBuilder(authorization: authorization, sorting: sorting, showIn: showIn, assets: assets, includeWithInvestments: includeWithInvestments, dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, facetId: facetId, mask: mask, ownerId: ownerId, showFavorites: showFavorites, skip: skip, take: take).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getFunds(sorting: FundsFilterSorting? = nil, showIn: Currency? = nil, assets: [String]? = nil, includeWithInvestments: Bool? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: FundDetailsListItemItemsViewModel?,_ error: Error?) -> Void)) {
+        getFundsWithRequestBuilder(sorting: sorting, showIn: showIn, assets: assets, includeWithInvestments: includeWithInvestments, dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, facetId: facetId, mask: mask, ownerId: ownerId, showFavorites: showFavorites, skip: skip, take: take).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
@@ -557,47 +402,32 @@ open class FundsAPI {
     /**
      Funds list
      - GET /v2.0/funds
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "total" : 4,
   "items" : [ {
-    "owner" : {
-      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "url" : "url",
-      "username" : "username"
-    },
     "totalAssetsCount" : 2,
-    "statistic" : {
-      "drawdown" : 5.637376656633329,
-      "chart" : [ {
-        "date" : 0,
-        "value" : 6.027456183070403
-      }, {
-        "date" : 0,
-        "value" : 6.027456183070403
-      } ],
-      "profit" : 5.962133916683182
-    },
     "color" : "color",
     "topFundAssets" : [ {
       "name" : "name",
-      "icon" : "icon",
       "asset" : "asset",
-      "percent" : 1.4658129805029452
+      "percent" : 1.4658129805029452,
+      "logoUrl" : "logoUrl",
+      "url" : "url"
     }, {
       "name" : "name",
-      "icon" : "icon",
       "asset" : "asset",
-      "percent" : 1.4658129805029452
+      "percent" : 1.4658129805029452,
+      "logoUrl" : "logoUrl",
+      "url" : "url"
     } ],
     "description" : "description",
     "title" : "title",
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
+    "logoUrl" : "logoUrl",
     "url" : "url",
-    "balance" : {
-      "amount" : 9.301444243932576,
-      "currency" : { }
-    },
-    "logo" : "logo",
     "personalDetails" : {
       "isOwnAsset" : true,
       "isFavorite" : true
@@ -606,44 +436,26 @@ open class FundsAPI {
     "investorsCount" : 3,
     "status" : "status"
   }, {
-    "owner" : {
-      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "url" : "url",
-      "username" : "username"
-    },
     "totalAssetsCount" : 2,
-    "statistic" : {
-      "drawdown" : 5.637376656633329,
-      "chart" : [ {
-        "date" : 0,
-        "value" : 6.027456183070403
-      }, {
-        "date" : 0,
-        "value" : 6.027456183070403
-      } ],
-      "profit" : 5.962133916683182
-    },
     "color" : "color",
     "topFundAssets" : [ {
       "name" : "name",
-      "icon" : "icon",
       "asset" : "asset",
-      "percent" : 1.4658129805029452
+      "percent" : 1.4658129805029452,
+      "logoUrl" : "logoUrl",
+      "url" : "url"
     }, {
       "name" : "name",
-      "icon" : "icon",
       "asset" : "asset",
-      "percent" : 1.4658129805029452
+      "percent" : 1.4658129805029452,
+      "logoUrl" : "logoUrl",
+      "url" : "url"
     } ],
     "description" : "description",
     "title" : "title",
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
+    "logoUrl" : "logoUrl",
     "url" : "url",
-    "balance" : {
-      "amount" : 9.301444243932576,
-      "currency" : { }
-    },
-    "logo" : "logo",
     "personalDetails" : {
       "isOwnAsset" : true,
       "isFavorite" : true
@@ -653,69 +465,109 @@ open class FundsAPI {
     "status" : "status"
   } ]
 }}]
-     
-     - parameter authorization: (header)  (optional)
-     - parameter sorting: (query)  (optional)
-     - parameter showIn: (query)  (optional)
-     - parameter assets: (query)  (optional)
-     - parameter includeWithInvestments: (query)  (optional)
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter chartPointsCount: (query)  (optional)
-     - parameter facetId: (query)  (optional)
-     - parameter mask: (query)  (optional)
-     - parameter ownerId: (query)  (optional)
-     - parameter showFavorites: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
+     - parameter sorting: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter assets: (query)  (optional)     - parameter includeWithInvestments: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter facetId: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter ownerId: (query)  (optional)     - parameter showFavorites: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
 
-     - returns: RequestBuilder<ItemsViewModelFundDetailsListItem> 
+     - returns: RequestBuilder<FundDetailsListItemItemsViewModel> 
      */
-    open class func getFundsWithRequestBuilder(authorization: String? = nil, sorting: Sorting_getFunds? = nil, showIn: ShowIn_getFunds? = nil, assets: [String]? = nil, includeWithInvestments: Bool? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ItemsViewModelFundDetailsListItem> {
+    open class func getFundsWithRequestBuilder(sorting: FundsFilterSorting? = nil, showIn: Currency? = nil, assets: [String]? = nil, includeWithInvestments: Bool? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<FundDetailsListItemItemsViewModel> {
         let path = "/v2.0/funds"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "Sorting": sorting?.rawValue, 
-            "ShowIn": showIn?.rawValue, 
-            "Assets": assets, 
-            "IncludeWithInvestments": includeWithInvestments, 
-            "DateFrom": dateFrom?.encodeToJSON(), 
-            "DateTo": dateTo?.encodeToJSON(), 
-            "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
-            "FacetId": facetId, 
-            "Mask": mask, 
-            "OwnerId": ownerId, 
-            "ShowFavorites": showFavorites, 
-            "Skip": skip?.encodeToJSON(), 
-            "Take": take?.encodeToJSON()
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "Sorting": sorting, 
+                        "ShowIn": showIn, 
+                        "Assets": assets, 
+                        "IncludeWithInvestments": includeWithInvestments, 
+                        "DateFrom": dateFrom?.encodeToJSON(), 
+                        "DateTo": dateTo?.encodeToJSON(), 
+                        "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
+                        "FacetId": facetId, 
+                        "Mask": mask, 
+                        "OwnerId": ownerId, 
+                        "ShowFavorites": showFavorites, 
+                        "Skip": skip?.encodeToJSON(), 
+                        "Take": take?.encodeToJSON()
         ])
-        
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
-        let requestBuilder: RequestBuilder<ItemsViewModelFundDetailsListItem>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<FundDetailsListItemItemsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Get last weekly funds challenge winner
+     - parameter chartPointsCount: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getLastChallengeWinner(chartPointsCount: Int? = nil, completion: @escaping ((_ data: FundDetailsListItem?,_ error: Error?) -> Void)) {
+        getLastChallengeWinnerWithRequestBuilder(chartPointsCount: chartPointsCount).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     Get last weekly funds challenge winner
+     - GET /v2.0/funds/challenge/winner
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example={
+  "totalAssetsCount" : 2,
+  "color" : "color",
+  "topFundAssets" : [ {
+    "name" : "name",
+    "asset" : "asset",
+    "percent" : 1.4658129805029452,
+    "logoUrl" : "logoUrl",
+    "url" : "url"
+  }, {
+    "name" : "name",
+    "asset" : "asset",
+    "percent" : 1.4658129805029452,
+    "logoUrl" : "logoUrl",
+    "url" : "url"
+  } ],
+  "description" : "description",
+  "title" : "title",
+  "creationDate" : "2000-01-23T04:56:07.000+00:00",
+  "logoUrl" : "logoUrl",
+  "url" : "url",
+  "personalDetails" : {
+    "isOwnAsset" : true,
+    "isFavorite" : true
+  },
+  "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+  "investorsCount" : 3,
+  "status" : "status"
+}}]
+     - parameter chartPointsCount: (query)  (optional)
+
+     - returns: RequestBuilder<FundDetailsListItem> 
+     */
+    open class func getLastChallengeWinnerWithRequestBuilder(chartPointsCount: Int? = nil) -> RequestBuilder<FundDetailsListItem> {
+        let path = "/v2.0/funds/challenge/winner"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "chartPointsCount": chartPointsCount?.encodeToJSON()
+        ])
+
+        let requestBuilder: RequestBuilder<FundDetailsListItem>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
      Get history of asset part update requests
-     
-     - parameter id: (path)  
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
+     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getReallocatingHistory(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ItemsViewModelReallocationModel?,_ error: Error?) -> Void)) {
-        getReallocatingHistoryWithRequestBuilder(id: id, dateFrom: dateFrom, dateTo: dateTo, skip: skip, take: take).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getReallocatingHistory(_id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ReallocationModelItemsViewModel?,_ error: Error?) -> Void)) {
+        getReallocatingHistoryWithRequestBuilder(_id: _id, dateFrom: dateFrom, dateTo: dateTo, skip: skip, take: take).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
@@ -723,79 +575,83 @@ open class FundsAPI {
     /**
      Get history of asset part update requests
      - GET /v2.0/funds/{id}/reallocations
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "total" : 0,
   "items" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "parts" : [ {
       "color" : "color",
-      "icon" : "icon",
       "name" : "name",
       "asset" : "asset",
-      "percent" : 2.027123023002322
+      "percent" : 3.616076749251911,
+      "logoUrl" : "logoUrl",
+      "url" : "url"
     }, {
       "color" : "color",
-      "icon" : "icon",
       "name" : "name",
       "asset" : "asset",
-      "percent" : 2.027123023002322
+      "percent" : 3.616076749251911,
+      "logoUrl" : "logoUrl",
+      "url" : "url"
     } ]
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "parts" : [ {
       "color" : "color",
-      "icon" : "icon",
       "name" : "name",
       "asset" : "asset",
-      "percent" : 2.027123023002322
+      "percent" : 3.616076749251911,
+      "logoUrl" : "logoUrl",
+      "url" : "url"
     }, {
       "color" : "color",
-      "icon" : "icon",
       "name" : "name",
       "asset" : "asset",
-      "percent" : 2.027123023002322
+      "percent" : 3.616076749251911,
+      "logoUrl" : "logoUrl",
+      "url" : "url"
     } ]
   } ]
 }}]
-     
-     - parameter id: (path)  
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
+     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
 
-     - returns: RequestBuilder<ItemsViewModelReallocationModel> 
+     - returns: RequestBuilder<ReallocationModelItemsViewModel> 
      */
-    open class func getReallocatingHistoryWithRequestBuilder(id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ItemsViewModelReallocationModel> {
+    open class func getReallocatingHistoryWithRequestBuilder(_id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ReallocationModelItemsViewModel> {
         var path = "/v2.0/funds/{id}/reallocations"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "DateFrom": dateFrom?.encodeToJSON(), 
-            "DateTo": dateTo?.encodeToJSON(), 
-            "Skip": skip?.encodeToJSON(), 
-            "Take": take?.encodeToJSON()
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "DateFrom": dateFrom?.encodeToJSON(), 
+                        "DateTo": dateTo?.encodeToJSON(), 
+                        "Skip": skip?.encodeToJSON(), 
+                        "Take": take?.encodeToJSON()
         ])
-        
 
-        let requestBuilder: RequestBuilder<ItemsViewModelReallocationModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<ReallocationModelItemsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
      Remove from favorites
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
+     - parameter _id: (path)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func removeFromFavorites(id: UUID, authorization: String, completion: @escaping ((_ error: Error?) -> Void)) {
-        removeFromFavoritesWithRequestBuilder(id: id, authorization: authorization).execute { (response, error) -> Void in
-            completion(error);
+    open class func removeFromFavorites(_id: UUID, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        removeFromFavoritesWithRequestBuilder(_id: _id).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
         }
     }
 
@@ -803,28 +659,26 @@ open class FundsAPI {
     /**
      Remove from favorites
      - POST /v2.0/funds/{id}/favorite/remove
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter _id: (path)  
 
      - returns: RequestBuilder<Void> 
      */
-    open class func removeFromFavoritesWithRequestBuilder(id: UUID, authorization: String) -> RequestBuilder<Void> {
+    open class func removeFromFavoritesWithRequestBuilder(_id: UUID) -> RequestBuilder<Void> {
         var path = "/v2.0/funds/{id}/favorite/remove"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
 }

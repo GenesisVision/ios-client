@@ -8,69 +8,55 @@
 import Foundation
 
 
+public struct BrokerAccountType: Codable {
 
-open class BrokerAccountType: Codable {
 
-    public var id: UUID?
+    public var _id: UUID?
+
     public var name: String?
-    public var description: String?
+
+    public var _description: String?
+
     public var type: BrokerTradeServerType?
+
     public var leverages: [Int]?
+
     public var currencies: [String]?
+
     public var minimumDepositsAmount: [String:Double]?
+
     public var isKycRequired: Bool?
+
+    public var isCountryNotUSRequired: Bool?
+
     public var isSignalsAvailable: Bool?
+
     public var isDepositRequired: Bool?
-
-
-    
-    public init(id: UUID?, name: String?, description: String?, type: BrokerTradeServerType?, leverages: [Int]?, currencies: [String]?, minimumDepositsAmount: [String:Double]?, isKycRequired: Bool?, isSignalsAvailable: Bool?, isDepositRequired: Bool?) {
-        self.id = id
+    public init(_id: UUID? = nil, name: String? = nil, _description: String? = nil, type: BrokerTradeServerType? = nil, leverages: [Int]? = nil, currencies: [String]? = nil, minimumDepositsAmount: [String:Double]? = nil, isKycRequired: Bool? = nil, isCountryNotUSRequired: Bool? = nil, isSignalsAvailable: Bool? = nil, isDepositRequired: Bool? = nil) { 
+        self._id = _id
         self.name = name
-        self.description = description
+        self._description = _description
         self.type = type
         self.leverages = leverages
         self.currencies = currencies
         self.minimumDepositsAmount = minimumDepositsAmount
         self.isKycRequired = isKycRequired
+        self.isCountryNotUSRequired = isCountryNotUSRequired
         self.isSignalsAvailable = isSignalsAvailable
         self.isDepositRequired = isDepositRequired
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(id, forKey: "id")
-        try container.encodeIfPresent(name, forKey: "name")
-        try container.encodeIfPresent(description, forKey: "description")
-        try container.encodeIfPresent(type, forKey: "type")
-        try container.encodeIfPresent(leverages, forKey: "leverages")
-        try container.encodeIfPresent(currencies, forKey: "currencies")
-        try container.encodeIfPresent(minimumDepositsAmount, forKey: "minimumDepositsAmount")
-        try container.encodeIfPresent(isKycRequired, forKey: "isKycRequired")
-        try container.encodeIfPresent(isSignalsAvailable, forKey: "isSignalsAvailable")
-        try container.encodeIfPresent(isDepositRequired, forKey: "isDepositRequired")
+    public enum CodingKeys: String, CodingKey { 
+        case _id = "id"
+        case name
+        case _description = "description"
+        case type
+        case leverages
+        case currencies
+        case minimumDepositsAmount
+        case isKycRequired
+        case isCountryNotUSRequired
+        case isSignalsAvailable
+        case isDepositRequired
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        id = try container.decodeIfPresent(UUID.self, forKey: "id")
-        name = try container.decodeIfPresent(String.self, forKey: "name")
-        description = try container.decodeIfPresent(String.self, forKey: "description")
-        type = try container.decodeIfPresent(BrokerTradeServerType.self, forKey: "type")
-        leverages = try container.decodeIfPresent([Int].self, forKey: "leverages")
-        currencies = try container.decodeIfPresent([String].self, forKey: "currencies")
-        minimumDepositsAmount = try container.decodeIfPresent([String:Double].self, forKey: "minimumDepositsAmount")
-        isKycRequired = try container.decodeIfPresent(Bool.self, forKey: "isKycRequired")
-        isSignalsAvailable = try container.decodeIfPresent(Bool.self, forKey: "isSignalsAvailable")
-        isDepositRequired = try container.decodeIfPresent(Bool.self, forKey: "isDepositRequired")
-    }
 }
-

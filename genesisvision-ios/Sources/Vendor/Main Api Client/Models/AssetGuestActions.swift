@@ -8,41 +8,18 @@
 import Foundation
 
 
+public struct AssetGuestActions: Codable {
 
-open class AssetGuestActions: Codable {
 
     public var canSubscribeToInternalSignal: Bool?
+
     public var canSubscribeToExternalSignalPrivateAccount: Bool?
+
     public var canSubscribeToExternalSignalCommonAccount: Bool?
-
-
-    
-    public init(canSubscribeToInternalSignal: Bool?, canSubscribeToExternalSignalPrivateAccount: Bool?, canSubscribeToExternalSignalCommonAccount: Bool?) {
+    public init(canSubscribeToInternalSignal: Bool? = nil, canSubscribeToExternalSignalPrivateAccount: Bool? = nil, canSubscribeToExternalSignalCommonAccount: Bool? = nil) { 
         self.canSubscribeToInternalSignal = canSubscribeToInternalSignal
         self.canSubscribeToExternalSignalPrivateAccount = canSubscribeToExternalSignalPrivateAccount
         self.canSubscribeToExternalSignalCommonAccount = canSubscribeToExternalSignalCommonAccount
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(canSubscribeToInternalSignal, forKey: "canSubscribeToInternalSignal")
-        try container.encodeIfPresent(canSubscribeToExternalSignalPrivateAccount, forKey: "canSubscribeToExternalSignalPrivateAccount")
-        try container.encodeIfPresent(canSubscribeToExternalSignalCommonAccount, forKey: "canSubscribeToExternalSignalCommonAccount")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        canSubscribeToInternalSignal = try container.decodeIfPresent(Bool.self, forKey: "canSubscribeToInternalSignal")
-        canSubscribeToExternalSignalPrivateAccount = try container.decodeIfPresent(Bool.self, forKey: "canSubscribeToExternalSignalPrivateAccount")
-        canSubscribeToExternalSignalCommonAccount = try container.decodeIfPresent(Bool.self, forKey: "canSubscribeToExternalSignalCommonAccount")
-    }
 }
-

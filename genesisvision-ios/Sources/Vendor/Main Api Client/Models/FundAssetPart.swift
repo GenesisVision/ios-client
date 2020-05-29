@@ -8,37 +8,19 @@
 import Foundation
 
 
+public struct FundAssetPart: Codable {
 
-open class FundAssetPart: Codable {
 
-    public var id: UUID?
+    public var _id: UUID?
+
     public var percent: Double?
-
-
-    
-    public init(id: UUID?, percent: Double?) {
-        self.id = id
+    public init(_id: UUID? = nil, percent: Double? = nil) { 
+        self._id = _id
         self.percent = percent
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(id, forKey: "id")
-        try container.encodeIfPresent(percent, forKey: "percent")
+    public enum CodingKeys: String, CodingKey { 
+        case _id = "id"
+        case percent
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        id = try container.decodeIfPresent(UUID.self, forKey: "id")
-        percent = try container.decodeIfPresent(Double.self, forKey: "percent")
-    }
 }
-

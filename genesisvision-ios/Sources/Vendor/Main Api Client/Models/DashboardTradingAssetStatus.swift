@@ -7,10 +7,8 @@
 
 import Foundation
 
-
 public enum DashboardTradingAssetStatus: String, Codable {
     case pending = "Pending"
     case active = "Active"
     case disabled = "Disabled"
-
 }

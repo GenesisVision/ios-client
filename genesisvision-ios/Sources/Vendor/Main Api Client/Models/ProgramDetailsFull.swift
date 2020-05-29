@@ -8,33 +8,49 @@
 import Foundation
 
 
+public struct ProgramDetailsFull: Codable {
 
-open class ProgramDetailsFull: Codable {
 
     public var level: Int?
+
     public var levelProgress: Double?
+
     public var periodDuration: Int?
+
     public var periodStarts: Date?
+
     public var periodEnds: Date?
+
     public var tradesDelay: TradesDelay?
+
     public var ageDays: Double?
+
     public var genesisRatio: Double?
+
     public var investmentScale: Double?
+
     public var volumeScale: Double?
-    public var entryFeeSelected: Double?
-    public var entryFeeCurrent: Double?
+
+    public var managementFeeSelected: Double?
+
+    public var managementFeeCurrent: Double?
+
     public var successFeeSelected: Double?
+
     public var successFeeCurrent: Double?
+
     public var stopOutLevelSelected: Double?
+
     public var stopOutLevelCurrent: Double?
+
     public var availableInvestmentBase: Double?
+
     public var availableInvestmentLimit: Double?
+
     public var totalAvailableInvestment: Double?
+
     public var personalDetails: PersonalProgramDetails?
-
-
-    
-    public init(level: Int?, levelProgress: Double?, periodDuration: Int?, periodStarts: Date?, periodEnds: Date?, tradesDelay: TradesDelay?, ageDays: Double?, genesisRatio: Double?, investmentScale: Double?, volumeScale: Double?, entryFeeSelected: Double?, entryFeeCurrent: Double?, successFeeSelected: Double?, successFeeCurrent: Double?, stopOutLevelSelected: Double?, stopOutLevelCurrent: Double?, availableInvestmentBase: Double?, availableInvestmentLimit: Double?, totalAvailableInvestment: Double?, personalDetails: PersonalProgramDetails?) {
+    public init(level: Int? = nil, levelProgress: Double? = nil, periodDuration: Int? = nil, periodStarts: Date? = nil, periodEnds: Date? = nil, tradesDelay: TradesDelay? = nil, ageDays: Double? = nil, genesisRatio: Double? = nil, investmentScale: Double? = nil, volumeScale: Double? = nil, managementFeeSelected: Double? = nil, managementFeeCurrent: Double? = nil, successFeeSelected: Double? = nil, successFeeCurrent: Double? = nil, stopOutLevelSelected: Double? = nil, stopOutLevelCurrent: Double? = nil, availableInvestmentBase: Double? = nil, availableInvestmentLimit: Double? = nil, totalAvailableInvestment: Double? = nil, personalDetails: PersonalProgramDetails? = nil) { 
         self.level = level
         self.levelProgress = levelProgress
         self.periodDuration = periodDuration
@@ -45,8 +61,8 @@ open class ProgramDetailsFull: Codable {
         self.genesisRatio = genesisRatio
         self.investmentScale = investmentScale
         self.volumeScale = volumeScale
-        self.entryFeeSelected = entryFeeSelected
-        self.entryFeeCurrent = entryFeeCurrent
+        self.managementFeeSelected = managementFeeSelected
+        self.managementFeeCurrent = managementFeeCurrent
         self.successFeeSelected = successFeeSelected
         self.successFeeCurrent = successFeeCurrent
         self.stopOutLevelSelected = stopOutLevelSelected
@@ -56,61 +72,5 @@ open class ProgramDetailsFull: Codable {
         self.totalAvailableInvestment = totalAvailableInvestment
         self.personalDetails = personalDetails
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(level, forKey: "level")
-        try container.encodeIfPresent(levelProgress, forKey: "levelProgress")
-        try container.encodeIfPresent(periodDuration, forKey: "periodDuration")
-        try container.encodeIfPresent(periodStarts, forKey: "periodStarts")
-        try container.encodeIfPresent(periodEnds, forKey: "periodEnds")
-        try container.encodeIfPresent(tradesDelay, forKey: "tradesDelay")
-        try container.encodeIfPresent(ageDays, forKey: "ageDays")
-        try container.encodeIfPresent(genesisRatio, forKey: "genesisRatio")
-        try container.encodeIfPresent(investmentScale, forKey: "investmentScale")
-        try container.encodeIfPresent(volumeScale, forKey: "volumeScale")
-        try container.encodeIfPresent(entryFeeSelected, forKey: "entryFeeSelected")
-        try container.encodeIfPresent(entryFeeCurrent, forKey: "entryFeeCurrent")
-        try container.encodeIfPresent(successFeeSelected, forKey: "successFeeSelected")
-        try container.encodeIfPresent(successFeeCurrent, forKey: "successFeeCurrent")
-        try container.encodeIfPresent(stopOutLevelSelected, forKey: "stopOutLevelSelected")
-        try container.encodeIfPresent(stopOutLevelCurrent, forKey: "stopOutLevelCurrent")
-        try container.encodeIfPresent(availableInvestmentBase, forKey: "availableInvestmentBase")
-        try container.encodeIfPresent(availableInvestmentLimit, forKey: "availableInvestmentLimit")
-        try container.encodeIfPresent(totalAvailableInvestment, forKey: "totalAvailableInvestment")
-        try container.encodeIfPresent(personalDetails, forKey: "personalDetails")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        level = try container.decodeIfPresent(Int.self, forKey: "level")
-        levelProgress = try container.decodeIfPresent(Double.self, forKey: "levelProgress")
-        periodDuration = try container.decodeIfPresent(Int.self, forKey: "periodDuration")
-        periodStarts = try container.decodeIfPresent(Date.self, forKey: "periodStarts")
-        periodEnds = try container.decodeIfPresent(Date.self, forKey: "periodEnds")
-        tradesDelay = try container.decodeIfPresent(TradesDelay.self, forKey: "tradesDelay")
-        ageDays = try container.decodeIfPresent(Double.self, forKey: "ageDays")
-        genesisRatio = try container.decodeIfPresent(Double.self, forKey: "genesisRatio")
-        investmentScale = try container.decodeIfPresent(Double.self, forKey: "investmentScale")
-        volumeScale = try container.decodeIfPresent(Double.self, forKey: "volumeScale")
-        entryFeeSelected = try container.decodeIfPresent(Double.self, forKey: "entryFeeSelected")
-        entryFeeCurrent = try container.decodeIfPresent(Double.self, forKey: "entryFeeCurrent")
-        successFeeSelected = try container.decodeIfPresent(Double.self, forKey: "successFeeSelected")
-        successFeeCurrent = try container.decodeIfPresent(Double.self, forKey: "successFeeCurrent")
-        stopOutLevelSelected = try container.decodeIfPresent(Double.self, forKey: "stopOutLevelSelected")
-        stopOutLevelCurrent = try container.decodeIfPresent(Double.self, forKey: "stopOutLevelCurrent")
-        availableInvestmentBase = try container.decodeIfPresent(Double.self, forKey: "availableInvestmentBase")
-        availableInvestmentLimit = try container.decodeIfPresent(Double.self, forKey: "availableInvestmentLimit")
-        totalAvailableInvestment = try container.decodeIfPresent(Double.self, forKey: "totalAvailableInvestment")
-        personalDetails = try container.decodeIfPresent(PersonalProgramDetails.self, forKey: "personalDetails")
-    }
 }
-

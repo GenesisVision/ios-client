@@ -104,7 +104,7 @@ class AccountTradeListViewModel: ListViewModelWithPaging {
         
         var models = [CellViewModel]()
         if isOpenTrades {
-            AccountsDataProvider.getTradesOpen(with: assetId, sorting: sorting as? TradingaccountAPI.Sorting_getOpenTrades, symbol: nil, accountId: nil, currency: currency, skip: skip, take: take(), completion: { [weak self] (tradesViewModel) in
+            AccountsDataProvider.getTradesOpen(with: assetId, sorting: sorting as? TradeSorting, symbol: nil, accountId: nil, currency: currency, skip: skip, take: take(), completion: { [weak self] (tradesViewModel) in
                 guard let tradesViewModel = tradesViewModel, let total = tradesViewModel.total else { return }
                 tradesViewModel.items?.forEach({ (model) in
                     let viewModel = CellViewModel(orderModel: model, currencyType: currency)
@@ -113,7 +113,7 @@ class AccountTradeListViewModel: ListViewModelWithPaging {
                 self?.updateViewModels(models, refresh: refresh, total: total)
             }, errorCompletion: errorCompletion)
         } else {
-            AccountsDataProvider.getTrades(with: assetId, dateFrom: dateFrom, dateTo: dateTo, symbol: nil, sorting: sorting as? TradingaccountAPI.Sorting_getTrades, accountId: nil, currency: currency, skip: skip, take: take(), completion: { [weak self] (tradesViewModel) in
+            AccountsDataProvider.getTrades(with: assetId, dateFrom: dateFrom, dateTo: dateTo, symbol: nil, sorting: sorting as? TradeSorting, accountId: nil, currency: currency, skip: skip, take: take(), completion: { [weak self] (tradesViewModel) in
                 guard let tradesViewModel = tradesViewModel, let total = tradesViewModel.total else { return }
                 tradesViewModel.items?.forEach({ (model) in
                     let viewModel = CellViewModel(orderModel: model, currencyType: currency)

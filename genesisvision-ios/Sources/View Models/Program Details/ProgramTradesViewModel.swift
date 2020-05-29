@@ -227,7 +227,7 @@ extension ProgramTradesViewModel {
         let sorting = sortingDelegateManager.manager?.getSelectedSorting()
         
         if isOpenTrades {
-            ProgramsDataProvider.getTradesOpen(with: assetId, sorting: sorting as? ProgramsAPI.Sorting_getProgramOpenTrades, skip: skip, take: take, completion: { [weak self] (tradesViewModel) in
+            ProgramsDataProvider.getTradesOpen(with: assetId, sorting: sorting as? TradeSorting, skip: skip, take: take, completion: { [weak self] (tradesViewModel) in
                 guard tradesViewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completionError)
                 }
@@ -243,7 +243,7 @@ extension ProgramTradesViewModel {
                 completionSuccess(totalCount, viewModels)
             }, errorCompletion: completionError)
         } else {
-            ProgramsDataProvider.getTrades(with: assetId, dateFrom: dateFrom, dateTo: dateTo, sorting: sorting as? ProgramsAPI.Sorting_getAssetTrades, skip: skip, take: take, completion: { [weak self] (tradesViewModel) in
+            ProgramsDataProvider.getTrades(with: assetId, dateFrom: dateFrom, dateTo: dateTo, sorting: sorting as? TradeSorting, skip: skip, take: take, completion: { [weak self] (tradesViewModel) in
                 guard tradesViewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completionError)
                 }

@@ -8,45 +8,21 @@
 import Foundation
 
 
+public struct EventTradingItemFilters: Codable {
 
-open class EventTradingItemFilters: Codable {
 
     public var follow: [FilterItemInfo]?
+
     public var all: [FilterItemInfo]?
+
     public var program: [FilterItemInfo]?
+
     public var fund: [FilterItemInfo]?
-
-
-    
-    public init(follow: [FilterItemInfo]?, all: [FilterItemInfo]?, program: [FilterItemInfo]?, fund: [FilterItemInfo]?) {
+    public init(follow: [FilterItemInfo]? = nil, all: [FilterItemInfo]? = nil, program: [FilterItemInfo]? = nil, fund: [FilterItemInfo]? = nil) { 
         self.follow = follow
         self.all = all
         self.program = program
         self.fund = fund
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(follow, forKey: "follow")
-        try container.encodeIfPresent(all, forKey: "all")
-        try container.encodeIfPresent(program, forKey: "program")
-        try container.encodeIfPresent(fund, forKey: "fund")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        follow = try container.decodeIfPresent([FilterItemInfo].self, forKey: "follow")
-        all = try container.decodeIfPresent([FilterItemInfo].self, forKey: "all")
-        program = try container.decodeIfPresent([FilterItemInfo].self, forKey: "program")
-        fund = try container.decodeIfPresent([FilterItemInfo].self, forKey: "fund")
-    }
 }
-

@@ -8,37 +8,15 @@
 import Foundation
 
 
+public struct EventFilters: Codable {
 
-open class EventFilters: Codable {
 
     public var investmentHistory: EventInvestingItemFilters?
+
     public var tradingHistory: EventTradingItemFilters?
-
-
-    
-    public init(investmentHistory: EventInvestingItemFilters?, tradingHistory: EventTradingItemFilters?) {
+    public init(investmentHistory: EventInvestingItemFilters? = nil, tradingHistory: EventTradingItemFilters? = nil) { 
         self.investmentHistory = investmentHistory
         self.tradingHistory = tradingHistory
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(investmentHistory, forKey: "investmentHistory")
-        try container.encodeIfPresent(tradingHistory, forKey: "tradingHistory")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        investmentHistory = try container.decodeIfPresent(EventInvestingItemFilters.self, forKey: "investmentHistory")
-        tradingHistory = try container.decodeIfPresent(EventTradingItemFilters.self, forKey: "tradingHistory")
-    }
 }
-

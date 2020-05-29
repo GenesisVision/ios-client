@@ -8,33 +8,15 @@
 import Foundation
 
 
-
-open class UploadResult: Codable {
-
-    public var id: UUID?
+public struct UploadResult: Codable {
 
 
-    
-    public init(id: UUID?) {
-        self.id = id
+    public var _id: UUID?
+    public init(_id: UUID? = nil) { 
+        self._id = _id
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(id, forKey: "id")
+    public enum CodingKeys: String, CodingKey { 
+        case _id = "id"
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        id = try container.decodeIfPresent(UUID.self, forKey: "id")
-    }
 }
-

@@ -15,7 +15,7 @@ struct EventTableViewCellViewModel {
 extension EventTableViewCellViewModel: CellViewModel {
     func setup(on cell: EventTableViewCell) {
         cell.iconImageView.image = UIImage.eventPlaceholder
-        if let fileName = event.icon, let fileUrl = getFileURL(fileName: fileName) {
+        if let fileName = event.logoUrl, let fileUrl = getFileURL(fileName: fileName) {
             cell.typeImageView.kf.indicatorType = .activity
             cell.typeImageView.kf.setImage(with: fileUrl, placeholder: UIImage.eventPlaceholder)
         }
@@ -33,7 +33,7 @@ extension EventTableViewCellViewModel: CellViewModel {
             }
         }
         
-        if let fileName = event.assetDetails?.logo, let fileUrl = getFileURL(fileName: fileName) {
+        if let fileName = event.assetDetails?.logoUrl, let fileUrl = getFileURL(fileName: fileName) {
             cell.iconImageView.kf.indicatorType = .activity
             cell.iconImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
         }

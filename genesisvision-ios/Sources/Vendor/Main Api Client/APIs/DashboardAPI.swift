@@ -12,109 +12,74 @@ import Alamofire
 
 open class DashboardAPI {
     /**
-     * enum for parameter showIn
-     */
-    public enum ShowIn_getChart: String { 
-        case usd = "USD"
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case eur = "EUR"
-    }
-
-    /**
-
-     - parameter authorization: (header) JWT access token 
-     - parameter assets: (query)  (optional)
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter chartPointsCount: (query)  (optional)
-     - parameter showIn: (query)  (optional)
+     - parameter assets: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter showIn: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getChart(authorization: String, assets: [UUID]? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, showIn: ShowIn_getChart? = nil, completion: @escaping ((_ data: DashboardChart?,_ error: Error?) -> Void)) {
-        getChartWithRequestBuilder(authorization: authorization, assets: assets, dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, showIn: showIn).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getChart(assets: [UUID]? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, showIn: Currency? = nil, completion: @escaping ((_ data: DashboardChart?,_ error: Error?) -> Void)) {
+        getChartWithRequestBuilder(assets: assets, dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, showIn: showIn).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
 
     /**
      - GET /v2.0/dashboard/chart
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "charts" : [ {
     "color" : "color",
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "chart" : [ {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "value" : 0.8008281904610115
     }, {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "value" : 0.8008281904610115
     } ]
   }, {
     "color" : "color",
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "chart" : [ {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "value" : 0.8008281904610115
     }, {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "value" : 0.8008281904610115
     } ]
   } ]
 }}]
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter assets: (query)  (optional)
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter chartPointsCount: (query)  (optional)
-     - parameter showIn: (query)  (optional)
+     - parameter assets: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter showIn: (query)  (optional)
 
      - returns: RequestBuilder<DashboardChart> 
      */
-    open class func getChartWithRequestBuilder(authorization: String, assets: [UUID]? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, showIn: ShowIn_getChart? = nil) -> RequestBuilder<DashboardChart> {
+    open class func getChartWithRequestBuilder(assets: [UUID]? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, showIn: Currency? = nil) -> RequestBuilder<DashboardChart> {
         let path = "/v2.0/dashboard/chart"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "Assets": assets, 
-            "DateFrom": dateFrom?.encodeToJSON(), 
-            "DateTo": dateTo?.encodeToJSON(), 
-            "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
-            "ShowIn": showIn?.rawValue
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "Assets": assets, 
+                        "DateFrom": dateFrom?.encodeToJSON(), 
+                        "DateTo": dateTo?.encodeToJSON(), 
+                        "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
+                        "ShowIn": showIn
         ])
-        
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<DashboardChart>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
      Active assets for chart
-     
-     - parameter authorization: (header) JWT access token 
+
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getChartAssets(authorization: String, completion: @escaping ((_ data: DashboardChartAssets?,_ error: Error?) -> Void)) {
-        getChartAssetsWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getChartAssets(completion: @escaping ((_ data: DashboardChartAssets?,_ error: Error?) -> Void)) {
+        getChartAssetsWithRequestBuilder().execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
@@ -122,6 +87,9 @@ open class DashboardAPI {
     /**
      Active assets for chart
      - GET /v2.0/dashboard/chart/assets
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "assets" : [ {
     "programDetails" : {
@@ -130,11 +98,11 @@ open class DashboardAPI {
     },
     "color" : "color",
     "isPrivateAccount" : true,
-    "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "title" : "title",
+    "logoUrl" : "logoUrl",
     "url" : "url",
-    "assetType" : { }
+    "assetType" : "None"
   }, {
     "programDetails" : {
       "level" : 0,
@@ -142,50 +110,95 @@ open class DashboardAPI {
     },
     "color" : "color",
     "isPrivateAccount" : true,
-    "logo" : "logo",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "title" : "title",
+    "logoUrl" : "logoUrl",
     "url" : "url",
-    "assetType" : { }
+    "assetType" : "None"
   } ]
 }}]
-     
-     - parameter authorization: (header) JWT access token 
 
      - returns: RequestBuilder<DashboardChartAssets> 
      */
-    open class func getChartAssetsWithRequestBuilder(authorization: String) -> RequestBuilder<DashboardChartAssets> {
+    open class func getChartAssetsWithRequestBuilder() -> RequestBuilder<DashboardChartAssets> {
         let path = "/v2.0/dashboard/chart/assets"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<DashboardChartAssets>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
+     - parameter currency: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getDashboardSummary(currency: Currency? = nil, completion: @escaping ((_ data: DashboardSummary?,_ error: Error?) -> Void)) {
+        getDashboardSummaryWithRequestBuilder(currency: currency).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
 
-     - parameter authorization: (header) JWT access token 
+
+    /**
+     - GET /v2.0/dashboard/summary
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example={
+  "trading" : 6.027456183070403,
+  "limitWithoutKyc" : {
+    "limit" : 5.637376656633329,
+    "currency" : "Undefined",
+    "invested" : 2.3021358869347655
+  },
+  "profits" : {
+    "day" : {
+      "profitPercent" : 5.637376656633329,
+      "profit" : 5.962133916683182
+    }
+  },
+  "total" : 5.962133916683182,
+  "wallets" : 1.4658129805029452,
+  "invested" : 0.8008281904610115
+}}]
+     - parameter currency: (query)  (optional)
+
+     - returns: RequestBuilder<DashboardSummary> 
+     */
+    open class func getDashboardSummaryWithRequestBuilder(currency: Currency? = nil) -> RequestBuilder<DashboardSummary> {
+        let path = "/v2.0/dashboard/summary"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "currency": currency
+        ])
+
+        let requestBuilder: RequestBuilder<DashboardSummary>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
      - parameter topAssetsCount: (query)  (optional, default to 4)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getHoldings(authorization: String, topAssetsCount: Int? = nil, completion: @escaping ((_ data: DashboardAssets?,_ error: Error?) -> Void)) {
-        getHoldingsWithRequestBuilder(authorization: authorization, topAssetsCount: topAssetsCount).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getHoldings(topAssetsCount: Int? = nil, completion: @escaping ((_ data: DashboardAssets?,_ error: Error?) -> Void)) {
+        getHoldingsWithRequestBuilder(topAssetsCount: topAssetsCount).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
 
     /**
      - GET /v2.0/dashboard/holdings
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "assets" : [ {
     "color" : "color",
@@ -197,77 +210,42 @@ open class DashboardAPI {
     "percent" : 0.8008281904610115
   } ]
 }}]
-     
-     - parameter authorization: (header) JWT access token 
      - parameter topAssetsCount: (query)  (optional, default to 4)
 
      - returns: RequestBuilder<DashboardAssets> 
      */
-    open class func getHoldingsWithRequestBuilder(authorization: String, topAssetsCount: Int? = nil) -> RequestBuilder<DashboardAssets> {
+    open class func getHoldingsWithRequestBuilder(topAssetsCount: Int? = nil) -> RequestBuilder<DashboardAssets> {
         let path = "/v2.0/dashboard/holdings"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "topAssetsCount": topAssetsCount?.encodeToJSON()
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "topAssetsCount": topAssetsCount?.encodeToJSON()
         ])
-        
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<DashboardAssets>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
-     * enum for parameter currency
-     */
-    public enum Currency_getInvestingDetails: String { 
-        case usd = "USD"
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case eur = "EUR"
-    }
-
-    /**
-
-     - parameter authorization: (header) JWT access token 
-     - parameter currency: (query)  (optional)
-     - parameter eventsTake: (query)  (optional)
+     - parameter currency: (query)  (optional)     - parameter eventsTake: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getInvestingDetails(authorization: String, currency: Currency_getInvestingDetails? = nil, eventsTake: Int? = nil, completion: @escaping ((_ data: DashboardInvestingDetails?,_ error: Error?) -> Void)) {
-        getInvestingDetailsWithRequestBuilder(authorization: authorization, currency: currency, eventsTake: eventsTake).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getInvestingDetails(currency: Currency? = nil, eventsTake: Int? = nil, completion: @escaping ((_ data: DashboardInvestingDetails?,_ error: Error?) -> Void)) {
+        getInvestingDetailsWithRequestBuilder(currency: currency, eventsTake: eventsTake).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
 
     /**
      - GET /v2.0/dashboard/investing
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "profits" : {
-    "week" : {
-      "profitPercent" : 5.637376656633329,
-      "profit" : 5.962133916683182
-    },
-    "month" : {
-      "profitPercent" : 5.637376656633329,
-      "profit" : 5.962133916683182
-    },
     "day" : {
       "profitPercent" : 5.637376656633329,
       "profit" : 5.962133916683182
@@ -286,40 +264,35 @@ open class DashboardAPI {
           "levelProgress" : 6.027456183070403
         },
         "color" : "color",
-        "logo" : "logo",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "title" : "title",
+        "logoUrl" : "logoUrl",
         "url" : "url",
-        "assetType" : { }
+        "assetType" : "None"
       },
       "amount" : 2.3021358869347655,
       "feesInfo" : [ {
         "amount" : 9.301444243932576,
         "description" : "description",
-        "currency" : null,
         "title" : "title",
-        "type" : { }
+        "type" : "Undefined"
       }, {
         "amount" : 9.301444243932576,
         "description" : "description",
-        "currency" : null,
         "title" : "title",
-        "type" : { }
+        "type" : "Undefined"
       } ],
-      "icon" : "icon",
-      "changeState" : { },
+      "changeState" : "NotChanged",
       "extendedInfo" : [ {
         "amount" : 7.061401241503109,
-        "currency" : { },
         "title" : "title"
       }, {
         "amount" : 7.061401241503109,
-        "currency" : { },
         "title" : "title"
       } ],
-      "currency" : "USD",
+      "currency" : "Undefined",
       "title" : "title",
-      "totalFeesCurrency" : "USD",
+      "logoUrl" : "logoUrl",
       "totalFeesAmount" : 3.616076749251911
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
@@ -329,145 +302,74 @@ open class DashboardAPI {
           "levelProgress" : 6.027456183070403
         },
         "color" : "color",
-        "logo" : "logo",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "title" : "title",
+        "logoUrl" : "logoUrl",
         "url" : "url",
-        "assetType" : { }
+        "assetType" : "None"
       },
       "amount" : 2.3021358869347655,
       "feesInfo" : [ {
         "amount" : 9.301444243932576,
         "description" : "description",
-        "currency" : null,
         "title" : "title",
-        "type" : { }
+        "type" : "Undefined"
       }, {
         "amount" : 9.301444243932576,
         "description" : "description",
-        "currency" : null,
         "title" : "title",
-        "type" : { }
+        "type" : "Undefined"
       } ],
-      "icon" : "icon",
-      "changeState" : { },
+      "changeState" : "NotChanged",
       "extendedInfo" : [ {
         "amount" : 7.061401241503109,
-        "currency" : { },
         "title" : "title"
       }, {
         "amount" : 7.061401241503109,
-        "currency" : { },
         "title" : "title"
       } ],
-      "currency" : "USD",
+      "currency" : "Undefined",
       "title" : "title",
-      "totalFeesCurrency" : "USD",
+      "logoUrl" : "logoUrl",
       "totalFeesAmount" : 3.616076749251911
     } ]
   }
 }}]
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter currency: (query)  (optional)
-     - parameter eventsTake: (query)  (optional)
+     - parameter currency: (query)  (optional)     - parameter eventsTake: (query)  (optional)
 
      - returns: RequestBuilder<DashboardInvestingDetails> 
      */
-    open class func getInvestingDetailsWithRequestBuilder(authorization: String, currency: Currency_getInvestingDetails? = nil, eventsTake: Int? = nil) -> RequestBuilder<DashboardInvestingDetails> {
+    open class func getInvestingDetailsWithRequestBuilder(currency: Currency? = nil, eventsTake: Int? = nil) -> RequestBuilder<DashboardInvestingDetails> {
         let path = "/v2.0/dashboard/investing"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "currency": currency?.rawValue, 
-            "eventsTake": eventsTake?.encodeToJSON()
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "currency": currency, 
+                        "eventsTake": eventsTake?.encodeToJSON()
         ])
-        
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<DashboardInvestingDetails>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
-     * enum for parameter sorting
-     */
-    public enum Sorting_getInvestingFunds: String { 
-        case byTitleAsc = "ByTitleAsc"
-        case byTitleDesc = "ByTitleDesc"
-        case bySizeAsc = "BySizeAsc"
-        case bySizeDesc = "BySizeDesc"
-        case byInvestorsAsc = "ByInvestorsAsc"
-        case byInvestorsDesc = "ByInvestorsDesc"
-        case byDrawdownAsc = "ByDrawdownAsc"
-        case byDrawdownDesc = "ByDrawdownDesc"
-        case byProfitAsc = "ByProfitAsc"
-        case byProfitDesc = "ByProfitDesc"
-        case byNewAsc = "ByNewAsc"
-        case byNewDesc = "ByNewDesc"
-        case byValueAsc = "ByValueAsc"
-        case byValueDesc = "ByValueDesc"
-    }
-
-    /**
-     * enum for parameter showIn
-     */
-    public enum ShowIn_getInvestingFunds: String { 
-        case usd = "USD"
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case eur = "EUR"
-    }
-
-    /**
-     * enum for parameter status
-     */
-    public enum Status_getInvestingFunds: String { 
-        case all = "All"
-        case active = "Active"
-    }
-
-    /**
-
-     - parameter authorization: (header) JWT access token 
-     - parameter sorting: (query)  (optional)
-     - parameter showIn: (query)  (optional)
-     - parameter status: (query)  (optional)
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter chartPointsCount: (query)  (optional)
-     - parameter facetId: (query)  (optional)
-     - parameter mask: (query)  (optional)
-     - parameter ownerId: (query)  (optional)
-     - parameter showFavorites: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
+     - parameter sorting: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter status: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter facetId: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter ownerId: (query)  (optional)     - parameter showFavorites: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getInvestingFunds(authorization: String, sorting: Sorting_getInvestingFunds? = nil, showIn: ShowIn_getInvestingFunds? = nil, status: Status_getInvestingFunds? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ItemsViewModelFundInvestingDetailsList?,_ error: Error?) -> Void)) {
-        getInvestingFundsWithRequestBuilder(authorization: authorization, sorting: sorting, showIn: showIn, status: status, dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, facetId: facetId, mask: mask, ownerId: ownerId, showFavorites: showFavorites, skip: skip, take: take).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getInvestingFunds(sorting: FundsFilterSorting? = nil, showIn: Currency? = nil, status: DashboardAssetStatus? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: FundInvestingDetailsListItemsViewModel?,_ error: Error?) -> Void)) {
+        getInvestingFundsWithRequestBuilder(sorting: sorting, showIn: showIn, status: status, dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, facetId: facetId, mask: mask, ownerId: ownerId, showFavorites: showFavorites, skip: skip, take: take).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
 
     /**
      - GET /v2.0/dashboard/investing/funds
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "total" : 3,
   "items" : [ {
@@ -480,35 +382,37 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 5.637376656633329,
       "chart" : [ {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : "2000-01-23T04:56:07.000+00:00",
+        "value" : 0.8008281904610115
       }, {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : "2000-01-23T04:56:07.000+00:00",
+        "value" : 0.8008281904610115
       } ],
       "profit" : 5.962133916683182
     },
     "color" : "color",
     "topFundAssets" : [ {
       "name" : "name",
-      "icon" : "icon",
       "asset" : "asset",
-      "percent" : 1.4658129805029452
+      "percent" : 1.4658129805029452,
+      "logoUrl" : "logoUrl",
+      "url" : "url"
     }, {
       "name" : "name",
-      "icon" : "icon",
       "asset" : "asset",
-      "percent" : 1.4658129805029452
+      "percent" : 1.4658129805029452,
+      "logoUrl" : "logoUrl",
+      "url" : "url"
     } ],
     "description" : "description",
     "title" : "title",
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
+    "logoUrl" : "logoUrl",
     "url" : "url",
     "balance" : {
       "amount" : 9.301444243932576,
-      "currency" : { }
+      "currency" : "Undefined"
     },
-    "logo" : "logo",
     "personalDetails" : {
       "canWithdraw" : true,
       "canInvest" : true,
@@ -516,7 +420,7 @@ open class DashboardAPI {
       "share" : 2.3021358869347655,
       "value" : 7.061401241503109,
       "isFavorite" : true,
-      "status" : { }
+      "status" : "Pending"
     },
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "investorsCount" : 0
@@ -530,35 +434,37 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 5.637376656633329,
       "chart" : [ {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : "2000-01-23T04:56:07.000+00:00",
+        "value" : 0.8008281904610115
       }, {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : "2000-01-23T04:56:07.000+00:00",
+        "value" : 0.8008281904610115
       } ],
       "profit" : 5.962133916683182
     },
     "color" : "color",
     "topFundAssets" : [ {
       "name" : "name",
-      "icon" : "icon",
       "asset" : "asset",
-      "percent" : 1.4658129805029452
+      "percent" : 1.4658129805029452,
+      "logoUrl" : "logoUrl",
+      "url" : "url"
     }, {
       "name" : "name",
-      "icon" : "icon",
       "asset" : "asset",
-      "percent" : 1.4658129805029452
+      "percent" : 1.4658129805029452,
+      "logoUrl" : "logoUrl",
+      "url" : "url"
     } ],
     "description" : "description",
     "title" : "title",
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
+    "logoUrl" : "logoUrl",
     "url" : "url",
     "balance" : {
       "amount" : 9.301444243932576,
-      "currency" : { }
+      "currency" : "Undefined"
     },
-    "logo" : "logo",
     "personalDetails" : {
       "canWithdraw" : true,
       "canInvest" : true,
@@ -566,139 +472,57 @@ open class DashboardAPI {
       "share" : 2.3021358869347655,
       "value" : 7.061401241503109,
       "isFavorite" : true,
-      "status" : { }
+      "status" : "Pending"
     },
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "investorsCount" : 0
   } ]
 }}]
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter sorting: (query)  (optional)
-     - parameter showIn: (query)  (optional)
-     - parameter status: (query)  (optional)
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter chartPointsCount: (query)  (optional)
-     - parameter facetId: (query)  (optional)
-     - parameter mask: (query)  (optional)
-     - parameter ownerId: (query)  (optional)
-     - parameter showFavorites: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
+     - parameter sorting: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter status: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter facetId: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter ownerId: (query)  (optional)     - parameter showFavorites: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
 
-     - returns: RequestBuilder<ItemsViewModelFundInvestingDetailsList> 
+     - returns: RequestBuilder<FundInvestingDetailsListItemsViewModel> 
      */
-    open class func getInvestingFundsWithRequestBuilder(authorization: String, sorting: Sorting_getInvestingFunds? = nil, showIn: ShowIn_getInvestingFunds? = nil, status: Status_getInvestingFunds? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ItemsViewModelFundInvestingDetailsList> {
+    open class func getInvestingFundsWithRequestBuilder(sorting: FundsFilterSorting? = nil, showIn: Currency? = nil, status: DashboardAssetStatus? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<FundInvestingDetailsListItemsViewModel> {
         let path = "/v2.0/dashboard/investing/funds"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "Sorting": sorting?.rawValue, 
-            "ShowIn": showIn?.rawValue, 
-            "Status": status?.rawValue, 
-            "DateFrom": dateFrom?.encodeToJSON(), 
-            "DateTo": dateTo?.encodeToJSON(), 
-            "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
-            "FacetId": facetId, 
-            "Mask": mask, 
-            "OwnerId": ownerId, 
-            "ShowFavorites": showFavorites, 
-            "Skip": skip?.encodeToJSON(), 
-            "Take": take?.encodeToJSON()
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "Sorting": sorting, 
+                        "ShowIn": showIn, 
+                        "Status": status, 
+                        "DateFrom": dateFrom?.encodeToJSON(), 
+                        "DateTo": dateTo?.encodeToJSON(), 
+                        "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
+                        "FacetId": facetId, 
+                        "Mask": mask, 
+                        "OwnerId": ownerId, 
+                        "ShowFavorites": showFavorites, 
+                        "Skip": skip?.encodeToJSON(), 
+                        "Take": take?.encodeToJSON()
         ])
-        
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
-        let requestBuilder: RequestBuilder<ItemsViewModelFundInvestingDetailsList>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<FundInvestingDetailsListItemsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
-     * enum for parameter sorting
-     */
-    public enum Sorting_getInvestingPrograms: String { 
-        case byTitleAsc = "ByTitleAsc"
-        case byTitleDesc = "ByTitleDesc"
-        case byEquityAsc = "ByEquityAsc"
-        case byEquityDesc = "ByEquityDesc"
-        case byInvestorsAsc = "ByInvestorsAsc"
-        case byInvestorsDesc = "ByInvestorsDesc"
-        case byPeriodAsc = "ByPeriodAsc"
-        case byPeriodDesc = "ByPeriodDesc"
-        case byDrawdownAsc = "ByDrawdownAsc"
-        case byDrawdownDesc = "ByDrawdownDesc"
-        case byProfitAsc = "ByProfitAsc"
-        case byProfitDesc = "ByProfitDesc"
-        case byNewAsc = "ByNewAsc"
-        case byNewDesc = "ByNewDesc"
-        case byLevelProgressAsc = "ByLevelProgressAsc"
-        case byLevelProgressDesc = "ByLevelProgressDesc"
-        case byLevelAsc = "ByLevelAsc"
-        case byLevelDesc = "ByLevelDesc"
-        case byValueAsc = "ByValueAsc"
-        case byValueDesc = "ByValueDesc"
-    }
-
-    /**
-     * enum for parameter showIn
-     */
-    public enum ShowIn_getInvestingPrograms: String { 
-        case usd = "USD"
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case eur = "EUR"
-    }
-
-    /**
-     * enum for parameter status
-     */
-    public enum Status_getInvestingPrograms: String { 
-        case all = "All"
-        case active = "Active"
-    }
-
-    /**
-
-     - parameter authorization: (header) JWT access token 
-     - parameter sorting: (query)  (optional)
-     - parameter showIn: (query)  (optional)
-     - parameter status: (query)  (optional)
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter chartPointsCount: (query)  (optional)
-     - parameter facetId: (query)  (optional)
-     - parameter mask: (query)  (optional)
-     - parameter ownerId: (query)  (optional)
-     - parameter showFavorites: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
+     - parameter sorting: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter status: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter facetId: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter ownerId: (query)  (optional)     - parameter showFavorites: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getInvestingPrograms(authorization: String, sorting: Sorting_getInvestingPrograms? = nil, showIn: ShowIn_getInvestingPrograms? = nil, status: Status_getInvestingPrograms? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ItemsViewModelProgramInvestingDetailsList?,_ error: Error?) -> Void)) {
-        getInvestingProgramsWithRequestBuilder(authorization: authorization, sorting: sorting, showIn: showIn, status: status, dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, facetId: facetId, mask: mask, ownerId: ownerId, showFavorites: showFavorites, skip: skip, take: take).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getInvestingPrograms(sorting: ProgramsFilterSorting? = nil, showIn: Currency? = nil, status: DashboardAssetStatus? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ProgramInvestingDetailsListItemsViewModel?,_ error: Error?) -> Void)) {
+        getInvestingProgramsWithRequestBuilder(sorting: sorting, showIn: showIn, status: status, dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, facetId: facetId, mask: mask, ownerId: ownerId, showFavorites: showFavorites, skip: skip, take: take).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
 
     /**
      - GET /v2.0/dashboard/investing/programs
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "total" : 4,
   "items" : [ {
@@ -711,11 +535,11 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 5.637376656633329,
       "chart" : [ {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : "2000-01-23T04:56:07.000+00:00",
+        "value" : 0.8008281904610115
       }, {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : "2000-01-23T04:56:07.000+00:00",
+        "value" : 0.8008281904610115
       } ],
       "profit" : 5.962133916683182
     },
@@ -723,6 +547,7 @@ open class DashboardAPI {
     "level" : 6,
     "title" : "title",
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
+    "logoUrl" : "logoUrl",
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "tags" : [ {
@@ -734,36 +559,37 @@ open class DashboardAPI {
     } ],
     "balance" : {
       "amount" : 9.301444243932576,
-      "currency" : { }
+      "currency" : "Undefined"
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
-    "logo" : "logo",
     "availableToInvest" : 0.8008281904610115,
     "personalDetails" : {
-      "profitPercent" : 3.616076749251911,
+      "canChangeReinvest" : true,
       "canWithdraw" : true,
-      "isReinvest" : true,
       "canInvest" : true,
       "isOwnAsset" : true,
+      "profitPercent" : 3.616076749251911,
+      "isReinvest" : true,
+      "isAutoJoin" : true,
       "share" : 2.3021358869347655,
       "value" : 7.061401241503109,
       "profit" : 9.301444243932576,
       "invested" : 2.027123023002322,
       "isFavorite" : true,
-      "status" : { }
+      "status" : "Pending"
     },
-    "currency" : { },
+    "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "brokerDetails" : {
       "showCommissionRebateSometime" : true,
       "showCommissionRebate" : true,
       "showSwaps" : true,
       "showTicketsSometime" : true,
-      "type" : { },
+      "type" : "Undefined",
       "showTickets" : true,
+      "logoUrl" : "logoUrl",
       "isKycRequired" : true,
       "name" : "name",
-      "logo" : "logo",
       "showSwapsSometime" : true,
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "isSignalsAvailable" : true,
@@ -781,11 +607,11 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 5.637376656633329,
       "chart" : [ {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : "2000-01-23T04:56:07.000+00:00",
+        "value" : 0.8008281904610115
       }, {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : "2000-01-23T04:56:07.000+00:00",
+        "value" : 0.8008281904610115
       } ],
       "profit" : 5.962133916683182
     },
@@ -793,6 +619,7 @@ open class DashboardAPI {
     "level" : 6,
     "title" : "title",
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
+    "logoUrl" : "logoUrl",
     "url" : "url",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "tags" : [ {
@@ -804,36 +631,37 @@ open class DashboardAPI {
     } ],
     "balance" : {
       "amount" : 9.301444243932576,
-      "currency" : { }
+      "currency" : "Undefined"
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
-    "logo" : "logo",
     "availableToInvest" : 0.8008281904610115,
     "personalDetails" : {
-      "profitPercent" : 3.616076749251911,
+      "canChangeReinvest" : true,
       "canWithdraw" : true,
-      "isReinvest" : true,
       "canInvest" : true,
       "isOwnAsset" : true,
+      "profitPercent" : 3.616076749251911,
+      "isReinvest" : true,
+      "isAutoJoin" : true,
       "share" : 2.3021358869347655,
       "value" : 7.061401241503109,
       "profit" : 9.301444243932576,
       "invested" : 2.027123023002322,
       "isFavorite" : true,
-      "status" : { }
+      "status" : "Pending"
     },
-    "currency" : { },
+    "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "brokerDetails" : {
       "showCommissionRebateSometime" : true,
       "showCommissionRebate" : true,
       "showSwaps" : true,
       "showTicketsSometime" : true,
-      "type" : { },
+      "type" : "Undefined",
       "showTickets" : true,
+      "logoUrl" : "logoUrl",
       "isKycRequired" : true,
       "name" : "name",
-      "logo" : "logo",
       "showSwapsSometime" : true,
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "isSignalsAvailable" : true,
@@ -843,119 +671,79 @@ open class DashboardAPI {
     "investorsCount" : 5
   } ]
 }}]
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter sorting: (query)  (optional)
-     - parameter showIn: (query)  (optional)
-     - parameter status: (query)  (optional)
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter chartPointsCount: (query)  (optional)
-     - parameter facetId: (query)  (optional)
-     - parameter mask: (query)  (optional)
-     - parameter ownerId: (query)  (optional)
-     - parameter showFavorites: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
+     - parameter sorting: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter status: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter facetId: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter ownerId: (query)  (optional)     - parameter showFavorites: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
 
-     - returns: RequestBuilder<ItemsViewModelProgramInvestingDetailsList> 
+     - returns: RequestBuilder<ProgramInvestingDetailsListItemsViewModel> 
      */
-    open class func getInvestingProgramsWithRequestBuilder(authorization: String, sorting: Sorting_getInvestingPrograms? = nil, showIn: ShowIn_getInvestingPrograms? = nil, status: Status_getInvestingPrograms? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ItemsViewModelProgramInvestingDetailsList> {
+    open class func getInvestingProgramsWithRequestBuilder(sorting: ProgramsFilterSorting? = nil, showIn: Currency? = nil, status: DashboardAssetStatus? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ProgramInvestingDetailsListItemsViewModel> {
         let path = "/v2.0/dashboard/investing/programs"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "Sorting": sorting?.rawValue, 
-            "ShowIn": showIn?.rawValue, 
-            "Status": status?.rawValue, 
-            "DateFrom": dateFrom?.encodeToJSON(), 
-            "DateTo": dateTo?.encodeToJSON(), 
-            "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
-            "FacetId": facetId, 
-            "Mask": mask, 
-            "OwnerId": ownerId, 
-            "ShowFavorites": showFavorites, 
-            "Skip": skip?.encodeToJSON(), 
-            "Take": take?.encodeToJSON()
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "Sorting": sorting, 
+                        "ShowIn": showIn, 
+                        "Status": status, 
+                        "DateFrom": dateFrom?.encodeToJSON(), 
+                        "DateTo": dateTo?.encodeToJSON(), 
+                        "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
+                        "FacetId": facetId, 
+                        "Mask": mask, 
+                        "OwnerId": ownerId, 
+                        "ShowFavorites": showFavorites, 
+                        "Skip": skip?.encodeToJSON(), 
+                        "Take": take?.encodeToJSON()
         ])
-        
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
-        let requestBuilder: RequestBuilder<ItemsViewModelProgramInvestingDetailsList>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<ProgramInvestingDetailsListItemsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
-     * enum for parameter showIn
-     */
-    public enum ShowIn_getMostProfitableAssets: String { 
-        case usd = "USD"
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case eur = "EUR"
-    }
-
-    /**
-
-     - parameter authorization: (header) JWT access token 
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter chartPointsCount: (query)  (optional)
-     - parameter showIn: (query)  (optional)
+     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter showIn: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getMostProfitableAssets(authorization: String, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, showIn: ShowIn_getMostProfitableAssets? = nil, completion: @escaping ((_ data: ItemsViewModelDashboardTradingAsset?,_ error: Error?) -> Void)) {
-        getMostProfitableAssetsWithRequestBuilder(authorization: authorization, dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, showIn: showIn).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getMostProfitableAssets(dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, showIn: Currency? = nil, completion: @escaping ((_ data: DashboardTradingAssetItemsViewModel?,_ error: Error?) -> Void)) {
+        getMostProfitableAssetsWithRequestBuilder(dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, showIn: showIn).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
 
     /**
      - GET /v2.0/dashboard/trading/mostprofitable
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "total" : 5,
   "items" : [ {
     "accountInfo" : {
       "leverage" : 1,
       "balance" : 6.027456183070403,
-      "currency" : "USD",
+      "currency" : "Undefined",
       "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
       "login" : "login",
-      "type" : { },
-      "status" : { }
+      "type" : "None",
+      "status" : "Pending"
     },
     "statistic" : {
       "drawdown" : 5.637376656633329,
       "chart" : [ {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : "2000-01-23T04:56:07.000+00:00",
+        "value" : 0.8008281904610115
       }, {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : "2000-01-23T04:56:07.000+00:00",
+        "value" : 0.8008281904610115
       } ],
       "profit" : 5.962133916683182
     },
     "signalInfo" : {
       "subscribersCount" : 5
     },
-    "assetTypeExt" : { },
+    "assetTypeExt" : "None",
     "publicInfo" : {
       "programDetails" : {
         "level" : 0,
@@ -965,27 +753,29 @@ open class DashboardAPI {
         "totalAssetsCount" : 0,
         "topFundAssets" : [ {
           "name" : "name",
-          "icon" : "icon",
           "asset" : "asset",
-          "percent" : 1.4658129805029452
+          "percent" : 1.4658129805029452,
+          "logoUrl" : "logoUrl",
+          "url" : "url"
         }, {
           "name" : "name",
-          "icon" : "icon",
           "asset" : "asset",
-          "percent" : 1.4658129805029452
+          "percent" : 1.4658129805029452,
+          "logoUrl" : "logoUrl",
+          "url" : "url"
         } ]
       },
       "color" : "color",
-      "logo" : "logo",
       "title" : "title",
+      "logoUrl" : "logoUrl",
       "url" : "url"
     },
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "broker" : {
       "name" : "name",
-      "logo" : "logo",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "type" : { }
+      "type" : "Undefined",
+      "logoUrl" : "logoUrl"
     },
     "actions" : {
       "canAddRequestWithdraw" : true,
@@ -1004,7 +794,7 @@ open class DashboardAPI {
       "canConfirm2FA" : true,
       "canAddRequestInvest" : true
     },
-    "assetType" : { },
+    "assetType" : "None",
     "tags" : [ {
       "color" : "color",
       "name" : "name"
@@ -1016,28 +806,28 @@ open class DashboardAPI {
     "accountInfo" : {
       "leverage" : 1,
       "balance" : 6.027456183070403,
-      "currency" : "USD",
+      "currency" : "Undefined",
       "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
       "login" : "login",
-      "type" : { },
-      "status" : { }
+      "type" : "None",
+      "status" : "Pending"
     },
     "statistic" : {
       "drawdown" : 5.637376656633329,
       "chart" : [ {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : "2000-01-23T04:56:07.000+00:00",
+        "value" : 0.8008281904610115
       }, {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : "2000-01-23T04:56:07.000+00:00",
+        "value" : 0.8008281904610115
       } ],
       "profit" : 5.962133916683182
     },
     "signalInfo" : {
       "subscribersCount" : 5
     },
-    "assetTypeExt" : { },
+    "assetTypeExt" : "None",
     "publicInfo" : {
       "programDetails" : {
         "level" : 0,
@@ -1047,27 +837,29 @@ open class DashboardAPI {
         "totalAssetsCount" : 0,
         "topFundAssets" : [ {
           "name" : "name",
-          "icon" : "icon",
           "asset" : "asset",
-          "percent" : 1.4658129805029452
+          "percent" : 1.4658129805029452,
+          "logoUrl" : "logoUrl",
+          "url" : "url"
         }, {
           "name" : "name",
-          "icon" : "icon",
           "asset" : "asset",
-          "percent" : 1.4658129805029452
+          "percent" : 1.4658129805029452,
+          "logoUrl" : "logoUrl",
+          "url" : "url"
         } ]
       },
       "color" : "color",
-      "logo" : "logo",
       "title" : "title",
+      "logoUrl" : "logoUrl",
       "url" : "url"
     },
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "broker" : {
       "name" : "name",
-      "logo" : "logo",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "type" : { }
+      "type" : "Undefined",
+      "logoUrl" : "logoUrl"
     },
     "actions" : {
       "canAddRequestWithdraw" : true,
@@ -1086,7 +878,7 @@ open class DashboardAPI {
       "canConfirm2FA" : true,
       "canAddRequestInvest" : true
     },
-    "assetType" : { },
+    "assetType" : "None",
     "tags" : [ {
       "color" : "color",
       "name" : "name"
@@ -1096,47 +888,35 @@ open class DashboardAPI {
     } ]
   } ]
 }}]
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter chartPointsCount: (query)  (optional)
-     - parameter showIn: (query)  (optional)
+     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter showIn: (query)  (optional)
 
-     - returns: RequestBuilder<ItemsViewModelDashboardTradingAsset> 
+     - returns: RequestBuilder<DashboardTradingAssetItemsViewModel> 
      */
-    open class func getMostProfitableAssetsWithRequestBuilder(authorization: String, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, showIn: ShowIn_getMostProfitableAssets? = nil) -> RequestBuilder<ItemsViewModelDashboardTradingAsset> {
+    open class func getMostProfitableAssetsWithRequestBuilder(dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, showIn: Currency? = nil) -> RequestBuilder<DashboardTradingAssetItemsViewModel> {
         let path = "/v2.0/dashboard/trading/mostprofitable"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "DateFrom": dateFrom?.encodeToJSON(), 
-            "DateTo": dateTo?.encodeToJSON(), 
-            "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
-            "ShowIn": showIn?.rawValue
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "DateFrom": dateFrom?.encodeToJSON(), 
+                        "DateTo": dateTo?.encodeToJSON(), 
+                        "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
+                        "ShowIn": showIn
         ])
-        
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
-        let requestBuilder: RequestBuilder<ItemsViewModelDashboardTradingAsset>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<DashboardTradingAssetItemsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
      Money distribution in percents
-     
-     - parameter authorization: (header) JWT access token 
+
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getPortfolio(authorization: String, completion: @escaping ((_ data: DashboardPortfolio?,_ error: Error?) -> Void)) {
-        getPortfolioWithRequestBuilder(authorization: authorization).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getPortfolio(completion: @escaping ((_ data: DashboardPortfolio?,_ error: Error?) -> Void)) {
+        getPortfolioWithRequestBuilder().execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
@@ -1144,115 +924,79 @@ open class DashboardAPI {
     /**
      Money distribution in percents
      - GET /v2.0/dashboard/portfolio
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "distribution" : [ {
     "color" : "color",
-    "name" : { },
+    "name" : "Programs",
     "percent" : 0.8008281904610115
   }, {
     "color" : "color",
-    "name" : { },
+    "name" : "Programs",
     "percent" : 0.8008281904610115
   } ]
 }}]
-     
-     - parameter authorization: (header) JWT access token 
 
      - returns: RequestBuilder<DashboardPortfolio> 
      */
-    open class func getPortfolioWithRequestBuilder(authorization: String) -> RequestBuilder<DashboardPortfolio> {
+    open class func getPortfolioWithRequestBuilder() -> RequestBuilder<DashboardPortfolio> {
         let path = "/v2.0/dashboard/portfolio"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<DashboardPortfolio>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
-     * enum for parameter showIn
-     */
-    public enum ShowIn_getPrivateTradingAssets: String { 
-        case usd = "USD"
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case eur = "EUR"
-    }
-
-    /**
-     * enum for parameter status
-     */
-    public enum Status_getPrivateTradingAssets: String { 
-        case all = "All"
-        case active = "Active"
-    }
-
-    /**
-
-     - parameter authorization: (header) JWT access token 
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter chartPointsCount: (query)  (optional)
-     - parameter showIn: (query)  (optional)
-     - parameter status: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
+     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter status: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getPrivateTradingAssets(authorization: String, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, showIn: ShowIn_getPrivateTradingAssets? = nil, status: Status_getPrivateTradingAssets? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ItemsViewModelDashboardTradingAsset?,_ error: Error?) -> Void)) {
-        getPrivateTradingAssetsWithRequestBuilder(authorization: authorization, dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, showIn: showIn, status: status, skip: skip, take: take).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getPrivateTradingAssets(dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, showIn: Currency? = nil, status: DashboardAssetStatus? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: DashboardTradingAssetItemsViewModel?,_ error: Error?) -> Void)) {
+        getPrivateTradingAssetsWithRequestBuilder(dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, showIn: showIn, status: status, skip: skip, take: take).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
 
     /**
      - GET /v2.0/dashboard/trading/private
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "total" : 5,
   "items" : [ {
     "accountInfo" : {
       "leverage" : 1,
       "balance" : 6.027456183070403,
-      "currency" : "USD",
+      "currency" : "Undefined",
       "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
       "login" : "login",
-      "type" : { },
-      "status" : { }
+      "type" : "None",
+      "status" : "Pending"
     },
     "statistic" : {
       "drawdown" : 5.637376656633329,
       "chart" : [ {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : "2000-01-23T04:56:07.000+00:00",
+        "value" : 0.8008281904610115
       }, {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : "2000-01-23T04:56:07.000+00:00",
+        "value" : 0.8008281904610115
       } ],
       "profit" : 5.962133916683182
     },
     "signalInfo" : {
       "subscribersCount" : 5
     },
-    "assetTypeExt" : { },
+    "assetTypeExt" : "None",
     "publicInfo" : {
       "programDetails" : {
         "level" : 0,
@@ -1262,27 +1006,29 @@ open class DashboardAPI {
         "totalAssetsCount" : 0,
         "topFundAssets" : [ {
           "name" : "name",
-          "icon" : "icon",
           "asset" : "asset",
-          "percent" : 1.4658129805029452
+          "percent" : 1.4658129805029452,
+          "logoUrl" : "logoUrl",
+          "url" : "url"
         }, {
           "name" : "name",
-          "icon" : "icon",
           "asset" : "asset",
-          "percent" : 1.4658129805029452
+          "percent" : 1.4658129805029452,
+          "logoUrl" : "logoUrl",
+          "url" : "url"
         } ]
       },
       "color" : "color",
-      "logo" : "logo",
       "title" : "title",
+      "logoUrl" : "logoUrl",
       "url" : "url"
     },
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "broker" : {
       "name" : "name",
-      "logo" : "logo",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "type" : { }
+      "type" : "Undefined",
+      "logoUrl" : "logoUrl"
     },
     "actions" : {
       "canAddRequestWithdraw" : true,
@@ -1301,7 +1047,7 @@ open class DashboardAPI {
       "canConfirm2FA" : true,
       "canAddRequestInvest" : true
     },
-    "assetType" : { },
+    "assetType" : "None",
     "tags" : [ {
       "color" : "color",
       "name" : "name"
@@ -1313,28 +1059,28 @@ open class DashboardAPI {
     "accountInfo" : {
       "leverage" : 1,
       "balance" : 6.027456183070403,
-      "currency" : "USD",
+      "currency" : "Undefined",
       "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
       "login" : "login",
-      "type" : { },
-      "status" : { }
+      "type" : "None",
+      "status" : "Pending"
     },
     "statistic" : {
       "drawdown" : 5.637376656633329,
       "chart" : [ {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : "2000-01-23T04:56:07.000+00:00",
+        "value" : 0.8008281904610115
       }, {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : "2000-01-23T04:56:07.000+00:00",
+        "value" : 0.8008281904610115
       } ],
       "profit" : 5.962133916683182
     },
     "signalInfo" : {
       "subscribersCount" : 5
     },
-    "assetTypeExt" : { },
+    "assetTypeExt" : "None",
     "publicInfo" : {
       "programDetails" : {
         "level" : 0,
@@ -1344,27 +1090,29 @@ open class DashboardAPI {
         "totalAssetsCount" : 0,
         "topFundAssets" : [ {
           "name" : "name",
-          "icon" : "icon",
           "asset" : "asset",
-          "percent" : 1.4658129805029452
+          "percent" : 1.4658129805029452,
+          "logoUrl" : "logoUrl",
+          "url" : "url"
         }, {
           "name" : "name",
-          "icon" : "icon",
           "asset" : "asset",
-          "percent" : 1.4658129805029452
+          "percent" : 1.4658129805029452,
+          "logoUrl" : "logoUrl",
+          "url" : "url"
         } ]
       },
       "color" : "color",
-      "logo" : "logo",
       "title" : "title",
+      "logoUrl" : "logoUrl",
       "url" : "url"
     },
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "broker" : {
       "name" : "name",
-      "logo" : "logo",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "type" : { }
+      "type" : "Undefined",
+      "logoUrl" : "logoUrl"
     },
     "actions" : {
       "canAddRequestWithdraw" : true,
@@ -1383,7 +1131,7 @@ open class DashboardAPI {
       "canConfirm2FA" : true,
       "canAddRequestInvest" : true
     },
-    "assetType" : { },
+    "assetType" : "None",
     "tags" : [ {
       "color" : "color",
       "name" : "name"
@@ -1393,120 +1141,74 @@ open class DashboardAPI {
     } ]
   } ]
 }}]
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter chartPointsCount: (query)  (optional)
-     - parameter showIn: (query)  (optional)
-     - parameter status: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
+     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter status: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
 
-     - returns: RequestBuilder<ItemsViewModelDashboardTradingAsset> 
+     - returns: RequestBuilder<DashboardTradingAssetItemsViewModel> 
      */
-    open class func getPrivateTradingAssetsWithRequestBuilder(authorization: String, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, showIn: ShowIn_getPrivateTradingAssets? = nil, status: Status_getPrivateTradingAssets? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ItemsViewModelDashboardTradingAsset> {
+    open class func getPrivateTradingAssetsWithRequestBuilder(dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, showIn: Currency? = nil, status: DashboardAssetStatus? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<DashboardTradingAssetItemsViewModel> {
         let path = "/v2.0/dashboard/trading/private"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "DateFrom": dateFrom?.encodeToJSON(), 
-            "DateTo": dateTo?.encodeToJSON(), 
-            "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
-            "ShowIn": showIn?.rawValue, 
-            "Status": status?.rawValue, 
-            "Skip": skip?.encodeToJSON(), 
-            "Take": take?.encodeToJSON()
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "DateFrom": dateFrom?.encodeToJSON(), 
+                        "DateTo": dateTo?.encodeToJSON(), 
+                        "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
+                        "ShowIn": showIn, 
+                        "Status": status, 
+                        "Skip": skip?.encodeToJSON(), 
+                        "Take": take?.encodeToJSON()
         ])
-        
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
-        let requestBuilder: RequestBuilder<ItemsViewModelDashboardTradingAsset>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<DashboardTradingAssetItemsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
-     * enum for parameter showIn
-     */
-    public enum ShowIn_getPublicTradingAssets: String { 
-        case usd = "USD"
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case eur = "EUR"
-    }
-
-    /**
-     * enum for parameter status
-     */
-    public enum Status_getPublicTradingAssets: String { 
-        case all = "All"
-        case active = "Active"
-    }
-
-    /**
-
-     - parameter authorization: (header) JWT access token 
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter chartPointsCount: (query)  (optional)
-     - parameter showIn: (query)  (optional)
-     - parameter status: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
+     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter status: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getPublicTradingAssets(authorization: String, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, showIn: ShowIn_getPublicTradingAssets? = nil, status: Status_getPublicTradingAssets? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ItemsViewModelDashboardTradingAsset?,_ error: Error?) -> Void)) {
-        getPublicTradingAssetsWithRequestBuilder(authorization: authorization, dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, showIn: showIn, status: status, skip: skip, take: take).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getPublicTradingAssets(dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, showIn: Currency? = nil, status: DashboardAssetStatus? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: DashboardTradingAssetItemsViewModel?,_ error: Error?) -> Void)) {
+        getPublicTradingAssetsWithRequestBuilder(dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, showIn: showIn, status: status, skip: skip, take: take).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
 
     /**
      - GET /v2.0/dashboard/trading/public
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "total" : 5,
   "items" : [ {
     "accountInfo" : {
       "leverage" : 1,
       "balance" : 6.027456183070403,
-      "currency" : "USD",
+      "currency" : "Undefined",
       "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
       "login" : "login",
-      "type" : { },
-      "status" : { }
+      "type" : "None",
+      "status" : "Pending"
     },
     "statistic" : {
       "drawdown" : 5.637376656633329,
       "chart" : [ {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : "2000-01-23T04:56:07.000+00:00",
+        "value" : 0.8008281904610115
       }, {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : "2000-01-23T04:56:07.000+00:00",
+        "value" : 0.8008281904610115
       } ],
       "profit" : 5.962133916683182
     },
     "signalInfo" : {
       "subscribersCount" : 5
     },
-    "assetTypeExt" : { },
+    "assetTypeExt" : "None",
     "publicInfo" : {
       "programDetails" : {
         "level" : 0,
@@ -1516,27 +1218,29 @@ open class DashboardAPI {
         "totalAssetsCount" : 0,
         "topFundAssets" : [ {
           "name" : "name",
-          "icon" : "icon",
           "asset" : "asset",
-          "percent" : 1.4658129805029452
+          "percent" : 1.4658129805029452,
+          "logoUrl" : "logoUrl",
+          "url" : "url"
         }, {
           "name" : "name",
-          "icon" : "icon",
           "asset" : "asset",
-          "percent" : 1.4658129805029452
+          "percent" : 1.4658129805029452,
+          "logoUrl" : "logoUrl",
+          "url" : "url"
         } ]
       },
       "color" : "color",
-      "logo" : "logo",
       "title" : "title",
+      "logoUrl" : "logoUrl",
       "url" : "url"
     },
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "broker" : {
       "name" : "name",
-      "logo" : "logo",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "type" : { }
+      "type" : "Undefined",
+      "logoUrl" : "logoUrl"
     },
     "actions" : {
       "canAddRequestWithdraw" : true,
@@ -1555,7 +1259,7 @@ open class DashboardAPI {
       "canConfirm2FA" : true,
       "canAddRequestInvest" : true
     },
-    "assetType" : { },
+    "assetType" : "None",
     "tags" : [ {
       "color" : "color",
       "name" : "name"
@@ -1567,28 +1271,28 @@ open class DashboardAPI {
     "accountInfo" : {
       "leverage" : 1,
       "balance" : 6.027456183070403,
-      "currency" : "USD",
+      "currency" : "Undefined",
       "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
       "login" : "login",
-      "type" : { },
-      "status" : { }
+      "type" : "None",
+      "status" : "Pending"
     },
     "statistic" : {
       "drawdown" : 5.637376656633329,
       "chart" : [ {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : "2000-01-23T04:56:07.000+00:00",
+        "value" : 0.8008281904610115
       }, {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : "2000-01-23T04:56:07.000+00:00",
+        "value" : 0.8008281904610115
       } ],
       "profit" : 5.962133916683182
     },
     "signalInfo" : {
       "subscribersCount" : 5
     },
-    "assetTypeExt" : { },
+    "assetTypeExt" : "None",
     "publicInfo" : {
       "programDetails" : {
         "level" : 0,
@@ -1598,27 +1302,29 @@ open class DashboardAPI {
         "totalAssetsCount" : 0,
         "topFundAssets" : [ {
           "name" : "name",
-          "icon" : "icon",
           "asset" : "asset",
-          "percent" : 1.4658129805029452
+          "percent" : 1.4658129805029452,
+          "logoUrl" : "logoUrl",
+          "url" : "url"
         }, {
           "name" : "name",
-          "icon" : "icon",
           "asset" : "asset",
-          "percent" : 1.4658129805029452
+          "percent" : 1.4658129805029452,
+          "logoUrl" : "logoUrl",
+          "url" : "url"
         } ]
       },
       "color" : "color",
-      "logo" : "logo",
       "title" : "title",
+      "logoUrl" : "logoUrl",
       "url" : "url"
     },
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "broker" : {
       "name" : "name",
-      "logo" : "logo",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "type" : { }
+      "type" : "Undefined",
+      "logoUrl" : "logoUrl"
     },
     "actions" : {
       "canAddRequestWithdraw" : true,
@@ -1637,7 +1343,7 @@ open class DashboardAPI {
       "canConfirm2FA" : true,
       "canAddRequestInvest" : true
     },
-    "assetType" : { },
+    "assetType" : "None",
     "tags" : [ {
       "color" : "color",
       "name" : "name"
@@ -1647,75 +1353,38 @@ open class DashboardAPI {
     } ]
   } ]
 }}]
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter chartPointsCount: (query)  (optional)
-     - parameter showIn: (query)  (optional)
-     - parameter status: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
+     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter status: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
 
-     - returns: RequestBuilder<ItemsViewModelDashboardTradingAsset> 
+     - returns: RequestBuilder<DashboardTradingAssetItemsViewModel> 
      */
-    open class func getPublicTradingAssetsWithRequestBuilder(authorization: String, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, showIn: ShowIn_getPublicTradingAssets? = nil, status: Status_getPublicTradingAssets? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ItemsViewModelDashboardTradingAsset> {
+    open class func getPublicTradingAssetsWithRequestBuilder(dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, showIn: Currency? = nil, status: DashboardAssetStatus? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<DashboardTradingAssetItemsViewModel> {
         let path = "/v2.0/dashboard/trading/public"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "DateFrom": dateFrom?.encodeToJSON(), 
-            "DateTo": dateTo?.encodeToJSON(), 
-            "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
-            "ShowIn": showIn?.rawValue, 
-            "Status": status?.rawValue, 
-            "Skip": skip?.encodeToJSON(), 
-            "Take": take?.encodeToJSON()
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "DateFrom": dateFrom?.encodeToJSON(), 
+                        "DateTo": dateTo?.encodeToJSON(), 
+                        "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
+                        "ShowIn": showIn, 
+                        "Status": status, 
+                        "Skip": skip?.encodeToJSON(), 
+                        "Take": take?.encodeToJSON()
         ])
-        
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
-        let requestBuilder: RequestBuilder<ItemsViewModelDashboardTradingAsset>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<DashboardTradingAssetItemsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
-    }
-
-    /**
-     * enum for parameter currency
-     */
-    public enum Currency_getRecommendations: String { 
-        case usd = "USD"
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case eur = "EUR"
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
      Recommended assets to invest (programs, funds and follows). Funds in passed currency
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter currency: (query)  (optional)
-     - parameter take: (query)  (optional)
-     - parameter onlyFollows: (query)  (optional, default to false)
+     - parameter currency: (query)  (optional)     - parameter take: (query)  (optional)     - parameter onlyFollows: (query)  (optional, default to false)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getRecommendations(authorization: String, currency: Currency_getRecommendations? = nil, take: Int? = nil, onlyFollows: Bool? = nil, completion: @escaping ((_ data: CommonPublicAssetsViewModel?,_ error: Error?) -> Void)) {
-        getRecommendationsWithRequestBuilder(authorization: authorization, currency: currency, take: take, onlyFollows: onlyFollows).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getRecommendations(currency: Currency? = nil, take: Int? = nil, onlyFollows: Bool? = nil, completion: @escaping ((_ data: CommonPublicAssetsViewModel?,_ error: Error?) -> Void)) {
+        getRecommendationsWithRequestBuilder(currency: currency, take: take, onlyFollows: onlyFollows).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
@@ -1723,95 +1392,52 @@ open class DashboardAPI {
     /**
      Recommended assets to invest (programs, funds and follows). Funds in passed currency
      - GET /v2.0/dashboard/recommendations
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "follows" : {
     "total" : 6,
     "items" : [ {
       "leverageMin" : 1,
-      "owner" : {
-        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-        "url" : "url",
-        "username" : "username"
-      },
       "brokerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "statistic" : {
-        "drawdown" : 5.637376656633329,
-        "chart" : [ {
-          "date" : 0,
-          "value" : 6.027456183070403
-        }, {
-          "date" : 0,
-          "value" : 6.027456183070403
-        } ],
-        "profit" : 5.962133916683182
-      },
       "color" : "color",
       "isExternal" : true,
       "subscribersCount" : 7,
-      "brokerType" : { },
+      "brokerType" : "Undefined",
       "description" : "description",
       "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
+      "logoUrl" : "logoUrl",
       "url" : "url",
-      "tags" : [ {
-        "color" : "color",
-        "name" : "name"
-      }, {
-        "color" : "color",
-        "name" : "name"
-      } ],
+      "tags" : [ null, null ],
       "tradesCount" : 1,
       "leverageMax" : 1,
-      "logo" : "logo",
       "personalDetails" : {
         "isOwnAsset" : true,
         "isFavorite" : true
       },
-      "currency" : "USD",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "status" : "status"
     }, {
       "leverageMin" : 1,
-      "owner" : {
-        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-        "url" : "url",
-        "username" : "username"
-      },
       "brokerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "statistic" : {
-        "drawdown" : 5.637376656633329,
-        "chart" : [ {
-          "date" : 0,
-          "value" : 6.027456183070403
-        }, {
-          "date" : 0,
-          "value" : 6.027456183070403
-        } ],
-        "profit" : 5.962133916683182
-      },
       "color" : "color",
       "isExternal" : true,
       "subscribersCount" : 7,
-      "brokerType" : { },
+      "brokerType" : "Undefined",
       "description" : "description",
       "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
+      "logoUrl" : "logoUrl",
       "url" : "url",
-      "tags" : [ {
-        "color" : "color",
-        "name" : "name"
-      }, {
-        "color" : "color",
-        "name" : "name"
-      } ],
+      "tags" : [ null, null ],
       "tradesCount" : 1,
       "leverageMax" : 1,
-      "logo" : "logo",
       "personalDetails" : {
         "isOwnAsset" : true,
         "isFavorite" : true
       },
-      "currency" : "USD",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "status" : "status"
     } ]
@@ -1819,44 +1445,26 @@ open class DashboardAPI {
   "funds" : {
     "total" : 4,
     "items" : [ {
-      "owner" : {
-        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-        "url" : "url",
-        "username" : "username"
-      },
       "totalAssetsCount" : 2,
-      "statistic" : {
-        "drawdown" : 5.637376656633329,
-        "chart" : [ {
-          "date" : 0,
-          "value" : 6.027456183070403
-        }, {
-          "date" : 0,
-          "value" : 6.027456183070403
-        } ],
-        "profit" : 5.962133916683182
-      },
       "color" : "color",
       "topFundAssets" : [ {
         "name" : "name",
-        "icon" : "icon",
         "asset" : "asset",
-        "percent" : 1.4658129805029452
+        "percent" : 1.4658129805029452,
+        "logoUrl" : "logoUrl",
+        "url" : "url"
       }, {
         "name" : "name",
-        "icon" : "icon",
         "asset" : "asset",
-        "percent" : 1.4658129805029452
+        "percent" : 1.4658129805029452,
+        "logoUrl" : "logoUrl",
+        "url" : "url"
       } ],
       "description" : "description",
       "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
+      "logoUrl" : "logoUrl",
       "url" : "url",
-      "balance" : {
-        "amount" : 9.301444243932576,
-        "currency" : { }
-      },
-      "logo" : "logo",
       "personalDetails" : {
         "isOwnAsset" : true,
         "isFavorite" : true
@@ -1865,44 +1473,26 @@ open class DashboardAPI {
       "investorsCount" : 3,
       "status" : "status"
     }, {
-      "owner" : {
-        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-        "url" : "url",
-        "username" : "username"
-      },
       "totalAssetsCount" : 2,
-      "statistic" : {
-        "drawdown" : 5.637376656633329,
-        "chart" : [ {
-          "date" : 0,
-          "value" : 6.027456183070403
-        }, {
-          "date" : 0,
-          "value" : 6.027456183070403
-        } ],
-        "profit" : 5.962133916683182
-      },
       "color" : "color",
       "topFundAssets" : [ {
         "name" : "name",
-        "icon" : "icon",
         "asset" : "asset",
-        "percent" : 1.4658129805029452
+        "percent" : 1.4658129805029452,
+        "logoUrl" : "logoUrl",
+        "url" : "url"
       }, {
         "name" : "name",
-        "icon" : "icon",
         "asset" : "asset",
-        "percent" : 1.4658129805029452
+        "percent" : 1.4658129805029452,
+        "logoUrl" : "logoUrl",
+        "url" : "url"
       } ],
       "description" : "description",
       "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
+      "logoUrl" : "logoUrl",
       "url" : "url",
-      "balance" : {
-        "amount" : 9.301444243932576,
-        "currency" : { }
-      },
-      "logo" : "logo",
       "personalDetails" : {
         "isOwnAsset" : true,
         "isFavorite" : true
@@ -1925,11 +1515,11 @@ open class DashboardAPI {
       "statistic" : {
         "drawdown" : 5.637376656633329,
         "chart" : [ {
-          "date" : 0,
-          "value" : 6.027456183070403
+          "date" : "2000-01-23T04:56:07.000+00:00",
+          "value" : 0.8008281904610115
         }, {
-          "date" : 0,
-          "value" : 6.027456183070403
+          "date" : "2000-01-23T04:56:07.000+00:00",
+          "value" : 0.8008281904610115
         } ],
         "profit" : 5.962133916683182
       },
@@ -1940,6 +1530,7 @@ open class DashboardAPI {
       "entryFeeSelected" : 2.3021358869347655,
       "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
+      "logoUrl" : "logoUrl",
       "url" : "url",
       "periodStarts" : "2000-01-23T04:56:07.000+00:00",
       "tags" : [ {
@@ -1951,17 +1542,17 @@ open class DashboardAPI {
       } ],
       "balance" : {
         "amount" : 9.301444243932576,
-        "currency" : { }
+        "currency" : "Undefined"
       },
       "periodEnds" : "2000-01-23T04:56:07.000+00:00",
-      "logo" : "logo",
       "availableToInvest" : 5.962133916683182,
       "personalDetails" : {
         "isReinvest" : true,
+        "isAutoJoin" : true,
         "isOwnAsset" : true,
         "isFavorite" : true
       },
-      "currency" : { },
+      "currency" : "Undefined",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "levelProgress" : 6.027456183070403,
       "investorsCount" : 5,
@@ -1977,11 +1568,11 @@ open class DashboardAPI {
       "statistic" : {
         "drawdown" : 5.637376656633329,
         "chart" : [ {
-          "date" : 0,
-          "value" : 6.027456183070403
+          "date" : "2000-01-23T04:56:07.000+00:00",
+          "value" : 0.8008281904610115
         }, {
-          "date" : 0,
-          "value" : 6.027456183070403
+          "date" : "2000-01-23T04:56:07.000+00:00",
+          "value" : 0.8008281904610115
         } ],
         "profit" : 5.962133916683182
       },
@@ -1992,6 +1583,7 @@ open class DashboardAPI {
       "entryFeeSelected" : 2.3021358869347655,
       "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
+      "logoUrl" : "logoUrl",
       "url" : "url",
       "periodStarts" : "2000-01-23T04:56:07.000+00:00",
       "tags" : [ {
@@ -2003,17 +1595,17 @@ open class DashboardAPI {
       } ],
       "balance" : {
         "amount" : 9.301444243932576,
-        "currency" : { }
+        "currency" : "Undefined"
       },
       "periodEnds" : "2000-01-23T04:56:07.000+00:00",
-      "logo" : "logo",
       "availableToInvest" : 5.962133916683182,
       "personalDetails" : {
         "isReinvest" : true,
+        "isAutoJoin" : true,
         "isOwnAsset" : true,
         "isFavorite" : true
       },
-      "currency" : { },
+      "currency" : "Undefined",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "levelProgress" : 6.027456183070403,
       "investorsCount" : 5,
@@ -2021,207 +1613,106 @@ open class DashboardAPI {
     } ]
   },
   "managers" : {
-    "total" : 7,
+    "total" : 4,
     "items" : [ {
       "socialLinks" : [ {
         "name" : "name",
-        "logo" : "logo",
-        "type" : { },
+        "type" : "Undefined",
         "value" : "value",
-        "url" : "url"
+        "url" : "url",
+        "logoUrl" : "logoUrl"
       }, {
         "name" : "name",
-        "logo" : "logo",
-        "type" : { },
+        "type" : "Undefined",
         "value" : "value",
-        "url" : "url"
+        "url" : "url",
+        "logoUrl" : "logoUrl"
       } ],
       "assets" : [ "assets", "assets" ],
+      "followers" : 7,
+      "following" : 1,
       "about" : "about",
       "regDate" : "2000-01-23T04:56:07.000+00:00",
+      "personalDetails" : {
+        "isFollow" : true,
+        "canCommentPosts" : true,
+        "canWritePost" : true,
+        "canFollow" : true
+      },
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "avatar" : "avatar",
+      "logoUrl" : "logoUrl",
       "url" : "url",
       "username" : "username"
     }, {
       "socialLinks" : [ {
         "name" : "name",
-        "logo" : "logo",
-        "type" : { },
+        "type" : "Undefined",
         "value" : "value",
-        "url" : "url"
+        "url" : "url",
+        "logoUrl" : "logoUrl"
       }, {
         "name" : "name",
-        "logo" : "logo",
-        "type" : { },
+        "type" : "Undefined",
         "value" : "value",
-        "url" : "url"
+        "url" : "url",
+        "logoUrl" : "logoUrl"
       } ],
       "assets" : [ "assets", "assets" ],
+      "followers" : 7,
+      "following" : 1,
       "about" : "about",
       "regDate" : "2000-01-23T04:56:07.000+00:00",
+      "personalDetails" : {
+        "isFollow" : true,
+        "canCommentPosts" : true,
+        "canWritePost" : true,
+        "canFollow" : true
+      },
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "avatar" : "avatar",
+      "logoUrl" : "logoUrl",
       "url" : "url",
       "username" : "username"
     } ]
   }
 }}]
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter currency: (query)  (optional)
-     - parameter take: (query)  (optional)
-     - parameter onlyFollows: (query)  (optional, default to false)
+     - parameter currency: (query)  (optional)     - parameter take: (query)  (optional)     - parameter onlyFollows: (query)  (optional, default to false)
 
      - returns: RequestBuilder<CommonPublicAssetsViewModel> 
      */
-    open class func getRecommendationsWithRequestBuilder(authorization: String, currency: Currency_getRecommendations? = nil, take: Int? = nil, onlyFollows: Bool? = nil) -> RequestBuilder<CommonPublicAssetsViewModel> {
+    open class func getRecommendationsWithRequestBuilder(currency: Currency? = nil, take: Int? = nil, onlyFollows: Bool? = nil) -> RequestBuilder<CommonPublicAssetsViewModel> {
         let path = "/v2.0/dashboard/recommendations"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "currency": currency?.rawValue, 
-            "take": take?.encodeToJSON(), 
-            "onlyFollows": onlyFollows
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "currency": currency, 
+                        "take": take?.encodeToJSON(), 
+                        "onlyFollows": onlyFollows
         ])
-        
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<CommonPublicAssetsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
-     * enum for parameter currency
-     */
-    public enum Currency_getSummary: String { 
-        case usd = "USD"
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case eur = "EUR"
-    }
-
-    /**
-
-     - parameter authorization: (header) JWT access token 
-     - parameter currency: (query)  (optional)
+     - parameter currency: (query)  (optional)     - parameter eventsTake: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getSummary(authorization: String, currency: Currency_getSummary? = nil, completion: @escaping ((_ data: DashboardSummary?,_ error: Error?) -> Void)) {
-        getSummaryWithRequestBuilder(authorization: authorization, currency: currency).execute { (response, error) -> Void in
-            completion(response?.body, error);
-        }
-    }
-
-
-    /**
-     - GET /v2.0/dashboard/summary
-     - examples: [{contentType=application/json, example={
-  "trading" : 6.027456183070403,
-  "profits" : {
-    "week" : {
-      "profitPercent" : 5.637376656633329,
-      "profit" : 5.962133916683182
-    },
-    "month" : {
-      "profitPercent" : 5.637376656633329,
-      "profit" : 5.962133916683182
-    },
-    "day" : {
-      "profitPercent" : 5.637376656633329,
-      "profit" : 5.962133916683182
-    }
-  },
-  "total" : 5.962133916683182,
-  "wallets" : 1.4658129805029452,
-  "invested" : 0.8008281904610115
-}}]
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter currency: (query)  (optional)
-
-     - returns: RequestBuilder<DashboardSummary> 
-     */
-    open class func getSummaryWithRequestBuilder(authorization: String, currency: Currency_getSummary? = nil) -> RequestBuilder<DashboardSummary> {
-        let path = "/v2.0/dashboard/summary"
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "currency": currency?.rawValue
-        ])
-        
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
-
-        let requestBuilder: RequestBuilder<DashboardSummary>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
-    }
-
-    /**
-     * enum for parameter currency
-     */
-    public enum Currency_getTradingDetails: String { 
-        case usd = "USD"
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case eur = "EUR"
-    }
-
-    /**
-
-     - parameter authorization: (header) JWT access token 
-     - parameter currency: (query)  (optional)
-     - parameter eventsTake: (query)  (optional)
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func getTradingDetails(authorization: String, currency: Currency_getTradingDetails? = nil, eventsTake: Int? = nil, completion: @escaping ((_ data: DashboardTradingDetails?,_ error: Error?) -> Void)) {
-        getTradingDetailsWithRequestBuilder(authorization: authorization, currency: currency, eventsTake: eventsTake).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getTradingDetails(currency: Currency? = nil, eventsTake: Int? = nil, completion: @escaping ((_ data: DashboardTradingDetails?,_ error: Error?) -> Void)) {
+        getTradingDetailsWithRequestBuilder(currency: currency, eventsTake: eventsTake).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
 
     /**
      - GET /v2.0/dashboard/trading
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "profits" : {
-    "week" : {
-      "profitPercent" : 5.637376656633329,
-      "profit" : 5.962133916683182
-    },
-    "month" : {
-      "profitPercent" : 5.637376656633329,
-      "profit" : 5.962133916683182
-    },
     "day" : {
       "profitPercent" : 5.637376656633329,
       "profit" : 5.962133916683182
@@ -2240,40 +1731,35 @@ open class DashboardAPI {
           "levelProgress" : 6.027456183070403
         },
         "color" : "color",
-        "logo" : "logo",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "title" : "title",
+        "logoUrl" : "logoUrl",
         "url" : "url",
-        "assetType" : { }
+        "assetType" : "None"
       },
       "amount" : 2.3021358869347655,
       "feesInfo" : [ {
         "amount" : 9.301444243932576,
         "description" : "description",
-        "currency" : null,
         "title" : "title",
-        "type" : { }
+        "type" : "Undefined"
       }, {
         "amount" : 9.301444243932576,
         "description" : "description",
-        "currency" : null,
         "title" : "title",
-        "type" : { }
+        "type" : "Undefined"
       } ],
-      "icon" : "icon",
-      "changeState" : { },
+      "changeState" : "NotChanged",
       "extendedInfo" : [ {
         "amount" : 7.061401241503109,
-        "currency" : { },
         "title" : "title"
       }, {
         "amount" : 7.061401241503109,
-        "currency" : { },
         "title" : "title"
       } ],
-      "currency" : "USD",
+      "currency" : "Undefined",
       "title" : "title",
-      "totalFeesCurrency" : "USD",
+      "logoUrl" : "logoUrl",
       "totalFeesAmount" : 3.616076749251911
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
@@ -2283,70 +1769,56 @@ open class DashboardAPI {
           "levelProgress" : 6.027456183070403
         },
         "color" : "color",
-        "logo" : "logo",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "title" : "title",
+        "logoUrl" : "logoUrl",
         "url" : "url",
-        "assetType" : { }
+        "assetType" : "None"
       },
       "amount" : 2.3021358869347655,
       "feesInfo" : [ {
         "amount" : 9.301444243932576,
         "description" : "description",
-        "currency" : null,
         "title" : "title",
-        "type" : { }
+        "type" : "Undefined"
       }, {
         "amount" : 9.301444243932576,
         "description" : "description",
-        "currency" : null,
         "title" : "title",
-        "type" : { }
+        "type" : "Undefined"
       } ],
-      "icon" : "icon",
-      "changeState" : { },
+      "changeState" : "NotChanged",
       "extendedInfo" : [ {
         "amount" : 7.061401241503109,
-        "currency" : { },
         "title" : "title"
       }, {
         "amount" : 7.061401241503109,
-        "currency" : { },
         "title" : "title"
       } ],
-      "currency" : "USD",
+      "currency" : "Undefined",
       "title" : "title",
-      "totalFeesCurrency" : "USD",
+      "logoUrl" : "logoUrl",
       "totalFeesAmount" : 3.616076749251911
     } ]
   }
 }}]
-     
-     - parameter authorization: (header) JWT access token 
-     - parameter currency: (query)  (optional)
-     - parameter eventsTake: (query)  (optional)
+     - parameter currency: (query)  (optional)     - parameter eventsTake: (query)  (optional)
 
      - returns: RequestBuilder<DashboardTradingDetails> 
      */
-    open class func getTradingDetailsWithRequestBuilder(authorization: String, currency: Currency_getTradingDetails? = nil, eventsTake: Int? = nil) -> RequestBuilder<DashboardTradingDetails> {
+    open class func getTradingDetailsWithRequestBuilder(currency: Currency? = nil, eventsTake: Int? = nil) -> RequestBuilder<DashboardTradingDetails> {
         let path = "/v2.0/dashboard/trading"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "currency": currency?.rawValue, 
-            "eventsTake": eventsTake?.encodeToJSON()
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "currency": currency, 
+                        "eventsTake": eventsTake?.encodeToJSON()
         ])
-        
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<DashboardTradingDetails>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
 }

@@ -8,33 +8,12 @@
 import Foundation
 
 
+public struct WalletMultiAvailable: Codable {
 
-open class WalletMultiAvailable: Codable {
 
     public var wallets: [WalletBaseData]?
-
-
-    
-    public init(wallets: [WalletBaseData]?) {
+    public init(wallets: [WalletBaseData]? = nil) { 
         self.wallets = wallets
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(wallets, forKey: "wallets")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        wallets = try container.decodeIfPresent([WalletBaseData].self, forKey: "wallets")
-    }
 }
-

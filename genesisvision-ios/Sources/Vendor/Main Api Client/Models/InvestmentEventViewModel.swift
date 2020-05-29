@@ -8,56 +8,33 @@
 import Foundation
 
 
+public struct InvestmentEventViewModel: Codable {
 
-open class InvestmentEventViewModel: Codable {
 
-    public enum Currency: String, Codable { 
-        case usd = "USD"
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case eur = "EUR"
-    }
-    public enum TotalFeesCurrency: String, Codable { 
-        case usd = "USD"
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case eur = "EUR"
-    }
     public var title: String?
-    public var icon: String?
+
+    public var logoUrl: String?
+
     public var date: Date?
+
     public var assetDetails: AssetDetails?
+
     public var amount: Double?
+
     public var currency: Currency?
+
     public var changeState: ChangeState?
+
     public var extendedInfo: [InvestmentEventItemViewModel]?
+
     public var feesInfo: [FeeDetails]?
+
     public var totalFeesAmount: Double?
-    public var totalFeesCurrency: TotalFeesCurrency?
 
-
-    
-    public init(title: String?, icon: String?, date: Date?, assetDetails: AssetDetails?, amount: Double?, currency: Currency?, changeState: ChangeState?, extendedInfo: [InvestmentEventItemViewModel]?, feesInfo: [FeeDetails]?, totalFeesAmount: Double?, totalFeesCurrency: TotalFeesCurrency?) {
+    public var totalFeesCurrency: Currency?
+    public init(title: String? = nil, logoUrl: String? = nil, date: Date? = nil, assetDetails: AssetDetails? = nil, amount: Double? = nil, currency: Currency? = nil, changeState: ChangeState? = nil, extendedInfo: [InvestmentEventItemViewModel]? = nil, feesInfo: [FeeDetails]? = nil, totalFeesAmount: Double? = nil, totalFeesCurrency: Currency? = nil) { 
         self.title = title
-        self.icon = icon
+        self.logoUrl = logoUrl
         self.date = date
         self.assetDetails = assetDetails
         self.amount = amount
@@ -68,43 +45,5 @@ open class InvestmentEventViewModel: Codable {
         self.totalFeesAmount = totalFeesAmount
         self.totalFeesCurrency = totalFeesCurrency
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(title, forKey: "title")
-        try container.encodeIfPresent(icon, forKey: "icon")
-        try container.encodeIfPresent(date, forKey: "date")
-        try container.encodeIfPresent(assetDetails, forKey: "assetDetails")
-        try container.encodeIfPresent(amount, forKey: "amount")
-        try container.encodeIfPresent(currency, forKey: "currency")
-        try container.encodeIfPresent(changeState, forKey: "changeState")
-        try container.encodeIfPresent(extendedInfo, forKey: "extendedInfo")
-        try container.encodeIfPresent(feesInfo, forKey: "feesInfo")
-        try container.encodeIfPresent(totalFeesAmount, forKey: "totalFeesAmount")
-        try container.encodeIfPresent(totalFeesCurrency, forKey: "totalFeesCurrency")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        title = try container.decodeIfPresent(String.self, forKey: "title")
-        icon = try container.decodeIfPresent(String.self, forKey: "icon")
-        date = try container.decodeIfPresent(Date.self, forKey: "date")
-        assetDetails = try container.decodeIfPresent(AssetDetails.self, forKey: "assetDetails")
-        amount = try container.decodeIfPresent(Double.self, forKey: "amount")
-        currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
-        changeState = try container.decodeIfPresent(ChangeState.self, forKey: "changeState")
-        extendedInfo = try container.decodeIfPresent([InvestmentEventItemViewModel].self, forKey: "extendedInfo")
-        feesInfo = try container.decodeIfPresent([FeeDetails].self, forKey: "feesInfo")
-        totalFeesAmount = try container.decodeIfPresent(Double.self, forKey: "totalFeesAmount")
-        totalFeesCurrency = try container.decodeIfPresent(TotalFeesCurrency.self, forKey: "totalFeesCurrency")
-    }
 }
-

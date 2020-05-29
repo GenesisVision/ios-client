@@ -13,14 +13,12 @@ import Alamofire
 open class RateAPI {
     /**
      Get rate
-     
-     - parameter from: (path)  
-     - parameter to: (path)  
+     - parameter from: (path)       - parameter to: (path)  
      - parameter completion: completion handler to receive the data and the error objects
      */
     open class func getRate(from: String, to: String, completion: @escaping ((_ data: RateModel?,_ error: Error?) -> Void)) {
         getRateWithRequestBuilder(from: from, to: to).execute { (response, error) -> Void in
-            completion(response?.body, error);
+            completion(response?.body, error)
         }
     }
 
@@ -28,24 +26,28 @@ open class RateAPI {
     /**
      Get rate
      - GET /v2.0/rate/{from}/{to}
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "rate" : 0.8008281904610115
 }}]
-     
-     - parameter from: (path)  
-     - parameter to: (path)  
+     - parameter from: (path)       - parameter to: (path)  
 
      - returns: RequestBuilder<RateModel> 
      */
     open class func getRateWithRequestBuilder(from: String, to: String) -> RequestBuilder<RateModel> {
         var path = "/v2.0/rate/{from}/{to}"
-        path = path.replacingOccurrences(of: "{from}", with: "\(from)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{to}", with: "\(to)", options: .literal, range: nil)
+        let fromPreEscape = "\(from)"
+        let fromPostEscape = fromPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{from}", with: fromPostEscape, options: .literal, range: nil)
+        let toPreEscape = "\(to)"
+        let toPostEscape = toPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{to}", with: toPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
-        let url = NSURLComponents(string: URLString)
-
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<RateModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
@@ -54,15 +56,12 @@ open class RateAPI {
 
     /**
      Get rate by exchange
-     
-     - parameter exchange: (path)  
-     - parameter from: (path)  
-     - parameter to: (path)  
+     - parameter exchange: (path)       - parameter from: (path)       - parameter to: (path)  
      - parameter completion: completion handler to receive the data and the error objects
      */
     open class func getRateExchange(exchange: String, from: String, to: String, completion: @escaping ((_ data: RateModel?,_ error: Error?) -> Void)) {
         getRateExchangeWithRequestBuilder(exchange: exchange, from: from, to: to).execute { (response, error) -> Void in
-            completion(response?.body, error);
+            completion(response?.body, error)
         }
     }
 
@@ -70,26 +69,31 @@ open class RateAPI {
     /**
      Get rate by exchange
      - GET /v2.0/rate/{exchange}/{from}/{to}
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "rate" : 0.8008281904610115
 }}]
-     
-     - parameter exchange: (path)  
-     - parameter from: (path)  
-     - parameter to: (path)  
+     - parameter exchange: (path)       - parameter from: (path)       - parameter to: (path)  
 
      - returns: RequestBuilder<RateModel> 
      */
     open class func getRateExchangeWithRequestBuilder(exchange: String, from: String, to: String) -> RequestBuilder<RateModel> {
         var path = "/v2.0/rate/{exchange}/{from}/{to}"
-        path = path.replacingOccurrences(of: "{exchange}", with: "\(exchange)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{from}", with: "\(from)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{to}", with: "\(to)", options: .literal, range: nil)
+        let exchangePreEscape = "\(exchange)"
+        let exchangePostEscape = exchangePreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{exchange}", with: exchangePostEscape, options: .literal, range: nil)
+        let fromPreEscape = "\(from)"
+        let fromPostEscape = fromPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{from}", with: fromPostEscape, options: .literal, range: nil)
+        let toPreEscape = "\(to)"
+        let toPostEscape = toPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{to}", with: toPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
-        let url = NSURLComponents(string: URLString)
-
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<RateModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
@@ -98,14 +102,12 @@ open class RateAPI {
 
     /**
      Get rates
-     
-     - parameter from: (query)  (optional)
-     - parameter to: (query)  (optional)
+     - parameter from: (query)  (optional)     - parameter to: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
     open class func getRates(from: [String]? = nil, to: [String]? = nil, completion: @escaping ((_ data: RatesModel?,_ error: Error?) -> Void)) {
         getRatesWithRequestBuilder(from: from, to: to).execute { (response, error) -> Void in
-            completion(response?.body, error);
+            completion(response?.body, error)
         }
     }
 
@@ -113,104 +115,21 @@ open class RateAPI {
     /**
      Get rates
      - GET /v2.0/rate
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "rates" : {
-    "Undefined" : [ {
+    "key" : [ {
       "rate" : 0.8008281904610115,
-      "currency" : { }
+      "currency" : "Undefined"
     }, {
       "rate" : 0.8008281904610115,
-      "currency" : { }
-    } ],
-    "EUR" : [ {
-      "rate" : 0.8008281904610115,
-      "currency" : { }
-    }, {
-      "rate" : 0.8008281904610115,
-      "currency" : { }
-    } ],
-    "GVT" : [ {
-      "rate" : 0.8008281904610115,
-      "currency" : { }
-    }, {
-      "rate" : 0.8008281904610115,
-      "currency" : { }
-    } ],
-    "BCH" : [ {
-      "rate" : 0.8008281904610115,
-      "currency" : { }
-    }, {
-      "rate" : 0.8008281904610115,
-      "currency" : { }
-    } ],
-    "USD" : [ {
-      "rate" : 0.8008281904610115,
-      "currency" : { }
-    }, {
-      "rate" : 0.8008281904610115,
-      "currency" : { }
-    } ],
-    "USDT" : [ {
-      "rate" : 0.8008281904610115,
-      "currency" : { }
-    }, {
-      "rate" : 0.8008281904610115,
-      "currency" : { }
-    } ],
-    "DOGE" : [ {
-      "rate" : 0.8008281904610115,
-      "currency" : { }
-    }, {
-      "rate" : 0.8008281904610115,
-      "currency" : { }
-    } ],
-    "BTC" : [ {
-      "rate" : 0.8008281904610115,
-      "currency" : { }
-    }, {
-      "rate" : 0.8008281904610115,
-      "currency" : { }
-    } ],
-    "XRP" : [ {
-      "rate" : 0.8008281904610115,
-      "currency" : { }
-    }, {
-      "rate" : 0.8008281904610115,
-      "currency" : { }
-    } ],
-    "BNB" : [ {
-      "rate" : 0.8008281904610115,
-      "currency" : { }
-    }, {
-      "rate" : 0.8008281904610115,
-      "currency" : { }
-    } ],
-    "ETH" : [ {
-      "rate" : 0.8008281904610115,
-      "currency" : { }
-    }, {
-      "rate" : 0.8008281904610115,
-      "currency" : { }
-    } ],
-    "LTC" : [ {
-      "rate" : 0.8008281904610115,
-      "currency" : { }
-    }, {
-      "rate" : 0.8008281904610115,
-      "currency" : { }
-    } ],
-    "ADA" : [ {
-      "rate" : 0.8008281904610115,
-      "currency" : { }
-    }, {
-      "rate" : 0.8008281904610115,
-      "currency" : { }
+      "currency" : "Undefined"
     } ]
   }
 }}]
-     
-     - parameter from: (query)  (optional)
-     - parameter to: (query)  (optional)
+     - parameter from: (query)  (optional)     - parameter to: (query)  (optional)
 
      - returns: RequestBuilder<RatesModel> 
      */
@@ -218,13 +137,11 @@ open class RateAPI {
         let path = "/v2.0/rate"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "from": from, 
-            "to": to
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "from": from, 
+                        "to": to
         ])
-        
 
         let requestBuilder: RequestBuilder<RatesModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 

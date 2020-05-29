@@ -7,10 +7,8 @@
 
 import Foundation
 
-
 public enum PeriodStatus: String, Codable {
     case planned = "Planned"
     case inProccess = "InProccess"
     case closed = "Closed"
-
 }

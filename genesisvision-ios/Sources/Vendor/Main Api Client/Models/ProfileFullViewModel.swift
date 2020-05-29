@@ -8,34 +8,58 @@
 import Foundation
 
 
+public struct ProfileFullViewModel: Codable {
 
-open class ProfileFullViewModel: Codable {
 
-    public var id: UUID?
+    public var _id: UUID?
+
     public var email: String?
+
     public var firstName: String?
+
     public var middleName: String?
+
     public var lastName: String?
+
     public var country: String?
+
     public var city: String?
+
     public var address: String?
+
     public var phone: String?
+
     public var phoneNumberConfirmed: Bool?
+
     public var birthday: Date?
+
     public var gender: Bool?
-    public var avatar: String?
+
+    public var logoUrl: String?
+
     public var about: String?
+
     public var userName: String?
+
     public var index: String?
+
     public var citizenship: String?
+
     public var refUrl: String?
+
     public var verificationStatus: UserVerificationStatus?
+
     public var isPublicInvestor: Bool?
 
+    public var platformCurrency: Currency?
 
-    
-    public init(id: UUID?, email: String?, firstName: String?, middleName: String?, lastName: String?, country: String?, city: String?, address: String?, phone: String?, phoneNumberConfirmed: Bool?, birthday: Date?, gender: Bool?, avatar: String?, about: String?, userName: String?, index: String?, citizenship: String?, refUrl: String?, verificationStatus: UserVerificationStatus?, isPublicInvestor: Bool?) {
-        self.id = id
+    public var whoCanPostToMayWall: SocialViewMode?
+
+    public var whoCanCommentOnMyPosts: SocialViewMode?
+
+    public var whoCanViewCommentsOnMyPosts: SocialViewMode?
+    public init(_id: UUID? = nil, email: String? = nil, firstName: String? = nil, middleName: String? = nil, lastName: String? = nil, country: String? = nil, city: String? = nil, address: String? = nil, phone: String? = nil, phoneNumberConfirmed: Bool? = nil, birthday: Date? = nil, gender: Bool? = nil, logoUrl: String? = nil, about: String? = nil, userName: String? = nil, index: String? = nil, citizenship: String? = nil, refUrl: String? = nil, verificationStatus: UserVerificationStatus? = nil, isPublicInvestor: Bool? = nil, platformCurrency: Currency? = nil, whoCanPostToMayWall: SocialViewMode? = nil, whoCanCommentOnMyPosts: SocialViewMode? = nil, whoCanViewCommentsOnMyPosts: SocialViewMode? = nil) { 
+        self._id = _id
         self.email = email
         self.firstName = firstName
         self.middleName = middleName
@@ -47,7 +71,7 @@ open class ProfileFullViewModel: Codable {
         self.phoneNumberConfirmed = phoneNumberConfirmed
         self.birthday = birthday
         self.gender = gender
-        self.avatar = avatar
+        self.logoUrl = logoUrl
         self.about = about
         self.userName = userName
         self.index = index
@@ -55,62 +79,36 @@ open class ProfileFullViewModel: Codable {
         self.refUrl = refUrl
         self.verificationStatus = verificationStatus
         self.isPublicInvestor = isPublicInvestor
+        self.platformCurrency = platformCurrency
+        self.whoCanPostToMayWall = whoCanPostToMayWall
+        self.whoCanCommentOnMyPosts = whoCanCommentOnMyPosts
+        self.whoCanViewCommentsOnMyPosts = whoCanViewCommentsOnMyPosts
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(id, forKey: "id")
-        try container.encodeIfPresent(email, forKey: "email")
-        try container.encodeIfPresent(firstName, forKey: "firstName")
-        try container.encodeIfPresent(middleName, forKey: "middleName")
-        try container.encodeIfPresent(lastName, forKey: "lastName")
-        try container.encodeIfPresent(country, forKey: "country")
-        try container.encodeIfPresent(city, forKey: "city")
-        try container.encodeIfPresent(address, forKey: "address")
-        try container.encodeIfPresent(phone, forKey: "phone")
-        try container.encodeIfPresent(phoneNumberConfirmed, forKey: "phoneNumberConfirmed")
-        try container.encodeIfPresent(birthday, forKey: "birthday")
-        try container.encodeIfPresent(gender, forKey: "gender")
-        try container.encodeIfPresent(avatar, forKey: "avatar")
-        try container.encodeIfPresent(about, forKey: "about")
-        try container.encodeIfPresent(userName, forKey: "userName")
-        try container.encodeIfPresent(index, forKey: "index")
-        try container.encodeIfPresent(citizenship, forKey: "citizenship")
-        try container.encodeIfPresent(refUrl, forKey: "refUrl")
-        try container.encodeIfPresent(verificationStatus, forKey: "verificationStatus")
-        try container.encodeIfPresent(isPublicInvestor, forKey: "isPublicInvestor")
+    public enum CodingKeys: String, CodingKey { 
+        case _id = "id"
+        case email
+        case firstName
+        case middleName
+        case lastName
+        case country
+        case city
+        case address
+        case phone
+        case phoneNumberConfirmed
+        case birthday
+        case gender
+        case logoUrl
+        case about
+        case userName
+        case index
+        case citizenship
+        case refUrl
+        case verificationStatus
+        case isPublicInvestor
+        case platformCurrency
+        case whoCanPostToMayWall
+        case whoCanCommentOnMyPosts
+        case whoCanViewCommentsOnMyPosts
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        id = try container.decodeIfPresent(UUID.self, forKey: "id")
-        email = try container.decodeIfPresent(String.self, forKey: "email")
-        firstName = try container.decodeIfPresent(String.self, forKey: "firstName")
-        middleName = try container.decodeIfPresent(String.self, forKey: "middleName")
-        lastName = try container.decodeIfPresent(String.self, forKey: "lastName")
-        country = try container.decodeIfPresent(String.self, forKey: "country")
-        city = try container.decodeIfPresent(String.self, forKey: "city")
-        address = try container.decodeIfPresent(String.self, forKey: "address")
-        phone = try container.decodeIfPresent(String.self, forKey: "phone")
-        phoneNumberConfirmed = try container.decodeIfPresent(Bool.self, forKey: "phoneNumberConfirmed")
-        birthday = try container.decodeIfPresent(Date.self, forKey: "birthday")
-        gender = try container.decodeIfPresent(Bool.self, forKey: "gender")
-        avatar = try container.decodeIfPresent(String.self, forKey: "avatar")
-        about = try container.decodeIfPresent(String.self, forKey: "about")
-        userName = try container.decodeIfPresent(String.self, forKey: "userName")
-        index = try container.decodeIfPresent(String.self, forKey: "index")
-        citizenship = try container.decodeIfPresent(String.self, forKey: "citizenship")
-        refUrl = try container.decodeIfPresent(String.self, forKey: "refUrl")
-        verificationStatus = try container.decodeIfPresent(UserVerificationStatus.self, forKey: "verificationStatus")
-        isPublicInvestor = try container.decodeIfPresent(Bool.self, forKey: "isPublicInvestor")
-    }
 }
-

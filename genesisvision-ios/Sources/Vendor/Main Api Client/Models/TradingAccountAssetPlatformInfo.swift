@@ -8,33 +8,15 @@
 import Foundation
 
 
+public struct TradingAccountAssetPlatformInfo: Codable {
 
-open class TradingAccountAssetPlatformInfo: Codable {
 
     public var minAmounts: [TradingAccountMinCreateAmount]?
 
-
-    
-    public init(minAmounts: [TradingAccountMinCreateAmount]?) {
+    public var maxAmounts: [TradingAccountMaxCreateAmount]?
+    public init(minAmounts: [TradingAccountMinCreateAmount]? = nil, maxAmounts: [TradingAccountMaxCreateAmount]? = nil) { 
         self.minAmounts = minAmounts
-    }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(minAmounts, forKey: "minAmounts")
+        self.maxAmounts = maxAmounts
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        minAmounts = try container.decodeIfPresent([TradingAccountMinCreateAmount].self, forKey: "minAmounts")
-    }
 }
-

@@ -8,73 +8,55 @@
 import Foundation
 
 
+public struct NotificationViewModel: Codable {
 
-open class NotificationViewModel: Codable {
 
-    public var id: UUID?
+    public var _id: UUID?
+
     public var text: String?
+
     public var date: Date?
+
     public var type: NotificationType?
+
     public var assetId: UUID?
+
     public var managerId: UUID?
-    public var logo: String?
+
+    public var logoUrl: String?
+
     public var url: String?
+
     public var color: String?
+
     public var isUnread: Bool?
+
     public var assetType: InvestmentProgramType?
-
-
-    
-    public init(id: UUID?, text: String?, date: Date?, type: NotificationType?, assetId: UUID?, managerId: UUID?, logo: String?, url: String?, color: String?, isUnread: Bool?, assetType: InvestmentProgramType?) {
-        self.id = id
+    public init(_id: UUID? = nil, text: String? = nil, date: Date? = nil, type: NotificationType? = nil, assetId: UUID? = nil, managerId: UUID? = nil, logoUrl: String? = nil, url: String? = nil, color: String? = nil, isUnread: Bool? = nil, assetType: InvestmentProgramType? = nil) { 
+        self._id = _id
         self.text = text
         self.date = date
         self.type = type
         self.assetId = assetId
         self.managerId = managerId
-        self.logo = logo
+        self.logoUrl = logoUrl
         self.url = url
         self.color = color
         self.isUnread = isUnread
         self.assetType = assetType
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(id, forKey: "id")
-        try container.encodeIfPresent(text, forKey: "text")
-        try container.encodeIfPresent(date, forKey: "date")
-        try container.encodeIfPresent(type, forKey: "type")
-        try container.encodeIfPresent(assetId, forKey: "assetId")
-        try container.encodeIfPresent(managerId, forKey: "managerId")
-        try container.encodeIfPresent(logo, forKey: "logo")
-        try container.encodeIfPresent(url, forKey: "url")
-        try container.encodeIfPresent(color, forKey: "color")
-        try container.encodeIfPresent(isUnread, forKey: "isUnread")
-        try container.encodeIfPresent(assetType, forKey: "assetType")
+    public enum CodingKeys: String, CodingKey { 
+        case _id = "id"
+        case text
+        case date
+        case type
+        case assetId
+        case managerId
+        case logoUrl
+        case url
+        case color
+        case isUnread
+        case assetType
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        id = try container.decodeIfPresent(UUID.self, forKey: "id")
-        text = try container.decodeIfPresent(String.self, forKey: "text")
-        date = try container.decodeIfPresent(Date.self, forKey: "date")
-        type = try container.decodeIfPresent(NotificationType.self, forKey: "type")
-        assetId = try container.decodeIfPresent(UUID.self, forKey: "assetId")
-        managerId = try container.decodeIfPresent(UUID.self, forKey: "managerId")
-        logo = try container.decodeIfPresent(String.self, forKey: "logo")
-        url = try container.decodeIfPresent(String.self, forKey: "url")
-        color = try container.decodeIfPresent(String.self, forKey: "color")
-        isUnread = try container.decodeIfPresent(Bool.self, forKey: "isUnread")
-        assetType = try container.decodeIfPresent(InvestmentProgramType.self, forKey: "assetType")
-    }
 }
-

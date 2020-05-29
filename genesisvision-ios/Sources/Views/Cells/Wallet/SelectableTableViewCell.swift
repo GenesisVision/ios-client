@@ -51,9 +51,9 @@ class SelectableTableViewCell: UITableViewCell {
     
     // MARK: - Public methods
     func configure(_ model: WalletWithdrawalInfo? = nil, selected: Bool) {
-        setTitle(model?.description)
+        setTitle(model?._description)
         setSubtitle(model?.currency?.rawValue)
-        setImage(model?.logo)
+        setImage(model?.logoUrl)
         
         changeSelected(selected)
     }
@@ -61,7 +61,7 @@ class SelectableTableViewCell: UITableViewCell {
     func configure(_ model: WalletData? = nil, selected: Bool) {
         setTitle(model?.title)
         setSubtitle(model?.currency?.rawValue)
-        setImage(model?.logo)
+        setImage(model?.logoUrl)
         
         changeSelected(selected)
     }
@@ -69,7 +69,7 @@ class SelectableTableViewCell: UITableViewCell {
     func configure(_ model: TradingAccountDetails? = nil, selected: Bool) {
         setTitle(model?.login)
         setSubtitle(model?.currency?.rawValue)
-        setImage(model?.asset?.logo)
+        setImage(model?.asset?.logoUrl)
 
         changeSelected(selected)
     }

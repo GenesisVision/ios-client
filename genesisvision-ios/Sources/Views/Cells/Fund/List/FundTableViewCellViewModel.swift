@@ -10,7 +10,7 @@ import Foundation
 import Kingfisher
 
 struct ProgramTableViewCellViewModel {
-    let asset: ProgramDetailsListItem
+    var asset: ProgramDetailsListItem
     weak var filterProtocol: FilterChangedProtocol?
     weak var favoriteProtocol: FavoriteStateChangeProtocol?
 }
@@ -22,7 +22,7 @@ extension ProgramTableViewCellViewModel: CellViewModel {
 }
 
 struct FundTableViewCellViewModel {
-    let asset: FundDetailsListItem
+    var asset: FundDetailsListItem
     weak var filterProtocol: FilterChangedProtocol?
     weak var favoriteProtocol: FavoriteStateChangeProtocol?
 }
@@ -34,7 +34,7 @@ extension FundTableViewCellViewModel: CellViewModel {
 }
 
 struct FollowTableViewCellViewModel {
-    let asset: FollowDetailsListItem
+    var asset: FollowDetailsListItem
     weak var filterProtocol: FilterChangedProtocol?
     weak var favoriteProtocol: FavoriteStateChangeProtocol?
 }

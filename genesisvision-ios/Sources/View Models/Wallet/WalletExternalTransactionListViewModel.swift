@@ -163,7 +163,7 @@ extension WalletExternalTransactionListViewModel {
     /// Save [WalletTransaction] and total -> Return [WalletTransactionTableViewCellViewModel] or error
     private func fetchTransactions(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [WalletTransactionTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
 
-        let currency = WalletAPI.Currency_getTransactionsExternal(rawValue: wallet?.currency?.rawValue ?? "")
+        let currency = Currency(rawValue: wallet?.currency?.rawValue ?? "")
         
         WalletDataProvider.getExternalTransactions(currency: currency, skip: skip, take: take, completion: { (transactionsViewModel) in
             guard transactionsViewModel != nil else {
@@ -188,7 +188,7 @@ extension WalletExternalTransactionListViewModel {
 extension WalletExternalTransactionListViewModel {
     func showDetail(at indexPath: IndexPath) {
         guard let model: WalletTransactionTableViewCellViewModel = model(for: indexPath) as? WalletTransactionTableViewCellViewModel,
-            let assetId = model.walletTransaction.asset?.id?.uuidString,
+            let assetId = model.walletTransaction.asset?._id?.uuidString,
             let assetType = model.walletTransaction.asset?.assetType
             else { return }
 

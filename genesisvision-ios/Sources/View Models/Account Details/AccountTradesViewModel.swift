@@ -184,7 +184,7 @@ extension AccountTradesViewModel {
         let sorting = sortingDelegateManager.manager?.getSelectedSorting()
         
         if isOpenTrades {
-            AccountsDataProvider.getTradesOpen(with: assetId, sorting: sorting as? TradingaccountAPI.Sorting_getOpenTrades, skip: skip, take: take, completion: { [weak self] (tradesViewModel) in
+            AccountsDataProvider.getTradesOpen(with: assetId, sorting: sorting as? TradeSorting, skip: skip, take: take, completion: { [weak self] (tradesViewModel) in
                 guard tradesViewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completionError)
                 }
@@ -200,7 +200,7 @@ extension AccountTradesViewModel {
                 completionSuccess(totalCount, viewModels)
             }, errorCompletion: completionError)
         } else {
-            AccountsDataProvider.getTrades(with: assetId, dateFrom: dateFrom, dateTo: dateTo, sorting: sorting as? TradingaccountAPI.Sorting_getTrades, skip: skip, take: take, completion: { [weak self] (tradesViewModel) in
+            AccountsDataProvider.getTrades(with: assetId, dateFrom: dateFrom, dateTo: dateTo, sorting: sorting as? TradeSorting, skip: skip, take: take, completion: { [weak self] (tradesViewModel) in
                 guard tradesViewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completionError)
                 }

@@ -8,37 +8,15 @@
 import Foundation
 
 
+public struct UpdateProfileViewModel: Codable {
 
-open class UpdateProfileViewModel: Codable {
 
     public var userName: String?
+
     public var about: String?
-
-
-    
-    public init(userName: String?, about: String?) {
+    public init(userName: String? = nil, about: String? = nil) { 
         self.userName = userName
         self.about = about
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(userName, forKey: "userName")
-        try container.encodeIfPresent(about, forKey: "about")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        userName = try container.decodeIfPresent(String.self, forKey: "userName")
-        about = try container.decodeIfPresent(String.self, forKey: "about")
-    }
 }
-

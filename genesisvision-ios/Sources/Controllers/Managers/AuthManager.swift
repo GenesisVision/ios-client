@@ -63,7 +63,7 @@ class AuthManager {
     static func getSavedRates(completion: @escaping (_ rates: [RateItem]?) -> Void) {
         getRates { (viewModel) in
             guard let viewModel = viewModel else { return completion(nil) }
-            completion(viewModel.rates?.GVT)
+            completion(viewModel.rates?["GVT"])
         }
     }
     
@@ -160,9 +160,8 @@ class AuthManager {
     
     // MARK: - Private methods
     private func updateApiToken(completion: @escaping CompletionBlock)  {
-        guard let token = AuthManager.authorizedToken else { return completion(.failure(errorType: .apiError(message: nil))) }
         
-        AuthAPI.updateAuthToken(authorization: token) { (token, error) in
+        AuthAPI.updateAuthToken { (token, error) in
             guard token != nil else {
                 return ErrorHandler.handleApiError(error: error, completion: completion)
             }

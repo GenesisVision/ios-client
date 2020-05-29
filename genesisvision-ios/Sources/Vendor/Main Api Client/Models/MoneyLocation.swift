@@ -8,41 +8,18 @@
 import Foundation
 
 
+public struct MoneyLocation: Codable {
 
-open class MoneyLocation: Codable {
 
     public var name: MoneyLocationType?
+
     public var percent: Double?
+
     public var color: String?
-
-
-    
-    public init(name: MoneyLocationType?, percent: Double?, color: String?) {
+    public init(name: MoneyLocationType? = nil, percent: Double? = nil, color: String? = nil) { 
         self.name = name
         self.percent = percent
         self.color = color
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(name, forKey: "name")
-        try container.encodeIfPresent(percent, forKey: "percent")
-        try container.encodeIfPresent(color, forKey: "color")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        name = try container.decodeIfPresent(MoneyLocationType.self, forKey: "name")
-        percent = try container.decodeIfPresent(Double.self, forKey: "percent")
-        color = try container.decodeIfPresent(String.self, forKey: "color")
-    }
 }
-

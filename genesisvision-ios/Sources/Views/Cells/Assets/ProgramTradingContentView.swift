@@ -58,7 +58,7 @@ extension ProgramTradingContentView: ContentViewProtocol {
     func configure(programTrading asset: DashboardTradingAsset, filterProtocol: FilterChangedProtocol?) {
         self.filterProtocol = filterProtocol
         
-        if let assetId = asset.id?.uuidString {
+        if let assetId = asset._id?.uuidString {
             self.assetId = assetId
         }
         
@@ -102,7 +102,7 @@ extension ProgramTradingContentView: ContentViewProtocol {
         }
         
         assetLogoImageView.profilePhotoImageView.image = UIImage.programPlaceholder
-        if let logo = asset.publicInfo?.logo, let fileUrl = getFileURL(fileName: logo) {
+        if let logo = asset.publicInfo?.logoUrl, let fileUrl = getFileURL(fileName: logo) {
             assetLogoImageView.profilePhotoImageView.kf.indicatorType = .activity
             assetLogoImageView.profilePhotoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
             assetLogoImageView.profilePhotoImageView.backgroundColor = .clear

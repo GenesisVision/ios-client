@@ -80,7 +80,7 @@ class CreateFundViewController: BaseModalViewController {
             viewModel?.request.title = value
         }
         if let value = stackView.descriptionView.textView.text {
-            viewModel?.request.description = value
+            viewModel?.request._description = value
         }
         if let value = stackView.exitFeeView.textField.text?.doubleValue {
             viewModel?.request.exitFee = value
@@ -233,7 +233,7 @@ extension CreateFundViewController: AddAssetListViewModelProtocol {
     func addAssets(_ assets: [PlatformAsset]?) {
         guard let assets = assets else { return }
         
-        viewModel?.request.assets = assets.map { FundAssetPart(id: $0.id, percent: $0.mandatoryFundPercent ) }
+        viewModel?.request.assets = assets.map { FundAssetPart(_id: $0._id, percent: $0.mandatoryFundPercent ) }
         viewModel?.assetCollectionViewModel.assets = assets
         stackView.updateProgressView(assets)
         stackView.assetStackView.collectionView.reloadData()
@@ -281,7 +281,7 @@ class CreateFundViewModel {
             if let wallets = walletSummary?.wallets, !wallets.isEmpty {
                 fromListViewModel = FromListViewModel(delegate, items: wallets, selectedIndex: 0)
                 fromListDataSource = TableViewDataSource(fromListViewModel)
-                request.depositWalletId = fromListViewModel?.selected()?.id
+                request.depositWalletId = fromListViewModel?.selected()?._id
             }
         }
     }
@@ -291,7 +291,7 @@ class CreateFundViewModel {
     private let errorCompletion: ((CompletionResult) -> Void) = { (result) in
        print(result)
     }
-    var request = NewFundRequest(assets: nil, entryFee: nil, exitFee: nil, depositAmount: nil, depositWalletId: nil, title: nil, description: nil, logo: nil)
+    var request = NewFundRequest(assets: nil, entryFee: nil, exitFee: nil, depositAmount: nil, depositWalletId: nil, title: nil, _description: nil, logo: nil)
     
     weak var addAssetsProtocol: AddAssetListViewModelProtocol?
     weak var delegate: BaseTableViewProtocol?
@@ -353,7 +353,7 @@ class CreateFundViewModel {
     func getRate() -> Double? {
         guard let rates = ratesModel?.rates, let fromCurrency = fromListViewModel.selected()?.currency, fromCurrency != Currency.gvt else { return nil }
         
-        let rate = rates.GVT?.first(where: { $0.currency == fromCurrency })?.rate
+        let rate = rates["GVT"]?.first(where: { $0.currency == fromCurrency })?.rate
         
         return rate != 0 ? rate : nil
     }
@@ -371,11 +371,11 @@ class CreateFundViewModel {
         return value / rate
     }
     func createFund(completion: @escaping CompletionBlock) {
-        guard let pickedImageURL = pickedImageURL else {
+        guard let pickedImage = pickedImage?.pngData() else {
             AssetsDataProvider.createFund(request, completion: completion)
             return
         }
-        saveImage(pickedImageURL) { [weak self] (result) in
+        saveImage(pickedImage) { [weak self] (result) in
             switch result {
             case .success:
                 AssetsDataProvider.createFund(self?.request, completion: completion)
@@ -387,14 +387,14 @@ class CreateFundViewModel {
     }
     
     func updateWallet(_ index: Int) {
-        request.depositWalletId = fromListViewModel?.selected()?.id
+        request.depositWalletId = fromListViewModel?.selected()?._id
         updateRates()
     }
     
     // MARK: - Public methods
-    func saveImage(_ pickedImageURL: URL, completion: @escaping (CompletionBlock)) {
-        BaseDataProvider.uploadImage(imageURL: pickedImageURL, completion: { [weak self] (uploadResult) in
-            guard let uploadResult = uploadResult, let uuidString = uploadResult.id?.uuidString else { return completion(.failure(errorType: .apiError(message: nil))) }
+    func saveImage(_ pickedImageURL: Data, completion: @escaping (CompletionBlock)) {
+        BaseDataProvider.uploadImage(imageData: pickedImageURL, completion: { [weak self] (uploadResult) in
+            guard let uploadResult = uploadResult, let uuidString = uploadResult._id?.uuidString else { return completion(.failure(errorType: .apiError(message: nil))) }
             
             self?.uploadedUuidString = uuidString
             completion(.success)
@@ -430,7 +430,7 @@ class AssetCollectionViewModel: CellViewModelWithCollection {
             }
             
             if value < 100 {
-                viewModels.append(FundAssetCollectionViewCellViewModel(assetModel: PlatformAsset(id: nil, name: nil, asset: nil, description: nil, icon: nil, color: nil, mandatoryFundPercent: 100 - value, url: nil)))
+                viewModels.append(FundAssetCollectionViewCellViewModel(assetModel: PlatformAsset(_id: nil, name: nil, asset: nil, _description: nil, logoUrl: nil, color: nil, mandatoryFundPercent: 100 - value, url: nil)))
             }
         }
     }

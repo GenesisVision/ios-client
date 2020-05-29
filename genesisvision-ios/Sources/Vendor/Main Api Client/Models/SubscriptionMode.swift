@@ -7,10 +7,8 @@
 
 import Foundation
 
-
 public enum SubscriptionMode: String, Codable {
     case byBalance = "ByBalance"
     case percent = "Percent"
     case fixed = "Fixed"
-
 }

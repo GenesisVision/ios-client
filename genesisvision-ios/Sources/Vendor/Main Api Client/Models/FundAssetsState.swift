@@ -8,41 +8,18 @@
 import Foundation
 
 
+public struct FundAssetsState: Codable {
 
-open class FundAssetsState: Codable {
 
-    public var date: Int64?
+    public var date: Date?
+
     public var value: Double?
+
     public var assets: [FundAssetPartWithIcon]?
-
-
-    
-    public init(date: Int64?, value: Double?, assets: [FundAssetPartWithIcon]?) {
+    public init(date: Date? = nil, value: Double? = nil, assets: [FundAssetPartWithIcon]? = nil) { 
         self.date = date
         self.value = value
         self.assets = assets
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(date, forKey: "date")
-        try container.encodeIfPresent(value, forKey: "value")
-        try container.encodeIfPresent(assets, forKey: "assets")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        date = try container.decodeIfPresent(Int64.self, forKey: "date")
-        value = try container.decodeIfPresent(Double.self, forKey: "value")
-        assets = try container.decodeIfPresent([FundAssetPartWithIcon].self, forKey: "assets")
-    }
 }
-

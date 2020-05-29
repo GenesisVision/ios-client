@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum FacetSortType: String, Codable {
     case new = "New"
     case top = "Top"
@@ -18,5 +17,5 @@ public enum FacetSortType: String, Codable {
     case trading = "Trading"
     case investing = "Investing"
     case aum = "AUM"
-
+    case fundsChallenge = "FundsChallenge"
 }

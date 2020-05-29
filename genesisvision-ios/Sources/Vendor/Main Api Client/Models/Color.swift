@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum Color: String, Codable {
     case white = "White"
     case red = "Red"
@@ -17,5 +16,4 @@ public enum Color: String, Codable {
     case blue = "Blue"
     case purple = "Purple"
     case black = "Black"
-
 }

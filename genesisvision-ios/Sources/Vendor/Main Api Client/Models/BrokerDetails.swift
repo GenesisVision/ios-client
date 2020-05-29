@@ -8,28 +8,37 @@
 import Foundation
 
 
+public struct BrokerDetails: Codable {
 
-open class BrokerDetails: Codable {
 
-    public var id: UUID?
-    public var logo: String?
+    public var _id: UUID?
+
+    public var logoUrl: String?
+
     public var name: String?
+
     public var type: BrokerTradeServerType?
+
     public var isKycRequired: Bool?
+
     public var showSwaps: Bool?
+
     public var showTickets: Bool?
+
     public var showCommissionRebate: Bool?
+
     public var isSignalsAvailable: Bool?
+
     public var isKycRequiredSometime: Bool?
+
     public var showSwapsSometime: Bool?
+
     public var showTicketsSometime: Bool?
+
     public var showCommissionRebateSometime: Bool?
-
-
-    
-    public init(id: UUID?, logo: String?, name: String?, type: BrokerTradeServerType?, isKycRequired: Bool?, showSwaps: Bool?, showTickets: Bool?, showCommissionRebate: Bool?, isSignalsAvailable: Bool?, isKycRequiredSometime: Bool?, showSwapsSometime: Bool?, showTicketsSometime: Bool?, showCommissionRebateSometime: Bool?) {
-        self.id = id
-        self.logo = logo
+    public init(_id: UUID? = nil, logoUrl: String? = nil, name: String? = nil, type: BrokerTradeServerType? = nil, isKycRequired: Bool? = nil, showSwaps: Bool? = nil, showTickets: Bool? = nil, showCommissionRebate: Bool? = nil, isSignalsAvailable: Bool? = nil, isKycRequiredSometime: Bool? = nil, showSwapsSometime: Bool? = nil, showTicketsSometime: Bool? = nil, showCommissionRebateSometime: Bool? = nil) { 
+        self._id = _id
+        self.logoUrl = logoUrl
         self.name = name
         self.type = type
         self.isKycRequired = isKycRequired
@@ -42,47 +51,20 @@ open class BrokerDetails: Codable {
         self.showTicketsSometime = showTicketsSometime
         self.showCommissionRebateSometime = showCommissionRebateSometime
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(id, forKey: "id")
-        try container.encodeIfPresent(logo, forKey: "logo")
-        try container.encodeIfPresent(name, forKey: "name")
-        try container.encodeIfPresent(type, forKey: "type")
-        try container.encodeIfPresent(isKycRequired, forKey: "isKycRequired")
-        try container.encodeIfPresent(showSwaps, forKey: "showSwaps")
-        try container.encodeIfPresent(showTickets, forKey: "showTickets")
-        try container.encodeIfPresent(showCommissionRebate, forKey: "showCommissionRebate")
-        try container.encodeIfPresent(isSignalsAvailable, forKey: "isSignalsAvailable")
-        try container.encodeIfPresent(isKycRequiredSometime, forKey: "isKycRequiredSometime")
-        try container.encodeIfPresent(showSwapsSometime, forKey: "showSwapsSometime")
-        try container.encodeIfPresent(showTicketsSometime, forKey: "showTicketsSometime")
-        try container.encodeIfPresent(showCommissionRebateSometime, forKey: "showCommissionRebateSometime")
+    public enum CodingKeys: String, CodingKey { 
+        case _id = "id"
+        case logoUrl
+        case name
+        case type
+        case isKycRequired
+        case showSwaps
+        case showTickets
+        case showCommissionRebate
+        case isSignalsAvailable
+        case isKycRequiredSometime
+        case showSwapsSometime
+        case showTicketsSometime
+        case showCommissionRebateSometime
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        id = try container.decodeIfPresent(UUID.self, forKey: "id")
-        logo = try container.decodeIfPresent(String.self, forKey: "logo")
-        name = try container.decodeIfPresent(String.self, forKey: "name")
-        type = try container.decodeIfPresent(BrokerTradeServerType.self, forKey: "type")
-        isKycRequired = try container.decodeIfPresent(Bool.self, forKey: "isKycRequired")
-        showSwaps = try container.decodeIfPresent(Bool.self, forKey: "showSwaps")
-        showTickets = try container.decodeIfPresent(Bool.self, forKey: "showTickets")
-        showCommissionRebate = try container.decodeIfPresent(Bool.self, forKey: "showCommissionRebate")
-        isSignalsAvailable = try container.decodeIfPresent(Bool.self, forKey: "isSignalsAvailable")
-        isKycRequiredSometime = try container.decodeIfPresent(Bool.self, forKey: "isKycRequiredSometime")
-        showSwapsSometime = try container.decodeIfPresent(Bool.self, forKey: "showSwapsSometime")
-        showTicketsSometime = try container.decodeIfPresent(Bool.self, forKey: "showTicketsSometime")
-        showCommissionRebateSometime = try container.decodeIfPresent(Bool.self, forKey: "showCommissionRebateSometime")
-    }
 }
-

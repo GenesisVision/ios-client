@@ -38,7 +38,7 @@ extension ReallocateHistoryTableViewCellViewModel: CellViewModel {
                 iconImageView.backgroundColor = .clear
                 iconImageView.heightAnchor.constraint(equalToConstant: 20).isActive = true
                 iconImageView.widthAnchor.constraint(equalToConstant: 20).isActive = true
-                if let logo = part.icon, let fileUrl = getFileURL(fileName: logo) {
+                if let logo = part.logoUrl, let fileUrl = getFileURL(fileName: logo) {
                     iconImageView.kf.indicatorType = .activity
                     iconImageView.kf.setImage(with: fileUrl, placeholder: UIImage.fundPlaceholder)
                 }

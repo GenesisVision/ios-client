@@ -8,37 +8,15 @@
 import Foundation
 
 
+public struct FilterItemInfo: Codable {
 
-open class FilterItemInfo: Codable {
 
     public var key: String?
+
     public var title: String?
-
-
-    
-    public init(key: String?, title: String?) {
+    public init(key: String? = nil, title: String? = nil) { 
         self.key = key
         self.title = title
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(key, forKey: "key")
-        try container.encodeIfPresent(title, forKey: "title")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        key = try container.decodeIfPresent(String.self, forKey: "key")
-        title = try container.decodeIfPresent(String.self, forKey: "title")
-    }
 }
-

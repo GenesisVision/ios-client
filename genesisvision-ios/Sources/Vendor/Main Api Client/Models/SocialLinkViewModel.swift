@@ -8,49 +8,24 @@
 import Foundation
 
 
+public struct SocialLinkViewModel: Codable {
 
-open class SocialLinkViewModel: Codable {
 
     public var url: String?
-    public var logo: String?
+
+    public var logoUrl: String?
+
     public var name: String?
+
     public var value: String?
+
     public var type: SocialLinkType?
-
-
-    
-    public init(url: String?, logo: String?, name: String?, value: String?, type: SocialLinkType?) {
+    public init(url: String? = nil, logoUrl: String? = nil, name: String? = nil, value: String? = nil, type: SocialLinkType? = nil) { 
         self.url = url
-        self.logo = logo
+        self.logoUrl = logoUrl
         self.name = name
         self.value = value
         self.type = type
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(url, forKey: "url")
-        try container.encodeIfPresent(logo, forKey: "logo")
-        try container.encodeIfPresent(name, forKey: "name")
-        try container.encodeIfPresent(value, forKey: "value")
-        try container.encodeIfPresent(type, forKey: "type")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        url = try container.decodeIfPresent(String.self, forKey: "url")
-        logo = try container.decodeIfPresent(String.self, forKey: "logo")
-        name = try container.decodeIfPresent(String.self, forKey: "name")
-        value = try container.decodeIfPresent(String.self, forKey: "value")
-        type = try container.decodeIfPresent(SocialLinkType.self, forKey: "type")
-    }
 }
-

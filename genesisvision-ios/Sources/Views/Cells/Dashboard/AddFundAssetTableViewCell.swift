@@ -82,7 +82,7 @@ class AddFundAssetTableViewCell: UITableViewCell {
         
         logoImageView.image = #imageLiteral(resourceName: "img_wallet_usdt_icon")
         
-        if let logo = assetModel?.icon, let fileUrl = getFileURL(fileName: logo) {
+        if let logo = assetModel?.logoUrl, let fileUrl = getFileURL(fileName: logo) {
             logoImageView.kf.indicatorType = .activity
             logoImageView.kf.setImage(with: fileUrl)
         }

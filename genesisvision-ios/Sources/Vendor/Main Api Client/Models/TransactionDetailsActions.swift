@@ -8,37 +8,15 @@
 import Foundation
 
 
+public struct TransactionDetailsActions: Codable {
 
-open class TransactionDetailsActions: Codable {
 
     public var canResend: Bool?
+
     public var canCancel: Bool?
-
-
-    
-    public init(canResend: Bool?, canCancel: Bool?) {
+    public init(canResend: Bool? = nil, canCancel: Bool? = nil) { 
         self.canResend = canResend
         self.canCancel = canCancel
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(canResend, forKey: "canResend")
-        try container.encodeIfPresent(canCancel, forKey: "canCancel")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        canResend = try container.decodeIfPresent(Bool.self, forKey: "canResend")
-        canCancel = try container.decodeIfPresent(Bool.self, forKey: "canCancel")
-    }
 }
-

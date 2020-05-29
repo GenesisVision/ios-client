@@ -8,37 +8,15 @@
 import Foundation
 
 
+public struct SignalDataMaster: Codable {
 
-open class SignalDataMaster: Codable {
 
     public var login: String?
+
     public var share: Double?
-
-
-    
-    public init(login: String?, share: Double?) {
+    public init(login: String? = nil, share: Double? = nil) { 
         self.login = login
         self.share = share
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(login, forKey: "login")
-        try container.encodeIfPresent(share, forKey: "share")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        login = try container.decodeIfPresent(String.self, forKey: "login")
-        share = try container.decodeIfPresent(Double.self, forKey: "share")
-    }
 }
-

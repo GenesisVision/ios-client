@@ -42,7 +42,6 @@ final class SettingsViewModel {
     var title: String = "Settings"
     
     var pickedImage: UIImage?
-    var pickedImageURL: URL?
     
     let biometricIDAuthManager = BiometricIDAuthManager.shared
     
@@ -133,7 +132,7 @@ final class SettingsViewModel {
     }
     
     var avatarURL: URL? {
-        guard let avatar = profileModel?.avatar,
+        guard let avatar = profileModel?.logoUrl,
             let avatarURL = getFileURL(fileName: avatar)
             else { return nil }
         
@@ -279,17 +278,17 @@ final class SettingsViewModel {
     }
     
     func saveProfilePhoto(completion: @escaping CompletionBlock) {
-        guard let pickedImageURL = pickedImageURL else {
+        guard let pickedImage = pickedImage?.pngData() else {
             return completion(.failure(errorType: .apiError(message: nil)))
         }
         
-        BaseDataProvider.uploadImage(imageURL: pickedImageURL, completion: { (uploadResult) in
-            guard let uploadResult = uploadResult, let uuidString = uploadResult.id?.uuidString else { return completion(.failure(errorType: .apiError(message: nil))) }
+        BaseDataProvider.uploadImage(imageData: pickedImage, completion: { (uploadResult) in
+            guard let uploadResult = uploadResult, let uuidString = uploadResult._id?.uuidString else { return completion(.failure(errorType: .apiError(message: nil))) }
             
             ProfileDataProvider.updateProfileAvatar(fileId: uuidString, completion: { [weak self] (result) in
                 switch result {
                 case .success:
-                    self?.profileModel?.avatar = uuidString
+                    self?.profileModel?.logoUrl = uuidString
                     completion(.success)
                 case .failure(let errorType):
                     print(errorType)

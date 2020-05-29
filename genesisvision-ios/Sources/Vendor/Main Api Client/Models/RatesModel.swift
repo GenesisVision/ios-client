@@ -8,33 +8,12 @@
 import Foundation
 
 
-
-open class RatesModel: Codable {
-
-    public var rates: RatesModelRates?
+public struct RatesModel: Codable {
 
 
-    
-    public init(rates: RatesModelRates?) {
+    public var rates: [String:[RateItem]]?
+    public init(rates: [String:[RateItem]]? = nil) { 
         self.rates = rates
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(rates, forKey: "rates")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        rates = try container.decodeIfPresent(RatesModelRates.self, forKey: "rates")
-    }
 }
-

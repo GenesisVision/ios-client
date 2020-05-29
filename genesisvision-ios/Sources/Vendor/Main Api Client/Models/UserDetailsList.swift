@@ -8,81 +8,39 @@
 import Foundation
 
 
+public struct UserDetailsList: Codable {
 
-open class UserDetailsList: Codable {
 
     public var userId: UUID?
+
     public var username: String?
-    public var avatar: String?
+
+    public var logoUrl: String?
+
     public var url: String?
-    public var socialLinks: [SocialLinkViewModel]?
+
     public var tags: [Tag]?
+
     public var regDate: Date?
+
     public var assetsUnderManagement: Double?
+
     public var investorsCount: Int?
+
     public var followersCount: Int?
+
     public var totalProfit: Double?
-    public var tradingProfit: Double?
-    public var investingProfit: Double?
-
-
-    
-    public init(userId: UUID?, username: String?, avatar: String?, url: String?, socialLinks: [SocialLinkViewModel]?, tags: [Tag]?, regDate: Date?, assetsUnderManagement: Double?, investorsCount: Int?, followersCount: Int?, totalProfit: Double?, tradingProfit: Double?, investingProfit: Double?) {
+    public init(userId: UUID? = nil, username: String? = nil, logoUrl: String? = nil, url: String? = nil, tags: [Tag]? = nil, regDate: Date? = nil, assetsUnderManagement: Double? = nil, investorsCount: Int? = nil, followersCount: Int? = nil, totalProfit: Double? = nil) { 
         self.userId = userId
         self.username = username
-        self.avatar = avatar
+        self.logoUrl = logoUrl
         self.url = url
-        self.socialLinks = socialLinks
         self.tags = tags
         self.regDate = regDate
         self.assetsUnderManagement = assetsUnderManagement
         self.investorsCount = investorsCount
         self.followersCount = followersCount
         self.totalProfit = totalProfit
-        self.tradingProfit = tradingProfit
-        self.investingProfit = investingProfit
-    }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(userId, forKey: "userId")
-        try container.encodeIfPresent(username, forKey: "username")
-        try container.encodeIfPresent(avatar, forKey: "avatar")
-        try container.encodeIfPresent(url, forKey: "url")
-        try container.encodeIfPresent(socialLinks, forKey: "socialLinks")
-        try container.encodeIfPresent(tags, forKey: "tags")
-        try container.encodeIfPresent(regDate, forKey: "regDate")
-        try container.encodeIfPresent(assetsUnderManagement, forKey: "assetsUnderManagement")
-        try container.encodeIfPresent(investorsCount, forKey: "investorsCount")
-        try container.encodeIfPresent(followersCount, forKey: "followersCount")
-        try container.encodeIfPresent(totalProfit, forKey: "totalProfit")
-        try container.encodeIfPresent(tradingProfit, forKey: "tradingProfit")
-        try container.encodeIfPresent(investingProfit, forKey: "investingProfit")
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        userId = try container.decodeIfPresent(UUID.self, forKey: "userId")
-        username = try container.decodeIfPresent(String.self, forKey: "username")
-        avatar = try container.decodeIfPresent(String.self, forKey: "avatar")
-        url = try container.decodeIfPresent(String.self, forKey: "url")
-        socialLinks = try container.decodeIfPresent([SocialLinkViewModel].self, forKey: "socialLinks")
-        tags = try container.decodeIfPresent([Tag].self, forKey: "tags")
-        regDate = try container.decodeIfPresent(Date.self, forKey: "regDate")
-        assetsUnderManagement = try container.decodeIfPresent(Double.self, forKey: "assetsUnderManagement")
-        investorsCount = try container.decodeIfPresent(Int.self, forKey: "investorsCount")
-        followersCount = try container.decodeIfPresent(Int.self, forKey: "followersCount")
-        totalProfit = try container.decodeIfPresent(Double.self, forKey: "totalProfit")
-        tradingProfit = try container.decodeIfPresent(Double.self, forKey: "tradingProfit")
-        investingProfit = try container.decodeIfPresent(Double.self, forKey: "investingProfit")
-    }
 }
-

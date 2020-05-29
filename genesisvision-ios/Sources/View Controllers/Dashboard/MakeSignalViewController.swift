@@ -85,7 +85,7 @@ class MakeSignalViewController: BaseModalViewController, BaseTableViewProtocol {
             viewModel.request.title = title
         }
         if let description = stackView.descriptionView.textView.text {
-            viewModel.request.description = description
+            viewModel.request._description = description
         }
         if let volumeFee = stackView.volumeFeeView.textField.text?.doubleValue {
             viewModel.request.volumeFee = volumeFee
@@ -155,16 +155,16 @@ class MakeSignalViewModel {
         }
     }
     
-    var request = MakeTradingAccountSignalProvider(id: nil, volumeFee: nil, successFee: nil, title: nil, description: nil, logo: nil)
+    var request = MakeTradingAccountSignalProvider(_id: nil, volumeFee: nil, successFee: nil, title: nil, _description: nil, logo: nil)
     weak var delegate: BaseTableViewProtocol?
     init(_ delegate: BaseTableViewProtocol?) {
         self.delegate = delegate
     }
     
     // MARK: - Public methods
-    func saveImage(_ pickedImageURL: URL, completion: @escaping (CompletionBlock)) {
-        BaseDataProvider.uploadImage(imageURL: pickedImageURL, completion: { [weak self] (uploadResult) in
-            guard let uploadResult = uploadResult, let uuidString = uploadResult.id?.uuidString else { return completion(.failure(errorType: .apiError(message: nil))) }
+    func saveImage(_ pickedImageURL: Data, completion: @escaping (CompletionBlock)) {
+        BaseDataProvider.uploadImage(imageData: pickedImageURL, completion: { [weak self] (uploadResult) in
+            guard let uploadResult = uploadResult, let uuidString = uploadResult._id?.uuidString else { return completion(.failure(errorType: .apiError(message: nil))) }
             
             self?.uploadedUuidString = uuidString
             completion(.success)
@@ -172,11 +172,11 @@ class MakeSignalViewModel {
     }
     
     func makeSignal(completion: @escaping CompletionBlock) {
-        guard let pickedImageURL = pickedImageURL else {
+        guard let pickedImage = pickedImage?.pngData() else {
             AssetsDataProvider.makeAccountSignalProvider(request, completion: completion)
             return
         }
-        saveImage(pickedImageURL) { [weak self] (result) in
+        saveImage(pickedImage) { [weak self] (result) in
             switch result {
             case .success:
                 AssetsDataProvider.makeAccountSignalProvider(self?.request, completion: completion)

@@ -12,69 +12,56 @@ import Alamofire
 
 open class TradingaccountAPI {
     /**
-     * enum for parameter sorting
+     Manually close trade by symbol for account
+     - parameter _id: (path)       - parameter symbol: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
      */
-    public enum Sorting_exportTrades: String { 
-        case byDateAsc = "ByDateAsc"
-        case byDateDesc = "ByDateDesc"
-        case byTicketAsc = "ByTicketAsc"
-        case byTicketDesc = "ByTicketDesc"
-        case bySymbolAsc = "BySymbolAsc"
-        case bySymbolDesc = "BySymbolDesc"
-        case byDirectionAsc = "ByDirectionAsc"
-        case byDirectionDesc = "ByDirectionDesc"
-        case byVolumeAsc = "ByVolumeAsc"
-        case byVolumeDesc = "ByVolumeDesc"
-        case byPriceAsc = "ByPriceAsc"
-        case byPriceDesc = "ByPriceDesc"
-        case byPriceCurrentAsc = "ByPriceCurrentAsc"
-        case byPriceCurrentDesc = "ByPriceCurrentDesc"
-        case byProfitAsc = "ByProfitAsc"
-        case byProfitDesc = "ByProfitDesc"
-        case byCommissionAsc = "ByCommissionAsc"
-        case byCommissionDesc = "ByCommissionDesc"
-        case bySwapAsc = "BySwapAsc"
-        case bySwapDesc = "BySwapDesc"
+    open class func closeAccountAssetTrade(_id: UUID, symbol: String? = nil, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        closeAccountAssetTradeWithRequestBuilder(_id: _id, symbol: symbol).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
+        }
     }
 
+
     /**
-     * enum for parameter accountCurrency
+     Manually close trade by symbol for account
+     - POST /v2.0/tradingaccount/{id}/trades/close
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter _id: (path)       - parameter symbol: (query)  (optional)
+
+     - returns: RequestBuilder<Void> 
      */
-    public enum AccountCurrency_exportTrades: String { 
-        case usd = "USD"
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case eur = "EUR"
+    open class func closeAccountAssetTradeWithRequestBuilder(_id: UUID, symbol: String? = nil) -> RequestBuilder<Void> {
+        var path = "/v2.0/tradingaccount/{id}/trades/close"
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "Symbol": symbol
+        ])
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
      Export trade history
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter symbol: (query)  (optional)
-     - parameter sorting: (query)  (optional)
-     - parameter accountId: (query)  (optional)
-     - parameter accountCurrency: (query)  (optional)
-     - parameter isFollow: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
+     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter symbol: (query)  (optional)     - parameter sorting: (query)  (optional)     - parameter accountId: (query)  (optional)     - parameter accountCurrency: (query)  (optional)     - parameter isFollow: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func exportTrades(id: UUID, authorization: String, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: Sorting_exportTrades? = nil, accountId: UUID? = nil, accountCurrency: AccountCurrency_exportTrades? = nil, isFollow: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: Data?,_ error: Error?) -> Void)) {
-        exportTradesWithRequestBuilder(id: id, authorization: authorization, dateFrom: dateFrom, dateTo: dateTo, symbol: symbol, sorting: sorting, accountId: accountId, accountCurrency: accountCurrency, isFollow: isFollow, skip: skip, take: take).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func exportTrades(_id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: TradeSorting? = nil, accountId: UUID? = nil, accountCurrency: Currency? = nil, isFollow: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: Data?,_ error: Error?) -> Void)) {
+        exportTradesWithRequestBuilder(_id: _id, dateFrom: dateFrom, dateTo: dateTo, symbol: symbol, sorting: sorting, accountId: accountId, accountCurrency: accountCurrency, isFollow: isFollow, skip: skip, take: take).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
@@ -82,84 +69,47 @@ open class TradingaccountAPI {
     /**
      Export trade history
      - GET /v2.0/tradingaccount/{id}/trades/export
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example=""}]
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter symbol: (query)  (optional)
-     - parameter sorting: (query)  (optional)
-     - parameter accountId: (query)  (optional)
-     - parameter accountCurrency: (query)  (optional)
-     - parameter isFollow: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
+     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter symbol: (query)  (optional)     - parameter sorting: (query)  (optional)     - parameter accountId: (query)  (optional)     - parameter accountCurrency: (query)  (optional)     - parameter isFollow: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<Data> 
      */
-    open class func exportTradesWithRequestBuilder(id: UUID, authorization: String, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: Sorting_exportTrades? = nil, accountId: UUID? = nil, accountCurrency: AccountCurrency_exportTrades? = nil, isFollow: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<Data> {
+    open class func exportTradesWithRequestBuilder(_id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: TradeSorting? = nil, accountId: UUID? = nil, accountCurrency: Currency? = nil, isFollow: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<Data> {
         var path = "/v2.0/tradingaccount/{id}/trades/export"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "DateFrom": dateFrom?.encodeToJSON(), 
-            "DateTo": dateTo?.encodeToJSON(), 
-            "Symbol": symbol, 
-            "Sorting": sorting?.rawValue, 
-            "AccountId": accountId, 
-            "AccountCurrency": accountCurrency?.rawValue, 
-            "IsFollow": isFollow, 
-            "Skip": skip?.encodeToJSON(), 
-            "Take": take?.encodeToJSON()
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "DateFrom": dateFrom?.encodeToJSON(), 
+                        "DateTo": dateTo?.encodeToJSON(), 
+                        "Symbol": symbol, 
+                        "Sorting": sorting, 
+                        "AccountId": accountId, 
+                        "AccountCurrency": accountCurrency, 
+                        "IsFollow": isFollow, 
+                        "Skip": skip?.encodeToJSON(), 
+                        "Take": take?.encodeToJSON()
         ])
-        
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<Data>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
-    }
-
-    /**
-     * enum for parameter currency
-     */
-    public enum Currency_getAbsoluteProfitChart: String { 
-        case usd = "USD"
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case eur = "EUR"
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
      Trading account absolute profit chart
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter maxPointCount: (query)  (optional)
-     - parameter currency: (query)  (optional)
+     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter maxPointCount: (query)  (optional)     - parameter currency: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getAbsoluteProfitChart(id: UUID, authorization: String, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency_getAbsoluteProfitChart? = nil, completion: @escaping ((_ data: AbsoluteProfitChart?,_ error: Error?) -> Void)) {
-        getAbsoluteProfitChartWithRequestBuilder(id: id, authorization: authorization, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getAbsoluteProfitChart(_id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency? = nil, completion: @escaping ((_ data: AbsoluteProfitChart?,_ error: Error?) -> Void)) {
+        getAbsoluteProfitChartWithRequestBuilder(_id: _id, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
@@ -167,83 +117,51 @@ open class TradingaccountAPI {
     /**
      Trading account absolute profit chart
      - GET /v2.0/tradingaccount/{id}/charts/profit/absolute
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "profit" : 0.8008281904610115,
   "chart" : [ {
-    "date" : 0,
-    "value" : 6.027456183070403
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "value" : 0.8008281904610115
   }, {
-    "date" : 0,
-    "value" : 6.027456183070403
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "value" : 0.8008281904610115
   } ]
 }}]
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter maxPointCount: (query)  (optional)
-     - parameter currency: (query)  (optional)
+     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter maxPointCount: (query)  (optional)     - parameter currency: (query)  (optional)
 
      - returns: RequestBuilder<AbsoluteProfitChart> 
      */
-    open class func getAbsoluteProfitChartWithRequestBuilder(id: UUID, authorization: String, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency_getAbsoluteProfitChart? = nil) -> RequestBuilder<AbsoluteProfitChart> {
+    open class func getAbsoluteProfitChartWithRequestBuilder(_id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency? = nil) -> RequestBuilder<AbsoluteProfitChart> {
         var path = "/v2.0/tradingaccount/{id}/charts/profit/absolute"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "DateFrom": dateFrom?.encodeToJSON(), 
-            "DateTo": dateTo?.encodeToJSON(), 
-            "MaxPointCount": maxPointCount?.encodeToJSON(), 
-            "Currency": currency?.rawValue
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "DateFrom": dateFrom?.encodeToJSON(), 
+                        "DateTo": dateTo?.encodeToJSON(), 
+                        "MaxPointCount": maxPointCount?.encodeToJSON(), 
+                        "Currency": currency
         ])
-        
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<AbsoluteProfitChart>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
-    }
-
-    /**
-     * enum for parameter currency
-     */
-    public enum Currency_getBalanceChart: String { 
-        case usd = "USD"
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case eur = "EUR"
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
      Trading account balance chart
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter maxPointCount: (query)  (optional)
-     - parameter currency: (query)  (optional)
+     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter maxPointCount: (query)  (optional)     - parameter currency: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getBalanceChart(id: UUID, authorization: String, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency_getBalanceChart? = nil, completion: @escaping ((_ data: AccountBalanceChart?,_ error: Error?) -> Void)) {
-        getBalanceChartWithRequestBuilder(id: id, authorization: authorization, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getBalanceChart(_id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency? = nil, completion: @escaping ((_ data: AccountBalanceChart?,_ error: Error?) -> Void)) {
+        getBalanceChartWithRequestBuilder(_id: _id, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
@@ -251,112 +169,52 @@ open class TradingaccountAPI {
     /**
      Trading account balance chart
      - GET /v2.0/tradingaccount/{id}/charts/balance
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "balance" : 0.8008281904610115,
   "color" : "color",
   "chart" : [ {
-    "date" : 0,
-    "value" : 6.027456183070403
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "value" : 0.8008281904610115
   }, {
-    "date" : 0,
-    "value" : 6.027456183070403
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "value" : 0.8008281904610115
   } ]
 }}]
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter maxPointCount: (query)  (optional)
-     - parameter currency: (query)  (optional)
+     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter maxPointCount: (query)  (optional)     - parameter currency: (query)  (optional)
 
      - returns: RequestBuilder<AccountBalanceChart> 
      */
-    open class func getBalanceChartWithRequestBuilder(id: UUID, authorization: String, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency_getBalanceChart? = nil) -> RequestBuilder<AccountBalanceChart> {
+    open class func getBalanceChartWithRequestBuilder(_id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency? = nil) -> RequestBuilder<AccountBalanceChart> {
         var path = "/v2.0/tradingaccount/{id}/charts/balance"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "DateFrom": dateFrom?.encodeToJSON(), 
-            "DateTo": dateTo?.encodeToJSON(), 
-            "MaxPointCount": maxPointCount?.encodeToJSON(), 
-            "Currency": currency?.rawValue
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "DateFrom": dateFrom?.encodeToJSON(), 
+                        "DateTo": dateTo?.encodeToJSON(), 
+                        "MaxPointCount": maxPointCount?.encodeToJSON(), 
+                        "Currency": currency
         ])
-        
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<AccountBalanceChart>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
-    }
-
-    /**
-     * enum for parameter sorting
-     */
-    public enum Sorting_getOpenTrades: String { 
-        case byDateAsc = "ByDateAsc"
-        case byDateDesc = "ByDateDesc"
-        case byTicketAsc = "ByTicketAsc"
-        case byTicketDesc = "ByTicketDesc"
-        case bySymbolAsc = "BySymbolAsc"
-        case bySymbolDesc = "BySymbolDesc"
-        case byDirectionAsc = "ByDirectionAsc"
-        case byDirectionDesc = "ByDirectionDesc"
-        case byVolumeAsc = "ByVolumeAsc"
-        case byVolumeDesc = "ByVolumeDesc"
-        case byPriceAsc = "ByPriceAsc"
-        case byPriceDesc = "ByPriceDesc"
-        case byPriceCurrentAsc = "ByPriceCurrentAsc"
-        case byPriceCurrentDesc = "ByPriceCurrentDesc"
-        case byProfitAsc = "ByProfitAsc"
-        case byProfitDesc = "ByProfitDesc"
-        case byCommissionAsc = "ByCommissionAsc"
-        case byCommissionDesc = "ByCommissionDesc"
-        case bySwapAsc = "BySwapAsc"
-        case bySwapDesc = "BySwapDesc"
-    }
-
-    /**
-     * enum for parameter accountCurrency
-     */
-    public enum AccountCurrency_getOpenTrades: String { 
-        case usd = "USD"
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case eur = "EUR"
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
      Trading account open positions
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter sorting: (query)  (optional)
-     - parameter symbol: (query)  (optional)
-     - parameter accountId: (query)  (optional)
-     - parameter accountCurrency: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
+     - parameter _id: (path)       - parameter sorting: (query)  (optional)     - parameter symbol: (query)  (optional)     - parameter accountId: (query)  (optional)     - parameter accountCurrency: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getOpenTrades(id: UUID, authorization: String, sorting: Sorting_getOpenTrades? = nil, symbol: String? = nil, accountId: UUID? = nil, accountCurrency: AccountCurrency_getOpenTrades? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: TradesViewModel?,_ error: Error?) -> Void)) {
-        getOpenTradesWithRequestBuilder(id: id, authorization: authorization, sorting: sorting, symbol: symbol, accountId: accountId, accountCurrency: accountCurrency, skip: skip, take: take).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getOpenTrades(_id: UUID, sorting: TradeSorting? = nil, symbol: String? = nil, accountId: UUID? = nil, accountCurrency: Currency? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: TradesViewModel?,_ error: Error?) -> Void)) {
+        getOpenTradesWithRequestBuilder(_id: _id, sorting: sorting, symbol: symbol, accountId: accountId, accountCurrency: accountCurrency, skip: skip, take: take).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
@@ -364,22 +222,35 @@ open class TradingaccountAPI {
     /**
      Trading account open positions
      - GET /v2.0/tradingaccount/{id}/trades/open
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
+  "showProfit" : true,
   "total" : 3,
+  "showDirection" : true,
+  "showPrice" : true,
   "showSwaps" : true,
+  "showPriceOpen" : true,
   "showTickets" : true,
-  "tradesDelay" : { },
+  "showDate" : true,
+  "tradesDelay" : "None",
   "items" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "originalCommissionCurrency" : "originalCommissionCurrency",
     "symbol" : "symbol",
     "ticket" : "ticket",
+    "assetData" : {
+      "hasAssetInfo" : true,
+      "logoUrl" : "logoUrl",
+      "url" : "url"
+    },
     "swap" : 9.301444243932576,
     "originalCommission" : 2.3021358869347655,
     "login" : "login",
     "volume" : 0.8008281904610115,
     "priceCurrent" : 5.962133916683182,
-    "entry" : { },
+    "entry" : "In",
     "price" : 1.4658129805029452,
     "showOriginalCommission" : true,
     "profitCurrency" : "profitCurrency",
@@ -396,18 +267,23 @@ open class TradingaccountAPI {
       } ]
     },
     "profit" : 6.027456183070403,
-    "direction" : { }
+    "direction" : "Buy"
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "originalCommissionCurrency" : "originalCommissionCurrency",
     "symbol" : "symbol",
     "ticket" : "ticket",
+    "assetData" : {
+      "hasAssetInfo" : true,
+      "logoUrl" : "logoUrl",
+      "url" : "url"
+    },
     "swap" : 9.301444243932576,
     "originalCommission" : 2.3021358869347655,
     "login" : "login",
     "volume" : 0.8008281904610115,
     "priceCurrent" : 5.962133916683182,
-    "entry" : { },
+    "entry" : "In",
     "price" : 1.4658129805029452,
     "showOriginalCommission" : true,
     "profitCurrency" : "profitCurrency",
@@ -424,81 +300,43 @@ open class TradingaccountAPI {
       } ]
     },
     "profit" : 6.027456183070403,
-    "direction" : { }
+    "direction" : "Buy"
   } ]
 }}]
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter sorting: (query)  (optional)
-     - parameter symbol: (query)  (optional)
-     - parameter accountId: (query)  (optional)
-     - parameter accountCurrency: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
+     - parameter _id: (path)       - parameter sorting: (query)  (optional)     - parameter symbol: (query)  (optional)     - parameter accountId: (query)  (optional)     - parameter accountCurrency: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<TradesViewModel> 
      */
-    open class func getOpenTradesWithRequestBuilder(id: UUID, authorization: String, sorting: Sorting_getOpenTrades? = nil, symbol: String? = nil, accountId: UUID? = nil, accountCurrency: AccountCurrency_getOpenTrades? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<TradesViewModel> {
+    open class func getOpenTradesWithRequestBuilder(_id: UUID, sorting: TradeSorting? = nil, symbol: String? = nil, accountId: UUID? = nil, accountCurrency: Currency? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<TradesViewModel> {
         var path = "/v2.0/tradingaccount/{id}/trades/open"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "Sorting": sorting?.rawValue, 
-            "Symbol": symbol, 
-            "AccountId": accountId, 
-            "AccountCurrency": accountCurrency?.rawValue, 
-            "Skip": skip?.encodeToJSON(), 
-            "Take": take?.encodeToJSON()
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "Sorting": sorting, 
+                        "Symbol": symbol, 
+                        "AccountId": accountId, 
+                        "AccountCurrency": accountCurrency, 
+                        "Skip": skip?.encodeToJSON(), 
+                        "Take": take?.encodeToJSON()
         ])
-        
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<TradesViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
-    }
-
-    /**
-     * enum for parameter currency
-     */
-    public enum Currency_getProfitPercentCharts: String { 
-        case usd = "USD"
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case eur = "EUR"
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
      Trading account profit percent charts
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter maxPointCount: (query)  (optional)
-     - parameter currency: (query)  (optional)
-     - parameter currencies: (query)  (optional)
+     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter maxPointCount: (query)  (optional)     - parameter currency: (query)  (optional)     - parameter currencies: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getProfitPercentCharts(id: UUID, authorization: String, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency_getProfitPercentCharts? = nil, currencies: [String]? = nil, completion: @escaping ((_ data: AccountProfitPercentCharts?,_ error: Error?) -> Void)) {
-        getProfitPercentChartsWithRequestBuilder(id: id, authorization: authorization, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency, currencies: currencies).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getProfitPercentCharts(_id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency? = nil, currencies: [Currency]? = nil, completion: @escaping ((_ data: AccountProfitPercentCharts?,_ error: Error?) -> Void)) {
+        getProfitPercentChartsWithRequestBuilder(_id: _id, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency, currencies: currencies).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
@@ -506,6 +344,9 @@ open class TradingaccountAPI {
     /**
      Trading account profit percent charts
      - GET /v2.0/tradingaccount/{id}/charts/profit/percent
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "statistic" : {
     "profitFactor" : 5.962133916683182,
@@ -521,126 +362,59 @@ open class TradingaccountAPI {
   },
   "charts" : [ {
     "color" : "color",
-    "currency" : { },
+    "currency" : "Undefined",
     "chart" : [ {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "value" : 0.8008281904610115
     }, {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "value" : 0.8008281904610115
     } ]
   }, {
     "color" : "color",
-    "currency" : { },
+    "currency" : "Undefined",
     "chart" : [ {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "value" : 0.8008281904610115
     }, {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "value" : 0.8008281904610115
     } ]
   } ]
 }}]
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter maxPointCount: (query)  (optional)
-     - parameter currency: (query)  (optional)
-     - parameter currencies: (query)  (optional)
+     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter maxPointCount: (query)  (optional)     - parameter currency: (query)  (optional)     - parameter currencies: (query)  (optional)
 
      - returns: RequestBuilder<AccountProfitPercentCharts> 
      */
-    open class func getProfitPercentChartsWithRequestBuilder(id: UUID, authorization: String, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency_getProfitPercentCharts? = nil, currencies: [String]? = nil) -> RequestBuilder<AccountProfitPercentCharts> {
+    open class func getProfitPercentChartsWithRequestBuilder(_id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency? = nil, currencies: [Currency]? = nil) -> RequestBuilder<AccountProfitPercentCharts> {
         var path = "/v2.0/tradingaccount/{id}/charts/profit/percent"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "DateFrom": dateFrom?.encodeToJSON(), 
-            "DateTo": dateTo?.encodeToJSON(), 
-            "MaxPointCount": maxPointCount?.encodeToJSON(), 
-            "Currency": currency?.rawValue, 
-            "currencies": currencies
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "DateFrom": dateFrom?.encodeToJSON(), 
+                        "DateTo": dateTo?.encodeToJSON(), 
+                        "MaxPointCount": maxPointCount?.encodeToJSON(), 
+                        "Currency": currency, 
+                        "currencies": currencies
         ])
-        
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<AccountProfitPercentCharts>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
-    }
-
-    /**
-     * enum for parameter sorting
-     */
-    public enum Sorting_getTrades: String { 
-        case byDateAsc = "ByDateAsc"
-        case byDateDesc = "ByDateDesc"
-        case byTicketAsc = "ByTicketAsc"
-        case byTicketDesc = "ByTicketDesc"
-        case bySymbolAsc = "BySymbolAsc"
-        case bySymbolDesc = "BySymbolDesc"
-        case byDirectionAsc = "ByDirectionAsc"
-        case byDirectionDesc = "ByDirectionDesc"
-        case byVolumeAsc = "ByVolumeAsc"
-        case byVolumeDesc = "ByVolumeDesc"
-        case byPriceAsc = "ByPriceAsc"
-        case byPriceDesc = "ByPriceDesc"
-        case byPriceCurrentAsc = "ByPriceCurrentAsc"
-        case byPriceCurrentDesc = "ByPriceCurrentDesc"
-        case byProfitAsc = "ByProfitAsc"
-        case byProfitDesc = "ByProfitDesc"
-        case byCommissionAsc = "ByCommissionAsc"
-        case byCommissionDesc = "ByCommissionDesc"
-        case bySwapAsc = "BySwapAsc"
-        case bySwapDesc = "BySwapDesc"
-    }
-
-    /**
-     * enum for parameter accountCurrency
-     */
-    public enum AccountCurrency_getTrades: String { 
-        case usd = "USD"
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case eur = "EUR"
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
      Trading account trades
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter symbol: (query)  (optional)
-     - parameter sorting: (query)  (optional)
-     - parameter accountId: (query)  (optional)
-     - parameter accountCurrency: (query)  (optional)
-     - parameter isFollow: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
+     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter symbol: (query)  (optional)     - parameter sorting: (query)  (optional)     - parameter accountId: (query)  (optional)     - parameter accountCurrency: (query)  (optional)     - parameter isFollow: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getTrades(id: UUID, authorization: String, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: Sorting_getTrades? = nil, accountId: UUID? = nil, accountCurrency: AccountCurrency_getTrades? = nil, isFollow: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: TradesSignalViewModel?,_ error: Error?) -> Void)) {
-        getTradesWithRequestBuilder(id: id, authorization: authorization, dateFrom: dateFrom, dateTo: dateTo, symbol: symbol, sorting: sorting, accountId: accountId, accountCurrency: accountCurrency, isFollow: isFollow, skip: skip, take: take).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getTrades(_id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: TradeSorting? = nil, accountId: UUID? = nil, accountCurrency: Currency? = nil, isFollow: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: TradesSignalViewModel?,_ error: Error?) -> Void)) {
+        getTradesWithRequestBuilder(_id: _id, dateFrom: dateFrom, dateTo: dateTo, symbol: symbol, sorting: sorting, accountId: accountId, accountCurrency: accountCurrency, isFollow: isFollow, skip: skip, take: take).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
@@ -648,40 +422,24 @@ open class TradingaccountAPI {
     /**
      Trading account trades
      - GET /v2.0/tradingaccount/{id}/trades
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "total" : 7,
   "showSwaps" : true,
   "showTickets" : true,
+  "tradesDelay" : "None",
   "items" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "originalCommissionCurrency" : "originalCommissionCurrency",
     "symbol" : "symbol",
-    "ticket" : "ticket",
-    "swap" : 1.4894159098541704,
     "originalCommission" : 1.2315135367772556,
     "totalCommission" : 7.061401241503109,
     "login" : "login",
-    "volume" : 9.301444243932576,
-    "totalCommissionByType" : [ {
-      "amount" : 9.301444243932576,
-      "description" : "description",
-      "currency" : null,
-      "title" : "title",
-      "type" : { }
-    }, {
-      "amount" : 9.301444243932576,
-      "description" : "description",
-      "currency" : null,
-      "title" : "title",
-      "type" : { }
-    } ],
     "priceCurrent" : 4.145608029883936,
-    "entry" : { },
     "price" : 2.027123023002322,
     "showOriginalCommission" : true,
-    "tradingAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "currency" : null,
-    "profitCurrency" : "profitCurrency",
     "commission" : 1.0246457001441578,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "baseVolume" : 7.386281948385884,
@@ -695,35 +453,58 @@ open class TradingaccountAPI {
       } ]
     },
     "profit" : 3.616076749251911,
+    "direction" : "Buy",
+    "ticket" : "ticket",
+    "assetData" : {
+      "hasAssetInfo" : true,
+      "logoUrl" : "logoUrl",
+      "url" : "url"
+    },
+    "swap" : 1.4894159098541704,
+    "volume" : 9.301444243932576,
+    "totalCommissionByType" : [ {
+      "amount" : 9.301444243932576,
+      "description" : "description",
+      "title" : "title",
+      "type" : "Undefined"
+    }, {
+      "amount" : 9.301444243932576,
+      "description" : "description",
+      "title" : "title",
+      "type" : "Undefined"
+    } ],
+    "entry" : "In",
+    "tradingAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "profitCurrency" : "profitCurrency",
     "providers" : [ {
       "volume" : 1.4658129805029452,
       "firstOrderDate" : "2000-01-23T04:56:07.000+00:00",
       "fees" : [ {
         "amount" : 2.3021358869347655,
-        "currency" : { },
-        "type" : { }
+        "currency" : "Undefined",
+        "type" : "Undefined"
       }, {
         "amount" : 2.3021358869347655,
-        "currency" : { },
-        "type" : { }
+        "currency" : "Undefined",
+        "type" : "Undefined"
       } ],
       "manager" : {
         "socialLinks" : [ {
           "name" : "name",
-          "logo" : "logo",
-          "type" : { },
+          "type" : "Undefined",
           "value" : "value",
-          "url" : "url"
+          "url" : "url",
+          "logoUrl" : "logoUrl"
         }, {
           "name" : "name",
-          "logo" : "logo",
-          "type" : { },
+          "type" : "Undefined",
           "value" : "value",
-          "url" : "url"
+          "url" : "url",
+          "logoUrl" : "logoUrl"
         } ],
         "registrationDate" : "2000-01-23T04:56:07.000+00:00",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-        "avatar" : "avatar",
+        "logoUrl" : "logoUrl",
         "url" : "url",
         "username" : "username"
       },
@@ -731,10 +512,10 @@ open class TradingaccountAPI {
       "program" : {
         "color" : "color",
         "level" : 0,
-        "logo" : "logo",
         "title" : "title",
-        "type" : { },
+        "type" : "None",
         "url" : "url",
+        "logoUrl" : "logoUrl",
         "levelProgress" : 6.027456183070403
       },
       "profit" : 5.637376656633329,
@@ -744,30 +525,30 @@ open class TradingaccountAPI {
       "firstOrderDate" : "2000-01-23T04:56:07.000+00:00",
       "fees" : [ {
         "amount" : 2.3021358869347655,
-        "currency" : { },
-        "type" : { }
+        "currency" : "Undefined",
+        "type" : "Undefined"
       }, {
         "amount" : 2.3021358869347655,
-        "currency" : { },
-        "type" : { }
+        "currency" : "Undefined",
+        "type" : "Undefined"
       } ],
       "manager" : {
         "socialLinks" : [ {
           "name" : "name",
-          "logo" : "logo",
-          "type" : { },
+          "type" : "Undefined",
           "value" : "value",
-          "url" : "url"
+          "url" : "url",
+          "logoUrl" : "logoUrl"
         }, {
           "name" : "name",
-          "logo" : "logo",
-          "type" : { },
+          "type" : "Undefined",
           "value" : "value",
-          "url" : "url"
+          "url" : "url",
+          "logoUrl" : "logoUrl"
         } ],
         "registrationDate" : "2000-01-23T04:56:07.000+00:00",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-        "avatar" : "avatar",
+        "logoUrl" : "logoUrl",
         "url" : "url",
         "username" : "username"
       },
@@ -775,46 +556,25 @@ open class TradingaccountAPI {
       "program" : {
         "color" : "color",
         "level" : 0,
-        "logo" : "logo",
         "title" : "title",
-        "type" : { },
+        "type" : "None",
         "url" : "url",
+        "logoUrl" : "logoUrl",
         "levelProgress" : 6.027456183070403
       },
       "profit" : 5.637376656633329,
       "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
-    } ],
-    "direction" : { }
+    } ]
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "originalCommissionCurrency" : "originalCommissionCurrency",
     "symbol" : "symbol",
-    "ticket" : "ticket",
-    "swap" : 1.4894159098541704,
     "originalCommission" : 1.2315135367772556,
     "totalCommission" : 7.061401241503109,
     "login" : "login",
-    "volume" : 9.301444243932576,
-    "totalCommissionByType" : [ {
-      "amount" : 9.301444243932576,
-      "description" : "description",
-      "currency" : null,
-      "title" : "title",
-      "type" : { }
-    }, {
-      "amount" : 9.301444243932576,
-      "description" : "description",
-      "currency" : null,
-      "title" : "title",
-      "type" : { }
-    } ],
     "priceCurrent" : 4.145608029883936,
-    "entry" : { },
     "price" : 2.027123023002322,
     "showOriginalCommission" : true,
-    "tradingAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "currency" : null,
-    "profitCurrency" : "profitCurrency",
     "commission" : 1.0246457001441578,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "baseVolume" : 7.386281948385884,
@@ -828,35 +588,58 @@ open class TradingaccountAPI {
       } ]
     },
     "profit" : 3.616076749251911,
+    "direction" : "Buy",
+    "ticket" : "ticket",
+    "assetData" : {
+      "hasAssetInfo" : true,
+      "logoUrl" : "logoUrl",
+      "url" : "url"
+    },
+    "swap" : 1.4894159098541704,
+    "volume" : 9.301444243932576,
+    "totalCommissionByType" : [ {
+      "amount" : 9.301444243932576,
+      "description" : "description",
+      "title" : "title",
+      "type" : "Undefined"
+    }, {
+      "amount" : 9.301444243932576,
+      "description" : "description",
+      "title" : "title",
+      "type" : "Undefined"
+    } ],
+    "entry" : "In",
+    "tradingAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "profitCurrency" : "profitCurrency",
     "providers" : [ {
       "volume" : 1.4658129805029452,
       "firstOrderDate" : "2000-01-23T04:56:07.000+00:00",
       "fees" : [ {
         "amount" : 2.3021358869347655,
-        "currency" : { },
-        "type" : { }
+        "currency" : "Undefined",
+        "type" : "Undefined"
       }, {
         "amount" : 2.3021358869347655,
-        "currency" : { },
-        "type" : { }
+        "currency" : "Undefined",
+        "type" : "Undefined"
       } ],
       "manager" : {
         "socialLinks" : [ {
           "name" : "name",
-          "logo" : "logo",
-          "type" : { },
+          "type" : "Undefined",
           "value" : "value",
-          "url" : "url"
+          "url" : "url",
+          "logoUrl" : "logoUrl"
         }, {
           "name" : "name",
-          "logo" : "logo",
-          "type" : { },
+          "type" : "Undefined",
           "value" : "value",
-          "url" : "url"
+          "url" : "url",
+          "logoUrl" : "logoUrl"
         } ],
         "registrationDate" : "2000-01-23T04:56:07.000+00:00",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-        "avatar" : "avatar",
+        "logoUrl" : "logoUrl",
         "url" : "url",
         "username" : "username"
       },
@@ -864,10 +647,10 @@ open class TradingaccountAPI {
       "program" : {
         "color" : "color",
         "level" : 0,
-        "logo" : "logo",
         "title" : "title",
-        "type" : { },
+        "type" : "None",
         "url" : "url",
+        "logoUrl" : "logoUrl",
         "levelProgress" : 6.027456183070403
       },
       "profit" : 5.637376656633329,
@@ -877,30 +660,30 @@ open class TradingaccountAPI {
       "firstOrderDate" : "2000-01-23T04:56:07.000+00:00",
       "fees" : [ {
         "amount" : 2.3021358869347655,
-        "currency" : { },
-        "type" : { }
+        "currency" : "Undefined",
+        "type" : "Undefined"
       }, {
         "amount" : 2.3021358869347655,
-        "currency" : { },
-        "type" : { }
+        "currency" : "Undefined",
+        "type" : "Undefined"
       } ],
       "manager" : {
         "socialLinks" : [ {
           "name" : "name",
-          "logo" : "logo",
-          "type" : { },
+          "type" : "Undefined",
           "value" : "value",
-          "url" : "url"
+          "url" : "url",
+          "logoUrl" : "logoUrl"
         }, {
           "name" : "name",
-          "logo" : "logo",
-          "type" : { },
+          "type" : "Undefined",
           "value" : "value",
-          "url" : "url"
+          "url" : "url",
+          "logoUrl" : "logoUrl"
         } ],
         "registrationDate" : "2000-01-23T04:56:07.000+00:00",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-        "avatar" : "avatar",
+        "logoUrl" : "logoUrl",
         "url" : "url",
         "username" : "username"
       },
@@ -908,72 +691,54 @@ open class TradingaccountAPI {
       "program" : {
         "color" : "color",
         "level" : 0,
-        "logo" : "logo",
         "title" : "title",
-        "type" : { },
+        "type" : "None",
         "url" : "url",
+        "logoUrl" : "logoUrl",
         "levelProgress" : 6.027456183070403
       },
       "profit" : 5.637376656633329,
       "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
-    } ],
-    "direction" : { }
+    } ]
   } ]
 }}]
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
-     - parameter dateFrom: (query)  (optional)
-     - parameter dateTo: (query)  (optional)
-     - parameter symbol: (query)  (optional)
-     - parameter sorting: (query)  (optional)
-     - parameter accountId: (query)  (optional)
-     - parameter accountCurrency: (query)  (optional)
-     - parameter isFollow: (query)  (optional)
-     - parameter skip: (query)  (optional)
-     - parameter take: (query)  (optional)
+     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter symbol: (query)  (optional)     - parameter sorting: (query)  (optional)     - parameter accountId: (query)  (optional)     - parameter accountCurrency: (query)  (optional)     - parameter isFollow: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<TradesSignalViewModel> 
      */
-    open class func getTradesWithRequestBuilder(id: UUID, authorization: String, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: Sorting_getTrades? = nil, accountId: UUID? = nil, accountCurrency: AccountCurrency_getTrades? = nil, isFollow: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<TradesSignalViewModel> {
+    open class func getTradesWithRequestBuilder(_id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: TradeSorting? = nil, accountId: UUID? = nil, accountCurrency: Currency? = nil, isFollow: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<TradesSignalViewModel> {
         var path = "/v2.0/tradingaccount/{id}/trades"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "DateFrom": dateFrom?.encodeToJSON(), 
-            "DateTo": dateTo?.encodeToJSON(), 
-            "Symbol": symbol, 
-            "Sorting": sorting?.rawValue, 
-            "AccountId": accountId, 
-            "AccountCurrency": accountCurrency?.rawValue, 
-            "IsFollow": isFollow, 
-            "Skip": skip?.encodeToJSON(), 
-            "Take": take?.encodeToJSON()
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "DateFrom": dateFrom?.encodeToJSON(), 
+                        "DateTo": dateTo?.encodeToJSON(), 
+                        "Symbol": symbol, 
+                        "Sorting": sorting, 
+                        "AccountId": accountId, 
+                        "AccountCurrency": accountCurrency, 
+                        "IsFollow": isFollow, 
+                        "Skip": skip?.encodeToJSON(), 
+                        "Take": take?.encodeToJSON()
         ])
-        
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<TradesSignalViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
      Trading account details
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
+     - parameter _id: (path)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getTradingAccountDetails(id: UUID, authorization: String, completion: @escaping ((_ data: PrivateTradingAccountFull?,_ error: Error?) -> Void)) {
-        getTradingAccountDetailsWithRequestBuilder(id: id, authorization: authorization).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func getTradingAccountDetails(_id: UUID, completion: @escaping ((_ data: PrivateTradingAccountFull?,_ error: Error?) -> Void)) {
+        getTradingAccountDetailsWithRequestBuilder(_id: _id).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
@@ -981,35 +746,40 @@ open class TradingaccountAPI {
     /**
      Trading account details
      - GET /v2.0/tradingaccount/{id}
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
      - examples: [{contentType=application/json, example={
   "tradingAccountInfo" : {
+    "showTradingLog" : true,
     "leverage" : 0,
     "subscriptions" : 1,
     "apiKey" : "apiKey",
     "balance" : 6.027456183070403,
     "isExternal" : true,
-    "currency" : "USD",
+    "currency" : "Undefined",
     "login" : "login",
-    "type" : { }
+    "type" : "None"
   },
   "publicInfo" : {
     "title" : "title",
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
-    "status" : { }
+    "status" : "Pending"
   },
   "ownerActions" : {
     "canClose" : true,
-    "isEnoughMoneyToCreateProgram" : true,
-    "canChangePassword" : true,
+    "canCloseOpenPositions" : true,
     "canEditSignalProviderSettings" : true,
-    "canMakeSignalProviderFromPrivateTradingAccount" : true,
-    "canMakeSignalProviderFromProgram" : true,
     "canMakeSignalProviderFromPrivateExternalTradingAccount" : true,
     "canTransferMoney" : true,
     "canMakeDemoDeposit" : true,
     "canMakeProgramFromPrivateTradingAccount" : true,
-    "canConfirm2FA" : true,
-    "canMakeProgramFromSignalProvider" : true
+    "canMakeProgramFromSignalProvider" : true,
+    "isEnoughMoneyToCreateProgram" : true,
+    "canChangePassword" : true,
+    "canMakeSignalProviderFromPrivateTradingAccount" : true,
+    "canMakeSignalProviderFromProgram" : true,
+    "canConfirm2FA" : true
   },
   "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "brokerDetails" : {
@@ -1017,39 +787,34 @@ open class TradingaccountAPI {
     "showCommissionRebate" : true,
     "showSwaps" : true,
     "showTicketsSometime" : true,
-    "type" : { },
+    "type" : "Undefined",
     "showTickets" : true,
+    "logoUrl" : "logoUrl",
     "isKycRequired" : true,
     "name" : "name",
-    "logo" : "logo",
     "showSwapsSometime" : true,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "isSignalsAvailable" : true,
     "isKycRequiredSometime" : true
   }
 }}]
-     
-     - parameter id: (path)  
-     - parameter authorization: (header) JWT access token 
+     - parameter _id: (path)  
 
      - returns: RequestBuilder<PrivateTradingAccountFull> 
      */
-    open class func getTradingAccountDetailsWithRequestBuilder(id: UUID, authorization: String) -> RequestBuilder<PrivateTradingAccountFull> {
+    open class func getTradingAccountDetailsWithRequestBuilder(_id: UUID) -> RequestBuilder<PrivateTradingAccountFull> {
         var path = "/v2.0/tradingaccount/{id}"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
-        let url = NSURLComponents(string: URLString)
-
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+        let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<PrivateTradingAccountFull>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
 }

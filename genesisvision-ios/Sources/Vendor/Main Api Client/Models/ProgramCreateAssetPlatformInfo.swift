@@ -8,37 +8,15 @@
 import Foundation
 
 
+public struct ProgramCreateAssetPlatformInfo: Codable {
 
-open class ProgramCreateAssetPlatformInfo: Codable {
 
-    public var maxEntryFee: Double?
     public var maxSuccessFee: Double?
 
-
-    
-    public init(maxEntryFee: Double?, maxSuccessFee: Double?) {
-        self.maxEntryFee = maxEntryFee
+    public var maxManagementFee: Double?
+    public init(maxSuccessFee: Double? = nil, maxManagementFee: Double? = nil) { 
         self.maxSuccessFee = maxSuccessFee
-    }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(maxEntryFee, forKey: "maxEntryFee")
-        try container.encodeIfPresent(maxSuccessFee, forKey: "maxSuccessFee")
+        self.maxManagementFee = maxManagementFee
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        maxEntryFee = try container.decodeIfPresent(Double.self, forKey: "maxEntryFee")
-        maxSuccessFee = try container.decodeIfPresent(Double.self, forKey: "maxSuccessFee")
-    }
 }
-

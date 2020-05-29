@@ -7,11 +7,9 @@
 
 import Foundation
 
-
 public enum MoneyLocationType: String, Codable {
     case programs = "Programs"
     case funds = "Funds"
     case trading = "Trading"
     case wallet = "Wallet"
-
 }

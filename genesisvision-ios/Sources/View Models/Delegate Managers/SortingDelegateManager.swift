@@ -34,7 +34,7 @@ class SortingManager: NSObject {
     }
     
     // MARK: - Private methods
-    private func getProgramsSelectedSorting() -> ProgramsAPI.Sorting_getPrograms {
+    private func getProgramsSelectedSorting() -> ProgramsFilterSorting {
         let selectedValue = getSelectedSortingValue()
         
         switch selectedValue {
@@ -56,7 +56,7 @@ class SortingManager: NSObject {
             return highToLowValue ? .byProfitDesc : .byProfitAsc
         }
     }
-    private func getFollowsSelectedSorting() -> FollowAPI.Sorting_getFollowAssets {
+    private func getFollowsSelectedSorting() -> FollowFilterSorting {
         let selectedValue = getSelectedSortingValue()
         
         switch selectedValue {
@@ -76,7 +76,7 @@ class SortingManager: NSObject {
             return highToLowValue ? .byProfitDesc : .byProfitAsc
         }
     }
-    private func getFundsSelectedSorting() -> FundsAPI.Sorting_getFunds {
+    private func getFundsSelectedSorting() -> FundsFilterSorting {
         let selectedValue = getSelectedSortingValue()
         
         switch selectedValue {
@@ -94,7 +94,7 @@ class SortingManager: NSObject {
             return highToLowValue ? .byProfitDesc : .byProfitAsc
         }
     }
-    private func getTradesOpenSelectedSorting() -> ProgramsAPI.Sorting_getProgramOpenTrades {
+    private func getTradesOpenSelectedSorting() -> TradeSorting {
         let selectedValue = getSelectedSortingValue()
         
         switch selectedValue {
@@ -116,7 +116,7 @@ class SortingManager: NSObject {
             return highToLowValue ? .byDateDesc : .byDateAsc
         }
     }
-    private func getTradesSelectedSorting() -> ProgramsAPI.Sorting_getAssetTrades {
+    private func getTradesSelectedSorting() -> TradeSorting {
         let selectedValue = getSelectedSortingValue()
         
         switch selectedValue {
@@ -139,28 +139,28 @@ class SortingManager: NSObject {
             return highToLowValue ? .byDateDesc : .byDateAsc
         }
     }
-    private func getSignalTradesOpenSelectedSorting() -> SignalAPI.Sorting_getOpenSignalTrades {
-        let selectedValue = getSelectedSortingValue()
-        
-        switch selectedValue {
-        case "date":
-            return highToLowValue ? .byDateDesc : .byDateAsc
-        case "ticket":
-            return highToLowValue ? .byTicketDesc : .byTicketAsc
-        case "symbol":
-            return highToLowValue ? .bySymbolDesc : .bySymbolAsc
-        case "direction":
-            return highToLowValue ? .byDirectionDesc : .byDirectionAsc
-        case "volume":
-            return highToLowValue ? .byVolumeDesc : .byVolumeAsc
-        case "price":
-            return highToLowValue ? .byPriceDesc : .byPriceAsc
-        case "profit":
-            return highToLowValue ? .byProfitDesc : .byProfitAsc
-        default:
-            return highToLowValue ? .byDateDesc : .byDateAsc
-        }
-    }
+//    private func getSignalTradesOpenSelectedSorting() -> SignalAPI.Sorting_getOpenSignalTrades {
+//        let selectedValue = getSelectedSortingValue()
+//
+//        switch selectedValue {
+//        case "date":
+//            return highToLowValue ? .byDateDesc : .byDateAsc
+//        case "ticket":
+//            return highToLowValue ? .byTicketDesc : .byTicketAsc
+//        case "symbol":
+//            return highToLowValue ? .bySymbolDesc : .bySymbolAsc
+//        case "direction":
+//            return highToLowValue ? .byDirectionDesc : .byDirectionAsc
+//        case "volume":
+//            return highToLowValue ? .byVolumeDesc : .byVolumeAsc
+//        case "price":
+//            return highToLowValue ? .byPriceDesc : .byPriceAsc
+//        case "profit":
+//            return highToLowValue ? .byProfitDesc : .byProfitAsc
+//        default:
+//            return highToLowValue ? .byDateDesc : .byDateAsc
+//        }
+//    }
     
     private func setup() {
         switch sortingType {
@@ -205,7 +205,7 @@ class SortingManager: NSObject {
         case .trades:
             return getTradesSelectedSorting()
         case .signalTradesOpen:
-            return getSignalTradesOpenSelectedSorting()
+            return getTradesSelectedSorting()
         }
     }
 }

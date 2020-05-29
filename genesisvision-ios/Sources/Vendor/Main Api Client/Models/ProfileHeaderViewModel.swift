@@ -8,81 +8,75 @@
 import Foundation
 
 
+public struct ProfileHeaderViewModel: Codable {
 
-open class ProfileHeaderViewModel: Codable {
 
-    public var id: UUID?
+    public var _id: UUID?
+
     public var name: String?
+
     public var email: String?
+
     public var url: String?
-    public var avatar: String?
+
+    public var logoUrl: String?
+
     public var countryCode: String?
+
     public var notificationsCount: Int?
+
     public var isKycConfirmed: Bool?
+
     public var isForexAllowed: Bool?
+
+    public var isCountryUS: Bool?
+
     public var isTwoFactorEnabled: Bool?
+
     public var isNewUser: Bool?
+
     public var isPublicInvestor: Bool?
+
+    public var betaTester: [BetaTestingType]?
+
     public var isUserNameFilled: Bool?
 
-
-    
-    public init(id: UUID?, name: String?, email: String?, url: String?, avatar: String?, countryCode: String?, notificationsCount: Int?, isKycConfirmed: Bool?, isForexAllowed: Bool?, isTwoFactorEnabled: Bool?, isNewUser: Bool?, isPublicInvestor: Bool?, isUserNameFilled: Bool?) {
-        self.id = id
+    public var platformCurrency: Currency?
+    public init(_id: UUID? = nil, name: String? = nil, email: String? = nil, url: String? = nil, logoUrl: String? = nil, countryCode: String? = nil, notificationsCount: Int? = nil, isKycConfirmed: Bool? = nil, isForexAllowed: Bool? = nil, isCountryUS: Bool? = nil, isTwoFactorEnabled: Bool? = nil, isNewUser: Bool? = nil, isPublicInvestor: Bool? = nil, betaTester: [BetaTestingType]? = nil, isUserNameFilled: Bool? = nil, platformCurrency: Currency? = nil) { 
+        self._id = _id
         self.name = name
         self.email = email
         self.url = url
-        self.avatar = avatar
+        self.logoUrl = logoUrl
         self.countryCode = countryCode
         self.notificationsCount = notificationsCount
         self.isKycConfirmed = isKycConfirmed
         self.isForexAllowed = isForexAllowed
+        self.isCountryUS = isCountryUS
         self.isTwoFactorEnabled = isTwoFactorEnabled
         self.isNewUser = isNewUser
         self.isPublicInvestor = isPublicInvestor
+        self.betaTester = betaTester
         self.isUserNameFilled = isUserNameFilled
+        self.platformCurrency = platformCurrency
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(id, forKey: "id")
-        try container.encodeIfPresent(name, forKey: "name")
-        try container.encodeIfPresent(email, forKey: "email")
-        try container.encodeIfPresent(url, forKey: "url")
-        try container.encodeIfPresent(avatar, forKey: "avatar")
-        try container.encodeIfPresent(countryCode, forKey: "countryCode")
-        try container.encodeIfPresent(notificationsCount, forKey: "notificationsCount")
-        try container.encodeIfPresent(isKycConfirmed, forKey: "isKycConfirmed")
-        try container.encodeIfPresent(isForexAllowed, forKey: "isForexAllowed")
-        try container.encodeIfPresent(isTwoFactorEnabled, forKey: "isTwoFactorEnabled")
-        try container.encodeIfPresent(isNewUser, forKey: "isNewUser")
-        try container.encodeIfPresent(isPublicInvestor, forKey: "isPublicInvestor")
-        try container.encodeIfPresent(isUserNameFilled, forKey: "isUserNameFilled")
+    public enum CodingKeys: String, CodingKey { 
+        case _id = "id"
+        case name
+        case email
+        case url
+        case logoUrl
+        case countryCode
+        case notificationsCount
+        case isKycConfirmed
+        case isForexAllowed
+        case isCountryUS
+        case isTwoFactorEnabled
+        case isNewUser
+        case isPublicInvestor
+        case betaTester
+        case isUserNameFilled
+        case platformCurrency
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        id = try container.decodeIfPresent(UUID.self, forKey: "id")
-        name = try container.decodeIfPresent(String.self, forKey: "name")
-        email = try container.decodeIfPresent(String.self, forKey: "email")
-        url = try container.decodeIfPresent(String.self, forKey: "url")
-        avatar = try container.decodeIfPresent(String.self, forKey: "avatar")
-        countryCode = try container.decodeIfPresent(String.self, forKey: "countryCode")
-        notificationsCount = try container.decodeIfPresent(Int.self, forKey: "notificationsCount")
-        isKycConfirmed = try container.decodeIfPresent(Bool.self, forKey: "isKycConfirmed")
-        isForexAllowed = try container.decodeIfPresent(Bool.self, forKey: "isForexAllowed")
-        isTwoFactorEnabled = try container.decodeIfPresent(Bool.self, forKey: "isTwoFactorEnabled")
-        isNewUser = try container.decodeIfPresent(Bool.self, forKey: "isNewUser")
-        isPublicInvestor = try container.decodeIfPresent(Bool.self, forKey: "isPublicInvestor")
-        isUserNameFilled = try container.decodeIfPresent(Bool.self, forKey: "isUserNameFilled")
-    }
 }
-

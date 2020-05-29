@@ -34,7 +34,7 @@ extension ProgramInvestNowTableViewCellViewModel: CellViewModel {
         cell.investButton.setTitle("Invest", for: .normal)
         
         cell.entryFeeTitleLabel.text = "entry fee"
-        if let entryFeeCurrent = programDetails?.entryFeeCurrent, let entryFeeSelected = programDetails?.entryFeeSelected {
+        if let entryFeeCurrent = programDetails?.managementFeeCurrent, let entryFeeSelected = programDetails?.managementFeeSelected {
             let entryFeeCurrentString = entryFeeCurrent.rounded(with: .undefined).toString() + "%"
             let entryFeeSelectedString = " (" + entryFeeSelected.rounded(with: .undefined).toString() + "%)"
             

@@ -39,13 +39,13 @@ class WalletMoreButtonView: UIView {
         
         backgroundColor = UIColor.Cell.bg
     }
-    
+    // MARK: WILL NOT WORK
     // MARK: - Public Methods
     func configure(_ wallet: WalletSummary?) {
-        guard let wallet = wallet, let payFeesWithGvt = wallet.payFeesWithGvt else { return }
+        guard let wallet = wallet else { return }//let payFeesWithGvt = wallet.payFeesWithGvt else { return }
         
         titleLabel.text = "Using GVT to pay for fees"
-        payFeesWithGvtSwitch.isOn = payFeesWithGvt
+        //payFeesWithGvtSwitch.isOn = payFeesWithGvt
     }
     
     // MARK: - Actions

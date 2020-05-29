@@ -8,29 +8,42 @@
 import Foundation
 
 
+public struct PersonalInvestingProgramDetailsList: Codable {
 
-open class PersonalInvestingProgramDetailsList: Codable {
 
     public var isOwnAsset: Bool?
+
     public var isFavorite: Bool?
+
     public var isReinvest: Bool?
+
+    public var isAutoJoin: Bool?
+
     public var canInvest: Bool?
+
     public var canWithdraw: Bool?
+
+    public var canChangeReinvest: Bool?
+
     public var share: Double?
+
     public var value: Double?
+
     public var profit: Double?
+
     public var profitPercent: Double?
+
     public var invested: Double?
+
     public var status: AssetInvestmentStatus?
-
-
-    
-    public init(isOwnAsset: Bool?, isFavorite: Bool?, isReinvest: Bool?, canInvest: Bool?, canWithdraw: Bool?, share: Double?, value: Double?, profit: Double?, profitPercent: Double?, invested: Double?, status: AssetInvestmentStatus?) {
+    public init(isOwnAsset: Bool? = nil, isFavorite: Bool? = nil, isReinvest: Bool? = nil, isAutoJoin: Bool? = nil, canInvest: Bool? = nil, canWithdraw: Bool? = nil, canChangeReinvest: Bool? = nil, share: Double? = nil, value: Double? = nil, profit: Double? = nil, profitPercent: Double? = nil, invested: Double? = nil, status: AssetInvestmentStatus? = nil) { 
         self.isOwnAsset = isOwnAsset
         self.isFavorite = isFavorite
         self.isReinvest = isReinvest
+        self.isAutoJoin = isAutoJoin
         self.canInvest = canInvest
         self.canWithdraw = canWithdraw
+        self.canChangeReinvest = canChangeReinvest
         self.share = share
         self.value = value
         self.profit = profit
@@ -38,43 +51,5 @@ open class PersonalInvestingProgramDetailsList: Codable {
         self.invested = invested
         self.status = status
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(isOwnAsset, forKey: "isOwnAsset")
-        try container.encodeIfPresent(isFavorite, forKey: "isFavorite")
-        try container.encodeIfPresent(isReinvest, forKey: "isReinvest")
-        try container.encodeIfPresent(canInvest, forKey: "canInvest")
-        try container.encodeIfPresent(canWithdraw, forKey: "canWithdraw")
-        try container.encodeIfPresent(share, forKey: "share")
-        try container.encodeIfPresent(value, forKey: "value")
-        try container.encodeIfPresent(profit, forKey: "profit")
-        try container.encodeIfPresent(profitPercent, forKey: "profitPercent")
-        try container.encodeIfPresent(invested, forKey: "invested")
-        try container.encodeIfPresent(status, forKey: "status")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        isOwnAsset = try container.decodeIfPresent(Bool.self, forKey: "isOwnAsset")
-        isFavorite = try container.decodeIfPresent(Bool.self, forKey: "isFavorite")
-        isReinvest = try container.decodeIfPresent(Bool.self, forKey: "isReinvest")
-        canInvest = try container.decodeIfPresent(Bool.self, forKey: "canInvest")
-        canWithdraw = try container.decodeIfPresent(Bool.self, forKey: "canWithdraw")
-        share = try container.decodeIfPresent(Double.self, forKey: "share")
-        value = try container.decodeIfPresent(Double.self, forKey: "value")
-        profit = try container.decodeIfPresent(Double.self, forKey: "profit")
-        profitPercent = try container.decodeIfPresent(Double.self, forKey: "profitPercent")
-        invested = try container.decodeIfPresent(Double.self, forKey: "invested")
-        status = try container.decodeIfPresent(AssetInvestmentStatus.self, forKey: "status")
-    }
 }
-

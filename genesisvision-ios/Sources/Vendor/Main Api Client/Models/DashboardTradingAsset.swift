@@ -8,24 +8,30 @@
 import Foundation
 
 
+public struct DashboardTradingAsset: Codable {
 
-open class DashboardTradingAsset: Codable {
 
-    public var id: UUID?
+    public var _id: UUID?
+
     public var assetType: AssetType?
+
     public var assetTypeExt: AssetTypeExt?
+
     public var statistic: ProfitChart?
+
     public var publicInfo: DashboardTradingAssetPublicDetails?
+
     public var accountInfo: DashboardTradingAssetCommonDetails?
+
     public var signalInfo: DashboardTradingAssetSignalDetails?
+
     public var broker: DashboardTradingAssetBrokerDetails?
+
     public var actions: DashboardTradingAssetActions?
+
     public var tags: [Tag]?
-
-
-    
-    public init(id: UUID?, assetType: AssetType?, assetTypeExt: AssetTypeExt?, statistic: ProfitChart?, publicInfo: DashboardTradingAssetPublicDetails?, accountInfo: DashboardTradingAssetCommonDetails?, signalInfo: DashboardTradingAssetSignalDetails?, broker: DashboardTradingAssetBrokerDetails?, actions: DashboardTradingAssetActions?, tags: [Tag]?) {
-        self.id = id
+    public init(_id: UUID? = nil, assetType: AssetType? = nil, assetTypeExt: AssetTypeExt? = nil, statistic: ProfitChart? = nil, publicInfo: DashboardTradingAssetPublicDetails? = nil, accountInfo: DashboardTradingAssetCommonDetails? = nil, signalInfo: DashboardTradingAssetSignalDetails? = nil, broker: DashboardTradingAssetBrokerDetails? = nil, actions: DashboardTradingAssetActions? = nil, tags: [Tag]? = nil) { 
+        self._id = _id
         self.assetType = assetType
         self.assetTypeExt = assetTypeExt
         self.statistic = statistic
@@ -36,41 +42,17 @@ open class DashboardTradingAsset: Codable {
         self.actions = actions
         self.tags = tags
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(id, forKey: "id")
-        try container.encodeIfPresent(assetType, forKey: "assetType")
-        try container.encodeIfPresent(assetTypeExt, forKey: "assetTypeExt")
-        try container.encodeIfPresent(statistic, forKey: "statistic")
-        try container.encodeIfPresent(publicInfo, forKey: "publicInfo")
-        try container.encodeIfPresent(accountInfo, forKey: "accountInfo")
-        try container.encodeIfPresent(signalInfo, forKey: "signalInfo")
-        try container.encodeIfPresent(broker, forKey: "broker")
-        try container.encodeIfPresent(actions, forKey: "actions")
-        try container.encodeIfPresent(tags, forKey: "tags")
+    public enum CodingKeys: String, CodingKey { 
+        case _id = "id"
+        case assetType
+        case assetTypeExt
+        case statistic
+        case publicInfo
+        case accountInfo
+        case signalInfo
+        case broker
+        case actions
+        case tags
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        id = try container.decodeIfPresent(UUID.self, forKey: "id")
-        assetType = try container.decodeIfPresent(AssetType.self, forKey: "assetType")
-        assetTypeExt = try container.decodeIfPresent(AssetTypeExt.self, forKey: "assetTypeExt")
-        statistic = try container.decodeIfPresent(ProfitChart.self, forKey: "statistic")
-        publicInfo = try container.decodeIfPresent(DashboardTradingAssetPublicDetails.self, forKey: "publicInfo")
-        accountInfo = try container.decodeIfPresent(DashboardTradingAssetCommonDetails.self, forKey: "accountInfo")
-        signalInfo = try container.decodeIfPresent(DashboardTradingAssetSignalDetails.self, forKey: "signalInfo")
-        broker = try container.decodeIfPresent(DashboardTradingAssetBrokerDetails.self, forKey: "broker")
-        actions = try container.decodeIfPresent(DashboardTradingAssetActions.self, forKey: "actions")
-        tags = try container.decodeIfPresent([Tag].self, forKey: "tags")
-    }
 }
-

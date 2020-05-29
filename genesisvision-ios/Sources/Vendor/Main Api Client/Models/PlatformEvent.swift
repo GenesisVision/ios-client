@@ -8,26 +8,33 @@
 import Foundation
 
 
+public struct PlatformEvent: Codable {
 
-open class PlatformEvent: Codable {
 
     public var title: String?
+
     public var text: String?
-    public var icon: String?
+
+    public var logoUrl: String?
+
     public var assetUrl: String?
+
     public var userUrl: String?
+
+    /** Can be null */
     public var value: String?
+
     public var color: String?
+
     public var assetType: AssetType?
+
     public var date: Date?
+
     public var type: PlatformEventType?
-
-
-    
-    public init(title: String?, text: String?, icon: String?, assetUrl: String?, userUrl: String?, value: String?, color: String?, assetType: AssetType?, date: Date?, type: PlatformEventType?) {
+    public init(title: String? = nil, text: String? = nil, logoUrl: String? = nil, assetUrl: String? = nil, userUrl: String? = nil, value: String? = nil, color: String? = nil, assetType: AssetType? = nil, date: Date? = nil, type: PlatformEventType? = nil) { 
         self.title = title
         self.text = text
-        self.icon = icon
+        self.logoUrl = logoUrl
         self.assetUrl = assetUrl
         self.userUrl = userUrl
         self.value = value
@@ -36,41 +43,5 @@ open class PlatformEvent: Codable {
         self.date = date
         self.type = type
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(title, forKey: "title")
-        try container.encodeIfPresent(text, forKey: "text")
-        try container.encodeIfPresent(icon, forKey: "icon")
-        try container.encodeIfPresent(assetUrl, forKey: "assetUrl")
-        try container.encodeIfPresent(userUrl, forKey: "userUrl")
-        try container.encodeIfPresent(value, forKey: "value")
-        try container.encodeIfPresent(color, forKey: "color")
-        try container.encodeIfPresent(assetType, forKey: "assetType")
-        try container.encodeIfPresent(date, forKey: "date")
-        try container.encodeIfPresent(type, forKey: "type")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        title = try container.decodeIfPresent(String.self, forKey: "title")
-        text = try container.decodeIfPresent(String.self, forKey: "text")
-        icon = try container.decodeIfPresent(String.self, forKey: "icon")
-        assetUrl = try container.decodeIfPresent(String.self, forKey: "assetUrl")
-        userUrl = try container.decodeIfPresent(String.self, forKey: "userUrl")
-        value = try container.decodeIfPresent(String.self, forKey: "value")
-        color = try container.decodeIfPresent(String.self, forKey: "color")
-        assetType = try container.decodeIfPresent(AssetType.self, forKey: "assetType")
-        date = try container.decodeIfPresent(Date.self, forKey: "date")
-        type = try container.decodeIfPresent(PlatformEventType.self, forKey: "type")
-    }
 }
-

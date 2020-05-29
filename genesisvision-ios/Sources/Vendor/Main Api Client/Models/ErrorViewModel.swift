@@ -8,37 +8,15 @@
 import Foundation
 
 
+public struct ErrorViewModel: Codable {
 
-open class ErrorViewModel: Codable {
 
     public var errors: [ErrorMessage]?
+
     public var code: ErrorCodes?
-
-
-    
-    public init(errors: [ErrorMessage]?, code: ErrorCodes?) {
+    public init(errors: [ErrorMessage]? = nil, code: ErrorCodes? = nil) { 
         self.errors = errors
         self.code = code
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(errors, forKey: "errors")
-        try container.encodeIfPresent(code, forKey: "code")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        errors = try container.decodeIfPresent([ErrorMessage].self, forKey: "errors")
-        code = try container.decodeIfPresent(ErrorCodes.self, forKey: "code")
-    }
 }
-

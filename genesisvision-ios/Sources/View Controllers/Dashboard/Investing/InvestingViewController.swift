@@ -66,7 +66,7 @@ class InvestingViewController: ListViewController {
         bottomSheetController.present()
     }
     
-    func showRequests(_ requests: ItemsViewModelAssetInvestmentRequest?) {
+    func showRequests(_ requests: AssetInvestmentRequestItemsViewModel?) {
         bottomSheetController = BottomSheetController()
         bottomSheetController.initializeHeight = 300.0
         
@@ -109,7 +109,7 @@ extension InvestingViewController: InRequestsDelegateManagerProtocol {
         }
 
         let request = requests[indexPath.row]
-        if let assetId = request.assetDetails?.id?.uuidString, let assetType = request.assetDetails?.assetType {
+        if let assetId = request.assetDetails?._id?.uuidString, let assetType = request.assetDetails?.assetType {
             viewModel.router?.showAssetDetails(with: assetId, assetType: assetType)
         }
     }
@@ -181,7 +181,7 @@ extension InvestingViewController: BaseTableViewProtocol {
             vc.title = "Funds"
             navigationController?.pushViewController(vc, animated: true)
         case .investingRequests:
-            showRequests(viewModel.requests)
+            showRequests(viewModel?.requests)
         default:
             break
         }
@@ -245,7 +245,7 @@ class InvestingViewModel: ViewModelWithListProtocol {
             delegate?.didReload()
         }
     }
-    var requests: ItemsViewModelAssetInvestmentRequest? {
+    var requests: AssetInvestmentRequestItemsViewModel? {
         didSet {
             guard let count = requests?.items?.count, count > 0 else { return }
             sections.insert(.requests, at: 1)
@@ -254,7 +254,7 @@ class InvestingViewModel: ViewModelWithListProtocol {
             delegate?.didReload()
         }
     }
-    var fundInvesting: ItemsViewModelFundInvestingDetailsList? {
+    var fundInvesting: FundInvestingDetailsListItemsViewModel? {
         didSet {
             guard let count = fundInvesting?.items?.count, count > 0 else { return }
             
@@ -263,7 +263,7 @@ class InvestingViewModel: ViewModelWithListProtocol {
             reloadSection(.funds)
         }
     }
-    var programInvesting: ItemsViewModelProgramInvestingDetailsList? {
+    var programInvesting: ProgramInvestingDetailsListItemsViewModel? {
         didSet {
             guard let count = programInvesting?.items?.count, count > 0 else { return }
             

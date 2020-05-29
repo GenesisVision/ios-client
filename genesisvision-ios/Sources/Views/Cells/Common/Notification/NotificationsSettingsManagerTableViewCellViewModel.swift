@@ -23,7 +23,7 @@ extension NotificationsSettingsManagerTableViewCellViewModel: CellViewModel {
         
         cell.assetLogoImageView.profilePhotoImageView.image = UIImage.programPlaceholder
         
-        if let logo = setting.avatar, let fileUrl = getFileURL(fileName: logo) {
+        if let logo = setting.logoUrl, let fileUrl = getFileURL(fileName: logo) {
             cell.assetLogoImageView.profilePhotoImageView.kf.indicatorType = .activity
             cell.assetLogoImageView.profilePhotoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
             cell.assetLogoImageView.profilePhotoImageView.backgroundColor = .clear

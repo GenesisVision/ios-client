@@ -8,37 +8,15 @@
 import Foundation
 
 
+public struct BrokersProgramInfo: Codable {
 
-open class BrokersProgramInfo: Codable {
 
     public var brokers: [Broker]?
+
     public var currentAccountTypeId: UUID?
-
-
-    
-    public init(brokers: [Broker]?, currentAccountTypeId: UUID?) {
+    public init(brokers: [Broker]? = nil, currentAccountTypeId: UUID? = nil) { 
         self.brokers = brokers
         self.currentAccountTypeId = currentAccountTypeId
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(brokers, forKey: "brokers")
-        try container.encodeIfPresent(currentAccountTypeId, forKey: "currentAccountTypeId")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        brokers = try container.decodeIfPresent([Broker].self, forKey: "brokers")
-        currentAccountTypeId = try container.decodeIfPresent(UUID.self, forKey: "currentAccountTypeId")
-    }
 }
-

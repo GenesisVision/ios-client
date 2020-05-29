@@ -74,7 +74,7 @@ final class ManagerListViewModel: ListViewModelProtocol {
         //TODO: in future
     }
     
-    func updateViewModels(_ managerList: ItemsViewModelPublicProfile?) {
+    func updateViewModels(_ managerList: PublicProfileItemsViewModel?) {
         guard let managerList = managerList else { return }
 
         var viewModels = [ManagerTableViewCellViewModel]()

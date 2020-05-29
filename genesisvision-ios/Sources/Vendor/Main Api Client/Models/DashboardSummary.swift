@@ -8,49 +8,27 @@
 import Foundation
 
 
+public struct DashboardSummary: Codable {
 
-open class DashboardSummary: Codable {
 
     public var invested: Double?
+
     public var trading: Double?
+
     public var wallets: Double?
+
     public var total: Double?
+
     public var profits: DashboardProfits?
 
-
-    
-    public init(invested: Double?, trading: Double?, wallets: Double?, total: Double?, profits: DashboardProfits?) {
+    public var limitWithoutKyc: LimitWithoutKyc?
+    public init(invested: Double? = nil, trading: Double? = nil, wallets: Double? = nil, total: Double? = nil, profits: DashboardProfits? = nil, limitWithoutKyc: LimitWithoutKyc? = nil) { 
         self.invested = invested
         self.trading = trading
         self.wallets = wallets
         self.total = total
         self.profits = profits
-    }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(invested, forKey: "invested")
-        try container.encodeIfPresent(trading, forKey: "trading")
-        try container.encodeIfPresent(wallets, forKey: "wallets")
-        try container.encodeIfPresent(total, forKey: "total")
-        try container.encodeIfPresent(profits, forKey: "profits")
+        self.limitWithoutKyc = limitWithoutKyc
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        invested = try container.decodeIfPresent(Double.self, forKey: "invested")
-        trading = try container.decodeIfPresent(Double.self, forKey: "trading")
-        wallets = try container.decodeIfPresent(Double.self, forKey: "wallets")
-        total = try container.decodeIfPresent(Double.self, forKey: "total")
-        profits = try container.decodeIfPresent(DashboardProfits.self, forKey: "profits")
-    }
 }
-

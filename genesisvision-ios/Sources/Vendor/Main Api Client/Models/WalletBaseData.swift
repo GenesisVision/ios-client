@@ -8,53 +8,35 @@
 import Foundation
 
 
+public struct WalletBaseData: Codable {
 
-open class WalletBaseData: Codable {
 
-    public var id: UUID?
+    public var _id: UUID?
+
     public var title: String?
-    public var logo: String?
+
+    public var logoUrl: String?
+
     public var currency: Currency?
+
     public var available: Double?
+
     public var rate: Double?
-
-
-    
-    public init(id: UUID?, title: String?, logo: String?, currency: Currency?, available: Double?, rate: Double?) {
-        self.id = id
+    public init(_id: UUID? = nil, title: String? = nil, logoUrl: String? = nil, currency: Currency? = nil, available: Double? = nil, rate: Double? = nil) { 
+        self._id = _id
         self.title = title
-        self.logo = logo
+        self.logoUrl = logoUrl
         self.currency = currency
         self.available = available
         self.rate = rate
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(id, forKey: "id")
-        try container.encodeIfPresent(title, forKey: "title")
-        try container.encodeIfPresent(logo, forKey: "logo")
-        try container.encodeIfPresent(currency, forKey: "currency")
-        try container.encodeIfPresent(available, forKey: "available")
-        try container.encodeIfPresent(rate, forKey: "rate")
+    public enum CodingKeys: String, CodingKey { 
+        case _id = "id"
+        case title
+        case logoUrl
+        case currency
+        case available
+        case rate
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        id = try container.decodeIfPresent(UUID.self, forKey: "id")
-        title = try container.decodeIfPresent(String.self, forKey: "title")
-        logo = try container.decodeIfPresent(String.self, forKey: "logo")
-        currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
-        available = try container.decodeIfPresent(Double.self, forKey: "available")
-        rate = try container.decodeIfPresent(Double.self, forKey: "rate")
-    }
 }
-

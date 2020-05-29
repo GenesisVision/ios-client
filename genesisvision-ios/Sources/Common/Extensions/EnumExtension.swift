@@ -31,4 +31,4 @@ public extension EnumCollection {
     }
 }
 
-extension ProgramsAPI.Sorting_getPrograms: EnumCollection {}
+extension ProgramsFilterSorting: EnumCollection {}

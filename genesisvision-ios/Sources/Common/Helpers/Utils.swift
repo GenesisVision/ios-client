@@ -219,9 +219,9 @@ var selectedPlatformCurrency: String {
     }
 }
 
-func getPlatformCurrencyType() -> CurrencyType {
-    if let currencyType = CurrencyType(rawValue: selectedPlatformCurrency) {
-        return currencyType
+func getPlatformCurrencyType() -> Currency {
+    if let currency = Currency(rawValue: selectedPlatformCurrency) {
+        return currency
     }
     
     return .usdt

@@ -8,41 +8,18 @@
 import Foundation
 
 
+public struct DashboardProfits: Codable {
 
-open class DashboardProfits: Codable {
 
     public var day: DashboardTimeframeProfit?
+
     public var week: DashboardTimeframeProfit?
+
     public var month: DashboardTimeframeProfit?
-
-
-    
-    public init(day: DashboardTimeframeProfit?, week: DashboardTimeframeProfit?, month: DashboardTimeframeProfit?) {
+    public init(day: DashboardTimeframeProfit? = nil, week: DashboardTimeframeProfit? = nil, month: DashboardTimeframeProfit? = nil) { 
         self.day = day
         self.week = week
         self.month = month
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(day, forKey: "day")
-        try container.encodeIfPresent(week, forKey: "week")
-        try container.encodeIfPresent(month, forKey: "month")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        day = try container.decodeIfPresent(DashboardTimeframeProfit.self, forKey: "day")
-        week = try container.decodeIfPresent(DashboardTimeframeProfit.self, forKey: "week")
-        month = try container.decodeIfPresent(DashboardTimeframeProfit.self, forKey: "month")
-    }
 }
-

@@ -8,41 +8,23 @@
 import Foundation
 
 
+public struct CaptchaCheckResult: Codable {
 
-open class CaptchaCheckResult: Codable {
 
-    public var id: String?
+    public var _id: String?
+
     public var pow: PowResult?
+
     public var geeTest: GeeTestResult?
-
-
-    
-    public init(id: String?, pow: PowResult?, geeTest: GeeTestResult?) {
-        self.id = id
+    public init(_id: String? = nil, pow: PowResult? = nil, geeTest: GeeTestResult? = nil) { 
+        self._id = _id
         self.pow = pow
         self.geeTest = geeTest
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(id, forKey: "id")
-        try container.encodeIfPresent(pow, forKey: "pow")
-        try container.encodeIfPresent(geeTest, forKey: "geeTest")
+    public enum CodingKeys: String, CodingKey { 
+        case _id = "id"
+        case pow
+        case geeTest
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        id = try container.decodeIfPresent(String.self, forKey: "id")
-        pow = try container.decodeIfPresent(PowResult.self, forKey: "pow")
-        geeTest = try container.decodeIfPresent(GeeTestResult.self, forKey: "geeTest")
-    }
 }
-

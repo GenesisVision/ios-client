@@ -129,12 +129,12 @@ final class ListViewModel: ListViewModelProtocol {
         var fundFacets: [AssetFacet] = []
         var followFacets: [AssetFacet] = []
         
-        let favoritesFaset = AssetFacet(id: nil, title: "Favorites", description: nil, logo: nil, url: nil, sortType: nil, timeframe: nil, sorting: nil)
+        let favoritesFacet = AssetFacet(_id: nil, title: "Favorites", _description: nil, logoUrl: nil, url: nil, sortType: nil, timeframe: nil, sorting: nil)        
         
         switch assetType {
         case .program:
             if isLogin() {
-                programFacets.insert(favoritesFaset, at: 0)
+                programFacets.insert(favoritesFacet, at: 0)
             }
             if let facets = PlatformManager.shared.platformInfo?.assetInfo?.programInfo?.facets {
                 programFacets.append(contentsOf: facets)
@@ -150,7 +150,7 @@ final class ListViewModel: ListViewModelProtocol {
             }
         case .fund:
             if isLogin() {
-                fundFacets.insert(favoritesFaset, at: 0)
+                fundFacets.insert(favoritesFacet, at: 0)
             }
             if let facets = PlatformManager.shared.platformInfo?.assetInfo?.fundInfo?.facets {
                 fundFacets.append(contentsOf: facets)
@@ -166,7 +166,7 @@ final class ListViewModel: ListViewModelProtocol {
             }
         case .follow:
             if isLogin() {
-                followFacets.insert(favoritesFaset, at: 0)
+                followFacets.insert(favoritesFacet, at: 0)
             }
             if let facets = PlatformManager.shared.platformInfo?.assetInfo?.followInfo?.facets {
                 followFacets.append(contentsOf: facets)
@@ -223,19 +223,29 @@ final class ListViewModel: ListViewModelProtocol {
     
     func changeFavoriteProgram(value: Bool, assetId: String, request: Bool = false, completion: @escaping CompletionBlock) {
         guard request else {
-            guard let model = model(for: assetId) as? ProgramTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
-            model.asset.personalDetails?.isFavorite = value
-            completion(.success)
-            return
+
+            var programModel = model(for: assetId) as? ProgramTableViewCellViewModel
+
+            if programModel != nil {
+                programModel!.asset.personalDetails?.isFavorite = value
+                completion(.success)
+                return
+            } else { return completion(.failure(errorType: .apiError(message: nil))) }
+
         }
         
         
         ProgramsDataProvider.favorites(isFavorite: !value, assetId: assetId) { [weak self] (result) in
             switch result {
             case .success:
-                guard let model = self?.model(for: assetId) as? ProgramTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
-                model.asset.personalDetails?.isFavorite = value
-                completion(.success)
+                var programModel = self?.model(for: assetId) as? ProgramTableViewCellViewModel
+                
+                if programModel != nil {
+                    programModel!.asset.personalDetails?.isFavorite = value
+                    completion(.success)
+                } else {
+                    return completion(.failure(errorType: .apiError(message: nil)))
+                }
             case .failure(let errorType):
                 print(errorType)
                 completion(result)
@@ -245,19 +255,30 @@ final class ListViewModel: ListViewModelProtocol {
     
     func changeFavoriteFund(value: Bool, assetId: String, request: Bool = false, completion: @escaping CompletionBlock) {
         guard request else {
-            guard let model = model(for: assetId) as? FundTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
-            model.asset.personalDetails?.isFavorite = value
-            completion(.success)
-            return
+            var fundModel = model(for: assetId) as? FundTableViewCellViewModel
+            
+            if fundModel != nil {
+                fundModel!.asset.personalDetails?.isFavorite = value
+                completion(.success)
+                return
+            } else {
+                return completion(.failure(errorType: .apiError(message: nil)))
+            }
         }
         
         
         FundsDataProvider.favorites(isFavorite: !value, assetId: assetId) { [weak self] (result) in
             switch result {
             case .success:
-                guard let model = self?.model(for: assetId) as? FundTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
-                model.asset.personalDetails?.isFavorite = value
-                completion(.success)
+                var fundModel = self?.model(for: assetId) as? FundTableViewCellViewModel
+                
+                if fundModel != nil {
+                    fundModel!.asset.personalDetails?.isFavorite = value
+                    completion(.success)
+                    return
+                } else {
+                    return completion(.failure(errorType: .apiError(message: nil)))
+                }
             case .failure(let errorType):
                 print(errorType)
                 completion(result)
@@ -267,18 +288,27 @@ final class ListViewModel: ListViewModelProtocol {
     
     func changeFavoriteFollow(value: Bool, assetId: String, request: Bool = false, completion: @escaping CompletionBlock) {
         guard request else {
-            guard let model = model(for: assetId) as? FollowTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
-            model.asset.personalDetails?.isFavorite = value
-            completion(.success)
-            return
+            var followModel = model(for: assetId) as? FollowTableViewCellViewModel
+            
+            if followModel != nil {
+                followModel!.asset.personalDetails?.isFavorite = value
+                completion(.success)
+                return
+            } else {
+                return completion(.failure(errorType: .apiError(message: nil)))
+            }
         }
 
         FollowsDataProvider.favorites(isFavorite: !value, assetId: assetId) { [weak self] (result) in
             switch result {
             case .success:
-                guard let model = self?.model(for: assetId) as? FollowTableViewCellViewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
-                model.asset.personalDetails?.isFavorite = value
-                completion(.success)
+                var followModel = self?.model(for: assetId) as? FollowTableViewCellViewModel
+                
+                if followModel != nil {
+                    followModel!.asset.personalDetails?.isFavorite = value
+                    completion(.success)
+                    return
+                }
             case .failure(let errorType):
                 print(errorType)
                 completion(result)
@@ -286,7 +316,7 @@ final class ListViewModel: ListViewModelProtocol {
         }
     }
     
-    func updateViewModels(_ assetList: ItemsViewModelProgramDetailsListItem?) {
+    func updateViewModels(_ assetList: ProgramDetailsListItemItemsViewModel?) {
         guard let assetList = assetList else { return }
         
         var viewModels = [ProgramTableViewCellViewModel]()
@@ -303,7 +333,7 @@ final class ListViewModel: ListViewModelProtocol {
         self.updateFetchedData(totalCount: totalCount, viewModels)
     }
     
-    func updateViewModels(_ assetList: ItemsViewModelFundDetailsListItem?) {
+    func updateViewModels(_ assetList: FundDetailsListItemItemsViewModel?) {
         guard let assetList = assetList else { return }
 
         var viewModels = [FundTableViewCellViewModel]()
@@ -320,7 +350,7 @@ final class ListViewModel: ListViewModelProtocol {
         self.updateFetchedData(totalCount: totalCount, viewModels)
     }
     
-    func updateViewModels(_ assetList: ItemsViewModelFollowDetailsListItem?) {
+    func updateViewModels(_ assetList: FollowDetailsListItemItemsViewModel?) {
         guard let assetList = assetList else { return }
 
         var viewModels = [FollowTableViewCellViewModel]()

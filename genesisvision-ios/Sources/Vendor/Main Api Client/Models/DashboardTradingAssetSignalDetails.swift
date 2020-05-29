@@ -8,33 +8,12 @@
 import Foundation
 
 
+public struct DashboardTradingAssetSignalDetails: Codable {
 
-open class DashboardTradingAssetSignalDetails: Codable {
 
     public var subscribersCount: Int?
-
-
-    
-    public init(subscribersCount: Int?) {
+    public init(subscribersCount: Int? = nil) { 
         self.subscribersCount = subscribersCount
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(subscribersCount, forKey: "subscribersCount")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        subscribersCount = try container.decodeIfPresent(Int.self, forKey: "subscribersCount")
-    }
 }
-

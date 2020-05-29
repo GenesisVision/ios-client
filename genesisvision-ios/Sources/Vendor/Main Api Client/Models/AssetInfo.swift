@@ -8,57 +8,39 @@
 import Foundation
 
 
+public struct AssetInfo: Codable {
 
-open class AssetInfo: Codable {
 
     public var name: String?
+
     public var symbol: String?
-    public var logo: String?
-    public var description: String?
+
+    public var logoUrl: String?
+
+    public var _description: String?
+
     public var chartSymbol: String?
+
     public var tags: [Tag]?
+
     public var socialLinks: [SocialLinkViewModel]?
-
-
-    
-    public init(name: String?, symbol: String?, logo: String?, description: String?, chartSymbol: String?, tags: [Tag]?, socialLinks: [SocialLinkViewModel]?) {
+    public init(name: String? = nil, symbol: String? = nil, logoUrl: String? = nil, _description: String? = nil, chartSymbol: String? = nil, tags: [Tag]? = nil, socialLinks: [SocialLinkViewModel]? = nil) { 
         self.name = name
         self.symbol = symbol
-        self.logo = logo
-        self.description = description
+        self.logoUrl = logoUrl
+        self._description = _description
         self.chartSymbol = chartSymbol
         self.tags = tags
         self.socialLinks = socialLinks
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(name, forKey: "name")
-        try container.encodeIfPresent(symbol, forKey: "symbol")
-        try container.encodeIfPresent(logo, forKey: "logo")
-        try container.encodeIfPresent(description, forKey: "description")
-        try container.encodeIfPresent(chartSymbol, forKey: "chartSymbol")
-        try container.encodeIfPresent(tags, forKey: "tags")
-        try container.encodeIfPresent(socialLinks, forKey: "socialLinks")
+    public enum CodingKeys: String, CodingKey { 
+        case name
+        case symbol
+        case logoUrl
+        case _description = "description"
+        case chartSymbol
+        case tags
+        case socialLinks
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        name = try container.decodeIfPresent(String.self, forKey: "name")
-        symbol = try container.decodeIfPresent(String.self, forKey: "symbol")
-        logo = try container.decodeIfPresent(String.self, forKey: "logo")
-        description = try container.decodeIfPresent(String.self, forKey: "description")
-        chartSymbol = try container.decodeIfPresent(String.self, forKey: "chartSymbol")
-        tags = try container.decodeIfPresent([Tag].self, forKey: "tags")
-        socialLinks = try container.decodeIfPresent([SocialLinkViewModel].self, forKey: "socialLinks")
-    }
 }
-

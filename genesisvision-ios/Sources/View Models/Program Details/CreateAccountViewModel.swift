@@ -99,10 +99,10 @@ final class OldCreateAccountViewModel {
     // MARK: - Navigation
     func create(_ initialDepositAmount: Double) {
         guard let wallet = selectedWalletFromDelegateManager?.selected else { return }
-        let request = NewTradingAccountRequest(depositAmount: initialDepositAmount, depositWalletId: wallet.id, currency: wallet.currency, leverage: leverage, brokerAccountTypeId: brokerId)
+        let request = NewTradingAccountRequest(depositAmount: initialDepositAmount, depositWalletId: wallet._id, currency: wallet.currency, leverage: leverage, brokerAccountTypeId: brokerId)
         
         AssetsDataProvider.createTradingAccount(request, completion: { [weak self] (viewModel) in
-            self?.completion?(viewModel?.id)
+            self?.completion?(viewModel?._id)
         }) { (result) in
             print(result)
         }

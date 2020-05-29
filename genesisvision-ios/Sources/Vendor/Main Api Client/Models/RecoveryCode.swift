@@ -8,37 +8,15 @@
 import Foundation
 
 
+public struct RecoveryCode: Codable {
 
-open class RecoveryCode: Codable {
 
     public var code: String?
+
     public var isActive: Bool?
-
-
-    
-    public init(code: String?, isActive: Bool?) {
+    public init(code: String? = nil, isActive: Bool? = nil) { 
         self.code = code
         self.isActive = isActive
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(code, forKey: "code")
-        try container.encodeIfPresent(isActive, forKey: "isActive")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        code = try container.decodeIfPresent(String.self, forKey: "code")
-        isActive = try container.decodeIfPresent(Bool.self, forKey: "isActive")
-    }
 }
-

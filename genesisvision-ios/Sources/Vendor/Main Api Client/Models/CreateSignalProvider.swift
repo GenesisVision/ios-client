@@ -8,42 +8,24 @@
 import Foundation
 
 
+public struct CreateSignalProvider: Codable {
 
-open class CreateSignalProvider: Codable {
 
     /** AssetId */
-    public var id: UUID?
+    public var _id: UUID?
+
     public var volumeFee: Double?
+
     public var successFee: Double?
-
-
-    
-    public init(id: UUID?, volumeFee: Double?, successFee: Double?) {
-        self.id = id
+    public init(_id: UUID? = nil, volumeFee: Double? = nil, successFee: Double? = nil) { 
+        self._id = _id
         self.volumeFee = volumeFee
         self.successFee = successFee
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(id, forKey: "id")
-        try container.encodeIfPresent(volumeFee, forKey: "volumeFee")
-        try container.encodeIfPresent(successFee, forKey: "successFee")
+    public enum CodingKeys: String, CodingKey { 
+        case _id = "id"
+        case volumeFee
+        case successFee
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        id = try container.decodeIfPresent(UUID.self, forKey: "id")
-        volumeFee = try container.decodeIfPresent(Double.self, forKey: "volumeFee")
-        successFee = try container.decodeIfPresent(Double.self, forKey: "successFee")
-    }
 }
-

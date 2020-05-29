@@ -29,7 +29,7 @@ class FundAssetCollectionViewCell: BaseCollectionViewCell {
     @IBOutlet weak var percentLabel: TitleLabel!
     
     func configure(_ assetModel: PlatformAsset?) {
-        if let logo = assetModel?.icon, let fileUrl = getFileURL(fileName: logo) {
+        if let logo = assetModel?.logoUrl, let fileUrl = getFileURL(fileName: logo) {
             logoImageView.isHidden = false
             logoImageView.image = #imageLiteral(resourceName: "img_wallet_usdt_icon")
             logoImageView.kf.indicatorType = .activity
@@ -50,7 +50,7 @@ class FundAssetCollectionViewCell: BaseCollectionViewCell {
             percentLabel.isHidden = true
         }
         
-        if assetModel?.icon == nil, assetModel?.asset == nil {
+        if assetModel?.logoUrl == nil, assetModel?.asset == nil {
             percentLabel.textAlignment = .center
             percentLabel.textColor = UIColor.primary
         } else {

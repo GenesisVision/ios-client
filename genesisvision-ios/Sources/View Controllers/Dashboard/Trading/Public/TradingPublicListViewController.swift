@@ -53,7 +53,7 @@ class TradingPublicListViewController: ListViewController, DashboardTradingAcion
     }
     
     func showAsset(_ asset: TradingTableViewCellViewModel) {
-        guard let assetId = asset.asset.id?.uuidString, let type = asset.asset.assetType else { return }
+        guard let assetId = asset.asset._id?.uuidString, let type = asset.asset.assetType else { return }
         viewModel.router?.showAssetDetails(with: assetId, assetType: type)
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 
 class ProgramsDataProvider: DataProvider {
     // MARK: - Assets
-    static func get(_ filterModel: FilterModel? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ programsViewModel: ItemsViewModelProgramDetailsListItem?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func get(_ filterModel: FilterModel? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ programsViewModel: ProgramDetailsListItemItemsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
     
         let levelMin = filterModel?.levelModel.minLevel
         let levelMax = filterModel?.levelModel.maxLevel
@@ -21,14 +21,14 @@ class ProgramsDataProvider: DataProvider {
         let dateFrom = filterModel?.dateRangeModel.dateFrom
         let dateTo = filterModel?.dateRangeModel.dateTo
         
-        var sorting: ProgramsAPI.Sorting_getPrograms?
+        var sorting: ProgramsFilterSorting?
         
-        if let selectedSorting = filterModel?.sortingModel.selectedSorting as? ProgramsAPI.Sorting_getPrograms, filterModel?.facetTitle != "Rating" {
+        if let selectedSorting = filterModel?.sortingModel.selectedSorting as? ProgramsFilterSorting, filterModel?.facetTitle != "Rating" {
             sorting = selectedSorting
         }
         
         if let facetSorting = filterModel?.facetSorting, filterModel?.facetTitle != "Rating" {
-            sorting = ProgramsAPI.Sorting_getPrograms(rawValue: facetSorting)
+            sorting = ProgramsFilterSorting(rawValue: facetSorting)
         }
         
         let mask = filterModel?.mask
@@ -42,19 +42,17 @@ class ProgramsDataProvider: DataProvider {
         
         let chartPointsCount = filterModel?.chartPointsCount
         
-        var programCurrency: ProgramsAPI.ProgramCurrency_getPrograms?
-        if let selectedCurrency = filterModel?.currencyModel.selectedCurrency, let newCurrency = ProgramsAPI.ProgramCurrency_getPrograms(rawValue: selectedCurrency) {
+        var programCurrency: Currency?
+        if let selectedCurrency = filterModel?.currencyModel.selectedCurrency, let newCurrency = Currency(rawValue: selectedCurrency) {
             programCurrency = newCurrency
         }
         
-        var showIn: ProgramsAPI.ShowIn_getPrograms?
-        if let newCurrency = ProgramsAPI.ShowIn_getPrograms(rawValue: selectedPlatformCurrency) {
+        var showIn: Currency?
+        if let newCurrency = Currency(rawValue: selectedPlatformCurrency) {
             showIn = newCurrency
         }
         
-        let authorization = AuthManager.authorizedToken
-        ProgramsAPI.getPrograms(authorization: authorization,
-                                sorting: sorting,
+        ProgramsAPI.getPrograms(sorting: sorting,
                                 showIn: showIn,
                                 tags: tags,
                                 programCurrency: programCurrency,
@@ -74,161 +72,148 @@ class ProgramsDataProvider: DataProvider {
         }
     }
     static func get(_ assetId: String, completion: @escaping (_ program: ProgramFollowDetailsFull?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        let authorization = AuthManager.authorizedToken
-        ProgramsAPI.getProgramDetails(id: assetId, authorization: authorization) { (viewModel, error) in
+        ProgramsAPI.getProgramDetails(_id: assetId) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
     
     // MARK: - Invest & Withdraw
     static func getWithdrawInfo(_ assetId: String, completion: @escaping (_ programWithdrawInfo: ProgramWithdrawInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        guard let authorization = AuthManager.authorizedToken,
-            let uuid = UUID(uuidString: assetId)
+        guard let uuid = UUID(uuidString: assetId)
             else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        InvestmentsAPI.getProgramWithdrawInfo(id: uuid, authorization: authorization) { (programWithdrawInfo, error) in
+        InvestmentsAPI.getProgramWithdrawInfo(_id: uuid) { (programWithdrawInfo, error) in
             DataProvider().responseHandler(programWithdrawInfo, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
     static func withdraw(withAmount amount: Double, assetId: String?, withdrawAll: Bool? = nil, errorCompletion: @escaping CompletionBlock) {
-        guard let authorization = AuthManager.authorizedToken,
-            let assetId = assetId,
+        guard let assetId = assetId,
             let uuid = UUID(uuidString: assetId)
             else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        InvestmentsAPI.withdrawFromProgram(id: uuid, authorization: authorization, amount: amount, withdrawAll: withdrawAll) { (error) in
+        InvestmentsAPI.withdrawFromProgram(_id: uuid, amount: amount, withdrawAll: withdrawAll) { (_, error) in
             DataProvider().responseHandler(error, completion: errorCompletion)
         }
     }
     static func invest(withAmount amount: Double, assetId: String?, errorCompletion: @escaping CompletionBlock) {
-        guard let authorization = AuthManager.authorizedToken,
-            let assetId = assetId,
+        guard let assetId = assetId,
             let uuid = UUID(uuidString: assetId)
             else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        InvestmentsAPI.investIntoProgram(id: uuid, authorization: authorization, amount: amount) { (error) in
+        InvestmentsAPI.investIntoProgram(_id: uuid, amount: amount) { (_, error) in
             DataProvider().responseHandler(error, completion: errorCompletion)
         }
     }
     static func reinvestOn(with assetId: String, completion: @escaping CompletionBlock) {
-        guard let authorization = AuthManager.authorizedToken,
-            let uuid = UUID(uuidString: assetId) else { return completion(.failure(errorType: .apiError(message: nil))) }
+        guard let uuid = UUID(uuidString: assetId) else { return completion(.failure(errorType: .apiError(message: nil))) }
         
-        InvestmentsAPI.switchReinvestOn(id: uuid, authorization: authorization) { (error) in
+        InvestmentsAPI.switchReinvestOn(_id: uuid) { (_, error) in
             DataProvider().responseHandler(error, completion: completion)
         }
     }
     static func reinvestOff(with assetId: String, completion: @escaping CompletionBlock) {
-        guard let authorization = AuthManager.authorizedToken,
-            let uuid = UUID(uuidString: assetId) else { return completion(.failure(errorType: .apiError(message: nil))) }
+        guard let uuid = UUID(uuidString: assetId) else { return completion(.failure(errorType: .apiError(message: nil))) }
 
-        InvestmentsAPI.switchReinvestOff(id: uuid, authorization: authorization) { (error) in
+        InvestmentsAPI.switchReinvestOff(_id: uuid) { (_, error) in
             DataProvider().responseHandler(error, completion: completion)
         }
     }
     
     // MARK: - Trades
-    static func getTradesOpen(with assetId: String?, sorting: ProgramsAPI.Sorting_getProgramOpenTrades? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ tradesViewModel: TradesViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getTradesOpen(with assetId: String?, sorting: TradeSorting? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ tradesViewModel: TradesViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
         guard let assetId = assetId, let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        ProgramsAPI.getProgramOpenTrades(id: uuid, sorting: sorting, skip: skip, take: take) { (viewModel, error) in
+        ProgramsAPI.getProgramOpenTrades(_id: uuid, sorting: sorting, skip: skip, take: take) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
     
-    static func getTrades(with assetId: String?, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: ProgramsAPI.Sorting_getAssetTrades? = nil, accountId: UUID? = nil, accountCurrencyType: CurrencyType? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ tradesViewModel: TradesSignalViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getTrades(with assetId: String?, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, sorting: TradeSorting? = nil, accountId: UUID? = nil, accountCurrency: Currency? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ tradesViewModel: TradesSignalViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
         guard let assetId = assetId, let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
-         
-        let accountCurrency = ProgramsAPI.AccountCurrency_getAssetTrades(rawValue: accountCurrencyType?.rawValue ?? "")
-            
-        ProgramsAPI.getAssetTrades(id: uuid, dateFrom: dateFrom, dateTo: dateTo, symbol: symbol, sorting: sorting, accountId: accountId, accountCurrency: accountCurrency, skip: skip, take: take) { (viewModel, error) in
+                     
+        ProgramsAPI.getAssetTrades(_id: uuid, dateFrom: dateFrom, dateTo: dateTo, symbol: symbol, sorting: sorting, accountId: accountId, accountCurrency: accountCurrency, skip: skip, take: take) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
     
-    static func exportTrades(with assetId: String?, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String?, sorting: ProgramsAPI.Sorting_exportProgramTrades?, accountId: UUID?, accountCurrencyType: CurrencyType? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (Data?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        
-        let accountCurrency = ProgramsAPI.AccountCurrency_exportProgramTrades(rawValue: accountCurrencyType?.rawValue ?? "")
-        
+    static func exportTrades(with assetId: String?, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String?, sorting: TradeSorting?, accountId: UUID?, accountCurrency: Currency? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (Data?) -> Void, errorCompletion: @escaping CompletionBlock) {
+                
         guard let assetId = assetId, let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        ProgramsAPI.exportProgramTrades(id: uuid, dateFrom: dateFrom, dateTo: dateTo, symbol: symbol, sorting: sorting, accountId: accountId, accountCurrency: accountCurrency, skip: skip, take: take) { (viewModel, error) in
+        ProgramsAPI.exportProgramTrades(_id: uuid, dateFrom: dateFrom, dateTo: dateTo, symbol: symbol, sorting: sorting, accountId: accountId, accountCurrency: accountCurrency, skip: skip, take: take) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
     
 
     // MARK: - Periods
-    static func getPeriodHistory(with assetId: String?, dateFrom: Date? = nil, dateTo: Date? = nil, numberMin: Int? = nil, numberMax: Int? = nil, status: ProgramsAPI.Status_getProgramPeriods? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ programPeriodsViewModel: ProgramPeriodsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getPeriodHistory(with assetId: String?, dateFrom: Date? = nil, dateTo: Date? = nil, numberMin: Int? = nil, numberMax: Int? = nil, status: PeriodStatus? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ programPeriodsViewModel: ProgramPeriodsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
-        guard let assetId = assetId, let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        guard let assetId = assetId else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        ProgramsAPI.getProgramPeriods(id: assetId, authorization: authorization, dateFrom: dateFrom, dateTo: dateTo, numberMin: numberMin, numberMax: numberMax, status: status, skip: skip, take: take) { (viewModel, error) in
+        ProgramsAPI.getProgramPeriods(_id: assetId, dateFrom: dateFrom, dateTo: dateTo, numberMin: numberMin, numberMax: numberMax, status: status, skip: skip, take: take) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
     
-    static func exportPeriods(with assetId: String, dateFrom: Date? = nil, dateTo: Date? = nil, numberMin: Int?, numberMax: Int?, status: ProgramsAPI.Status_exportProgramPeriods? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (Data?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func exportPeriods(with assetId: String, dateFrom: Date? = nil, dateTo: Date? = nil, numberMin: Int?, numberMax: Int?, status: PeriodStatus? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (Data?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
-        ProgramsAPI.exportProgramPeriods(id: assetId, dateFrom: dateFrom, dateTo: dateTo, numberMin: numberMin, numberMax: numberMax, status: status, skip: skip, take: take) { (viewModel, error) in
+        ProgramsAPI.exportProgramPeriods(_id: assetId, dateFrom: dateFrom, dateTo: dateTo, numberMin: numberMin, numberMax: numberMax, status: status, skip: skip, take: take) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
     
     
-    static func exportPeriodsFinStatistic(with assetId: String, dateFrom: Date? = nil, dateTo: Date? = nil, numberMin: Int?, numberMax: Int?, status: ProgramsAPI.Status_exportProgramPeriodsFinStatistic? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (Data?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        
-        guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
-        
-        ProgramsAPI.exportProgramPeriodsFinStatistic(id: assetId, authorization: authorization, dateFrom: dateFrom, dateTo: dateTo, numberMin: numberMin, numberMax: numberMax, status: status, skip: skip, take: take) { (viewModel, error) in
+    static func exportPeriodsFinStatistic(with assetId: String, dateFrom: Date? = nil, dateTo: Date? = nil, numberMin: Int?, numberMax: Int?, status: PeriodStatus? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (Data?) -> Void, errorCompletion: @escaping CompletionBlock) {
+                
+        ProgramsAPI.exportProgramPeriodsFinStatistic(_id: assetId, dateFrom: dateFrom, dateTo: dateTo, numberMin: numberMin, numberMax: numberMax, status: status, skip: skip, take: take) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
     
     // MARK: - Subscribers
-    static func getSubscribers(with assetId: String?, dateFrom: Date? = nil, dateTo: Date? = nil, status: ProgramsAPI.Status_getProgramSubscribers? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (SignalProviderSubscribers?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getSubscribers(with assetId: String?, dateFrom: Date? = nil, dateTo: Date? = nil, status: DashboardActionStatus? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (SignalProviderSubscribers?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
-        guard let assetId = assetId, let uuid = UUID(uuidString: assetId), let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        guard let assetId = assetId, let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        ProgramsAPI.getProgramSubscribers(id: uuid, authorization: authorization, status: status, skip: skip, take: take) { (viewModel, error) in
+        ProgramsAPI.getProgramSubscribers(_id: uuid, status: status, skip: skip, take: take) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
     
     // MARK: - Requests
-    static func getRequests(with assetId: String, skip: Int, take: Int, completion: @escaping (ItemsViewModelAssetInvestmentRequest?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        guard let authorization = AuthManager.authorizedToken,
-            let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+    static func getRequests(with assetId: String, skip: Int, take: Int, completion: @escaping (AssetInvestmentRequestItemsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        guard let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        InvestmentsAPI.getRequestsByProgram(id: uuid, skip: skip, take: take, authorization: authorization) { (viewModel, error) in
+        InvestmentsAPI.getRequestsByProgram(_id: uuid, skip: skip, take: take) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
     
     
     // MARK: - Charts
-    static func getProfitPercentCharts(with assetId: String, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currencyType: CurrencyType, currencies: [String]?, completion: @escaping (_ data: ProgramProfitPercentCharts?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getProfitPercentCharts(with assetId: String, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency, currencies: [Currency]?, completion: @escaping (_ data: ProgramProfitPercentCharts?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
-        guard let currency = ProgramsAPI.Currency_getProgramProfitPercentCharts(rawValue: currencyType.rawValue), let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        guard let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        ProgramsAPI.getProgramProfitPercentCharts(id: uuid, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency, currencies: currencies) { (viewModel, error) in
+        ProgramsAPI.getProgramProfitPercentCharts(_id: uuid, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency, currencies: currencies) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
-    static func getBalanceChart(with assetId: String, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currencyType: CurrencyType, completion: @escaping (_ data: ProgramBalanceChart?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getBalanceChart(with assetId: String, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency, completion: @escaping (_ data: ProgramBalanceChart?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
-        guard let currency = ProgramsAPI.Currency_getProgramBalanceChart(rawValue: currencyType.rawValue), let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        guard let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        ProgramsAPI.getProgramBalanceChart(id: uuid, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency) { (viewModel, error) in
+        ProgramsAPI.getProgramBalanceChart(_id: uuid, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
-    static func getAbsoluteProfitChart(with assetId: String, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currencyType: CurrencyType, completion: @escaping (_ data: AbsoluteProfitChart?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        guard let currency = ProgramsAPI.Currency_getProgramAbsoluteProfitChart(rawValue: currencyType.rawValue), let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+    static func getAbsoluteProfitChart(with assetId: String, dateFrom: Date? = nil, dateTo: Date? = nil, maxPointCount: Int? = nil, currency: Currency, completion: @escaping (_ data: AbsoluteProfitChart?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        guard let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        ProgramsAPI.getProgramAbsoluteProfitChart(id: uuid, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency) { (viewModel, error) in
+        ProgramsAPI.getProgramAbsoluteProfitChart(_id: uuid, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: currency) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
@@ -244,7 +229,7 @@ class ProgramsDataProvider: DataProvider {
     private static func favoritesAdd(with assetId: String, authorization: String, completion: @escaping CompletionBlock) {
         guard let uuid = UUID(uuidString: assetId) else { return completion(.failure(errorType: .apiError(message: nil))) }
         
-        ProgramsAPI.addToFavorites(id: uuid, authorization: authorization) { (error) in
+        ProgramsAPI.addToFavorites(_id: uuid) { (_, error) in
             DataProvider().responseHandler(error, completion: { (result) in
                 switch result {
                 case .success:
@@ -260,7 +245,7 @@ class ProgramsDataProvider: DataProvider {
     private static func favoritesRemove(with assetId: String, authorization: String, completion: @escaping CompletionBlock) {
         guard let uuid = UUID(uuidString: assetId) else { return completion(.failure(errorType: .apiError(message: nil))) }
         
-        ProgramsAPI.removeFromFavorites(id: uuid, authorization: authorization) { (error) in
+        ProgramsAPI.removeFromFavorites(_id: uuid) { (_, error) in
             DataProvider().responseHandler(error, completion: { (result) in
                 switch result {
                 case .success:

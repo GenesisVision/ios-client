@@ -75,7 +75,7 @@ final class FundInfoViewModel: ViewModelWithListProtocol {
             self.assetId = assetId
         }
         
-        if let fundDetailsFull = fundDetailsFull, let assetId = fundDetailsFull.id?.uuidString {
+        if let fundDetailsFull = fundDetailsFull, let assetId = fundDetailsFull._id?.uuidString {
             self.fundDetailsFull = fundDetailsFull
             self.assetId = assetId
         }
@@ -135,7 +135,7 @@ final class FundInfoViewModel: ViewModelWithListProtocol {
 extension FundInfoViewModel {
     // MARK: - Public methods
     func showManagerVC() {
-        guard let managerId = fundDetailsFull?.owner?.id?.uuidString else { return }
+        guard let managerId = fundDetailsFull?.owner?._id?.uuidString else { return }
         router.show(routeType: .manager(managerId: managerId))
     }
     
@@ -175,7 +175,7 @@ extension FundInfoViewModel {
                 guard let profilePublic = fundDetailsFull?.owner else { return nil }
                 return DetailManagerTableViewCellViewModel(profilePublic: profilePublic)
             case .strategy:
-                return DefaultTableViewCellViewModel(title: "Strategy", subtitle: fundDetailsFull?.publicInfo?.description)
+                return DefaultTableViewCellViewModel(title: "Strategy", subtitle: fundDetailsFull?.publicInfo?._description)
             }
         case .yourInvestment:
             return FundYourInvestmentTableViewCellViewModel(fundDetailsFull: fundDetailsFull, yourInvestmentProtocol: self)

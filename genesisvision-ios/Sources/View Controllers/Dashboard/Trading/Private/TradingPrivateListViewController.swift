@@ -73,7 +73,7 @@ class TradingPrivateListViewController: ListViewController, DashboardTradingAcio
     }
     
     func showAccount(_ tradingAsset: DashboardTradingAsset) {
-        if let router = viewModel.router, let assetId = tradingAsset.id?.uuidString {
+        if let router = viewModel.router, let assetId = tradingAsset._id?.uuidString {
             let viewController = AccountViewController()
             let accountRouter = AccountRouter(parentRouter: router)
             accountRouter.accountViewController = viewController

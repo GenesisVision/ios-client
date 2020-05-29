@@ -8,33 +8,12 @@
 import Foundation
 
 
+public struct DashboardChart: Codable {
 
-open class DashboardChart: Codable {
 
     public var charts: [DashboardAssetChart]?
-
-
-    
-    public init(charts: [DashboardAssetChart]?) {
+    public init(charts: [DashboardAssetChart]? = nil) { 
         self.charts = charts
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(charts, forKey: "charts")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        charts = try container.decodeIfPresent([DashboardAssetChart].self, forKey: "charts")
-    }
 }
-

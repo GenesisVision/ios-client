@@ -90,7 +90,7 @@ extension ProgramBalanceViewModel {
     private func fetch(_ completion: @escaping CompletionBlock) {
         guard let assetId = assetId else { return completion(.failure(errorType: .apiError(message: nil))) }
         
-        ProgramsDataProvider.getBalanceChart(with: assetId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currencyType: getPlatformCurrencyType(), completion: { [weak self] (viewModel) in
+        ProgramsDataProvider.getBalanceChart(with: assetId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: getPlatformCurrencyType(), completion: { [weak self] (viewModel) in
             guard viewModel != nil else {
                 return ErrorHandler.handleApiError(error: nil, completion: completion)
             }

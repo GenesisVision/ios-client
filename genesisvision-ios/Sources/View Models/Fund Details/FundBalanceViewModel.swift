@@ -92,7 +92,7 @@ extension FundBalanceViewModel {
         switch dataType {
         case .api:
             guard let assetId = assetId else { return completion(.failure(errorType: .apiError(message: nil))) }
-            FundsDataProvider.getBalanceChart(with: assetId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currencyType: getPlatformCurrencyType(), completion: { [weak self] (viewModel) in
+            FundsDataProvider.getBalanceChart(with: assetId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: getPlatformCurrencyType(), completion: { [weak self] (viewModel) in
                 guard viewModel != nil else {
                     return ErrorHandler.handleApiError(error: nil, completion: completion)
                 }

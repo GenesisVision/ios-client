@@ -21,7 +21,7 @@ extension FacetCollectionViewCellViewModel: CellViewModel {
         }
         
         cell.detailLabel.isHidden = true
-        if let description = facet?.description {
+        if let description = facet?._description {
             cell.detailLabel.isHidden = false
             cell.detailLabel.text = description
         }
@@ -34,7 +34,7 @@ extension FacetCollectionViewCellViewModel: CellViewModel {
             cell.iconImageView.image = #imageLiteral(resourceName: "img_favorite_icon_selected").withRenderingMode(.alwaysTemplate)
             
             cell.bgImageView.image = #imageLiteral(resourceName: "img_facet_favorites_bg")
-        } else if let fileName = facet?.logo, let fileUrl = getFileURL(fileName: fileName) {
+        } else if let fileName = facet?.logoUrl, let fileUrl = getFileURL(fileName: fileName) {
             cell.bgImageView.kf.indicatorType = .activity
             cell.bgImageView.kf.setImage(with: fileUrl)
         }

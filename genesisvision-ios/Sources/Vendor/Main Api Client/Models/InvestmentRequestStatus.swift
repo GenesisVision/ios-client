@@ -7,11 +7,9 @@
 
 import Foundation
 
-
 public enum InvestmentRequestStatus: String, Codable {
     case new = "New"
     case executed = "Executed"
     case cancelled = "Cancelled"
     case pending = "Pending"
-
 }

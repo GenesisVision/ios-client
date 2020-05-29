@@ -8,37 +8,15 @@
 import Foundation
 
 
+public struct DetachFromSignalProvider: Codable {
 
-open class DetachFromSignalProvider: Codable {
 
     public var tradingAccountId: UUID?
+
     public var mode: SignalDetachMode?
-
-
-    
-    public init(tradingAccountId: UUID?, mode: SignalDetachMode?) {
+    public init(tradingAccountId: UUID? = nil, mode: SignalDetachMode? = nil) { 
         self.tradingAccountId = tradingAccountId
         self.mode = mode
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(tradingAccountId, forKey: "tradingAccountId")
-        try container.encodeIfPresent(mode, forKey: "mode")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        tradingAccountId = try container.decodeIfPresent(UUID.self, forKey: "tradingAccountId")
-        mode = try container.decodeIfPresent(SignalDetachMode.self, forKey: "mode")
-    }
 }
-

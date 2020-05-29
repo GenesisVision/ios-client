@@ -184,7 +184,7 @@ class ProfileViewController: BaseTableViewController, UINavigationControllerDele
                         twitterUrlLabel.isHidden = true
                     }
                     twitterTextField.text = value
-                    if let logo = viewModel.logo, let fileUrl = getFileURL(fileName: logo) {
+                    if let logo = viewModel.logoUrl, let fileUrl = getFileURL(fileName: logo) {
                         twitterImageView.kf.indicatorType = .activity
                         twitterImageView.kf.setImage(with: fileUrl)
                     }
@@ -196,7 +196,7 @@ class ProfileViewController: BaseTableViewController, UINavigationControllerDele
                         telegramUrlLabel.isHidden = true
                     }
                     telegramTextField.text = value
-                    if let logo = viewModel.logo, let fileUrl = getFileURL(fileName: logo) {
+                    if let logo = viewModel.logoUrl, let fileUrl = getFileURL(fileName: logo) {
                         telegramImageView.kf.indicatorType = .activity
                         telegramImageView.kf.setImage(with: fileUrl)
                     }
@@ -208,7 +208,7 @@ class ProfileViewController: BaseTableViewController, UINavigationControllerDele
                         facebookUrlLabel.isHidden = true
                     }
                     facebookTextField.text = value
-                    if let logo = viewModel.logo, let fileUrl = getFileURL(fileName: logo) {
+                    if let logo = viewModel.logoUrl, let fileUrl = getFileURL(fileName: logo) {
                         facebookImageView.kf.indicatorType = .activity
                         facebookImageView.kf.setImage(with: fileUrl)
                     }
@@ -220,7 +220,7 @@ class ProfileViewController: BaseTableViewController, UINavigationControllerDele
                         linkedinUrlLabel.isHidden = true
                     }
                     linkedinTextField.text = value
-                    if let logo = viewModel.logo, let fileUrl = getFileURL(fileName: logo) {
+                    if let logo = viewModel.logoUrl, let fileUrl = getFileURL(fileName: logo) {
                         linkedinImageView.kf.indicatorType = .activity
                         linkedinImageView.kf.setImage(with: fileUrl)
                     }
@@ -232,7 +232,7 @@ class ProfileViewController: BaseTableViewController, UINavigationControllerDele
                         youtubeUrlLabel.isHidden = true
                     }
                     youtubeTextField.text = value
-                    if let logo = viewModel.logo, let fileUrl = getFileURL(fileName: logo) {
+                    if let logo = viewModel.logoUrl, let fileUrl = getFileURL(fileName: logo) {
                         youtubeImageView.kf.indicatorType = .activity
                         youtubeImageView.kf.setImage(with: fileUrl)
                     }
@@ -244,7 +244,7 @@ class ProfileViewController: BaseTableViewController, UINavigationControllerDele
                         wechatUrlLabel.isHidden = true
                     }
                     wechatTextField.text = value
-                    if let logo = viewModel.logo, let fileUrl = getFileURL(fileName: logo) {
+                    if let logo = viewModel.logoUrl, let fileUrl = getFileURL(fileName: logo) {
                         wechatImageView.kf.indicatorType = .activity
                         wechatImageView.kf.setImage(with: fileUrl)
                     }
@@ -256,7 +256,7 @@ class ProfileViewController: BaseTableViewController, UINavigationControllerDele
                         mailToUrlLabel.isHidden = true
                     }
                     mailToTextField.text = value
-                    if let logo = viewModel.logo, let fileUrl = getFileURL(fileName: logo) {
+                    if let logo = viewModel.logoUrl, let fileUrl = getFileURL(fileName: logo) {
                         mailToImageView.kf.indicatorType = .activity
                         mailToImageView.kf.setImage(with: fileUrl)
                     }
@@ -365,7 +365,6 @@ extension ProfileViewController: ImagePickerPresentable {
     
     func selected(pickedImage: UIImage?, pickedImageURL: URL?) {
         viewModel.pickedImage = pickedImage
-        viewModel.pickedImageURL = pickedImageURL
         
         let oldImage = profileImageView.image
         showProgressHUD()

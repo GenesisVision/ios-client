@@ -7,11 +7,9 @@
 
 import Foundation
 
-
 public enum AssetFilterType: String, Codable {
     case all = "All"
     case program = "Program"
     case fund = "Fund"
     case follow = "Follow"
-
 }

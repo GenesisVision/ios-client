@@ -8,20 +8,23 @@
 import Foundation
 
 
+public struct PersonalInvestingFundDetailsList: Codable {
 
-open class PersonalInvestingFundDetailsList: Codable {
 
     public var isOwnAsset: Bool?
+
     public var isFavorite: Bool?
+
     public var canInvest: Bool?
+
     public var canWithdraw: Bool?
+
     public var share: Double?
+
     public var value: Double?
+
     public var status: AssetInvestmentStatus?
-
-
-    
-    public init(isOwnAsset: Bool?, isFavorite: Bool?, canInvest: Bool?, canWithdraw: Bool?, share: Double?, value: Double?, status: AssetInvestmentStatus?) {
+    public init(isOwnAsset: Bool? = nil, isFavorite: Bool? = nil, canInvest: Bool? = nil, canWithdraw: Bool? = nil, share: Double? = nil, value: Double? = nil, status: AssetInvestmentStatus? = nil) { 
         self.isOwnAsset = isOwnAsset
         self.isFavorite = isFavorite
         self.canInvest = canInvest
@@ -30,35 +33,5 @@ open class PersonalInvestingFundDetailsList: Codable {
         self.value = value
         self.status = status
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(isOwnAsset, forKey: "isOwnAsset")
-        try container.encodeIfPresent(isFavorite, forKey: "isFavorite")
-        try container.encodeIfPresent(canInvest, forKey: "canInvest")
-        try container.encodeIfPresent(canWithdraw, forKey: "canWithdraw")
-        try container.encodeIfPresent(share, forKey: "share")
-        try container.encodeIfPresent(value, forKey: "value")
-        try container.encodeIfPresent(status, forKey: "status")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        isOwnAsset = try container.decodeIfPresent(Bool.self, forKey: "isOwnAsset")
-        isFavorite = try container.decodeIfPresent(Bool.self, forKey: "isFavorite")
-        canInvest = try container.decodeIfPresent(Bool.self, forKey: "canInvest")
-        canWithdraw = try container.decodeIfPresent(Bool.self, forKey: "canWithdraw")
-        share = try container.decodeIfPresent(Double.self, forKey: "share")
-        value = try container.decodeIfPresent(Double.self, forKey: "value")
-        status = try container.decodeIfPresent(AssetInvestmentStatus.self, forKey: "status")
-    }
 }
-

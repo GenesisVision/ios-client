@@ -8,37 +8,15 @@
 import Foundation
 
 
+public struct TwoFactorAuthenticator: Codable {
 
-open class TwoFactorAuthenticator: Codable {
 
     public var sharedKey: String?
+
     public var authenticatorUri: String?
-
-
-    
-    public init(sharedKey: String?, authenticatorUri: String?) {
+    public init(sharedKey: String? = nil, authenticatorUri: String? = nil) { 
         self.sharedKey = sharedKey
         self.authenticatorUri = authenticatorUri
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(sharedKey, forKey: "sharedKey")
-        try container.encodeIfPresent(authenticatorUri, forKey: "authenticatorUri")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        sharedKey = try container.decodeIfPresent(String.self, forKey: "sharedKey")
-        authenticatorUri = try container.decodeIfPresent(String.self, forKey: "authenticatorUri")
-    }
 }
-

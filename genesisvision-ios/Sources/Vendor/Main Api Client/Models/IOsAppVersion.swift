@@ -8,37 +8,15 @@
 import Foundation
 
 
+public struct IOsAppVersion: Codable {
 
-open class IOsAppVersion: Codable {
 
     public var minVersion: String?
+
     public var lastVersion: String?
-
-
-    
-    public init(minVersion: String?, lastVersion: String?) {
+    public init(minVersion: String? = nil, lastVersion: String? = nil) { 
         self.minVersion = minVersion
         self.lastVersion = lastVersion
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(minVersion, forKey: "minVersion")
-        try container.encodeIfPresent(lastVersion, forKey: "lastVersion")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        minVersion = try container.decodeIfPresent(String.self, forKey: "minVersion")
-        lastVersion = try container.decodeIfPresent(String.self, forKey: "lastVersion")
-    }
 }
-

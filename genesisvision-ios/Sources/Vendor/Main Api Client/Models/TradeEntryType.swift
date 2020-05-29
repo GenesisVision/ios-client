@@ -7,11 +7,9 @@
 
 import Foundation
 
-
 public enum TradeEntryType: String, Codable {
     case _in = "In"
     case out = "Out"
     case _inout = "InOut"
     case outBy = "OutBy"
-
 }

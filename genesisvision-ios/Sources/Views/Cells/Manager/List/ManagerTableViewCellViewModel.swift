@@ -25,7 +25,7 @@ extension ManagerTableViewCellViewModel: CellViewModel {
         
         cell.managerImageView.image = UIImage.profilePlaceholder
         
-        if let fileName = profile.avatar, let fileUrl = getFileURL(fileName: fileName) {
+        if let fileName = profile.logoUrl, let fileUrl = getFileURL(fileName: fileName) {
             cell.managerImageView.kf.indicatorType = .activity
             cell.managerImageView.kf.setImage(with: fileUrl, placeholder: UIImage.profilePlaceholder)
         }

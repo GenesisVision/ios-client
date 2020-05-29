@@ -8,53 +8,35 @@
 import Foundation
 
 
+public struct WalletWithdrawalInfo: Codable {
 
-open class WalletWithdrawalInfo: Codable {
 
     public var currency: Currency?
-    public var description: String?
-    public var logo: String?
+
+    public var _description: String?
+
+    public var logoUrl: String?
+
     public var commission: Double?
+
     public var rateToGvt: Double?
+
     public var availableToWithdrawal: Double?
-
-
-    
-    public init(currency: Currency?, description: String?, logo: String?, commission: Double?, rateToGvt: Double?, availableToWithdrawal: Double?) {
+    public init(currency: Currency? = nil, _description: String? = nil, logoUrl: String? = nil, commission: Double? = nil, rateToGvt: Double? = nil, availableToWithdrawal: Double? = nil) { 
         self.currency = currency
-        self.description = description
-        self.logo = logo
+        self._description = _description
+        self.logoUrl = logoUrl
         self.commission = commission
         self.rateToGvt = rateToGvt
         self.availableToWithdrawal = availableToWithdrawal
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(currency, forKey: "currency")
-        try container.encodeIfPresent(description, forKey: "description")
-        try container.encodeIfPresent(logo, forKey: "logo")
-        try container.encodeIfPresent(commission, forKey: "commission")
-        try container.encodeIfPresent(rateToGvt, forKey: "rateToGvt")
-        try container.encodeIfPresent(availableToWithdrawal, forKey: "availableToWithdrawal")
+    public enum CodingKeys: String, CodingKey { 
+        case currency
+        case _description = "description"
+        case logoUrl
+        case commission
+        case rateToGvt
+        case availableToWithdrawal
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
-        description = try container.decodeIfPresent(String.self, forKey: "description")
-        logo = try container.decodeIfPresent(String.self, forKey: "logo")
-        commission = try container.decodeIfPresent(Double.self, forKey: "commission")
-        rateToGvt = try container.decodeIfPresent(Double.self, forKey: "rateToGvt")
-        availableToWithdrawal = try container.decodeIfPresent(Double.self, forKey: "availableToWithdrawal")
-    }
 }
-

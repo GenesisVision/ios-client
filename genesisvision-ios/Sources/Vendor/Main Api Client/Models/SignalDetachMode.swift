@@ -7,10 +7,8 @@
 
 import Foundation
 
-
 public enum SignalDetachMode: String, Codable {
     case _none = "None"
     case providerCloseOnly = "ProviderCloseOnly"
     case closeAllImmediately = "CloseAllImmediately"
-
 }

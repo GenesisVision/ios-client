@@ -7,10 +7,8 @@
 
 import Foundation
 
-
 public enum CaptchaType: String, Codable {
     case _none = "None"
     case pow = "Pow"
     case geeTest = "GeeTest"
-
 }

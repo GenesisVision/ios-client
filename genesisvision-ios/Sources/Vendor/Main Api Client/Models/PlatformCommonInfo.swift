@@ -8,41 +8,18 @@
 import Foundation
 
 
+public struct PlatformCommonInfo: Codable {
 
-open class PlatformCommonInfo: Codable {
 
     public var platformCommission: PlatformCommissionInfo?
+
     public var platformCurrencies: [PlatformCurrencyInfo]?
+
     public var platformUrls: [PlatformUrlInfo]?
-
-
-    
-    public init(platformCommission: PlatformCommissionInfo?, platformCurrencies: [PlatformCurrencyInfo]?, platformUrls: [PlatformUrlInfo]?) {
+    public init(platformCommission: PlatformCommissionInfo? = nil, platformCurrencies: [PlatformCurrencyInfo]? = nil, platformUrls: [PlatformUrlInfo]? = nil) { 
         self.platformCommission = platformCommission
         self.platformCurrencies = platformCurrencies
         self.platformUrls = platformUrls
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(platformCommission, forKey: "platformCommission")
-        try container.encodeIfPresent(platformCurrencies, forKey: "platformCurrencies")
-        try container.encodeIfPresent(platformUrls, forKey: "platformUrls")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        platformCommission = try container.decodeIfPresent(PlatformCommissionInfo.self, forKey: "platformCommission")
-        platformCurrencies = try container.decodeIfPresent([PlatformCurrencyInfo].self, forKey: "platformCurrencies")
-        platformUrls = try container.decodeIfPresent([PlatformUrlInfo].self, forKey: "platformUrls")
-    }
 }
-

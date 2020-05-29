@@ -8,45 +8,21 @@
 import Foundation
 
 
+public struct ProgramBalanceChart: Codable {
 
-open class ProgramBalanceChart: Codable {
 
     public var balance: Double?
+
     public var programCurrency: Currency?
+
     public var color: String?
+
     public var chart: [BalanceChartPoint]?
-
-
-    
-    public init(balance: Double?, programCurrency: Currency?, color: String?, chart: [BalanceChartPoint]?) {
+    public init(balance: Double? = nil, programCurrency: Currency? = nil, color: String? = nil, chart: [BalanceChartPoint]? = nil) { 
         self.balance = balance
         self.programCurrency = programCurrency
         self.color = color
         self.chart = chart
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(balance, forKey: "balance")
-        try container.encodeIfPresent(programCurrency, forKey: "programCurrency")
-        try container.encodeIfPresent(color, forKey: "color")
-        try container.encodeIfPresent(chart, forKey: "chart")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        balance = try container.decodeIfPresent(Double.self, forKey: "balance")
-        programCurrency = try container.decodeIfPresent(Currency.self, forKey: "programCurrency")
-        color = try container.decodeIfPresent(String.self, forKey: "color")
-        chart = try container.decodeIfPresent([BalanceChartPoint].self, forKey: "chart")
-    }
 }
-

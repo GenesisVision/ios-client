@@ -8,45 +8,24 @@
 import Foundation
 
 
+public struct FundAssetPercent: Codable {
 
-open class FundAssetPercent: Codable {
 
     public var asset: String?
+
     public var name: String?
+
     public var percent: Double?
-    public var icon: String?
 
+    public var logoUrl: String?
 
-    
-    public init(asset: String?, name: String?, percent: Double?, icon: String?) {
+    public var url: String?
+    public init(asset: String? = nil, name: String? = nil, percent: Double? = nil, logoUrl: String? = nil, url: String? = nil) { 
         self.asset = asset
         self.name = name
         self.percent = percent
-        self.icon = icon
-    }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(asset, forKey: "asset")
-        try container.encodeIfPresent(name, forKey: "name")
-        try container.encodeIfPresent(percent, forKey: "percent")
-        try container.encodeIfPresent(icon, forKey: "icon")
+        self.logoUrl = logoUrl
+        self.url = url
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        asset = try container.decodeIfPresent(String.self, forKey: "asset")
-        name = try container.decodeIfPresent(String.self, forKey: "name")
-        percent = try container.decodeIfPresent(Double.self, forKey: "percent")
-        icon = try container.decodeIfPresent(String.self, forKey: "icon")
-    }
 }
-

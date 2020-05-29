@@ -24,7 +24,7 @@ extension DetailManagerTableViewCellViewModel: CellViewModel {
         
         cell.managerImageView.image = UIImage.profilePlaceholder
         
-        if let fileName = profilePublic.avatar, let fileUrl = getFileURL(fileName: fileName) {
+        if let fileName = profilePublic.logoUrl, let fileUrl = getFileURL(fileName: fileName) {
             cell.managerImageView.kf.indicatorType = .activity
             cell.managerImageView.kf.setImage(with: fileUrl, placeholder: UIImage.profilePlaceholder)
         }
@@ -48,7 +48,7 @@ extension DetailTradingAccountTableViewCellViewModel: CellViewModel {
         
         cell.logoImageView.image = UIImage.profilePlaceholder
         
-        if let fileName = dashboardTradingAsset.broker?.logo, let fileUrl = getFileURL(fileName: fileName) {
+        if let fileName = dashboardTradingAsset.broker?.logoUrl, let fileUrl = getFileURL(fileName: fileName) {
             cell.logoImageView.kf.indicatorType = .activity
             cell.logoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.profilePlaceholder)
         }

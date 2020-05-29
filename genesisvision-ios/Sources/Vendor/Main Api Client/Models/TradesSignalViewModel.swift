@@ -8,45 +8,24 @@
 import Foundation
 
 
+public struct TradesSignalViewModel: Codable {
 
-open class TradesSignalViewModel: Codable {
 
     public var showSwaps: Bool?
+
     public var showTickets: Bool?
+
+    public var tradesDelay: TradesDelay?
+
     public var items: [OrderSignalModel]?
+
     public var total: Int?
-
-
-    
-    public init(showSwaps: Bool?, showTickets: Bool?, items: [OrderSignalModel]?, total: Int?) {
+    public init(showSwaps: Bool? = nil, showTickets: Bool? = nil, tradesDelay: TradesDelay? = nil, items: [OrderSignalModel]? = nil, total: Int? = nil) { 
         self.showSwaps = showSwaps
         self.showTickets = showTickets
+        self.tradesDelay = tradesDelay
         self.items = items
         self.total = total
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(showSwaps, forKey: "showSwaps")
-        try container.encodeIfPresent(showTickets, forKey: "showTickets")
-        try container.encodeIfPresent(items, forKey: "items")
-        try container.encodeIfPresent(total, forKey: "total")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        showSwaps = try container.decodeIfPresent(Bool.self, forKey: "showSwaps")
-        showTickets = try container.decodeIfPresent(Bool.self, forKey: "showTickets")
-        items = try container.decodeIfPresent([OrderSignalModel].self, forKey: "items")
-        total = try container.decodeIfPresent(Int.self, forKey: "total")
-    }
 }
-

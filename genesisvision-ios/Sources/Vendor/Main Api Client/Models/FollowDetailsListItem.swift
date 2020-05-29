@@ -8,52 +8,55 @@
 import Foundation
 
 
+public struct FollowDetailsListItem: Codable {
 
-open class FollowDetailsListItem: Codable {
 
-    public enum Currency: String, Codable { 
-        case usd = "USD"
-        case btc = "BTC"
-        case eth = "ETH"
-        case usdt = "USDT"
-        case gvt = "GVT"
-        case undefined = "Undefined"
-        case ada = "ADA"
-        case xrp = "XRP"
-        case bch = "BCH"
-        case ltc = "LTC"
-        case doge = "DOGE"
-        case bnb = "BNB"
-        case eur = "EUR"
-    }
-    public var id: UUID?
+    public var _id: UUID?
+
     public var title: String?
-    public var description: String?
-    public var logo: String?
+
+    public var _description: String?
+
+    public var logoUrl: String?
+
     public var creationDate: Date?
+
     public var currency: Currency?
+
     public var subscribersCount: Int?
+
     public var tradesCount: Int?
+
     public var status: String?
+
     public var url: String?
+
     public var color: String?
+
     public var isExternal: Bool?
+
     public var leverageMin: Int?
+
     public var leverageMax: Int?
+
     public var brokerId: UUID?
+
     public var brokerType: BrokerTradeServerType?
+
     public var owner: ProfilePublicShort?
+
     public var statistic: ProfitChart?
+
     public var personalDetails: PersonalFollowDetailsList?
+
     public var tags: [Tag]?
 
-
-    
-    public init(id: UUID?, title: String?, description: String?, logo: String?, creationDate: Date?, currency: Currency?, subscribersCount: Int?, tradesCount: Int?, status: String?, url: String?, color: String?, isExternal: Bool?, leverageMin: Int?, leverageMax: Int?, brokerId: UUID?, brokerType: BrokerTradeServerType?, owner: ProfilePublicShort?, statistic: ProfitChart?, personalDetails: PersonalFollowDetailsList?, tags: [Tag]?) {
-        self.id = id
+    public var balance: AmountWithCurrency?
+    public init(_id: UUID? = nil, title: String? = nil, _description: String? = nil, logoUrl: String? = nil, creationDate: Date? = nil, currency: Currency? = nil, subscribersCount: Int? = nil, tradesCount: Int? = nil, status: String? = nil, url: String? = nil, color: String? = nil, isExternal: Bool? = nil, leverageMin: Int? = nil, leverageMax: Int? = nil, brokerId: UUID? = nil, brokerType: BrokerTradeServerType? = nil, owner: ProfilePublicShort? = nil, statistic: ProfitChart? = nil, personalDetails: PersonalFollowDetailsList? = nil, tags: [Tag]? = nil, balance: AmountWithCurrency? = nil) { 
+        self._id = _id
         self.title = title
-        self.description = description
-        self.logo = logo
+        self._description = _description
+        self.logoUrl = logoUrl
         self.creationDate = creationDate
         self.currency = currency
         self.subscribersCount = subscribersCount
@@ -70,62 +73,30 @@ open class FollowDetailsListItem: Codable {
         self.statistic = statistic
         self.personalDetails = personalDetails
         self.tags = tags
+        self.balance = balance
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(id, forKey: "id")
-        try container.encodeIfPresent(title, forKey: "title")
-        try container.encodeIfPresent(description, forKey: "description")
-        try container.encodeIfPresent(logo, forKey: "logo")
-        try container.encodeIfPresent(creationDate, forKey: "creationDate")
-        try container.encodeIfPresent(currency, forKey: "currency")
-        try container.encodeIfPresent(subscribersCount, forKey: "subscribersCount")
-        try container.encodeIfPresent(tradesCount, forKey: "tradesCount")
-        try container.encodeIfPresent(status, forKey: "status")
-        try container.encodeIfPresent(url, forKey: "url")
-        try container.encodeIfPresent(color, forKey: "color")
-        try container.encodeIfPresent(isExternal, forKey: "isExternal")
-        try container.encodeIfPresent(leverageMin, forKey: "leverageMin")
-        try container.encodeIfPresent(leverageMax, forKey: "leverageMax")
-        try container.encodeIfPresent(brokerId, forKey: "brokerId")
-        try container.encodeIfPresent(brokerType, forKey: "brokerType")
-        try container.encodeIfPresent(owner, forKey: "owner")
-        try container.encodeIfPresent(statistic, forKey: "statistic")
-        try container.encodeIfPresent(personalDetails, forKey: "personalDetails")
-        try container.encodeIfPresent(tags, forKey: "tags")
+    public enum CodingKeys: String, CodingKey { 
+        case _id = "id"
+        case title
+        case _description = "description"
+        case logoUrl
+        case creationDate
+        case currency
+        case subscribersCount
+        case tradesCount
+        case status
+        case url
+        case color
+        case isExternal
+        case leverageMin
+        case leverageMax
+        case brokerId
+        case brokerType
+        case owner
+        case statistic
+        case personalDetails
+        case tags
+        case balance
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        id = try container.decodeIfPresent(UUID.self, forKey: "id")
-        title = try container.decodeIfPresent(String.self, forKey: "title")
-        description = try container.decodeIfPresent(String.self, forKey: "description")
-        logo = try container.decodeIfPresent(String.self, forKey: "logo")
-        creationDate = try container.decodeIfPresent(Date.self, forKey: "creationDate")
-        currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
-        subscribersCount = try container.decodeIfPresent(Int.self, forKey: "subscribersCount")
-        tradesCount = try container.decodeIfPresent(Int.self, forKey: "tradesCount")
-        status = try container.decodeIfPresent(String.self, forKey: "status")
-        url = try container.decodeIfPresent(String.self, forKey: "url")
-        color = try container.decodeIfPresent(String.self, forKey: "color")
-        isExternal = try container.decodeIfPresent(Bool.self, forKey: "isExternal")
-        leverageMin = try container.decodeIfPresent(Int.self, forKey: "leverageMin")
-        leverageMax = try container.decodeIfPresent(Int.self, forKey: "leverageMax")
-        brokerId = try container.decodeIfPresent(UUID.self, forKey: "brokerId")
-        brokerType = try container.decodeIfPresent(BrokerTradeServerType.self, forKey: "brokerType")
-        owner = try container.decodeIfPresent(ProfilePublicShort.self, forKey: "owner")
-        statistic = try container.decodeIfPresent(ProfitChart.self, forKey: "statistic")
-        personalDetails = try container.decodeIfPresent(PersonalFollowDetailsList.self, forKey: "personalDetails")
-        tags = try container.decodeIfPresent([Tag].self, forKey: "tags")
-    }
 }
-

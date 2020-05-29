@@ -8,41 +8,23 @@
 import Foundation
 
 
+public struct TradingAccountCreateResult: Codable {
 
-open class TradingAccountCreateResult: Codable {
 
-    public var id: UUID?
+    public var _id: UUID?
+
     public var twoFactorRequired: Bool?
+
     public var twoFactor: TwoFactorAuthenticator?
-
-
-    
-    public init(id: UUID?, twoFactorRequired: Bool?, twoFactor: TwoFactorAuthenticator?) {
-        self.id = id
+    public init(_id: UUID? = nil, twoFactorRequired: Bool? = nil, twoFactor: TwoFactorAuthenticator? = nil) { 
+        self._id = _id
         self.twoFactorRequired = twoFactorRequired
         self.twoFactor = twoFactor
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(id, forKey: "id")
-        try container.encodeIfPresent(twoFactorRequired, forKey: "twoFactorRequired")
-        try container.encodeIfPresent(twoFactor, forKey: "twoFactor")
+    public enum CodingKeys: String, CodingKey { 
+        case _id = "id"
+        case twoFactorRequired
+        case twoFactor
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        id = try container.decodeIfPresent(UUID.self, forKey: "id")
-        twoFactorRequired = try container.decodeIfPresent(Bool.self, forKey: "twoFactorRequired")
-        twoFactor = try container.decodeIfPresent(TwoFactorAuthenticator.self, forKey: "twoFactor")
-    }
 }
-

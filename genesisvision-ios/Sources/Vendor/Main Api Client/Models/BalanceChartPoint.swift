@@ -8,41 +8,18 @@
 import Foundation
 
 
+public struct BalanceChartPoint: Codable {
 
-open class BalanceChartPoint: Codable {
 
-    public var date: Int64?
+    public var date: Date?
+
     public var managerFunds: Double?
+
     public var investorsFunds: Double?
-
-
-    
-    public init(date: Int64?, managerFunds: Double?, investorsFunds: Double?) {
+    public init(date: Date? = nil, managerFunds: Double? = nil, investorsFunds: Double? = nil) { 
         self.date = date
         self.managerFunds = managerFunds
         self.investorsFunds = investorsFunds
     }
-    
 
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(date, forKey: "date")
-        try container.encodeIfPresent(managerFunds, forKey: "managerFunds")
-        try container.encodeIfPresent(investorsFunds, forKey: "investorsFunds")
-    }
-
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        date = try container.decodeIfPresent(Int64.self, forKey: "date")
-        managerFunds = try container.decodeIfPresent(Double.self, forKey: "managerFunds")
-        investorsFunds = try container.decodeIfPresent(Double.self, forKey: "investorsFunds")
-    }
 }
-

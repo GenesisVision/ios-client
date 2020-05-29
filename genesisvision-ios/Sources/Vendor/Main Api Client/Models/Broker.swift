@@ -8,27 +8,34 @@
 import Foundation
 
 
+public struct Broker: Codable {
 
-open class Broker: Codable {
 
     public var name: String?
-    public var description: String?
-    public var logo: String?
+
+    public var _description: String?
+
+    public var logoUrl: String?
+
     public var terms: String?
+
     public var assets: String?
+
     public var fee: Double?
+
     public var leverageMin: Int?
+
     public var leverageMax: Int?
+
     public var isKycRequired: Bool?
+
     public var accountTypes: [BrokerAccountType]?
+
     public var tags: [Tag]?
-
-
-    
-    public init(name: String?, description: String?, logo: String?, terms: String?, assets: String?, fee: Double?, leverageMin: Int?, leverageMax: Int?, isKycRequired: Bool?, accountTypes: [BrokerAccountType]?, tags: [Tag]?) {
+    public init(name: String? = nil, _description: String? = nil, logoUrl: String? = nil, terms: String? = nil, assets: String? = nil, fee: Double? = nil, leverageMin: Int? = nil, leverageMax: Int? = nil, isKycRequired: Bool? = nil, accountTypes: [BrokerAccountType]? = nil, tags: [Tag]? = nil) { 
         self.name = name
-        self.description = description
-        self.logo = logo
+        self._description = _description
+        self.logoUrl = logoUrl
         self.terms = terms
         self.assets = assets
         self.fee = fee
@@ -38,43 +45,18 @@ open class Broker: Codable {
         self.accountTypes = accountTypes
         self.tags = tags
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(name, forKey: "name")
-        try container.encodeIfPresent(description, forKey: "description")
-        try container.encodeIfPresent(logo, forKey: "logo")
-        try container.encodeIfPresent(terms, forKey: "terms")
-        try container.encodeIfPresent(assets, forKey: "assets")
-        try container.encodeIfPresent(fee, forKey: "fee")
-        try container.encodeIfPresent(leverageMin, forKey: "leverageMin")
-        try container.encodeIfPresent(leverageMax, forKey: "leverageMax")
-        try container.encodeIfPresent(isKycRequired, forKey: "isKycRequired")
-        try container.encodeIfPresent(accountTypes, forKey: "accountTypes")
-        try container.encodeIfPresent(tags, forKey: "tags")
+    public enum CodingKeys: String, CodingKey { 
+        case name
+        case _description = "description"
+        case logoUrl
+        case terms
+        case assets
+        case fee
+        case leverageMin
+        case leverageMax
+        case isKycRequired
+        case accountTypes
+        case tags
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        name = try container.decodeIfPresent(String.self, forKey: "name")
-        description = try container.decodeIfPresent(String.self, forKey: "description")
-        logo = try container.decodeIfPresent(String.self, forKey: "logo")
-        terms = try container.decodeIfPresent(String.self, forKey: "terms")
-        assets = try container.decodeIfPresent(String.self, forKey: "assets")
-        fee = try container.decodeIfPresent(Double.self, forKey: "fee")
-        leverageMin = try container.decodeIfPresent(Int.self, forKey: "leverageMin")
-        leverageMax = try container.decodeIfPresent(Int.self, forKey: "leverageMax")
-        isKycRequired = try container.decodeIfPresent(Bool.self, forKey: "isKycRequired")
-        accountTypes = try container.decodeIfPresent([BrokerAccountType].self, forKey: "accountTypes")
-        tags = try container.decodeIfPresent([Tag].self, forKey: "tags")
-    }
 }
-

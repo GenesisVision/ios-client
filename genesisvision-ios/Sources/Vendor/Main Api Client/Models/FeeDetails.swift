@@ -8,49 +8,31 @@
 import Foundation
 
 
+public struct FeeDetails: Codable {
 
-open class FeeDetails: Codable {
 
     public var title: String?
-    public var description: String?
+
+    public var _description: String?
+
     public var type: FeeType?
+
     public var amount: Double?
+
     public var currency: Currency?
-
-
-    
-    public init(title: String?, description: String?, type: FeeType?, amount: Double?, currency: Currency?) {
+    public init(title: String? = nil, _description: String? = nil, type: FeeType? = nil, amount: Double? = nil, currency: Currency? = nil) { 
         self.title = title
-        self.description = description
+        self._description = _description
         self.type = type
         self.amount = amount
         self.currency = currency
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(title, forKey: "title")
-        try container.encodeIfPresent(description, forKey: "description")
-        try container.encodeIfPresent(type, forKey: "type")
-        try container.encodeIfPresent(amount, forKey: "amount")
-        try container.encodeIfPresent(currency, forKey: "currency")
+    public enum CodingKeys: String, CodingKey { 
+        case title
+        case _description = "description"
+        case type
+        case amount
+        case currency
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        title = try container.decodeIfPresent(String.self, forKey: "title")
-        description = try container.decodeIfPresent(String.self, forKey: "description")
-        type = try container.decodeIfPresent(FeeType.self, forKey: "type")
-        amount = try container.decodeIfPresent(Double.self, forKey: "amount")
-        currency = try container.decodeIfPresent(Currency.self, forKey: "currency")
-    }
 }
-

@@ -8,61 +8,43 @@
 import Foundation
 
 
+public struct NewFundRequest: Codable {
 
-open class NewFundRequest: Codable {
 
     public var assets: [FundAssetPart]?
+
     public var entryFee: Double?
+
     public var exitFee: Double?
+
     public var depositAmount: Double?
+
     public var depositWalletId: UUID?
+
     public var title: String?
-    public var description: String?
+
+    public var _description: String?
+
     public var logo: String?
-
-
-    
-    public init(assets: [FundAssetPart]?, entryFee: Double?, exitFee: Double?, depositAmount: Double?, depositWalletId: UUID?, title: String?, description: String?, logo: String?) {
+    public init(assets: [FundAssetPart]? = nil, entryFee: Double? = nil, exitFee: Double? = nil, depositAmount: Double? = nil, depositWalletId: UUID? = nil, title: String? = nil, _description: String? = nil, logo: String? = nil) { 
         self.assets = assets
         self.entryFee = entryFee
         self.exitFee = exitFee
         self.depositAmount = depositAmount
         self.depositWalletId = depositWalletId
         self.title = title
-        self.description = description
+        self._description = _description
         self.logo = logo
     }
-    
-
-    // Encodable protocol methods
-
-    public func encode(to encoder: Encoder) throws {
-
-        var container = encoder.container(keyedBy: String.self)
-
-        try container.encodeIfPresent(assets, forKey: "assets")
-        try container.encodeIfPresent(entryFee, forKey: "entryFee")
-        try container.encodeIfPresent(exitFee, forKey: "exitFee")
-        try container.encodeIfPresent(depositAmount, forKey: "depositAmount")
-        try container.encodeIfPresent(depositWalletId, forKey: "depositWalletId")
-        try container.encodeIfPresent(title, forKey: "title")
-        try container.encodeIfPresent(description, forKey: "description")
-        try container.encodeIfPresent(logo, forKey: "logo")
+    public enum CodingKeys: String, CodingKey { 
+        case assets
+        case entryFee
+        case exitFee
+        case depositAmount
+        case depositWalletId
+        case title
+        case _description = "description"
+        case logo
     }
 
-    // Decodable protocol methods
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: String.self)
-
-        assets = try container.decodeIfPresent([FundAssetPart].self, forKey: "assets")
-        entryFee = try container.decodeIfPresent(Double.self, forKey: "entryFee")
-        exitFee = try container.decodeIfPresent(Double.self, forKey: "exitFee")
-        depositAmount = try container.decodeIfPresent(Double.self, forKey: "depositAmount")
-        depositWalletId = try container.decodeIfPresent(UUID.self, forKey: "depositWalletId")
-        title = try container.decodeIfPresent(String.self, forKey: "title")
-        description = try container.decodeIfPresent(String.self, forKey: "description")
-        logo = try container.decodeIfPresent(String.self, forKey: "logo")
-    }
 }
-
