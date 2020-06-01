@@ -171,11 +171,11 @@ open class SocialAPI {
 
     /**
      Get feed
-     - parameter userId: (query)  (optional)     - parameter userMode: (query)  (optional)     - parameter hashTags: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter showTop: (query)  (optional)     - parameter showLiked: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter userId: (query)  (optional)     - parameter tagContentId: (query)  (optional)     - parameter tagContentIds: (query)  (optional)     - parameter userMode: (query)  (optional)     - parameter hashTags: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter showTop: (query)  (optional)     - parameter showLiked: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getFeed(userId: UUID? = nil, userMode: UserFeedMode? = nil, hashTags: [String]? = nil, mask: String? = nil, showTop: Bool? = nil, showLiked: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: PostItemsViewModel?,_ error: Error?) -> Void)) {
-        getFeedWithRequestBuilder(userId: userId, userMode: userMode, hashTags: hashTags, mask: mask, showTop: showTop, showLiked: showLiked, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func getFeed(userId: UUID? = nil, tagContentId: UUID? = nil, tagContentIds: [UUID]? = nil, userMode: UserFeedMode? = nil, hashTags: [String]? = nil, mask: String? = nil, showTop: Bool? = nil, showLiked: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: PostItemsViewModel?,_ error: Error?) -> Void)) {
+        getFeedWithRequestBuilder(userId: userId, tagContentId: tagContentId, tagContentIds: tagContentIds, userMode: userMode, hashTags: hashTags, mask: mask, showTop: showTop, showLiked: showLiked, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
@@ -188,7 +188,7 @@ open class SocialAPI {
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
-  "total" : 5,
+  "total" : 3,
   "items" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "images" : [ {
@@ -217,7 +217,11 @@ open class SocialAPI {
           "level" : 0,
           "levelProgress" : 6.027456183070403
         },
+        "priceCurrency" : "Undefined",
+        "change24Percent" : 2.3021358869347655,
         "color" : "color",
+        "price" : 5.637376656633329,
+        "changeState" : "NotChanged",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "title" : "title",
         "logoUrl" : "logoUrl",
@@ -236,6 +240,11 @@ open class SocialAPI {
       },
       "title" : "title",
       "type" : "Undefined",
+      "event" : {
+        "amount" : 7.061401241503109,
+        "title" : "title",
+        "percent" : 9.301444243932576
+      },
       "userDetails" : {
         "socialLinks" : [ {
           "name" : "name",
@@ -263,7 +272,11 @@ open class SocialAPI {
           "level" : 0,
           "levelProgress" : 6.027456183070403
         },
+        "priceCurrency" : "Undefined",
+        "change24Percent" : 2.3021358869347655,
         "color" : "color",
+        "price" : 5.637376656633329,
+        "changeState" : "NotChanged",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "title" : "title",
         "logoUrl" : "logoUrl",
@@ -282,6 +295,11 @@ open class SocialAPI {
       },
       "title" : "title",
       "type" : "Undefined",
+      "event" : {
+        "amount" : 7.061401241503109,
+        "title" : "title",
+        "percent" : 9.301444243932576
+      },
       "userDetails" : {
         "socialLinks" : [ {
           "name" : "name",
@@ -344,7 +362,11 @@ open class SocialAPI {
           "level" : 0,
           "levelProgress" : 6.027456183070403
         },
+        "priceCurrency" : "Undefined",
+        "change24Percent" : 2.3021358869347655,
         "color" : "color",
+        "price" : 5.637376656633329,
+        "changeState" : "NotChanged",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "title" : "title",
         "logoUrl" : "logoUrl",
@@ -363,6 +385,11 @@ open class SocialAPI {
       },
       "title" : "title",
       "type" : "Undefined",
+      "event" : {
+        "amount" : 7.061401241503109,
+        "title" : "title",
+        "percent" : 9.301444243932576
+      },
       "userDetails" : {
         "socialLinks" : [ {
           "name" : "name",
@@ -390,7 +417,11 @@ open class SocialAPI {
           "level" : 0,
           "levelProgress" : 6.027456183070403
         },
+        "priceCurrency" : "Undefined",
+        "change24Percent" : 2.3021358869347655,
         "color" : "color",
+        "price" : 5.637376656633329,
+        "changeState" : "NotChanged",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "title" : "title",
         "logoUrl" : "logoUrl",
@@ -409,6 +440,11 @@ open class SocialAPI {
       },
       "title" : "title",
       "type" : "Undefined",
+      "event" : {
+        "amount" : 7.061401241503109,
+        "title" : "title",
+        "percent" : 9.301444243932576
+      },
       "userDetails" : {
         "socialLinks" : [ {
           "name" : "name",
@@ -445,17 +481,19 @@ open class SocialAPI {
     "rePostsCount" : 6
   } ]
 }}]
-     - parameter userId: (query)  (optional)     - parameter userMode: (query)  (optional)     - parameter hashTags: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter showTop: (query)  (optional)     - parameter showLiked: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter userId: (query)  (optional)     - parameter tagContentId: (query)  (optional)     - parameter tagContentIds: (query)  (optional)     - parameter userMode: (query)  (optional)     - parameter hashTags: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter showTop: (query)  (optional)     - parameter showLiked: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<PostItemsViewModel> 
      */
-    open class func getFeedWithRequestBuilder(userId: UUID? = nil, userMode: UserFeedMode? = nil, hashTags: [String]? = nil, mask: String? = nil, showTop: Bool? = nil, showLiked: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<PostItemsViewModel> {
+    open class func getFeedWithRequestBuilder(userId: UUID? = nil, tagContentId: UUID? = nil, tagContentIds: [UUID]? = nil, userMode: UserFeedMode? = nil, hashTags: [String]? = nil, mask: String? = nil, showTop: Bool? = nil, showLiked: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<PostItemsViewModel> {
         let path = "/v2.0/social/feed"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "UserId": userId, 
+                        "TagContentId": tagContentId, 
+                        "TagContentIds": tagContentIds, 
                         "UserMode": userMode, 
                         "HashTags": hashTags, 
                         "Mask": mask, 
@@ -535,7 +573,11 @@ open class SocialAPI {
           "level" : 0,
           "levelProgress" : 6.027456183070403
         },
+        "priceCurrency" : "Undefined",
+        "change24Percent" : 2.3021358869347655,
         "color" : "color",
+        "price" : 5.637376656633329,
+        "changeState" : "NotChanged",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "title" : "title",
         "logoUrl" : "logoUrl",
@@ -554,6 +596,11 @@ open class SocialAPI {
       },
       "title" : "title",
       "type" : "Undefined",
+      "event" : {
+        "amount" : 7.061401241503109,
+        "title" : "title",
+        "percent" : 9.301444243932576
+      },
       "userDetails" : {
         "socialLinks" : [ {
           "name" : "name",
@@ -581,7 +628,11 @@ open class SocialAPI {
           "level" : 0,
           "levelProgress" : 6.027456183070403
         },
+        "priceCurrency" : "Undefined",
+        "change24Percent" : 2.3021358869347655,
         "color" : "color",
+        "price" : 5.637376656633329,
+        "changeState" : "NotChanged",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "title" : "title",
         "logoUrl" : "logoUrl",
@@ -600,6 +651,11 @@ open class SocialAPI {
       },
       "title" : "title",
       "type" : "Undefined",
+      "event" : {
+        "amount" : 7.061401241503109,
+        "title" : "title",
+        "percent" : 9.301444243932576
+      },
       "userDetails" : {
         "socialLinks" : [ {
           "name" : "name",
@@ -662,7 +718,11 @@ open class SocialAPI {
           "level" : 0,
           "levelProgress" : 6.027456183070403
         },
+        "priceCurrency" : "Undefined",
+        "change24Percent" : 2.3021358869347655,
         "color" : "color",
+        "price" : 5.637376656633329,
+        "changeState" : "NotChanged",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "title" : "title",
         "logoUrl" : "logoUrl",
@@ -681,6 +741,11 @@ open class SocialAPI {
       },
       "title" : "title",
       "type" : "Undefined",
+      "event" : {
+        "amount" : 7.061401241503109,
+        "title" : "title",
+        "percent" : 9.301444243932576
+      },
       "userDetails" : {
         "socialLinks" : [ {
           "name" : "name",
@@ -708,7 +773,11 @@ open class SocialAPI {
           "level" : 0,
           "levelProgress" : 6.027456183070403
         },
+        "priceCurrency" : "Undefined",
+        "change24Percent" : 2.3021358869347655,
         "color" : "color",
+        "price" : 5.637376656633329,
+        "changeState" : "NotChanged",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "title" : "title",
         "logoUrl" : "logoUrl",
@@ -727,6 +796,11 @@ open class SocialAPI {
       },
       "title" : "title",
       "type" : "Undefined",
+      "event" : {
+        "amount" : 7.061401241503109,
+        "title" : "title",
+        "percent" : 9.301444243932576
+      },
       "userDetails" : {
         "socialLinks" : [ {
           "name" : "name",
@@ -791,7 +865,11 @@ open class SocialAPI {
         "level" : 0,
         "levelProgress" : 6.027456183070403
       },
+      "priceCurrency" : "Undefined",
+      "change24Percent" : 2.3021358869347655,
       "color" : "color",
+      "price" : 5.637376656633329,
+      "changeState" : "NotChanged",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "title" : "title",
       "logoUrl" : "logoUrl",
@@ -810,6 +888,11 @@ open class SocialAPI {
     },
     "title" : "title",
     "type" : "Undefined",
+    "event" : {
+      "amount" : 7.061401241503109,
+      "title" : "title",
+      "percent" : 9.301444243932576
+    },
     "userDetails" : {
       "socialLinks" : [ {
         "name" : "name",
@@ -837,7 +920,11 @@ open class SocialAPI {
         "level" : 0,
         "levelProgress" : 6.027456183070403
       },
+      "priceCurrency" : "Undefined",
+      "change24Percent" : 2.3021358869347655,
       "color" : "color",
+      "price" : 5.637376656633329,
+      "changeState" : "NotChanged",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "title" : "title",
       "logoUrl" : "logoUrl",
@@ -856,6 +943,11 @@ open class SocialAPI {
     },
     "title" : "title",
     "type" : "Undefined",
+    "event" : {
+      "amount" : 7.061401241503109,
+      "title" : "title",
+      "percent" : 9.301444243932576
+    },
     "userDetails" : {
       "socialLinks" : [ {
         "name" : "name",
@@ -911,6 +1003,93 @@ open class SocialAPI {
     }
 
     /**
+     Get social media
+     - parameter mask: (query)  (optional)     - parameter type: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getSocialMedia(mask: String? = nil, type: SocialLinkType? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: MediaPostItemsViewModel?,_ error: Error?) -> Void)) {
+        getSocialMediaWithRequestBuilder(mask: mask, type: type, skip: skip, take: take).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     Get social media
+     - GET /v2.0/social/feed/media
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example={
+  "total" : 5,
+  "items" : [ {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "image" : {
+      "resizes" : [ {
+        "logoUrl" : "logoUrl",
+        "quality" : "Low"
+      }, {
+        "logoUrl" : "logoUrl",
+        "quality" : "Low"
+      } ]
+    },
+    "author" : "author",
+    "type" : "Undefined",
+    "title" : "title",
+    "url" : "url",
+    "likesCount" : 0,
+    "commentsCount" : 1,
+    "authorUrl" : "authorUrl",
+    "authorLogoUrl" : "authorLogoUrl",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "text" : "text",
+    "rePostsCount" : 6
+  }, {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "image" : {
+      "resizes" : [ {
+        "logoUrl" : "logoUrl",
+        "quality" : "Low"
+      }, {
+        "logoUrl" : "logoUrl",
+        "quality" : "Low"
+      } ]
+    },
+    "author" : "author",
+    "type" : "Undefined",
+    "title" : "title",
+    "url" : "url",
+    "likesCount" : 0,
+    "commentsCount" : 1,
+    "authorUrl" : "authorUrl",
+    "authorLogoUrl" : "authorLogoUrl",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "text" : "text",
+    "rePostsCount" : 6
+  } ]
+}}]
+     - parameter mask: (query)  (optional)     - parameter type: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+
+     - returns: RequestBuilder<MediaPostItemsViewModel> 
+     */
+    open class func getSocialMediaWithRequestBuilder(mask: String? = nil, type: SocialLinkType? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<MediaPostItemsViewModel> {
+        let path = "/v2.0/social/feed/media"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
+                        "Mask": mask, 
+                        "Type": type, 
+                        "Skip": skip?.encodeToJSON(), 
+                        "Take": take?.encodeToJSON()
+        ])
+
+        let requestBuilder: RequestBuilder<MediaPostItemsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
      Get social summary
 
      - parameter completion: completion handler to receive the data and the error objects
@@ -929,48 +1108,70 @@ open class SocialAPI {
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
-  "trendPlatformAssets" : [ {
-    "mandatoryFundPercent" : 0.8008281904610115,
-    "color" : "color",
-    "name" : "name",
-    "description" : "description",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "asset" : "asset",
-    "logoUrl" : "logoUrl",
-    "url" : "url"
+  "hotTopics" : [ {
+    "impressionsCount" : 0,
+    "discussCount" : 6,
+    "hashTag" : "hashTag"
   }, {
-    "mandatoryFundPercent" : 0.8008281904610115,
-    "color" : "color",
-    "name" : "name",
-    "description" : "description",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "asset" : "asset",
-    "logoUrl" : "logoUrl",
-    "url" : "url"
+    "impressionsCount" : 0,
+    "discussCount" : 6,
+    "hashTag" : "hashTag"
   } ],
-  "trendHashTags" : [ "trendHashTags", "trendHashTags" ],
-  "trendAssets" : [ {
+  "topStrategies" : [ {
     "programDetails" : {
       "level" : 0,
       "levelProgress" : 6.027456183070403
     },
+    "profitPercent" : 5.637376656633329,
     "color" : "color",
+    "subscribersCount" : 5,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "title" : "title",
     "logoUrl" : "logoUrl",
     "url" : "url",
+    "investorsCount" : 1,
     "assetType" : "None"
   }, {
     "programDetails" : {
       "level" : 0,
       "levelProgress" : 6.027456183070403
     },
+    "profitPercent" : 5.637376656633329,
     "color" : "color",
+    "subscribersCount" : 5,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "title" : "title",
     "logoUrl" : "logoUrl",
     "url" : "url",
+    "investorsCount" : 1,
     "assetType" : "None"
+  } ],
+  "topAssets" : [ {
+    "priceCurrency" : "Undefined",
+    "change24Percent" : 7.061401241503109,
+    "color" : "color",
+    "price" : 2.3021358869347655,
+    "changeState" : "NotChanged",
+    "name" : "name",
+    "description" : "description",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "asset" : "asset",
+    "logoUrl" : "logoUrl",
+    "url" : "url",
+    "hasPrice" : true
+  }, {
+    "priceCurrency" : "Undefined",
+    "change24Percent" : 7.061401241503109,
+    "color" : "color",
+    "price" : 2.3021358869347655,
+    "changeState" : "NotChanged",
+    "name" : "name",
+    "description" : "description",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "asset" : "asset",
+    "logoUrl" : "logoUrl",
+    "url" : "url",
+    "hasPrice" : true
   } ]
 }}]
 

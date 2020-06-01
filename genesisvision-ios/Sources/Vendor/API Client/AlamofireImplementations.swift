@@ -107,7 +107,6 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
     }
 
     fileprivate func processRequest(request: DataRequest, _ managerId: String, _ completion: @escaping (_ response: Response<T>?, _ error: Error?) -> Void) {
-        networkActivity()
         if let credential = self.credential {
             request.authenticate(usingCredential: credential)
         }
@@ -269,7 +268,7 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
 
     fileprivate func getPath(from url : URL) throws -> String {
 
-        guard var path = NSURLComponents(url: url, resolvingAgainstBaseURL: true)?.path else {
+        guard var path = URLComponents(url: url, resolvingAgainstBaseURL: true)?.path else {
             throw DownloadException.requestMissingPath
         }
 
@@ -310,7 +309,6 @@ public enum AlamofireDecodableRequestBuilderError: Error {
 open class AlamofireDecodableRequestBuilder<T:Decodable>: AlamofireRequestBuilder<T> {
 
     override fileprivate func processRequest(request: DataRequest, _ managerId: String, _ completion: @escaping (_ response: Response<T>?, _ error: Error?) -> Void) {
-        networkActivity()
         if let credential = self.credential {
             request.authenticate(usingCredential: credential)
         }
@@ -338,26 +336,6 @@ open class AlamofireDecodableRequestBuilder<T:Decodable>: AlamofireRequestBuilde
                     Response(
                         response: stringResponse.response!,
                         body: ((stringResponse.result.value ?? "") as! T)
-                    ),
-                    nil
-                )
-            })
-        case is Double.Type:
-            validatedRequest.responseString(completionHandler: { (stringResponse) in
-                cleanupRequest()
-                
-                if stringResponse.result.isFailure {
-                    completion(
-                        nil,
-                        ErrorResponse.error(stringResponse.response?.statusCode ?? 500, stringResponse.data, stringResponse.result.error!)
-                    )
-                    return
-                }
-                
-                completion(
-                    Response(
-                        response: stringResponse.response!,
-                        body: ((stringResponse.result.value ?? "").doubleValue as! T)
                     ),
                     nil
                 )

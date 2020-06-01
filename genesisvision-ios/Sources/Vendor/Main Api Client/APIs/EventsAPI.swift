@@ -118,7 +118,7 @@ open class EventsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "EventLocation": eventLocation, 
                         "AssetId": assetId, 
                         "From": from?.encodeToJSON(), 

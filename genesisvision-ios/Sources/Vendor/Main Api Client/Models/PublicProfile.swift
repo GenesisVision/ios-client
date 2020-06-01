@@ -25,14 +25,14 @@ public struct PublicProfile: Codable {
 
     public var url: String?
 
-    public var followers: Int?
+    public var followers: [ProfilePublicShort]?
 
-    public var following: Int?
+    public var following: [ProfilePublicShort]?
 
     public var socialLinks: [SocialLinkViewModel]?
 
     public var personalDetails: PublicProfilePersonalDetails?
-    public init(_id: UUID? = nil, username: String? = nil, about: String? = nil, logoUrl: String? = nil, regDate: Date? = nil, assets: [String]? = nil, url: String? = nil, followers: Int? = nil, following: Int? = nil, socialLinks: [SocialLinkViewModel]? = nil, personalDetails: PublicProfilePersonalDetails? = nil) { 
+    public init(_id: UUID? = nil, username: String? = nil, about: String? = nil, logoUrl: String? = nil, regDate: Date? = nil, assets: [String]? = nil, url: String? = nil, followers: [ProfilePublicShort]? = nil, following: [ProfilePublicShort]? = nil, socialLinks: [SocialLinkViewModel]? = nil, personalDetails: PublicProfilePersonalDetails? = nil) { 
         self._id = _id
         self.username = username
         self.about = about

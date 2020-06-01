@@ -92,7 +92,7 @@ open class FundsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "DateFrom": dateFrom?.encodeToJSON(), 
                         "DateTo": dateTo?.encodeToJSON(), 
                         "MaxPointCount": maxPointCount?.encodeToJSON(), 
@@ -147,7 +147,7 @@ open class FundsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "DateFrom": dateFrom?.encodeToJSON(), 
                         "DateTo": dateTo?.encodeToJSON(), 
                         "MaxPointCount": maxPointCount?.encodeToJSON(), 
@@ -263,7 +263,7 @@ open class FundsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "currency": currency, 
                         "logoQuality": logoQuality
         ])
@@ -373,7 +373,7 @@ open class FundsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "DateFrom": dateFrom?.encodeToJSON(), 
                         "DateTo": dateTo?.encodeToJSON(), 
                         "MaxPointCount": maxPointCount?.encodeToJSON(), 
@@ -389,11 +389,11 @@ open class FundsAPI {
 
     /**
      Funds list
-     - parameter sorting: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter assets: (query)  (optional)     - parameter includeWithInvestments: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter facetId: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter ownerId: (query)  (optional)     - parameter showFavorites: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter sorting: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter assets: (query)  (optional)     - parameter includeWithInvestments: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter facetId: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter ownerId: (query)  (optional)     - parameter showFavorites: (query)  (optional)     - parameter skipStatistic: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getFunds(sorting: FundsFilterSorting? = nil, showIn: Currency? = nil, assets: [String]? = nil, includeWithInvestments: Bool? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: FundDetailsListItemItemsViewModel?,_ error: Error?) -> Void)) {
-        getFundsWithRequestBuilder(sorting: sorting, showIn: showIn, assets: assets, includeWithInvestments: includeWithInvestments, dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, facetId: facetId, mask: mask, ownerId: ownerId, showFavorites: showFavorites, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func getFunds(sorting: FundsFilterSorting? = nil, showIn: Currency? = nil, assets: [String]? = nil, includeWithInvestments: Bool? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skipStatistic: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: FundDetailsListItemItemsViewModel?,_ error: Error?) -> Void)) {
+        getFundsWithRequestBuilder(sorting: sorting, showIn: showIn, assets: assets, includeWithInvestments: includeWithInvestments, dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, facetId: facetId, mask: mask, ownerId: ownerId, showFavorites: showFavorites, skipStatistic: skipStatistic, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
@@ -465,16 +465,16 @@ open class FundsAPI {
     "status" : "status"
   } ]
 }}]
-     - parameter sorting: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter assets: (query)  (optional)     - parameter includeWithInvestments: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter facetId: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter ownerId: (query)  (optional)     - parameter showFavorites: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter sorting: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter assets: (query)  (optional)     - parameter includeWithInvestments: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter facetId: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter ownerId: (query)  (optional)     - parameter showFavorites: (query)  (optional)     - parameter skipStatistic: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<FundDetailsListItemItemsViewModel> 
      */
-    open class func getFundsWithRequestBuilder(sorting: FundsFilterSorting? = nil, showIn: Currency? = nil, assets: [String]? = nil, includeWithInvestments: Bool? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<FundDetailsListItemItemsViewModel> {
+    open class func getFundsWithRequestBuilder(sorting: FundsFilterSorting? = nil, showIn: Currency? = nil, assets: [String]? = nil, includeWithInvestments: Bool? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skipStatistic: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<FundDetailsListItemItemsViewModel> {
         let path = "/v2.0/funds"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "Sorting": sorting, 
                         "ShowIn": showIn, 
                         "Assets": assets, 
@@ -486,6 +486,7 @@ open class FundsAPI {
                         "Mask": mask, 
                         "OwnerId": ownerId, 
                         "ShowFavorites": showFavorites, 
+                        "SkipStatistic": skipStatistic, 
                         "Skip": skip?.encodeToJSON(), 
                         "Take": take?.encodeToJSON()
         ])
@@ -551,7 +552,7 @@ open class FundsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "chartPointsCount": chartPointsCount?.encodeToJSON()
         ])
 
@@ -628,7 +629,7 @@ open class FundsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "DateFrom": dateFrom?.encodeToJSON(), 
                         "DateTo": dateTo?.encodeToJSON(), 
                         "Skip": skip?.encodeToJSON(), 

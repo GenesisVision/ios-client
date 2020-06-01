@@ -12,8 +12,11 @@ public struct UsersPlatformInfo: Codable {
 
 
     public var tags: [Tag]?
-    public init(tags: [Tag]? = nil) { 
+
+    public var availableBetaFeatures: [BetaTestingType]?
+    public init(tags: [Tag]? = nil, availableBetaFeatures: [BetaTestingType]? = nil) { 
         self.tags = tags
+        self.availableBetaFeatures = availableBetaFeatures
     }
 
 }

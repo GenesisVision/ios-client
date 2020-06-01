@@ -11,15 +11,15 @@ import Foundation
 public struct SocialSummary: Codable {
 
 
-    public var trendHashTags: [String]?
+    public var hotTopics: [SocialSummaryHashTag]?
 
-    public var trendAssets: [AssetDetails]?
+    public var topStrategies: [SocialSummaryStrategy]?
 
-    public var trendPlatformAssets: [PlatformAsset]?
-    public init(trendHashTags: [String]? = nil, trendAssets: [AssetDetails]? = nil, trendPlatformAssets: [PlatformAsset]? = nil) { 
-        self.trendHashTags = trendHashTags
-        self.trendAssets = trendAssets
-        self.trendPlatformAssets = trendPlatformAssets
+    public var topAssets: [SocialPostPlatformAsset]?
+    public init(hotTopics: [SocialSummaryHashTag]? = nil, topStrategies: [SocialSummaryStrategy]? = nil, topAssets: [SocialPostPlatformAsset]? = nil) { 
+        self.hotTopics = hotTopics
+        self.topStrategies = topStrategies
+        self.topAssets = topAssets
     }
 
 }

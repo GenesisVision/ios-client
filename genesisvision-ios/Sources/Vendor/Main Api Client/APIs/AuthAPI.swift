@@ -109,7 +109,7 @@ open class AuthAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "userId": userId, 
                         "code": code
         ])
@@ -644,7 +644,7 @@ open class AuthAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "code": code
         ])
 

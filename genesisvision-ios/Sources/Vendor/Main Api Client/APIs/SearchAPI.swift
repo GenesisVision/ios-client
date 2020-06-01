@@ -13,11 +13,11 @@ import Alamofire
 open class SearchAPI {
     /**
      Program / fund / manager search
-     - parameter mask: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter mask: (query)  (optional)     - parameter take: (query)  (optional)     - parameter skipStatistic: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func search(mask: String? = nil, take: Int? = nil, completion: @escaping ((_ data: CommonPublicAssetsViewModel?,_ error: Error?) -> Void)) {
-        searchWithRequestBuilder(mask: mask, take: take).execute { (response, error) -> Void in
+    open class func search(mask: String? = nil, take: Int? = nil, skipStatistic: Bool? = nil, completion: @escaping ((_ data: CommonPublicAssetsViewModel?,_ error: Error?) -> Void)) {
+        searchWithRequestBuilder(mask: mask, take: take, skipStatistic: skipStatistic).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
@@ -140,8 +140,15 @@ open class SearchAPI {
     "total" : 9,
     "items" : [ {
       "owner" : {
+        "personalDetails" : {
+          "isFollow" : true,
+          "canCommentPosts" : true,
+          "canWritePost" : true,
+          "canFollow" : true
+        },
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "url" : "url",
+        "logoUrl" : "logoUrl",
         "username" : "username"
       },
       "periodDuration" : 1,
@@ -193,8 +200,15 @@ open class SearchAPI {
       "status" : "status"
     }, {
       "owner" : {
+        "personalDetails" : {
+          "isFollow" : true,
+          "canCommentPosts" : true,
+          "canWritePost" : true,
+          "canFollow" : true
+        },
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "url" : "url",
+        "logoUrl" : "logoUrl",
         "username" : "username"
       },
       "periodDuration" : 1,
@@ -247,7 +261,7 @@ open class SearchAPI {
     } ]
   },
   "managers" : {
-    "total" : 4,
+    "total" : 7,
     "items" : [ {
       "socialLinks" : [ {
         "name" : "name",
@@ -263,8 +277,8 @@ open class SearchAPI {
         "logoUrl" : "logoUrl"
       } ],
       "assets" : [ "assets", "assets" ],
-      "followers" : 7,
-      "following" : 1,
+      "followers" : [ null, null ],
+      "following" : [ null, null ],
       "about" : "about",
       "regDate" : "2000-01-23T04:56:07.000+00:00",
       "personalDetails" : {
@@ -292,8 +306,8 @@ open class SearchAPI {
         "logoUrl" : "logoUrl"
       } ],
       "assets" : [ "assets", "assets" ],
-      "followers" : 7,
-      "following" : 1,
+      "followers" : [ null, null ],
+      "following" : [ null, null ],
       "about" : "about",
       "regDate" : "2000-01-23T04:56:07.000+00:00",
       "personalDetails" : {
@@ -309,18 +323,19 @@ open class SearchAPI {
     } ]
   }
 }}]
-     - parameter mask: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter mask: (query)  (optional)     - parameter take: (query)  (optional)     - parameter skipStatistic: (query)  (optional)
 
      - returns: RequestBuilder<CommonPublicAssetsViewModel> 
      */
-    open class func searchWithRequestBuilder(mask: String? = nil, take: Int? = nil) -> RequestBuilder<CommonPublicAssetsViewModel> {
+    open class func searchWithRequestBuilder(mask: String? = nil, take: Int? = nil, skipStatistic: Bool? = nil) -> RequestBuilder<CommonPublicAssetsViewModel> {
         let path = "/v2.0/search"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "mask": mask, 
-                        "take": take?.encodeToJSON()
+                        "take": take?.encodeToJSON(), 
+                        "skipStatistic": skipStatistic
         ])
 
         let requestBuilder: RequestBuilder<CommonPublicAssetsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()

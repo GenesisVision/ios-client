@@ -40,20 +40,6 @@ class WalletDataProvider: DataProvider {
         }
     }
     
-    //MARK: WILL NOT WORK
-    
-//    static func feeChange(_ value: Bool, completion: @escaping CompletionBlock) {
-//        guard let authorization = AuthManager.authorizedToken else { return completion(.failure(errorType: .apiError(message: nil))) }
-//        value ?
-//            WalletAPI.switchPayFeeInGvtOn(authorization: authorization) { (error) in
-//                DataProvider().responseHandler(error, completion: completion)
-//            }
-//            :
-//            WalletAPI.switchPayFeeInGvtOff(authorization: authorization) { (error) in
-//                DataProvider().responseHandler(error, completion: completion)
-//        }
-//    }
-    
     // MARK: - Transactions
     static func getTransactions(from: Date? = nil, to: Date? = nil, type: TransactionInternalType? = nil, currency: Currency?, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ transactions: TransactionViewModelItemsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         

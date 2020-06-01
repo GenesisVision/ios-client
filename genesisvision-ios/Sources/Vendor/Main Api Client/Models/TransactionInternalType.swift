@@ -18,4 +18,5 @@ public enum TransactionInternalType: String, Codable {
     case follow = "Follow"
     case tradingAccounts = "TradingAccounts"
     case agentReward = "AgentReward"
+    case exchangeAccounts = "ExchangeAccounts"
 }

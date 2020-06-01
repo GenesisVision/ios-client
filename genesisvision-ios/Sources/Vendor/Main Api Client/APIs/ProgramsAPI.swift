@@ -86,7 +86,7 @@ open class ProgramsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "Symbol": symbol
         ])
 
@@ -126,7 +126,7 @@ open class ProgramsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "DateFrom": dateFrom?.encodeToJSON(), 
                         "DateTo": dateTo?.encodeToJSON(), 
                         "NumberMin": numberMin?.encodeToJSON(), 
@@ -172,7 +172,7 @@ open class ProgramsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "DateFrom": dateFrom?.encodeToJSON(), 
                         "DateTo": dateTo?.encodeToJSON(), 
                         "NumberMin": numberMin?.encodeToJSON(), 
@@ -218,7 +218,7 @@ open class ProgramsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "DateFrom": dateFrom?.encodeToJSON(), 
                         "DateTo": dateTo?.encodeToJSON(), 
                         "Symbol": symbol, 
@@ -542,7 +542,7 @@ open class ProgramsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "DateFrom": dateFrom?.encodeToJSON(), 
                         "DateTo": dateTo?.encodeToJSON(), 
                         "Symbol": symbol, 
@@ -599,7 +599,7 @@ open class ProgramsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "DateFrom": dateFrom?.encodeToJSON(), 
                         "DateTo": dateTo?.encodeToJSON(), 
                         "MaxPointCount": maxPointCount?.encodeToJSON(), 
@@ -655,7 +655,7 @@ open class ProgramsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "DateFrom": dateFrom?.encodeToJSON(), 
                         "DateTo": dateTo?.encodeToJSON(), 
                         "MaxPointCount": maxPointCount?.encodeToJSON(), 
@@ -890,7 +890,7 @@ open class ProgramsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "logoQuality": logoQuality
         ])
 
@@ -1007,7 +1007,7 @@ open class ProgramsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "Sorting": sorting, 
                         "Symbol": symbol, 
                         "AccountId": accountId, 
@@ -1101,7 +1101,7 @@ open class ProgramsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "DateFrom": dateFrom?.encodeToJSON(), 
                         "DateTo": dateTo?.encodeToJSON(), 
                         "NumberMin": numberMin?.encodeToJSON(), 
@@ -1185,7 +1185,7 @@ open class ProgramsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "DateFrom": dateFrom?.encodeToJSON(), 
                         "DateTo": dateTo?.encodeToJSON(), 
                         "MaxPointCount": maxPointCount?.encodeToJSON(), 
@@ -1256,7 +1256,7 @@ open class ProgramsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "Status": status, 
                         "Skip": skip?.encodeToJSON(), 
                         "Take": take?.encodeToJSON()
@@ -1269,11 +1269,11 @@ open class ProgramsAPI {
 
     /**
      Programs list
-     - parameter sorting: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter tags: (query)  (optional)     - parameter programCurrency: (query)  (optional)     - parameter levelMin: (query)  (optional)     - parameter levelMax: (query)  (optional)     - parameter levelsSet: (query)  (optional)     - parameter includeWithInvestments: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter facetId: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter ownerId: (query)  (optional)     - parameter showFavorites: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter sorting: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter tags: (query)  (optional)     - parameter programCurrency: (query)  (optional)     - parameter levelMin: (query)  (optional)     - parameter levelMax: (query)  (optional)     - parameter levelsSet: (query)  (optional)     - parameter includeWithInvestments: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter facetId: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter ownerId: (query)  (optional)     - parameter showFavorites: (query)  (optional)     - parameter skipStatistic: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getPrograms(sorting: ProgramsFilterSorting? = nil, showIn: Currency? = nil, tags: [String]? = nil, programCurrency: Currency? = nil, levelMin: Int? = nil, levelMax: Int? = nil, levelsSet: [Int]? = nil, includeWithInvestments: Bool? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ProgramDetailsListItemItemsViewModel?,_ error: Error?) -> Void)) {
-        getProgramsWithRequestBuilder(sorting: sorting, showIn: showIn, tags: tags, programCurrency: programCurrency, levelMin: levelMin, levelMax: levelMax, levelsSet: levelsSet, includeWithInvestments: includeWithInvestments, dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, facetId: facetId, mask: mask, ownerId: ownerId, showFavorites: showFavorites, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func getPrograms(sorting: ProgramsFilterSorting? = nil, showIn: Currency? = nil, tags: [String]? = nil, programCurrency: Currency? = nil, levelMin: Int? = nil, levelMax: Int? = nil, levelsSet: [Int]? = nil, includeWithInvestments: Bool? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skipStatistic: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ProgramDetailsListItemItemsViewModel?,_ error: Error?) -> Void)) {
+        getProgramsWithRequestBuilder(sorting: sorting, showIn: showIn, tags: tags, programCurrency: programCurrency, levelMin: levelMin, levelMax: levelMax, levelsSet: levelsSet, includeWithInvestments: includeWithInvestments, dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, facetId: facetId, mask: mask, ownerId: ownerId, showFavorites: showFavorites, skipStatistic: skipStatistic, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
@@ -1289,8 +1289,15 @@ open class ProgramsAPI {
   "total" : 9,
   "items" : [ {
     "owner" : {
+      "personalDetails" : {
+        "isFollow" : true,
+        "canCommentPosts" : true,
+        "canWritePost" : true,
+        "canFollow" : true
+      },
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "url" : "url",
+      "logoUrl" : "logoUrl",
       "username" : "username"
     },
     "periodDuration" : 1,
@@ -1342,8 +1349,15 @@ open class ProgramsAPI {
     "status" : "status"
   }, {
     "owner" : {
+      "personalDetails" : {
+        "isFollow" : true,
+        "canCommentPosts" : true,
+        "canWritePost" : true,
+        "canFollow" : true
+      },
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "url" : "url",
+      "logoUrl" : "logoUrl",
       "username" : "username"
     },
     "periodDuration" : 1,
@@ -1395,16 +1409,16 @@ open class ProgramsAPI {
     "status" : "status"
   } ]
 }}]
-     - parameter sorting: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter tags: (query)  (optional)     - parameter programCurrency: (query)  (optional)     - parameter levelMin: (query)  (optional)     - parameter levelMax: (query)  (optional)     - parameter levelsSet: (query)  (optional)     - parameter includeWithInvestments: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter facetId: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter ownerId: (query)  (optional)     - parameter showFavorites: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter sorting: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter tags: (query)  (optional)     - parameter programCurrency: (query)  (optional)     - parameter levelMin: (query)  (optional)     - parameter levelMax: (query)  (optional)     - parameter levelsSet: (query)  (optional)     - parameter includeWithInvestments: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter facetId: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter ownerId: (query)  (optional)     - parameter showFavorites: (query)  (optional)     - parameter skipStatistic: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<ProgramDetailsListItemItemsViewModel> 
      */
-    open class func getProgramsWithRequestBuilder(sorting: ProgramsFilterSorting? = nil, showIn: Currency? = nil, tags: [String]? = nil, programCurrency: Currency? = nil, levelMin: Int? = nil, levelMax: Int? = nil, levelsSet: [Int]? = nil, includeWithInvestments: Bool? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ProgramDetailsListItemItemsViewModel> {
+    open class func getProgramsWithRequestBuilder(sorting: ProgramsFilterSorting? = nil, showIn: Currency? = nil, tags: [String]? = nil, programCurrency: Currency? = nil, levelMin: Int? = nil, levelMax: Int? = nil, levelsSet: [Int]? = nil, includeWithInvestments: Bool? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skipStatistic: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ProgramDetailsListItemItemsViewModel> {
         let path = "/v2.0/programs"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "Sorting": sorting, 
                         "ShowIn": showIn, 
                         "Tags": tags, 
@@ -1420,6 +1434,7 @@ open class ProgramsAPI {
                         "Mask": mask, 
                         "OwnerId": ownerId, 
                         "ShowFavorites": showFavorites, 
+                        "SkipStatistic": skipStatistic, 
                         "Skip": skip?.encodeToJSON(), 
                         "Take": take?.encodeToJSON()
         ])

@@ -61,24 +61,6 @@ class WalletViewController: BaseTabmanViewController<WalletTabmanViewModel> {
 }
 
 extension WalletViewController: WalletMoreButtonViewProtocol {
-    func feeSwitchDidChange(value: Bool) {
-        showProgressHUD()
-        
-        //MARK: WILL NOT WORK
-        
-//        WalletDataProvider.feeChange(value) { [weak self] (result) in
-//            self?.hideHUD()
-//            self?.bottomSheetController.dismiss()
-//
-//            switch result {
-//            case .success:
-//                self?.viewModel.multiWallet?.payFeesWithGvt = value
-//            case .failure(let errorType):
-//                print(errorType)
-//                ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
-//            }
-//        }
-    }
     func aboutFeesButtonDidTapped() {
         bottomSheetController.dismiss()
         

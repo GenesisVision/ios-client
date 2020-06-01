@@ -244,6 +244,7 @@ open class PlatformAPI {
        - name: Bearer
      - examples: [{contentType=application/json, example={
   "usersInfo" : {
+    "availableBetaFeatures" : [ "None", "None" ],
     "tags" : [ null, null ]
   },
   "appVersionInfo" : {
@@ -572,8 +573,15 @@ open class PlatformAPI {
     "total" : 9,
     "items" : [ {
       "owner" : {
+        "personalDetails" : {
+          "isFollow" : true,
+          "canCommentPosts" : true,
+          "canWritePost" : true,
+          "canFollow" : true
+        },
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "url" : "url",
+        "logoUrl" : "logoUrl",
         "username" : "username"
       },
       "periodDuration" : 1,
@@ -625,8 +633,15 @@ open class PlatformAPI {
       "status" : "status"
     }, {
       "owner" : {
+        "personalDetails" : {
+          "isFollow" : true,
+          "canCommentPosts" : true,
+          "canWritePost" : true,
+          "canFollow" : true
+        },
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "url" : "url",
+        "logoUrl" : "logoUrl",
         "username" : "username"
       },
       "periodDuration" : 1,

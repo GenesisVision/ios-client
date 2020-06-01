@@ -549,7 +549,7 @@ open class PlatformAPI {
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
             "currency": currency?.rawValue
         ])
         
@@ -620,7 +620,7 @@ open class PlatformAPI {
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
             "currency": currency?.rawValue
         ])
         
@@ -672,7 +672,7 @@ open class PlatformAPI {
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
             "Route": route,
             "Client": client,
             "Version": version

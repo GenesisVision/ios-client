@@ -12,11 +12,11 @@ import Alamofire
 
 open class DashboardAPI {
     /**
-     - parameter assets: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter showIn: (query)  (optional)
+     - parameter assets: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter skipStatistic: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getChart(assets: [UUID]? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, showIn: Currency? = nil, completion: @escaping ((_ data: DashboardChart?,_ error: Error?) -> Void)) {
-        getChartWithRequestBuilder(assets: assets, dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, showIn: showIn).execute { (response, error) -> Void in
+    open class func getChart(assets: [UUID]? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, showIn: Currency? = nil, skipStatistic: Bool? = nil, completion: @escaping ((_ data: DashboardChart?,_ error: Error?) -> Void)) {
+        getChartWithRequestBuilder(assets: assets, dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, showIn: showIn, skipStatistic: skipStatistic).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
@@ -50,21 +50,22 @@ open class DashboardAPI {
     } ]
   } ]
 }}]
-     - parameter assets: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter showIn: (query)  (optional)
+     - parameter assets: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter skipStatistic: (query)  (optional)
 
      - returns: RequestBuilder<DashboardChart> 
      */
-    open class func getChartWithRequestBuilder(assets: [UUID]? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, showIn: Currency? = nil) -> RequestBuilder<DashboardChart> {
+    open class func getChartWithRequestBuilder(assets: [UUID]? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, showIn: Currency? = nil, skipStatistic: Bool? = nil) -> RequestBuilder<DashboardChart> {
         let path = "/v2.0/dashboard/chart"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "Assets": assets, 
                         "DateFrom": dateFrom?.encodeToJSON(), 
                         "DateTo": dateTo?.encodeToJSON(), 
                         "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
-                        "ShowIn": showIn
+                        "ShowIn": showIn, 
+                        "SkipStatistic": skipStatistic
         ])
 
         let requestBuilder: RequestBuilder<DashboardChart>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
@@ -174,11 +175,58 @@ open class DashboardAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "currency": currency
         ])
 
         let requestBuilder: RequestBuilder<DashboardSummary>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     - parameter exchangeAccountId: (query)  (optional)     - parameter brokerId: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getExchangeAccountCredentials(exchangeAccountId: UUID? = nil, brokerId: UUID? = nil, completion: @escaping ((_ data: DashboardExchangeTradingAsset?,_ error: Error?) -> Void)) {
+        getExchangeAccountCredentialsWithRequestBuilder(exchangeAccountId: exchangeAccountId, brokerId: brokerId).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     - GET /v2.0/dashboard/trading/exchange/credentials
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example={
+  "credentials" : {
+    "apiKey" : "apiKey",
+    "apiSecret" : "apiSecret"
+  },
+  "broker" : {
+    "name" : "name",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "type" : "Undefined",
+    "logoUrl" : "logoUrl"
+  }
+}}]
+     - parameter exchangeAccountId: (query)  (optional)     - parameter brokerId: (query)  (optional)
+
+     - returns: RequestBuilder<DashboardExchangeTradingAsset> 
+     */
+    open class func getExchangeAccountCredentialsWithRequestBuilder(exchangeAccountId: UUID? = nil, brokerId: UUID? = nil) -> RequestBuilder<DashboardExchangeTradingAsset> {
+        let path = "/v2.0/dashboard/trading/exchange/credentials"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
+                        "exchangeAccountId": exchangeAccountId, 
+                        "brokerId": brokerId
+        ])
+
+        let requestBuilder: RequestBuilder<DashboardExchangeTradingAsset>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
@@ -219,7 +267,7 @@ open class DashboardAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "topAssetsCount": topAssetsCount?.encodeToJSON()
         ])
 
@@ -344,7 +392,7 @@ open class DashboardAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "currency": currency, 
                         "eventsTake": eventsTake?.encodeToJSON()
         ])
@@ -355,11 +403,11 @@ open class DashboardAPI {
     }
 
     /**
-     - parameter sorting: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter status: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter facetId: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter ownerId: (query)  (optional)     - parameter showFavorites: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter sorting: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter status: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter facetId: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter ownerId: (query)  (optional)     - parameter showFavorites: (query)  (optional)     - parameter skipStatistic: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getInvestingFunds(sorting: FundsFilterSorting? = nil, showIn: Currency? = nil, status: DashboardAssetStatus? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: FundInvestingDetailsListItemsViewModel?,_ error: Error?) -> Void)) {
-        getInvestingFundsWithRequestBuilder(sorting: sorting, showIn: showIn, status: status, dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, facetId: facetId, mask: mask, ownerId: ownerId, showFavorites: showFavorites, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func getInvestingFunds(sorting: FundsFilterSorting? = nil, showIn: Currency? = nil, status: DashboardAssetStatus? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skipStatistic: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: FundInvestingDetailsListItemsViewModel?,_ error: Error?) -> Void)) {
+        getInvestingFundsWithRequestBuilder(sorting: sorting, showIn: showIn, status: status, dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, facetId: facetId, mask: mask, ownerId: ownerId, showFavorites: showFavorites, skipStatistic: skipStatistic, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
@@ -374,8 +422,15 @@ open class DashboardAPI {
   "total" : 3,
   "items" : [ {
     "owner" : {
+      "personalDetails" : {
+        "isFollow" : true,
+        "canCommentPosts" : true,
+        "canWritePost" : true,
+        "canFollow" : true
+      },
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "url" : "url",
+      "logoUrl" : "logoUrl",
       "username" : "username"
     },
     "totalAssetsCount" : 6,
@@ -426,8 +481,15 @@ open class DashboardAPI {
     "investorsCount" : 0
   }, {
     "owner" : {
+      "personalDetails" : {
+        "isFollow" : true,
+        "canCommentPosts" : true,
+        "canWritePost" : true,
+        "canFollow" : true
+      },
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "url" : "url",
+      "logoUrl" : "logoUrl",
       "username" : "username"
     },
     "totalAssetsCount" : 6,
@@ -478,16 +540,16 @@ open class DashboardAPI {
     "investorsCount" : 0
   } ]
 }}]
-     - parameter sorting: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter status: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter facetId: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter ownerId: (query)  (optional)     - parameter showFavorites: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter sorting: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter status: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter facetId: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter ownerId: (query)  (optional)     - parameter showFavorites: (query)  (optional)     - parameter skipStatistic: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<FundInvestingDetailsListItemsViewModel> 
      */
-    open class func getInvestingFundsWithRequestBuilder(sorting: FundsFilterSorting? = nil, showIn: Currency? = nil, status: DashboardAssetStatus? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<FundInvestingDetailsListItemsViewModel> {
+    open class func getInvestingFundsWithRequestBuilder(sorting: FundsFilterSorting? = nil, showIn: Currency? = nil, status: DashboardAssetStatus? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skipStatistic: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<FundInvestingDetailsListItemsViewModel> {
         let path = "/v2.0/dashboard/investing/funds"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "Sorting": sorting, 
                         "ShowIn": showIn, 
                         "Status": status, 
@@ -498,6 +560,7 @@ open class DashboardAPI {
                         "Mask": mask, 
                         "OwnerId": ownerId, 
                         "ShowFavorites": showFavorites, 
+                        "SkipStatistic": skipStatistic, 
                         "Skip": skip?.encodeToJSON(), 
                         "Take": take?.encodeToJSON()
         ])
@@ -508,11 +571,11 @@ open class DashboardAPI {
     }
 
     /**
-     - parameter sorting: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter status: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter facetId: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter ownerId: (query)  (optional)     - parameter showFavorites: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter sorting: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter status: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter facetId: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter ownerId: (query)  (optional)     - parameter showFavorites: (query)  (optional)     - parameter skipStatistic: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getInvestingPrograms(sorting: ProgramsFilterSorting? = nil, showIn: Currency? = nil, status: DashboardAssetStatus? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ProgramInvestingDetailsListItemsViewModel?,_ error: Error?) -> Void)) {
-        getInvestingProgramsWithRequestBuilder(sorting: sorting, showIn: showIn, status: status, dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, facetId: facetId, mask: mask, ownerId: ownerId, showFavorites: showFavorites, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func getInvestingPrograms(sorting: ProgramsFilterSorting? = nil, showIn: Currency? = nil, status: DashboardAssetStatus? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skipStatistic: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ProgramInvestingDetailsListItemsViewModel?,_ error: Error?) -> Void)) {
+        getInvestingProgramsWithRequestBuilder(sorting: sorting, showIn: showIn, status: status, dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, facetId: facetId, mask: mask, ownerId: ownerId, showFavorites: showFavorites, skipStatistic: skipStatistic, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
@@ -527,8 +590,15 @@ open class DashboardAPI {
   "total" : 4,
   "items" : [ {
     "owner" : {
+      "personalDetails" : {
+        "isFollow" : true,
+        "canCommentPosts" : true,
+        "canWritePost" : true,
+        "canFollow" : true
+      },
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "url" : "url",
+      "logoUrl" : "logoUrl",
       "username" : "username"
     },
     "periodDuration" : 5,
@@ -599,8 +669,15 @@ open class DashboardAPI {
     "investorsCount" : 5
   }, {
     "owner" : {
+      "personalDetails" : {
+        "isFollow" : true,
+        "canCommentPosts" : true,
+        "canWritePost" : true,
+        "canFollow" : true
+      },
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "url" : "url",
+      "logoUrl" : "logoUrl",
       "username" : "username"
     },
     "periodDuration" : 5,
@@ -671,16 +748,16 @@ open class DashboardAPI {
     "investorsCount" : 5
   } ]
 }}]
-     - parameter sorting: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter status: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter facetId: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter ownerId: (query)  (optional)     - parameter showFavorites: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter sorting: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter status: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter facetId: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter ownerId: (query)  (optional)     - parameter showFavorites: (query)  (optional)     - parameter skipStatistic: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<ProgramInvestingDetailsListItemsViewModel> 
      */
-    open class func getInvestingProgramsWithRequestBuilder(sorting: ProgramsFilterSorting? = nil, showIn: Currency? = nil, status: DashboardAssetStatus? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ProgramInvestingDetailsListItemsViewModel> {
+    open class func getInvestingProgramsWithRequestBuilder(sorting: ProgramsFilterSorting? = nil, showIn: Currency? = nil, status: DashboardAssetStatus? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skipStatistic: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ProgramInvestingDetailsListItemsViewModel> {
         let path = "/v2.0/dashboard/investing/programs"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "Sorting": sorting, 
                         "ShowIn": showIn, 
                         "Status": status, 
@@ -691,6 +768,7 @@ open class DashboardAPI {
                         "Mask": mask, 
                         "OwnerId": ownerId, 
                         "ShowFavorites": showFavorites, 
+                        "SkipStatistic": skipStatistic, 
                         "Skip": skip?.encodeToJSON(), 
                         "Take": take?.encodeToJSON()
         ])
@@ -701,11 +779,11 @@ open class DashboardAPI {
     }
 
     /**
-     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter showIn: (query)  (optional)
+     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter skipStatistic: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getMostProfitableAssets(dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, showIn: Currency? = nil, completion: @escaping ((_ data: DashboardTradingAssetItemsViewModel?,_ error: Error?) -> Void)) {
-        getMostProfitableAssetsWithRequestBuilder(dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, showIn: showIn).execute { (response, error) -> Void in
+    open class func getMostProfitableAssets(dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, showIn: Currency? = nil, skipStatistic: Bool? = nil, completion: @escaping ((_ data: DashboardTradingAssetItemsViewModel?,_ error: Error?) -> Void)) {
+        getMostProfitableAssetsWithRequestBuilder(dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, showIn: showIn, skipStatistic: skipStatistic).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
@@ -721,6 +799,14 @@ open class DashboardAPI {
   "items" : [ {
     "accountInfo" : {
       "leverage" : 1,
+      "supportedCurrencies" : [ null, null ],
+      "balances" : [ {
+        "amount" : 9.301444243932576,
+        "currency" : "Undefined"
+      }, {
+        "amount" : 9.301444243932576,
+        "currency" : "Undefined"
+      } ],
       "balance" : 6.027456183070403,
       "currency" : "Undefined",
       "title" : "title",
@@ -739,6 +825,10 @@ open class DashboardAPI {
         "value" : 0.8008281904610115
       } ],
       "profit" : 5.962133916683182
+    },
+    "credentials" : {
+      "apiKey" : "apiKey",
+      "apiSecret" : "apiSecret"
     },
     "signalInfo" : {
       "subscribersCount" : 5
@@ -805,6 +895,14 @@ open class DashboardAPI {
   }, {
     "accountInfo" : {
       "leverage" : 1,
+      "supportedCurrencies" : [ null, null ],
+      "balances" : [ {
+        "amount" : 9.301444243932576,
+        "currency" : "Undefined"
+      }, {
+        "amount" : 9.301444243932576,
+        "currency" : "Undefined"
+      } ],
       "balance" : 6.027456183070403,
       "currency" : "Undefined",
       "title" : "title",
@@ -823,6 +921,10 @@ open class DashboardAPI {
         "value" : 0.8008281904610115
       } ],
       "profit" : 5.962133916683182
+    },
+    "credentials" : {
+      "apiKey" : "apiKey",
+      "apiSecret" : "apiSecret"
     },
     "signalInfo" : {
       "subscribersCount" : 5
@@ -888,20 +990,21 @@ open class DashboardAPI {
     } ]
   } ]
 }}]
-     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter showIn: (query)  (optional)
+     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter skipStatistic: (query)  (optional)
 
      - returns: RequestBuilder<DashboardTradingAssetItemsViewModel> 
      */
-    open class func getMostProfitableAssetsWithRequestBuilder(dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, showIn: Currency? = nil) -> RequestBuilder<DashboardTradingAssetItemsViewModel> {
+    open class func getMostProfitableAssetsWithRequestBuilder(dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, showIn: Currency? = nil, skipStatistic: Bool? = nil) -> RequestBuilder<DashboardTradingAssetItemsViewModel> {
         let path = "/v2.0/dashboard/trading/mostprofitable"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "DateFrom": dateFrom?.encodeToJSON(), 
                         "DateTo": dateTo?.encodeToJSON(), 
                         "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
-                        "ShowIn": showIn
+                        "ShowIn": showIn, 
+                        "SkipStatistic": skipStatistic
         ])
 
         let requestBuilder: RequestBuilder<DashboardTradingAssetItemsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
@@ -954,11 +1057,11 @@ open class DashboardAPI {
     }
 
     /**
-     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter status: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter status: (query)  (optional)     - parameter skipStatistic: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getPrivateTradingAssets(dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, showIn: Currency? = nil, status: DashboardAssetStatus? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: DashboardTradingAssetItemsViewModel?,_ error: Error?) -> Void)) {
-        getPrivateTradingAssetsWithRequestBuilder(dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, showIn: showIn, status: status, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func getPrivateTradingAssets(dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, showIn: Currency? = nil, status: DashboardAssetStatus? = nil, skipStatistic: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: DashboardTradingAssetItemsViewModel?,_ error: Error?) -> Void)) {
+        getPrivateTradingAssetsWithRequestBuilder(dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, showIn: showIn, status: status, skipStatistic: skipStatistic, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
@@ -974,6 +1077,14 @@ open class DashboardAPI {
   "items" : [ {
     "accountInfo" : {
       "leverage" : 1,
+      "supportedCurrencies" : [ null, null ],
+      "balances" : [ {
+        "amount" : 9.301444243932576,
+        "currency" : "Undefined"
+      }, {
+        "amount" : 9.301444243932576,
+        "currency" : "Undefined"
+      } ],
       "balance" : 6.027456183070403,
       "currency" : "Undefined",
       "title" : "title",
@@ -992,6 +1103,10 @@ open class DashboardAPI {
         "value" : 0.8008281904610115
       } ],
       "profit" : 5.962133916683182
+    },
+    "credentials" : {
+      "apiKey" : "apiKey",
+      "apiSecret" : "apiSecret"
     },
     "signalInfo" : {
       "subscribersCount" : 5
@@ -1058,6 +1173,14 @@ open class DashboardAPI {
   }, {
     "accountInfo" : {
       "leverage" : 1,
+      "supportedCurrencies" : [ null, null ],
+      "balances" : [ {
+        "amount" : 9.301444243932576,
+        "currency" : "Undefined"
+      }, {
+        "amount" : 9.301444243932576,
+        "currency" : "Undefined"
+      } ],
       "balance" : 6.027456183070403,
       "currency" : "Undefined",
       "title" : "title",
@@ -1076,6 +1199,10 @@ open class DashboardAPI {
         "value" : 0.8008281904610115
       } ],
       "profit" : 5.962133916683182
+    },
+    "credentials" : {
+      "apiKey" : "apiKey",
+      "apiSecret" : "apiSecret"
     },
     "signalInfo" : {
       "subscribersCount" : 5
@@ -1141,21 +1268,22 @@ open class DashboardAPI {
     } ]
   } ]
 }}]
-     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter status: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter status: (query)  (optional)     - parameter skipStatistic: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<DashboardTradingAssetItemsViewModel> 
      */
-    open class func getPrivateTradingAssetsWithRequestBuilder(dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, showIn: Currency? = nil, status: DashboardAssetStatus? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<DashboardTradingAssetItemsViewModel> {
+    open class func getPrivateTradingAssetsWithRequestBuilder(dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, showIn: Currency? = nil, status: DashboardAssetStatus? = nil, skipStatistic: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<DashboardTradingAssetItemsViewModel> {
         let path = "/v2.0/dashboard/trading/private"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "DateFrom": dateFrom?.encodeToJSON(), 
                         "DateTo": dateTo?.encodeToJSON(), 
                         "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
                         "ShowIn": showIn, 
                         "Status": status, 
+                        "SkipStatistic": skipStatistic, 
                         "Skip": skip?.encodeToJSON(), 
                         "Take": take?.encodeToJSON()
         ])
@@ -1166,11 +1294,11 @@ open class DashboardAPI {
     }
 
     /**
-     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter status: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter status: (query)  (optional)     - parameter skipStatistic: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getPublicTradingAssets(dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, showIn: Currency? = nil, status: DashboardAssetStatus? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: DashboardTradingAssetItemsViewModel?,_ error: Error?) -> Void)) {
-        getPublicTradingAssetsWithRequestBuilder(dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, showIn: showIn, status: status, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func getPublicTradingAssets(dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, showIn: Currency? = nil, status: DashboardAssetStatus? = nil, skipStatistic: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: DashboardTradingAssetItemsViewModel?,_ error: Error?) -> Void)) {
+        getPublicTradingAssetsWithRequestBuilder(dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, showIn: showIn, status: status, skipStatistic: skipStatistic, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
@@ -1186,6 +1314,14 @@ open class DashboardAPI {
   "items" : [ {
     "accountInfo" : {
       "leverage" : 1,
+      "supportedCurrencies" : [ null, null ],
+      "balances" : [ {
+        "amount" : 9.301444243932576,
+        "currency" : "Undefined"
+      }, {
+        "amount" : 9.301444243932576,
+        "currency" : "Undefined"
+      } ],
       "balance" : 6.027456183070403,
       "currency" : "Undefined",
       "title" : "title",
@@ -1204,6 +1340,10 @@ open class DashboardAPI {
         "value" : 0.8008281904610115
       } ],
       "profit" : 5.962133916683182
+    },
+    "credentials" : {
+      "apiKey" : "apiKey",
+      "apiSecret" : "apiSecret"
     },
     "signalInfo" : {
       "subscribersCount" : 5
@@ -1270,6 +1410,14 @@ open class DashboardAPI {
   }, {
     "accountInfo" : {
       "leverage" : 1,
+      "supportedCurrencies" : [ null, null ],
+      "balances" : [ {
+        "amount" : 9.301444243932576,
+        "currency" : "Undefined"
+      }, {
+        "amount" : 9.301444243932576,
+        "currency" : "Undefined"
+      } ],
       "balance" : 6.027456183070403,
       "currency" : "Undefined",
       "title" : "title",
@@ -1288,6 +1436,10 @@ open class DashboardAPI {
         "value" : 0.8008281904610115
       } ],
       "profit" : 5.962133916683182
+    },
+    "credentials" : {
+      "apiKey" : "apiKey",
+      "apiSecret" : "apiSecret"
     },
     "signalInfo" : {
       "subscribersCount" : 5
@@ -1353,21 +1505,22 @@ open class DashboardAPI {
     } ]
   } ]
 }}]
-     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter status: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter status: (query)  (optional)     - parameter skipStatistic: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<DashboardTradingAssetItemsViewModel> 
      */
-    open class func getPublicTradingAssetsWithRequestBuilder(dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, showIn: Currency? = nil, status: DashboardAssetStatus? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<DashboardTradingAssetItemsViewModel> {
+    open class func getPublicTradingAssetsWithRequestBuilder(dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, showIn: Currency? = nil, status: DashboardAssetStatus? = nil, skipStatistic: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<DashboardTradingAssetItemsViewModel> {
         let path = "/v2.0/dashboard/trading/public"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "DateFrom": dateFrom?.encodeToJSON(), 
                         "DateTo": dateTo?.encodeToJSON(), 
                         "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
                         "ShowIn": showIn, 
                         "Status": status, 
+                        "SkipStatistic": skipStatistic, 
                         "Skip": skip?.encodeToJSON(), 
                         "Take": take?.encodeToJSON()
         ])
@@ -1506,8 +1659,15 @@ open class DashboardAPI {
     "total" : 9,
     "items" : [ {
       "owner" : {
+        "personalDetails" : {
+          "isFollow" : true,
+          "canCommentPosts" : true,
+          "canWritePost" : true,
+          "canFollow" : true
+        },
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "url" : "url",
+        "logoUrl" : "logoUrl",
         "username" : "username"
       },
       "periodDuration" : 1,
@@ -1559,8 +1719,15 @@ open class DashboardAPI {
       "status" : "status"
     }, {
       "owner" : {
+        "personalDetails" : {
+          "isFollow" : true,
+          "canCommentPosts" : true,
+          "canWritePost" : true,
+          "canFollow" : true
+        },
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "url" : "url",
+        "logoUrl" : "logoUrl",
         "username" : "username"
       },
       "periodDuration" : 1,
@@ -1613,7 +1780,7 @@ open class DashboardAPI {
     } ]
   },
   "managers" : {
-    "total" : 4,
+    "total" : 7,
     "items" : [ {
       "socialLinks" : [ {
         "name" : "name",
@@ -1629,8 +1796,8 @@ open class DashboardAPI {
         "logoUrl" : "logoUrl"
       } ],
       "assets" : [ "assets", "assets" ],
-      "followers" : 7,
-      "following" : 1,
+      "followers" : [ null, null ],
+      "following" : [ null, null ],
       "about" : "about",
       "regDate" : "2000-01-23T04:56:07.000+00:00",
       "personalDetails" : {
@@ -1658,8 +1825,8 @@ open class DashboardAPI {
         "logoUrl" : "logoUrl"
       } ],
       "assets" : [ "assets", "assets" ],
-      "followers" : 7,
-      "following" : 1,
+      "followers" : [ null, null ],
+      "following" : [ null, null ],
       "about" : "about",
       "regDate" : "2000-01-23T04:56:07.000+00:00",
       "personalDetails" : {
@@ -1684,7 +1851,7 @@ open class DashboardAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "currency": currency, 
                         "take": take?.encodeToJSON(), 
                         "onlyFollows": onlyFollows
@@ -1811,7 +1978,7 @@ open class DashboardAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "currency": currency, 
                         "eventsTake": eventsTake?.encodeToJSON()
         ])

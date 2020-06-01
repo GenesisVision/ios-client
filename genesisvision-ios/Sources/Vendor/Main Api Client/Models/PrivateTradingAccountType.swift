@@ -10,5 +10,6 @@ import Foundation
 public enum PrivateTradingAccountType: String, Codable {
     case _none = "None"
     case tradingAccount = "TradingAccount"
+    case exchangeAccount = "ExchangeAccount"
     case externalTradingAccount = "ExternalTradingAccount"
 }

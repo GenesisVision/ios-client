@@ -55,7 +55,7 @@ extension DetailStatisticsTableViewCellViewModel: CellViewModel {
             cell.addToStackView(cell.topStackView, value: value.toString(), header: "invest. ratio")
         }
         if let value = details.programDetails?.periodDuration {
-            cell.addToStackView(cell.topStackView, value: value.getDays(), header: "period")
+            cell.addToStackView(cell.topStackView, value: value.toString(), header: "period")
         }
         if let value = details.programDetails?.genesisRatio {
             cell.addToStackView(cell.topStackView, value: value.toString(), header: "genesis ratio")
@@ -68,7 +68,7 @@ extension DetailStatisticsTableViewCellViewModel: CellViewModel {
             cell.addToStackView(cell.bottomStackView, value: (min == max) ? "1:\(min)" : "1:\(min)-1:\(max)", header: "leverage")
         }
         if let value = details.programDetails?.ageDays {
-            cell.addToStackView(cell.bottomStackView, value: value.getDays(), header: "age")
+            cell.addToStackView(cell.bottomStackView, value: value.toString(), header: "age")
         }
     }
 }

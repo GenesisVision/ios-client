@@ -152,6 +152,51 @@ open class NotificationsAPI {
     }
 
     /**
+     User settings for follow
+     - parameter _id: (path)  
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getNotificationsFollowSettings(_id: String, completion: @escaping ((_ data: FollowNotificationSettingList?,_ error: Error?) -> Void)) {
+        getNotificationsFollowSettingsWithRequestBuilder(_id: _id).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     User settings for follow
+     - GET /v2.0/notifications/settings/follow/{id}
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example={
+  "color" : "color",
+  "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+  "settingsGeneral" : [ null, null ],
+  "title" : "title",
+  "url" : "url",
+  "logoUrl" : "logoUrl"
+}}]
+     - parameter _id: (path)  
+
+     - returns: RequestBuilder<FollowNotificationSettingList> 
+     */
+    open class func getNotificationsFollowSettingsWithRequestBuilder(_id: String) -> RequestBuilder<FollowNotificationSettingList> {
+        var path = "/v2.0/notifications/settings/follow/{id}"
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = URLComponents(string: URLString)
+
+        let requestBuilder: RequestBuilder<FollowNotificationSettingList>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
      User settings for fund
      - parameter _id: (path)  
      - parameter completion: completion handler to receive the data and the error objects

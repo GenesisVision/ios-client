@@ -30,7 +30,13 @@ public struct UserDetailsList: Codable {
     public var followersCount: Int?
 
     public var totalProfit: Double?
-    public init(userId: UUID? = nil, username: String? = nil, logoUrl: String? = nil, url: String? = nil, tags: [Tag]? = nil, regDate: Date? = nil, assetsUnderManagement: Double? = nil, investorsCount: Int? = nil, followersCount: Int? = nil, totalProfit: Double? = nil) { 
+
+    public var about: String?
+
+    public var followers: [ProfilePublicShort]?
+
+    public var personalDetails: PublicProfilePersonalDetails?
+    public init(userId: UUID? = nil, username: String? = nil, logoUrl: String? = nil, url: String? = nil, tags: [Tag]? = nil, regDate: Date? = nil, assetsUnderManagement: Double? = nil, investorsCount: Int? = nil, followersCount: Int? = nil, totalProfit: Double? = nil, about: String? = nil, followers: [ProfilePublicShort]? = nil, personalDetails: PublicProfilePersonalDetails? = nil) { 
         self.userId = userId
         self.username = username
         self.logoUrl = logoUrl
@@ -41,6 +47,9 @@ public struct UserDetailsList: Codable {
         self.investorsCount = investorsCount
         self.followersCount = followersCount
         self.totalProfit = totalProfit
+        self.about = about
+        self.followers = followers
+        self.personalDetails = personalDetails
     }
 
 }

@@ -273,6 +273,86 @@ open class ProfileAPI {
     }
 
     /**
+     Disable beta feature
+     - parameter feature: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func switchBetaFeatureOff(feature: BetaTestingType? = nil, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        switchBetaFeatureOffWithRequestBuilder(feature: feature).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
+        }
+    }
+
+
+    /**
+     Disable beta feature
+     - POST /v2.0/profile/beta/off
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter feature: (query)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func switchBetaFeatureOffWithRequestBuilder(feature: BetaTestingType? = nil) -> RequestBuilder<Void> {
+        let path = "/v2.0/profile/beta/off"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
+                        "feature": feature
+        ])
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Enable beta feature
+     - parameter feature: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func switchBetaFeatureOn(feature: BetaTestingType? = nil, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        switchBetaFeatureOnWithRequestBuilder(feature: feature).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
+        }
+    }
+
+
+    /**
+     Enable beta feature
+     - POST /v2.0/profile/beta/on
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter feature: (query)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func switchBetaFeatureOnWithRequestBuilder(feature: BetaTestingType? = nil) -> RequestBuilder<Void> {
+        let path = "/v2.0/profile/beta/on"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
+                        "feature": feature
+        ])
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
      Disable public investor profile
 
      - parameter completion: completion handler to receive the data and the error objects
@@ -606,7 +686,7 @@ open class ProfileAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "currency": currency
         ])
 
@@ -646,7 +726,7 @@ open class ProfileAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "WhoCanPostToMayWall": whoCanPostToMayWall, 
                         "WhoCanViewCommentsOnMyPosts": whoCanViewCommentsOnMyPosts, 
                         "WhoCanCommentOnMyPosts": whoCanCommentOnMyPosts

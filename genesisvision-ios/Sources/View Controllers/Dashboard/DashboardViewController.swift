@@ -269,12 +269,10 @@ class DashboardViewModel: ViewModelWithListProtocol {
     
     func fetch() {
         viewModels = [CellViewAnyModel]()
-        
-        // MARK: WILL NOT WORK
-        
-//        DashboardDataProvider.getSummary(currencyType, completion: { [weak self] (model) in
-//            self?.overview = model
-//        }, errorCompletion: errorCompletion)
+                
+        DashboardDataProvider.getSummary(currencyType, completion: { [weak self] (model) in
+            self?.overview = model
+        }, errorCompletion: errorCompletion)
         DashboardDataProvider.getTrading(currencyType, eventsTake: 12, completion: { [weak self] (model) in
             self?.tradingDetails = model
         }, errorCompletion: errorCompletion)

@@ -430,7 +430,7 @@ class AssetCollectionViewModel: CellViewModelWithCollection {
             }
             
             if value < 100 {
-                viewModels.append(FundAssetCollectionViewCellViewModel(assetModel: PlatformAsset(_id: nil, name: nil, asset: nil, _description: nil, logoUrl: nil, color: nil, mandatoryFundPercent: 100 - value, url: nil)))
+                viewModels.append(FundAssetCollectionViewCellViewModel(assetModel: PlatformAsset(mandatoryFundPercent: 100 - value, _id: nil, name: nil, asset: nil, _description: nil, logoUrl: nil, color: nil, url: nil)))
             }
         }
     }

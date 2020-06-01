@@ -71,14 +71,12 @@ class DashboardDataProvider: DataProvider {
         }
     }
     
-    // MARK: - Summary
-//    static func getSummary(_ currency: Currency, completion: @escaping (DashboardSummary?) -> Void, errorCompletion: @escaping CompletionBlock) {
-//
-//
-//        DashboardAPI.getSummary(currency: currency) { (viewModel, error) in
-//            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
-//        }
-//    }
+    static func getSummary(_ currency: Currency, completion: @escaping (DashboardSummary?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        
+        DashboardAPI.getDashboardSummary(currency: currency) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
     
     // MARK: - Trading
     static func getTrading(_ currency: Currency, eventsTake: Int?, completion: @escaping (DashboardTradingDetails?) -> Void, errorCompletion: @escaping CompletionBlock) {

@@ -106,6 +106,7 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     override func fetch() {
         viewModel.refresh { [weak self] (result) in
             self?.hideAll()
+            self?.reloadData()
             
             switch result {
             case .success:

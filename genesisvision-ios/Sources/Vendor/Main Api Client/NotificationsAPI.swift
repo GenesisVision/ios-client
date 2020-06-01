@@ -87,7 +87,7 @@ open class NotificationsAPI {
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
             "AssetId": assetId,
             "ManagerId": managerId,
             "Type": type?.rawValue,
@@ -203,7 +203,7 @@ open class NotificationsAPI {
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
             "skip": skip?.encodeToJSON(),
             "take": take?.encodeToJSON()
         ])

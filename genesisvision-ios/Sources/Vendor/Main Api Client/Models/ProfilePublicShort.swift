@@ -16,15 +16,23 @@ public struct ProfilePublicShort: Codable {
     public var username: String?
 
     public var url: String?
-    public init(_id: UUID? = nil, username: String? = nil, url: String? = nil) { 
+
+    public var logoUrl: String?
+
+    public var personalDetails: PublicProfilePersonalDetails?
+    public init(_id: UUID? = nil, username: String? = nil, url: String? = nil, logoUrl: String? = nil, personalDetails: PublicProfilePersonalDetails? = nil) { 
         self._id = _id
         self.username = username
         self.url = url
+        self.logoUrl = logoUrl
+        self.personalDetails = personalDetails
     }
     public enum CodingKeys: String, CodingKey { 
         case _id = "id"
         case username
         case url
+        case logoUrl
+        case personalDetails
     }
 
 }

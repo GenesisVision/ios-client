@@ -16,8 +16,8 @@ open class UsersAPI {
      - parameter _id: (path)       - parameter logoQuality: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getManagerProfile(_id: String, logoQuality: ImageQuality? = nil, completion: @escaping ((_ data: PublicProfile?,_ error: Error?) -> Void)) {
-        getManagerProfileWithRequestBuilder(_id: _id, logoQuality: logoQuality).execute { (response, error) -> Void in
+    open class func getUserProfile(_id: String, logoQuality: ImageQuality? = nil, completion: @escaping ((_ data: PublicProfile?,_ error: Error?) -> Void)) {
+        getUserProfileWithRequestBuilder(_id: _id, logoQuality: logoQuality).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
@@ -44,8 +44,8 @@ open class UsersAPI {
     "logoUrl" : "logoUrl"
   } ],
   "assets" : [ "assets", "assets" ],
-  "followers" : 7,
-  "following" : 1,
+  "followers" : [ null, null ],
+  "following" : [ null, null ],
   "about" : "about",
   "regDate" : "2000-01-23T04:56:07.000+00:00",
   "personalDetails" : {
@@ -63,7 +63,7 @@ open class UsersAPI {
 
      - returns: RequestBuilder<PublicProfile> 
      */
-    open class func getManagerProfileWithRequestBuilder(_id: String, logoQuality: ImageQuality? = nil) -> RequestBuilder<PublicProfile> {
+    open class func getUserProfileWithRequestBuilder(_id: String, logoQuality: ImageQuality? = nil) -> RequestBuilder<PublicProfile> {
         var path = "/v2.0/users/{id}"
         let _idPreEscape = "\(_id)"
         let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -71,7 +71,7 @@ open class UsersAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "logoQuality": logoQuality
         ])
 
@@ -101,14 +101,12 @@ open class UsersAPI {
      - examples: [{contentType=application/json, example={
   "total" : 5,
   "items" : [ {
-    "assetsUnderManagement" : 0.8008281904610115,
     "totalProfit" : 5.962133916683182,
+    "about" : "about",
     "regDate" : "2000-01-23T04:56:07.000+00:00",
-    "followersCount" : 1,
     "userId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logoUrl" : "logoUrl",
     "url" : "url",
-    "username" : "username",
     "tags" : [ {
       "color" : "color",
       "name" : "name"
@@ -116,16 +114,46 @@ open class UsersAPI {
       "color" : "color",
       "name" : "name"
     } ],
+    "assetsUnderManagement" : 0.8008281904610115,
+    "followers" : [ {
+      "personalDetails" : {
+        "isFollow" : true,
+        "canCommentPosts" : true,
+        "canWritePost" : true,
+        "canFollow" : true
+      },
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "url" : "url",
+      "logoUrl" : "logoUrl",
+      "username" : "username"
+    }, {
+      "personalDetails" : {
+        "isFollow" : true,
+        "canCommentPosts" : true,
+        "canWritePost" : true,
+        "canFollow" : true
+      },
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "url" : "url",
+      "logoUrl" : "logoUrl",
+      "username" : "username"
+    } ],
+    "personalDetails" : {
+      "isFollow" : true,
+      "canCommentPosts" : true,
+      "canWritePost" : true,
+      "canFollow" : true
+    },
+    "followersCount" : 1,
+    "username" : "username",
     "investorsCount" : 6
   }, {
-    "assetsUnderManagement" : 0.8008281904610115,
     "totalProfit" : 5.962133916683182,
+    "about" : "about",
     "regDate" : "2000-01-23T04:56:07.000+00:00",
-    "followersCount" : 1,
     "userId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "logoUrl" : "logoUrl",
     "url" : "url",
-    "username" : "username",
     "tags" : [ {
       "color" : "color",
       "name" : "name"
@@ -133,6 +161,38 @@ open class UsersAPI {
       "color" : "color",
       "name" : "name"
     } ],
+    "assetsUnderManagement" : 0.8008281904610115,
+    "followers" : [ {
+      "personalDetails" : {
+        "isFollow" : true,
+        "canCommentPosts" : true,
+        "canWritePost" : true,
+        "canFollow" : true
+      },
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "url" : "url",
+      "logoUrl" : "logoUrl",
+      "username" : "username"
+    }, {
+      "personalDetails" : {
+        "isFollow" : true,
+        "canCommentPosts" : true,
+        "canWritePost" : true,
+        "canFollow" : true
+      },
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "url" : "url",
+      "logoUrl" : "logoUrl",
+      "username" : "username"
+    } ],
+    "personalDetails" : {
+      "isFollow" : true,
+      "canCommentPosts" : true,
+      "canWritePost" : true,
+      "canFollow" : true
+    },
+    "followersCount" : 1,
+    "username" : "username",
     "investorsCount" : 6
   } ]
 }}]
@@ -145,7 +205,7 @@ open class UsersAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "Sorting": sorting, 
                         "Timeframe": timeframe, 
                         "Tags": tags, 

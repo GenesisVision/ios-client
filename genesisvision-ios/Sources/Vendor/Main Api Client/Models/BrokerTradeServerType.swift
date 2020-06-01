@@ -19,4 +19,5 @@ public enum BrokerTradeServerType: String, Codable {
     case huobi = "Huobi"
     case exante = "Exante"
     case binanceFollow = "BinanceFollow"
+    case binance = "Binance"
 }
