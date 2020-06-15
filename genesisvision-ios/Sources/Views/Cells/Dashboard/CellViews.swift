@@ -575,15 +575,15 @@ class DashboardOverviewLabelsView: UIStackView {
         
         investedView.circleView.backgroundColor = UIColor.Common.primary
         investedView.labelsView.titleLabel.text = "invested"
-        investedView.labelsView.valueLabel.text = data.investedProgress.rounded(with: .undefined).toString() + "%"
+        investedView.labelsView.valueLabel.text = data.investedProgress.getPercentageString()
         
         tradingView.circleView.backgroundColor = UIColor.Common.yellow
         tradingView.labelsView.titleLabel.text = "trading"
-        tradingView.labelsView.valueLabel.text = data.tradingProgress.rounded(with: .undefined).toString() + "%"
+        tradingView.labelsView.valueLabel.text = data.tradingProgress.getPercentageString()
         
         walletsView.circleView.backgroundColor = UIColor.Common.purple
         walletsView.labelsView.titleLabel.text = "wallets"
-        walletsView.labelsView.valueLabel.text = data.walletsProgress.rounded(with: .undefined).toString() + "%"
+        walletsView.labelsView.valueLabel.text = data.walletsProgress.getPercentageString()
         
         let day = data.profits.day
         changeLabelsView.dayLabel.titleLabel.text = "day"

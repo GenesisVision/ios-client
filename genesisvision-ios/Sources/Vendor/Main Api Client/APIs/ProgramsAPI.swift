@@ -86,7 +86,7 @@ open class ProgramsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "Symbol": symbol
         ])
 
@@ -126,7 +126,7 @@ open class ProgramsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "DateFrom": dateFrom?.encodeToJSON(), 
                         "DateTo": dateTo?.encodeToJSON(), 
                         "NumberMin": numberMin?.encodeToJSON(), 
@@ -172,7 +172,7 @@ open class ProgramsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "DateFrom": dateFrom?.encodeToJSON(), 
                         "DateTo": dateTo?.encodeToJSON(), 
                         "NumberMin": numberMin?.encodeToJSON(), 
@@ -218,7 +218,7 @@ open class ProgramsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "DateFrom": dateFrom?.encodeToJSON(), 
                         "DateTo": dateTo?.encodeToJSON(), 
                         "Symbol": symbol, 
@@ -542,7 +542,7 @@ open class ProgramsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "DateFrom": dateFrom?.encodeToJSON(), 
                         "DateTo": dateTo?.encodeToJSON(), 
                         "Symbol": symbol, 
@@ -599,7 +599,7 @@ open class ProgramsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "DateFrom": dateFrom?.encodeToJSON(), 
                         "DateTo": dateTo?.encodeToJSON(), 
                         "MaxPointCount": maxPointCount?.encodeToJSON(), 
@@ -655,7 +655,7 @@ open class ProgramsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "DateFrom": dateFrom?.encodeToJSON(), 
                         "DateTo": dateTo?.encodeToJSON(), 
                         "MaxPointCount": maxPointCount?.encodeToJSON(), 
@@ -890,7 +890,7 @@ open class ProgramsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "logoQuality": logoQuality
         ])
 
@@ -1007,7 +1007,7 @@ open class ProgramsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "Sorting": sorting, 
                         "Symbol": symbol, 
                         "AccountId": accountId, 
@@ -1101,7 +1101,7 @@ open class ProgramsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "DateFrom": dateFrom?.encodeToJSON(), 
                         "DateTo": dateTo?.encodeToJSON(), 
                         "NumberMin": numberMin?.encodeToJSON(), 
@@ -1185,7 +1185,7 @@ open class ProgramsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "DateFrom": dateFrom?.encodeToJSON(), 
                         "DateTo": dateTo?.encodeToJSON(), 
                         "MaxPointCount": maxPointCount?.encodeToJSON(), 
@@ -1256,7 +1256,7 @@ open class ProgramsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "Status": status, 
                         "Skip": skip?.encodeToJSON(), 
                         "Take": take?.encodeToJSON()
@@ -1291,9 +1291,9 @@ open class ProgramsAPI {
     "owner" : {
       "personalDetails" : {
         "isFollow" : true,
+        "allowFollow" : true,
         "canCommentPosts" : true,
-        "canWritePost" : true,
-        "canFollow" : true
+        "canWritePost" : true
       },
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "url" : "url",
@@ -1351,9 +1351,9 @@ open class ProgramsAPI {
     "owner" : {
       "personalDetails" : {
         "isFollow" : true,
+        "allowFollow" : true,
         "canCommentPosts" : true,
-        "canWritePost" : true,
-        "canFollow" : true
+        "canWritePost" : true
       },
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "url" : "url",
@@ -1418,7 +1418,7 @@ open class ProgramsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "Sorting": sorting, 
                         "ShowIn": showIn, 
                         "Tags": tags, 

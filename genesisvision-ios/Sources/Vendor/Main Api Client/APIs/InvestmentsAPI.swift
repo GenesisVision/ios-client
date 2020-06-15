@@ -89,7 +89,7 @@ open class InvestmentsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "currency": currency
         ])
 
@@ -371,7 +371,7 @@ open class InvestmentsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "amount": amount, 
                         "walletId": walletId
         ])
@@ -415,7 +415,7 @@ open class InvestmentsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "amount": amount, 
                         "walletId": walletId
         ])
@@ -623,7 +623,7 @@ open class InvestmentsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "percent": percent, 
                         "currency": currency
         ])
@@ -667,7 +667,7 @@ open class InvestmentsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "amount": amount, 
                         "withdrawAll": withdrawAll
         ])

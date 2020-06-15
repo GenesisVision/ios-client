@@ -15,13 +15,13 @@ public struct PublicProfilePersonalDetails: Codable {
 
     public var canWritePost: Bool?
 
-    public var canFollow: Bool?
+    public var allowFollow: Bool?
 
     public var canCommentPosts: Bool?
-    public init(isFollow: Bool? = nil, canWritePost: Bool? = nil, canFollow: Bool? = nil, canCommentPosts: Bool? = nil) { 
+    public init(isFollow: Bool? = nil, canWritePost: Bool? = nil, allowFollow: Bool? = nil, canCommentPosts: Bool? = nil) { 
         self.isFollow = isFollow
         self.canWritePost = canWritePost
-        self.canFollow = canFollow
+        self.allowFollow = allowFollow
         self.canCommentPosts = canCommentPosts
     }
 

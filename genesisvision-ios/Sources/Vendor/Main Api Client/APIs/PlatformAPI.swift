@@ -575,9 +575,9 @@ open class PlatformAPI {
       "owner" : {
         "personalDetails" : {
           "isFollow" : true,
+          "allowFollow" : true,
           "canCommentPosts" : true,
-          "canWritePost" : true,
-          "canFollow" : true
+          "canWritePost" : true
         },
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "url" : "url",
@@ -635,9 +635,9 @@ open class PlatformAPI {
       "owner" : {
         "personalDetails" : {
           "isFollow" : true,
+          "allowFollow" : true,
           "canCommentPosts" : true,
-          "canWritePost" : true,
-          "canFollow" : true
+          "canWritePost" : true
         },
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "url" : "url",

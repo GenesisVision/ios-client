@@ -27,6 +27,12 @@ extension Double {
         let number = NSNumber(value: self)
         return numberFormatter.string(from: number) ?? String(describing: self)
     }
+    
+    func getPercentageString() -> String {
+        let percentText = self < 1.0 && self > 0.0 ? (self * 100.0).rounded(with: .undefined).toString() : "∞"
+        return percentText + "%"
+    }
+    
 }
 
 extension Int {

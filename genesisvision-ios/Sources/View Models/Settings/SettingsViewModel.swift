@@ -133,7 +133,7 @@ final class SettingsViewModel {
     
     var avatarURL: URL? {
         guard let avatar = profileModel?.logoUrl,
-            let avatarURL = getFileURL(fileName: avatar)
+            let avatarURL = URL(string: avatar)
             else { return nil }
         
         return avatarURL

@@ -24,7 +24,7 @@ open class Response<T> {
         self.header = header
         self.body = body
     }
-
+    
     public convenience init(response: HTTPURLResponse, body: T?) {
         let rawHeader = response.allHeaderFields
         var header = [String:String]()

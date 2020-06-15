@@ -59,7 +59,7 @@ open class DashboardAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "Assets": assets, 
                         "DateFrom": dateFrom?.encodeToJSON(), 
                         "DateTo": dateTo?.encodeToJSON(), 
@@ -175,7 +175,7 @@ open class DashboardAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "currency": currency
         ])
 
@@ -221,7 +221,7 @@ open class DashboardAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "exchangeAccountId": exchangeAccountId, 
                         "brokerId": brokerId
         ])
@@ -267,7 +267,7 @@ open class DashboardAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "topAssetsCount": topAssetsCount?.encodeToJSON()
         ])
 
@@ -392,7 +392,7 @@ open class DashboardAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "currency": currency, 
                         "eventsTake": eventsTake?.encodeToJSON()
         ])
@@ -424,9 +424,9 @@ open class DashboardAPI {
     "owner" : {
       "personalDetails" : {
         "isFollow" : true,
+        "allowFollow" : true,
         "canCommentPosts" : true,
-        "canWritePost" : true,
-        "canFollow" : true
+        "canWritePost" : true
       },
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "url" : "url",
@@ -483,9 +483,9 @@ open class DashboardAPI {
     "owner" : {
       "personalDetails" : {
         "isFollow" : true,
+        "allowFollow" : true,
         "canCommentPosts" : true,
-        "canWritePost" : true,
-        "canFollow" : true
+        "canWritePost" : true
       },
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "url" : "url",
@@ -549,7 +549,7 @@ open class DashboardAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "Sorting": sorting, 
                         "ShowIn": showIn, 
                         "Status": status, 
@@ -592,9 +592,9 @@ open class DashboardAPI {
     "owner" : {
       "personalDetails" : {
         "isFollow" : true,
+        "allowFollow" : true,
         "canCommentPosts" : true,
-        "canWritePost" : true,
-        "canFollow" : true
+        "canWritePost" : true
       },
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "url" : "url",
@@ -671,9 +671,9 @@ open class DashboardAPI {
     "owner" : {
       "personalDetails" : {
         "isFollow" : true,
+        "allowFollow" : true,
         "canCommentPosts" : true,
-        "canWritePost" : true,
-        "canFollow" : true
+        "canWritePost" : true
       },
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "url" : "url",
@@ -757,7 +757,7 @@ open class DashboardAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "Sorting": sorting, 
                         "ShowIn": showIn, 
                         "Status": status, 
@@ -999,7 +999,7 @@ open class DashboardAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "DateFrom": dateFrom?.encodeToJSON(), 
                         "DateTo": dateTo?.encodeToJSON(), 
                         "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
@@ -1277,7 +1277,7 @@ open class DashboardAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "DateFrom": dateFrom?.encodeToJSON(), 
                         "DateTo": dateTo?.encodeToJSON(), 
                         "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
@@ -1514,7 +1514,7 @@ open class DashboardAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "DateFrom": dateFrom?.encodeToJSON(), 
                         "DateTo": dateTo?.encodeToJSON(), 
                         "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
@@ -1661,9 +1661,9 @@ open class DashboardAPI {
       "owner" : {
         "personalDetails" : {
           "isFollow" : true,
+          "allowFollow" : true,
           "canCommentPosts" : true,
-          "canWritePost" : true,
-          "canFollow" : true
+          "canWritePost" : true
         },
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "url" : "url",
@@ -1721,9 +1721,9 @@ open class DashboardAPI {
       "owner" : {
         "personalDetails" : {
           "isFollow" : true,
+          "allowFollow" : true,
           "canCommentPosts" : true,
-          "canWritePost" : true,
-          "canFollow" : true
+          "canWritePost" : true
         },
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "url" : "url",
@@ -1802,9 +1802,9 @@ open class DashboardAPI {
       "regDate" : "2000-01-23T04:56:07.000+00:00",
       "personalDetails" : {
         "isFollow" : true,
+        "allowFollow" : true,
         "canCommentPosts" : true,
-        "canWritePost" : true,
-        "canFollow" : true
+        "canWritePost" : true
       },
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "logoUrl" : "logoUrl",
@@ -1831,9 +1831,9 @@ open class DashboardAPI {
       "regDate" : "2000-01-23T04:56:07.000+00:00",
       "personalDetails" : {
         "isFollow" : true,
+        "allowFollow" : true,
         "canCommentPosts" : true,
-        "canWritePost" : true,
-        "canFollow" : true
+        "canWritePost" : true
       },
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "logoUrl" : "logoUrl",
@@ -1851,7 +1851,7 @@ open class DashboardAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "currency": currency, 
                         "take": take?.encodeToJSON(), 
                         "onlyFollows": onlyFollows
@@ -1978,7 +1978,7 @@ open class DashboardAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "currency": currency, 
                         "eventsTake": eventsTake?.encodeToJSON()
         ])

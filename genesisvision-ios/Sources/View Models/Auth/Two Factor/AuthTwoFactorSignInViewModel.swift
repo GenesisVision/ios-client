@@ -35,12 +35,31 @@ final class AuthTwoFactorSignInViewModel {
     }
     
     // MARK: - API
-    func signIn(twoFactorCode: String? = nil, recoveryCode: String? = nil, completion: @escaping CompletionBlock) {
-        AuthDataProvider.signIn(email: email, password: password, twoFactorCode: twoFactorCode, recoveryCode: recoveryCode, completion: { (token) in
+    func signIn(twoFactorCode: String? = nil, recoveryCode: String? = nil, captchaResult: CaptchaCheckResult? = nil, completion: @escaping CompletionBlock) {
+        AuthDataProvider.signIn(email: email, password: password, twoFactorCode: twoFactorCode, recoveryCode: recoveryCode, captchaCheckResult: captchaResult, completion: { (token) in
             AuthManager.authorizedToken = token
             completion(.success)
         }) { (result) in
             completion(result)
         }
+    }
+    
+    func riskControl(twoFactorCode: String? = nil, recoveryCode: String? = nil, completion: @escaping CompletionBlock) {
+        BaseDataProvider.riskControl(with: email, version: getFullVersion(), completion: { [weak self] (model) in
+            guard let model = model, let captchaType = model.captchaType else { return completion(.failure(errorType: .apiError(message: nil))) }
+            
+            switch captchaType {
+            case .pow:
+                guard let powId = model._id?.uuidString, let pow = model.pow, let nonce = pow.nonce, let difficulty = pow.difficulty else { return completion(.failure(errorType: .apiError(message: nil))) }
+                
+                captcha_hash(self?.email ?? "", nonce: nonce, difficulty: difficulty, completion: { (result) in
+                    let powResult = PowResult(_prefix: result)
+                    let captchaCheckResult = CaptchaCheckResult(_id: powId.lowercased(), pow: powResult, geeTest: nil)
+                    self?.signIn(twoFactorCode: twoFactorCode, recoveryCode: recoveryCode, captchaResult: captchaCheckResult, completion: completion)
+                })
+            default:
+                self?.signIn(twoFactorCode: twoFactorCode, recoveryCode: recoveryCode, completion: completion)
+            }
+        }, errorCompletion: completion)
     }
 }

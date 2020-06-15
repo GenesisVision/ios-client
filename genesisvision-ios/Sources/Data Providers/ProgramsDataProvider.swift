@@ -16,7 +16,17 @@ class ProgramsDataProvider: DataProvider {
         let levelMax = filterModel?.levelModel.maxLevel
         let levelsSet = filterModel?.levelsSet
         
-        let tags = filterModel?.tagsModel.selectedTags
+        var tags: [String]? = nil
+        
+        if let empty = filterModel?.tagsModel.selectedTags.isEmpty, !empty {
+            tags = filterModel?.tagsModel.selectedTags
+        }
+        
+//        if filterModel?.tagsModel.selectedTags.isEmpty ?? <#default value#> {
+//
+//        }
+//
+//        //let tags = filterModel?.tagsModel.selectedTags
         
         let dateFrom = filterModel?.dateRangeModel.dateFrom
         let dateTo = filterModel?.dateRangeModel.dateTo

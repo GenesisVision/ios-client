@@ -27,7 +27,7 @@ extension WalletTransactionTableViewCellViewModel: CellViewModel {
         cell.amountLabel.text = ""
         
         if let amount = walletTransaction.amount?.first?.amount, let currencyFrom = walletTransaction.amount?.first?.currency, let currency = CurrencyType(rawValue: currencyFrom.rawValue) {
-            cell.amountLabel.text = amount.rounded(with: currency).toString() + " " + currency.rawValue
+            cell.amountLabel.text = amount.toString() + " " + currency.rawValue
 
             cell.amountLabel.textColor = amount == 0 ? UIColor.Cell.title : amount > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
         } else {

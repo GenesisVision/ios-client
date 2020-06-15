@@ -13,6 +13,8 @@ public struct PostEvent: Codable {
 
     public var title: String?
 
+    public var logoUrl: String?
+
     public var amount: Double?
 
     public var currency: Currency?
@@ -20,8 +22,9 @@ public struct PostEvent: Codable {
     public var percent: Double?
 
     public var changeState: ChangeState?
-    public init(title: String? = nil, amount: Double? = nil, currency: Currency? = nil, percent: Double? = nil, changeState: ChangeState? = nil) { 
+    public init(title: String? = nil, logoUrl: String? = nil, amount: Double? = nil, currency: Currency? = nil, percent: Double? = nil, changeState: ChangeState? = nil) { 
         self.title = title
+        self.logoUrl = logoUrl
         self.amount = amount
         self.currency = currency
         self.percent = percent

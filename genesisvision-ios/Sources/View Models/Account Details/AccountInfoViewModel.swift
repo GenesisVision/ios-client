@@ -32,7 +32,7 @@ final class AccountInfoViewModel: ViewModelWithListProtocol {
     var assetId: String!
     
     private var equityChart: [SimpleChartPoint]?
-    public private(set) var tradingAccounts: ItemsViewModelTradingAccountDetails?
+    public private(set) var tradingAccounts: TradingAccountDetailsItemsViewModel?
     public private(set) var signalSubscription: SignalSubscription?
     public private(set) var accountDetailsFull: PrivateTradingAccountFull? {
         didSet {

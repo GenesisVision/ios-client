@@ -10,7 +10,12 @@ import UIKit
 import AVFoundation
 
 func getFileURL(fileName: String) -> URL? {
-    return URL(string: ApiKeys.filePath + fileName)
+    
+    if fileName.contains("https://") {
+        return URL(string: fileName)
+    } else {
+        return URL(string: ApiKeys.filePath + fileName)
+    }
 }
 
 func impactFeedback(style: UIImpactFeedbackGenerator.FeedbackStyle = .light) {

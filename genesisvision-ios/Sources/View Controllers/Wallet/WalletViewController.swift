@@ -12,15 +12,6 @@ import Tabman
 
 class WalletViewController: BaseTabmanViewController<WalletTabmanViewModel> {
     // MARK: - Variables
-    private var moreBarButtonItem: UIBarButtonItem!
-    
-    lazy var bottomSheetController: BottomSheetController = {
-        let vc = BottomSheetController()
-        vc.lineViewIsHidden = true
-        vc.initializeHeight = 120
-        return vc
-       
-    }()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -41,30 +32,6 @@ class WalletViewController: BaseTabmanViewController<WalletTabmanViewModel> {
     private func setupUI() {
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = UIColor.BaseView.bg
-        
-        if viewModel.walletType == .all {
-            moreBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_more_icon"), style: .done, target: self, action: #selector(moreBarButtonAction))
-            navigationItem.rightBarButtonItem = moreBarButtonItem
-        }
-    }
-    
-    @objc func moreBarButtonAction() {
-        guard let wallet = viewModel.multiWallet else { return }
-        
-        let walletMoreButtonView = WalletMoreButtonView.viewFromNib()
-        walletMoreButtonView.delegate = self
-        walletMoreButtonView.configure(wallet)
-        
-        bottomSheetController.addContentsView(walletMoreButtonView)
-        bottomSheetController.present()
-    }
-}
-
-extension WalletViewController: WalletMoreButtonViewProtocol {
-    func aboutFeesButtonDidTapped() {
-        bottomSheetController.dismiss()
-        
-        viewModel.showAboutFees()
     }
 }
 

@@ -113,7 +113,7 @@ final class FundViewModel: TabmanViewModel {
     // MARK: - Variables
     var assetId: String?
     
-    public private(set) var tradingAccounts: ItemsViewModelTradingAccountDetails?
+    public private(set) var tradingAccounts: TradingAccountDetailsItemsViewModel?
     public private(set) var signalSubscription: SignalSubscription?
     var fundDetailsFull: FundDetailsFull? {
         didSet {

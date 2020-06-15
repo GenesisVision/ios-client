@@ -142,9 +142,9 @@ open class SearchAPI {
       "owner" : {
         "personalDetails" : {
           "isFollow" : true,
+          "allowFollow" : true,
           "canCommentPosts" : true,
-          "canWritePost" : true,
-          "canFollow" : true
+          "canWritePost" : true
         },
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "url" : "url",
@@ -202,9 +202,9 @@ open class SearchAPI {
       "owner" : {
         "personalDetails" : {
           "isFollow" : true,
+          "allowFollow" : true,
           "canCommentPosts" : true,
-          "canWritePost" : true,
-          "canFollow" : true
+          "canWritePost" : true
         },
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "url" : "url",
@@ -283,9 +283,9 @@ open class SearchAPI {
       "regDate" : "2000-01-23T04:56:07.000+00:00",
       "personalDetails" : {
         "isFollow" : true,
+        "allowFollow" : true,
         "canCommentPosts" : true,
-        "canWritePost" : true,
-        "canFollow" : true
+        "canWritePost" : true
       },
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "logoUrl" : "logoUrl",
@@ -312,9 +312,9 @@ open class SearchAPI {
       "regDate" : "2000-01-23T04:56:07.000+00:00",
       "personalDetails" : {
         "isFollow" : true,
+        "allowFollow" : true,
         "canCommentPosts" : true,
-        "canWritePost" : true,
-        "canFollow" : true
+        "canWritePost" : true
       },
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "logoUrl" : "logoUrl",
@@ -332,7 +332,7 @@ open class SearchAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "mask": mask, 
                         "take": take?.encodeToJSON(), 
                         "skipStatistic": skipStatistic

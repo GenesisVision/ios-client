@@ -13,13 +13,11 @@ public struct APIHelper {
                 result[item.key] = value
             }
         }
-
-        if destination.isEmpty {
-            return nil
-        }
+        
+        if destination.isEmpty { return nil }
         return destination
     }
-
+    
     public static func rejectNilHeaders(_ source: [String:Any?]) -> [String:String] {
         return source.reduce(into: [String: String]()) { (result, item) in
             if let collection = item.value as? Array<Any?> {
@@ -29,12 +27,12 @@ public struct APIHelper {
             }
         }
     }
-
+    
     public static func convertBoolToString(_ source: [String: Any]?) -> [String:Any]? {
         guard let source = source else {
             return nil
         }
-
+        
         return source.reduce(into: [String: Any](), { (result, item) in
             switch item.value {
             case let x as Bool:
@@ -44,22 +42,24 @@ public struct APIHelper {
             }
         })
     }
-
-
-    public static func mapValuesToQueryItems(_ source: [String:Any?]) -> [URLQueryItem]? {
-        let destination = source.filter({ $0.value != nil}).reduce(into: [URLQueryItem]()) { (result, item) in
+    
+    
+    public static func mapValuesToQueryItems(values: [String:Any?]) -> [URLQueryItem]? {
+        let returnValues = values.filter({ $0.value != nil}).reduce(into: [URLQueryItem]()) { (result, item) in
             if let collection = item.value as? Array<Any?> {
-                let value = collection.filter({ $0 != nil }).map({"\($0!)"}).joined(separator: ",")
-                result.append(URLQueryItem(name: item.key, value: value))
+                let items = collection.filter({ $0 != nil }).map({ (value) -> URLQueryItem in
+                    URLQueryItem(
+                        name: item.key,
+                        value: String(describing: value ?? "")
+                    )
+                })
+                result.append(contentsOf: items)
             } else if let value = item.value {
                 result.append(URLQueryItem(name: item.key, value: "\(value)"))
             }
         }
-
-        if destination.isEmpty {
-            return nil
-        }
-        return destination
+        
+        if returnValues.isEmpty { return nil }
+        return returnValues
     }
 }
-

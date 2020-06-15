@@ -16,9 +16,9 @@ extension WalletTableViewCellViewModel: CellViewModel {
     func setup(on cell: WalletTableViewCell) {
         cell.iconImageView.image = UIImage.walletPlaceholder
         
-        if let logo = wallet.logoUrl, let fileUrl = getFileURL(fileName: logo) {
+        if let logo = wallet.logoUrl, let logoUrl = URL(string: logo) {
             cell.iconImageView.kf.indicatorType = .activity
-            cell.iconImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
+            cell.iconImageView.kf.setImage(with: logoUrl, placeholder: UIImage.programPlaceholder)
             cell.iconImageView.backgroundColor = .clear
         } else {
             cell.iconImageView.isHidden = true
@@ -38,8 +38,8 @@ extension WalletTableViewCellViewModel: CellViewModel {
             cell.amountLabel.text = ""
         }
         
-        //FIXME: check wallet.currencyCcy -> wallet.currency
-        if let amount = wallet.totalCcy, let currency = wallet.currency {
+        let currency = getPlatformCurrencyType()
+        if let amount = wallet.totalCcy {
             if let currency = CurrencyType(rawValue: currency.rawValue) {
                 cell.amountCcyLabel.text = amount.rounded(with: currency).toString() + " " + currency.rawValue
             }

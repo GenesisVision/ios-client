@@ -67,7 +67,7 @@ class FundWithdrawViewController: BaseViewController {
     
     @IBOutlet weak var copyMaxValueButton: UIButton! {
         didSet {
-            copyMaxValueButton.isHidden = true
+            copyMaxValueButton.isHidden = false
             copyMaxValueButton.setTitleColor(UIColor.Cell.title, for: .normal)
             copyMaxValueButton.titleLabel?.font = UIFont.getFont(.semibold, size: 12)
         }
@@ -276,8 +276,8 @@ class FundWithdrawViewController: BaseViewController {
     }
     
     @IBAction func copyAllButtonAction(_ sender: UIButton) {
-        amountToWithdrawValueLabel.text = availableToWithdrawValue.toString(withoutFormatter: true)
-        amountToWithdrawValue = availableToWithdrawValue
+        amountToWithdrawValueLabel.text = maxAmount?.toString()
+        amountToWithdrawValue = maxAmount ?? 0.0
     }
 }
 

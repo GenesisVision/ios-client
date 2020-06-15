@@ -11,7 +11,7 @@ class AlamofireRequestBuilderFactory: RequestBuilderFactory {
     func getNonDecodableBuilder<T>() -> RequestBuilder<T>.Type {
         return AlamofireRequestBuilder<T>.self
     }
-
+    
     func getBuilder<T:Decodable>() -> RequestBuilder<T>.Type {
         return AlamofireDecodableRequestBuilder<T>.self
     }
@@ -24,7 +24,7 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
     required public init(method: String, URLString: String, parameters: [String : Any]?, isBody: Bool, headers: [String : String] = [:]) {
         super.init(method: method, URLString: URLString, parameters: parameters, isBody: isBody, headers: headers)
     }
-
+    
     /**
      May be overridden by a subclass if you want to control the session
      configuration.
@@ -34,18 +34,18 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
         configuration.httpAdditionalHeaders = buildHeaders()
         return Alamofire.SessionManager(configuration: configuration)
     }
-
+    
     /**
      May be overridden by a subclass if you want to control the Content-Type
      that is given to an uploaded form part.
-
+     
      Return nil to use the default behavior (inferring the Content-Type from
      the file extension).  Return the desired Content-Type otherwise.
      */
     open func contentTypeForFormPart(fileURL: URL) -> String? {
         return nil
     }
-
+    
     /**
      May be overridden by a subclass if you want to control the request
      configuration (e.g. to override the cache policy).
@@ -53,19 +53,19 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
     open func makeRequest(manager: SessionManager, method: HTTPMethod, encoding: ParameterEncoding, headers: [String:String]) -> DataRequest {
         return manager.request(URLString, method: method, parameters: parameters, encoding: encoding, headers: headers)
     }
-
+    
     override open func execute(_ completion: @escaping (_ response: Response<T>?, _ error: Error?) -> Void) {
         let managerId:String = UUID().uuidString
         // Create a new manager for each request to customize its request header
         let manager = createSessionManager()
         managerStore[managerId] = manager
-
+        
         let encoding:ParameterEncoding = isBody ? JSONDataEncoding() : URLEncoding()
-
+        
         let xMethod = Alamofire.HTTPMethod(rawValue: method)
         let fileKeys = parameters == nil ? [] : parameters!.filter { $1 is NSURL }
-                                                           .map { $0.0 }
-
+            .map { $0.0 }
+        
         if fileKeys.count > 0 {
             manager.upload(multipartFormData: { mpForm in
                 for (k, v) in self.parameters! {
@@ -85,7 +85,7 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
                         fatalError("Unprocessable value \(v) with key \(k)")
                     }
                 }
-                }, to: URLString, method: xMethod!, headers: nil, encodingCompletion: { encodingResult in
+            }, to: URLString, method: xMethod!, headers: nil, encodingCompletion: { encodingResult in
                 switch encodingResult {
                 case .success(let upload, _, _):
                     if let onProgressReady = self.onProgressReady {
@@ -103,25 +103,26 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
             }
             processRequest(request: request, managerId, completion)
         }
-
+        
     }
-
+    
     fileprivate func processRequest(request: DataRequest, _ managerId: String, _ completion: @escaping (_ response: Response<T>?, _ error: Error?) -> Void) {
+        networkActivity()
         if let credential = self.credential {
             request.authenticate(usingCredential: credential)
         }
-
+        
         let cleanupRequest = {
             _ = managerStore.removeValue(forKey: managerId)
         }
-
+        
         let validatedRequest = request.validate()
-
+        
         switch T.self {
         case is String.Type:
             validatedRequest.responseString(completionHandler: { (stringResponse) in
                 cleanupRequest()
-
+                
                 if stringResponse.result.isFailure {
                     completion(
                         nil,
@@ -129,7 +130,7 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
                     )
                     return
                 }
-
+                
                 completion(
                     Response(
                         response: stringResponse.response!,
@@ -141,38 +142,38 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
         case is URL.Type:
             validatedRequest.responseData(completionHandler: { (dataResponse) in
                 cleanupRequest()
-
+                
                 do {
-
+                    
                     guard !dataResponse.result.isFailure else {
                         throw DownloadException.responseFailed
                     }
-
+                    
                     guard let data = dataResponse.data else {
                         throw DownloadException.responseDataMissing
                     }
-
+                    
                     guard let request = request.request else {
                         throw DownloadException.requestMissing
                     }
-
+                    
                     let fileManager = FileManager.default
                     let urlRequest = try request.asURLRequest()
                     let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
                     let requestURL = try self.getURL(from: urlRequest)
-
+                    
                     var requestPath = try self.getPath(from: requestURL)
-
+                    
                     if let headerFileName = self.getFileName(fromContentDisposition: dataResponse.response?.allHeaderFields["Content-Disposition"] as? String) {
                         requestPath = requestPath.appending("/\(headerFileName)")
                     }
-
+                    
                     let filePath = documentsDirectory.appendingPathComponent(requestPath)
                     let directoryPath = filePath.deletingLastPathComponent().path
-
+                    
                     try fileManager.createDirectory(atPath: directoryPath, withIntermediateDirectories: true, attributes: nil)
                     try data.write(to: filePath, options: .atomic)
-
+                    
                     completion(
                         Response(
                             response: dataResponse.response!,
@@ -180,7 +181,7 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
                         ),
                         nil
                     )
-
+                    
                 } catch let requestParserError as DownloadException {
                     completion(nil, ErrorResponse.error(400, dataResponse.data, requestParserError))
                 } catch let error {
@@ -191,7 +192,7 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
         case is Void.Type:
             validatedRequest.responseData(completionHandler: { (voidResponse) in
                 cleanupRequest()
-
+                
                 if voidResponse.result.isFailure {
                     completion(
                         nil,
@@ -199,7 +200,7 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
                     )
                     return
                 }
-
+                
                 completion(
                     Response(
                         response: voidResponse.response!,
@@ -210,7 +211,7 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
         default:
             validatedRequest.responseData(completionHandler: { (dataResponse) in
                 cleanupRequest()
-
+                
                 if dataResponse.result.isFailure {
                     completion(
                         nil,
@@ -218,7 +219,7 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
                     )
                     return
                 }
-
+                
                 completion(
                     Response(
                         response: dataResponse.response!,
@@ -229,7 +230,7 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
             })
         }
     }
-
+    
     open func buildHeaders() -> [String: String] {
         var httpHeaders = SessionManager.defaultHTTPHeaders
         for (key, value) in self.headers {
@@ -237,58 +238,58 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
         }
         return httpHeaders
     }
-
+    
     fileprivate func getFileName(fromContentDisposition contentDisposition : String?) -> String? {
-
+        
         guard let contentDisposition = contentDisposition else {
             return nil
         }
-
+        
         let items = contentDisposition.components(separatedBy: ";")
-
+        
         var filename : String? = nil
-
+        
         for contentItem in items {
-
+            
             let filenameKey = "filename="
             guard let range = contentItem.range(of: filenameKey) else {
                 break
             }
-
+            
             filename = contentItem
             return filename?
                 .replacingCharacters(in: range, with:"")
                 .replacingOccurrences(of: "\"", with: "")
                 .trimmingCharacters(in: .whitespacesAndNewlines)
         }
-
+        
         return filename
-
+        
     }
-
+    
     fileprivate func getPath(from url : URL) throws -> String {
-
+        
         guard var path = URLComponents(url: url, resolvingAgainstBaseURL: true)?.path else {
             throw DownloadException.requestMissingPath
         }
-
+        
         if path.hasPrefix("/") {
             path.remove(at: path.startIndex)
         }
-
+        
         return path
-
+        
     }
-
+    
     fileprivate func getURL(from urlRequest : URLRequest) throws -> URL {
-
+        
         guard let url = urlRequest.url else {
             throw DownloadException.requestMissingURL
         }
-
+        
         return url
     }
-
+    
 }
 
 fileprivate enum DownloadException : Error {
@@ -307,23 +308,24 @@ public enum AlamofireDecodableRequestBuilderError: Error {
 }
 
 open class AlamofireDecodableRequestBuilder<T:Decodable>: AlamofireRequestBuilder<T> {
-
+    
     override fileprivate func processRequest(request: DataRequest, _ managerId: String, _ completion: @escaping (_ response: Response<T>?, _ error: Error?) -> Void) {
+        networkActivity()
         if let credential = self.credential {
             request.authenticate(usingCredential: credential)
         }
-
+        
         let cleanupRequest = {
             _ = managerStore.removeValue(forKey: managerId)
         }
-
+        
         let validatedRequest = request.validate()
-
+        
         switch T.self {
         case is String.Type:
             validatedRequest.responseString(completionHandler: { (stringResponse) in
                 cleanupRequest()
-
+                
                 if stringResponse.result.isFailure {
                     completion(
                         nil,
@@ -331,11 +333,31 @@ open class AlamofireDecodableRequestBuilder<T:Decodable>: AlamofireRequestBuilde
                     )
                     return
                 }
-
+                
                 completion(
                     Response(
                         response: stringResponse.response!,
                         body: ((stringResponse.result.value ?? "") as! T)
+                    ),
+                    nil
+                )
+            })
+        case is Double.Type:
+            validatedRequest.responseString(completionHandler: { (stringResponse) in
+                cleanupRequest()
+                
+                if stringResponse.result.isFailure {
+                    completion(
+                        nil,
+                        ErrorResponse.error(stringResponse.response?.statusCode ?? 500, stringResponse.data, stringResponse.result.error!)
+                    )
+                    return
+                }
+                
+                completion(
+                    Response(
+                        response: stringResponse.response!,
+                        body: ((stringResponse.result.value ?? "").doubleValue as! T)
                     ),
                     nil
                 )
@@ -351,7 +373,7 @@ open class AlamofireDecodableRequestBuilder<T:Decodable>: AlamofireRequestBuilde
                     )
                     return
                 }
-
+                
                 completion(
                     Response(
                         response: voidResponse.response!,
@@ -362,7 +384,7 @@ open class AlamofireDecodableRequestBuilder<T:Decodable>: AlamofireRequestBuilde
         case is Data.Type:
             validatedRequest.responseData(completionHandler: { (dataResponse) in
                 cleanupRequest()
-
+                
                 if dataResponse.result.isFailure {
                     completion(
                         nil,
@@ -370,7 +392,7 @@ open class AlamofireDecodableRequestBuilder<T:Decodable>: AlamofireRequestBuilde
                     )
                     return
                 }
-
+                
                 completion(
                     Response(
                         response: dataResponse.response!,
@@ -382,32 +404,32 @@ open class AlamofireDecodableRequestBuilder<T:Decodable>: AlamofireRequestBuilde
         default:
             validatedRequest.responseData(completionHandler: { (dataResponse: DataResponse<Data>) in
                 cleanupRequest()
-
+                
                 guard dataResponse.result.isSuccess else {
                     completion(nil, ErrorResponse.error(dataResponse.response?.statusCode ?? 500, dataResponse.data, dataResponse.result.error!))
                     return
                 }
-
+                
                 guard let data = dataResponse.data, !data.isEmpty else {
                     completion(nil, ErrorResponse.error(-1, nil, AlamofireDecodableRequestBuilderError.emptyDataResponse))
                     return
                 }
-
+                
                 guard let httpResponse = dataResponse.response else {
                     completion(nil, ErrorResponse.error(-2, nil, AlamofireDecodableRequestBuilderError.nilHTTPResponse))
                     return
                 }
-
+                
                 var responseObj: Response<T>? = nil
-
+                
                 let decodeResult: (decodableObj: T?, error: Error?) = CodableHelper.decode(T.self, from: data)
                 if decodeResult.error == nil {
                     responseObj = Response(response: httpResponse, body: decodeResult.decodableObj)
                 }
-
+                
                 completion(responseObj, decodeResult.error)
             })
         }
     }
-
+    
 }

@@ -102,8 +102,8 @@ class AuthTwoFactorSignInViewController: BaseViewController {
         authenticatorCode = authenticatorCode.trimmingCharacters(in: .whitespaces)
         
         isRecoveryCode
-            ? viewModel.signIn(recoveryCode: authenticatorCode, completion: completion)
-            : viewModel.signIn(twoFactorCode: authenticatorCode, completion: completion)
+            ? viewModel.riskControl(recoveryCode: authenticatorCode, completion: completion)//viewModel.signIn(recoveryCode: authenticatorCode, completion: completion)
+            : viewModel.riskControl(twoFactorCode: authenticatorCode, completion: completion)//viewModel.signIn(twoFactorCode: authenticatorCode, completion: completion)
     }
     
     // MARK: - Actions

@@ -243,7 +243,8 @@ open class SocialAPI {
       "event" : {
         "amount" : 7.061401241503109,
         "title" : "title",
-        "percent" : 9.301444243932576
+        "percent" : 9.301444243932576,
+        "logoUrl" : "logoUrl"
       },
       "userDetails" : {
         "socialLinks" : [ {
@@ -298,7 +299,8 @@ open class SocialAPI {
       "event" : {
         "amount" : 7.061401241503109,
         "title" : "title",
-        "percent" : 9.301444243932576
+        "percent" : 9.301444243932576,
+        "logoUrl" : "logoUrl"
       },
       "userDetails" : {
         "socialLinks" : [ {
@@ -388,7 +390,8 @@ open class SocialAPI {
       "event" : {
         "amount" : 7.061401241503109,
         "title" : "title",
-        "percent" : 9.301444243932576
+        "percent" : 9.301444243932576,
+        "logoUrl" : "logoUrl"
       },
       "userDetails" : {
         "socialLinks" : [ {
@@ -443,7 +446,8 @@ open class SocialAPI {
       "event" : {
         "amount" : 7.061401241503109,
         "title" : "title",
-        "percent" : 9.301444243932576
+        "percent" : 9.301444243932576,
+        "logoUrl" : "logoUrl"
       },
       "userDetails" : {
         "socialLinks" : [ {
@@ -490,7 +494,7 @@ open class SocialAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "UserId": userId, 
                         "TagContentId": tagContentId, 
                         "TagContentIds": tagContentIds, 
@@ -599,7 +603,8 @@ open class SocialAPI {
       "event" : {
         "amount" : 7.061401241503109,
         "title" : "title",
-        "percent" : 9.301444243932576
+        "percent" : 9.301444243932576,
+        "logoUrl" : "logoUrl"
       },
       "userDetails" : {
         "socialLinks" : [ {
@@ -654,7 +659,8 @@ open class SocialAPI {
       "event" : {
         "amount" : 7.061401241503109,
         "title" : "title",
-        "percent" : 9.301444243932576
+        "percent" : 9.301444243932576,
+        "logoUrl" : "logoUrl"
       },
       "userDetails" : {
         "socialLinks" : [ {
@@ -744,7 +750,8 @@ open class SocialAPI {
       "event" : {
         "amount" : 7.061401241503109,
         "title" : "title",
-        "percent" : 9.301444243932576
+        "percent" : 9.301444243932576,
+        "logoUrl" : "logoUrl"
       },
       "userDetails" : {
         "socialLinks" : [ {
@@ -799,7 +806,8 @@ open class SocialAPI {
       "event" : {
         "amount" : 7.061401241503109,
         "title" : "title",
-        "percent" : 9.301444243932576
+        "percent" : 9.301444243932576,
+        "logoUrl" : "logoUrl"
       },
       "userDetails" : {
         "socialLinks" : [ {
@@ -891,7 +899,8 @@ open class SocialAPI {
     "event" : {
       "amount" : 7.061401241503109,
       "title" : "title",
-      "percent" : 9.301444243932576
+      "percent" : 9.301444243932576,
+      "logoUrl" : "logoUrl"
     },
     "userDetails" : {
       "socialLinks" : [ {
@@ -946,7 +955,8 @@ open class SocialAPI {
     "event" : {
       "amount" : 7.061401241503109,
       "title" : "title",
-      "percent" : 9.301444243932576
+      "percent" : 9.301444243932576,
+      "logoUrl" : "logoUrl"
     },
     "userDetails" : {
       "socialLinks" : [ {
@@ -1077,7 +1087,7 @@ open class SocialAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "Mask": mask, 
                         "Type": type, 
                         "Skip": skip?.encodeToJSON(), 
