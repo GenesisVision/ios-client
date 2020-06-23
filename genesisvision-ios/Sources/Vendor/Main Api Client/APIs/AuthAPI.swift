@@ -17,7 +17,6 @@ open class AuthAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     open class func authorize(body: LoginViewModel? = nil, completion: @escaping ((_ data: String?,_ error: Error?) -> Void)) {
-        print(body)
         authorizeWithRequestBuilder(body: body).execute { (response, error) -> Void in
             completion(response?.body, error)
         }

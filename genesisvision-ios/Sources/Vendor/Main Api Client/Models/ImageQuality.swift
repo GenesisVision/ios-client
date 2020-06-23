@@ -11,4 +11,5 @@ public enum ImageQuality: String, Codable {
     case low = "Low"
     case medium = "Medium"
     case high = "High"
+    case original = "Original"
 }

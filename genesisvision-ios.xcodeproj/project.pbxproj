@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		19129476249BB9C8007F1083 /* BasePlatformAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19129475249BB9C7007F1083 /* BasePlatformAsset.swift */; };
+		19129478249BB9DE007F1083 /* FundTradingEventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19129477249BB9DE007F1083 /* FundTradingEventType.swift */; };
+		1912947A249BB9F1007F1083 /* FundTradingEventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19129479249BB9F1007F1083 /* FundTradingEventViewModel.swift */; };
+		1912947C249BB9FB007F1083 /* FundTradingEventViewModelItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1912947B249BB9FA007F1083 /* FundTradingEventViewModelItemsViewModel.swift */; };
+		1912947E249BBA09007F1083 /* ImageLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1912947D249BBA09007F1083 /* ImageLocation.swift */; };
+		19129480249BBA1F007F1083 /* PostLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1912947F249BBA1E007F1083 /* PostLink.swift */; };
+		19129482249BBA2D007F1083 /* PostAssetDetailsWithPrices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19129481249BBA2C007F1083 /* PostAssetDetailsWithPrices.swift */; };
+		19129484249BBA3F007F1083 /* PublicProfileFollow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19129483249BBA3E007F1083 /* PublicProfileFollow.swift */; };
+		19129486249BBAF8007F1083 /* PostPlatformAssetDetailsWithPrices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19129485249BBAF8007F1083 /* PostPlatformAssetDetailsWithPrices.swift */; };
 		19787AEC24813FEB00217CA9 /* ExchangesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19787AEB24813FEB00217CA9 /* ExchangesAPI.swift */; };
 		19787AEE2481400B00217CA9 /* DashboardExchangeTradingAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19787AED2481400B00217CA9 /* DashboardExchangeTradingAsset.swift */; };
 		19787AF02481402600217CA9 /* DashboardTradingAssetCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19787AEF2481402600217CA9 /* DashboardTradingAssetCredentials.swift */; };
@@ -939,6 +948,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		19129475249BB9C7007F1083 /* BasePlatformAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasePlatformAsset.swift; sourceTree = "<group>"; };
+		19129477249BB9DE007F1083 /* FundTradingEventType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FundTradingEventType.swift; sourceTree = "<group>"; };
+		19129479249BB9F1007F1083 /* FundTradingEventViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FundTradingEventViewModel.swift; sourceTree = "<group>"; };
+		1912947B249BB9FA007F1083 /* FundTradingEventViewModelItemsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FundTradingEventViewModelItemsViewModel.swift; sourceTree = "<group>"; };
+		1912947D249BBA09007F1083 /* ImageLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLocation.swift; sourceTree = "<group>"; };
+		1912947F249BBA1E007F1083 /* PostLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostLink.swift; sourceTree = "<group>"; };
+		19129481249BBA2C007F1083 /* PostAssetDetailsWithPrices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostAssetDetailsWithPrices.swift; sourceTree = "<group>"; };
+		19129483249BBA3E007F1083 /* PublicProfileFollow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicProfileFollow.swift; sourceTree = "<group>"; };
+		19129485249BBAF8007F1083 /* PostPlatformAssetDetailsWithPrices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostPlatformAssetDetailsWithPrices.swift; sourceTree = "<group>"; };
 		19787AEB24813FEB00217CA9 /* ExchangesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExchangesAPI.swift; sourceTree = "<group>"; };
 		19787AED2481400B00217CA9 /* DashboardExchangeTradingAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardExchangeTradingAsset.swift; sourceTree = "<group>"; };
 		19787AEF2481402600217CA9 /* DashboardTradingAssetCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardTradingAssetCredentials.swift; sourceTree = "<group>"; };
@@ -2008,19 +2026,28 @@
 				19787AFD248141A400217CA9 /* PostAssetDetailsWithPrices.swift */,
 				19787B01248141C100217CA9 /* SocialPostPlatformAsset.swift */,
 				19787B05248141DB00217CA9 /* SocialSummaryHashTag.swift */,
+				19129485249BBAF8007F1083 /* PostPlatformAssetDetailsWithPrices.swift */,
 				19787B03248141DB00217CA9 /* SocialSummaryStrategy.swift */,
 				19787B04248141DB00217CA9 /* StringItemsViewModel.swift */,
 				19787AFE248141A400217CA9 /* PostEvent.swift */,
+				19129475249BB9C7007F1083 /* BasePlatformAsset.swift */,
+				1912947B249BB9FA007F1083 /* FundTradingEventViewModelItemsViewModel.swift */,
 				19787AF72481414A00217CA9 /* MediaPost.swift */,
+				19129479249BB9F1007F1083 /* FundTradingEventViewModel.swift */,
+				19129477249BB9DE007F1083 /* FundTradingEventType.swift */,
 				19787AFB2481416900217CA9 /* NewExchangeAccountRequest.swift */,
 				19787AF82481414A00217CA9 /* MediaPostItemsViewModel.swift */,
 				5EF9F92623E322FE00542E1E /* LandingInfo.swift */,
+				1912947D249BBA09007F1083 /* ImageLocation.swift */,
 				5EF9F92423E322FC00542E1E /* PlatformEvent.swift */,
 				19787AF12481404E00217CA9 /* ExchangeAccountType.swift */,
 				19787AF22481404F00217CA9 /* ExchangeInfo.swift */,
 				19787AF32481404F00217CA9 /* ExchangeInfoItemsViewModel.swift */,
+				19129481249BBA2C007F1083 /* PostAssetDetailsWithPrices.swift */,
+				19129483249BBA3E007F1083 /* PublicProfileFollow.swift */,
 				19787AEF2481402600217CA9 /* DashboardTradingAssetCredentials.swift */,
 				19787AED2481400B00217CA9 /* DashboardExchangeTradingAsset.swift */,
+				1912947F249BBA1E007F1083 /* PostLink.swift */,
 				5EF9F92723E322FE00542E1E /* PlatformEventType.swift */,
 				19812434246451CD00F286FE /* FollowDetailsListItemItemsViewModel.swift */,
 				1981245C246458AA00F286FE /* ProgramsFilterSorting.swift */,
@@ -4272,6 +4299,7 @@
 				5E39F78223A3F9300073DAD5 /* SignalSubscriberInfo.swift in Sources */,
 				5E39F7C023A3F9300073DAD5 /* MultiWalletTransactionStatus.swift in Sources */,
 				5E367907206BC6DA006E226A /* AmountLabel.swift in Sources */,
+				19129486249BBAF8007F1083 /* PostPlatformAssetDetailsWithPrices.swift in Sources */,
 				5EB06A4E239E8AFB003AB3FB /* EventsDataProvider.swift in Sources */,
 				5E70427123CCECB900D8950F /* AccountListViewController.swift in Sources */,
 				5EA274D92162B5D8008CAF77 /* DefaultTableViewCellViewModel.swift in Sources */,
@@ -4379,6 +4407,7 @@
 				5E39F74323A3F92F0073DAD5 /* WalletSummary.swift in Sources */,
 				FC0E200C2044358200872BE5 /* WalletWithdrawViewController.swift in Sources */,
 				FC83DF63203D89BE00A8F8CE /* ProgramWithdrawRouter.swift in Sources */,
+				1912947C249BB9FB007F1083 /* FundTradingEventViewModelItemsViewModel.swift in Sources */,
 				5E93E70021D1A5370020DE55 /* NotificationsSettingsGeneralTableViewCell.swift in Sources */,
 				5E39F74023A3F92F0073DAD5 /* DashboardTradingAssetBrokerDetails.swift in Sources */,
 				5E39F72923A3F92F0073DAD5 /* WalletMultiAvailable.swift in Sources */,
@@ -4678,6 +4707,7 @@
 				5EC0CB0723CB42E6003D0818 /* InvestingProgramListViewController.swift in Sources */,
 				5EB06A3E239D312A003AB3FB /* RateAPI.swift in Sources */,
 				5E39F73A23A3F92F0073DAD5 /* ForgotPasswordViewModel.swift in Sources */,
+				19129476249BB9C8007F1083 /* BasePlatformAsset.swift in Sources */,
 				5ECA620921C8216C00CA9C8C /* FilterModel.swift in Sources */,
 				5E39F5EB23A3F8A60073DAD5 /* BrokerTradeServerType.swift in Sources */,
 				198124562464585D00F286FE /* PostItemsViewModel.swift in Sources */,
@@ -4689,6 +4719,7 @@
 				5E6A6BC0216D5EEE0082C343 /* EventTableViewCell.swift in Sources */,
 				5E39F79223A3F9300073DAD5 /* FundAssetPartWithIcon.swift in Sources */,
 				5E39F5EC23A3F8A60073DAD5 /* DashboardChartAssets.swift in Sources */,
+				1912947E249BBA09007F1083 /* ImageLocation.swift in Sources */,
 				5EF14D932181F85C00B3843A /* FundRouter.swift in Sources */,
 				5EA1FE2321A2F16600308D81 /* FacetsTableViewCell.swift in Sources */,
 				5E39F79C23A3F9300073DAD5 /* NewTradingAccountRequest.swift in Sources */,
@@ -4703,6 +4734,7 @@
 				5E39F75423A3F92F0073DAD5 /* PeriodStatus.swift in Sources */,
 				5EB06A35239D312A003AB3FB /* ProgramsAPI.swift in Sources */,
 				5EC0CAFB23CB42E6003D0818 /* TradingViewController.swift in Sources */,
+				19129482249BBA2D007F1083 /* PostAssetDetailsWithPrices.swift in Sources */,
 				1981243B2464521C00F286FE /* FundInvestingDetailsListItemsViewModel.swift in Sources */,
 				5EF14D9F2181FC5500B3843A /* FundWithdrawRouter.swift in Sources */,
 				5E21663923A9101A001BB512 /* FundAssetDetails.swift in Sources */,
@@ -4765,6 +4797,7 @@
 				5E39F74623A3F92F0073DAD5 /* OrderSignalModel.swift in Sources */,
 				5E39F5FE23A3F8A60073DAD5 /* DashboardChart.swift in Sources */,
 				5E39F7D623A3F9300073DAD5 /* FollowDetailsListItem.swift in Sources */,
+				1912947A249BB9F1007F1083 /* FundTradingEventViewModel.swift in Sources */,
 				5E39F5F323A3F8A60073DAD5 /* AssetRequestDetails.swift in Sources */,
 				19787AF42481404F00217CA9 /* ExchangeAccountType.swift in Sources */,
 				5EC7B87F20D147F5007720D1 /* SettingsViewController.swift in Sources */,
@@ -4829,6 +4862,7 @@
 				198124822464599D00F286FE /* UserDetailsListItemsViewModel.swift in Sources */,
 				5E39F72123A3F92F0073DAD5 /* DashboardTradingAssetActions.swift in Sources */,
 				5E36652420D94B0A00195CBE /* PasscodeViewModel.swift in Sources */,
+				19129478249BB9DE007F1083 /* FundTradingEventType.swift in Sources */,
 				5E17709E220D05A900669D84 /* WalletTableViewCell.swift in Sources */,
 				5EF14D9B2181FBCD00B3843A /* FundInvestViewModel.swift in Sources */,
 				5E39F79323A3F9300073DAD5 /* PlatformAssets.swift in Sources */,
@@ -4899,6 +4933,7 @@
 				FC27232C20498959005225F2 /* QRCodeReaderViewControllerBuilder.swift in Sources */,
 				5E0B1BA4205BAAFB00557707 /* DesignableTextField.swift in Sources */,
 				5E18CE0920C195F9008FE5B5 /* AuthTwoFactorSuccessDisableViewModel.swift in Sources */,
+				19129480249BBA1F007F1083 /* PostLink.swift in Sources */,
 				5EA1FE2E21A3105000308D81 /* FacetsTableViewCellViewModel.swift in Sources */,
 				5E39F7CE23A3F9300073DAD5 /* TransactionDetailsActions.swift in Sources */,
 				5ED03F3820FF784A00AF5E07 /* FieldWithTextFieldTableViewCellViewModel.swift in Sources */,
@@ -4993,6 +5028,7 @@
 				5EA8B9C421B453F00074EA2C /* ManagerTableViewCellViewModel.swift in Sources */,
 				5E39F60A23A3F8A60073DAD5 /* ChangeBrokerProgramRequest.swift in Sources */,
 				5E39F60323A3F8A60073DAD5 /* ChangePasswordViewModel.swift in Sources */,
+				19129484249BBA3F007F1083 /* PublicProfileFollow.swift in Sources */,
 				5E39F61123A3F8A60073DAD5 /* AssetGuestActions.swift in Sources */,
 				FCB2C4EA2010BAAA0012AA58 /* String+Localized.swift in Sources */,
 				198124332464518600F286FE /* EditablePost.swift in Sources */,
@@ -5158,7 +5194,7 @@
 				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.2;
+				CURRENT_PROJECT_VERSION = 1.0.3;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -5439,7 +5475,7 @@
 				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.2;
+				CURRENT_PROJECT_VERSION = 1.0.3;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
@@ -5520,7 +5556,7 @@
 				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.2;
+				CURRENT_PROJECT_VERSION = 1.0.3;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

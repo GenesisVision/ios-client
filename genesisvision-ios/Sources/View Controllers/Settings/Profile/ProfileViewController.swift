@@ -365,6 +365,7 @@ extension ProfileViewController: ImagePickerPresentable {
     
     func selected(pickedImage: UIImage?, pickedImageURL: URL?) {
         viewModel.pickedImage = pickedImage
+        viewModel.pickedImageURL = pickedImageURL
         
         let oldImage = profileImageView.image
         showProgressHUD()
@@ -373,7 +374,7 @@ extension ProfileViewController: ImagePickerPresentable {
             DispatchQueue.main.async {
                 self?.profileImageView.image = nil
             }
-            
+
             switch result {
             case .success:
                 DispatchQueue.main.async {

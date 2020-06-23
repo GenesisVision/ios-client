@@ -272,9 +272,9 @@ class CreateFundStackView: ActionStackView {
         assetStackView.configure(viewModel)
         
         feesSettingsTitle.text = "Fees settings"
-        entryFeeView.titleLabel.text = "Entry fee"
+        entryFeeView.titleLabel.text = "Management fee"
         entryFeeView.textField.text = viewModel.request.entryFee?.toString() ?? ""
-        entryFeeView.subtitleLabel.text = "An entry fee is a fee charged to investors upon their investment to a GV Fund. The maximum entry fee is 10 %"
+        entryFeeView.subtitleLabel.text = "A management fee is a fee charged to investors upon their investment to a GV Fund. The maximum management fee is 10 %"
         exitFeeView.titleLabel.text = "Exit fee"
         exitFeeView.textField.text = viewModel.request.exitFee?.toString() ?? ""
         exitFeeView.subtitleLabel.text = "An exit fee is a fee charged to investors when they redeem shares from a GV Fund. The maximum exit fee is 10 %"
@@ -371,7 +371,7 @@ class MakeProgramStackView: ActionStackView {
         tradesDelayView.textLabel.textColor = viewModel.isEnableTradesSelector() ? UIColor.Cell.title : UIColor.Cell.subtitle
         
         feesSettingsTitle.text = "Fees settings"
-        entryFeeView.titleLabel.text = "Entry fee"
+        entryFeeView.titleLabel.text = "Management fee"
         entryFeeView.textField.text = ""
         entryFeeView.subtitleLabel.text = "A fee charged upon each investment in the program"
         successFeeView.titleLabel.text = "Success fee"
@@ -410,7 +410,7 @@ class MakeSignalStackView: ActionStackView {
         uploadLogoView.logoStackView.isHidden = true
         
         feesSettingsTitle.text = "Signal provider fees"
-        volumeFeeView.titleLabel.text = "Entry fee"
+        volumeFeeView.titleLabel.text = "Management fee"
         volumeFeeView.textField.text = ""
         volumeFeeView.subtitleLabel.text = "A fee charged for the copied volume"
         signalSuccessFeeView.titleLabel.text = "Success fee"

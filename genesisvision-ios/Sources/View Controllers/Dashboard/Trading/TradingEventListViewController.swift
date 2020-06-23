@@ -95,7 +95,7 @@ extension TradingEventListViewController: BaseTableViewProtocol {
 class TradingEventListViewModel: ListViewModelWithPaging {
     lazy var dataSource: TableViewDataSource = TableViewDataSource(self)
     var viewModels = [CellViewAnyModel]()
-    var title = "History"
+    var title = "Trading History"
     var canPullToRefresh: Bool = true
 
     var cellModelsForRegistration: [CellViewAnyModel.Type] {

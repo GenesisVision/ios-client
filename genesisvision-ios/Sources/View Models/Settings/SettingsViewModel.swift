@@ -282,7 +282,7 @@ final class SettingsViewModel {
             return completion(.failure(errorType: .apiError(message: nil)))
         }
         
-        BaseDataProvider.uploadImage(imageData: pickedImage, completion: { (uploadResult) in
+        BaseDataProvider.uploadImage(imageData: pickedImage, imageLocation: .user, completion: { (uploadResult) in
             guard let uploadResult = uploadResult, let uuidString = uploadResult._id?.uuidString else { return completion(.failure(errorType: .apiError(message: nil))) }
             
             ProfileDataProvider.updateProfileAvatar(fileId: uuidString, completion: { [weak self] (result) in

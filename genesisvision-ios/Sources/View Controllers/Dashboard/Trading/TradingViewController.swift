@@ -122,7 +122,7 @@ extension TradingViewController: BaseTableViewProtocol {
             let vc = TradingEventListViewController()
             viewModel.router?.tradingEventListViewController = vc
             vc.viewModel = TradingEventListViewModel(viewModel.router, delegate: vc)
-            vc.title = "My history"
+            vc.title = "Trading history"
             navigationController?.pushViewController(vc, animated: true)
         case .tradingPublicList:
             switch actionType {

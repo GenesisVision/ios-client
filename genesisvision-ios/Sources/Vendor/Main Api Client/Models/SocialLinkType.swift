@@ -19,4 +19,5 @@ public enum SocialLinkType: String, Codable {
     case website = "Website"
     case reddit = "Reddit"
     case gitHub = "GitHub"
+    case medium = "Medium"
 }

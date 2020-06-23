@@ -750,9 +750,21 @@ open class TradingaccountAPI {
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
+  "credentials" : {
+    "apiKey" : "apiKey",
+    "apiSecret" : "apiSecret"
+  },
   "tradingAccountInfo" : {
     "showTradingLog" : true,
     "leverage" : 0,
+    "supportedCurrencies" : [ null, null ],
+    "balances" : [ {
+      "amount" : 9.301444243932576,
+      "currency" : "Undefined"
+    }, {
+      "amount" : 9.301444243932576,
+      "currency" : "Undefined"
+    } ],
     "subscriptions" : 1,
     "apiKey" : "apiKey",
     "balance" : 6.027456183070403,

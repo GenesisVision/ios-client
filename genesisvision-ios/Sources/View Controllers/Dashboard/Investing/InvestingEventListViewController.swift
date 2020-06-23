@@ -92,7 +92,7 @@ class InvestingEventListViewModel: ListViewModelWithPaging {
     
     var viewModels = [CellViewAnyModel]()
     
-    var title = "History"
+    var title = "Investment History"
     
     var canPullToRefresh: Bool = true
 

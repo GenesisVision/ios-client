@@ -31,7 +31,7 @@ class InvestingEventsViewModel: CellViewModelWithCollection {
     init(_ details: DashboardInvestingDetails?, delegate: BaseTableViewProtocol?) {
         self.details = details
         self.delegate = delegate
-        title = "History"
+        title = "Investment History"
         type = .investingEvents
         
         details?.events?.items?.forEach({ (model) in

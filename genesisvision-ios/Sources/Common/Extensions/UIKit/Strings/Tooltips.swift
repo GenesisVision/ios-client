@@ -32,6 +32,6 @@ extension String {
         static var programDetails: String = totalProfit + "\n············································\n" + avgProfit + "\n············································\n" + balance + "\n············································\n" + investors
         
         static var dashboardHeader: String = portfolioProfit + "\n············································\n" + portfolioInvested + "\n············································\n" + portfolioValue
-        static var entryFee: String = "The entry fee is disabled for programs that have not reached level 3. It will be charged only for programs with level 3 or higher."
+        static var entryFee: String = "The managment fee is disabled for programs that have not reached level 3. It will be charged only for programs with level 3 or higher."
     }
 }

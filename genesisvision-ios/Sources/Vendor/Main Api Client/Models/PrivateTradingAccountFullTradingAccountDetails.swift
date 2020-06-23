@@ -21,6 +21,8 @@ public struct PrivateTradingAccountFullTradingAccountDetails: Codable {
 
     public var balance: Double?
 
+    public var balances: [AmountWithCurrency]?
+
     public var type: PrivateTradingAccountType?
 
     public var subscriptions: Int?
@@ -28,16 +30,20 @@ public struct PrivateTradingAccountFullTradingAccountDetails: Codable {
     public var isExternal: Bool?
 
     public var showTradingLog: Bool?
-    public init(currency: Currency? = nil, leverage: Int? = nil, apiKey: String? = nil, login: String? = nil, balance: Double? = nil, type: PrivateTradingAccountType? = nil, subscriptions: Int? = nil, isExternal: Bool? = nil, showTradingLog: Bool? = nil) { 
+
+    public var supportedCurrencies: [Currency]?
+    public init(currency: Currency? = nil, leverage: Int? = nil, apiKey: String? = nil, login: String? = nil, balance: Double? = nil, balances: [AmountWithCurrency]? = nil, type: PrivateTradingAccountType? = nil, subscriptions: Int? = nil, isExternal: Bool? = nil, showTradingLog: Bool? = nil, supportedCurrencies: [Currency]? = nil) { 
         self.currency = currency
         self.leverage = leverage
         self.apiKey = apiKey
         self.login = login
         self.balance = balance
+        self.balances = balances
         self.type = type
         self.subscriptions = subscriptions
         self.isExternal = isExternal
         self.showTradingLog = showTradingLog
+        self.supportedCurrencies = supportedCurrencies
     }
 
 }

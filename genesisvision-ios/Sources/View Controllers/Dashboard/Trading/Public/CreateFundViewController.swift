@@ -393,7 +393,7 @@ class CreateFundViewModel {
     
     // MARK: - Public methods
     func saveImage(_ pickedImageURL: Data, completion: @escaping (CompletionBlock)) {
-        BaseDataProvider.uploadImage(imageData: pickedImageURL, completion: { [weak self] (uploadResult) in
+        BaseDataProvider.uploadImage(imageData: pickedImageURL, imageLocation: .fundAsset, completion: { [weak self] (uploadResult) in
             guard let uploadResult = uploadResult, let uuidString = uploadResult._id?.uuidString else { return completion(.failure(errorType: .apiError(message: nil))) }
             
             self?.uploadedUuidString = uuidString

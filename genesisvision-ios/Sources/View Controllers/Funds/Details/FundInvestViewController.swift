@@ -65,10 +65,10 @@ class FundInvestViewController: BaseViewController {
         }
     }
     
-    @IBOutlet weak var entryFeeTitleLabel: SubtitleLabel! {
+    @IBOutlet weak var managementFeeTitleLabel: SubtitleLabel! {
         didSet {
-            entryFeeTitleLabel.text = "Entry fee"
-            entryFeeTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
+            managementFeeTitleLabel.text = "Management fee"
+            managementFeeTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
     @IBOutlet weak var entryFeeValueLabel: TitleLabel!
@@ -243,7 +243,7 @@ class FundInvestViewController: BaseViewController {
                                                           managerName: nil,
                                                           firstTitle: amountToInvestTitleLabel.text,
                                                           firstValue: firstValue,
-                                                          secondTitle: entryFeeTitleLabel.text,
+                                                          secondTitle: managementFeeTitleLabel.text,
                                                           secondValue: entryFeeValueLabel.text,
                                                           thirdTitle: gvCommissionTitleLabel.text,
                                                           thirdValue: gvCommissionValueLabel.text,

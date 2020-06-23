@@ -17,6 +17,8 @@ public struct MediaPost: Codable {
 
     public var type: SocialLinkType?
 
+    public var typeLogoUrl: String?
+
     public var author: String?
 
     public var authorUrl: String?
@@ -36,10 +38,11 @@ public struct MediaPost: Codable {
     public var commentsCount: Int?
 
     public var image: PostImage?
-    public init(_id: UUID? = nil, url: String? = nil, type: SocialLinkType? = nil, author: String? = nil, authorUrl: String? = nil, authorLogoUrl: String? = nil, title: String? = nil, text: String? = nil, date: Date? = nil, likesCount: Int? = nil, rePostsCount: Int? = nil, commentsCount: Int? = nil, image: PostImage? = nil) { 
+    public init(_id: UUID? = nil, url: String? = nil, type: SocialLinkType? = nil, typeLogoUrl: String? = nil, author: String? = nil, authorUrl: String? = nil, authorLogoUrl: String? = nil, title: String? = nil, text: String? = nil, date: Date? = nil, likesCount: Int? = nil, rePostsCount: Int? = nil, commentsCount: Int? = nil, image: PostImage? = nil) { 
         self._id = _id
         self.url = url
         self.type = type
+        self.typeLogoUrl = typeLogoUrl
         self.author = author
         self.authorUrl = authorUrl
         self.authorLogoUrl = authorLogoUrl
@@ -55,6 +58,7 @@ public struct MediaPost: Codable {
         case _id = "id"
         case url
         case type
+        case typeLogoUrl
         case author
         case authorUrl
         case authorLogoUrl

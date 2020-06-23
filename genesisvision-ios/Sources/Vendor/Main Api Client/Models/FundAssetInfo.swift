@@ -21,13 +21,16 @@ public struct FundAssetInfo: Codable {
 
     public var current: Double?
 
+    public var currentAmount: Double?
+
     public var url: String?
-    public init(asset: String? = nil, symbol: String? = nil, logoUrl: String? = nil, target: Double? = nil, current: Double? = nil, url: String? = nil) { 
+    public init(asset: String? = nil, symbol: String? = nil, logoUrl: String? = nil, target: Double? = nil, current: Double? = nil, currentAmount: Double? = nil, url: String? = nil) { 
         self.asset = asset
         self.symbol = symbol
         self.logoUrl = logoUrl
         self.target = target
         self.current = current
+        self.currentAmount = currentAmount
         self.url = url
     }
 

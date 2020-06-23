@@ -55,9 +55,9 @@ class BaseDataProvider: DataProvider {
     }
     
     // MARK: - Files
-    static func uploadImage(imageData: Data, completion: @escaping (_ uploadResult: UploadResult?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func uploadImage(imageData: Data, imageLocation: ImageLocation?, completion: @escaping (_ uploadResult: UploadResult?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
-        FileAPI.uploadFile(uploadedFile: imageData) { (model, error) in
+        FileAPI.uploadFile(uploadedFile: imageData, location: imageLocation) { (model, error) in
             DataProvider().responseHandler(model, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }

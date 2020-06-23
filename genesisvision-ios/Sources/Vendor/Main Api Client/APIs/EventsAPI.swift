@@ -13,11 +13,11 @@ import Alamofire
 open class EventsAPI {
     /**
      Events
-     - parameter eventLocation: (query)  (optional)     - parameter assetId: (query)  (optional)     - parameter from: (query)  (optional)     - parameter to: (query)  (optional)     - parameter eventType: (query)  (optional)     - parameter assetType: (query)  (optional)     - parameter assetsIds: (query)  (optional)     - parameter forceFilterByIds: (query)  (optional)     - parameter eventGroup: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter eventLocation: (query)  (optional)     - parameter assetId: (query)  (optional)     - parameter from: (query)  (optional)     - parameter to: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter eventType: (query)  (optional)     - parameter assetType: (query)  (optional)     - parameter assetsIds: (query)  (optional)     - parameter forceFilterByIds: (query)  (optional)     - parameter eventGroup: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getEvents(eventLocation: InvestmentEventLocation? = nil, assetId: UUID? = nil, from: Date? = nil, to: Date? = nil, eventType: InvestmentEventType? = nil, assetType: AssetFilterType? = nil, assetsIds: [UUID]? = nil, forceFilterByIds: Bool? = nil, eventGroup: EventGroupType? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: InvestmentEventViewModels?,_ error: Error?) -> Void)) {
-        getEventsWithRequestBuilder(eventLocation: eventLocation, assetId: assetId, from: from, to: to, eventType: eventType, assetType: assetType, assetsIds: assetsIds, forceFilterByIds: forceFilterByIds, eventGroup: eventGroup, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func getEvents(eventLocation: InvestmentEventLocation? = nil, assetId: UUID? = nil, from: Date? = nil, to: Date? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, eventType: InvestmentEventType? = nil, assetType: AssetFilterType? = nil, assetsIds: [UUID]? = nil, forceFilterByIds: Bool? = nil, eventGroup: EventGroupType? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: InvestmentEventViewModels?,_ error: Error?) -> Void)) {
+        getEventsWithRequestBuilder(eventLocation: eventLocation, assetId: assetId, from: from, to: to, dateFrom: dateFrom, dateTo: dateTo, eventType: eventType, assetType: assetType, assetsIds: assetsIds, forceFilterByIds: forceFilterByIds, eventGroup: eventGroup, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
@@ -109,11 +109,11 @@ open class EventsAPI {
     "totalFeesAmount" : 3.616076749251911
   } ]
 }}]
-     - parameter eventLocation: (query)  (optional)     - parameter assetId: (query)  (optional)     - parameter from: (query)  (optional)     - parameter to: (query)  (optional)     - parameter eventType: (query)  (optional)     - parameter assetType: (query)  (optional)     - parameter assetsIds: (query)  (optional)     - parameter forceFilterByIds: (query)  (optional)     - parameter eventGroup: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter eventLocation: (query)  (optional)     - parameter assetId: (query)  (optional)     - parameter from: (query)  (optional)     - parameter to: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter eventType: (query)  (optional)     - parameter assetType: (query)  (optional)     - parameter assetsIds: (query)  (optional)     - parameter forceFilterByIds: (query)  (optional)     - parameter eventGroup: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<InvestmentEventViewModels> 
      */
-    open class func getEventsWithRequestBuilder(eventLocation: InvestmentEventLocation? = nil, assetId: UUID? = nil, from: Date? = nil, to: Date? = nil, eventType: InvestmentEventType? = nil, assetType: AssetFilterType? = nil, assetsIds: [UUID]? = nil, forceFilterByIds: Bool? = nil, eventGroup: EventGroupType? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<InvestmentEventViewModels> {
+    open class func getEventsWithRequestBuilder(eventLocation: InvestmentEventLocation? = nil, assetId: UUID? = nil, from: Date? = nil, to: Date? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, eventType: InvestmentEventType? = nil, assetType: AssetFilterType? = nil, assetsIds: [UUID]? = nil, forceFilterByIds: Bool? = nil, eventGroup: EventGroupType? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<InvestmentEventViewModels> {
         let path = "/v2.0/events"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -123,6 +123,8 @@ open class EventsAPI {
                         "AssetId": assetId, 
                         "From": from?.encodeToJSON(), 
                         "To": to?.encodeToJSON(), 
+                        "DateFrom": dateFrom?.encodeToJSON(), 
+                        "DateTo": dateTo?.encodeToJSON(), 
                         "EventType": eventType, 
                         "AssetType": assetType, 
                         "AssetsIds": assetsIds, 

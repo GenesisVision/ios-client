@@ -168,7 +168,7 @@ extension InvestingViewController: BaseTableViewProtocol {
             let vc = InvestingEventListViewController()
             viewModel.router?.investingEventListViewController = vc
             vc.viewModel = InvestingEventListViewModel(viewModel.router, delegate: vc)
-            vc.title = "History"
+            vc.title = "Investment History"
             navigationController?.pushViewController(vc, animated: true)
         case .investingPrograms:
             let vc = InvestingProgramListViewController()

@@ -105,7 +105,7 @@ final class FundViewModel: TabmanViewModel {
         case assets = "Assets"
         case reallocateHistory = "Reallocate history"
         
-        case events = "My history"
+        case events = "Fund history"
     }
     var tabTypes: [TabType] = [.info, .assets, .reallocateHistory, .profit, .balance, .events]
     var controllers = [TabType : UIViewController]()

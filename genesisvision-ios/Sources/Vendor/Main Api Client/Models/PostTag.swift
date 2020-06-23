@@ -21,12 +21,14 @@ public struct PostTag: Codable {
 
     public var userDetails: ProfilePublic?
 
-    public var platformAssetDetails: PlatformAsset?
+    public var platformAssetDetails: PostPlatformAssetDetailsWithPrices?
 
     public var post: Post?
 
     public var event: PostEvent?
-    public init(title: String? = nil, number: Int? = nil, type: SocialPostTagType? = nil, assetDetails: PostAssetDetailsWithPrices? = nil, userDetails: ProfilePublic? = nil, platformAssetDetails: PlatformAsset? = nil, post: Post? = nil, event: PostEvent? = nil) { 
+
+    public var link: PostLink?
+    public init(title: String? = nil, number: Int? = nil, type: SocialPostTagType? = nil, assetDetails: PostAssetDetailsWithPrices? = nil, userDetails: ProfilePublic? = nil, platformAssetDetails: PostPlatformAssetDetailsWithPrices? = nil, post: Post? = nil, event: PostEvent? = nil, link: PostLink? = nil) { 
         self.title = title
         self.number = number
         self.type = type
@@ -35,6 +37,7 @@ public struct PostTag: Codable {
         self.platformAssetDetails = platformAssetDetails
         self.post = post
         self.event = event
+        self.link = link
     }
 
 }

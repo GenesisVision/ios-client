@@ -188,7 +188,7 @@ open class SocialAPI {
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
-  "total" : 3,
+  "total" : 4,
   "items" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "images" : [ {
@@ -210,6 +210,7 @@ open class SocialAPI {
     } ],
     "comments" : [ null, null ],
     "isPinned" : true,
+    "url" : "url",
     "tags" : [ {
       "number" : 5,
       "assetDetails" : {
@@ -228,9 +229,14 @@ open class SocialAPI {
         "url" : "url",
         "assetType" : "None"
       },
+      "link" : {
+        "title" : "title",
+        "url" : "url"
+      },
       "platformAssetDetails" : {
-        "mandatoryFundPercent" : 0.8008281904610115,
+        "change24Percent" : 9.301444243932576,
         "color" : "color",
+        "price" : 7.061401241503109,
         "name" : "name",
         "description" : "description",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -241,9 +247,9 @@ open class SocialAPI {
       "title" : "title",
       "type" : "Undefined",
       "event" : {
-        "amount" : 7.061401241503109,
+        "amount" : 3.616076749251911,
         "title" : "title",
-        "percent" : 9.301444243932576,
+        "percent" : 2.027123023002322,
         "logoUrl" : "logoUrl"
       },
       "userDetails" : {
@@ -284,9 +290,14 @@ open class SocialAPI {
         "url" : "url",
         "assetType" : "None"
       },
+      "link" : {
+        "title" : "title",
+        "url" : "url"
+      },
       "platformAssetDetails" : {
-        "mandatoryFundPercent" : 0.8008281904610115,
+        "change24Percent" : 9.301444243932576,
         "color" : "color",
+        "price" : 7.061401241503109,
         "name" : "name",
         "description" : "description",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -297,9 +308,9 @@ open class SocialAPI {
       "title" : "title",
       "type" : "Undefined",
       "event" : {
-        "amount" : 7.061401241503109,
+        "amount" : 3.616076749251911,
         "title" : "title",
-        "percent" : 9.301444243932576,
+        "percent" : 2.027123023002322,
         "logoUrl" : "logoUrl"
       },
       "userDetails" : {
@@ -357,6 +368,7 @@ open class SocialAPI {
     } ],
     "comments" : [ null, null ],
     "isPinned" : true,
+    "url" : "url",
     "tags" : [ {
       "number" : 5,
       "assetDetails" : {
@@ -375,9 +387,14 @@ open class SocialAPI {
         "url" : "url",
         "assetType" : "None"
       },
+      "link" : {
+        "title" : "title",
+        "url" : "url"
+      },
       "platformAssetDetails" : {
-        "mandatoryFundPercent" : 0.8008281904610115,
+        "change24Percent" : 9.301444243932576,
         "color" : "color",
+        "price" : 7.061401241503109,
         "name" : "name",
         "description" : "description",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -388,9 +405,9 @@ open class SocialAPI {
       "title" : "title",
       "type" : "Undefined",
       "event" : {
-        "amount" : 7.061401241503109,
+        "amount" : 3.616076749251911,
         "title" : "title",
-        "percent" : 9.301444243932576,
+        "percent" : 2.027123023002322,
         "logoUrl" : "logoUrl"
       },
       "userDetails" : {
@@ -431,9 +448,14 @@ open class SocialAPI {
         "url" : "url",
         "assetType" : "None"
       },
+      "link" : {
+        "title" : "title",
+        "url" : "url"
+      },
       "platformAssetDetails" : {
-        "mandatoryFundPercent" : 0.8008281904610115,
+        "change24Percent" : 9.301444243932576,
         "color" : "color",
+        "price" : 7.061401241503109,
         "name" : "name",
         "description" : "description",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -444,9 +466,9 @@ open class SocialAPI {
       "title" : "title",
       "type" : "Undefined",
       "event" : {
-        "amount" : 7.061401241503109,
+        "amount" : 3.616076749251911,
         "title" : "title",
-        "percent" : 9.301444243932576,
+        "percent" : 2.027123023002322,
         "logoUrl" : "logoUrl"
       },
       "userDetails" : {
@@ -517,7 +539,7 @@ open class SocialAPI {
      - parameter _id: (path)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getPost(_id: UUID, completion: @escaping ((_ data: EditablePost?,_ error: Error?) -> Void)) {
+    open class func getPost(_id: String, completion: @escaping ((_ data: EditablePost?,_ error: Error?) -> Void)) {
         getPostWithRequestBuilder(_id: _id).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
@@ -570,6 +592,7 @@ open class SocialAPI {
     } ],
     "comments" : [ null, null ],
     "isPinned" : true,
+    "url" : "url",
     "tags" : [ {
       "number" : 5,
       "assetDetails" : {
@@ -588,9 +611,14 @@ open class SocialAPI {
         "url" : "url",
         "assetType" : "None"
       },
+      "link" : {
+        "title" : "title",
+        "url" : "url"
+      },
       "platformAssetDetails" : {
-        "mandatoryFundPercent" : 0.8008281904610115,
+        "change24Percent" : 9.301444243932576,
         "color" : "color",
+        "price" : 7.061401241503109,
         "name" : "name",
         "description" : "description",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -601,9 +629,9 @@ open class SocialAPI {
       "title" : "title",
       "type" : "Undefined",
       "event" : {
-        "amount" : 7.061401241503109,
+        "amount" : 3.616076749251911,
         "title" : "title",
-        "percent" : 9.301444243932576,
+        "percent" : 2.027123023002322,
         "logoUrl" : "logoUrl"
       },
       "userDetails" : {
@@ -644,9 +672,14 @@ open class SocialAPI {
         "url" : "url",
         "assetType" : "None"
       },
+      "link" : {
+        "title" : "title",
+        "url" : "url"
+      },
       "platformAssetDetails" : {
-        "mandatoryFundPercent" : 0.8008281904610115,
+        "change24Percent" : 9.301444243932576,
         "color" : "color",
+        "price" : 7.061401241503109,
         "name" : "name",
         "description" : "description",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -657,9 +690,9 @@ open class SocialAPI {
       "title" : "title",
       "type" : "Undefined",
       "event" : {
-        "amount" : 7.061401241503109,
+        "amount" : 3.616076749251911,
         "title" : "title",
-        "percent" : 9.301444243932576,
+        "percent" : 2.027123023002322,
         "logoUrl" : "logoUrl"
       },
       "userDetails" : {
@@ -717,6 +750,7 @@ open class SocialAPI {
     } ],
     "comments" : [ null, null ],
     "isPinned" : true,
+    "url" : "url",
     "tags" : [ {
       "number" : 5,
       "assetDetails" : {
@@ -735,9 +769,14 @@ open class SocialAPI {
         "url" : "url",
         "assetType" : "None"
       },
+      "link" : {
+        "title" : "title",
+        "url" : "url"
+      },
       "platformAssetDetails" : {
-        "mandatoryFundPercent" : 0.8008281904610115,
+        "change24Percent" : 9.301444243932576,
         "color" : "color",
+        "price" : 7.061401241503109,
         "name" : "name",
         "description" : "description",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -748,9 +787,9 @@ open class SocialAPI {
       "title" : "title",
       "type" : "Undefined",
       "event" : {
-        "amount" : 7.061401241503109,
+        "amount" : 3.616076749251911,
         "title" : "title",
-        "percent" : 9.301444243932576,
+        "percent" : 2.027123023002322,
         "logoUrl" : "logoUrl"
       },
       "userDetails" : {
@@ -791,9 +830,14 @@ open class SocialAPI {
         "url" : "url",
         "assetType" : "None"
       },
+      "link" : {
+        "title" : "title",
+        "url" : "url"
+      },
       "platformAssetDetails" : {
-        "mandatoryFundPercent" : 0.8008281904610115,
+        "change24Percent" : 9.301444243932576,
         "color" : "color",
+        "price" : 7.061401241503109,
         "name" : "name",
         "description" : "description",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -804,9 +848,9 @@ open class SocialAPI {
       "title" : "title",
       "type" : "Undefined",
       "event" : {
-        "amount" : 7.061401241503109,
+        "amount" : 3.616076749251911,
         "title" : "title",
-        "percent" : 9.301444243932576,
+        "percent" : 2.027123023002322,
         "logoUrl" : "logoUrl"
       },
       "userDetails" : {
@@ -866,6 +910,7 @@ open class SocialAPI {
     "username" : "username"
   },
   "textOriginal" : "textOriginal",
+  "url" : "url",
   "tags" : [ {
     "number" : 5,
     "assetDetails" : {
@@ -884,9 +929,14 @@ open class SocialAPI {
       "url" : "url",
       "assetType" : "None"
     },
+    "link" : {
+      "title" : "title",
+      "url" : "url"
+    },
     "platformAssetDetails" : {
-      "mandatoryFundPercent" : 0.8008281904610115,
+      "change24Percent" : 9.301444243932576,
       "color" : "color",
+      "price" : 7.061401241503109,
       "name" : "name",
       "description" : "description",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -897,9 +947,9 @@ open class SocialAPI {
     "title" : "title",
     "type" : "Undefined",
     "event" : {
-      "amount" : 7.061401241503109,
+      "amount" : 3.616076749251911,
       "title" : "title",
-      "percent" : 9.301444243932576,
+      "percent" : 2.027123023002322,
       "logoUrl" : "logoUrl"
     },
     "userDetails" : {
@@ -940,9 +990,14 @@ open class SocialAPI {
       "url" : "url",
       "assetType" : "None"
     },
+    "link" : {
+      "title" : "title",
+      "url" : "url"
+    },
     "platformAssetDetails" : {
-      "mandatoryFundPercent" : 0.8008281904610115,
+      "change24Percent" : 9.301444243932576,
       "color" : "color",
+      "price" : 7.061401241503109,
       "name" : "name",
       "description" : "description",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -953,9 +1008,9 @@ open class SocialAPI {
     "title" : "title",
     "type" : "Undefined",
     "event" : {
-      "amount" : 7.061401241503109,
+      "amount" : 3.616076749251911,
       "title" : "title",
-      "percent" : 9.301444243932576,
+      "percent" : 2.027123023002322,
       "logoUrl" : "logoUrl"
     },
     "userDetails" : {
@@ -997,7 +1052,7 @@ open class SocialAPI {
 
      - returns: RequestBuilder<EditablePost> 
      */
-    open class func getPostWithRequestBuilder(_id: UUID) -> RequestBuilder<EditablePost> {
+    open class func getPostWithRequestBuilder(_id: String) -> RequestBuilder<EditablePost> {
         var path = "/v2.0/social/feed/{id}"
         let _idPreEscape = "\(_id)"
         let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -1044,6 +1099,7 @@ open class SocialAPI {
       } ]
     },
     "author" : "author",
+    "typeLogoUrl" : "typeLogoUrl",
     "type" : "Undefined",
     "title" : "title",
     "url" : "url",
@@ -1066,6 +1122,7 @@ open class SocialAPI {
       } ]
     },
     "author" : "author",
+    "typeLogoUrl" : "typeLogoUrl",
     "type" : "Undefined",
     "title" : "title",
     "url" : "url",
@@ -1166,9 +1223,15 @@ open class SocialAPI {
     "description" : "description",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "asset" : "asset",
+    "chart" : [ {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "value" : 0.8008281904610115
+    }, {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "value" : 0.8008281904610115
+    } ],
     "logoUrl" : "logoUrl",
-    "url" : "url",
-    "hasPrice" : true
+    "url" : "url"
   }, {
     "priceCurrency" : "Undefined",
     "change24Percent" : 7.061401241503109,
@@ -1179,9 +1242,15 @@ open class SocialAPI {
     "description" : "description",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "asset" : "asset",
+    "chart" : [ {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "value" : 0.8008281904610115
+    }, {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "value" : 0.8008281904610115
+    } ],
     "logoUrl" : "logoUrl",
-    "url" : "url",
-    "hasPrice" : true
+    "url" : "url"
   } ]
 }}]
 

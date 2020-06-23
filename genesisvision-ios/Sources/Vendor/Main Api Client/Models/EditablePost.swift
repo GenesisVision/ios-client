@@ -15,6 +15,8 @@ public struct EditablePost: Codable {
 
     public var _id: UUID?
 
+    public var url: String?
+
     public var text: String?
 
     public var date: Date?
@@ -38,9 +40,10 @@ public struct EditablePost: Codable {
     public var actions: PostActions?
 
     public var comments: [Post]?
-    public init(textOriginal: String? = nil, _id: UUID? = nil, text: String? = nil, date: Date? = nil, likesCount: Int? = nil, rePostsCount: Int? = nil, impressionsCount: Int? = nil, isPinned: Bool? = nil, isDeleted: Bool? = nil, images: [PostImage]? = nil, tags: [PostTag]? = nil, author: ProfilePublic? = nil, actions: PostActions? = nil, comments: [Post]? = nil) { 
+    public init(textOriginal: String? = nil, _id: UUID? = nil, url: String? = nil, text: String? = nil, date: Date? = nil, likesCount: Int? = nil, rePostsCount: Int? = nil, impressionsCount: Int? = nil, isPinned: Bool? = nil, isDeleted: Bool? = nil, images: [PostImage]? = nil, tags: [PostTag]? = nil, author: ProfilePublic? = nil, actions: PostActions? = nil, comments: [Post]? = nil) { 
         self.textOriginal = textOriginal
         self._id = _id
+        self.url = url
         self.text = text
         self.date = date
         self.likesCount = likesCount
@@ -57,6 +60,7 @@ public struct EditablePost: Codable {
     public enum CodingKeys: String, CodingKey { 
         case textOriginal
         case _id = "id"
+        case url
         case text
         case date
         case likesCount

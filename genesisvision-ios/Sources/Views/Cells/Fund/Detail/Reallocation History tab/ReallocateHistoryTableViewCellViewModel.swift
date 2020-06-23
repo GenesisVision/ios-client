@@ -25,6 +25,8 @@ extension ReallocateHistoryTableViewCellViewModel: CellViewModel {
             cell.dateLabel.text = date.onlyTimeFormatString
         }
         
+        cell.stackView.removeAllArrangedSubviews()
+        
         if let parts = model.parts, !parts.isEmpty {
             parts.prefix(4).forEach { (part) in
                 let assetsStackView = UIStackView(frame: .zero)

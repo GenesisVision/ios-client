@@ -261,7 +261,7 @@ open class SearchAPI {
     } ]
   },
   "managers" : {
-    "total" : 7,
+    "total" : 4,
     "items" : [ {
       "socialLinks" : [ {
         "name" : "name",
@@ -277,8 +277,8 @@ open class SearchAPI {
         "logoUrl" : "logoUrl"
       } ],
       "assets" : [ "assets", "assets" ],
-      "followers" : [ null, null ],
-      "following" : [ null, null ],
+      "followers" : 7,
+      "following" : 1,
       "about" : "about",
       "regDate" : "2000-01-23T04:56:07.000+00:00",
       "personalDetails" : {
@@ -306,8 +306,8 @@ open class SearchAPI {
         "logoUrl" : "logoUrl"
       } ],
       "assets" : [ "assets", "assets" ],
-      "followers" : [ null, null ],
-      "following" : [ null, null ],
+      "followers" : 7,
+      "following" : 1,
       "about" : "about",
       "regDate" : "2000-01-23T04:56:07.000+00:00",
       "personalDetails" : {

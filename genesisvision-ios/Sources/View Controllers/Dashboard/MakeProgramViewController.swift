@@ -337,7 +337,7 @@ class MakeProgramViewModel {
         
         guard let pickedImage = pickedImage?.pngData() else { return completion(.failure(errorType: .apiError(message: nil))) }
         
-        BaseDataProvider.uploadImage(imageData: pickedImage, completion: { [weak self] (uploadResult) in
+        BaseDataProvider.uploadImage(imageData: pickedImage, imageLocation: .asset, completion: { [weak self] (uploadResult) in
             guard let uploadResult = uploadResult, let uuidString = uploadResult._id?.uuidString else { return completion(.failure(errorType: .apiError(message: nil))) }
             
             self?.uploadedUuidString = uuidString

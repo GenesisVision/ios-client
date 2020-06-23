@@ -44,8 +44,8 @@ open class UsersAPI {
     "logoUrl" : "logoUrl"
   } ],
   "assets" : [ "assets", "assets" ],
-  "followers" : [ null, null ],
-  "following" : [ null, null ],
+  "followers" : 7,
+  "following" : 1,
   "about" : "about",
   "regDate" : "2000-01-23T04:56:07.000+00:00",
   "personalDetails" : {
@@ -81,6 +81,69 @@ open class UsersAPI {
     }
 
     /**
+     Public profile follow details
+     - parameter _id: (path)  
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getUserProfileFollowDetails(_id: String, completion: @escaping ((_ data: PublicProfileFollow?,_ error: Error?) -> Void)) {
+        getUserProfileFollowDetailsWithRequestBuilder(_id: _id).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     Public profile follow details
+     - GET /v2.0/users/{id}/follow
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example={
+  "followers" : [ {
+    "personalDetails" : {
+      "isFollow" : true,
+      "allowFollow" : true,
+      "canCommentPosts" : true,
+      "canWritePost" : true
+    },
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "url" : "url",
+    "logoUrl" : "logoUrl",
+    "username" : "username"
+  }, {
+    "personalDetails" : {
+      "isFollow" : true,
+      "allowFollow" : true,
+      "canCommentPosts" : true,
+      "canWritePost" : true
+    },
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "url" : "url",
+    "logoUrl" : "logoUrl",
+    "username" : "username"
+  } ],
+  "following" : [ null, null ]
+}}]
+     - parameter _id: (path)  
+
+     - returns: RequestBuilder<PublicProfileFollow> 
+     */
+    open class func getUserProfileFollowDetailsWithRequestBuilder(_id: String) -> RequestBuilder<PublicProfileFollow> {
+        var path = "/v2.0/users/{id}/follow"
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = URLComponents(string: URLString)
+
+        let requestBuilder: RequestBuilder<PublicProfileFollow>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
      Get users list
      - parameter sorting: (query)  (optional)     - parameter timeframe: (query)  (optional)     - parameter tags: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
@@ -94,7 +157,7 @@ open class UsersAPI {
 
     /**
      Get users list
-     - GET /v2.0/users/list
+     - GET /v2.0/users
      - API Key:
        - type: apiKey Authorization 
        - name: Bearer
@@ -201,7 +264,7 @@ open class UsersAPI {
      - returns: RequestBuilder<UserDetailsListItemsViewModel> 
      */
     open class func getUsersListWithRequestBuilder(sorting: UsersFilterSorting? = nil, timeframe: UsersFilterTimeframe? = nil, tags: [String]? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<UserDetailsListItemsViewModel> {
-        let path = "/v2.0/users/list"
+        let path = "/v2.0/users"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -374,13 +374,11 @@
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xPx-7d-d1l" customClass="TextFieldStackView" customModule="GV_DEBUG" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="60" width="335" height="77.5"/>
                                                                         <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UtG-zv-Xau" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Management fee" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UtG-zv-Xau" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="15"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="15" id="yKd-vN-iIn"/>
                                                                                 </constraints>
-                                                                                <string key="text">Entry fee
-</string>
                                                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="12"/>
                                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
@@ -443,13 +441,11 @@
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jNY-Xp-FWW" customClass="TextFieldStackView" customModule="GV_DEBUG" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="157.5" width="335" height="77.5"/>
                                                                         <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7fO-7S-zyr" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Management fee" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7fO-7S-zyr" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="15"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="15" id="vv5-fV-91L"/>
                                                                                 </constraints>
-                                                                                <string key="text">Entry fee
-</string>
                                                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="12"/>
                                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
@@ -2054,13 +2050,11 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="q2L-vc-9KR" customClass="TextFieldStackView" customModule="GV_DEBUG" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="60" width="335" height="77.5"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X5k-Jz-0he" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Management fee" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X5k-Jz-0he" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="335" height="15"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="15" id="W1L-Ok-OGx"/>
                                                                         </constraints>
-                                                                        <string key="text">Entry fee
-</string>
                                                                         <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="12"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -2128,7 +2122,7 @@
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="15" id="OFx-vD-4VA"/>
                                                                         </constraints>
-                                                                        <string key="text">Entry fee
+                                                                        <string key="text">Management fee
 </string>
                                                                         <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="12"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2598,13 +2592,11 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Nms-po-MJu" customClass="TextFieldStackView" customModule="GV_DEBUG" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="60" width="335" height="77.5"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="svM-HI-VYc" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Management fee" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="svM-HI-VYc" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="335" height="15"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="15" id="3K4-hg-zCa"/>
                                                                         </constraints>
-                                                                        <string key="text">Entry fee
-</string>
                                                                         <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="12"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -2667,13 +2659,11 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rsB-an-0OS" customClass="TextFieldStackView" customModule="GV_DEBUG" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="157.5" width="335" height="77.5"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UMu-AY-R3X" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Management fee" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UMu-AY-R3X" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="335" height="15"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="15" id="I52-yp-YZI"/>
                                                                         </constraints>
-                                                                        <string key="text">Entry fee
-</string>
                                                                         <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="12"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>

@@ -27,7 +27,7 @@ extension FundInvestNowTableViewCellViewModel: CellViewModel {
         cell.investButton.setTitle("Invest", for: .normal)
         
          if let entryFee = fundDetailsFull?.entryFeeCurrent {
-            cell.entryFeeTitleLabel.text = "entry fee"
+            cell.entryFeeTitleLabel.text = "Management fee"
             cell.entryFeeValueLabel.text = entryFee.rounded(with: .undefined).toString() + "%"
         }
         

@@ -16,4 +16,5 @@ public enum SocialPostTagType: String, Codable {
     case asset = "Asset"
     case event = "Event"
     case post = "Post"
+    case url = "Url"
 }

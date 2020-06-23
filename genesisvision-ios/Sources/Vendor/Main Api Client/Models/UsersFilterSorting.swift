@@ -22,4 +22,6 @@ public enum UsersFilterSorting: String, Codable {
     case byPopularityDesc = "ByPopularityDesc"
     case byProfitAsc = "ByProfitAsc"
     case byProfitDesc = "ByProfitDesc"
+    case byActivityAsc = "ByActivityAsc"
+    case byActivityDesc = "ByActivityDesc"
 }

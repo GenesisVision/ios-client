@@ -758,11 +758,11 @@ open class FollowAPI {
 
     /**
      Follow assets
-     - parameter sorting: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter tags: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter facetId: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter ownerId: (query)  (optional)     - parameter showFavorites: (query)  (optional)     - parameter skipStatistic: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter sorting: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter tags: (query)  (optional)     - parameter subscriberId: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter facetId: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter ownerId: (query)  (optional)     - parameter showFavorites: (query)  (optional)     - parameter skipStatistic: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getFollowAssets(sorting: FollowFilterSorting? = nil, showIn: Currency? = nil, tags: [String]? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skipStatistic: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: FollowDetailsListItemItemsViewModel?,_ error: Error?) -> Void)) {
-        getFollowAssetsWithRequestBuilder(sorting: sorting, showIn: showIn, tags: tags, dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, facetId: facetId, mask: mask, ownerId: ownerId, showFavorites: showFavorites, skipStatistic: skipStatistic, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func getFollowAssets(sorting: FollowFilterSorting? = nil, showIn: Currency? = nil, tags: [String]? = nil, subscriberId: UUID? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skipStatistic: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: FollowDetailsListItemItemsViewModel?,_ error: Error?) -> Void)) {
+        getFollowAssetsWithRequestBuilder(sorting: sorting, showIn: showIn, tags: tags, subscriberId: subscriberId, dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, facetId: facetId, mask: mask, ownerId: ownerId, showFavorites: showFavorites, skipStatistic: skipStatistic, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
@@ -820,11 +820,11 @@ open class FollowAPI {
     "status" : "status"
   } ]
 }}]
-     - parameter sorting: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter tags: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter facetId: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter ownerId: (query)  (optional)     - parameter showFavorites: (query)  (optional)     - parameter skipStatistic: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter sorting: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter tags: (query)  (optional)     - parameter subscriberId: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter facetId: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter ownerId: (query)  (optional)     - parameter showFavorites: (query)  (optional)     - parameter skipStatistic: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<FollowDetailsListItemItemsViewModel> 
      */
-    open class func getFollowAssetsWithRequestBuilder(sorting: FollowFilterSorting? = nil, showIn: Currency? = nil, tags: [String]? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skipStatistic: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<FollowDetailsListItemItemsViewModel> {
+    open class func getFollowAssetsWithRequestBuilder(sorting: FollowFilterSorting? = nil, showIn: Currency? = nil, tags: [String]? = nil, subscriberId: UUID? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skipStatistic: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<FollowDetailsListItemItemsViewModel> {
         let path = "/v2.0/follow"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -833,6 +833,7 @@ open class FollowAPI {
                         "Sorting": sorting, 
                         "ShowIn": showIn, 
                         "Tags": tags, 
+                        "SubscriberId": subscriberId, 
                         "DateFrom": dateFrom?.encodeToJSON(), 
                         "DateTo": dateTo?.encodeToJSON(), 
                         "ChartPointsCount": chartPointsCount?.encodeToJSON(), 

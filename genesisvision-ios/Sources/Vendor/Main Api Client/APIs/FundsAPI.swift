@@ -203,6 +203,7 @@ open class FundsAPI {
   "assetsStructure" : [ {
     "symbol" : "symbol",
     "current" : 2.3021358869347655,
+    "currentAmount" : 7.061401241503109,
     "asset" : "asset",
     "logoUrl" : "logoUrl",
     "url" : "url",
@@ -210,6 +211,7 @@ open class FundsAPI {
   }, {
     "symbol" : "symbol",
     "current" : 2.3021358869347655,
+    "currentAmount" : 7.061401241503109,
     "asset" : "asset",
     "logoUrl" : "logoUrl",
     "url" : "url",
@@ -230,7 +232,7 @@ open class FundsAPI {
   "exitFeeCurrent" : 5.962133916683182,
   "entryFeeSelected" : 0.8008281904610115,
   "personalDetails" : {
-    "exitFeePersonal" : 7.386281948385884,
+    "exitFeePersonal" : 1.2315135367772556,
     "pendingInOutCurrency" : "Undefined",
     "canWithdraw" : true,
     "canInvest" : true,
@@ -239,12 +241,12 @@ open class FundsAPI {
       "canClose" : true,
       "canReallocate" : true
     },
-    "pendingOutput" : 3.616076749251911,
+    "pendingOutput" : 2.027123023002322,
     "hasNotifications" : true,
-    "pendingInput" : 9.301444243932576,
-    "availableReallocationPercents" : 4,
-    "value" : 7.061401241503109,
-    "withdrawPercent" : 2.027123023002322,
+    "pendingInput" : 3.616076749251911,
+    "availableReallocationPercents" : 7,
+    "value" : 9.301444243932576,
+    "withdrawPercent" : 4.145608029883936,
     "isFavorite" : true,
     "isInvested" : true,
     "status" : "Pending"
@@ -389,11 +391,11 @@ open class FundsAPI {
 
     /**
      Funds list
-     - parameter sorting: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter assets: (query)  (optional)     - parameter includeWithInvestments: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter facetId: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter ownerId: (query)  (optional)     - parameter showFavorites: (query)  (optional)     - parameter skipStatistic: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter sorting: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter assets: (query)  (optional)     - parameter investorId: (query)  (optional)     - parameter includeWithInvestments: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter facetId: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter ownerId: (query)  (optional)     - parameter showFavorites: (query)  (optional)     - parameter skipStatistic: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getFunds(sorting: FundsFilterSorting? = nil, showIn: Currency? = nil, assets: [String]? = nil, includeWithInvestments: Bool? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skipStatistic: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: FundDetailsListItemItemsViewModel?,_ error: Error?) -> Void)) {
-        getFundsWithRequestBuilder(sorting: sorting, showIn: showIn, assets: assets, includeWithInvestments: includeWithInvestments, dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, facetId: facetId, mask: mask, ownerId: ownerId, showFavorites: showFavorites, skipStatistic: skipStatistic, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func getFunds(sorting: FundsFilterSorting? = nil, showIn: Currency? = nil, assets: [String]? = nil, investorId: UUID? = nil, includeWithInvestments: Bool? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skipStatistic: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: FundDetailsListItemItemsViewModel?,_ error: Error?) -> Void)) {
+        getFundsWithRequestBuilder(sorting: sorting, showIn: showIn, assets: assets, investorId: investorId, includeWithInvestments: includeWithInvestments, dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, facetId: facetId, mask: mask, ownerId: ownerId, showFavorites: showFavorites, skipStatistic: skipStatistic, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
@@ -465,11 +467,11 @@ open class FundsAPI {
     "status" : "status"
   } ]
 }}]
-     - parameter sorting: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter assets: (query)  (optional)     - parameter includeWithInvestments: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter facetId: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter ownerId: (query)  (optional)     - parameter showFavorites: (query)  (optional)     - parameter skipStatistic: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter sorting: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter assets: (query)  (optional)     - parameter investorId: (query)  (optional)     - parameter includeWithInvestments: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter facetId: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter ownerId: (query)  (optional)     - parameter showFavorites: (query)  (optional)     - parameter skipStatistic: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<FundDetailsListItemItemsViewModel> 
      */
-    open class func getFundsWithRequestBuilder(sorting: FundsFilterSorting? = nil, showIn: Currency? = nil, assets: [String]? = nil, includeWithInvestments: Bool? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skipStatistic: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<FundDetailsListItemItemsViewModel> {
+    open class func getFundsWithRequestBuilder(sorting: FundsFilterSorting? = nil, showIn: Currency? = nil, assets: [String]? = nil, investorId: UUID? = nil, includeWithInvestments: Bool? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, facetId: String? = nil, mask: String? = nil, ownerId: UUID? = nil, showFavorites: Bool? = nil, skipStatistic: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<FundDetailsListItemItemsViewModel> {
         let path = "/v2.0/funds"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -478,6 +480,7 @@ open class FundsAPI {
                         "Sorting": sorting, 
                         "ShowIn": showIn, 
                         "Assets": assets, 
+                        "InvestorId": investorId, 
                         "IncludeWithInvestments": includeWithInvestments, 
                         "DateFrom": dateFrom?.encodeToJSON(), 
                         "DateTo": dateTo?.encodeToJSON(), 
@@ -492,6 +495,85 @@ open class FundsAPI {
         ])
 
         let requestBuilder: RequestBuilder<FundDetailsListItemItemsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Get funds trading events
+     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter eventsType: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getFundsTradingEvents(_id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, eventsType: FundTradingEventType? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: FundTradingEventViewModelItemsViewModel?,_ error: Error?) -> Void)) {
+        getFundsTradingEventsWithRequestBuilder(_id: _id, dateFrom: dateFrom, dateTo: dateTo, eventsType: eventsType, skip: skip, take: take).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     Get funds trading events
+     - GET /v2.0/funds/{id}/events
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example={
+  "total" : 5,
+  "items" : [ {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "commissionCurrency" : "commissionCurrency",
+    "amount" : 0.8008281904610115,
+    "boughtAmount" : 6.027456183070403,
+    "commission" : 1.4658129805029452,
+    "type" : "Trade",
+    "asset" : {
+      "color" : "color",
+      "name" : "name",
+      "description" : "description",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "asset" : "asset",
+      "logoUrl" : "logoUrl",
+      "url" : "url"
+    }
+  }, {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "commissionCurrency" : "commissionCurrency",
+    "amount" : 0.8008281904610115,
+    "boughtAmount" : 6.027456183070403,
+    "commission" : 1.4658129805029452,
+    "type" : "Trade",
+    "asset" : {
+      "color" : "color",
+      "name" : "name",
+      "description" : "description",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "asset" : "asset",
+      "logoUrl" : "logoUrl",
+      "url" : "url"
+    }
+  } ]
+}}]
+     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter eventsType: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+
+     - returns: RequestBuilder<FundTradingEventViewModelItemsViewModel> 
+     */
+    open class func getFundsTradingEventsWithRequestBuilder(_id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, eventsType: FundTradingEventType? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<FundTradingEventViewModelItemsViewModel> {
+        var path = "/v2.0/funds/{id}/events"
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "DateFrom": dateFrom?.encodeToJSON(), 
+                        "DateTo": dateTo?.encodeToJSON(), 
+                        "EventsType": eventsType, 
+                        "Skip": skip?.encodeToJSON(), 
+                        "Take": take?.encodeToJSON()
+        ])
+
+        let requestBuilder: RequestBuilder<FundTradingEventViewModelItemsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }

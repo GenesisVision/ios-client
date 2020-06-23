@@ -53,6 +53,7 @@ final class ProfileViewModel {
                                            .socialLinks : [.twitter, .telegram, .facebook, .linkedin, .youtube, .wechat, .email]]
     
     var pickedImage: UIImage?
+    var pickedImageURL: URL?
     
     var username: String?
     var about: String?
@@ -188,11 +189,11 @@ final class ProfileViewModel {
     }
     
     func saveProfilePhoto(completion: @escaping CompletionBlock) {
-        guard let pickedImage = pickedImage?.pngData() else {
+        guard let pickedImage = pickedImage?.pngData(), let pickedImageUrl = pickedImageURL else {
             return completion(.failure(errorType: .apiError(message: nil)))
         }
         
-        BaseDataProvider.uploadImage(imageData: pickedImage, completion: { (uploadResult) in
+        BaseDataProvider.uploadImage(imageData: pickedImageUrl.dataRepresentation, imageLocation: ._default, completion: { (uploadResult) in
             guard let uploadResult = uploadResult, let uuidString = uploadResult._id?.uuidString else { return completion(.failure(errorType: .apiError(message: nil))) }
             
             ProfileDataProvider.updateProfileAvatar(fileId: uuidString, completion: { [weak self] (result) in

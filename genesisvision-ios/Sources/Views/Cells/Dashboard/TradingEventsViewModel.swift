@@ -28,7 +28,7 @@ class TradingEventsViewModel: CellViewModelWithCollection {
     init(_ details: DashboardTradingDetails?, delegate: BaseTableViewProtocol?) {
         self.details = details
         self.delegate = delegate
-        title = "History"
+        title = "Trading History"
         type = .tradingEvents
         
         details?.events?.items?.forEach({ (model) in
