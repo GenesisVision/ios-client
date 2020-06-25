@@ -50,6 +50,12 @@ final class FundInvestViewModel {
     }
     
     func getInfo(completion: @escaping CompletionBlock) {
+        
+        
+        
+        
+        
+        
 //        guard let assetId = assetId,
 //            let fundCurrencyValue = fundCurrency?.rawValue,
 //            let currencySecondary = InvestorAPI.Currency_v10InvestorFundsByIdInvestInfoByCurrencyGet(rawValue: fundCurrencyValue)
@@ -63,19 +69,18 @@ final class FundInvestViewModel {
                 self?.selectedWalletFromDelegateManager?.selectedIndex = 0
                 self?.selectedWalletFromDelegateManager?.selected = wallets[0]
                 self?.walletCurrency = CurrencyType(rawValue: wallets[0].currency?.rawValue ?? "")
-            }
-            
-            //FIXME:
-//            FundsDataProvider.getInvestInfo(assetId: assetId, currencySecondary: currencySecondary, completion: { [weak self] (fundInvestInfo) in
-//                guard let fundInvestInfo = fundInvestInfo else {
-//                    return completion(.failure(errorType: .apiError(message: nil)))
-//                }
+                completion(.success)
+            }}, completionError: completion)
+//        FundsDataProvider.getInvestInfo(assetId: assetId, currencySecondary: currencySecondary, completion: { [weak self] (fundInvestInfo) in
+//            guard let fundInvestInfo = fundInvestInfo else {
+//                return completion(.failure(errorType: .apiError(message: nil)))
+//            }
 //
-//                self?.fundInvestInfo = fundInvestInfo
-//                self?.updateRate(completion: completion)
-//                completion(.success)
-//                }, errorCompletion: completion)
-            }, completionError: completion)
+//            self?.fundInvestInfo = fundInvestInfo
+//            self?.updateRate(completion: completion)
+//            completion(.success)
+//            }, errorCompletion: completion)
+
     }
     
     func getInvestmentAmountCurrencyValue(_ amount: Double) -> String {

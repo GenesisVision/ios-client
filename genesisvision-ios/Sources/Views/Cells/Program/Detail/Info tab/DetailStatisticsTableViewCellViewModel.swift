@@ -51,11 +51,15 @@ extension DetailStatisticsTableViewCellViewModel: CellViewModel {
         }
         cell.topStackView.removeAllArrangedSubviews()
         cell.bottomStackView.removeAllArrangedSubviews()
+        
+        
+        details.tradingAccountInfo?.currency?.rawValue
+        
         if let value = details.programDetails?.investmentScale {
             cell.addToStackView(cell.topStackView, value: value.toString(), header: "invest. ratio")
         }
         if let value = details.programDetails?.periodDuration {
-            cell.addToStackView(cell.topStackView, value: value.toString(), header: "period")
+            cell.addToStackView(cell.topStackView, value: details.tradingAccountInfo?.currency?.rawValue ?? "", header: "currency")
         }
         if let value = details.programDetails?.genesisRatio {
             cell.addToStackView(cell.topStackView, value: value.toString(), header: "genesis ratio")

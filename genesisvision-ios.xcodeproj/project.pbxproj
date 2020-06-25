@@ -13,7 +13,6 @@
 		1912947C249BB9FB007F1083 /* FundTradingEventViewModelItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1912947B249BB9FA007F1083 /* FundTradingEventViewModelItemsViewModel.swift */; };
 		1912947E249BBA09007F1083 /* ImageLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1912947D249BBA09007F1083 /* ImageLocation.swift */; };
 		19129480249BBA1F007F1083 /* PostLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1912947F249BBA1E007F1083 /* PostLink.swift */; };
-		19129482249BBA2D007F1083 /* PostAssetDetailsWithPrices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19129481249BBA2C007F1083 /* PostAssetDetailsWithPrices.swift */; };
 		19129484249BBA3F007F1083 /* PublicProfileFollow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19129483249BBA3E007F1083 /* PublicProfileFollow.swift */; };
 		19129486249BBAF8007F1083 /* PostPlatformAssetDetailsWithPrices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19129485249BBAF8007F1083 /* PostPlatformAssetDetailsWithPrices.swift */; };
 		19787AEC24813FEB00217CA9 /* ExchangesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19787AEB24813FEB00217CA9 /* ExchangesAPI.swift */; };
@@ -82,7 +81,6 @@
 		19812486246459A900F286FE /* UsersFilterSorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19812484246459A900F286FE /* UsersFilterSorting.swift */; };
 		19812487246459A900F286FE /* UsersFilterTimeframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19812485246459A900F286FE /* UsersFilterTimeframe.swift */; };
 		19812489246459B900F286FE /* UtmSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19812488246459B900F286FE /* UtmSource.swift */; };
-		1981248B24645B3400F286FE /* SignalSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1981248A24645B3400F286FE /* SignalSubscription.swift */; };
 		5E026FF322D3497F00C555CC /* TagsDelegateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E026FF222D3497F00C555CC /* TagsDelegateManager.swift */; };
 		5E026FF722D3531900C555CC /* TagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E026FF622D3531900C555CC /* TagTableViewCell.swift */; };
 		5E026FF922D3532400C555CC /* TagTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E026FF822D3532400C555CC /* TagTableViewCellViewModel.swift */; };
@@ -4031,7 +4029,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0940;
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = "Genesis Vision";
 				TargetAttributes = {
 					5E8724C820E0B7E3007A1E16 = {
@@ -4734,7 +4732,6 @@
 				5E39F75423A3F92F0073DAD5 /* PeriodStatus.swift in Sources */,
 				5EB06A35239D312A003AB3FB /* ProgramsAPI.swift in Sources */,
 				5EC0CAFB23CB42E6003D0818 /* TradingViewController.swift in Sources */,
-				19129482249BBA2D007F1083 /* PostAssetDetailsWithPrices.swift in Sources */,
 				1981243B2464521C00F286FE /* FundInvestingDetailsListItemsViewModel.swift in Sources */,
 				5EF14D9F2181FC5500B3843A /* FundWithdrawRouter.swift in Sources */,
 				5E21663923A9101A001BB512 /* FundAssetDetails.swift in Sources */,
@@ -5059,7 +5056,6 @@
 				5EA274BE21628253008CAF77 /* YourInvestmentTableViewCell.swift in Sources */,
 				FCA19A39201AE02F00157AD6 /* SignInRouter.swift in Sources */,
 				5EE0075D217871BB0045B890 /* ManagerInfoViewModel.swift in Sources */,
-				1981248B24645B3400F286FE /* SignalSubscription.swift in Sources */,
 				5E026FF922D3532400C555CC /* TagTableViewCellViewModel.swift in Sources */,
 				5E39F76C23A3F9300073DAD5 /* FilterItemInfo.swift in Sources */,
 				1981245D246458AA00F286FE /* ProgramsFilterSorting.swift in Sources */,

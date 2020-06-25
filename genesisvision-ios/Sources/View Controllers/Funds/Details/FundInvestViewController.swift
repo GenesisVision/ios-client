@@ -131,6 +131,10 @@ class FundInvestViewController: BaseViewController {
     private func setup() {
         investButton.setEnabled(false)
         
+        DispatchQueue.main.async {
+            self.updateUI()
+        }
+        
         showProgressHUD()
         viewModel.getInfo(completion: { [weak self] (result) in
             self?.hideAll()
@@ -141,6 +145,9 @@ class FundInvestViewController: BaseViewController {
                     self?.updateUI()
                 }
             case .failure(let errorType):
+                DispatchQueue.main.async {
+                    self?.updateUI()
+                }
                 ErrorHandler.handleError(with: errorType, viewController: self)
             }
         })

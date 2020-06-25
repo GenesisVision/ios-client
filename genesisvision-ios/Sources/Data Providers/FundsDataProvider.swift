@@ -36,7 +36,7 @@ class FundsDataProvider: DataProvider {
         }
     }
     
-    static func get(_ assetId: String, currencyType: Currency, completion: @escaping (FundDetailsFull?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func get(_ assetId: String, currencyType: Currency? = nil, completion: @escaping (FundDetailsFull?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
         FundsAPI.getFundDetails(_id: assetId, currency: currencyType) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)

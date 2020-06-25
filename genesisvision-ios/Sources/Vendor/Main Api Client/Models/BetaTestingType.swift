@@ -10,4 +10,5 @@ import Foundation
 public enum BetaTestingType: String, Codable {
     case _none = "None"
     case social = "Social"
+    case tradingTerminal = "TradingTerminal"
 }

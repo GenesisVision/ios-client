@@ -19,7 +19,7 @@ final class ManagerListViewModel: ListViewModelProtocol {
     
     var router: ListRouterProtocol!
     
-    var assetListDelegateManager: ListDelegateManager<ListViewModel>!
+    var assetListDelegateManager: ListDelegateManager<ManagerListViewModel>!
     
     private weak var reloadDataProtocol: ReloadDataProtocol?
     var canPullToRefresh = true
@@ -48,6 +48,8 @@ final class ManagerListViewModel: ListViewModelProtocol {
         self.router = router
         self.reloadDataProtocol = reloadDataProtocol
         self.showFacets = showFacets
+        
+        assetListDelegateManager = ListDelegateManager(with: self)
         
         if let filterModel = filterModel {
             self.filterModel = filterModel

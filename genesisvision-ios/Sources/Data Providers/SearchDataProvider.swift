@@ -11,6 +11,7 @@ import Foundation
 class SearchDataProvider: DataProvider {
     static func get(_ mask: String? = nil, take: Int? = nil, completion: @escaping (_ searchViewModel: CommonPublicAssetsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
+
         SearchAPI.search(mask: mask, take: take) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }

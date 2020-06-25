@@ -30,9 +30,9 @@ class FundRouter: TabmanRouter {
         return viewController
     }
     
-    func getAssets() -> FundAssetsViewController? {
+    func getAssets(with assetId: String) -> FundAssetsViewController? {
         let viewController = FundAssetsViewController()
-        let viewModel = FundAssetsViewModel(withRouter: self, reloadDataProtocol: viewController)
+        let viewModel = FundAssetsViewModel(withRouter: self, reloadDataProtocol: viewController, assetId: assetId)
         viewController.viewModel = viewModel
         
         return viewController

@@ -39,6 +39,15 @@ class FundAssetsViewController: BaseViewControllerWithTableView {
         setupTableConfiguration()
         
         setupNavigationBar()
+        
+        viewModel.fetch { [weak self] (result) in
+            switch result {
+            case .success:
+                self?.reloadData()
+            case .failure(errorType: let errorType):
+                return
+            }
+        }
     }
     
     private func reloadData() {

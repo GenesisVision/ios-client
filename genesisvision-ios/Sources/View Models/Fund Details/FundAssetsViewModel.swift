@@ -22,7 +22,8 @@ final class FundAssetsViewModel {
     var skip = 0
     var take = ApiKeys.take
     
-    var assets: [FundAssetsState]?
+    var assets: [FundAssetInfo]?
+    var fundDetails: FundDetailsFull?
     
     var totalCount = 0 {
         didSet {
@@ -33,10 +34,32 @@ final class FundAssetsViewModel {
     var viewModels = [FundAssetTableViewCellViewModel]()
     
     // MARK: - Init
-    init(withRouter router: FundRouter, assets: [FundAssetsState]? = nil, reloadDataProtocol: ReloadDataProtocol?) {
+    init(withRouter router: FundRouter, assets: [FundAssetInfo]? = nil, reloadDataProtocol: ReloadDataProtocol?, assetId: String) {
         self.router = router
         self.assets = assets
         self.reloadDataProtocol = reloadDataProtocol
+        self.assetId = assetId
+    }
+    
+    
+    func fetch(completion: @escaping CompletionBlock) {
+        guard let assetId = assetId else { return }
+        FundsDataProvider.get(assetId, completion: { [weak self] (fundDetails) in
+            guard let fundDetails = fundDetails, let assets = fundDetails.assetsStructure else {
+                return completion(.failure(errorType: .apiError(message: nil)))
+            }
+            self?.fundDetails = fundDetails
+            self?.assets = assets
+            
+            
+            var viewModels = [FundAssetTableViewCellViewModel]()
+            
+            for item in assets {
+                viewModels.append(FundAssetTableViewCellViewModel(fundAssetInfo: item))
+            }
+            self?.viewModels = viewModels
+            completion(.success)
+        }, errorCompletion: completion)
     }
 }
 

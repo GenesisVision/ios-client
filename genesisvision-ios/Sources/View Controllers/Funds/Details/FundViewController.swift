@@ -168,7 +168,7 @@ final class FundViewModel: TabmanViewModel {
         case .reallocateHistory:
             return router.getReallocateHistory(with: assetId)
         case .assets:
-            return router.getAssets()
+            return router.getAssets(with: assetId)
         case .events:
             return router.getEvents(with: assetId)
         }
