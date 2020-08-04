@@ -52,9 +52,6 @@ extension DetailStatisticsTableViewCellViewModel: CellViewModel {
         cell.topStackView.removeAllArrangedSubviews()
         cell.bottomStackView.removeAllArrangedSubviews()
         
-        
-        details.tradingAccountInfo?.currency?.rawValue
-        
         if let value = details.programDetails?.investmentScale {
             cell.addToStackView(cell.topStackView, value: value.toString(), header: "invest. ratio")
         }

@@ -401,7 +401,7 @@ extension ProgramInfoViewModel: YourInvestmentProtocol {
 
 extension ProgramInfoViewModel: InvestNowProtocol {
     func didTapEntryFeeTooltipButton(_ tooltipText: String) {
-        if let viewController = router.topViewController() as? BaseViewController {
+        if let viewController = router.topViewController() as? BaseTabmanViewController<ProgramViewModel> {
             viewController.showBottomSheet(.text, title: tooltipText, initializeHeight: 130, completion: nil)
         }
     }
@@ -417,6 +417,10 @@ extension ProgramInfoViewModel: InvestNowProtocol {
         } else if let topViewController = router.topViewController() {
             topViewController.showAlertWithTitle(title: "", message: String.Alerts.noAvailableTokens, actionTitle: "OK", cancelTitle: nil, handler: nil, cancelHandler: nil)
         }
+    }
+    
+    func ditTapEditButton() {
+        
     }
 }
 

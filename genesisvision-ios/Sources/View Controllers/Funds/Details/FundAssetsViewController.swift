@@ -45,7 +45,21 @@ class FundAssetsViewController: BaseViewControllerWithTableView {
             case .success:
                 self?.reloadData()
             case .failure(errorType: let errorType):
-                return
+                ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
+            }
+        }
+    }
+    
+    override func pullToRefresh() {
+        super.pullToRefresh()
+        
+        viewModel.fetch { [weak self] (result) in
+            self?.hideAll()
+            switch result {
+            case .success:
+                self?.reloadData()
+            case .failure(errorType: let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }
         }
     }

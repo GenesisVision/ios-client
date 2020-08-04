@@ -93,7 +93,7 @@ extension TradingInfoContentView {
         
         bottomStackView.removeAllArrangedSubviews()
         if let value = asset.managementFeeCurrent {
-            addToStackView(bottomStackView, value: "\(value)%", header: "managment fee")
+            addToStackView(bottomStackView, value: "\(value)%", header: "management fee")
         }
         if let value = asset.successFeeCurrent {
             addToStackView(bottomStackView, value: "\(value)%", header: "success fee")

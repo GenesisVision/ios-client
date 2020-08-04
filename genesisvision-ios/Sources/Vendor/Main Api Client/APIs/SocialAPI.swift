@@ -171,11 +171,11 @@ open class SocialAPI {
 
     /**
      Get feed
-     - parameter userId: (query)  (optional)     - parameter tagContentId: (query)  (optional)     - parameter tagContentIds: (query)  (optional)     - parameter userMode: (query)  (optional)     - parameter hashTags: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter showTop: (query)  (optional)     - parameter showLiked: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter userId: (query)  (optional)     - parameter tagContentId: (query)  (optional)     - parameter tagContentIds: (query)  (optional)     - parameter userMode: (query)  (optional)     - parameter hashTags: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter showTop: (query)  (optional)     - parameter showLiked: (query)  (optional)     - parameter showOnlyUserPosts: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getFeed(userId: UUID? = nil, tagContentId: UUID? = nil, tagContentIds: [UUID]? = nil, userMode: UserFeedMode? = nil, hashTags: [String]? = nil, mask: String? = nil, showTop: Bool? = nil, showLiked: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: PostItemsViewModel?,_ error: Error?) -> Void)) {
-        getFeedWithRequestBuilder(userId: userId, tagContentId: tagContentId, tagContentIds: tagContentIds, userMode: userMode, hashTags: hashTags, mask: mask, showTop: showTop, showLiked: showLiked, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func getFeed(userId: UUID? = nil, tagContentId: UUID? = nil, tagContentIds: [UUID]? = nil, userMode: UserFeedMode? = nil, hashTags: [String]? = nil, mask: String? = nil, showTop: Bool? = nil, showLiked: Bool? = nil, showOnlyUserPosts: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: PostItemsViewModel?,_ error: Error?) -> Void)) {
+        getFeedWithRequestBuilder(userId: userId, tagContentId: tagContentId, tagContentIds: tagContentIds, userMode: userMode, hashTags: hashTags, mask: mask, showTop: showTop, showLiked: showLiked, showOnlyUserPosts: showOnlyUserPosts, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
@@ -191,6 +191,7 @@ open class SocialAPI {
   "total" : 4,
   "items" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
+    "isHighlighted" : true,
     "images" : [ {
       "resizes" : [ {
         "logoUrl" : "logoUrl",
@@ -198,7 +199,8 @@ open class SocialAPI {
       }, {
         "logoUrl" : "logoUrl",
         "quality" : "Low"
-      } ]
+      } ],
+      "id" : "id"
     }, {
       "resizes" : [ {
         "logoUrl" : "logoUrl",
@@ -206,10 +208,34 @@ open class SocialAPI {
       }, {
         "logoUrl" : "logoUrl",
         "quality" : "Low"
-      } ]
+      } ],
+      "id" : "id"
     } ],
     "comments" : [ null, null ],
     "isPinned" : true,
+    "likesUsers" : [ {
+      "personalDetails" : {
+        "isFollow" : true,
+        "allowFollow" : true,
+        "canCommentPosts" : true,
+        "canWritePost" : true
+      },
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "url" : "url",
+      "logoUrl" : "logoUrl",
+      "username" : "username"
+    }, {
+      "personalDetails" : {
+        "isFollow" : true,
+        "allowFollow" : true,
+        "canCommentPosts" : true,
+        "canWritePost" : true
+      },
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "url" : "url",
+      "logoUrl" : "logoUrl",
+      "username" : "username"
+    } ],
     "url" : "url",
     "tags" : [ {
       "number" : 5,
@@ -236,6 +262,7 @@ open class SocialAPI {
       "platformAssetDetails" : {
         "change24Percent" : 9.301444243932576,
         "color" : "color",
+        "provider" : "Undefined",
         "price" : 7.061401241503109,
         "name" : "name",
         "description" : "description",
@@ -297,6 +324,7 @@ open class SocialAPI {
       "platformAssetDetails" : {
         "change24Percent" : 9.301444243932576,
         "color" : "color",
+        "provider" : "Undefined",
         "price" : 7.061401241503109,
         "name" : "name",
         "description" : "description",
@@ -337,18 +365,20 @@ open class SocialAPI {
     "likesCount" : 0,
     "impressionsCount" : 1,
     "isDeleted" : true,
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "text" : "text",
-    "actions" : {
+    "rePostsUsers" : [ null, null ],
+    "personalDetails" : {
       "canEdit" : true,
       "isLiked" : true,
       "canDelete" : true,
       "canComment" : true,
       "canPin" : true
     },
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "text" : "text",
     "rePostsCount" : 6
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
+    "isHighlighted" : true,
     "images" : [ {
       "resizes" : [ {
         "logoUrl" : "logoUrl",
@@ -356,7 +386,8 @@ open class SocialAPI {
       }, {
         "logoUrl" : "logoUrl",
         "quality" : "Low"
-      } ]
+      } ],
+      "id" : "id"
     }, {
       "resizes" : [ {
         "logoUrl" : "logoUrl",
@@ -364,10 +395,34 @@ open class SocialAPI {
       }, {
         "logoUrl" : "logoUrl",
         "quality" : "Low"
-      } ]
+      } ],
+      "id" : "id"
     } ],
     "comments" : [ null, null ],
     "isPinned" : true,
+    "likesUsers" : [ {
+      "personalDetails" : {
+        "isFollow" : true,
+        "allowFollow" : true,
+        "canCommentPosts" : true,
+        "canWritePost" : true
+      },
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "url" : "url",
+      "logoUrl" : "logoUrl",
+      "username" : "username"
+    }, {
+      "personalDetails" : {
+        "isFollow" : true,
+        "allowFollow" : true,
+        "canCommentPosts" : true,
+        "canWritePost" : true
+      },
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "url" : "url",
+      "logoUrl" : "logoUrl",
+      "username" : "username"
+    } ],
     "url" : "url",
     "tags" : [ {
       "number" : 5,
@@ -394,6 +449,7 @@ open class SocialAPI {
       "platformAssetDetails" : {
         "change24Percent" : 9.301444243932576,
         "color" : "color",
+        "provider" : "Undefined",
         "price" : 7.061401241503109,
         "name" : "name",
         "description" : "description",
@@ -455,6 +511,7 @@ open class SocialAPI {
       "platformAssetDetails" : {
         "change24Percent" : 9.301444243932576,
         "color" : "color",
+        "provider" : "Undefined",
         "price" : 7.061401241503109,
         "name" : "name",
         "description" : "description",
@@ -495,23 +552,24 @@ open class SocialAPI {
     "likesCount" : 0,
     "impressionsCount" : 1,
     "isDeleted" : true,
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "text" : "text",
-    "actions" : {
+    "rePostsUsers" : [ null, null ],
+    "personalDetails" : {
       "canEdit" : true,
       "isLiked" : true,
       "canDelete" : true,
       "canComment" : true,
       "canPin" : true
     },
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "text" : "text",
     "rePostsCount" : 6
   } ]
 }}]
-     - parameter userId: (query)  (optional)     - parameter tagContentId: (query)  (optional)     - parameter tagContentIds: (query)  (optional)     - parameter userMode: (query)  (optional)     - parameter hashTags: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter showTop: (query)  (optional)     - parameter showLiked: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter userId: (query)  (optional)     - parameter tagContentId: (query)  (optional)     - parameter tagContentIds: (query)  (optional)     - parameter userMode: (query)  (optional)     - parameter hashTags: (query)  (optional)     - parameter mask: (query)  (optional)     - parameter showTop: (query)  (optional)     - parameter showLiked: (query)  (optional)     - parameter showOnlyUserPosts: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<PostItemsViewModel> 
      */
-    open class func getFeedWithRequestBuilder(userId: UUID? = nil, tagContentId: UUID? = nil, tagContentIds: [UUID]? = nil, userMode: UserFeedMode? = nil, hashTags: [String]? = nil, mask: String? = nil, showTop: Bool? = nil, showLiked: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<PostItemsViewModel> {
+    open class func getFeedWithRequestBuilder(userId: UUID? = nil, tagContentId: UUID? = nil, tagContentIds: [UUID]? = nil, userMode: UserFeedMode? = nil, hashTags: [String]? = nil, mask: String? = nil, showTop: Bool? = nil, showLiked: Bool? = nil, showOnlyUserPosts: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<PostItemsViewModel> {
         let path = "/v2.0/social/feed"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -525,6 +583,7 @@ open class SocialAPI {
                         "Mask": mask, 
                         "ShowTop": showTop, 
                         "ShowLiked": showLiked, 
+                        "ShowOnlyUserPosts": showOnlyUserPosts, 
                         "Skip": skip?.encodeToJSON(), 
                         "Take": take?.encodeToJSON()
         ])
@@ -535,25 +594,26 @@ open class SocialAPI {
     }
 
     /**
-     Get post
+     Get original post/comment
      - parameter _id: (path)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getPost(_id: String, completion: @escaping ((_ data: EditablePost?,_ error: Error?) -> Void)) {
-        getPostWithRequestBuilder(_id: _id).execute { (response, error) -> Void in
+    open class func getOriginalPost(_id: String, completion: @escaping ((_ data: EditablePost?,_ error: Error?) -> Void)) {
+        getOriginalPostWithRequestBuilder(_id: _id).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
 
 
     /**
-     Get post
-     - GET /v2.0/social/feed/{id}
+     Get original post/comment
+     - GET /v2.0/social/feed/{id}/original
      - API Key:
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
   "date" : "2000-01-23T04:56:07.000+00:00",
+  "isHighlighted" : true,
   "images" : [ {
     "resizes" : [ {
       "logoUrl" : "logoUrl",
@@ -561,7 +621,8 @@ open class SocialAPI {
     }, {
       "logoUrl" : "logoUrl",
       "quality" : "Low"
-    } ]
+    } ],
+    "id" : "id"
   }, {
     "resizes" : [ {
       "logoUrl" : "logoUrl",
@@ -569,10 +630,12 @@ open class SocialAPI {
     }, {
       "logoUrl" : "logoUrl",
       "quality" : "Low"
-    } ]
+    } ],
+    "id" : "id"
   } ],
   "comments" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
+    "isHighlighted" : true,
     "images" : [ {
       "resizes" : [ {
         "logoUrl" : "logoUrl",
@@ -580,7 +643,8 @@ open class SocialAPI {
       }, {
         "logoUrl" : "logoUrl",
         "quality" : "Low"
-      } ]
+      } ],
+      "id" : "id"
     }, {
       "resizes" : [ {
         "logoUrl" : "logoUrl",
@@ -588,10 +652,34 @@ open class SocialAPI {
       }, {
         "logoUrl" : "logoUrl",
         "quality" : "Low"
-      } ]
+      } ],
+      "id" : "id"
     } ],
     "comments" : [ null, null ],
     "isPinned" : true,
+    "likesUsers" : [ {
+      "personalDetails" : {
+        "isFollow" : true,
+        "allowFollow" : true,
+        "canCommentPosts" : true,
+        "canWritePost" : true
+      },
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "url" : "url",
+      "logoUrl" : "logoUrl",
+      "username" : "username"
+    }, {
+      "personalDetails" : {
+        "isFollow" : true,
+        "allowFollow" : true,
+        "canCommentPosts" : true,
+        "canWritePost" : true
+      },
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "url" : "url",
+      "logoUrl" : "logoUrl",
+      "username" : "username"
+    } ],
     "url" : "url",
     "tags" : [ {
       "number" : 5,
@@ -618,6 +706,7 @@ open class SocialAPI {
       "platformAssetDetails" : {
         "change24Percent" : 9.301444243932576,
         "color" : "color",
+        "provider" : "Undefined",
         "price" : 7.061401241503109,
         "name" : "name",
         "description" : "description",
@@ -679,6 +768,7 @@ open class SocialAPI {
       "platformAssetDetails" : {
         "change24Percent" : 9.301444243932576,
         "color" : "color",
+        "provider" : "Undefined",
         "price" : 7.061401241503109,
         "name" : "name",
         "description" : "description",
@@ -719,18 +809,20 @@ open class SocialAPI {
     "likesCount" : 0,
     "impressionsCount" : 1,
     "isDeleted" : true,
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "text" : "text",
-    "actions" : {
+    "rePostsUsers" : [ null, null ],
+    "personalDetails" : {
       "canEdit" : true,
       "isLiked" : true,
       "canDelete" : true,
       "canComment" : true,
       "canPin" : true
     },
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "text" : "text",
     "rePostsCount" : 6
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
+    "isHighlighted" : true,
     "images" : [ {
       "resizes" : [ {
         "logoUrl" : "logoUrl",
@@ -738,7 +830,8 @@ open class SocialAPI {
       }, {
         "logoUrl" : "logoUrl",
         "quality" : "Low"
-      } ]
+      } ],
+      "id" : "id"
     }, {
       "resizes" : [ {
         "logoUrl" : "logoUrl",
@@ -746,10 +839,34 @@ open class SocialAPI {
       }, {
         "logoUrl" : "logoUrl",
         "quality" : "Low"
-      } ]
+      } ],
+      "id" : "id"
     } ],
     "comments" : [ null, null ],
     "isPinned" : true,
+    "likesUsers" : [ {
+      "personalDetails" : {
+        "isFollow" : true,
+        "allowFollow" : true,
+        "canCommentPosts" : true,
+        "canWritePost" : true
+      },
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "url" : "url",
+      "logoUrl" : "logoUrl",
+      "username" : "username"
+    }, {
+      "personalDetails" : {
+        "isFollow" : true,
+        "allowFollow" : true,
+        "canCommentPosts" : true,
+        "canWritePost" : true
+      },
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "url" : "url",
+      "logoUrl" : "logoUrl",
+      "username" : "username"
+    } ],
     "url" : "url",
     "tags" : [ {
       "number" : 5,
@@ -776,6 +893,7 @@ open class SocialAPI {
       "platformAssetDetails" : {
         "change24Percent" : 9.301444243932576,
         "color" : "color",
+        "provider" : "Undefined",
         "price" : 7.061401241503109,
         "name" : "name",
         "description" : "description",
@@ -837,6 +955,7 @@ open class SocialAPI {
       "platformAssetDetails" : {
         "change24Percent" : 9.301444243932576,
         "color" : "color",
+        "provider" : "Undefined",
         "price" : 7.061401241503109,
         "name" : "name",
         "description" : "description",
@@ -877,15 +996,16 @@ open class SocialAPI {
     "likesCount" : 0,
     "impressionsCount" : 1,
     "isDeleted" : true,
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "text" : "text",
-    "actions" : {
+    "rePostsUsers" : [ null, null ],
+    "personalDetails" : {
       "canEdit" : true,
       "isLiked" : true,
       "canDelete" : true,
       "canComment" : true,
       "canPin" : true
     },
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "text" : "text",
     "rePostsCount" : 6
   } ],
   "isPinned" : true,
@@ -910,6 +1030,29 @@ open class SocialAPI {
     "username" : "username"
   },
   "textOriginal" : "textOriginal",
+  "likesUsers" : [ {
+    "personalDetails" : {
+      "isFollow" : true,
+      "allowFollow" : true,
+      "canCommentPosts" : true,
+      "canWritePost" : true
+    },
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "url" : "url",
+    "logoUrl" : "logoUrl",
+    "username" : "username"
+  }, {
+    "personalDetails" : {
+      "isFollow" : true,
+      "allowFollow" : true,
+      "canCommentPosts" : true,
+      "canWritePost" : true
+    },
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "url" : "url",
+    "logoUrl" : "logoUrl",
+    "username" : "username"
+  } ],
   "url" : "url",
   "tags" : [ {
     "number" : 5,
@@ -936,6 +1079,7 @@ open class SocialAPI {
     "platformAssetDetails" : {
       "change24Percent" : 9.301444243932576,
       "color" : "color",
+      "provider" : "Undefined",
       "price" : 7.061401241503109,
       "name" : "name",
       "description" : "description",
@@ -997,6 +1141,7 @@ open class SocialAPI {
     "platformAssetDetails" : {
       "change24Percent" : 9.301444243932576,
       "color" : "color",
+      "provider" : "Undefined",
       "price" : 7.061401241503109,
       "name" : "name",
       "description" : "description",
@@ -1037,23 +1182,24 @@ open class SocialAPI {
   "likesCount" : 0,
   "impressionsCount" : 1,
   "isDeleted" : true,
-  "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-  "text" : "text",
-  "actions" : {
+  "rePostsUsers" : [ null, null ],
+  "personalDetails" : {
     "canEdit" : true,
     "isLiked" : true,
     "canDelete" : true,
     "canComment" : true,
     "canPin" : true
   },
+  "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+  "text" : "text",
   "rePostsCount" : 6
 }}]
      - parameter _id: (path)  
 
      - returns: RequestBuilder<EditablePost> 
      */
-    open class func getPostWithRequestBuilder(_id: String) -> RequestBuilder<EditablePost> {
-        var path = "/v2.0/social/feed/{id}"
+    open class func getOriginalPostWithRequestBuilder(_id: String) -> RequestBuilder<EditablePost> {
+        var path = "/v2.0/social/feed/{id}/original"
         let _idPreEscape = "\(_id)"
         let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
@@ -1063,6 +1209,357 @@ open class SocialAPI {
         let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<EditablePost>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Get post
+     - parameter _id: (path)  
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getPost(_id: String, completion: @escaping ((_ data: Post?,_ error: Error?) -> Void)) {
+        getPostWithRequestBuilder(_id: _id).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     Get post
+     - GET /v2.0/social/feed/{id}
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example={
+  "date" : "2000-01-23T04:56:07.000+00:00",
+  "isHighlighted" : true,
+  "images" : [ {
+    "resizes" : [ {
+      "logoUrl" : "logoUrl",
+      "quality" : "Low"
+    }, {
+      "logoUrl" : "logoUrl",
+      "quality" : "Low"
+    } ],
+    "id" : "id"
+  }, {
+    "resizes" : [ {
+      "logoUrl" : "logoUrl",
+      "quality" : "Low"
+    }, {
+      "logoUrl" : "logoUrl",
+      "quality" : "Low"
+    } ],
+    "id" : "id"
+  } ],
+  "comments" : [ null, null ],
+  "isPinned" : true,
+  "likesUsers" : [ {
+    "personalDetails" : {
+      "isFollow" : true,
+      "allowFollow" : true,
+      "canCommentPosts" : true,
+      "canWritePost" : true
+    },
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "url" : "url",
+    "logoUrl" : "logoUrl",
+    "username" : "username"
+  }, {
+    "personalDetails" : {
+      "isFollow" : true,
+      "allowFollow" : true,
+      "canCommentPosts" : true,
+      "canWritePost" : true
+    },
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "url" : "url",
+    "logoUrl" : "logoUrl",
+    "username" : "username"
+  } ],
+  "url" : "url",
+  "tags" : [ {
+    "number" : 5,
+    "assetDetails" : {
+      "programDetails" : {
+        "level" : 0,
+        "levelProgress" : 6.027456183070403
+      },
+      "priceCurrency" : "Undefined",
+      "change24Percent" : 2.3021358869347655,
+      "color" : "color",
+      "price" : 5.637376656633329,
+      "changeState" : "NotChanged",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "title" : "title",
+      "logoUrl" : "logoUrl",
+      "url" : "url",
+      "assetType" : "None"
+    },
+    "link" : {
+      "title" : "title",
+      "url" : "url"
+    },
+    "platformAssetDetails" : {
+      "change24Percent" : 9.301444243932576,
+      "color" : "color",
+      "provider" : "Undefined",
+      "price" : 7.061401241503109,
+      "name" : "name",
+      "description" : "description",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "asset" : "asset",
+      "logoUrl" : "logoUrl",
+      "url" : "url"
+    },
+    "title" : "title",
+    "type" : "Undefined",
+    "event" : {
+      "amount" : 3.616076749251911,
+      "title" : "title",
+      "percent" : 2.027123023002322,
+      "logoUrl" : "logoUrl"
+    },
+    "userDetails" : {
+      "socialLinks" : [ {
+        "name" : "name",
+        "type" : "Undefined",
+        "value" : "value",
+        "url" : "url",
+        "logoUrl" : "logoUrl"
+      }, {
+        "name" : "name",
+        "type" : "Undefined",
+        "value" : "value",
+        "url" : "url",
+        "logoUrl" : "logoUrl"
+      } ],
+      "registrationDate" : "2000-01-23T04:56:07.000+00:00",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "logoUrl" : "logoUrl",
+      "url" : "url",
+      "username" : "username"
+    }
+  }, {
+    "number" : 5,
+    "assetDetails" : {
+      "programDetails" : {
+        "level" : 0,
+        "levelProgress" : 6.027456183070403
+      },
+      "priceCurrency" : "Undefined",
+      "change24Percent" : 2.3021358869347655,
+      "color" : "color",
+      "price" : 5.637376656633329,
+      "changeState" : "NotChanged",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "title" : "title",
+      "logoUrl" : "logoUrl",
+      "url" : "url",
+      "assetType" : "None"
+    },
+    "link" : {
+      "title" : "title",
+      "url" : "url"
+    },
+    "platformAssetDetails" : {
+      "change24Percent" : 9.301444243932576,
+      "color" : "color",
+      "provider" : "Undefined",
+      "price" : 7.061401241503109,
+      "name" : "name",
+      "description" : "description",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "asset" : "asset",
+      "logoUrl" : "logoUrl",
+      "url" : "url"
+    },
+    "title" : "title",
+    "type" : "Undefined",
+    "event" : {
+      "amount" : 3.616076749251911,
+      "title" : "title",
+      "percent" : 2.027123023002322,
+      "logoUrl" : "logoUrl"
+    },
+    "userDetails" : {
+      "socialLinks" : [ {
+        "name" : "name",
+        "type" : "Undefined",
+        "value" : "value",
+        "url" : "url",
+        "logoUrl" : "logoUrl"
+      }, {
+        "name" : "name",
+        "type" : "Undefined",
+        "value" : "value",
+        "url" : "url",
+        "logoUrl" : "logoUrl"
+      } ],
+      "registrationDate" : "2000-01-23T04:56:07.000+00:00",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "logoUrl" : "logoUrl",
+      "url" : "url",
+      "username" : "username"
+    }
+  } ],
+  "likesCount" : 0,
+  "impressionsCount" : 1,
+  "isDeleted" : true,
+  "rePostsUsers" : [ null, null ],
+  "personalDetails" : {
+    "canEdit" : true,
+    "isLiked" : true,
+    "canDelete" : true,
+    "canComment" : true,
+    "canPin" : true
+  },
+  "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+  "text" : "text",
+  "rePostsCount" : 6
+}}]
+     - parameter _id: (path)  
+
+     - returns: RequestBuilder<Post> 
+     */
+    open class func getPostWithRequestBuilder(_id: String) -> RequestBuilder<Post> {
+        var path = "/v2.0/social/feed/{id}"
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = URLComponents(string: URLString)
+
+        let requestBuilder: RequestBuilder<Post>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Get post/comment likes users
+     - parameter _id: (path)  
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getPostLikesUsers(_id: String, completion: @escaping ((_ data: ProfilePublicShortItemsViewModel?,_ error: Error?) -> Void)) {
+        getPostLikesUsersWithRequestBuilder(_id: _id).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     Get post/comment likes users
+     - GET /v2.0/social/feed/{id}/users/likes
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example={
+  "total" : 0,
+  "items" : [ {
+    "personalDetails" : {
+      "isFollow" : true,
+      "allowFollow" : true,
+      "canCommentPosts" : true,
+      "canWritePost" : true
+    },
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "url" : "url",
+    "logoUrl" : "logoUrl",
+    "username" : "username"
+  }, {
+    "personalDetails" : {
+      "isFollow" : true,
+      "allowFollow" : true,
+      "canCommentPosts" : true,
+      "canWritePost" : true
+    },
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "url" : "url",
+    "logoUrl" : "logoUrl",
+    "username" : "username"
+  } ]
+}}]
+     - parameter _id: (path)  
+
+     - returns: RequestBuilder<ProfilePublicShortItemsViewModel> 
+     */
+    open class func getPostLikesUsersWithRequestBuilder(_id: String) -> RequestBuilder<ProfilePublicShortItemsViewModel> {
+        var path = "/v2.0/social/feed/{id}/users/likes"
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = URLComponents(string: URLString)
+
+        let requestBuilder: RequestBuilder<ProfilePublicShortItemsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Get post/comment reposts users
+     - parameter _id: (path)  
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getPostRepostsUsers(_id: String, completion: @escaping ((_ data: ProfilePublicShortItemsViewModel?,_ error: Error?) -> Void)) {
+        getPostRepostsUsersWithRequestBuilder(_id: _id).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     Get post/comment reposts users
+     - GET /v2.0/social/feed/{id}/users/reposts
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example={
+  "total" : 0,
+  "items" : [ {
+    "personalDetails" : {
+      "isFollow" : true,
+      "allowFollow" : true,
+      "canCommentPosts" : true,
+      "canWritePost" : true
+    },
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "url" : "url",
+    "logoUrl" : "logoUrl",
+    "username" : "username"
+  }, {
+    "personalDetails" : {
+      "isFollow" : true,
+      "allowFollow" : true,
+      "canCommentPosts" : true,
+      "canWritePost" : true
+    },
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "url" : "url",
+    "logoUrl" : "logoUrl",
+    "username" : "username"
+  } ]
+}}]
+     - parameter _id: (path)  
+
+     - returns: RequestBuilder<ProfilePublicShortItemsViewModel> 
+     */
+    open class func getPostRepostsUsersWithRequestBuilder(_id: String) -> RequestBuilder<ProfilePublicShortItemsViewModel> {
+        var path = "/v2.0/social/feed/{id}/users/reposts"
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = URLComponents(string: URLString)
+
+        let requestBuilder: RequestBuilder<ProfilePublicShortItemsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
@@ -1086,7 +1583,7 @@ open class SocialAPI {
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
-  "total" : 5,
+  "total" : 0,
   "items" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "image" : {
@@ -1096,20 +1593,18 @@ open class SocialAPI {
       }, {
         "logoUrl" : "logoUrl",
         "quality" : "Low"
-      } ]
+      } ],
+      "id" : "id"
     },
     "author" : "author",
-    "typeLogoUrl" : "typeLogoUrl",
-    "type" : "Undefined",
-    "title" : "title",
-    "url" : "url",
-    "likesCount" : 0,
-    "commentsCount" : 1,
     "authorUrl" : "authorUrl",
     "authorLogoUrl" : "authorLogoUrl",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "typeLogoUrl" : "typeLogoUrl",
     "text" : "text",
-    "rePostsCount" : 6
+    "type" : "Undefined",
+    "title" : "title",
+    "url" : "url"
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "image" : {
@@ -1119,20 +1614,18 @@ open class SocialAPI {
       }, {
         "logoUrl" : "logoUrl",
         "quality" : "Low"
-      } ]
+      } ],
+      "id" : "id"
     },
     "author" : "author",
-    "typeLogoUrl" : "typeLogoUrl",
-    "type" : "Undefined",
-    "title" : "title",
-    "url" : "url",
-    "likesCount" : 0,
-    "commentsCount" : 1,
     "authorUrl" : "authorUrl",
     "authorLogoUrl" : "authorLogoUrl",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "typeLogoUrl" : "typeLogoUrl",
     "text" : "text",
-    "rePostsCount" : 6
+    "type" : "Undefined",
+    "title" : "title",
+    "url" : "url"
   } ]
 }}]
      - parameter mask: (query)  (optional)     - parameter type: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
@@ -1214,13 +1707,16 @@ open class SocialAPI {
     "assetType" : "None"
   } ],
   "topAssets" : [ {
+    "color" : "color",
+    "description" : "description",
+    "logoUrl" : "logoUrl",
+    "url" : "url",
     "priceCurrency" : "Undefined",
     "change24Percent" : 7.061401241503109,
-    "color" : "color",
+    "provider" : "Undefined",
     "price" : 2.3021358869347655,
     "changeState" : "NotChanged",
     "name" : "name",
-    "description" : "description",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "asset" : "asset",
     "chart" : [ {
@@ -1229,17 +1725,18 @@ open class SocialAPI {
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "value" : 0.8008281904610115
-    } ],
-    "logoUrl" : "logoUrl",
-    "url" : "url"
+    } ]
   }, {
+    "color" : "color",
+    "description" : "description",
+    "logoUrl" : "logoUrl",
+    "url" : "url",
     "priceCurrency" : "Undefined",
     "change24Percent" : 7.061401241503109,
-    "color" : "color",
+    "provider" : "Undefined",
     "price" : 2.3021358869347655,
     "changeState" : "NotChanged",
     "name" : "name",
-    "description" : "description",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "asset" : "asset",
     "chart" : [ {
@@ -1248,9 +1745,7 @@ open class SocialAPI {
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "value" : 0.8008281904610115
-    } ],
-    "logoUrl" : "logoUrl",
-    "url" : "url"
+    } ]
   } ]
 }}]
 
@@ -1425,6 +1920,629 @@ open class SocialAPI {
         let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Report post/comment
+     - parameter _id: (path)       - parameter reason: (query)  (optional)     - parameter text: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func spamReport(_id: String, reason: String? = nil, text: String? = nil, completion: @escaping ((_ data: EditablePost?,_ error: Error?) -> Void)) {
+        spamReportWithRequestBuilder(_id: _id, reason: reason, text: text).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     Report post/comment
+     - POST /v2.0/social/feed/{id}/report
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example={
+  "date" : "2000-01-23T04:56:07.000+00:00",
+  "isHighlighted" : true,
+  "images" : [ {
+    "resizes" : [ {
+      "logoUrl" : "logoUrl",
+      "quality" : "Low"
+    }, {
+      "logoUrl" : "logoUrl",
+      "quality" : "Low"
+    } ],
+    "id" : "id"
+  }, {
+    "resizes" : [ {
+      "logoUrl" : "logoUrl",
+      "quality" : "Low"
+    }, {
+      "logoUrl" : "logoUrl",
+      "quality" : "Low"
+    } ],
+    "id" : "id"
+  } ],
+  "comments" : [ {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "isHighlighted" : true,
+    "images" : [ {
+      "resizes" : [ {
+        "logoUrl" : "logoUrl",
+        "quality" : "Low"
+      }, {
+        "logoUrl" : "logoUrl",
+        "quality" : "Low"
+      } ],
+      "id" : "id"
+    }, {
+      "resizes" : [ {
+        "logoUrl" : "logoUrl",
+        "quality" : "Low"
+      }, {
+        "logoUrl" : "logoUrl",
+        "quality" : "Low"
+      } ],
+      "id" : "id"
+    } ],
+    "comments" : [ null, null ],
+    "isPinned" : true,
+    "likesUsers" : [ {
+      "personalDetails" : {
+        "isFollow" : true,
+        "allowFollow" : true,
+        "canCommentPosts" : true,
+        "canWritePost" : true
+      },
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "url" : "url",
+      "logoUrl" : "logoUrl",
+      "username" : "username"
+    }, {
+      "personalDetails" : {
+        "isFollow" : true,
+        "allowFollow" : true,
+        "canCommentPosts" : true,
+        "canWritePost" : true
+      },
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "url" : "url",
+      "logoUrl" : "logoUrl",
+      "username" : "username"
+    } ],
+    "url" : "url",
+    "tags" : [ {
+      "number" : 5,
+      "assetDetails" : {
+        "programDetails" : {
+          "level" : 0,
+          "levelProgress" : 6.027456183070403
+        },
+        "priceCurrency" : "Undefined",
+        "change24Percent" : 2.3021358869347655,
+        "color" : "color",
+        "price" : 5.637376656633329,
+        "changeState" : "NotChanged",
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "title" : "title",
+        "logoUrl" : "logoUrl",
+        "url" : "url",
+        "assetType" : "None"
+      },
+      "link" : {
+        "title" : "title",
+        "url" : "url"
+      },
+      "platformAssetDetails" : {
+        "change24Percent" : 9.301444243932576,
+        "color" : "color",
+        "provider" : "Undefined",
+        "price" : 7.061401241503109,
+        "name" : "name",
+        "description" : "description",
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "asset" : "asset",
+        "logoUrl" : "logoUrl",
+        "url" : "url"
+      },
+      "title" : "title",
+      "type" : "Undefined",
+      "event" : {
+        "amount" : 3.616076749251911,
+        "title" : "title",
+        "percent" : 2.027123023002322,
+        "logoUrl" : "logoUrl"
+      },
+      "userDetails" : {
+        "socialLinks" : [ {
+          "name" : "name",
+          "type" : "Undefined",
+          "value" : "value",
+          "url" : "url",
+          "logoUrl" : "logoUrl"
+        }, {
+          "name" : "name",
+          "type" : "Undefined",
+          "value" : "value",
+          "url" : "url",
+          "logoUrl" : "logoUrl"
+        } ],
+        "registrationDate" : "2000-01-23T04:56:07.000+00:00",
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "logoUrl" : "logoUrl",
+        "url" : "url",
+        "username" : "username"
+      }
+    }, {
+      "number" : 5,
+      "assetDetails" : {
+        "programDetails" : {
+          "level" : 0,
+          "levelProgress" : 6.027456183070403
+        },
+        "priceCurrency" : "Undefined",
+        "change24Percent" : 2.3021358869347655,
+        "color" : "color",
+        "price" : 5.637376656633329,
+        "changeState" : "NotChanged",
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "title" : "title",
+        "logoUrl" : "logoUrl",
+        "url" : "url",
+        "assetType" : "None"
+      },
+      "link" : {
+        "title" : "title",
+        "url" : "url"
+      },
+      "platformAssetDetails" : {
+        "change24Percent" : 9.301444243932576,
+        "color" : "color",
+        "provider" : "Undefined",
+        "price" : 7.061401241503109,
+        "name" : "name",
+        "description" : "description",
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "asset" : "asset",
+        "logoUrl" : "logoUrl",
+        "url" : "url"
+      },
+      "title" : "title",
+      "type" : "Undefined",
+      "event" : {
+        "amount" : 3.616076749251911,
+        "title" : "title",
+        "percent" : 2.027123023002322,
+        "logoUrl" : "logoUrl"
+      },
+      "userDetails" : {
+        "socialLinks" : [ {
+          "name" : "name",
+          "type" : "Undefined",
+          "value" : "value",
+          "url" : "url",
+          "logoUrl" : "logoUrl"
+        }, {
+          "name" : "name",
+          "type" : "Undefined",
+          "value" : "value",
+          "url" : "url",
+          "logoUrl" : "logoUrl"
+        } ],
+        "registrationDate" : "2000-01-23T04:56:07.000+00:00",
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "logoUrl" : "logoUrl",
+        "url" : "url",
+        "username" : "username"
+      }
+    } ],
+    "likesCount" : 0,
+    "impressionsCount" : 1,
+    "isDeleted" : true,
+    "rePostsUsers" : [ null, null ],
+    "personalDetails" : {
+      "canEdit" : true,
+      "isLiked" : true,
+      "canDelete" : true,
+      "canComment" : true,
+      "canPin" : true
+    },
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "text" : "text",
+    "rePostsCount" : 6
+  }, {
+    "date" : "2000-01-23T04:56:07.000+00:00",
+    "isHighlighted" : true,
+    "images" : [ {
+      "resizes" : [ {
+        "logoUrl" : "logoUrl",
+        "quality" : "Low"
+      }, {
+        "logoUrl" : "logoUrl",
+        "quality" : "Low"
+      } ],
+      "id" : "id"
+    }, {
+      "resizes" : [ {
+        "logoUrl" : "logoUrl",
+        "quality" : "Low"
+      }, {
+        "logoUrl" : "logoUrl",
+        "quality" : "Low"
+      } ],
+      "id" : "id"
+    } ],
+    "comments" : [ null, null ],
+    "isPinned" : true,
+    "likesUsers" : [ {
+      "personalDetails" : {
+        "isFollow" : true,
+        "allowFollow" : true,
+        "canCommentPosts" : true,
+        "canWritePost" : true
+      },
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "url" : "url",
+      "logoUrl" : "logoUrl",
+      "username" : "username"
+    }, {
+      "personalDetails" : {
+        "isFollow" : true,
+        "allowFollow" : true,
+        "canCommentPosts" : true,
+        "canWritePost" : true
+      },
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "url" : "url",
+      "logoUrl" : "logoUrl",
+      "username" : "username"
+    } ],
+    "url" : "url",
+    "tags" : [ {
+      "number" : 5,
+      "assetDetails" : {
+        "programDetails" : {
+          "level" : 0,
+          "levelProgress" : 6.027456183070403
+        },
+        "priceCurrency" : "Undefined",
+        "change24Percent" : 2.3021358869347655,
+        "color" : "color",
+        "price" : 5.637376656633329,
+        "changeState" : "NotChanged",
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "title" : "title",
+        "logoUrl" : "logoUrl",
+        "url" : "url",
+        "assetType" : "None"
+      },
+      "link" : {
+        "title" : "title",
+        "url" : "url"
+      },
+      "platformAssetDetails" : {
+        "change24Percent" : 9.301444243932576,
+        "color" : "color",
+        "provider" : "Undefined",
+        "price" : 7.061401241503109,
+        "name" : "name",
+        "description" : "description",
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "asset" : "asset",
+        "logoUrl" : "logoUrl",
+        "url" : "url"
+      },
+      "title" : "title",
+      "type" : "Undefined",
+      "event" : {
+        "amount" : 3.616076749251911,
+        "title" : "title",
+        "percent" : 2.027123023002322,
+        "logoUrl" : "logoUrl"
+      },
+      "userDetails" : {
+        "socialLinks" : [ {
+          "name" : "name",
+          "type" : "Undefined",
+          "value" : "value",
+          "url" : "url",
+          "logoUrl" : "logoUrl"
+        }, {
+          "name" : "name",
+          "type" : "Undefined",
+          "value" : "value",
+          "url" : "url",
+          "logoUrl" : "logoUrl"
+        } ],
+        "registrationDate" : "2000-01-23T04:56:07.000+00:00",
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "logoUrl" : "logoUrl",
+        "url" : "url",
+        "username" : "username"
+      }
+    }, {
+      "number" : 5,
+      "assetDetails" : {
+        "programDetails" : {
+          "level" : 0,
+          "levelProgress" : 6.027456183070403
+        },
+        "priceCurrency" : "Undefined",
+        "change24Percent" : 2.3021358869347655,
+        "color" : "color",
+        "price" : 5.637376656633329,
+        "changeState" : "NotChanged",
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "title" : "title",
+        "logoUrl" : "logoUrl",
+        "url" : "url",
+        "assetType" : "None"
+      },
+      "link" : {
+        "title" : "title",
+        "url" : "url"
+      },
+      "platformAssetDetails" : {
+        "change24Percent" : 9.301444243932576,
+        "color" : "color",
+        "provider" : "Undefined",
+        "price" : 7.061401241503109,
+        "name" : "name",
+        "description" : "description",
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "asset" : "asset",
+        "logoUrl" : "logoUrl",
+        "url" : "url"
+      },
+      "title" : "title",
+      "type" : "Undefined",
+      "event" : {
+        "amount" : 3.616076749251911,
+        "title" : "title",
+        "percent" : 2.027123023002322,
+        "logoUrl" : "logoUrl"
+      },
+      "userDetails" : {
+        "socialLinks" : [ {
+          "name" : "name",
+          "type" : "Undefined",
+          "value" : "value",
+          "url" : "url",
+          "logoUrl" : "logoUrl"
+        }, {
+          "name" : "name",
+          "type" : "Undefined",
+          "value" : "value",
+          "url" : "url",
+          "logoUrl" : "logoUrl"
+        } ],
+        "registrationDate" : "2000-01-23T04:56:07.000+00:00",
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "logoUrl" : "logoUrl",
+        "url" : "url",
+        "username" : "username"
+      }
+    } ],
+    "likesCount" : 0,
+    "impressionsCount" : 1,
+    "isDeleted" : true,
+    "rePostsUsers" : [ null, null ],
+    "personalDetails" : {
+      "canEdit" : true,
+      "isLiked" : true,
+      "canDelete" : true,
+      "canComment" : true,
+      "canPin" : true
+    },
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "text" : "text",
+    "rePostsCount" : 6
+  } ],
+  "isPinned" : true,
+  "author" : {
+    "socialLinks" : [ {
+      "name" : "name",
+      "type" : "Undefined",
+      "value" : "value",
+      "url" : "url",
+      "logoUrl" : "logoUrl"
+    }, {
+      "name" : "name",
+      "type" : "Undefined",
+      "value" : "value",
+      "url" : "url",
+      "logoUrl" : "logoUrl"
+    } ],
+    "registrationDate" : "2000-01-23T04:56:07.000+00:00",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "logoUrl" : "logoUrl",
+    "url" : "url",
+    "username" : "username"
+  },
+  "textOriginal" : "textOriginal",
+  "likesUsers" : [ {
+    "personalDetails" : {
+      "isFollow" : true,
+      "allowFollow" : true,
+      "canCommentPosts" : true,
+      "canWritePost" : true
+    },
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "url" : "url",
+    "logoUrl" : "logoUrl",
+    "username" : "username"
+  }, {
+    "personalDetails" : {
+      "isFollow" : true,
+      "allowFollow" : true,
+      "canCommentPosts" : true,
+      "canWritePost" : true
+    },
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "url" : "url",
+    "logoUrl" : "logoUrl",
+    "username" : "username"
+  } ],
+  "url" : "url",
+  "tags" : [ {
+    "number" : 5,
+    "assetDetails" : {
+      "programDetails" : {
+        "level" : 0,
+        "levelProgress" : 6.027456183070403
+      },
+      "priceCurrency" : "Undefined",
+      "change24Percent" : 2.3021358869347655,
+      "color" : "color",
+      "price" : 5.637376656633329,
+      "changeState" : "NotChanged",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "title" : "title",
+      "logoUrl" : "logoUrl",
+      "url" : "url",
+      "assetType" : "None"
+    },
+    "link" : {
+      "title" : "title",
+      "url" : "url"
+    },
+    "platformAssetDetails" : {
+      "change24Percent" : 9.301444243932576,
+      "color" : "color",
+      "provider" : "Undefined",
+      "price" : 7.061401241503109,
+      "name" : "name",
+      "description" : "description",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "asset" : "asset",
+      "logoUrl" : "logoUrl",
+      "url" : "url"
+    },
+    "title" : "title",
+    "type" : "Undefined",
+    "event" : {
+      "amount" : 3.616076749251911,
+      "title" : "title",
+      "percent" : 2.027123023002322,
+      "logoUrl" : "logoUrl"
+    },
+    "userDetails" : {
+      "socialLinks" : [ {
+        "name" : "name",
+        "type" : "Undefined",
+        "value" : "value",
+        "url" : "url",
+        "logoUrl" : "logoUrl"
+      }, {
+        "name" : "name",
+        "type" : "Undefined",
+        "value" : "value",
+        "url" : "url",
+        "logoUrl" : "logoUrl"
+      } ],
+      "registrationDate" : "2000-01-23T04:56:07.000+00:00",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "logoUrl" : "logoUrl",
+      "url" : "url",
+      "username" : "username"
+    }
+  }, {
+    "number" : 5,
+    "assetDetails" : {
+      "programDetails" : {
+        "level" : 0,
+        "levelProgress" : 6.027456183070403
+      },
+      "priceCurrency" : "Undefined",
+      "change24Percent" : 2.3021358869347655,
+      "color" : "color",
+      "price" : 5.637376656633329,
+      "changeState" : "NotChanged",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "title" : "title",
+      "logoUrl" : "logoUrl",
+      "url" : "url",
+      "assetType" : "None"
+    },
+    "link" : {
+      "title" : "title",
+      "url" : "url"
+    },
+    "platformAssetDetails" : {
+      "change24Percent" : 9.301444243932576,
+      "color" : "color",
+      "provider" : "Undefined",
+      "price" : 7.061401241503109,
+      "name" : "name",
+      "description" : "description",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "asset" : "asset",
+      "logoUrl" : "logoUrl",
+      "url" : "url"
+    },
+    "title" : "title",
+    "type" : "Undefined",
+    "event" : {
+      "amount" : 3.616076749251911,
+      "title" : "title",
+      "percent" : 2.027123023002322,
+      "logoUrl" : "logoUrl"
+    },
+    "userDetails" : {
+      "socialLinks" : [ {
+        "name" : "name",
+        "type" : "Undefined",
+        "value" : "value",
+        "url" : "url",
+        "logoUrl" : "logoUrl"
+      }, {
+        "name" : "name",
+        "type" : "Undefined",
+        "value" : "value",
+        "url" : "url",
+        "logoUrl" : "logoUrl"
+      } ],
+      "registrationDate" : "2000-01-23T04:56:07.000+00:00",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "logoUrl" : "logoUrl",
+      "url" : "url",
+      "username" : "username"
+    }
+  } ],
+  "likesCount" : 0,
+  "impressionsCount" : 1,
+  "isDeleted" : true,
+  "rePostsUsers" : [ null, null ],
+  "personalDetails" : {
+    "canEdit" : true,
+    "isLiked" : true,
+    "canDelete" : true,
+    "canComment" : true,
+    "canPin" : true
+  },
+  "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+  "text" : "text",
+  "rePostsCount" : 6
+}}]
+     - parameter _id: (path)       - parameter reason: (query)  (optional)     - parameter text: (query)  (optional)
+
+     - returns: RequestBuilder<EditablePost> 
+     */
+    open class func spamReportWithRequestBuilder(_id: String, reason: String? = nil, text: String? = nil) -> RequestBuilder<EditablePost> {
+        var path = "/v2.0/social/feed/{id}/report"
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "reason": reason, 
+                        "text": text
+        ])
+
+        let requestBuilder: RequestBuilder<EditablePost>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }

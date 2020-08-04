@@ -180,7 +180,7 @@ extension ProgramContentView: ContentViewProtocol {
         
         assetLogoImageView.profilePhotoImageView.image = UIImage.programPlaceholder
         
-        if let logo = asset.logoUrl, let fileUrl = getFileURL(fileName: logo) {
+        if let logo = asset.logoUrl, let fileUrl = getFileURL(fileName: logo), isPictureURL(url: fileUrl.absoluteString) {
             assetLogoImageView.profilePhotoImageView.kf.indicatorType = .activity
             assetLogoImageView.profilePhotoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
             assetLogoImageView.profilePhotoImageView.backgroundColor = .clear

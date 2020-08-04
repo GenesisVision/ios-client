@@ -44,7 +44,7 @@ final class FundAssetsViewModel {
     
     func fetch(completion: @escaping CompletionBlock) {
         guard let assetId = assetId else { return }
-        FundsDataProvider.get(assetId, completion: { [weak self] (fundDetails) in
+        FundsDataProvider.get(assetId, currencyType: getPlatformCurrencyType(), completion: { [weak self] (fundDetails) in
             guard let fundDetails = fundDetails, let assets = fundDetails.assetsStructure else {
                 return completion(.failure(errorType: .apiError(message: nil)))
             }

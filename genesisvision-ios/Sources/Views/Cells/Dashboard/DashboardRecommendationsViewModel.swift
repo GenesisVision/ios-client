@@ -28,18 +28,30 @@ class DashboardRecommendationsViewModel: CellViewModelWithCollection {
     init(_ details: CommonPublicAssetsViewModel?, delegate: BaseTableViewProtocol?) {
         self.details = details
         self.delegate = delegate
-        self.title = "Recommendation"
+        self.title = "Recommendations"
         self.type = .dashboardRecommendation
         
-        details?.programs?.items?.forEach({ (viewModel) in
-            viewModels.append(AssetCollectionViewCellViewModel(type: .program, asset: viewModel, filterProtocol: nil, favoriteProtocol: nil))
-        })
-        details?.follows?.items?.forEach({ (viewModel) in
-            viewModels.append(AssetCollectionViewCellViewModel(type: .follow, asset: viewModel, filterProtocol: nil, favoriteProtocol: nil))
-        })
-        details?.funds?.items?.forEach({ (viewModel) in
-            viewModels.append(AssetCollectionViewCellViewModel(type: .fund, asset: viewModel, filterProtocol: nil, favoriteProtocol: nil))
-        })
+        guard let programs = details?.programs?.items, let funds = details?.funds?.items, let follows = details?.follows?.items else { return }
+        
+        var allCount = 0
+        
+        if programs.count == funds.count, funds.count == follows.count {
+            allCount = programs.count
+        } else {
+            allCount = min(programs.count, funds.count, follows.count)
+        }
+                
+        for index in 0...allCount-1 {
+            if let program = programs[safe: index] {
+                viewModels.append(AssetCollectionViewCellViewModel(type: .program, asset: program, filterProtocol: nil, favoriteProtocol: nil))
+            }
+            if let fund = funds[safe: index] {
+                viewModels.append(AssetCollectionViewCellViewModel(type: .fund, asset: fund, filterProtocol: nil, favoriteProtocol: nil))
+            }
+            if let follow = follows[safe: index] {
+                viewModels.append(AssetCollectionViewCellViewModel(type: .fund, asset: follow, filterProtocol: nil, favoriteProtocol: nil))
+            }
+        }
     }
     
     func didSelect(at indexPath: IndexPath) {

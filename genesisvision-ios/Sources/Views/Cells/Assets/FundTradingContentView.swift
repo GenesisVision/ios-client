@@ -116,7 +116,7 @@ extension FundTradingContentView: ContentViewProtocol {
         }
         
         photoImageView.image = UIImage.fundPlaceholder
-        if let logo = asset.publicInfo?.logoUrl, let fileUrl = getFileURL(fileName: logo) {
+        if let logo = asset.publicInfo?.logoUrl, let fileUrl = getFileURL(fileName: logo), isPictureURL(url: fileUrl.absoluteString) {
             photoImageView.kf.indicatorType = .activity
             photoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.fundPlaceholder)
             photoImageView.backgroundColor = .clear

@@ -759,10 +759,10 @@ open class TradingaccountAPI {
     "leverage" : 0,
     "supportedCurrencies" : [ null, null ],
     "balances" : [ {
-      "amount" : 9.301444243932576,
+      "amount" : 7.386281948385884,
       "currency" : "Undefined"
     }, {
-      "amount" : 9.301444243932576,
+      "amount" : 7.386281948385884,
       "currency" : "Undefined"
     } ],
     "subscriptions" : 1,

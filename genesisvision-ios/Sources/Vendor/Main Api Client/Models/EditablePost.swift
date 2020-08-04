@@ -23,7 +23,11 @@ public struct EditablePost: Codable {
 
     public var likesCount: Int?
 
+    public var likesUsers: [ProfilePublicShort]?
+
     public var rePostsCount: Int?
+
+    public var rePostsUsers: [ProfilePublicShort]?
 
     public var impressionsCount: Int?
 
@@ -31,30 +35,35 @@ public struct EditablePost: Codable {
 
     public var isDeleted: Bool?
 
+    public var isHighlighted: Bool?
+
     public var images: [PostImage]?
 
     public var tags: [PostTag]?
 
     public var author: ProfilePublic?
 
-    public var actions: PostActions?
+    public var personalDetails: PostPersonalDetails?
 
     public var comments: [Post]?
-    public init(textOriginal: String? = nil, _id: UUID? = nil, url: String? = nil, text: String? = nil, date: Date? = nil, likesCount: Int? = nil, rePostsCount: Int? = nil, impressionsCount: Int? = nil, isPinned: Bool? = nil, isDeleted: Bool? = nil, images: [PostImage]? = nil, tags: [PostTag]? = nil, author: ProfilePublic? = nil, actions: PostActions? = nil, comments: [Post]? = nil) { 
+    public init(textOriginal: String? = nil, _id: UUID? = nil, url: String? = nil, text: String? = nil, date: Date? = nil, likesCount: Int? = nil, likesUsers: [ProfilePublicShort]? = nil, rePostsCount: Int? = nil, rePostsUsers: [ProfilePublicShort]? = nil, impressionsCount: Int? = nil, isPinned: Bool? = nil, isDeleted: Bool? = nil, isHighlighted: Bool? = nil, images: [PostImage]? = nil, tags: [PostTag]? = nil, author: ProfilePublic? = nil, personalDetails: PostPersonalDetails? = nil, comments: [Post]? = nil) { 
         self.textOriginal = textOriginal
         self._id = _id
         self.url = url
         self.text = text
         self.date = date
         self.likesCount = likesCount
+        self.likesUsers = likesUsers
         self.rePostsCount = rePostsCount
+        self.rePostsUsers = rePostsUsers
         self.impressionsCount = impressionsCount
         self.isPinned = isPinned
         self.isDeleted = isDeleted
+        self.isHighlighted = isHighlighted
         self.images = images
         self.tags = tags
         self.author = author
-        self.actions = actions
+        self.personalDetails = personalDetails
         self.comments = comments
     }
     public enum CodingKeys: String, CodingKey { 
@@ -64,14 +73,17 @@ public struct EditablePost: Codable {
         case text
         case date
         case likesCount
+        case likesUsers
         case rePostsCount
+        case rePostsUsers
         case impressionsCount
         case isPinned
         case isDeleted
+        case isHighlighted
         case images
         case tags
         case author
-        case actions
+        case personalDetails
         case comments
     }
 

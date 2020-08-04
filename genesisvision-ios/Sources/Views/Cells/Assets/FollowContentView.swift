@@ -140,8 +140,8 @@ extension FollowContentView: ContentViewProtocol {
         }
         
         thirdStackView.titleLabel.text = "D.down"
-        if let drawdown = asset.statistic?.drawdown {
-            thirdStackView.valueLabel.text = drawdown.toString()
+        if let drawdownPercent = asset.statistic?.drawdown {
+            thirdStackView.valueLabel.text = drawdownPercent.rounded(with: .undefined).toString() + "%"
         } else {
             thirdStackView.valueLabel.text = ""
         }
@@ -158,7 +158,7 @@ extension FollowContentView: ContentViewProtocol {
         
         photoImageView.image = UIImage.programPlaceholder
         
-        if let logo = asset.logoUrl, let fileUrl = getFileURL(fileName: logo) {
+        if let logo = asset.logoUrl, let fileUrl = getFileURL(fileName: logo), isPictureURL(url: fileUrl.absoluteString) {
             photoImageView.kf.indicatorType = .activity
             photoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
             photoImageView.backgroundColor = .clear
@@ -168,6 +168,53 @@ extension FollowContentView: ContentViewProtocol {
             let sign = profitPercent > 0 ? "+" : ""
             profitPercentLabel.text = sign + profitPercent.rounded(with: .undefined).toString() + "%"
             profitPercentLabel.textColor = profitPercent == 0 ? UIColor.Cell.title : profitPercent > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
+        }
+        
+        setupTagsBottomView(asset.tags, status: asset.status)
+    }
+    
+    func setupTagsBottomView(_ tags: [Tag]?, status: String?) {
+        guard var tags = tags, !tags.isEmpty else {
+            return
+        }
+        
+        if let status = status, status == "closed" {
+            tags.insert(Tag(name: "Closed", color: "#787d82"), at: 0)
+        }
+        
+        let tagsCount = tags.count
+        tagsBottomStackView.isHidden = false
+        
+        firstTagLabel.isHidden = true
+        if let name = tags[0].name, let color = tags[0].color {
+            firstTagLabel.isHidden = false
+            firstTagLabel.text = name.uppercased()
+            firstTagLabel.backgroundColor = UIColor.hexColor(color).withAlphaComponent(0.1)
+            firstTagLabel.textColor = UIColor.hexColor(color)
+        }
+        
+        secondTagLabel.isHidden = true
+        if tagsCount > 1, let name = tags[1].name, let color = tags[1].color {
+            secondTagLabel.isHidden = false
+            secondTagLabel.text = name.uppercased()
+            secondTagLabel.backgroundColor = UIColor.hexColor(color).withAlphaComponent(0.1)
+            secondTagLabel.textColor = UIColor.hexColor(color)
+        }
+        
+        thirdTagLabel.isHidden = true
+        if tagsCount > 2, let name = tags[2].name, let color = tags[2].color {
+            thirdTagLabel.isHidden = false
+            thirdTagLabel.text = name.uppercased()
+            thirdTagLabel.backgroundColor = UIColor.hexColor(color).withAlphaComponent(0.1)
+            thirdTagLabel.textColor = UIColor.hexColor(color)
+        }
+        
+        otherTagLabel.isHidden = true
+        if tagsCount > 3 {
+            otherTagLabel.isHidden = false
+            otherTagLabel.text = "+\(tagsCount - 3)"
+            otherTagLabel.backgroundColor = UIColor.Common.green.withAlphaComponent(0.1)
+            otherTagLabel.textColor = UIColor.Common.green
         }
     }
 }

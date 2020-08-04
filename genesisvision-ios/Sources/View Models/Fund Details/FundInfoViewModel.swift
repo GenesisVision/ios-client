@@ -148,6 +148,11 @@ extension FundInfoViewModel {
         guard let assetId = assetId else { return }
         router.show(routeType: .withdraw(assetId: assetId))
     }
+    
+    func edit() {
+        guard let assetId = assetId else { return }
+        router.show(routeType: .edit(assetId: assetId))
+    }
 }
 
 // MARK: - Fetch
@@ -228,5 +233,8 @@ extension FundInfoViewModel: InvestNowProtocol {
         }
         
         invest()
+    }
+    func ditTapEditButton() {
+        edit()
     }
 }

@@ -77,11 +77,11 @@ class CreateAccountViewController: BaseModalViewController {
             stackView.depositView.amountView.approxLabel.text = ""
         }
         
-        if
-            let value = stackView.depositView.amountView.textField.text?.doubleValue,
+        if let value = stackView.depositView.amountView.textField.text?.doubleValue,
             let minDeposit = viewModel?.getMinDepositValue(),
             let exchangedValue = viewModel?.exchangeValueInCurrency(value),
-            exchangedValue >= minDeposit {
+            let available = viewModel.fromListViewModel.selected()?.available,
+            exchangedValue >= minDeposit, value <= available {
             isEnable = true
         }
         
@@ -177,8 +177,8 @@ class CreateAccountViewController: BaseModalViewController {
     }
     @IBAction func copyMaxValueButtonAction(_ sender: UIButton) {
         if let wallet = viewModel.fromListViewModel?.selected(), let currency = wallet.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency), let availableInWalletFromValue = wallet.available {
-            
             stackView.depositView.amountView.textField.text = availableInWalletFromValue.rounded(with: currencyType).toString(withoutFormatter: true)
+            checkActionButton()
         }
     }
 }

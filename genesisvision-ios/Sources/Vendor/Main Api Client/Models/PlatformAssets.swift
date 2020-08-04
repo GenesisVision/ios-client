@@ -12,8 +12,11 @@ public struct PlatformAssets: Codable {
 
 
     public var assets: [PlatformAsset]?
-    public init(assets: [PlatformAsset]? = nil) { 
+
+    public var providers: [ProviderPlatformAssets]?
+    public init(assets: [PlatformAsset]? = nil, providers: [ProviderPlatformAssets]? = nil) { 
         self.assets = assets
+        self.providers = providers
     }
 
 }

@@ -15,23 +15,15 @@ public struct EditPost: Codable {
 
     public var text: String?
 
-    public var postId: UUID?
-
-    public var userId: UUID?
-
     public var images: [NewPostImage]?
-    public init(_id: UUID? = nil, text: String? = nil, postId: UUID? = nil, userId: UUID? = nil, images: [NewPostImage]? = nil) { 
+    public init(_id: UUID? = nil, text: String? = nil, images: [NewPostImage]? = nil) { 
         self._id = _id
         self.text = text
-        self.postId = postId
-        self.userId = userId
         self.images = images
     }
     public enum CodingKeys: String, CodingKey { 
         case _id = "id"
         case text
-        case postId
-        case userId
         case images
     }
 

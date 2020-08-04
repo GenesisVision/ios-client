@@ -18,6 +18,14 @@ func getFileURL(fileName: String) -> URL? {
     }
 }
 
+func isPictureURL(url: String) -> Bool {
+    if !url.isEmpty, (url.contains(".png") || url.contains(".jpg")) {
+        return true
+    } else {
+        return false
+    }
+}
+
 func impactFeedback(style: UIImpactFeedbackGenerator.FeedbackStyle = .light) {
     let generator = UIImpactFeedbackGenerator(style: style)
     generator.impactOccurred()

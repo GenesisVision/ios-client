@@ -104,7 +104,7 @@ final class ProgramViewModel: TabmanViewModel {
         case trades = "Trades"
         case openPosition = "Open position"
         case periodHistory = "Period history"
-        case events = "Program history"
+        case events = "My history"
     }
     var tabTypes: [TabType] = []
     var controllers = [TabType : UIViewController]()

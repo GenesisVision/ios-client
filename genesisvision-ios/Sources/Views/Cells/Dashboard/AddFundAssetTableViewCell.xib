@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddFundAssetTableViewCell" rowHeight="159" id="KGk-i7-Jjw" customClass="AddFundAssetTableViewCell" customModule="GV_DEBUG" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="395" height="159"/>
+            <rect key="frame" x="0.0" y="0.0" width="631" height="159"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="395" height="159"/>
+                <rect key="frame" x="0.0" y="0.0" width="631" height="159"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxS-KK-nef">
-                        <rect key="frame" x="271" y="57.5" width="60" height="44"/>
+                        <rect key="frame" x="507" y="57.5" width="60" height="44"/>
                         <color key="backgroundColor" red="0.090196078430000007" green="0.1333333333" blue="0.1647058824" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="NaN-Cm-KWk">
-                        <rect key="frame" x="20" y="20" width="355" height="119"/>
+                        <rect key="frame" x="20" y="20" width="591" height="119"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="4or-Fw-jLF">
-                                <rect key="frame" x="0.0" y="27" width="174" height="65.5"/>
+                                <rect key="frame" x="0.0" y="37" width="344.5" height="45"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IKI-2c-UGQ" customClass="UIImageView">
-                                        <rect key="frame" x="0.0" y="17.5" width="30" height="30"/>
+                                        <rect key="frame" x="0.0" y="7.5" width="30" height="30"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="IKI-2c-UGQ" secondAttribute="height" multiplier="1:1" id="4zA-p5-sbP"/>
@@ -35,16 +35,16 @@
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="E9b-iE-G2Q">
-                                        <rect key="frame" x="50" y="0.0" width="124" height="65.5"/>
+                                        <rect key="frame" x="50" y="0.0" width="294.5" height="45"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genesis Vision Token" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="War-kZ-WQJ" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="124" height="41"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="294.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GVT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="btH-Ek-uNw" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="45" width="124" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="24.5" width="294.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -54,10 +54,10 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="Bzs-hK-Xro">
-                                <rect key="frame" x="178" y="37.5" width="177" height="44"/>
+                                <rect key="frame" x="348.5" y="37.5" width="242.5" height="44"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="geG-Uf-GUc">
-                                        <rect key="frame" x="29" y="0.0" width="148" height="44"/>
+                                        <rect key="frame" x="94.5" y="0.0" width="148" height="44"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cDA-a6-j1K">
                                                 <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
@@ -148,7 +148,7 @@
                 <outlet property="textfieldBgView" destination="fxS-KK-nef" id="4XF-Nx-oBE"/>
                 <outlet property="titleLabel" destination="War-kZ-WQJ" id="z2A-kq-beh"/>
             </connections>
-            <point key="canvasLocation" x="190.57971014492756" y="174.44196428571428"/>
+            <point key="canvasLocation" x="19.565217391304348" y="174.44196428571428"/>
         </tableViewCell>
     </objects>
     <resources>

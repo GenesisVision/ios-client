@@ -136,21 +136,18 @@ class ProgramWithdrawViewController: BaseViewController {
         if let periodEnds = viewModel.programWithdrawInfo?.periodEnds {
             self.payoutDayValueLabel.text = periodEnds.onlyDateFormatString
         }
-        
-        // FIXME:
-//        if let rate = viewModel.programWithdrawInfo?.rate {
-//            let selectedCurrency = getSelectedCurrency()
-//            let currency = CurrencyType(rawValue: selectedCurrency) ?? .gvt
-//            let amountToWithdrawValueCurrencyString = (amountToWithdrawValue * rate).rounded(with: currency).toString()
-//            self.amountToWithdrawCurrencyLabel.text = "≈" + amountToWithdrawValueCurrencyString + " " + selectedCurrency
-//        }
+            
+        if let avaliableToWithdraw = viewModel.programWithdrawInfo?.availableToWithdraw {
+            let amountToWithdrawValueCurrencyString = avaliableToWithdraw.toString()
+            self.amountToWithdrawCurrencyLabel.text = "≈" + amountToWithdrawValueCurrencyString + " " + viewModel.programCurrency.rawValue
+        }
         
         let withdrawButtonEnabled = amountToWithdrawValue > 0.0 && amountToWithdrawValue <= availableToWithdrawValue
         
         withdrawButton.setEnabled(withdrawButtonEnabled)
     }
     
-    private func   withdrawMethod() {
+    private func withdrawMethod() {
         guard let text = amountToWithdrawValueLabel.text,
             let amount = text.doubleValue
             else { return showErrorHUD(subtitle: "Enter withdraw value, please") }

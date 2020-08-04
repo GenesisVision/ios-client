@@ -140,6 +140,8 @@ class ProgramSubscribeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
         switch viewModel.followType {
         case .follow:
             navigationItem.title = "Follow trades"
@@ -168,8 +170,17 @@ class ProgramSubscribeViewController: BaseViewController {
             subscribeButton.setTitle("Submit", for: .normal)
             subscribeButton.configure(with: .darkClear)
         }
-        
-        updateUI()
+        viewModel.fetch { (result) in
+            switch result {
+                
+            case .success:
+                DispatchQueue.main.async {
+                    self.updateUI()
+                }
+            case .failure(errorType: let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
+            }
+        }
     }
     
     private func updateUI() {
@@ -301,17 +312,20 @@ class ProgramSubscribeViewController: BaseViewController {
     }
     
     @IBAction func selectAccountButtonAction(_ sender: UIButton) {
+        
+        guard viewModel.tradingAccountListViewModel != nil else { return }
+        
         self.view.endEditing(true)
         
         bottomSheetController = BottomSheetController()
         bottomSheetController.initializeHeight = 275.0
 
-        bottomSheetController.addNavigationBar(viewModel.tradingAccountListViewModel.title)
+        bottomSheetController.addNavigationBar(viewModel.tradingAccountListViewModel!.title)
 
         bottomSheetController.addTableView { tableView in
             tableView.separatorStyle = .none
             
-            tableView.registerNibs(for: viewModel.tradingAccountListViewModel.cellModelsForRegistration)
+            tableView.registerNibs(for: viewModel.tradingAccountListViewModel!.cellModelsForRegistration)
             tableView.delegate = viewModel.tradingAccountListDataSource
             tableView.dataSource = viewModel.tradingAccountListDataSource
             tableView.reloadDataSmoothly()

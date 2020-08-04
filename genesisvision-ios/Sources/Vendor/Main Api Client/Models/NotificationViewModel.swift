@@ -31,8 +31,8 @@ public struct NotificationViewModel: Codable {
 
     public var isUnread: Bool?
 
-    public var assetType: InvestmentProgramType?
-    public init(_id: UUID? = nil, text: String? = nil, date: Date? = nil, type: NotificationType? = nil, assetId: UUID? = nil, managerId: UUID? = nil, logoUrl: String? = nil, url: String? = nil, color: String? = nil, isUnread: Bool? = nil, assetType: InvestmentProgramType? = nil) { 
+    public var assetType: AssetGlobalType?
+    public init(_id: UUID? = nil, text: String? = nil, date: Date? = nil, type: NotificationType? = nil, assetId: UUID? = nil, managerId: UUID? = nil, logoUrl: String? = nil, url: String? = nil, color: String? = nil, isUnread: Bool? = nil, assetType: AssetGlobalType? = nil) { 
         self._id = _id
         self.text = text
         self.date = date

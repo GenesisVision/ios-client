@@ -15,8 +15,9 @@ final class FundInvestViewModel {
     var fundCurrency: CurrencyType? = .usd
     var walletCurrency: CurrencyType?
     var labelPlaceholder: String = "0"
-    
-//    var fundInvestInfo: FundInvestInfo?
+    var levelsParamsInfo: LevelsParamsInfo?
+    var fundDetailsFull: FundDetailsFull?
+    var investmentCommission: Double?
 
     var walletId: UUID?
     var walletSummary: WalletSummary?
@@ -33,7 +34,7 @@ final class FundInvestViewModel {
         self.router = router
         self.assetId = assetId
         self.detailProtocol = detailProtocol
-        self.fundCurrency = CurrencyType(rawValue: selectedPlatformCurrency) ?? .usd
+        self.fundCurrency = CurrencyType.gvt
     }
     
     // MARK: - Public methods
@@ -50,17 +51,6 @@ final class FundInvestViewModel {
     }
     
     func getInfo(completion: @escaping CompletionBlock) {
-        
-        
-        
-        
-        
-        
-//        guard let assetId = assetId,
-//            let fundCurrencyValue = fundCurrency?.rawValue,
-//            let currencySecondary = InvestorAPI.Currency_v10InvestorFundsByIdInvestInfoByCurrencyGet(rawValue: fundCurrencyValue)
-//            else { return completion(.failure(errorType: .apiError(message: nil))) }
-        
         AuthManager.getWallet(completion: { [weak self] (wallet) in
             if let wallet = wallet, let wallets = wallet.wallets {
                 self?.walletSummary = wallet
@@ -70,17 +60,23 @@ final class FundInvestViewModel {
                 self?.selectedWalletFromDelegateManager?.selected = wallets[0]
                 self?.walletCurrency = CurrencyType(rawValue: wallets[0].currency?.rawValue ?? "")
                 completion(.success)
-            }}, completionError: completion)
-//        FundsDataProvider.getInvestInfo(assetId: assetId, currencySecondary: currencySecondary, completion: { [weak self] (fundInvestInfo) in
-//            guard let fundInvestInfo = fundInvestInfo else {
-//                return completion(.failure(errorType: .apiError(message: nil)))
-//            }
-//
-//            self?.fundInvestInfo = fundInvestInfo
-//            self?.updateRate(completion: completion)
-//            completion(.success)
-//            }, errorCompletion: completion)
-
+            }
+            
+            PlatformManager.shared.getLevelsParamsInfo(currency: .usdt) { [weak self] (viewModel) in
+                self?.levelsParamsInfo = viewModel
+                
+                PlatformManager.shared.getPlatformInfo { [weak self] (platformCommonInfo) in
+                    self?.investmentCommission = platformCommonInfo?.commonInfo?.platformCommission?.investment
+                    self?.updateRate(completion: completion)
+                    
+                    guard let assetId = self?.assetId else { return }
+                    
+                    FundsDataProvider.get(assetId, currencyType: .usdt, completion: { (details) in
+                        self?.fundDetailsFull = details
+                    }, errorCompletion: completion)
+                }
+            }
+            }, completionError: completion)
     }
     
     func getInvestmentAmountCurrencyValue(_ amount: Double) -> String {
@@ -131,17 +127,14 @@ final class FundInvestViewModel {
     }
     
     func getGVCommision() -> Double {
-//        guard let gvCommission = fundInvestInfo?.gvCommission else { return 0.0 }
-//
-//        return gvCommission
-        return 0.0 //FIXME:
+        guard let gvCommission = investmentCommission else { return 0.0 }
+        return gvCommission
     }
     
     func getEntryFee() -> Double {
-//        guard let entryFee = fundInvestInfo?.entryFee else { return 0.0 }
-//
-//        return entryFee
-        return 0.0 //FIXME:
+        guard let entryFee = fundDetailsFull?.entryFeeCurrent else { return 0.0 }
+        
+        return entryFee
     }
     
     func getApproximateAmount(_ amount: Double) -> Double {
@@ -173,6 +166,7 @@ final class FundInvestViewModel {
     // MARK: - Private methods
     // MARK: - API
     private func apiInvest(with value: Double, completion: @escaping CompletionBlock) {
+        guard let walletId = selectedWalletFromDelegateManager?.selected?._id else { return }
         FundsDataProvider.invest(withAmount: value, assetId: assetId, walletId: walletId) { (result) in
             completion(result)
         }

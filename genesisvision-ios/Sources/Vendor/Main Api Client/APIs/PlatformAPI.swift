@@ -16,8 +16,8 @@ open class PlatformAPI {
 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getAllPlatformAssets(completion: @escaping ((_ data: PlatformAssets?,_ error: Error?) -> Void)) {
-        getAllPlatformAssetsWithRequestBuilder().execute { (response, error) -> Void in
+    open class func getAllPlatformTradingAssets(completion: @escaping ((_ data: PlatformAssets?,_ error: Error?) -> Void)) {
+        getAllPlatformTradingAssetsWithRequestBuilder().execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
@@ -25,14 +25,15 @@ open class PlatformAPI {
 
     /**
      Get all supported assets for funds
-     - GET /v2.0/platform/assets
+     - GET /v2.0/platform/trading/assets
      - API Key:
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
   "assets" : [ {
-    "mandatoryFundPercent" : 0.8008281904610115,
+    "mandatoryFundPercent" : 5.962133916683182,
     "color" : "color",
+    "provider" : "Undefined",
     "name" : "name",
     "description" : "description",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -40,21 +41,43 @@ open class PlatformAPI {
     "logoUrl" : "logoUrl",
     "url" : "url"
   }, {
-    "mandatoryFundPercent" : 0.8008281904610115,
+    "mandatoryFundPercent" : 5.962133916683182,
     "color" : "color",
+    "provider" : "Undefined",
     "name" : "name",
     "description" : "description",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "asset" : "asset",
     "logoUrl" : "logoUrl",
     "url" : "url"
+  } ],
+  "providers" : [ {
+    "tradingSchedule" : {
+      "hourEnd" : 2,
+      "dayStart" : "Sunday",
+      "minuteEnd" : 7,
+      "hourStart" : 5,
+      "hasTradingSchedule" : true,
+      "minuteStart" : 5
+    },
+    "type" : "Undefined"
+  }, {
+    "tradingSchedule" : {
+      "hourEnd" : 2,
+      "dayStart" : "Sunday",
+      "minuteEnd" : 7,
+      "hourStart" : 5,
+      "hasTradingSchedule" : true,
+      "minuteStart" : 5
+    },
+    "type" : "Undefined"
   } ]
 }}]
 
      - returns: RequestBuilder<PlatformAssets> 
      */
-    open class func getAllPlatformAssetsWithRequestBuilder() -> RequestBuilder<PlatformAssets> {
-        let path = "/v2.0/platform/assets"
+    open class func getAllPlatformTradingAssetsWithRequestBuilder() -> RequestBuilder<PlatformAssets> {
+        let path = "/v2.0/platform/trading/assets"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
@@ -245,6 +268,17 @@ open class PlatformAPI {
      - examples: [{contentType=application/json, example={
   "usersInfo" : {
     "availableBetaFeatures" : [ "None", "None" ],
+    "socialLinkTypes" : [ {
+      "name" : "name",
+      "type" : "Undefined",
+      "url" : "url",
+      "logoUrl" : "logoUrl"
+    }, {
+      "name" : "name",
+      "type" : "Undefined",
+      "url" : "url",
+      "logoUrl" : "logoUrl"
+    } ],
     "tags" : [ null, null ]
   },
   "appVersionInfo" : {
@@ -292,15 +326,15 @@ open class PlatformAPI {
       "url" : "url"
     } ],
     "platformCommission" : {
-      "investment" : 4.145608029883936
+      "investment" : 7.386281948385884
     },
     "platformCurrencies" : [ {
       "color" : "color",
-      "minConvertAmount" : 7.386281948385884,
+      "minConvertAmount" : 1.2315135367772556,
       "name" : "name"
     }, {
       "color" : "color",
-      "minConvertAmount" : 7.386281948385884,
+      "minConvertAmount" : 1.2315135367772556,
       "name" : "name"
     } ]
   },
@@ -341,20 +375,20 @@ open class PlatformAPI {
       "minInvestAmounts" : [ {
         "serverType" : "Undefined",
         "minDepositCreateAsset" : [ {
-          "amount" : 9.301444243932576,
+          "amount" : 7.386281948385884,
           "currency" : "Undefined"
         }, {
-          "amount" : 9.301444243932576,
+          "amount" : 7.386281948385884,
           "currency" : "Undefined"
         } ],
         "minInvestAmountIntoProgram" : [ null, null ]
       }, {
         "serverType" : "Undefined",
         "minDepositCreateAsset" : [ {
-          "amount" : 9.301444243932576,
+          "amount" : 7.386281948385884,
           "currency" : "Undefined"
         }, {
-          "amount" : 9.301444243932576,
+          "amount" : 7.386281948385884,
           "currency" : "Undefined"
         } ],
         "minInvestAmountIntoProgram" : [ null, null ]
@@ -374,10 +408,10 @@ open class PlatformAPI {
     },
     "followInfo" : {
       "createFollowInfo" : {
-        "maxSuccessFee" : 2.027123023002322,
-        "maxVolumeFee" : 9.301444243932576,
-        "minSuccessFee" : 3.616076749251911,
-        "minVolumeFee" : 7.061401241503109
+        "maxSuccessFee" : 4.145608029883936,
+        "maxVolumeFee" : 3.616076749251911,
+        "minSuccessFee" : 2.027123023002322,
+        "minVolumeFee" : 9.301444243932576
       },
       "subscribeFixedCurrencies" : [ "subscribeFixedCurrencies", "subscribeFixedCurrencies" ],
       "facets" : [ null, null ],
@@ -385,8 +419,9 @@ open class PlatformAPI {
     },
     "fundInfo" : {
       "assets" : [ {
-        "mandatoryFundPercent" : 0.8008281904610115,
+        "mandatoryFundPercent" : 5.962133916683182,
         "color" : "color",
+        "provider" : "Undefined",
         "name" : "name",
         "description" : "description",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -394,8 +429,9 @@ open class PlatformAPI {
         "logoUrl" : "logoUrl",
         "url" : "url"
       }, {
-        "mandatoryFundPercent" : 0.8008281904610115,
+        "mandatoryFundPercent" : 5.962133916683182,
         "color" : "color",
+        "provider" : "Undefined",
         "name" : "name",
         "description" : "description",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -405,9 +441,9 @@ open class PlatformAPI {
       } ],
       "minWithdrawAmountFromFund" : [ null, null ],
       "createFundInfo" : {
-        "maxExitFee" : 5.637376656633329,
-        "minDeposit" : 2.3021358869347655,
-        "maxEntryFee" : 5.962133916683182
+        "maxExitFee" : 2.3021358869347655,
+        "minDeposit" : 7.061401241503109,
+        "maxEntryFee" : 5.637376656633329
       },
       "minInvestAmountIntoFund" : [ null, null ],
       "facets" : [ null, null ]
@@ -587,7 +623,7 @@ open class PlatformAPI {
       "periodDuration" : 1,
       "brokerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "statistic" : {
-        "drawdown" : 5.637376656633329,
+        "drawdown" : 3.616076749251911,
         "chart" : [ {
           "date" : "2000-01-23T04:56:07.000+00:00",
           "value" : 0.8008281904610115
@@ -595,7 +631,7 @@ open class PlatformAPI {
           "date" : "2000-01-23T04:56:07.000+00:00",
           "value" : 0.8008281904610115
         } ],
-        "profit" : 5.962133916683182
+        "profit" : 9.301444243932576
       },
       "color" : "color",
       "level" : 0,
@@ -615,7 +651,7 @@ open class PlatformAPI {
         "name" : "name"
       } ],
       "balance" : {
-        "amount" : 9.301444243932576,
+        "amount" : 7.386281948385884,
         "currency" : "Undefined"
       },
       "periodEnds" : "2000-01-23T04:56:07.000+00:00",
@@ -647,7 +683,7 @@ open class PlatformAPI {
       "periodDuration" : 1,
       "brokerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "statistic" : {
-        "drawdown" : 5.637376656633329,
+        "drawdown" : 3.616076749251911,
         "chart" : [ {
           "date" : "2000-01-23T04:56:07.000+00:00",
           "value" : 0.8008281904610115
@@ -655,7 +691,7 @@ open class PlatformAPI {
           "date" : "2000-01-23T04:56:07.000+00:00",
           "value" : 0.8008281904610115
         } ],
-        "profit" : 5.962133916683182
+        "profit" : 9.301444243932576
       },
       "color" : "color",
       "level" : 0,
@@ -675,7 +711,7 @@ open class PlatformAPI {
         "name" : "name"
       } ],
       "balance" : {
-        "amount" : 9.301444243932576,
+        "amount" : 7.386281948385884,
         "currency" : "Undefined"
       },
       "periodEnds" : "2000-01-23T04:56:07.000+00:00",

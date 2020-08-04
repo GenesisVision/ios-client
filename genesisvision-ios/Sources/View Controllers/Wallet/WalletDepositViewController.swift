@@ -128,6 +128,10 @@ class WalletDepositViewController: BaseViewController {
             walletCurrencyDelegateManager.currencyDelegate = self
         }
         
+        if let selectedWallet = viewModel.selectedWallet, let title = selectedWallet.title, let currency = selectedWallet.currency {
+            selectedWalletCurrencyValueLabel.text = title + " | " + currency.rawValue
+        }
+        
         self.view.layoutIfNeeded()
     }
     

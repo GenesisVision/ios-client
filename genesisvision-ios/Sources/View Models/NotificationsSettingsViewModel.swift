@@ -130,7 +130,7 @@ final class NotificationsSettingsViewModel {
         case .funds:
             return "Funds"
         case .managers:
-            return "Managers"
+            return "Users"
         case .custom:
             return "Custom"
         }

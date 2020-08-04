@@ -57,8 +57,8 @@ class PlatformManager {
         }
     }
     
-    func getLevelsParamsInfo(completion: @escaping (_ platformAssets: LevelsParamsInfo?) -> Void) {
-        BaseDataProvider.getLevelsParameters(completion: { [weak self] (viewModel) in
+    func getLevelsParamsInfo(currency: PlatformAPI.Currency_getProgramLevelsParams, completion: @escaping (_ platformAssets: LevelsParamsInfo?) -> Void) {
+        BaseDataProvider.getLevelsParameters(currency, completion: { [weak self] (viewModel) in
             self?.levelsParamsInfo = viewModel
             completion(viewModel)
         }) { (result) in

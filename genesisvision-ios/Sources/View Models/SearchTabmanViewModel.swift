@@ -11,7 +11,7 @@ import Tabman
 
 final class SearchTabmanViewModel: TabmanViewModel {
     enum TabType: String {
-        case follows = "Follows", funds = "Funds", programs = "Programs", managers = "Managers"
+        case follows = "Follows", funds = "Funds", programs = "Programs", managers = "Users"
     }
     var tabTypes: [TabType] = [.follows, .funds, .programs, .managers]
     var controllers = [TabType : UIViewController]()

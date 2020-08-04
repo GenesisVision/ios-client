@@ -14,9 +14,12 @@ public struct FundAssetDetails: Codable {
     public var topFundAssets: [FundAssetPercent]?
 
     public var totalAssetsCount: Int?
-    public init(topFundAssets: [FundAssetPercent]? = nil, totalAssetsCount: Int? = nil) { 
+
+    public var tradingSchedule: TradingScheduleInfo?
+    public init(topFundAssets: [FundAssetPercent]? = nil, totalAssetsCount: Int? = nil, tradingSchedule: TradingScheduleInfo? = nil) { 
         self.topFundAssets = topFundAssets
         self.totalAssetsCount = totalAssetsCount
+        self.tradingSchedule = tradingSchedule
     }
 
 }

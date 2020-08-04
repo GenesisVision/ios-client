@@ -217,6 +217,14 @@ open class FundsAPI {
     "url" : "url",
     "target" : 5.637376656633329
   } ],
+  "tradingSchedule" : {
+    "hourEnd" : 2,
+    "dayStart" : "Sunday",
+    "minuteEnd" : 7,
+    "hourStart" : 5,
+    "hasTradingSchedule" : true,
+    "minuteStart" : 5
+  },
   "publicInfo" : {
     "typeExt" : "None",
     "color" : "color",
@@ -504,8 +512,8 @@ open class FundsAPI {
      - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter eventsType: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getFundsTradingEvents(_id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, eventsType: FundTradingEventType? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: FundTradingEventViewModelItemsViewModel?,_ error: Error?) -> Void)) {
-        getFundsTradingEventsWithRequestBuilder(_id: _id, dateFrom: dateFrom, dateTo: dateTo, eventsType: eventsType, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func getFundsHistoryEvents(_id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, eventsType: FundHistoryEventType? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: FundHistoryEventViewModelItemsViewModel?,_ error: Error?) -> Void)) {
+        getFundsHistoryEventsWithRequestBuilder(_id: _id, dateFrom: dateFrom, dateTo: dateTo, eventsType: eventsType, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
@@ -513,7 +521,7 @@ open class FundsAPI {
 
     /**
      Get funds trading events
-     - GET /v2.0/funds/{id}/events
+     - GET /v2.0/funds/{id}/history
      - API Key:
        - type: apiKey Authorization 
        - name: Bearer
@@ -521,44 +529,98 @@ open class FundsAPI {
   "total" : 5,
   "items" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "commissionCurrency" : "commissionCurrency",
     "amount" : 0.8008281904610115,
-    "boughtAmount" : 6.027456183070403,
-    "commission" : 1.4658129805029452,
-    "type" : "Trade",
+    "trades" : [ {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "commissionCurrency" : "commissionCurrency",
+      "boughtAmount" : 1.4658129805029452,
+      "commission" : 5.962133916683182,
+      "soldAmount" : 6.027456183070403
+    }, {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "commissionCurrency" : "commissionCurrency",
+      "boughtAmount" : 1.4658129805029452,
+      "commission" : 5.962133916683182,
+      "soldAmount" : 6.027456183070403
+    } ],
+    "newAssets" : [ {
+      "color" : "color",
+      "name" : "name",
+      "asset" : "asset",
+      "percent" : 3.616076749251911,
+      "logoUrl" : "logoUrl",
+      "url" : "url"
+    }, {
+      "color" : "color",
+      "name" : "name",
+      "asset" : "asset",
+      "percent" : 3.616076749251911,
+      "logoUrl" : "logoUrl",
+      "url" : "url"
+    } ],
+    "type" : "Creation",
     "asset" : {
       "color" : "color",
+      "provider" : "Undefined",
       "name" : "name",
       "description" : "description",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "asset" : "asset",
       "logoUrl" : "logoUrl",
       "url" : "url"
-    }
+    },
+    "logoUrl" : "logoUrl"
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "commissionCurrency" : "commissionCurrency",
     "amount" : 0.8008281904610115,
-    "boughtAmount" : 6.027456183070403,
-    "commission" : 1.4658129805029452,
-    "type" : "Trade",
+    "trades" : [ {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "commissionCurrency" : "commissionCurrency",
+      "boughtAmount" : 1.4658129805029452,
+      "commission" : 5.962133916683182,
+      "soldAmount" : 6.027456183070403
+    }, {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "commissionCurrency" : "commissionCurrency",
+      "boughtAmount" : 1.4658129805029452,
+      "commission" : 5.962133916683182,
+      "soldAmount" : 6.027456183070403
+    } ],
+    "newAssets" : [ {
+      "color" : "color",
+      "name" : "name",
+      "asset" : "asset",
+      "percent" : 3.616076749251911,
+      "logoUrl" : "logoUrl",
+      "url" : "url"
+    }, {
+      "color" : "color",
+      "name" : "name",
+      "asset" : "asset",
+      "percent" : 3.616076749251911,
+      "logoUrl" : "logoUrl",
+      "url" : "url"
+    } ],
+    "type" : "Creation",
     "asset" : {
       "color" : "color",
+      "provider" : "Undefined",
       "name" : "name",
       "description" : "description",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "asset" : "asset",
       "logoUrl" : "logoUrl",
       "url" : "url"
-    }
+    },
+    "logoUrl" : "logoUrl"
   } ]
 }}]
      - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter eventsType: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
 
-     - returns: RequestBuilder<FundTradingEventViewModelItemsViewModel> 
+     - returns: RequestBuilder<FundHistoryEventViewModelItemsViewModel> 
      */
-    open class func getFundsTradingEventsWithRequestBuilder(_id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, eventsType: FundTradingEventType? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<FundTradingEventViewModelItemsViewModel> {
-        var path = "/v2.0/funds/{id}/events"
+    open class func getFundsHistoryEventsWithRequestBuilder(_id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, eventsType: FundHistoryEventType? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<FundHistoryEventViewModelItemsViewModel> {
+        var path = "/v2.0/funds/{id}/history"
         let _idPreEscape = "\(_id)"
         let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
@@ -573,7 +635,7 @@ open class FundsAPI {
                         "Take": take?.encodeToJSON()
         ])
 
-        let requestBuilder: RequestBuilder<FundTradingEventViewModelItemsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<FundHistoryEventViewModelItemsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }

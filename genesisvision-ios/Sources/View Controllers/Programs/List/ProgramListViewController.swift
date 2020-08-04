@@ -124,8 +124,8 @@ class ProgramListViewController: BaseViewControllerWithTableView {
     }
     
     override func updateData(from dateFrom: Date?, to dateTo: Date?) {
-        viewModel.filterModel.dateRangeModel.dateFrom = dateFrom
-        viewModel.filterModel.dateRangeModel.dateTo = dateTo
+//        viewModel.filterModel.dateRangeModel.dateFrom = dateFrom
+//        viewModel.filterModel.dateRangeModel.dateTo = dateTo
         
         showProgressHUD()
         fetch()
@@ -134,7 +134,16 @@ class ProgramListViewController: BaseViewControllerWithTableView {
 
 extension ProgramListViewController {
     override func filterButtonAction() {
-        viewModel.showFilterVC(listViewModel: self.viewModel, filterModel: viewModel.filterModel, filterType: .programs, sortingType: .programs)
+        switch viewModel.assetType {
+        case ._none:
+            viewModel.showFilterVC(listViewModel: self.viewModel, filterModel: viewModel.filterModel, filterType: .programs, sortingType: .programs)
+        case .program:
+            viewModel.showFilterVC(listViewModel: self.viewModel, filterModel: viewModel.filterModel, filterType: .programs, sortingType: .programs)
+        case .fund:
+            viewModel.showFilterVC(listViewModel: self.viewModel, filterModel: viewModel.filterModel, filterType: .funds, sortingType: .funds)
+        case .follow:
+            viewModel.showFilterVC(listViewModel: self.viewModel, filterModel: viewModel.filterModel, filterType: .follows, sortingType: .follows)
+        }
     }
     
     override func signInButtonAction() {

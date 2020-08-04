@@ -86,7 +86,7 @@ class ProgramHeaderTableViewCell: UITableViewCell {
         
         assetLogoImageView.profilePhotoImageView.image = UIImage.fundPlaceholder
         
-        if let logo = details.publicInfo?.logo, let fileUrl = getFileURL(fileName: logo) {
+        if let logo = details.publicInfo?.logoUrl, let fileUrl = getFileURL(fileName: logo), isPictureURL(url: fileUrl.absoluteString) {
             assetLogoImageView.profilePhotoImageView.kf.indicatorType = .activity
             assetLogoImageView.profilePhotoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.fundPlaceholder)
             assetLogoImageView.profilePhotoImageView.backgroundColor = .clear
@@ -110,7 +110,7 @@ class ProgramHeaderTableViewCell: UITableViewCell {
         
         assetLogoImageView.profilePhotoImageView.image = UIImage.programPlaceholder
         
-        if let logo = details.publicInfo?.logo, let fileUrl = getFileURL(fileName: logo) {
+        if let logo = details.publicInfo?.logoUrl, let fileUrl = getFileURL(fileName: logo), isPictureURL(url: fileUrl.absoluteString) {
             assetLogoImageView.profilePhotoImageView.kf.indicatorType = .activity
             assetLogoImageView.profilePhotoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
             assetLogoImageView.profilePhotoImageView.backgroundColor = .clear

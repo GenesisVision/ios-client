@@ -1,39 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="392" id="KGk-i7-Jjw" customClass="InvestNowTableViewCell" customModule="GV_DEBUG" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="392"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="385" id="KGk-i7-Jjw" customClass="InvestNowTableViewCell" customModule="GV_DEBUG" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="444" height="385"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="392"/>
+                <rect key="frame" x="0.0" y="0.0" width="444" height="385"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pXX-oU-LEc" customClass="LargeTitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
-                        <rect key="frame" x="20" y="20" width="280" height="21"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="tgz-3u-0dp" userLabel="Top Stack View">
+                        <rect key="frame" x="20" y="20" width="404" height="21"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pXX-oU-LEc" customClass="LargeTitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="133.5" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="7yK-DH-zee"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="db7-DB-Hwu" customClass="ActionButton" customModule="GV_DEBUG" customModuleProvider="target">
+                                <rect key="frame" x="227" y="0.0" width="175" height="21"/>
+                                <state key="normal" title="Manage"/>
+                                <connections>
+                                    <action selector="editButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Sux-N8-cKV"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <constraints>
-                            <constraint firstAttribute="height" constant="21" id="7yK-DH-zee"/>
+                            <constraint firstAttribute="height" constant="21" id="R05-fk-jYe"/>
+                            <constraint firstAttribute="trailing" secondItem="db7-DB-Hwu" secondAttribute="trailing" constant="2" id="ZXP-Db-F0b"/>
+                            <constraint firstItem="db7-DB-Hwu" firstAttribute="leading" secondItem="pXX-oU-LEc" secondAttribute="trailing" constant="60" id="eDr-WD-nUu"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="PEE-od-7LG">
-                        <rect key="frame" x="20" y="62" width="280" height="161"/>
+                    </stackView>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="PEE-od-7LG" userLabel="Middle Stack View">
+                        <rect key="frame" x="20" y="62" width="404" height="161"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="wTe-am-DOk">
-                                <rect key="frame" x="0.0" y="0.0" width="280" height="70.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="404" height="70.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="7hJ-jm-49X">
-                                        <rect key="frame" x="0.0" y="0.0" width="140" height="70.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="202" height="70.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ce-8c-cVW" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -50,7 +67,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="9Ol-xV-aP8">
-                                        <rect key="frame" x="140" y="0.0" width="140" height="70.5"/>
+                                        <rect key="frame" x="202" y="0.0" width="202" height="70.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wK8-Cs-dr1" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -69,10 +86,10 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="SsQ-Av-2oZ">
-                                <rect key="frame" x="0.0" y="90.5" width="280" height="70.5"/>
+                                <rect key="frame" x="0.0" y="90.5" width="404" height="70.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="OGk-xX-6eX">
-                                        <rect key="frame" x="0.0" y="0.0" width="140" height="70.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="202" height="70.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dYQ-Ch-qJE" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -89,7 +106,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="tiO-jf-OzW">
-                                        <rect key="frame" x="140" y="0.0" width="140" height="70.5"/>
+                                        <rect key="frame" x="202" y="0.0" width="202" height="70.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cOC-PX-TV1" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -109,11 +126,11 @@
                             </stackView>
                         </subviews>
                     </stackView>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0zE-uW-kbp">
-                        <rect key="frame" x="20" y="243" width="280" height="129"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0zE-uW-kbp" userLabel="Bottom Stack View">
+                        <rect key="frame" x="20" y="243" width="404" height="122"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GrT-YF-Trs" customClass="ActionButton" customModule="GV_DEBUG" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="280" height="50"/>
+                                <rect key="frame" x="0.0" y="0.0" width="404" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Xuq-MR-LdL"/>
                                 </constraints>
@@ -123,7 +140,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A0B-Yt-WF2" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="70" width="280" height="59"/>
+                                <rect key="frame" x="0.0" y="70" width="404" height="52"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -142,22 +159,23 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="YCJ-kf-EU1" firstAttribute="centerY" secondItem="ves-4M-lWr" secondAttribute="centerY" id="1BE-5Q-IZy"/>
-                    <constraint firstItem="pXX-oU-LEc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="2nY-bp-Tmp"/>
-                    <constraint firstItem="PEE-od-7LG" firstAttribute="trailing" secondItem="pXX-oU-LEc" secondAttribute="trailing" id="42t-QF-jfc"/>
+                    <constraint firstItem="PEE-od-7LG" firstAttribute="top" secondItem="tgz-3u-0dp" secondAttribute="bottom" constant="21" id="3PI-47-hyr"/>
                     <constraint firstAttribute="bottom" secondItem="0zE-uW-kbp" secondAttribute="bottom" constant="20" id="43u-Tc-xgX"/>
-                    <constraint firstItem="PEE-od-7LG" firstAttribute="top" secondItem="pXX-oU-LEc" secondAttribute="bottom" constant="21" id="7Ne-a3-GoJ"/>
-                    <constraint firstItem="PEE-od-7LG" firstAttribute="leading" secondItem="pXX-oU-LEc" secondAttribute="leading" id="7Tg-Yt-e4m"/>
+                    <constraint firstAttribute="trailing" secondItem="tgz-3u-0dp" secondAttribute="trailing" constant="20" id="5W2-fz-fb4"/>
                     <constraint firstItem="0zE-uW-kbp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="AJc-CH-cih"/>
+                    <constraint firstItem="PEE-od-7LG" firstAttribute="trailing" secondItem="tgz-3u-0dp" secondAttribute="trailing" id="BYW-xt-00u"/>
+                    <constraint firstItem="tgz-3u-0dp" firstAttribute="leading" secondItem="PEE-od-7LG" secondAttribute="leading" id="SLx-Rh-mk6"/>
                     <constraint firstAttribute="trailing" secondItem="0zE-uW-kbp" secondAttribute="trailing" constant="20" id="WYc-Cv-NyB"/>
-                    <constraint firstItem="pXX-oU-LEc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="ads-3g-7yN"/>
+                    <constraint firstItem="tgz-3u-0dp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="eQh-ja-yk3"/>
                     <constraint firstItem="0zE-uW-kbp" firstAttribute="top" secondItem="PEE-od-7LG" secondAttribute="bottom" constant="20" id="nEL-dc-z9D"/>
-                    <constraint firstAttribute="trailing" secondItem="pXX-oU-LEc" secondAttribute="trailing" constant="20" id="otH-3Q-4vE"/>
+                    <constraint firstItem="tgz-3u-0dp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="zcC-li-f7g"/>
                     <constraint firstItem="YCJ-kf-EU1" firstAttribute="leading" secondItem="ves-4M-lWr" secondAttribute="trailing" constant="-2" id="zsM-Jf-QJI"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="disclaimerLabel" destination="A0B-Yt-WF2" id="7We-7O-uMi"/>
+                <outlet property="editButton" destination="db7-DB-Hwu" id="oje-MM-nqi"/>
                 <outlet property="entryFeeStackView" destination="OGk-xX-6eX" id="MJ2-f0-QZD"/>
                 <outlet property="entryFeeTitleLabel" destination="ves-4M-lWr" id="Nbm-dy-Xo4"/>
                 <outlet property="entryFeeTooltip" destination="YCJ-kf-EU1" id="hBB-wn-WNZ"/>
@@ -174,7 +192,7 @@
                 <outlet property="successFeeValueLabel" destination="cOC-PX-TV1" id="kml-fh-ALn"/>
                 <outlet property="titleLabel" destination="pXX-oU-LEc" id="KjN-eR-gC7"/>
             </connections>
-            <point key="canvasLocation" x="137.59999999999999" y="-121.4392803598201"/>
+            <point key="canvasLocation" x="236.80000000000001" y="-124.58770614692655"/>
         </tableViewCell>
     </objects>
     <resources>

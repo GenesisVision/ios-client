@@ -69,11 +69,11 @@ final class FilterViewModel {
         self.filterType = filterType
         switch filterType {
         case .programs:
-            rows = [.levels, .currency, .sort, .dateRange, .tags]
+            rows = [.currency, .dateRange, .sort]
         case .follows:
-            rows = [.sort, .dateRange, .tags]
+            rows = [.dateRange, .sort]
         case .funds:
-            rows = [.sort, .dateRange, .assets]
+            rows = [.dateRange, .sort]
         }
         
         self.router = router
@@ -142,7 +142,7 @@ final class FilterViewModel {
                 }
             case .sort:
                 if let detail = sortingDelegateManager?.manager?.getSelectedSortingValue() {
-                    viewModels[idx].detail = detail
+                    viewModels[idx].detail = detail.rawValue
                 }
             case .tags, .assets:
                 if let detail = tagsDelegateManager?.manager?.getSelectedValues() {
@@ -282,7 +282,7 @@ final class FilterViewModel {
                 
                 tableViewCellViewModel = FilterTableViewCellViewModel(title: "Sort", detail: nil, detailImage: highToLowValue ? #imageLiteral(resourceName: "img_profit_filter_icon") : #imageLiteral(resourceName: "img_profit_filter_desc_icon"), switchOn: nil, style: .detail, delegate: nil)
                 if let selectedValue = sortingDelegateManager?.manager?.getSelectedSortingValue() {
-                    tableViewCellViewModel?.detail = selectedValue
+                    tableViewCellViewModel?.detail = selectedValue.rawValue
                 }
                 viewModels.append(tableViewCellViewModel!)
             case .tags, .assets:
@@ -424,7 +424,7 @@ extension FilterViewModel: SortingDelegate {
             let detail = manager.getSelectedSortingValue()
             let highToLowValue = manager.highToLowValue
             
-            viewModels[idx].detail = detail
+            viewModels[idx].detail = detail.rawValue
             viewModels[idx].detailImage = highToLowValue ? #imageLiteral(resourceName: "img_profit_filter_icon") : #imageLiteral(resourceName: "img_profit_filter_desc_icon")
         }
         

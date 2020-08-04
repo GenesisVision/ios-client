@@ -33,12 +33,14 @@ public struct FundInvestingDetailsList: Codable {
 
     public var owner: ProfilePublicShort?
 
+    public var tradingSchedule: TradingScheduleInfo?
+
     public var statistic: ProfitChart?
 
     public var personalDetails: PersonalInvestingFundDetailsList?
 
     public var balance: AmountWithCurrency?
-    public init(_id: UUID? = nil, logoUrl: String? = nil, url: String? = nil, color: String? = nil, title: String? = nil, _description: String? = nil, creationDate: Date? = nil, investorsCount: Int? = nil, totalAssetsCount: Int? = nil, topFundAssets: [FundAssetPercent]? = nil, owner: ProfilePublicShort? = nil, statistic: ProfitChart? = nil, personalDetails: PersonalInvestingFundDetailsList? = nil, balance: AmountWithCurrency? = nil) { 
+    public init(_id: UUID? = nil, logoUrl: String? = nil, url: String? = nil, color: String? = nil, title: String? = nil, _description: String? = nil, creationDate: Date? = nil, investorsCount: Int? = nil, totalAssetsCount: Int? = nil, topFundAssets: [FundAssetPercent]? = nil, owner: ProfilePublicShort? = nil, tradingSchedule: TradingScheduleInfo? = nil, statistic: ProfitChart? = nil, personalDetails: PersonalInvestingFundDetailsList? = nil, balance: AmountWithCurrency? = nil) { 
         self._id = _id
         self.logoUrl = logoUrl
         self.url = url
@@ -50,6 +52,7 @@ public struct FundInvestingDetailsList: Codable {
         self.totalAssetsCount = totalAssetsCount
         self.topFundAssets = topFundAssets
         self.owner = owner
+        self.tradingSchedule = tradingSchedule
         self.statistic = statistic
         self.personalDetails = personalDetails
         self.balance = balance
@@ -66,6 +69,7 @@ public struct FundInvestingDetailsList: Codable {
         case totalAssetsCount
         case topFundAssets
         case owner
+        case tradingSchedule
         case statistic
         case personalDetails
         case balance

@@ -35,7 +35,7 @@ open class FileAPI {
      - parameter uploadedFile: (form)  (optional)     - parameter location: (query)  (optional)
 
      - returns: RequestBuilder<UploadResult> 
-     */
+     *///curl -X POST "https://red.genesis.vision/api/v2.0/file/upload" -H "accept: text/plain" -H "Content-Type: multipart/form-data" -F "uploadedFile=@inx960x640.jpg;type=image/jpeg"
     open class func uploadFileWithRequestBuilder(uploadedFile: Data? = nil, location: ImageLocation? = nil) -> RequestBuilder<UploadResult> {
         let path = "/v2.0/file/upload"
         let URLString = SwaggerClientAPI.basePath + path

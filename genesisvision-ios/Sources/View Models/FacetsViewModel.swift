@@ -56,6 +56,84 @@ final class FacetsViewModel: ListViewModelProtocolWithFacets {
         
         filterModel.sortingModel.sortType = sortType.rawValue
         
+        if let facetSortType = facet.sortType {
+            switch facetSortType {
+            case .new:
+                switch assetType {
+                case ._none:
+                    filterModel.sortingModel.selectedSorting = ProgramsFilterSorting.byNewDesc
+                case .program:
+                    filterModel.sortingModel.selectedSorting = ProgramsFilterSorting.byNewDesc
+                case .fund:
+                    filterModel.sortingModel.selectedSorting = FundsFilterSorting.byNewDesc
+                case .follow:
+                    filterModel.sortingModel.selectedSorting = FollowFilterSorting.byNewDesc
+                }
+            case .top:
+                switch assetType {
+                case ._none:
+                    filterModel.sortingModel.selectedSorting = ProgramsFilterSorting.byProfitDesc
+                case .program:
+                    filterModel.sortingModel.selectedSorting = ProgramsFilterSorting.byProfitDesc
+                case .fund:
+                    filterModel.sortingModel.selectedSorting = FundsFilterSorting.byProfitDesc
+                case .follow:
+                    filterModel.sortingModel.selectedSorting = FollowFilterSorting.byProfitDesc
+                }
+            case .weeklyTop:
+                switch assetType {
+                case ._none:
+                    filterModel.sortingModel.selectedSorting = ProgramsFilterSorting.byProfitDesc
+                case .program:
+                    filterModel.sortingModel.selectedSorting = ProgramsFilterSorting.byProfitDesc
+                case .fund:
+                    filterModel.sortingModel.selectedSorting = FundsFilterSorting.byProfitDesc
+                case .follow:
+                    filterModel.sortingModel.selectedSorting = FollowFilterSorting.byProfitDesc
+                }
+            case .popular:
+                switch assetType {
+                case ._none:
+                    filterModel.sortingModel.selectedSorting = ProgramsFilterSorting.byInvestorsDesc
+                case .program:
+                    filterModel.sortingModel.selectedSorting = ProgramsFilterSorting.byInvestorsDesc
+                case .fund:
+                    filterModel.sortingModel.selectedSorting = FundsFilterSorting.byInvestorsDesc
+                case .follow:
+                    filterModel.sortingModel.selectedSorting = FollowFilterSorting.bySubscribersDesc
+                }
+            case .toLevelUp:
+                break
+            case .mostReliable:
+                break
+            case .trading:
+                break
+            case .investing:
+                break
+            case .aum:
+                break
+            case .fundsChallenge:
+                break
+            }
+        }
+        
+        if let facetTimeFrame = facet.timeframe {
+            switch facetTimeFrame {
+            case .day:
+                filterModel.dateRangeModel = .init(dateRangeType: .day, dateFrom: Date(), dateTo: Date().removeDays(1))
+            case .week:
+                filterModel.dateRangeModel = .init(dateRangeType: .week, dateFrom: Date(), dateTo: Date().removeDays(7))
+            case .month:
+                filterModel.dateRangeModel = .init(dateRangeType: .month, dateFrom: Date(), dateTo: Date().removeMonths(1))
+            case .threeMonths:
+                filterModel.dateRangeModel = .init(dateRangeType: .custom, dateFrom: Date().removeMonths(3), dateTo: Date())
+            case .year:
+                filterModel.dateRangeModel = .init(dateRangeType: .year, dateFrom: Date(), dateTo: Date().removeYears(1))
+            case .allTime:
+                filterModel.dateRangeModel = .init(dateRangeType: .all, dateFrom: Date().removeYears(20), dateTo: Date())
+            }
+        }
+        
         router.show(routeType: .showAssetList(filterModel: filterModel, assetType: assetType))
     }
     func numberOfItems(in section: Int) -> Int {

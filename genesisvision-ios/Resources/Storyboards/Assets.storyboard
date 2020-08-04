@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -79,6 +79,41 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f6g-4y-p9L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1536.8" y="914.392803598201"/>
+        </scene>
+        <!--Create Fund Assets List View Controller-->
+        <scene sceneID="tUO-Ry-Slc">
+            <objects>
+                <viewController storyboardIdentifier="CreateFundAssetsListViewController" id="NFT-aT-tCh" customClass="CreateFundAssetsListViewController" customModule="GV_DEBUG" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fKy-9F-Pjr">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JGs-jL-VGs">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="4qn-RU-Ufu" id="41M-b1-8rX"/>
+                                    <outlet property="delegate" destination="4qn-RU-Ufu" id="Mb1-VD-Zl6"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="JGs-jL-VGs" firstAttribute="top" secondItem="uml-td-sVF" secondAttribute="top" id="7UA-5e-2oE"/>
+                            <constraint firstItem="JGs-jL-VGs" firstAttribute="leading" secondItem="uml-td-sVF" secondAttribute="leading" id="ajk-Se-sZy"/>
+                            <constraint firstItem="JGs-jL-VGs" firstAttribute="trailing" secondItem="uml-td-sVF" secondAttribute="trailing" id="jua-qa-d1U"/>
+                            <constraint firstAttribute="bottom" secondItem="JGs-jL-VGs" secondAttribute="bottom" id="nwI-wA-FOA"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="uml-td-sVF"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="JGs-jL-VGs" id="3MJ-fA-T4c"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mSa-Ih-srK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1536" y="1592"/>
         </scene>
         <!--Filters View Controller-->
         <scene sceneID="1ZW-ud-iiu">

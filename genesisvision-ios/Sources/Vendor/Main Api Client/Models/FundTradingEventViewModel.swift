@@ -13,27 +13,21 @@ public struct FundTradingEventViewModel: Codable {
 
     public var date: Date?
 
-    public var type: FundTradingEventType?
+    public var soldAmount: Double?
 
-    /** Investment/withdrawal/funds challenge amount, sold amount for trade */
-    public var amount: Double?
+    public var soldAsset: BasePlatformAsset?
 
-    public var asset: BasePlatformAsset?
-
-    /** Only for trades */
     public var boughtAmount: Double?
 
     public var boughtAsset: BasePlatformAsset?
 
-    /** Only for trades */
     public var commission: Double?
 
     public var commissionCurrency: String?
-    public init(date: Date? = nil, type: FundTradingEventType? = nil, amount: Double? = nil, asset: BasePlatformAsset? = nil, boughtAmount: Double? = nil, boughtAsset: BasePlatformAsset? = nil, commission: Double? = nil, commissionCurrency: String? = nil) { 
+    public init(date: Date? = nil, soldAmount: Double? = nil, soldAsset: BasePlatformAsset? = nil, boughtAmount: Double? = nil, boughtAsset: BasePlatformAsset? = nil, commission: Double? = nil, commissionCurrency: String? = nil) { 
         self.date = date
-        self.type = type
-        self.amount = amount
-        self.asset = asset
+        self.soldAmount = soldAmount
+        self.soldAsset = soldAsset
         self.boughtAmount = boughtAmount
         self.boughtAsset = boughtAsset
         self.commission = commission

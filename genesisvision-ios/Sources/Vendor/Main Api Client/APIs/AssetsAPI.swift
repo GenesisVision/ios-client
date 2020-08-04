@@ -678,7 +678,7 @@ open class AssetsAPI {
     }
 
     /**
-     Create an investment program
+     Create an investment program from trading account
      - parameter body: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -694,7 +694,7 @@ open class AssetsAPI {
 
 
     /**
-     Create an investment program
+     Create an investment program from trading account
      - POST /v2.0/assets/programs/fromaccount/create
      - API Key:
        - type: apiKey Authorization 
@@ -784,6 +784,44 @@ open class AssetsAPI {
         let _idPreEscape = "\(_id)"
         let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
+
+        let url = URLComponents(string: URLString)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+    }
+
+    /**
+     Create an investment program from exchange account
+     - parameter body: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func makeExchangeAccountProgram(body: MakeExchangeAccountProgram? = nil, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        makeExchangeAccountProgramWithRequestBuilder(body: body).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
+        }
+    }
+
+
+    /**
+     Create an investment program from exchange account
+     - POST /v2.0/assets/programs/fromexchangeaccount/create
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter body: (body)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func makeExchangeAccountProgramWithRequestBuilder(body: MakeExchangeAccountProgram? = nil) -> RequestBuilder<Void> {
+        let path = "/v2.0/assets/programs/fromexchangeaccount/create"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
 

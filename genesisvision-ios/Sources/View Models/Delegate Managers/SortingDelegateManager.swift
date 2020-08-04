@@ -16,6 +16,28 @@ enum SortingType {
     case programs, funds, follows, tradesOpen, trades, signalTradesOpen
 }
 
+enum SortingValue: String {
+    case profit = "Profit"
+    case level = "Level"
+    case endPeriod = "End of period"
+    case equity = "Equity"
+    case title = "Title"
+    case new = "New"
+    case drawdown = "Drawdown"
+    case trades = "Trades"
+    case subscribers = "Subscribers"
+    case size = "Size"
+    case investors = "Investors"
+    case date = "Date"
+    case ticket = "Ticket"
+    case symbol = "Symbol"
+    case direction = "Direction"
+    case volume = "Volume"
+    case price = "Price"
+    case levelProgress = "Level progress"
+    case value = "Value"
+}
+
 class SortingManager: NSObject {
 
     var sortingType: SortingType = .programs
@@ -23,7 +45,7 @@ class SortingManager: NSObject {
     var highToLowValue: Bool = true
     var selectedIndex: Int = 0
     
-    var sortingValues: [String]!
+    var sortingValues: [SortingValue]!
     
     init(_ sortingType: SortingType) {
         super.init()
@@ -38,20 +60,26 @@ class SortingManager: NSObject {
         let selectedValue = getSelectedSortingValue()
         
         switch selectedValue {
-        case "profit":
+        case .profit:
             return highToLowValue ? .byProfitDesc : .byProfitAsc
-        case "equity":
+        case .equity:
             return highToLowValue ? .byEquityDesc : .byEquityAsc
-        case "level":
+        case .level:
             return highToLowValue ? .byLevelDesc : .byLevelAsc
-        case "drawdown":
-            return highToLowValue ? .byDrawdownDesc : .byDrawdownAsc
-        case "investors":
-            return highToLowValue ? .byInvestorsDesc : .byInvestorsAsc
-        case "title":
+        case .title:
             return highToLowValue ? .byTitleDesc : .byTitleAsc
-        case "new":
+        case .new:
             return highToLowValue ? .byNewDesc : .byNewAsc
+        case .endPeriod:
+            return highToLowValue ? .byPeriodDesc : .byPeriodAsc
+        case .investors:
+            return highToLowValue ? .byInvestorsDesc : .byInvestorsAsc
+        case .drawdown:
+            return highToLowValue ? .byDrawdownDesc : .byDrawdownAsc
+        case .levelProgress:
+            return highToLowValue ? .byLevelProgressDesc : .byLevelProgressAsc
+        case .value:
+            return highToLowValue ? .byValueDesc : .byValueAsc
         default:
             return highToLowValue ? .byProfitDesc : .byProfitAsc
         }
@@ -60,18 +88,20 @@ class SortingManager: NSObject {
         let selectedValue = getSelectedSortingValue()
         
         switch selectedValue {
-        case "profit":
+        case .profit:
             return highToLowValue ? .byProfitDesc : .byProfitAsc
-        case "level":
-            return highToLowValue ? .bySubscribersDesc : .bySubscribersAsc
-        case "drawdown":
+        case .drawdown:
             return highToLowValue ? .byDrawdownDesc : .byDrawdownAsc
-        case "trades":
+        case .trades:
             return highToLowValue ? .byTradesDesc : .byTradesAsc
-        case "title":
+        case .title:
             return highToLowValue ? .byTitleDesc : .byTitleAsc
-        case "new":
+        case .new:
             return highToLowValue ? .byNewDesc : .byNewAsc
+        case .subscribers:
+            return highToLowValue ? .bySubscribersDesc : .bySubscribersAsc
+        case .equity:
+            return highToLowValue ? .byEquityDesc : .byEquityAsc
         default:
             return highToLowValue ? .byProfitDesc : .byProfitAsc
         }
@@ -80,16 +110,20 @@ class SortingManager: NSObject {
         let selectedValue = getSelectedSortingValue()
         
         switch selectedValue {
-        case "profit":
+        case .profit:
             return highToLowValue ? .byProfitDesc : .byProfitAsc
-        case "investors":
+        case .investors:
             return highToLowValue ? .byInvestorsDesc : .byInvestorsAsc
-        case "drawdown":
+        case .drawdown:
             return highToLowValue ? .byDrawdownDesc : .byDrawdownAsc
-        case "title":
+        case .title:
             return highToLowValue ? .byTitleDesc : .byTitleAsc
-        case "new":
+        case .new:
             return highToLowValue ? .byNewDesc : .byNewAsc
+        case .size:
+            return highToLowValue ? .bySizeDesc : .bySizeAsc
+        case .value:
+            return highToLowValue ? .byValueDesc : .byValueAsc
         default:
             return highToLowValue ? .byProfitDesc : .byProfitAsc
         }
@@ -98,85 +132,63 @@ class SortingManager: NSObject {
         let selectedValue = getSelectedSortingValue()
         
         switch selectedValue {
-        case "date":
-            return highToLowValue ? .byDateDesc : .byDateAsc
-        case "ticket":
-            return highToLowValue ? .byTicketDesc : .byTicketAsc
-        case "symbol":
-            return highToLowValue ? .bySymbolDesc : .bySymbolAsc
-        case "direction":
-            return highToLowValue ? .byDirectionDesc : .byDirectionAsc
-        case "volume":
-            return highToLowValue ? .byVolumeDesc : .byVolumeAsc
-        case "price":
-            return highToLowValue ? .byPriceDesc : .byPriceAsc
-        case "profit":
+        case .profit:
             return highToLowValue ? .byProfitDesc : .byProfitAsc
-        default:
+        case .date:
             return highToLowValue ? .byDateDesc : .byDateAsc
+        case .ticket:
+            return highToLowValue ? .byTicketDesc : .byTicketAsc
+        case .symbol:
+            return highToLowValue ? .bySymbolDesc : .bySymbolAsc
+        case .direction:
+            return highToLowValue ? .byDirectionDesc : .byDirectionAsc
+        case .volume:
+            return highToLowValue ? .byVolumeDesc : .byVolumeAsc
+        case .price:
+            return highToLowValue ? .byPriceDesc : .byPriceAsc
+        default:
+            return highToLowValue ? .byProfitDesc : .byProfitAsc
         }
     }
     private func getTradesSelectedSorting() -> TradeSorting {
         let selectedValue = getSelectedSortingValue()
         
+        
         switch selectedValue {
-        case "date":
-            return highToLowValue ? .byDateDesc : .byDateAsc
-        case "ticket":
-            return highToLowValue ? .byTicketDesc : .byTicketAsc
-        case "symbol":
-            return highToLowValue ? .bySymbolDesc : .bySymbolAsc
-        case "direction":
-            return highToLowValue ? .byDirectionDesc : .byDirectionAsc
-        case "volume":
-            return highToLowValue ? .byVolumeDesc : .byVolumeAsc
-        case "price":
-            return highToLowValue ? .byPriceDesc : .byPriceAsc
-        case "profit":
+        case .profit:
             return highToLowValue ? .byProfitDesc : .byProfitAsc
-
-        default:
+        case .date:
             return highToLowValue ? .byDateDesc : .byDateAsc
+        case .ticket:
+            return highToLowValue ? .byTicketDesc : .byTicketAsc
+        case .symbol:
+            return highToLowValue ? .bySymbolDesc : .bySymbolAsc
+        case .direction:
+            return highToLowValue ? .byDirectionDesc : .byDirectionAsc
+        case .volume:
+            return highToLowValue ? .byVolumeDesc : .byVolumeAsc
+        case .price:
+            return highToLowValue ? .byPriceDesc : .byPriceAsc
+        default:
+            return highToLowValue ? .byProfitDesc : .byProfitAsc
         }
     }
-//    private func getSignalTradesOpenSelectedSorting() -> SignalAPI.Sorting_getOpenSignalTrades {
-//        let selectedValue = getSelectedSortingValue()
-//
-//        switch selectedValue {
-//        case "date":
-//            return highToLowValue ? .byDateDesc : .byDateAsc
-//        case "ticket":
-//            return highToLowValue ? .byTicketDesc : .byTicketAsc
-//        case "symbol":
-//            return highToLowValue ? .bySymbolDesc : .bySymbolAsc
-//        case "direction":
-//            return highToLowValue ? .byDirectionDesc : .byDirectionAsc
-//        case "volume":
-//            return highToLowValue ? .byVolumeDesc : .byVolumeAsc
-//        case "price":
-//            return highToLowValue ? .byPriceDesc : .byPriceAsc
-//        case "profit":
-//            return highToLowValue ? .byProfitDesc : .byProfitAsc
-//        default:
-//            return highToLowValue ? .byDateDesc : .byDateAsc
-//        }
-//    }
     
     private func setup() {
         switch sortingType {
         case .programs:
-            sortingValues = ["profit", "equity", "level", "drawdown", "title", "investors", "new"]
+            sortingValues = [.profit, .level, .endPeriod, .equity, .title]
         case .follows:
-            sortingValues = ["profit", "level", "drawdown", "trades", "title", "new"]
+            sortingValues = [.profit, .equity, .title, .subscribers, .drawdown]
         case .funds:
-            sortingValues = ["profit", "investors", "drawdown", "title", "new"]
+            sortingValues = [.profit, .size, .title, .investors, .drawdown]
         case .tradesOpen, .trades, .signalTradesOpen:
-            sortingValues = ["date", "ticket", "symbol", "direction", "volume", "price", "profit"]
+            sortingValues = [.date, .ticket, .symbol, .direction, .volume, .price, .profit]
         }
     }
     
     // MARK: - Public methods
-    func getSelectedSortingValue() -> String {
+    func getSelectedSortingValue() -> SortingValue {
         return sortingValues[selectedIndex]
     }
     
@@ -189,7 +201,7 @@ class SortingManager: NSObject {
     }
     
     func sortTitle() -> String? {
-        return "Sort by " + getSelectedSortingValue()
+        return "Sort by " + getSelectedSortingValue().rawValue
     }
     
     func getSelectedSorting() -> Any {
@@ -250,7 +262,7 @@ final class SortingDelegateManager: NSObject, UITableViewDelegate, UITableViewDa
             return cell
         }
         
-        let title = manager?.sortingValues[indexPath.row]
+        let title = manager?.sortingValues[indexPath.row].rawValue
         let isSelected = indexPath.row == manager?.selectedIndex
         cell.configure(title: title, selected: isSelected)
         

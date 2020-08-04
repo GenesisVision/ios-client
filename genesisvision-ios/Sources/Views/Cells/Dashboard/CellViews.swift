@@ -272,9 +272,9 @@ class CreateFundStackView: ActionStackView {
         assetStackView.configure(viewModel)
         
         feesSettingsTitle.text = "Fees settings"
-        entryFeeView.titleLabel.text = "Management fee"
+        entryFeeView.titleLabel.text = "Entry fee"
         entryFeeView.textField.text = viewModel.request.entryFee?.toString() ?? ""
-        entryFeeView.subtitleLabel.text = "A management fee is a fee charged to investors upon their investment to a GV Fund. The maximum management fee is 10 %"
+        entryFeeView.subtitleLabel.text = "A entry fee is a fee charged to investors upon their investment to a GV Fund. The maximum entry fee is 10 %"
         exitFeeView.titleLabel.text = "Exit fee"
         exitFeeView.textField.text = viewModel.request.exitFee?.toString() ?? ""
         exitFeeView.subtitleLabel.text = "An exit fee is a fee charged to investors when they redeem shares from a GV Fund. The maximum exit fee is 10 %"

@@ -9,7 +9,10 @@
 import Foundation
 
 enum FundInfoRouteType {
-    case invest(assetId: String), withdraw(assetId: String), manager(managerId: String)
+    case invest(assetId: String)
+    case withdraw(assetId: String)
+    case manager(managerId: String)
+    case edit(assetId: String)
 }
 
 class FundInfoRouter: Router {
@@ -22,6 +25,8 @@ class FundInfoRouter: Router {
             withdraw(with: assetId)
         case .manager(let managerId):
             showAssetDetails(with: managerId, assetType: ._none)
+        case .edit(let assetId):
+            edit(with: assetId)
         }
     }
     
@@ -43,6 +48,12 @@ class FundInfoRouter: Router {
         let router = FundWithdrawRouter(parentRouter: self)
         let viewModel = FundWithdrawViewModel(withRouter: router, assetId: assetId, detailProtocol: fundViewController)
         viewController.viewModel = viewModel
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func edit(with assetId: String) {
+        guard let viewController = ManageFundViewController.storyboardInstance(.fund) else { return }
+        
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

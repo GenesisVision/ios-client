@@ -222,8 +222,13 @@ open class BottomSheet {
                                    buttonTarget: Any? = nil,
                                    buttonSelected: Bool = false,
                                    _  configurationHandler: ((UINavigationBar) -> Void)? = nil) {
+//            self.bar?.removeFromSuperview()
+//            self.bar = nil
+            //guard !hasBar else { fatalError("UIToolbar or UINavigationBar can only have one") }
             
-            guard !hasBar else { fatalError("UIToolbar or UINavigationBar can only have one") }
+            if self.bar != nil {
+                containerView.willRemoveSubview(self.bar!)
+            }
             let navigationBar = UINavigationBar()
             navigationBar.isTranslucent = false
             navigationBar.backgroundColor = containerViewBackgroundColor

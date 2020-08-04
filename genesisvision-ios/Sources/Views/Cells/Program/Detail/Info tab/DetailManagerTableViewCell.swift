@@ -42,6 +42,7 @@ class DetailManagerTableViewCell: UITableViewCell {
         tintColor = UIColor.Cell.title
         accessoryView?.backgroundColor = UIColor.BaseView.bg
         selectionStyle = .none
+        isUserInteractionEnabled = true
     }
 }
 

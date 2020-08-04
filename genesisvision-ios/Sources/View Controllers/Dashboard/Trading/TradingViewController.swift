@@ -42,14 +42,46 @@ class TradingViewController: ListViewController {
         navigationItem.titleView = titleView
     }
     
-    private func createFund() {
-        guard let vc = CreateFundViewController.storyboardInstance(.dashboard) else { return }
-        vc.title = "Create Fund"
-        vc.viewModel = CreateFundViewModel(vc, addAssetsProtocol: vc)
-        let nav = BaseNavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .fullScreen
-        present(nav, animated: true, completion: nil)
+    @objc private func createFund() {
+        self.dismiss(animated: true) {
+            guard let vc = CreateFundViewController.storyboardInstance(.dashboard) else { return }
+            vc.title = "Create Fund"
+            vc.viewModel = CreateFundViewModel(vc, addAssetsProtocol: vc)
+            let nav = BaseNavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            self.present(nav, animated: true, completion: nil)
+        }
     }
+    
+    private func showCreateFundBottomSheet() {
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.initializeHeight = CGFloat(view.height*0.15)
+        
+        let actionLabel = TitleLabel()
+        
+        actionLabel.font = UIFont.getFont(.regular, size: 16)
+        actionLabel.textColor = UIColor.Common.darkGray
+        actionLabel.text = "Create Fund"
+        actionLabel.isUserInteractionEnabled = true
+        actionLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        let gest = UITapGestureRecognizer(target: self, action: #selector(createFund))
+        actionLabel.addGestureRecognizer(gest)
+        
+        let view = UIView()
+        view.addSubview(actionLabel)
+        
+        actionLabel.anchor(top: view.topAnchor,
+                           leading: view.leadingAnchor,
+                           bottom: view.bottomAnchor,
+                           trailing: view.trailingAnchor,
+                           padding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
+        
+        bottomSheetController.addContentsView(view)
+        bottomSheetController.lineViewIsHidden = true
+        bottomSheetController.present()
+    }
+    
     private func createAccount() {
         guard let vc = CreateAccountViewController.storyboardInstance(.dashboard) else { return }
         vc.title = "Create account"
@@ -132,7 +164,7 @@ extension TradingViewController: BaseTableViewProtocol {
                 vc.title = "Public"
                 navigationController?.pushViewController(vc, animated: true)
             case .add:
-                self.createFund()
+                self.showCreateFundBottomSheet()
             default:
                 break
             }

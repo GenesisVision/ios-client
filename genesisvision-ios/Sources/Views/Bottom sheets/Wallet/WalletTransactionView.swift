@@ -130,7 +130,7 @@ extension WalletTransactionView {
             if let color = asset.color {
                 assetStackView.assetLogoImageView?.profilePhotoImageView?.backgroundColor = UIColor.hexColor(color)
             }
-            if let logo = asset.logoUrl, let fileUrl = getFileURL(fileName: logo) {
+            if let logo = asset.logoUrl, let fileUrl = getFileURL(fileName: logo), isPictureURL(url: fileUrl.absoluteString) {
                 assetStackView.assetLogoImageView?.profilePhotoImageView.kf.indicatorType = .activity
                 assetStackView.assetLogoImageView?.profilePhotoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
                 assetStackView.assetLogoImageView?.profilePhotoImageView.backgroundColor = .clear

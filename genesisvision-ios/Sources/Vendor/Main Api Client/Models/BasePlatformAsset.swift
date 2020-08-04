@@ -24,7 +24,9 @@ public struct BasePlatformAsset: Codable {
     public var color: String?
 
     public var url: String?
-    public init(_id: UUID? = nil, name: String? = nil, asset: String? = nil, _description: String? = nil, logoUrl: String? = nil, color: String? = nil, url: String? = nil) { 
+
+    public var provider: AssetProvider?
+    public init(_id: UUID? = nil, name: String? = nil, asset: String? = nil, _description: String? = nil, logoUrl: String? = nil, color: String? = nil, url: String? = nil, provider: AssetProvider? = nil) { 
         self._id = _id
         self.name = name
         self.asset = asset
@@ -32,6 +34,7 @@ public struct BasePlatformAsset: Codable {
         self.logoUrl = logoUrl
         self.color = color
         self.url = url
+        self.provider = provider
     }
     public enum CodingKeys: String, CodingKey { 
         case _id = "id"
@@ -41,6 +44,7 @@ public struct BasePlatformAsset: Codable {
         case logoUrl
         case color
         case url
+        case provider
     }
 
 }

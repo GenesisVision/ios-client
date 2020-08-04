@@ -11,7 +11,10 @@ import UIKit
 protocol InvestNowProtocol: class {
     func didTapInvestButton()
     func didTapEntryFeeTooltipButton(_ tooltipText: String)
+    func ditTapEditButton()
 }
+
+
 
 class InvestNowTableViewCell: UITableViewCell {
     // MARK: - Outlets
@@ -34,10 +37,15 @@ class InvestNowTableViewCell: UITableViewCell {
     @IBOutlet weak var successFeeTitleLabel: SubtitleLabel!
     
     @IBOutlet weak var investButton: ActionButton!
+    @IBOutlet weak var editButton: ActionButton! {
+        didSet {
+            editButton.configure(with: .custom(options: ActionButtonOptions(borderWidth: 0, borderColor: nil, fontSize: 16, bgColor: .clear, textColor: UIColor.primary, image: nil, rightPosition: true)))
+        }
+    }
     
     @IBOutlet weak var entryFeeTooltip: TooltipButton! {
         didSet {
-            entryFeeTooltip.tooltipText = String.Tooltitps.entryFee
+            entryFeeTooltip.tooltipText = String.Tooltitps.managementFee
             entryFeeTooltip.delegate = self
             entryFeeTooltip.isHidden = true
         }
@@ -51,7 +59,6 @@ class InvestNowTableViewCell: UITableViewCell {
     }
     
     weak var investNowProtocol: InvestNowProtocol?
-    
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -64,6 +71,10 @@ class InvestNowTableViewCell: UITableViewCell {
     // MARK: - Actions
     @IBAction func investButtonAction(_ sender: UIButton) {
         investNowProtocol?.didTapInvestButton()
+    }
+    
+    @IBAction func editButtonAction(_ sender: Any) {
+        investNowProtocol?.ditTapEditButton()
     }
 }
 

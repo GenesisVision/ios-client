@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -38,7 +38,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="540" height="40"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available to invest" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bls-dK-jFo" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="12.5" width="148" height="15"/>
+                                                        <rect key="frame" x="0.0" y="12.5" width="107" height="15"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="15" id="ESc-vG-1dD"/>
                                                         </constraints>
@@ -47,7 +47,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mjz-9f-hmz" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
-                                                        <rect key="frame" x="156" y="0.0" width="384" height="40"/>
+                                                        <rect key="frame" x="115" y="0.0" width="425" height="40"/>
                                                         <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -120,13 +120,13 @@
                                                         <rect key="frame" x="0.0" y="56" width="540" height="25"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available in wallet" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2bL-SH-TrD" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="4" width="181.5" height="17.5"/>
+                                                                <rect key="frame" x="0.0" y="4" width="134.5" height="17.5"/>
                                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wIr-F7-h15" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
-                                                                <rect key="frame" x="189.5" y="0.0" width="350.5" height="25"/>
+                                                                <rect key="frame" x="142.5" y="0.0" width="397.5" height="25"/>
                                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -508,7 +508,6 @@
                         <outlet property="availableToInvestTitleLabel" destination="bls-dK-jFo" id="cCP-v7-86V"/>
                         <outlet property="availableToInvestValueLabel" destination="mjz-9f-hmz" id="J2s-lC-yW1"/>
                         <outlet property="copyMaxValueButton" destination="Tdv-eA-6M1" id="7ij-2e-CH6"/>
-                        <outlet property="entryFeeValueLabel" destination="syP-KK-E6j" id="2Ki-Do-P0R"/>
                         <outlet property="gvCommissionTitleLabel" destination="DX3-qz-DYW" id="Uih-LT-IPw"/>
                         <outlet property="gvCommissionValueLabel" destination="vTN-AA-wsg" id="DIx-aP-Edt"/>
                         <outlet property="investButton" destination="Uun-QE-fnC" id="Rzl-5M-kQT"/>
@@ -516,6 +515,7 @@
                         <outlet property="investmentAmountTitleLabel" destination="8yj-d5-v4V" id="1q0-R8-dGM"/>
                         <outlet property="investmentAmountValueLabel" destination="0Se-nv-wyH" id="Aag-Qw-HKQ"/>
                         <outlet property="managementFeeTitleLabel" destination="cZI-Wf-lih" id="34D-9A-hlh"/>
+                        <outlet property="managementFeeValueLabel" destination="syP-KK-E6j" id="2Ki-Do-P0R"/>
                         <outlet property="numpadView" destination="k4A-Kz-3qk" id="KJb-Ca-ihR"/>
                         <outlet property="selectedWalletFromButton" destination="LD6-sX-0hy" id="4Ng-T3-Mi3"/>
                         <outlet property="selectedWalletFromTitleLabel" destination="L6l-tE-B3g" id="Epy-ql-0IQ"/>
@@ -547,13 +547,13 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="540" height="50"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You invested in program" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXo-aN-ZUB" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="16.5" width="247" height="17.5"/>
+                                                                <rect key="frame" x="0.0" y="16.5" width="192.5" height="17.5"/>
                                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="htZ-7m-1Nk" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
-                                                                <rect key="frame" x="255" y="0.0" width="285" height="50"/>
+                                                                <rect key="frame" x="200.5" y="0.0" width="339.5" height="50"/>
                                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -1163,13 +1163,13 @@
                                                         <rect key="frame" x="0.0" y="56" width="540" height="25"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available in wallet" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="paz-I2-YdD" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="4" width="181.5" height="17.5"/>
+                                                                <rect key="frame" x="0.0" y="4" width="134.5" height="17.5"/>
                                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C7h-57-Yay" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
-                                                                <rect key="frame" x="189.5" y="0.0" width="350.5" height="25"/>
+                                                                <rect key="frame" x="142.5" y="0.0" width="397.5" height="25"/>
                                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>

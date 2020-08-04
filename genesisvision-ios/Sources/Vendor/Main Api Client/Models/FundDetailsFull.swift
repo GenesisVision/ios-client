@@ -23,18 +23,21 @@ public struct FundDetailsFull: Codable {
 
     public var exitFeeCurrent: Double?
 
+    public var tradingSchedule: TradingScheduleInfo?
+
     public var assetsStructure: [FundAssetInfo]?
 
     public var personalDetails: PersonalFundDetails?
 
     public var owner: ProfilePublic?
-    public init(_id: UUID? = nil, publicInfo: AssetPublicDetails? = nil, entryFeeSelected: Double? = nil, entryFeeCurrent: Double? = nil, exitFeeSelected: Double? = nil, exitFeeCurrent: Double? = nil, assetsStructure: [FundAssetInfo]? = nil, personalDetails: PersonalFundDetails? = nil, owner: ProfilePublic? = nil) { 
+    public init(_id: UUID? = nil, publicInfo: AssetPublicDetails? = nil, entryFeeSelected: Double? = nil, entryFeeCurrent: Double? = nil, exitFeeSelected: Double? = nil, exitFeeCurrent: Double? = nil, tradingSchedule: TradingScheduleInfo? = nil, assetsStructure: [FundAssetInfo]? = nil, personalDetails: PersonalFundDetails? = nil, owner: ProfilePublic? = nil) { 
         self._id = _id
         self.publicInfo = publicInfo
         self.entryFeeSelected = entryFeeSelected
         self.entryFeeCurrent = entryFeeCurrent
         self.exitFeeSelected = exitFeeSelected
         self.exitFeeCurrent = exitFeeCurrent
+        self.tradingSchedule = tradingSchedule
         self.assetsStructure = assetsStructure
         self.personalDetails = personalDetails
         self.owner = owner
@@ -46,6 +49,7 @@ public struct FundDetailsFull: Codable {
         case entryFeeCurrent
         case exitFeeSelected
         case exitFeeCurrent
+        case tradingSchedule
         case assetsStructure
         case personalDetails
         case owner

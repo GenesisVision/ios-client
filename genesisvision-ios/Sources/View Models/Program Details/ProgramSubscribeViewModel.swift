@@ -28,14 +28,14 @@ final class ProgramSubscribeViewModel {
     
     var signalSubscription: SignalSubscription?
     
-    var tradingAccountListViewModel: TradingAccountListViewModel!
-    var tradingAccountListDataSource: TableViewDataSource!
+    var tradingAccountListViewModel: TradingAccountListViewModel?
+    var tradingAccountListDataSource: TableViewDataSource?
     
     var tradingAccounts: TradingAccountDetailsItemsViewModel? {
         didSet {
             if let items = tradingAccounts?.items, !items.isEmpty {
                 tradingAccountListViewModel = TradingAccountListViewModel(delegate, items: items, selectedIndex: 0)
-                tradingAccountListDataSource = TableViewDataSource(tradingAccountListViewModel)
+                tradingAccountListDataSource = TableViewDataSource(tradingAccountListViewModel!)
             }
         }
     }
@@ -134,6 +134,15 @@ final class ProgramSubscribeViewModel {
     }
     
     // MARK: - Public methods
+    
+    func fetch(completion: @escaping CompletionBlock) {
+        guard let assetId = assetId else { return }
+        SignalDataProvider.attachAccounts(assetId: assetId, completion: { (viewModel) in
+            self.tradingAccounts = viewModel
+        }, errorCompletion: completion)
+    }
+    
+    
     func getSelectedDescription() -> String {
         switch followType {
         case .follow, .edit:
@@ -153,7 +162,7 @@ final class ProgramSubscribeViewModel {
     }
     
     func getSelectedAccountType() -> String {
-        guard let login = tradingAccountListViewModel.selected()?.login, let currency = tradingAccountListViewModel.selected()?.currency?.rawValue else { return "" }
+        guard tradingAccountListViewModel != nil, let login = tradingAccountListViewModel!.selected()?.login, let currency = tradingAccountListViewModel!.selected()?.currency?.rawValue else { return "" }
         return login + " | " + currency
     }
     
@@ -240,7 +249,7 @@ final class ProgramSubscribeViewModel {
         if let mode = signalSubscription?.mode {
             attachToSignal.mode = SubscriptionMode(rawValue: mode.rawValue)
         }
-        if let tradingAccountId = tradingAccountListViewModel.selected()?._id {
+        if tradingAccountListViewModel != nil, let tradingAccountId = tradingAccountListViewModel!.selected()?._id {
             attachToSignal.tradingAccountId = tradingAccountId
         }
         
@@ -260,7 +269,7 @@ final class ProgramSubscribeViewModel {
             attachToSignal.mode = SubscriptionMode(rawValue: mode.rawValue)
         }
         
-        if let tradingAccountId = tradingAccountListViewModel.selected()?._id {
+        if tradingAccountListViewModel != nil, let tradingAccountId = tradingAccountListViewModel!.selected()?._id {
             attachToSignal.tradingAccountId = tradingAccountId
         }
         
@@ -270,7 +279,7 @@ final class ProgramSubscribeViewModel {
     }
     
     func unsubscribe(completion: @escaping CompletionBlock) {
-        guard let assetId = assetId, let tradingAccountId = tradingAccountListViewModel.selected()?._id else { return completion(.failure(errorType: .apiError(message: nil))) }
+        guard let assetId = assetId, tradingAccountListViewModel != nil, let tradingAccountId = tradingAccountListViewModel!.selected()?._id else { return completion(.failure(errorType: .apiError(message: nil))) }
     
         let model = DetachFromSignalProvider(tradingAccountId: tradingAccountId, mode: reasonMode)
         SignalDataProvider.detach(with: assetId, model: model, completion: completion)

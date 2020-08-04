@@ -20,7 +20,7 @@ extension AddFundAssetTableViewCellViewModel: CellViewModel {
 }
 
 protocol AddFundAssetTableViewCellProtocol: class {
-    func confirmAsset(_ asset: PlatformAsset?)
+    func confirmAsset(_ asset: PlatformAsset?) -> Bool
 }
 
 class AddFundAssetTableViewCell: UITableViewCell {

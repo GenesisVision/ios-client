@@ -17,7 +17,6 @@ extension String {
         static var totalPortfolio: String = "Total portfolio value – the value of all your tokens from all investment programs.".localized
         static var totalProfit: String = "Total profit – the total all–time manager’s profit.".localized
         static var balance: String = "Balance –  the amount of funds on a trading account.".localized
-        static var managementFee: String = "Management fee – an annual obligatory commission, regardless of the outcome (profit or loss).".localized
         static var successFee: String = "Success fee – a payment to the manager for successful trading, set as a percentage of your profit.".localized
         static var trades: String = "Trades – a history of financial operations conducted by the manager.".localized
         static var investors: String = "Investors – a number of investors who already invested in the manager.".localized
@@ -32,6 +31,6 @@ extension String {
         static var programDetails: String = totalProfit + "\n············································\n" + avgProfit + "\n············································\n" + balance + "\n············································\n" + investors
         
         static var dashboardHeader: String = portfolioProfit + "\n············································\n" + portfolioInvested + "\n············································\n" + portfolioValue
-        static var entryFee: String = "The managment fee is disabled for programs that have not reached level 3. It will be charged only for programs with level 3 or higher."
+        static var managementFee: String = "The сommission that is paid to the manager by an investor for the actual asset management period. Management fee is defined in annual percentage and is charged at the end of each reporting period."
     }
 }

@@ -419,7 +419,7 @@ open class DashboardAPI {
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
-  "total" : 3,
+  "total" : 1,
   "items" : [ {
     "owner" : {
       "personalDetails" : {
@@ -435,7 +435,7 @@ open class DashboardAPI {
     },
     "totalAssetsCount" : 6,
     "statistic" : {
-      "drawdown" : 5.637376656633329,
+      "drawdown" : 3.616076749251911,
       "chart" : [ {
         "date" : "2000-01-23T04:56:07.000+00:00",
         "value" : 0.8008281904610115
@@ -443,9 +443,17 @@ open class DashboardAPI {
         "date" : "2000-01-23T04:56:07.000+00:00",
         "value" : 0.8008281904610115
       } ],
-      "profit" : 5.962133916683182
+      "profit" : 9.301444243932576
     },
     "color" : "color",
+    "tradingSchedule" : {
+      "hourEnd" : 2,
+      "dayStart" : "Sunday",
+      "minuteEnd" : 7,
+      "hourStart" : 5,
+      "hasTradingSchedule" : true,
+      "minuteStart" : 5
+    },
     "topFundAssets" : [ {
       "name" : "name",
       "asset" : "asset",
@@ -465,15 +473,15 @@ open class DashboardAPI {
     "logoUrl" : "logoUrl",
     "url" : "url",
     "balance" : {
-      "amount" : 9.301444243932576,
+      "amount" : 7.386281948385884,
       "currency" : "Undefined"
     },
     "personalDetails" : {
       "canWithdraw" : true,
       "canInvest" : true,
       "isOwnAsset" : true,
-      "share" : 2.3021358869347655,
-      "value" : 7.061401241503109,
+      "share" : 2.027123023002322,
+      "value" : 4.145608029883936,
       "isFavorite" : true,
       "status" : "Pending"
     },
@@ -494,7 +502,7 @@ open class DashboardAPI {
     },
     "totalAssetsCount" : 6,
     "statistic" : {
-      "drawdown" : 5.637376656633329,
+      "drawdown" : 3.616076749251911,
       "chart" : [ {
         "date" : "2000-01-23T04:56:07.000+00:00",
         "value" : 0.8008281904610115
@@ -502,9 +510,17 @@ open class DashboardAPI {
         "date" : "2000-01-23T04:56:07.000+00:00",
         "value" : 0.8008281904610115
       } ],
-      "profit" : 5.962133916683182
+      "profit" : 9.301444243932576
     },
     "color" : "color",
+    "tradingSchedule" : {
+      "hourEnd" : 2,
+      "dayStart" : "Sunday",
+      "minuteEnd" : 7,
+      "hourStart" : 5,
+      "hasTradingSchedule" : true,
+      "minuteStart" : 5
+    },
     "topFundAssets" : [ {
       "name" : "name",
       "asset" : "asset",
@@ -524,15 +540,15 @@ open class DashboardAPI {
     "logoUrl" : "logoUrl",
     "url" : "url",
     "balance" : {
-      "amount" : 9.301444243932576,
+      "amount" : 7.386281948385884,
       "currency" : "Undefined"
     },
     "personalDetails" : {
       "canWithdraw" : true,
       "canInvest" : true,
       "isOwnAsset" : true,
-      "share" : 2.3021358869347655,
-      "value" : 7.061401241503109,
+      "share" : 2.027123023002322,
+      "value" : 4.145608029883936,
       "isFavorite" : true,
       "status" : "Pending"
     },
@@ -603,7 +619,7 @@ open class DashboardAPI {
     },
     "periodDuration" : 5,
     "statistic" : {
-      "drawdown" : 5.637376656633329,
+      "drawdown" : 3.616076749251911,
       "chart" : [ {
         "date" : "2000-01-23T04:56:07.000+00:00",
         "value" : 0.8008281904610115
@@ -611,7 +627,7 @@ open class DashboardAPI {
         "date" : "2000-01-23T04:56:07.000+00:00",
         "value" : 0.8008281904610115
       } ],
-      "profit" : 5.962133916683182
+      "profit" : 9.301444243932576
     },
     "color" : "color",
     "level" : 6,
@@ -628,7 +644,7 @@ open class DashboardAPI {
       "name" : "name"
     } ],
     "balance" : {
-      "amount" : 9.301444243932576,
+      "amount" : 7.386281948385884,
       "currency" : "Undefined"
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
@@ -682,7 +698,7 @@ open class DashboardAPI {
     },
     "periodDuration" : 5,
     "statistic" : {
-      "drawdown" : 5.637376656633329,
+      "drawdown" : 3.616076749251911,
       "chart" : [ {
         "date" : "2000-01-23T04:56:07.000+00:00",
         "value" : 0.8008281904610115
@@ -690,7 +706,7 @@ open class DashboardAPI {
         "date" : "2000-01-23T04:56:07.000+00:00",
         "value" : 0.8008281904610115
       } ],
-      "profit" : 5.962133916683182
+      "profit" : 9.301444243932576
     },
     "color" : "color",
     "level" : 6,
@@ -707,7 +723,7 @@ open class DashboardAPI {
       "name" : "name"
     } ],
     "balance" : {
-      "amount" : 9.301444243932576,
+      "amount" : 7.386281948385884,
       "currency" : "Undefined"
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
@@ -801,10 +817,10 @@ open class DashboardAPI {
       "leverage" : 1,
       "supportedCurrencies" : [ null, null ],
       "balances" : [ {
-        "amount" : 9.301444243932576,
+        "amount" : 7.386281948385884,
         "currency" : "Undefined"
       }, {
-        "amount" : 9.301444243932576,
+        "amount" : 7.386281948385884,
         "currency" : "Undefined"
       } ],
       "balance" : 6.027456183070403,
@@ -816,7 +832,7 @@ open class DashboardAPI {
       "status" : "Pending"
     },
     "statistic" : {
-      "drawdown" : 5.637376656633329,
+      "drawdown" : 3.616076749251911,
       "chart" : [ {
         "date" : "2000-01-23T04:56:07.000+00:00",
         "value" : 0.8008281904610115
@@ -824,7 +840,7 @@ open class DashboardAPI {
         "date" : "2000-01-23T04:56:07.000+00:00",
         "value" : 0.8008281904610115
       } ],
-      "profit" : 5.962133916683182
+      "profit" : 9.301444243932576
     },
     "credentials" : {
       "apiKey" : "apiKey",
@@ -841,6 +857,14 @@ open class DashboardAPI {
       },
       "fundDetails" : {
         "totalAssetsCount" : 0,
+        "tradingSchedule" : {
+          "hourEnd" : 2,
+          "dayStart" : "Sunday",
+          "minuteEnd" : 7,
+          "hourStart" : 5,
+          "hasTradingSchedule" : true,
+          "minuteStart" : 5
+        },
         "topFundAssets" : [ {
           "name" : "name",
           "asset" : "asset",
@@ -897,10 +921,10 @@ open class DashboardAPI {
       "leverage" : 1,
       "supportedCurrencies" : [ null, null ],
       "balances" : [ {
-        "amount" : 9.301444243932576,
+        "amount" : 7.386281948385884,
         "currency" : "Undefined"
       }, {
-        "amount" : 9.301444243932576,
+        "amount" : 7.386281948385884,
         "currency" : "Undefined"
       } ],
       "balance" : 6.027456183070403,
@@ -912,7 +936,7 @@ open class DashboardAPI {
       "status" : "Pending"
     },
     "statistic" : {
-      "drawdown" : 5.637376656633329,
+      "drawdown" : 3.616076749251911,
       "chart" : [ {
         "date" : "2000-01-23T04:56:07.000+00:00",
         "value" : 0.8008281904610115
@@ -920,7 +944,7 @@ open class DashboardAPI {
         "date" : "2000-01-23T04:56:07.000+00:00",
         "value" : 0.8008281904610115
       } ],
-      "profit" : 5.962133916683182
+      "profit" : 9.301444243932576
     },
     "credentials" : {
       "apiKey" : "apiKey",
@@ -937,6 +961,14 @@ open class DashboardAPI {
       },
       "fundDetails" : {
         "totalAssetsCount" : 0,
+        "tradingSchedule" : {
+          "hourEnd" : 2,
+          "dayStart" : "Sunday",
+          "minuteEnd" : 7,
+          "hourStart" : 5,
+          "hasTradingSchedule" : true,
+          "minuteStart" : 5
+        },
         "topFundAssets" : [ {
           "name" : "name",
           "asset" : "asset",
@@ -1079,10 +1111,10 @@ open class DashboardAPI {
       "leverage" : 1,
       "supportedCurrencies" : [ null, null ],
       "balances" : [ {
-        "amount" : 9.301444243932576,
+        "amount" : 7.386281948385884,
         "currency" : "Undefined"
       }, {
-        "amount" : 9.301444243932576,
+        "amount" : 7.386281948385884,
         "currency" : "Undefined"
       } ],
       "balance" : 6.027456183070403,
@@ -1094,7 +1126,7 @@ open class DashboardAPI {
       "status" : "Pending"
     },
     "statistic" : {
-      "drawdown" : 5.637376656633329,
+      "drawdown" : 3.616076749251911,
       "chart" : [ {
         "date" : "2000-01-23T04:56:07.000+00:00",
         "value" : 0.8008281904610115
@@ -1102,7 +1134,7 @@ open class DashboardAPI {
         "date" : "2000-01-23T04:56:07.000+00:00",
         "value" : 0.8008281904610115
       } ],
-      "profit" : 5.962133916683182
+      "profit" : 9.301444243932576
     },
     "credentials" : {
       "apiKey" : "apiKey",
@@ -1119,6 +1151,14 @@ open class DashboardAPI {
       },
       "fundDetails" : {
         "totalAssetsCount" : 0,
+        "tradingSchedule" : {
+          "hourEnd" : 2,
+          "dayStart" : "Sunday",
+          "minuteEnd" : 7,
+          "hourStart" : 5,
+          "hasTradingSchedule" : true,
+          "minuteStart" : 5
+        },
         "topFundAssets" : [ {
           "name" : "name",
           "asset" : "asset",
@@ -1175,10 +1215,10 @@ open class DashboardAPI {
       "leverage" : 1,
       "supportedCurrencies" : [ null, null ],
       "balances" : [ {
-        "amount" : 9.301444243932576,
+        "amount" : 7.386281948385884,
         "currency" : "Undefined"
       }, {
-        "amount" : 9.301444243932576,
+        "amount" : 7.386281948385884,
         "currency" : "Undefined"
       } ],
       "balance" : 6.027456183070403,
@@ -1190,7 +1230,7 @@ open class DashboardAPI {
       "status" : "Pending"
     },
     "statistic" : {
-      "drawdown" : 5.637376656633329,
+      "drawdown" : 3.616076749251911,
       "chart" : [ {
         "date" : "2000-01-23T04:56:07.000+00:00",
         "value" : 0.8008281904610115
@@ -1198,7 +1238,7 @@ open class DashboardAPI {
         "date" : "2000-01-23T04:56:07.000+00:00",
         "value" : 0.8008281904610115
       } ],
-      "profit" : 5.962133916683182
+      "profit" : 9.301444243932576
     },
     "credentials" : {
       "apiKey" : "apiKey",
@@ -1215,6 +1255,14 @@ open class DashboardAPI {
       },
       "fundDetails" : {
         "totalAssetsCount" : 0,
+        "tradingSchedule" : {
+          "hourEnd" : 2,
+          "dayStart" : "Sunday",
+          "minuteEnd" : 7,
+          "hourStart" : 5,
+          "hasTradingSchedule" : true,
+          "minuteStart" : 5
+        },
         "topFundAssets" : [ {
           "name" : "name",
           "asset" : "asset",
@@ -1316,10 +1364,10 @@ open class DashboardAPI {
       "leverage" : 1,
       "supportedCurrencies" : [ null, null ],
       "balances" : [ {
-        "amount" : 9.301444243932576,
+        "amount" : 7.386281948385884,
         "currency" : "Undefined"
       }, {
-        "amount" : 9.301444243932576,
+        "amount" : 7.386281948385884,
         "currency" : "Undefined"
       } ],
       "balance" : 6.027456183070403,
@@ -1331,7 +1379,7 @@ open class DashboardAPI {
       "status" : "Pending"
     },
     "statistic" : {
-      "drawdown" : 5.637376656633329,
+      "drawdown" : 3.616076749251911,
       "chart" : [ {
         "date" : "2000-01-23T04:56:07.000+00:00",
         "value" : 0.8008281904610115
@@ -1339,7 +1387,7 @@ open class DashboardAPI {
         "date" : "2000-01-23T04:56:07.000+00:00",
         "value" : 0.8008281904610115
       } ],
-      "profit" : 5.962133916683182
+      "profit" : 9.301444243932576
     },
     "credentials" : {
       "apiKey" : "apiKey",
@@ -1356,6 +1404,14 @@ open class DashboardAPI {
       },
       "fundDetails" : {
         "totalAssetsCount" : 0,
+        "tradingSchedule" : {
+          "hourEnd" : 2,
+          "dayStart" : "Sunday",
+          "minuteEnd" : 7,
+          "hourStart" : 5,
+          "hasTradingSchedule" : true,
+          "minuteStart" : 5
+        },
         "topFundAssets" : [ {
           "name" : "name",
           "asset" : "asset",
@@ -1412,10 +1468,10 @@ open class DashboardAPI {
       "leverage" : 1,
       "supportedCurrencies" : [ null, null ],
       "balances" : [ {
-        "amount" : 9.301444243932576,
+        "amount" : 7.386281948385884,
         "currency" : "Undefined"
       }, {
-        "amount" : 9.301444243932576,
+        "amount" : 7.386281948385884,
         "currency" : "Undefined"
       } ],
       "balance" : 6.027456183070403,
@@ -1427,7 +1483,7 @@ open class DashboardAPI {
       "status" : "Pending"
     },
     "statistic" : {
-      "drawdown" : 5.637376656633329,
+      "drawdown" : 3.616076749251911,
       "chart" : [ {
         "date" : "2000-01-23T04:56:07.000+00:00",
         "value" : 0.8008281904610115
@@ -1435,7 +1491,7 @@ open class DashboardAPI {
         "date" : "2000-01-23T04:56:07.000+00:00",
         "value" : 0.8008281904610115
       } ],
-      "profit" : 5.962133916683182
+      "profit" : 9.301444243932576
     },
     "credentials" : {
       "apiKey" : "apiKey",
@@ -1452,6 +1508,14 @@ open class DashboardAPI {
       },
       "fundDetails" : {
         "totalAssetsCount" : 0,
+        "tradingSchedule" : {
+          "hourEnd" : 2,
+          "dayStart" : "Sunday",
+          "minuteEnd" : 7,
+          "hourStart" : 5,
+          "hasTradingSchedule" : true,
+          "minuteStart" : 5
+        },
         "topFundAssets" : [ {
           "name" : "name",
           "asset" : "asset",
@@ -1673,7 +1737,7 @@ open class DashboardAPI {
       "periodDuration" : 1,
       "brokerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "statistic" : {
-        "drawdown" : 5.637376656633329,
+        "drawdown" : 3.616076749251911,
         "chart" : [ {
           "date" : "2000-01-23T04:56:07.000+00:00",
           "value" : 0.8008281904610115
@@ -1681,7 +1745,7 @@ open class DashboardAPI {
           "date" : "2000-01-23T04:56:07.000+00:00",
           "value" : 0.8008281904610115
         } ],
-        "profit" : 5.962133916683182
+        "profit" : 9.301444243932576
       },
       "color" : "color",
       "level" : 0,
@@ -1701,7 +1765,7 @@ open class DashboardAPI {
         "name" : "name"
       } ],
       "balance" : {
-        "amount" : 9.301444243932576,
+        "amount" : 7.386281948385884,
         "currency" : "Undefined"
       },
       "periodEnds" : "2000-01-23T04:56:07.000+00:00",
@@ -1733,7 +1797,7 @@ open class DashboardAPI {
       "periodDuration" : 1,
       "brokerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "statistic" : {
-        "drawdown" : 5.637376656633329,
+        "drawdown" : 3.616076749251911,
         "chart" : [ {
           "date" : "2000-01-23T04:56:07.000+00:00",
           "value" : 0.8008281904610115
@@ -1741,7 +1805,7 @@ open class DashboardAPI {
           "date" : "2000-01-23T04:56:07.000+00:00",
           "value" : 0.8008281904610115
         } ],
-        "profit" : 5.962133916683182
+        "profit" : 9.301444243932576
       },
       "color" : "color",
       "level" : 0,
@@ -1761,7 +1825,7 @@ open class DashboardAPI {
         "name" : "name"
       } ],
       "balance" : {
-        "amount" : 9.301444243932576,
+        "amount" : 7.386281948385884,
         "currency" : "Undefined"
       },
       "periodEnds" : "2000-01-23T04:56:07.000+00:00",

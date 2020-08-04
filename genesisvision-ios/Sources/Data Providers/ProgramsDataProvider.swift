@@ -57,13 +57,13 @@ class ProgramsDataProvider: DataProvider {
             programCurrency = newCurrency
         }
         
-        var showIn: Currency?
-        if let newCurrency = Currency(rawValue: selectedPlatformCurrency) {
-            showIn = newCurrency
-        }
+//        var showIn: Currency?
+//        if let newCurrency = Currency(rawValue: selectedPlatformCurrency) {
+//            showIn = newCurrency
+//        }
         
         ProgramsAPI.getPrograms(sorting: sorting,
-                                showIn: showIn,
+                                showIn: nil,
                                 tags: tags,
                                 programCurrency: programCurrency,
                                 levelMin: levelMin,
@@ -105,12 +105,13 @@ class ProgramsDataProvider: DataProvider {
             DataProvider().responseHandler(error, completion: errorCompletion)
         }
     }
-    static func invest(withAmount amount: Double, assetId: String?, errorCompletion: @escaping CompletionBlock) {
+    static func invest(withAmount amount: Double, assetId: String?, walletId: UUID?, errorCompletion: @escaping CompletionBlock) {
         guard let assetId = assetId,
-            let uuid = UUID(uuidString: assetId)
-            else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+            let uuid = UUID(uuidString: assetId),
+            let walletId = walletId
+        else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        InvestmentsAPI.investIntoProgram(_id: uuid, amount: amount) { (_, error) in
+        InvestmentsAPI.investIntoProgram(_id: uuid, amount: amount, walletId: walletId) { (_, error) in
             DataProvider().responseHandler(error, completion: errorCompletion)
         }
     }

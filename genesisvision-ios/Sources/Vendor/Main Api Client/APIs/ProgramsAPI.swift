@@ -1303,7 +1303,7 @@ open class ProgramsAPI {
     "periodDuration" : 1,
     "brokerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "statistic" : {
-      "drawdown" : 5.637376656633329,
+      "drawdown" : 3.616076749251911,
       "chart" : [ {
         "date" : "2000-01-23T04:56:07.000+00:00",
         "value" : 0.8008281904610115
@@ -1311,7 +1311,7 @@ open class ProgramsAPI {
         "date" : "2000-01-23T04:56:07.000+00:00",
         "value" : 0.8008281904610115
       } ],
-      "profit" : 5.962133916683182
+      "profit" : 9.301444243932576
     },
     "color" : "color",
     "level" : 0,
@@ -1331,7 +1331,7 @@ open class ProgramsAPI {
       "name" : "name"
     } ],
     "balance" : {
-      "amount" : 9.301444243932576,
+      "amount" : 7.386281948385884,
       "currency" : "Undefined"
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
@@ -1363,7 +1363,7 @@ open class ProgramsAPI {
     "periodDuration" : 1,
     "brokerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "statistic" : {
-      "drawdown" : 5.637376656633329,
+      "drawdown" : 3.616076749251911,
       "chart" : [ {
         "date" : "2000-01-23T04:56:07.000+00:00",
         "value" : 0.8008281904610115
@@ -1371,7 +1371,7 @@ open class ProgramsAPI {
         "date" : "2000-01-23T04:56:07.000+00:00",
         "value" : 0.8008281904610115
       } ],
-      "profit" : 5.962133916683182
+      "profit" : 9.301444243932576
     },
     "color" : "color",
     "level" : 0,
@@ -1391,7 +1391,7 @@ open class ProgramsAPI {
       "name" : "name"
     } ],
     "balance" : {
-      "amount" : 9.301444243932576,
+      "amount" : 7.386281948385884,
       "currency" : "Undefined"
     },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",

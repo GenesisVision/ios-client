@@ -14,9 +14,12 @@ public struct UsersPlatformInfo: Codable {
     public var tags: [Tag]?
 
     public var availableBetaFeatures: [BetaTestingType]?
-    public init(tags: [Tag]? = nil, availableBetaFeatures: [BetaTestingType]? = nil) { 
+
+    public var socialLinkTypes: [UsersSocialLinkInfo]?
+    public init(tags: [Tag]? = nil, availableBetaFeatures: [BetaTestingType]? = nil, socialLinkTypes: [UsersSocialLinkInfo]? = nil) { 
         self.tags = tags
         self.availableBetaFeatures = availableBetaFeatures
+        self.socialLinkTypes = socialLinkTypes
     }
 
 }

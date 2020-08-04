@@ -11,9 +11,16 @@ import Foundation
 public struct PostImage: Codable {
 
 
+    public var _id: String?
+
     public var resizes: [PostImageResize]?
-    public init(resizes: [PostImageResize]? = nil) { 
+    public init(_id: String? = nil, resizes: [PostImageResize]? = nil) { 
+        self._id = _id
         self.resizes = resizes
+    }
+    public enum CodingKeys: String, CodingKey { 
+        case _id = "id"
+        case resizes
     }
 
 }

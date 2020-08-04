@@ -67,7 +67,7 @@ class FundInvestViewController: BaseViewController {
     
     @IBOutlet weak var managementFeeTitleLabel: SubtitleLabel! {
         didSet {
-            managementFeeTitleLabel.text = "Management fee"
+            managementFeeTitleLabel.text = "Entry fee"
             managementFeeTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
@@ -185,7 +185,7 @@ class FundInvestViewController: BaseViewController {
         let entryFeeCurrencyString = entryFeeCurrency.rounded(with: fundCurrency).toString()
         let entryFeeString = entryFee.rounded(toPlaces: 3).toString()
         
-        let entryFeeValueLabelString = entryFeeString + "% (≈\(entryFeeCurrencyString) \(fundCurrency.rawValue))"
+        let entryFeeValueLabelString = entryFeeString + "% (≈\(entryFeeCurrencyString) \(Currency.gvt.rawValue))"
         self.entryFeeValueLabel.text = entryFeeValueLabelString
         
         let gvCommissionCurrency = gvCommission * amountToInvestValue / 100
@@ -246,7 +246,7 @@ class FundInvestViewController: BaseViewController {
         let confirmViewModel = InvestWithdrawConfirmModel(title: "Confirm Invest",
                                                           subtitle: subtitle,
                                                           programLogo: nil,
-                                                          programTitle: "", //viewModel.fundInvestInfo.title, //FIXME:
+                                                          programTitle: viewModel.fundDetailsFull?.publicInfo?.title,
                                                           managerName: nil,
                                                           firstTitle: amountToInvestTitleLabel.text,
                                                           firstValue: firstValue,

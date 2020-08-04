@@ -18,6 +18,7 @@ final class ProgramInvestViewModel {
 
     var walletSummary: WalletSummary?
     var levelsParamsInfo: LevelsParamsInfo?
+    var programDetailsFull: ProgramDetailsFull?
     var investmentCommission: Double?
     var selectedWalletFromDelegateManager: WalletDepositCurrencyDelegateManager?
     
@@ -58,11 +59,17 @@ final class ProgramInvestViewModel {
                 self?.selectedWalletFromDelegateManager?.selected = wallets[0]
                 self?.walletCurrency = CurrencyType(rawValue: wallets[0].currency?.rawValue ?? "")
             }
-            PlatformManager.shared.getLevelsParamsInfo { [weak self] (viewModel) in
+            PlatformManager.shared.getLevelsParamsInfo(currency: .usdt) { [weak self] (viewModel) in
                 self?.levelsParamsInfo = viewModel
                 PlatformManager.shared.getPlatformInfo { [weak self] (platformCommonInfo) in
                     self?.investmentCommission = platformCommonInfo?.commonInfo?.platformCommission?.investment
                     self?.updateRate(completion: completion)
+                    
+                    guard let assetId = self?.assetId else { return }
+                    
+                    ProgramsDataProvider.get(assetId, completion: { (details) in
+                        self?.programDetailsFull = details?.programDetails
+                    }, errorCompletion: completion)
                 }
             }
             }, completionError: completion)
@@ -119,21 +126,21 @@ final class ProgramInvestViewModel {
     }
     
     func getAvailableToInvest() -> Double {
-        return getAvailableInWallet()
+        guard let availableToInvestInProgramm = programDetailsFull?.availableInvestmentBase else { return 0.0 }
+        
+        return availableToInvestInProgramm
     }
     
     func getGVCommision() -> Double {
-//        guard let gvCommission = programInvestInfo?.gvCommission else { return 0.0 }
+        guard let gvCommission = investmentCommission else { return 0.0 }
         
-//        return gvCommission
-        return 0.0 //FIXME:
+        return gvCommission
     }
     
-    func getEntryFee() -> Double {
-//        guard let entryFee = programInvestInfo?.entryFee else { return 0.0 }
-//
-//        return entryFee
-        return 0.0 //FIXME:
+    func getManagementFee() -> Double {
+        guard let managementFee = programDetailsFull?.managementFeeCurrent else { return 0.0 }
+
+        return managementFee
     }
     
     func getApproximateAmount(_ amount: Double) -> Double {
@@ -149,8 +156,8 @@ final class ProgramInvestViewModel {
     }
     
     // MARK: - Navigation
-    func invest(with value: Double, completion: @escaping CompletionBlock) {
-        apiInvest(with: value, completion: completion)
+    func invest(with value: Double, walletId: UUID, completion: @escaping CompletionBlock) {
+        apiInvest(with: value, walletId: walletId, completion: completion)
     }
     
     func showInvestmentRequestedVC(investedAmount: Double) {
@@ -169,7 +176,7 @@ final class ProgramInvestViewModel {
     
     // MARK: - Private methods
     // MARK: - API
-    private func apiInvest(with value: Double, completion: @escaping CompletionBlock) {
-        ProgramsDataProvider.invest(withAmount: value, assetId: assetId, errorCompletion: completion)
+    private func apiInvest(with value: Double, walletId: UUID, completion: @escaping CompletionBlock) {
+        ProgramsDataProvider.invest(withAmount: value, assetId: assetId, walletId: walletId, errorCompletion: completion)
     }
 }

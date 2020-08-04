@@ -34,7 +34,9 @@ public struct SocialPostPlatformAsset: Codable {
     public var color: String?
 
     public var url: String?
-    public init(price: Double? = nil, priceCurrency: Currency? = nil, change24Percent: Double? = nil, changeState: ChangeState? = nil, chart: [SimpleChartPoint]? = nil, _id: UUID? = nil, name: String? = nil, asset: String? = nil, _description: String? = nil, logoUrl: String? = nil, color: String? = nil, url: String? = nil) { 
+
+    public var provider: AssetProvider?
+    public init(price: Double? = nil, priceCurrency: Currency? = nil, change24Percent: Double? = nil, changeState: ChangeState? = nil, chart: [SimpleChartPoint]? = nil, _id: UUID? = nil, name: String? = nil, asset: String? = nil, _description: String? = nil, logoUrl: String? = nil, color: String? = nil, url: String? = nil, provider: AssetProvider? = nil) { 
         self.price = price
         self.priceCurrency = priceCurrency
         self.change24Percent = change24Percent
@@ -47,6 +49,7 @@ public struct SocialPostPlatformAsset: Codable {
         self.logoUrl = logoUrl
         self.color = color
         self.url = url
+        self.provider = provider
     }
     public enum CodingKeys: String, CodingKey { 
         case price
@@ -61,6 +64,7 @@ public struct SocialPostPlatformAsset: Codable {
         case logoUrl
         case color
         case url
+        case provider
     }
 
 }

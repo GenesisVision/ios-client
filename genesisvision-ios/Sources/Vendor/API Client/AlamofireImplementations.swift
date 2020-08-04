@@ -63,8 +63,23 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
         let encoding:ParameterEncoding = isBody ? JSONDataEncoding() : URLEncoding()
         
         let xMethod = Alamofire.HTTPMethod(rawValue: method)
-        let fileKeys = parameters == nil ? [] : parameters!.filter { $1 is NSURL }
-            .map { $0.0 }
+        
+        
+        let fileKeys = parameters == nil ? [] : parameters!.filter({ (key, value) -> Bool in
+            if value is NSURL {
+                return true
+            }
+            if let valueString = value as? String, let url = URL(string: valueString) {
+                return true
+            } else if let data = value as? Data, let valueString = String(data: data, encoding: .utf8), let url = URL(string: valueString) {
+                return true
+            }
+            return false
+        }).compactMap({$0.0})
+        
+        
+//        let fileKeys = parameters == nil ? [] : parameters!.filter { $1 is NSURL }
+//            .map { $0.0 }
         
         if fileKeys.count > 0 {
             manager.upload(multipartFormData: { mpForm in
@@ -81,6 +96,10 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
                         mpForm.append(string.data(using: String.Encoding.utf8)!, withName: k)
                     case let number as NSNumber:
                         mpForm.append(number.stringValue.data(using: String.Encoding.utf8)!, withName: k)
+                    case let data as Data:
+                        if let string = String(data: data, encoding: .utf8), let url = URL(string: string) {
+                            mpForm.append(url, withName: k)
+                        }
                     default:
                         fatalError("Unprocessable value \(v) with key \(k)")
                     }
@@ -402,6 +421,7 @@ open class AlamofireDecodableRequestBuilder<T:Decodable>: AlamofireRequestBuilde
                 )
             })
         default:
+            print(validatedRequest.debugDescription)
             validatedRequest.responseData(completionHandler: { (dataResponse: DataResponse<Data>) in
                 cleanupRequest()
                 

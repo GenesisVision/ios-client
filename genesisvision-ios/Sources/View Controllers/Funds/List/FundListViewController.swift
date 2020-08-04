@@ -119,8 +119,8 @@ class FundListViewController: BaseViewControllerWithTableView {
     }
     
     override func updateData(from dateFrom: Date?, to dateTo: Date?) {
-        viewModel.filterModel.dateRangeModel.dateFrom = dateFrom
-        viewModel.filterModel.dateRangeModel.dateTo = dateTo
+//        viewModel.filterModel.dateRangeModel.dateFrom = dateFrom
+//        viewModel.filterModel.dateRangeModel.dateTo = dateTo
         
         showProgressHUD()
         fetch()

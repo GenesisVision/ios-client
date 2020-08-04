@@ -31,14 +31,8 @@ public struct MediaPost: Codable {
 
     public var date: Date?
 
-    public var likesCount: Int?
-
-    public var rePostsCount: Int?
-
-    public var commentsCount: Int?
-
     public var image: PostImage?
-    public init(_id: UUID? = nil, url: String? = nil, type: SocialLinkType? = nil, typeLogoUrl: String? = nil, author: String? = nil, authorUrl: String? = nil, authorLogoUrl: String? = nil, title: String? = nil, text: String? = nil, date: Date? = nil, likesCount: Int? = nil, rePostsCount: Int? = nil, commentsCount: Int? = nil, image: PostImage? = nil) { 
+    public init(_id: UUID? = nil, url: String? = nil, type: SocialLinkType? = nil, typeLogoUrl: String? = nil, author: String? = nil, authorUrl: String? = nil, authorLogoUrl: String? = nil, title: String? = nil, text: String? = nil, date: Date? = nil, image: PostImage? = nil) { 
         self._id = _id
         self.url = url
         self.type = type
@@ -49,9 +43,6 @@ public struct MediaPost: Codable {
         self.title = title
         self.text = text
         self.date = date
-        self.likesCount = likesCount
-        self.rePostsCount = rePostsCount
-        self.commentsCount = commentsCount
         self.image = image
     }
     public enum CodingKeys: String, CodingKey { 
@@ -65,9 +56,6 @@ public struct MediaPost: Codable {
         case title
         case text
         case date
-        case likesCount
-        case rePostsCount
-        case commentsCount
         case image
     }
 

@@ -41,11 +41,13 @@ class CreateFundViewController: BaseModalViewController {
         stackView.depositView.amountView.textField.addTarget(self, action: #selector(checkActionButton), for: .editingChanged)
         
         stackView.nameView.textField.delegate = self
+        stackView.nameView.textField.keyboardType = .asciiCapable
         stackView.nameView.textField.designableTextFieldDelegate = self
         stackView.nameView.textField.addTarget(self, action: #selector(nameDidChange), for: .editingChanged)
         stackView.nameView.subtitleValueLabel.textColor = UIColor.Cell.subtitle
         
         stackView.descriptionView.textView.textContainerInset = UIEdgeInsets(top: 0, left: -6, bottom: 0, right: -6)
+        stackView.descriptionView.textView.keyboardType = .asciiCapable
         stackView.descriptionView.textView.delegate = self
         stackView.descriptionView.subtitleValueLabel.textColor = UIColor.Cell.subtitle
         
@@ -60,9 +62,33 @@ class CreateFundViewController: BaseModalViewController {
             stackView.configure(viewModel)
         }
     }
+    
     @objc private func feeDidChange() {
+        guard let entryFeeText = stackView.entryFeeView.textField.text, !entryFeeText.isEmpty, let exitFeeText = stackView.exitFeeView.textField.text, !exitFeeText.isEmpty else { return }
+        
+        if let entryFee = Int(entryFeeText) {
+            if entryFee >= 10 {
+                stackView.entryFeeView.textField.text = "10"
+            } else {
+                stackView.entryFeeView.textField.text = String(entryFee)
+            }
+        } else {
+            stackView.entryFeeView.textField.text = "0"
+        }
+        
+        if let exitFee = Int(exitFeeText) {
+            if exitFee >= 10 {
+                stackView.exitFeeView.textField.text = "10"
+            } else {
+                stackView.exitFeeView.textField.text = String(exitFee)
+            }
+        } else {
+            stackView.exitFeeView.textField.text = "0"
+        }
+        
         checkActionButton()
     }
+    
     @objc private func nameDidChange() {
         if let text = stackView.nameView.textField.text {
             let max = 20
@@ -371,11 +397,11 @@ class CreateFundViewModel {
         return value / rate
     }
     func createFund(completion: @escaping CompletionBlock) {
-        guard let pickedImage = pickedImage?.pngData() else {
+        guard let pickedImageUrl = pickedImageURL else {
             AssetsDataProvider.createFund(request, completion: completion)
             return
         }
-        saveImage(pickedImage) { [weak self] (result) in
+        saveImage(pickedImageUrl) { [weak self] (result) in
             switch result {
             case .success:
                 AssetsDataProvider.createFund(self?.request, completion: completion)
@@ -392,8 +418,8 @@ class CreateFundViewModel {
     }
     
     // MARK: - Public methods
-    func saveImage(_ pickedImageURL: Data, completion: @escaping (CompletionBlock)) {
-        BaseDataProvider.uploadImage(imageData: pickedImageURL, imageLocation: .fundAsset, completion: { [weak self] (uploadResult) in
+    func saveImage(_ pickedImageURL: URL, completion: @escaping (CompletionBlock)) {
+        BaseDataProvider.uploadImage(imageData: pickedImageURL.dataRepresentation, imageLocation: .fundAsset, completion: { [weak self] (uploadResult) in
             guard let uploadResult = uploadResult, let uuidString = uploadResult._id?.uuidString else { return completion(.failure(errorType: .apiError(message: nil))) }
             
             self?.uploadedUuidString = uuidString
@@ -504,19 +530,38 @@ final class AddAssetListViewModel: ViewModelWithListProtocol {
         return sum
     }
     
+    private func getRemainFundBalancePercent() -> Double {
+        return 100 - assets.map({($0.mandatoryFundPercent ?? 0.0)}).reduce(0.0, +)
+    }
+    
     func isFull() -> Bool {
         return getMandatoryFundPercent() == 100.0
     }
 }
 extension AddAssetListViewModel: AddFundAssetTableViewCellProtocol {
-    func confirmAsset(_ asset: PlatformAsset?) {
-        guard let asset = asset else { return }
+    func confirmAsset(_ asset: PlatformAsset?) -> Bool {
+        guard let asset = asset else { return false }
 
         if let index = assets.firstIndex(where: { $0.asset == asset.asset }) {
-            assets.remove(at: index)
+            let oldAsset = assets[index]
+            
+            if let oldPercent = oldAsset.mandatoryFundPercent, let newPercent = asset.mandatoryFundPercent {
+                if newPercent <= oldPercent {
+                    assets.remove(at: index)
+                } else if !isFull(), (newPercent - oldPercent) <= getRemainFundBalancePercent() {
+                    assets.remove(at: index)
+                } else {
+                    return false
+                }
+            } else {
+                return false
+            }
         }
+        
         assets.append(asset)
         
         updateAssets()
+        
+        return true
     }
 }

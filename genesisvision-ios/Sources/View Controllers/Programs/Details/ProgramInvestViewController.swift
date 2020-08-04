@@ -26,7 +26,7 @@ class ProgramInvestViewController: BaseViewController {
     // MARK: - Labels
     @IBOutlet weak var availableToInvestTitleLabel: SubtitleLabel! {
         didSet {
-            availableToInvestTitleLabel.text = "Available to invest"
+            availableToInvestTitleLabel.text = "Available to invest in program"
         }
     }
     @IBOutlet weak var availableToInvestValueLabel: TitleLabel!
@@ -78,7 +78,7 @@ class ProgramInvestViewController: BaseViewController {
             managementFeeTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
-    @IBOutlet weak var entryFeeValueLabel: TitleLabel!
+    @IBOutlet weak var managementFeeValueLabel: TitleLabel!
     
     @IBOutlet weak var gvCommissionTitleLabel: SubtitleLabel! {
         didSet {
@@ -185,23 +185,18 @@ class ProgramInvestViewController: BaseViewController {
         self.investmentAmountCurrencyLabel.text?.append(viewModel.getMinInvestmentAmountText())
         
         let rate = viewModel.rate
-        let entryFee = viewModel.getEntryFee()
+        let managementFee = viewModel.getManagementFee()
         let gvCommission = viewModel.getGVCommision()
         
-        let entryFeeCurrency = entryFee * amountToInvestValue * rate / 100
-        let entryFeeCurrencyString = entryFeeCurrency.rounded(with: programCurrency).toString()
-        let entryFeeString = entryFee.rounded(toPlaces: 3).toString()
-
-        let entryFeeValueLabelString = entryFeeString + "% (≈\(entryFeeCurrencyString) \(programCurrency.rawValue))"
-        self.entryFeeValueLabel.text = entryFeeValueLabelString
+        self.managementFeeValueLabel.text = managementFee.rounded(with: programCurrency).toString() + "% (annual)"
 
         let gvCommissionCurrency = gvCommission * amountToInvestValue / 100
-        let gvCommissionCurrencyString = gvCommissionCurrency.rounded(with: walletCurrencyType).toString()
-        let gvCommissionString = gvCommission.rounded(toPlaces: 3).toString()
+        let gvCommissionCurrencyString = gvCommissionCurrency.rounded(toPlaces: 8).toString()
+        let gvCommissionString = gvCommission.rounded(toPlaces: 8).toString()
 
         let gvCommissionValueLabelString = gvCommissionString + "% (≈\(gvCommissionCurrencyString) \(walletCurrencyType.rawValue))"
         self.gvCommissionValueLabel.text = gvCommissionValueLabelString
-        let investmentAmountValue = (amountToInvestValue * rate - entryFeeCurrency - gvCommissionCurrency * rate).rounded(with: programCurrency).toString()
+        let investmentAmountValue = (amountToInvestValue * rate - gvCommissionCurrency * rate).rounded(with: programCurrency).toString()
         self.investmentAmountValueLabel.text = "≈" + investmentAmountValue + " " + programCurrency.rawValue
     
         self.availableToInvestValue = viewModel.getAvailableToInvest()
@@ -218,10 +213,10 @@ class ProgramInvestViewController: BaseViewController {
     private func investMethod() {
         let rate = viewModel.rate
         let minInvestmentAmount = viewModel.getMinInvestmentAmount()
-        guard amountToInvestValue * rate >= minInvestmentAmount else { return showErrorHUD(subtitle: "Enter investment value, please") }
+        guard amountToInvestValue * rate >= minInvestmentAmount, let walletId = viewModel.selectedWalletFromDelegateManager?.selected?._id else { return showErrorHUD(subtitle: "Enter investment value, please") }
         
         showProgressHUD()
-        viewModel.invest(with: amountToInvestValue) { [weak self] (result) in
+        viewModel.invest(with: amountToInvestValue, walletId: walletId) { [weak self] (result) in
             self?.hideAll()
             
             switch result {
@@ -259,7 +254,7 @@ class ProgramInvestViewController: BaseViewController {
                                                           firstTitle: amountToInvestTitleLabel.text,
                                                           firstValue: firstValue,
                                                           secondTitle: managementFeeTitleLabel.text,
-                                                          secondValue: entryFeeValueLabel.text,
+                                                          secondValue: managementFeeValueLabel.text,
                                                           thirdTitle: gvCommissionTitleLabel.text,
                                                           thirdValue: gvCommissionValueLabel.text,
                                                           fourthTitle: investmentAmountTitleLabel.text,

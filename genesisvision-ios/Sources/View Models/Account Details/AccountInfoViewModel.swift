@@ -263,4 +263,8 @@ extension AccountInfoViewModel: InvestNowProtocol {
         
 //        invest()
     }
+    
+    func ditTapEditButton() {
+        
+    }
 }

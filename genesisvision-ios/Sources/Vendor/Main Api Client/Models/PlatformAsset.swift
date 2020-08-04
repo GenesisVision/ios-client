@@ -26,7 +26,9 @@ public struct PlatformAsset: Codable {
     public var color: String?
 
     public var url: String?
-    public init(mandatoryFundPercent: Double? = nil, _id: UUID? = nil, name: String? = nil, asset: String? = nil, _description: String? = nil, logoUrl: String? = nil, color: String? = nil, url: String? = nil) { 
+
+    public var provider: AssetProvider?
+    public init(mandatoryFundPercent: Double? = nil, _id: UUID? = nil, name: String? = nil, asset: String? = nil, _description: String? = nil, logoUrl: String? = nil, color: String? = nil, url: String? = nil, provider: AssetProvider? = nil) { 
         self.mandatoryFundPercent = mandatoryFundPercent
         self._id = _id
         self.name = name
@@ -35,6 +37,7 @@ public struct PlatformAsset: Codable {
         self.logoUrl = logoUrl
         self.color = color
         self.url = url
+        self.provider = provider
     }
     public enum CodingKeys: String, CodingKey { 
         case mandatoryFundPercent
@@ -45,6 +48,7 @@ public struct PlatformAsset: Codable {
         case logoUrl
         case color
         case url
+        case provider
     }
 
 }

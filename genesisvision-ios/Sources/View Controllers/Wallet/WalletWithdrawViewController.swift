@@ -207,6 +207,8 @@ class WalletWithdrawViewController: BaseViewController {
             } else {
                 self.withdrawingValueLabel.text = "0 " + currency.rawValue
             }
+            
+            viewModel.walletCurrencyDelegateManager?.selectedWallet = selectedWallet
         }
         
         if let currency = viewModel.selectedWallet?.currency {
