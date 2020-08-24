@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -49,6 +49,9 @@
                                                     <constraint firstAttribute="height" constant="50" id="kFn-OS-cgj"/>
                                                 </constraints>
                                                 <state key="normal" title="Create account"/>
+                                                <connections>
+                                                    <action selector="createAccountButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="4TS-4Q-vPb"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Create trading account and start to trade" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uYx-f0-6ZV" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="58" width="280" height="0.0"/>
@@ -67,6 +70,9 @@
                                                     <constraint firstAttribute="height" constant="50" id="GUr-1x-iIM"/>
                                                 </constraints>
                                                 <state key="normal" title="Create fund"/>
+                                                <connections>
+                                                    <action selector="createFundButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="JMh-t0-Cwc"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Create your first fund" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1qN-th-HMl" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="58" width="280" height="0.0"/>
@@ -78,7 +84,6 @@
                                     </stackView>
                                 </subviews>
                                 <connections>
-                                    <outlet property="createAccountButton" destination="gs5-Of-uFV" id="qM0-Ts-Ism"/>
                                     <outlet property="createAccountLabel" destination="uYx-f0-6ZV" id="4Dk-bd-8ST"/>
                                     <outlet property="createFundButton" destination="UOv-ih-XhJ" id="i3g-GO-cSX"/>
                                     <outlet property="createFundLabel" destination="1qN-th-HMl" id="Tue-Cx-5W0"/>

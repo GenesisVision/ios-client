@@ -512,7 +512,7 @@ open class FundsAPI {
      - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter eventsType: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getFundsHistoryEvents(_id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, eventsType: FundHistoryEventType? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: FundHistoryEventViewModelItemsViewModel?,_ error: Error?) -> Void)) {
+    open class func getFundsHistoryEvents(_id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, eventsType: FundHistoryEventFilterType? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: FundHistoryEventViewModelItemsViewModel?,_ error: Error?) -> Void)) {
         getFundsHistoryEventsWithRequestBuilder(_id: _id, dateFrom: dateFrom, dateTo: dateTo, eventsType: eventsType, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
@@ -529,19 +529,39 @@ open class FundsAPI {
   "total" : 5,
   "items" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "amount" : 0.8008281904610115,
+    "description" : "description",
     "trades" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "commissionCurrency" : "commissionCurrency",
-      "boughtAmount" : 1.4658129805029452,
-      "commission" : 5.962133916683182,
-      "soldAmount" : 6.027456183070403
+      "soldAsset" : {
+        "color" : "color",
+        "provider" : "Undefined",
+        "name" : "name",
+        "description" : "description",
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "asset" : "asset",
+        "logoUrl" : "logoUrl",
+        "url" : "url"
+      },
+      "boughtAmount" : 6.027456183070403,
+      "commission" : 1.4658129805029452,
+      "soldAmount" : 0.8008281904610115
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "commissionCurrency" : "commissionCurrency",
-      "boughtAmount" : 1.4658129805029452,
-      "commission" : 5.962133916683182,
-      "soldAmount" : 6.027456183070403
+      "soldAsset" : {
+        "color" : "color",
+        "provider" : "Undefined",
+        "name" : "name",
+        "description" : "description",
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "asset" : "asset",
+        "logoUrl" : "logoUrl",
+        "url" : "url"
+      },
+      "boughtAmount" : 6.027456183070403,
+      "commission" : 1.4658129805029452,
+      "soldAmount" : 0.8008281904610115
     } ],
     "newAssets" : [ {
       "color" : "color",
@@ -559,32 +579,42 @@ open class FundsAPI {
       "url" : "url"
     } ],
     "type" : "Creation",
-    "asset" : {
-      "color" : "color",
-      "provider" : "Undefined",
-      "name" : "name",
-      "description" : "description",
-      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "asset" : "asset",
-      "logoUrl" : "logoUrl",
-      "url" : "url"
-    },
     "logoUrl" : "logoUrl"
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "amount" : 0.8008281904610115,
+    "description" : "description",
     "trades" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "commissionCurrency" : "commissionCurrency",
-      "boughtAmount" : 1.4658129805029452,
-      "commission" : 5.962133916683182,
-      "soldAmount" : 6.027456183070403
+      "soldAsset" : {
+        "color" : "color",
+        "provider" : "Undefined",
+        "name" : "name",
+        "description" : "description",
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "asset" : "asset",
+        "logoUrl" : "logoUrl",
+        "url" : "url"
+      },
+      "boughtAmount" : 6.027456183070403,
+      "commission" : 1.4658129805029452,
+      "soldAmount" : 0.8008281904610115
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "commissionCurrency" : "commissionCurrency",
-      "boughtAmount" : 1.4658129805029452,
-      "commission" : 5.962133916683182,
-      "soldAmount" : 6.027456183070403
+      "soldAsset" : {
+        "color" : "color",
+        "provider" : "Undefined",
+        "name" : "name",
+        "description" : "description",
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "asset" : "asset",
+        "logoUrl" : "logoUrl",
+        "url" : "url"
+      },
+      "boughtAmount" : 6.027456183070403,
+      "commission" : 1.4658129805029452,
+      "soldAmount" : 0.8008281904610115
     } ],
     "newAssets" : [ {
       "color" : "color",
@@ -602,16 +632,6 @@ open class FundsAPI {
       "url" : "url"
     } ],
     "type" : "Creation",
-    "asset" : {
-      "color" : "color",
-      "provider" : "Undefined",
-      "name" : "name",
-      "description" : "description",
-      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "asset" : "asset",
-      "logoUrl" : "logoUrl",
-      "url" : "url"
-    },
     "logoUrl" : "logoUrl"
   } ]
 }}]
@@ -619,7 +639,7 @@ open class FundsAPI {
 
      - returns: RequestBuilder<FundHistoryEventViewModelItemsViewModel> 
      */
-    open class func getFundsHistoryEventsWithRequestBuilder(_id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, eventsType: FundHistoryEventType? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<FundHistoryEventViewModelItemsViewModel> {
+    open class func getFundsHistoryEventsWithRequestBuilder(_id: UUID, dateFrom: Date? = nil, dateTo: Date? = nil, eventsType: FundHistoryEventFilterType? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<FundHistoryEventViewModelItemsViewModel> {
         var path = "/v2.0/funds/{id}/history"
         let _idPreEscape = "\(_id)"
         let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""

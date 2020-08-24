@@ -134,15 +134,19 @@ func startTimer() -> Bool {
 }
 
 func getVersion() -> String {
-    let dictionary = Bundle.main.infoDictionary!
-    let version = dictionary["CFBundleShortVersionString"] as! String
-    return "\(version)"
+    if let dictionary = Bundle.main.infoDictionary, let version = dictionary["CFBundleShortVersionString"] as? String {
+        return "\(version)"
+    } else {
+        return ""
+    }
 }
 
 func getBuild() -> String {
-    let dictionary = Bundle.main.infoDictionary!
-    let build = dictionary["CFBundleVersion"] as! String
-    return "\(build)"
+    if let dictionary = Bundle.main.infoDictionary, let build = dictionary["CFBundleVersion"] as? String {
+        return "\(build)"
+    } else {
+        return ""
+    }
 }
 
 func getFullVersion() -> String {

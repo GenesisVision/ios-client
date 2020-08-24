@@ -42,7 +42,7 @@ class TradingViewController: ListViewController {
         navigationItem.titleView = titleView
     }
     
-    @objc private func createFund() {
+    @objc private func createNewFund() {
         self.dismiss(animated: true) {
             guard let vc = CreateFundViewController.storyboardInstance(.dashboard) else { return }
             vc.title = "Create Fund"
@@ -65,7 +65,7 @@ class TradingViewController: ListViewController {
         actionLabel.isUserInteractionEnabled = true
         actionLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        let gest = UITapGestureRecognizer(target: self, action: #selector(createFund))
+        let gest = UITapGestureRecognizer(target: self, action: #selector(createNewFund))
         actionLabel.addGestureRecognizer(gest)
         
         let view = UIView()
@@ -82,13 +82,14 @@ class TradingViewController: ListViewController {
         bottomSheetController.present()
     }
     
-    private func createAccount() {
+    private func createTradeAccount() {
         guard let vc = CreateAccountViewController.storyboardInstance(.dashboard) else { return }
         vc.title = "Create account"
         let nav = BaseNavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true, completion: nil)
     }
+    
     private func attachAccount() {
         guard let vc = AttachAccountViewController.storyboardInstance(.dashboard) else { return }
         vc.title = "Attach external account"
@@ -96,12 +97,13 @@ class TradingViewController: ListViewController {
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true, completion: nil)
     }
+    
     private func addAccountSelector() {
         showActionSheet(with: nil,
                         message: nil,
                         firstActionTitle: "Create account",
                         firstHandler: { [weak self] in
-                            self?.createAccount()
+                            self?.createTradeAccount()
             },
                         secondActionTitle: "Attach external account",
                         secondHandler: { [weak self] in
@@ -110,6 +112,7 @@ class TradingViewController: ListViewController {
                         cancelTitle: "Cancel",
                         cancelHandler: nil)
     }
+    
     func showEvent(_ event: InvestmentEventViewModel) {
         var count = 0
 
@@ -132,6 +135,16 @@ class TradingViewController: ListViewController {
         view.delegate = self
         bottomSheetController.addContentsView(view)
         bottomSheetController.present()
+    }
+}
+
+extension TradingViewController: DashBoardTradingTableViewCellButtonsActionsProtocol {
+    func createFund() {
+        createNewFund()
+    }
+    
+    func createAccount() {
+        addAccountSelector()
     }
 }
 
@@ -259,7 +272,7 @@ class TradingViewModel: ViewModelWithListProtocol {
     }
     var details: DashboardTradingDetails? {
         didSet {
-            let overviewViewModel = TradingHeaderTableViewCellViewModel(data: TradingHeaderData(details: details, currency: currency), delegate: delegate)
+            let overviewViewModel = TradingHeaderTableViewCellViewModel(data: TradingHeaderData(details: details, currency: currency), delegate: delegate, createsDelegate: creationDelegate)
             viewModels.append(overviewViewModel)
             reloadSection(.events)
             
@@ -295,8 +308,10 @@ class TradingViewModel: ViewModelWithListProtocol {
     }
     var router: DashboardRouter?
     weak var delegate: BaseTableViewProtocol?
+    weak var creationDelegate: DashBoardTradingTableViewCellButtonsActionsProtocol?
     init(_ router: DashboardRouter?) {
         self.delegate = router?.tradingViewController
+        self.creationDelegate = router?.tradingViewController
         self.router = router
     }
     private func reloadSection(_ section: SectionType) {

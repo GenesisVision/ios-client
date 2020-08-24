@@ -40,6 +40,8 @@ final class ListViewModel: ListViewModelProtocol {
     }
 
     var showFacets = false
+    
+    var gvFundsWeeklyTop: Bool = false
 
     var bottomViewType: BottomViewType = .none
     
@@ -95,7 +97,12 @@ final class ListViewModel: ListViewModelProtocol {
         if let filterModel = filterModel {
             self.filterModel = filterModel
             if let facetTitle = filterModel.facetTitle {
-                self.title = (facetTitle == "Favorites" ? "Favorite" : facetTitle) + " " + title.lowercased()
+                if facetTitle == "GV Funds Weekly Challenge" {
+                    self.title = facetTitle
+                    self.gvFundsWeeklyTop = true
+                } else {
+                    self.title = (facetTitle == "Favorites" ? "Favorite" : facetTitle) + " " + title.lowercased()
+                }
                 
                 if facetTitle == "Rating" {
                     self.bottomViewType = .none

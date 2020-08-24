@@ -26,14 +26,14 @@ class CustomLayout {
         if #available(iOS 13.0, *) {
             layout = UICollectionViewCompositionalLayout { (section: Int, environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
                 
-                let itemInset = NSDirectionalEdgeInsets(top: 0.0, leading: Constants.SystemSizes.Cell.horizontalMarginValue / 2, bottom: Constants.SystemSizes.Cell.verticalMarginValues, trailing: Constants.SystemSizes.Cell.horizontalMarginValue / 2)
+                let itemInset = NSDirectionalEdgeInsets(top: 0.0, leading: Constants.SystemSizes.Cell.horizontalMarginValue / 2, bottom: Constants.SystemSizes.Cell.verticalMarginValue, trailing: Constants.SystemSizes.Cell.horizontalMarginValue / 2)
                 let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
                 item.contentInsets = itemInset
                 
                 let size = NSCollectionLayoutSize(widthDimension: .fractionalWidth(fractionalWidth), heightDimension: .absolute(150.0))//.fractionalHeight(1.0))
                 let group = NSCollectionLayoutGroup.vertical(layoutSize: size, subitem: item, count: vCount)
                 
-                let sectionInset = NSDirectionalEdgeInsets(top: 0.0, leading: Constants.SystemSizes.Cell.horizontalMarginValue, bottom: Constants.SystemSizes.Cell.verticalMarginValues, trailing: Constants.SystemSizes.Cell.horizontalMarginValue)
+                let sectionInset = NSDirectionalEdgeInsets(top: 0.0, leading: Constants.SystemSizes.Cell.horizontalMarginValue, bottom: Constants.SystemSizes.Cell.verticalMarginValue, trailing: Constants.SystemSizes.Cell.horizontalMarginValue)
                 let section = NSCollectionLayoutSection(group: group)
                 section.contentInsets = sectionInset
                 section.orthogonalScrollingBehavior = pagging ? .groupPaging : .continuous

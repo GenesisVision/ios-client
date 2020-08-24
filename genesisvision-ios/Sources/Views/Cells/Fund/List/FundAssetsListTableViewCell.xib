@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FundAssetsListTableViewCell" rowHeight="159" id="gCz-la-b9y" userLabel="FundAssetsListTableViewCell" customClass="FundAssetsListTableViewCell" customModule="GV_DEBUG" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="631" height="159"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gCz-la-b9y" id="KXT-9R-JVc">
+                <rect key="frame" x="0.0" y="0.0" width="631" height="159"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="chg-KQ-YBz">
+                        <rect key="frame" x="10" y="10" width="611" height="139"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="t0F-qb-cCm">
+                                <rect key="frame" x="0.0" y="0.0" width="611" height="139"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="dNP-et-nE3">
+                                        <rect key="frame" x="0.0" y="54.5" width="611" height="30"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GQx-sz-Ugi" customClass="UIImageView">
+                                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="Kx2-Lh-IUE"/>
+                                                    <constraint firstAttribute="width" secondItem="GQx-sz-Ugi" secondAttribute="height" multiplier="1:1" id="v2p-0V-QGD"/>
+                                                </constraints>
+                                            </view>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ads-8I-waF">
+                                                <rect key="frame" x="50" y="5" width="561" height="20.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genesis Vision Token" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vbe-uW-kxr" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="275.5" height="20.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GVT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Byr-iF-X76" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                                        <rect key="frame" x="285.5" y="0.0" width="275.5" height="20.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="t0F-qb-cCm" firstAttribute="leading" secondItem="chg-KQ-YBz" secondAttribute="leading" id="0cH-dH-0sg"/>
+                            <constraint firstAttribute="trailing" secondItem="t0F-qb-cCm" secondAttribute="trailing" id="5H7-S4-YIx"/>
+                            <constraint firstAttribute="bottom" secondItem="t0F-qb-cCm" secondAttribute="bottom" id="Lzb-vg-pHT"/>
+                            <constraint firstItem="t0F-qb-cCm" firstAttribute="top" secondItem="chg-KQ-YBz" secondAttribute="top" id="WN2-aF-EW8"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="chg-KQ-YBz" firstAttribute="top" secondItem="KXT-9R-JVc" secondAttribute="top" constant="10" id="0DB-fY-keZ"/>
+                    <constraint firstAttribute="trailing" secondItem="chg-KQ-YBz" secondAttribute="trailing" constant="10" id="8gT-F8-myq"/>
+                    <constraint firstItem="chg-KQ-YBz" firstAttribute="leading" secondItem="KXT-9R-JVc" secondAttribute="leading" constant="10" id="Jwe-hq-M47"/>
+                    <constraint firstAttribute="bottom" secondItem="chg-KQ-YBz" secondAttribute="bottom" constant="10" id="teQ-bF-wda"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="logoImageView" destination="GQx-sz-Ugi" id="DQI-5S-Vac"/>
+                <outlet property="subtitleLabel" destination="Byr-iF-X76" id="Zbo-HF-dNq"/>
+                <outlet property="titleLabel" destination="Vbe-uW-kxr" id="wgi-FD-ibh"/>
+            </connections>
+            <point key="canvasLocation" x="19.565217391304348" y="174.44196428571428"/>
+        </tableViewCell>
+    </objects>
+</document>

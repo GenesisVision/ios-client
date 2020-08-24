@@ -54,6 +54,9 @@ class FundInfoRouter: Router {
     func edit(with assetId: String) {
         guard let viewController = ManageFundViewController.storyboardInstance(.fund) else { return }
         
+        let viewModel = ManageFundViewModel(with: assetId)
+        viewController.viewModel = viewModel
+        
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

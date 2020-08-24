@@ -172,8 +172,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YKz-Mq-ZS1">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="plO-oM-IA7" userLabel="Top TableView">
+                                <rect key="frame" x="0.0" y="44" width="414" height="300"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="N7c-7L-OVT"/>
+                                </constraints>
+                            </tableView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YKz-Mq-ZS1" userLabel="Main TableView">
+                                <rect key="frame" x="0.0" y="344" width="414" height="552"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
@@ -185,15 +192,20 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="YKz-Mq-ZS1" secondAttribute="bottom" id="82f-fX-RCQ"/>
+                            <constraint firstItem="plO-oM-IA7" firstAttribute="leading" secondItem="rUs-bQ-7o9" secondAttribute="leading" id="Cdt-C6-RV6"/>
                             <constraint firstItem="YKz-Mq-ZS1" firstAttribute="leading" secondItem="rUs-bQ-7o9" secondAttribute="leading" id="EAT-1I-hSz"/>
-                            <constraint firstItem="YKz-Mq-ZS1" firstAttribute="top" secondItem="rUs-bQ-7o9" secondAttribute="top" id="WSe-36-k4F"/>
+                            <constraint firstItem="YKz-Mq-ZS1" firstAttribute="top" secondItem="plO-oM-IA7" secondAttribute="bottom" id="WSe-36-k4F"/>
+                            <constraint firstItem="rUs-bQ-7o9" firstAttribute="trailing" secondItem="plO-oM-IA7" secondAttribute="trailing" id="YvT-OE-gna"/>
+                            <constraint firstItem="plO-oM-IA7" firstAttribute="top" secondItem="rUs-bQ-7o9" secondAttribute="top" id="bJf-dT-aoO"/>
                             <constraint firstItem="rUs-bQ-7o9" firstAttribute="trailing" secondItem="YKz-Mq-ZS1" secondAttribute="trailing" id="fb7-Td-keN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rUs-bQ-7o9"/>
                     </view>
                     <navigationItem key="navigationItem" id="Bm6-z0-Gb5"/>
                     <connections>
+                        <outlet property="gvWeeklyChallngeTableView" destination="plO-oM-IA7" id="xEy-KH-tVn"/>
                         <outlet property="tableView" destination="YKz-Mq-ZS1" id="qnA-aJ-yeG"/>
+                        <outlet property="topTableViewHeightConstraint" destination="N7c-7L-OVT" id="ZzJ-32-Pjk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J3O-Y9-bzf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -235,6 +247,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H6r-BW-f6g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4129" y="913"/>
+        </scene>
+        <!--Fund Assets List View Controller-->
+        <scene sceneID="Kw6-gm-0du">
+            <objects>
+                <viewController storyboardIdentifier="FundAssetsListViewController" id="FIa-zd-zDz" customClass="FundAssetsListViewController" customModule="GV_DEBUG" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FUs-GA-MvK">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="bc6-b4-2u7"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="WC4-yU-BqG"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ut8-XG-D7A" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3291" y="913"/>
         </scene>
     </scenes>
 </document>

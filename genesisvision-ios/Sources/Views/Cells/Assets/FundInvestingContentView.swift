@@ -130,8 +130,9 @@ extension FundInvestingContentView: ContentViewProtocol {
         }
         
         firstStackView.titleLabel.text = "Balance"
-        if let balance = asset.balance, let balanceCurrency = balance.currency, let amount = balance.amount, let currency = CurrencyType(rawValue: balanceCurrency.rawValue) {
-            firstStackView.valueLabel.text = amount.rounded(with: currency, short: true).toString() + " " + currency.rawValue
+        
+        if let balance = asset.balance, let balanceCurrency = balance.currency, let personalInvest = asset.personalDetails?.value, let currency = CurrencyType(rawValue: balanceCurrency.rawValue) {
+            firstStackView.valueLabel.text = personalInvest.rounded(with: currency, short: true).toString() + " " + currency.rawValue
         } else {
             firstStackView.valueLabel.text = ""
         }

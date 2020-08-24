@@ -37,7 +37,9 @@ class AssetsPageboyViewControllerDataSource: BasePageboyViewControllerDataSource
         let listRouter = ListRouter(parentRouter: router)
         listRouter.currentController = viewController
         let viewModel = ListViewModel(withRouter: listRouter, reloadDataProtocol: viewController, filterModel: filterModel, showFacets: showFacets, assetType: .fund)
+        let weeklyChallangeViewModel = WeeklyChallangeTableViewModel(delegate: viewController)
         viewController.viewModel = viewModel
+        viewController.topTableViewModel = weeklyChallangeViewModel
         
         return viewController
     }

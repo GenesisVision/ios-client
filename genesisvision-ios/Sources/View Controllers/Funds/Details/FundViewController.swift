@@ -21,9 +21,9 @@ class FundViewController: BaseTabmanViewController<FundViewModel> {
         super.viewDidLoad()
         
         showProgressHUD()
-        setup()
         viewModel.fetch { [weak self] (result) in
             self?.hideHUD()
+            self?.setup()
             self?.reloadData()
             self?.title = self?.viewModel.title
         }
@@ -113,6 +113,15 @@ final class FundViewModel: TabmanViewModel {
     // MARK: - Variables
     var assetId: String?
     
+    var showEvents: Bool = true {
+        didSet {
+            if !showEvents {
+                tabTypes = [.info, .assets, .reallocateHistory, .profit, .balance]
+                setViewControllers()
+            }
+        }
+    }
+    
     public private(set) var tradingAccounts: TradingAccountDetailsItemsViewModel?
     public private(set) var signalSubscription: SignalSubscription?
     var fundDetailsFull: FundDetailsFull? {
@@ -140,8 +149,12 @@ final class FundViewModel: TabmanViewModel {
         
         NotificationCenter.default.addObserver(self, selector: #selector(fundFavoriteStateChangeNotification(notification:)), name: .fundFavoriteStateChange, object: nil)
         
-        self.tabTypes.forEach({ controllers[$0] = getViewController($0) })
+        setViewControllers()
         self.dataSource = PageboyDataSource(self)
+    }
+    
+    private func setViewControllers() {
+        self.tabTypes.forEach({ controllers[$0] = getViewController($0) })
     }
     
     deinit {
@@ -186,7 +199,11 @@ extension FundViewModel: TabmanDataSourceProtocol {
     }
     
     func getViewController(_ index: Int) -> UIViewController? {
-        return getViewController(tabTypes[index])
+        if let tabType = tabTypes[safe: index] {
+            return getViewController(tabType)
+        } else {
+            return nil
+        }
     }
 }
 // MARK: - Actions
@@ -198,13 +215,36 @@ extension FundViewModel {
     
     func fetch(_ completion: @escaping CompletionBlock) {
         guard let assetId = self.assetId else { return }
+        fetchHistory()
 
         FundsDataProvider.get(assetId, currencyType: getPlatformCurrencyType(), completion: { [weak self] (viewModel) in
             guard let viewModel = viewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
-            
             self?.fundDetailsFull = viewModel
             completion(.success)
         }, errorCompletion: completion)
+    }
+    
+    private func fetchHistory() {
+        guard let assetId = self.assetId else { return }
+        
+        EventsDataProvider.get(assetId, eventLocation: .asset, from: nil, to: nil, eventType: .all, assetType: .fund, assetsIds: nil, forceFilterByIds: nil, eventGroup: .none, skip: 0, take: 12, completion: { [weak self] (model) in
+            guard let model = model else {
+                self?.showEvents = false
+                return }
+            if let count = model.events?.count, count > 0 {
+                self?.showEvents = true
+            } else {
+                self?.showEvents = false
+            }
+            }, errorCompletion: { (result) in
+                switch result {
+                    
+                case .success:
+                    self.showEvents = false
+                case .failure(errorType: let errorType):
+                    self.showEvents = false
+                }
+            })
     }
     
     func changeFavorite(value: Bool? = nil, request: Bool = false, completion: @escaping CompletionBlock) {

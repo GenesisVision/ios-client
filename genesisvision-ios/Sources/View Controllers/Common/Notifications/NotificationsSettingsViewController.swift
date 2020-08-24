@@ -71,7 +71,9 @@ class NotificationsSettingsViewController: BaseViewControllerWithTableView {
     
     override func fetch() {
         showProgressHUD()
-        viewModel.fetch { (result) in }
+        viewModel.fetch { [weak self] (result) in
+            self?.hideAll()
+        }
     }
     
     // MARK: - IBAction

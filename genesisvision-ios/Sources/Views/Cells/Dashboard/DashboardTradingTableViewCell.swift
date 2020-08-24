@@ -13,10 +13,12 @@ struct DashboardTradingCellViewModel<ViewModelType: CellViewModelWithCollection>
     let data: TradingHeaderData?
     var dataSource: CollectionViewDataSource!
     weak var delegate: BaseTableViewProtocol?
-    init(_ viewModel: ViewModelType, data: TradingHeaderData?, delegate: BaseTableViewProtocol?) {
+    weak var createsDelegate: DashBoardTradingTableViewCellButtonsActionsProtocol?
+    init(_ viewModel: ViewModelType, data: TradingHeaderData?, delegate: BaseTableViewProtocol?, createsDelegate: DashBoardTradingTableViewCellButtonsActionsProtocol?) {
         self.viewModel = viewModel
         self.delegate = delegate
         self.data = data
+        self.createsDelegate = createsDelegate
         
         dataSource = CollectionViewDataSource(viewModel)
     }
@@ -34,7 +36,13 @@ extension DashboardTradingCellViewModel: CellViewModel {
         cell.labelsView.changeLabelsView.dayLabel.valueLabel.isHidden = true
         cell.labelsView.changeLabelsView.weekLabel.valueLabel.isHidden = true
         cell.labelsView.changeLabelsView.monthLabel.valueLabel.isHidden = true
+        cell.createsDelegate = createsDelegate
     }
+}
+
+protocol DashBoardTradingTableViewCellButtonsActionsProtocol: class {
+    func createFund()
+    func createAccount()
 }
 
 class DashboardTradingTableViewCell: CellWithCollectionView {
@@ -44,6 +52,15 @@ class DashboardTradingTableViewCell: CellWithCollectionView {
        }
     }
     @IBOutlet weak var labelsView: DashboardTradingLabelsView!
+    weak var createsDelegate: DashBoardTradingTableViewCellButtonsActionsProtocol?
+    
+    @IBAction func createAccountActionButton(_ sender: Any) {
+        createsDelegate?.createAccount()
+    }
+    
+    @IBAction func createFundActionButton(_ sender: Any) {
+        createsDelegate?.createFund()
+    }
 }
 
 class TradingCollectionViewModel: CellViewModelWithCollection {

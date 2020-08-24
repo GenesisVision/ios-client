@@ -25,8 +25,8 @@ final class FacetsDelegateManager: NSObject, UICollectionViewDelegate, UICollect
     
     let collectionTopInset: CGFloat = Constants.SystemSizes.Cell.horizontalMarginValue
     let collectionBottomInset: CGFloat = Constants.SystemSizes.Cell.horizontalMarginValue
-    let collectionLeftInset: CGFloat = Constants.SystemSizes.Cell.verticalMarginValues
-    let collectionRightInset: CGFloat = Constants.SystemSizes.Cell.verticalMarginValues
+    let collectionLeftInset: CGFloat = Constants.SystemSizes.Cell.verticalMarginValue
+    let collectionRightInset: CGFloat = Constants.SystemSizes.Cell.verticalMarginValue
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataSource?.numberOfItems(in: section) ?? 0
@@ -45,7 +45,7 @@ final class FacetsDelegateManager: NSObject, UICollectionViewDelegate, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width / 2, height: collectionView.frame.height - Constants.SystemSizes.Cell.verticalMarginValues * 2)
+        return CGSize(width: collectionView.frame.width / 2, height: collectionView.frame.height - Constants.SystemSizes.Cell.verticalMarginValue * 2)
     }
     
     func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, minimumLineSpacingForSectionAt _: Int) -> CGFloat {

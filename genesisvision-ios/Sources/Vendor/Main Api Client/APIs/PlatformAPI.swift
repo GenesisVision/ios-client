@@ -302,6 +302,7 @@ open class PlatformAPI {
       "key" : "key"
     } ],
     "assets" : [ null, null ],
+    "fundsHistoryEvents" : [ null, null ],
     "events" : {
       "tradingHistory" : {
         "all" : [ null, null ],

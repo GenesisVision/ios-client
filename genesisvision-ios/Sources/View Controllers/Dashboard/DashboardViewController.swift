@@ -73,6 +73,48 @@ extension DashboardViewController: UIScrollViewDelegate {
     }
 }
 
+extension DashboardViewController: DashBoardTradingTableViewCellButtonsActionsProtocol {
+    func createFund() {
+        guard let vc = CreateFundViewController.storyboardInstance(.dashboard) else { return }
+        vc.title = "Create Fund"
+        vc.viewModel = CreateFundViewModel(vc, addAssetsProtocol: vc)
+        let nav = BaseNavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true, completion: nil)
+    }
+    
+    func createAccount() {
+        showActionSheet(with: nil,
+                        message: nil,
+                        firstActionTitle: "Create account",
+                        firstHandler: { [weak self] in
+                            self?.createTradeAccount()
+            },
+                        secondActionTitle: "Attach external account",
+                        secondHandler: { [weak self] in
+                            self?.attachExternalAccount()
+            },
+                        cancelTitle: "Cancel",
+                        cancelHandler: nil)
+    }
+    
+    private func createTradeAccount() {
+        guard let vc = CreateAccountViewController.storyboardInstance(.dashboard) else { return }
+        vc.title = "Create account"
+        let nav = BaseNavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true, completion: nil)
+    }
+    
+    private func attachExternalAccount() {
+        guard let vc = AttachAccountViewController.storyboardInstance(.dashboard) else { return }
+        vc.title = "Attach external account"
+        let nav = BaseNavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true, completion: nil)
+    }
+}
+
 extension DashboardViewController: BaseTableViewProtocol {
     func didSelect(_ type: CellActionType, cellViewModel: CellViewAnyModel?) {
         print("select cell \(type)")
@@ -194,7 +236,7 @@ class DashboardViewModel: ViewModelWithListProtocol {
     }
     var tradingDetails: DashboardTradingDetails? {
         didSet {
-            let viewModel = DashboardTradingCellViewModel(TradingCollectionViewModel(tradingDetails, delegate: delegate), data: TradingHeaderData(title: "Trading", details: tradingDetails, currency: currencyType), delegate: delegate)
+            let viewModel = DashboardTradingCellViewModel(TradingCollectionViewModel(tradingDetails, delegate: delegate), data: TradingHeaderData(title: "Trading", details: tradingDetails, currency: currencyType), delegate: delegate, createsDelegate: creationDelegate)
             viewModels.append(viewModel)
             reloadSection(.trading)
         }
@@ -246,8 +288,10 @@ class DashboardViewModel: ViewModelWithListProtocol {
     }
     var router: DashboardRouter?
     weak var delegate: BaseTableViewProtocol?
+    weak var creationDelegate: DashBoardTradingTableViewCellButtonsActionsProtocol?
     init(_ router: DashboardRouter?) {
         self.delegate = router?.dashboardViewController
+        self.creationDelegate = router?.dashboardViewController
         self.router = router
     }
     

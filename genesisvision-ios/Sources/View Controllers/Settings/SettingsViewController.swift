@@ -273,7 +273,6 @@ class SettingsViewController: BaseTableViewController {
     private func setup() {
         showProgressHUD()
         fetch()
-        setupUI()
         setupPullToRefresh(scrollView: tableView)
         
         NotificationCenter.default.addObserver(self, selector: #selector(twoFactorChangeNotification(notification:)), name: .twoFactorChange, object: nil)

@@ -180,7 +180,7 @@ struct AppearanceController {
         PlateTableViewCell.appearance().plateAppearance =
             PlateTableViewCellAppearance(cornerRadius: Constants.SystemSizes.cornerSize,
                                          horizontalMarginValue: Constants.SystemSizes.Cell.horizontalMarginValue,
-                                         verticalMarginValues: Constants.SystemSizes.Cell.verticalMarginValues,
+                                         verticalMarginValues: Constants.SystemSizes.Cell.verticalMarginValue,
                                          backgroundColor: UIColor.Cell.bg,
                                          selectedBackgroundColor: UIColor.Background.gray)
     }

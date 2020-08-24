@@ -50,7 +50,7 @@ final class FundInvestViewModel {
         updateRate(completion: completion)
     }
     
-    func getInfo(completion: @escaping CompletionBlock) {
+    private func getWallet(completion: @escaping CompletionBlock) {
         AuthManager.getWallet(completion: { [weak self] (wallet) in
             if let wallet = wallet, let wallets = wallet.wallets {
                 self?.walletSummary = wallet
@@ -59,24 +59,62 @@ final class FundInvestViewModel {
                 self?.selectedWalletFromDelegateManager?.selectedIndex = 0
                 self?.selectedWalletFromDelegateManager?.selected = wallets[0]
                 self?.walletCurrency = CurrencyType(rawValue: wallets[0].currency?.rawValue ?? "")
-                completion(.success)
+                self?.getLevelsParamsInfo(completion: completion)
             }
+        }, completionError: completion)
+    }
+    
+    private func getLevelsParamsInfo(completion: @escaping CompletionBlock) {
+        PlatformManager.shared.getLevelsParamsInfo(currency: .usdt) { [weak self] (viewModel) in
+            self?.levelsParamsInfo = viewModel
+            self?.getPlatformInfoAndFundDetails(completion: completion)
+        }
+    }
+    
+    private func getPlatformInfoAndFundDetails(completion: @escaping CompletionBlock) {
+        PlatformManager.shared.getPlatformInfo { [weak self] (platformCommonInfo) in
+            self?.investmentCommission = platformCommonInfo?.commonInfo?.platformCommission?.investment
+            self?.updateRate(completion: completion)
             
-            PlatformManager.shared.getLevelsParamsInfo(currency: .usdt) { [weak self] (viewModel) in
-                self?.levelsParamsInfo = viewModel
-                
-                PlatformManager.shared.getPlatformInfo { [weak self] (platformCommonInfo) in
-                    self?.investmentCommission = platformCommonInfo?.commonInfo?.platformCommission?.investment
-                    self?.updateRate(completion: completion)
-                    
-                    guard let assetId = self?.assetId else { return }
-                    
-                    FundsDataProvider.get(assetId, currencyType: .usdt, completion: { (details) in
-                        self?.fundDetailsFull = details
-                    }, errorCompletion: completion)
-                }
-            }
-            }, completionError: completion)
+            guard let assetId = self?.assetId else { return }
+            
+            FundsDataProvider.get(assetId, currencyType: .usdt, completion: { (details) in
+                self?.fundDetailsFull = details
+            }, errorCompletion: completion)
+        }
+    }
+    
+    func getInfo(completion: @escaping CompletionBlock) {
+        
+        getWallet(completion: completion)
+        
+        
+//        AuthManager.getWallet(completion: { [weak self] (wallet) in
+//            if let wallet = wallet, let wallets = wallet.wallets {
+//                self?.walletSummary = wallet
+//                self?.selectedWalletFromDelegateManager = WalletDepositCurrencyDelegateManager(wallets)
+//                self?.selectedWalletFromDelegateManager?.walletId = 0
+//                self?.selectedWalletFromDelegateManager?.selectedIndex = 0
+//                self?.selectedWalletFromDelegateManager?.selected = wallets[0]
+//                self?.walletCurrency = CurrencyType(rawValue: wallets[0].currency?.rawValue ?? "")
+//                completion(.success)
+//            }
+//
+//            PlatformManager.shared.getLevelsParamsInfo(currency: .usdt) { [weak self] (viewModel) in
+//                self?.levelsParamsInfo = viewModel
+//
+//                PlatformManager.shared.getPlatformInfo { [weak self] (platformCommonInfo) in
+//                    self?.investmentCommission = platformCommonInfo?.commonInfo?.platformCommission?.investment
+//                    self?.updateRate(completion: completion)
+//
+//                    guard let assetId = self?.assetId else { return }
+//
+//                    FundsDataProvider.get(assetId, currencyType: .usdt, completion: { (details) in
+//                        self?.fundDetailsFull = details
+//                    }, errorCompletion: completion)
+//                }
+//            }
+//            }, completionError: completion)
     }
     
     func getInvestmentAmountCurrencyValue(_ amount: Double) -> String {
@@ -102,10 +140,11 @@ final class FundInvestViewModel {
     }
     
     func getMinInvestmentAmount() -> Double {
+        
 //        guard let minInvestmentAmount = fundInvestInfo?.minInvestmentAmount else { return 0.0 }
 //
 //        return minInvestmentAmount
-        return 0.0 //FIXME:
+        return 1.0 //FIXME:
     }
     
     func getSelectedWalletTitle() -> String {

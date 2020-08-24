@@ -15,6 +15,7 @@ class FundListViewController: BaseViewControllerWithTableView {
     
     // MARK: - View Model
     var viewModel: ListViewModel!
+    var topTableViewModel: WeeklyChallangeTableViewModel!
     weak var searchProtocol: SearchViewControllerProtocol?
     // MARK: - Outlets
     @IBOutlet override var tableView: UITableView! {
@@ -22,6 +23,10 @@ class FundListViewController: BaseViewControllerWithTableView {
             setupTableConfiguration()
         }
     }
+    
+    @IBOutlet weak var topTableViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var gvWeeklyChallngeTableView: UITableView!
+    
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -72,11 +77,57 @@ class FundListViewController: BaseViewControllerWithTableView {
         
         navigationItem.title = viewModel.title
         
+        if !viewModel.gvFundsWeeklyTop {
+            topTableViewHeightConstraint.constant = 0
+            NSLayoutConstraint.activate([topTableViewHeightConstraint])
+        } else {
+            setupChallengeTableView()
+            topTableViewModel?.fetchData()
+        }
+        
         bottomViewType = searchProtocol == nil ? viewModel.bottomViewType : .none
         
         if signInButtonEnable {
             showNewVersionAlertIfNeeded(self)
         }
+    }
+    
+    private func setupChallengeTableHeader() {
+        let rect = CGRect(x: gvWeeklyChallngeTableView.frame.minX, y: gvWeeklyChallngeTableView.frame.minY, width: gvWeeklyChallngeTableView.width, height: 30)
+        let view = UILabel(frame: rect)
+        view.font = UIFont.getFont(.semibold, size: 16)
+        view.text = "    Last's week challange winner"
+        
+        gvWeeklyChallngeTableView.tableHeaderView = view
+    }
+    
+    private func setupMainTableHeader() {
+        let rect = CGRect(x: tableView.frame.minX, y: tableView.frame.minY, width: tableView.width, height: 30)
+        let view = UILabel(frame: rect)
+        view.font = UIFont.getFont(.semibold, size: 16)
+        
+        view.text = "    All funds"
+        
+        tableView.tableHeaderView = view
+    }
+    
+    private func setupChallengeTableView() {
+        gvWeeklyChallngeTableView.configure(with: .custom(TableViewConfiguration(
+            topInset: 0,
+            bottomInset: 20,
+            estimatedRowHeight: 140,
+            rowHeight: UITableView.automaticDimension,
+            separatorInsetLeft: 16.0,
+            separatorInsetRight: 16.0
+        )))
+        
+        gvWeeklyChallngeTableView.delegate = topTableViewModel?.dataSource
+        gvWeeklyChallngeTableView.dataSource = topTableViewModel?.dataSource
+        gvWeeklyChallngeTableView.registerNibs(for: topTableViewModel.cellModelsForRegistration)
+        gvWeeklyChallngeTableView.isScrollEnabled = false
+        gvWeeklyChallngeTableView.separatorStyle = .none
+        setupChallengeTableHeader()
+        setupMainTableHeader()
     }
     
     private func setupTableConfiguration() {
@@ -124,6 +175,81 @@ class FundListViewController: BaseViewControllerWithTableView {
         
         showProgressHUD()
         fetch()
+    }
+}
+
+final class WeeklyChallangeTableViewModel: ListViewModelWithPaging {
+    
+    lazy var dataSource: TableViewDataSource = TableViewDataSource(self)
+    
+    typealias CellViewModel = FundTableViewCellViewModel
+    
+    var canFetchMoreResults: Bool = false
+    
+    var canPullToRefresh: Bool = false
+    
+    var skip: Int = 0
+    
+    var viewModels: [CellViewAnyModel] = []
+    
+    var weeklyTopFundModel: FundDetailsListItem? {
+        didSet {
+            setupViewModels()
+        }
+    }
+    
+    var cellModelsForRegistration: [CellViewAnyModel.Type] {
+        return [FundTableViewCellViewModel.self]
+    }
+    
+    weak var delegate: BaseTableViewProtocol?
+    
+    init(delegate: BaseTableViewProtocol) {
+        self.delegate = delegate        
+    }
+        
+    func fetchData() {
+        
+        FundsDataProvider.getWeeklyWinner(completion: { (viewModel) in
+            if let viewModel = viewModel {
+                self.weeklyTopFundModel = viewModel
+            }
+        }) { (result) in
+            switch result {
+                
+            case .success:
+                break
+            case .failure(errorType: let errorType):
+                break
+            }
+        }
+        
+    }
+    
+    private func setupViewModels() {
+        guard let viewModel = self.weeklyTopFundModel else { return }
+        viewModels.append(FundTableViewCellViewModel(asset: viewModel, filterProtocol: nil, favoriteProtocol: nil))
+        delegate?.didReload()
+    }
+    
+    func numberOfSections() -> Int {
+        return 1
+    }
+    
+    func model(for indexPath: IndexPath) -> CellViewAnyModel? {
+        return viewModels[indexPath.row]
+    }
+    
+    func numberOfRows(in section: Int) -> Int {
+        viewModels.count
+    }
+    
+    func showInfiniteIndicator(_ value: Bool) {
+        delegate?.didShowInfiniteIndicator(value)
+    }
+    
+    func didSelect(at indexPath: IndexPath) {
+        delegate?.didSelect(.none, cellViewModel: viewModels[indexPath.row])
     }
 }
 
@@ -203,5 +329,19 @@ extension FundListViewController: FavoriteStateChangeProtocol {
                 self?.fetch()
             }
         }
+    }
+}
+
+extension FundListViewController: BaseTableViewProtocol {
+    func didReload() {
+        DispatchQueue.main.async {
+            self.gvWeeklyChallngeTableView.reloadData()
+            self.gvWeeklyChallngeTableView.isScrollEnabled = false
+        }
+    }
+    
+    func didSelect(_ type: CellActionType, cellViewModel: CellViewAnyModel?) {
+        guard let cellViewModel = cellViewModel as?FundTableViewCellViewModel, let assetId = cellViewModel.asset._id?.uuidString  else { return }
+        viewModel.showDetail(with: assetId)
     }
 }

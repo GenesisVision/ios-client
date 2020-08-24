@@ -198,12 +198,18 @@ class ProgramInvestViewController: BaseViewController {
         self.gvCommissionValueLabel.text = gvCommissionValueLabelString
         let investmentAmountValue = (amountToInvestValue * rate - gvCommissionCurrency * rate).rounded(with: programCurrency).toString()
         self.investmentAmountValueLabel.text = "≈" + investmentAmountValue + " " + programCurrency.rawValue
-    
-        self.availableToInvestValue = viewModel.getAvailableToInvest()
         
-        let investButtonEnabled = amountToInvestValue * rate >= viewModel.getMinInvestmentAmount() && amountToInvestValue * rate <= availableToInvestValue
-        
-        investButton.setEnabled(investButtonEnabled)
+        if viewModel.programDetailsFull == nil {
+            gvCommissionValueLabel.isHidden = true
+            gvCommissionTitleLabel.isHidden = true
+            let investButtonEnabled = amountToInvestValue * rate >= viewModel.getMinInvestmentAmount()
+            investButton.setEnabled(investButtonEnabled)
+        } else {
+            self.availableToInvestValue = viewModel.getAvailableToInvest()
+            let investButtonEnabled = amountToInvestValue * rate >= viewModel.getMinInvestmentAmount() && amountToInvestValue * rate <= availableToInvestValue
+            investButton.setEnabled(investButtonEnabled)
+        }
+
     }
     
     @objc private func closeButtonAction() {

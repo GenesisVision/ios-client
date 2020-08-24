@@ -21,8 +21,8 @@ class ProgramViewController: BaseTabmanViewController<ProgramViewModel> {
         super.viewDidLoad()
         
         showProgressHUD()
-        setup()
         viewModel.fetch { [weak self] (result) in
+            self?.setup()
             self?.hideHUD()
             self?.reloadData()
             self?.title = self?.viewModel.title
@@ -125,7 +125,16 @@ final class ProgramViewModel: TabmanViewModel {
                 title = programDetailsFull?.publicInfo?.title ?? ""
                 tabTypes = [.info, .profit, .balance, .trades, .openPosition, .events]
             }
-            self.tabTypes.forEach({ controllers[$0] = getViewController($0) })
+            setViewControllers()
+        }
+    }
+    
+    var showEvents: Bool = true {
+        didSet {
+            if !showEvents {
+                tabTypes.removeAll(where: {$0 == .events})
+                setViewControllers()
+            }
         }
     }
     
@@ -151,6 +160,10 @@ final class ProgramViewModel: TabmanViewModel {
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: .programFavoriteStateChange, object: nil)
+    }
+    
+    private func setViewControllers() {
+        self.tabTypes.forEach({ controllers[$0] = getViewController($0) })
     }
     
     func getViewController(_ type: TabType) -> UIViewController? {
@@ -194,7 +207,11 @@ extension ProgramViewModel: TabmanDataSourceProtocol {
     }
     
     func getViewController(_ index: Int) -> UIViewController? {
-        return getViewController(tabTypes[index])
+        if let tabType = tabTypes[safe: index] {
+            return getViewController(tabType)
+        } else {
+            return nil
+        }
     }
 }
 // MARK: - Actions
@@ -213,26 +230,53 @@ extension ProgramViewModel {
     
     func fetch(_ completion: @escaping CompletionBlock) {
         guard let assetId = self.assetId else { return }
-        
         switch assetType {
         case .program:
             ProgramsDataProvider.get(assetId, completion: { [weak self] (viewModel) in
                 guard let viewModel = viewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
                 
                 self?.programDetailsFull = viewModel
-                completion(.success)
+                self?.fetchHistory(completion)
             }, errorCompletion: completion)
         case .follow:
             FollowsDataProvider.get(assetId, completion: { [weak self] (viewModel) in
                 guard let viewModel = viewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
                 
                 self?.programDetailsFull = viewModel
-                completion(.success)
+                self?.fetchHistory(completion)
             }, errorCompletion: completion)
         default:
             break
         }
         
+    }
+    
+    private func fetchHistory(_ completion: @escaping CompletionBlock) {
+        guard let assetId = self.assetId else { return }
+        
+        EventsDataProvider.get(assetId, eventLocation: .asset, from: nil, to: nil, eventType: .all, assetType: .fund, assetsIds: nil, forceFilterByIds: nil, eventGroup: .none, skip: 0, take: 12, completion: { [weak self] (model) in
+            guard let model = model else {
+                self?.showEvents = false
+                completion(.success)
+                return }
+            if let count = model.events?.count, count > 0 {
+                self?.showEvents = true
+                completion(.success)
+            } else {
+                self?.showEvents = false
+                completion(.success)
+            }
+            }, errorCompletion: { (result) in
+                switch result {
+                    
+                case .success:
+                    self.showEvents = false
+                    completion(.success)
+                case .failure(errorType: let errorType):
+                    self.showEvents = false
+                    completion(.success)
+                }
+            })
     }
     
     func changeFavorite(value: Bool? = nil, request: Bool = false, completion: @escaping CompletionBlock) {

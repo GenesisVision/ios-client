@@ -37,6 +37,10 @@ class ProgramPeriodTableViewCell: UITableViewCell {
             periodLeftLabel.text = ""
         }
     }
+    @IBOutlet weak var ageStackView: LabelWithTitle!
+    @IBOutlet weak var ageProgressView: CircularProgressView!
+    @IBOutlet weak var ageTitleLabel: SubtitleLabel!
+    @IBOutlet weak var ageValueLabel: TitleLabel!
     
     // MARK: - Lifecycle
     override func awakeFromNib() {

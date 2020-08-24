@@ -174,7 +174,9 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
     func scrollToTop(_ scrollView: UIScrollView) {
         if let tableView = scrollView as? UITableView {
             let indexPath = IndexPath(row: 0, section: 0)
-            tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+            if tableView.indexPathExists(indexPath: indexPath) {
+                tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+            }
         } else {
             scrollView.setContentOffset(.zero, animated: true)
         }
@@ -186,7 +188,8 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
     
     @objc func dateRangeButtonAction() {
         dateRangeView.delegate = self
-//        bottomSheetController = BottomSheetController()
+        
+        bottomSheetController = BottomSheetController()
         bottomSheetController.addNavigationBar("Date range")
         bottomSheetController.initializeHeight = 370
         bottomSheetController.addContentsView(dateRangeView)

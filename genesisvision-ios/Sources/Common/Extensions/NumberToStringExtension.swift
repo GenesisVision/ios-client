@@ -29,7 +29,7 @@ extension Double {
     }
     
     func getPercentageString() -> String {
-        let percentText = self < 1.0 && self > 0.0 ? (self * 100.0).rounded(with: .undefined).toString() : "∞"
+        let percentText = self < 1.0 && self > 0.0 ? (self * 100.0).rounded(with: .undefined).toString() : "0"
         return percentText + "%"
     }
     

@@ -129,6 +129,10 @@ final class ProgramInfoViewModel: ViewModelWithListProtocol {
         return sections.count
     }
     
+    func modelsCount() -> Int {
+        return viewModels.count == 0 ? 1 : viewModels.count
+    }
+    
     func numberOfRows(in section: Int) -> Int {
         let sectionType = sections[section]
         
@@ -144,6 +148,20 @@ final class ProgramInfoViewModel: ViewModelWithListProtocol {
         guard let rawValue = programFollowDetailsFull?.tradingAccountInfo?.currency?.rawValue, let currency = CurrencyType(rawValue: rawValue) else { return }
         
         router.showAboutLevels(currency)
+    }
+    
+    func didSelect(at indexPath: IndexPath) {
+        switch sections[indexPath.section] {
+        case .details:
+            switch rows[indexPath.row] {
+            case .manager:
+                showManagerVC()
+            default:
+                break
+            }
+        default:
+            break
+        }
     }
     
     func didSelectRow(at indexPath: IndexPath) {

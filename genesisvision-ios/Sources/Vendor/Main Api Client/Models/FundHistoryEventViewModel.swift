@@ -15,10 +15,7 @@ public struct FundHistoryEventViewModel: Codable {
 
     public var type: FundHistoryEventType?
 
-    /** Investment/withdrawal/fund creation */
-    public var amount: Double?
-
-    public var asset: BasePlatformAsset?
+    public var _description: String?
 
     public var logoUrl: String?
 
@@ -26,14 +23,21 @@ public struct FundHistoryEventViewModel: Codable {
 
     /** Reallocation/fund creation */
     public var newAssets: [FundAssetPartWithIcon]?
-    public init(date: Date? = nil, type: FundHistoryEventType? = nil, amount: Double? = nil, asset: BasePlatformAsset? = nil, logoUrl: String? = nil, trades: [FundTradingEventViewModel]? = nil, newAssets: [FundAssetPartWithIcon]? = nil) { 
+    public init(date: Date? = nil, type: FundHistoryEventType? = nil, _description: String? = nil, logoUrl: String? = nil, trades: [FundTradingEventViewModel]? = nil, newAssets: [FundAssetPartWithIcon]? = nil) { 
         self.date = date
         self.type = type
-        self.amount = amount
-        self.asset = asset
+        self._description = _description
         self.logoUrl = logoUrl
         self.trades = trades
         self.newAssets = newAssets
+    }
+    public enum CodingKeys: String, CodingKey { 
+        case date
+        case type
+        case _description = "description"
+        case logoUrl
+        case trades
+        case newAssets
     }
 
 }

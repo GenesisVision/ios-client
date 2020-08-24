@@ -18,11 +18,14 @@ public struct FilterInfo: Codable {
     public var events: EventFilters?
 
     public var assets: [FilterItemInfo]?
-    public init(walletTransactions: [FilterItemInfo]? = nil, walletExternalTransactions: [FilterItemInfo]? = nil, events: EventFilters? = nil, assets: [FilterItemInfo]? = nil) { 
+
+    public var fundsHistoryEvents: [FilterItemInfo]?
+    public init(walletTransactions: [FilterItemInfo]? = nil, walletExternalTransactions: [FilterItemInfo]? = nil, events: EventFilters? = nil, assets: [FilterItemInfo]? = nil, fundsHistoryEvents: [FilterItemInfo]? = nil) { 
         self.walletTransactions = walletTransactions
         self.walletExternalTransactions = walletExternalTransactions
         self.events = events
         self.assets = assets
+        self.fundsHistoryEvents = fundsHistoryEvents
     }
 
 }

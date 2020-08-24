@@ -116,6 +116,24 @@ final class FundInfoViewModel: ViewModelWithListProtocol {
         }
     }
     
+    func modelsCount() -> Int {
+        return viewModels.count == 0 ? 1 : viewModels.count
+    }
+    
+    func didSelect(at indexPath: IndexPath) {
+        switch sections[indexPath.section] {
+        case .details:
+            switch rows[indexPath.row] {
+            case .manager:
+                showManagerVC()
+            default:
+                break
+            }
+        default:
+            break
+        }
+    }
+    
     func didSelectRow(at indexPath: IndexPath) {
         switch sections[indexPath.section] {
         case .details:

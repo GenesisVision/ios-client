@@ -181,23 +181,30 @@ class FundInvestViewController: BaseViewController {
         let entryFee = viewModel.getEntryFee()
         let gvCommission = viewModel.getGVCommision()
         
-        let entryFeeCurrency = entryFee * amountToInvestValue * rate / 100
+        let gvCommissionCurrency = gvCommission * amountToInvestValue / 100
+        let gvCommissionCurrencyString = gvCommissionCurrency.rounded(with: walletCurrencyType).toString()
+        let gvCommissionString = gvCommission.rounded(toPlaces: 3).toString()
+        let gvCommissionValueLabelString = gvCommissionString + "% (≈\(gvCommissionCurrencyString) \(walletCurrencyType.rawValue))"
+        self.gvCommissionValueLabel.text = gvCommissionValueLabelString
+        
+        let amounToInvestAfterGVCommision = amountToInvestValue - gvCommissionCurrency
+        
+
+        
+        let entryFeeCurrency = entryFee * amounToInvestAfterGVCommision * rate / 100
         let entryFeeCurrencyString = entryFeeCurrency.rounded(with: fundCurrency).toString()
         let entryFeeString = entryFee.rounded(toPlaces: 3).toString()
         
         let entryFeeValueLabelString = entryFeeString + "% (≈\(entryFeeCurrencyString) \(Currency.gvt.rawValue))"
         self.entryFeeValueLabel.text = entryFeeValueLabelString
         
-        let gvCommissionCurrency = gvCommission * amountToInvestValue / 100
-        let gvCommissionCurrencyString = gvCommissionCurrency.rounded(with: walletCurrencyType).toString()
-        let gvCommissionString = gvCommission.rounded(toPlaces: 3).toString()
+        let amountToInvestAfterAllCommission = (amounToInvestAfterGVCommision - entryFeeCurrency)
         
-        let gvCommissionValueLabelString = gvCommissionString + "% (≈\(gvCommissionCurrencyString) \(walletCurrencyType.rawValue))"
-        self.gvCommissionValueLabel.text = gvCommissionValueLabelString
-        let investmentAmountValue = (amountToInvestValue * rate - entryFeeCurrency - gvCommissionCurrency * rate).rounded(with: fundCurrency).toString()
-        self.investmentAmountValueLabel.text = "≈" + investmentAmountValue + " " + fundCurrency.rawValue
+
+//        let investmentAmountValue = (amountToInvestValue * rate - entryFeeCurrency - gvCommissionCurrency * rate).rounded(with: fundCurrency).toString()
+        self.investmentAmountValueLabel.text = "≈" + amountToInvestAfterAllCommission.rounded(with: fundCurrency).toString() + " " + fundCurrency.rawValue
         
-        let investButtonEnabled = amountToInvestValue * rate >= viewModel.getMinInvestmentAmount()
+        let investButtonEnabled = amountToInvestAfterAllCommission * rate >= viewModel.getMinInvestmentAmount()
         
         investButton.setEnabled(investButtonEnabled)
     }

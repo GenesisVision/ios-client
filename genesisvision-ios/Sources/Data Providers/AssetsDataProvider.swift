@@ -18,6 +18,14 @@ class AssetsDataProvider: DataProvider {
         }
     }
     
+    static func updateFundAssetDetails(_ assetId: String, model: ProgramUpdate, completion: @escaping CompletionBlock) {
+        guard let uuid = UUID(uuidString: assetId) else { return completion(.failure(errorType: .apiError(message: nil))) }
+        
+        AssetsAPI.updateAsset_0(_id: uuid, body: model) { (_, error) in
+            DataProvider().responseHandler(error, completion: completion)
+        }
+    }
+    
     // MARK: - Fund
     static func closeFund(_ fundId: String, model: TwoFactorCodeModel?, completion: @escaping CompletionBlock) {
         

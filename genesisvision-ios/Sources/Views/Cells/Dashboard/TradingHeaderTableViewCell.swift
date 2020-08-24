@@ -36,10 +36,11 @@ struct TradingHeaderData: BaseData {
 struct TradingHeaderTableViewCellViewModel {
     let data: TradingHeaderData
     weak var delegate: BaseTableViewProtocol?
+    weak var createsDelegate: DashBoardTradingTableViewCellButtonsActionsProtocol?
 }
 extension TradingHeaderTableViewCellViewModel: CellViewModel {
     func setup(on cell: TradingHeaderTableViewCell) {
-        cell.configure(data, delegate: delegate)
+        cell.configure(data, delegate: delegate, createsDelegate: createsDelegate)
     }
 }
 
@@ -51,10 +52,12 @@ class TradingHeaderTableViewCell: BaseTableViewCell {
        }
     }
     @IBOutlet weak var labelsView: DashboardTradingLabelsView!
+    weak var createsDelegate: DashBoardTradingTableViewCellButtonsActionsProtocol?
     
     // MARK: - Public methods
-    func configure(_ data: TradingHeaderData, delegate: BaseTableViewProtocol?) {
+    func configure(_ data: TradingHeaderData, delegate: BaseTableViewProtocol?, createsDelegate: DashBoardTradingTableViewCellButtonsActionsProtocol?) {
         self.delegate = delegate
+        self.createsDelegate = createsDelegate
         type = .dashboardTrading
         
         loaderView.stopAnimating()
@@ -77,5 +80,12 @@ class TradingHeaderTableViewCell: BaseTableViewCell {
         labelsView.changeLabelsView.dayLabel.valueLabel.isHidden = true
         labelsView.changeLabelsView.weekLabel.valueLabel.isHidden = true
         labelsView.changeLabelsView.monthLabel.valueLabel.isHidden = true
+    }
+    
+    @IBAction func createFundButtonAction(_ sender: Any) {
+        createsDelegate?.createFund()
+    }
+    @IBAction func createAccountButtonAction(_ sender: Any) {
+        createsDelegate?.createAccount()
     }
 }

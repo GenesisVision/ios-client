@@ -42,7 +42,7 @@ extension FundYourInvestmentTableViewCellViewModel: CellViewModel {
         cell.reinvestSwitch.isHidden = true
         cell.reinvestTitleLabel.isHidden = true
         
-        let currency: CurrencyType = .gvt
+        let currency = getPlatformCurrencyType()
         
         if let value = fundDetailsFull?.personalDetails?.value {
             cell.investedTitleLabel.text = "value"
@@ -52,7 +52,7 @@ extension FundYourInvestmentTableViewCellViewModel: CellViewModel {
             cell.investedValueLabel.isHidden = true
         }
         
-        if let value = fundDetailsFull?.personalDetails?.pendingInput, value > 0 {
+        if let value = fundDetailsFull?.personalDetails?.pendingInput, value > 0, let currency = fundDetailsFull?.personalDetails?.pendingInOutCurrency {
             cell.valueTitleLabel.text = "pending input"
             cell.valueLabel.text = value.rounded(with: currency).toString() + " " + currency.rawValue
         } else {
@@ -60,7 +60,8 @@ extension FundYourInvestmentTableViewCellViewModel: CellViewModel {
             cell.valueLabel.isHidden = true
         }
         
-        if let value = fundDetailsFull?.personalDetails?.pendingOutput, value > 0 {
+        if let value = fundDetailsFull?.personalDetails?.pendingOutput, value > 0,
+            let currency = fundDetailsFull?.personalDetails?.pendingInOutCurrency {
             cell.profitTitleLabel.text = "pending output"
             cell.profitValueLabel.text = value.rounded(with: currency).toString() + " " + currency.rawValue
         } else {

@@ -20,4 +20,5 @@ public enum SocialLinkType: String, Codable {
     case reddit = "Reddit"
     case gitHub = "GitHub"
     case medium = "Medium"
+    case instagram = "Instagram"
 }

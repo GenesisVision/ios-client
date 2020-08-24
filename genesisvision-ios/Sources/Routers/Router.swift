@@ -537,7 +537,10 @@ extension Router {
         let router = ListRouter(parentRouter: parentRouter ?? self)
         router.currentController = viewController
         let viewModel = ListViewModel(withRouter: router, reloadDataProtocol: viewController, filterModel: filterModel, showFacets: showFacets, assetType: .fund)
+        let weeklyChallangeViewModel = WeeklyChallangeTableViewModel(delegate: viewController)
         viewController.viewModel = viewModel
+        viewController.topTableViewModel = weeklyChallangeViewModel
+        
         
         viewController.hidesBottomBarWhenPushed = true
         return viewController

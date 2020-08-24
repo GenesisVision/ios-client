@@ -99,6 +99,10 @@ class DesignableUITextField: UITextField, UITextFieldDelegate {
         padding = UIEdgeInsets(top: 0, left: leftPadding + imageWidth + rightPadding, bottom: 0, right: 0)
     }
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
     // MARK: - Lifecycle
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!

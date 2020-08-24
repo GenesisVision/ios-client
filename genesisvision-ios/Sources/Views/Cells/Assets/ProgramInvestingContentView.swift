@@ -186,8 +186,9 @@ extension ProgramInvestingContentView: ContentViewProtocol {
         }
         
         secondStackView.titleLabel.text = "Equity"
-        if let balance = asset.balance, let balanceCurrency = balance.currency, let amount = balance.amount, let currency = CurrencyType(rawValue: balanceCurrency.rawValue) {
-            secondStackView.valueLabel.text = amount.rounded(with: currency, short: true).toString() + " " + currency.rawValue
+        
+        if let balance = asset.balance, let balanceCurrency = balance.currency, let personalInvest = asset.personalDetails?.value, let currency = CurrencyType(rawValue: balanceCurrency.rawValue) {
+            secondStackView.valueLabel.text = personalInvest.rounded(with: currency, short: true).toString() + " " + currency.rawValue
         } else {
             secondStackView.valueLabel.text = ""
         }
