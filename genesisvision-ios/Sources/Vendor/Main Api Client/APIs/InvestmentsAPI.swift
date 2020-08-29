@@ -121,7 +121,8 @@ open class InvestmentsAPI {
   "periodEnds" : "2000-01-23T04:56:07.000+00:00",
   "withheldInvestment" : 6.027456183070403,
   "title" : "title",
-  "availableToWithdraw" : 0.8008281904610115
+  "availableToWithdraw" : 0.8008281904610115,
+  "withdrawInPercent" : true
 }}]
      - parameter _id: (path)  
 

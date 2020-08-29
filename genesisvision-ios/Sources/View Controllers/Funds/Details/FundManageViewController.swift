@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ManageFundViewController: BaseViewController {
+class FundManageViewController: BaseViewController {
     
     var viewModel: ManageFundViewModel!
     
@@ -120,7 +120,7 @@ class ManageFundViewController: BaseViewController {
     }
     
     @IBAction func changeSettingsButtonAction(_ sender: Any) {
-        guard let viewController = ChangeFundSettingsViewController.storyboardInstance(.fund), let assetId = self.viewModel.assetId else { return }
+        guard let viewController = FundChangeSettingsViewController.storyboardInstance(.fund), let assetId = self.viewModel.assetId else { return }
         
         let viewModel = ChangeFundSettingsViewModel()
         viewModel.assetId = assetId

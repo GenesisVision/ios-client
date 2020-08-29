@@ -786,6 +786,7 @@ open class TradingaccountAPI {
     "canTransferMoney" : true,
     "canMakeDemoDeposit" : true,
     "canMakeProgramFromPrivateTradingAccount" : true,
+    "canMakeExchangeProgramFromPrivateTradingAccount" : true,
     "canMakeProgramFromSignalProvider" : true,
     "isEnoughMoneyToCreateProgram" : true,
     "canChangePassword" : true,

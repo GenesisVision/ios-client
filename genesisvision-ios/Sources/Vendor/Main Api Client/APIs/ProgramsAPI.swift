@@ -710,10 +710,16 @@ open class ProgramsAPI {
     "periodDuration" : 2,
     "stopOutLevelCurrent" : 6.84685269835264,
     "successFeeSelected" : 1.2315135367772556,
+    "canShowFinancialStatistic" : true,
     "level" : 5,
     "genesisRatio" : 9.301444243932576,
     "availableInvestmentLimit" : 1.1730742509559433,
+    "type" : "DailyPeriod",
     "tradesDelay" : "None",
+    "dailyPeriodDetails" : {
+      "hourProcessing" : 5,
+      "isProcessingRealTime" : true
+    },
     "availableInvestmentBase" : 7.457744773683766,
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "totalAvailableInvestment" : 4.965218492984954,
@@ -722,19 +728,20 @@ open class ProgramsAPI {
     "investmentScale" : 3.616076749251911,
     "successFeeCurrent" : 1.0246457001441578,
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
+    "canShowPeriodHistory" : true,
     "ageDays" : 7.061401241503109,
     "personalDetails" : {
       "canChangeReinvest" : true,
       "canWithdraw" : true,
       "pendingOutputIsWithdrawAll" : true,
-      "subscribedAccounts" : 1,
+      "subscribedAccounts" : 2,
       "canInvest" : true,
       "showTwoFactorButton" : true,
-      "pendingOutput" : 9.018348186070783,
-      "managementFeePersonal" : 3.5571952270680973,
+      "pendingOutput" : 6.438423552598547,
+      "managementFeePersonal" : 6.965117697638846,
       "hasNotifications" : true,
-      "pendingInput" : 8.762042012749001,
-      "profitPercent" : 9.369310271410669,
+      "pendingInput" : 9.018348186070783,
+      "profitPercent" : 6.683562403749608,
       "isReinvest" : true,
       "isAutoJoin" : true,
       "migration" : {
@@ -785,13 +792,13 @@ open class ProgramsAPI {
             "name" : "name"
           } ]
         },
-        "newLeverage" : 6,
+        "newLeverage" : 1,
         "dateCreate" : "2000-01-23T04:56:07.000+00:00"
       },
-      "value" : 5.025004791520295,
-      "profit" : 9.965781217890562,
-      "successFeePersonal" : 6.438423552598547,
-      "invested" : 6.683562403749608,
+      "value" : 9.965781217890562,
+      "profit" : 9.369310271410669,
+      "successFeePersonal" : 3.5571952270680973,
+      "invested" : 8.762042012749001,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
@@ -827,6 +834,7 @@ open class ProgramsAPI {
     "canMakeSignalProviderFromPrivateExternalTradingAccount" : true,
     "canTransferMoney" : true,
     "canMakeProgramFromPrivateTradingAccount" : true,
+    "canMakeExchangeProgramFromPrivateTradingAccount" : true,
     "canClosePeriod" : true,
     "canMakeProgramFromSignalProvider" : true,
     "isEnoughMoneyToCreateProgram" : true,
@@ -836,13 +844,13 @@ open class ProgramsAPI {
     "canConfirm2FA" : true
   },
   "followDetails" : {
-    "tradesCount" : 2,
+    "tradesCount" : 6,
     "signalSettings" : {
-      "signalSuccessFee" : 6.778324963048013,
-      "signalVolumeFee" : 6.878052220127876,
+      "signalSuccessFee" : 6.878052220127876,
+      "signalVolumeFee" : 5.944895607614016,
       "isActive" : true
     },
-    "subscribersCount" : 5,
+    "subscribersCount" : 6,
     "personalDetails" : {
       "guestActions" : {
         "canSubscribeToExternalSignalPrivateAccount" : true,
@@ -850,7 +858,7 @@ open class ProgramsAPI {
         "canSubscribeToInternalSignal" : true
       },
       "hasNotifications" : true,
-      "subscribedAccounts" : 6,
+      "subscribedAccounts" : 3,
       "isFavorite" : true
     }
   },
@@ -1288,6 +1296,20 @@ open class ProgramsAPI {
      - examples: [{contentType=application/json, example={
   "total" : 9,
   "items" : [ {
+    "color" : "color",
+    "description" : "description",
+    "type" : "DailyPeriod",
+    "title" : "title",
+    "periodStarts" : "2000-01-23T04:56:07.000+00:00",
+    "balance" : {
+      "amount" : 7.386281948385884,
+      "currency" : "Undefined"
+    },
+    "availableToInvest" : 5.962133916683182,
+    "currency" : "Undefined",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "levelProgress" : 6.027456183070403,
+    "investorsCount" : 5,
     "owner" : {
       "personalDetails" : {
         "isFollow" : true,
@@ -1313,16 +1335,12 @@ open class ProgramsAPI {
       } ],
       "profit" : 9.301444243932576
     },
-    "color" : "color",
     "level" : 0,
     "entryFeeCurrent" : 7.061401241503109,
-    "description" : "description",
     "entryFeeSelected" : 2.3021358869347655,
-    "title" : "title",
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
     "logoUrl" : "logoUrl",
     "url" : "url",
-    "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "tags" : [ {
       "color" : "color",
       "name" : "name"
@@ -1330,24 +1348,29 @@ open class ProgramsAPI {
       "color" : "color",
       "name" : "name"
     } ],
-    "balance" : {
-      "amount" : 7.386281948385884,
-      "currency" : "Undefined"
-    },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
-    "availableToInvest" : 5.962133916683182,
     "personalDetails" : {
       "isReinvest" : true,
       "isAutoJoin" : true,
       "isOwnAsset" : true,
       "isFavorite" : true
     },
-    "currency" : "Undefined",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "levelProgress" : 6.027456183070403,
-    "investorsCount" : 5,
     "status" : "status"
   }, {
+    "color" : "color",
+    "description" : "description",
+    "type" : "DailyPeriod",
+    "title" : "title",
+    "periodStarts" : "2000-01-23T04:56:07.000+00:00",
+    "balance" : {
+      "amount" : 7.386281948385884,
+      "currency" : "Undefined"
+    },
+    "availableToInvest" : 5.962133916683182,
+    "currency" : "Undefined",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "levelProgress" : 6.027456183070403,
+    "investorsCount" : 5,
     "owner" : {
       "personalDetails" : {
         "isFollow" : true,
@@ -1373,16 +1396,12 @@ open class ProgramsAPI {
       } ],
       "profit" : 9.301444243932576
     },
-    "color" : "color",
     "level" : 0,
     "entryFeeCurrent" : 7.061401241503109,
-    "description" : "description",
     "entryFeeSelected" : 2.3021358869347655,
-    "title" : "title",
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
     "logoUrl" : "logoUrl",
     "url" : "url",
-    "periodStarts" : "2000-01-23T04:56:07.000+00:00",
     "tags" : [ {
       "color" : "color",
       "name" : "name"
@@ -1390,22 +1409,13 @@ open class ProgramsAPI {
       "color" : "color",
       "name" : "name"
     } ],
-    "balance" : {
-      "amount" : 7.386281948385884,
-      "currency" : "Undefined"
-    },
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
-    "availableToInvest" : 5.962133916683182,
     "personalDetails" : {
       "isReinvest" : true,
       "isAutoJoin" : true,
       "isOwnAsset" : true,
       "isFavorite" : true
     },
-    "currency" : "Undefined",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "levelProgress" : 6.027456183070403,
-    "investorsCount" : 5,
     "status" : "status"
   } ]
 }}]

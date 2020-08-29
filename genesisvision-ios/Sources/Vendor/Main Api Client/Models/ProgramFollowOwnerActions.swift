@@ -23,6 +23,8 @@ public struct ProgramFollowOwnerActions: Codable {
 
     public var canMakeProgramFromPrivateTradingAccount: Bool?
 
+    public var canMakeExchangeProgramFromPrivateTradingAccount: Bool?
+
     public var canMakeSignalProviderFromPrivateTradingAccount: Bool?
 
     public var canMakeSignalProviderFromPrivateExternalTradingAccount: Bool?
@@ -36,13 +38,14 @@ public struct ProgramFollowOwnerActions: Codable {
     public var isEnoughMoneyToCreateProgram: Bool?
 
     public var canConfirm2FA: Bool?
-    public init(canClose: Bool? = nil, canClosePeriod: Bool? = nil, canChangePassword: Bool? = nil, canTransferMoney: Bool? = nil, canCloseOpenPositions: Bool? = nil, canMakeProgramFromPrivateTradingAccount: Bool? = nil, canMakeSignalProviderFromPrivateTradingAccount: Bool? = nil, canMakeSignalProviderFromPrivateExternalTradingAccount: Bool? = nil, canMakeProgramFromSignalProvider: Bool? = nil, canMakeSignalProviderFromProgram: Bool? = nil, canEditSignalProviderSettings: Bool? = nil, isEnoughMoneyToCreateProgram: Bool? = nil, canConfirm2FA: Bool? = nil) { 
+    public init(canClose: Bool? = nil, canClosePeriod: Bool? = nil, canChangePassword: Bool? = nil, canTransferMoney: Bool? = nil, canCloseOpenPositions: Bool? = nil, canMakeProgramFromPrivateTradingAccount: Bool? = nil, canMakeExchangeProgramFromPrivateTradingAccount: Bool? = nil, canMakeSignalProviderFromPrivateTradingAccount: Bool? = nil, canMakeSignalProviderFromPrivateExternalTradingAccount: Bool? = nil, canMakeProgramFromSignalProvider: Bool? = nil, canMakeSignalProviderFromProgram: Bool? = nil, canEditSignalProviderSettings: Bool? = nil, isEnoughMoneyToCreateProgram: Bool? = nil, canConfirm2FA: Bool? = nil) { 
         self.canClose = canClose
         self.canClosePeriod = canClosePeriod
         self.canChangePassword = canChangePassword
         self.canTransferMoney = canTransferMoney
         self.canCloseOpenPositions = canCloseOpenPositions
         self.canMakeProgramFromPrivateTradingAccount = canMakeProgramFromPrivateTradingAccount
+        self.canMakeExchangeProgramFromPrivateTradingAccount = canMakeExchangeProgramFromPrivateTradingAccount
         self.canMakeSignalProviderFromPrivateTradingAccount = canMakeSignalProviderFromPrivateTradingAccount
         self.canMakeSignalProviderFromPrivateExternalTradingAccount = canMakeSignalProviderFromPrivateExternalTradingAccount
         self.canMakeProgramFromSignalProvider = canMakeProgramFromSignalProvider

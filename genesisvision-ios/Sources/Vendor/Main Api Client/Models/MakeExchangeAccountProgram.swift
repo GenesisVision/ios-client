@@ -17,7 +17,7 @@ public struct MakeExchangeAccountProgram: Codable {
 
     public var hourProcessing: Int?
 
-    public var stopOutLevel: Double?
+    public var isProcessingRealTime: Bool?
 
     public var tradesDelay: TradesDelay?
 
@@ -32,11 +32,11 @@ public struct MakeExchangeAccountProgram: Codable {
     public var _description: String?
 
     public var logo: String?
-    public init(_id: UUID? = nil, currency: Currency? = nil, hourProcessing: Int? = nil, stopOutLevel: Double? = nil, tradesDelay: TradesDelay? = nil, managementFee: Double? = nil, successFee: Double? = nil, investmentLimit: Double? = nil, title: String? = nil, _description: String? = nil, logo: String? = nil) { 
+    public init(_id: UUID? = nil, currency: Currency? = nil, hourProcessing: Int? = nil, isProcessingRealTime: Bool? = nil, tradesDelay: TradesDelay? = nil, managementFee: Double? = nil, successFee: Double? = nil, investmentLimit: Double? = nil, title: String? = nil, _description: String? = nil, logo: String? = nil) { 
         self._id = _id
         self.currency = currency
         self.hourProcessing = hourProcessing
-        self.stopOutLevel = stopOutLevel
+        self.isProcessingRealTime = isProcessingRealTime
         self.tradesDelay = tradesDelay
         self.managementFee = managementFee
         self.successFee = successFee
@@ -49,7 +49,7 @@ public struct MakeExchangeAccountProgram: Codable {
         case _id = "id"
         case currency
         case hourProcessing
-        case stopOutLevel
+        case isProcessingRealTime
         case tradesDelay
         case managementFee
         case successFee

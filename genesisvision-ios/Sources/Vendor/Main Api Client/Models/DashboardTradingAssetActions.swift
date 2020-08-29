@@ -27,6 +27,8 @@ public struct DashboardTradingAssetActions: Codable {
 
     public var canMakeProgramFromPrivateTradingAccount: Bool?
 
+    public var canMakeExchangeProgramFromPrivateTradingAccount: Bool?
+
     public var canMakeSignalProviderFromPrivateTradingAccount: Bool?
 
     public var canMakeSignalProviderFromPrivateExternalTradingAccount: Bool?
@@ -40,7 +42,7 @@ public struct DashboardTradingAssetActions: Codable {
     public var isEnoughMoneyToCreateProgram: Bool?
 
     public var canConfirm2FA: Bool?
-    public init(canAddRequestInvest: Bool? = nil, canAddRequestWithdraw: Bool? = nil, canTransferMoney: Bool? = nil, canMakeDemoDeposit: Bool? = nil, canChangePassword: Bool? = nil, canClose: Bool? = nil, hasTerminal: Bool? = nil, canMakeProgramFromPrivateTradingAccount: Bool? = nil, canMakeSignalProviderFromPrivateTradingAccount: Bool? = nil, canMakeSignalProviderFromPrivateExternalTradingAccount: Bool? = nil, canMakeProgramFromSignalProvider: Bool? = nil, canMakeSignalProviderFromProgram: Bool? = nil, canEditSignalProviderSettings: Bool? = nil, isEnoughMoneyToCreateProgram: Bool? = nil, canConfirm2FA: Bool? = nil) { 
+    public init(canAddRequestInvest: Bool? = nil, canAddRequestWithdraw: Bool? = nil, canTransferMoney: Bool? = nil, canMakeDemoDeposit: Bool? = nil, canChangePassword: Bool? = nil, canClose: Bool? = nil, hasTerminal: Bool? = nil, canMakeProgramFromPrivateTradingAccount: Bool? = nil, canMakeExchangeProgramFromPrivateTradingAccount: Bool? = nil, canMakeSignalProviderFromPrivateTradingAccount: Bool? = nil, canMakeSignalProviderFromPrivateExternalTradingAccount: Bool? = nil, canMakeProgramFromSignalProvider: Bool? = nil, canMakeSignalProviderFromProgram: Bool? = nil, canEditSignalProviderSettings: Bool? = nil, isEnoughMoneyToCreateProgram: Bool? = nil, canConfirm2FA: Bool? = nil) { 
         self.canAddRequestInvest = canAddRequestInvest
         self.canAddRequestWithdraw = canAddRequestWithdraw
         self.canTransferMoney = canTransferMoney
@@ -49,6 +51,7 @@ public struct DashboardTradingAssetActions: Codable {
         self.canClose = canClose
         self.hasTerminal = hasTerminal
         self.canMakeProgramFromPrivateTradingAccount = canMakeProgramFromPrivateTradingAccount
+        self.canMakeExchangeProgramFromPrivateTradingAccount = canMakeExchangeProgramFromPrivateTradingAccount
         self.canMakeSignalProviderFromPrivateTradingAccount = canMakeSignalProviderFromPrivateTradingAccount
         self.canMakeSignalProviderFromPrivateExternalTradingAccount = canMakeSignalProviderFromPrivateExternalTradingAccount
         self.canMakeProgramFromSignalProvider = canMakeProgramFromSignalProvider

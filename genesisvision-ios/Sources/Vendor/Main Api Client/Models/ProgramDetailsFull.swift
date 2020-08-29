@@ -11,6 +11,8 @@ import Foundation
 public struct ProgramDetailsFull: Codable {
 
 
+    public var type: ProgramType?
+
     public var level: Int?
 
     public var levelProgress: Double?
@@ -49,8 +51,15 @@ public struct ProgramDetailsFull: Codable {
 
     public var totalAvailableInvestment: Double?
 
+    public var canShowPeriodHistory: Bool?
+
+    public var canShowFinancialStatistic: Bool?
+
+    public var dailyPeriodDetails: ProgramDailyPeriodDetails?
+
     public var personalDetails: PersonalProgramDetails?
-    public init(level: Int? = nil, levelProgress: Double? = nil, periodDuration: Int? = nil, periodStarts: Date? = nil, periodEnds: Date? = nil, tradesDelay: TradesDelay? = nil, ageDays: Double? = nil, genesisRatio: Double? = nil, investmentScale: Double? = nil, volumeScale: Double? = nil, managementFeeSelected: Double? = nil, managementFeeCurrent: Double? = nil, successFeeSelected: Double? = nil, successFeeCurrent: Double? = nil, stopOutLevelSelected: Double? = nil, stopOutLevelCurrent: Double? = nil, availableInvestmentBase: Double? = nil, availableInvestmentLimit: Double? = nil, totalAvailableInvestment: Double? = nil, personalDetails: PersonalProgramDetails? = nil) { 
+    public init(type: ProgramType? = nil, level: Int? = nil, levelProgress: Double? = nil, periodDuration: Int? = nil, periodStarts: Date? = nil, periodEnds: Date? = nil, tradesDelay: TradesDelay? = nil, ageDays: Double? = nil, genesisRatio: Double? = nil, investmentScale: Double? = nil, volumeScale: Double? = nil, managementFeeSelected: Double? = nil, managementFeeCurrent: Double? = nil, successFeeSelected: Double? = nil, successFeeCurrent: Double? = nil, stopOutLevelSelected: Double? = nil, stopOutLevelCurrent: Double? = nil, availableInvestmentBase: Double? = nil, availableInvestmentLimit: Double? = nil, totalAvailableInvestment: Double? = nil, canShowPeriodHistory: Bool? = nil, canShowFinancialStatistic: Bool? = nil, dailyPeriodDetails: ProgramDailyPeriodDetails? = nil, personalDetails: PersonalProgramDetails? = nil) { 
+        self.type = type
         self.level = level
         self.levelProgress = levelProgress
         self.periodDuration = periodDuration
@@ -70,6 +79,9 @@ public struct ProgramDetailsFull: Codable {
         self.availableInvestmentBase = availableInvestmentBase
         self.availableInvestmentLimit = availableInvestmentLimit
         self.totalAvailableInvestment = totalAvailableInvestment
+        self.canShowPeriodHistory = canShowPeriodHistory
+        self.canShowFinancialStatistic = canShowFinancialStatistic
+        self.dailyPeriodDetails = dailyPeriodDetails
         self.personalDetails = personalDetails
     }
 

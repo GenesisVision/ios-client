@@ -13,6 +13,8 @@ public struct ProgramInvestingDetailsList: Codable {
 
     public var _id: UUID?
 
+    public var type: ProgramType?
+
     public var logoUrl: String?
 
     public var url: String?
@@ -50,8 +52,9 @@ public struct ProgramInvestingDetailsList: Codable {
     public var statistic: ProfitChart?
 
     public var balance: AmountWithCurrency?
-    public init(_id: UUID? = nil, logoUrl: String? = nil, url: String? = nil, color: String? = nil, title: String? = nil, creationDate: Date? = nil, currency: Currency? = nil, availableToInvest: Double? = nil, level: Int? = nil, levelProgress: Double? = nil, periodDuration: Int? = nil, investorsCount: Int? = nil, periodStarts: Date? = nil, periodEnds: Date? = nil, owner: ProfilePublicShort? = nil, brokerDetails: BrokerDetails? = nil, personalDetails: PersonalInvestingProgramDetailsList? = nil, tags: [Tag]? = nil, statistic: ProfitChart? = nil, balance: AmountWithCurrency? = nil) { 
+    public init(_id: UUID? = nil, type: ProgramType? = nil, logoUrl: String? = nil, url: String? = nil, color: String? = nil, title: String? = nil, creationDate: Date? = nil, currency: Currency? = nil, availableToInvest: Double? = nil, level: Int? = nil, levelProgress: Double? = nil, periodDuration: Int? = nil, investorsCount: Int? = nil, periodStarts: Date? = nil, periodEnds: Date? = nil, owner: ProfilePublicShort? = nil, brokerDetails: BrokerDetails? = nil, personalDetails: PersonalInvestingProgramDetailsList? = nil, tags: [Tag]? = nil, statistic: ProfitChart? = nil, balance: AmountWithCurrency? = nil) { 
         self._id = _id
+        self.type = type
         self.logoUrl = logoUrl
         self.url = url
         self.color = color
@@ -74,6 +77,7 @@ public struct ProgramInvestingDetailsList: Codable {
     }
     public enum CodingKeys: String, CodingKey { 
         case _id = "id"
+        case type
         case logoUrl
         case url
         case color

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChangeFundSettingsViewController: BaseViewController {
+class FundChangeSettingsViewController: BaseViewController {
     
     @IBOutlet weak var entryFeeTextField: DesignableUITextField! {
         didSet {

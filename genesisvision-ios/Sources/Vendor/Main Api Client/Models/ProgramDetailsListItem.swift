@@ -13,6 +13,8 @@ public struct ProgramDetailsListItem: Codable {
 
     public var _id: UUID?
 
+    public var type: ProgramType?
+
     public var logoUrl: String?
 
     public var url: String?
@@ -58,8 +60,9 @@ public struct ProgramDetailsListItem: Codable {
     public var statistic: ProfitChart?
 
     public var balance: AmountWithCurrency?
-    public init(_id: UUID? = nil, logoUrl: String? = nil, url: String? = nil, _description: String? = nil, color: String? = nil, title: String? = nil, creationDate: Date? = nil, currency: Currency? = nil, level: Int? = nil, levelProgress: Double? = nil, periodDuration: Int? = nil, availableToInvest: Double? = nil, investorsCount: Int? = nil, periodStarts: Date? = nil, periodEnds: Date? = nil, status: String? = nil, entryFeeSelected: Double? = nil, entryFeeCurrent: Double? = nil, brokerId: UUID? = nil, owner: ProfilePublicShort? = nil, personalDetails: PersonalProgramDetailsList? = nil, tags: [Tag]? = nil, statistic: ProfitChart? = nil, balance: AmountWithCurrency? = nil) { 
+    public init(_id: UUID? = nil, type: ProgramType? = nil, logoUrl: String? = nil, url: String? = nil, _description: String? = nil, color: String? = nil, title: String? = nil, creationDate: Date? = nil, currency: Currency? = nil, level: Int? = nil, levelProgress: Double? = nil, periodDuration: Int? = nil, availableToInvest: Double? = nil, investorsCount: Int? = nil, periodStarts: Date? = nil, periodEnds: Date? = nil, status: String? = nil, entryFeeSelected: Double? = nil, entryFeeCurrent: Double? = nil, brokerId: UUID? = nil, owner: ProfilePublicShort? = nil, personalDetails: PersonalProgramDetailsList? = nil, tags: [Tag]? = nil, statistic: ProfitChart? = nil, balance: AmountWithCurrency? = nil) { 
         self._id = _id
+        self.type = type
         self.logoUrl = logoUrl
         self.url = url
         self._description = _description
@@ -86,6 +89,7 @@ public struct ProgramDetailsListItem: Codable {
     }
     public enum CodingKeys: String, CodingKey { 
         case _id = "id"
+        case type
         case logoUrl
         case url
         case _description = "description"

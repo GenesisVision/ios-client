@@ -631,6 +631,7 @@ open class DashboardAPI {
     },
     "color" : "color",
     "level" : 6,
+    "type" : "DailyPeriod",
     "title" : "title",
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
     "logoUrl" : "logoUrl",
@@ -710,6 +711,7 @@ open class DashboardAPI {
     },
     "color" : "color",
     "level" : 6,
+    "type" : "DailyPeriod",
     "title" : "title",
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
     "logoUrl" : "logoUrl",
@@ -899,6 +901,7 @@ open class DashboardAPI {
       "canTransferMoney" : true,
       "canMakeDemoDeposit" : true,
       "canMakeProgramFromPrivateTradingAccount" : true,
+      "canMakeExchangeProgramFromPrivateTradingAccount" : true,
       "canMakeProgramFromSignalProvider" : true,
       "isEnoughMoneyToCreateProgram" : true,
       "canChangePassword" : true,
@@ -1003,6 +1006,7 @@ open class DashboardAPI {
       "canTransferMoney" : true,
       "canMakeDemoDeposit" : true,
       "canMakeProgramFromPrivateTradingAccount" : true,
+      "canMakeExchangeProgramFromPrivateTradingAccount" : true,
       "canMakeProgramFromSignalProvider" : true,
       "isEnoughMoneyToCreateProgram" : true,
       "canChangePassword" : true,
@@ -1193,6 +1197,7 @@ open class DashboardAPI {
       "canTransferMoney" : true,
       "canMakeDemoDeposit" : true,
       "canMakeProgramFromPrivateTradingAccount" : true,
+      "canMakeExchangeProgramFromPrivateTradingAccount" : true,
       "canMakeProgramFromSignalProvider" : true,
       "isEnoughMoneyToCreateProgram" : true,
       "canChangePassword" : true,
@@ -1297,6 +1302,7 @@ open class DashboardAPI {
       "canTransferMoney" : true,
       "canMakeDemoDeposit" : true,
       "canMakeProgramFromPrivateTradingAccount" : true,
+      "canMakeExchangeProgramFromPrivateTradingAccount" : true,
       "canMakeProgramFromSignalProvider" : true,
       "isEnoughMoneyToCreateProgram" : true,
       "canChangePassword" : true,
@@ -1446,6 +1452,7 @@ open class DashboardAPI {
       "canTransferMoney" : true,
       "canMakeDemoDeposit" : true,
       "canMakeProgramFromPrivateTradingAccount" : true,
+      "canMakeExchangeProgramFromPrivateTradingAccount" : true,
       "canMakeProgramFromSignalProvider" : true,
       "isEnoughMoneyToCreateProgram" : true,
       "canChangePassword" : true,
@@ -1550,6 +1557,7 @@ open class DashboardAPI {
       "canTransferMoney" : true,
       "canMakeDemoDeposit" : true,
       "canMakeProgramFromPrivateTradingAccount" : true,
+      "canMakeExchangeProgramFromPrivateTradingAccount" : true,
       "canMakeProgramFromSignalProvider" : true,
       "isEnoughMoneyToCreateProgram" : true,
       "canChangePassword" : true,
@@ -1722,6 +1730,20 @@ open class DashboardAPI {
   "programs" : {
     "total" : 9,
     "items" : [ {
+      "color" : "color",
+      "description" : "description",
+      "type" : "DailyPeriod",
+      "title" : "title",
+      "periodStarts" : "2000-01-23T04:56:07.000+00:00",
+      "balance" : {
+        "amount" : 7.386281948385884,
+        "currency" : "Undefined"
+      },
+      "availableToInvest" : 5.962133916683182,
+      "currency" : "Undefined",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "levelProgress" : 6.027456183070403,
+      "investorsCount" : 5,
       "owner" : {
         "personalDetails" : {
           "isFollow" : true,
@@ -1747,16 +1769,12 @@ open class DashboardAPI {
         } ],
         "profit" : 9.301444243932576
       },
-      "color" : "color",
       "level" : 0,
       "entryFeeCurrent" : 7.061401241503109,
-      "description" : "description",
       "entryFeeSelected" : 2.3021358869347655,
-      "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
       "logoUrl" : "logoUrl",
       "url" : "url",
-      "periodStarts" : "2000-01-23T04:56:07.000+00:00",
       "tags" : [ {
         "color" : "color",
         "name" : "name"
@@ -1764,24 +1782,29 @@ open class DashboardAPI {
         "color" : "color",
         "name" : "name"
       } ],
-      "balance" : {
-        "amount" : 7.386281948385884,
-        "currency" : "Undefined"
-      },
       "periodEnds" : "2000-01-23T04:56:07.000+00:00",
-      "availableToInvest" : 5.962133916683182,
       "personalDetails" : {
         "isReinvest" : true,
         "isAutoJoin" : true,
         "isOwnAsset" : true,
         "isFavorite" : true
       },
-      "currency" : "Undefined",
-      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "levelProgress" : 6.027456183070403,
-      "investorsCount" : 5,
       "status" : "status"
     }, {
+      "color" : "color",
+      "description" : "description",
+      "type" : "DailyPeriod",
+      "title" : "title",
+      "periodStarts" : "2000-01-23T04:56:07.000+00:00",
+      "balance" : {
+        "amount" : 7.386281948385884,
+        "currency" : "Undefined"
+      },
+      "availableToInvest" : 5.962133916683182,
+      "currency" : "Undefined",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "levelProgress" : 6.027456183070403,
+      "investorsCount" : 5,
       "owner" : {
         "personalDetails" : {
           "isFollow" : true,
@@ -1807,16 +1830,12 @@ open class DashboardAPI {
         } ],
         "profit" : 9.301444243932576
       },
-      "color" : "color",
       "level" : 0,
       "entryFeeCurrent" : 7.061401241503109,
-      "description" : "description",
       "entryFeeSelected" : 2.3021358869347655,
-      "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
       "logoUrl" : "logoUrl",
       "url" : "url",
-      "periodStarts" : "2000-01-23T04:56:07.000+00:00",
       "tags" : [ {
         "color" : "color",
         "name" : "name"
@@ -1824,22 +1843,13 @@ open class DashboardAPI {
         "color" : "color",
         "name" : "name"
       } ],
-      "balance" : {
-        "amount" : 7.386281948385884,
-        "currency" : "Undefined"
-      },
       "periodEnds" : "2000-01-23T04:56:07.000+00:00",
-      "availableToInvest" : 5.962133916683182,
       "personalDetails" : {
         "isReinvest" : true,
         "isAutoJoin" : true,
         "isOwnAsset" : true,
         "isFavorite" : true
       },
-      "currency" : "Undefined",
-      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "levelProgress" : 6.027456183070403,
-      "investorsCount" : 5,
       "status" : "status"
     } ]
   },
