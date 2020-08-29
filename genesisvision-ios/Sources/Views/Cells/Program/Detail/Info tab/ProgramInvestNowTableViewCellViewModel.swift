@@ -17,6 +17,12 @@ extension ProgramInvestNowTableViewCellViewModel: CellViewModel {
     func setup(on cell: InvestNowTableViewCell) {
         let programDetails = programDetailsFull?.programDetails
         
+        if let isOwner = programDetailsFull?.publicInfo?.isOwnAsset, isOwner {
+            cell.investButton.setTitle("Deposit", for: .normal)
+        } else {
+            cell.investButton.setTitle("Invest", for: .normal)
+        }
+        
         if let canInvest = programDetails?.personalDetails?.canInvest, programDetails?.availableInvestmentBase != 0 {
             cell.investButton.setEnabled(canInvest)
         }
@@ -31,7 +37,7 @@ extension ProgramInvestNowTableViewCellViewModel: CellViewModel {
         cell.investNowProtocol = investNowProtocol
         
         cell.titleLabel.text = "Invest now"
-        cell.investButton.setTitle("Invest", for: .normal)
+        
         
         cell.entryFeeTitleLabel.text = "Management fee"
         if let entryFeeCurrent = programDetails?.managementFeeCurrent, let entryFeeSelected = programDetails?.managementFeeSelected {
@@ -50,6 +56,8 @@ extension ProgramInvestNowTableViewCellViewModel: CellViewModel {
         if let availableInvestment = programDetails?.availableInvestmentBase, let currency = programDetailsFull?.tradingAccountInfo?.currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
             cell.investValueLabel.text = availableInvestment.rounded(with: currencyType).toString() + " " + currencyType.rawValue
         }
+        
+        cell.editButton.isHidden = true
         
         //FIXME: if selected != current => show (selected)
         cell.stopOutTitleLabel.text = "stop out"

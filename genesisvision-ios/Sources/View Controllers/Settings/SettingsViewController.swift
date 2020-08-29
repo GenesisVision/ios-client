@@ -286,8 +286,7 @@ class SettingsViewController: BaseTableViewController {
         
         signOutBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_profile_logout"), style: .done, target: self, action: #selector(signOutMethod))
         navigationItem.rightBarButtonItem = signOutBarButtonItem
-        
-        versionLabel.text = "App version " + getFullVersion()
+
         
         showInfiniteIndicator(value: false)
         
@@ -296,6 +295,10 @@ class SettingsViewController: BaseTableViewController {
         
         if let name = viewModel.currencyListViewModel.selected()?.name {
             platformCurrencyValueLabel.text = name
+        }
+        
+        if versionLabel != nil {
+            versionLabel.text = "App version " + getFullVersion()
         }
     }
     

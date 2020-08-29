@@ -480,6 +480,7 @@
                         <outlet property="amountToInvestValueLabel" destination="crB-YI-3vS" id="bHz-nX-Roh"/>
                         <outlet property="availableInWalletTitleLabel" destination="X5A-9d-U9l" id="ztt-OI-GcZ"/>
                         <outlet property="availableInWalletValueLabel" destination="Jvc-cO-RJG" id="4he-pP-OPU"/>
+                        <outlet property="commissionsStackView" destination="FyW-Tg-mnQ" id="lFu-Ig-mbp"/>
                         <outlet property="copyMaxValueButton" destination="EBS-hh-g74" id="rBP-14-AIP"/>
                         <outlet property="entryFeeValueLabel" destination="f3S-44-YYc" id="ugX-Bb-LCb"/>
                         <outlet property="gvCommissionTitleLabel" destination="z0k-lU-vFf" id="PxM-rq-IK0"/>
@@ -682,7 +683,7 @@
                                     <constraint firstItem="d0V-1o-PMN" firstAttribute="leading" secondItem="QR9-30-7zZ" secondAttribute="leading" constant="30" id="x28-dO-dHs"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="dc9-Ym-rGc">
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="dc9-Ym-rGc" userLabel="CommissionView">
                                 <rect key="frame" x="0.0" y="535" width="414" height="41"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="T6e-V0-Z5S">
@@ -972,6 +973,7 @@
                         <outlet property="amountToWithdrawValueLabel" destination="Cxm-X7-nDl" id="U68-N5-6pC"/>
                         <outlet property="availableToWithdrawValueLabel" destination="Sn1-Dn-knj" id="YJ2-ie-Bqu"/>
                         <outlet property="availableToWithdrawValueTitleLabel" destination="3QN-9h-2tz" id="ZyI-ad-XwD"/>
+                        <outlet property="commissionView" destination="dc9-Ym-rGc" id="7tY-6m-du8"/>
                         <outlet property="copyMaxValueButton" destination="jyM-t4-mEA" id="Jcx-vj-Atk"/>
                         <outlet property="disclaimerLabel" destination="Uta-DH-xsg" id="0SL-v9-aYQ"/>
                         <outlet property="exitFeeTitleLabel" destination="VF8-BX-pCU" id="1Q0-Gf-klt"/>
@@ -990,10 +992,10 @@
             </objects>
             <point key="canvasLocation" x="4097.1014492753629" y="1831.4732142857142"/>
         </scene>
-        <!--Manage Fund View Controller-->
+        <!--Fund Manage View Controller-->
         <scene sceneID="r1w-fz-gwS">
             <objects>
-                <viewController storyboardIdentifier="ManageFundViewController" id="Ba7-jI-mTu" customClass="ManageFundViewController" customModule="GV_DEBUG" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FundManageViewController" id="Ba7-jI-mTu" customClass="FundManageViewController" customModule="GV_DEBUG" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="h90-Rj-UMK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1411,10 +1413,10 @@
             </objects>
             <point key="canvasLocation" x="5687" y="2279"/>
         </scene>
-        <!--Change Fund Settings View Controller-->
+        <!--Fund Change Settings View Controller-->
         <scene sceneID="zJ7-QR-Kgw">
             <objects>
-                <viewController storyboardIdentifier="ChangeFundSettingsViewController" id="wcU-Ta-HeU" customClass="ChangeFundSettingsViewController" customModule="GV_DEBUG" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FundChangeSettingsViewController" id="wcU-Ta-HeU" customClass="FundChangeSettingsViewController" customModule="GV_DEBUG" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6m6-0U-eOW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1602,9 +1604,264 @@
             </objects>
             <point key="canvasLocation" x="5688" y="1570"/>
         </scene>
+        <!--Fund Edit Public Info View Controller-->
+        <scene sceneID="Pd2-dD-UrU">
+            <objects>
+                <viewController storyboardIdentifier="FundEditPublicInfoViewController" id="dh3-aX-Ikh" customClass="FundEditPublicInfoViewController" customModule="GV_DEBUG" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2aE-aq-lKv">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="GUZ-Zi-qEe">
+                                <rect key="frame" x="20" y="74" width="374" height="256"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="5Rc-zI-OUc" customClass="TextFieldStackView" customModule="GV_DEBUG" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="81"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6zx-rQ-eHM" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="15"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="15" id="i2U-bl-bK8"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="12"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kiq-Yv-wkT" customClass="DesignableUITextField" customModule="GV_DEBUG" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="15" width="374" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="8Fl-nz-BII"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" textContentType="name"/>
+                                            </textField>
+                                            <view alpha="0.20000000298023224" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pxd-sl-0yO">
+                                                <rect key="frame" x="0.0" y="55" width="374" height="1"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1" id="QzQ-8G-1su"/>
+                                                </constraints>
+                                            </view>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="2TI-yz-agm">
+                                                <rect key="frame" x="0.0" y="56" width="374" height="25"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Minimum 4 symbols" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sqh-lL-lj5" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="135" height="25"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tkc-WY-Mfr" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                                        <rect key="frame" x="143" y="0.0" width="231" height="25"/>
+                                                        <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
+                                                        <color key="textColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="81" id="JNV-ym-tai"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="bottomLineView" destination="pxd-sl-0yO" id="QJy-im-A0s"/>
+                                            <outlet property="subtitleLabel" destination="Sqh-lL-lj5" id="5E3-K4-w3i"/>
+                                            <outlet property="subtitleValueLabel" destination="tkc-WY-Mfr" id="Flq-Fo-nYo"/>
+                                            <outlet property="textField" destination="kiq-Yv-wkT" id="Vao-lf-k7I"/>
+                                            <outlet property="titleLabel" destination="6zx-rQ-eHM" id="VB7-gr-Gig"/>
+                                        </connections>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Mbu-ZN-6lm" customClass="TextViewStackView" customModule="GV_DEBUG" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="101" width="374" height="155"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ePT-SN-bF6" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="15"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="15" id="43P-bu-iFS"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="12"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f5w-1a-o1h">
+                                                <rect key="frame" x="0.0" y="23" width="374" height="100"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="JYq-bJ-ubh"/>
+                                                </constraints>
+                                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Anu-Ak-GsI">
+                                                <rect key="frame" x="0.0" y="131" width="374" height="24"/>
+                                                <subviews>
+                                                    <view alpha="0.20000000298023224" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vab-27-VD0">
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="1"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="1" id="9VR-jU-UK0"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="rwj-OQ-Jfz">
+                                                        <rect key="frame" x="0.0" y="5" width="374" height="19"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Minimum 20 symbols" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Hf-zY-Kph" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="143.5" height="19"/>
+                                                                <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dN8-di-J6H" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                                                <rect key="frame" x="151.5" y="0.0" width="222.5" height="19"/>
+                                                                <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
+                                                                <color key="textColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="155" id="XjX-k0-zoU"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="bottomLineView" destination="Vab-27-VD0" id="lbc-fj-nqq"/>
+                                            <outlet property="subtitleLabel" destination="1Hf-zY-Kph" id="yvD-AP-n3n"/>
+                                            <outlet property="subtitleValueLabel" destination="dN8-di-J6H" id="lbG-B3-NQd"/>
+                                            <outlet property="textView" destination="f5w-1a-o1h" id="Uef-bQ-heQ"/>
+                                            <outlet property="titleLabel" destination="ePT-SN-bF6" id="vBy-DD-tUv"/>
+                                        </connections>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dAi-af-YFG">
+                                <rect key="frame" x="20" y="340" width="374" height="300"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Logo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VQn-hw-iAd" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="5" width="187" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="ekR-Nx-ds6"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rXY-RT-6AY" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="45" width="224.5" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="DRD-An-H1U"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5hq-Ma-vAQ" userLabel="logoView">
+                                        <rect key="frame" x="254" y="5" width="110" height="110"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qGL-68-KzJ">
+                                                <rect key="frame" x="5" y="5" width="100" height="100"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="qGL-68-KzJ" secondAttribute="height" multiplier="1:1" id="Srr-zE-4QH"/>
+                                                </constraints>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OAR-mA-9ho">
+                                                <rect key="frame" x="90" y="0.0" width="20" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="20" id="CFj-UG-gFu"/>
+                                                    <constraint firstAttribute="width" secondItem="OAR-mA-9ho" secondAttribute="height" multiplier="1:1" id="UKe-Oj-XW6"/>
+                                                </constraints>
+                                                <state key="normal" image="img_trade_close"/>
+                                                <connections>
+                                                    <action selector="removeButtomAction:" destination="dh3-aX-Ikh" eventType="touchUpInside" id="dBE-bc-pf0"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="OAR-mA-9ho" secondAttribute="trailing" id="7zW-Fm-owR"/>
+                                            <constraint firstItem="qGL-68-KzJ" firstAttribute="top" secondItem="5hq-Ma-vAQ" secondAttribute="top" constant="5" id="8VM-Qh-DgK"/>
+                                            <constraint firstAttribute="bottom" secondItem="qGL-68-KzJ" secondAttribute="bottom" constant="5" id="E0F-cf-nXB"/>
+                                            <constraint firstItem="qGL-68-KzJ" firstAttribute="leading" secondItem="5hq-Ma-vAQ" secondAttribute="leading" constant="5" id="vim-HZ-aHr"/>
+                                            <constraint firstAttribute="trailing" secondItem="qGL-68-KzJ" secondAttribute="trailing" constant="5" id="xgx-hj-yE5"/>
+                                            <constraint firstAttribute="width" constant="110" id="zSi-05-F8g"/>
+                                            <constraint firstItem="OAR-mA-9ho" firstAttribute="top" secondItem="5hq-Ma-vAQ" secondAttribute="top" id="zZP-kw-pTM"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NZw-Fh-kdb" customClass="ActionButton" customModule="GV_DEBUG" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="125" width="374" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="puU-SQ-f2d"/>
+                                        </constraints>
+                                        <state key="normal" title="Upload Logo"/>
+                                        <connections>
+                                            <action selector="uploadLogoButtonAction:" destination="dh3-aX-Ikh" eventType="touchUpInside" id="WRZ-a2-Rlq"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rha-RU-RKA" customClass="ActionButton" customModule="GV_DEBUG" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="205" width="374" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="9pm-Kn-3MY"/>
+                                            <constraint firstAttribute="height" constant="50" id="g8f-vS-kUh"/>
+                                        </constraints>
+                                        <state key="normal" title="Update public info"/>
+                                        <connections>
+                                            <action selector="updatePublicInfoButtonAction:" destination="dh3-aX-Ikh" eventType="touchUpInside" id="PZN-lq-krJ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="NZw-Fh-kdb" firstAttribute="leading" secondItem="dAi-af-YFG" secondAttribute="leading" id="0jo-hD-Igc"/>
+                                    <constraint firstItem="rXY-RT-6AY" firstAttribute="width" secondItem="dAi-af-YFG" secondAttribute="width" multiplier="0.6" id="FCC-Cz-mRL"/>
+                                    <constraint firstAttribute="trailing" secondItem="NZw-Fh-kdb" secondAttribute="trailing" id="Fp4-Cw-dGh"/>
+                                    <constraint firstItem="NZw-Fh-kdb" firstAttribute="top" secondItem="5hq-Ma-vAQ" secondAttribute="bottom" constant="10" id="GKA-OV-7oy"/>
+                                    <constraint firstItem="rXY-RT-6AY" firstAttribute="leading" secondItem="dAi-af-YFG" secondAttribute="leading" id="GrE-PZ-jO5"/>
+                                    <constraint firstAttribute="height" constant="300" id="H68-zj-tmw"/>
+                                    <constraint firstItem="5hq-Ma-vAQ" firstAttribute="top" secondItem="dAi-af-YFG" secondAttribute="top" constant="5" id="ISi-9w-a2b"/>
+                                    <constraint firstItem="rha-RU-RKA" firstAttribute="top" secondItem="NZw-Fh-kdb" secondAttribute="bottom" constant="30" id="IkB-ML-p5p"/>
+                                    <constraint firstAttribute="trailing" secondItem="rha-RU-RKA" secondAttribute="trailing" id="Jqo-YV-wjK"/>
+                                    <constraint firstItem="rha-RU-RKA" firstAttribute="leading" secondItem="dAi-af-YFG" secondAttribute="leading" id="T8j-0g-ZFt"/>
+                                    <constraint firstAttribute="trailing" secondItem="5hq-Ma-vAQ" secondAttribute="trailing" constant="10" id="XKu-3i-lZI"/>
+                                    <constraint firstItem="VQn-hw-iAd" firstAttribute="leading" secondItem="dAi-af-YFG" secondAttribute="leading" id="Xwi-Em-VVl"/>
+                                    <constraint firstItem="VQn-hw-iAd" firstAttribute="top" secondItem="dAi-af-YFG" secondAttribute="top" constant="5" id="fy0-My-mC7"/>
+                                    <constraint firstItem="VQn-hw-iAd" firstAttribute="width" secondItem="dAi-af-YFG" secondAttribute="width" multiplier="0.5" id="hRI-16-UUf"/>
+                                    <constraint firstItem="rXY-RT-6AY" firstAttribute="top" secondItem="VQn-hw-iAd" secondAttribute="bottom" id="vZK-1E-Fob"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="GUZ-Zi-qEe" secondAttribute="trailing" constant="20" id="3kR-tC-jBF"/>
+                            <constraint firstItem="GUZ-Zi-qEe" firstAttribute="top" secondItem="BwF-jG-kyB" secondAttribute="top" constant="30" id="7ar-py-LR3"/>
+                            <constraint firstItem="BwF-jG-kyB" firstAttribute="trailing" secondItem="dAi-af-YFG" secondAttribute="trailing" constant="20" id="O5S-9W-txP"/>
+                            <constraint firstItem="GUZ-Zi-qEe" firstAttribute="leading" secondItem="2aE-aq-lKv" secondAttribute="leading" constant="20" id="fpU-Ln-Lem"/>
+                            <constraint firstItem="dAi-af-YFG" firstAttribute="leading" secondItem="BwF-jG-kyB" secondAttribute="leading" constant="20" id="r9l-c9-h8E"/>
+                            <constraint firstItem="dAi-af-YFG" firstAttribute="top" secondItem="GUZ-Zi-qEe" secondAttribute="bottom" constant="10" id="xzu-Bj-bqo"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="BwF-jG-kyB"/>
+                    </view>
+                    <connections>
+                        <outlet property="descriptionCountLabel" destination="dN8-di-J6H" id="zxn-Zf-gQr"/>
+                        <outlet property="descriptionTextView" destination="f5w-1a-o1h" id="JUZ-uE-puo"/>
+                        <outlet property="logoDescription" destination="rXY-RT-6AY" id="bSX-nB-ve4"/>
+                        <outlet property="logoImageView" destination="qGL-68-KzJ" id="Wwz-yy-iyy"/>
+                        <outlet property="logoTitle" destination="VQn-hw-iAd" id="jpc-he-qMu"/>
+                        <outlet property="removeImageButton" destination="OAR-mA-9ho" id="NT3-3D-SWY"/>
+                        <outlet property="titleCountLabel" destination="tkc-WY-Mfr" id="Lde-EF-cGW"/>
+                        <outlet property="titleTextField" destination="kiq-Yv-wkT" id="9jD-MT-Qfi"/>
+                        <outlet property="uploadLogoButton" destination="NZw-Fh-kdb" id="G6g-il-a0V"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m8q-pU-sRx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6654" y="1570"/>
+        </scene>
     </scenes>
     <resources>
         <image name="img_numpad_delete" width="26" height="18"/>
         <image name="img_scroll_arrow_down" width="11" height="7"/>
+        <image name="img_trade_close" width="28" height="28"/>
     </resources>
 </document>

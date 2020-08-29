@@ -19,6 +19,7 @@ final class ProgramInvestViewModel {
     var walletSummary: WalletSummary?
     var levelsParamsInfo: LevelsParamsInfo?
     var programDetailsFull: ProgramDetailsFull?
+    var programFollowDetailsFull: ProgramFollowDetailsFull?
     var investmentCommission: Double?
     var selectedWalletFromDelegateManager: WalletDepositCurrencyDelegateManager?
     
@@ -49,7 +50,7 @@ final class ProgramInvestViewModel {
         updateRate(completion: completion)
     }
     
-    func getInfo(completion: @escaping CompletionBlock) {
+    private func getWallet(completion: @escaping CompletionBlock) {
         AuthManager.getWallet(completion: { [weak self] (wallet) in
             if let wallet = wallet, let wallets = wallet.wallets {
                 self?.walletSummary = wallet
@@ -58,21 +59,58 @@ final class ProgramInvestViewModel {
                 self?.selectedWalletFromDelegateManager?.selectedIndex = 0
                 self?.selectedWalletFromDelegateManager?.selected = wallets[0]
                 self?.walletCurrency = CurrencyType(rawValue: wallets[0].currency?.rawValue ?? "")
-            }
-            PlatformManager.shared.getLevelsParamsInfo(currency: .usdt) { [weak self] (viewModel) in
-                self?.levelsParamsInfo = viewModel
-                PlatformManager.shared.getPlatformInfo { [weak self] (platformCommonInfo) in
-                    self?.investmentCommission = platformCommonInfo?.commonInfo?.platformCommission?.investment
-                    self?.updateRate(completion: completion)
-                    
-                    guard let assetId = self?.assetId else { return }
-                    
-                    ProgramsDataProvider.get(assetId, completion: { (details) in
-                        self?.programDetailsFull = details?.programDetails
-                    }, errorCompletion: completion)
-                }
+                self?.getProgramsData(completion: completion)
             }
             }, completionError: completion)
+    }
+    
+    private func getPlatformInfo(completion: @escaping CompletionBlock) {
+        PlatformManager.shared.getLevelsParamsInfo(currency: .usdt) { [weak self] (viewModel) in
+            self?.levelsParamsInfo = viewModel
+            PlatformManager.shared.getPlatformInfo { [weak self] (platformCommonInfo) in
+                self?.investmentCommission = platformCommonInfo?.commonInfo?.platformCommission?.investment
+                self?.updateRate(completion: completion)
+                completion(.success)
+            }
+        }
+    }
+    
+    private func getProgramsData(completion: @escaping CompletionBlock) {
+        guard let assetId = self.assetId else { return }
+        ProgramsDataProvider.get(assetId, completion: { [weak self] (details) in
+            self?.programFollowDetailsFull = details
+            self?.programDetailsFull = details?.programDetails
+            completion(.success)
+            self?.getPlatformInfo(completion: completion)
+        }, errorCompletion: completion)
+    }
+    
+    func getInfo(completion: @escaping CompletionBlock) {
+        getWallet(completion: completion)
+//        AuthManager.getWallet(completion: { [weak self] (wallet) in
+//            if let wallet = wallet, let wallets = wallet.wallets {
+//                self?.walletSummary = wallet
+//                self?.selectedWalletFromDelegateManager = WalletDepositCurrencyDelegateManager(wallets)
+//                self?.selectedWalletFromDelegateManager?.walletId = 0
+//                self?.selectedWalletFromDelegateManager?.selectedIndex = 0
+//                self?.selectedWalletFromDelegateManager?.selected = wallets[0]
+//                self?.walletCurrency = CurrencyType(rawValue: wallets[0].currency?.rawValue ?? "")
+//            }
+//            PlatformManager.shared.getLevelsParamsInfo(currency: .usdt) { [weak self] (viewModel) in
+//                self?.levelsParamsInfo = viewModel
+//                PlatformManager.shared.getPlatformInfo { [weak self] (platformCommonInfo) in
+//                    self?.investmentCommission = platformCommonInfo?.commonInfo?.platformCommission?.investment
+//                    self?.updateRate(completion: completion)
+//                    
+//                    guard let assetId = self?.assetId else { return }
+//                    
+//                    ProgramsDataProvider.get(assetId, completion: { (details) in
+//                        self?.programFollowDetailsFull = details
+//                        self?.programDetailsFull = details?.programDetails
+//                    }, errorCompletion: completion)
+//                }
+//            }
+//            }, completionError: completion)
     }
     
     func getInvestmentAmountCurrencyValue(_ amount: Double) -> String {
@@ -98,7 +136,6 @@ final class ProgramInvestViewModel {
     }
     
     func getMinInvestmentAmount() -> Double {
-        //FIXME:
         guard
             let minInvestAmounts = PlatformManager.shared.platformInfo?.assetInfo?.programInfo?.minInvestAmounts,
             let minInvestAmountIntoProgram = minInvestAmounts[0].minInvestAmountIntoProgram,

@@ -20,7 +20,7 @@ extension ProgramProfitStatisticTableViewCellViewModel: CellViewModel {
         cell.stackView.removeAllArrangedSubviews()
         
         if let value = statistic.balance {
-            let text = value.rounded(with: currency).toString() + " \(currency.rawValue)"
+            let text = value.rounded(with: getPlatformCurrencyType()).toString() + " \(getPlatformCurrencyType().rawValue)"
             cell.addToStackView(text, header: "Equity")
         }
         

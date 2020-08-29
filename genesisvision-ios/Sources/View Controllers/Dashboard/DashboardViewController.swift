@@ -236,7 +236,7 @@ class DashboardViewModel: ViewModelWithListProtocol {
     }
     var tradingDetails: DashboardTradingDetails? {
         didSet {
-            let viewModel = DashboardTradingCellViewModel(TradingCollectionViewModel(tradingDetails, delegate: delegate), data: TradingHeaderData(title: "Trading", details: tradingDetails, currency: currencyType), delegate: delegate, createsDelegate: creationDelegate)
+            let viewModel = DashboardTradingCellViewModel(TradingCollectionViewModel(tradingDetails, delegate: delegate), data: TradingHeaderData(title: "Trading", details: tradingDetails, currency: currencyType, showCreateFund: false, showCreateAccount: false), delegate: delegate, createsDelegate: creationDelegate)
             viewModels.append(viewModel)
             reloadSection(.trading)
         }

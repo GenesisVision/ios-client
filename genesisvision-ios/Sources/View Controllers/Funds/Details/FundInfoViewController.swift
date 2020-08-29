@@ -45,6 +45,10 @@ class FundInfoViewController: ListViewController {
         didReload()
     }
     
+    func updateDetails() {
+        fetch()
+    }
+    
     func showRequests(_ requests: AssetInvestmentRequestItemsViewModel?) {
         bottomSheetController = BottomSheetController()
         bottomSheetController.initializeHeight = 300.0

@@ -34,11 +34,6 @@ class ProgramWithdrawViewController: BaseViewController {
             amountToWithdrawGVTLabel.font = UIFont.getFont(.regular, size: 18.0)
         }
     }
-    @IBOutlet weak var amountToWithdrawCurrencyLabel: SubtitleLabel! {
-        didSet {
-            amountToWithdrawCurrencyLabel.textColor = UIColor.Cell.title
-        }
-    }
     
     @IBOutlet weak var copyMaxValueButton: UIButton! {
         didSet {
@@ -61,6 +56,8 @@ class ProgramWithdrawViewController: BaseViewController {
             withdrawButton.titleLabel?.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
+    
+    @IBOutlet weak var withdrawAllStackView: UIStackView!
     
     @IBOutlet weak var withdrawAllSwitchButton: UIButton! {
         didSet {
@@ -136,10 +133,9 @@ class ProgramWithdrawViewController: BaseViewController {
         if let periodEnds = viewModel.programWithdrawInfo?.periodEnds {
             self.payoutDayValueLabel.text = periodEnds.onlyDateFormatString
         }
-            
-        if let avaliableToWithdraw = viewModel.programWithdrawInfo?.availableToWithdraw {
-            let amountToWithdrawValueCurrencyString = avaliableToWithdraw.toString()
-            self.amountToWithdrawCurrencyLabel.text = "≈" + amountToWithdrawValueCurrencyString + " " + viewModel.programCurrency.rawValue
+        
+        if let isOwner = viewModel.programWithdrawInfo?.isOwner, isOwner {
+            withdrawAllStackView.isHidden = true
         }
         
         let withdrawButtonEnabled = amountToWithdrawValue > 0.0 && amountToWithdrawValue <= availableToWithdrawValue

@@ -35,8 +35,8 @@ extension ProgramYourInvestmentTableViewCellViewModel: CellViewModel {
         
         cell.withdrawButton.setTitle("Withdraw", for: .normal)
         cell.depositButton.setTitle("Add funds", for: .normal)
-        cell.withdrawButton.isHidden = details.tradingAccountInfo?.isExternal ?? true
-        cell.depositButton.isHidden = details.tradingAccountInfo?.isExternal ?? true
+        cell.withdrawButton.isHidden = true//details.tradingAccountInfo?.isExternal ?? true
+        cell.depositButton.isHidden = true//details.tradingAccountInfo?.isExternal ?? true
         
         cell.titleLabel.text = "Your deposit"
         
@@ -55,6 +55,10 @@ extension ProgramYourInvestmentTableViewCellViewModel: CellViewModel {
         
         if let canWithdraw = programDetails?.personalDetails?.canWithdraw {
             cell.withdrawButton.setEnabled(canWithdraw)
+        }
+        
+        if let isOwner = programDetailsFull.publicInfo?.isOwnAsset, isOwner {
+            cell.reinvestView.isHidden = true
         }
         
         cell.disclaimerLabel.text = "You can withdraw only the invested funds, the profit will be withdrawn to your account at the end of the period automatically."

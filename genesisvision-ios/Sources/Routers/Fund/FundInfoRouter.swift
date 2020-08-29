@@ -12,7 +12,8 @@ enum FundInfoRouteType {
     case invest(assetId: String)
     case withdraw(assetId: String)
     case manager(managerId: String)
-    case edit(assetId: String)
+    case manageAssets(assetId: String)
+    case editPublicInfo(assetId: String)
 }
 
 class FundInfoRouter: Router {
@@ -25,13 +26,15 @@ class FundInfoRouter: Router {
             withdraw(with: assetId)
         case .manager(let managerId):
             showAssetDetails(with: managerId, assetType: ._none)
-        case .edit(let assetId):
-            edit(with: assetId)
+        case .manageAssets(let assetId):
+            manageAssets(with: assetId)
+        case .editPublicInfo(assetId: let assetId):
+            editPublicInfo(with: assetId)
         }
     }
     
     // MARK: - Private methods
-    func invest(with assetId: String) {
+    private func invest(with assetId: String) {
         guard let fundViewController = parentRouter?.topViewController() as? FundViewController,
             let viewController = FundInvestViewController.storyboardInstance(.fund) else { return }
         
@@ -41,7 +44,7 @@ class FundInfoRouter: Router {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    func withdraw(with assetId: String) {
+    private func withdraw(with assetId: String) {
         guard let fundViewController = parentRouter?.topViewController() as? FundViewController,
             let viewController = FundWithdrawViewController.storyboardInstance(.fund) else { return }
         
@@ -51,12 +54,19 @@ class FundInfoRouter: Router {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    func edit(with assetId: String) {
-        guard let viewController = ManageFundViewController.storyboardInstance(.fund) else { return }
+    private func manageAssets(with assetId: String) {
+        guard let viewController = FundManageViewController.storyboardInstance(.fund) else { return }
         
         let viewModel = ManageFundViewModel(with: assetId)
         viewController.viewModel = viewModel
         
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func editPublicInfo(with assetId: String) {
+        guard let viewController = FundEditPublicInfoViewController.storyboardInstance(.fund) else { return }
+        let viewModel = FundEditPublicInfoViewModel(assetId: assetId)
+        viewController.viewModel = viewModel
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

@@ -64,6 +64,15 @@ class FundReallocationViewController: BaseViewController {
             }
             self.fundReallocationProgressView.setProgress(Float(self.progress.fractionCompleted), animated: true)
             self.fundAssetsCollectionView.reloadData()
+            
+            let fundInfoLabelText = "The total share of all assets should be equal to 100%.\n" +
+            "At least two assets must be in the fund.\n" +
+                "Reallocation available - \(self.viewModel.reallocationAvailable)%\n" +
+            "You are able to reallocate 3% of the fund per day (cumulative). " +
+            "Example: you will be able to change 30% of the fund's allocation after 10 days.\n" +
+            "There is a mandatory 1% GVT allocation per fund."
+            
+            self.fundInfoLabel.text = fundInfoLabelText
         }
     }
     
@@ -85,16 +94,6 @@ class FundReallocationViewController: BaseViewController {
     private func setup() {
         title = "Reallocate"
         
-        let reallocationAvailable = 100
-        
-        let fundInfoLabelText = "The total share of all assets should be equal to 100%.\n" +
-        "At least two assets must be in the fund.\n" +
-        "Reallocation available - \(reallocationAvailable)%\n" +
-        "You are able to reallocate 3% of the fund per day (cumulative). " +
-        "Example: you will be able to change 30% of the fund's allocation after 10 days.\n" +
-        "There is a mandatory 1% GVT allocation per fund."
-        
-        fundInfoLabel.text = fundInfoLabelText
         fundReallocationProgressView.progress = 0.0
         progress.completedUnitCount = 0
         freeSpaceLabel.text = ""
@@ -227,6 +226,7 @@ final class FundReallocationViewModel {
     var assetId: String?
     var fundDetails: FundDetailsFull?
     var platformAssets: [PlatformAsset] = []
+    var reallocationAvailable: Int = 100
     
     init(with: String? = nil) {
         assetId = with
@@ -263,6 +263,9 @@ final class FundReallocationViewModel {
         FundsDataProvider.get(assetId, currencyType: .usdt, completion: { [weak self] (fundDetailsFull) in
             if let fundDetailsFull = fundDetailsFull, let assets = fundDetailsFull.assetsStructure {
                 self?.fundDetails = fundDetailsFull
+                if let reallocationAvailable = fundDetailsFull.personalDetails?.availableReallocationPercents {
+                    self?.reallocationAvailable = reallocationAvailable
+                }
                 self?.assetCollectionViewModel.assets = assets
             }
             completion(.success)

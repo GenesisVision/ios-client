@@ -20,6 +20,18 @@ class FundViewController: BaseTabmanViewController<FundViewModel> {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        showProgressHUD()
+//        viewModel.fetch { [weak self] (result) in
+//            self?.hideHUD()
+//            self?.setup()
+//            self?.reloadData()
+//            self?.title = self?.viewModel.title
+//        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         showProgressHUD()
         viewModel.fetch { [weak self] (result) in
             self?.hideHUD()
@@ -27,6 +39,8 @@ class FundViewController: BaseTabmanViewController<FundViewModel> {
             self?.reloadData()
             self?.title = self?.viewModel.title
         }
+        
+        viewModel.updateFundInfo()
     }
     
     // MARK: - Private methods
@@ -155,6 +169,12 @@ final class FundViewModel: TabmanViewModel {
     
     private func setViewControllers() {
         self.tabTypes.forEach({ controllers[$0] = getViewController($0) })
+    }
+    
+    func updateFundInfo() {
+        guard let viewController = getViewController(.info) as? FundInfoViewController else { return }
+        
+        viewController.updateDetails()
     }
     
     deinit {

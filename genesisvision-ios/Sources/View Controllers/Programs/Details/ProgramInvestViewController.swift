@@ -24,11 +24,18 @@ class ProgramInvestViewController: BaseViewController {
     }
     
     // MARK: - Labels
+    @IBOutlet weak var availableToInvestStackView: UIStackView! {
+        didSet {
+            availableToInvestStackView.isHidden = true
+        }
+    }
+    
     @IBOutlet weak var availableToInvestTitleLabel: SubtitleLabel! {
         didSet {
             availableToInvestTitleLabel.text = "Available to invest in program"
         }
     }
+    
     @IBOutlet weak var availableToInvestValueLabel: TitleLabel!
     
     @IBOutlet weak var selectedWalletFromTitleLabel: SubtitleLabel! {
@@ -36,29 +43,31 @@ class ProgramInvestViewController: BaseViewController {
             selectedWalletFromTitleLabel.text = "From"
         }
     }
+    
     @IBOutlet weak var selectedWalletFromButton: UIButton!
+    
     @IBOutlet weak var selectedWalletFromValueLabel: TitleLabel! {
         didSet {
             selectedWalletFromValueLabel.font = UIFont.getFont(.regular, size: 18.0)
         }
     }
+    
     @IBOutlet weak var availableInWalletTitleLabel: SubtitleLabel! {
         didSet {
             availableInWalletTitleLabel.text = "Available in wallet"
         }
     }
+    
     @IBOutlet weak var availableInWalletValueLabel: TitleLabel!
     
-    @IBOutlet weak var amountToInvestTitleLabel: SubtitleLabel! {
-        didSet {
-            amountToInvestTitleLabel.text = "Amount to invest"
-        }
-    }
+    @IBOutlet weak var amountToInvestTitleLabel: SubtitleLabel!
+    
     @IBOutlet weak var amountToInvestValueLabel: TitleLabel! {
         didSet {
             amountToInvestValueLabel.font = UIFont.getFont(.regular, size: 18.0)
         }
     }
+    
     @IBOutlet weak var amountToInvestCurrencyLabel: SubtitleLabel! {
         didSet {
             amountToInvestCurrencyLabel.font = UIFont.getFont(.regular, size: 18.0)
@@ -103,6 +112,12 @@ class ProgramInvestViewController: BaseViewController {
     }
     @IBOutlet weak var investmentAmountCurrencyLabel: SubtitleLabel!
     
+    @IBOutlet weak var commissionView: UIView! {
+        didSet {
+            commissionView.isHidden = true
+        }
+    }
+    
     // MARK: - Buttons
     @IBOutlet weak var investButton: ActionButton!
     
@@ -146,6 +161,8 @@ class ProgramInvestViewController: BaseViewController {
     private func setup() {
         investButton.setEnabled(false)
         
+        title = ""
+        
         showProgressHUD()
         viewModel.getInfo { [weak self] (result) in
             self?.hideAll()
@@ -164,6 +181,16 @@ class ProgramInvestViewController: BaseViewController {
     
     private func updateUI() {
         guard let programCurrency = viewModel.programCurrency, let walletCurrency = viewModel.selectedWalletFromDelegateManager?.selected?.currency?.rawValue, let walletCurrencyType = CurrencyType(rawValue: walletCurrency) else { return }
+        
+        if let isOwner = viewModel.programFollowDetailsFull?.publicInfo?.isOwnAsset, isOwner {
+            title = "Deposit"
+            amountToInvestTitleLabel.text = "Amount to deposit"
+        } else {
+            title = "Investment"
+            amountToInvestTitleLabel.text = "Amount to invest"
+            commissionView.isHidden = false
+            availableToInvestStackView.isHidden = false
+        }
         
         //wallet
         self.selectedWalletFromValueLabel.text = viewModel.getSelectedWalletTitle()
@@ -200,8 +227,10 @@ class ProgramInvestViewController: BaseViewController {
         self.investmentAmountValueLabel.text = "≈" + investmentAmountValue + " " + programCurrency.rawValue
         
         if viewModel.programDetailsFull == nil {
-            gvCommissionValueLabel.isHidden = true
-            gvCommissionTitleLabel.isHidden = true
+            let investButtonEnabled = amountToInvestValue * rate >= viewModel.getMinInvestmentAmount()
+            investButton.setEnabled(investButtonEnabled)
+        } else if let isOwner = viewModel.programFollowDetailsFull?.publicInfo?.isOwnAsset, isOwner {
+            self.availableToInvestValue = viewModel.getAvailableToInvest()
             let investButtonEnabled = amountToInvestValue * rate >= viewModel.getMinInvestmentAmount()
             investButton.setEnabled(investButtonEnabled)
         } else {
@@ -252,19 +281,40 @@ class ProgramInvestViewController: BaseViewController {
              firstValue = amount + " " + currency.rawValue
         }
         
-        let confirmViewModel = InvestWithdrawConfirmModel(title: "Confirm Invest",
+        var confirmVCTitle = "Confirm Invest"
+        
+        let firstTitle = amountToInvestTitleLabel.text
+        var secondTitle: String?
+        var secondValue: String?
+        var thirdTitle: String?
+        var thirdValue: String?
+        var fourthTitle: String?
+        var fourthValue: String?
+        
+        if let isOwner = viewModel.programFollowDetailsFull?.publicInfo?.isOwnAsset, isOwner {
+            confirmVCTitle = "Confirm Deposit"
+        } else {
+            secondTitle = managementFeeTitleLabel.text
+            secondValue = managementFeeValueLabel.text
+            thirdTitle = gvCommissionTitleLabel.text
+            thirdValue = gvCommissionValueLabel.text
+            fourthTitle = investmentAmountTitleLabel.text
+            fourthValue = investmentAmountValueLabel.text
+        }
+        
+        let confirmViewModel = InvestWithdrawConfirmModel(title: confirmVCTitle,
                                                           subtitle: subtitle,
                                                           programLogo: nil,
                                                           programTitle: nil,
                                                           managerName: nil,
-                                                          firstTitle: amountToInvestTitleLabel.text,
+                                                          firstTitle: firstTitle,
                                                           firstValue: firstValue,
-                                                          secondTitle: managementFeeTitleLabel.text,
-                                                          secondValue: managementFeeValueLabel.text,
-                                                          thirdTitle: gvCommissionTitleLabel.text,
-                                                          thirdValue: gvCommissionValueLabel.text,
-                                                          fourthTitle: investmentAmountTitleLabel.text,
-                                                          fourthValue: investmentAmountValueLabel.text)
+                                                          secondTitle: secondTitle,
+                                                          secondValue: secondValue,
+                                                          thirdTitle: thirdTitle,
+                                                          thirdValue: thirdValue,
+                                                          fourthTitle: fourthTitle,
+                                                          fourthValue: fourthValue)
         confirmView.configure(model: confirmViewModel)
         bottomSheetController.addContentsView(confirmView)
         confirmView.delegate = self

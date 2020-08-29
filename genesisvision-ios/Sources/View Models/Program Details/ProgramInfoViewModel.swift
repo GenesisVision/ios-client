@@ -430,7 +430,9 @@ extension ProgramInfoViewModel: InvestNowProtocol {
             return
         }
         
-        if availableInvestment > 0 {
+        let isOwner = programFollowDetailsFull?.publicInfo?.isOwnAsset
+        
+        if availableInvestment > 0 || (isOwner != nil && isOwner!) {
             invest()
         } else if let topViewController = router.topViewController() {
             topViewController.showAlertWithTitle(title: "", message: String.Alerts.noAvailableTokens, actionTitle: "OK", cancelTitle: nil, handler: nil, cancelHandler: nil)

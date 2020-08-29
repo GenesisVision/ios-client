@@ -345,6 +345,7 @@ class CreateFundViewModel {
             self?.twoFactorStatus = twoFactorStatus
         }, errorCompletion: errorCompletion)
     }
+    
     func updateRates() {
         RateDataProvider.getRates(from: [Currency.gvt.rawValue], to: [Currency.gvt.rawValue, Currency.btc.rawValue, Currency.eth.rawValue, Currency.usdt.rawValue], completion: { [weak self] (ratesModel) in
             self?.ratesModel = ratesModel
@@ -352,30 +353,36 @@ class CreateFundViewModel {
             
         }
     }
+    
     func getMinDeposit() -> String {
         guard let minDeposit = createFundInfo?.minDeposit else { return "" }
         let currencyType: CurrencyType = .gvt
         return minDeposit.rounded(with: currencyType).toString() + " " + currencyType.rawValue
     }
+    
     func getMinDepositValue() -> Double? {
         guard let minDeposit = createFundInfo?.minDeposit else { return nil }
 
         return minDeposit
     }
+    
     func getSelectedWallet() -> String {
         guard let selected = fromListViewModel.selected(), let title = selected.title, let currency = selected.currency?.rawValue else { return "" }
         
         return "\(currency) | \(title)"
     }
+    
     func getSelectedWalletCurrency() -> String {
         guard let currency = fromListViewModel.selected()?.currency?.rawValue else { return "" }
         
         return currency
     }
+    
     func getAvailable() -> String {
         guard let selected = fromListViewModel?.selected(), let currency = selected.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency), let available = fromListViewModel?.selected()?.available else { return "" }
         return available.rounded(with: currencyType).toString() + " " + currencyType.rawValue
     }
+    
     func getRate() -> Double? {
         guard let rates = ratesModel?.rates, let fromCurrency = fromListViewModel.selected()?.currency, fromCurrency != Currency.gvt else { return nil }
         
@@ -383,6 +390,7 @@ class CreateFundViewModel {
         
         return rate != 0 ? rate : nil
     }
+    
     func getApproxString(_ value: Double) -> String {
         let currency = CurrencyType.gvt
         guard let rate = getRate() else { return "" }
@@ -396,6 +404,7 @@ class CreateFundViewModel {
         guard let rate = getRate() else { return value }
         return value / rate
     }
+    
     func createFund(completion: @escaping CompletionBlock) {
         guard let pickedImageUrl = pickedImageURL else {
             AssetsDataProvider.createFund(request, completion: completion)

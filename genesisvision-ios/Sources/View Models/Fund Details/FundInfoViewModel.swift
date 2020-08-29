@@ -167,9 +167,14 @@ extension FundInfoViewModel {
         router.show(routeType: .withdraw(assetId: assetId))
     }
     
-    func edit() {
+    func manageAssets() {
         guard let assetId = assetId else { return }
-        router.show(routeType: .edit(assetId: assetId))
+        router.show(routeType: .manageAssets(assetId: assetId))
+    }
+    
+    func editPublicInfo() {
+        guard let assetId = assetId else { return }
+        router.show(routeType: .editPublicInfo(assetId: assetId))
     }
 }
 
@@ -198,7 +203,7 @@ extension FundInfoViewModel {
                 guard let profilePublic = fundDetailsFull?.owner else { return nil }
                 return DetailManagerTableViewCellViewModel(profilePublic: profilePublic)
             case .strategy:
-                return DefaultTableViewCellViewModel(title: "Strategy", subtitle: fundDetailsFull?.publicInfo?._description)
+                return DefaultTableViewCellViewModel(title: "Strategy", subtitle: fundDetailsFull?.publicInfo?._description, editInfoProtoclDelegate: self, assetType: .fund, isOwner: fundDetailsFull?.publicInfo?.isOwnAsset)
             }
         case .yourInvestment:
             return FundYourInvestmentTableViewCellViewModel(fundDetailsFull: fundDetailsFull, yourInvestmentProtocol: self)
@@ -253,6 +258,12 @@ extension FundInfoViewModel: InvestNowProtocol {
         invest()
     }
     func ditTapEditButton() {
-        edit()
+        manageAssets()
+    }
+}
+
+extension FundInfoViewModel: EditInfoProtocol {
+    func ditTapEditInfoButton() {
+        editPublicInfo()
     }
 }

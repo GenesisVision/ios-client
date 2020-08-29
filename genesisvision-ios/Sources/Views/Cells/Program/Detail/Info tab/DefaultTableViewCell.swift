@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol EditInfoProtocol: class {
+    func ditTapEditInfoButton()
+}
+
 class DefaultTableViewCell: UITableViewCell {
 
     // MARK: - Outlets
@@ -21,7 +25,14 @@ class DefaultTableViewCell: UITableViewCell {
             subtitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
+    @IBOutlet weak var editInfoButton: ActionButton! {
+        didSet {
+            editInfoButton.configure(with: .custom(options: ActionButtonOptions(borderWidth: 0, borderColor: nil, fontSize: 16, bgColor: .clear, textColor: UIColor.primary, image: nil, rightPosition: true)))
+            editInfoButton.isHidden = true
+        }
+    }
     
+    weak var editInfoProtocolDelegate: EditInfoProtocol?
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,5 +40,8 @@ class DefaultTableViewCell: UITableViewCell {
         backgroundColor = UIColor.BaseView.bg
         contentView.backgroundColor = UIColor.BaseView.bg
         selectionStyle = .none
+    }
+    @IBAction func editInfoButtonAction(_ sender: Any) {
+        editInfoProtocolDelegate?.ditTapEditInfoButton()
     }
 }

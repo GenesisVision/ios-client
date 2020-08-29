@@ -18,6 +18,7 @@ final class FundInvestViewModel {
     var levelsParamsInfo: LevelsParamsInfo?
     var fundDetailsFull: FundDetailsFull?
     var investmentCommission: Double?
+    var minInvestAmountIntoFund: [AmountWithCurrency]?
 
     var walletId: UUID?
     var walletSummary: WalletSummary?
@@ -74,12 +75,14 @@ final class FundInvestViewModel {
     private func getPlatformInfoAndFundDetails(completion: @escaping CompletionBlock) {
         PlatformManager.shared.getPlatformInfo { [weak self] (platformCommonInfo) in
             self?.investmentCommission = platformCommonInfo?.commonInfo?.platformCommission?.investment
+            self?.minInvestAmountIntoFund = platformCommonInfo?.assetInfo?.fundInfo?.minInvestAmountIntoFund
             self?.updateRate(completion: completion)
             
             guard let assetId = self?.assetId else { return }
             
             FundsDataProvider.get(assetId, currencyType: .usdt, completion: { (details) in
                 self?.fundDetailsFull = details
+                completion(.success)
             }, errorCompletion: completion)
         }
     }
@@ -140,11 +143,12 @@ final class FundInvestViewModel {
     }
     
     func getMinInvestmentAmount() -> Double {
+        guard let selectedCurrency = self.selectedWalletFromDelegateManager?.selected?.currency, let amountWithCurrency = minInvestAmountIntoFund?.first(where: {
+            guard let currency = $0.currency else { return false }
+            return currency == selectedCurrency
+        }), let minInvestmentAmount = amountWithCurrency.amount  else { return 0.0 }
         
-//        guard let minInvestmentAmount = fundInvestInfo?.minInvestmentAmount else { return 0.0 }
-//
-//        return minInvestmentAmount
-        return 1.0 //FIXME:
+        return minInvestmentAmount
     }
     
     func getSelectedWalletTitle() -> String {

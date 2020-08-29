@@ -44,7 +44,7 @@ class FundInvestViewController: BaseViewController {
     
     @IBOutlet weak var amountToInvestTitleLabel: SubtitleLabel! {
         didSet {
-            amountToInvestTitleLabel.text = "Amount to invest"
+            amountToInvestTitleLabel.isHidden = true
         }
     }
     @IBOutlet weak var amountToInvestValueLabel: TitleLabel! {
@@ -71,6 +71,12 @@ class FundInvestViewController: BaseViewController {
             managementFeeTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
+    @IBOutlet weak var commissionsStackView: UIStackView! {
+        didSet {
+            commissionsStackView.isHidden = true
+        }
+    }
+    
     @IBOutlet weak var entryFeeValueLabel: TitleLabel!
     
     @IBOutlet weak var gvCommissionTitleLabel: SubtitleLabel! {
@@ -130,10 +136,11 @@ class FundInvestViewController: BaseViewController {
     // MARK: - Private methods
     private func setup() {
         investButton.setEnabled(false)
-        
-        DispatchQueue.main.async {
-            self.updateUI()
-        }
+        title = ""
+//
+//        DispatchQueue.main.async {
+//            self.updateUI()
+//        }
         
         showProgressHUD()
         viewModel.getInfo(completion: { [weak self] (result) in
@@ -156,6 +163,18 @@ class FundInvestViewController: BaseViewController {
     private func updateUI() {
         guard let fundCurrency = viewModel.fundCurrency, let walletCurrency = viewModel.selectedWalletFromDelegateManager?.selected?.currency?.rawValue, let walletCurrencyType = CurrencyType(rawValue: walletCurrency) else { return }
         
+        amountToInvestTitleLabel.isHidden = false
+        
+        if let isOwner = viewModel.fundDetailsFull?.publicInfo?.isOwnAsset, isOwner {
+            title = "Deposit"
+            commissionsStackView.isHidden = true
+            amountToInvestTitleLabel.text = "Amount to deposit"
+        } else {
+            title = "Investment"
+            commissionsStackView.isHidden = false
+            amountToInvestTitleLabel.text = "Amount to invest"
+        }
+        
         //wallet
         self.selectedWalletFromValueLabel.text = viewModel.getSelectedWalletTitle()
         self.availableInWalletFromValue = viewModel.getAvailableInWallet()
@@ -177,7 +196,7 @@ class FundInvestViewController: BaseViewController {
         
         self.investmentAmountCurrencyLabel.text?.append(viewModel.getMinInvestmentAmountText())
         
-        let rate = viewModel.rate
+        //let rate = viewModel.rate
         let entryFee = viewModel.getEntryFee()
         let gvCommission = viewModel.getGVCommision()
         
@@ -191,20 +210,20 @@ class FundInvestViewController: BaseViewController {
         
 
         
-        let entryFeeCurrency = entryFee * amounToInvestAfterGVCommision * rate / 100
-        let entryFeeCurrencyString = entryFeeCurrency.rounded(with: fundCurrency).toString()
+        let entryFeeCurrency = entryFee * amounToInvestAfterGVCommision / 100
+        let entryFeeCurrencyString = entryFeeCurrency.rounded(with: walletCurrencyType).toString()
         let entryFeeString = entryFee.rounded(toPlaces: 3).toString()
         
-        let entryFeeValueLabelString = entryFeeString + "% (≈\(entryFeeCurrencyString) \(Currency.gvt.rawValue))"
+        let entryFeeValueLabelString = entryFeeString + "% (≈\(entryFeeCurrencyString) \(walletCurrencyType.rawValue))"
         self.entryFeeValueLabel.text = entryFeeValueLabelString
         
         let amountToInvestAfterAllCommission = (amounToInvestAfterGVCommision - entryFeeCurrency)
         
 
 //        let investmentAmountValue = (amountToInvestValue * rate - entryFeeCurrency - gvCommissionCurrency * rate).rounded(with: fundCurrency).toString()
-        self.investmentAmountValueLabel.text = "≈" + amountToInvestAfterAllCommission.rounded(with: fundCurrency).toString() + " " + fundCurrency.rawValue
+        self.investmentAmountValueLabel.text = "≈" + amountToInvestAfterAllCommission.toString() + " " + walletCurrencyType.rawValue
         
-        let investButtonEnabled = amountToInvestAfterAllCommission * rate >= viewModel.getMinInvestmentAmount()
+        let investButtonEnabled = amountToInvestValue >= viewModel.getMinInvestmentAmount()
         
         investButton.setEnabled(investButtonEnabled)
     }
@@ -214,9 +233,8 @@ class FundInvestViewController: BaseViewController {
     }
     
     private func investMethod() {
-        let rate = viewModel.rate
         let minInvestmentAmount = viewModel.getMinInvestmentAmount()
-        guard amountToInvestValue * rate >= minInvestmentAmount else { return showErrorHUD(subtitle: "Enter investment value, please") }
+        guard amountToInvestValue >= minInvestmentAmount else { return showErrorHUD(subtitle: "Enter investment value, please") }
         
         showProgressHUD()
         viewModel.invest(with: amountToInvestValue) { [weak self] (result) in
@@ -247,22 +265,43 @@ class FundInvestViewController: BaseViewController {
         if let amount = amountToInvestValueLabel.text {
             firstValue = amount + " " + currency.rawValue
         }
-
-        let subtitle = "Your request will be processed within a few minutes."
         
-        let confirmViewModel = InvestWithdrawConfirmModel(title: "Confirm Invest",
-                                                          subtitle: subtitle,
+        var confirmVCTitle = "Confirm Invest"
+        let confirmVCSubtitle = "Your request will be processed within a few minutes."
+        
+        
+        let firstTitle = amountToInvestTitleLabel.text
+        var secondTitle: String?
+        var secondValue: String?
+        var thirdTitle: String?
+        var thirdValue: String?
+        var fourthTitle: String?
+        var fourthValue: String?
+        
+        if let isOwner = viewModel.fundDetailsFull?.publicInfo?.isOwnAsset, isOwner {
+            confirmVCTitle = "Confirm Deposit"
+        } else {
+            secondTitle = managementFeeTitleLabel.text
+            secondValue = entryFeeValueLabel.text
+            thirdTitle = gvCommissionTitleLabel.text
+            thirdValue = gvCommissionValueLabel.text
+            fourthTitle = investmentAmountTitleLabel.text
+            fourthValue = investmentAmountValueLabel.text
+        }
+        
+        let confirmViewModel = InvestWithdrawConfirmModel(title: confirmVCTitle,
+                                                          subtitle: confirmVCSubtitle,
                                                           programLogo: nil,
                                                           programTitle: viewModel.fundDetailsFull?.publicInfo?.title,
                                                           managerName: nil,
-                                                          firstTitle: amountToInvestTitleLabel.text,
+                                                          firstTitle: firstTitle,
                                                           firstValue: firstValue,
-                                                          secondTitle: managementFeeTitleLabel.text,
-                                                          secondValue: entryFeeValueLabel.text,
-                                                          thirdTitle: gvCommissionTitleLabel.text,
-                                                          thirdValue: gvCommissionValueLabel.text,
-                                                          fourthTitle: investmentAmountTitleLabel.text,
-                                                          fourthValue: investmentAmountValueLabel.text)
+                                                          secondTitle: secondTitle,
+                                                          secondValue: secondValue,
+                                                          thirdTitle: thirdTitle,
+                                                          thirdValue: thirdValue,
+                                                          fourthTitle: fourthTitle,
+                                                          fourthValue: fourthValue)
         confirmView.configure(model: confirmViewModel)
         bottomSheetController.addContentsView(confirmView)
         confirmView.delegate = self

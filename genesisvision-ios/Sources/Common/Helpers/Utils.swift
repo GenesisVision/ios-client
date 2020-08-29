@@ -19,7 +19,7 @@ func getFileURL(fileName: String) -> URL? {
 }
 
 func isPictureURL(url: String) -> Bool {
-    if !url.isEmpty, (url.contains(".png") || url.contains(".jpg")) {
+    if !url.isEmpty, (url.contains(".png") || url.contains(".jpg") || url.contains(".jpeg")) {
         return true
     } else {
         return false

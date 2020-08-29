@@ -84,6 +84,7 @@
                                     </stackView>
                                 </subviews>
                                 <connections>
+                                    <outlet property="createAccountButton" destination="gs5-Of-uFV" id="QL6-g8-4rE"/>
                                     <outlet property="createAccountLabel" destination="uYx-f0-6ZV" id="4Dk-bd-8ST"/>
                                     <outlet property="createFundButton" destination="UOv-ih-XhJ" id="i3g-GO-cSX"/>
                                     <outlet property="createFundLabel" destination="1qN-th-HMl" id="Tue-Cx-5W0"/>

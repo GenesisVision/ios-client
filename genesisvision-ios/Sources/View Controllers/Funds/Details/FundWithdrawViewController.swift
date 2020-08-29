@@ -81,6 +81,7 @@ class FundWithdrawViewController: BaseViewController {
     }
     @IBOutlet weak var exitFeeValueLabel: TitleLabel!
     
+    @IBOutlet weak var commissionView: UIView!
     @IBOutlet weak var withdrawingAmountTitleLabel: SubtitleLabel! {
         didSet {
             withdrawingAmountTitleLabel.text = "You will get approx."
@@ -160,6 +161,10 @@ class FundWithdrawViewController: BaseViewController {
     private func updateUI() {
         guard let selectedWalletCurrency = viewModel.selectedWalletFromDelegateManager?.selected?.currency, let currencyType = CurrencyType(rawValue: selectedWalletCurrency.rawValue) else { return }
         
+        if let isOwner = viewModel.fundWithdrawInfo?.isOwner, isOwner {
+            commissionView.isHidden = true
+        }
+        
         if let selectedWalletFromDelegateManager = viewModel?.selectedWalletFromDelegateManager {
             selectedWalletFromDelegateManager.currencyDelegate = self
         }
@@ -229,17 +234,31 @@ class FundWithdrawViewController: BaseViewController {
         
         let subtitle = "Your request will be processed within a few minutes."
         
-        let confirmViewModel = InvestWithdrawConfirmModel(title: "Confirm Withdraw",
+        var secondTitle: String?
+        var secondValue: String?
+        var thirdTitle: String?
+        var thirdValue: String?
+        
+        if let isOwner = viewModel.fundWithdrawInfo?.isOwner, isOwner {
+            
+        } else {
+            secondTitle = exitFeeTitleLabel.text
+            secondValue = exitFeeValueLabel.text
+            thirdTitle = "You will get approximately"
+            thirdValue = withdrawingAmountValueLabel.text
+        }
+        
+        let confirmViewModel = InvestWithdrawConfirmModel(title: "Confirm Withdrawal",
                                                           subtitle: subtitle,
                                                           programLogo: nil,
                                                           programTitle: nil,
                                                           managerName: nil,
                                                           firstTitle: "Amount to withdraw",
                                                           firstValue: amountText,
-                                                          secondTitle: exitFeeTitleLabel.text,
-                                                          secondValue: exitFeeValueLabel.text,
-                                                          thirdTitle: "You will get approximately",
-                                                          thirdValue: withdrawingAmountValueLabel.text,
+                                                          secondTitle: secondTitle,
+                                                          secondValue: secondValue,
+                                                          thirdTitle: thirdTitle,
+                                                          thirdValue: thirdValue,
                                                           fourthTitle: nil,
                                                           fourthValue: nil)
         confirmView.configure(model: confirmViewModel)

@@ -235,25 +235,29 @@ class InvestingViewModel: ViewModelWithListProtocol {
         didSet {
             let overviewViewModel = InvestingHeaderTableViewCellViewModel(data: InvestingHeaderData(details: details, currency: currency), delegate: delegate)
             viewModels.append(overviewViewModel)
-            reloadSection(.events)
+            //reloadSection(.events)
             
             guard let count = details?.events?.items?.count, count > 0 else { return }
-            sections.insert(.events, at: sections.contains(.requests) ? 2 : 1)
+            //sections.insert(.events, at: sections.contains(.requests) ? 2 : 1)
             
             let eventsViewModel = CellWithCollectionViewModel(InvestingEventsViewModel(details, delegate: delegate), delegate: delegate)
             viewModels.append(eventsViewModel)
+            
+            sections.contains(.events) ? reloadSection(.events) : sections.insert(.events, at: 1)
             delegate?.didReload()
         }
     }
+    
     var requests: AssetInvestmentRequestItemsViewModel? {
         didSet {
             guard let count = requests?.items?.count, count > 0 else { return }
-            sections.insert(.requests, at: 1)
             let viewModel = CellWithCollectionViewModel(InvestingRequestsViewModel(requests, delegate: delegate), delegate: delegate)
             viewModels.append(viewModel)
+            sections.contains(.requests) ? reloadSection(.requests) : sections.insert(.requests, at: 1)
             delegate?.didReload()
         }
     }
+    
     var fundInvesting: FundInvestingDetailsListItemsViewModel? {
         didSet {
             guard let count = fundInvesting?.items?.count, count > 0 else { return }
@@ -263,6 +267,7 @@ class InvestingViewModel: ViewModelWithListProtocol {
             reloadSection(.funds)
         }
     }
+    
     var programInvesting: ProgramInvestingDetailsListItemsViewModel? {
         didSet {
             guard let count = programInvesting?.items?.count, count > 0 else { return }
@@ -272,6 +277,7 @@ class InvestingViewModel: ViewModelWithListProtocol {
             reloadSection(.programs)
         }
     }
+    
     private let errorCompletion: ((CompletionResult) -> Void) = { (result) in
        print(result)
     }

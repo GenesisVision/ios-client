@@ -20,7 +20,7 @@ extension FundBalanceChartTableViewCellViewModel: CellViewModel {
         cell.chartViewProtocol = chartViewProtocol
         
         if let amountValue = fundBalanceChart.balance {
-            cell.amountValueLabel.text = amountValue.rounded(with: .gvt).toString() + " \(Constants.gvtString)"
+            cell.amountValueLabel.text = amountValue.rounded(with: getPlatformCurrencyType()).toString() + " \(getPlatformCurrencyType().rawValue)"
         } else {
             cell.amountValueLabel.isHidden = true
         }

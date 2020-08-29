@@ -11,6 +11,9 @@ import Foundation
 struct DefaultTableViewCellViewModel {
     var title: String?
     var subtitle: String?
+    weak var editInfoProtoclDelegate: EditInfoProtocol?
+    var assetType: AssetType?
+    var isOwner: Bool?
 }
 
 extension DefaultTableViewCellViewModel: CellViewModel {
@@ -22,5 +25,11 @@ extension DefaultTableViewCellViewModel: CellViewModel {
         if let subtitle = subtitle {
             cell.subtitleLabel.text = subtitle
         }
+        
+        if let isOwner = isOwner, isOwner, let assetType = assetType, assetType == .fund {
+            cell.editInfoButton.isHidden = false
+        }
+        
+        cell.editInfoProtocolDelegate = editInfoProtoclDelegate
     }
 }

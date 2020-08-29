@@ -15,12 +15,14 @@ struct TradingHeaderData: BaseData {
     var yourEquity: Double
     var aum: Double
     var profits: Profits
+    var showCreateFundButton: Bool
+    var showCreateAccountButton: Bool
     
     let currency: CurrencyType
     
     let isEmpty: Bool
     
-    init(title: String? = nil, details: DashboardTradingDetails?, currency: CurrencyType) {
+    init(title: String? = nil, details: DashboardTradingDetails?, currency: CurrencyType, showCreateFund: Bool, showCreateAccount: Bool) {
         type = .none
         self.title = title ?? ""
         
@@ -30,6 +32,8 @@ struct TradingHeaderData: BaseData {
         yourEquity = details?.equity ?? 0.0
         aum = details?.aum ?? 0.0
         profits = Profits(details?.profits)
+        showCreateFundButton = showCreateFund
+        showCreateAccountButton = showCreateAccount
     }
 }
 
@@ -63,12 +67,21 @@ class TradingHeaderTableViewCell: BaseTableViewCell {
         loaderView.stopAnimating()
         loaderView.isHidden = true
         
+        if data.showCreateFundButton || data.showCreateAccountButton {
+            emptyView.isHidden = false
+            emptyView.createAccountButton.isHidden = !data.showCreateAccountButton
+            emptyView.createAccountLabel.isHidden = !data.showCreateAccountButton
+            emptyView.createFundButton.isHidden = !data.showCreateFundButton
+            emptyView.createFundLabel.isHidden = !data.showCreateFundButton
+        }
+        
         if data.isEmpty {
             emptyView.isHidden = !data.isEmpty
             labelsView.isHidden = data.isEmpty
         }
         
         if !data.title.isEmpty {
+            titleLabel.isHidden = false
             titleLabel.text = data.title
         } else {
             titleLabel.isHidden = true

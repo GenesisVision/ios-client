@@ -20,9 +20,11 @@ extension FundInvestNowTableViewCellViewModel: CellViewModel {
         }
         
         if let isOwner = fundDetailsFull?.publicInfo?.isOwnAsset, isOwner {
+            cell.investButton.setTitle("Deposit", for: .normal)
             cell.editButton.isHidden = false
             cell.editButton.setEnabled(true)
         } else {
+            cell.investButton.setTitle("Invest", for: .normal)
             cell.editButton.isHidden = true
             cell.editButton.setEnabled(false)
         }
@@ -32,7 +34,6 @@ extension FundInvestNowTableViewCellViewModel: CellViewModel {
         cell.investNowProtocol = investNowProtocol
         
         cell.titleLabel.text = "Invest now"
-        cell.investButton.setTitle("Invest", for: .normal)
         
          if let entryFee = fundDetailsFull?.entryFeeCurrent {
             cell.entryFeeTitleLabel.text = "Entry fee"

@@ -35,6 +35,7 @@ class TradingViewController: ListViewController {
         tableView.dataSource = viewModel.dataSource
         tableView.reloadDataSmoothly()
         tableView.backgroundColor = UIColor.Cell.headerBg
+        isEnablePullToRefresh = false
         
         titleView.titleLabel.text = "Trading"
         titleView.balanceLabel.text = viewModel.getTotalValue()
@@ -262,7 +263,7 @@ class TradingViewModel: ViewModelWithListProtocol {
     private var sections: [SectionType] = [.overview, .publicTrading, .privateTrading]
     var viewModels = [CellViewAnyModel]()
     
-    var canPullToRefresh: Bool = true
+    var canPullToRefresh: Bool = false
     
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [TradingHeaderTableViewCellViewModel.self,
@@ -270,9 +271,12 @@ class TradingViewModel: ViewModelWithListProtocol {
                 CellWithCollectionViewModel<TradingPublicShortListViewModel>.self,
                 CellWithCollectionViewModel<TradingPrivateShortListViewModel>.self]
     }
+    
     var details: DashboardTradingDetails? {
         didSet {
-            let overviewViewModel = TradingHeaderTableViewCellViewModel(data: TradingHeaderData(details: details, currency: currency), delegate: delegate, createsDelegate: creationDelegate)
+            let showCreateFund = publicTrading?.items?.count ?? 0 > 0 ? false : true
+            let showCreateAccount = privateTrading?.items?.count ?? 0 > 0 ? false : true
+            let overviewViewModel = TradingHeaderTableViewCellViewModel(data: TradingHeaderData(details: details, currency: currency, showCreateFund: showCreateFund, showCreateAccount: showCreateAccount), delegate: delegate, createsDelegate: creationDelegate)
             viewModels.append(overviewViewModel)
             reloadSection(.events)
             
@@ -284,6 +288,7 @@ class TradingViewModel: ViewModelWithListProtocol {
             delegate?.didReload()
         }
     }
+    
     var publicTrading: DashboardTradingAssetItemsViewModel? {
         didSet {
             guard let count = publicTrading?.items?.count, count > 0 else { return }
@@ -292,6 +297,7 @@ class TradingViewModel: ViewModelWithListProtocol {
             reloadSection(.publicTrading)
         }
     }
+    
     var privateTrading: DashboardTradingAssetItemsViewModel? {
         didSet {
             guard let count = privateTrading?.items?.count, count > 0 else { return }
@@ -306,18 +312,22 @@ class TradingViewModel: ViewModelWithListProtocol {
     private let errorCompletion: ((CompletionResult) -> Void) = { (result) in
        print(result)
     }
+    
     var router: DashboardRouter?
     weak var delegate: BaseTableViewProtocol?
     weak var creationDelegate: DashBoardTradingTableViewCellButtonsActionsProtocol?
+    
     init(_ router: DashboardRouter?) {
         self.delegate = router?.tradingViewController
         self.creationDelegate = router?.tradingViewController
         self.router = router
     }
+    
     private func reloadSection(_ section: SectionType) {
         let reloadSection = sections.firstIndex(of: section) ?? 0
         delegate?.didReload(IndexPath(row: 0, section: reloadSection))
     }
+    
     func getTotalValue() -> String {
         if let total = details?.equity {
             return total.toString() + " " + currency.rawValue
@@ -325,20 +335,26 @@ class TradingViewModel: ViewModelWithListProtocol {
         
         return ""
     }
+    
     func fetch() {
         viewModels.removeAll()
     
-        DashboardDataProvider.getTrading(currency, eventsTake: 12, completion: { [weak self] (model) in
-            self?.details = model
-        }, errorCompletion: errorCompletion)
         DashboardDataProvider.getPrivateTrading(currency: currency, status: .active, skip: 0, take: 12, completion: { [weak self] (model) in
             self?.privateTrading = model
         }, errorCompletion: errorCompletion)
+        
         DashboardDataProvider.getPublicTrading(currency: currency, status: .active, skip: 0, take: 12, completion: { [weak self] (model) in
             self?.publicTrading = model
+            self?.fetchDetails()
         }, errorCompletion: errorCompletion)
         
         delegate?.didReload()
+    }
+    
+    private func fetchDetails() {
+        DashboardDataProvider.getTrading(currency, eventsTake: 12, completion: { [weak self] (model) in
+            self?.details = model
+        }, errorCompletion: errorCompletion)
     }
     
     func model(for indexPath: IndexPath) -> CellViewAnyModel? {
@@ -354,9 +370,11 @@ class TradingViewModel: ViewModelWithListProtocol {
             return viewModels.first{ $0 is CellWithCollectionViewModel<TradingPrivateShortListViewModel> }
         }
     }
+    
     func didSelectEvent(at assetId: String, assetType: AssetType) {
         router?.showAssetDetails(with: assetId, assetType: assetType)
     }
+    
     func headerHeight(for section: Int) -> CGFloat {
         return 0.0
     }
