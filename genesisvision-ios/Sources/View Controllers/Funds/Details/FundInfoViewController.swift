@@ -14,6 +14,7 @@ class FundInfoViewController: ListViewController {
     
     // MARK: - View Model
     var viewModel: FundInfoViewModel!
+//    weak var scrollDelegate: NavbarSmoothScrollProtocol?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -36,6 +37,8 @@ class FundInfoViewController: ListViewController {
         tableView.reloadDataSmoothly()
         tableView.backgroundColor = UIColor.Cell.headerBg
         
+//        (tableView as UIScrollView).delegate = self
+//
         setupPullToRefresh(scrollView: tableView)
     }
     
@@ -88,9 +91,17 @@ class FundInfoViewController: ListViewController {
         fetch()
     }
 }
+
+//extension FundInfoViewController: UIScrollViewDelegate {
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        scrollDelegate?.scrollDidScroll(contentOffset: scrollView.contentOffset.y)
+//    }
+//}
+
 extension FundInfoViewController: BaseTableViewProtocol {
     
 }
+
 extension FundInfoViewController: ReloadDataProtocol {
     func didReloadData() {
         didReload()

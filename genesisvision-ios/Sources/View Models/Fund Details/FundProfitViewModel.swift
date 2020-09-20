@@ -44,12 +44,28 @@ final class FundProfitViewModel: ViewModelWithListProtocol, ViewModelWithFilter 
         self.assetId = assetId
         self.currency = currency
         self.reloadDataProtocol = reloadDataProtocol
-        self.chartViewProtocol = router.currentController as? ChartViewProtocol
+        //self.chartViewProtocol = router.currentController as? ChartViewProtocol
     }
     
     // MARK: - Public methods
     func selectSimpleChartPoint(_ date: Date) {
     }
+}
+
+extension FundProfitViewModel: ChartViewProtocol {
+    var filterDateRangeModel: FilterDateRangeModel? {
+        return FilterDateRangeModel(dateRangeType: .custom, dateFrom: self.dateFrom, dateTo: self.dateTo)
+    }
+    
+    func chartValueSelected(date: Date) {
+        
+    }
+    
+    func chartValueNothingSelected() {
+        
+    }
+    
+    
 }
 
 // MARK: - TableView
@@ -100,7 +116,7 @@ extension FundProfitViewModel {
         
         switch sections[indexPath.section] {
         case .chart:
-            self.fundProfitChartTableViewCellViewModel = FundProfitChartTableViewCellViewModel(fundProfitChart: fundProfitChart, chartViewProtocol: self.chartViewProtocol)
+            self.fundProfitChartTableViewCellViewModel = FundProfitChartTableViewCellViewModel(fundProfitChart: fundProfitChart, chartViewProtocol: self)
             return fundProfitChartTableViewCellViewModel
         case .statistics:
             if let statistic = fundProfitChart.statistic, let currency = currency {
@@ -115,6 +131,8 @@ extension FundProfitViewModel {
     // MARK: - Private methods
     private func fetch(_ completion: @escaping CompletionBlock) {
         guard let assetId = assetId, let currency = Currency(rawValue: selectedPlatformCurrency) else { return completion(.failure(errorType: .apiError(message: nil))) }
+        
+        
         FundsDataProvider.getProfitPercentCharts(with: assetId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currencyType: getPlatformCurrencyType(), currencies: [currency], completion: { [weak self] (viewModel) in
             guard viewModel != nil else {
                 return ErrorHandler.handleApiError(error: nil, completion: completion)

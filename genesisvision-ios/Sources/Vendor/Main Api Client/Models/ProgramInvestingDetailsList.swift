@@ -41,6 +41,14 @@ public struct ProgramInvestingDetailsList: Codable {
 
     public var periodEnds: Date?
 
+    public var managementFeeSelected: Double?
+
+    public var managementFeeCurrent: Double?
+
+    public var successFeeSelected: Double?
+
+    public var successFeeCurrent: Double?
+
     public var owner: ProfilePublicShort?
 
     public var brokerDetails: BrokerDetails?
@@ -52,7 +60,9 @@ public struct ProgramInvestingDetailsList: Codable {
     public var statistic: ProfitChart?
 
     public var balance: AmountWithCurrency?
-    public init(_id: UUID? = nil, type: ProgramType? = nil, logoUrl: String? = nil, url: String? = nil, color: String? = nil, title: String? = nil, creationDate: Date? = nil, currency: Currency? = nil, availableToInvest: Double? = nil, level: Int? = nil, levelProgress: Double? = nil, periodDuration: Int? = nil, investorsCount: Int? = nil, periodStarts: Date? = nil, periodEnds: Date? = nil, owner: ProfilePublicShort? = nil, brokerDetails: BrokerDetails? = nil, personalDetails: PersonalInvestingProgramDetailsList? = nil, tags: [Tag]? = nil, statistic: ProfitChart? = nil, balance: AmountWithCurrency? = nil) { 
+
+    public var dailyPeriodDetails: ProgramDailyPeriodDetails?
+    public init(_id: UUID? = nil, type: ProgramType? = nil, logoUrl: String? = nil, url: String? = nil, color: String? = nil, title: String? = nil, creationDate: Date? = nil, currency: Currency? = nil, availableToInvest: Double? = nil, level: Int? = nil, levelProgress: Double? = nil, periodDuration: Int? = nil, investorsCount: Int? = nil, periodStarts: Date? = nil, periodEnds: Date? = nil, managementFeeSelected: Double? = nil, managementFeeCurrent: Double? = nil, successFeeSelected: Double? = nil, successFeeCurrent: Double? = nil, owner: ProfilePublicShort? = nil, brokerDetails: BrokerDetails? = nil, personalDetails: PersonalInvestingProgramDetailsList? = nil, tags: [Tag]? = nil, statistic: ProfitChart? = nil, balance: AmountWithCurrency? = nil, dailyPeriodDetails: ProgramDailyPeriodDetails? = nil) { 
         self._id = _id
         self.type = type
         self.logoUrl = logoUrl
@@ -68,12 +78,17 @@ public struct ProgramInvestingDetailsList: Codable {
         self.investorsCount = investorsCount
         self.periodStarts = periodStarts
         self.periodEnds = periodEnds
+        self.managementFeeSelected = managementFeeSelected
+        self.managementFeeCurrent = managementFeeCurrent
+        self.successFeeSelected = successFeeSelected
+        self.successFeeCurrent = successFeeCurrent
         self.owner = owner
         self.brokerDetails = brokerDetails
         self.personalDetails = personalDetails
         self.tags = tags
         self.statistic = statistic
         self.balance = balance
+        self.dailyPeriodDetails = dailyPeriodDetails
     }
     public enum CodingKeys: String, CodingKey { 
         case _id = "id"
@@ -91,12 +106,17 @@ public struct ProgramInvestingDetailsList: Codable {
         case investorsCount
         case periodStarts
         case periodEnds
+        case managementFeeSelected
+        case managementFeeCurrent
+        case successFeeSelected
+        case successFeeCurrent
         case owner
         case brokerDetails
         case personalDetails
         case tags
         case statistic
         case balance
+        case dailyPeriodDetails
     }
 
 }

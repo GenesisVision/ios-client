@@ -189,7 +189,7 @@ final class ProfileViewModel {
     }
     
     func saveProfilePhoto(completion: @escaping CompletionBlock) {
-        guard let pickedImage = pickedImage?.pngData(), let pickedImageUrl = pickedImageURL else {
+        guard let pickedImageUrl = pickedImageURL else {
             return completion(.failure(errorType: .apiError(message: nil)))
         }
         

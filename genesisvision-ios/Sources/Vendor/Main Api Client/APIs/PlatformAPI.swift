@@ -55,20 +55,20 @@ open class PlatformAPI {
     "tradingSchedule" : {
       "hourEnd" : 2,
       "dayStart" : "Sunday",
-      "minuteEnd" : 7,
-      "hourStart" : 5,
+      "minuteEnd" : 4,
+      "hourStart" : 9,
       "hasTradingSchedule" : true,
-      "minuteStart" : 5
+      "minuteStart" : 3
     },
     "type" : "Undefined"
   }, {
     "tradingSchedule" : {
       "hourEnd" : 2,
       "dayStart" : "Sunday",
-      "minuteEnd" : 7,
-      "hourStart" : 5,
+      "minuteEnd" : 4,
+      "hourStart" : 9,
       "hasTradingSchedule" : true,
-      "minuteStart" : 5
+      "minuteStart" : 3
     },
     "type" : "Undefined"
   } ]
@@ -376,20 +376,20 @@ open class PlatformAPI {
       "minInvestAmounts" : [ {
         "serverType" : "Undefined",
         "minDepositCreateAsset" : [ {
-          "amount" : 7.386281948385884,
+          "amount" : 7.457744773683766,
           "currency" : "Undefined"
         }, {
-          "amount" : 7.386281948385884,
+          "amount" : 7.457744773683766,
           "currency" : "Undefined"
         } ],
         "minInvestAmountIntoProgram" : [ null, null ]
       }, {
         "serverType" : "Undefined",
         "minDepositCreateAsset" : [ {
-          "amount" : 7.386281948385884,
+          "amount" : 7.457744773683766,
           "currency" : "Undefined"
         }, {
-          "amount" : 7.386281948385884,
+          "amount" : 7.457744773683766,
           "currency" : "Undefined"
         } ],
         "minInvestAmountIntoProgram" : [ null, null ]
@@ -554,13 +554,13 @@ open class PlatformAPI {
       "topFundAssets" : [ {
         "name" : "name",
         "asset" : "asset",
-        "percent" : 1.4658129805029452,
+        "percent" : 7.061401241503109,
         "logoUrl" : "logoUrl",
         "url" : "url"
       }, {
         "name" : "name",
         "asset" : "asset",
-        "percent" : 1.4658129805029452,
+        "percent" : 7.061401241503109,
         "logoUrl" : "logoUrl",
         "url" : "url"
       } ],
@@ -582,13 +582,13 @@ open class PlatformAPI {
       "topFundAssets" : [ {
         "name" : "name",
         "asset" : "asset",
-        "percent" : 1.4658129805029452,
+        "percent" : 7.061401241503109,
         "logoUrl" : "logoUrl",
         "url" : "url"
       }, {
         "name" : "name",
         "asset" : "asset",
-        "percent" : 1.4658129805029452,
+        "percent" : 7.061401241503109,
         "logoUrl" : "logoUrl",
         "url" : "url"
       } ],
@@ -615,7 +615,7 @@ open class PlatformAPI {
       "title" : "title",
       "periodStarts" : "2000-01-23T04:56:07.000+00:00",
       "balance" : {
-        "amount" : 7.386281948385884,
+        "amount" : 7.457744773683766,
         "currency" : "Undefined"
       },
       "availableToInvest" : 5.962133916683182,
@@ -638,7 +638,7 @@ open class PlatformAPI {
       "periodDuration" : 1,
       "brokerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "statistic" : {
-        "drawdown" : 3.616076749251911,
+        "drawdown" : 1.2315135367772556,
         "chart" : [ {
           "date" : "2000-01-23T04:56:07.000+00:00",
           "value" : 0.8008281904610115
@@ -646,7 +646,7 @@ open class PlatformAPI {
           "date" : "2000-01-23T04:56:07.000+00:00",
           "value" : 0.8008281904610115
         } ],
-        "profit" : 9.301444243932576
+        "profit" : 7.386281948385884
       },
       "level" : 0,
       "entryFeeCurrent" : 7.061401241503109,
@@ -676,7 +676,7 @@ open class PlatformAPI {
       "title" : "title",
       "periodStarts" : "2000-01-23T04:56:07.000+00:00",
       "balance" : {
-        "amount" : 7.386281948385884,
+        "amount" : 7.457744773683766,
         "currency" : "Undefined"
       },
       "availableToInvest" : 5.962133916683182,
@@ -699,7 +699,7 @@ open class PlatformAPI {
       "periodDuration" : 1,
       "brokerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "statistic" : {
-        "drawdown" : 3.616076749251911,
+        "drawdown" : 1.2315135367772556,
         "chart" : [ {
           "date" : "2000-01-23T04:56:07.000+00:00",
           "value" : 0.8008281904610115
@@ -707,7 +707,7 @@ open class PlatformAPI {
           "date" : "2000-01-23T04:56:07.000+00:00",
           "value" : 0.8008281904610115
         } ],
-        "profit" : 9.301444243932576
+        "profit" : 7.386281948385884
       },
       "level" : 0,
       "entryFeeCurrent" : 7.061401241503109,

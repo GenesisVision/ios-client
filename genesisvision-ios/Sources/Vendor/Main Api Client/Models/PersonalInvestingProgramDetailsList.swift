@@ -35,8 +35,12 @@ public struct PersonalInvestingProgramDetailsList: Codable {
 
     public var invested: Double?
 
+    public var successFeePersonal: Double?
+
+    public var managementFeePersonal: Double?
+
     public var status: AssetInvestmentStatus?
-    public init(isOwnAsset: Bool? = nil, isFavorite: Bool? = nil, isReinvest: Bool? = nil, isAutoJoin: Bool? = nil, canInvest: Bool? = nil, canWithdraw: Bool? = nil, canChangeReinvest: Bool? = nil, share: Double? = nil, value: Double? = nil, profit: Double? = nil, profitPercent: Double? = nil, invested: Double? = nil, status: AssetInvestmentStatus? = nil) { 
+    public init(isOwnAsset: Bool? = nil, isFavorite: Bool? = nil, isReinvest: Bool? = nil, isAutoJoin: Bool? = nil, canInvest: Bool? = nil, canWithdraw: Bool? = nil, canChangeReinvest: Bool? = nil, share: Double? = nil, value: Double? = nil, profit: Double? = nil, profitPercent: Double? = nil, invested: Double? = nil, successFeePersonal: Double? = nil, managementFeePersonal: Double? = nil, status: AssetInvestmentStatus? = nil) { 
         self.isOwnAsset = isOwnAsset
         self.isFavorite = isFavorite
         self.isReinvest = isReinvest
@@ -49,6 +53,8 @@ public struct PersonalInvestingProgramDetailsList: Codable {
         self.profit = profit
         self.profitPercent = profitPercent
         self.invested = invested
+        self.successFeePersonal = successFeePersonal
+        self.managementFeePersonal = managementFeePersonal
         self.status = status
     }
 

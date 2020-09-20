@@ -35,14 +35,12 @@ class BaseTabBarController: UITabBarController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if let items = tabBar.items {
-            for item in items {
-                if UIDevice.current.userInterfaceIdiom != .pad {
-                    item.imageInsets = UIEdgeInsets(top: 6.0, left: 0.0, bottom: -6.0, right: 0.0)
-                }
-            }
-        }
+        setupTabBarItems()
+    }
+    
+    private func setupTabBarItems() {
+        guard let items = tabBar.items else { return }
+        items.forEach({$0.title = ""})
     }
     
     deinit {

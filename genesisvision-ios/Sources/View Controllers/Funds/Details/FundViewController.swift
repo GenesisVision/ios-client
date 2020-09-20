@@ -16,22 +16,26 @@ class FundViewController: BaseTabmanViewController<FundViewModel> {
     private var favoriteBarButtonItem: UIBarButtonItem!
     private var notificationsBarButtonItem: UIBarButtonItem!
     
+    private let fundLogoImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.backgroundColor = .clear
+        imageView.contentMode = .scaleAspectFill
+        imageView.kf.setImage(with: URL(string: ""), placeholder: UIImage.fundPlaceholder)
+        return imageView
+    }()
+    
+    private var imageViewHeightConstraint: NSLayoutConstraint?
+    private var barTopAnchor: NSLayoutConstraint?
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        showProgressHUD()
-//        viewModel.fetch { [weak self] (result) in
-//            self?.hideHUD()
-//            self?.setup()
-//            self?.reloadData()
-//            self?.title = self?.viewModel.title
-//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        //setupImageView()
         showProgressHUD()
         viewModel.fetch { [weak self] (result) in
             self?.hideHUD()
@@ -41,6 +45,13 @@ class FundViewController: BaseTabmanViewController<FundViewModel> {
         }
         
         viewModel.updateFundInfo()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+//        removeImageView()
+//        navigationController?.navigationBar.resetNavigationBarTransluent()
     }
     
     // MARK: - Private methods
@@ -54,7 +65,73 @@ class FundViewController: BaseTabmanViewController<FundViewModel> {
         notificationsBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_notifications_icon"), style: .done, target: self, action: #selector(notificationsButtonAction))
         
         navigationItem.rightBarButtonItems = [favoriteBarButtonItem, notificationsBarButtonItem]
+//
+//        barTopAnchor = bar.topAnchor.constraint(equalTo: fundLogoImageView.bottomAnchor)
+//        NSLayoutConstraint.activate([barTopAnchor!])
+//
+//        navigationController?.navigationBar.setNavigationBarFullTransluent()
+//        navigationController?.navigationBar.layer.zPosition = 1
     }
+//
+//    private func removeImageView() {
+//        fundLogoImageView.removeFromSuperview()
+//    }
+//    
+//    private func updateImageViewConstraints(height: CGFloat) {
+//        if height == 0 {
+//            navigationController?.navigationBar.resetNavigationBarTransluent()
+//            imageViewHeightConstraint?.constant = 50
+//            NSLayoutConstraint.activate([self.imageViewHeightConstraint!])
+//            NSLayoutConstraint.activate([self.barTopAnchor!])
+//            UIView.animate(withDuration: 0.6) {
+//                self.fundLogoImageView.alpha = 0
+//                self.fundLogoImageView.isHidden = true
+//                self.fundLogoImageView.layoutIfNeeded()
+//                self.bar.layoutIfNeeded()
+//            }
+//        }
+//
+//        if height == 350 {
+//            navigationController?.navigationBar.setNavigationBarFullTransluent()
+//            imageViewHeightConstraint?.constant = 350
+//            NSLayoutConstraint.activate([self.imageViewHeightConstraint!])
+//            NSLayoutConstraint.activate([self.barTopAnchor!])
+//            UIView.animate(withDuration: 0.6) {
+//                self.fundLogoImageView.alpha = 1
+//                self.fundLogoImageView.isHidden = false
+//                self.fundLogoImageView.layoutIfNeeded()
+//                self.bar.layoutIfNeeded()
+//            }
+//        }
+//    }
+//
+//    private func setupImageView() {
+//        navigationController?.view.addSubview(fundLogoImageView)
+//        fundLogoImageView.anchor(top: navigationController?.view.topAnchor, leading: navigationController?.view.leadingAnchor, bottom: nil, trailing: navigationController?.view.trailingAnchor)
+//        imageViewHeightConstraint = fundLogoImageView.heightAnchor.constraint(equalToConstant: 350)
+//        NSLayoutConstraint.activate([imageViewHeightConstraint!])
+//
+//        viewModel.fetch { [weak self] (result) in
+//            switch result {
+//            case .success:
+//                self?.setupImage()
+//            case .failure(errorType: let errorType):
+//                ErrorHandler.handleError(with: errorType)
+//            }
+//        }
+//    }
+//
+//    private func setupImage() {
+//        if let color = viewModel.fundDetailsFull?.publicInfo?.color {
+//            fundLogoImageView.backgroundColor = UIColor.hexColor(color)
+//        }
+//
+//        if let logoString = viewModel.fundDetailsFull?.publicInfo?.logoUrl, let logoUrl = URL(string: logoString) {
+//            fundLogoImageView.kf.setImage(with: logoUrl, placeholder: UIImage.fundPlaceholder)
+//        } else {
+//            fundLogoImageView.kf.setImage(with: URL(string: ""), placeholder: UIImage.fundPlaceholder)
+//        }
+//    }
     
     @objc func notificationsButtonAction() {
         viewModel.showNotificationSettings()
@@ -92,6 +169,19 @@ extension FundViewController: ReloadDataProtocol {
     func didReloadData() {
     }
 }
+
+//extension FundViewController: NavbarSmoothScrollProtocol {
+//    func scrollDidScroll(contentOffset: CGFloat) {
+//        if contentOffset > 100 {
+//            updateImageViewConstraints(height: 0)
+//        }
+//        if contentOffset <= 0 {
+//            updateImageViewConstraints(height: 350)
+//        }
+//    }
+//
+//}
+
 extension FundViewController: FavoriteStateUpdatedProtocol {
     func didFavoriteStateUpdated() {
         DispatchQueue.main.async {
@@ -261,7 +351,7 @@ extension FundViewModel {
                     
                 case .success:
                     self.showEvents = false
-                case .failure(errorType: let errorType):
+                case .failure(errorType: _):
                     self.showEvents = false
                 }
             })

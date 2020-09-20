@@ -154,16 +154,18 @@ class ProfileViewController: BaseTableViewController, UINavigationControllerDele
         } else {
             emailTextField.text = ""
         }
+        
         if let userName = viewModel.profileModel?.userName {
             usernameTextField.text = userName
             title = userName
         } else {
             usernameTextField.text = ""
         }
+        
         if let about = viewModel.profileModel?.about {
             aboutTextView.text = about
         } else {
-            aboutTextView.text = "About"
+            aboutTextView.text = ""
         }
         
         setupSocialLinks()

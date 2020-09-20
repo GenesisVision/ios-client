@@ -12,6 +12,7 @@ class FundListViewController: BaseViewControllerWithTableView {
     
     // MARK: - Variables
     private var signInButtonEnable: Bool = false
+    private var infoBarButtonItem: UIBarButtonItem!
     
     // MARK: - View Model
     var viewModel: ListViewModel!
@@ -112,6 +113,10 @@ class FundListViewController: BaseViewControllerWithTableView {
     }
     
     private func setupChallengeTableView() {
+        infoBarButtonItem = UIBarButtonItem(title: "", style: .done, target: self, action: #selector(infoButtonPressed))
+        infoBarButtonItem.image = #imageLiteral(resourceName: "img_info")
+        navigationItem.rightBarButtonItem = infoBarButtonItem
+        
         gvWeeklyChallngeTableView.configure(with: .custom(TableViewConfiguration(
             topInset: 0,
             bottomInset: 20,
@@ -141,6 +146,10 @@ class FundListViewController: BaseViewControllerWithTableView {
         if viewModel.canPullToRefresh {
             setupPullToRefresh(scrollView: tableView)
         }
+    }
+    
+    @objc private func infoButtonPressed() {
+        openSafariVC(with: Urls.gvWeeklyChallengeBlog)
     }
     
     private func reloadData() {
@@ -219,7 +228,7 @@ final class WeeklyChallangeTableViewModel: ListViewModelWithPaging {
                 
             case .success:
                 break
-            case .failure(errorType: let errorType):
+            case .failure(errorType: _):
                 break
             }
         }

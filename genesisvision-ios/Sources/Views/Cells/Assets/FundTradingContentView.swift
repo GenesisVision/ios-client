@@ -146,7 +146,7 @@ extension FundTradingContentView: ContentViewProtocol {
         
         secondStackView.titleLabel.text = "D.down"
         if let drawdown = asset.statistic?.drawdown {
-            secondStackView.valueLabel.text = drawdown.toString()
+            secondStackView.valueLabel.text = drawdown.rounded(toPlaces: 2).toString()
         } else {
             secondStackView.valueLabel.text = "0"
         }

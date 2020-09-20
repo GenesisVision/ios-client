@@ -153,7 +153,7 @@ final class ProgramInvestViewModel {
     }
     
     func getMaxAmount() -> Double {
-        return max(getAvailableInWallet(), getAvailableToInvest() / rate)
+        return min(getAvailableInWallet(), getAvailableToInvest() / rate)
     }
     
     func getAvailableInWallet() -> Double {

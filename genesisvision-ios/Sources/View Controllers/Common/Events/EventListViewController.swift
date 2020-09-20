@@ -64,6 +64,7 @@ class EventListViewController: ListViewController {
         bottomSheetController.present()
     }
 }
+
 extension EventListViewController: EventDetailsViewProtocol {
     func closeButtonDidPress() {
         bottomSheetController.dismiss()

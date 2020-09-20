@@ -15,6 +15,9 @@ struct FundProfitStatisticTableViewCellViewModel {
 
 extension FundProfitStatisticTableViewCellViewModel: CellViewModel {
     func setup(on cell: DetailProfitStatisticTableViewCell) {
+        
+        cell.stackView.removeAllArrangedSubviews()
+        
         cell.titleLabel.text = "Statistics"
         
         if let value = statistic.balance {

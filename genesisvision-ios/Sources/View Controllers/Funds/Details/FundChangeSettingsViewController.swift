@@ -85,7 +85,7 @@ class FundChangeSettingsViewController: BaseViewController {
                     self.showSuccessHUD()
                     self.navigationController?.popViewController(animated: true)
                 }
-            case .failure(errorType: let errorType):
+            case .failure(errorType: _):
                 DispatchQueue.main.async {
                     self.showErrorHUD()
                 }

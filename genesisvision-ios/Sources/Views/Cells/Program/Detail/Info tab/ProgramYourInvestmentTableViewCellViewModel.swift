@@ -85,7 +85,7 @@ extension ProgramYourInvestmentTableViewCellViewModel: CellViewModel {
         cell.investedValueLabel.isHidden = true
         
         cell.profitTitleLabel.text = "profit"
-        if let profitPercent = programDetails?.personalDetails?.profit,
+        if let profitPercent = programDetails?.personalDetails?.profitPercent,
             let value = programDetails?.personalDetails?.value,
             let invested = programDetails?.personalDetails?.invested {
             let profitValue = value - invested

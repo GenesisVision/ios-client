@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -1241,6 +1241,7 @@
                         <outlet property="entryFeeLabel" destination="sqJ-Ib-XlK" id="1Ge-CI-bnT"/>
                         <outlet property="exitFeeLabel" destination="DHj-Ph-OGb" id="COG-TD-Z5e"/>
                         <outlet property="informationLabel" destination="Ykm-tb-BO2" id="Hwu-Se-AbG"/>
+                        <outlet property="reallocateButton" destination="6PC-bL-Hp5" id="UNj-3E-A4k"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IMx-xS-KQI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1284,14 +1285,15 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="rSy-Cr-9Cz">
-                                                        <rect key="frame" x="0.0" y="30" width="394" height="2"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="10y-bf-5q7" customClass="MultiProgressView" customModule="GV_DEBUG" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="30" width="394" height="4"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="2" id="EHB-7p-2Yi"/>
+                                                            <constraint firstAttribute="height" constant="4" id="LAi-pM-dqe"/>
                                                         </constraints>
-                                                    </progressView>
+                                                    </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7xF-5K-QgU" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="32" width="30" height="28"/>
+                                                        <rect key="frame" x="0.0" y="34" width="30" height="26"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="30" id="s1S-Fl-72t"/>
                                                         </constraints>
@@ -1300,7 +1302,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hgc-c8-bJM" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
-                                                        <rect key="frame" x="354" y="32" width="40" height="28"/>
+                                                        <rect key="frame" x="354" y="34" width="40" height="26"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="40" id="8i8-bI-RCx"/>
                                                         </constraints>
@@ -1312,17 +1314,17 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="7xF-5K-QgU" firstAttribute="leading" secondItem="R6A-bo-SDA" secondAttribute="leading" id="0eC-J3-tci"/>
-                                                    <constraint firstItem="Hgc-c8-bJM" firstAttribute="top" secondItem="rSy-Cr-9Cz" secondAttribute="bottom" id="1Qb-oJ-DEg"/>
-                                                    <constraint firstItem="rSy-Cr-9Cz" firstAttribute="leading" secondItem="R6A-bo-SDA" secondAttribute="leading" id="1n2-Pb-OHZ"/>
                                                     <constraint firstAttribute="bottom" secondItem="7xF-5K-QgU" secondAttribute="bottom" id="2Vb-os-aPc"/>
                                                     <constraint firstAttribute="trailing" secondItem="YFo-Z5-1U8" secondAttribute="trailing" id="81W-ct-qZf"/>
                                                     <constraint firstAttribute="bottom" secondItem="Hgc-c8-bJM" secondAttribute="bottom" id="CIe-0o-bTf"/>
-                                                    <constraint firstItem="rSy-Cr-9Cz" firstAttribute="top" secondItem="YFo-Z5-1U8" secondAttribute="bottom" id="P5J-vK-KBE"/>
                                                     <constraint firstAttribute="height" constant="60" id="U43-Yt-LfS"/>
+                                                    <constraint firstItem="7xF-5K-QgU" firstAttribute="top" secondItem="10y-bf-5q7" secondAttribute="bottom" id="WYM-yH-tD8"/>
+                                                    <constraint firstAttribute="trailing" secondItem="10y-bf-5q7" secondAttribute="trailing" id="XNq-F4-e7Q"/>
                                                     <constraint firstAttribute="trailing" secondItem="Hgc-c8-bJM" secondAttribute="trailing" id="Xhj-JB-Gck"/>
-                                                    <constraint firstAttribute="trailing" secondItem="rSy-Cr-9Cz" secondAttribute="trailing" id="eb6-9c-F54"/>
-                                                    <constraint firstItem="7xF-5K-QgU" firstAttribute="top" secondItem="rSy-Cr-9Cz" secondAttribute="bottom" id="flG-oZ-mBk"/>
+                                                    <constraint firstItem="10y-bf-5q7" firstAttribute="top" secondItem="YFo-Z5-1U8" secondAttribute="bottom" id="d8X-Xq-aS3"/>
                                                     <constraint firstItem="YFo-Z5-1U8" firstAttribute="top" secondItem="R6A-bo-SDA" secondAttribute="top" id="gXy-ep-0tR"/>
+                                                    <constraint firstItem="Hgc-c8-bJM" firstAttribute="top" secondItem="10y-bf-5q7" secondAttribute="bottom" id="hcX-Vo-2Ko"/>
+                                                    <constraint firstItem="10y-bf-5q7" firstAttribute="leading" secondItem="R6A-bo-SDA" secondAttribute="leading" id="jgU-z6-Io1"/>
                                                 </constraints>
                                             </view>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DIm-Ws-iMN">
@@ -1405,7 +1407,7 @@
                         <outlet property="freeSpaceLabel" destination="YFo-Z5-1U8" id="kSG-Cg-f07"/>
                         <outlet property="fundAssetsCollectionView" destination="DIm-Ws-iMN" id="7Fe-h9-Itn"/>
                         <outlet property="fundInfoLabel" destination="32v-5V-zA7" id="ZAq-h3-yNu"/>
-                        <outlet property="fundReallocationProgressView" destination="rSy-Cr-9Cz" id="EnH-ga-6Bn"/>
+                        <outlet property="fundReallocationProgressView" destination="10y-bf-5q7" id="Ooj-p0-Nh6"/>
                         <outlet property="reallocateButton" destination="KRZ-gu-IWf" id="6ZE-FI-h7x"/>
                     </connections>
                 </viewController>

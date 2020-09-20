@@ -101,12 +101,6 @@ class SignUpViewController: BaseViewController {
             termsSwitchButton.setImage(#imageLiteral(resourceName: "img_checkbox_selected_icon"), for: .selected)
         }
     }
-    @IBOutlet weak var notAmericanSwitchButton: UIButton! {
-        didSet {
-            notAmericanSwitchButton.setImage(#imageLiteral(resourceName: "img_checkbox_unselected_icon"), for: .normal)
-            notAmericanSwitchButton.setImage(#imageLiteral(resourceName: "img_checkbox_selected_icon"), for: .selected)
-        }
-    }
     
     @IBOutlet weak var signUpButton: ActionButton! {
         didSet {
@@ -180,7 +174,7 @@ class SignUpViewController: BaseViewController {
     
     @IBAction func switchButtonAction(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        signUpButton.setEnabled(privacyPolicySwitchButton.isSelected && termsSwitchButton.isSelected && notAmericanSwitchButton.isSelected)
+        signUpButton.setEnabled(privacyPolicySwitchButton.isSelected && termsSwitchButton.isSelected)
     }
 }
 

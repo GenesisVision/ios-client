@@ -381,6 +381,10 @@ extension Router {
         navigationController?.openSafariVC(with: Urls.termsWebAddress)
     }
     
+    func showSafari(with: String) {
+        navigationController?.openSafariVC(with: with)
+    }
+    
     func goToBack(animated: Bool = false) {
         popViewController(animated: animated)
     }

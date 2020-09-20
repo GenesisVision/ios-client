@@ -25,14 +25,22 @@ class WalletBalanceViewController: BaseViewControllerWithTableView {
             addFundsButton.backgroundColor = UIColor.primary.withAlphaComponent(0.1)
         }
     }
+    
     @IBOutlet weak var withdrawButton: ActionButton! {
         didSet {
             withdrawButton.configure(with: .darkClear)
         }
     }
+    
     @IBOutlet weak var transferButton: ActionButton! {
         didSet {
             transferButton.isHidden = true
+        }
+    }
+    
+    @IBOutlet weak var topUpButton: ActionButton! {
+        didSet {
+            topUpButton.backgroundColor = UIColor.primary.withAlphaComponent(0.1)
         }
     }
     
@@ -66,9 +74,15 @@ class WalletBalanceViewController: BaseViewControllerWithTableView {
             
             addFundsButton.setEnabled(viewModel.wallet?.isDepositEnabled ?? false)
             withdrawButton.setEnabled(viewModel.wallet?.isWithdrawalEnabled ?? false)
+            topUpButton.setEnabled(viewModel.wallet?.isDepositEnabled ?? false)
         default:
             addFundsButton.isHidden = true
             withdrawButton.isHidden = true
+            topUpButton.isHidden = true
+        }
+        
+        if let currency = viewModel.wallet?.currency, currency == .gvt {
+            topUpButton.isHidden = true
         }
     }
     
@@ -118,6 +132,10 @@ class WalletBalanceViewController: BaseViewControllerWithTableView {
     
     @IBAction func transferButtonAction(_ sender: UIButton) {
         viewModel.transfer()
+    }
+    
+    @IBAction func butWithCardButtonAction(_ sender: Any) {
+        viewModel.topUp()
     }
 }
 

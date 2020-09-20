@@ -10,8 +10,6 @@ import UIKit
 
 protocol ChangeFundAssetPartViewProtocol: class {
     func close()
-    func minusPercent()
-    func plusPercent()
     func update(targetInFund: Int, freeInFund: Int, fundSymbol: String)
 }
 
@@ -94,14 +92,6 @@ class ChangeFundAssetPartView: UIView {
         button.addTarget(self, action: #selector(plusPercent), for: .touchUpInside)
         return button
     }()
-    
-//    private let percentValue: TitleLabel = {
-//        let label = TitleLabel()
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.font = UIFont.getFont(.semibold, size: 15.0)
-//        label.textAlignment = .center
-//        return label
-//    }()
     
     private let percentValue: DesignableUITextField = {
         let textField = DesignableUITextField()

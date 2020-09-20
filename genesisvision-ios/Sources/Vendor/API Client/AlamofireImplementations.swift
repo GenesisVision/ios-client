@@ -69,17 +69,13 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
             if value is NSURL {
                 return true
             }
-            if let valueString = value as? String, let url = URL(string: valueString) {
+            if let valueString = value as? String, let _ = URL(string: valueString) {
                 return true
-            } else if let data = value as? Data, let valueString = String(data: data, encoding: .utf8), let url = URL(string: valueString) {
+            } else if let data = value as? Data, let valueString = String(data: data, encoding: .utf8), let _ = URL(string: valueString) {
                 return true
             }
             return false
         }).compactMap({$0.0})
-        
-        
-//        let fileKeys = parameters == nil ? [] : parameters!.filter { $1 is NSURL }
-//            .map { $0.0 }
         
         if fileKeys.count > 0 {
             manager.upload(multipartFormData: { mpForm in

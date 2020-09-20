@@ -48,7 +48,7 @@ open class RequestBuilder<T> {
     }
     
     open func addAuthorizationHeader() {
-        if let token = AuthManager.authorizedToken{
+        if let token = AuthManager.authorizedToken {
             headers["Authorization"] = token
         }
     }

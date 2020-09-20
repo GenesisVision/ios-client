@@ -10,6 +10,7 @@ import UIKit.UIColor
 
 struct WalletTableViewCellViewModel {
     let wallet: WalletData
+    let totalAmountInPlatformCurrency: Double?
 }
 
 extension WalletTableViewCellViewModel: CellViewModel {
@@ -30,7 +31,7 @@ extension WalletTableViewCellViewModel: CellViewModel {
             cell.titleLabel.text = ""
         }
         
-        if let amount = wallet.total, let currency = wallet.currency {
+        if let amount = wallet.available, let currency = wallet.currency {
             if let currency = CurrencyType(rawValue: currency.rawValue) {
                 cell.amountLabel.text = amount.rounded(with: currency).toString() + " " + currency.rawValue
             }
@@ -38,11 +39,9 @@ extension WalletTableViewCellViewModel: CellViewModel {
             cell.amountLabel.text = ""
         }
         
-        let currency = getPlatformCurrencyType()
-        if let amount = wallet.totalCcy {
-            if let currency = CurrencyType(rawValue: currency.rawValue) {
-                cell.amountCcyLabel.text = amount.rounded(with: currency).toString() + " " + currency.rawValue
-            }
+        if let amount = totalAmountInPlatformCurrency {
+            let currency = getPlatformCurrencyType()
+            cell.amountCcyLabel.text = amount.rounded(with: currency).toString() + " " + currency.rawValue
         } else {
             cell.amountCcyLabel.text = ""
         }

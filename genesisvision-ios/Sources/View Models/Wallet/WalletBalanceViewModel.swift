@@ -125,6 +125,12 @@ extension WalletBalanceViewModel {
             router.show(routeType: .transfer(from: .gvt, to: .btc, walletSummary: multiWallet))
         }
     }
+    
+    func topUp() {
+        guard let url = wallet?.depositUrlCoindirect else { return }
+        
+        router.showSafari(with: url)
+    }
 }
 
 extension WalletBalanceViewModel {

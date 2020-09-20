@@ -220,6 +220,47 @@ open class AssetsAPI {
     }
 
     /**
+     Close exchange account
+     - parameter _id: (path)  
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func closeExchangeAccount(_id: UUID, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        closeExchangeAccountWithRequestBuilder(_id: _id).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
+        }
+    }
+
+
+    /**
+     Close exchange account
+     - POST /v2.0/assets/tradingaccounts/exchange/{id}/close
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter _id: (path)  
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func closeExchangeAccountWithRequestBuilder(_id: UUID) -> RequestBuilder<Void> {
+        var path = "/v2.0/assets/tradingaccounts/exchange/{id}/close"
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = URLComponents(string: URLString)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
      Close existing fund
      - parameter _id: (path)       - parameter body: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
@@ -407,7 +448,8 @@ open class AssetsAPI {
     "authenticatorUri" : "authenticatorUri"
   },
   "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-  "twoFactorRequired" : true
+  "twoFactorRequired" : true,
+  "startDeposit" : 0.8008281904610115
 }}]
      - parameter body: (body)  (optional)
 
@@ -449,7 +491,8 @@ open class AssetsAPI {
     "authenticatorUri" : "authenticatorUri"
   },
   "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-  "twoFactorRequired" : true
+  "twoFactorRequired" : true,
+  "startDeposit" : 0.8008281904610115
 }}]
      - parameter body: (body)  (optional)
 
@@ -529,7 +572,8 @@ open class AssetsAPI {
     "authenticatorUri" : "authenticatorUri"
   },
   "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-  "twoFactorRequired" : true
+  "twoFactorRequired" : true,
+  "startDeposit" : 0.8008281904610115
 }}]
      - parameter body: (body)  (optional)
 
@@ -866,6 +910,49 @@ open class AssetsAPI {
         let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+    }
+
+    /**
+     Create an investment program
+     - parameter body: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func makeProgram(body: MakeProgram? = nil, completion: @escaping ((_ data: TradingAccountCreateResult?,_ error: Error?) -> Void)) {
+        makeProgramWithRequestBuilder(body: body).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     Create an investment program
+     - POST /v2.0/assets/programs/create
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example={
+  "twoFactor" : {
+    "sharedKey" : "sharedKey",
+    "authenticatorUri" : "authenticatorUri"
+  },
+  "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+  "twoFactorRequired" : true,
+  "startDeposit" : 0.8008281904610115
+}}]
+     - parameter body: (body)  (optional)
+
+     - returns: RequestBuilder<TradingAccountCreateResult> 
+     */
+    open class func makeProgramWithRequestBuilder(body: MakeProgram? = nil) -> RequestBuilder<TradingAccountCreateResult> {
+        let path = "/v2.0/assets/programs/create"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
+
+        let url = URLComponents(string: URLString)
+
+        let requestBuilder: RequestBuilder<TradingAccountCreateResult>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }

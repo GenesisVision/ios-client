@@ -23,14 +23,17 @@ public struct PersonalInvestingFundDetailsList: Codable {
 
     public var value: Double?
 
+    public var exitFeePersonal: Double?
+
     public var status: AssetInvestmentStatus?
-    public init(isOwnAsset: Bool? = nil, isFavorite: Bool? = nil, canInvest: Bool? = nil, canWithdraw: Bool? = nil, share: Double? = nil, value: Double? = nil, status: AssetInvestmentStatus? = nil) { 
+    public init(isOwnAsset: Bool? = nil, isFavorite: Bool? = nil, canInvest: Bool? = nil, canWithdraw: Bool? = nil, share: Double? = nil, value: Double? = nil, exitFeePersonal: Double? = nil, status: AssetInvestmentStatus? = nil) { 
         self.isOwnAsset = isOwnAsset
         self.isFavorite = isFavorite
         self.canInvest = canInvest
         self.canWithdraw = canWithdraw
         self.share = share
         self.value = value
+        self.exitFeePersonal = exitFeePersonal
         self.status = status
     }
 

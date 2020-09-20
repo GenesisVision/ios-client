@@ -220,10 +220,10 @@ open class FundsAPI {
   "tradingSchedule" : {
     "hourEnd" : 2,
     "dayStart" : "Sunday",
-    "minuteEnd" : 7,
-    "hourStart" : 5,
+    "minuteEnd" : 4,
+    "hourStart" : 9,
     "hasTradingSchedule" : true,
-    "minuteStart" : 5
+    "minuteStart" : 3
   },
   "publicInfo" : {
     "typeExt" : "None",
@@ -233,6 +233,7 @@ open class FundsAPI {
     "isOwnAsset" : true,
     "title" : "title",
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
+    "systemUrl" : "systemUrl",
     "logoUrl" : "logoUrl",
     "url" : "url",
     "status" : "status"
@@ -423,13 +424,13 @@ open class FundsAPI {
     "topFundAssets" : [ {
       "name" : "name",
       "asset" : "asset",
-      "percent" : 1.4658129805029452,
+      "percent" : 7.061401241503109,
       "logoUrl" : "logoUrl",
       "url" : "url"
     }, {
       "name" : "name",
       "asset" : "asset",
-      "percent" : 1.4658129805029452,
+      "percent" : 7.061401241503109,
       "logoUrl" : "logoUrl",
       "url" : "url"
     } ],
@@ -451,13 +452,13 @@ open class FundsAPI {
     "topFundAssets" : [ {
       "name" : "name",
       "asset" : "asset",
-      "percent" : 1.4658129805029452,
+      "percent" : 7.061401241503109,
       "logoUrl" : "logoUrl",
       "url" : "url"
     }, {
       "name" : "name",
       "asset" : "asset",
-      "percent" : 1.4658129805029452,
+      "percent" : 7.061401241503109,
       "logoUrl" : "logoUrl",
       "url" : "url"
     } ],
@@ -684,13 +685,13 @@ open class FundsAPI {
   "topFundAssets" : [ {
     "name" : "name",
     "asset" : "asset",
-    "percent" : 1.4658129805029452,
+    "percent" : 7.061401241503109,
     "logoUrl" : "logoUrl",
     "url" : "url"
   }, {
     "name" : "name",
     "asset" : "asset",
-    "percent" : 1.4658129805029452,
+    "percent" : 7.061401241503109,
     "logoUrl" : "logoUrl",
     "url" : "url"
   } ],

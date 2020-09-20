@@ -1,5 +1,5 @@
 //
-//  ManageFundViewController.swift
+//  FundManageViewController.swift
 //  genesisvision-ios
 //
 //  Created by Ruslan Lukin on 03.08.2020.
@@ -22,24 +22,33 @@ class FundManageViewController: BaseViewController {
         }
     }
     @IBOutlet weak var collectionView: UICollectionView!
+    
     @IBOutlet weak var dangerZoneView: UIView! {
         didSet {
             dangerZoneView.isHidden = true
         }
     }
+    @IBOutlet weak var reallocateButton: UIButton! {
+        didSet {
+            reallocateButton.isEnabled = false
+        }
+    }
     
     @IBOutlet weak var informationLabel: SubtitleLabel!
+    
     @IBOutlet weak var closeFundButton: ActionButton! {
         didSet {
             closeFundButton.setTitle("Close Fund", for: .normal)
             closeFundButton.configure(with: .custom(options: ActionButtonOptions(borderWidth: 0, borderColor: nil, fontSize: 15, bgColor: UIColor.Common.red, textColor: UIColor.Common.white, image: nil, rightPosition: false)))
         }
     }
+    
     @IBOutlet weak var entryFeeLabel: TitleLabel! {
         didSet {
             entryFeeLabel.font = UIFont.getFont(.semibold, size: 16.0)
         }
     }
+    
     @IBOutlet weak var exitFeeLabel: TitleLabel! {
         didSet {
             exitFeeLabel.font = UIFont.getFont(.semibold, size: 16.0)
@@ -73,6 +82,7 @@ class FundManageViewController: BaseViewController {
                 self.exitFeeLabel.text = exitText + "%"
                 self.entryFeeLabel.text = entryText + "%"
             }
+            self.reallocateButton.isEnabled = self.viewModel.isReallocateable
             self.collectionView.reloadData()
         }
     }
@@ -144,11 +154,12 @@ class FundManageViewController: BaseViewController {
 }
 
 class ManageFundViewModel {
-        
+
     var assetCollectionViewModel: FundAssetCollectionViewModel!
     var assetCollectionViewDataSource: CollectionViewDataSource!
     var assetId: String?
     var fundDetails: FundDetailsFull?
+    var isReallocateable: Bool = true
     
     init(with: String? = nil) {
         assetId = with
@@ -166,6 +177,7 @@ class ManageFundViewModel {
             if let fundDetailsFull = fundDetailsFull, let assets = fundDetailsFull.assetsStructure {
                 self?.fundDetails = fundDetailsFull
                 self?.assetCollectionViewModel.assets = assets
+                self?.isReallocateable = fundDetailsFull.personalDetails?.ownerActions?.canReallocate ?? true
             }
             completion(.success)
         }) { (result) in

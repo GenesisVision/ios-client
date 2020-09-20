@@ -137,10 +137,6 @@ class FundInvestViewController: BaseViewController {
     private func setup() {
         investButton.setEnabled(false)
         title = ""
-//
-//        DispatchQueue.main.async {
-//            self.updateUI()
-//        }
         
         showProgressHUD()
         viewModel.getInfo(completion: { [weak self] (result) in

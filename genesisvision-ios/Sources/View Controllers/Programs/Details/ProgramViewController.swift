@@ -132,7 +132,7 @@ final class ProgramViewModel: TabmanViewModel {
     var showEvents: Bool = true {
         didSet {
             if !showEvents {
-                tabTypes.removeAll(where: {$0 == .events})
+                tabTypes.removeAll(where: { $0 == .events })
                 setViewControllers()
             }
         }
@@ -272,7 +272,7 @@ extension ProgramViewModel {
                 case .success:
                     self.showEvents = false
                     completion(.success)
-                case .failure(errorType: let errorType):
+                case .failure(errorType: _):
                     self.showEvents = false
                     completion(.success)
                 }

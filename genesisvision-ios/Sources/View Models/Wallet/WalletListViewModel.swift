@@ -23,11 +23,14 @@ final class WalletListViewModel {
                 walletType = .wallet
                 viewModels.removeAll()
                 wallets.forEach { (wallet) in
-                    viewModels.append(WalletTableViewCellViewModel.init(wallet: wallet))
+                    let amountInPlatformCurrency = getAmountForPlatformCurrency(fromAmount: wallet.available, fromCurrency: wallet.currency?.rawValue)
+                    viewModels.append(WalletTableViewCellViewModel.init(wallet: wallet, totalAmountInPlatformCurrency: amountInPlatformCurrency))
                 }
             }
         }
     }
+    
+    private var rates: RatesModel?
     
     private var sections: [SectionType] = [.wallets]
     
@@ -41,6 +44,11 @@ final class WalletListViewModel {
     init(withRouter router: WalletRouter, reloadDataProtocol: ReloadDataProtocol? = nil) {
         self.router = router
         self.reloadDataProtocol = reloadDataProtocol
+    }
+    
+    private func getAmountForPlatformCurrency(fromAmount: Double?, fromCurrency: String?) -> Double? {
+        guard let fromAmount = fromAmount, let fromCurrency = fromCurrency, let rates = rates?.rates, let rate = rates[getPlatformCurrencyType().rawValue]?.first(where: {$0.currency?.rawValue == fromCurrency })?.rate else { return nil }
+        return fromAmount/rate
     }
 }
 
@@ -143,12 +151,17 @@ extension WalletListViewModel {
 // MARK: - Fetch
 extension WalletListViewModel {
     func fetch() {
-        AuthManager.getWallet(completion: { [weak self] (wallet) in
-            guard let wallet = wallet else { return }
-            self?.wallet = wallet
-            self?.reloadDataProtocol?.didReloadData()
+        RateDataProvider.getRates(from: [getPlatformCurrencyType().rawValue], to: [Currency.btc.rawValue, Currency.eth.rawValue, Currency.gvt.rawValue, Currency.usdt.rawValue], completion: { [weak self] (ratesModel) in
+            self?.rates = ratesModel
+            AuthManager.getWallet(completion: { [weak self] (wallet) in
+                guard let wallet = wallet else { return }
+                self?.wallet = wallet
+                self?.reloadDataProtocol?.didReloadData()
+            }) { (result) in
+                print("ERROR")
+            }
+            
         }) { (result) in
-            print("ERROR")
         }
     }
 }

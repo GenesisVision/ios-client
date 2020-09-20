@@ -448,7 +448,7 @@ class CreateAccountViewModel {
         return count > 1
     }
     func getRate() -> Double? {
-        guard let rates = ratesModel?.rates, let currency = Currency(rawValue: getCurrency()), let fromCurrency = fromListViewModel.selected()?.currency, currency != fromCurrency else { return nil }
+        guard let rates = ratesModel?.rates, let currency = Currency(rawValue: getCurrency()), let fromCurrency = fromListViewModel.selected()?.currency else { return nil }
         
         var rate: Double?
         switch currency {

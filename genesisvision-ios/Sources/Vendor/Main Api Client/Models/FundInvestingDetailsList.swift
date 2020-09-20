@@ -27,6 +27,14 @@ public struct FundInvestingDetailsList: Codable {
 
     public var investorsCount: Int?
 
+    public var entryFeeCurrent: Double?
+
+    public var entryFeeSelected: Double?
+
+    public var exitFeeCurrent: Double?
+
+    public var exitFeeSelected: Double?
+
     public var totalAssetsCount: Int?
 
     public var topFundAssets: [FundAssetPercent]?
@@ -40,7 +48,7 @@ public struct FundInvestingDetailsList: Codable {
     public var personalDetails: PersonalInvestingFundDetailsList?
 
     public var balance: AmountWithCurrency?
-    public init(_id: UUID? = nil, logoUrl: String? = nil, url: String? = nil, color: String? = nil, title: String? = nil, _description: String? = nil, creationDate: Date? = nil, investorsCount: Int? = nil, totalAssetsCount: Int? = nil, topFundAssets: [FundAssetPercent]? = nil, owner: ProfilePublicShort? = nil, tradingSchedule: TradingScheduleInfo? = nil, statistic: ProfitChart? = nil, personalDetails: PersonalInvestingFundDetailsList? = nil, balance: AmountWithCurrency? = nil) { 
+    public init(_id: UUID? = nil, logoUrl: String? = nil, url: String? = nil, color: String? = nil, title: String? = nil, _description: String? = nil, creationDate: Date? = nil, investorsCount: Int? = nil, entryFeeCurrent: Double? = nil, entryFeeSelected: Double? = nil, exitFeeCurrent: Double? = nil, exitFeeSelected: Double? = nil, totalAssetsCount: Int? = nil, topFundAssets: [FundAssetPercent]? = nil, owner: ProfilePublicShort? = nil, tradingSchedule: TradingScheduleInfo? = nil, statistic: ProfitChart? = nil, personalDetails: PersonalInvestingFundDetailsList? = nil, balance: AmountWithCurrency? = nil) { 
         self._id = _id
         self.logoUrl = logoUrl
         self.url = url
@@ -49,6 +57,10 @@ public struct FundInvestingDetailsList: Codable {
         self._description = _description
         self.creationDate = creationDate
         self.investorsCount = investorsCount
+        self.entryFeeCurrent = entryFeeCurrent
+        self.entryFeeSelected = entryFeeSelected
+        self.exitFeeCurrent = exitFeeCurrent
+        self.exitFeeSelected = exitFeeSelected
         self.totalAssetsCount = totalAssetsCount
         self.topFundAssets = topFundAssets
         self.owner = owner
@@ -66,6 +78,10 @@ public struct FundInvestingDetailsList: Codable {
         case _description = "description"
         case creationDate
         case investorsCount
+        case entryFeeCurrent
+        case entryFeeSelected
+        case exitFeeCurrent
+        case exitFeeSelected
         case totalAssetsCount
         case topFundAssets
         case owner

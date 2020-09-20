@@ -19,10 +19,10 @@ public struct DashboardTradingAssetPublicDetails: Codable {
 
     public var url: String?
 
-    public var programDetails: ProgramAssetDetails?
+    public var programDetails: DashboardProgramDetails?
 
-    public var fundDetails: FundAssetDetails?
-    public init(logoUrl: String? = nil, color: String? = nil, title: String? = nil, url: String? = nil, programDetails: ProgramAssetDetails? = nil, fundDetails: FundAssetDetails? = nil) { 
+    public var fundDetails: DashboardFundDetails?
+    public init(logoUrl: String? = nil, color: String? = nil, title: String? = nil, url: String? = nil, programDetails: DashboardProgramDetails? = nil, fundDetails: DashboardFundDetails? = nil) { 
         self.logoUrl = logoUrl
         self.color = color
         self.title = title

@@ -13,7 +13,13 @@ class FundReallocationViewController: BaseViewController {
     var viewModel: FundReallocationViewModel!
 
     @IBOutlet weak var fundInfoLabel: SubtitleLabel!
-    @IBOutlet weak var fundReallocationProgressView: UIProgressView!
+    @IBOutlet weak var fundReallocationProgressView: MultiProgressView! {
+        didSet {
+            fundReallocationProgressView.trackBackgroundColor = UIColor.Cell.subtitle
+            fundReallocationProgressView.lineCap = .round
+            fundReallocationProgressView.cornerRadius = 4.0
+        }
+    }
     @IBOutlet weak var fundAssetsCollectionView: UICollectionView!
     @IBOutlet weak var addAssetButton: ActionButton! {
         didSet {
@@ -31,7 +37,7 @@ class FundReallocationViewController: BaseViewController {
     private var changeFundAssetPartView = ChangeFundAssetPartView(frame: .zero)
     
     private var freeSpaceInFundAsset: Int = 0
-    private let progress = Progress(totalUnitCount: 100)
+    private var assetColor: [Int: UIColor] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,13 +62,13 @@ class FundReallocationViewController: BaseViewController {
     
     private func updateUI() {
         DispatchQueue.main.async {
-            self.progress.completedUnitCount = Int64(100 - self.freeSpaceInFundAsset)
+            self.fundReallocationProgressView.reloadData()
+            self.updateProgressView(self.viewModel.assetCollectionViewModel.assets)
             if self.freeSpaceInFundAsset > 0 {
                 self.freeSpaceLabel.text = "+" + self.freeSpaceInFundAsset.toString() + "%"
             } else {
                 self.freeSpaceLabel.text = ""
             }
-            self.fundReallocationProgressView.setProgress(Float(self.progress.fractionCompleted), animated: true)
             self.fundAssetsCollectionView.reloadData()
             
             let fundInfoLabelText = "The total share of all assets should be equal to 100%.\n" +
@@ -94,8 +100,7 @@ class FundReallocationViewController: BaseViewController {
     private func setup() {
         title = "Reallocate"
         
-        fundReallocationProgressView.progress = 0.0
-        progress.completedUnitCount = 0
+        fundReallocationProgressView.dataSource = self
         freeSpaceLabel.text = ""
         freeSpaceInFundAsset = 0
     }
@@ -113,33 +118,7 @@ class FundReallocationViewController: BaseViewController {
         fundAssetsCollectionView.showsHorizontalScrollIndicator = false
         fundAssetsCollectionView.indicatorStyle = .black
         fundAssetsCollectionView.registerNibs(for: viewModel.assetCollectionViewModel.cellModelsForRegistration)
-            
-//        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressOnCell(longPressGestureRecognizer:)))
-//        self.fundAssetsCollectionView.addGestureRecognizer(longPressRecognizer)
-        
-//        let minimumHeight = 200
-//
-//        let heightvalue = (65)*(viewModel.assetCollectionViewModel.viewModels.count/2)
-//
-//        collectionViewHeightConstraint.constant = heightvalue > minimumHeight ? CGFloat(heightvalue) : CGFloat(minimumHeight)
-//
-//        NSLayoutConstraint.activate([collectionViewHeightConstraint])
     }
-    
-//    @objc private func longPressOnCell(longPressGestureRecognizer: UILongPressGestureRecognizer) {
-//        if longPressGestureRecognizer.state == .began {
-//
-//            let touchPoint = longPressGestureRecognizer.location(in: self.view)
-//
-//            let indexPath = fundAssetsCollectionView.indexPathForItem(at: touchPoint)
-//            if let index = self.fundAssetsCollectionView.indexPathForItem(at: touchPoint) {
-//                // your code here, get the row for the indexPath or do whatever you want
-//                if let cell = viewModel.assetCollectionViewModel.viewModels[index.row] as? FundAssetManageCollectionViewCellViewModel {
-//                    print(cell.assetModel?.symbol)
-//                }
-//            }
-//        }
-//    }
 
     @IBAction func addAssetButtonAction(_ sender: Any) {
         guard freeSpaceInFundAsset > 0 else { return }
@@ -165,6 +144,18 @@ class FundReallocationViewController: BaseViewController {
             }
         }
     }
+    
+    func updateProgressView(_ assets: [FundAssetInfo]?) {
+        guard let assets = assets else { return }
+        
+        for (index, asset) in assets.enumerated() {
+            if let value = asset.target, asset.asset != nil {
+                DispatchQueue.main.async {
+                    self.fundReallocationProgressView.setProgress(section: index, to: Float(Double(value) / 100))
+                }
+            }
+        }
+    }
 }
 
 extension FundReallocationViewController: ChangeFundAssetPartViewProtocol {
@@ -178,14 +169,6 @@ extension FundReallocationViewController: ChangeFundAssetPartViewProtocol {
     func close() {
         changeFundAssetPartView.isHidden = true
     }
-    
-    func minusPercent() {
-        
-    }
-    
-    func plusPercent() {
-        
-    }
 }
 
 extension FundReallocationViewController: FundReallocationCellActionProtocol {
@@ -195,18 +178,11 @@ extension FundReallocationViewController: FundReallocationCellActionProtocol {
     }
     
     func assetCellSelected(assetInfo: FundAssetInfo) {
-        
         changeFundAssetPartView.configure(assetInfo: assetInfo, freeSpaceInFund: freeSpaceInFundAsset)
         
         UIView.animate(withDuration: 0.3) {
             self.changeFundAssetPartView.isHidden = false
         }
-        
-//        
-//        let vc = FundAssetManageViewController()
-//        vc.modalPresentationStyle = .overCurrentContext
-//        vc.fundAsseInfo = assetInfo
-//        present(viewController: vc)
     }
 }
 
@@ -215,6 +191,24 @@ extension FundReallocationViewController: AssetListSelectedProtocol {
         let newAsset = viewModel.addAsset(asset: asset)
         assetCellSelected(assetInfo: newAsset)
         updateUI()
+    }
+}
+
+extension FundReallocationViewController: MultiProgressViewDataSource {
+    func numberOfSections(in progressView: MultiProgressView) -> Int {
+        return viewModel.assetCollectionViewModel.viewModels.count
+    }
+
+    func progressView(_ progressView: MultiProgressView, viewForSection section: Int) -> ProgressViewSection {
+        let sectionView = ProgressViewSection()
+        
+        if let color = assetColor[section] {
+            sectionView.backgroundColor = color
+        } else {
+            assetColor[section] = UIColor.random
+            sectionView.backgroundColor = assetColor[section]
+        }
+        return sectionView
     }
 }
 
@@ -234,10 +228,6 @@ final class FundReallocationViewModel {
         assetCollectionViewDataSource = CollectionViewDataSource(assetCollectionViewModel)
     }
     
-    func add(first: Int, second: Int) -> Int {
-        return first + second
-    }
-    
     func reallocate(completion: @escaping CompletionBlock) {
         guard let fundId = assetId else { return completion(.failure(errorType: .apiError(message: nil))) }
         
@@ -248,7 +238,7 @@ final class FundReallocationViewModel {
         AssetsDataProvider.updateFundAssets(fundId, assets: fundAssets, completion: completion)
     }
     
-    func addAsset(asset: PlatformAsset) ->FundAssetInfo {
+    func addAsset(asset: PlatformAsset) -> FundAssetInfo {
         let fundAssetInfo = FundAssetInfo(asset: asset.name, symbol: asset.asset, logoUrl: asset.logoUrl, target: 0, current: 0, currentAmount: 0, url: asset.url)
         assetCollectionViewModel.assets.append(fundAssetInfo)
         return fundAssetInfo

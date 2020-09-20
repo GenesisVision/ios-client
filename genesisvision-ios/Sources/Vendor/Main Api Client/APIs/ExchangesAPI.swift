@@ -48,7 +48,8 @@ open class ExchangesAPI {
       },
       "isCountryNotUSRequired" : true,
       "isDepositRequired" : true,
-      "isKycRequired" : true
+      "isKycRequired" : true,
+      "currencies" : [ "currencies", "currencies" ]
     }, {
       "name" : "name",
       "description" : "description",
@@ -60,7 +61,8 @@ open class ExchangesAPI {
       },
       "isCountryNotUSRequired" : true,
       "isDepositRequired" : true,
-      "isKycRequired" : true
+      "isKycRequired" : true,
+      "currencies" : [ "currencies", "currencies" ]
     } ],
     "logoUrl" : "logoUrl",
     "isKycRequired" : true,
@@ -88,7 +90,8 @@ open class ExchangesAPI {
       },
       "isCountryNotUSRequired" : true,
       "isDepositRequired" : true,
-      "isKycRequired" : true
+      "isKycRequired" : true,
+      "currencies" : [ "currencies", "currencies" ]
     }, {
       "name" : "name",
       "description" : "description",
@@ -100,7 +103,8 @@ open class ExchangesAPI {
       },
       "isCountryNotUSRequired" : true,
       "isDepositRequired" : true,
-      "isKycRequired" : true
+      "isKycRequired" : true,
+      "currencies" : [ "currencies", "currencies" ]
     } ],
     "logoUrl" : "logoUrl",
     "isKycRequired" : true,

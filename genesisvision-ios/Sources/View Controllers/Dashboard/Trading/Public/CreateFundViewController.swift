@@ -386,7 +386,7 @@ class CreateFundViewModel {
     func getRate() -> Double? {
         guard let rates = ratesModel?.rates, let fromCurrency = fromListViewModel.selected()?.currency, fromCurrency != Currency.gvt else { return nil }
         
-        let rate = rates["GVT"]?.first(where: { $0.currency == fromCurrency })?.rate
+        let rate = rates[Currency.gvt.rawValue]?.first(where: { $0.currency == fromCurrency })?.rate
         
         return rate != 0 ? rate : nil
     }

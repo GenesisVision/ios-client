@@ -43,16 +43,19 @@ class ProgramHeaderTableViewCell: UITableViewCell {
            assetLogoImageView.backgroundColor = UIColor.BaseView.bg
        }
     }
+    
     @IBOutlet weak var bottomHeightConstraint: NSLayoutConstraint! {
         didSet {
             bottomHeightConstraint.constant = 68.0
         }
     }
+    
     @IBOutlet weak var bottomView: UIView! {
         didSet {
             bottomView.backgroundColor = UIColor.BaseView.bg
         }
     }
+    
     @IBOutlet weak var labelsStackView: UIStackView!
     @IBOutlet weak var tagsView: UIScrollView!
     

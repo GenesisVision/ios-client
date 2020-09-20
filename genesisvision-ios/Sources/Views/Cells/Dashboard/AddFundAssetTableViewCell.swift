@@ -101,7 +101,7 @@ class AddFundAssetTableViewCell: UITableViewCell {
     @objc private func textFieldDidChange(_ textField: UITextField) {
         percentValue = textField.text?.doubleValue ?? 0.0
         assetModel?.mandatoryFundPercent = percentValue
-        delegate?.confirmAsset(assetModel)
+        _ = delegate?.confirmAsset(assetModel)
     }
     
     // MARK: - Actions
@@ -111,7 +111,7 @@ class AddFundAssetTableViewCell: UITableViewCell {
         percentValue += 1
         assetModel?.mandatoryFundPercent = percentValue
         textField.text = percentValue.toString()
-        delegate?.confirmAsset(assetModel)
+        _ = delegate?.confirmAsset(assetModel)
     }
     @IBAction func decrementButtonAction(_ sender: UIStepper) {
         if assetModel?.asset == "GVT" && percentValue < 2 || percentValue < 1 { return }
@@ -119,7 +119,7 @@ class AddFundAssetTableViewCell: UITableViewCell {
         percentValue -= 1
         assetModel?.mandatoryFundPercent = percentValue
         textField.text = percentValue.toString()
-        delegate?.confirmAsset(assetModel)
+        _ = delegate?.confirmAsset(assetModel)
     }
 }
 

@@ -68,14 +68,7 @@ final class WalletTransferViewModel {
         guard let walletSummary = walletSummary,
             let wallets = walletSummary.wallets else { return }
         
-        let oldIndex = selectedWalletFromDelegateManager?.selectedIndex ?? 0
         selectedWalletFromDelegateManager?.selectedIndex = selectedIndex
-        
-//        if selectedIndex == selectedWalletToDelegateManager?.selectedIndex {
-//            updateWalletCurrencyToIndex(oldIndex) { (result) in
-//                print(result)
-//            }
-//        }
         
         selectedWalletFromDelegateManager?.selected = wallets[selectedWalletFromDelegateManager?.selectedIndex ?? 0]
         updateRate(completion: completion)
@@ -85,14 +78,7 @@ final class WalletTransferViewModel {
         guard let walletSummary = walletSummary,
             let wallets = walletSummary.wallets else { return }
         
-        let oldIndex = selectedWalletToDelegateManager?.selectedIndex ?? 0
         selectedWalletToDelegateManager?.selectedIndex = selectedIndex
-        
-//        if selectedIndex == selectedWalletFromDelegateManager?.selectedIndex {
-//            updateWalletCurrencyFromIndex(oldIndex) { (result) in
-//                print(result)
-//            }
-//        }
         
         selectedWalletToDelegateManager?.selected = wallets[selectedWalletToDelegateManager?.selectedIndex ?? 0]
         updateRate(completion: completion)

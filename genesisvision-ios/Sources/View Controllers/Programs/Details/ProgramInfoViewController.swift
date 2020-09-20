@@ -15,6 +15,8 @@ class ProgramInfoViewController: ListViewController {
     // MARK: - View Model
     var viewModel: ProgramInfoViewModel!
     
+    //weak var scrollDelegate: NavbarSmoothScrollProtocol?
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +37,8 @@ class ProgramInfoViewController: ListViewController {
         tableView.dataSource = viewModel.dataSource
         tableView.reloadDataSmoothly()
         tableView.backgroundColor = UIColor.Cell.headerBg
+        
+        //(tableView as UIScrollView).delegate = self
         
         setupPullToRefresh(scrollView: tableView)
     }
@@ -90,9 +94,17 @@ extension ProgramInfoViewController: ReloadDataProtocol {
         didReload()
     }
 }
+
+//extension ProgramInfoViewController: UIScrollViewDelegate {
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        scrollDelegate?.scrollDidScroll(contentOffset: scrollView.contentOffset.y)
+//    }
+//}
+
 extension ProgramInfoViewController: BaseTableViewProtocol {
     
 }
+
 extension ProgramInfoViewController: InRequestsDelegateManagerProtocol {
     func didSelectRequest(at indexPath: IndexPath) {
         

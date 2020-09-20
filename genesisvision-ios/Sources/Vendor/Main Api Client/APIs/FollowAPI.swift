@@ -574,7 +574,7 @@ open class FollowAPI {
     "type" : "DailyPeriod",
     "tradesDelay" : "None",
     "dailyPeriodDetails" : {
-      "hourProcessing" : 5,
+      "hourProcessing" : 7,
       "isProcessingRealTime" : true
     },
     "availableInvestmentBase" : 7.457744773683766,
@@ -591,14 +591,14 @@ open class FollowAPI {
       "canChangeReinvest" : true,
       "canWithdraw" : true,
       "pendingOutputIsWithdrawAll" : true,
-      "subscribedAccounts" : 2,
+      "subscribedAccounts" : 1,
       "canInvest" : true,
       "showTwoFactorButton" : true,
-      "pendingOutput" : 6.438423552598547,
-      "managementFeePersonal" : 6.965117697638846,
+      "pendingOutput" : 9.018348186070783,
+      "managementFeePersonal" : 3.5571952270680973,
       "hasNotifications" : true,
-      "pendingInput" : 9.018348186070783,
-      "profitPercent" : 6.683562403749608,
+      "pendingInput" : 8.762042012749001,
+      "profitPercent" : 9.369310271410669,
       "isReinvest" : true,
       "isAutoJoin" : true,
       "migration" : {
@@ -649,13 +649,13 @@ open class FollowAPI {
             "name" : "name"
           } ]
         },
-        "newLeverage" : 1,
+        "newLeverage" : 6,
         "dateCreate" : "2000-01-23T04:56:07.000+00:00"
       },
-      "value" : 9.965781217890562,
-      "profit" : 9.369310271410669,
-      "successFeePersonal" : 3.5571952270680973,
-      "invested" : 8.762042012749001,
+      "value" : 5.025004791520295,
+      "profit" : 9.965781217890562,
+      "successFeePersonal" : 6.438423552598547,
+      "invested" : 6.683562403749608,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
@@ -680,6 +680,7 @@ open class FollowAPI {
     "isOwnAsset" : true,
     "title" : "title",
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
+    "systemUrl" : "systemUrl",
     "logoUrl" : "logoUrl",
     "url" : "url",
     "status" : "status"
@@ -701,13 +702,13 @@ open class FollowAPI {
     "canConfirm2FA" : true
   },
   "followDetails" : {
-    "tradesCount" : 6,
+    "tradesCount" : 2,
     "signalSettings" : {
-      "signalSuccessFee" : 6.878052220127876,
-      "signalVolumeFee" : 5.944895607614016,
+      "signalSuccessFee" : 6.778324963048013,
+      "signalVolumeFee" : 6.878052220127876,
       "isActive" : true
     },
-    "subscribersCount" : 6,
+    "subscribersCount" : 5,
     "personalDetails" : {
       "guestActions" : {
         "canSubscribeToExternalSignalPrivateAccount" : true,
@@ -715,7 +716,7 @@ open class FollowAPI {
         "canSubscribeToInternalSignal" : true
       },
       "hasNotifications" : true,
-      "subscribedAccounts" : 3,
+      "subscribedAccounts" : 6,
       "isFavorite" : true
     }
   },
