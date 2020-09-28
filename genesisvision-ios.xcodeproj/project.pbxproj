@@ -13,6 +13,10 @@
 		19129480249BBA1F007F1083 /* PostLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1912947F249BBA1E007F1083 /* PostLink.swift */; };
 		19129484249BBA3F007F1083 /* PublicProfileFollow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19129483249BBA3E007F1083 /* PublicProfileFollow.swift */; };
 		19129486249BBAF8007F1083 /* PostPlatformAssetDetailsWithPrices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19129485249BBAF8007F1083 /* PostPlatformAssetDetailsWithPrices.swift */; };
+		194351832520BAF300CEBBDF /* SocialFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194351822520BAF300CEBBDF /* SocialFeedViewController.swift */; };
+		194351872520BE5800CEBBDF /* SocialFeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 194351862520BE5800CEBBDF /* SocialFeedTableViewCell.xib */; };
+		1943518C2520BE7A00CEBBDF /* SocialFeedTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1943518B2520BE7A00CEBBDF /* SocialFeedTableViewCellViewModel.swift */; };
+		194351902520C30F00CEBBDF /* SocialDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1943518F2520C30F00CEBBDF /* SocialDataProvider.swift */; };
 		1963836A24FED6A600FDB06E /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1963836924FED6A600FDB06E /* UINavigationBar.swift */; };
 		196FFF1024EDC3F50064B633 /* SearchHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196FFF0F24EDC3F50064B633 /* SearchHeaderView.swift */; };
 		1973143A24C8B38C00D675B6 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1973143924C8B38C00D675B6 /* Collection.swift */; };
@@ -88,7 +92,7 @@
 		19812487246459A900F286FE /* UsersFilterTimeframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19812485246459A900F286FE /* UsersFilterTimeframe.swift */; };
 		19812489246459B900F286FE /* UtmSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19812488246459B900F286FE /* UtmSource.swift */; };
 		1981F22924D1D40000979262 /* InfoSubscriptionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EEC3F0D23C5544E0023FAC5 /* InfoSubscriptionTableViewCell.xib */; };
-		199D0E2A24F2DB830005D76B /* MainSocialPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199D0E2924F2DB830005D76B /* MainSocialPageViewController.swift */; };
+		199D0E2A24F2DB830005D76B /* SocialMainFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199D0E2924F2DB830005D76B /* SocialMainFeedViewController.swift */; };
 		199D0E3124F560FA0005D76B /* FundEditPublicInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199D0E3024F560FA0005D76B /* FundEditPublicInfoViewController.swift */; };
 		199D0E3324F804F30005D76B /* ProgramDailyPeriodDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199D0E3224F804F20005D76B /* ProgramDailyPeriodDetails.swift */; };
 		199D0E3524F805C90005D76B /* ProgramType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199D0E3424F805C80005D76B /* ProgramType.swift */; };
@@ -1005,6 +1009,10 @@
 		19129481249BBA2C007F1083 /* PostAssetDetailsWithPrices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostAssetDetailsWithPrices.swift; sourceTree = "<group>"; };
 		19129483249BBA3E007F1083 /* PublicProfileFollow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicProfileFollow.swift; sourceTree = "<group>"; };
 		19129485249BBAF8007F1083 /* PostPlatformAssetDetailsWithPrices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostPlatformAssetDetailsWithPrices.swift; sourceTree = "<group>"; };
+		194351822520BAF300CEBBDF /* SocialFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialFeedViewController.swift; sourceTree = "<group>"; };
+		194351862520BE5800CEBBDF /* SocialFeedTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialFeedTableViewCell.xib; sourceTree = "<group>"; };
+		1943518B2520BE7A00CEBBDF /* SocialFeedTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialFeedTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		1943518F2520C30F00CEBBDF /* SocialDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialDataProvider.swift; sourceTree = "<group>"; };
 		1963836924FED6A600FDB06E /* UINavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationBar.swift; sourceTree = "<group>"; };
 		196FFF0F24EDC3F50064B633 /* SearchHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeaderView.swift; sourceTree = "<group>"; };
 		1973143924C8B38C00D675B6 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
@@ -1080,7 +1088,7 @@
 		19812485246459A900F286FE /* UsersFilterTimeframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersFilterTimeframe.swift; sourceTree = "<group>"; };
 		19812488246459B900F286FE /* UtmSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtmSource.swift; sourceTree = "<group>"; };
 		1981248A24645B3400F286FE /* SignalSubscription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalSubscription.swift; sourceTree = "<group>"; };
-		199D0E2924F2DB830005D76B /* MainSocialPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSocialPageViewController.swift; sourceTree = "<group>"; };
+		199D0E2924F2DB830005D76B /* SocialMainFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMainFeedViewController.swift; sourceTree = "<group>"; };
 		199D0E3024F560FA0005D76B /* FundEditPublicInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundEditPublicInfoViewController.swift; sourceTree = "<group>"; };
 		199D0E3224F804F20005D76B /* ProgramDailyPeriodDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramDailyPeriodDetails.swift; sourceTree = "<group>"; };
 		199D0E3424F805C80005D76B /* ProgramType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramType.swift; sourceTree = "<group>"; };
@@ -1996,6 +2004,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1943518A2520BE6800CEBBDF /* Social */ = {
+			isa = PBXGroup;
+			children = (
+				194351862520BE5800CEBBDF /* SocialFeedTableViewCell.xib */,
+				1943518B2520BE7A00CEBBDF /* SocialFeedTableViewCellViewModel.swift */,
+			);
+			path = Social;
+			sourceTree = "<group>";
+		};
 		1975B8DA24DD8F030095C72B /* Manage Fund */ = {
 			isa = PBXGroup;
 			children = (
@@ -2008,7 +2025,8 @@
 		199D0E2B24F2DB980005D76B /* Social */ = {
 			isa = PBXGroup;
 			children = (
-				199D0E2924F2DB830005D76B /* MainSocialPageViewController.swift */,
+				199D0E2924F2DB830005D76B /* SocialMainFeedViewController.swift */,
+				194351822520BAF300CEBBDF /* SocialFeedViewController.swift */,
 			);
 			path = Social;
 			sourceTree = "<group>";
@@ -4032,6 +4050,7 @@
 				5E0E1B9E2221A6B6001F3C4E /* SignalDataProvider.swift */,
 				5EB06A49239E7C87003AB3FB /* AccountsDataProvider.swift */,
 				5EB06A4F239EA1FE003AB3FB /* UsersDataProvider.swift */,
+				1943518F2520C30F00CEBBDF /* SocialDataProvider.swift */,
 			);
 			path = "Data Providers";
 			sourceTree = "<group>";
@@ -4065,6 +4084,7 @@
 		FCC9DD52200DFA5E008825EC /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				1943518A2520BE6800CEBBDF /* Social */,
 				5EF9F91C23E117F400542E1E /* Assets */,
 				5E70429523CD082600D8950F /* Account */,
 				5EC6708921AEA877009BF4C0 /* Common */,
@@ -4231,6 +4251,7 @@
 				5EFB2381238C010F00CD7480 /* InvestingHeaderTableViewCell.xib in Resources */,
 				5E4A7E89222BA08400A97968 /* GoogleService-Info.plist in Resources */,
 				5EA274CB21628297008CAF77 /* DetailBalanceChartTableViewCell.xib in Resources */,
+				194351872520BE5800CEBBDF /* SocialFeedTableViewCell.xib in Resources */,
 				5EEFAA6523B5BFB900EBBC6D /* DetailTradingAccountTableViewCell.xib in Resources */,
 				5E942E8920D7BA5A0069343C /* Settings.storyboard in Resources */,
 				5E1CF81C218B71D100541C70 /* Montserrat-ExtraLight.ttf in Resources */,
@@ -4588,7 +4609,7 @@
 				5E69AC8223DA0542000AB692 /* TradingInfoContentView.swift in Sources */,
 				5EC1C3B72288178A0024008E /* WalletDepositCurrencyDelegateManager.swift in Sources */,
 				5E39F74923A3F92F0073DAD5 /* SecureAlgorithm.swift in Sources */,
-				199D0E2A24F2DB830005D76B /* MainSocialPageViewController.swift in Sources */,
+				199D0E2A24F2DB830005D76B /* SocialMainFeedViewController.swift in Sources */,
 				5E39F78F23A3F9300073DAD5 /* WalletBaseData.swift in Sources */,
 				5ED0C9192091144200C83F23 /* PlateTableViewCellAppearance.swift in Sources */,
 				5EF16D6721E8C4B100FF55B8 /* SelectedChartAssetsView.swift in Sources */,
@@ -4652,6 +4673,7 @@
 				19787AF02481402600217CA9 /* DashboardTradingAssetCredentials.swift in Sources */,
 				5EA274D32162B582008CAF77 /* ProgramYourInvestmentTableViewCellViewModel.swift in Sources */,
 				5E87E765208F638E00141269 /* Tooltips.swift in Sources */,
+				1943518C2520BE7A00CEBBDF /* SocialFeedTableViewCellViewModel.swift in Sources */,
 				5E8340E0207E3907004A29F1 /* ProgramTradesViewModel.swift in Sources */,
 				5E7A6A8B214020EE005DEEBD /* BottomSheet.swift in Sources */,
 				5ED3B47A210898810026C123 /* ProfileImageView.swift in Sources */,
@@ -4662,6 +4684,7 @@
 				FC27233020498959005225F2 /* ToggleTorchButton.swift in Sources */,
 				198124572464585D00F286FE /* PostImage.swift in Sources */,
 				5EA274CA21628297008CAF77 /* DetailBalanceChartTableViewCell.swift in Sources */,
+				194351832520BAF300CEBBDF /* SocialFeedViewController.swift in Sources */,
 				1981242B246450CE00F286FE /* Body.swift in Sources */,
 				5E39F7C623A3F9300073DAD5 /* ReferralFriend.swift in Sources */,
 				5E1770A5220D197800669D84 /* WalletTabmanViewController.swift in Sources */,
@@ -5072,6 +5095,7 @@
 				FCB178722046CA0D00A482B7 /* ProgramsDataProvider.swift in Sources */,
 				5EF9F92B23E322FF00542E1E /* ImageQuality.swift in Sources */,
 				5E5BBE6621822708009E4BA3 /* FundYourInvestmentTableViewCellViewModel.swift in Sources */,
+				194351902520C30F00CEBBDF /* SocialDataProvider.swift in Sources */,
 				5E9C74DE22C99D6B003604ED /* DetailStatisticsTableViewCell.swift in Sources */,
 				5EF9F92C23E322FF00542E1E /* LandingInfo.swift in Sources */,
 				5EF22570206E486B00D2CB12 /* UIDevice.swift in Sources */,
@@ -5371,12 +5395,12 @@
 				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.0.1;
+				MARKETING_VERSION = 2.1.0;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "\"-DPROD\"";
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor;
@@ -5652,13 +5676,13 @@
 				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.0.1;
+				MARKETING_VERSION = 2.1.0;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Onone";
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor;
 				PRODUCT_NAME = "${APP_DISPLAY_NAME}";
@@ -5733,12 +5757,12 @@
 				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.0.1;
+				MARKETING_VERSION = 2.1.0;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "\"-DDEV\"";
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor;
