@@ -12,12 +12,9 @@ import Tabman
 
 class SocialMainFeedViewController: BaseTabmanViewController<SocialMainFeedViewModel> {
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setup()
-        title = "Social"
     }
     
     private func setup() {
@@ -50,9 +47,15 @@ final class SocialMainFeedViewModel: TabmanViewModel {
             viewController.viewModel = viewModel
             return viewController
         case .hot:
-            return nil
+            let viewController = SocialFeedViewController()
+            let viewModel = SocialFeedViewModel(feedType: .hot, tableViewDelegate: viewController)
+            viewController.viewModel = viewModel
+            return viewController
         case .feed:
-            return nil
+            let viewController = SocialFeedViewController()
+            let viewModel = SocialFeedViewModel(feedType: .feed, tableViewDelegate: viewController)
+            viewController.viewModel = viewModel
+            return viewController
         }
     }
     

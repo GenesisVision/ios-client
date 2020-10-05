@@ -129,6 +129,7 @@ class Router {
         let socialViewController = SocialMainFeedViewController()
         //let walletViewController = WalletViewController()
         navigationController = BaseNavigationController(rootViewController: socialViewController)
+        navigationController.title = ""
         //let router = WalletRouter(parentRouter: self, navigationController: navigationController)
         //router.walletTabmanViewController = walletViewController
         

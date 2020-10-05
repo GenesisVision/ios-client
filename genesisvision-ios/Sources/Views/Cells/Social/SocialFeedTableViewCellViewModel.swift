@@ -16,7 +16,7 @@ struct SocialFeedTableViewCellViewModel {
 extension SocialFeedTableViewCellViewModel: CellViewModel {
     func setup(on cell: SocialFeedTableViewCell) {
         
-        if let logo = post.author?.logoUrl, let fileUrl = getFileURL(fileName: logo) {
+        if let logo = post.author?.logoUrl, let fileUrl = getFileURL(fileName: logo), isPictureURL(url: fileUrl.absoluteString) {
             cell.userImageView.kf.indicatorType = .activity
             cell.userImageView.kf.setImage(with: fileUrl)
         } else {

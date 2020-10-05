@@ -47,7 +47,7 @@ class SocialFeedViewController: BaseViewController {
 extension SocialFeedViewController: BaseTableViewProtocol {
     func didReload() {
         DispatchQueue.main.async {
-            self.tableView.reloadData()
+            self.tableView.reloadDataSmoothly()
         }
     }
 }
@@ -93,9 +93,11 @@ final class SocialFeedViewModel: ListViewModelWithPaging {
             fetch { (_) in
             }
         case .hot:
-            break
+            fetch { (_) in
+            }
         case .feed:
-            break
+            fetch { (_) in
+            }
         }
     }
     
@@ -111,16 +113,41 @@ final class SocialFeedViewModel: ListViewModelWithPaging {
         
         var models = [CellViewModel]()
         
-        SocialDataProvider.getFeed(userId: nil, tagContentId: nil, tagContentIds: nil, userMode: nil, hashTags: nil, mask: nil, showTop: nil, showLiked: nil, showOnlyUsersPosts: nil, skip: skip, take: take()) { [weak self] (postsViewModel) in
-            if let viewModel = postsViewModel, let total = postsViewModel?.total {
-                viewModel.items?.forEach({ (model) in
-                    let viewModel = SocialFeedTableViewCellViewModel(post: model)
-                    models.append(viewModel)
-                })
-                self?.updateViewModels(models, refresh: false, total: total)
-            }
-            
-        } errorCompletion: { _ in }
+        switch feedType {
+        case .live:
+            SocialDataProvider.getFeed(userId: nil, tagContentId: nil, tagContentIds: nil, userMode: nil, hashTags: nil, mask: nil, showTop: nil, showLiked: nil, showOnlyUsersPosts: nil, skip: skip, take: take()) { [weak self] (postsViewModel) in
+                if let viewModel = postsViewModel, let total = postsViewModel?.total {
+                    viewModel.items?.forEach({ (model) in
+                        let viewModel = SocialFeedTableViewCellViewModel(post: model)
+                        models.append(viewModel)
+                    })
+                    self?.updateViewModels(models, refresh: false, total: total)
+                }
+                
+            } errorCompletion: { _ in }
+        case .hot:
+            SocialDataProvider.getFeed(userId: nil, tagContentId: nil, tagContentIds: nil, userMode: nil, hashTags: nil, mask: nil, showTop: nil, showLiked: nil, showOnlyUsersPosts: nil, skip: skip, take: take()) { [weak self] (postsViewModel) in
+                if let viewModel = postsViewModel, let total = postsViewModel?.total {
+                    viewModel.items?.forEach({ (model) in
+                        let viewModel = SocialFeedTableViewCellViewModel(post: model)
+                        models.append(viewModel)
+                    })
+                    self?.updateViewModels(models, refresh: false, total: total)
+                }
+                
+            } errorCompletion: { _ in }
+        case .feed:
+            SocialDataProvider.getFeed(userId: nil, tagContentId: nil, tagContentIds: nil, userMode: nil, hashTags: nil, mask: nil, showTop: nil, showLiked: nil, showOnlyUsersPosts: nil, skip: skip, take: take()) { [weak self] (postsViewModel) in
+                if let viewModel = postsViewModel, let total = postsViewModel?.total {
+                    viewModel.items?.forEach({ (model) in
+                        let viewModel = SocialFeedTableViewCellViewModel(post: model)
+                        models.append(viewModel)
+                    })
+                    self?.updateViewModels(models, refresh: false, total: total)
+                }
+                
+            } errorCompletion: { _ in }
+        }
     }
     
     func updateViewModels(_ models: [CellViewAnyModel], refresh: Bool, total: Int?) {
