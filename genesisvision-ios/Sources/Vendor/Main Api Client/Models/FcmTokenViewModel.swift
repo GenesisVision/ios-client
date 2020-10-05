@@ -12,8 +12,11 @@ public struct FcmTokenViewModel: Codable {
 
 
     public var token: String
-    public init(token: String) { 
+
+    public var platform: AppPlatform?
+    public init(token: String, platform: AppPlatform? = nil) { 
         self.token = token
+        self.platform = platform
     }
 
 }

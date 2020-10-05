@@ -21,23 +21,23 @@ public struct MakeTradingAccountProgram: Codable {
 
     public var tradesDelay: TradesDelay?
 
-    public var entryFee: Double?
-
     public var successFee: Double?
+
+    public var managementFee: Double?
 
     public var title: String?
 
     public var _description: String?
 
     public var logo: String?
-    public init(_id: UUID? = nil, periodLength: Int? = nil, stopOutLevel: Double? = nil, investmentLimit: Double? = nil, tradesDelay: TradesDelay? = nil, entryFee: Double? = nil, successFee: Double? = nil, title: String? = nil, _description: String? = nil, logo: String? = nil) { 
+    public init(_id: UUID? = nil, periodLength: Int? = nil, stopOutLevel: Double? = nil, investmentLimit: Double? = nil, tradesDelay: TradesDelay? = nil, successFee: Double? = nil, managementFee: Double? = nil, title: String? = nil, _description: String? = nil, logo: String? = nil) { 
         self._id = _id
         self.periodLength = periodLength
         self.stopOutLevel = stopOutLevel
         self.investmentLimit = investmentLimit
         self.tradesDelay = tradesDelay
-        self.entryFee = entryFee
         self.successFee = successFee
+        self.managementFee = managementFee
         self.title = title
         self._description = _description
         self.logo = logo
@@ -48,8 +48,8 @@ public struct MakeTradingAccountProgram: Codable {
         case stopOutLevel
         case investmentLimit
         case tradesDelay
-        case entryFee
         case successFee
+        case managementFee
         case title
         case _description = "description"
         case logo

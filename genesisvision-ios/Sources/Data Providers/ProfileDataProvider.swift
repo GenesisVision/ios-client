@@ -56,7 +56,7 @@ class ProfileDataProvider: DataProvider {
     // MARK: - Push notifications
     static func addFCMToken(token: String, completion: @escaping CompletionBlock) {
         
-        let token = FcmTokenViewModel(token: token)
+        let token = FcmTokenViewModel(token: token, platform: .ios)
         
         ProfileAPI.updateFcmToken(body: token) { (_, error) in
             DataProvider().responseHandler(error, completion: completion)

@@ -24,11 +24,22 @@ class AccountViewController: BaseTabmanViewController<AccountTabmanViewModel> {
         
         dataSource = viewModel.dataSource
         
+        NotificationCenter.default.addObserver(self, selector: #selector(updateNotification(notification:)), name: .updateTradingAccountViewController, object: nil)
+        
         setupUI()
     }
     
     private func setupUI() {
         
+    }
+    
+    @objc private func updateNotification(notification: Notification) {
+        guard let assetId = notification.userInfo?["assetId"] as? String, assetId == viewModel.assetId else { return }
+        viewModel.updateViewControllers()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .updateTradingAccountViewController, object: nil)
     }
 }
 extension AccountViewController: ReloadDataProtocol {
@@ -92,6 +103,29 @@ final class AccountTabmanViewModel: TabmanViewModel {
         case .openPosition:
             return router.getTradesOpen(with: assetId, currencyType: currency)
         }
+    }
+    
+    func updateViewControllers() {
+        controllers.forEach { (type, viewController) in
+            switch type {
+            case .info:
+                guard let infoViewController = viewController as? AccountInfoViewController else { return }
+                infoViewController.fetch()
+            case .balance:
+                guard let balanceViewController = viewController as? BalanceViewController else { return }
+                balanceViewController.fetch()
+            case .profit:
+                guard let profitViewController = viewController as? ProfitViewController else { return }
+                profitViewController.fetch()
+            case .openPosition:
+                guard let tradesViewController = viewController as? TradesViewController else { return }
+                tradesViewController.fetch()
+            case .trades:
+                guard let tradesViewController = viewController as? TradesViewController else { return }
+                tradesViewController.fetch()
+            }
+        }
+        
     }
 }
 

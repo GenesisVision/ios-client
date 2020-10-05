@@ -80,4 +80,3 @@ extension String {
         return self.isLatin && self.isCyrillic
     }
 }
-

@@ -32,7 +32,11 @@ public struct NotificationViewModel: Codable {
     public var isUnread: Bool?
 
     public var assetType: AssetGlobalType?
-    public init(_id: UUID? = nil, text: String? = nil, date: Date? = nil, type: NotificationType? = nil, assetId: UUID? = nil, managerId: UUID? = nil, logoUrl: String? = nil, url: String? = nil, color: String? = nil, isUnread: Bool? = nil, assetType: AssetGlobalType? = nil) { 
+
+    public var imageUrl: String?
+
+    public var location: NotificationLocationViewModel?
+    public init(_id: UUID? = nil, text: String? = nil, date: Date? = nil, type: NotificationType? = nil, assetId: UUID? = nil, managerId: UUID? = nil, logoUrl: String? = nil, url: String? = nil, color: String? = nil, isUnread: Bool? = nil, assetType: AssetGlobalType? = nil, imageUrl: String? = nil, location: NotificationLocationViewModel? = nil) { 
         self._id = _id
         self.text = text
         self.date = date
@@ -44,6 +48,8 @@ public struct NotificationViewModel: Codable {
         self.color = color
         self.isUnread = isUnread
         self.assetType = assetType
+        self.imageUrl = imageUrl
+        self.location = location
     }
     public enum CodingKeys: String, CodingKey { 
         case _id = "id"
@@ -57,6 +63,8 @@ public struct NotificationViewModel: Codable {
         case color
         case isUnread
         case assetType
+        case imageUrl
+        case location
     }
 
 }

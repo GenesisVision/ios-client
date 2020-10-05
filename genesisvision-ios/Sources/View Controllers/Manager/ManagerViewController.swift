@@ -13,14 +13,8 @@ class ManagerViewController: BaseTabmanViewController<ManagerViewModel> {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        showProgressHUD()
         setup()
-        viewModel.fetch { [weak self] (result) in
-            self?.hideHUD()
-            self?.reloadData()
-            self?.title = self?.viewModel.title
-        }
+        fetch()
     }
     
     // MARK: - Private methods
@@ -33,7 +27,27 @@ class ManagerViewController: BaseTabmanViewController<ManagerViewModel> {
         
         dataSource = viewModel.dataSource
         
+        NotificationCenter.default.addObserver(self, selector: #selector(updateNotification(notification:)), name: .updateUserViewController, object: nil)
+        
         setupUI()
+    }
+    
+    private func fetch() {
+        showProgressHUD()
+        viewModel.fetch { [weak self] (result) in
+            self?.hideHUD()
+            self?.reloadData()
+            self?.title = self?.viewModel.title
+        }
+    }
+    
+    @objc private func updateNotification(notification: Notification) {
+        guard let assetId = notification.userInfo?["userId"] as? String, assetId == viewModel.managerId else { return }
+        fetch()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .updateUserViewController, object: nil)
     }
 }
 

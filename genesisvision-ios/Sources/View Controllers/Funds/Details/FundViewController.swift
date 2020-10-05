@@ -36,6 +36,10 @@ class FundViewController: BaseTabmanViewController<FundViewModel> {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //setupImageView()
+        fetch()
+    }
+    
+    private func fetch() {
         showProgressHUD()
         viewModel.fetch { [weak self] (result) in
             self?.hideHUD()
@@ -55,6 +59,16 @@ class FundViewController: BaseTabmanViewController<FundViewModel> {
     }
     
     // MARK: - Private methods
+    private func setup() {
+        navigationItem.title = viewModel.title
+        
+        dataSource = viewModel.dataSource
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateNotification(notification:)), name: .updateFundViewController, object: nil)
+        
+        setupUI()
+    }
+    
     private func setupUI() {
         guard AuthManager.isLogin() else { return }
         
@@ -133,16 +147,13 @@ class FundViewController: BaseTabmanViewController<FundViewModel> {
 //        }
 //    }
     
-    @objc func notificationsButtonAction() {
-        viewModel.showNotificationSettings()
+    @objc private func updateNotification(notification: Notification) {
+        guard let assetId = notification.userInfo?["assetId"] as? String, assetId == viewModel.assetId else { return }
+        fetch()
     }
     
-    private func setup() {
-        navigationItem.title = viewModel.title
-        
-        dataSource = viewModel.dataSource
-        
-        setupUI()
+    @objc func notificationsButtonAction() {
+        viewModel.showNotificationSettings()
     }
     
     // MARK: - IBActions
@@ -162,6 +173,10 @@ class FundViewController: BaseTabmanViewController<FundViewModel> {
                 ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }
         }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .updateFundViewController, object: nil)
     }
 }
 

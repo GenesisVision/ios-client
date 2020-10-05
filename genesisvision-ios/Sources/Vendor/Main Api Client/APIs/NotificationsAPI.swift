@@ -109,27 +109,39 @@ open class NotificationsAPI {
   "notifications" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "color" : "color",
-    "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "text" : "text",
     "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "PlatformNewsAndUpdates",
     "logoUrl" : "logoUrl",
     "url" : "url",
     "isUnread" : true,
-    "assetType" : "Program"
+    "assetType" : "Program",
+    "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "imageUrl" : "imageUrl",
+    "location" : {
+      "externalUrl" : "externalUrl",
+      "location" : "location",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+    },
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "text" : "text"
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "color" : "color",
-    "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "text" : "text",
     "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "PlatformNewsAndUpdates",
     "logoUrl" : "logoUrl",
     "url" : "url",
     "isUnread" : true,
-    "assetType" : "Program"
+    "assetType" : "Program",
+    "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "imageUrl" : "imageUrl",
+    "location" : {
+      "externalUrl" : "externalUrl",
+      "location" : "location",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+    },
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "text" : "text"
   } ]
 }}]
      - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)

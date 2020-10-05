@@ -25,9 +25,9 @@ public struct MakeProgram: Codable {
 
     public var tradesDelay: TradesDelay?
 
-    public var entryFee: Double?
-
     public var successFee: Double?
+
+    public var managementFee: Double?
 
     public var depositAmount: Double?
 
@@ -38,7 +38,7 @@ public struct MakeProgram: Codable {
     public var leverage: Int?
 
     public var brokerAccountTypeId: UUID?
-    public init(title: String? = nil, _description: String? = nil, logo: String? = nil, periodLength: Int? = nil, stopOutLevel: Double? = nil, investmentLimit: Double? = nil, tradesDelay: TradesDelay? = nil, entryFee: Double? = nil, successFee: Double? = nil, depositAmount: Double? = nil, depositWalletId: UUID? = nil, currency: Currency? = nil, leverage: Int? = nil, brokerAccountTypeId: UUID? = nil) { 
+    public init(title: String? = nil, _description: String? = nil, logo: String? = nil, periodLength: Int? = nil, stopOutLevel: Double? = nil, investmentLimit: Double? = nil, tradesDelay: TradesDelay? = nil, successFee: Double? = nil, managementFee: Double? = nil, depositAmount: Double? = nil, depositWalletId: UUID? = nil, currency: Currency? = nil, leverage: Int? = nil, brokerAccountTypeId: UUID? = nil) { 
         self.title = title
         self._description = _description
         self.logo = logo
@@ -46,8 +46,8 @@ public struct MakeProgram: Codable {
         self.stopOutLevel = stopOutLevel
         self.investmentLimit = investmentLimit
         self.tradesDelay = tradesDelay
-        self.entryFee = entryFee
         self.successFee = successFee
+        self.managementFee = managementFee
         self.depositAmount = depositAmount
         self.depositWalletId = depositWalletId
         self.currency = currency
@@ -62,8 +62,8 @@ public struct MakeProgram: Codable {
         case stopOutLevel
         case investmentLimit
         case tradesDelay
-        case entryFee
         case successFee
+        case managementFee
         case depositAmount
         case depositWalletId
         case currency

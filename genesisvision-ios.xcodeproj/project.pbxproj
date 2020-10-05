@@ -37,6 +37,34 @@
 		19787B06248141DB00217CA9 /* SocialSummaryStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19787B03248141DB00217CA9 /* SocialSummaryStrategy.swift */; };
 		19787B07248141DB00217CA9 /* StringItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19787B04248141DB00217CA9 /* StringItemsViewModel.swift */; };
 		19787B08248141DB00217CA9 /* SocialSummaryHashTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19787B05248141DB00217CA9 /* SocialSummaryHashTag.swift */; };
+		1979A5132524DD00005EEABF /* PushNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1979A5122524DD00005EEABF /* PushNotificationsManager.swift */; };
+		1979A5172524DE5D005EEABF /* AppPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1979A5162524DE5D005EEABF /* AppPlatform.swift */; };
+		1979A52B2524DE8F005EEABF /* BinanceRawOrderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1979A51A2524DE8C005EEABF /* BinanceRawOrderType.swift */; };
+		1979A52C2524DE8F005EEABF /* BinanceRawExchangeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1979A51B2524DE8C005EEABF /* BinanceRawExchangeInfo.swift */; };
+		1979A52D2524DE8F005EEABF /* BinanceRaw24HPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1979A51C2524DE8C005EEABF /* BinanceRaw24HPrice.swift */; };
+		1979A52F2524DE8F005EEABF /* BinanceRawRateLimit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1979A51E2524DE8D005EEABF /* BinanceRawRateLimit.swift */; };
+		1979A5302524DE8F005EEABF /* BinanceRawAccountType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1979A51F2524DE8D005EEABF /* BinanceRawAccountType.swift */; };
+		1979A5312524DE8F005EEABF /* BinanceRawOrderBookEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1979A5202524DE8D005EEABF /* BinanceRawOrderBookEntry.swift */; };
+		1979A5322524DE8F005EEABF /* BinanceRawKline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1979A5212524DE8D005EEABF /* BinanceRawKline.swift */; };
+		1979A5342524DE8F005EEABF /* BinanceRawRateLimitInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1979A5232524DE8E005EEABF /* BinanceRawRateLimitInterval.swift */; };
+		1979A5352524DE8F005EEABF /* BinanceRawSymbolFilterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1979A5242524DE8E005EEABF /* BinanceRawSymbolFilterType.swift */; };
+		1979A5362524DE8F005EEABF /* BinanceRawRateLimitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1979A5252524DE8E005EEABF /* BinanceRawRateLimitType.swift */; };
+		1979A5372524DE8F005EEABF /* BinanceRawSymbolFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1979A5262524DE8E005EEABF /* BinanceRawSymbolFilter.swift */; };
+		1979A5382524DE8F005EEABF /* BinanceRawSymbolStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1979A5272524DE8E005EEABF /* BinanceRawSymbolStatus.swift */; };
+		1979A5392524DE8F005EEABF /* BinanceRawKlineInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1979A5282524DE8F005EEABF /* BinanceRawKlineInterval.swift */; };
+		1979A53A2524DE8F005EEABF /* BinanceRawSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1979A5292524DE8F005EEABF /* BinanceRawSymbol.swift */; };
+		1979A53B2524DE8F005EEABF /* BinanceRawOrderBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1979A52A2524DE8F005EEABF /* BinanceRawOrderBook.swift */; };
+		1979A53F2524DEC2005EEABF /* InvestorFinancialStatistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1979A53E2524DEC2005EEABF /* InvestorFinancialStatistic.swift */; };
+		1979A5432524DED5005EEABF /* MakeSelfManagedFundPublicRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1979A5422524DED5005EEABF /* MakeSelfManagedFundPublicRequest.swift */; };
+		1979A5472524DEF0005EEABF /* NewSelfManagedFundRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1979A5462524DEF0005EEABF /* NewSelfManagedFundRequest.swift */; };
+		1979A54B2524DF00005EEABF /* NotificationLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1979A54A2524DF00005EEABF /* NotificationLocationViewModel.swift */; };
+		1979A55C25252722005EEABF /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1979A55B25252722005EEABF /* NotificationService.swift */; };
+		1979A56025252722005EEABF /* NotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 1979A55925252722005EEABF /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		1979A57225252761005EEABF /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1979A57125252761005EEABF /* UserNotifications.framework */; };
+		1979A57425252761005EEABF /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1979A57325252761005EEABF /* UserNotificationsUI.framework */; };
+		1979A57725252761005EEABF /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1979A57625252761005EEABF /* NotificationViewController.swift */; };
+		1979A57A25252762005EEABF /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1979A57825252761005EEABF /* MainInterface.storyboard */; };
+		1979A57E25252762005EEABF /* NotificationContent.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 1979A57025252761005EEABF /* NotificationContent.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		198124232464504A00F286FE /* GuidesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198124222464504900F286FE /* GuidesAPI.swift */; };
 		198124252464506E00F286FE /* SocialAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198124242464506E00F286FE /* SocialAPI.swift */; };
 		19812427246450A600F286FE /* AssetInvestmentRequestItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19812426246450A600F286FE /* AssetInvestmentRequestItemsViewModel.swift */; };
@@ -988,6 +1016,20 @@
 /* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
+		1979A55E25252722005EEABF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FCC9DD1C200DF2C3008825EC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1979A55825252722005EEABF;
+			remoteInfo = NotificationService;
+		};
+		1979A57C25252762005EEABF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FCC9DD1C200DF2C3008825EC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1979A56F25252761005EEABF;
+			remoteInfo = NotificationContent;
+		};
 		5E8724CE20E0B7E3007A1E16 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FCC9DD1C200DF2C3008825EC /* Project object */;
@@ -996,6 +1038,21 @@
 			remoteInfo = "genesisvision-ios";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1979A56525252723005EEABF /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				1979A56025252722005EEABF /* NotificationService.appex in Embed App Extensions */,
+				1979A57E25252762005EEABF /* NotificationContent.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		19129475249BB9C7007F1083 /* BasePlatformAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasePlatformAsset.swift; sourceTree = "<group>"; };
@@ -1029,6 +1086,38 @@
 		19787B03248141DB00217CA9 /* SocialSummaryStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialSummaryStrategy.swift; sourceTree = "<group>"; };
 		19787B04248141DB00217CA9 /* StringItemsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringItemsViewModel.swift; sourceTree = "<group>"; };
 		19787B05248141DB00217CA9 /* SocialSummaryHashTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialSummaryHashTag.swift; sourceTree = "<group>"; };
+		1979A5122524DD00005EEABF /* PushNotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationsManager.swift; sourceTree = "<group>"; };
+		1979A5162524DE5D005EEABF /* AppPlatform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppPlatform.swift; sourceTree = "<group>"; };
+		1979A51A2524DE8C005EEABF /* BinanceRawOrderType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawOrderType.swift; sourceTree = "<group>"; };
+		1979A51B2524DE8C005EEABF /* BinanceRawExchangeInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawExchangeInfo.swift; sourceTree = "<group>"; };
+		1979A51C2524DE8C005EEABF /* BinanceRaw24HPrice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRaw24HPrice.swift; sourceTree = "<group>"; };
+		1979A51D2524DE8D005EEABF /* BinanceRawOrderItemsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawOrderItemsViewModel.swift; sourceTree = "<group>"; };
+		1979A51E2524DE8D005EEABF /* BinanceRawRateLimit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawRateLimit.swift; sourceTree = "<group>"; };
+		1979A51F2524DE8D005EEABF /* BinanceRawAccountType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawAccountType.swift; sourceTree = "<group>"; };
+		1979A5202524DE8D005EEABF /* BinanceRawOrderBookEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawOrderBookEntry.swift; sourceTree = "<group>"; };
+		1979A5212524DE8D005EEABF /* BinanceRawKline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawKline.swift; sourceTree = "<group>"; };
+		1979A5222524DE8E005EEABF /* BinanceRawOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawOrder.swift; sourceTree = "<group>"; };
+		1979A5232524DE8E005EEABF /* BinanceRawRateLimitInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawRateLimitInterval.swift; sourceTree = "<group>"; };
+		1979A5242524DE8E005EEABF /* BinanceRawSymbolFilterType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawSymbolFilterType.swift; sourceTree = "<group>"; };
+		1979A5252524DE8E005EEABF /* BinanceRawRateLimitType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawRateLimitType.swift; sourceTree = "<group>"; };
+		1979A5262524DE8E005EEABF /* BinanceRawSymbolFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawSymbolFilter.swift; sourceTree = "<group>"; };
+		1979A5272524DE8E005EEABF /* BinanceRawSymbolStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawSymbolStatus.swift; sourceTree = "<group>"; };
+		1979A5282524DE8F005EEABF /* BinanceRawKlineInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawKlineInterval.swift; sourceTree = "<group>"; };
+		1979A5292524DE8F005EEABF /* BinanceRawSymbol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawSymbol.swift; sourceTree = "<group>"; };
+		1979A52A2524DE8F005EEABF /* BinanceRawOrderBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawOrderBook.swift; sourceTree = "<group>"; };
+		1979A53E2524DEC2005EEABF /* InvestorFinancialStatistic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvestorFinancialStatistic.swift; sourceTree = "<group>"; };
+		1979A5422524DED5005EEABF /* MakeSelfManagedFundPublicRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MakeSelfManagedFundPublicRequest.swift; sourceTree = "<group>"; };
+		1979A5462524DEF0005EEABF /* NewSelfManagedFundRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewSelfManagedFundRequest.swift; sourceTree = "<group>"; };
+		1979A54A2524DF00005EEABF /* NotificationLocationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationLocationViewModel.swift; sourceTree = "<group>"; };
+		1979A55925252722005EEABF /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		1979A55B25252722005EEABF /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		1979A55D25252722005EEABF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1979A57025252761005EEABF /* NotificationContent.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationContent.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		1979A57125252761005EEABF /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		1979A57325252761005EEABF /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
+		1979A57625252761005EEABF /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		1979A57925252762005EEABF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		1979A57B25252762005EEABF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		198124222464504900F286FE /* GuidesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuidesAPI.swift; sourceTree = "<group>"; };
 		198124242464506E00F286FE /* SocialAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAPI.swift; sourceTree = "<group>"; };
 		19812426246450A600F286FE /* AssetInvestmentRequestItemsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetInvestmentRequestItemsViewModel.swift; sourceTree = "<group>"; };
@@ -1977,6 +2066,22 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1979A55625252722005EEABF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1979A56D25252761005EEABF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1979A57425252761005EEABF /* UserNotificationsUI.framework in Frameworks */,
+				1979A57225252761005EEABF /* UserNotifications.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5E8724C620E0B7E3007A1E16 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -2003,6 +2108,25 @@
 				1975B8D824DD681E0095C72B /* FundAssetManageCollectionViewCell.swift */,
 			);
 			path = "Manage Fund";
+			sourceTree = "<group>";
+		};
+		1979A55A25252722005EEABF /* NotificationService */ = {
+			isa = PBXGroup;
+			children = (
+				1979A55B25252722005EEABF /* NotificationService.swift */,
+				1979A55D25252722005EEABF /* Info.plist */,
+			);
+			path = NotificationService;
+			sourceTree = "<group>";
+		};
+		1979A57525252761005EEABF /* NotificationContent */ = {
+			isa = PBXGroup;
+			children = (
+				1979A57625252761005EEABF /* NotificationViewController.swift */,
+				1979A57825252761005EEABF /* MainInterface.storyboard */,
+				1979A57B25252762005EEABF /* Info.plist */,
+			);
+			path = NotificationContent;
 			sourceTree = "<group>";
 		};
 		199D0E2B24F2DB980005D76B /* Social */ = {
@@ -2135,6 +2259,28 @@
 				19787AFD248141A400217CA9 /* PostAssetDetailsWithPrices.swift */,
 				19EEE0C92507C1AD00F83CED /* DayOfWeekType.swift */,
 				19787B01248141C100217CA9 /* SocialPostPlatformAsset.swift */,
+				1979A51C2524DE8C005EEABF /* BinanceRaw24HPrice.swift */,
+				1979A51F2524DE8D005EEABF /* BinanceRawAccountType.swift */,
+				1979A51B2524DE8C005EEABF /* BinanceRawExchangeInfo.swift */,
+				1979A5212524DE8D005EEABF /* BinanceRawKline.swift */,
+				1979A5282524DE8F005EEABF /* BinanceRawKlineInterval.swift */,
+				1979A54A2524DF00005EEABF /* NotificationLocationViewModel.swift */,
+				1979A53E2524DEC2005EEABF /* InvestorFinancialStatistic.swift */,
+				1979A5422524DED5005EEABF /* MakeSelfManagedFundPublicRequest.swift */,
+				1979A5462524DEF0005EEABF /* NewSelfManagedFundRequest.swift */,
+				1979A5222524DE8E005EEABF /* BinanceRawOrder.swift */,
+				1979A52A2524DE8F005EEABF /* BinanceRawOrderBook.swift */,
+				1979A5202524DE8D005EEABF /* BinanceRawOrderBookEntry.swift */,
+				1979A51D2524DE8D005EEABF /* BinanceRawOrderItemsViewModel.swift */,
+				1979A51A2524DE8C005EEABF /* BinanceRawOrderType.swift */,
+				1979A51E2524DE8D005EEABF /* BinanceRawRateLimit.swift */,
+				1979A5232524DE8E005EEABF /* BinanceRawRateLimitInterval.swift */,
+				1979A5252524DE8E005EEABF /* BinanceRawRateLimitType.swift */,
+				1979A5292524DE8F005EEABF /* BinanceRawSymbol.swift */,
+				1979A5262524DE8E005EEABF /* BinanceRawSymbolFilter.swift */,
+				1979A5242524DE8E005EEABF /* BinanceRawSymbolFilterType.swift */,
+				1979A5272524DE8E005EEABF /* BinanceRawSymbolStatus.swift */,
+				1979A5162524DE5D005EEABF /* AppPlatform.swift */,
 				19787B05248141DB00217CA9 /* SocialSummaryHashTag.swift */,
 				19129485249BBAF8007F1083 /* PostPlatformAssetDetailsWithPrices.swift */,
 				19EEE0D12507C24000F83CED /* ProviderPlatformAssets.swift */,
@@ -2856,6 +3002,7 @@
 				5E89772F206E987B0015FD26 /* ReachabilityManager.swift */,
 				5EC0309520A5A786005CBA32 /* PlatformManager.swift */,
 				5EC1E94020E3A91B00AE3560 /* BiometricIDAuthManager.swift */,
+				1979A5122524DD00005EEABF /* PushNotificationsManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -3429,6 +3576,8 @@
 			children = (
 				5EC7B88620D16093007720D1 /* LocalAuthentication.framework */,
 				275306FFD93861F4EC21FED6 /* Pods_genesisvision_ios.framework */,
+				1979A57125252761005EEABF /* UserNotifications.framework */,
+				1979A57325252761005EEABF /* UserNotificationsUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -3826,6 +3975,8 @@
 			children = (
 				FCC9DD26200DF2C3008825EC /* genesisvision-ios */,
 				5E8724CA20E0B7E3007A1E16 /* Genesis VisionUITests */,
+				1979A55A25252722005EEABF /* NotificationService */,
+				1979A57525252761005EEABF /* NotificationContent */,
 				FCC9DD25200DF2C3008825EC /* Products */,
 				B8DB3D95241F1BF35C1AA19C /* Frameworks */,
 				CE4BFE008E7A929ACC4946B7 /* Pods */,
@@ -3837,6 +3988,8 @@
 			children = (
 				FCC9DD24200DF2C3008825EC /* GV DEBUG.app */,
 				5E8724C920E0B7E3007A1E16 /* Genesis VisionUITests.xctest */,
+				1979A55925252722005EEABF /* NotificationService.appex */,
+				1979A57025252761005EEABF /* NotificationContent.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -4126,6 +4279,40 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		1979A55825252722005EEABF /* NotificationService */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1979A56125252723005EEABF /* Build configuration list for PBXNativeTarget "NotificationService" */;
+			buildPhases = (
+				1979A55525252722005EEABF /* Sources */,
+				1979A55625252722005EEABF /* Frameworks */,
+				1979A55725252722005EEABF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NotificationService;
+			productName = NotificationService;
+			productReference = 1979A55925252722005EEABF /* NotificationService.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		1979A56F25252761005EEABF /* NotificationContent */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1979A57F25252762005EEABF /* Build configuration list for PBXNativeTarget "NotificationContent" */;
+			buildPhases = (
+				1979A56C25252761005EEABF /* Sources */,
+				1979A56D25252761005EEABF /* Frameworks */,
+				1979A56E25252761005EEABF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NotificationContent;
+			productName = NotificationContent;
+			productReference = 1979A57025252761005EEABF /* NotificationContent.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		5E8724C820E0B7E3007A1E16 /* Genesis VisionUITests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5E8724D620E0B7E3007A1E16 /* Build configuration list for PBXNativeTarget "Genesis VisionUITests" */;
@@ -4154,11 +4341,14 @@
 				FCC9DD22200DF2C3008825EC /* Resources */,
 				5E3A987C21C92B9700279DDE /* ShellScript */,
 				750771F2971064F350062A56 /* [CP] Embed Pods Frameworks */,
+				1979A56525252723005EEABF /* Embed App Extensions */,
 			);
 			buildRules = (
 				19D317D22516D17A00939794 /* PBXBuildRule */,
 			);
 			dependencies = (
+				1979A55F25252722005EEABF /* PBXTargetDependency */,
+				1979A57D25252762005EEABF /* PBXTargetDependency */,
 			);
 			name = "genesisvision-ios";
 			productName = "genesisvision-ios";
@@ -4171,10 +4361,18 @@
 		FCC9DD1C200DF2C3008825EC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0940;
+				LastSwiftUpdateCheck = 1200;
 				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = "Genesis Vision";
 				TargetAttributes = {
+					1979A55825252722005EEABF = {
+						CreatedOnToolsVersion = 12.0.1;
+						ProvisioningStyle = Automatic;
+					};
+					1979A56F25252761005EEABF = {
+						CreatedOnToolsVersion = 12.0.1;
+						ProvisioningStyle = Automatic;
+					};
 					5E8724C820E0B7E3007A1E16 = {
 						CreatedOnToolsVersion = 9.4;
 						ProvisioningStyle = Automatic;
@@ -4210,11 +4408,28 @@
 			targets = (
 				FCC9DD23200DF2C3008825EC /* genesisvision-ios */,
 				5E8724C820E0B7E3007A1E16 /* Genesis VisionUITests */,
+				1979A55825252722005EEABF /* NotificationService */,
+				1979A56F25252761005EEABF /* NotificationContent */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		1979A55725252722005EEABF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1979A56E25252761005EEABF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1979A57A25252762005EEABF /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5E8724C720E0B7E3007A1E16 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -4423,6 +4638,22 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1979A55525252722005EEABF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1979A55C25252722005EEABF /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1979A56C25252761005EEABF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1979A57725252761005EEABF /* NotificationViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5E8724C520E0B7E3007A1E16 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -4438,6 +4669,7 @@
 				FC27232E20498959005225F2 /* ReaderOverlayView.swift in Sources */,
 				FCA5707220274AC1001942F3 /* Date+DefaultFormat.swift in Sources */,
 				5E39F61323A3F8A60073DAD5 /* AccountProfitPercentCharts.swift in Sources */,
+				1979A52F2524DE8F005EEABF /* BinanceRawRateLimit.swift in Sources */,
 				FCC9DD8C200E658E008825EC /* ReusableCell.swift in Sources */,
 				5E39F78223A3F9300073DAD5 /* SignalSubscriberInfo.swift in Sources */,
 				5E39F7C023A3F9300073DAD5 /* MultiWalletTransactionStatus.swift in Sources */,
@@ -4472,6 +4704,7 @@
 				5ED738762194FA15001DA633 /* FilterTableViewCell.swift in Sources */,
 				5E39F78423A3F9300073DAD5 /* TransactionAssetDetails.swift in Sources */,
 				5EB06A43239D312A003AB3FB /* FileAPI.swift in Sources */,
+				1979A52C2524DE8F005EEABF /* BinanceRawExchangeInfo.swift in Sources */,
 				FC7D87B420446F17002FC943 /* String+Сonversion.swift in Sources */,
 				5EA4B366237D5A9D001545CA /* CellWithCollectionView.swift in Sources */,
 				5E39F7B323A3F9300073DAD5 /* ProgramAssetPlatformInfo.swift in Sources */,
@@ -4492,6 +4725,7 @@
 				5E21663723A83DAD001BB512 /* CustomLayoutForCollectionView.swift in Sources */,
 				5EC7B88520D15E9D007720D1 /* SettingsRouter.swift in Sources */,
 				5E39F5F823A3F8A60073DAD5 /* BrokersInfo.swift in Sources */,
+				1979A5312524DE8F005EEABF /* BinanceRawOrderBookEntry.swift in Sources */,
 				5E35E80F217DE3890019B60C /* SettingsTableViewCell.swift in Sources */,
 				5EEC1AC92175FC9A007D77ED /* NotificationListRouter.swift in Sources */,
 				5EA09B9A2292D04800123B5D /* ListDelegateManager.swift in Sources */,
@@ -4506,6 +4740,7 @@
 				5E3C72FE2174EC6E00DE6F7D /* InvestWithdrawConfirmView.swift in Sources */,
 				5EFB2373238AC2A800CD7480 /* TradingPublicShortListViewModel.swift in Sources */,
 				5EEC1AC52175F82D007D77ED /* EventsViewModel.swift in Sources */,
+				1979A5172524DE5D005EEABF /* AppPlatform.swift in Sources */,
 				5E39F7B423A3F9300073DAD5 /* SimpleChart.swift in Sources */,
 				5EA274CF2162B556008CAF77 /* ProgramProfitStatisticTableViewCellViewModel.swift in Sources */,
 				5E86BFDE22B7FFC70019DC85 /* TradeDetailView.swift in Sources */,
@@ -4544,6 +4779,7 @@
 				FCC9DD86200E5D12008825EC /* UITableViewHeaderFooterView+ReusableCell.swift in Sources */,
 				FCC9DD63200E2246008825EC /* CellViewModel.swift in Sources */,
 				5E7CBA6223B29A7E008A52FE /* Color.swift in Sources */,
+				1979A53F2524DEC2005EEABF /* InvestorFinancialStatistic.swift in Sources */,
 				5EAC11B420B81AFB0057A2D2 /* AuthChangePasswordViewModel.swift in Sources */,
 				5E106387213D69AF008A0E8B /* BaseExtensions.swift in Sources */,
 				198124492464535C00F286FE /* NewPost.swift in Sources */,
@@ -4570,6 +4806,7 @@
 				5E39F78D23A3F9300073DAD5 /* ProgramProfitPercentCharts.swift in Sources */,
 				19812447246452AC00F286FE /* LimitWithoutKyc.swift in Sources */,
 				FCB178702045C47A00A482B7 /* WalletDataProvider.swift in Sources */,
+				1979A5472524DEF0005EEABF /* NewSelfManagedFundRequest.swift in Sources */,
 				FCA19A2B201ACE0400157AD6 /* SignUpRouter.swift in Sources */,
 				5E39F7CD23A3F9300073DAD5 /* FollowCreateAssetPlatformInfo.swift in Sources */,
 				198124692464590A00F286FE /* RewardDetailsItemsViewModel.swift in Sources */,
@@ -4624,6 +4861,7 @@
 				5E39F7DA23A3F9300073DAD5 /* PrivateTradingAccountOwnerActions.swift in Sources */,
 				FCC9DD80200E59C8008825EC /* UITableView+Configure.swift in Sources */,
 				5EEC3F0F23C554930023FAC5 /* InfoSubscriptionTableViewCell.swift in Sources */,
+				1979A5392524DE8F005EEABF /* BinanceRawKlineInterval.swift in Sources */,
 				FCA19A33201ADFAD00157AD6 /* AuthSignUpConfirmationViewModel.swift in Sources */,
 				5ED645F521C06A0F0044AC1D /* AboutLevelView.swift in Sources */,
 				5E177099220D051A00669D84 /* WalletInternalTransactionListViewModel.swift in Sources */,
@@ -4671,6 +4909,7 @@
 				5E39F75323A3F92F0073DAD5 /* TradesDelay.swift in Sources */,
 				5E5488362141577700B2D9FE /* DateRangeView.swift in Sources */,
 				5E39F76923A3F9300073DAD5 /* TwoFactorCodeWithPassword.swift in Sources */,
+				1979A52D2524DE8F005EEABF /* BinanceRaw24HPrice.swift in Sources */,
 				5EFB2385238C056600CD7480 /* InvestingEventsViewModel.swift in Sources */,
 				5E39F5FF23A3F8A60073DAD5 /* AttachToSignalProvider.swift in Sources */,
 				5E39F5E823A3F8A60073DAD5 /* CreateSignalProvider.swift in Sources */,
@@ -4680,6 +4919,7 @@
 				5E528ECE237F00E8006F2339 /* DashboardTradingTableViewCell.swift in Sources */,
 				5E93E70D21D1AC130020DE55 /* NotificationsSettingsCustomTableViewCell.swift in Sources */,
 				19787B00248141A400217CA9 /* PostEvent.swift in Sources */,
+				1979A5322524DE8F005EEABF /* BinanceRawKline.swift in Sources */,
 				5E39F5F923A3F8A60073DAD5 /* AttachToExternalSignalProviderExt.swift in Sources */,
 				5E39F78923A3F9300073DAD5 /* MoneyLocationType.swift in Sources */,
 				5E39F5ED23A3F8A60073DAD5 /* BalanceChartPoint.swift in Sources */,
@@ -4762,6 +5002,7 @@
 				5E39F72823A3F92F0073DAD5 /* DashboardTradingAssetSignalDetails.swift in Sources */,
 				5E39F7DE23A3F9300073DAD5 /* NotificationSettingConditionType.swift in Sources */,
 				5E77176A2154200D002624FC /* EventCollectionViewCellViewModel.swift in Sources */,
+				1979A53A2524DE8F005EEABF /* BinanceRawSymbol.swift in Sources */,
 				5E616B4020F7880800B3459D /* ImagePickerPresentable.swift in Sources */,
 				19D3099C24ED85ED006B4185 /* FundAssetsListViewController.swift in Sources */,
 				5E39F5F523A3F8A60073DAD5 /* AppVersion.swift in Sources */,
@@ -4778,6 +5019,7 @@
 				5EF9F90F23E10D7900542E1E /* FundContentView.swift in Sources */,
 				5E39F70623A3F92F0073DAD5 /* TwoFactorStatus.swift in Sources */,
 				FCA19A45201AE86900157AD6 /* WalletRouter.swift in Sources */,
+				1979A52B2524DE8F005EEABF /* BinanceRawOrderType.swift in Sources */,
 				5ED0F33322CE501600F3F9F0 /* CommissionsView.swift in Sources */,
 				5E39F70523A3F92F0073DAD5 /* IOsAppVersion.swift in Sources */,
 				19EEE0C82507C13500F83CED /* TradingScheduleInfo.swift in Sources */,
@@ -4789,6 +5031,7 @@
 				5EB06A33239D312A003AB3FB /* TradingaccountAPI.swift in Sources */,
 				19787B08248141DB00217CA9 /* SocialSummaryHashTag.swift in Sources */,
 				5E39F76723A3F9300073DAD5 /* FollowAssetPlatformInfo.swift in Sources */,
+				1979A5342524DE8F005EEABF /* BinanceRawRateLimitInterval.swift in Sources */,
 				5E39F60F23A3F8A60073DAD5 /* AssetInfo.swift in Sources */,
 				5E39F74C23A3F92F0073DAD5 /* InvestmentEventLocation.swift in Sources */,
 				5E39F7C223A3F9300073DAD5 /* PersonalInvestingFundDetailsList.swift in Sources */,
@@ -4863,6 +5106,7 @@
 				5E39F5FC23A3F8A60073DAD5 /* AssetInvestmentStatus.swift in Sources */,
 				5E39F77023A3F9300073DAD5 /* UpdateProfileViewModel.swift in Sources */,
 				5E39F60D23A3F8A60073DAD5 /* AssetInvestmentRequest.swift in Sources */,
+				1979A5132524DD00005EEABF /* PushNotificationsManager.swift in Sources */,
 				5EAD3504214FCA1C0057450C /* AllEnums.swift in Sources */,
 				5EC7871F216BD3E1000C91E4 /* NotificationListViewModel.swift in Sources */,
 				5E4A7E85222B9D0900A97968 /* Constants.swift in Sources */,
@@ -4884,6 +5128,7 @@
 				5E6A6BC0216D5EEE0082C343 /* EventTableViewCell.swift in Sources */,
 				5E39F79223A3F9300073DAD5 /* FundAssetPartWithIcon.swift in Sources */,
 				5E39F5EC23A3F8A60073DAD5 /* DashboardChartAssets.swift in Sources */,
+				1979A54B2524DF00005EEABF /* NotificationLocationViewModel.swift in Sources */,
 				1912947E249BBA09007F1083 /* ImageLocation.swift in Sources */,
 				5EF14D932181F85C00B3843A /* FundRouter.swift in Sources */,
 				5EA1FE2321A2F16600308D81 /* FacetsTableViewCell.swift in Sources */,
@@ -4983,6 +5228,7 @@
 				5E96D77A21D30DE300BFB842 /* CreateNotificationViewModel.swift in Sources */,
 				5EC78816216CDEE2000C91E4 /* UICollectionView+Registration.swift in Sources */,
 				5EF9F92D23E322FF00542E1E /* PlatformEventType.swift in Sources */,
+				1979A5302524DE8F005EEABF /* BinanceRawAccountType.swift in Sources */,
 				FCA19A2F201ADF8800157AD6 /* AuthSignUpViewModel.swift in Sources */,
 				5E39F7A623A3F9300073DAD5 /* PlatformCommonInfo.swift in Sources */,
 				5E39F72323A3F92F0073DAD5 /* FollowDetailsFull.swift in Sources */,
@@ -5065,6 +5311,7 @@
 				5E39F7BA23A3F9300073DAD5 /* RecoveryCode.swift in Sources */,
 				1981243F2464523F00F286FE /* Guide.swift in Sources */,
 				5E18CE0320C03E3A008FE5B5 /* AuthTwoFactorTabmanViewModel.swift in Sources */,
+				1979A5362524DE8F005EEABF /* BinanceRawRateLimitType.swift in Sources */,
 				5E14CDA521B5829400388616 /* RatingPageboyViewControllerDataSource.swift in Sources */,
 				FC4C519B2048055A0042CEE1 /* ProgramRequestsRouter.swift in Sources */,
 				5E39F7D423A3F9300073DAD5 /* MoneyLocation.swift in Sources */,
@@ -5086,6 +5333,7 @@
 				5E7D28F122C1159E00EF96F6 /* WalletBalanceTableViewCellViewModel.swift in Sources */,
 				FC0E2014204435DE00872BE5 /* WalletDepositRouter.swift in Sources */,
 				5E39F7CB23A3F9300073DAD5 /* MigrationRequest.swift in Sources */,
+				1979A5432524DED5005EEABF /* MakeSelfManagedFundPublicRequest.swift in Sources */,
 				5ED7388021951018001DA633 /* LevelsFilterView.swift in Sources */,
 				5E1813842061D36700481646 /* DatePickerViewController.swift in Sources */,
 				5E2BA549226F373300C6A88C /* WalletCurrencyTableViewCellViewModel.swift in Sources */,
@@ -5131,6 +5379,7 @@
 				FC4964242015590D00104CEB /* UIColor+PaletteColors.swift in Sources */,
 				5E93E70821D1A5D80020DE55 /* NotificationsSettingsFundTableViewCellViewModel.swift in Sources */,
 				5E39F75723A3F92F0073DAD5 /* NotificationSettingList.swift in Sources */,
+				1979A5372524DE8F005EEABF /* BinanceRawSymbolFilter.swift in Sources */,
 				5E39F59023A16FE40073DAD5 /* ProgramSubscribeViewModel.swift in Sources */,
 				FC496422201558AD00104CEB /* AppearanceController.swift in Sources */,
 				5ED03F3920FF784A00AF5E07 /* FieldWithTextFieldTableViewCell.swift in Sources */,
@@ -5183,6 +5432,8 @@
 				198124312464516800F286FE /* EditPost.swift in Sources */,
 				5E93E70121D1A5370020DE55 /* NotificationsSettingsProgramTableViewCellViewModel.swift in Sources */,
 				5E70429C23CD082700D8950F /* AccountProfitChartTableViewCellViewModel.swift in Sources */,
+				1979A5382524DE8F005EEABF /* BinanceRawSymbolStatus.swift in Sources */,
+				1979A53B2524DE8F005EEABF /* BinanceRawOrderBook.swift in Sources */,
 				19EEE0C62507C11F00F83CED /* MakeExchangeAccountProgram.swift in Sources */,
 				5E39F78023A3F9300073DAD5 /* SignalProviderSubscribers.swift in Sources */,
 				5EB06A44239D312A003AB3FB /* PartnershipAPI.swift in Sources */,
@@ -5269,6 +5520,7 @@
 				19812465246458E100F286FE /* ReallocationModelItemsViewModel.swift in Sources */,
 				5EC1C3B1228807540024008E /* ProgramSubscribeViewController.swift in Sources */,
 				5E39F7C123A3F9300073DAD5 /* UserCommissionData.swift in Sources */,
+				1979A5352524DE8F005EEABF /* BinanceRawSymbolFilterType.swift in Sources */,
 				19EEE0D02507C22E00F83CED /* ProfilePublicShortItemsViewModel.swift in Sources */,
 				5E39F77723A3F9300073DAD5 /* FundChartStatistic.swift in Sources */,
 				5EC0CB0523CB42E6003D0818 /* TradingPrivateListViewController.swift in Sources */,
@@ -5300,6 +5552,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1979A55F25252722005EEABF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1979A55825252722005EEABF /* NotificationService */;
+			targetProxy = 1979A55E25252722005EEABF /* PBXContainerItemProxy */;
+		};
+		1979A57D25252762005EEABF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1979A56F25252761005EEABF /* NotificationContent */;
+			targetProxy = 1979A57C25252762005EEABF /* PBXContainerItemProxy */;
+		};
 		5E8724CF20E0B7E3007A1E16 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = FCC9DD23200DF2C3008825EC /* genesisvision-ios */;
@@ -5307,7 +5569,310 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		1979A57825252761005EEABF /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1979A57925252762005EEABF /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		1979A56225252723005EEABF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3FUAGA25F7;
+				INFOPLIST_FILE = NotificationService/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor.NotificationService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1979A56325252723005EEABF /* Release DEV */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 3FUAGA25F7;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = NotificationService/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor.NotificationService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release DEV";
+		};
+		1979A56425252723005EEABF /* Release PROD */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 3FUAGA25F7;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = NotificationService/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor.NotificationService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release PROD";
+		};
+		1979A58025252762005EEABF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3FUAGA25F7;
+				INFOPLIST_FILE = NotificationContent/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor.NotificationContent;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1979A58125252762005EEABF /* Release DEV */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 3FUAGA25F7;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = NotificationContent/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor.NotificationContent;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release DEV";
+		};
+		1979A58225252762005EEABF /* Release PROD */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 3FUAGA25F7;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = NotificationContent/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor.NotificationContent;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release PROD";
+		};
 		5E541D3D238EAA7A00B38244 /* Release PROD */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -5365,18 +5930,19 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A6C4AD19B7C4980B347D6556 /* Pods-genesisvision-ios.release prod.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APP_DISPLAY_NAME = "Genesis Vision";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.0.1;
+				MARKETING_VERSION = 2.1.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "\"-DPROD\"";
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor;
@@ -5646,19 +6212,20 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 288F5D4CC66E0FF4B863BCD0 /* Pods-genesisvision-ios.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APP_DISPLAY_NAME = "GV DEBUG";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.0.1;
+				MARKETING_VERSION = 2.1.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Onone";
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor;
 				PRODUCT_NAME = "${APP_DISPLAY_NAME}";
@@ -5727,18 +6294,19 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E6793C6131153B9FEF56421D /* Pods-genesisvision-ios.release dev.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APP_DISPLAY_NAME = "GV DEV";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.0.1;
+				MARKETING_VERSION = 2.1.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "\"-DDEV\"";
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor;
@@ -5754,6 +6322,26 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1979A56125252723005EEABF /* Build configuration list for PBXNativeTarget "NotificationService" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1979A56225252723005EEABF /* Debug */,
+				1979A56325252723005EEABF /* Release DEV */,
+				1979A56425252723005EEABF /* Release PROD */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		1979A57F25252762005EEABF /* Build configuration list for PBXNativeTarget "NotificationContent" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1979A58025252762005EEABF /* Debug */,
+				1979A58125252762005EEABF /* Release DEV */,
+				1979A58225252762005EEABF /* Release PROD */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		5E8724D620E0B7E3007A1E16 /* Build configuration list for PBXNativeTarget "Genesis VisionUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

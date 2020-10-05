@@ -188,26 +188,34 @@ open class SocialAPI {
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
-  "total" : 4,
+  "total" : 1,
   "items" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "isHighlighted" : true,
     "images" : [ {
       "resizes" : [ {
+        "width" : 5,
         "logoUrl" : "logoUrl",
-        "quality" : "Low"
+        "quality" : "Low",
+        "height" : 5
       }, {
+        "width" : 5,
         "logoUrl" : "logoUrl",
-        "quality" : "Low"
+        "quality" : "Low",
+        "height" : 5
       } ],
       "id" : "id"
     }, {
       "resizes" : [ {
+        "width" : 5,
         "logoUrl" : "logoUrl",
-        "quality" : "Low"
+        "quality" : "Low",
+        "height" : 5
       }, {
+        "width" : 5,
         "logoUrl" : "logoUrl",
-        "quality" : "Low"
+        "quality" : "Low",
+        "height" : 5
       } ],
       "id" : "id"
     } ],
@@ -238,16 +246,16 @@ open class SocialAPI {
     } ],
     "url" : "url",
     "tags" : [ {
-      "number" : 5,
+      "number" : 2,
       "assetDetails" : {
         "programDetails" : {
           "level" : 0,
           "levelProgress" : 6.027456183070403
         },
         "priceCurrency" : "Undefined",
-        "change24Percent" : 2.3021358869347655,
+        "change24Percent" : 9.301444243932576,
         "color" : "color",
-        "price" : 5.637376656633329,
+        "price" : 7.061401241503109,
         "changeState" : "NotChanged",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "title" : "title",
@@ -260,10 +268,10 @@ open class SocialAPI {
         "url" : "url"
       },
       "platformAssetDetails" : {
-        "change24Percent" : 9.301444243932576,
+        "change24Percent" : 2.027123023002322,
         "color" : "color",
         "provider" : "Undefined",
-        "price" : 7.061401241503109,
+        "price" : 3.616076749251911,
         "name" : "name",
         "description" : "description",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -274,9 +282,9 @@ open class SocialAPI {
       "title" : "title",
       "type" : "Undefined",
       "event" : {
-        "amount" : 3.616076749251911,
+        "amount" : 4.145608029883936,
         "title" : "title",
-        "percent" : 2.027123023002322,
+        "percent" : 7.386281948385884,
         "logoUrl" : "logoUrl"
       },
       "userDetails" : {
@@ -300,16 +308,16 @@ open class SocialAPI {
         "username" : "username"
       }
     }, {
-      "number" : 5,
+      "number" : 2,
       "assetDetails" : {
         "programDetails" : {
           "level" : 0,
           "levelProgress" : 6.027456183070403
         },
         "priceCurrency" : "Undefined",
-        "change24Percent" : 2.3021358869347655,
+        "change24Percent" : 9.301444243932576,
         "color" : "color",
-        "price" : 5.637376656633329,
+        "price" : 7.061401241503109,
         "changeState" : "NotChanged",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "title" : "title",
@@ -322,10 +330,10 @@ open class SocialAPI {
         "url" : "url"
       },
       "platformAssetDetails" : {
-        "change24Percent" : 9.301444243932576,
+        "change24Percent" : 2.027123023002322,
         "color" : "color",
         "provider" : "Undefined",
-        "price" : 7.061401241503109,
+        "price" : 3.616076749251911,
         "name" : "name",
         "description" : "description",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -336,9 +344,9 @@ open class SocialAPI {
       "title" : "title",
       "type" : "Undefined",
       "event" : {
-        "amount" : 3.616076749251911,
+        "amount" : 4.145608029883936,
         "title" : "title",
-        "percent" : 2.027123023002322,
+        "percent" : 7.386281948385884,
         "logoUrl" : "logoUrl"
       },
       "userDetails" : {
@@ -381,20 +389,28 @@ open class SocialAPI {
     "isHighlighted" : true,
     "images" : [ {
       "resizes" : [ {
+        "width" : 5,
         "logoUrl" : "logoUrl",
-        "quality" : "Low"
+        "quality" : "Low",
+        "height" : 5
       }, {
+        "width" : 5,
         "logoUrl" : "logoUrl",
-        "quality" : "Low"
+        "quality" : "Low",
+        "height" : 5
       } ],
       "id" : "id"
     }, {
       "resizes" : [ {
+        "width" : 5,
         "logoUrl" : "logoUrl",
-        "quality" : "Low"
+        "quality" : "Low",
+        "height" : 5
       }, {
+        "width" : 5,
         "logoUrl" : "logoUrl",
-        "quality" : "Low"
+        "quality" : "Low",
+        "height" : 5
       } ],
       "id" : "id"
     } ],
@@ -425,16 +441,16 @@ open class SocialAPI {
     } ],
     "url" : "url",
     "tags" : [ {
-      "number" : 5,
+      "number" : 2,
       "assetDetails" : {
         "programDetails" : {
           "level" : 0,
           "levelProgress" : 6.027456183070403
         },
         "priceCurrency" : "Undefined",
-        "change24Percent" : 2.3021358869347655,
+        "change24Percent" : 9.301444243932576,
         "color" : "color",
-        "price" : 5.637376656633329,
+        "price" : 7.061401241503109,
         "changeState" : "NotChanged",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "title" : "title",
@@ -447,10 +463,10 @@ open class SocialAPI {
         "url" : "url"
       },
       "platformAssetDetails" : {
-        "change24Percent" : 9.301444243932576,
+        "change24Percent" : 2.027123023002322,
         "color" : "color",
         "provider" : "Undefined",
-        "price" : 7.061401241503109,
+        "price" : 3.616076749251911,
         "name" : "name",
         "description" : "description",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -461,9 +477,9 @@ open class SocialAPI {
       "title" : "title",
       "type" : "Undefined",
       "event" : {
-        "amount" : 3.616076749251911,
+        "amount" : 4.145608029883936,
         "title" : "title",
-        "percent" : 2.027123023002322,
+        "percent" : 7.386281948385884,
         "logoUrl" : "logoUrl"
       },
       "userDetails" : {
@@ -487,16 +503,16 @@ open class SocialAPI {
         "username" : "username"
       }
     }, {
-      "number" : 5,
+      "number" : 2,
       "assetDetails" : {
         "programDetails" : {
           "level" : 0,
           "levelProgress" : 6.027456183070403
         },
         "priceCurrency" : "Undefined",
-        "change24Percent" : 2.3021358869347655,
+        "change24Percent" : 9.301444243932576,
         "color" : "color",
-        "price" : 5.637376656633329,
+        "price" : 7.061401241503109,
         "changeState" : "NotChanged",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "title" : "title",
@@ -509,10 +525,10 @@ open class SocialAPI {
         "url" : "url"
       },
       "platformAssetDetails" : {
-        "change24Percent" : 9.301444243932576,
+        "change24Percent" : 2.027123023002322,
         "color" : "color",
         "provider" : "Undefined",
-        "price" : 7.061401241503109,
+        "price" : 3.616076749251911,
         "name" : "name",
         "description" : "description",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -523,9 +539,9 @@ open class SocialAPI {
       "title" : "title",
       "type" : "Undefined",
       "event" : {
-        "amount" : 3.616076749251911,
+        "amount" : 4.145608029883936,
         "title" : "title",
-        "percent" : 2.027123023002322,
+        "percent" : 7.386281948385884,
         "logoUrl" : "logoUrl"
       },
       "userDetails" : {
@@ -616,20 +632,28 @@ open class SocialAPI {
   "isHighlighted" : true,
   "images" : [ {
     "resizes" : [ {
+      "width" : 5,
       "logoUrl" : "logoUrl",
-      "quality" : "Low"
+      "quality" : "Low",
+      "height" : 5
     }, {
+      "width" : 5,
       "logoUrl" : "logoUrl",
-      "quality" : "Low"
+      "quality" : "Low",
+      "height" : 5
     } ],
     "id" : "id"
   }, {
     "resizes" : [ {
+      "width" : 5,
       "logoUrl" : "logoUrl",
-      "quality" : "Low"
+      "quality" : "Low",
+      "height" : 5
     }, {
+      "width" : 5,
       "logoUrl" : "logoUrl",
-      "quality" : "Low"
+      "quality" : "Low",
+      "height" : 5
     } ],
     "id" : "id"
   } ],
@@ -638,20 +662,28 @@ open class SocialAPI {
     "isHighlighted" : true,
     "images" : [ {
       "resizes" : [ {
+        "width" : 5,
         "logoUrl" : "logoUrl",
-        "quality" : "Low"
+        "quality" : "Low",
+        "height" : 5
       }, {
+        "width" : 5,
         "logoUrl" : "logoUrl",
-        "quality" : "Low"
+        "quality" : "Low",
+        "height" : 5
       } ],
       "id" : "id"
     }, {
       "resizes" : [ {
+        "width" : 5,
         "logoUrl" : "logoUrl",
-        "quality" : "Low"
+        "quality" : "Low",
+        "height" : 5
       }, {
+        "width" : 5,
         "logoUrl" : "logoUrl",
-        "quality" : "Low"
+        "quality" : "Low",
+        "height" : 5
       } ],
       "id" : "id"
     } ],
@@ -682,16 +714,16 @@ open class SocialAPI {
     } ],
     "url" : "url",
     "tags" : [ {
-      "number" : 5,
+      "number" : 2,
       "assetDetails" : {
         "programDetails" : {
           "level" : 0,
           "levelProgress" : 6.027456183070403
         },
         "priceCurrency" : "Undefined",
-        "change24Percent" : 2.3021358869347655,
+        "change24Percent" : 9.301444243932576,
         "color" : "color",
-        "price" : 5.637376656633329,
+        "price" : 7.061401241503109,
         "changeState" : "NotChanged",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "title" : "title",
@@ -704,10 +736,10 @@ open class SocialAPI {
         "url" : "url"
       },
       "platformAssetDetails" : {
-        "change24Percent" : 9.301444243932576,
+        "change24Percent" : 2.027123023002322,
         "color" : "color",
         "provider" : "Undefined",
-        "price" : 7.061401241503109,
+        "price" : 3.616076749251911,
         "name" : "name",
         "description" : "description",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -718,9 +750,9 @@ open class SocialAPI {
       "title" : "title",
       "type" : "Undefined",
       "event" : {
-        "amount" : 3.616076749251911,
+        "amount" : 4.145608029883936,
         "title" : "title",
-        "percent" : 2.027123023002322,
+        "percent" : 7.386281948385884,
         "logoUrl" : "logoUrl"
       },
       "userDetails" : {
@@ -744,16 +776,16 @@ open class SocialAPI {
         "username" : "username"
       }
     }, {
-      "number" : 5,
+      "number" : 2,
       "assetDetails" : {
         "programDetails" : {
           "level" : 0,
           "levelProgress" : 6.027456183070403
         },
         "priceCurrency" : "Undefined",
-        "change24Percent" : 2.3021358869347655,
+        "change24Percent" : 9.301444243932576,
         "color" : "color",
-        "price" : 5.637376656633329,
+        "price" : 7.061401241503109,
         "changeState" : "NotChanged",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "title" : "title",
@@ -766,10 +798,10 @@ open class SocialAPI {
         "url" : "url"
       },
       "platformAssetDetails" : {
-        "change24Percent" : 9.301444243932576,
+        "change24Percent" : 2.027123023002322,
         "color" : "color",
         "provider" : "Undefined",
-        "price" : 7.061401241503109,
+        "price" : 3.616076749251911,
         "name" : "name",
         "description" : "description",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -780,9 +812,9 @@ open class SocialAPI {
       "title" : "title",
       "type" : "Undefined",
       "event" : {
-        "amount" : 3.616076749251911,
+        "amount" : 4.145608029883936,
         "title" : "title",
-        "percent" : 2.027123023002322,
+        "percent" : 7.386281948385884,
         "logoUrl" : "logoUrl"
       },
       "userDetails" : {
@@ -825,20 +857,28 @@ open class SocialAPI {
     "isHighlighted" : true,
     "images" : [ {
       "resizes" : [ {
+        "width" : 5,
         "logoUrl" : "logoUrl",
-        "quality" : "Low"
+        "quality" : "Low",
+        "height" : 5
       }, {
+        "width" : 5,
         "logoUrl" : "logoUrl",
-        "quality" : "Low"
+        "quality" : "Low",
+        "height" : 5
       } ],
       "id" : "id"
     }, {
       "resizes" : [ {
+        "width" : 5,
         "logoUrl" : "logoUrl",
-        "quality" : "Low"
+        "quality" : "Low",
+        "height" : 5
       }, {
+        "width" : 5,
         "logoUrl" : "logoUrl",
-        "quality" : "Low"
+        "quality" : "Low",
+        "height" : 5
       } ],
       "id" : "id"
     } ],
@@ -869,16 +909,16 @@ open class SocialAPI {
     } ],
     "url" : "url",
     "tags" : [ {
-      "number" : 5,
+      "number" : 2,
       "assetDetails" : {
         "programDetails" : {
           "level" : 0,
           "levelProgress" : 6.027456183070403
         },
         "priceCurrency" : "Undefined",
-        "change24Percent" : 2.3021358869347655,
+        "change24Percent" : 9.301444243932576,
         "color" : "color",
-        "price" : 5.637376656633329,
+        "price" : 7.061401241503109,
         "changeState" : "NotChanged",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "title" : "title",
@@ -891,10 +931,10 @@ open class SocialAPI {
         "url" : "url"
       },
       "platformAssetDetails" : {
-        "change24Percent" : 9.301444243932576,
+        "change24Percent" : 2.027123023002322,
         "color" : "color",
         "provider" : "Undefined",
-        "price" : 7.061401241503109,
+        "price" : 3.616076749251911,
         "name" : "name",
         "description" : "description",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -905,9 +945,9 @@ open class SocialAPI {
       "title" : "title",
       "type" : "Undefined",
       "event" : {
-        "amount" : 3.616076749251911,
+        "amount" : 4.145608029883936,
         "title" : "title",
-        "percent" : 2.027123023002322,
+        "percent" : 7.386281948385884,
         "logoUrl" : "logoUrl"
       },
       "userDetails" : {
@@ -931,16 +971,16 @@ open class SocialAPI {
         "username" : "username"
       }
     }, {
-      "number" : 5,
+      "number" : 2,
       "assetDetails" : {
         "programDetails" : {
           "level" : 0,
           "levelProgress" : 6.027456183070403
         },
         "priceCurrency" : "Undefined",
-        "change24Percent" : 2.3021358869347655,
+        "change24Percent" : 9.301444243932576,
         "color" : "color",
-        "price" : 5.637376656633329,
+        "price" : 7.061401241503109,
         "changeState" : "NotChanged",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         "title" : "title",
@@ -953,10 +993,10 @@ open class SocialAPI {
         "url" : "url"
       },
       "platformAssetDetails" : {
-        "change24Percent" : 9.301444243932576,
+        "change24Percent" : 2.027123023002322,
         "color" : "color",
         "provider" : "Undefined",
-        "price" : 7.061401241503109,
+        "price" : 3.616076749251911,
         "name" : "name",
         "description" : "description",
         "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -967,9 +1007,9 @@ open class SocialAPI {
       "title" : "title",
       "type" : "Undefined",
       "event" : {
-        "amount" : 3.616076749251911,
+        "amount" : 4.145608029883936,
         "title" : "title",
-        "percent" : 2.027123023002322,
+        "percent" : 7.386281948385884,
         "logoUrl" : "logoUrl"
       },
       "userDetails" : {
@@ -1055,16 +1095,16 @@ open class SocialAPI {
   } ],
   "url" : "url",
   "tags" : [ {
-    "number" : 5,
+    "number" : 2,
     "assetDetails" : {
       "programDetails" : {
         "level" : 0,
         "levelProgress" : 6.027456183070403
       },
       "priceCurrency" : "Undefined",
-      "change24Percent" : 2.3021358869347655,
+      "change24Percent" : 9.301444243932576,
       "color" : "color",
-      "price" : 5.637376656633329,
+      "price" : 7.061401241503109,
       "changeState" : "NotChanged",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "title" : "title",
@@ -1077,10 +1117,10 @@ open class SocialAPI {
       "url" : "url"
     },
     "platformAssetDetails" : {
-      "change24Percent" : 9.301444243932576,
+      "change24Percent" : 2.027123023002322,
       "color" : "color",
       "provider" : "Undefined",
-      "price" : 7.061401241503109,
+      "price" : 3.616076749251911,
       "name" : "name",
       "description" : "description",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -1091,9 +1131,9 @@ open class SocialAPI {
     "title" : "title",
     "type" : "Undefined",
     "event" : {
-      "amount" : 3.616076749251911,
+      "amount" : 4.145608029883936,
       "title" : "title",
-      "percent" : 2.027123023002322,
+      "percent" : 7.386281948385884,
       "logoUrl" : "logoUrl"
     },
     "userDetails" : {
@@ -1117,16 +1157,16 @@ open class SocialAPI {
       "username" : "username"
     }
   }, {
-    "number" : 5,
+    "number" : 2,
     "assetDetails" : {
       "programDetails" : {
         "level" : 0,
         "levelProgress" : 6.027456183070403
       },
       "priceCurrency" : "Undefined",
-      "change24Percent" : 2.3021358869347655,
+      "change24Percent" : 9.301444243932576,
       "color" : "color",
-      "price" : 5.637376656633329,
+      "price" : 7.061401241503109,
       "changeState" : "NotChanged",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "title" : "title",
@@ -1139,10 +1179,10 @@ open class SocialAPI {
       "url" : "url"
     },
     "platformAssetDetails" : {
-      "change24Percent" : 9.301444243932576,
+      "change24Percent" : 2.027123023002322,
       "color" : "color",
       "provider" : "Undefined",
-      "price" : 7.061401241503109,
+      "price" : 3.616076749251911,
       "name" : "name",
       "description" : "description",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -1153,9 +1193,9 @@ open class SocialAPI {
     "title" : "title",
     "type" : "Undefined",
     "event" : {
-      "amount" : 3.616076749251911,
+      "amount" : 4.145608029883936,
       "title" : "title",
-      "percent" : 2.027123023002322,
+      "percent" : 7.386281948385884,
       "logoUrl" : "logoUrl"
     },
     "userDetails" : {
@@ -1236,20 +1276,28 @@ open class SocialAPI {
   "isHighlighted" : true,
   "images" : [ {
     "resizes" : [ {
+      "width" : 5,
       "logoUrl" : "logoUrl",
-      "quality" : "Low"
+      "quality" : "Low",
+      "height" : 5
     }, {
+      "width" : 5,
       "logoUrl" : "logoUrl",
-      "quality" : "Low"
+      "quality" : "Low",
+      "height" : 5
     } ],
     "id" : "id"
   }, {
     "resizes" : [ {
+      "width" : 5,
       "logoUrl" : "logoUrl",
-      "quality" : "Low"
+      "quality" : "Low",
+      "height" : 5
     }, {
+      "width" : 5,
       "logoUrl" : "logoUrl",
-      "quality" : "Low"
+      "quality" : "Low",
+      "height" : 5
     } ],
     "id" : "id"
   } ],
@@ -1280,16 +1328,16 @@ open class SocialAPI {
   } ],
   "url" : "url",
   "tags" : [ {
-    "number" : 5,
+    "number" : 2,
     "assetDetails" : {
       "programDetails" : {
         "level" : 0,
         "levelProgress" : 6.027456183070403
       },
       "priceCurrency" : "Undefined",
-      "change24Percent" : 2.3021358869347655,
+      "change24Percent" : 9.301444243932576,
       "color" : "color",
-      "price" : 5.637376656633329,
+      "price" : 7.061401241503109,
       "changeState" : "NotChanged",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "title" : "title",
@@ -1302,10 +1350,10 @@ open class SocialAPI {
       "url" : "url"
     },
     "platformAssetDetails" : {
-      "change24Percent" : 9.301444243932576,
+      "change24Percent" : 2.027123023002322,
       "color" : "color",
       "provider" : "Undefined",
-      "price" : 7.061401241503109,
+      "price" : 3.616076749251911,
       "name" : "name",
       "description" : "description",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -1316,9 +1364,9 @@ open class SocialAPI {
     "title" : "title",
     "type" : "Undefined",
     "event" : {
-      "amount" : 3.616076749251911,
+      "amount" : 4.145608029883936,
       "title" : "title",
-      "percent" : 2.027123023002322,
+      "percent" : 7.386281948385884,
       "logoUrl" : "logoUrl"
     },
     "userDetails" : {
@@ -1342,16 +1390,16 @@ open class SocialAPI {
       "username" : "username"
     }
   }, {
-    "number" : 5,
+    "number" : 2,
     "assetDetails" : {
       "programDetails" : {
         "level" : 0,
         "levelProgress" : 6.027456183070403
       },
       "priceCurrency" : "Undefined",
-      "change24Percent" : 2.3021358869347655,
+      "change24Percent" : 9.301444243932576,
       "color" : "color",
-      "price" : 5.637376656633329,
+      "price" : 7.061401241503109,
       "changeState" : "NotChanged",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "title" : "title",
@@ -1364,10 +1412,10 @@ open class SocialAPI {
       "url" : "url"
     },
     "platformAssetDetails" : {
-      "change24Percent" : 9.301444243932576,
+      "change24Percent" : 2.027123023002322,
       "color" : "color",
       "provider" : "Undefined",
-      "price" : 7.061401241503109,
+      "price" : 3.616076749251911,
       "name" : "name",
       "description" : "description",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -1378,9 +1426,9 @@ open class SocialAPI {
     "title" : "title",
     "type" : "Undefined",
     "event" : {
-      "amount" : 3.616076749251911,
+      "amount" : 4.145608029883936,
       "title" : "title",
-      "percent" : 2.027123023002322,
+      "percent" : 7.386281948385884,
       "logoUrl" : "logoUrl"
     },
     "userDetails" : {
@@ -1588,11 +1636,15 @@ open class SocialAPI {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "image" : {
       "resizes" : [ {
+        "width" : 5,
         "logoUrl" : "logoUrl",
-        "quality" : "Low"
+        "quality" : "Low",
+        "height" : 5
       }, {
+        "width" : 5,
         "logoUrl" : "logoUrl",
-        "quality" : "Low"
+        "quality" : "Low",
+        "height" : 5
       } ],
       "id" : "id"
     },
@@ -1609,11 +1661,15 @@ open class SocialAPI {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "image" : {
       "resizes" : [ {
+        "width" : 5,
         "logoUrl" : "logoUrl",
-        "quality" : "Low"
+        "quality" : "Low",
+        "height" : 5
       }, {
+        "width" : 5,
         "logoUrl" : "logoUrl",
-        "quality" : "Low"
+        "quality" : "Low",
+        "height" : 5
       } ],
       "id" : "id"
     },

@@ -264,8 +264,10 @@ final class FilterViewModel {
             case .currency:
                 tableViewCellViewModel = FilterTableViewCellViewModel(title: "Currency", detail: nil, detailImage: nil, switchOn: nil, style: .detail, delegate: nil)
                 
-                if let selectedValue = currencyDelegateManager?.getSelectedCurrencyValue() {
+                if let selectedValue = listViewModel?.filterModel.currencyModel.selectedCurrency {
                     tableViewCellViewModel?.detail = selectedValue
+                } else {
+                    tableViewCellViewModel?.detail = currencyDelegateManager?.getSelectedCurrencyValue()
                 }
                 
                 viewModels.append(tableViewCellViewModel!)

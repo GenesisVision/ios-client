@@ -51,6 +51,8 @@ class DashboardViewController: ListViewController {
         
         notificationsBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_notifications_icon"), style: .done, target: self, action: #selector(notificationsButtonAction))
         navigationItem.leftBarButtonItems = [notificationsBarButtonItem]
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateNotification(notification:)), name: .updateDashboardViewController, object: nil)
     }
     
     @objc func notificationsButtonAction() {
@@ -58,6 +60,14 @@ class DashboardViewController: ListViewController {
         UIApplication.shared.applicationIconBadgeNumber = 0
         notificationsBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_notifications_icon"), style: .done, target: self, action: #selector(notificationsButtonAction))
         navigationItem.leftBarButtonItems = [notificationsBarButtonItem]
+    }
+    
+    @objc private func updateNotification(notification: Notification) {
+        viewModel.fetch()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .updateDashboardViewController, object: nil)
     }
 }
 

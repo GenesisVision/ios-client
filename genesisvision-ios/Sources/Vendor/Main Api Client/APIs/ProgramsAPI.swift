@@ -96,12 +96,156 @@ open class ProgramsAPI {
     }
 
     /**
-     Export periods
-     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter numberMin: (query)  (optional)     - parameter numberMax: (query)  (optional)     - parameter status: (query)  (optional)     - parameter timeframe: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+     Export daily program analytics
+     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter numberMin: (query)  (optional)     - parameter numberMax: (query)  (optional)     - parameter status: (query)  (optional)     - parameter timeframe: (query)  (optional)     - parameter showInvestorReport: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func exportProgramPeriods(_id: String, dateFrom: Date? = nil, dateTo: Date? = nil, numberMin: Int? = nil, numberMax: Int? = nil, status: PeriodStatus? = nil, timeframe: Timeframe? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: Data?,_ error: Error?) -> Void)) {
-        exportProgramPeriodsWithRequestBuilder(_id: _id, dateFrom: dateFrom, dateTo: dateTo, numberMin: numberMin, numberMax: numberMax, status: status, timeframe: timeframe, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func exportDailyProgramAnalytics(_id: String, dateFrom: Date? = nil, dateTo: Date? = nil, numberMin: Int? = nil, numberMax: Int? = nil, status: PeriodStatus? = nil, timeframe: Timeframe? = nil, showInvestorReport: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: Data?,_ error: Error?) -> Void)) {
+        exportDailyProgramAnalyticsWithRequestBuilder(_id: _id, dateFrom: dateFrom, dateTo: dateTo, numberMin: numberMin, numberMax: numberMax, status: status, timeframe: timeframe, showInvestorReport: showInvestorReport, skip: skip, take: take).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     Export daily program analytics
+     - GET /v2.0/programs/{id}/periods/export/analytics
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example=""}]
+     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter numberMin: (query)  (optional)     - parameter numberMax: (query)  (optional)     - parameter status: (query)  (optional)     - parameter timeframe: (query)  (optional)     - parameter showInvestorReport: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+
+     - returns: RequestBuilder<Data> 
+     */
+    open class func exportDailyProgramAnalyticsWithRequestBuilder(_id: String, dateFrom: Date? = nil, dateTo: Date? = nil, numberMin: Int? = nil, numberMax: Int? = nil, status: PeriodStatus? = nil, timeframe: Timeframe? = nil, showInvestorReport: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<Data> {
+        var path = "/v2.0/programs/{id}/periods/export/analytics"
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "DateFrom": dateFrom?.encodeToJSON(), 
+                        "DateTo": dateTo?.encodeToJSON(), 
+                        "NumberMin": numberMin?.encodeToJSON(), 
+                        "NumberMax": numberMax?.encodeToJSON(), 
+                        "Status": status, 
+                        "Timeframe": timeframe, 
+                        "ShowInvestorReport": showInvestorReport, 
+                        "Skip": skip?.encodeToJSON(), 
+                        "Take": take?.encodeToJSON()
+        ])
+
+        let requestBuilder: RequestBuilder<Data>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Export daily program financial statistic
+     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter numberMin: (query)  (optional)     - parameter numberMax: (query)  (optional)     - parameter status: (query)  (optional)     - parameter timeframe: (query)  (optional)     - parameter showInvestorReport: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func exportDailyProgramFinancialStatistic(_id: String, dateFrom: Date? = nil, dateTo: Date? = nil, numberMin: Int? = nil, numberMax: Int? = nil, status: PeriodStatus? = nil, timeframe: Timeframe? = nil, showInvestorReport: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: Data?,_ error: Error?) -> Void)) {
+        exportDailyProgramFinancialStatisticWithRequestBuilder(_id: _id, dateFrom: dateFrom, dateTo: dateTo, numberMin: numberMin, numberMax: numberMax, status: status, timeframe: timeframe, showInvestorReport: showInvestorReport, skip: skip, take: take).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     Export daily program financial statistic
+     - GET /v2.0/programs/{id}/periods/export/financialstatistic
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example=""}]
+     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter numberMin: (query)  (optional)     - parameter numberMax: (query)  (optional)     - parameter status: (query)  (optional)     - parameter timeframe: (query)  (optional)     - parameter showInvestorReport: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+
+     - returns: RequestBuilder<Data> 
+     */
+    open class func exportDailyProgramFinancialStatisticWithRequestBuilder(_id: String, dateFrom: Date? = nil, dateTo: Date? = nil, numberMin: Int? = nil, numberMax: Int? = nil, status: PeriodStatus? = nil, timeframe: Timeframe? = nil, showInvestorReport: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<Data> {
+        var path = "/v2.0/programs/{id}/periods/export/financialstatistic"
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "DateFrom": dateFrom?.encodeToJSON(), 
+                        "DateTo": dateTo?.encodeToJSON(), 
+                        "NumberMin": numberMin?.encodeToJSON(), 
+                        "NumberMax": numberMax?.encodeToJSON(), 
+                        "Status": status, 
+                        "Timeframe": timeframe, 
+                        "ShowInvestorReport": showInvestorReport, 
+                        "Skip": skip?.encodeToJSON(), 
+                        "Take": take?.encodeToJSON()
+        ])
+
+        let requestBuilder: RequestBuilder<Data>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Export daily program investor report
+     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter numberMin: (query)  (optional)     - parameter numberMax: (query)  (optional)     - parameter status: (query)  (optional)     - parameter timeframe: (query)  (optional)     - parameter showInvestorReport: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func exportDailyProgramInvestorReport(_id: String, dateFrom: Date? = nil, dateTo: Date? = nil, numberMin: Int? = nil, numberMax: Int? = nil, status: PeriodStatus? = nil, timeframe: Timeframe? = nil, showInvestorReport: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: Data?,_ error: Error?) -> Void)) {
+        exportDailyProgramInvestorReportWithRequestBuilder(_id: _id, dateFrom: dateFrom, dateTo: dateTo, numberMin: numberMin, numberMax: numberMax, status: status, timeframe: timeframe, showInvestorReport: showInvestorReport, skip: skip, take: take).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     Export daily program investor report
+     - GET /v2.0/programs/{id}/periods/export/investorreport
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example=""}]
+     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter numberMin: (query)  (optional)     - parameter numberMax: (query)  (optional)     - parameter status: (query)  (optional)     - parameter timeframe: (query)  (optional)     - parameter showInvestorReport: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+
+     - returns: RequestBuilder<Data> 
+     */
+    open class func exportDailyProgramInvestorReportWithRequestBuilder(_id: String, dateFrom: Date? = nil, dateTo: Date? = nil, numberMin: Int? = nil, numberMax: Int? = nil, status: PeriodStatus? = nil, timeframe: Timeframe? = nil, showInvestorReport: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<Data> {
+        var path = "/v2.0/programs/{id}/periods/export/investorreport"
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "DateFrom": dateFrom?.encodeToJSON(), 
+                        "DateTo": dateTo?.encodeToJSON(), 
+                        "NumberMin": numberMin?.encodeToJSON(), 
+                        "NumberMax": numberMax?.encodeToJSON(), 
+                        "Status": status, 
+                        "Timeframe": timeframe, 
+                        "ShowInvestorReport": showInvestorReport, 
+                        "Skip": skip?.encodeToJSON(), 
+                        "Take": take?.encodeToJSON()
+        ])
+
+        let requestBuilder: RequestBuilder<Data>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Export periods
+     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter numberMin: (query)  (optional)     - parameter numberMax: (query)  (optional)     - parameter status: (query)  (optional)     - parameter timeframe: (query)  (optional)     - parameter showInvestorReport: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func exportProgramPeriods(_id: String, dateFrom: Date? = nil, dateTo: Date? = nil, numberMin: Int? = nil, numberMax: Int? = nil, status: PeriodStatus? = nil, timeframe: Timeframe? = nil, showInvestorReport: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: Data?,_ error: Error?) -> Void)) {
+        exportProgramPeriodsWithRequestBuilder(_id: _id, dateFrom: dateFrom, dateTo: dateTo, numberMin: numberMin, numberMax: numberMax, status: status, timeframe: timeframe, showInvestorReport: showInvestorReport, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
@@ -114,11 +258,11 @@ open class ProgramsAPI {
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example=""}]
-     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter numberMin: (query)  (optional)     - parameter numberMax: (query)  (optional)     - parameter status: (query)  (optional)     - parameter timeframe: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter numberMin: (query)  (optional)     - parameter numberMax: (query)  (optional)     - parameter status: (query)  (optional)     - parameter timeframe: (query)  (optional)     - parameter showInvestorReport: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<Data> 
      */
-    open class func exportProgramPeriodsWithRequestBuilder(_id: String, dateFrom: Date? = nil, dateTo: Date? = nil, numberMin: Int? = nil, numberMax: Int? = nil, status: PeriodStatus? = nil, timeframe: Timeframe? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<Data> {
+    open class func exportProgramPeriodsWithRequestBuilder(_id: String, dateFrom: Date? = nil, dateTo: Date? = nil, numberMin: Int? = nil, numberMax: Int? = nil, status: PeriodStatus? = nil, timeframe: Timeframe? = nil, showInvestorReport: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<Data> {
         var path = "/v2.0/programs/{id}/periods/export"
         let _idPreEscape = "\(_id)"
         let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -133,6 +277,7 @@ open class ProgramsAPI {
                         "NumberMax": numberMax?.encodeToJSON(), 
                         "Status": status, 
                         "Timeframe": timeframe, 
+                        "ShowInvestorReport": showInvestorReport, 
                         "Skip": skip?.encodeToJSON(), 
                         "Take": take?.encodeToJSON()
         ])
@@ -144,11 +289,11 @@ open class ProgramsAPI {
 
     /**
      Export period financial statistic
-     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter numberMin: (query)  (optional)     - parameter numberMax: (query)  (optional)     - parameter status: (query)  (optional)     - parameter timeframe: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter numberMin: (query)  (optional)     - parameter numberMax: (query)  (optional)     - parameter status: (query)  (optional)     - parameter timeframe: (query)  (optional)     - parameter showInvestorReport: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func exportProgramPeriodsFinStatistic(_id: String, dateFrom: Date? = nil, dateTo: Date? = nil, numberMin: Int? = nil, numberMax: Int? = nil, status: PeriodStatus? = nil, timeframe: Timeframe? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: Data?,_ error: Error?) -> Void)) {
-        exportProgramPeriodsFinStatisticWithRequestBuilder(_id: _id, dateFrom: dateFrom, dateTo: dateTo, numberMin: numberMin, numberMax: numberMax, status: status, timeframe: timeframe, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func exportProgramPeriodsFinStatistic(_id: String, dateFrom: Date? = nil, dateTo: Date? = nil, numberMin: Int? = nil, numberMax: Int? = nil, status: PeriodStatus? = nil, timeframe: Timeframe? = nil, showInvestorReport: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: Data?,_ error: Error?) -> Void)) {
+        exportProgramPeriodsFinStatisticWithRequestBuilder(_id: _id, dateFrom: dateFrom, dateTo: dateTo, numberMin: numberMin, numberMax: numberMax, status: status, timeframe: timeframe, showInvestorReport: showInvestorReport, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
@@ -161,11 +306,11 @@ open class ProgramsAPI {
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example=""}]
-     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter numberMin: (query)  (optional)     - parameter numberMax: (query)  (optional)     - parameter status: (query)  (optional)     - parameter timeframe: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter numberMin: (query)  (optional)     - parameter numberMax: (query)  (optional)     - parameter status: (query)  (optional)     - parameter timeframe: (query)  (optional)     - parameter showInvestorReport: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<Data> 
      */
-    open class func exportProgramPeriodsFinStatisticWithRequestBuilder(_id: String, dateFrom: Date? = nil, dateTo: Date? = nil, numberMin: Int? = nil, numberMax: Int? = nil, status: PeriodStatus? = nil, timeframe: Timeframe? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<Data> {
+    open class func exportProgramPeriodsFinStatisticWithRequestBuilder(_id: String, dateFrom: Date? = nil, dateTo: Date? = nil, numberMin: Int? = nil, numberMax: Int? = nil, status: PeriodStatus? = nil, timeframe: Timeframe? = nil, showInvestorReport: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<Data> {
         var path = "/v2.0/programs/{id}/periods/export/statistic"
         let _idPreEscape = "\(_id)"
         let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -180,6 +325,7 @@ open class ProgramsAPI {
                         "NumberMax": numberMax?.encodeToJSON(), 
                         "Status": status, 
                         "Timeframe": timeframe, 
+                        "ShowInvestorReport": showInvestorReport, 
                         "Skip": skip?.encodeToJSON(), 
                         "Take": take?.encodeToJSON()
         ])
@@ -1034,11 +1180,11 @@ open class ProgramsAPI {
 
     /**
      Program periods
-     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter numberMin: (query)  (optional)     - parameter numberMax: (query)  (optional)     - parameter status: (query)  (optional)     - parameter timeframe: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter numberMin: (query)  (optional)     - parameter numberMax: (query)  (optional)     - parameter status: (query)  (optional)     - parameter timeframe: (query)  (optional)     - parameter showInvestorReport: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getProgramPeriods(_id: String, dateFrom: Date? = nil, dateTo: Date? = nil, numberMin: Int? = nil, numberMax: Int? = nil, status: PeriodStatus? = nil, timeframe: Timeframe? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ProgramPeriodsViewModel?,_ error: Error?) -> Void)) {
-        getProgramPeriodsWithRequestBuilder(_id: _id, dateFrom: dateFrom, dateTo: dateTo, numberMin: numberMin, numberMax: numberMax, status: status, timeframe: timeframe, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func getProgramPeriods(_id: String, dateFrom: Date? = nil, dateTo: Date? = nil, numberMin: Int? = nil, numberMax: Int? = nil, status: PeriodStatus? = nil, timeframe: Timeframe? = nil, showInvestorReport: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: ProgramPeriodsViewModel?,_ error: Error?) -> Void)) {
+        getProgramPeriodsWithRequestBuilder(_id: _id, dateFrom: dateFrom, dateTo: dateTo, numberMin: numberMin, numberMax: numberMax, status: status, timeframe: timeframe, showInvestorReport: showInvestorReport, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
@@ -1051,8 +1197,17 @@ open class ProgramsAPI {
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
-  "total" : 1,
+  "total" : 9,
   "periods" : [ {
+    "investorStatistic" : {
+      "balance" : 4.965218492984954,
+      "managerSuccessFee" : 6.683562403749608,
+      "platformSuccessFee" : 8.762042012749001,
+      "managerManagementFee" : 9.369310271410669,
+      "profit" : 1.1730742509559433,
+      "deposits" : 5.025004791520295,
+      "withdrawals" : 9.965781217890562
+    },
     "investorsWithdraw" : 4.145608029883936,
     "dateFrom" : "2000-01-23T04:56:07.000+00:00",
     "investors" : 2,
@@ -1076,6 +1231,15 @@ open class ProgramsAPI {
     },
     "status" : "Planned"
   }, {
+    "investorStatistic" : {
+      "balance" : 4.965218492984954,
+      "managerSuccessFee" : 6.683562403749608,
+      "platformSuccessFee" : 8.762042012749001,
+      "managerManagementFee" : 9.369310271410669,
+      "profit" : 1.1730742509559433,
+      "deposits" : 5.025004791520295,
+      "withdrawals" : 9.965781217890562
+    },
     "investorsWithdraw" : 4.145608029883936,
     "dateFrom" : "2000-01-23T04:56:07.000+00:00",
     "investors" : 2,
@@ -1100,11 +1264,11 @@ open class ProgramsAPI {
     "status" : "Planned"
   } ]
 }}]
-     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter numberMin: (query)  (optional)     - parameter numberMax: (query)  (optional)     - parameter status: (query)  (optional)     - parameter timeframe: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter numberMin: (query)  (optional)     - parameter numberMax: (query)  (optional)     - parameter status: (query)  (optional)     - parameter timeframe: (query)  (optional)     - parameter showInvestorReport: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
 
      - returns: RequestBuilder<ProgramPeriodsViewModel> 
      */
-    open class func getProgramPeriodsWithRequestBuilder(_id: String, dateFrom: Date? = nil, dateTo: Date? = nil, numberMin: Int? = nil, numberMax: Int? = nil, status: PeriodStatus? = nil, timeframe: Timeframe? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ProgramPeriodsViewModel> {
+    open class func getProgramPeriodsWithRequestBuilder(_id: String, dateFrom: Date? = nil, dateTo: Date? = nil, numberMin: Int? = nil, numberMax: Int? = nil, status: PeriodStatus? = nil, timeframe: Timeframe? = nil, showInvestorReport: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<ProgramPeriodsViewModel> {
         var path = "/v2.0/programs/{id}/periods"
         let _idPreEscape = "\(_id)"
         let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -1119,6 +1283,7 @@ open class ProgramsAPI {
                         "NumberMax": numberMax?.encodeToJSON(), 
                         "Status": status, 
                         "Timeframe": timeframe, 
+                        "ShowInvestorReport": showInvestorReport, 
                         "Skip": skip?.encodeToJSON(), 
                         "Take": take?.encodeToJSON()
         ])
