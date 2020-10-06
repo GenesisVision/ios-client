@@ -125,7 +125,11 @@ class SettingsViewController: BaseTableViewController {
             sendFeedbackTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
-    @IBOutlet weak var versionLabel: SubtitleLabel!
+    @IBOutlet weak var versionLabel: SubtitleLabel! {
+        didSet {
+            versionLabel.text = ""
+        }
+    }
     @IBOutlet weak var footerView: UITableViewHeaderFooterView!
     
     private var signOutBarButtonItem: UIBarButtonItem!
@@ -256,6 +260,12 @@ class SettingsViewController: BaseTableViewController {
             profileNameLabel.text = "Profile"
         }
         
+        if let name = viewModel.currencyListViewModel.selected()?.name {
+            platformCurrencyValueLabel.text = name
+        }
+        
+        versionLabel.text = "App version " + getFullVersion()
+        
         profileEmailLabel.text = viewModel.email
         tableView?.reloadDataSmoothly()
     }
@@ -293,13 +303,6 @@ class SettingsViewController: BaseTableViewController {
         tableView.tableFooterView = footerView
         tableView.backgroundColor = UIColor.Cell.headerBg
         
-        if let name = viewModel.currencyListViewModel.selected()?.name {
-            platformCurrencyValueLabel.text = name
-        }
-        
-        if versionLabel != nil {
-            versionLabel.text = "App version " + getFullVersion()
-        }
     }
     
     private func setupTableConfiguration() {
