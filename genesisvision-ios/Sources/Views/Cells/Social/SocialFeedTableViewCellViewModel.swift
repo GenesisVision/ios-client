@@ -30,6 +30,9 @@ extension SocialFeedTableViewCellViewModel: CellViewModel {
         if let date = post.date {
             cell.dateLabel.text = date.dateForSocialPost
         }
+        
+        if let text = post.text {
+        }
     }
 }
 
@@ -98,8 +101,8 @@ class SocialFeedTableViewCell: UITableViewCell {
         super.awakeFromNib()
         backgroundColor = UIColor.BaseView.bg
         contentView.backgroundColor = UIColor.Common.darkCell
-        overlayFirstLayer()
-        overlaySecondLayer()
+        overlayContentView()
+        overlayTopView()
     }
     
     override func layoutSubviews() {
@@ -111,7 +114,7 @@ class SocialFeedTableViewCell: UITableViewCell {
         super.prepareForReuse()
     }
     
-    private func overlayFirstLayer() {
+    private func overlayContentView() {
         contentView.addSubview(topView)
         contentView.addSubview(middleView)
         contentView.addSubview(bottomView)
@@ -129,7 +132,7 @@ class SocialFeedTableViewCell: UITableViewCell {
         }
     }
     
-    private func overlaySecondLayer() {
+    private func overlayTopView() {
         topView.addSubview(userImageView)
         topView.addSubview(userNameLabel)
         topView.addSubview(dateLabel)
@@ -148,5 +151,39 @@ class SocialFeedTableViewCell: UITableViewCell {
         postActionsButton.anchor(top: nil, leading: nil, bottom: nil, trailing: topView.trailingAnchor)
         postActionsButton.anchorCenter(centerY: topView.centerYAnchor, centerX: nil)
         postActionsButton.anchorSize(size: CGSize(width: 60, height: 60))
+    }
+}
+
+
+final class SocialPostView: UIView {
+    
+    let textView: UITextView = {
+        let textView = UITextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        return textView
+    }()
+    
+    let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    private func overlayFirstLayer() {
+        addSubview(textView)
+        addSubview(imageView)
+        
+        imageView.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor)
+        imageView.anchorSize(size: CGSize(width: 0, height: 200))
+        
+        textView.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
