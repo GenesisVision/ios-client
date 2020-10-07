@@ -39,11 +39,12 @@ final class PushNotificationsManager {
               let notificationModel = CodableHelper.decode(NotificationViewModel.self, from: data).decodableObj
         else { return nil }
         
-        guard let location = notificationModel.location?.location, let entityId = notificationModel.location?._id?.uuidString, let notificationLocationType = NotificationLocationType(rawValue: location) else {
+        guard let location = notificationModel.location?.location, let notificationLocationType = NotificationLocationType(rawValue: location) else {
             return NotificationDestination(location: .nothing, entityId: "", destinationUrl: "")
         }
         
         let destinationUrl = notificationModel.location?.externalUrl ?? ""
+        let entityId = notificationModel.location?._id?.uuidString ?? ""
         
         return NotificationDestination(location: notificationLocationType, entityId: entityId, destinationUrl: destinationUrl)
     }

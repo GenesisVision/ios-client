@@ -32,8 +32,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "334"
             endingLineNumber = "334"
-            landmarkName = "showFundDetails(with:)"
-            landmarkType = "7">
+            landmarkName = "Router"
+            landmarkType = "21">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1711,7 +1711,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "595"
-            endingLineNumber = "595">
+            endingLineNumber = "595"
+            landmarkName = "Router"
+            landmarkType = "21">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2973,8 +2975,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "200"
             endingLineNumber = "200"
-            landmarkName = "fetch()"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
             <Locations>
                <Location
                   uuid = "842634F1-1937-45B5-8211-012058C3AEF9 - 4ecc868ad883637e"
@@ -4281,7 +4283,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "164"
             endingLineNumber = "164"
-            landmarkName = "showFollowList(with:)"
+            landmarkName = "showFundList(with:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4297,7 +4299,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "549"
             endingLineNumber = "549"
-            landmarkName = "getFunds(with:showFacets:parentRouter:)"
+            landmarkName = "getFollows(with:showFacets:parentRouter:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4553,7 +4555,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "333"
             endingLineNumber = "333"
-            landmarkName = "showFundDetails(with:)"
+            landmarkName = "showFilterVC(with:filterModel:filterType:sortingType:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -7801,7 +7803,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "562"
             endingLineNumber = "562"
-            landmarkName = "getManagers(with:showFacets:parentRouter:)"
+            landmarkName = "getFunds(with:showFacets:parentRouter:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -7817,7 +7819,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "563"
             endingLineNumber = "563"
-            landmarkName = "getManagers(with:showFacets:parentRouter:)"
+            landmarkName = "getFunds(with:showFacets:parentRouter:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -7833,7 +7835,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "564"
             endingLineNumber = "564"
-            landmarkName = "getManagers(with:showFacets:parentRouter:)"
+            landmarkName = "getFunds(with:showFacets:parentRouter:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -9911,7 +9913,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "342"
             endingLineNumber = "342"
-            landmarkName = "showAssetList(with:assetType:)"
+            landmarkName = "showFundDetails(with:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -10168,6 +10170,38 @@
             startingLineNumber = "19"
             endingLineNumber = "19"
             landmarkName = "setup(on:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8F51B0BF-B56C-441A-BDE9-36EDA35CC522"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/Controllers/Managers/PushNotificationsManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "parsePushNotification(userInfo:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B17331A6-28ED-4B9F-BC9E-AB87D28EAC7D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/Controllers/Managers/PushNotificationsManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "parsePushNotification(userInfo:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
