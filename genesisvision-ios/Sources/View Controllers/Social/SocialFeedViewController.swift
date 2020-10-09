@@ -23,12 +23,11 @@ class SocialFeedViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        title = "Social"
         setupTableView()
     }
     
     private func setupTableView() {
-        
         view.addSubview(tableView)
         
         tableView.fillSuperview(padding: UIEdgeInsets(top: 60, left: 0, bottom: 0, right: 0))
@@ -39,6 +38,7 @@ class SocialFeedViewController: BaseViewController {
         tableView.separatorStyle = .none
         tableView.backgroundView = nil
         tableView.backgroundColor = .clear
+        tableView.rowHeight = UITableView.automaticDimension
         setupPullToRefresh(scrollView: tableView)
     }
     
@@ -126,7 +126,7 @@ final class SocialFeedViewModel: ListViewModelWithPaging {
         
         switch feedType {
         case .live:
-            SocialDataProvider.getFeed(userId: nil, tagContentId: nil, tagContentIds: nil, userMode: nil, hashTags: nil, mask: nil, showTop: nil, showLiked: nil, showOnlyUsersPosts: true, skip: skip, take: take()) { [weak self] (postsViewModel) in
+            SocialDataProvider.getFeed(userId: nil, tagContentId: nil, tagContentIds: nil, userMode: nil, hashTags: nil, mask: nil, showTop: nil, showLiked: nil, showOnlyUsersPosts: true, skip: skip, take: take() - 2) { [weak self] (postsViewModel) in
                 if let viewModel = postsViewModel, let total = postsViewModel?.total {
                     viewModel.items?.forEach({ (model) in
                         let viewModel = SocialFeedTableViewCellViewModel(post: model)
@@ -137,7 +137,7 @@ final class SocialFeedViewModel: ListViewModelWithPaging {
                 completion(.success)
             } errorCompletion: { _ in }
         case .hot:
-            SocialDataProvider.getFeed(userId: nil, tagContentId: nil, tagContentIds: nil, userMode: nil, hashTags: nil, mask: nil, showTop: true, showLiked: nil, showOnlyUsersPosts: nil, skip: skip, take: take()) { [weak self] (postsViewModel) in
+            SocialDataProvider.getFeed(userId: nil, tagContentId: nil, tagContentIds: nil, userMode: nil, hashTags: nil, mask: nil, showTop: true, showLiked: nil, showOnlyUsersPosts: nil, skip: skip, take: take() - 2) { [weak self] (postsViewModel) in
                 if let viewModel = postsViewModel, let total = postsViewModel?.total {
                     viewModel.items?.forEach({ (model) in
                         let viewModel = SocialFeedTableViewCellViewModel(post: model)
@@ -148,7 +148,7 @@ final class SocialFeedViewModel: ListViewModelWithPaging {
                 completion(.success)
             } errorCompletion: { _ in }
         case .feed:
-            SocialDataProvider.getFeed(userId: nil, tagContentId: nil, tagContentIds: nil, userMode: nil, hashTags: nil, mask: nil, showTop: nil, showLiked: nil, showOnlyUsersPosts: nil, skip: skip, take: take()) { [weak self] (postsViewModel) in
+            SocialDataProvider.getFeed(userId: nil, tagContentId: nil, tagContentIds: nil, userMode: nil, hashTags: nil, mask: nil, showTop: nil, showLiked: nil, showOnlyUsersPosts: nil, skip: skip, take: take() - 2) { [weak self] (postsViewModel) in
                 if let viewModel = postsViewModel, let total = postsViewModel?.total {
                     viewModel.items?.forEach({ (model) in
                         let viewModel = SocialFeedTableViewCellViewModel(post: model)
