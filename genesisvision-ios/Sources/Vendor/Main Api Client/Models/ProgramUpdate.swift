@@ -32,9 +32,7 @@ public struct ProgramUpdate: Codable {
     public var hourProcessing: Int?
 
     public var isProcessingRealTime: Bool?
-
-    public var _id: UUID?
-    public init(title: String? = nil, _description: String? = nil, logo: String? = nil, entryFee: Double? = nil, exitFee: Double? = nil, successFee: Double? = nil, stopOutLevel: Double? = nil, investmentLimit: Double? = nil, tradesDelay: TradesDelay? = nil, hourProcessing: Int? = nil, isProcessingRealTime: Bool? = nil, _id: UUID? = nil) { 
+    public init(title: String? = nil, _description: String? = nil, logo: String? = nil, entryFee: Double? = nil, exitFee: Double? = nil, successFee: Double? = nil, stopOutLevel: Double? = nil, investmentLimit: Double? = nil, tradesDelay: TradesDelay? = nil, hourProcessing: Int? = nil, isProcessingRealTime: Bool? = nil) { 
         self.title = title
         self._description = _description
         self.logo = logo
@@ -46,7 +44,6 @@ public struct ProgramUpdate: Codable {
         self.tradesDelay = tradesDelay
         self.hourProcessing = hourProcessing
         self.isProcessingRealTime = isProcessingRealTime
-        self._id = _id
     }
     public enum CodingKeys: String, CodingKey { 
         case title
@@ -60,7 +57,6 @@ public struct ProgramUpdate: Codable {
         case tradesDelay
         case hourProcessing
         case isProcessingRealTime
-        case _id = "id"
     }
 
 }

@@ -276,7 +276,7 @@ class MakeProgramViewModel {
        print(result)
     }
     
-    var request = MakeTradingAccountProgram(_id: nil, periodLength: nil, stopOutLevel: nil, investmentLimit: nil, tradesDelay: nil, successFee: nil, managementFee: nil, title: nil, _description: nil, logo: nil)
+    var request = MakeTradingAccountProgram(title: nil, _description: nil, logo: nil, _id: nil, periodLength: nil, stopOutLevel: nil, investmentLimit: nil, tradesDelay: nil, successFee: nil, managementFee: nil)
     
     weak var delegate: BaseTableViewProtocol?
     init(_ delegate: BaseTableViewProtocol?) {

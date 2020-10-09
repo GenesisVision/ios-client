@@ -14,6 +14,13 @@
 		19129484249BBA3F007F1083 /* PublicProfileFollow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19129483249BBA3E007F1083 /* PublicProfileFollow.swift */; };
 		19129486249BBAF8007F1083 /* PostPlatformAssetDetailsWithPrices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19129485249BBAF8007F1083 /* PostPlatformAssetDetailsWithPrices.swift */; };
 		1963836A24FED6A600FDB06E /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1963836924FED6A600FDB06E /* UINavigationBar.swift */; };
+		196389A92530AA7C00CA2092 /* BinanceRawAccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196389A82530AA7C00CA2092 /* BinanceRawAccountInfo.swift */; };
+		196389B02530AA9C00CA2092 /* BinanceRawBinanceBalance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196389AE2530AA9C00CA2092 /* BinanceRawBinanceBalance.swift */; };
+		196389B12530AA9C00CA2092 /* BinanceRawKlineItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196389AF2530AA9C00CA2092 /* BinanceRawKlineItemsViewModel.swift */; };
+		196389B72530AAB300CA2092 /* BinanceRawOrderSide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196389B62530AAB300CA2092 /* BinanceRawOrderSide.swift */; };
+		196389BD2530AAC800CA2092 /* BinanceRawPlaceOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196389BC2530AAC800CA2092 /* BinanceRawPlaceOrder.swift */; };
+		196389C32530AAD700CA2092 /* BinanceRawTimeInForce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196389C22530AAD700CA2092 /* BinanceRawTimeInForce.swift */; };
+		196389C92530ADFF00CA2092 /* BinanceRawOrderResponseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196389C82530ADFF00CA2092 /* BinanceRawOrderResponseType.swift */; };
 		196FFF1024EDC3F50064B633 /* SearchHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196FFF0F24EDC3F50064B633 /* SearchHeaderView.swift */; };
 		1973143A24C8B38C00D675B6 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1973143924C8B38C00D675B6 /* Collection.swift */; };
 		1975B8D324D829920095C72B /* FundManageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1975B8D224D829920095C72B /* FundManageViewController.swift */; };
@@ -1063,6 +1070,13 @@
 		19129483249BBA3E007F1083 /* PublicProfileFollow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicProfileFollow.swift; sourceTree = "<group>"; };
 		19129485249BBAF8007F1083 /* PostPlatformAssetDetailsWithPrices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostPlatformAssetDetailsWithPrices.swift; sourceTree = "<group>"; };
 		1963836924FED6A600FDB06E /* UINavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationBar.swift; sourceTree = "<group>"; };
+		196389A82530AA7C00CA2092 /* BinanceRawAccountInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawAccountInfo.swift; sourceTree = "<group>"; };
+		196389AE2530AA9C00CA2092 /* BinanceRawBinanceBalance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawBinanceBalance.swift; sourceTree = "<group>"; };
+		196389AF2530AA9C00CA2092 /* BinanceRawKlineItemsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawKlineItemsViewModel.swift; sourceTree = "<group>"; };
+		196389B62530AAB300CA2092 /* BinanceRawOrderSide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawOrderSide.swift; sourceTree = "<group>"; };
+		196389BC2530AAC800CA2092 /* BinanceRawPlaceOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawPlaceOrder.swift; sourceTree = "<group>"; };
+		196389C22530AAD700CA2092 /* BinanceRawTimeInForce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawTimeInForce.swift; sourceTree = "<group>"; };
+		196389C82530ADFF00CA2092 /* BinanceRawOrderResponseType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawOrderResponseType.swift; sourceTree = "<group>"; };
 		196FFF0F24EDC3F50064B633 /* SearchHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeaderView.swift; sourceTree = "<group>"; };
 		1973143924C8B38C00D675B6 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		1975B8D224D829920095C72B /* FundManageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundManageViewController.swift; sourceTree = "<group>"; };
@@ -2263,8 +2277,14 @@
 				1979A51F2524DE8D005EEABF /* BinanceRawAccountType.swift */,
 				1979A51B2524DE8C005EEABF /* BinanceRawExchangeInfo.swift */,
 				1979A5212524DE8D005EEABF /* BinanceRawKline.swift */,
+				196389AE2530AA9C00CA2092 /* BinanceRawBinanceBalance.swift */,
+				196389AF2530AA9C00CA2092 /* BinanceRawKlineItemsViewModel.swift */,
 				1979A5282524DE8F005EEABF /* BinanceRawKlineInterval.swift */,
+				196389BC2530AAC800CA2092 /* BinanceRawPlaceOrder.swift */,
+				196389C22530AAD700CA2092 /* BinanceRawTimeInForce.swift */,
+				196389C82530ADFF00CA2092 /* BinanceRawOrderResponseType.swift */,
 				1979A54A2524DF00005EEABF /* NotificationLocationViewModel.swift */,
+				196389B62530AAB300CA2092 /* BinanceRawOrderSide.swift */,
 				1979A53E2524DEC2005EEABF /* InvestorFinancialStatistic.swift */,
 				1979A5422524DED5005EEABF /* MakeSelfManagedFundPublicRequest.swift */,
 				1979A5462524DEF0005EEABF /* NewSelfManagedFundRequest.swift */,
@@ -2275,6 +2295,7 @@
 				1979A51A2524DE8C005EEABF /* BinanceRawOrderType.swift */,
 				1979A51E2524DE8D005EEABF /* BinanceRawRateLimit.swift */,
 				1979A5232524DE8E005EEABF /* BinanceRawRateLimitInterval.swift */,
+				196389A82530AA7C00CA2092 /* BinanceRawAccountInfo.swift */,
 				1979A5252524DE8E005EEABF /* BinanceRawRateLimitType.swift */,
 				1979A5292524DE8F005EEABF /* BinanceRawSymbol.swift */,
 				1979A5262524DE8E005EEABF /* BinanceRawSymbolFilter.swift */,
@@ -4675,6 +4696,7 @@
 				5E39F7C023A3F9300073DAD5 /* MultiWalletTransactionStatus.swift in Sources */,
 				5E367907206BC6DA006E226A /* AmountLabel.swift in Sources */,
 				19129486249BBAF8007F1083 /* PostPlatformAssetDetailsWithPrices.swift in Sources */,
+				196389C32530AAD700CA2092 /* BinanceRawTimeInForce.swift in Sources */,
 				5EB06A4E239E8AFB003AB3FB /* EventsDataProvider.swift in Sources */,
 				5E70427123CCECB900D8950F /* AccountListViewController.swift in Sources */,
 				19DA233924C4C5C9002ECB2C /* CreateFundAssetsListViewController.swift in Sources */,
@@ -5010,6 +5032,7 @@
 				5E39F78723A3F9300073DAD5 /* ProgramFollowDetailsFullTradingAccountDetails.swift in Sources */,
 				5E39F5EF23A3F8A60073DAD5 /* AssetFacet.swift in Sources */,
 				5EA1FE2C21A30EC200308D81 /* FacetsDelegateManager.swift in Sources */,
+				196389BD2530AAC800CA2092 /* BinanceRawPlaceOrder.swift in Sources */,
 				19812439246451FF00F286FE /* FundDetailsListItemItemsViewModel.swift in Sources */,
 				5E39F7B823A3F9300073DAD5 /* LevelsParamsInfo.swift in Sources */,
 				5E541D3A238DD5E600B38244 /* TradingEventsViewModel.swift in Sources */,
@@ -5025,6 +5048,7 @@
 				19EEE0C82507C13500F83CED /* TradingScheduleInfo.swift in Sources */,
 				5E39F72523A3F92F0073DAD5 /* PrivateTradingAccountFullTradingAccountDetails.swift in Sources */,
 				19EEE0CC2507C1CF00F83CED /* AssetGlobalType.swift in Sources */,
+				196389B72530AAB300CA2092 /* BinanceRawOrderSide.swift in Sources */,
 				5EF9F92223E322F100542E1E /* PlatformEvents.swift in Sources */,
 				FC0E20062044123F00872BE5 /* PhotoHeaderView.swift in Sources */,
 				5E93E70621D1A5370020DE55 /* NotificationsSettingsGeneralTableViewCellViewModel.swift in Sources */,
@@ -5049,6 +5073,7 @@
 				5EE0075F217871E40045B890 /* ManagerInfoViewController.swift in Sources */,
 				5E39F75A23A3F92F0073DAD5 /* DetachFromSignalProvider.swift in Sources */,
 				5EA274E12162F113008CAF77 /* ProgramProfitViewModel.swift in Sources */,
+				196389B02530AA9C00CA2092 /* BinanceRawBinanceBalance.swift in Sources */,
 				FCA19A3B201AE34900157AD6 /* WelcomeRouter.swift in Sources */,
 				FC0E201F2044459500872BE5 /* QRCode.swift in Sources */,
 				5E39F71F23A3F92F0073DAD5 /* MakeTradingAccountSignalProvider.swift in Sources */,
@@ -5201,6 +5226,7 @@
 				5E39F79A23A3F9300073DAD5 /* ProgramCreateAssetPlatformInfo.swift in Sources */,
 				5E826AE9238563A600116DD7 /* DashboardRecommendationsViewModel.swift in Sources */,
 				198124542464585D00F286FE /* PostTag.swift in Sources */,
+				196389C92530ADFF00CA2092 /* BinanceRawOrderResponseType.swift in Sources */,
 				5E93E70421D1A5370020DE55 /* NotificationListTableViewCellViewModel.swift in Sources */,
 				FCB8DFCF2010F99200698D18 /* AuthManager.swift in Sources */,
 				5EAD0AB92090AB2300A92B49 /* MarkerView.swift in Sources */,
@@ -5286,6 +5312,7 @@
 				5EF14D792181EB0E00B3843A /* FundWithdrawViewController.swift in Sources */,
 				5EC2402422D9139D0053AFF0 /* ErrorBottomSheetView.swift in Sources */,
 				5E39F73423A3F92F0073DAD5 /* UserDetailsList.swift in Sources */,
+				196389B12530AA9C00CA2092 /* BinanceRawKlineItemsViewModel.swift in Sources */,
 				5E21663523A7DC97001BB512 /* AssetPublicDetails.swift in Sources */,
 				5EFB2389238C058200CD7480 /* InvestingFundsViewModel.swift in Sources */,
 				5E70426823CCEBE900D8950F /* AccountBalanceViewModel.swift in Sources */,
@@ -5537,6 +5564,7 @@
 				5E39F78A23A3F9300073DAD5 /* ErrorMessage.swift in Sources */,
 				5E39F75F23A3F92F0073DAD5 /* InvestmentEventType.swift in Sources */,
 				1981243D2464522F00F286FE /* FundsFilterSorting.swift in Sources */,
+				196389A92530AA7C00CA2092 /* BinanceRawAccountInfo.swift in Sources */,
 				5E1813822061D36700481646 /* UIAlertController+Extensions.swift in Sources */,
 				5EB06A3F239D312A003AB3FB /* BrokersAPI.swift in Sources */,
 				5E39F7A923A3F9300073DAD5 /* OrderModelSignalData.swift in Sources */,
@@ -5937,7 +5965,7 @@
 				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -6219,7 +6247,7 @@
 				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
@@ -6301,7 +6329,7 @@
 				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

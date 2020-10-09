@@ -245,7 +245,8 @@ final class FundEditPublicInfoViewModel {
             imageLogo = fundPublicInfo?.logo
         }
         
-        let model = ProgramUpdate(title: newTitle, _description: newDescription, logo: imageLogo, entryFee: entryFeeCurrent, exitFee: exitFeeCurrent, successFee: nil, stopOutLevel: nil, investmentLimit: nil, tradesDelay: nil, _id: nil)
+
+        let model = ProgramUpdate(title: newTitle, _description: newDescription, logo: imageLogo, entryFee: entryFeeCurrent, exitFee: exitFeeCurrent, successFee: nil, stopOutLevel: nil, investmentLimit: nil, tradesDelay: nil, hourProcessing: nil, isProcessingRealTime: nil)
         AssetsDataProvider.updateFundAssetDetails(assetId, model: model, completion: completion)
     }
 }

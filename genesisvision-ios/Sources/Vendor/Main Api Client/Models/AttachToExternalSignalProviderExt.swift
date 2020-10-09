@@ -11,8 +11,6 @@ import Foundation
 public struct AttachToExternalSignalProviderExt: Codable {
 
 
-    public var tradingAccountId: UUID?
-
     public var mode: SubscriptionMode?
 
     public var percent: Double?
@@ -22,13 +20,15 @@ public struct AttachToExternalSignalProviderExt: Codable {
     public var fixedVolume: Double?
 
     public var fixedCurrency: Currency?
-    public init(tradingAccountId: UUID? = nil, mode: SubscriptionMode? = nil, percent: Double? = nil, openTolerancePercent: Double? = nil, fixedVolume: Double? = nil, fixedCurrency: Currency? = nil) { 
-        self.tradingAccountId = tradingAccountId
+
+    public var tradingAccountId: UUID?
+    public init(mode: SubscriptionMode? = nil, percent: Double? = nil, openTolerancePercent: Double? = nil, fixedVolume: Double? = nil, fixedCurrency: Currency? = nil, tradingAccountId: UUID? = nil) { 
         self.mode = mode
         self.percent = percent
         self.openTolerancePercent = openTolerancePercent
         self.fixedVolume = fixedVolume
         self.fixedCurrency = fixedCurrency
+        self.tradingAccountId = tradingAccountId
     }
 
 }

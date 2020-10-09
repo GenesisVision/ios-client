@@ -317,7 +317,7 @@ class CreateFundViewModel {
     private let errorCompletion: ((CompletionResult) -> Void) = { (result) in
        print(result)
     }
-    var request = NewFundRequest(assets: nil, entryFee: nil, exitFee: nil, depositAmount: nil, depositWalletId: nil, title: nil, _description: nil, logo: nil)
+    var request = NewFundRequest(title: nil, _description: nil, logo: nil, assets: nil, entryFee: nil, exitFee: nil, depositAmount: nil, depositWalletId: nil)
     
     weak var addAssetsProtocol: AddAssetListViewModelProtocol?
     weak var delegate: BaseTableViewProtocol?
@@ -465,7 +465,7 @@ class AssetCollectionViewModel: CellViewModelWithCollection {
             }
             
             if value < 100 {
-                viewModels.append(FundAssetCollectionViewCellViewModel(assetModel: PlatformAsset(mandatoryFundPercent: 100 - value, _id: nil, name: nil, asset: nil, _description: nil, logoUrl: nil, color: nil, url: nil)))
+                viewModels.append(FundAssetCollectionViewCellViewModel(assetModel: PlatformAsset(_id: nil, name: nil, asset: nil, _description: nil, logoUrl: nil, color: nil, url: nil, mandatoryFundPercent: 100 - value)))
             }
         }
     }

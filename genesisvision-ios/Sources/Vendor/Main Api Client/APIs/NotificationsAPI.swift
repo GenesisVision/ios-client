@@ -421,16 +421,16 @@ open class NotificationsAPI {
     "isEnabled" : true,
     "conditionAmount" : 0.8008281904610115,
     "conditionType" : "Empty",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "PlatformNewsAndUpdates"
   }, {
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "isEnabled" : true,
     "conditionAmount" : 0.8008281904610115,
     "conditionType" : "Empty",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "PlatformNewsAndUpdates"
   } ],
   "settingsFund" : [ {

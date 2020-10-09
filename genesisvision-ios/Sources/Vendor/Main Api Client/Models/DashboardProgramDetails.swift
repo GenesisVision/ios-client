@@ -11,6 +11,10 @@ import Foundation
 public struct DashboardProgramDetails: Codable {
 
 
+    public var level: Int?
+
+    public var levelProgress: Double?
+
     public var managementFeeSelected: Double?
 
     public var managementFeeCurrent: Double?
@@ -20,18 +24,14 @@ public struct DashboardProgramDetails: Codable {
     public var successFeeCurrent: Double?
 
     public var dailyPeriodDetails: ProgramDailyPeriodDetails?
-
-    public var level: Int?
-
-    public var levelProgress: Double?
-    public init(managementFeeSelected: Double? = nil, managementFeeCurrent: Double? = nil, successFeeSelected: Double? = nil, successFeeCurrent: Double? = nil, dailyPeriodDetails: ProgramDailyPeriodDetails? = nil, level: Int? = nil, levelProgress: Double? = nil) { 
+    public init(level: Int? = nil, levelProgress: Double? = nil, managementFeeSelected: Double? = nil, managementFeeCurrent: Double? = nil, successFeeSelected: Double? = nil, successFeeCurrent: Double? = nil, dailyPeriodDetails: ProgramDailyPeriodDetails? = nil) { 
+        self.level = level
+        self.levelProgress = levelProgress
         self.managementFeeSelected = managementFeeSelected
         self.managementFeeCurrent = managementFeeCurrent
         self.successFeeSelected = successFeeSelected
         self.successFeeCurrent = successFeeCurrent
         self.dailyPeriodDetails = dailyPeriodDetails
-        self.level = level
-        self.levelProgress = levelProgress
     }
 
 }

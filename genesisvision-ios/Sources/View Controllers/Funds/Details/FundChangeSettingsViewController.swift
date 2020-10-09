@@ -126,7 +126,7 @@ final class ChangeFundSettingsViewModel {
     func updateAssetFees(completion: @escaping CompletionBlock) {
         guard let assetId = assetId else { return }
         
-        let model = ProgramUpdate(title: fundDetails?.publicInfo?.title, _description: fundDetails?.publicInfo?._description, logo: fundDetails?.publicInfo?.logo, entryFee: newEntryFee, exitFee: newExitFee, successFee: nil, stopOutLevel: nil, investmentLimit: nil, tradesDelay: nil, _id: nil)
+        let model = ProgramUpdate(title: fundDetails?.publicInfo?.title, _description: fundDetails?.publicInfo?._description, logo: fundDetails?.publicInfo?.logo, entryFee: newEntryFee, exitFee: newExitFee, successFee: nil, stopOutLevel: nil, investmentLimit: nil, tradesDelay: nil, hourProcessing: nil, isProcessingRealTime: nil)
         
         AssetsDataProvider.updateFundAssetDetails(assetId, model: model, completion: completion)
     }

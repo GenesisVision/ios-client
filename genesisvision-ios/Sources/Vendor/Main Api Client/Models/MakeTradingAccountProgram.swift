@@ -11,6 +11,12 @@ import Foundation
 public struct MakeTradingAccountProgram: Codable {
 
 
+    public var title: String?
+
+    public var _description: String?
+
+    public var logo: String?
+
     public var _id: UUID?
 
     public var periodLength: Int?
@@ -24,13 +30,10 @@ public struct MakeTradingAccountProgram: Codable {
     public var successFee: Double?
 
     public var managementFee: Double?
-
-    public var title: String?
-
-    public var _description: String?
-
-    public var logo: String?
-    public init(_id: UUID? = nil, periodLength: Int? = nil, stopOutLevel: Double? = nil, investmentLimit: Double? = nil, tradesDelay: TradesDelay? = nil, successFee: Double? = nil, managementFee: Double? = nil, title: String? = nil, _description: String? = nil, logo: String? = nil) { 
+    public init(title: String? = nil, _description: String? = nil, logo: String? = nil, _id: UUID? = nil, periodLength: Int? = nil, stopOutLevel: Double? = nil, investmentLimit: Double? = nil, tradesDelay: TradesDelay? = nil, successFee: Double? = nil, managementFee: Double? = nil) { 
+        self.title = title
+        self._description = _description
+        self.logo = logo
         self._id = _id
         self.periodLength = periodLength
         self.stopOutLevel = stopOutLevel
@@ -38,11 +41,11 @@ public struct MakeTradingAccountProgram: Codable {
         self.tradesDelay = tradesDelay
         self.successFee = successFee
         self.managementFee = managementFee
-        self.title = title
-        self._description = _description
-        self.logo = logo
     }
     public enum CodingKeys: String, CodingKey { 
+        case title
+        case _description = "description"
+        case logo
         case _id = "id"
         case periodLength
         case stopOutLevel
@@ -50,9 +53,6 @@ public struct MakeTradingAccountProgram: Codable {
         case tradesDelay
         case successFee
         case managementFee
-        case title
-        case _description = "description"
-        case logo
     }
 
 }

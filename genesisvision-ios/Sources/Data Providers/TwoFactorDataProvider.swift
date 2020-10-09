@@ -24,7 +24,7 @@ class TwoFactorDataProvider: DataProvider {
     
     static func confirm(twoFactorCode: String, sharedKey: String, password: String, completion: @escaping (_ recoveryCodesViewModel: RecoveryCodesViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
 
-        let twoFactorAuthenticatorConfirm = TwoFactorAuthenticatorConfirm(code: twoFactorCode, sharedKey: sharedKey, password: password)
+        let twoFactorAuthenticatorConfirm = TwoFactorAuthenticatorConfirm(password: password, code: twoFactorCode, sharedKey: sharedKey)
         
         AuthAPI.confirmTwoStepAuth(body: twoFactorAuthenticatorConfirm) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
@@ -33,7 +33,7 @@ class TwoFactorDataProvider: DataProvider {
     
     static func disable(twoFactorCode: String? = nil, recoveryCode: String? = nil, password: String, completion: @escaping CompletionBlock) {
         
-        let twoFactorCodeModel = TwoFactorCodeWithPassword(twoFactorCode: twoFactorCode, password: password)
+        let twoFactorCodeModel = TwoFactorCodeWithPassword(password: password, twoFactorCode: twoFactorCode)
         
         AuthAPI.disableTwoStepAuth(body: twoFactorCodeModel) { (_, error) in
             DataProvider().responseHandler(error, completion: completion)

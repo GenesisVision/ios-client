@@ -71,11 +71,11 @@ open class InvestmentsAPI {
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
-  "exitFee" : 0.8008281904610115,
+  "exitFee" : 1.4658129805029452,
   "isOwner" : true,
-  "withheldInvestment" : 1.4658129805029452,
+  "withheldInvestment" : 6.027456183070403,
   "title" : "title",
-  "availableToWithdraw" : 6.027456183070403
+  "availableToWithdraw" : 0.8008281904610115
 }}]
      - parameter _id: (path)       - parameter currency: (query)  (optional)
 
@@ -118,8 +118,8 @@ open class InvestmentsAPI {
        - name: Bearer
      - examples: [{contentType=application/json, example={
   "isOwner" : true,
-  "periodEnds" : "2000-01-23T04:56:07.000+00:00",
   "withheldInvestment" : 6.027456183070403,
+  "periodEnds" : "2000-01-23T04:56:07.000+00:00",
   "title" : "title",
   "availableToWithdraw" : 0.8008281904610115,
   "withdrawInPercent" : true

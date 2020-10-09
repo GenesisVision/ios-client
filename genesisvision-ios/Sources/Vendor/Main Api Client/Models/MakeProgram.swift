@@ -11,6 +11,16 @@ import Foundation
 public struct MakeProgram: Codable {
 
 
+    public var depositAmount: Double?
+
+    public var depositWalletId: UUID?
+
+    public var currency: Currency?
+
+    public var leverage: Int?
+
+    public var brokerAccountTypeId: UUID?
+
     public var title: String?
 
     public var _description: String?
@@ -28,17 +38,12 @@ public struct MakeProgram: Codable {
     public var successFee: Double?
 
     public var managementFee: Double?
-
-    public var depositAmount: Double?
-
-    public var depositWalletId: UUID?
-
-    public var currency: Currency?
-
-    public var leverage: Int?
-
-    public var brokerAccountTypeId: UUID?
-    public init(title: String? = nil, _description: String? = nil, logo: String? = nil, periodLength: Int? = nil, stopOutLevel: Double? = nil, investmentLimit: Double? = nil, tradesDelay: TradesDelay? = nil, successFee: Double? = nil, managementFee: Double? = nil, depositAmount: Double? = nil, depositWalletId: UUID? = nil, currency: Currency? = nil, leverage: Int? = nil, brokerAccountTypeId: UUID? = nil) { 
+    public init(depositAmount: Double? = nil, depositWalletId: UUID? = nil, currency: Currency? = nil, leverage: Int? = nil, brokerAccountTypeId: UUID? = nil, title: String? = nil, _description: String? = nil, logo: String? = nil, periodLength: Int? = nil, stopOutLevel: Double? = nil, investmentLimit: Double? = nil, tradesDelay: TradesDelay? = nil, successFee: Double? = nil, managementFee: Double? = nil) { 
+        self.depositAmount = depositAmount
+        self.depositWalletId = depositWalletId
+        self.currency = currency
+        self.leverage = leverage
+        self.brokerAccountTypeId = brokerAccountTypeId
         self.title = title
         self._description = _description
         self.logo = logo
@@ -48,13 +53,13 @@ public struct MakeProgram: Codable {
         self.tradesDelay = tradesDelay
         self.successFee = successFee
         self.managementFee = managementFee
-        self.depositAmount = depositAmount
-        self.depositWalletId = depositWalletId
-        self.currency = currency
-        self.leverage = leverage
-        self.brokerAccountTypeId = brokerAccountTypeId
     }
     public enum CodingKeys: String, CodingKey { 
+        case depositAmount
+        case depositWalletId
+        case currency
+        case leverage
+        case brokerAccountTypeId
         case title
         case _description = "description"
         case logo
@@ -64,11 +69,6 @@ public struct MakeProgram: Codable {
         case tradesDelay
         case successFee
         case managementFee
-        case depositAmount
-        case depositWalletId
-        case currency
-        case leverage
-        case brokerAccountTypeId
     }
 
 }

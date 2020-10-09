@@ -11,16 +11,6 @@ import Foundation
 public struct PrivateTradingAccountOwnerActions: Codable {
 
 
-    public var canClose: Bool?
-
-    public var canChangePassword: Bool?
-
-    public var canTransferMoney: Bool?
-
-    public var canMakeDemoDeposit: Bool?
-
-    public var canCloseOpenPositions: Bool?
-
     public var canMakeProgramFromPrivateTradingAccount: Bool?
 
     public var canMakeExchangeProgramFromPrivateTradingAccount: Bool?
@@ -38,12 +28,17 @@ public struct PrivateTradingAccountOwnerActions: Codable {
     public var isEnoughMoneyToCreateProgram: Bool?
 
     public var canConfirm2FA: Bool?
-    public init(canClose: Bool? = nil, canChangePassword: Bool? = nil, canTransferMoney: Bool? = nil, canMakeDemoDeposit: Bool? = nil, canCloseOpenPositions: Bool? = nil, canMakeProgramFromPrivateTradingAccount: Bool? = nil, canMakeExchangeProgramFromPrivateTradingAccount: Bool? = nil, canMakeSignalProviderFromPrivateTradingAccount: Bool? = nil, canMakeSignalProviderFromPrivateExternalTradingAccount: Bool? = nil, canMakeProgramFromSignalProvider: Bool? = nil, canMakeSignalProviderFromProgram: Bool? = nil, canEditSignalProviderSettings: Bool? = nil, isEnoughMoneyToCreateProgram: Bool? = nil, canConfirm2FA: Bool? = nil) { 
-        self.canClose = canClose
-        self.canChangePassword = canChangePassword
-        self.canTransferMoney = canTransferMoney
-        self.canMakeDemoDeposit = canMakeDemoDeposit
-        self.canCloseOpenPositions = canCloseOpenPositions
+
+    public var canClose: Bool?
+
+    public var canChangePassword: Bool?
+
+    public var canTransferMoney: Bool?
+
+    public var canMakeDemoDeposit: Bool?
+
+    public var canCloseOpenPositions: Bool?
+    public init(canMakeProgramFromPrivateTradingAccount: Bool? = nil, canMakeExchangeProgramFromPrivateTradingAccount: Bool? = nil, canMakeSignalProviderFromPrivateTradingAccount: Bool? = nil, canMakeSignalProviderFromPrivateExternalTradingAccount: Bool? = nil, canMakeProgramFromSignalProvider: Bool? = nil, canMakeSignalProviderFromProgram: Bool? = nil, canEditSignalProviderSettings: Bool? = nil, isEnoughMoneyToCreateProgram: Bool? = nil, canConfirm2FA: Bool? = nil, canClose: Bool? = nil, canChangePassword: Bool? = nil, canTransferMoney: Bool? = nil, canMakeDemoDeposit: Bool? = nil, canCloseOpenPositions: Bool? = nil) { 
         self.canMakeProgramFromPrivateTradingAccount = canMakeProgramFromPrivateTradingAccount
         self.canMakeExchangeProgramFromPrivateTradingAccount = canMakeExchangeProgramFromPrivateTradingAccount
         self.canMakeSignalProviderFromPrivateTradingAccount = canMakeSignalProviderFromPrivateTradingAccount
@@ -53,6 +48,11 @@ public struct PrivateTradingAccountOwnerActions: Codable {
         self.canEditSignalProviderSettings = canEditSignalProviderSettings
         self.isEnoughMoneyToCreateProgram = isEnoughMoneyToCreateProgram
         self.canConfirm2FA = canConfirm2FA
+        self.canClose = canClose
+        self.canChangePassword = canChangePassword
+        self.canTransferMoney = canTransferMoney
+        self.canMakeDemoDeposit = canMakeDemoDeposit
+        self.canCloseOpenPositions = canCloseOpenPositions
     }
 
 }

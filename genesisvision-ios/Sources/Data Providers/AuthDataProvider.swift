@@ -10,7 +10,7 @@ class AuthDataProvider: DataProvider {
     // MARK: - Public methods
     static func signIn(email: String, password: String, twoFactorCode: String? = nil, recoveryCode: String? = nil, client: String? = "iOS", captchaCheckResult: CaptchaCheckResult? = nil, completion: @escaping (_ token: String?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
-        let model = LoginViewModel(password: password, rememberMe: true, twoFactorCode: twoFactorCode, recoveryCode: recoveryCode, client: client, email: email, captchaCheckResult: captchaCheckResult)
+        let model = LoginViewModel(email: email, captchaCheckResult: captchaCheckResult, password: password, rememberMe: true, twoFactorCode: twoFactorCode, recoveryCode: recoveryCode, client: client)
                 
         AuthAPI.authorize(body: model) { (token, error) in
             DataProvider().responseHandler(error, completion: { (result) in
@@ -26,7 +26,7 @@ class AuthDataProvider: DataProvider {
     
     static func signUp(username: String, email: String, password: String, confirmPassword: String, refCode: String? = nil, isAuto: Bool? = nil, captchaCheckResult: CaptchaCheckResult? = nil, completion: @escaping CompletionBlock) {
         
-        let model = RegisterViewModel(password: password, confirmPassword: confirmPassword, userName: username, refCode: refCode, isAuto: isAuto, email: email, captchaCheckResult: captchaCheckResult)
+        let model = RegisterViewModel(email: email, captchaCheckResult: captchaCheckResult, password: password, confirmPassword: confirmPassword, userName: username, refCode: refCode, isAuto: isAuto)
         
         AuthAPI.register(body: model) { (_, error) in
             DataProvider().responseHandler(error, completion: completion)

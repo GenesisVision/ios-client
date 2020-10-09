@@ -404,31 +404,29 @@ open class ProgramsAPI {
      - examples: [{contentType=application/json, example={
   "total" : 7,
   "showSwaps" : true,
-  "showTickets" : true,
-  "tradesDelay" : "None",
   "items" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "originalCommissionCurrency" : "originalCommissionCurrency",
     "symbol" : "symbol",
-    "originalCommission" : 1.2315135367772556,
-    "totalCommission" : 7.061401241503109,
+    "originalCommission" : 2.3021358869347655,
     "login" : "login",
-    "priceCurrent" : 4.145608029883936,
-    "price" : 2.027123023002322,
+    "totalCommission" : 6.84685269835264,
+    "priceCurrent" : 5.962133916683182,
+    "price" : 1.4658129805029452,
     "showOriginalCommission" : true,
-    "commission" : 1.0246457001441578,
+    "commission" : 7.061401241503109,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "baseVolume" : 7.386281948385884,
+    "baseVolume" : 5.637376656633329,
     "signalData" : {
       "masters" : [ {
-        "share" : 6.84685269835264,
+        "share" : 3.616076749251911,
         "login" : "login"
       }, {
-        "share" : 6.84685269835264,
+        "share" : 3.616076749251911,
         "login" : "login"
       } ]
     },
-    "profit" : 3.616076749251911,
+    "profit" : 6.027456183070403,
     "direction" : "Buy",
     "ticket" : "ticket",
     "assetData" : {
@@ -436,8 +434,9 @@ open class ProgramsAPI {
       "logoUrl" : "logoUrl",
       "url" : "url"
     },
-    "swap" : 1.4894159098541704,
-    "volume" : 9.301444243932576,
+    "swap" : 9.301444243932576,
+    "volume" : 0.8008281904610115,
+    "entry" : "In",
     "totalCommissionByType" : [ {
       "amount" : 9.301444243932576,
       "description" : "description",
@@ -449,18 +448,17 @@ open class ProgramsAPI {
       "title" : "title",
       "type" : "Undefined"
     } ],
-    "entry" : "In",
     "tradingAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "profitCurrency" : "profitCurrency",
     "providers" : [ {
-      "volume" : 1.4658129805029452,
+      "volume" : 7.386281948385884,
       "firstOrderDate" : "2000-01-23T04:56:07.000+00:00",
       "fees" : [ {
-        "amount" : 2.3021358869347655,
+        "amount" : 1.4894159098541704,
         "currency" : "Undefined",
         "type" : "Undefined"
       }, {
-        "amount" : 2.3021358869347655,
+        "amount" : 1.4894159098541704,
         "currency" : "Undefined",
         "type" : "Undefined"
       } ],
@@ -484,27 +482,27 @@ open class ProgramsAPI {
         "url" : "url",
         "username" : "username"
       },
-      "priceOpenAvg" : 5.962133916683182,
+      "priceOpenAvg" : 1.2315135367772556,
       "program" : {
         "color" : "color",
-        "level" : 0,
+        "level" : 2,
         "title" : "title",
         "type" : "None",
         "url" : "url",
         "logoUrl" : "logoUrl",
-        "levelProgress" : 6.027456183070403
+        "levelProgress" : 4.145608029883936
       },
-      "profit" : 5.637376656633329,
+      "profit" : 1.0246457001441578,
       "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
     }, {
-      "volume" : 1.4658129805029452,
+      "volume" : 7.386281948385884,
       "firstOrderDate" : "2000-01-23T04:56:07.000+00:00",
       "fees" : [ {
-        "amount" : 2.3021358869347655,
+        "amount" : 1.4894159098541704,
         "currency" : "Undefined",
         "type" : "Undefined"
       }, {
-        "amount" : 2.3021358869347655,
+        "amount" : 1.4894159098541704,
         "currency" : "Undefined",
         "type" : "Undefined"
       } ],
@@ -528,42 +526,42 @@ open class ProgramsAPI {
         "url" : "url",
         "username" : "username"
       },
-      "priceOpenAvg" : 5.962133916683182,
+      "priceOpenAvg" : 1.2315135367772556,
       "program" : {
         "color" : "color",
-        "level" : 0,
+        "level" : 2,
         "title" : "title",
         "type" : "None",
         "url" : "url",
         "logoUrl" : "logoUrl",
-        "levelProgress" : 6.027456183070403
+        "levelProgress" : 4.145608029883936
       },
-      "profit" : 5.637376656633329,
+      "profit" : 1.0246457001441578,
       "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
     } ]
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "originalCommissionCurrency" : "originalCommissionCurrency",
     "symbol" : "symbol",
-    "originalCommission" : 1.2315135367772556,
-    "totalCommission" : 7.061401241503109,
+    "originalCommission" : 2.3021358869347655,
     "login" : "login",
-    "priceCurrent" : 4.145608029883936,
-    "price" : 2.027123023002322,
+    "totalCommission" : 6.84685269835264,
+    "priceCurrent" : 5.962133916683182,
+    "price" : 1.4658129805029452,
     "showOriginalCommission" : true,
-    "commission" : 1.0246457001441578,
+    "commission" : 7.061401241503109,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "baseVolume" : 7.386281948385884,
+    "baseVolume" : 5.637376656633329,
     "signalData" : {
       "masters" : [ {
-        "share" : 6.84685269835264,
+        "share" : 3.616076749251911,
         "login" : "login"
       }, {
-        "share" : 6.84685269835264,
+        "share" : 3.616076749251911,
         "login" : "login"
       } ]
     },
-    "profit" : 3.616076749251911,
+    "profit" : 6.027456183070403,
     "direction" : "Buy",
     "ticket" : "ticket",
     "assetData" : {
@@ -571,8 +569,9 @@ open class ProgramsAPI {
       "logoUrl" : "logoUrl",
       "url" : "url"
     },
-    "swap" : 1.4894159098541704,
-    "volume" : 9.301444243932576,
+    "swap" : 9.301444243932576,
+    "volume" : 0.8008281904610115,
+    "entry" : "In",
     "totalCommissionByType" : [ {
       "amount" : 9.301444243932576,
       "description" : "description",
@@ -584,18 +583,17 @@ open class ProgramsAPI {
       "title" : "title",
       "type" : "Undefined"
     } ],
-    "entry" : "In",
     "tradingAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "profitCurrency" : "profitCurrency",
     "providers" : [ {
-      "volume" : 1.4658129805029452,
+      "volume" : 7.386281948385884,
       "firstOrderDate" : "2000-01-23T04:56:07.000+00:00",
       "fees" : [ {
-        "amount" : 2.3021358869347655,
+        "amount" : 1.4894159098541704,
         "currency" : "Undefined",
         "type" : "Undefined"
       }, {
-        "amount" : 2.3021358869347655,
+        "amount" : 1.4894159098541704,
         "currency" : "Undefined",
         "type" : "Undefined"
       } ],
@@ -619,27 +617,27 @@ open class ProgramsAPI {
         "url" : "url",
         "username" : "username"
       },
-      "priceOpenAvg" : 5.962133916683182,
+      "priceOpenAvg" : 1.2315135367772556,
       "program" : {
         "color" : "color",
-        "level" : 0,
+        "level" : 2,
         "title" : "title",
         "type" : "None",
         "url" : "url",
         "logoUrl" : "logoUrl",
-        "levelProgress" : 6.027456183070403
+        "levelProgress" : 4.145608029883936
       },
-      "profit" : 5.637376656633329,
+      "profit" : 1.0246457001441578,
       "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
     }, {
-      "volume" : 1.4658129805029452,
+      "volume" : 7.386281948385884,
       "firstOrderDate" : "2000-01-23T04:56:07.000+00:00",
       "fees" : [ {
-        "amount" : 2.3021358869347655,
+        "amount" : 1.4894159098541704,
         "currency" : "Undefined",
         "type" : "Undefined"
       }, {
-        "amount" : 2.3021358869347655,
+        "amount" : 1.4894159098541704,
         "currency" : "Undefined",
         "type" : "Undefined"
       } ],
@@ -663,20 +661,22 @@ open class ProgramsAPI {
         "url" : "url",
         "username" : "username"
       },
-      "priceOpenAvg" : 5.962133916683182,
+      "priceOpenAvg" : 1.2315135367772556,
       "program" : {
         "color" : "color",
-        "level" : 0,
+        "level" : 2,
         "title" : "title",
         "type" : "None",
         "url" : "url",
         "logoUrl" : "logoUrl",
-        "levelProgress" : 6.027456183070403
+        "levelProgress" : 4.145608029883936
       },
-      "profit" : 5.637376656633329,
+      "profit" : 1.0246457001441578,
       "programId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
     } ]
-  } ]
+  } ],
+  "showTickets" : true,
+  "tradesDelay" : "None"
 }}]
      - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter symbol: (query)  (optional)     - parameter sorting: (query)  (optional)     - parameter accountId: (query)  (optional)     - parameter accountCurrency: (query)  (optional)     - parameter isFollow: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
 
@@ -728,11 +728,11 @@ open class ProgramsAPI {
      - examples: [{contentType=application/json, example={
   "profit" : 0.8008281904610115,
   "chart" : [ {
-    "date" : "2000-01-23T04:56:07.000+00:00",
-    "value" : 0.8008281904610115
+    "date" : 0,
+    "value" : 6.027456183070403
   }, {
-    "date" : "2000-01-23T04:56:07.000+00:00",
-    "value" : 0.8008281904610115
+    "date" : 0,
+    "value" : 6.027456183070403
   } ]
 }}]
      - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter maxPointCount: (query)  (optional)     - parameter currency: (query)  (optional)
@@ -782,13 +782,13 @@ open class ProgramsAPI {
   "color" : "color",
   "programCurrency" : "Undefined",
   "chart" : [ {
-    "date" : "2000-01-23T04:56:07.000+00:00",
-    "investorsFunds" : 1.4658129805029452,
-    "managerFunds" : 6.027456183070403
+    "date" : 6,
+    "investorsFunds" : 5.962133916683182,
+    "managerFunds" : 1.4658129805029452
   }, {
-    "date" : "2000-01-23T04:56:07.000+00:00",
-    "investorsFunds" : 1.4658129805029452,
-    "managerFunds" : 6.027456183070403
+    "date" : 6,
+    "investorsFunds" : 5.962133916683182,
+    "managerFunds" : 1.4658129805029452
   } ]
 }}]
      - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter maxPointCount: (query)  (optional)     - parameter currency: (query)  (optional)
@@ -984,8 +984,8 @@ open class ProgramsAPI {
     "canTransferMoney" : true,
     "canMakeProgramFromPrivateTradingAccount" : true,
     "canMakeExchangeProgramFromPrivateTradingAccount" : true,
-    "canClosePeriod" : true,
     "canMakeProgramFromSignalProvider" : true,
+    "canClosePeriod" : true,
     "isEnoughMoneyToCreateProgram" : true,
     "canChangePassword" : true,
     "canMakeSignalProviderFromPrivateTradingAccount" : true,
@@ -1081,9 +1081,6 @@ open class ProgramsAPI {
   "showPrice" : true,
   "showSwaps" : true,
   "showPriceOpen" : true,
-  "showTickets" : true,
-  "showDate" : true,
-  "tradesDelay" : "None",
   "items" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "originalCommissionCurrency" : "originalCommissionCurrency",
@@ -1108,10 +1105,10 @@ open class ProgramsAPI {
     "baseVolume" : 5.637376656633329,
     "signalData" : {
       "masters" : [ {
-        "share" : 6.84685269835264,
+        "share" : 3.616076749251911,
         "login" : "login"
       }, {
-        "share" : 6.84685269835264,
+        "share" : 3.616076749251911,
         "login" : "login"
       } ]
     },
@@ -1141,16 +1138,19 @@ open class ProgramsAPI {
     "baseVolume" : 5.637376656633329,
     "signalData" : {
       "masters" : [ {
-        "share" : 6.84685269835264,
+        "share" : 3.616076749251911,
         "login" : "login"
       }, {
-        "share" : 6.84685269835264,
+        "share" : 3.616076749251911,
         "login" : "login"
       } ]
     },
     "profit" : 6.027456183070403,
     "direction" : "Buy"
-  } ]
+  } ],
+  "showTickets" : true,
+  "showDate" : true,
+  "tradesDelay" : "None"
 }}]
      - parameter _id: (path)       - parameter sorting: (query)  (optional)     - parameter symbol: (query)  (optional)     - parameter accountId: (query)  (optional)     - parameter accountCurrency: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
 
@@ -1313,40 +1313,40 @@ open class ProgramsAPI {
        - name: Bearer
      - examples: [{contentType=application/json, example={
   "statistic" : {
-    "profitFactor" : 2.3021358869347655,
-    "calmarRatio" : 4.145608029883936,
-    "subscribers" : 6,
-    "trades" : 5,
-    "maxDrawdown" : 7.386281948385884,
-    "investors" : 0,
-    "tradingVolume" : 1.4658129805029452,
-    "sortinoRatio" : 2.027123023002322,
-    "balance" : 7.061401241503109,
-    "profitPercent" : 9.301444243932576,
-    "successTradesPercent" : 5.637376656633329,
+    "profitFactor" : 2.027123023002322,
+    "calmarRatio" : 5.637376656633329,
+    "subscribers" : 7,
+    "trades" : 9,
+    "maxDrawdown" : 2.3021358869347655,
+    "tradingVolume" : 7.061401241503109,
+    "investors" : 4,
+    "sortinoRatio" : 5.962133916683182,
+    "balance" : 0.8008281904610115,
+    "profitPercent" : 6.027456183070403,
+    "successTradesPercent" : 3.616076749251911,
     "lastPeriodEnds" : "2000-01-23T04:56:07.000+00:00",
-    "sharpeRatio" : 3.616076749251911,
+    "sharpeRatio" : 1.4658129805029452,
     "lastPeriodStarts" : "2000-01-23T04:56:07.000+00:00"
   },
   "charts" : [ {
     "color" : "color",
     "currency" : "Undefined",
     "chart" : [ {
-      "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 0.8008281904610115
+      "date" : 0,
+      "value" : 6.027456183070403
     }, {
-      "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 0.8008281904610115
+      "date" : 0,
+      "value" : 6.027456183070403
     } ]
   }, {
     "color" : "color",
     "currency" : "Undefined",
     "chart" : [ {
-      "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 0.8008281904610115
+      "date" : 0,
+      "value" : 6.027456183070403
     }, {
-      "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 0.8008281904610115
+      "date" : 0,
+      "value" : 6.027456183070403
     } ]
   } ]
 }}]
@@ -1496,11 +1496,11 @@ open class ProgramsAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       }, {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       } ],
       "profit" : 7.386281948385884
     },
@@ -1557,11 +1557,11 @@ open class ProgramsAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       }, {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       } ],
       "profit" : 7.386281948385884
     },

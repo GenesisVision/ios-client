@@ -11,18 +11,6 @@ import Foundation
 public struct AssetRequestDetails: Codable {
 
 
-    public var entryFee: Double?
-
-    public var managementFee: Double?
-
-    public var exitFee: Double?
-
-    public var withdrawPercent: Double?
-
-    public var isWithdrawAll: Bool?
-
-    public var successFee: Double?
-
     public var _id: UUID?
 
     public var logoUrl: String?
@@ -36,13 +24,19 @@ public struct AssetRequestDetails: Codable {
     public var assetType: AssetType?
 
     public var programDetails: ProgramAssetDetails?
-    public init(entryFee: Double? = nil, managementFee: Double? = nil, exitFee: Double? = nil, withdrawPercent: Double? = nil, isWithdrawAll: Bool? = nil, successFee: Double? = nil, _id: UUID? = nil, logoUrl: String? = nil, color: String? = nil, title: String? = nil, url: String? = nil, assetType: AssetType? = nil, programDetails: ProgramAssetDetails? = nil) { 
-        self.entryFee = entryFee
-        self.managementFee = managementFee
-        self.exitFee = exitFee
-        self.withdrawPercent = withdrawPercent
-        self.isWithdrawAll = isWithdrawAll
-        self.successFee = successFee
+
+    public var entryFee: Double?
+
+    public var managementFee: Double?
+
+    public var exitFee: Double?
+
+    public var withdrawPercent: Double?
+
+    public var isWithdrawAll: Bool?
+
+    public var successFee: Double?
+    public init(_id: UUID? = nil, logoUrl: String? = nil, color: String? = nil, title: String? = nil, url: String? = nil, assetType: AssetType? = nil, programDetails: ProgramAssetDetails? = nil, entryFee: Double? = nil, managementFee: Double? = nil, exitFee: Double? = nil, withdrawPercent: Double? = nil, isWithdrawAll: Bool? = nil, successFee: Double? = nil) { 
         self._id = _id
         self.logoUrl = logoUrl
         self.color = color
@@ -50,14 +44,14 @@ public struct AssetRequestDetails: Codable {
         self.url = url
         self.assetType = assetType
         self.programDetails = programDetails
+        self.entryFee = entryFee
+        self.managementFee = managementFee
+        self.exitFee = exitFee
+        self.withdrawPercent = withdrawPercent
+        self.isWithdrawAll = isWithdrawAll
+        self.successFee = successFee
     }
     public enum CodingKeys: String, CodingKey { 
-        case entryFee
-        case managementFee
-        case exitFee
-        case withdrawPercent
-        case isWithdrawAll
-        case successFee
         case _id = "id"
         case logoUrl
         case color
@@ -65,6 +59,12 @@ public struct AssetRequestDetails: Codable {
         case url
         case assetType
         case programDetails
+        case entryFee
+        case managementFee
+        case exitFee
+        case withdrawPercent
+        case isWithdrawAll
+        case successFee
     }
 
 }

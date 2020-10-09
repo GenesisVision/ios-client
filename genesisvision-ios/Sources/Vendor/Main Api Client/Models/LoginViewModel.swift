@@ -11,6 +11,10 @@ import Foundation
 public struct LoginViewModel: Codable {
 
 
+    public var email: String
+
+    public var captchaCheckResult: CaptchaCheckResult?
+
     public var password: String
 
     public var rememberMe: Bool?
@@ -20,18 +24,14 @@ public struct LoginViewModel: Codable {
     public var recoveryCode: String?
 
     public var client: String?
-
-    public var email: String
-
-    public var captchaCheckResult: CaptchaCheckResult?
-    public init(password: String, rememberMe: Bool? = nil, twoFactorCode: String? = nil, recoveryCode: String? = nil, client: String? = nil, email: String, captchaCheckResult: CaptchaCheckResult? = nil) { 
+    public init(email: String, captchaCheckResult: CaptchaCheckResult? = nil, password: String, rememberMe: Bool? = nil, twoFactorCode: String? = nil, recoveryCode: String? = nil, client: String? = nil) { 
+        self.email = email
+        self.captchaCheckResult = captchaCheckResult
         self.password = password
         self.rememberMe = rememberMe
         self.twoFactorCode = twoFactorCode
         self.recoveryCode = recoveryCode
         self.client = client
-        self.email = email
-        self.captchaCheckResult = captchaCheckResult
     }
 
 }

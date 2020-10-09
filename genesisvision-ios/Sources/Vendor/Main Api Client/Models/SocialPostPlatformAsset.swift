@@ -11,16 +11,6 @@ import Foundation
 public struct SocialPostPlatformAsset: Codable {
 
 
-    public var price: Double?
-
-    public var priceCurrency: Currency?
-
-    public var change24Percent: Double?
-
-    public var changeState: ChangeState?
-
-    public var chart: [SimpleChartPoint]?
-
     public var _id: UUID?
 
     public var name: String?
@@ -36,12 +26,17 @@ public struct SocialPostPlatformAsset: Codable {
     public var url: String?
 
     public var provider: AssetProvider?
-    public init(price: Double? = nil, priceCurrency: Currency? = nil, change24Percent: Double? = nil, changeState: ChangeState? = nil, chart: [SimpleChartPoint]? = nil, _id: UUID? = nil, name: String? = nil, asset: String? = nil, _description: String? = nil, logoUrl: String? = nil, color: String? = nil, url: String? = nil, provider: AssetProvider? = nil) { 
-        self.price = price
-        self.priceCurrency = priceCurrency
-        self.change24Percent = change24Percent
-        self.changeState = changeState
-        self.chart = chart
+
+    public var price: Double?
+
+    public var priceCurrency: Currency?
+
+    public var change24Percent: Double?
+
+    public var changeState: ChangeState?
+
+    public var chart: [SimpleChartPoint]?
+    public init(_id: UUID? = nil, name: String? = nil, asset: String? = nil, _description: String? = nil, logoUrl: String? = nil, color: String? = nil, url: String? = nil, provider: AssetProvider? = nil, price: Double? = nil, priceCurrency: Currency? = nil, change24Percent: Double? = nil, changeState: ChangeState? = nil, chart: [SimpleChartPoint]? = nil) { 
         self._id = _id
         self.name = name
         self.asset = asset
@@ -50,13 +45,13 @@ public struct SocialPostPlatformAsset: Codable {
         self.color = color
         self.url = url
         self.provider = provider
+        self.price = price
+        self.priceCurrency = priceCurrency
+        self.change24Percent = change24Percent
+        self.changeState = changeState
+        self.chart = chart
     }
     public enum CodingKeys: String, CodingKey { 
-        case price
-        case priceCurrency
-        case change24Percent
-        case changeState
-        case chart
         case _id = "id"
         case name
         case asset
@@ -65,6 +60,11 @@ public struct SocialPostPlatformAsset: Codable {
         case color
         case url
         case provider
+        case price
+        case priceCurrency
+        case change24Percent
+        case changeState
+        case chart
     }
 
 }

@@ -16,8 +16,8 @@ open class TradingplatformAPI {
      - parameter _id: (path)       - parameter symbol: (path)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func addTradingPlatformFavoriteSymbol(_id: UUID, symbol: String, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
-        addTradingPlatformFavoriteSymbolWithRequestBuilder(_id: _id, symbol: symbol).execute { (response, error) -> Void in
+    open class func addFavoriteSymbol(_id: UUID, symbol: String, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        addFavoriteSymbolWithRequestBuilder(_id: _id, symbol: symbol).execute { (response, error) -> Void in
             if error == nil {
                 completion((), error)
             } else {
@@ -37,7 +37,7 @@ open class TradingplatformAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func addTradingPlatformFavoriteSymbolWithRequestBuilder(_id: UUID, symbol: String) -> RequestBuilder<Void> {
+    open class func addFavoriteSymbolWithRequestBuilder(_id: UUID, symbol: String) -> RequestBuilder<Void> {
         var path = "/v2.0/tradingplatform/accounts/{id}/symbols/favorite/{symbol}/add"
         let _idPreEscape = "\(_id)"
         let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -56,11 +56,94 @@ open class TradingplatformAPI {
     }
 
     /**
-     Get 24H price
-     - parameter symbol: (query)  (optional)
+     Cancel all orders
+     - parameter accountId: (query)  (optional)     - parameter symbol: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func get24HPrice(symbol: String? = nil, completion: @escaping ((_ data: BinanceRaw24HPrice?,_ error: Error?) -> Void)) {
+    open class func cancelAllOrders(accountId: UUID? = nil, symbol: String? = nil, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        cancelAllOrdersWithRequestBuilder(accountId: accountId, symbol: symbol).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
+        }
+    }
+
+
+    /**
+     Cancel all orders
+     - POST /v2.0/tradingplatform/binance/spot/orders/close/all
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter accountId: (query)  (optional)     - parameter symbol: (query)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func cancelAllOrdersWithRequestBuilder(accountId: UUID? = nil, symbol: String? = nil) -> RequestBuilder<Void> {
+        let path = "/v2.0/tradingplatform/binance/spot/orders/close/all"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "accountId": accountId, 
+                        "symbol": symbol
+        ])
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Cancel order
+     - parameter accountId: (query)  (optional)     - parameter symbol: (query)  (optional)     - parameter orderId: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func cancelOrder(accountId: UUID? = nil, symbol: String? = nil, orderId: String? = nil, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        cancelOrderWithRequestBuilder(accountId: accountId, symbol: symbol, orderId: orderId).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
+        }
+    }
+
+
+    /**
+     Cancel order
+     - POST /v2.0/tradingplatform/binance/spot/orders/close
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter accountId: (query)  (optional)     - parameter symbol: (query)  (optional)     - parameter orderId: (query)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func cancelOrderWithRequestBuilder(accountId: UUID? = nil, symbol: String? = nil, orderId: String? = nil) -> RequestBuilder<Void> {
+        let path = "/v2.0/tradingplatform/binance/spot/orders/close"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "accountId": accountId, 
+                        "symbol": symbol, 
+                        "orderId": orderId
+        ])
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Get 24H price
+     - parameter symbol: (path)  
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func get24HPrice(symbol: String, completion: @escaping ((_ data: BinanceRaw24HPrice?,_ error: Error?) -> Void)) {
         get24HPriceWithRequestBuilder(symbol: symbol).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
@@ -69,47 +152,105 @@ open class TradingplatformAPI {
 
     /**
      Get 24H price
-     - GET /v2.0/tradingplatform/binance/market/ticker/24hr
+     - GET /v2.0/tradingplatform/binance/market/{symbol}/ticker/24hr
      - API Key:
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
-  "priceChange" : 9.301444243932576,
-  "bidQuantity" : 1.4658129805029452,
-  "askPrice" : 5.962133916683182,
+  "priceChange" : 0.8008281904610115,
   "symbol" : "symbol",
-  "weightedAveragePrice" : 2.027123023002322,
-  "askQuantity" : 5.637376656633329,
-  "firstTradeId" : 6,
-  "lastTradeId" : 7,
-  "openPrice" : 1.2315135367772556,
-  "totalTrades" : 1,
-  "quoteVolume" : 7.061401241503109,
-  "bidPrice" : 6.027456183070403,
-  "lowPrice" : 1.4894159098541704,
-  "highPrice" : 1.0246457001441578,
+  "bidQuantity" : 1.0246457001441578,
+  "askPrice" : 1.4894159098541704,
+  "weightedAveragePrice" : 1.4658129805029452,
+  "firstTradeId" : 3,
+  "lastTradeId" : 2,
+  "askQuantity" : 6.84685269835264,
+  "openPrice" : 2.3021358869347655,
+  "totalTrades" : 4,
+  "quoteVolume" : 1.1730742509559433,
+  "bidPrice" : 1.2315135367772556,
+  "lowPrice" : 9.301444243932576,
+  "highPrice" : 7.061401241503109,
   "closeTime" : "2000-01-23T04:56:07.000+00:00",
-  "baseVolume" : 2.3021358869347655,
   "openTime" : "2000-01-23T04:56:07.000+00:00",
-  "lastQuantity" : 7.386281948385884,
-  "prevDayClosePrice" : 0.8008281904610115,
-  "priceChangePercent" : 3.616076749251911,
-  "lastPrice" : 4.145608029883936
+  "baseVolume" : 7.457744773683766,
+  "lastQuantity" : 5.637376656633329,
+  "priceChangePercent" : 6.027456183070403,
+  "prevDayClosePrice" : 7.386281948385884,
+  "lastPrice" : 5.962133916683182
 }}]
-     - parameter symbol: (query)  (optional)
+     - parameter symbol: (path)  
 
      - returns: RequestBuilder<BinanceRaw24HPrice> 
      */
-    open class func get24HPriceWithRequestBuilder(symbol: String? = nil) -> RequestBuilder<BinanceRaw24HPrice> {
-        let path = "/v2.0/tradingplatform/binance/market/ticker/24hr"
+    open class func get24HPriceWithRequestBuilder(symbol: String) -> RequestBuilder<BinanceRaw24HPrice> {
+        var path = "/v2.0/tradingplatform/binance/market/{symbol}/ticker/24hr"
+        let symbolPreEscape = "\(symbol)"
+        let symbolPostEscape = symbolPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{symbol}", with: symbolPostEscape, options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = URLComponents(string: URLString)
+
+        let requestBuilder: RequestBuilder<BinanceRaw24HPrice>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     - parameter accountId: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getAccountInfo(accountId: UUID? = nil, completion: @escaping ((_ data: BinanceRawAccountInfo?,_ error: Error?) -> Void)) {
+        getAccountInfoWithRequestBuilder(accountId: accountId).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     - GET /v2.0/tradingplatform/binance/account
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example={
+  "balances" : [ {
+    "total" : 7.061401241503109,
+    "asset" : "asset",
+    "free" : 5.637376656633329,
+    "locked" : 2.3021358869347655
+  }, {
+    "total" : 7.061401241503109,
+    "asset" : "asset",
+    "free" : 5.637376656633329,
+    "locked" : 2.3021358869347655
+  } ],
+  "makerCommission" : 0.8008281904610115,
+  "buyerCommission" : 1.4658129805029452,
+  "canWithdraw" : true,
+  "permissions" : [ null, null ],
+  "accountType" : "Spot",
+  "sellerCommission" : 5.962133916683182,
+  "updateTime" : "2000-01-23T04:56:07.000+00:00",
+  "canDeposit" : true,
+  "takerCommission" : 6.027456183070403,
+  "canTrade" : true
+}}]
+     - parameter accountId: (query)  (optional)
+
+     - returns: RequestBuilder<BinanceRawAccountInfo> 
+     */
+    open class func getAccountInfoWithRequestBuilder(accountId: UUID? = nil) -> RequestBuilder<BinanceRawAccountInfo> {
+        let path = "/v2.0/tradingplatform/binance/account"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
-                        "symbol": symbol
+                        "accountId": accountId
         ])
 
-        let requestBuilder: RequestBuilder<BinanceRaw24HPrice>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<BinanceRawAccountInfo>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
@@ -206,11 +347,86 @@ open class TradingplatformAPI {
     }
 
     /**
-     Get klines
-     - parameter symbol: (query)  (optional)     - parameter interval: (query)  (optional)     - parameter startTime: (query)  (optional)     - parameter endTime: (query)  (optional)     - parameter limit: (query)  (optional)
+     Server time
+
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getKlines(symbol: String? = nil, interval: BinanceRawKlineInterval? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil, completion: @escaping ((_ data: [BinanceRawKline]?,_ error: Error?) -> Void)) {
+    open class func getExchangeTime(completion: @escaping ((_ data: Date?,_ error: Error?) -> Void)) {
+        getExchangeTimeWithRequestBuilder().execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     Server time
+     - GET /v2.0/tradingplatform/binance/server/time
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example="2000-01-23T04:56:07.000+00:00"}]
+
+     - returns: RequestBuilder<Date> 
+     */
+    open class func getExchangeTimeWithRequestBuilder() -> RequestBuilder<Date> {
+        let path = "/v2.0/tradingplatform/binance/server/time"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = URLComponents(string: URLString)
+
+        let requestBuilder: RequestBuilder<Date>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Get account favorite symbols
+     - parameter _id: (path)  
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getFavoriteSymbols(_id: UUID, completion: @escaping ((_ data: StringItemsViewModel?,_ error: Error?) -> Void)) {
+        getFavoriteSymbolsWithRequestBuilder(_id: _id).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     Get account favorite symbols
+     - GET /v2.0/tradingplatform/accounts/{id}/symbols/favorite
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example={
+  "total" : 0,
+  "items" : [ "items", "items" ]
+}}]
+     - parameter _id: (path)  
+
+     - returns: RequestBuilder<StringItemsViewModel> 
+     */
+    open class func getFavoriteSymbolsWithRequestBuilder(_id: UUID) -> RequestBuilder<StringItemsViewModel> {
+        var path = "/v2.0/tradingplatform/accounts/{id}/symbols/favorite"
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = URLComponents(string: URLString)
+
+        let requestBuilder: RequestBuilder<StringItemsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Get klines
+     - parameter symbol: (path)       - parameter interval: (query)  (optional)     - parameter startTime: (query)  (optional)     - parameter endTime: (query)  (optional)     - parameter limit: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getKlines(symbol: String, interval: BinanceRawKlineInterval? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil, completion: @escaping ((_ data: BinanceRawKlineItemsViewModel?,_ error: Error?) -> Void)) {
         getKlinesWithRequestBuilder(symbol: symbol, interval: interval, startTime: startTime, endTime: endTime, limit: limit).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
@@ -219,63 +435,168 @@ open class TradingplatformAPI {
 
     /**
      Get klines
-     - GET /v2.0/tradingplatform/binance/market/klines
+     - GET /v2.0/tradingplatform/binance/market/{symbol}/klines
      - API Key:
        - type: apiKey Authorization 
        - name: Bearer
-     - examples: [{contentType=application/json, example=[ {
-  "takerBuyQuoteVolume" : 3.616076749251911,
-  "high" : 6.027456183070403,
-  "tradeCount" : 7,
-  "low" : 1.4658129805029452,
-  "closeTime" : "2000-01-23T04:56:07.000+00:00",
-  "takerBuyBaseVolume" : 9.301444243932576,
-  "quoteVolume" : 2.3021358869347655,
-  "openTime" : "2000-01-23T04:56:07.000+00:00",
-  "baseVolume" : 5.637376656633329,
-  "close" : 5.962133916683182,
-  "open" : 0.8008281904610115
-}, {
-  "takerBuyQuoteVolume" : 3.616076749251911,
-  "high" : 6.027456183070403,
-  "tradeCount" : 7,
-  "low" : 1.4658129805029452,
-  "closeTime" : "2000-01-23T04:56:07.000+00:00",
-  "takerBuyBaseVolume" : 9.301444243932576,
-  "quoteVolume" : 2.3021358869347655,
-  "openTime" : "2000-01-23T04:56:07.000+00:00",
-  "baseVolume" : 5.637376656633329,
-  "close" : 5.962133916683182,
-  "open" : 0.8008281904610115
-} ]}]
-     - parameter symbol: (query)  (optional)     - parameter interval: (query)  (optional)     - parameter startTime: (query)  (optional)     - parameter endTime: (query)  (optional)     - parameter limit: (query)  (optional)
+     - examples: [{contentType=application/json, example={
+  "total" : 2,
+  "items" : [ {
+    "takerBuyQuoteVolume" : 3.616076749251911,
+    "high" : 6.027456183070403,
+    "tradeCount" : 7,
+    "low" : 1.4658129805029452,
+    "closeTime" : "2000-01-23T04:56:07.000+00:00",
+    "takerBuyBaseVolume" : 9.301444243932576,
+    "quoteVolume" : 2.3021358869347655,
+    "openTime" : "2000-01-23T04:56:07.000+00:00",
+    "baseVolume" : 5.637376656633329,
+    "close" : 5.962133916683182,
+    "open" : 0.8008281904610115
+  }, {
+    "takerBuyQuoteVolume" : 3.616076749251911,
+    "high" : 6.027456183070403,
+    "tradeCount" : 7,
+    "low" : 1.4658129805029452,
+    "closeTime" : "2000-01-23T04:56:07.000+00:00",
+    "takerBuyBaseVolume" : 9.301444243932576,
+    "quoteVolume" : 2.3021358869347655,
+    "openTime" : "2000-01-23T04:56:07.000+00:00",
+    "baseVolume" : 5.637376656633329,
+    "close" : 5.962133916683182,
+    "open" : 0.8008281904610115
+  } ]
+}}]
+     - parameter symbol: (path)       - parameter interval: (query)  (optional)     - parameter startTime: (query)  (optional)     - parameter endTime: (query)  (optional)     - parameter limit: (query)  (optional)
 
-     - returns: RequestBuilder<[BinanceRawKline]> 
+     - returns: RequestBuilder<BinanceRawKlineItemsViewModel> 
      */
-    open class func getKlinesWithRequestBuilder(symbol: String? = nil, interval: BinanceRawKlineInterval? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil) -> RequestBuilder<[BinanceRawKline]> {
-        let path = "/v2.0/tradingplatform/binance/market/klines"
+    open class func getKlinesWithRequestBuilder(symbol: String, interval: BinanceRawKlineInterval? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil) -> RequestBuilder<BinanceRawKlineItemsViewModel> {
+        var path = "/v2.0/tradingplatform/binance/market/{symbol}/klines"
+        let symbolPreEscape = "\(symbol)"
+        let symbolPostEscape = symbolPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{symbol}", with: symbolPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
-                        "symbol": symbol, 
                         "interval": interval, 
                         "startTime": startTime?.encodeToJSON(), 
                         "endTime": endTime?.encodeToJSON(), 
                         "limit": limit?.encodeToJSON()
         ])
 
-        let requestBuilder: RequestBuilder<[BinanceRawKline]>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<BinanceRawKlineItemsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Open positions
+     - parameter accountId: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getOpenOrders(accountId: UUID? = nil, completion: @escaping ((_ data: BinanceRawOrderItemsViewModel?,_ error: Error?) -> Void)) {
+        getOpenOrdersWithRequestBuilder(accountId: accountId).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     Open positions
+     - GET /v2.0/tradingplatform/binance/spot/orders
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example={
+  "total" : 1,
+  "items" : [ {
+    "symbol" : "symbol",
+    "orderId" : 5,
+    "executionType" : "New",
+    "type" : "Limit",
+    "originalClientOrderId" : "originalClientOrderId",
+    "rejectReason" : "None",
+    "buyerIsMaker" : true,
+    "price" : 6.027456183070403,
+    "commission" : 3.616076749251911,
+    "lastQuantityFilled" : 2.3021358869347655,
+    "timeInForce" : "GoodTillCancel",
+    "icebergQuantity" : 5.962133916683182,
+    "quoteQuantity" : 7.386281948385884,
+    "lastPriceFilled" : 9.301444243932576,
+    "quoteQuantityFilled" : 4.145608029883936,
+    "side" : "Buy",
+    "quantity" : 0.8008281904610115,
+    "orderListId" : 1,
+    "lastQuoteQuantity" : 1.2315135367772556,
+    "clientOrderId" : "clientOrderId",
+    "updateTime" : "2000-01-23T04:56:07.000+00:00",
+    "commissionAsset" : "commissionAsset",
+    "quantityFilled" : 7.061401241503109,
+    "accountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "stopPrice" : 1.4658129805029452,
+    "createTime" : "2000-01-23T04:56:07.000+00:00",
+    "tradeId" : 2,
+    "isWorking" : true,
+    "status" : "New"
+  }, {
+    "symbol" : "symbol",
+    "orderId" : 5,
+    "executionType" : "New",
+    "type" : "Limit",
+    "originalClientOrderId" : "originalClientOrderId",
+    "rejectReason" : "None",
+    "buyerIsMaker" : true,
+    "price" : 6.027456183070403,
+    "commission" : 3.616076749251911,
+    "lastQuantityFilled" : 2.3021358869347655,
+    "timeInForce" : "GoodTillCancel",
+    "icebergQuantity" : 5.962133916683182,
+    "quoteQuantity" : 7.386281948385884,
+    "lastPriceFilled" : 9.301444243932576,
+    "quoteQuantityFilled" : 4.145608029883936,
+    "side" : "Buy",
+    "quantity" : 0.8008281904610115,
+    "orderListId" : 1,
+    "lastQuoteQuantity" : 1.2315135367772556,
+    "clientOrderId" : "clientOrderId",
+    "updateTime" : "2000-01-23T04:56:07.000+00:00",
+    "commissionAsset" : "commissionAsset",
+    "quantityFilled" : 7.061401241503109,
+    "accountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "stopPrice" : 1.4658129805029452,
+    "createTime" : "2000-01-23T04:56:07.000+00:00",
+    "tradeId" : 2,
+    "isWorking" : true,
+    "status" : "New"
+  } ]
+}}]
+     - parameter accountId: (query)  (optional)
+
+     - returns: RequestBuilder<BinanceRawOrderItemsViewModel> 
+     */
+    open class func getOpenOrdersWithRequestBuilder(accountId: UUID? = nil) -> RequestBuilder<BinanceRawOrderItemsViewModel> {
+        let path = "/v2.0/tradingplatform/binance/spot/orders"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "accountId": accountId
+        ])
+
+        let requestBuilder: RequestBuilder<BinanceRawOrderItemsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
      Get order book
-     - parameter symbol: (query)  (optional)     - parameter limit: (query)  (optional)
+     - parameter symbol: (path)       - parameter limit: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getOrderBook(symbol: String? = nil, limit: Int? = nil, completion: @escaping ((_ data: BinanceRawOrderBook?,_ error: Error?) -> Void)) {
+    open class func getOrderBook(symbol: String, limit: Int? = nil, completion: @escaping ((_ data: BinanceRawOrderBook?,_ error: Error?) -> Void)) {
         getOrderBookWithRequestBuilder(symbol: symbol, limit: limit).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
@@ -284,7 +605,7 @@ open class TradingplatformAPI {
 
     /**
      Get order book
-     - GET /v2.0/tradingplatform/binance/market/depth
+     - GET /v2.0/tradingplatform/binance/market/{symbol}/depth
      - API Key:
        - type: apiKey Authorization 
        - name: Bearer
@@ -301,17 +622,19 @@ open class TradingplatformAPI {
   } ],
   "firstUpdateId" : 6
 }}]
-     - parameter symbol: (query)  (optional)     - parameter limit: (query)  (optional)
+     - parameter symbol: (path)       - parameter limit: (query)  (optional)
 
      - returns: RequestBuilder<BinanceRawOrderBook> 
      */
-    open class func getOrderBookWithRequestBuilder(symbol: String? = nil, limit: Int? = nil) -> RequestBuilder<BinanceRawOrderBook> {
-        let path = "/v2.0/tradingplatform/binance/market/depth"
+    open class func getOrderBookWithRequestBuilder(symbol: String, limit: Int? = nil) -> RequestBuilder<BinanceRawOrderBook> {
+        var path = "/v2.0/tradingplatform/binance/market/{symbol}/depth"
+        let symbolPreEscape = "\(symbol)"
+        let symbolPostEscape = symbolPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{symbol}", with: symbolPostEscape, options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
-                        "symbol": symbol, 
                         "limit": limit?.encodeToJSON()
         ])
 
@@ -321,46 +644,12 @@ open class TradingplatformAPI {
     }
 
     /**
-     Server time
-
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func getServerTime(completion: @escaping ((_ data: Date?,_ error: Error?) -> Void)) {
-        getServerTimeWithRequestBuilder().execute { (response, error) -> Void in
-            completion(response?.body, error)
-        }
-    }
-
-
-    /**
-     Server time
-     - GET /v2.0/tradingplatform/binance/server/time
-     - API Key:
-       - type: apiKey Authorization 
-       - name: Bearer
-     - examples: [{contentType=application/json, example="2000-01-23T04:56:07.000+00:00"}]
-
-     - returns: RequestBuilder<Date> 
-     */
-    open class func getServerTimeWithRequestBuilder() -> RequestBuilder<Date> {
-        let path = "/v2.0/tradingplatform/binance/server/time"
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = URLComponents(string: URLString)
-
-        let requestBuilder: RequestBuilder<Date>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    /**
      Account history
      - parameter accountId: (query)  (optional)     - parameter mode: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getTradingPlatformBinanceOrders(accountId: UUID? = nil, mode: TradingPlatformBinanceOrdersMode? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: BinanceRawOrderItemsViewModel?,_ error: Error?) -> Void)) {
-        getTradingPlatformBinanceOrdersWithRequestBuilder(accountId: accountId, mode: mode, skip: skip, take: take).execute { (response, error) -> Void in
+    open class func getTradesHistory(accountId: UUID? = nil, mode: TradingPlatformBinanceOrdersMode? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: BinanceRawOrderItemsViewModel?,_ error: Error?) -> Void)) {
+        getTradesHistoryWithRequestBuilder(accountId: accountId, mode: mode, skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
@@ -368,7 +657,7 @@ open class TradingplatformAPI {
 
     /**
      Account history
-     - GET /v2.0/tradingplatform/binance/spot/orders
+     - GET /v2.0/tradingplatform/binance/spot/trades
      - API Key:
        - type: apiKey Authorization 
        - name: Bearer
@@ -440,8 +729,8 @@ open class TradingplatformAPI {
 
      - returns: RequestBuilder<BinanceRawOrderItemsViewModel> 
      */
-    open class func getTradingPlatformBinanceOrdersWithRequestBuilder(accountId: UUID? = nil, mode: TradingPlatformBinanceOrdersMode? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<BinanceRawOrderItemsViewModel> {
-        let path = "/v2.0/tradingplatform/binance/spot/orders"
+    open class func getTradesHistoryWithRequestBuilder(accountId: UUID? = nil, mode: TradingPlatformBinanceOrdersMode? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<BinanceRawOrderItemsViewModel> {
+        let path = "/v2.0/tradingplatform/binance/spot/trades"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
@@ -458,44 +747,84 @@ open class TradingplatformAPI {
     }
 
     /**
-     Get account favorite symbols
-     - parameter _id: (path)  
+     Ping account stream
+     - parameter accountId: (query)  (optional)     - parameter listenKey: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getTradingPlatformFavoriteSymbols(_id: UUID, completion: @escaping ((_ data: StringItemsViewModel?,_ error: Error?) -> Void)) {
-        getTradingPlatformFavoriteSymbolsWithRequestBuilder(_id: _id).execute { (response, error) -> Void in
-            completion(response?.body, error)
+    open class func keepAliveAccountStream(accountId: UUID? = nil, listenKey: String? = nil, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        keepAliveAccountStreamWithRequestBuilder(accountId: accountId, listenKey: listenKey).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
         }
     }
 
 
     /**
-     Get account favorite symbols
-     - GET /v2.0/tradingplatform/accounts/{id}/symbols/favorite
+     Ping account stream
+     - POST /v2.0/tradingplatform/binance/spot/stream/ping
      - API Key:
        - type: apiKey Authorization 
        - name: Bearer
-     - examples: [{contentType=application/json, example={
-  "total" : 0,
-  "items" : [ "items", "items" ]
-}}]
-     - parameter _id: (path)  
+     - parameter accountId: (query)  (optional)     - parameter listenKey: (query)  (optional)
 
-     - returns: RequestBuilder<StringItemsViewModel> 
+     - returns: RequestBuilder<Void> 
      */
-    open class func getTradingPlatformFavoriteSymbolsWithRequestBuilder(_id: UUID) -> RequestBuilder<StringItemsViewModel> {
-        var path = "/v2.0/tradingplatform/accounts/{id}/symbols/favorite"
-        let _idPreEscape = "\(_id)"
-        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
+    open class func keepAliveAccountStreamWithRequestBuilder(accountId: UUID? = nil, listenKey: String? = nil) -> RequestBuilder<Void> {
+        let path = "/v2.0/tradingplatform/binance/spot/stream/ping"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "accountId": accountId, 
+                        "listenKey": listenKey
+        ])
 
-        let url = URLComponents(string: URLString)
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
-        let requestBuilder: RequestBuilder<StringItemsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    /**
+     Place order
+     - parameter body: (body)  (optional)     - parameter accountId: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func placeOrder(body: BinanceRawPlaceOrder? = nil, accountId: UUID? = nil, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        placeOrderWithRequestBuilder(body: body, accountId: accountId).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
+        }
+    }
+
+
+    /**
+     Place order
+     - POST /v2.0/tradingplatform/binance/spot/orders/place
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter body: (body)  (optional)     - parameter accountId: (query)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func placeOrderWithRequestBuilder(body: BinanceRawPlaceOrder? = nil, accountId: UUID? = nil) -> RequestBuilder<Void> {
+        let path = "/v2.0/tradingplatform/binance/spot/orders/place"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "accountId": accountId
+        ])
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
     /**
@@ -503,8 +832,8 @@ open class TradingplatformAPI {
      - parameter _id: (path)       - parameter symbol: (path)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func removeTradingPlatformFavoriteSymbol(_id: UUID, symbol: String, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
-        removeTradingPlatformFavoriteSymbolWithRequestBuilder(_id: _id, symbol: symbol).execute { (response, error) -> Void in
+    open class func removeFavoriteSymbol(_id: UUID, symbol: String, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        removeFavoriteSymbolWithRequestBuilder(_id: _id, symbol: symbol).execute { (response, error) -> Void in
             if error == nil {
                 completion((), error)
             } else {
@@ -524,7 +853,7 @@ open class TradingplatformAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func removeTradingPlatformFavoriteSymbolWithRequestBuilder(_id: UUID, symbol: String) -> RequestBuilder<Void> {
+    open class func removeFavoriteSymbolWithRequestBuilder(_id: UUID, symbol: String) -> RequestBuilder<Void> {
         var path = "/v2.0/tradingplatform/accounts/{id}/symbols/favorite/{symbol}/remove"
         let _idPreEscape = "\(_id)"
         let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -536,6 +865,84 @@ open class TradingplatformAPI {
         let parameters: [String:Any]? = nil
 
         let url = URLComponents(string: URLString)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Start account stream
+     - parameter accountId: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func startAccountStream(accountId: UUID? = nil, completion: @escaping ((_ data: String?,_ error: Error?) -> Void)) {
+        startAccountStreamWithRequestBuilder(accountId: accountId).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     Start account stream
+     - POST /v2.0/tradingplatform/binance/spot/stream/start
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example=""}]
+     - parameter accountId: (query)  (optional)
+
+     - returns: RequestBuilder<String> 
+     */
+    open class func startAccountStreamWithRequestBuilder(accountId: UUID? = nil) -> RequestBuilder<String> {
+        let path = "/v2.0/tradingplatform/binance/spot/stream/start"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "accountId": accountId
+        ])
+
+        let requestBuilder: RequestBuilder<String>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Stop account stream
+     - parameter accountId: (query)  (optional)     - parameter listenKey: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func stopAccountStream(accountId: UUID? = nil, listenKey: String? = nil, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        stopAccountStreamWithRequestBuilder(accountId: accountId, listenKey: listenKey).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
+        }
+    }
+
+
+    /**
+     Stop account stream
+     - POST /v2.0/tradingplatform/binance/spot/stream/stop
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter accountId: (query)  (optional)     - parameter listenKey: (query)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func stopAccountStreamWithRequestBuilder(accountId: UUID? = nil, listenKey: String? = nil) -> RequestBuilder<Void> {
+        let path = "/v2.0/tradingplatform/binance/spot/stream/stop"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "accountId": accountId, 
+                        "listenKey": listenKey
+        ])
 
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 

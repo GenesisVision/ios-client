@@ -16,7 +16,7 @@ public struct BalanceChartPoint: Codable {
     public var managerFunds: Double?
 
     public var investorsFunds: Double?
-    public init(date: Date? = nil, managerFunds: Double? = nil, investorsFunds: Double? = nil) { 
+    public init(date: Date? = nil, managerFunds: Double? = nil, investorsFunds: Double? = nil) {
         self.date = date
         self.managerFunds = managerFunds
         self.investorsFunds = investorsFunds

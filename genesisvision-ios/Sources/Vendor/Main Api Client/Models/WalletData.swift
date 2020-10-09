@@ -11,6 +11,14 @@ import Foundation
 public struct WalletData: Codable {
 
 
+    public var currency: Currency?
+
+    public var available: Double?
+
+    public var invested: Double?
+
+    public var trading: Double?
+
     public var pending: Double?
 
     public var total: Double?
@@ -40,15 +48,11 @@ public struct WalletData: Codable {
     public var depositAddress: String?
 
     public var depositUrlCoindirect: String?
-
-    public var currency: Currency?
-
-    public var available: Double?
-
-    public var invested: Double?
-
-    public var trading: Double?
-    public init(pending: Double? = nil, total: Double? = nil, availableCcy: Double? = nil, investedCcy: Double? = nil, tradingCcy: Double? = nil, pendingCcy: Double? = nil, totalCcy: Double? = nil, _id: UUID? = nil, title: String? = nil, logoUrl: String? = nil, isDepositEnabled: Bool? = nil, isWithdrawalEnabled: Bool? = nil, withdrawalCommission: Double? = nil, depositAddress: String? = nil, depositUrlCoindirect: String? = nil, currency: Currency? = nil, available: Double? = nil, invested: Double? = nil, trading: Double? = nil) { 
+    public init(currency: Currency? = nil, available: Double? = nil, invested: Double? = nil, trading: Double? = nil, pending: Double? = nil, total: Double? = nil, availableCcy: Double? = nil, investedCcy: Double? = nil, tradingCcy: Double? = nil, pendingCcy: Double? = nil, totalCcy: Double? = nil, _id: UUID? = nil, title: String? = nil, logoUrl: String? = nil, isDepositEnabled: Bool? = nil, isWithdrawalEnabled: Bool? = nil, withdrawalCommission: Double? = nil, depositAddress: String? = nil, depositUrlCoindirect: String? = nil) { 
+        self.currency = currency
+        self.available = available
+        self.invested = invested
+        self.trading = trading
         self.pending = pending
         self.total = total
         self.availableCcy = availableCcy
@@ -64,12 +68,12 @@ public struct WalletData: Codable {
         self.withdrawalCommission = withdrawalCommission
         self.depositAddress = depositAddress
         self.depositUrlCoindirect = depositUrlCoindirect
-        self.currency = currency
-        self.available = available
-        self.invested = invested
-        self.trading = trading
     }
     public enum CodingKeys: String, CodingKey { 
+        case currency
+        case available
+        case invested
+        case trading
         case pending
         case total
         case availableCcy
@@ -85,10 +89,6 @@ public struct WalletData: Codable {
         case withdrawalCommission
         case depositAddress
         case depositUrlCoindirect
-        case currency
-        case available
-        case invested
-        case trading
     }
 
 }

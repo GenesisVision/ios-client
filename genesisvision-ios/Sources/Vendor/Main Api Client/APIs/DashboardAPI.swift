@@ -32,21 +32,21 @@ open class DashboardAPI {
     "color" : "color",
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "chart" : [ {
-      "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 0.8008281904610115
+      "date" : 0,
+      "value" : 6.027456183070403
     }, {
-      "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 0.8008281904610115
+      "date" : 0,
+      "value" : 6.027456183070403
     } ]
   }, {
     "color" : "color",
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "chart" : [ {
-      "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 0.8008281904610115
+      "date" : 0,
+      "value" : 6.027456183070403
     }, {
-      "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 0.8008281904610115
+      "date" : 0,
+      "value" : 6.027456183070403
     } ]
   } ]
 }}]
@@ -437,11 +437,11 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       }, {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       } ],
       "profit" : 7.386281948385884
     },
@@ -509,11 +509,11 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       }, {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       } ],
       "profit" : 7.386281948385884
     },
@@ -663,11 +663,11 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       }, {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       } ],
       "profit" : 7.386281948385884
     },
@@ -753,11 +753,11 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       }, {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       } ],
       "profit" : 7.386281948385884
     },
@@ -866,11 +866,11 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       }, {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       } ],
       "profit" : 7.386281948385884
     },
@@ -884,16 +884,16 @@ open class DashboardAPI {
     "assetTypeExt" : "None",
     "publicInfo" : {
       "programDetails" : {
-        "managementFeeSelected" : 0.8008281904610115,
-        "successFeeSelected" : 1.4658129805029452,
-        "successFeeCurrent" : 5.962133916683182,
-        "level" : 5,
-        "managementFeeCurrent" : 6.027456183070403,
+        "managementFeeSelected" : 1.4658129805029452,
+        "successFeeSelected" : 5.637376656633329,
+        "level" : 0,
+        "successFeeCurrent" : 2.3021358869347655,
+        "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
           "hourProcessing" : 7,
           "isProcessingRealTime" : true
         },
-        "levelProgress" : 2.3021358869347655
+        "levelProgress" : 6.027456183070403
       },
       "fundDetails" : {
         "totalAssetsCount" : 7,
@@ -949,8 +949,8 @@ open class DashboardAPI {
       "canChangePassword" : true,
       "canMakeSignalProviderFromPrivateTradingAccount" : true,
       "canMakeSignalProviderFromProgram" : true,
-      "hasTerminal" : true,
       "canConfirm2FA" : true,
+      "hasTerminal" : true,
       "canAddRequestInvest" : true
     },
     "assetType" : "None",
@@ -983,11 +983,11 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       }, {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       } ],
       "profit" : 7.386281948385884
     },
@@ -1001,16 +1001,16 @@ open class DashboardAPI {
     "assetTypeExt" : "None",
     "publicInfo" : {
       "programDetails" : {
-        "managementFeeSelected" : 0.8008281904610115,
-        "successFeeSelected" : 1.4658129805029452,
-        "successFeeCurrent" : 5.962133916683182,
-        "level" : 5,
-        "managementFeeCurrent" : 6.027456183070403,
+        "managementFeeSelected" : 1.4658129805029452,
+        "successFeeSelected" : 5.637376656633329,
+        "level" : 0,
+        "successFeeCurrent" : 2.3021358869347655,
+        "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
           "hourProcessing" : 7,
           "isProcessingRealTime" : true
         },
-        "levelProgress" : 2.3021358869347655
+        "levelProgress" : 6.027456183070403
       },
       "fundDetails" : {
         "totalAssetsCount" : 7,
@@ -1066,8 +1066,8 @@ open class DashboardAPI {
       "canChangePassword" : true,
       "canMakeSignalProviderFromPrivateTradingAccount" : true,
       "canMakeSignalProviderFromProgram" : true,
-      "hasTerminal" : true,
       "canConfirm2FA" : true,
+      "hasTerminal" : true,
       "canAddRequestInvest" : true
     },
     "assetType" : "None",
@@ -1186,11 +1186,11 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       }, {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       } ],
       "profit" : 7.386281948385884
     },
@@ -1204,16 +1204,16 @@ open class DashboardAPI {
     "assetTypeExt" : "None",
     "publicInfo" : {
       "programDetails" : {
-        "managementFeeSelected" : 0.8008281904610115,
-        "successFeeSelected" : 1.4658129805029452,
-        "successFeeCurrent" : 5.962133916683182,
-        "level" : 5,
-        "managementFeeCurrent" : 6.027456183070403,
+        "managementFeeSelected" : 1.4658129805029452,
+        "successFeeSelected" : 5.637376656633329,
+        "level" : 0,
+        "successFeeCurrent" : 2.3021358869347655,
+        "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
           "hourProcessing" : 7,
           "isProcessingRealTime" : true
         },
-        "levelProgress" : 2.3021358869347655
+        "levelProgress" : 6.027456183070403
       },
       "fundDetails" : {
         "totalAssetsCount" : 7,
@@ -1269,8 +1269,8 @@ open class DashboardAPI {
       "canChangePassword" : true,
       "canMakeSignalProviderFromPrivateTradingAccount" : true,
       "canMakeSignalProviderFromProgram" : true,
-      "hasTerminal" : true,
       "canConfirm2FA" : true,
+      "hasTerminal" : true,
       "canAddRequestInvest" : true
     },
     "assetType" : "None",
@@ -1303,11 +1303,11 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       }, {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       } ],
       "profit" : 7.386281948385884
     },
@@ -1321,16 +1321,16 @@ open class DashboardAPI {
     "assetTypeExt" : "None",
     "publicInfo" : {
       "programDetails" : {
-        "managementFeeSelected" : 0.8008281904610115,
-        "successFeeSelected" : 1.4658129805029452,
-        "successFeeCurrent" : 5.962133916683182,
-        "level" : 5,
-        "managementFeeCurrent" : 6.027456183070403,
+        "managementFeeSelected" : 1.4658129805029452,
+        "successFeeSelected" : 5.637376656633329,
+        "level" : 0,
+        "successFeeCurrent" : 2.3021358869347655,
+        "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
           "hourProcessing" : 7,
           "isProcessingRealTime" : true
         },
-        "levelProgress" : 2.3021358869347655
+        "levelProgress" : 6.027456183070403
       },
       "fundDetails" : {
         "totalAssetsCount" : 7,
@@ -1386,8 +1386,8 @@ open class DashboardAPI {
       "canChangePassword" : true,
       "canMakeSignalProviderFromPrivateTradingAccount" : true,
       "canMakeSignalProviderFromProgram" : true,
-      "hasTerminal" : true,
       "canConfirm2FA" : true,
+      "hasTerminal" : true,
       "canAddRequestInvest" : true
     },
     "assetType" : "None",
@@ -1465,11 +1465,11 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       }, {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       } ],
       "profit" : 7.386281948385884
     },
@@ -1483,16 +1483,16 @@ open class DashboardAPI {
     "assetTypeExt" : "None",
     "publicInfo" : {
       "programDetails" : {
-        "managementFeeSelected" : 0.8008281904610115,
-        "successFeeSelected" : 1.4658129805029452,
-        "successFeeCurrent" : 5.962133916683182,
-        "level" : 5,
-        "managementFeeCurrent" : 6.027456183070403,
+        "managementFeeSelected" : 1.4658129805029452,
+        "successFeeSelected" : 5.637376656633329,
+        "level" : 0,
+        "successFeeCurrent" : 2.3021358869347655,
+        "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
           "hourProcessing" : 7,
           "isProcessingRealTime" : true
         },
-        "levelProgress" : 2.3021358869347655
+        "levelProgress" : 6.027456183070403
       },
       "fundDetails" : {
         "totalAssetsCount" : 7,
@@ -1548,8 +1548,8 @@ open class DashboardAPI {
       "canChangePassword" : true,
       "canMakeSignalProviderFromPrivateTradingAccount" : true,
       "canMakeSignalProviderFromProgram" : true,
-      "hasTerminal" : true,
       "canConfirm2FA" : true,
+      "hasTerminal" : true,
       "canAddRequestInvest" : true
     },
     "assetType" : "None",
@@ -1582,11 +1582,11 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       }, {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       } ],
       "profit" : 7.386281948385884
     },
@@ -1600,16 +1600,16 @@ open class DashboardAPI {
     "assetTypeExt" : "None",
     "publicInfo" : {
       "programDetails" : {
-        "managementFeeSelected" : 0.8008281904610115,
-        "successFeeSelected" : 1.4658129805029452,
-        "successFeeCurrent" : 5.962133916683182,
-        "level" : 5,
-        "managementFeeCurrent" : 6.027456183070403,
+        "managementFeeSelected" : 1.4658129805029452,
+        "successFeeSelected" : 5.637376656633329,
+        "level" : 0,
+        "successFeeCurrent" : 2.3021358869347655,
+        "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
           "hourProcessing" : 7,
           "isProcessingRealTime" : true
         },
-        "levelProgress" : 2.3021358869347655
+        "levelProgress" : 6.027456183070403
       },
       "fundDetails" : {
         "totalAssetsCount" : 7,
@@ -1665,8 +1665,8 @@ open class DashboardAPI {
       "canChangePassword" : true,
       "canMakeSignalProviderFromPrivateTradingAccount" : true,
       "canMakeSignalProviderFromProgram" : true,
-      "hasTerminal" : true,
       "canConfirm2FA" : true,
+      "hasTerminal" : true,
       "canAddRequestInvest" : true
     },
     "assetType" : "None",
@@ -1863,11 +1863,11 @@ open class DashboardAPI {
       "statistic" : {
         "drawdown" : 1.2315135367772556,
         "chart" : [ {
-          "date" : "2000-01-23T04:56:07.000+00:00",
-          "value" : 0.8008281904610115
+          "date" : 0,
+          "value" : 6.027456183070403
         }, {
-          "date" : "2000-01-23T04:56:07.000+00:00",
-          "value" : 0.8008281904610115
+          "date" : 0,
+          "value" : 6.027456183070403
         } ],
         "profit" : 7.386281948385884
       },
@@ -1924,11 +1924,11 @@ open class DashboardAPI {
       "statistic" : {
         "drawdown" : 1.2315135367772556,
         "chart" : [ {
-          "date" : "2000-01-23T04:56:07.000+00:00",
-          "value" : 0.8008281904610115
+          "date" : 0,
+          "value" : 6.027456183070403
         }, {
-          "date" : "2000-01-23T04:56:07.000+00:00",
-          "value" : 0.8008281904610115
+          "date" : 0,
+          "value" : 6.027456183070403
         } ],
         "profit" : 7.386281948385884
       },
@@ -2078,11 +2078,11 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       }, {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       } ],
       "profit" : 7.386281948385884
     },
@@ -2096,16 +2096,16 @@ open class DashboardAPI {
     "assetTypeExt" : "None",
     "publicInfo" : {
       "programDetails" : {
-        "managementFeeSelected" : 0.8008281904610115,
-        "successFeeSelected" : 1.4658129805029452,
-        "successFeeCurrent" : 5.962133916683182,
-        "level" : 5,
-        "managementFeeCurrent" : 6.027456183070403,
+        "managementFeeSelected" : 1.4658129805029452,
+        "successFeeSelected" : 5.637376656633329,
+        "level" : 0,
+        "successFeeCurrent" : 2.3021358869347655,
+        "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
           "hourProcessing" : 7,
           "isProcessingRealTime" : true
         },
-        "levelProgress" : 2.3021358869347655
+        "levelProgress" : 6.027456183070403
       },
       "fundDetails" : {
         "totalAssetsCount" : 7,
@@ -2161,8 +2161,8 @@ open class DashboardAPI {
       "canChangePassword" : true,
       "canMakeSignalProviderFromPrivateTradingAccount" : true,
       "canMakeSignalProviderFromProgram" : true,
-      "hasTerminal" : true,
       "canConfirm2FA" : true,
+      "hasTerminal" : true,
       "canAddRequestInvest" : true
     },
     "assetType" : "None",
@@ -2195,11 +2195,11 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       }, {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       } ],
       "profit" : 7.386281948385884
     },
@@ -2213,16 +2213,16 @@ open class DashboardAPI {
     "assetTypeExt" : "None",
     "publicInfo" : {
       "programDetails" : {
-        "managementFeeSelected" : 0.8008281904610115,
-        "successFeeSelected" : 1.4658129805029452,
-        "successFeeCurrent" : 5.962133916683182,
-        "level" : 5,
-        "managementFeeCurrent" : 6.027456183070403,
+        "managementFeeSelected" : 1.4658129805029452,
+        "successFeeSelected" : 5.637376656633329,
+        "level" : 0,
+        "successFeeCurrent" : 2.3021358869347655,
+        "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
           "hourProcessing" : 7,
           "isProcessingRealTime" : true
         },
-        "levelProgress" : 2.3021358869347655
+        "levelProgress" : 6.027456183070403
       },
       "fundDetails" : {
         "totalAssetsCount" : 7,
@@ -2278,8 +2278,8 @@ open class DashboardAPI {
       "canChangePassword" : true,
       "canMakeSignalProviderFromPrivateTradingAccount" : true,
       "canMakeSignalProviderFromProgram" : true,
-      "hasTerminal" : true,
       "canConfirm2FA" : true,
+      "hasTerminal" : true,
       "canAddRequestInvest" : true
     },
     "assetType" : "None",

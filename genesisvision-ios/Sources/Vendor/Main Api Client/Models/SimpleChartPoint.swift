@@ -14,7 +14,7 @@ public struct SimpleChartPoint: Codable {
     public var date: Date?
 
     public var value: Double?
-    public init(date: Date? = nil, value: Double? = nil) { 
+    public init(date: Date? = nil, value: Double? = nil) {
         self.date = date
         self.value = value
     }

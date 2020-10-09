@@ -11,10 +11,6 @@ import Foundation
 public struct AttachToExternalSignalProviderCommon: Codable {
 
 
-    public var initialDepositCurrency: Currency?
-
-    public var initialDepositAmount: Double?
-
     public var mode: SubscriptionMode?
 
     public var percent: Double?
@@ -24,14 +20,18 @@ public struct AttachToExternalSignalProviderCommon: Codable {
     public var fixedVolume: Double?
 
     public var fixedCurrency: Currency?
-    public init(initialDepositCurrency: Currency? = nil, initialDepositAmount: Double? = nil, mode: SubscriptionMode? = nil, percent: Double? = nil, openTolerancePercent: Double? = nil, fixedVolume: Double? = nil, fixedCurrency: Currency? = nil) { 
-        self.initialDepositCurrency = initialDepositCurrency
-        self.initialDepositAmount = initialDepositAmount
+
+    public var initialDepositCurrency: Currency?
+
+    public var initialDepositAmount: Double?
+    public init(mode: SubscriptionMode? = nil, percent: Double? = nil, openTolerancePercent: Double? = nil, fixedVolume: Double? = nil, fixedCurrency: Currency? = nil, initialDepositCurrency: Currency? = nil, initialDepositAmount: Double? = nil) { 
         self.mode = mode
         self.percent = percent
         self.openTolerancePercent = openTolerancePercent
         self.fixedVolume = fixedVolume
         self.fixedCurrency = fixedCurrency
+        self.initialDepositCurrency = initialDepositCurrency
+        self.initialDepositAmount = initialDepositAmount
     }
 
 }

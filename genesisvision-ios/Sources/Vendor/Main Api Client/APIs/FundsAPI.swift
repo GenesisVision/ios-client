@@ -73,11 +73,11 @@ open class FundsAPI {
      - examples: [{contentType=application/json, example={
   "profit" : 0.8008281904610115,
   "chart" : [ {
-    "date" : "2000-01-23T04:56:07.000+00:00",
-    "value" : 0.8008281904610115
+    "date" : 0,
+    "value" : 6.027456183070403
   }, {
-    "date" : "2000-01-23T04:56:07.000+00:00",
-    "value" : 0.8008281904610115
+    "date" : 0,
+    "value" : 6.027456183070403
   } ]
 }}]
      - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter maxPointCount: (query)  (optional)     - parameter currency: (query)  (optional)
@@ -126,13 +126,13 @@ open class FundsAPI {
   "balance" : 0.8008281904610115,
   "color" : "color",
   "chart" : [ {
-    "date" : "2000-01-23T04:56:07.000+00:00",
-    "investorsFunds" : 1.4658129805029452,
-    "managerFunds" : 6.027456183070403
+    "date" : 6,
+    "investorsFunds" : 5.962133916683182,
+    "managerFunds" : 1.4658129805029452
   }, {
-    "date" : "2000-01-23T04:56:07.000+00:00",
-    "investorsFunds" : 1.4658129805029452,
-    "managerFunds" : 6.027456183070403
+    "date" : 6,
+    "investorsFunds" : 5.962133916683182,
+    "managerFunds" : 1.4658129805029452
   } ]
 }}]
      - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter maxPointCount: (query)  (optional)     - parameter currency: (query)  (optional)
@@ -304,72 +304,72 @@ open class FundsAPI {
        - name: Bearer
      - examples: [{contentType=application/json, example={
   "statistic" : {
-    "calmarRatio" : 2.3021358869347655,
-    "balance" : 6.027456183070403,
-    "profitPercent" : 1.4658129805029452,
-    "maxDrawdown" : 7.061401241503109,
-    "sharpeRatio" : 5.962133916683182,
+    "calmarRatio" : 5.637376656633329,
+    "balance" : 0.8008281904610115,
+    "profitPercent" : 6.027456183070403,
+    "maxDrawdown" : 2.3021358869347655,
+    "sharpeRatio" : 1.4658129805029452,
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
-    "investors" : 0,
-    "sortinoRatio" : 5.637376656633329
+    "investors" : 7,
+    "sortinoRatio" : 5.962133916683182
   },
   "charts" : [ {
     "color" : "color",
     "currency" : "Undefined",
     "chart" : [ {
-      "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 0.8008281904610115
+      "date" : 0,
+      "value" : 6.027456183070403
     }, {
-      "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 0.8008281904610115
+      "date" : 0,
+      "value" : 6.027456183070403
     } ]
   }, {
     "color" : "color",
     "currency" : "Undefined",
     "chart" : [ {
-      "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 0.8008281904610115
+      "date" : 0,
+      "value" : 6.027456183070403
     }, {
-      "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 0.8008281904610115
+      "date" : 0,
+      "value" : 6.027456183070403
     } ]
   } ],
   "assets" : [ {
-    "date" : "2000-01-23T04:56:07.000+00:00",
+    "date" : 9,
     "assets" : [ {
       "color" : "color",
       "name" : "name",
       "asset" : "asset",
-      "percent" : 3.616076749251911,
+      "percent" : 2.027123023002322,
       "logoUrl" : "logoUrl",
       "url" : "url"
     }, {
       "color" : "color",
       "name" : "name",
       "asset" : "asset",
-      "percent" : 3.616076749251911,
+      "percent" : 2.027123023002322,
       "logoUrl" : "logoUrl",
       "url" : "url"
     } ],
-    "value" : 9.301444243932576
+    "value" : 3.616076749251911
   }, {
-    "date" : "2000-01-23T04:56:07.000+00:00",
+    "date" : 9,
     "assets" : [ {
       "color" : "color",
       "name" : "name",
       "asset" : "asset",
-      "percent" : 3.616076749251911,
+      "percent" : 2.027123023002322,
       "logoUrl" : "logoUrl",
       "url" : "url"
     }, {
       "color" : "color",
       "name" : "name",
       "asset" : "asset",
-      "percent" : 3.616076749251911,
+      "percent" : 2.027123023002322,
       "logoUrl" : "logoUrl",
       "url" : "url"
     } ],
-    "value" : 9.301444243932576
+    "value" : 3.616076749251911
   } ]
 }}]
      - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter maxPointCount: (query)  (optional)     - parameter currency: (query)  (optional)     - parameter currencies: (query)  (optional)     - parameter chartAssetsCount: (query)  (optional, default to 3)
@@ -568,14 +568,14 @@ open class FundsAPI {
       "color" : "color",
       "name" : "name",
       "asset" : "asset",
-      "percent" : 3.616076749251911,
+      "percent" : 2.027123023002322,
       "logoUrl" : "logoUrl",
       "url" : "url"
     }, {
       "color" : "color",
       "name" : "name",
       "asset" : "asset",
-      "percent" : 3.616076749251911,
+      "percent" : 2.027123023002322,
       "logoUrl" : "logoUrl",
       "url" : "url"
     } ],
@@ -621,14 +621,14 @@ open class FundsAPI {
       "color" : "color",
       "name" : "name",
       "asset" : "asset",
-      "percent" : 3.616076749251911,
+      "percent" : 2.027123023002322,
       "logoUrl" : "logoUrl",
       "url" : "url"
     }, {
       "color" : "color",
       "name" : "name",
       "asset" : "asset",
-      "percent" : 3.616076749251911,
+      "percent" : 2.027123023002322,
       "logoUrl" : "logoUrl",
       "url" : "url"
     } ],
@@ -752,14 +752,14 @@ open class FundsAPI {
       "color" : "color",
       "name" : "name",
       "asset" : "asset",
-      "percent" : 3.616076749251911,
+      "percent" : 2.027123023002322,
       "logoUrl" : "logoUrl",
       "url" : "url"
     }, {
       "color" : "color",
       "name" : "name",
       "asset" : "asset",
-      "percent" : 3.616076749251911,
+      "percent" : 2.027123023002322,
       "logoUrl" : "logoUrl",
       "url" : "url"
     } ]
@@ -769,14 +769,14 @@ open class FundsAPI {
       "color" : "color",
       "name" : "name",
       "asset" : "asset",
-      "percent" : 3.616076749251911,
+      "percent" : 2.027123023002322,
       "logoUrl" : "logoUrl",
       "url" : "url"
     }, {
       "color" : "color",
       "name" : "name",
       "asset" : "asset",
-      "percent" : 3.616076749251911,
+      "percent" : 2.027123023002322,
       "logoUrl" : "logoUrl",
       "url" : "url"
     } ]
