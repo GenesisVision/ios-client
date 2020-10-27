@@ -8,16 +8,23 @@
 
 import UIKit
 
+protocol DashboardInvestingCellViewModelProtocol: class {
+    func programs()
+    func funds()
+}
+
 struct DashboardInvestingCellViewModel<ViewModelType: CellViewModelWithCollection> {
     var viewModel: ViewModelType
     var dataSource: CollectionViewDataSource!
     let data: InvestingHeaderData?
+    weak var cellDelegate: DashboardInvestingCellViewModelProtocol?
     
     weak var delegate: BaseTableViewProtocol?
-    init(_ viewModel: ViewModelType, data: InvestingHeaderData?, delegate: BaseTableViewProtocol?) {
+    init(_ viewModel: ViewModelType, data: InvestingHeaderData?, delegate: BaseTableViewProtocol?, cellDelegate: DashboardInvestingCellViewModelProtocol?) {
         self.viewModel = viewModel
         self.delegate = delegate
         self.data = data
+        self.cellDelegate = cellDelegate
         
         dataSource = CollectionViewDataSource(viewModel)
     }
@@ -30,6 +37,8 @@ extension DashboardInvestingCellViewModel: CellViewModel {
         }
         
         cell.configure(viewModel, delegate: delegate, collectionDataSourceProtocol: dataSource, cellModelsForRegistration: viewModel.cellModelsForRegistration)
+        
+        cell.cellDelegate = cellDelegate
         
         cell.labelsView.configure(data)
         cell.labelsView.changeLabelsView.dayLabel.valueLabel.isHidden = true
@@ -45,6 +54,17 @@ class DashboardInvestingTableViewCell: CellWithCollectionView {
         }
     }
     @IBOutlet weak var labelsView: DashboardInvestingLabelsView!
+    
+    weak var cellDelegate: DashboardInvestingCellViewModelProtocol?
+    
+    
+    @IBAction func programsButtonAction(_ sender: Any) {
+        cellDelegate?.programs()
+    }
+    
+    @IBAction func fundsButtonAction(_ sender: Any) {
+        cellDelegate?.funds()
+    }
 }
 
 class InvestingCollectionViewModel: CellViewModelWithCollection {

@@ -288,43 +288,103 @@ open class TradingplatformAPI {
   "timeZone" : "timeZone",
   "serverTime" : "2000-01-23T04:56:07.000+00:00",
   "symbols" : [ {
+    "maxAlgorithmicOrdersFilter" : {
+      "maxNumberAlgorithmicOrders" : 1
+    },
     "iceBergAllowed" : true,
     "quoteOrderQuantityMarketAllowed" : true,
+    "lotSizeFilter" : {
+      "minQuantity" : 9.301444243932576,
+      "maxQuantity" : 3.616076749251911,
+      "stepSize" : 2.027123023002322
+    },
+    "iceBergPartsFilter" : {
+      "limit" : 7,
+      "filterType" : "Unknown"
+    },
+    "priceFilter" : {
+      "minPrice" : 1.1730742509559433,
+      "maxPrice" : 4.965218492984954,
+      "tickSize" : 5.025004791520295
+    },
     "baseAsset" : "baseAsset",
-    "filters" : [ {
-      "filterType" : "Unknown"
-    }, {
-      "filterType" : "Unknown"
-    } ],
     "baseAssetPrecision" : 1,
     "isSpotTradingAllowed" : true,
+    "marketLotSizeFilter" : {
+      "minQuantity" : 4.145608029883936,
+      "maxQuantity" : 7.386281948385884,
+      "stepSize" : 1.2315135367772556
+    },
     "quoteAssetPrecision" : 5,
     "quoteCommissionPrecision" : 2,
     "ocoAllowed" : true,
+    "minNotionalFilter" : {
+      "applyToMarketOrders" : true,
+      "averagePriceMinutes" : 7,
+      "minNotional" : 6.84685269835264
+    },
     "orderTypes" : [ "Limit", "Limit" ],
     "permissions" : [ "Spot", "Spot" ],
     "name" : "name",
+    "pricePercentFilter" : {
+      "multiplierDown" : 9.369310271410669,
+      "averagePriceMinutes" : 6,
+      "multiplierUp" : 9.965781217890562
+    },
+    "maxOrdersFilter" : {
+      "maxNumberOrders" : 1
+    },
     "isMarginTradingAllowed" : true,
     "quoteAsset" : "quoteAsset",
     "baseCommissionPrecision" : 5,
     "status" : "PreTrading"
   }, {
+    "maxAlgorithmicOrdersFilter" : {
+      "maxNumberAlgorithmicOrders" : 1
+    },
     "iceBergAllowed" : true,
     "quoteOrderQuantityMarketAllowed" : true,
+    "lotSizeFilter" : {
+      "minQuantity" : 9.301444243932576,
+      "maxQuantity" : 3.616076749251911,
+      "stepSize" : 2.027123023002322
+    },
+    "iceBergPartsFilter" : {
+      "limit" : 7,
+      "filterType" : "Unknown"
+    },
+    "priceFilter" : {
+      "minPrice" : 1.1730742509559433,
+      "maxPrice" : 4.965218492984954,
+      "tickSize" : 5.025004791520295
+    },
     "baseAsset" : "baseAsset",
-    "filters" : [ {
-      "filterType" : "Unknown"
-    }, {
-      "filterType" : "Unknown"
-    } ],
     "baseAssetPrecision" : 1,
     "isSpotTradingAllowed" : true,
+    "marketLotSizeFilter" : {
+      "minQuantity" : 4.145608029883936,
+      "maxQuantity" : 7.386281948385884,
+      "stepSize" : 1.2315135367772556
+    },
     "quoteAssetPrecision" : 5,
     "quoteCommissionPrecision" : 2,
     "ocoAllowed" : true,
+    "minNotionalFilter" : {
+      "applyToMarketOrders" : true,
+      "averagePriceMinutes" : 7,
+      "minNotional" : 6.84685269835264
+    },
     "orderTypes" : [ "Limit", "Limit" ],
     "permissions" : [ "Spot", "Spot" ],
     "name" : "name",
+    "pricePercentFilter" : {
+      "multiplierDown" : 9.369310271410669,
+      "averagePriceMinutes" : 6,
+      "multiplierUp" : 9.965781217890562
+    },
+    "maxOrdersFilter" : {
+      "maxNumberOrders" : 1
+    },
     "isMarginTradingAllowed" : true,
     "quoteAsset" : "quoteAsset",
     "baseCommissionPrecision" : 5,

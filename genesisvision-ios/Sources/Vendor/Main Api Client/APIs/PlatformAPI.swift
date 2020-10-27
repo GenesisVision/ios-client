@@ -779,6 +779,95 @@ open class PlatformAPI {
     }
 
     /**
+     Server time
+
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getPlatformTime(completion: @escaping ((_ data: PushNotificationViewModel?,_ error: Error?) -> Void)) {
+        getPlatformTimeWithRequestBuilder().execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     Server time
+     - POST /v2.0/platform/time
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example={
+  "date" : "2000-01-23T04:56:07.000+00:00",
+  "assetDetails" : {
+    "programDetails" : {
+      "level" : 0,
+      "levelProgress" : 6.027456183070403
+    },
+    "color" : "color",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "title" : "title",
+    "logoUrl" : "logoUrl",
+    "url" : "url",
+    "assetType" : "None"
+  },
+  "imageUrl" : "imageUrl",
+  "channel" : "Platform",
+  "platformAssetDetails" : {
+    "color" : "color",
+    "provider" : "Undefined",
+    "name" : "name",
+    "description" : "description",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "asset" : "asset",
+    "logoUrl" : "logoUrl",
+    "url" : "url"
+  },
+  "location" : {
+    "externalUrl" : "externalUrl",
+    "location" : "location",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+  },
+  "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+  "text" : "text",
+  "type" : "type",
+  "userDetails" : {
+    "socialLinks" : [ {
+      "name" : "name",
+      "type" : "Undefined",
+      "value" : "value",
+      "url" : "url",
+      "logoUrl" : "logoUrl"
+    }, {
+      "name" : "name",
+      "type" : "Undefined",
+      "value" : "value",
+      "url" : "url",
+      "logoUrl" : "logoUrl"
+    } ],
+    "registrationDate" : "2000-01-23T04:56:07.000+00:00",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "logoUrl" : "logoUrl",
+    "url" : "url",
+    "username" : "username"
+  },
+  "isUnread" : true
+}}]
+
+     - returns: RequestBuilder<PushNotificationViewModel> 
+     */
+    open class func getPlatformTimeWithRequestBuilder() -> RequestBuilder<PushNotificationViewModel> {
+        let path = "/v2.0/platform/time"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = URLComponents(string: URLString)
+
+        let requestBuilder: RequestBuilder<PushNotificationViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
      Investment programs levels
      - parameter currency: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects

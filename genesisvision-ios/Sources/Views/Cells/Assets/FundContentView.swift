@@ -158,7 +158,7 @@ extension FundContentView: ContentViewProtocol {
         
         photoImageView.image = UIImage.fundPlaceholder
         
-        if let logo = asset.logoUrl, let fileUrl = getFileURL(fileName: logo), isPictureURL(url: fileUrl.absoluteString) {
+        if let logo = asset.logoUrl, let fileUrl = getFileURL(fileName: logo) {
             photoImageView.kf.indicatorType = .activity
             photoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.fundPlaceholder)
             photoImageView.backgroundColor = .clear

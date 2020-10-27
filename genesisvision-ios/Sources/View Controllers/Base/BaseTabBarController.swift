@@ -95,7 +95,6 @@ class BaseTabBarController: UITabBarController {
                 destinationUrl = "https://genesis.vision/posts/\(destination.entityId)"
             }
             
-//            let destinationUrl = isDebug ? "https://blue.genesis.vision/posts/\(destination.entityId)" : "https://genesis.vision/posts/\(destination.entityId)"
             router?.showSafari(with: destinationUrl)
         case .socialMediaPost:
             SocialAPI.getSocialMediaPost(_id: destination.entityId) { [ weak self] (post, error) in

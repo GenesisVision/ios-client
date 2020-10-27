@@ -15,6 +15,7 @@ enum ErrorMessageType {
     case apiError(message: String?)
     case requiresTwoFactor(message: String?)
     case requiresCaptcha(message: String?)
+    case requiresEmailConfirmation(message: String?)
 }
 
 class ErrorHandler {
@@ -55,13 +56,15 @@ class ErrorHandler {
                 completion(.failure(errorType: .requiresTwoFactor(message: errorsText)))
             case .internalServerError, .validationError:
                 completion(.failure(errorType: .apiError(message: errorsText)))
+            case .requiresEmailConfirmation:
+                completion(.failure(errorType: .requiresEmailConfirmation(message: errorsText)))
             }
         }
     }
     
     static func handleError(with errorMessageType: ErrorMessageType, viewController: UIViewController? = nil, hud: Bool = false) {
         switch errorMessageType {
-        case .apiError(let message), .requiresTwoFactor(let message), .requiresCaptcha(let message):
+        case .apiError(let message), .requiresTwoFactor(let message), .requiresCaptcha(let message), .requiresEmailConfirmation(let message):
             hud && viewController != nil
                 ? message != nil ? viewController!.showErrorHUD(subtitle: message!) : viewController!.showErrorHUD()
                 : message != nil ? print("Api Error with reason: " + message!) : print("Api Error without reason")

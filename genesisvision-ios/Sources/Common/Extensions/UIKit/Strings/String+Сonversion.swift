@@ -39,6 +39,11 @@ extension String {
         return nil
     }
     
+    var decimalPartCount: Int? {
+        guard (self.doubleValue != nil), let decimalPart = self.replacingOccurrences(of: ",", with: ".").components(separatedBy: ".").last else { return nil }
+        return decimalPart.count
+    }
+    
     func removeCharacters(from forbiddenChars: CharacterSet) -> String {
         let passed = self.unicodeScalars.filter { !forbiddenChars.contains($0) }
         return String(String.UnicodeScalarView(passed))

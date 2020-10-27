@@ -260,11 +260,13 @@ class SettingsViewController: BaseTableViewController {
             profileNameLabel.text = "Profile"
         }
         
-        if let name = viewModel.currencyListViewModel.selected()?.name {
+        if viewModel.currencyListViewModel != nil, let name = viewModel.currencyListViewModel.selected()?.name {
             platformCurrencyValueLabel.text = name
         }
         
-        versionLabel.text = "App version " + getFullVersion()
+        if versionLabel != nil {
+            versionLabel.text = "App version " + getFullVersion()
+        }
         
         profileEmailLabel.text = viewModel.email
         tableView?.reloadDataSmoothly()

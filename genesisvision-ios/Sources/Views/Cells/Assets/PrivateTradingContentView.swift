@@ -98,7 +98,7 @@ extension PrivateTradingContentView: ContentViewProtocol {
             titleLabel.text = title
         }
         
-        if let logo = asset.broker?.logoUrl, let fileUrl = getFileURL(fileName: logo), isPictureURL(url: fileUrl.absoluteString) {
+        if let logo = asset.broker?.logoUrl, let fileUrl = getFileURL(fileName: logo) {
             photoImageView.contentMode = .scaleAspectFit
             photoImageView.kf.indicatorType = .activity
             photoImageView.kf.setImage(with: fileUrl)

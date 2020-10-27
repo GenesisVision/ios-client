@@ -102,7 +102,7 @@ extension ProgramTradingContentView: ContentViewProtocol {
         }
         
         assetLogoImageView.profilePhotoImageView.image = UIImage.programPlaceholder
-        if let logo = asset.publicInfo?.logoUrl, let fileUrl = getFileURL(fileName: logo), isPictureURL(url: fileUrl.absoluteString) {
+        if let logo = asset.publicInfo?.logoUrl, let fileUrl = getFileURL(fileName: logo) {
             assetLogoImageView.profilePhotoImageView.kf.indicatorType = .activity
             assetLogoImageView.profilePhotoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
             assetLogoImageView.profilePhotoImageView.backgroundColor = .clear

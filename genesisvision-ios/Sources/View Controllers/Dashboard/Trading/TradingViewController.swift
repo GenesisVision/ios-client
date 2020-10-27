@@ -45,12 +45,19 @@ class TradingViewController: ListViewController {
     
     @objc private func createNewFund() {
         self.dismiss(animated: true) {
-            guard let vc = CreateFundViewController.storyboardInstance(.dashboard) else { return }
-            vc.title = "Create Fund"
-            vc.viewModel = CreateFundViewModel(vc, addAssetsProtocol: vc)
-            let nav = BaseNavigationController(rootViewController: vc)
-            nav.modalPresentationStyle = .fullScreen
-            self.present(nav, animated: true, completion: nil)
+            guard let viewController = FundPublicInfoViewController.storyboardInstance(.fund) else { return }
+            viewController.title = "Create Fund"
+            viewController.viewModel = FundPublicInfoViewModel(mode: .create)
+            self.navigationController?.pushViewController(viewController, animated: true)
+//            let nav = BaseNavigationController(rootViewController: viewController)
+//            nav.modalPresentationStyle = .fullScreen
+//            self.present(nav, animated: true, completion: nil)
+//            guard let vc = CreateFundViewController.storyboardInstance(.dashboard) else { return }
+//            vc.title = "Create Fund"
+//            vc.viewModel = CreateFundViewModel(vc, addAssetsProtocol: vc)
+//            let nav = BaseNavigationController(rootViewController: vc)
+//            nav.modalPresentationStyle = .fullScreen
+//            self.present(nav, animated: true, completion: nil)
         }
     }
     

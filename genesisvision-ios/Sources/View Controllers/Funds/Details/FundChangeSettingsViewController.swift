@@ -15,6 +15,7 @@ class FundChangeSettingsViewController: BaseViewController {
             entryFeeTextField.addTarget(self, action: #selector(entryFeeFieldDidChange), for: .editingChanged)
         }
     }
+    
     @IBOutlet weak var exitFeeTextField: DesignableUITextField! {
         didSet {
             exitFeeTextField.addTarget(self, action: #selector(exitFeeFieldDidChange), for: .editingChanged)
@@ -26,19 +27,44 @@ class FundChangeSettingsViewController: BaseViewController {
             entryFeeSubtitleLabel.text = "A entry fee is a fee charged to investors upon their investment to a GV Fund. The maximum entry fee is 10 %"
         }
     }
+    
     @IBOutlet weak var exitFeeSubtitleLabel: SubtitleLabel! {
         didSet {
             exitFeeSubtitleLabel.text = "An exit fee is a fee charged to investors when they redeem shares from a GV Fund. The maximum exit fee is 10 %"
         }
     }
     
+    @IBOutlet weak var updateButton: ActionButton! {
+        didSet {
+            updateButton.setEnabled(false)
+        }
+    }
+    
+    private let maxDecimalPartSize: Int = 4
+    
     var viewModel: ChangeFundSettingsViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
+        guard let mode = viewModel?.changeSettingsMode else {
+            setupEdit()
+            return }
+        
+        mode == .create ? setupCreate() : setupEdit()
+    }
+    
+    private func setupCreate() {
+        title = "Create Fund"
+        updateButton.setTitle("Next", for: .normal)
+    }
+    
+    private func setupEdit() {
         title = "Change settings"
-        
         viewModel?.fetch(completion: { (result) in
             switch result {
             case .success:
@@ -53,31 +79,72 @@ class FundChangeSettingsViewController: BaseViewController {
     }
     
     @objc private func entryFeeFieldDidChange() {
-        guard let entryFeeText = entryFeeTextField.text, !entryFeeText.isEmpty, let value = Double(entryFeeText) else {
+        guard let entryFeeText = entryFeeTextField.text, !entryFeeText.isEmpty, let value = Double(entryFeeText.replacingOccurrences(of: ",", with: ".")) else {
+            checkActionButton()
             entryFeeTextField.text = ""
             return }
         
+        guard let decimalPartCount = entryFeeText.decimalPartCount, decimalPartCount <= maxDecimalPartSize else {
+            checkActionButton()
+            entryFeeTextField.text = String(entryFeeText.dropLast())
+            return
+        }
+        
         if value > 10 {
             entryFeeTextField.text = "10"
+            viewModel?.newEntryFee = 10.0
+        } else {
+            viewModel?.newEntryFee = value
         }
-        viewModel?.newEntryFee = value
+        checkActionButton()
     }
     
     @objc private func exitFeeFieldDidChange() {
-        guard let exitFeeText = exitFeeTextField.text, !exitFeeText.isEmpty, let value = Double(exitFeeText)
-            else {
+        guard let exitFeeText = exitFeeTextField.text, !exitFeeText.isEmpty, let value = Double(exitFeeText.replacingOccurrences(of: ",", with: ".")) else {
+            checkActionButton()
             exitFeeTextField.text = ""
             return }
         
+        guard let decimalPartCount = exitFeeText.decimalPartCount, decimalPartCount <= maxDecimalPartSize else {
+            checkActionButton()
+            exitFeeTextField.text = String(exitFeeText.dropLast())
+            return
+        }
+        
         if value > 10 {
             exitFeeTextField.text = "10"
+            viewModel?.newExitFee = 10.0
+        } else {
+            viewModel?.newExitFee = value
         }
-        viewModel?.newExitFee = value
+        checkActionButton()
+    }
+    
+    private func checkActionButton() {
+        guard let entryFeeText = entryFeeTextField.text, !entryFeeText.isEmpty, let _ = Double(entryFeeText.replacingOccurrences(of: ",", with: ".")), let exitFeeText = exitFeeTextField.text, !exitFeeText.isEmpty, let _ = Double(exitFeeText.replacingOccurrences(of: ",", with: "."))  else {
+            updateButton.setEnabled(false)
+            return }
+        updateButton.setEnabled(true)
+        
     }
     
     @IBAction func updateButtonAction(_ sender: Any) {
-        guard let _ = viewModel?.assetId else { return }
-
+        guard let mode = viewModel?.changeSettingsMode else {
+            updateAction()
+            return }
+        
+        mode == .create ? createAction() : updateAction()
+    }
+    
+    private func createAction() {
+        guard let viewController = FundDepositViewController.storyboardInstance(.fund) else { return }
+        
+        viewController.viewModel = FundDepositViewModel(viewController)
+        viewController.viewModel.createViewModel = self.viewModel?.createViewModel
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func updateAction() {
         viewModel?.updateAssetFees(completion: { (result) in
             switch result {
             case .success:
@@ -92,17 +159,39 @@ class FundChangeSettingsViewController: BaseViewController {
             }
         })
     }
+    
 }
 
 
 final class ChangeFundSettingsViewModel {
     
+    var createViewModel: CreateNewFundViewModel?
+    
     var assetId: String?
     var currentEntryFee: Double?
     var currentExitFee: Double?
-    var newEntryFee: Double?
-    var newExitFee: Double?
+    var newEntryFee: Double? {
+        didSet {
+            if changeSettingsMode == .create {
+                createViewModel?.entryFee = newEntryFee
+            }
+        }
+    }
+    var newExitFee: Double? {
+        didSet {
+            if changeSettingsMode == .create {
+                createViewModel?.exitFee = newExitFee
+            }
+        }
+    }
     var fundDetails: FundDetailsFull?
+    
+    enum FundReallocationMode {
+        case create
+        case edit
+    }
+    
+    var changeSettingsMode: FundReallocationMode = .create
     
     func fetch(completion: @escaping CompletionBlock) {
         guard let assetId = assetId else { return }

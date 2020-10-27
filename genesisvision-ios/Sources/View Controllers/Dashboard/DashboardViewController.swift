@@ -85,27 +85,24 @@ extension DashboardViewController: UIScrollViewDelegate {
 
 extension DashboardViewController: DashBoardTradingTableViewCellButtonsActionsProtocol {
     func createFund() {
-        guard let vc = CreateFundViewController.storyboardInstance(.dashboard) else { return }
-        vc.title = "Create Fund"
-        vc.viewModel = CreateFundViewModel(vc, addAssetsProtocol: vc)
-        let nav = BaseNavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .fullScreen
-        present(nav, animated: true, completion: nil)
+        guard let viewController = FundPublicInfoViewController.storyboardInstance(.fund) else { return }
+        viewController.title = "Create Fund"
+        viewController.viewModel = FundPublicInfoViewModel(mode: .create)
+        navigationController?.pushViewController(viewController, animated: true)
+//        guard let viewController = FundPublicInfoViewController.storyboardInstance(.dashboard) else { return }
+//        viewController.title = "Create Fund"
+//        vc.title = "Create Fund"
+//        vc.viewModel = CreateFundViewModel(vc, addAssetsProtocol: vc)
+//        let nav = BaseNavigationController(rootViewController: vc)
+//        nav.modalPresentationStyle = .fullScreen
+//        present(nav, animated: true, completion: nil)
     }
     
     func createAccount() {
-        showActionSheet(with: nil,
-                        message: nil,
-                        firstActionTitle: "Create account",
-                        firstHandler: { [weak self] in
-                            self?.createTradeAccount()
-            },
-                        secondActionTitle: "Attach external account",
-                        secondHandler: { [weak self] in
-                            self?.attachExternalAccount()
-            },
-                        cancelTitle: "Cancel",
-                        cancelHandler: nil)
+        showActionSheet(with: nil, message: nil, firstActionTitle: "Create account", firstHandler: { [weak self] in self?.createTradeAccount()
+            }, secondActionTitle: "Attach external account", secondHandler: { [weak self] in
+                self?.attachExternalAccount()
+            }, cancelTitle: "Cancel", cancelHandler: nil)
     }
     
     private func createTradeAccount() {
@@ -220,6 +217,16 @@ extension DashboardViewController: EventDetailsViewProtocol {
     }
 }
 
+extension DashboardViewController: DashboardInvestingCellViewModelProtocol {
+    func programs() {
+        viewModel.router?.showAssetList(with: FilterModel(), assetType: .program)
+    }
+    
+    func funds() {
+        viewModel.router?.showAssetList(with: FilterModel(), assetType: .fund)
+    }
+}
+
 class DashboardViewModel: ViewModelWithListProtocol {
     lazy var dataSource: TableViewDataSource = TableViewDataSource(self)
     
@@ -253,7 +260,7 @@ class DashboardViewModel: ViewModelWithListProtocol {
     }
     var investingDetails: DashboardInvestingDetails? {
         didSet {
-            let viewModel = DashboardInvestingCellViewModel(InvestingCollectionViewModel(investingDetails, delegate: delegate), data: InvestingHeaderData(title: "Investing", details: investingDetails, currency: currencyType), delegate: delegate)
+            let viewModel = DashboardInvestingCellViewModel(InvestingCollectionViewModel(investingDetails, delegate: delegate), data: InvestingHeaderData(title: "Investing", details: investingDetails, currency: currencyType), delegate: delegate, cellDelegate: invetingEmptyCellDelegate)
             viewModels.append(viewModel)
             reloadSection(.investing)
         }
@@ -299,9 +306,11 @@ class DashboardViewModel: ViewModelWithListProtocol {
     var router: DashboardRouter?
     weak var delegate: BaseTableViewProtocol?
     weak var creationDelegate: DashBoardTradingTableViewCellButtonsActionsProtocol?
+    weak var invetingEmptyCellDelegate: DashboardInvestingCellViewModelProtocol?
     init(_ router: DashboardRouter?) {
         self.delegate = router?.dashboardViewController
         self.creationDelegate = router?.dashboardViewController
+        self.invetingEmptyCellDelegate = router?.dashboardViewController
         self.router = router
     }
     

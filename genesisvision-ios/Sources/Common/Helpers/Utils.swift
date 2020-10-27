@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 
 func getFileURL(fileName: String) -> URL? {
+    guard !fileName.isEmpty else { return nil }
     
     if fileName.contains("https://") {
         return URL(string: fileName)

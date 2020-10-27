@@ -121,12 +121,12 @@ enum DateRangeType: Int {
 typealias CurrencyType = Currency
 typealias SortingListType = ProgramsFilterSorting
 
-extension CurrencyType {
+extension Currency {
     public var currencyLenght: Int {
         switch self {
         case .gvt: return 4
         case .eth, .btc: return 8
-        case .usd, .eur, .usdt: return 2
+        case .usd, .usdt: return 2
         case .undefined: return 2 //for percent
         default:
             return 4
@@ -138,10 +138,8 @@ extension CurrencyType {
         case .gvt: return UIColor.Currency.gvt
         case .eth: return UIColor.Currency.eth
         case .btc: return UIColor.Currency.btc
-        case .ada: return UIColor.Currency.btc
         case .usd: return UIColor.Currency.usd
         case .usdt: return UIColor.Currency.usd
-        case .eur: return UIColor.Currency.eur
         default:
             return UIColor.Currency.gvt
         }

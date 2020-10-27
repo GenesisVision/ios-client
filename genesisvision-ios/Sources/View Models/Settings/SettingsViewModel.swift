@@ -268,8 +268,12 @@ final class SettingsViewModel {
     }
     
     private func clearData() {
+        if let fcmToken = UserDefaults.standard.string(forKey: UserDefaultKeys.fcmToken) {
+            ProfileDataProvider.removeFCMToken(token: fcmToken) { (result) in }
+        }
         AuthManager.signOut()
         profileModel = nil
+        
     }
     
     private func forceSignOut() {
