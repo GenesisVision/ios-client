@@ -304,16 +304,20 @@ class CreateAccountViewModel {
     var minAmounts: [TradingAccountMinCreateAmount]?
     var twoFactorStatus: TwoFactorStatus?
     lazy var currency = getPlatformCurrencyType()
+    
     private let errorCompletion: ((CompletionResult) -> Void) = { (result) in
        print(result)
     }
+    
     var request = NewTradingAccountRequest(depositAmount: nil, depositWalletId: nil, currency: nil, leverage: nil, brokerAccountTypeId: nil)
     var createResultModel: TradingAccountCreateResult?
     
     weak var delegate: BaseTableViewProtocol?
+    
     init(_ delegate: BaseTableViewProtocol?) {
         self.delegate = delegate
     }
+    
     private func fetchBrokers(_ walletSummary: WalletSummary?) {
         BrokersDataProvider.getBrokers(completion: { [weak self] (model) in
             self?.brokersInfo = model
@@ -321,6 +325,7 @@ class CreateAccountViewModel {
             self?.delegate?.didReload()
         }, errorCompletion: self.errorCompletion)
     }
+    
     func fetch() {
         WalletDataProvider.get(with: currency, completion: { [weak self] (walletSummary) in
             self?.fetchBrokers(walletSummary)
@@ -331,19 +336,22 @@ class CreateAccountViewModel {
             self?.minAmounts = model
         }
     }
+    
     func updateRates() {
-        RateDataProvider.getRates(from: [currencyListViewModel.selected() ?? ""], to: [Currency.gvt.rawValue, Currency.btc.rawValue, Currency.eth.rawValue, Currency.usdt.rawValue], completion: { [weak self] (ratesModel) in
+        RateDataProvider.getRates(from: [currencyListViewModel.selected() ?? ""], to: Currency.allCases.map({ return $0.rawValue }), completion: { [weak self] (ratesModel) in
             self?.ratesModel = ratesModel
         }) { (result) in
             
         }
     }
+    
     func createAccount(completion: @escaping CompletionBlock) {
         AssetsDataProvider.createTradingAccount(request, completion: { [weak self] (model) in
             self?.createResultModel = model
             completion(.success)
         }, errorCompletion: completion)
     }
+    
     func updateBroker() {
         if let broker = brokerCollectionViewModel.getSelected() {
             accountTypeListViewModel = AccountTypeListViewModel(delegate, items: broker.accountTypes ?? [], selectedIndex: 0)
@@ -352,6 +360,7 @@ class CreateAccountViewModel {
             updateAccountType(0)
         }
     }
+    
     func updateWalletFrom() {
         if let fromListViewModel = fromListViewModel, let currencyListViewModel = currencyListViewModel {
             fromListViewModel.selectedIndex = fromListViewModel.items.firstIndex(where: { $0.currency?.rawValue == currencyListViewModel.selected() }) ?? 0
@@ -379,6 +388,7 @@ class CreateAccountViewModel {
         leverageListDataSource = TableViewDataSource(leverageListViewModel)
         updateLeverage(0)
     }
+    
     func updateCurrency(_ index: Int) {
         currencyListViewModel.selectedIndex = index
         if let currency = currencyListViewModel.selected() {
@@ -386,6 +396,7 @@ class CreateAccountViewModel {
         }
         updateRates()
     }
+    
     func updateLeverage(_ index: Int) {
         leverageListViewModel.selectedIndex = index
         if let selected = leverageListViewModel.selected() {
@@ -404,74 +415,69 @@ class CreateAccountViewModel {
         
         return minDeposit
     }
+    
     func getMinDeposit() -> String {
         guard let currency = currencyListViewModel.selected(), let accountType = accountTypeListViewModel.selected(), let minDeposits = accountType.minimumDepositsAmount, let minDeposit = minDeposits[currency], let currencyType = CurrencyType(rawValue: currency) else { return "" }
         
         return minDeposit.rounded(with: currencyType).toString() + " " + currencyType.rawValue
     }
+    
     func getSelectedWallet() -> String {
         guard let fromListViewModel = fromListViewModel, let selected = fromListViewModel.selected(), let title = selected.title, let currency = selected.currency?.rawValue else { return "" }
         
         return "\(currency) | \(title)"
     }
+    
     func getSelectedWalletCurrency() -> String {
         guard let currency = fromListViewModel.selected()?.currency?.rawValue else { return "" }
         
         return currency
     }
+    
     func getAvailable() -> String {
         guard let selected = fromListViewModel?.selected(), let currency = selected.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency), let available = fromListViewModel?.selected()?.available else { return "" }
         return available.rounded(with: currencyType).toString() + " " + currencyType.rawValue
     }
+    
     func getLeverage() -> String {
         guard let selected = leverageListViewModel.selected() else { return "" }
         return selected.toString()
     }
+    
     func isEnableLeverageSelector() -> Bool {
         guard let count = leverageListViewModel?.items.count else { return false }
         return count > 1
     }
+    
     func getAccountType() -> String {
         guard let selected = accountTypeListViewModel.selected()?.name else { return "" }
         return selected
     }
+    
     func isEnableAccountTypeSelector() -> Bool {
         guard let count = accountTypeListViewModel?.items.count else { return false }
         return count > 1
     }
+    
     func getCurrency() -> String {
         guard let selected = currencyListViewModel?.selected() else { return "" }
         return selected
     }
+    
     func isEnableCurrencySelector() -> Bool {
         guard let count = currencyListViewModel?.items.count else { return false }
         return count > 1
     }
+    
     func getRate() -> Double? {
         guard let rates = ratesModel?.rates, let currency = Currency(rawValue: getCurrency()), let fromCurrency = fromListViewModel.selected()?.currency else { return nil }
-        
-        var rate: Double?
-        switch currency {
-        case .btc:
-            rate = rates["BTC"]?.first(where: { $0.currency == fromCurrency })?.rate
-        case .eth:
-            rate = rates["ETH"]?.first(where: { $0.currency == fromCurrency })?.rate
-        case .gvt:
-            rate = rates["GVT"]?.first(where: { $0.currency == fromCurrency })?.rate
-        case .usdt:
-            rate = rates["USDT"]?.first(where: { $0.currency == fromCurrency })?.rate
-        case .usd:
-            rate = rates["USD"]?.first(where: { $0.currency == fromCurrency })?.rate
-        default:
-            break
-        }
-        
+        let rate = rates[currency.rawValue]?.first(where: { $0.currency == fromCurrency })?.rate
         return rate != 0 ? rate : nil
     }
+    
     func getApproxString(_ value: Double) -> String {
         let currencyTypeValue = getCurrency()
         guard let currencyType = CurrencyType(rawValue: currencyTypeValue), let rate = getRate() else { return "" }
-        
         
         let text = "≈" + (value / rate).rounded(with: currencyType).toString() + " " + currencyTypeValue
         return text

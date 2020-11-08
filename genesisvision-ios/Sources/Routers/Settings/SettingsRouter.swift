@@ -9,7 +9,7 @@
 import UIKit.UIColor
 
 enum SettingsRouteType {
-    case signOut, forceSignOut, changePassword, enableTwoFactor(Bool), enablePasscode(Bool), showProfile(ProfileFullViewModel), feedback, terms, privacy
+    case signOut, forceSignOut, changePassword, enableTwoFactor(Bool), enablePasscode(Bool), showProfile(ProfileFullViewModel), feedback, terms, privacy, referral
 }
 
 class SettingsRouter: Router {
@@ -37,6 +37,8 @@ class SettingsRouter: Router {
             showTerms()
         case .privacy:
             showPrivacy()
+        case .referral:
+            showReferral()
         }
     }
     
@@ -86,6 +88,14 @@ class SettingsRouter: Router {
         guard let viewController = ProfileViewController.storyboardInstance(.profile) else { return }
         let router = ProfileRouter(parentRouter: self, navigationController: navigationController)
         viewController.viewModel = ProfileViewModel(withRouter: router, profileModel: profileModel)
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func showReferral() {
+        guard let viewController = ReferralProgramViewController.storyboardInstance(.settings) else { return }
+        let viewModel = ReferralProgramViewModel(with: self)
+        viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)
     }

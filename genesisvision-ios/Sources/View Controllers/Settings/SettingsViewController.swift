@@ -402,6 +402,8 @@ extension SettingsViewController {
             viewModel.showPrivacy()
         case .contactUs:
             feedbackMethod()
+        case .referralProgram:
+            viewModel.showReferral()
         default:
             break
         }

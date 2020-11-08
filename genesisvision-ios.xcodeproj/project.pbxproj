@@ -22,6 +22,15 @@
 		19129480249BBA1F007F1083 /* PostLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1912947F249BBA1E007F1083 /* PostLink.swift */; };
 		19129484249BBA3F007F1083 /* PublicProfileFollow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19129483249BBA3E007F1083 /* PublicProfileFollow.swift */; };
 		19129486249BBAF8007F1083 /* PostPlatformAssetDetailsWithPrices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19129485249BBAF8007F1083 /* PostPlatformAssetDetailsWithPrices.swift */; };
+		195B9EFA2558469D003DA54E /* ReferralProgramViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195B9EF92558469D003DA54E /* ReferralProgramViewController.swift */; };
+		195B9F0125584711003DA54E /* ReferralProgramViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195B9F0025584711003DA54E /* ReferralProgramViewModel.swift */; };
+		195B9F0B25585429003DA54E /* ReferralInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195B9F0A25585429003DA54E /* ReferralInfoViewController.swift */; };
+		195B9F112558543C003DA54E /* ReferralFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195B9F102558543C003DA54E /* ReferralFriendsViewController.swift */; };
+		195B9F1725585452003DA54E /* ReferralHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195B9F1625585452003DA54E /* ReferralHistoryViewController.swift */; };
+		195B9F2125585DC0003DA54E /* ReferralInfoLinkTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 195B9F2025585DC0003DA54E /* ReferralInfoLinkTableViewCell.xib */; };
+		195B9F2725585DE0003DA54E /* ReferralInfoLinkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195B9F2625585DE0003DA54E /* ReferralInfoLinkTableViewCell.swift */; };
+		195B9F2D25585DFE003DA54E /* ReferralInfoStatisticsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 195B9F2C25585DFE003DA54E /* ReferralInfoStatisticsTableViewCell.xib */; };
+		195B9F3325585E29003DA54E /* ReferralInfoStatisticsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195B9F3225585E29003DA54E /* ReferralInfoStatisticsTableViewCell.swift */; };
 		1963836A24FED6A600FDB06E /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1963836924FED6A600FDB06E /* UINavigationBar.swift */; };
 		196389A92530AA7C00CA2092 /* BinanceRawAccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196389A82530AA7C00CA2092 /* BinanceRawAccountInfo.swift */; };
 		196389B02530AA9C00CA2092 /* BinanceRawBinanceBalance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196389AE2530AA9C00CA2092 /* BinanceRawBinanceBalance.swift */; };
@@ -1090,6 +1099,15 @@
 		19129481249BBA2C007F1083 /* PostAssetDetailsWithPrices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostAssetDetailsWithPrices.swift; sourceTree = "<group>"; };
 		19129483249BBA3E007F1083 /* PublicProfileFollow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicProfileFollow.swift; sourceTree = "<group>"; };
 		19129485249BBAF8007F1083 /* PostPlatformAssetDetailsWithPrices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostPlatformAssetDetailsWithPrices.swift; sourceTree = "<group>"; };
+		195B9EF92558469D003DA54E /* ReferralProgramViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralProgramViewController.swift; sourceTree = "<group>"; };
+		195B9F0025584711003DA54E /* ReferralProgramViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralProgramViewModel.swift; sourceTree = "<group>"; };
+		195B9F0A25585429003DA54E /* ReferralInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralInfoViewController.swift; sourceTree = "<group>"; };
+		195B9F102558543C003DA54E /* ReferralFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralFriendsViewController.swift; sourceTree = "<group>"; };
+		195B9F1625585452003DA54E /* ReferralHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralHistoryViewController.swift; sourceTree = "<group>"; };
+		195B9F2025585DC0003DA54E /* ReferralInfoLinkTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReferralInfoLinkTableViewCell.xib; sourceTree = "<group>"; };
+		195B9F2625585DE0003DA54E /* ReferralInfoLinkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralInfoLinkTableViewCell.swift; sourceTree = "<group>"; };
+		195B9F2C25585DFE003DA54E /* ReferralInfoStatisticsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReferralInfoStatisticsTableViewCell.xib; sourceTree = "<group>"; };
+		195B9F3225585E29003DA54E /* ReferralInfoStatisticsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralInfoStatisticsTableViewCell.swift; sourceTree = "<group>"; };
 		1963836924FED6A600FDB06E /* UINavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationBar.swift; sourceTree = "<group>"; };
 		196389A82530AA7C00CA2092 /* BinanceRawAccountInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawAccountInfo.swift; sourceTree = "<group>"; };
 		196389AE2530AA9C00CA2092 /* BinanceRawBinanceBalance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawBinanceBalance.swift; sourceTree = "<group>"; };
@@ -2139,6 +2157,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		195B9EFF255846A9003DA54E /* Referral Program */ = {
+			isa = PBXGroup;
+			children = (
+				195B9EF92558469D003DA54E /* ReferralProgramViewController.swift */,
+				195B9F0A25585429003DA54E /* ReferralInfoViewController.swift */,
+				195B9F102558543C003DA54E /* ReferralFriendsViewController.swift */,
+				195B9F1625585452003DA54E /* ReferralHistoryViewController.swift */,
+			);
+			path = "Referral Program";
+			sourceTree = "<group>";
+		};
+		195B9F3825585E53003DA54E /* ReferralProgram */ = {
+			isa = PBXGroup;
+			children = (
+				195B9F2025585DC0003DA54E /* ReferralInfoLinkTableViewCell.xib */,
+				195B9F2625585DE0003DA54E /* ReferralInfoLinkTableViewCell.swift */,
+				195B9F2C25585DFE003DA54E /* ReferralInfoStatisticsTableViewCell.xib */,
+				195B9F3225585E29003DA54E /* ReferralInfoStatisticsTableViewCell.swift */,
+			);
+			path = ReferralProgram;
+			sourceTree = "<group>";
+		};
 		1975B8DA24DD8F030095C72B /* Manage Fund */ = {
 			isa = PBXGroup;
 			children = (
@@ -3291,6 +3331,7 @@
 			isa = PBXGroup;
 			children = (
 				5E35E80E217DE3890019B60C /* SettingsTableViewCell.swift */,
+				195B9F3825585E53003DA54E /* ReferralProgram */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -3429,6 +3470,7 @@
 				5EC7B87E20D147F5007720D1 /* SettingsViewController.swift */,
 				5E36652120D948B700195CBE /* PasscodeViewController.swift */,
 				FCC9DD72200E4C7E008825EC /* Profile */,
+				195B9EFF255846A9003DA54E /* Referral Program */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -3438,6 +3480,7 @@
 			children = (
 				5EC7B88120D14C9C007720D1 /* SettingsViewModel.swift */,
 				5E36652320D94B0A00195CBE /* PasscodeViewModel.swift */,
+				195B9F0025584711003DA54E /* ReferralProgramViewModel.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -4529,6 +4572,7 @@
 				FCC9DD57200DFA5E008825EC /* Main.storyboard in Resources */,
 				5EAD0AB72090AB1000A92B49 /* MarkerView.xib in Resources */,
 				5E93E6FC21D1A5370020DE55 /* NotificationListTableViewCell.xib in Resources */,
+				195B9F2125585DC0003DA54E /* ReferralInfoLinkTableViewCell.xib in Resources */,
 				5E82C75421429785007A21C3 /* DashboardCurrencyTableViewCell.xib in Resources */,
 				5EE0076E217881AA0045B890 /* Manager.storyboard in Resources */,
 				19D3099E24ED8799006B4185 /* FundAssetsListTableViewCell.xib in Resources */,
@@ -4574,6 +4618,7 @@
 				FCC9DD5B200DFFB8008825EC /* Profile.storyboard in Resources */,
 				5E826AE023855EB700116DD7 /* DashboardInvestingTableViewCell.xib in Resources */,
 				5EA274C721628286008CAF77 /* DetailProfitStatisticTableViewCell.xib in Resources */,
+				195B9F2D25585DFE003DA54E /* ReferralInfoStatisticsTableViewCell.xib in Resources */,
 				5EA274BB2162823F008CAF77 /* InvestNowTableViewCell.xib in Resources */,
 				5E1CF81E218B71D100541C70 /* Montserrat-Light.ttf in Resources */,
 				5EF9F90823E09C4400542E1E /* FollowTradingContentView.xib in Resources */,
@@ -4872,9 +4917,11 @@
 				198124692464590A00F286FE /* RewardDetailsItemsViewModel.swift in Sources */,
 				5EA274DF2162F0D6008CAF77 /* ProgramBalanceViewModel.swift in Sources */,
 				FC140FE82030168100B71E7F /* JSONEncodableEncoding.swift in Sources */,
+				195B9F3325585E29003DA54E /* ReferralInfoStatisticsTableViewCell.swift in Sources */,
 				5E70428F23CCFF0E00D8950F /* AccountInfoViewController.swift in Sources */,
 				5EB996A920F3738600E31D23 /* ListViewModelProtocol.swift in Sources */,
 				5E39F5F623A3F8A60073DAD5 /* DashboardChartAsset.swift in Sources */,
+				195B9F0B25585429003DA54E /* ReferralInfoViewController.swift in Sources */,
 				5EAC11B220B81AF10057A2D2 /* AuthChangePasswordInfoViewModel.swift in Sources */,
 				5E39F7AB23A3F9300073DAD5 /* DetachFromExternalSignalProvider.swift in Sources */,
 				5EA1FE2721A2F24A00308D81 /* FacetCollectionViewCell.swift in Sources */,
@@ -4996,6 +5043,7 @@
 				19EEE0D42507C25900F83CED /* FundHistoryEventViewModelItemsViewModel.swift in Sources */,
 				5EF9F91523E10DB600542E1E /* PrivateTradingContentView.swift in Sources */,
 				5E39F59F23A3E3BE0073DAD5 /* AssetCollectionViewCell.swift in Sources */,
+				195B9F1725585452003DA54E /* ReferralHistoryViewController.swift in Sources */,
 				5E39F60723A3F8A60073DAD5 /* CommonPublicAssetsViewModel.swift in Sources */,
 				5EFB2380238C010F00CD7480 /* InvestingHeaderTableViewCell.swift in Sources */,
 				5EB932112146999400EE01A2 /* DetailManagerTableViewCellViewModel.swift in Sources */,
@@ -5253,6 +5301,7 @@
 				5E39F7A223A3F9300073DAD5 /* ProfitChart.swift in Sources */,
 				5E6D681D207655A100299408 /* String+Constants.swift in Sources */,
 				5E39F72023A3F92F0073DAD5 /* TransactionDetailItem.swift in Sources */,
+				195B9F0125584711003DA54E /* ReferralProgramViewModel.swift in Sources */,
 				5EEFAA7223B6A43200EBBC6D /* ProgramHeaderTableViewCell.swift in Sources */,
 				5E858344205FFA010039E13F /* UILabelExtension.swift in Sources */,
 				5E5BBE6C218228E6009E4BA3 /* FundBalanceChartTableViewCellViewModel.swift in Sources */,
@@ -5323,6 +5372,7 @@
 				5E39F72723A3F92F0073DAD5 /* NewExternalTradingAccountRequest.swift in Sources */,
 				1975B8D324D829920095C72B /* FundManageViewController.swift in Sources */,
 				5EFB2375238AC2B600CD7480 /* TradingPrivateShortListViewModel.swift in Sources */,
+				195B9F2725585DE0003DA54E /* ReferralInfoLinkTableViewCell.swift in Sources */,
 				1981242F2464510C00F286FE /* DashboardTradingAssetItemsViewModel.swift in Sources */,
 				198124532464585D00F286FE /* PostImageResize.swift in Sources */,
 				FC5E904A202169DC000E4A90 /* FilterViewController.swift in Sources */,
@@ -5491,6 +5541,7 @@
 				5EF9F91923E10DC700542E1E /* ProgramInvestingContentView.swift in Sources */,
 				5E39F7A423A3F9300073DAD5 /* OrderSignalFee.swift in Sources */,
 				5E39F7DD23A3F9300073DAD5 /* DashboardInvestingDetails.swift in Sources */,
+				195B9EFA2558469D003DA54E /* ReferralProgramViewController.swift in Sources */,
 				5E5BC29C21868FD7009E4BA3 /* FundAssetsHeaderView.swift in Sources */,
 				198124412464524700F286FE /* GuidesCategory.swift in Sources */,
 				5E39F75023A3F92F0073DAD5 /* InternalTransferRequest.swift in Sources */,
@@ -5569,6 +5620,7 @@
 				5E39F72623A3F92F0073DAD5 /* DashboardTradingAssetPublicDetails.swift in Sources */,
 				5E1770A3220D18DA00669D84 /* WalletBalanceViewController.swift in Sources */,
 				5E0E1B9D2221A0CC001F3C4E /* InfoSignalsTableViewCellViewModel.swift in Sources */,
+				195B9F112558543C003DA54E /* ReferralFriendsViewController.swift in Sources */,
 				19812461246458BE00F286FE /* PublicProfilePersonalDetails.swift in Sources */,
 				5E1770A1220D05BC00669D84 /* WalletTableViewCellViewModel.swift in Sources */,
 				FC4964152015445E00104CEB /* WalletViewController.swift in Sources */,
@@ -5667,6 +5719,7 @@
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 2.1.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor.NotificationService;
@@ -5727,6 +5780,7 @@
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 2.1.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor.NotificationService;
@@ -5790,6 +5844,7 @@
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 2.1.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor.NotificationService;
@@ -5809,10 +5864,12 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = NotificationContent/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 2.1.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor.NotificationContent;
@@ -5858,6 +5915,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -5873,6 +5931,7 @@
 				INFOPLIST_FILE = NotificationContent/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 2.1.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor.NotificationContent;
@@ -5921,6 +5980,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -5936,6 +5996,7 @@
 				INFOPLIST_FILE = NotificationContent/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 2.1.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor.NotificationContent;
@@ -6013,12 +6074,12 @@
 				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.1.1;
+				MARKETING_VERSION = 2.1.2;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "\"-DPROD\"";
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor;
@@ -6295,13 +6356,13 @@
 				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.1.1;
+				MARKETING_VERSION = 2.1.2;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Onone";
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor;
 				PRODUCT_NAME = "${APP_DISPLAY_NAME}";
@@ -6377,12 +6438,12 @@
 				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.1.1;
+				MARKETING_VERSION = 2.1.2;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "\"-DDEV\"";
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor;

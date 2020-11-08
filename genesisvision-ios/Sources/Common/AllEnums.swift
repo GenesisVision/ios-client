@@ -119,7 +119,6 @@ enum DateRangeType: Int {
 
 // MARK: - Currency
 typealias CurrencyType = Currency
-typealias SortingListType = ProgramsFilterSorting
 
 extension Currency {
     public var currencyLenght: Int {
@@ -143,6 +142,12 @@ extension Currency {
         default:
             return UIColor.Currency.gvt
         }
+    }
+}
+
+extension Currency: CaseIterable {
+    public static var allCases: [Currency] {
+        return [.btc, .eth, .gvt, .usd, .usdc, .usdt]
     }
 }
 

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="145" id="OHq-gY-L7y">
+            <rect key="frame" x="0.0" y="0.0" width="348" height="145"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OHq-gY-L7y" id="VDb-oi-HZR">
+                <rect key="frame" x="0.0" y="0.0" width="348" height="145"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gAa-YW-exl">
+                        <rect key="frame" x="20" y="0.0" width="308" height="72.5"/>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="gAa-YW-exl" firstAttribute="top" secondItem="VDb-oi-HZR" secondAttribute="top" id="1CG-xL-GgG"/>
+                    <constraint firstAttribute="trailing" secondItem="gAa-YW-exl" secondAttribute="trailing" constant="20" id="BzC-kM-7EM"/>
+                    <constraint firstItem="gAa-YW-exl" firstAttribute="leading" secondItem="VDb-oi-HZR" secondAttribute="leading" constant="20" id="Nn5-cC-UO9"/>
+                    <constraint firstItem="gAa-YW-exl" firstAttribute="height" secondItem="VDb-oi-HZR" secondAttribute="height" multiplier="0.5" id="cL9-al-3pW"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="-162.31884057971016" y="174.44196428571428"/>
+        </tableViewCell>
+    </objects>
+</document>
