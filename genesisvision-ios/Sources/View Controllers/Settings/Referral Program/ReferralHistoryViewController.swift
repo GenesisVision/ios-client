@@ -61,6 +61,8 @@ class ReferralHistoryViewController: BaseViewControllerWithTableView {
         
         rewardTitle.anchor(top: headerView.topAnchor, leading: headerView.centerXAnchor, bottom: headerView.bottomAnchor, trailing: headerView.trailingAnchor, padding: UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 10), size: CGSize(width: 0, height: 40))
         
+        headerView.isHidden = true
+        
         tableView.tableHeaderView = headerView
     }
     
@@ -69,6 +71,7 @@ class ReferralHistoryViewController: BaseViewControllerWithTableView {
             switch result {
             case .success:
                 self?.hideAll()
+                self?.tableView.tableHeaderView?.isHidden = self?.viewModel.viewModels.isEmpty ?? false
                 self?.reloadData()
             case .failure(errorType: let errorType):
                 ErrorHandler.handleError(with: errorType, viewController: self, hud: true)

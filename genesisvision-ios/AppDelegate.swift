@@ -8,7 +8,6 @@
 
 import UIKit
 import UserNotifications
-
 import Firebase
 
 let gcmMessageIDKey = "gcm.message_id"

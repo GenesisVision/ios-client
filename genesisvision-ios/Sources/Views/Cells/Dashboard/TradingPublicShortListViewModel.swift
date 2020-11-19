@@ -90,21 +90,21 @@ extension TradingPublicShortListViewModel {
         }
         
         if let assetType = tradingAsset.assetType, assetType == .program {
-            let closePeriod = UIAction(title: "Close period", image: nil) { [weak self] action in
+            let closePeriod = UIAction(title: "Close period", image: nil) { action in
                 //TODO: Make signal action
             }
             children.append(closePeriod)
         }
         
         if let canMakeProgramFromSignalProvider = actions.canMakeProgramFromSignalProvider, canMakeProgramFromSignalProvider {
-            let makeProgram = UIAction(title: "Make program", image: nil) { [weak self] action in
+            let makeProgram = UIAction(title: "Make program", image: nil) { action in
                 //TODO: Make signal action
             }
             children.append(makeProgram)
         }
         
         if let canMakeSignalProviderFromProgram = actions.canMakeSignalProviderFromProgram, canMakeSignalProviderFromProgram {
-            let makeSignal = UIAction(title: "Make a signal provider", image: nil) { [weak self] action in
+            let makeSignal = UIAction(title: "Make a signal provider", image: nil) { action in
                 //TODO: Make signal action
             }
             children.append(makeSignal)
