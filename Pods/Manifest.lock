@@ -4,10 +4,7 @@ PODS:
   - Charts (3.4.0):
     - Charts/Core (= 3.4.0)
   - Charts/Core (3.4.0)
-  - Crashlytics (3.14.0):
-    - Fabric (~> 1.10.2)
   - DZNEmptyDataSet (1.8.1)
-  - Fabric (1.10.2)
   - Firebase/Analytics (6.14.0):
     - Firebase/Core
   - Firebase/Core (6.14.0):
@@ -81,6 +78,15 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (6.4.0):
     - GoogleUtilities/Logger
+  - IdensicMobileSDK (1.13.1):
+    - IdensicMobileSDK/Default (= 1.13.1)
+  - IdensicMobileSDK/Core (1.13.1)
+  - IdensicMobileSDK/Default (1.13.1):
+    - IdensicMobileSDK/Core
+    - IdensicMobileSDK/Liveness3D
+  - IdensicMobileSDK/Liveness3D (1.13.1):
+    - IdensicMobileSDK/Core
+    - ZoomAuthSDK (= 8.12.1)
   - IQKeyboardManagerSwift (6.5.4)
   - Kingfisher (5.12.0):
     - Kingfisher/Core (= 5.12.0)
@@ -103,16 +109,16 @@ PODS:
   - Tabman (2.6.3):
     - AutoInsetter (~> 1.8.0)
     - Pageboy (~> 3.5.0)
+  - ZoomAuthSDK (8.12.1)
 
 DEPENDENCIES:
   - Alamofire
   - Charts
-  - Crashlytics (~> 3.14.0)
   - DZNEmptyDataSet
-  - Fabric (~> 1.10.2)
   - Firebase/Analytics
   - Firebase/Core
   - Firebase/Messaging
+  - IdensicMobileSDK (= 1.13.1)
   - IQKeyboardManagerSwift
   - Kingfisher
   - NotificationBannerSwift
@@ -126,9 +132,7 @@ SPEC REPOS:
     - Alamofire
     - AutoInsetter
     - Charts
-    - Crashlytics
     - DZNEmptyDataSet
-    - Fabric
     - Firebase
     - FirebaseAnalytics
     - FirebaseAnalyticsInterop
@@ -153,14 +157,15 @@ SPEC REPOS:
     - SmileLock
     - SnapKit
     - Tabman
+  https://github.com/SumSubstance/Specs.git:
+    - IdensicMobileSDK
+    - ZoomAuthSDK
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   AutoInsetter: 0b90ca74e36561c340129045a3722c51a0b15c58
   Charts: 74c9f256eaf0460c0c416522d1cf8c634ea6b286
-  Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
-  Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
   Firebase: 0219bb4782eb1406f1b9b0628a2e625484ce910d
   FirebaseAnalytics: f68b9f3f1241385129ae0a83b63627fc420c05e5
   FirebaseAnalyticsInterop: d48b6ab67bcf016a05e55b71fc39c61c0cb6b7f3
@@ -173,6 +178,7 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 8e9b210c97d55fbff306cc5468ff91b9cb32dcf5
   GoogleDataTransportCCTSupport: 202d7cdf9c4a7d81a2bb7f7e7e1ba6faa421b1f2
   GoogleUtilities: 29bd0d8f850efbd28cff6d99e8b7da1f8d236bcf
+  IdensicMobileSDK: 69d5ec9053586c30dc8853961d8b01e6746930ed
   IQKeyboardManagerSwift: 2dde0fc70110e8eac7ccce2a46fdbec6a850b414
   Kingfisher: dc6e0f53bb5b12c3e75bedb0e01bbd7a640eea69
   MarqueeLabel: d24e821159667c93064ea3042ccf1875ca94db6b
@@ -185,7 +191,8 @@ SPEC CHECKSUMS:
   SmileLock: 46b847b3ad963e3140d083b53f09036a4d210537
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   Tabman: 63eae331ae7a9388ae389b1808f1939269fcdece
+  ZoomAuthSDK: 249880fac1d310c38b07ae1ee0108c2244fa5b6f
 
-PODFILE CHECKSUM: fb4f19fc7877e1f0728a609b95bd1975ee06bbea
+PODFILE CHECKSUM: 0e53d682fe71a9d024b7ba32812d9dc43a6fb056
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.10.0

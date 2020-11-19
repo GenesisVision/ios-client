@@ -148,6 +148,7 @@ final class ProgramViewModel: TabmanViewModel {
             if !showEvents {
                 tabTypes.removeAll(where: { $0 == .events })
                 setViewControllers()
+                reloadDataProtocol?.didReloadData()
             }
         }
     }

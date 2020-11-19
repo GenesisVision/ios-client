@@ -16,12 +16,12 @@ final class ReferralProgramViewModel: TabmanViewModel {
         case history = "History"
     }
     
-    private let tabTypes: [TabType] = [.info, .friends, .history]
+    var tabTypes: [TabType] = [.info, .friends, .history]
     
-    private var controllers = [TabType : UIViewController]()
+    var controllers = [TabType : UIViewController]()
     
     init(with router: Router) {
-        super.init(withRouter: router, viewControllersCount: tabTypes.count, defaultPage: 0)
+        super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0)
         
         font = UIFont.getFont(.semibold, size: 16)
         
@@ -38,11 +38,20 @@ final class ReferralProgramViewModel: TabmanViewModel {
     private func getViewController(_ type: TabType) -> UIViewController {
         switch type {
         case .friends:
-            return ReferralFriendsViewController()
+            let viewModel = ReferralFriendsViewModel(router: router)
+            let viewController = ReferralFriendsViewController()
+            viewController.viewModel = viewModel
+            return viewController
         case .info:
-            return ReferralInfoViewController()
+            let viewModel = ReferralInfoViewModel(router: router)
+            let viewController = ReferralInfoViewController()
+            viewController.viewModel = viewModel
+            return viewController
         case .history:
-            return ReferralHistoryViewController()
+            let viewModel = ReferralHistoryViewModel(router: router)
+            let viewController = ReferralHistoryViewController()
+            viewController.viewModel = viewModel
+            return viewController
         }
     }
 }
@@ -60,7 +69,7 @@ extension ReferralProgramViewModel: TabmanDataSourceProtocol {
     
     func getViewController(_ index: Int) -> UIViewController? {
         if let tabType = tabTypes[safe: index] {
-            return getViewController(tabType)
+            return controllers[tabType]
         } else {
             return nil
         }

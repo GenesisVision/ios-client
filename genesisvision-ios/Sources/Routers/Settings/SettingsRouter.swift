@@ -93,7 +93,7 @@ class SettingsRouter: Router {
     }
     
     private func showReferral() {
-        guard let viewController = ReferralProgramViewController.storyboardInstance(.settings) else { return }
+        let viewController = ReferralProgramViewController()
         let viewModel = ReferralProgramViewModel(with: self)
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true

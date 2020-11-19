@@ -13,9 +13,13 @@ class ReferralProgramViewController: BaseTabmanViewController<ReferralProgramVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setup()
+    }
     
     private func setup() {
         navigationItem.title = viewModel.title

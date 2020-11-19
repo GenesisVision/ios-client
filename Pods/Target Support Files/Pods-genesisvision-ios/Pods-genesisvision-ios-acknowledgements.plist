@@ -286,16 +286,6 @@ SOFTWARE.
 		</dict>
 		<dict>
 			<key>FooterText</key>
-			<string>Fabric: Copyright 2018 Google, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Fabric Software and Services Agreement located at https://fabric.io/terms. Crashlytics Kit: Copyright 2018 Crashlytics, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Crashlytics Terms of Service located at http://try.crashlytics.com/terms/terms-of-service.pdf and the Crashlytics Privacy Policy located at http://try.crashlytics.com/terms/privacy-policy.pdf. OSS: http://get.fabric.io/terms/opensource.txt</string>
-			<key>License</key>
-			<string>Commercial</string>
-			<key>Title</key>
-			<string>Crashlytics</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
 			<string>The MIT License (MIT)
 
 Copyright (c) 2016 Ignacio Romero Zurbuchen iromero@dzen.cl
@@ -310,16 +300,6 @@ THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 			<string>MIT</string>
 			<key>Title</key>
 			<string>DZNEmptyDataSet</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>Fabric: Copyright 2018 Google, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Fabric Software and Services Agreement located at https://fabric.io/terms. OSS: http://get.fabric.io/terms/opensource.txt</string>
-			<key>License</key>
-			<string>Commercial</string>
-			<key>Title</key>
-			<string>Fabric</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>
@@ -2978,6 +2958,16 @@ SOFTWARE.
 			<string>MIT</string>
 			<key>Title</key>
 			<string>Tabman</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>ZoomAuthentication is Copyright 2018 FaceTec, Inc.  It may not be modified.</string>
+			<key>License</key>
+			<string>custom</string>
+			<key>Title</key>
+			<string>ZoomAuthSDK</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>

@@ -8,11 +8,33 @@
 
 import UIKit
 
+struct ReferralHistoryTableViewCellViewModel {
+    let rewardDetails: RewardDetails
+}
+
+extension ReferralHistoryTableViewCellViewModel: CellViewModel {
+    func setup(on cell: ReferralHistoryTableViewCell) {
+        if let date = rewardDetails.date {
+            cell.dateLabel.text = date.dateAndTimeToString()
+        }
+        
+        if let currency = rewardDetails.currency, let amount = rewardDetails.amount {
+            cell.rewardLabel.text = amount.toString() + " " + currency.rawValue
+        }
+    }
+}
+
 class ReferralHistoryTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var dateLabel: SubtitleLabel!
+    
+    @IBOutlet weak var rewardLabel: TitleLabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        backgroundColor = UIColor.BaseView.bg
+        contentView.backgroundColor = UIColor.BaseView.bg
+        selectionStyle = .none
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

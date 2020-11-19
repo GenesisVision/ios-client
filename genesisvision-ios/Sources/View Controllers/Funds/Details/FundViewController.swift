@@ -237,6 +237,7 @@ final class FundViewModel: TabmanViewModel {
             if !showEvents {
                 tabTypes = [.info, .assets, .reallocateHistory, .profit, .balance]
                 setViewControllers()
+                reloadDataProtocol?.didReloadData()
             }
         }
     }
