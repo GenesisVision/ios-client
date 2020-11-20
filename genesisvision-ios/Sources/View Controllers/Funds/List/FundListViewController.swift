@@ -350,7 +350,7 @@ extension FundListViewController: BaseTableViewProtocol {
     }
     
     func didSelect(_ type: CellActionType, cellViewModel: CellViewAnyModel?) {
-        guard let cellViewModel = cellViewModel as?FundTableViewCellViewModel, let assetId = cellViewModel.asset._id?.uuidString  else { return }
+        guard let cellViewModel = cellViewModel as? FundTableViewCellViewModel, let assetId = cellViewModel.asset._id?.uuidString  else { return }
         viewModel.showDetail(with: assetId)
     }
 }

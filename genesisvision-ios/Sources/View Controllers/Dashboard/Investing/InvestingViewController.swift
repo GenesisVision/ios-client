@@ -161,7 +161,6 @@ extension InvestingViewController: BaseTableViewProtocol {
     }
     
     func action(_ type: CellActionType, actionType: ActionType) {
-        print("show all \(type)")
         
         switch type {
         case .investingEvents:

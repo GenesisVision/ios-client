@@ -49,15 +49,6 @@ class TradingViewController: ListViewController {
             viewController.title = "Create Fund"
             viewController.viewModel = FundPublicInfoViewModel(mode: .create)
             self.navigationController?.pushViewController(viewController, animated: true)
-//            let nav = BaseNavigationController(rootViewController: viewController)
-//            nav.modalPresentationStyle = .fullScreen
-//            self.present(nav, animated: true, completion: nil)
-//            guard let vc = CreateFundViewController.storyboardInstance(.dashboard) else { return }
-//            vc.title = "Create Fund"
-//            vc.viewModel = CreateFundViewModel(vc, addAssetsProtocol: vc)
-//            let nav = BaseNavigationController(rootViewController: vc)
-//            nav.modalPresentationStyle = .fullScreen
-//            self.present(nav, animated: true, completion: nil)
         }
     }
     
@@ -144,6 +135,12 @@ class TradingViewController: ListViewController {
         bottomSheetController.addContentsView(view)
         bottomSheetController.present()
     }
+    
+    override func pullToRefresh() {
+        super.pullToRefresh()
+        
+        viewModel.fetch()
+    }
 }
 
 extension TradingViewController: DashBoardTradingTableViewCellButtonsActionsProtocol {
@@ -168,7 +165,6 @@ extension TradingViewController: UIScrollViewDelegate {
 }
 extension TradingViewController: BaseTableViewProtocol {
     func action(_ type: CellActionType, actionType: ActionType) {
-        print("show all \(type)")
         
         switch type {
         case .tradingEvents:
