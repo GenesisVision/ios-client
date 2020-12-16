@@ -72,6 +72,7 @@ class ReferralHistoryViewController: BaseViewControllerWithTableView {
             case .success:
                 self?.hideAll()
                 self?.tableView.tableHeaderView?.isHidden = self?.viewModel.viewModels.isEmpty ?? false
+                self?.updateReferralProgramViewController()
                 self?.reloadData()
             case .failure(errorType: let errorType):
                 ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
@@ -85,7 +86,13 @@ class ReferralHistoryViewController: BaseViewControllerWithTableView {
         fetch()
     }
     
-    override func updateData(from dateFrom: Date?, to dateTo: Date?) {
+    private func updateReferralProgramViewController() {
+        let badgeValue = viewModel.viewModels.count.toString()
+        
+        NotificationCenter.default.post(name: .updateReferralProgramViewController, object: nil, userInfo: ["ReferralHistoryBadgeValue" : badgeValue])
+    }
+    
+    override func updateData(from dateFrom: Date?, to dateTo: Date?, dateRangeType: DateRangeType? = nil) {
         viewModel.dateFrom = dateFrom
         viewModel.dateTo = dateTo
         
@@ -124,6 +131,7 @@ final class ReferralHistoryViewModel: ViewModelWithListProtocol {
     func fetch(completion: @escaping CompletionBlock) {
         ReferralDataProvider.getRewards(dateFrom: dateFrom, dateTo: dateTo, skip: skip, take: take) { [weak self] (viewModel) in
             if let items = viewModel?.items {
+                self?.viewModels = []
                 items.forEach({ self?.viewModels.append(ReferralHistoryTableViewCellViewModel(rewardDetails: $0)) })
             }
             completion(.success)

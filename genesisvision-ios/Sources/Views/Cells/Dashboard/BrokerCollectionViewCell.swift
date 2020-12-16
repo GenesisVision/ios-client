@@ -9,18 +9,19 @@
 import UIKit
 
 protocol BrokerCollectionViewCellViewModelProtocol: class {
-    func isSelected(_ broker: Broker) -> Bool
-    func showDetails(_ broker: Broker)
+    func isSelected(_ broker: Broker?, _ exchanger: ExchangeInfo?) -> Bool
+    func showDetails(_ broker: Broker?, _ exchanger: ExchangeInfo?)
 }
 
 struct BrokerCollectionViewCellViewModel {
     let brokerModel: Broker?
+    let exchangerModel: ExchangeInfo?
     weak var delegate: BrokerCollectionViewCellViewModelProtocol?
 }
 
 extension BrokerCollectionViewCellViewModel: CellViewModel {
     func setup(on cell: BrokerCollectionViewCell) {
-        cell.configure(brokerModel, delegate: delegate)
+        cell.configure(brokerModel, exchanger: exchangerModel, delegate: delegate)
     }
 }
 
@@ -29,6 +30,7 @@ class BrokerCollectionViewCell: BaseCollectionViewCell {
     @IBOutlet weak var tagsView: UIStackView!
     
     var broker: Broker?
+    var exchanger: ExchangeInfo?
     
     weak var delegate: BrokerCollectionViewCellViewModelProtocol?
     
@@ -37,17 +39,24 @@ class BrokerCollectionViewCell: BaseCollectionViewCell {
         super.awakeFromNib()
     }
     
-    func configure(_ broker: Broker?, delegate: BrokerCollectionViewCellViewModelProtocol?) {
+    func configure(_ broker: Broker?, exchanger: ExchangeInfo?, delegate: BrokerCollectionViewCellViewModelProtocol?) {
         self.delegate = delegate
         self.broker = broker
+        self.exchanger = exchanger
         
         if let logo = broker?.logoUrl, let fileUrl = getFileURL(fileName: logo) {
             logoImageView.kf.indicatorType = .activity
             logoImageView.kf.setImage(with: fileUrl)
         }
         
+        if let logo = exchanger?.logoUrl, let fileUrl = getFileURL(fileName: logo) {
+            logoImageView.kf.indicatorType = .activity
+            logoImageView.kf.setImage(with: fileUrl)
+        }
+        
+        
         tagsView.removeAllArrangedSubviews()
-        if let tags = broker?.tags {
+        if let tags = exchanger?.tags {
             tags.forEach { (item) in
                 let tag = RoundedLabel()
                 if let color = item.color {
@@ -61,13 +70,23 @@ class BrokerCollectionViewCell: BaseCollectionViewCell {
             }
         }
         
-        if let broker = broker, let isSelected = delegate?.isSelected(broker) {
+        if let broker = broker, let isSelected = delegate?.isSelected(broker, nil) {
+            roundCorners(with: Constants.SystemSizes.cornerSize, borderWidth: isSelected ? 2.0 : 0.0, borderColor: .primary)
+        }
+        
+        if let exchanger = exchanger, let isSelected = delegate?.isSelected(nil, exchanger) {
             roundCorners(with: Constants.SystemSizes.cornerSize, borderWidth: isSelected ? 2.0 : 0.0, borderColor: .primary)
         }
     }
     
     @IBAction func detailButtonAction(_ sender: UIButton) {
-        guard let broker = broker else { return }
-        delegate?.showDetails(broker)
+        if let broker = broker {
+            delegate?.showDetails(broker, nil)
+            
+        }
+        if let exchanger = exchanger {
+            delegate?.showDetails(nil, exchanger)
+        }
+
     }
 }

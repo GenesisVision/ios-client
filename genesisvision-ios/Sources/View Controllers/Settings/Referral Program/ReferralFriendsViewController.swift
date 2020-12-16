@@ -25,7 +25,6 @@ class ReferralFriendsViewController: BaseViewControllerWithTableView {
     }
     
     private func setup() {
-        bottomViewType = .dateRange
         tableView.configure(with: .defaultConfiguration)
 
         tableView.separatorStyle = .none
@@ -71,6 +70,7 @@ class ReferralFriendsViewController: BaseViewControllerWithTableView {
             case .success:
                 self?.hideAll()
                 self?.tableView.tableHeaderView?.isHidden = self?.viewModel.viewModels.isEmpty ?? false
+                self?.updateReferralProgramViewController()
                 self?.reloadData()
             case .failure(errorType: let errorType):
                 ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
@@ -84,12 +84,10 @@ class ReferralFriendsViewController: BaseViewControllerWithTableView {
         fetch()
     }
     
-    override func updateData(from dateFrom: Date?, to dateTo: Date?) {
-        viewModel.dateFrom = dateFrom
-        viewModel.dateTo = dateTo
+    private func updateReferralProgramViewController() {
+        let badgeValue = viewModel.viewModels.count.toString()
         
-        showProgressHUD()
-        fetch()
+        NotificationCenter.default.post(name: .updateReferralProgramViewController, object: nil, userInfo: ["ReferralFriendsBadgeValue" : badgeValue])
     }
     
     private func reloadData() {
@@ -107,8 +105,6 @@ final class ReferralFriendsViewModel: ViewModelWithListProtocol {
     
     lazy var dataSource: TableViewDataSource = TableViewDataSource(self)
     
-    var skip: Int = 0
-    var take: Int = ApiKeys.take
     var router: Router
     
     var dateFrom: Date?
@@ -120,12 +116,13 @@ final class ReferralFriendsViewModel: ViewModelWithListProtocol {
     }
     
     func fetch(completion: @escaping CompletionBlock) {
-        ReferralDataProvider.getFriends(dateFrom: dateFrom, dateTo: dateTo, skip: skip, take: take) { [weak self] (viewModel) in
+        ReferralDataProvider.getFriends { [weak self] (viewModel) in
             if let items = viewModel?.items {
+                self?.viewModels = []
                 items.forEach({ self?.viewModels.append(ReferralFriendsTableViewCellViewModel(referralFriend: $0)) })
             }
             completion(.success)
-        } errorCompletion: { _ in}
+        } errorCompletion: { _ in }
     }
 }
 

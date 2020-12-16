@@ -11,14 +11,14 @@ import Foundation
 public struct BinanceRawSymbolMinNotionalFilter: Codable {
 
 
-    public var filterType: BinanceRawSymbolFilterType?
+    public var filterType: BinanceSymbolFilterType?
 
     public var minNotional: Double?
 
     public var applyToMarketOrders: Bool?
 
     public var averagePriceMinutes: Int?
-    public init(filterType: BinanceRawSymbolFilterType? = nil, minNotional: Double? = nil, applyToMarketOrders: Bool? = nil, averagePriceMinutes: Int? = nil) { 
+    public init(filterType: BinanceSymbolFilterType? = nil, minNotional: Double? = nil, applyToMarketOrders: Bool? = nil, averagePriceMinutes: Int? = nil) { 
         self.filterType = filterType
         self.minNotional = minNotional
         self.applyToMarketOrders = applyToMarketOrders

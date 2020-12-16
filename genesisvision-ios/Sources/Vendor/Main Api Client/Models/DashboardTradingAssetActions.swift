@@ -29,6 +29,8 @@ public struct DashboardTradingAssetActions: Codable {
 
     public var canConfirm2FA: Bool?
 
+    public var canCreateApiKeys: Bool?
+
     public var canAddRequestInvest: Bool?
 
     public var canAddRequestWithdraw: Bool?
@@ -41,8 +43,10 @@ public struct DashboardTradingAssetActions: Codable {
 
     public var canClose: Bool?
 
+    public var canClosePeriod: Bool?
+
     public var hasTerminal: Bool?
-    public init(canMakeProgramFromPrivateTradingAccount: Bool? = nil, canMakeExchangeProgramFromPrivateTradingAccount: Bool? = nil, canMakeSignalProviderFromPrivateTradingAccount: Bool? = nil, canMakeSignalProviderFromPrivateExternalTradingAccount: Bool? = nil, canMakeProgramFromSignalProvider: Bool? = nil, canMakeSignalProviderFromProgram: Bool? = nil, canEditSignalProviderSettings: Bool? = nil, isEnoughMoneyToCreateProgram: Bool? = nil, canConfirm2FA: Bool? = nil, canAddRequestInvest: Bool? = nil, canAddRequestWithdraw: Bool? = nil, canTransferMoney: Bool? = nil, canMakeDemoDeposit: Bool? = nil, canChangePassword: Bool? = nil, canClose: Bool? = nil, hasTerminal: Bool? = nil) { 
+    public init(canMakeProgramFromPrivateTradingAccount: Bool? = nil, canMakeExchangeProgramFromPrivateTradingAccount: Bool? = nil, canMakeSignalProviderFromPrivateTradingAccount: Bool? = nil, canMakeSignalProviderFromPrivateExternalTradingAccount: Bool? = nil, canMakeProgramFromSignalProvider: Bool? = nil, canMakeSignalProviderFromProgram: Bool? = nil, canEditSignalProviderSettings: Bool? = nil, isEnoughMoneyToCreateProgram: Bool? = nil, canConfirm2FA: Bool? = nil, canCreateApiKeys: Bool? = nil, canAddRequestInvest: Bool? = nil, canAddRequestWithdraw: Bool? = nil, canTransferMoney: Bool? = nil, canMakeDemoDeposit: Bool? = nil, canChangePassword: Bool? = nil, canClose: Bool? = nil, canClosePeriod: Bool? = nil, hasTerminal: Bool? = nil) { 
         self.canMakeProgramFromPrivateTradingAccount = canMakeProgramFromPrivateTradingAccount
         self.canMakeExchangeProgramFromPrivateTradingAccount = canMakeExchangeProgramFromPrivateTradingAccount
         self.canMakeSignalProviderFromPrivateTradingAccount = canMakeSignalProviderFromPrivateTradingAccount
@@ -52,12 +56,14 @@ public struct DashboardTradingAssetActions: Codable {
         self.canEditSignalProviderSettings = canEditSignalProviderSettings
         self.isEnoughMoneyToCreateProgram = isEnoughMoneyToCreateProgram
         self.canConfirm2FA = canConfirm2FA
+        self.canCreateApiKeys = canCreateApiKeys
         self.canAddRequestInvest = canAddRequestInvest
         self.canAddRequestWithdraw = canAddRequestWithdraw
         self.canTransferMoney = canTransferMoney
         self.canMakeDemoDeposit = canMakeDemoDeposit
         self.canChangePassword = canChangePassword
         self.canClose = canClose
+        self.canClosePeriod = canClosePeriod
         self.hasTerminal = hasTerminal
     }
 

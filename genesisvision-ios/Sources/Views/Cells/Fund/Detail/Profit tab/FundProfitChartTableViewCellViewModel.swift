@@ -23,6 +23,10 @@ extension FundProfitChartTableViewCellViewModel: CellViewModel {
         cell.amountCurrencyLabel.isHidden = true
         
         if let charts = fundProfitChart.charts, let equityChart = charts[0].chart, equityChart.count > 0 {
+            let chart = equityChart.map { (point) -> SimpleChartPoint? in
+                guard point.date != nil else { return nil }
+                return SimpleChartPoint(date: Int64(Double(point.date!)*0.001), value: point.value)
+            }.compactMap{ $0 }
             if let value = equityChart.last?.value {
                 cell.amountValueLabel.text = value.rounded(with: .undefined).toString() + "%"
             } else {
@@ -30,7 +34,7 @@ extension FundProfitChartTableViewCellViewModel: CellViewModel {
             }
             
             cell.chartViewHeightConstraint.constant = 150.0
-            cell.chartView.setup(lineChartData: equityChart, dateRangeModel: chartViewProtocol?.filterDateRangeModel)
+            cell.chartView.setup(lineChartData: chart, dateRangeModel: chartViewProtocol?.filterDateRangeModel)
             cell.chartView.isHidden = false
             
             cell.changeTitleLabel.text = "Change"

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DashboardInvestmentLimitsTableViewCell" rowHeight="181" id="KGk-i7-Jjw" customClass="DashboardInvestmentLimitsTableViewCell" customModule="GV_DEBUG" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="541" height="181"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="541" height="181"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="fEI-lR-RI6">
+                        <rect key="frame" x="20" y="20" width="501" height="141"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WH1-xB-MwE">
+                                <rect key="frame" x="0.0" y="0.0" width="501" height="30"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G4b-3M-kYO" customClass="LargeTitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zmg-J2-3gM" customClass="TooltipButton" customModule="GV_DEBUG" customModuleProvider="target">
+                                        <rect key="frame" x="10" y="0.0" width="30" height="30"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="3u1-bZ-Tqk"/>
+                                            <constraint firstAttribute="width" secondItem="zmg-J2-3gM" secondAttribute="height" multiplier="1:1" id="HaC-7g-4C9"/>
+                                        </constraints>
+                                        <state key="normal" image="img_tip_icon"/>
+                                        <connections>
+                                            <action selector="infoButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="5v6-Xn-xQ0"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="G4b-3M-kYO" firstAttribute="leading" secondItem="WH1-xB-MwE" secondAttribute="leading" id="1Bf-aO-6R9"/>
+                                    <constraint firstItem="zmg-J2-3gM" firstAttribute="centerY" secondItem="WH1-xB-MwE" secondAttribute="centerY" id="H9L-GS-eWs"/>
+                                    <constraint firstItem="zmg-J2-3gM" firstAttribute="leading" secondItem="G4b-3M-kYO" secondAttribute="trailing" constant="10" id="TUJ-ZX-Ny1"/>
+                                    <constraint firstAttribute="bottom" secondItem="G4b-3M-kYO" secondAttribute="bottom" id="VAt-oa-fI1"/>
+                                    <constraint firstItem="G4b-3M-kYO" firstAttribute="top" secondItem="WH1-xB-MwE" secondAttribute="top" id="Y10-e9-Hce"/>
+                                    <constraint firstAttribute="height" constant="30" id="wfY-u7-umj"/>
+                                </constraints>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="wAM-Tq-EfP">
+                                <rect key="frame" x="0.0" y="45" width="501" height="31"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QAj-xm-cIz" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="501" height="0.0"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Nl1-gc-AhM">
+                                        <rect key="frame" x="0.0" y="5" width="501" height="19"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QHs-q3-vb7" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="250.5" height="19"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n04-oQ-zSQ" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                                <rect key="frame" x="250.5" y="0.0" width="250.5" height="19"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AL4-d0-C6O" customClass="MultiProgressView" customModule="GV_DEBUG" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="29" width="501" height="2"/>
+                                        <color key="backgroundColor" red="0.47058823529411764" green="0.49019607843137253" blue="0.50980392156862742" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="2" id="BoB-AS-ZJz"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="awv-Qk-VLn" customClass="ActionButton" customModule="GV_DEBUG" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="91" width="501" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="ohN-ka-MZE"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="removeLimitButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="riI-Zj-geP"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="fEI-lR-RI6" secondAttribute="bottom" constant="20" id="3N7-pi-vOK"/>
+                    <constraint firstItem="fEI-lR-RI6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="9Hp-8v-pek"/>
+                    <constraint firstItem="fEI-lR-RI6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="jez-Jk-tl6"/>
+                    <constraint firstAttribute="trailing" secondItem="fEI-lR-RI6" secondAttribute="trailing" constant="20" id="xqF-sM-Wi9"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="infoButton" destination="zmg-J2-3gM" id="EJv-p4-LAq"/>
+                <outlet property="limitCurrentValueLabel" destination="QHs-q3-vb7" id="FVb-bu-gAI"/>
+                <outlet property="limitProgressView" destination="AL4-d0-C6O" id="p1g-Wh-SOZ"/>
+                <outlet property="limitUpperBoundValue" destination="n04-oQ-zSQ" id="c2C-H9-QtR"/>
+                <outlet property="removeLimitButton" destination="awv-Qk-VLn" id="RRd-O5-CYq"/>
+                <outlet property="spentLabel" destination="QAj-xm-cIz" id="Yzf-Rk-WkB"/>
+                <outlet property="titleLabel" destination="G4b-3M-kYO" id="KA6-dE-7KV"/>
+            </connections>
+            <point key="canvasLocation" x="239.85507246376812" y="147.65625"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="img_tip_icon" width="24" height="24"/>
+    </resources>
+</document>

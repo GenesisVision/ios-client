@@ -66,6 +66,8 @@ class ProgramWithdrawViewController: BaseViewController {
         }
     }
     
+    private var isGenesisMarkets: Bool = false
+    
     // MARK: - Views
     var confirmView: InvestWithdrawConfirmView!
     
@@ -123,6 +125,12 @@ class ProgramWithdrawViewController: BaseViewController {
     }
     
     private func updateUI() {
+        isGenesisMarkets = viewModel.programDetails?.brokerDetails?.type == .binance
+        
+        guard !isGenesisMarkets else {
+            updateUIasGM()
+            return
+        }
         
         amountToWithdrawGVTLabel.text = viewModel.programCurrency.rawValue
         
@@ -141,6 +149,18 @@ class ProgramWithdrawViewController: BaseViewController {
         let withdrawButtonEnabled = amountToWithdrawValue > 0.0 && amountToWithdrawValue <= availableToWithdrawValue
         
         withdrawButton.setEnabled(withdrawButtonEnabled)
+    }
+    
+    private func updateUIasGM() {
+        amountToWithdrawGVTLabel.text = viewModel.programCurrency.rawValue
+        
+        if let availableToWithdraw = viewModel.programWithdrawInfo?.availableToWithdraw {
+            self.availableToWithdrawValue = availableToWithdraw
+        }
+        
+        if let isOwner = viewModel.programWithdrawInfo?.isOwner, isOwner {
+            withdrawAllStackView.isHidden = true
+        }
     }
     
     private func withdrawMethod() {

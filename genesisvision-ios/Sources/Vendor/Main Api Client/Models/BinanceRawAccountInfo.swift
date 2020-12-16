@@ -27,12 +27,12 @@ public struct BinanceRawAccountInfo: Codable {
 
     public var updateTime: Date?
 
-    public var accountType: BinanceRawAccountType?
+    public var accountType: BinanceAccountType?
 
-    public var permissions: [BinanceRawAccountType]?
+    public var permissions: [BinanceAccountType]?
 
     public var balances: [BinanceRawBinanceBalance]?
-    public init(makerCommission: Double? = nil, takerCommission: Double? = nil, buyerCommission: Double? = nil, sellerCommission: Double? = nil, canTrade: Bool? = nil, canWithdraw: Bool? = nil, canDeposit: Bool? = nil, updateTime: Date? = nil, accountType: BinanceRawAccountType? = nil, permissions: [BinanceRawAccountType]? = nil, balances: [BinanceRawBinanceBalance]? = nil) { 
+    public init(makerCommission: Double? = nil, takerCommission: Double? = nil, buyerCommission: Double? = nil, sellerCommission: Double? = nil, canTrade: Bool? = nil, canWithdraw: Bool? = nil, canDeposit: Bool? = nil, updateTime: Date? = nil, accountType: BinanceAccountType? = nil, permissions: [BinanceAccountType]? = nil, balances: [BinanceRawBinanceBalance]? = nil) { 
         self.makerCommission = makerCommission
         self.takerCommission = takerCommission
         self.buyerCommission = buyerCommission

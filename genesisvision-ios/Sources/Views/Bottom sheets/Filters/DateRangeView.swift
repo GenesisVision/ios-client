@@ -175,8 +175,8 @@ class DateRangeView: UIView {
             dateFrom = dateTo?.removeYears(1)
             yearButton.isSelected = true
         case .all:
-            dateFrom = nil
-            dateTo = nil
+            dateTo = Date()
+            dateFrom = Date(timeIntervalSince1970: TimeInterval(Constants.projectStartDate))
             allTimeButton.isSelected = true
         case .custom:
             if dateTo == nil {

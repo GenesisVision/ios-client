@@ -29,6 +29,8 @@ public struct ProgramFollowOwnerActions: Codable {
 
     public var canConfirm2FA: Bool?
 
+    public var canCreateApiKeys: Bool?
+
     public var canClose: Bool?
 
     public var canClosePeriod: Bool?
@@ -38,7 +40,7 @@ public struct ProgramFollowOwnerActions: Codable {
     public var canTransferMoney: Bool?
 
     public var canCloseOpenPositions: Bool?
-    public init(canMakeProgramFromPrivateTradingAccount: Bool? = nil, canMakeExchangeProgramFromPrivateTradingAccount: Bool? = nil, canMakeSignalProviderFromPrivateTradingAccount: Bool? = nil, canMakeSignalProviderFromPrivateExternalTradingAccount: Bool? = nil, canMakeProgramFromSignalProvider: Bool? = nil, canMakeSignalProviderFromProgram: Bool? = nil, canEditSignalProviderSettings: Bool? = nil, isEnoughMoneyToCreateProgram: Bool? = nil, canConfirm2FA: Bool? = nil, canClose: Bool? = nil, canClosePeriod: Bool? = nil, canChangePassword: Bool? = nil, canTransferMoney: Bool? = nil, canCloseOpenPositions: Bool? = nil) { 
+    public init(canMakeProgramFromPrivateTradingAccount: Bool? = nil, canMakeExchangeProgramFromPrivateTradingAccount: Bool? = nil, canMakeSignalProviderFromPrivateTradingAccount: Bool? = nil, canMakeSignalProviderFromPrivateExternalTradingAccount: Bool? = nil, canMakeProgramFromSignalProvider: Bool? = nil, canMakeSignalProviderFromProgram: Bool? = nil, canEditSignalProviderSettings: Bool? = nil, isEnoughMoneyToCreateProgram: Bool? = nil, canConfirm2FA: Bool? = nil, canCreateApiKeys: Bool? = nil, canClose: Bool? = nil, canClosePeriod: Bool? = nil, canChangePassword: Bool? = nil, canTransferMoney: Bool? = nil, canCloseOpenPositions: Bool? = nil) { 
         self.canMakeProgramFromPrivateTradingAccount = canMakeProgramFromPrivateTradingAccount
         self.canMakeExchangeProgramFromPrivateTradingAccount = canMakeExchangeProgramFromPrivateTradingAccount
         self.canMakeSignalProviderFromPrivateTradingAccount = canMakeSignalProviderFromPrivateTradingAccount
@@ -48,6 +50,7 @@ public struct ProgramFollowOwnerActions: Codable {
         self.canEditSignalProviderSettings = canEditSignalProviderSettings
         self.isEnoughMoneyToCreateProgram = isEnoughMoneyToCreateProgram
         self.canConfirm2FA = canConfirm2FA
+        self.canCreateApiKeys = canCreateApiKeys
         self.canClose = canClose
         self.canClosePeriod = canClosePeriod
         self.canChangePassword = canChangePassword

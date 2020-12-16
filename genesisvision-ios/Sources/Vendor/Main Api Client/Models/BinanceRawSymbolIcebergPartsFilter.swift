@@ -11,10 +11,10 @@ import Foundation
 public struct BinanceRawSymbolIcebergPartsFilter: Codable {
 
 
-    public var filterType: BinanceRawSymbolFilterType?
+    public var filterType: BinanceSymbolFilterType?
 
     public var limit: Int?
-    public init(filterType: BinanceRawSymbolFilterType? = nil, limit: Int? = nil) { 
+    public init(filterType: BinanceSymbolFilterType? = nil, limit: Int? = nil) { 
         self.filterType = filterType
         self.limit = limit
     }

@@ -414,10 +414,18 @@ extension Router {
 
 //Get View Controllers
 extension Router {
-    func getEventsViewController(with assetId: String? = nil, router: Router? = nil, allowsSelection: Bool = true, assetType: AssetType) -> EventListViewController? {
+    func getEventsViewController(with assetId: String? = nil, router: Router? = nil, allowsSelection: Bool = true, assetType: AssetType) -> EventListViewControllerWithSections? {
         
-        let vc = EventListViewController()
-        vc.viewModel = EventListViewModel(router ?? self, delegate: vc)
+//        let vc = EventListViewController()
+//        vc.viewModel = EventListViewModel(router ?? self, delegate: vc)
+//        vc.viewModel.assetId = assetId
+//        vc.viewModel.assetType = assetType
+//        vc.title = "History"
+//
+//        return vc
+        
+        let vc = EventListViewControllerWithSections()
+        vc.viewModel = EventViewModelWithSections(reloadDataProtocol: vc)
         vc.viewModel.assetId = assetId
         vc.viewModel.assetType = assetType
         vc.title = "History"

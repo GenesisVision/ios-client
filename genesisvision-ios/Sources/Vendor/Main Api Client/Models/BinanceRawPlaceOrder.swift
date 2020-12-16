@@ -13,9 +13,9 @@ public struct BinanceRawPlaceOrder: Codable {
 
     public var symbol: String?
 
-    public var side: BinanceRawOrderSide?
+    public var side: BinanceOrderSide?
 
-    public var type: BinanceRawOrderType?
+    public var type: BinanceOrderType?
 
     public var quantity: Double?
 
@@ -25,14 +25,14 @@ public struct BinanceRawPlaceOrder: Codable {
 
     public var price: Double?
 
-    public var timeInForce: BinanceRawTimeInForce?
+    public var timeInForce: BinanceTimeInForce?
 
     public var stopPrice: Double?
 
     public var icebergQuantity: Double?
 
-    public var orderResponseType: BinanceRawOrderResponseType?
-    public init(symbol: String? = nil, side: BinanceRawOrderSide? = nil, type: BinanceRawOrderType? = nil, quantity: Double? = nil, quoteOrderQuantity: Double? = nil, newClientOrderId: String? = nil, price: Double? = nil, timeInForce: BinanceRawTimeInForce? = nil, stopPrice: Double? = nil, icebergQuantity: Double? = nil, orderResponseType: BinanceRawOrderResponseType? = nil) { 
+    public var orderResponseType: BinanceOrderResponseType?
+    public init(symbol: String? = nil, side: BinanceOrderSide? = nil, type: BinanceOrderType? = nil, quantity: Double? = nil, quoteOrderQuantity: Double? = nil, newClientOrderId: String? = nil, price: Double? = nil, timeInForce: BinanceTimeInForce? = nil, stopPrice: Double? = nil, icebergQuantity: Double? = nil, orderResponseType: BinanceOrderResponseType? = nil) { 
         self.symbol = symbol
         self.side = side
         self.type = type

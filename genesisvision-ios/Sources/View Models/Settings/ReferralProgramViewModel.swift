@@ -43,8 +43,8 @@ final class ReferralProgramViewModel: TabmanViewModel {
             viewController.viewModel = viewModel
             return viewController
         case .info:
-            let viewModel = ReferralInfoViewModel(router: router)
             let viewController = ReferralInfoViewController()
+            let viewModel = ReferralInfoViewModel(router: router, cellsDelegate: viewController)
             viewController.viewModel = viewModel
             return viewController
         case .history:
@@ -64,7 +64,19 @@ extension ReferralProgramViewModel: TabmanDataSourceProtocol {
     func getItem(_ index: Int) -> TMBarItem? {
         let type = tabTypes[index]
         
-        return TMBarItem(title: type.rawValue)
+        var badgeValue: String?
+        switch type {
+        case .info:
+            break
+        case .friends:
+            let viewController = controllers[type] as? ReferralFriendsViewController
+            badgeValue = (viewController?.viewModel.viewModels.count ?? 0).toString()
+        case .history:
+            let viewController = controllers[type] as? ReferralHistoryViewController
+            badgeValue = (viewController?.viewModel.viewModels.count ?? 0).toString()
+        }
+        
+        return TMBarItem(title: type.rawValue, badgeValue: badgeValue)
     }
     
     func getViewController(_ index: Int) -> UIViewController? {

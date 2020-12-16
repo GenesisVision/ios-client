@@ -19,6 +19,8 @@ final class ProgramWithdrawViewModel {
     
     var programWithdrawInfo: ProgramWithdrawInfo?
     
+    var programDetails: ProgramFollowDetailsFull?
+    
     private weak var detailProtocol: ReloadDataProtocol?
     
     private var router: ProgramWithdrawRouter!
@@ -40,10 +42,19 @@ final class ProgramWithdrawViewModel {
             guard let programWithdrawInfo = programWithdrawInfo else {
                 return completion(.failure(errorType: .apiError(message: nil)))
             }
-            
+            self?.getInfo(completion: completion)
             self?.programWithdrawInfo = programWithdrawInfo
-            completion(.success)
             }, errorCompletion: completion)
+    }
+    
+    func getProgramsDetails(completion: @escaping CompletionBlock) {
+        ProgramsDataProvider.get(assetId, completion: { [weak self] (viewModel) in
+            guard let viewModel = viewModel else {
+                return completion(.failure(errorType: .apiError(message: nil)))
+            }
+            self?.programDetails = viewModel
+            completion(.success)
+        }, errorCompletion: completion)
     }
     
     // MARK: - Navigation

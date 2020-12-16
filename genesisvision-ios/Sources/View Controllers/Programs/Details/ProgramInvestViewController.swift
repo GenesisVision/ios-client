@@ -273,7 +273,12 @@ class ProgramInvestViewController: BaseViewController {
         
         confirmView = InvestWithdrawConfirmView.viewFromNib()
         
-        let subtitle = "Your request will be processed at the end of the reporting period."
+        var subtitle: String = "Your request will be processed at the end of the reporting period."
+        
+        if viewModel.programFollowDetailsFull?.brokerDetails?.type == .binance, let realTime = viewModel.programDetailsFull?.dailyPeriodDetails?.isProcessingRealTime, !realTime {
+            subtitle = "Your request will be processed at 1.00 pm on June 13 (UTC)."
+        }
+        
         guard let currency = viewModel.selectedWalletFromDelegateManager?.selected?.currency else { return }
         
         var firstValue: String?

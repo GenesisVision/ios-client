@@ -142,7 +142,8 @@ extension DetailBalanceChartTableViewCell: ChartViewDelegate {
         if let model = chartModel as? FundBalanceChart {
             //FIXME:
             if let result = model.chart?.first(where: { (point) -> Bool in
-                if let pointDate = point.date {
+                if let pointDateInt = point.date {
+                    let pointDate = Date(timeIntervalSince1970: TimeInterval(integerLiteral: pointDateInt))
                     return pointDate == date
                 } else {
                     return false
@@ -168,14 +169,15 @@ extension DetailBalanceChartTableViewCell: ChartViewDelegate {
                 
                 if let date = result.date {
                     dateValueLabel.isHidden = false
-                    dateValueLabel.text = date.dateAndTimeFormatString
+                    dateValueLabel.text = Date(timeIntervalSince1970: TimeInterval(bitPattern: UInt64(date))).dateAndTimeFormatString
                     dateValueLabel.sizeToFit()
                 }
             }
         } else if let model = chartModel as? ProgramBalanceChart {
             //FIXME:
             if let result = model.chart?.first(where: { (point) -> Bool in
-                if let pointDate = point.date {
+                if let pointDateInt = point.date {
+                    let pointDate = Date(timeIntervalSince1970: TimeInterval(integerLiteral: pointDateInt))
                     return pointDate == date
                 } else {
                     return false
@@ -210,7 +212,7 @@ extension DetailBalanceChartTableViewCell: ChartViewDelegate {
                 
                 if let date = result.date {
                     dateValueLabel.isHidden = false
-                    dateValueLabel.text = date.dateAndTimeFormatString
+                    dateValueLabel.text = Date(timeIntervalSince1970: TimeInterval(bitPattern: UInt64(date))).dateAndTimeFormatString
                 }
             }
         }

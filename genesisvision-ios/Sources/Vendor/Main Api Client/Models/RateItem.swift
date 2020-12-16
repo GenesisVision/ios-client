@@ -11,10 +11,10 @@ import Foundation
 public struct RateItem: Codable {
 
 
-    public var currency: Currency?
+    public var currency: String?
 
     public var rate: Double?
-    public init(currency: Currency? = nil, rate: Double? = nil) { 
+    public init(currency: String? = nil, rate: Double? = nil) { 
         self.currency = currency
         self.rate = rate
     }

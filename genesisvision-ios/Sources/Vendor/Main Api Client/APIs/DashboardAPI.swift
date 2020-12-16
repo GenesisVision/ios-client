@@ -185,48 +185,75 @@ open class DashboardAPI {
     }
 
     /**
-     - parameter exchangeAccountId: (query)  (optional)     - parameter brokerId: (query)  (optional)
+     - parameter brokerId: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getExchangeAccountCredentials(exchangeAccountId: UUID? = nil, brokerId: UUID? = nil, completion: @escaping ((_ data: DashboardExchangeTradingAsset?,_ error: Error?) -> Void)) {
-        getExchangeAccountCredentialsWithRequestBuilder(exchangeAccountId: exchangeAccountId, brokerId: brokerId).execute { (response, error) -> Void in
+    open class func getExchangeAccountsCredentials(brokerId: UUID? = nil, completion: @escaping ((_ data: ExchangeAssetItemsViewModel?,_ error: Error?) -> Void)) {
+        getExchangeAccountsCredentialsWithRequestBuilder(brokerId: brokerId).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
 
 
     /**
-     - GET /v2.0/dashboard/trading/exchange/credentials
+     - GET /v2.0/dashboard/trading/exchange/credentials/all
      - API Key:
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
-  "credentials" : {
-    "apiKey" : "apiKey",
-    "apiSecret" : "apiSecret"
-  },
-  "broker" : {
-    "name" : "name",
+  "total" : 6,
+  "items" : [ {
+    "balance" : 0.8008281904610115,
+    "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "type" : "Undefined",
-    "logoUrl" : "logoUrl"
-  }
+    "title" : "title",
+    "creationDate" : "2000-01-23T04:56:07.000+00:00",
+    "asset" : {
+      "programDetails" : {
+        "level" : 0,
+        "levelProgress" : 6.027456183070403
+      },
+      "color" : "color",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "title" : "title",
+      "logoUrl" : "logoUrl",
+      "url" : "url",
+      "assetType" : "None"
+    }
+  }, {
+    "balance" : 0.8008281904610115,
+    "currency" : "Undefined",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "title" : "title",
+    "creationDate" : "2000-01-23T04:56:07.000+00:00",
+    "asset" : {
+      "programDetails" : {
+        "level" : 0,
+        "levelProgress" : 6.027456183070403
+      },
+      "color" : "color",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "title" : "title",
+      "logoUrl" : "logoUrl",
+      "url" : "url",
+      "assetType" : "None"
+    }
+  } ]
 }}]
-     - parameter exchangeAccountId: (query)  (optional)     - parameter brokerId: (query)  (optional)
+     - parameter brokerId: (query)  (optional)
 
-     - returns: RequestBuilder<DashboardExchangeTradingAsset> 
+     - returns: RequestBuilder<ExchangeAssetItemsViewModel> 
      */
-    open class func getExchangeAccountCredentialsWithRequestBuilder(exchangeAccountId: UUID? = nil, brokerId: UUID? = nil) -> RequestBuilder<DashboardExchangeTradingAsset> {
-        let path = "/v2.0/dashboard/trading/exchange/credentials"
+    open class func getExchangeAccountsCredentialsWithRequestBuilder(brokerId: UUID? = nil) -> RequestBuilder<ExchangeAssetItemsViewModel> {
+        let path = "/v2.0/dashboard/trading/exchange/credentials/all"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
-                        "exchangeAccountId": exchangeAccountId, 
                         "brokerId": brokerId
         ])
 
-        let requestBuilder: RequestBuilder<DashboardExchangeTradingAsset>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<ExchangeAssetItemsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
@@ -874,10 +901,6 @@ open class DashboardAPI {
       } ],
       "profit" : 7.386281948385884
     },
-    "credentials" : {
-      "apiKey" : "apiKey",
-      "apiSecret" : "apiSecret"
-    },
     "signalInfo" : {
       "subscribersCount" : 1
     },
@@ -940,11 +963,13 @@ open class DashboardAPI {
       "canClose" : true,
       "canEditSignalProviderSettings" : true,
       "canMakeSignalProviderFromPrivateExternalTradingAccount" : true,
+      "canCreateApiKeys" : true,
       "canTransferMoney" : true,
       "canMakeDemoDeposit" : true,
       "canMakeProgramFromPrivateTradingAccount" : true,
       "canMakeExchangeProgramFromPrivateTradingAccount" : true,
       "canMakeProgramFromSignalProvider" : true,
+      "canClosePeriod" : true,
       "isEnoughMoneyToCreateProgram" : true,
       "canChangePassword" : true,
       "canMakeSignalProviderFromPrivateTradingAccount" : true,
@@ -991,10 +1016,6 @@ open class DashboardAPI {
       } ],
       "profit" : 7.386281948385884
     },
-    "credentials" : {
-      "apiKey" : "apiKey",
-      "apiSecret" : "apiSecret"
-    },
     "signalInfo" : {
       "subscribersCount" : 1
     },
@@ -1057,11 +1078,13 @@ open class DashboardAPI {
       "canClose" : true,
       "canEditSignalProviderSettings" : true,
       "canMakeSignalProviderFromPrivateExternalTradingAccount" : true,
+      "canCreateApiKeys" : true,
       "canTransferMoney" : true,
       "canMakeDemoDeposit" : true,
       "canMakeProgramFromPrivateTradingAccount" : true,
       "canMakeExchangeProgramFromPrivateTradingAccount" : true,
       "canMakeProgramFromSignalProvider" : true,
+      "canClosePeriod" : true,
       "isEnoughMoneyToCreateProgram" : true,
       "canChangePassword" : true,
       "canMakeSignalProviderFromPrivateTradingAccount" : true,
@@ -1194,10 +1217,6 @@ open class DashboardAPI {
       } ],
       "profit" : 7.386281948385884
     },
-    "credentials" : {
-      "apiKey" : "apiKey",
-      "apiSecret" : "apiSecret"
-    },
     "signalInfo" : {
       "subscribersCount" : 1
     },
@@ -1260,11 +1279,13 @@ open class DashboardAPI {
       "canClose" : true,
       "canEditSignalProviderSettings" : true,
       "canMakeSignalProviderFromPrivateExternalTradingAccount" : true,
+      "canCreateApiKeys" : true,
       "canTransferMoney" : true,
       "canMakeDemoDeposit" : true,
       "canMakeProgramFromPrivateTradingAccount" : true,
       "canMakeExchangeProgramFromPrivateTradingAccount" : true,
       "canMakeProgramFromSignalProvider" : true,
+      "canClosePeriod" : true,
       "isEnoughMoneyToCreateProgram" : true,
       "canChangePassword" : true,
       "canMakeSignalProviderFromPrivateTradingAccount" : true,
@@ -1311,10 +1332,6 @@ open class DashboardAPI {
       } ],
       "profit" : 7.386281948385884
     },
-    "credentials" : {
-      "apiKey" : "apiKey",
-      "apiSecret" : "apiSecret"
-    },
     "signalInfo" : {
       "subscribersCount" : 1
     },
@@ -1377,11 +1394,13 @@ open class DashboardAPI {
       "canClose" : true,
       "canEditSignalProviderSettings" : true,
       "canMakeSignalProviderFromPrivateExternalTradingAccount" : true,
+      "canCreateApiKeys" : true,
       "canTransferMoney" : true,
       "canMakeDemoDeposit" : true,
       "canMakeProgramFromPrivateTradingAccount" : true,
       "canMakeExchangeProgramFromPrivateTradingAccount" : true,
       "canMakeProgramFromSignalProvider" : true,
+      "canClosePeriod" : true,
       "isEnoughMoneyToCreateProgram" : true,
       "canChangePassword" : true,
       "canMakeSignalProviderFromPrivateTradingAccount" : true,
@@ -1473,10 +1492,6 @@ open class DashboardAPI {
       } ],
       "profit" : 7.386281948385884
     },
-    "credentials" : {
-      "apiKey" : "apiKey",
-      "apiSecret" : "apiSecret"
-    },
     "signalInfo" : {
       "subscribersCount" : 1
     },
@@ -1539,11 +1554,13 @@ open class DashboardAPI {
       "canClose" : true,
       "canEditSignalProviderSettings" : true,
       "canMakeSignalProviderFromPrivateExternalTradingAccount" : true,
+      "canCreateApiKeys" : true,
       "canTransferMoney" : true,
       "canMakeDemoDeposit" : true,
       "canMakeProgramFromPrivateTradingAccount" : true,
       "canMakeExchangeProgramFromPrivateTradingAccount" : true,
       "canMakeProgramFromSignalProvider" : true,
+      "canClosePeriod" : true,
       "isEnoughMoneyToCreateProgram" : true,
       "canChangePassword" : true,
       "canMakeSignalProviderFromPrivateTradingAccount" : true,
@@ -1590,10 +1607,6 @@ open class DashboardAPI {
       } ],
       "profit" : 7.386281948385884
     },
-    "credentials" : {
-      "apiKey" : "apiKey",
-      "apiSecret" : "apiSecret"
-    },
     "signalInfo" : {
       "subscribersCount" : 1
     },
@@ -1656,11 +1669,13 @@ open class DashboardAPI {
       "canClose" : true,
       "canEditSignalProviderSettings" : true,
       "canMakeSignalProviderFromPrivateExternalTradingAccount" : true,
+      "canCreateApiKeys" : true,
       "canTransferMoney" : true,
       "canMakeDemoDeposit" : true,
       "canMakeProgramFromPrivateTradingAccount" : true,
       "canMakeExchangeProgramFromPrivateTradingAccount" : true,
       "canMakeProgramFromSignalProvider" : true,
+      "canClosePeriod" : true,
       "isEnoughMoneyToCreateProgram" : true,
       "canChangePassword" : true,
       "canMakeSignalProviderFromPrivateTradingAccount" : true,
@@ -2086,10 +2101,6 @@ open class DashboardAPI {
       } ],
       "profit" : 7.386281948385884
     },
-    "credentials" : {
-      "apiKey" : "apiKey",
-      "apiSecret" : "apiSecret"
-    },
     "signalInfo" : {
       "subscribersCount" : 1
     },
@@ -2152,11 +2163,13 @@ open class DashboardAPI {
       "canClose" : true,
       "canEditSignalProviderSettings" : true,
       "canMakeSignalProviderFromPrivateExternalTradingAccount" : true,
+      "canCreateApiKeys" : true,
       "canTransferMoney" : true,
       "canMakeDemoDeposit" : true,
       "canMakeProgramFromPrivateTradingAccount" : true,
       "canMakeExchangeProgramFromPrivateTradingAccount" : true,
       "canMakeProgramFromSignalProvider" : true,
+      "canClosePeriod" : true,
       "isEnoughMoneyToCreateProgram" : true,
       "canChangePassword" : true,
       "canMakeSignalProviderFromPrivateTradingAccount" : true,
@@ -2203,10 +2216,6 @@ open class DashboardAPI {
       } ],
       "profit" : 7.386281948385884
     },
-    "credentials" : {
-      "apiKey" : "apiKey",
-      "apiSecret" : "apiSecret"
-    },
     "signalInfo" : {
       "subscribersCount" : 1
     },
@@ -2269,11 +2278,13 @@ open class DashboardAPI {
       "canClose" : true,
       "canEditSignalProviderSettings" : true,
       "canMakeSignalProviderFromPrivateExternalTradingAccount" : true,
+      "canCreateApiKeys" : true,
       "canTransferMoney" : true,
       "canMakeDemoDeposit" : true,
       "canMakeProgramFromPrivateTradingAccount" : true,
       "canMakeExchangeProgramFromPrivateTradingAccount" : true,
       "canMakeProgramFromSignalProvider" : true,
+      "canClosePeriod" : true,
       "isEnoughMoneyToCreateProgram" : true,
       "canChangePassword" : true,
       "canMakeSignalProviderFromPrivateTradingAccount" : true,

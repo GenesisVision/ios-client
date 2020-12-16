@@ -12,6 +12,7 @@ enum CellActionType {
     case none
     case dashboardNotifications
     case dashboardTrading
+    case dashboardInvestLimitInfo
     case dashboardInvesting
     case dashboardRecommendation
     
@@ -50,7 +51,9 @@ enum DidSelectType {
     case tradesDelay
     
     case selectBroker
+    case selectExchanger
     case showBrokerDetails
+    case showExchangerDetails
 }
 
 enum ActionType {
@@ -58,6 +61,8 @@ enum ActionType {
     case add
     case showBrokerDetails
     case updateNotificationsCount
+    case showLimitInfo
+    case removeInvestLimit
 }
 
 // MARK: - Charts

@@ -66,7 +66,7 @@ class ProgramPeriodHistoryViewController: BaseViewControllerWithTableView {
         fetch()
     }
     
-    override func updateData(from dateFrom: Date?, to dateTo: Date?) {
+    override func updateData(from dateFrom: Date?, to dateTo: Date?, dateRangeType: DateRangeType? = nil) {
         viewModel.dateFrom = dateFrom
         viewModel.dateTo = dateTo
         

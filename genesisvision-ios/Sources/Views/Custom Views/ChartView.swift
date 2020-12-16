@@ -309,6 +309,8 @@ class ChartView: CombinedChartView {
         xAxis.valueFormatter = DefaultAxisValueFormatter(block: {(index, _) in
             let date = Date(timeIntervalSince1970: index)
             
+            print("\(date)")
+            
             let dateString = Date.getFormatStringForChart(for: date, dateRangeType: self.dateRangeType)
             
             return dateString
@@ -343,7 +345,7 @@ class ChartView: CombinedChartView {
             let investorsFunds = values[i].investorsFunds ?? 0.0
             let managerFunds = values[i].managerFunds ?? 0.0
             let yValue = investorsFunds + managerFunds
-            let date = Double(values[i].date?.timeIntervalSince1970 ?? 0)
+            let date = Double(values[i].date ?? 0)
             return ChartDataEntry(x: date, y: yValue)
         }
         lineChartDataSet = LineChartDataSet(entries: profitDataEntry, label: "Profit Chart")
@@ -360,7 +362,7 @@ class ChartView: CombinedChartView {
             let investorsFunds = values[i].investorsFunds ?? 0.0
             let managerFunds = values[i].managerFunds ?? 0.0
             let yValue = investorsFunds + managerFunds
-            let date = Double(values[i].date?.timeIntervalSince1970 ?? 0)
+            let date = Double(values[i].date ?? 0)
             return ChartDataEntry(x: date, y: yValue)
         }
         lineChartDataSet = LineChartDataSet(entries: investorsFundsDataEntry, label: "Investors Funds Chart")
@@ -375,7 +377,7 @@ class ChartView: CombinedChartView {
         
         let managerFundsDataEntry = (0..<values.count).map { (i) -> ChartDataEntry in
             let yValue = values[i].managerFunds ?? 0.0
-            let date = Double(values[i].date?.timeIntervalSince1970 ?? 0)
+            let date = Double(values[i].date ?? 0)
             return ChartDataEntry(x: date, y: yValue)
         }
         lineChartDataSet = LineChartDataSet(entries: managerFundsDataEntry, label: "Manager Funds Chart")
@@ -398,7 +400,7 @@ class ChartView: CombinedChartView {
             let investorsFunds = values[i].investorsFunds ?? 0.0
             let managerFunds = values[i].managerFunds ?? 0.0
             let yValue = investorsFunds + managerFunds
-            let date = Double(values[i].date?.timeIntervalSince1970 ?? 0)
+            let date = Double(values[i].date ?? 0)
             return ChartDataEntry(x: date, y: yValue)
         }
         lineChartDataSet = LineChartDataSet(entries: investorsFundsDataEntry, label: "Investors Funds Chart")
@@ -413,7 +415,7 @@ class ChartView: CombinedChartView {
         
         let managerFundsDataEntry = (0..<values.count).map { (i) -> ChartDataEntry in
             let yValue = values[i].managerFunds ?? 0.0
-            let date = Double(values[i].date?.timeIntervalSince1970 ?? 0)
+            let date = Double(values[i].date ?? 0)
             return ChartDataEntry(x: date, y: yValue)
         }
         lineChartDataSet = LineChartDataSet(entries: managerFundsDataEntry, label: "Manager Funds Chart")
@@ -433,7 +435,7 @@ class ChartView: CombinedChartView {
     private func generateLineChartData(_ values: [SimpleChartPoint]) -> LineChartData {
 
         let totalDataEntry = (0..<values.count).map { (i) -> ChartDataEntry in
-            let x = Double(values[i].date?.timeIntervalSince1970 ?? 0)
+            let x = Double(values[i].date ?? 0)
             let y = values[i].value ?? 0
             return ChartDataEntry(x: x, y: y)
         }

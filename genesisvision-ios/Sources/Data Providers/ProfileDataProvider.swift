@@ -7,6 +7,14 @@
 //
 
 class ProfileDataProvider: DataProvider {
+    
+    static func getMobileVErificationTokens(completion: @escaping (_ profile: ExternalKycAccessToken?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        
+        ProfileAPI.getMobileVerificationToken { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
     static func getProfile(completion: @escaping (_ profile: ProfileFullViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
         ProfileAPI.getProfileFull { (viewModel, error) in

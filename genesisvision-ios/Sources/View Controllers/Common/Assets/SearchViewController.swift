@@ -99,16 +99,16 @@ class SearchViewController: BaseTabmanViewController<SearchTabmanViewModel> {
         for vc in pageboyDataSource.controllers {
             if let vc = vc as? ProgramListViewController, let viewModel = vc.viewModel, viewModel.assetType == .follow {
                 viewModel.updateViewModels(searchViewModel?.follows)
-                bar.items![0].badgeValue = String(searchViewModel?.follows?.items?.count ?? 0)
+                bar.items?[0].badgeValue = String(searchViewModel?.follows?.items?.count ?? 0)
             } else if let vc = vc as? FundListViewController, let viewModel = vc.viewModel {
                 viewModel.updateViewModels(searchViewModel?.funds)
-                bar.items![1].badgeValue = String(searchViewModel?.funds?.items?.count ?? 0)
+                bar.items?[1].badgeValue = String(searchViewModel?.funds?.items?.count ?? 0)
             } else if let vc = vc as? ProgramListViewController, let viewModel = vc.viewModel, viewModel.assetType == .program {
                 viewModel.updateViewModels(searchViewModel?.programs)
-                bar.items![2].badgeValue = String(searchViewModel?.programs?.items?.count ?? 0)
+                bar.items?[2].badgeValue = String(searchViewModel?.programs?.items?.count ?? 0)
             } else if let vc = vc as? ManagerListViewController, let viewModel = vc.viewModel {
                 viewModel.updateViewModels(searchViewModel?.managers)
-                bar.items![3].badgeValue = String(searchViewModel?.managers?.items?.count ?? 0)
+                bar.items?[3].badgeValue = String(searchViewModel?.managers?.items?.count ?? 0)
             }
         }
     }

@@ -11,10 +11,10 @@ import Foundation
 public struct BinanceRawSymbolMaxAlgorithmicOrdersFilter: Codable {
 
 
-    public var filterType: BinanceRawSymbolFilterType?
+    public var filterType: BinanceSymbolFilterType?
 
     public var maxNumberAlgorithmicOrders: Int?
-    public init(filterType: BinanceRawSymbolFilterType? = nil, maxNumberAlgorithmicOrders: Int? = nil) { 
+    public init(filterType: BinanceSymbolFilterType? = nil, maxNumberAlgorithmicOrders: Int? = nil) { 
         self.filterType = filterType
         self.maxNumberAlgorithmicOrders = maxNumberAlgorithmicOrders
     }

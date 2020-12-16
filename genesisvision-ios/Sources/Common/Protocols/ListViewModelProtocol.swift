@@ -207,8 +207,6 @@ extension ListViewModelWithPaging {
     func refresh() {
         fetch(true)
     }
-    
-    
 }
 
 extension ListViewModelWithPaging {

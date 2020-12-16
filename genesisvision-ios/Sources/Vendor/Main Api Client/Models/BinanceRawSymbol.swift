@@ -13,7 +13,7 @@ public struct BinanceRawSymbol: Codable {
 
     public var name: String?
 
-    public var status: BinanceRawSymbolStatus?
+    public var status: BinanceSymbolStatus?
 
     public var baseAsset: String?
 
@@ -23,7 +23,7 @@ public struct BinanceRawSymbol: Codable {
 
     public var quoteAssetPrecision: Int?
 
-    public var orderTypes: [BinanceRawOrderType]?
+    public var orderTypes: [BinanceOrderType]?
 
     public var iceBergAllowed: Bool?
 
@@ -39,7 +39,7 @@ public struct BinanceRawSymbol: Codable {
 
     public var quoteCommissionPrecision: Int?
 
-    public var permissions: [BinanceRawAccountType]?
+    public var permissions: [BinanceAccountType]?
 
     public var iceBergPartsFilter: BinanceRawSymbolIcebergPartsFilter?
 
@@ -56,7 +56,9 @@ public struct BinanceRawSymbol: Codable {
     public var priceFilter: BinanceRawSymbolPriceFilter?
 
     public var pricePercentFilter: BinanceRawSymbolPercentPriceFilter?
-    public init(name: String? = nil, status: BinanceRawSymbolStatus? = nil, baseAsset: String? = nil, baseAssetPrecision: Int? = nil, quoteAsset: String? = nil, quoteAssetPrecision: Int? = nil, orderTypes: [BinanceRawOrderType]? = nil, iceBergAllowed: Bool? = nil, isSpotTradingAllowed: Bool? = nil, isMarginTradingAllowed: Bool? = nil, ocoAllowed: Bool? = nil, quoteOrderQuantityMarketAllowed: Bool? = nil, baseCommissionPrecision: Int? = nil, quoteCommissionPrecision: Int? = nil, permissions: [BinanceRawAccountType]? = nil, iceBergPartsFilter: BinanceRawSymbolIcebergPartsFilter? = nil, lotSizeFilter: BinanceRawSymbolLotSizeFilter? = nil, marketLotSizeFilter: BinanceRawSymbolMarketLotSizeFilter? = nil, maxOrdersFilter: BinanceRawSymbolMaxOrdersFilter? = nil, maxAlgorithmicOrdersFilter: BinanceRawSymbolMaxAlgorithmicOrdersFilter? = nil, minNotionalFilter: BinanceRawSymbolMinNotionalFilter? = nil, priceFilter: BinanceRawSymbolPriceFilter? = nil, pricePercentFilter: BinanceRawSymbolPercentPriceFilter? = nil) { 
+
+    public var maxPositionFilter: BinanceRawSymbolMaxPositionFilter?
+    public init(name: String? = nil, status: BinanceSymbolStatus? = nil, baseAsset: String? = nil, baseAssetPrecision: Int? = nil, quoteAsset: String? = nil, quoteAssetPrecision: Int? = nil, orderTypes: [BinanceOrderType]? = nil, iceBergAllowed: Bool? = nil, isSpotTradingAllowed: Bool? = nil, isMarginTradingAllowed: Bool? = nil, ocoAllowed: Bool? = nil, quoteOrderQuantityMarketAllowed: Bool? = nil, baseCommissionPrecision: Int? = nil, quoteCommissionPrecision: Int? = nil, permissions: [BinanceAccountType]? = nil, iceBergPartsFilter: BinanceRawSymbolIcebergPartsFilter? = nil, lotSizeFilter: BinanceRawSymbolLotSizeFilter? = nil, marketLotSizeFilter: BinanceRawSymbolMarketLotSizeFilter? = nil, maxOrdersFilter: BinanceRawSymbolMaxOrdersFilter? = nil, maxAlgorithmicOrdersFilter: BinanceRawSymbolMaxAlgorithmicOrdersFilter? = nil, minNotionalFilter: BinanceRawSymbolMinNotionalFilter? = nil, priceFilter: BinanceRawSymbolPriceFilter? = nil, pricePercentFilter: BinanceRawSymbolPercentPriceFilter? = nil, maxPositionFilter: BinanceRawSymbolMaxPositionFilter? = nil) { 
         self.name = name
         self.status = status
         self.baseAsset = baseAsset
@@ -80,6 +82,7 @@ public struct BinanceRawSymbol: Codable {
         self.minNotionalFilter = minNotionalFilter
         self.priceFilter = priceFilter
         self.pricePercentFilter = pricePercentFilter
+        self.maxPositionFilter = maxPositionFilter
     }
 
 }

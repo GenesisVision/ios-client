@@ -298,12 +298,14 @@ final class FundViewModel: TabmanViewModel {
             return router.getInfo(with: assetId)
         case .balance:
             let viewModel = FundBalanceViewModel(withRouter: router, assetId: assetId, reloadDataProtocol: router.fundViewController)
-            
-            return router.getBalanceViewController(with: viewModel)
+            let viewController = router.getBalanceViewController(with: viewModel)
+            router.fundBalanceViewController = viewController
+            return viewController
         case .profit:
             let viewModel = FundProfitViewModel(withRouter: router, assetId: assetId, reloadDataProtocol: router.fundViewController, currency: getPlatformCurrencyType())
-            
-            return router.getProfitViewController(with: viewModel)
+            let viewController = router.getProfitViewController(with: viewModel)
+            router.fundProfitViewController = viewController
+            return viewController
         case .reallocateHistory:
             return router.getReallocateHistory(with: assetId)
         case .assets:

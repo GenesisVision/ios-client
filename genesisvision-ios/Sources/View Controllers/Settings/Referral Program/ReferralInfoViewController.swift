@@ -61,6 +61,17 @@ class ReferralInfoViewController: BaseViewControllerWithTableView {
     }
 }
 
+extension ReferralInfoViewController: ReferralInfoLinkTableViewCellProtocol{
+    func shareButtonDidTap() {
+        viewModel.shareLink()
+    }
+    
+    func copyButtonDidTap() {
+        UIPasteboard.general.string = viewModel.refLink
+        showBottomSheet(.success, title: "Your referral link was copied to the clipboard successfully")
+    }
+}
+
 final class ReferralInfoViewModel: ViewModelWithListProtocol {
     
     enum SectionType {
@@ -80,11 +91,11 @@ final class ReferralInfoViewModel: ViewModelWithListProtocol {
     
     var router: Router
     
-    private var refLink: String = ""
+    public private(set) var refLink: String = ""
     
-    init(router: Router) {
+    init(router: Router, cellsDelegate: ReferralInfoLinkTableViewCellProtocol) {
         self.router = router
-        
+        self.cellsDelegate = cellsDelegate
     }
     
     func fetch(completion: @escaping CompletionBlock) {
@@ -92,7 +103,7 @@ final class ReferralInfoViewModel: ViewModelWithListProtocol {
         AuthManager.getProfile { [weak self] (viewModel) in
             if let refLink = viewModel?.refUrl {
                 self?.refLink = refLink
-                self?.viewModels.append(ReferralInfoLinkTableViewCellViewModel(link: refLink, delegate: self))
+                self?.viewModels.append(ReferralInfoLinkTableViewCellViewModel(link: refLink, delegate: self?.cellsDelegate))
             }
             
             ReferralDataProvider.getReferralDetails { [weak self] (viewModel) in
@@ -110,6 +121,10 @@ final class ReferralInfoViewModel: ViewModelWithListProtocol {
                 }
             }
         } completionError: { _ in }
+    }
+    
+    func shareLink() {
+        router.share(refLink)
     }
 }
 
@@ -161,16 +176,5 @@ extension ReferralInfoViewModel {
         case .statistics:
             return 20
         }
-    }
-}
-
-
-extension ReferralInfoViewModel: ReferralInfoLinkTableViewCellProtocol {
-    func shareButtonDidTap() {
-        router.share(refLink)
-    }
-    
-    func copyButtonDidTap() {
-        UIPasteboard.general.string = refLink
     }
 }

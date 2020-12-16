@@ -25,6 +25,11 @@ class DashboardViewController: ListViewController {
         viewModel.fetch()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.fetch()
+    }
+    
     override func pullToRefresh() {
         super.pullToRefresh()
         
@@ -89,13 +94,6 @@ extension DashboardViewController: DashBoardTradingTableViewCellButtonsActionsPr
         viewController.title = "Create Fund"
         viewController.viewModel = FundPublicInfoViewModel(mode: .create)
         navigationController?.pushViewController(viewController, animated: true)
-//        guard let viewController = FundPublicInfoViewController.storyboardInstance(.dashboard) else { return }
-//        viewController.title = "Create Fund"
-//        vc.title = "Create Fund"
-//        vc.viewModel = CreateFundViewModel(vc, addAssetsProtocol: vc)
-//        let nav = BaseNavigationController(rootViewController: vc)
-//        nav.modalPresentationStyle = .fullScreen
-//        present(nav, animated: true, completion: nil)
     }
     
     func createAccount() {
@@ -120,12 +118,25 @@ extension DashboardViewController: DashBoardTradingTableViewCellButtonsActionsPr
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true, completion: nil)
     }
+    
+    
+    private func showKYCInfo(verificationTokens: ExternalKycAccessToken) {
+        let viewController = KYCInfoViewController()
+        let viewModel = KYCInfoViewControllerViewModel(verificationTokens: verificationTokens)
+        viewController.viewModel = viewModel
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func showKYC(verificationTokens: ExternalKycAccessToken) {
+        guard let token = verificationTokens.accessToken, let baseUrl = verificationTokens.baseAddress, let flowName = verificationTokens.flowName, let kycViewController = PlatformManager.shared.getKYCViewController(token: token, baseUrl: baseUrl, flowName: flowName) else { return }
+        
+        present(kycViewController, animated: true)
+    }
 }
 
 extension DashboardViewController: BaseTableViewProtocol {
     func didSelect(_ type: CellActionType, cellViewModel: CellViewAnyModel?) {
-        print("select cell \(type)")
-        
         switch type {
         case .dashboardTrading, .dashboardInvesting:
             if let viewModel = cellViewModel as? EventCollectionViewCellViewModel {
@@ -141,8 +152,6 @@ extension DashboardViewController: BaseTableViewProtocol {
     }
     
     func action(_ type: CellActionType, actionType: ActionType) {
-        print("show all \(type)")
-        
         switch type {
         case .dashboardNotifications:
             if let notificationsCount = viewModel.header?.notificationsCount {
@@ -164,6 +173,23 @@ extension DashboardViewController: BaseTableViewProtocol {
             vc.title = ""
             vc.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(vc, animated: true)
+        case .dashboardInvestLimitInfo:
+            switch actionType {
+            case .showLimitInfo:
+                ProfileDataProvider.getMobileVErificationTokens { [weak self] (viewModel) in
+                    if let userTokens = viewModel {
+                        self?.showKYCInfo(verificationTokens: userTokens)
+                    }
+                } errorCompletion: { (_) in }
+            case .removeInvestLimit:
+                ProfileDataProvider.getMobileVErificationTokens { [weak self] (viewModel) in
+                    if let viewModel = viewModel {
+                        self?.showKYC(verificationTokens: viewModel)
+                    }
+                } errorCompletion: { (_) in }
+            default:
+                break
+            }
         default:
             break
         }
@@ -232,6 +258,7 @@ class DashboardViewModel: ViewModelWithListProtocol {
     
     enum SectionType {
         case overview
+        case investmentLimit
         case trading
         case investing
         case portfolio
@@ -243,6 +270,7 @@ class DashboardViewModel: ViewModelWithListProtocol {
     var viewModels = [CellViewAnyModel]()
     
     var canPullToRefresh: Bool = true
+    
     //Models
     var overview: DashboardSummary? {
            didSet {
@@ -251,6 +279,31 @@ class DashboardViewModel: ViewModelWithListProtocol {
             reloadSection(.overview)
         }
     }
+    
+    var verificaiontStatus: UserVerificationStatus?
+    
+    var investmentLimits: LimitWithoutKyc? {
+        didSet {
+            guard let investmentLimits = investmentLimits else {
+                if sections.contains(.investmentLimit) {
+                    sections.removeAll(where: { $0 == .investmentLimit })
+                    delegate?.didReload()
+                }
+                return
+            }
+            
+            let viewModel = DashboardInvestmentLimitsTableViewCellViewModel(investmentLimit: investmentLimits, delegate: delegate, verificationStatus: verificaiontStatus)
+            viewModels.append(viewModel)
+            
+            if !sections.contains(.investmentLimit) {
+                sections.insert(.investmentLimit, at: 1)
+                delegate?.didReload()
+            } else {
+                reloadSection(.investmentLimit)
+            }
+        }
+    }
+    
     var tradingDetails: DashboardTradingDetails? {
         didSet {
             let viewModel = DashboardTradingCellViewModel(TradingCollectionViewModel(tradingDetails, delegate: delegate), data: TradingHeaderData(title: "Trading", details: tradingDetails, currency: currencyType, showCreateFund: false, showCreateAccount: false), delegate: delegate, createsDelegate: creationDelegate)
@@ -258,6 +311,7 @@ class DashboardViewModel: ViewModelWithListProtocol {
             reloadSection(.trading)
         }
     }
+    
     var investingDetails: DashboardInvestingDetails? {
         didSet {
             let viewModel = DashboardInvestingCellViewModel(InvestingCollectionViewModel(investingDetails, delegate: delegate), data: InvestingHeaderData(title: "Investing", details: investingDetails, currency: currencyType), delegate: delegate, cellDelegate: invetingEmptyCellDelegate)
@@ -265,6 +319,7 @@ class DashboardViewModel: ViewModelWithListProtocol {
             reloadSection(.investing)
         }
     }
+    
     private var portfolio: DashboardPortfolio? {
         didSet {
             let viewModel = DashboardPortfolioChartTableViewCellViewModel(data: DashboardPortfolioData(portfolio), delegate: delegate)
@@ -272,6 +327,7 @@ class DashboardViewModel: ViewModelWithListProtocol {
             reloadSection(.portfolio)
         }
     }
+    
     private var assets: DashboardAssets? {
         didSet {
             let viewModel = DashboardAssetsChartTableViewCellViewModel(data: DashboardAssetsData(assets, currency: currencyType), delegate: delegate)
@@ -279,6 +335,7 @@ class DashboardViewModel: ViewModelWithListProtocol {
             reloadSection(.assets)
         }
     }
+    
     private var recommendations: CommonPublicAssetsViewModel? {
         didSet {
             let viewModel = CellWithCollectionViewModel(DashboardRecommendationsViewModel(recommendations, delegate: delegate), delegate: delegate)
@@ -286,23 +343,27 @@ class DashboardViewModel: ViewModelWithListProtocol {
             reloadSection(.recommendations)
         }
     }
+    
     var header: ProfileHeaderViewModel? {
         didSet {
             delegate?.action(.dashboardNotifications, actionType: .updateNotificationsCount)
         }
     }
+    
     var currencyType: CurrencyType {
         return getPlatformCurrencyType()
     }
     
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [DashboardOverviewTableViewCellViewModel.self,
+                DashboardInvestmentLimitsTableViewCellViewModel.self,
                 DashboardTradingCellViewModel<TradingCollectionViewModel>.self,
                 DashboardInvestingCellViewModel<InvestingCollectionViewModel>.self,
                 DashboardPortfolioChartTableViewCellViewModel.self,
                 DashboardAssetsChartTableViewCellViewModel.self,
                 CellWithCollectionViewModel<DashboardRecommendationsViewModel>.self]
     }
+    
     var router: DashboardRouter?
     weak var delegate: BaseTableViewProtocol?
     weak var creationDelegate: DashBoardTradingTableViewCellButtonsActionsProtocol?
@@ -317,6 +378,7 @@ class DashboardViewModel: ViewModelWithListProtocol {
     private let errorCompletion: ((CompletionResult) -> Void) = { (result) in
        print(result)
     }
+    
     private func reloadSection(_ section: SectionType) {
         let reloadSection = sections.firstIndex(of: section) ?? 0
         delegate?.didReload(IndexPath(row: 0, section: reloadSection))
@@ -335,19 +397,31 @@ class DashboardViewModel: ViewModelWithListProtocol {
                 
         DashboardDataProvider.getSummary(currencyType, completion: { [weak self] (model) in
             self?.overview = model
+            
+            AuthManager.getProfile { [weak self] (viewModel) in
+                if let viewModel = viewModel, let verificationStatus = viewModel.verificationStatus {
+                    self?.verificaiontStatus = verificationStatus
+                }
+                self?.investmentLimits = model?.limitWithoutKyc
+            } completionError: { _ in }
         }, errorCompletion: errorCompletion)
+        
         DashboardDataProvider.getTrading(currencyType, eventsTake: 12, completion: { [weak self] (model) in
             self?.tradingDetails = model
         }, errorCompletion: errorCompletion)
+        
         DashboardDataProvider.getInvesting(currencyType, eventsTake: 12, completion: { [weak self] (model) in
             self?.investingDetails = model
         }, errorCompletion: errorCompletion)
+        
         DashboardDataProvider.getPortfolio(completion: { [weak self] (model) in
             self?.portfolio = model
         }, errorCompletion: errorCompletion)
+        
         DashboardDataProvider.getHoldings(4, completion: { [weak self] (model) in
             self?.assets = model
         }, errorCompletion: errorCompletion)
+        
         DashboardDataProvider.getRecommendations(currencyType, take: 5, completion: { [weak self] (model) in
             self?.recommendations = model
         }, errorCompletion: errorCompletion)
@@ -355,6 +429,8 @@ class DashboardViewModel: ViewModelWithListProtocol {
         ProfileDataProvider.getHeader(completion: { [weak self] (viewModel) in
             self?.header = viewModel
         }, errorCompletion: errorCompletion)
+        
+        
         
         delegate?.didReload()
     }
@@ -374,6 +450,8 @@ class DashboardViewModel: ViewModelWithListProtocol {
             return viewModels.first{ $0 is DashboardAssetsChartTableViewCellViewModel }
         case .recommendations:
             return viewModels.first{ $0 is CellWithCollectionViewModel<DashboardRecommendationsViewModel>}
+        case .investmentLimit:
+            return viewModels.first{ $0 is DashboardInvestmentLimitsTableViewCellViewModel }
         }
     }
     

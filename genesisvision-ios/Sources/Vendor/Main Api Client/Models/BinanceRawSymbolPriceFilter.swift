@@ -11,14 +11,14 @@ import Foundation
 public struct BinanceRawSymbolPriceFilter: Codable {
 
 
-    public var filterType: BinanceRawSymbolFilterType?
+    public var filterType: BinanceSymbolFilterType?
 
     public var minPrice: Double?
 
     public var maxPrice: Double?
 
     public var tickSize: Double?
-    public init(filterType: BinanceRawSymbolFilterType? = nil, minPrice: Double? = nil, maxPrice: Double? = nil, tickSize: Double? = nil) { 
+    public init(filterType: BinanceSymbolFilterType? = nil, minPrice: Double? = nil, maxPrice: Double? = nil, tickSize: Double? = nil) { 
         self.filterType = filterType
         self.minPrice = minPrice
         self.maxPrice = maxPrice

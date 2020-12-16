@@ -750,10 +750,6 @@ open class TradingaccountAPI {
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
-  "credentials" : {
-    "apiKey" : "apiKey",
-    "apiSecret" : "apiSecret"
-  },
   "tradingAccountInfo" : {
     "showTradingLog" : true,
     "leverage" : 0,
@@ -783,6 +779,7 @@ open class TradingaccountAPI {
     "canCloseOpenPositions" : true,
     "canEditSignalProviderSettings" : true,
     "canMakeSignalProviderFromPrivateExternalTradingAccount" : true,
+    "canCreateApiKeys" : true,
     "canTransferMoney" : true,
     "canMakeDemoDeposit" : true,
     "canMakeProgramFromPrivateTradingAccount" : true,

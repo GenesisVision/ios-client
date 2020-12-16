@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -110,26 +110,15 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="GTd-ik-57i">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ef-Lv-xjj">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Q3-HU-oBI">
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
-                                                            <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not verified" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="39q-1K-Ugo" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
-                                                                    <rect key="frame" x="20" y="0.0" width="335" height="40"/>
-                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="15"/>
-                                                                    <color key="textColor" red="0.92156862750000001" green="0.23137254900000001" blue="0.35294117650000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                            </subviews>
-                                                            <color key="backgroundColor" red="0.92156862750000001" green="0.23137254900000001" blue="0.35294117650000001" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="bottom" secondItem="39q-1K-Ugo" secondAttribute="bottom" id="2LN-N7-Osa"/>
-                                                                <constraint firstItem="39q-1K-Ugo" firstAttribute="leading" secondItem="5ef-Lv-xjj" secondAttribute="leading" constant="20" id="BcI-6q-hXh"/>
-                                                                <constraint firstAttribute="height" constant="40" id="Lbs-uG-Fwg"/>
-                                                                <constraint firstAttribute="trailing" secondItem="39q-1K-Ugo" secondAttribute="trailing" constant="20" id="eMf-Rx-xax"/>
-                                                                <constraint firstItem="39q-1K-Ugo" firstAttribute="top" secondItem="5ef-Lv-xjj" secondAttribute="top" id="mfY-hT-5zw"/>
+                                                                <constraint firstAttribute="height" constant="40" id="cfi-MT-9hK"/>
                                                             </constraints>
-                                                        </view>
+                                                            <connections>
+                                                                <action selector="kycStatusButtonAction:" destination="2Ya-3a-R2M" eventType="touchUpInside" id="Sx6-GN-8ZI"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
@@ -481,6 +470,7 @@
                         <outlet property="contactUsCell" destination="abL-4O-wxA" id="zh9-vE-URD"/>
                         <outlet property="currencyCell" destination="hCc-Wb-Eix" id="pQd-2b-DFx"/>
                         <outlet property="footerView" destination="1hw-hx-IPR" id="ESx-mS-fT4"/>
+                        <outlet property="kycStatusButton" destination="0Q3-HU-oBI" id="N3V-15-smu"/>
                         <outlet property="kycStatusCell" destination="tXa-Ec-2IE" id="vsh-ZO-I1m"/>
                         <outlet property="passcodeCell" destination="pht-tP-VVL" id="pKh-j4-uhX"/>
                         <outlet property="passcodeSwitch" destination="vGe-Ob-FG1" id="a28-fn-BAS"/>
@@ -501,8 +491,6 @@
                         <outlet property="twoFactorCell" destination="5ho-iZ-Ot5" id="hde-7Y-gDS"/>
                         <outlet property="twoFactorSwitch" destination="gwo-Me-1Wz" id="YQh-lK-glh"/>
                         <outlet property="twoFactorTitleLabel" destination="Tcz-6n-stu" id="6QF-e9-te0"/>
-                        <outlet property="verifyTextLabel" destination="39q-1K-Ugo" id="F2q-ns-adZ"/>
-                        <outlet property="verifyView" destination="5ef-Lv-xjj" id="ljn-IT-qKh"/>
                         <outlet property="versionLabel" destination="Lmg-9i-SOi" id="k5p-pq-ExK"/>
                     </connections>
                 </tableViewController>

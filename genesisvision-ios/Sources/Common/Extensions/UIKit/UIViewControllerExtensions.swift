@@ -155,7 +155,8 @@ extension UIViewController {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    func getSafariVC(with url: URL) -> SFSafariViewController {
+    func getSafariVC(with url: URL) -> SFSafariViewController? {
+        guard UIApplication.shared.canOpenURL(url) else { return nil }
         let configuration = SFSafariViewController.Configuration()
         configuration.entersReaderIfAvailable = false
         let safariViewController = SFSafariViewController(url: url, configuration: configuration)
@@ -168,9 +169,9 @@ extension UIViewController {
     }
     
     func openSafariVC(with urlAddress: String) {
-        guard let url = URL(string: urlAddress) else { return }
+        guard let url = URL(string: urlAddress), let safariViewController = getSafariVC(with: url) else { return }
         
-        present(viewController: getSafariVC(with: url))
+        present(viewController: safariViewController)
     }
     
     func showActionSheet(with title: String?,

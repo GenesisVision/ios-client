@@ -8,6 +8,6 @@
 import Foundation
 
 public enum TradingPlatformBinanceOrdersMode: String, Codable {
-    case history = "History"
-    case openOrders = "OpenOrders"
+    case tradeHistory = "TradeHistory"
+    case orderHistory = "OrderHistory"
 }

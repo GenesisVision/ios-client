@@ -28,26 +28,26 @@ open class CodableHelper {
             formatter.locale = Locale(identifier: "en_US_POSIX")
             formatter.timeZone = TimeZone(secondsFromGMT: 0)
             formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-            //decoder.dateDecodingStrategy = .formatted(formatter)
+            decoder.dateDecodingStrategy = .formatted(formatter)
             //decoder.dateDecodingStrategy = .secondsSince1970
             
-            decoder.dateDecodingStrategy = .custom { decoder in
-                let container = try decoder.singleValueContainer()
-                
-                if let dateString = try? container.decode(String.self) {
-                    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
-                    if let date = formatter.date(from: dateString) {
-                        return date
-                    }
-                }
-                if let dateDouble = try? container.decode(Double.self) {
-                    let date = Date(timeIntervalSince1970: dateDouble)
-                    return date
-                }
-                
-                throw DecodingError.dataCorruptedError(in: container,
-                    debugDescription: "Cannot decode date string")
-            }
+//            decoder.dateDecodingStrategy = .custom { decoder in
+//                let container = try decoder.singleValueContainer()
+//
+//                if let dateString = try? container.decode(String.self) {
+//                    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+//                    if let date = formatter.date(from: dateString) {
+//                        return date
+//                    }
+//                }
+//                if let dateDouble = try? container.decode(Double.self) {
+//                    let date = Date(timeIntervalSince1970: dateDouble)
+//                    return date
+//                }
+//
+//                throw DecodingError.dataCorruptedError(in: container,
+//                    debugDescription: "Cannot decode date string")
+//            }
             
 
         }

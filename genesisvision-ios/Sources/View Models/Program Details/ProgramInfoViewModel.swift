@@ -58,9 +58,14 @@ final class ProgramInfoViewModel: ViewModelWithListProtocol {
     public private(set) var programFollowDetailsFull: ProgramFollowDetailsFull? {
         didSet {
             router.programViewController.viewModel.programDetailsFull = programFollowDetailsFull
+            if programFollowDetailsFull?.brokerDetails?.type == .binance {
+                rows.removeAll(where: {$0 == .period })
+            }
         }
     }
+    
     public private(set) var programDetailsFull: ProgramDetailsFull?
+    
     public private(set) var followDetailsFull: FollowDetailsFull?
 
     var availableInvestment: Double {

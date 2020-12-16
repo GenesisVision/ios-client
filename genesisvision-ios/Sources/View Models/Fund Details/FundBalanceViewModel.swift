@@ -30,27 +30,23 @@ final class FundBalanceViewModel: ViewModelWithListProtocol, ViewModelWithFilter
     var dateTo: Date?
     var maxPointCount: Int = ApiKeys.maxPoint
     
-    private var fundBalanceChart: FundBalanceChart?
+    private var fundBalanceChart: FundBalanceChart? {
+        didSet {
+            if let router = router as? FundRouter {
+                chartViewProtocol = router.fundBalanceViewController
+            }
+        }
+    }
     
     private var sections: [SectionType] = [.chart]
     
-    private var fundBalanceChartTableViewCellViewModel:   ProgramBalanceChartTableViewCellViewModel?
+    private var fundBalanceChartTableViewCellViewModel: ProgramBalanceChartTableViewCellViewModel?
     
     // MARK: - Init
     init(withRouter router: Router, assetId: String, reloadDataProtocol: ReloadDataProtocol?) {
         self.router = router
         self.assetId = assetId
         self.reloadDataProtocol = reloadDataProtocol
-        self.chartViewProtocol = router.currentController as? ChartViewProtocol
-    }
-    
-    // MARK: - Public methods
-    func getSelectedFundBalanceChartElement(_ date: Date) -> BalanceChartPoint? {
-//        if let result = fundBalanceChart?.chart?.first(where: { $0.date == date }) {
-//            return result
-//        }
-        
-        return nil
     }
 }
 
@@ -82,7 +78,7 @@ extension FundBalanceViewModel {
     func model(for indexPath: IndexPath) -> CellViewAnyModel? {
         guard let fundBalanceChart = fundBalanceChart else { return nil }
         
-        let fundBalanceChartTableViewCellViewModel =  FundBalanceChartTableViewCellViewModel(fundBalanceChart: fundBalanceChart, chartViewProtocol: self.chartViewProtocol)
+        let fundBalanceChartTableViewCellViewModel = FundBalanceChartTableViewCellViewModel(fundBalanceChart: fundBalanceChart, chartViewProtocol: chartViewProtocol)
         
         return fundBalanceChartTableViewCellViewModel
     }

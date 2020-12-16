@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import IdensicMobileSDK
 
 struct FilterConstants {
     var minLevel: Int
@@ -33,6 +34,7 @@ class PlatformManager {
     var dateFrom: Date?
     var dateTo: Date?
     
+    public private(set) var sdkInstance: SNSMobileSDK?
     public private(set) var platformInfo: PlatformInfo?
     public private(set) var filterConstants: FilterConstants?
     public private(set) var programsLevelsInfo: ProgramsLevelsInfo?
@@ -55,6 +57,22 @@ class PlatformManager {
                 ErrorHandler.handleError(with: errorType)
             }
         }
+    }
+    
+    func getKYCViewController(token: String, baseUrl: String, flowName: String, oneMoreVC: UIViewController? = nil) -> UIViewController? {
+        sdkInstance = SNSMobileSDK(baseUrl: baseUrl, flowName: flowName, accessToken: token, locale: Locale.current.identifier, supportEmail: "")
+
+        guard let isReady = sdkInstance?.isReady, isReady else {
+            return nil
+        }
+        
+        guard let mainKYCViewController = sdkInstance?.mainVC else { return nil }
+        
+        if let viewController = oneMoreVC {
+            mainKYCViewController.pushViewController(viewController, animated: false)
+        }
+        
+        return mainKYCViewController
     }
     
     func getLevelsParamsInfo(currency: PlatformAPI.Currency_getProgramLevelsParams, completion: @escaping (_ platformAssets: LevelsParamsInfo?) -> Void) {

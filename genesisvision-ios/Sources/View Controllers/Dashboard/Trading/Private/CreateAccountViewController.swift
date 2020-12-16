@@ -54,7 +54,21 @@ class CreateAccountViewController: BaseModalViewController {
         
         let brokerDetailsView = BrokerDetailsView.viewFromNib()
         
-        brokerDetailsView.configure(viewModel.brokerCollectionViewModel.get(index), delegate: self)
+        brokerDetailsView.configure(viewModel.brokerCollectionViewModel.getBroker(index), delegate: self)
+        bottomSheetController.addContentsView(brokerDetailsView)
+        bottomSheetController.bottomSheetControllerProtocol = brokerDetailsView
+
+        present(bottomSheetController, animated: true, completion: nil)
+    }
+    
+    func showExchangerDetails(_ index: Int) {
+        self.view.endEditing(true)
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.initializeHeight = 500.0
+        
+        let brokerDetailsView = BrokerDetailsView.viewFromNib()
+        
+        brokerDetailsView.configure(viewModel.brokerCollectionViewModel.getExchanger(index), delegate: self)
         bottomSheetController.addContentsView(brokerDetailsView)
         bottomSheetController.bottomSheetControllerProtocol = brokerDetailsView
 
@@ -62,10 +76,10 @@ class CreateAccountViewController: BaseModalViewController {
     }
     
     func showBrokerTerms(_ url: String) {
-        guard let url = URL(string: url) else { return }
-        let vc = getSafariVC(with: url)
-        vc.modalPresentationStyle = .formSheet
-        present(vc, animated: true, completion: nil)
+        guard let url = URL(string: url), let safariViewController = getSafariVC(with: url) else { return }
+        
+        safariViewController.modalPresentationStyle = .formSheet
+        present(safariViewController, animated: true, completion: nil)
     }
     @objc func checkActionButton() {
         var isEnable = false
@@ -99,7 +113,7 @@ class CreateAccountViewController: BaseModalViewController {
             case .success:
                 self?.dismiss(animated: true, completion: nil)
             case .failure(let errorType):
-                ErrorHandler.handleError(with: errorType, viewController: self)
+                ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }
         }
     }
@@ -223,6 +237,8 @@ extension CreateAccountViewController: BaseTableViewProtocol {
         case .showBrokerDetails:
             showBrokerDetails(index)
             return
+        case .showExchangerDetails:
+            showExchangerDetails(index)
         case .accountType:
             viewModel.updateAccountType(index)
             bottomSheetController.dismiss()
@@ -237,6 +253,11 @@ extension CreateAccountViewController: BaseTableViewProtocol {
             bottomSheetController.dismiss()
         case .selectBroker:
             viewModel.updateBroker()
+            if !viewModel.isDepositRequired() {
+                stackView.actionButton.setEnabled(true)
+            }
+        case .selectExchanger:
+            viewModel.updateExchanger()
             if !viewModel.isDepositRequired() {
                 stackView.actionButton.setEnabled(true)
             }
@@ -265,9 +286,18 @@ class CreateAccountViewModel {
     var brokerCollectionViewModel: BrokerCollectionViewModel!
     var brokerCollectionDataSource: CollectionViewDataSource!
     
+    var exchangesInfo: ExchangeInfoItemsViewModel? {
+        didSet {
+//
+//            guard let exchangeBroker = exchangesInfo?.items?.first else { return }
+//
+//            let brokerFromExchange = Broker(name: exchangeBroker.name, _description: exchangeBroker._description, logoUrl: exchangeBroker.logoUrl, terms: exchangeBroker.terms, assets: exchangeBroker.assets, fee: exchangeBroker.fee, leverageMin: nil, leverageMax: nil, isKycRequired: exchangeBroker.isKycRequired, accountTypes: exchangeBroker.accountTypes, tags: exchangeBroker.tags)
+        }
+    }
+    
     var brokersInfo: BrokersInfo? {
         didSet {
-            brokerCollectionViewModel = BrokerCollectionViewModel(delegate, items: brokersInfo?.brokers)
+            brokerCollectionViewModel = BrokerCollectionViewModel(delegate, brokers: brokersInfo?.brokers, exchangers: exchangesInfo?.items)
             brokerCollectionDataSource = CollectionViewDataSource(brokerCollectionViewModel)
             
             if let broker = brokersInfo?.brokers?.first {
@@ -306,13 +336,13 @@ class CreateAccountViewModel {
     lazy var currency = getPlatformCurrencyType()
     
     private let errorCompletion: ((CompletionResult) -> Void) = { (result) in
-       print(result)
     }
     
     var request = NewTradingAccountRequest(depositAmount: nil, depositWalletId: nil, currency: nil, leverage: nil, brokerAccountTypeId: nil)
     var createResultModel: TradingAccountCreateResult?
     
     weak var delegate: BaseTableViewProtocol?
+    var isGenesisMarketsBroker: Bool = false
     
     init(_ delegate: BaseTableViewProtocol?) {
         self.delegate = delegate
@@ -323,12 +353,19 @@ class CreateAccountViewModel {
             self?.brokersInfo = model
             self?.walletSummary = walletSummary
             self?.delegate?.didReload()
-        }, errorCompletion: self.errorCompletion)
+        }, errorCompletion: errorCompletion)
+    }
+    
+    private func fetchExchangers(_ walletSummary: WalletSummary?) {
+        ExchangeDataProvider.getExchanges(completion: { [weak self] (model) in
+            self?.exchangesInfo = model
+            self?.fetchBrokers(walletSummary)
+        }, errorCompletion: errorCompletion)
     }
     
     func fetch() {
         WalletDataProvider.get(with: currency, completion: { [weak self] (walletSummary) in
-            self?.fetchBrokers(walletSummary)
+            self?.fetchExchangers(walletSummary)
         }, errorCompletion: errorCompletion)
         
         PlatformManager.shared.getPlatformInfo { [weak self] (model) in
@@ -346,15 +383,36 @@ class CreateAccountViewModel {
     }
     
     func createAccount(completion: @escaping CompletionBlock) {
-        AssetsDataProvider.createTradingAccount(request, completion: { [weak self] (model) in
-            self?.createResultModel = model
-            completion(.success)
-        }, errorCompletion: completion)
+        if isGenesisMarketsBroker {
+            let newRequest = NewExchangeAccountRequest(depositAmount: request.depositAmount, depositWalletId: request.depositWalletId, brokerAccountTypeId: request.brokerAccountTypeId)
+            AssetsDataProvider.createExchangeAccount(request: newRequest, completion: { [weak self] (model) in
+                self?.createResultModel = model
+                completion(.success)
+            }, errorCompletion: completion)
+
+        } else {
+            AssetsDataProvider.createTradingAccount(request, completion: { [weak self] (model) in
+                self?.createResultModel = model
+                completion(.success)
+            }, errorCompletion: completion)
+        }
     }
     
     func updateBroker() {
-        if let broker = brokerCollectionViewModel.getSelected() {
+        if let broker = brokerCollectionViewModel.getSelectedBroker() {
             accountTypeListViewModel = AccountTypeListViewModel(delegate, items: broker.accountTypes ?? [], selectedIndex: 0)
+            accountTypeListDataSource = TableViewDataSource(accountTypeListViewModel)
+            
+            updateAccountType(0)
+        }
+    }
+    
+    func updateExchanger() {
+        if let exchanger = brokerCollectionViewModel.getSelectedExchanger() {
+            let accountTypes = exchanger.accountTypes?.map({ (exchangerAccountType) -> BrokerAccountType in
+                return BrokerAccountType(_id: exchangerAccountType._id, name: exchangerAccountType.name, _description: exchangerAccountType._description, type: exchangerAccountType.type, leverages: nil, currencies: exchangerAccountType.currencies, minimumDepositsAmount: exchangerAccountType.minimumDepositsAmount, isKycRequired: exchangerAccountType.isKycRequired, isCountryNotUSRequired: exchangerAccountType.isCountryNotUSRequired, isSignalsAvailable: exchangerAccountType.isSignalsAvailable, isDepositRequired: exchangerAccountType.isDepositRequired)
+            })
+            accountTypeListViewModel = AccountTypeListViewModel(delegate, items: accountTypes ?? [], selectedIndex: 0)
             accountTypeListDataSource = TableViewDataSource(accountTypeListViewModel)
             
             updateAccountType(0)
@@ -384,9 +442,14 @@ class CreateAccountViewModel {
         updateCurrency(0)
         updateWalletFrom()
         
-        leverageListViewModel = LeverageListViewModel(delegate, items: accountType.leverages ?? [], selectedIndex: 0)
-        leverageListDataSource = TableViewDataSource(leverageListViewModel)
-        updateLeverage(0)
+        if let leverages = accountType.leverages {
+            isGenesisMarketsBroker = false
+            leverageListViewModel = LeverageListViewModel(delegate, items: leverages, selectedIndex: 0)
+            leverageListDataSource = TableViewDataSource(leverageListViewModel)
+            updateLeverage(0)
+        } else {
+            isGenesisMarketsBroker = true
+        }
     }
     
     func updateCurrency(_ index: Int) {
@@ -440,12 +503,12 @@ class CreateAccountViewModel {
     }
     
     func getLeverage() -> String {
-        guard let selected = leverageListViewModel.selected() else { return "" }
+        guard !isGenesisMarketsBroker, let selected = leverageListViewModel.selected() else { return "1" }
         return selected.toString()
     }
     
     func isEnableLeverageSelector() -> Bool {
-        guard let count = leverageListViewModel?.items.count else { return false }
+        guard !isGenesisMarketsBroker, let count = leverageListViewModel?.items.count else { return false }
         return count > 1
     }
     
@@ -455,7 +518,7 @@ class CreateAccountViewModel {
     }
     
     func isEnableAccountTypeSelector() -> Bool {
-        guard let count = accountTypeListViewModel?.items.count else { return false }
+        guard !isGenesisMarketsBroker, let count = accountTypeListViewModel?.items.count else { return false }
         return count > 1
     }
     
@@ -465,13 +528,13 @@ class CreateAccountViewModel {
     }
     
     func isEnableCurrencySelector() -> Bool {
-        guard let count = currencyListViewModel?.items.count else { return false }
+        guard !isGenesisMarketsBroker, let count = currencyListViewModel?.items.count else { return false }
         return count > 1
     }
     
     func getRate() -> Double? {
         guard let rates = ratesModel?.rates, let currency = Currency(rawValue: getCurrency()), let fromCurrency = fromListViewModel.selected()?.currency else { return nil }
-        let rate = rates[currency.rawValue]?.first(where: { $0.currency == fromCurrency })?.rate
+        let rate = rates[currency.rawValue]?.first(where: { $0.currency == fromCurrency.rawValue })?.rate
         return rate != 0 ? rate : nil
     }
     
@@ -494,7 +557,8 @@ class BrokerCollectionViewModel: CellViewModelWithCollection {
     var type: CellActionType
     
     private var selectedIndex: Int = 0
-    private var items: [Broker]?
+    private var brokers: [Broker]?
+    private var exchangers: [ExchangeInfo]?
     
     var viewModels = [CellViewAnyModel]()
 
@@ -509,40 +573,61 @@ class BrokerCollectionViewModel: CellViewModelWithCollection {
     }
 
     weak var delegate: BaseTableViewProtocol?
-    init(_ delegate: BaseTableViewProtocol?, items: [Broker]?) {
+    init(_ delegate: BaseTableViewProtocol?, brokers: [Broker]?, exchangers: [ExchangeInfo]?) {
         self.delegate = delegate
         self.title = "Select broker"
         self.type = .createAccount
-        self.items = items
+        self.brokers = brokers
+        self.exchangers = exchangers
         
-        viewModels = items?.map { BrokerCollectionViewCellViewModel(brokerModel: $0, delegate: self) } ?? []
+        viewModels = brokers?.map { BrokerCollectionViewCellViewModel(brokerModel: $0, exchangerModel: nil, delegate: self) } ?? []
+        if let exchangers = exchangers {
+            viewModels.append(contentsOf: exchangers.map({ BrokerCollectionViewCellViewModel(brokerModel: nil, exchangerModel: $0, delegate: self) }))
+        }
     }
     
-    func getSelected() -> Broker? {
-        return items?[selectedIndex]
+    func getSelectedBroker() -> Broker? {
+        return brokers?[selectedIndex]
     }
     
-    func get(_ index: Int) -> Broker? {
-        return items?[index]
+    func getSelectedExchanger() -> ExchangeInfo? {
+        return exchangers?[selectedIndex - (brokers?.count ?? 0)]
+    }
+    
+    func getBroker(_ index: Int) -> Broker? {
+        return brokers?[index]
+    }
+    
+    func getExchanger(_ index: Int) -> ExchangeInfo? {
+        return exchangers?[index]
     }
     
     func didSelect(at indexPath: IndexPath) {
         selectedIndex = indexPath.row
-        delegate?.didSelect(.selectBroker, index: indexPath.row)
+        if let _ = brokers?[safe: selectedIndex] {
+            delegate?.didSelect(.selectBroker, index: indexPath.row)
+        } else if let _ = exchangers?[safe: selectedIndex - (brokers?.count ?? 0)] {
+            delegate?.didSelect(.selectExchanger, index: selectedIndex - (brokers?.count ?? 0))
+        }
     }
 }
 
 extension BrokerCollectionViewModel: BrokerCollectionViewCellViewModelProtocol {
-    func showDetails(_ broker: Broker) {
-        guard let index = items?.firstIndex(where: { $0.name == broker.name }) else { return }
-        
-        delegate?.didSelect(.showBrokerDetails, index: index)
+    func isSelected(_ broker: Broker?, _ exchanger: ExchangeInfo?) -> Bool {
+        if let broker = broker, let index = brokers?.firstIndex(where: { $0.name == broker.name }) {
+            return selectedIndex == index
+        } else if let exchanger = exchanger, let index = exchangers?.firstIndex(where: { $0.name == exchanger.name }) {
+            return selectedIndex - (brokers?.count ?? 0) == index
+        }
+        return false
     }
     
-    func isSelected(_ broker: Broker) -> Bool {
-        guard let index = items?.firstIndex(where: { $0.name == broker.name }) else { return false }
-        
-        return selectedIndex == index
+    func showDetails(_ broker: Broker?, _ exchanger: ExchangeInfo?) {
+        if let broker = broker, let index = brokers?.firstIndex(where: { $0.name == broker.name }) {
+            delegate?.didSelect(.showBrokerDetails, index: index)
+        } else if let exchanger = exchanger, let index = exchangers?.firstIndex(where: { $0.name == exchanger.name }) {
+            delegate?.didSelect(.showExchangerDetails, index: index)
+        }
     }
 }
 extension BrokerCollectionViewModel {

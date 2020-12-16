@@ -38,7 +38,7 @@ class FundRouter: TabmanRouter {
         return viewController
     }
     
-    func getEvents(with assetId: String) -> EventListViewController? {
+    func getEvents(with assetId: String) -> EventListViewControllerWithSections? {
         guard let viewController = getEventsViewController(with: assetId, router: self, allowsSelection: false, assetType: .fund) else { return nil }
         
         return viewController

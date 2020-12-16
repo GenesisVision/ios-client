@@ -98,18 +98,4 @@ class WalletDataProvider: DataProvider {
             DataProvider().responseHandler(error, completion: completion)
         }
     }
-    
-    
-//    static func getAddresses(completion: @escaping (_ walletsInfo: WalletsInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
-//        guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
-//
-//        WalletAPI.getWalletSummary(currency: <#T##WalletAPI.Currency_getWalletSummary#>, authorization: <#T##String#>) { (WalletSummary?, <#Error?#>) in
-//            <#code#>
-//        }
-//        WalletAPI.v10WalletAddressesGet(authorization: authorization) { (walletsInfo, error) in
-//            DataProvider().responseHandler(walletsInfo, error: error, successCompletion: completion, errorCompletion: errorCompletion)
-//        }
-//    }
-    
-    
 }

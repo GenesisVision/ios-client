@@ -9,7 +9,7 @@
 import UIKit.UIColor
 
 enum SettingsRouteType {
-    case signOut, forceSignOut, changePassword, enableTwoFactor(Bool), enablePasscode(Bool), showProfile(ProfileFullViewModel), feedback, terms, privacy, referral
+    case signOut, forceSignOut, changePassword, enableTwoFactor(Bool), enablePasscode(Bool), showProfile(ProfileFullViewModel), feedback, terms, privacy, referral, kyc(ExternalKycAccessToken)
 }
 
 class SettingsRouter: Router {
@@ -39,6 +39,8 @@ class SettingsRouter: Router {
             showPrivacy()
         case .referral:
             showReferral()
+        case .kyc(let kycTokens):
+            showKYC(verificationTokens: kycTokens)
         }
     }
     
@@ -95,6 +97,14 @@ class SettingsRouter: Router {
     private func showReferral() {
         let viewController = ReferralProgramViewController()
         let viewModel = ReferralProgramViewModel(with: self)
+        viewController.viewModel = viewModel
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func showKYC(verificationTokens: ExternalKycAccessToken) {
+        let viewController = KYCInfoViewController()
+        let viewModel = KYCInfoViewControllerViewModel(verificationTokens: verificationTokens)
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)

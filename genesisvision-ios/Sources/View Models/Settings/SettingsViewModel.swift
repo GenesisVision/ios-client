@@ -114,6 +114,8 @@ final class SettingsViewModel {
     }
     private var profileModel: ProfileFullViewModel?
     
+    var kycVerificationTokens: ExternalKycAccessToken?
+    
     var sections: [SectionType] = [.profile, .currency, .security, .feedback]
     var rows: [SectionType : [RowType]] = [.profile : [.profile, .kycStatus, .publicProfile],
                                            .currency : [.currency, .referralProgram],
@@ -256,6 +258,11 @@ final class SettingsViewModel {
         router.show(routeType: .signOut)
     }
     
+    func showKYC() {
+        guard let kycVerificationTokens = kycVerificationTokens else { return }
+        router.show(routeType: .kyc(kycVerificationTokens))
+    }
+    
     // MARK: -  Private methods
     private func setup() {
         NotificationCenter.default.addObserver(self, selector: #selector(signOutNotification(notification:)), name: .signOut, object: nil)
@@ -270,6 +277,12 @@ final class SettingsViewModel {
                 }
             }
         }
+        
+        ProfileDataProvider.getMobileVErificationTokens { [weak self] (viewModel) in
+            if let viewModel = viewModel {
+                self?.kycVerificationTokens = viewModel
+            }
+        } errorCompletion: { (_) in }
     }
     
     private func clearData() {

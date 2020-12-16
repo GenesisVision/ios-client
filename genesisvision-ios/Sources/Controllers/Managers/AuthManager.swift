@@ -80,12 +80,9 @@ class AuthManager {
     }
     
     static func getProfile(completion: @escaping (_ profile: ProfileFullViewModel?) -> Void, completionError: @escaping CompletionBlock) {
-        if let profileViewModel = profileViewModel {
-            completion(profileViewModel)
-        }
         
         ProfileDataProvider.getProfile(completion: { (viewModel) in
-            if viewModel != nil  {
+            if let viewModel = viewModel  {
                 profileViewModel = viewModel
             }
             

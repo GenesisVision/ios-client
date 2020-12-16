@@ -20,6 +20,7 @@ extension Notification.Name {
     static let updateFundViewController = Notification.Name(Keys.updateFundViewController)
     static let updateUserViewController = Notification.Name(Keys.updateUserViewController)
     static let updateProgramViewController = Notification.Name(Keys.updateProgramViewController)
+    static let updateReferralProgramViewController = Notification.Name(Keys.updateReferralProgramViewController)
     static let updateTradingAccountViewController = Notification.Name(Keys.updateTradingAccountViewController)
     static let updateDashboardViewController = Notification.Name(Keys.updateDashboardViewController)
     static let updateNotificationListViewController = Notification.Name(Keys.updateNotificationListViewController)

@@ -381,6 +381,47 @@ open class AssetsAPI {
     }
 
     /**
+     Create account api key
+     - parameter _id: (path)       - parameter body: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func createAccountApiKey(_id: UUID, body: CreateApiKeyModel? = nil, completion: @escaping ((_ data: ExchangeCredentials?,_ error: Error?) -> Void)) {
+        createAccountApiKeyWithRequestBuilder(_id: _id, body: body).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     Create account api key
+     - POST /v2.0/assets/tradingaccounts/{id}/keys/create
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example={
+  "apiKey" : "apiKey",
+  "apiSecret" : "apiSecret"
+}}]
+     - parameter _id: (path)       - parameter body: (body)  (optional)
+
+     - returns: RequestBuilder<ExchangeCredentials> 
+     */
+    open class func createAccountApiKeyWithRequestBuilder(_id: UUID, body: CreateApiKeyModel? = nil) -> RequestBuilder<ExchangeCredentials> {
+        var path = "/v2.0/assets/tradingaccounts/{id}/keys/create"
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
+
+        let url = URLComponents(string: URLString)
+
+        let requestBuilder: RequestBuilder<ExchangeCredentials>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+    }
+
+    /**
      Create exchange account
      - parameter body: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
@@ -583,6 +624,163 @@ open class AssetsAPI {
         let requestBuilder: RequestBuilder<TradingAccountCreateResult>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+    }
+
+    /**
+     Delete account api key
+     - parameter _id: (path)  
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func deleteAccountApiKey(_id: UUID, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        deleteAccountApiKeyWithRequestBuilder(_id: _id).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
+        }
+    }
+
+
+    /**
+     Delete account api key
+     - POST /v2.0/assets/tradingaccounts/keys/{id}/delete
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter _id: (path)  
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func deleteAccountApiKeyWithRequestBuilder(_id: UUID) -> RequestBuilder<Void> {
+        var path = "/v2.0/assets/tradingaccounts/keys/{id}/delete"
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = URLComponents(string: URLString)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Edit account api key restrictions
+     - parameter _id: (path)       - parameter body: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func editAccountApiKeyRestrictions(_id: UUID, body: EditApiKeyRestrictionsModel? = nil, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        editAccountApiKeyRestrictionsWithRequestBuilder(_id: _id, body: body).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
+        }
+    }
+
+
+    /**
+     Edit account api key restrictions
+     - POST /v2.0/assets/tradingaccounts/keys/{id}/edit
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter _id: (path)       - parameter body: (body)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func editAccountApiKeyRestrictionsWithRequestBuilder(_id: UUID, body: EditApiKeyRestrictionsModel? = nil) -> RequestBuilder<Void> {
+        var path = "/v2.0/assets/tradingaccounts/keys/{id}/edit"
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
+
+        let url = URLComponents(string: URLString)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+    }
+
+    /**
+     Get account api key
+     - parameter _id: (path)  
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getAccountApiKey(_id: UUID, completion: @escaping ((_ data: ExchangeCredentialsInfoItemsViewModel?,_ error: Error?) -> Void)) {
+        getAccountApiKeyWithRequestBuilder(_id: _id).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     Get account api key
+     - GET /v2.0/assets/tradingaccounts/{id}/keys
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example={
+  "total" : 0,
+  "items" : [ {
+    "apiKey" : "apiKey",
+    "isEnabled" : true,
+    "allowedIps" : [ {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "ip" : "ip"
+    }, {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "ip" : "ip"
+    } ],
+    "dateRemove" : "2000-01-23T04:56:07.000+00:00",
+    "apiSecret" : "apiSecret",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "isIpRestrict" : true,
+    "isTradingEnabled" : true,
+    "title" : "title",
+    "dateCreate" : "2000-01-23T04:56:07.000+00:00"
+  }, {
+    "apiKey" : "apiKey",
+    "isEnabled" : true,
+    "allowedIps" : [ {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "ip" : "ip"
+    }, {
+      "date" : "2000-01-23T04:56:07.000+00:00",
+      "ip" : "ip"
+    } ],
+    "dateRemove" : "2000-01-23T04:56:07.000+00:00",
+    "apiSecret" : "apiSecret",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "isIpRestrict" : true,
+    "isTradingEnabled" : true,
+    "title" : "title",
+    "dateCreate" : "2000-01-23T04:56:07.000+00:00"
+  } ]
+}}]
+     - parameter _id: (path)  
+
+     - returns: RequestBuilder<ExchangeCredentialsInfoItemsViewModel> 
+     */
+    open class func getAccountApiKeyWithRequestBuilder(_id: UUID) -> RequestBuilder<ExchangeCredentialsInfoItemsViewModel> {
+        var path = "/v2.0/assets/tradingaccounts/{id}/keys"
+        let _idPreEscape = "\(_id)"
+        let _idPostEscape = _idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: _idPostEscape, options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = URLComponents(string: URLString)
+
+        let requestBuilder: RequestBuilder<ExchangeCredentialsInfoItemsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
@@ -825,6 +1023,49 @@ open class AssetsAPI {
         let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+    }
+
+    /**
+     Create an exchange investment program
+     - parameter body: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func makeExchangeProgram(body: MakeExchangeProgram? = nil, completion: @escaping ((_ data: TradingAccountCreateResult?,_ error: Error?) -> Void)) {
+        makeExchangeProgramWithRequestBuilder(body: body).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     Create an exchange investment program
+     - POST /v2.0/assets/programs/exchange/create
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example={
+  "twoFactor" : {
+    "sharedKey" : "sharedKey",
+    "authenticatorUri" : "authenticatorUri"
+  },
+  "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+  "twoFactorRequired" : true,
+  "startDeposit" : 0.8008281904610115
+}}]
+     - parameter body: (body)  (optional)
+
+     - returns: RequestBuilder<TradingAccountCreateResult> 
+     */
+    open class func makeExchangeProgramWithRequestBuilder(body: MakeExchangeProgram? = nil) -> RequestBuilder<TradingAccountCreateResult> {
+        let path = "/v2.0/assets/programs/exchange/create"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
+
+        let url = URLComponents(string: URLString)
+
+        let requestBuilder: RequestBuilder<TradingAccountCreateResult>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }

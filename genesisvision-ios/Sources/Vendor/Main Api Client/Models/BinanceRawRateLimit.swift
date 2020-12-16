@@ -11,14 +11,14 @@ import Foundation
 public struct BinanceRawRateLimit: Codable {
 
 
-    public var interval: BinanceRawRateLimitInterval?
+    public var interval: BinanceRateLimitInterval?
 
-    public var type: BinanceRawRateLimitType?
+    public var type: BinanceRateLimitType?
 
     public var intervalNumber: Int?
 
     public var limit: Int?
-    public init(interval: BinanceRawRateLimitInterval? = nil, type: BinanceRawRateLimitType? = nil, intervalNumber: Int? = nil, limit: Int? = nil) { 
+    public init(interval: BinanceRateLimitInterval? = nil, type: BinanceRateLimitType? = nil, intervalNumber: Int? = nil, limit: Int? = nil) { 
         self.interval = interval
         self.type = type
         self.intervalNumber = intervalNumber

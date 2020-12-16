@@ -86,16 +86,7 @@ class BaseTabBarController: UITabBarController {
                 return }
             NotificationCenter.default.post(name: .updateTradingAccountViewController, object: nil, userInfo: ["assetId": destination.entityId])
         case .socialPost:
-            
-            var destinationUrl: String = ""
-            
-            if ApiKeys.basePath.contains("red") {
-                destinationUrl = "https://blue.genesis.vision/posts/\(destination.entityId)"
-            } else {
-                destinationUrl = "https://genesis.vision/posts/\(destination.entityId)"
-            }
-            
-            router?.showSafari(with: destinationUrl)
+            router?.showSafari(with: ApiKeys.socialPostsPath + "\(destination.entityId)")
         case .socialMediaPost:
             SocialAPI.getSocialMediaPost(_id: destination.entityId) { [ weak self] (post, error) in
                 if let post = post, let url = post.url {

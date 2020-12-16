@@ -18,11 +18,14 @@ public struct BinanceRawBinanceBalance: Codable {
     public var locked: Double?
 
     public var total: Double?
-    public init(asset: String? = nil, free: Double? = nil, locked: Double? = nil, total: Double? = nil) { 
+
+    public var amountInCurrency: Double?
+    public init(asset: String? = nil, free: Double? = nil, locked: Double? = nil, total: Double? = nil, amountInCurrency: Double? = nil) { 
         self.asset = asset
         self.free = free
         self.locked = locked
         self.total = total
+        self.amountInCurrency = amountInCurrency
     }
 
 }

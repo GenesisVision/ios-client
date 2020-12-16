@@ -9,6 +9,15 @@
 import Foundation
 
 extension Date {
+    
+    init(milliseconds: Int64) {
+        self = Date(timeIntervalSince1970: TimeInterval(milliseconds) / 1000)
+    }
+    
+    init(milliseconds: Double) {
+        self = Date(timeIntervalSince1970: TimeInterval(milliseconds) / 1000)
+    }
+    
     func interval(ofComponent comp: Calendar.Component, fromDate date: Date) -> Int {
         
         let currentCalendar = Calendar.current

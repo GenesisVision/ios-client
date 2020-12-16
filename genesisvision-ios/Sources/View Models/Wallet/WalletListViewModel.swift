@@ -47,7 +47,7 @@ final class WalletListViewModel {
     }
     
     private func getAmountForPlatformCurrency(fromAmount: Double?, fromCurrency: String?) -> Double? {
-        guard let fromAmount = fromAmount, let fromCurrency = fromCurrency, let rates = rates?.rates, let rate = rates[getPlatformCurrencyType().rawValue]?.first(where: {$0.currency?.rawValue == fromCurrency })?.rate else { return nil }
+        guard let fromAmount = fromAmount, let fromCurrency = fromCurrency, let rates = rates?.rates, let rate = rates[getPlatformCurrencyType().rawValue]?.first(where: {$0.currency == fromCurrency })?.rate else { return nil }
         return fromAmount/rate
     }
 }

@@ -29,6 +29,10 @@ public struct BinanceRaw24HPrice: Codable {
 
     public var lowPrice: Double?
 
+    public var baseVolume: Double?
+
+    public var quoteVolume: Double?
+
     public var openTime: Date?
 
     public var closeTime: Date?
@@ -48,11 +52,7 @@ public struct BinanceRaw24HPrice: Codable {
     public var askPrice: Double?
 
     public var askQuantity: Double?
-
-    public var baseVolume: Double?
-
-    public var quoteVolume: Double?
-    public init(symbol: String? = nil, priceChange: Double? = nil, priceChangePercent: Double? = nil, weightedAveragePrice: Double? = nil, lastPrice: Double? = nil, lastQuantity: Double? = nil, openPrice: Double? = nil, highPrice: Double? = nil, lowPrice: Double? = nil, openTime: Date? = nil, closeTime: Date? = nil, firstTradeId: Int64? = nil, lastTradeId: Int64? = nil, totalTrades: Int64? = nil, prevDayClosePrice: Double? = nil, bidPrice: Double? = nil, bidQuantity: Double? = nil, askPrice: Double? = nil, askQuantity: Double? = nil, baseVolume: Double? = nil, quoteVolume: Double? = nil) { 
+    public init(symbol: String? = nil, priceChange: Double? = nil, priceChangePercent: Double? = nil, weightedAveragePrice: Double? = nil, lastPrice: Double? = nil, lastQuantity: Double? = nil, openPrice: Double? = nil, highPrice: Double? = nil, lowPrice: Double? = nil, baseVolume: Double? = nil, quoteVolume: Double? = nil, openTime: Date? = nil, closeTime: Date? = nil, firstTradeId: Int64? = nil, lastTradeId: Int64? = nil, totalTrades: Int64? = nil, prevDayClosePrice: Double? = nil, bidPrice: Double? = nil, bidQuantity: Double? = nil, askPrice: Double? = nil, askQuantity: Double? = nil) { 
         self.symbol = symbol
         self.priceChange = priceChange
         self.priceChangePercent = priceChangePercent
@@ -62,6 +62,8 @@ public struct BinanceRaw24HPrice: Codable {
         self.openPrice = openPrice
         self.highPrice = highPrice
         self.lowPrice = lowPrice
+        self.baseVolume = baseVolume
+        self.quoteVolume = quoteVolume
         self.openTime = openTime
         self.closeTime = closeTime
         self.firstTradeId = firstTradeId
@@ -72,8 +74,6 @@ public struct BinanceRaw24HPrice: Codable {
         self.bidQuantity = bidQuantity
         self.askPrice = askPrice
         self.askQuantity = askQuantity
-        self.baseVolume = baseVolume
-        self.quoteVolume = quoteVolume
     }
 
 }
