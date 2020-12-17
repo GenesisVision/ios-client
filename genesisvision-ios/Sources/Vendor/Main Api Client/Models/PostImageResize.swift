@@ -14,9 +14,15 @@ public struct PostImageResize: Codable {
     public var quality: ImageQuality?
 
     public var logoUrl: String?
-    public init(quality: ImageQuality? = nil, logoUrl: String? = nil) { 
+
+    public var height: Int?
+
+    public var width: Int?
+    public init(quality: ImageQuality? = nil, logoUrl: String? = nil, height: Int? = nil, width: Int? = nil) { 
         self.quality = quality
         self.logoUrl = logoUrl
+        self.height = height
+        self.width = width
     }
 
 }

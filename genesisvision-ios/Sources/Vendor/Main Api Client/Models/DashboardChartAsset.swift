@@ -11,8 +11,6 @@ import Foundation
 public struct DashboardChartAsset: Codable {
 
 
-    public var isPrivateAccount: Bool?
-
     public var _id: UUID?
 
     public var logoUrl: String?
@@ -26,8 +24,9 @@ public struct DashboardChartAsset: Codable {
     public var assetType: AssetType?
 
     public var programDetails: ProgramAssetDetails?
-    public init(isPrivateAccount: Bool? = nil, _id: UUID? = nil, logoUrl: String? = nil, color: String? = nil, title: String? = nil, url: String? = nil, assetType: AssetType? = nil, programDetails: ProgramAssetDetails? = nil) { 
-        self.isPrivateAccount = isPrivateAccount
+
+    public var isPrivateAccount: Bool?
+    public init(_id: UUID? = nil, logoUrl: String? = nil, color: String? = nil, title: String? = nil, url: String? = nil, assetType: AssetType? = nil, programDetails: ProgramAssetDetails? = nil, isPrivateAccount: Bool? = nil) { 
         self._id = _id
         self.logoUrl = logoUrl
         self.color = color
@@ -35,9 +34,9 @@ public struct DashboardChartAsset: Codable {
         self.url = url
         self.assetType = assetType
         self.programDetails = programDetails
+        self.isPrivateAccount = isPrivateAccount
     }
     public enum CodingKeys: String, CodingKey { 
-        case isPrivateAccount
         case _id = "id"
         case logoUrl
         case color
@@ -45,6 +44,7 @@ public struct DashboardChartAsset: Codable {
         case url
         case assetType
         case programDetails
+        case isPrivateAccount
     }
 
 }

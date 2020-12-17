@@ -43,6 +43,8 @@ class Router {
     
     var parentRouter: Router?
     
+    weak var rootTabBarController: BaseTabBarController?
+    
     weak var navigationController: UINavigationController? {
         guard let vc = UIApplication.shared.windows[0].rootViewController else {
             return BaseNavigationController()
@@ -236,10 +238,12 @@ extension Router {
     
     func startAsAuthorized() {
         let tabBarController = BaseTabBarController()
+        rootTabBarController = tabBarController
+        
         tabBarController.viewControllers = tabBarControllers
         tabBarController.router = self
         
-        setWindowRoot(viewController: tabBarController)
+        setWindowRoot(viewController: rootTabBarController)
     }
     
     func showTwoFactorEnable() {
@@ -267,6 +271,10 @@ extension Router {
     }
     
     func getRootTabBar(parent: Router?) -> UITabBarController? {
+        if let rootTabBarController = parent?.rootTabBarController {
+            return rootTabBarController
+        }
+        
         if let parent = parent {
             return getRootTabBar(parent: parent.parentRouter)
         }
@@ -305,12 +313,18 @@ extension Router {
         case .fund:
             showFundDetails(with: assetId)
         case ._none:
-            showManagerDetails(with: assetId)
+            showUserDetails(with: assetId)
         }
     }
     
+    func showTradingAccountDetails(with assetId: String) {
+        guard let viewController = getTradingAccountViewController(with: assetId) else { return }
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
     func showUserDetails(with userId: String) {
-        self.showManagerDetails(with: userId)
+        guard let viewController = getManagerViewController(with: userId) else { return }
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     func showFilterVC(with listViewModel: ListViewModelProtocol, filterModel: FilterModel, filterType: FilterType, sortingType: SortingType) {
@@ -330,11 +344,6 @@ extension Router {
     
     private func showFundDetails(with assetId: String) {
         guard let viewController = getFundViewController(with: assetId) else { return }
-        navigationController?.pushViewController(viewController, animated: true)
-    }
-    
-    private func showManagerDetails(with managerId: String) {
-        guard let viewController = getManagerViewController(with: managerId) else { return }
         navigationController?.pushViewController(viewController, animated: true)
     }
     
@@ -410,10 +419,18 @@ extension Router {
 
 //Get View Controllers
 extension Router {
-    func getEventsViewController(with assetId: String? = nil, router: Router? = nil, allowsSelection: Bool = true, assetType: AssetType) -> EventListViewController? {
+    func getEventsViewController(with assetId: String? = nil, router: Router? = nil, allowsSelection: Bool = true, assetType: AssetType) -> EventListViewControllerWithSections? {
         
-        let vc = EventListViewController()
-        vc.viewModel = EventListViewModel(router ?? self, delegate: vc)
+//        let vc = EventListViewController()
+//        vc.viewModel = EventListViewModel(router ?? self, delegate: vc)
+//        vc.viewModel.assetId = assetId
+//        vc.viewModel.assetType = assetType
+//        vc.title = "History"
+//
+//        return vc
+        
+        let vc = EventListViewControllerWithSections()
+        vc.viewModel = EventViewModelWithSections(reloadDataProtocol: vc)
         vc.viewModel.assetId = assetId
         vc.viewModel.assetType = assetType
         vc.title = "History"
@@ -449,6 +466,14 @@ extension Router {
         vc.hidesBottomBarWhenPushed = true
         
         return vc
+    }
+    
+    func getTradingAccountViewController(with assetId: String) -> AccountViewController? {
+        let viewController = AccountViewController()
+        let accountRouter = AccountRouter(parentRouter: self)
+        accountRouter.accountViewController = viewController
+        viewController.viewModel = AccountTabmanViewModel(withRouter: accountRouter, assetId: assetId)
+        return viewController
     }
     
     func getManagerViewController(with managerId: String) -> ManagerViewController? {

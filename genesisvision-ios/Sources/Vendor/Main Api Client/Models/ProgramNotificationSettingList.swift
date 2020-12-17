@@ -11,12 +11,6 @@ import Foundation
 public struct ProgramNotificationSettingList: Codable {
 
 
-    public var level: Int?
-
-    public var levelProgress: Double?
-
-    public var settingsCustom: [NotificationSettingViewModel]?
-
     public var assetId: UUID?
 
     public var title: String?
@@ -28,16 +22,22 @@ public struct ProgramNotificationSettingList: Codable {
     public var color: String?
 
     public var settingsGeneral: [NotificationSettingViewModel]?
-    public init(level: Int? = nil, levelProgress: Double? = nil, settingsCustom: [NotificationSettingViewModel]? = nil, assetId: UUID? = nil, title: String? = nil, url: String? = nil, logoUrl: String? = nil, color: String? = nil, settingsGeneral: [NotificationSettingViewModel]? = nil) { 
-        self.level = level
-        self.levelProgress = levelProgress
-        self.settingsCustom = settingsCustom
+
+    public var level: Int?
+
+    public var levelProgress: Double?
+
+    public var settingsCustom: [NotificationSettingViewModel]?
+    public init(assetId: UUID? = nil, title: String? = nil, url: String? = nil, logoUrl: String? = nil, color: String? = nil, settingsGeneral: [NotificationSettingViewModel]? = nil, level: Int? = nil, levelProgress: Double? = nil, settingsCustom: [NotificationSettingViewModel]? = nil) { 
         self.assetId = assetId
         self.title = title
         self.url = url
         self.logoUrl = logoUrl
         self.color = color
         self.settingsGeneral = settingsGeneral
+        self.level = level
+        self.levelProgress = levelProgress
+        self.settingsCustom = settingsCustom
     }
 
 }

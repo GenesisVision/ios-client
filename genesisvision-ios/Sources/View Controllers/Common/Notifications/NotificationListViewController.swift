@@ -52,6 +52,8 @@ class NotificationListViewController: BaseViewControllerWithTableView {
         
         notificationsBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_notifications_settings"), style: .done, target: self, action: #selector(notificationsButtonAction))
         navigationItem.rightBarButtonItem = notificationsBarButtonItem
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateNotification(notification:)), name: .updateNotificationListViewController, object: nil)
 
         setupNavigationBar()
         
@@ -61,6 +63,11 @@ class NotificationListViewController: BaseViewControllerWithTableView {
     
     @objc func notificationsButtonAction() {
         viewModel.showNotificationsSettings()
+    }
+    
+    @objc private func updateNotification(notification: Notification) {
+        showProgressHUD()
+        fetch()
     }
     
     private func reloadData() {
@@ -87,6 +94,10 @@ class NotificationListViewController: BaseViewControllerWithTableView {
         super.pullToRefresh()
         
         fetch()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .updateNotificationListViewController, object: nil)
     }
 }
 

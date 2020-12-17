@@ -14,4 +14,5 @@ public enum AssetTypeExt: String, Codable {
     case fund = "Fund"
     case signalTradingAccount = "SignalTradingAccount"
     case externalSignalTradingAccount = "ExternalSignalTradingAccount"
+    case selfManagedFund = "SelfManagedFund"
 }

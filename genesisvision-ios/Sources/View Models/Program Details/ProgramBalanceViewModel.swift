@@ -34,7 +34,11 @@ final class ProgramBalanceViewModel: ViewModelWithListProtocol, ViewModelWithFil
         didSet {
             guard let programBalanceChart = programBalanceChart else { return }
             
-            let programBalanceChartTableViewCellViewModel =  ProgramBalanceChartTableViewCellViewModel(programBalanceChart: programBalanceChart, chartViewProtocol: self.chartViewProtocol)
+            if let router = router as? ProgramRouter {
+                self.chartViewProtocol = router.programBalanceViewController
+            }
+            
+            let programBalanceChartTableViewCellViewModel = ProgramBalanceChartTableViewCellViewModel(programBalanceChart: programBalanceChart, chartViewProtocol: self.chartViewProtocol)
             
             viewModels = [programBalanceChartTableViewCellViewModel]
         }
@@ -49,7 +53,6 @@ final class ProgramBalanceViewModel: ViewModelWithListProtocol, ViewModelWithFil
         self.router = router
         self.assetId = assetId
         self.reloadDataProtocol = reloadDataProtocol
-        self.chartViewProtocol = router.currentController as? ChartViewProtocol
     }
 }
 

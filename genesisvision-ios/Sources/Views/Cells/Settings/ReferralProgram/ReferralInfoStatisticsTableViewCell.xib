@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReferralInfoStatisticsTableViewCell" rowHeight="287" id="bTJ-io-ots" customClass="ReferralInfoStatisticsTableViewCell" customModule="GV_DEBUG" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="673" height="287"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bTJ-io-ots" id="ydW-3h-QGq">
+                <rect key="frame" x="0.0" y="0.0" width="673" height="287"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="4s3-Ow-tuA">
+                        <rect key="frame" x="20" y="5" width="633" height="175"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tmr-2f-Lwc" customClass="LargeTitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="633" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="OKU-1E-DLa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Qqq-Wf-IuB">
+                                <rect key="frame" x="0.0" y="45" width="633" height="40"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="e3W-6J-VWq">
+                                        <rect key="frame" x="0.0" y="0.0" width="309" height="40"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wdo-l8-EnL" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="309" height="17.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NmH-1a-GXo" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="22.5" width="309" height="17.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="loD-0C-WIW">
+                                        <rect key="frame" x="324" y="0.0" width="309" height="40"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mPp-Pr-vyb" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="309" height="17.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T2p-ty-3AF" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="22.5" width="309" height="17.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="CNV-Dx-gpC"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="qDO-7A-brT">
+                                <rect key="frame" x="0.0" y="105" width="633" height="70"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOS-BY-EEe" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="633" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="QGj-dO-UfA"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gLf-Fw-OTT" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="633" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="AhZ-5g-w3g"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="Tmr-2f-Lwc" firstAttribute="top" secondItem="4s3-Ow-tuA" secondAttribute="top" id="0gc-8P-SzX"/>
+                            <constraint firstItem="Tmr-2f-Lwc" firstAttribute="leading" secondItem="4s3-Ow-tuA" secondAttribute="leading" id="F9H-6c-gaF"/>
+                            <constraint firstAttribute="trailing" secondItem="Tmr-2f-Lwc" secondAttribute="trailing" id="FNk-T3-jph"/>
+                        </constraints>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="4s3-Ow-tuA" secondAttribute="bottom" constant="5" id="AoZ-am-K1D"/>
+                    <constraint firstItem="4s3-Ow-tuA" firstAttribute="top" secondItem="ydW-3h-QGq" secondAttribute="top" constant="5" id="XxX-jq-AiO"/>
+                    <constraint firstItem="4s3-Ow-tuA" firstAttribute="leading" secondItem="ydW-3h-QGq" secondAttribute="leading" constant="20" id="dSt-p0-zaS"/>
+                    <constraint firstAttribute="trailing" secondItem="4s3-Ow-tuA" secondAttribute="trailing" constant="20" id="s4C-EC-0bt"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="friendsLevel1Title" destination="NmH-1a-GXo" id="jGa-fU-vNh"/>
+                <outlet property="friendsLevel1Value" destination="wdo-l8-EnL" id="6nU-b5-ShE"/>
+                <outlet property="friendsLevel2Title" destination="T2p-ty-3AF" id="jWg-bd-nNv"/>
+                <outlet property="friendsLevel2Value" destination="mPp-Pr-vyb" id="jXm-F5-3nZ"/>
+                <outlet property="titleLabel" destination="Tmr-2f-Lwc" id="Pp9-JV-Ar6"/>
+                <outlet property="totalTitle" destination="gLf-Fw-OTT" id="PcG-eR-99V"/>
+                <outlet property="totalValue" destination="lOS-BY-EEe" id="uM5-rM-AG0"/>
+            </connections>
+            <point key="canvasLocation" x="-36" y="40"/>
+        </tableViewCell>
+    </objects>
+</document>

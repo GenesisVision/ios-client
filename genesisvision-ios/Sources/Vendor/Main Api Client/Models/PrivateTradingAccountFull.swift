@@ -19,15 +19,12 @@ public struct PrivateTradingAccountFull: Codable {
 
     public var brokerDetails: BrokerDetails?
 
-    public var credentials: DashboardTradingAssetCredentials?
-
     public var ownerActions: PrivateTradingAccountOwnerActions?
-    public init(_id: UUID? = nil, publicInfo: PrivateTradingAccountFullPublicDetails? = nil, tradingAccountInfo: PrivateTradingAccountFullTradingAccountDetails? = nil, brokerDetails: BrokerDetails? = nil, credentials: DashboardTradingAssetCredentials? = nil, ownerActions: PrivateTradingAccountOwnerActions? = nil) { 
+    public init(_id: UUID? = nil, publicInfo: PrivateTradingAccountFullPublicDetails? = nil, tradingAccountInfo: PrivateTradingAccountFullTradingAccountDetails? = nil, brokerDetails: BrokerDetails? = nil, ownerActions: PrivateTradingAccountOwnerActions? = nil) { 
         self._id = _id
         self.publicInfo = publicInfo
         self.tradingAccountInfo = tradingAccountInfo
         self.brokerDetails = brokerDetails
-        self.credentials = credentials
         self.ownerActions = ownerActions
     }
     public enum CodingKeys: String, CodingKey { 
@@ -35,7 +32,6 @@ public struct PrivateTradingAccountFull: Codable {
         case publicInfo
         case tradingAccountInfo
         case brokerDetails
-        case credentials
         case ownerActions
     }
 

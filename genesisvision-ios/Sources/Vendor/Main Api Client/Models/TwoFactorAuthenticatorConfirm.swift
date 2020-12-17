@@ -11,15 +11,15 @@ import Foundation
 public struct TwoFactorAuthenticatorConfirm: Codable {
 
 
+    public var password: String
+
     public var code: String
 
     public var sharedKey: String
-
-    public var password: String
-    public init(code: String, sharedKey: String, password: String) { 
+    public init(password: String, code: String, sharedKey: String) { 
+        self.password = password
         self.code = code
         self.sharedKey = sharedKey
-        self.password = password
     }
 
 }

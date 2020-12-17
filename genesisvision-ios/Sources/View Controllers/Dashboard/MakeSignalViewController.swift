@@ -155,7 +155,7 @@ class MakeSignalViewModel {
         }
     }
     
-    var request = MakeTradingAccountSignalProvider(_id: nil, volumeFee: nil, successFee: nil, title: nil, _description: nil, logo: nil)
+    var request = MakeTradingAccountSignalProvider(title: nil, _description: nil, logo: nil, _id: nil, volumeFee: nil, successFee: nil)
     weak var delegate: BaseTableViewProtocol?
     init(_ delegate: BaseTableViewProtocol?) {
         self.delegate = delegate

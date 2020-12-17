@@ -91,7 +91,7 @@ extension NotificationListViewModel {
         }
         
         let notification = selectedModel.notification
-        if (notification.assetId?.uuidString) != nil {
+        if (notification.assetDetails?._id?.uuidString) != nil {
             return true
         }
         
@@ -104,7 +104,7 @@ extension NotificationListViewModel {
         }
         
         let notification = selectedModel.notification
-        if let assetId = notification.assetId?.uuidString, let type = notification.assetType, let assetType = AssetType(rawValue: type.rawValue) {
+        if let assetId = notification.assetDetails?._id?.uuidString, let assetType = notification.assetDetails?.assetType {
             router.showAssetDetails(with: assetId, assetType: assetType)
         }
     }

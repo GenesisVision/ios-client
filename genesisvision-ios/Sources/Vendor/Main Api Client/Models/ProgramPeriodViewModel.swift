@@ -44,7 +44,9 @@ public struct ProgramPeriodViewModel: Codable {
     public var platformSuccessFee: Double?
 
     public var managerStatistic: ManagerFinancialStatistic?
-    public init(dateFrom: Date? = nil, dateTo: Date? = nil, periodLength: Double? = nil, status: PeriodStatus? = nil, number: Int? = nil, profit: Double? = nil, profitPercent: Double? = nil, balance: Double? = nil, investors: Int? = nil, managerDeposit: Double? = nil, managerWithdraw: Double? = nil, managerCommissionRebate: Double? = nil, investorsDeposit: Double? = nil, investorsWithdraw: Double? = nil, investorsProfitWithdraw: Double? = nil, platformSuccessFee: Double? = nil, managerStatistic: ManagerFinancialStatistic? = nil) { 
+
+    public var investorStatistic: InvestorFinancialStatistic?
+    public init(dateFrom: Date? = nil, dateTo: Date? = nil, periodLength: Double? = nil, status: PeriodStatus? = nil, number: Int? = nil, profit: Double? = nil, profitPercent: Double? = nil, balance: Double? = nil, investors: Int? = nil, managerDeposit: Double? = nil, managerWithdraw: Double? = nil, managerCommissionRebate: Double? = nil, investorsDeposit: Double? = nil, investorsWithdraw: Double? = nil, investorsProfitWithdraw: Double? = nil, platformSuccessFee: Double? = nil, managerStatistic: ManagerFinancialStatistic? = nil, investorStatistic: InvestorFinancialStatistic? = nil) { 
         self.dateFrom = dateFrom
         self.dateTo = dateTo
         self.periodLength = periodLength
@@ -62,6 +64,7 @@ public struct ProgramPeriodViewModel: Codable {
         self.investorsProfitWithdraw = investorsProfitWithdraw
         self.platformSuccessFee = platformSuccessFee
         self.managerStatistic = managerStatistic
+        self.investorStatistic = investorStatistic
     }
 
 }

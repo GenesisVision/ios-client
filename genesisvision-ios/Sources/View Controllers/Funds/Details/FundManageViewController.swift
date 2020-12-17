@@ -134,6 +134,7 @@ class FundManageViewController: BaseViewController {
         
         let viewModel = ChangeFundSettingsViewModel()
         viewModel.assetId = assetId
+        viewModel.changeSettingsMode = .edit
         viewController.viewModel = viewModel
         self.navigationController?.pushViewController(viewController, animated: true)
     }

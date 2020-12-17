@@ -11,10 +11,10 @@ import Foundation
 public struct SimpleChartPoint: Codable {
 
 
-    public var date: Date?
+    public var date: Int64?
 
     public var value: Double?
-    public init(date: Date? = nil, value: Double? = nil) { 
+    public init(date: Int64? = nil, value: Double? = nil) { 
         self.date = date
         self.value = value
     }

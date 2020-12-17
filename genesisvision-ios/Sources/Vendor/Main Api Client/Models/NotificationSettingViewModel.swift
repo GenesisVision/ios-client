@@ -11,10 +11,6 @@ import Foundation
 public struct NotificationSettingViewModel: Codable {
 
 
-    public var _id: UUID?
-
-    public var isEnabled: Bool?
-
     public var assetId: UUID?
 
     public var managerId: UUID?
@@ -24,23 +20,27 @@ public struct NotificationSettingViewModel: Codable {
     public var conditionType: NotificationSettingConditionType?
 
     public var conditionAmount: Double?
-    public init(_id: UUID? = nil, isEnabled: Bool? = nil, assetId: UUID? = nil, managerId: UUID? = nil, type: NotificationType? = nil, conditionType: NotificationSettingConditionType? = nil, conditionAmount: Double? = nil) { 
-        self._id = _id
-        self.isEnabled = isEnabled
+
+    public var _id: UUID?
+
+    public var isEnabled: Bool?
+    public init(assetId: UUID? = nil, managerId: UUID? = nil, type: NotificationType? = nil, conditionType: NotificationSettingConditionType? = nil, conditionAmount: Double? = nil, _id: UUID? = nil, isEnabled: Bool? = nil) { 
         self.assetId = assetId
         self.managerId = managerId
         self.type = type
         self.conditionType = conditionType
         self.conditionAmount = conditionAmount
+        self._id = _id
+        self.isEnabled = isEnabled
     }
     public enum CodingKeys: String, CodingKey { 
-        case _id = "id"
-        case isEnabled
         case assetId
         case managerId
         case type
         case conditionType
         case conditionAmount
+        case _id = "id"
+        case isEnabled
     }
 
 }

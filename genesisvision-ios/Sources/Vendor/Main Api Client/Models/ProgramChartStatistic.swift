@@ -11,24 +11,6 @@ import Foundation
 public struct ProgramChartStatistic: Codable {
 
 
-    /** Always filled for program */
-    public var investors: Int?
-
-    public var lastPeriodStarts: Date?
-
-    public var lastPeriodEnds: Date?
-
-    /** Always filled for signal */
-    public var subscribers: Int?
-
-    public var tradingVolume: Double?
-
-    public var trades: Int?
-
-    public var successTradesPercent: Double?
-
-    public var profitFactor: Double?
-
     public var balance: Double?
 
     public var profitPercent: Double?
@@ -40,21 +22,39 @@ public struct ProgramChartStatistic: Codable {
     public var calmarRatio: Double?
 
     public var maxDrawdown: Double?
-    public init(investors: Int? = nil, lastPeriodStarts: Date? = nil, lastPeriodEnds: Date? = nil, subscribers: Int? = nil, tradingVolume: Double? = nil, trades: Int? = nil, successTradesPercent: Double? = nil, profitFactor: Double? = nil, balance: Double? = nil, profitPercent: Double? = nil, sharpeRatio: Double? = nil, sortinoRatio: Double? = nil, calmarRatio: Double? = nil, maxDrawdown: Double? = nil) { 
-        self.investors = investors
-        self.lastPeriodStarts = lastPeriodStarts
-        self.lastPeriodEnds = lastPeriodEnds
-        self.subscribers = subscribers
-        self.tradingVolume = tradingVolume
-        self.trades = trades
-        self.successTradesPercent = successTradesPercent
-        self.profitFactor = profitFactor
+
+    public var tradingVolume: Double?
+
+    public var trades: Int?
+
+    public var successTradesPercent: Double?
+
+    public var profitFactor: Double?
+
+    /** Always filled for program */
+    public var investors: Int?
+
+    public var lastPeriodStarts: Date?
+
+    public var lastPeriodEnds: Date?
+
+    /** Always filled for signal */
+    public var subscribers: Int?
+    public init(balance: Double? = nil, profitPercent: Double? = nil, sharpeRatio: Double? = nil, sortinoRatio: Double? = nil, calmarRatio: Double? = nil, maxDrawdown: Double? = nil, tradingVolume: Double? = nil, trades: Int? = nil, successTradesPercent: Double? = nil, profitFactor: Double? = nil, investors: Int? = nil, lastPeriodStarts: Date? = nil, lastPeriodEnds: Date? = nil, subscribers: Int? = nil) { 
         self.balance = balance
         self.profitPercent = profitPercent
         self.sharpeRatio = sharpeRatio
         self.sortinoRatio = sortinoRatio
         self.calmarRatio = calmarRatio
         self.maxDrawdown = maxDrawdown
+        self.tradingVolume = tradingVolume
+        self.trades = trades
+        self.successTradesPercent = successTradesPercent
+        self.profitFactor = profitFactor
+        self.investors = investors
+        self.lastPeriodStarts = lastPeriodStarts
+        self.lastPeriodEnds = lastPeriodEnds
+        self.subscribers = subscribers
     }
 
 }

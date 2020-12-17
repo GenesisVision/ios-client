@@ -11,10 +11,6 @@ import Foundation
 public struct TransactionAssetDetails: Codable {
 
 
-    public var _description: String?
-
-    public var manager: String?
-
     public var _id: UUID?
 
     public var logoUrl: String?
@@ -28,9 +24,11 @@ public struct TransactionAssetDetails: Codable {
     public var assetType: AssetType?
 
     public var programDetails: ProgramAssetDetails?
-    public init(_description: String? = nil, manager: String? = nil, _id: UUID? = nil, logoUrl: String? = nil, color: String? = nil, title: String? = nil, url: String? = nil, assetType: AssetType? = nil, programDetails: ProgramAssetDetails? = nil) { 
-        self._description = _description
-        self.manager = manager
+
+    public var _description: String?
+
+    public var manager: String?
+    public init(_id: UUID? = nil, logoUrl: String? = nil, color: String? = nil, title: String? = nil, url: String? = nil, assetType: AssetType? = nil, programDetails: ProgramAssetDetails? = nil, _description: String? = nil, manager: String? = nil) { 
         self._id = _id
         self.logoUrl = logoUrl
         self.color = color
@@ -38,10 +36,10 @@ public struct TransactionAssetDetails: Codable {
         self.url = url
         self.assetType = assetType
         self.programDetails = programDetails
+        self._description = _description
+        self.manager = manager
     }
     public enum CodingKeys: String, CodingKey { 
-        case _description = "description"
-        case manager
         case _id = "id"
         case logoUrl
         case color
@@ -49,6 +47,8 @@ public struct TransactionAssetDetails: Codable {
         case url
         case assetType
         case programDetails
+        case _description = "description"
+        case manager
     }
 
 }

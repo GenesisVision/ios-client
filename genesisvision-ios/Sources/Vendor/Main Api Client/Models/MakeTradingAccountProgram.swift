@@ -11,6 +11,12 @@ import Foundation
 public struct MakeTradingAccountProgram: Codable {
 
 
+    public var title: String?
+
+    public var _description: String?
+
+    public var logo: String?
+
     public var _id: UUID?
 
     public var periodLength: Int?
@@ -21,38 +27,32 @@ public struct MakeTradingAccountProgram: Codable {
 
     public var tradesDelay: TradesDelay?
 
-    public var entryFee: Double?
-
     public var successFee: Double?
 
-    public var title: String?
-
-    public var _description: String?
-
-    public var logo: String?
-    public init(_id: UUID? = nil, periodLength: Int? = nil, stopOutLevel: Double? = nil, investmentLimit: Double? = nil, tradesDelay: TradesDelay? = nil, entryFee: Double? = nil, successFee: Double? = nil, title: String? = nil, _description: String? = nil, logo: String? = nil) { 
+    public var managementFee: Double?
+    public init(title: String? = nil, _description: String? = nil, logo: String? = nil, _id: UUID? = nil, periodLength: Int? = nil, stopOutLevel: Double? = nil, investmentLimit: Double? = nil, tradesDelay: TradesDelay? = nil, successFee: Double? = nil, managementFee: Double? = nil) { 
+        self.title = title
+        self._description = _description
+        self.logo = logo
         self._id = _id
         self.periodLength = periodLength
         self.stopOutLevel = stopOutLevel
         self.investmentLimit = investmentLimit
         self.tradesDelay = tradesDelay
-        self.entryFee = entryFee
         self.successFee = successFee
-        self.title = title
-        self._description = _description
-        self.logo = logo
+        self.managementFee = managementFee
     }
     public enum CodingKeys: String, CodingKey { 
+        case title
+        case _description = "description"
+        case logo
         case _id = "id"
         case periodLength
         case stopOutLevel
         case investmentLimit
         case tradesDelay
-        case entryFee
         case successFee
-        case title
-        case _description = "description"
-        case logo
+        case managementFee
     }
 
 }

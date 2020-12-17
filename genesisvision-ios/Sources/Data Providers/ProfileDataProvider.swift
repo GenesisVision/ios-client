@@ -7,6 +7,14 @@
 //
 
 class ProfileDataProvider: DataProvider {
+    
+    static func getMobileVErificationTokens(completion: @escaping (_ profile: ExternalKycAccessToken?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        
+        ProfileAPI.getMobileVerificationToken { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
     static func getProfile(completion: @escaping (_ profile: ProfileFullViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
         ProfileAPI.getProfileFull { (viewModel, error) in
@@ -56,7 +64,7 @@ class ProfileDataProvider: DataProvider {
     // MARK: - Push notifications
     static func addFCMToken(token: String, completion: @escaping CompletionBlock) {
         
-        let token = FcmTokenViewModel(token: token)
+        let token = FcmTokenViewModel(token: token, platform: .ios)
         
         ProfileAPI.updateFcmToken(body: token) { (_, error) in
             DataProvider().responseHandler(error, completion: completion)

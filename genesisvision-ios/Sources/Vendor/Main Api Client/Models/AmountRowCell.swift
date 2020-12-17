@@ -11,15 +11,15 @@ import Foundation
 public struct AmountRowCell: Codable {
 
 
+    public var title: String?
+
     public var first: AmountItem?
 
     public var second: AmountItem?
-
-    public var title: String?
-    public init(first: AmountItem? = nil, second: AmountItem? = nil, title: String? = nil) { 
+    public init(title: String? = nil, first: AmountItem? = nil, second: AmountItem? = nil) { 
+        self.title = title
         self.first = first
         self.second = second
-        self.title = title
     }
 
 }

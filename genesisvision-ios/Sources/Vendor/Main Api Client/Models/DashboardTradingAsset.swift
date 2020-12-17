@@ -23,8 +23,6 @@ public struct DashboardTradingAsset: Codable {
 
     public var accountInfo: DashboardTradingAssetCommonDetails?
 
-    public var credentials: DashboardTradingAssetCredentials?
-
     public var signalInfo: DashboardTradingAssetSignalDetails?
 
     public var broker: DashboardTradingAssetBrokerDetails?
@@ -32,14 +30,13 @@ public struct DashboardTradingAsset: Codable {
     public var actions: DashboardTradingAssetActions?
 
     public var tags: [Tag]?
-    public init(_id: UUID? = nil, assetType: AssetType? = nil, assetTypeExt: AssetTypeExt? = nil, statistic: ProfitChart? = nil, publicInfo: DashboardTradingAssetPublicDetails? = nil, accountInfo: DashboardTradingAssetCommonDetails? = nil, credentials: DashboardTradingAssetCredentials? = nil, signalInfo: DashboardTradingAssetSignalDetails? = nil, broker: DashboardTradingAssetBrokerDetails? = nil, actions: DashboardTradingAssetActions? = nil, tags: [Tag]? = nil) { 
+    public init(_id: UUID? = nil, assetType: AssetType? = nil, assetTypeExt: AssetTypeExt? = nil, statistic: ProfitChart? = nil, publicInfo: DashboardTradingAssetPublicDetails? = nil, accountInfo: DashboardTradingAssetCommonDetails? = nil, signalInfo: DashboardTradingAssetSignalDetails? = nil, broker: DashboardTradingAssetBrokerDetails? = nil, actions: DashboardTradingAssetActions? = nil, tags: [Tag]? = nil) { 
         self._id = _id
         self.assetType = assetType
         self.assetTypeExt = assetTypeExt
         self.statistic = statistic
         self.publicInfo = publicInfo
         self.accountInfo = accountInfo
-        self.credentials = credentials
         self.signalInfo = signalInfo
         self.broker = broker
         self.actions = actions
@@ -52,7 +49,6 @@ public struct DashboardTradingAsset: Codable {
         case statistic
         case publicInfo
         case accountInfo
-        case credentials
         case signalInfo
         case broker
         case actions

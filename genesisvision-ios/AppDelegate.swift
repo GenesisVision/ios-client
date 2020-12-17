@@ -8,7 +8,6 @@
 
 import UIKit
 import UserNotifications
-
 import Firebase
 
 let gcmMessageIDKey = "gcm.message_id"
@@ -98,6 +97,9 @@ extension AppDelegate {
             
             let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
             UNUserNotificationCenter.current().requestAuthorization(options: authOptions, completionHandler: { _, _ in })
+            let openAction = UNNotificationAction(identifier: "OpenNotification", title: NSLocalizedString("Abrir", comment: ""), options: UNNotificationActionOptions.foreground)
+            let deafultCategory = UNNotificationCategory(identifier: "CustomPush", actions: [openAction], intentIdentifiers: [], options: [])
+            UNUserNotificationCenter.current().setNotificationCategories(Set([deafultCategory]))
         } else {
             let settings: UIUserNotificationSettings =
                 UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
@@ -168,6 +170,7 @@ extension AppDelegate {
     }
 }
 
+
 @available(iOS 10, *)
 extension AppDelegate: UNUserNotificationCenterDelegate {
     // Receive displayed notifications for iOS 10 devices.
@@ -180,11 +183,14 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             print("Message ID: \(messageID)")
         }
         
-        print(userInfo)
+        if let modelData = userInfo[gcmModelKey] as? String {
+            let dataDict: [String: String] = [gcmModelKey: modelData]
+            NotificationCenter.default.post(name: .notificationDidReceive, object: nil, userInfo: dataDict)
+        }
         
         completionHandler([.alert, .badge, .sound])
     }
-    //action
+    
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 didReceive response: UNNotificationResponse,
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
@@ -198,7 +204,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
         if let modelData = userInfo[gcmModelKey] as? String {
             let dataDict: [String: String] = [gcmModelKey: modelData]
-            NotificationCenter.default.post(name: .notificationDidReceive, object: nil, userInfo: dataDict)
+            NotificationCenter.default.post(name: .notificationDidTap, object: nil, userInfo: dataDict)
         }
         
         completionHandler()

@@ -31,7 +31,11 @@ final class FundProfitViewModel: ViewModelWithListProtocol, ViewModelWithFilter 
     var dateTo: Date?
     var maxPointCount: Int = ApiKeys.maxPoint
     private var currency: CurrencyType?
-    private var fundProfitChart: FundProfitPercentCharts?
+    private var fundProfitChart: FundProfitPercentCharts? {
+        didSet {
+            chartViewProtocol = router.fundProfitViewController
+        }
+    }
     
     private var sections: [SectionType] = [.chart, .statistics]
     
@@ -50,22 +54,6 @@ final class FundProfitViewModel: ViewModelWithListProtocol, ViewModelWithFilter 
     // MARK: - Public methods
     func selectSimpleChartPoint(_ date: Date) {
     }
-}
-
-extension FundProfitViewModel: ChartViewProtocol {
-    var filterDateRangeModel: FilterDateRangeModel? {
-        return FilterDateRangeModel(dateRangeType: .custom, dateFrom: self.dateFrom, dateTo: self.dateTo)
-    }
-    
-    func chartValueSelected(date: Date) {
-        
-    }
-    
-    func chartValueNothingSelected() {
-        
-    }
-    
-    
 }
 
 // MARK: - TableView
@@ -116,7 +104,7 @@ extension FundProfitViewModel {
         
         switch sections[indexPath.section] {
         case .chart:
-            self.fundProfitChartTableViewCellViewModel = FundProfitChartTableViewCellViewModel(fundProfitChart: fundProfitChart, chartViewProtocol: self)
+            self.fundProfitChartTableViewCellViewModel = FundProfitChartTableViewCellViewModel(fundProfitChart: fundProfitChart, chartViewProtocol: chartViewProtocol)
             return fundProfitChartTableViewCellViewModel
         case .statistics:
             if let statistic = fundProfitChart.statistic, let currency = currency {

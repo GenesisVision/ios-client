@@ -32,7 +32,13 @@ final class ProgramProfitViewModel: ViewModelWithListProtocol, ViewModelWithFilt
     var dateTo: Date?
     var maxPointCount: Int = ApiKeys.maxPoint
     private var currency: CurrencyType?
-    private var programProfitChart: ProgramProfitPercentCharts?
+    private var programProfitChart: ProgramProfitPercentCharts? {
+        didSet {
+            if let router = router as? ProgramRouter {
+                chartViewProtocol = router.programProfitViewController
+            }
+        }
+    }
     
     private var sections: [SectionType] = [.chart, .statistics]
     
@@ -45,7 +51,6 @@ final class ProgramProfitViewModel: ViewModelWithListProtocol, ViewModelWithFilt
         self.assetId = assetId
         self.currency = currency
         self.reloadDataProtocol = reloadDataProtocol
-        self.chartViewProtocol = router.currentController as? ChartViewProtocol
     }
     
     // MARK: - Public methods

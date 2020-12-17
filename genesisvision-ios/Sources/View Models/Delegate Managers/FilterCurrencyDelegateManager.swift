@@ -28,6 +28,7 @@ final class FilterCurrencyDelegateManager: NSObject, UITableViewDelegate, UITabl
     // MARK: - Lifecycle
     override init() {
         super.init()
+        currencies.append(PlatformCurrencyInfo(name: "All", color: nil))
     }
     
     // MARK: - Public methods

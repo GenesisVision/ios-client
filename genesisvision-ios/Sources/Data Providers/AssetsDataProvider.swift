@@ -134,6 +134,15 @@ class AssetsDataProvider: DataProvider {
         }
     }
     
+    // MARK: Exchange accounts
+    
+    static func createExchangeAccount(request: NewExchangeAccountRequest, completion: @escaping (TradingAccountCreateResult?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        
+        AssetsAPI.createExchangeAccount(body: request) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
     // MARK: - Trading accounts
     static func changeTradingAccountPassword(_ accountId: String, model: TradingAccountPwdUpdate?, completion: @escaping CompletionBlock) {
         
@@ -143,12 +152,14 @@ class AssetsDataProvider: DataProvider {
             DataProvider().responseHandler(error, completion: completion)
         }
     }
+    
     static func createTradingAccount(_ request: NewTradingAccountRequest?, completion: @escaping (TradingAccountCreateResult?) -> Void, errorCompletion: @escaping CompletionBlock) {
                 
         AssetsAPI.createTradingAccount(body: request) { (model, error) in
             DataProvider().responseHandler(model, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
+    
     static func createExternalTradingAccount(_ request: NewExternalTradingAccountRequest?, completion: @escaping (TradingAccountCreateResult?) -> Void, errorCompletion: @escaping CompletionBlock) {
                 
         AssetsAPI.createExternalTradingAccount(body: request){ (model, error) in

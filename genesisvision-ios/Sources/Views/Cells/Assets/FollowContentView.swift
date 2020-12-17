@@ -158,7 +158,7 @@ extension FollowContentView: ContentViewProtocol {
         
         photoImageView.image = UIImage.programPlaceholder
         
-        if let logo = asset.logoUrl, let fileUrl = getFileURL(fileName: logo), isPictureURL(url: fileUrl.absoluteString) {
+        if let logo = asset.logoUrl, let fileUrl = getFileURL(fileName: logo) {
             photoImageView.kf.indicatorType = .activity
             photoImageView.kf.setImage(with: fileUrl, placeholder: UIImage.programPlaceholder)
             photoImageView.backgroundColor = .clear

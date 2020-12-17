@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReferralHistoryTableViewCell" rowHeight="114" id="KGk-i7-Jjw" customClass="ReferralHistoryTableViewCell" customModule="GV_DEBUG" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="317" height="114"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="317" height="114"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="o05-V8-eIk">
+                        <rect key="frame" x="10" y="0.0" width="297" height="40"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dxz-Bx-VyW" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="148.5" height="40"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WnF-mO-42c">
+                                <rect key="frame" x="148.5" y="0.0" width="148.5" height="40"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gep-TS-lgg" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                        <rect key="frame" x="10" y="0.0" width="138.5" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.074509803921568626" green="0.11764705882352941" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="gep-TS-lgg" firstAttribute="top" secondItem="WnF-mO-42c" secondAttribute="top" id="8vv-E1-JON"/>
+                                    <constraint firstAttribute="trailing" secondItem="gep-TS-lgg" secondAttribute="trailing" id="mUK-aa-S7B"/>
+                                    <constraint firstItem="gep-TS-lgg" firstAttribute="leading" secondItem="WnF-mO-42c" secondAttribute="leading" constant="10" id="pv3-dz-Pd8"/>
+                                    <constraint firstAttribute="bottom" secondItem="gep-TS-lgg" secondAttribute="bottom" id="xxm-23-SM1"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="Uwl-RI-Nr6"/>
+                        </constraints>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="o05-V8-eIk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="IV5-Xl-wzz"/>
+                    <constraint firstAttribute="bottom" secondItem="o05-V8-eIk" secondAttribute="bottom" id="PDs-ZK-gpH"/>
+                    <constraint firstAttribute="trailing" secondItem="o05-V8-eIk" secondAttribute="trailing" constant="10" id="XOj-Ce-sHU"/>
+                    <constraint firstItem="o05-V8-eIk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="rDE-bw-T6I"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="dateLabel" destination="dxz-Bx-VyW" id="SIB-k3-hcF"/>
+                <outlet property="rewardLabel" destination="gep-TS-lgg" id="tHM-73-iDS"/>
+            </connections>
+            <point key="canvasLocation" x="92.028985507246389" y="164.0625"/>
+        </tableViewCell>
+    </objects>
+</document>

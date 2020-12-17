@@ -19,30 +19,38 @@ class SettingsViewController: BaseTableViewController {
             profileImageView.roundCorners()
         }
     }
-    @IBOutlet weak var profileAddImageView: UIImageView! {
-        didSet {
-            profileAddImageView.roundCorners()
-        }
-    }
-    @IBOutlet weak var changePhotoButton: UIButton!
+    
     @IBOutlet weak var profileNameLabel: TitleLabel! {
         didSet {
             profileNameLabel.font = UIFont.getFont(.semibold, size: 17)
         }
     }
+    
     @IBOutlet weak var profileEmailLabel: SubtitleLabel!
+    
+    @IBOutlet weak var kycStatusButton: UIButton! {
+        didSet {
+            kycStatusButton.isHidden = true
+            kycStatusButton.backgroundColor = UIColor.Cell.redTitle.withAlphaComponent(0.1)
+            kycStatusButton.tintColor = UIColor.Cell.redTitle
+            kycStatusButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
+        }
+    }
+    
     @IBOutlet weak var verifyView: UIView! {
         didSet {
             verifyView.isHidden = true
             verifyView.backgroundColor = UIColor.Cell.redTitle.withAlphaComponent(0.1)
         }
     }
+    
     @IBOutlet weak var verifyTextLabel: TitleLabel! {
         didSet {
             verifyTextLabel.font = UIFont.getFont(.regular, size: 14.0)
             verifyTextLabel.textColor = UIColor.Cell.redTitle
         }
     }
+    
     @IBOutlet weak var platformCurrencyTitleLabel: TitleLabel! {
         didSet {
             platformCurrencyTitleLabel.text = "Platform currency"
@@ -125,7 +133,11 @@ class SettingsViewController: BaseTableViewController {
             sendFeedbackTitleLabel.font = UIFont.getFont(.regular, size: 14.0)
         }
     }
-    @IBOutlet weak var versionLabel: SubtitleLabel!
+    @IBOutlet weak var versionLabel: SubtitleLabel! {
+        didSet {
+            versionLabel.text = ""
+        }
+    }
     @IBOutlet weak var footerView: UITableViewHeaderFooterView!
     
     private var signOutBarButtonItem: UIBarButtonItem!
@@ -224,24 +236,24 @@ class SettingsViewController: BaseTableViewController {
         publicProfileSwitch.isOn = viewModel.isPublic
         
         if let verificationStatus = viewModel.verificationStatus {
-            verifyView.isHidden = false
+            kycStatusButton.isHidden = false
             switch verificationStatus {
             case .rejected:
-                verifyTextLabel.text = "Rejected"
-                verifyTextLabel.textColor = UIColor.Cell.redTitle
-                verifyView.backgroundColor = UIColor.Cell.redTitle.withAlphaComponent(0.1)
+                kycStatusButton.setTitle("Rejected", for: .normal)
+                kycStatusButton.tintColor = UIColor.Cell.redTitle
+                kycStatusButton.backgroundColor = UIColor.Cell.redTitle.withAlphaComponent(0.1)
             case .verified:
-                verifyTextLabel.text = "Verified"
-                verifyTextLabel.textColor = UIColor.Cell.greenTitle
-                verifyView.backgroundColor = UIColor.Cell.greenTitle.withAlphaComponent(0.1)
+                kycStatusButton.setTitle("Verified", for: .normal)
+                kycStatusButton.tintColor = UIColor.Cell.greenTitle
+                kycStatusButton.backgroundColor = UIColor.Cell.greenTitle.withAlphaComponent(0.1)
             case .notVerified:
-                verifyTextLabel.text = "Not verified"
-                verifyTextLabel.textColor = UIColor.Cell.redTitle
-                verifyView.backgroundColor = UIColor.Cell.redTitle.withAlphaComponent(0.1)
+                kycStatusButton.setTitle("Not verified", for: .normal)
+                kycStatusButton.tintColor = UIColor.Cell.redTitle
+                kycStatusButton.backgroundColor = UIColor.Cell.redTitle.withAlphaComponent(0.1)
             case .underReview:
-                verifyTextLabel.text = "Under Review"
-                verifyTextLabel.textColor = UIColor.Cell.yellowTitle
-                verifyView.backgroundColor = UIColor.Cell.yellowTitle.withAlphaComponent(0.1)
+                kycStatusButton.setTitle("Under Review", for: .normal)
+                kycStatusButton.tintColor = UIColor.Cell.yellowTitle
+                kycStatusButton.backgroundColor = UIColor.Cell.yellowTitle.withAlphaComponent(0.1)
             }
         }
             
@@ -254,6 +266,14 @@ class SettingsViewController: BaseTableViewController {
             profileNameLabel.text = username
         } else {
             profileNameLabel.text = "Profile"
+        }
+        
+        if viewModel.currencyListViewModel != nil, let name = viewModel.currencyListViewModel.selected()?.name {
+            platformCurrencyValueLabel.text = name
+        }
+        
+        if versionLabel != nil {
+            versionLabel.text = "App version " + getFullVersion()
         }
         
         profileEmailLabel.text = viewModel.email
@@ -293,13 +313,6 @@ class SettingsViewController: BaseTableViewController {
         tableView.tableFooterView = footerView
         tableView.backgroundColor = UIColor.Cell.headerBg
         
-        if let name = viewModel.currencyListViewModel.selected()?.name {
-            platformCurrencyValueLabel.text = name
-        }
-        
-        if versionLabel != nil {
-            versionLabel.text = "App version " + getFullVersion()
-        }
     }
     
     private func setupTableConfiguration() {
@@ -373,6 +386,13 @@ class SettingsViewController: BaseTableViewController {
             self.viewModel.enableTwoFactor(sender.isOn)
         })
     }
+    
+    @IBAction func kycStatusButtonAction(_ sender: Any) {
+        guard viewModel.verificationStatus != .verified, let token = viewModel.kycVerificationTokens?.accessToken, let baseUrl = viewModel.kycVerificationTokens?.baseAddress, let flowName = viewModel.kycVerificationTokens?.flowName, let _ = PlatformManager.shared.getKYCViewController(token: token, baseUrl: baseUrl, flowName: flowName) else { return }
+        
+        viewModel.showKYC()
+    }
+    
 }
 
 extension SettingsViewController {
@@ -397,6 +417,8 @@ extension SettingsViewController {
             viewModel.showPrivacy()
         case .contactUs:
             feedbackMethod()
+        case .referralProgram:
+            viewModel.showReferral()
         default:
             break
         }

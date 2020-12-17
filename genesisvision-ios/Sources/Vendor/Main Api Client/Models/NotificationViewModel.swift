@@ -15,48 +15,45 @@ public struct NotificationViewModel: Codable {
 
     public var text: String?
 
+    /** Notification type  &lt;br&gt;Platform&lt;br&gt;Profile&lt;br&gt;Asset&lt;br&gt;TradingAccount&lt;br&gt;User&lt;br&gt;Signal&lt;br&gt;Social&lt;br&gt;PlatformAsset  Enum: GenesisVision.Core.DataModel.Attributes.NotificationGroup */
+    public var type: String?
+
     public var date: Date?
 
-    public var type: NotificationType?
-
-    public var assetId: UUID?
-
-    public var managerId: UUID?
-
-    public var logoUrl: String?
-
-    public var url: String?
-
-    public var color: String?
+    public var imageUrl: String?
 
     public var isUnread: Bool?
 
-    public var assetType: AssetGlobalType?
-    public init(_id: UUID? = nil, text: String? = nil, date: Date? = nil, type: NotificationType? = nil, assetId: UUID? = nil, managerId: UUID? = nil, logoUrl: String? = nil, url: String? = nil, color: String? = nil, isUnread: Bool? = nil, assetType: AssetGlobalType? = nil) { 
+    public var location: NotificationLocationViewModel?
+
+    public var assetDetails: AssetDetails?
+
+    public var userDetails: ProfilePublic?
+
+    public var platformAssetDetails: BasePlatformAsset?
+    public init(_id: UUID? = nil, text: String? = nil, type: String? = nil, date: Date? = nil, imageUrl: String? = nil, isUnread: Bool? = nil, location: NotificationLocationViewModel? = nil, assetDetails: AssetDetails? = nil, userDetails: ProfilePublic? = nil, platformAssetDetails: BasePlatformAsset? = nil) { 
         self._id = _id
         self.text = text
-        self.date = date
         self.type = type
-        self.assetId = assetId
-        self.managerId = managerId
-        self.logoUrl = logoUrl
-        self.url = url
-        self.color = color
+        self.date = date
+        self.imageUrl = imageUrl
         self.isUnread = isUnread
-        self.assetType = assetType
+        self.location = location
+        self.assetDetails = assetDetails
+        self.userDetails = userDetails
+        self.platformAssetDetails = platformAssetDetails
     }
     public enum CodingKeys: String, CodingKey { 
         case _id = "id"
         case text
-        case date
         case type
-        case assetId
-        case managerId
-        case logoUrl
-        case url
-        case color
+        case date
+        case imageUrl
         case isUnread
-        case assetType
+        case location
+        case assetDetails
+        case userDetails
+        case platformAssetDetails
     }
 
 }

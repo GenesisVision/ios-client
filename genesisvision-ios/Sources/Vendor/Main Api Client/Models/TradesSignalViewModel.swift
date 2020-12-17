@@ -11,21 +11,21 @@ import Foundation
 public struct TradesSignalViewModel: Codable {
 
 
+    public var items: [OrderSignalModel]?
+
+    public var total: Int?
+
     public var showSwaps: Bool?
 
     public var showTickets: Bool?
 
     public var tradesDelay: TradesDelay?
-
-    public var items: [OrderSignalModel]?
-
-    public var total: Int?
-    public init(showSwaps: Bool? = nil, showTickets: Bool? = nil, tradesDelay: TradesDelay? = nil, items: [OrderSignalModel]? = nil, total: Int? = nil) { 
+    public init(items: [OrderSignalModel]? = nil, total: Int? = nil, showSwaps: Bool? = nil, showTickets: Bool? = nil, tradesDelay: TradesDelay? = nil) { 
+        self.items = items
+        self.total = total
         self.showSwaps = showSwaps
         self.showTickets = showTickets
         self.tradesDelay = tradesDelay
-        self.items = items
-        self.total = total
     }
 
 }

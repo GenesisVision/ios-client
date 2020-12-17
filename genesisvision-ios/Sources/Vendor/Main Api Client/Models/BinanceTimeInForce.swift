@@ -12,4 +12,5 @@ public enum BinanceTimeInForce: String, Codable {
     case immediateOrCancel = "ImmediateOrCancel"
     case fillOrKill = "FillOrKill"
     case goodTillCrossing = "GoodTillCrossing"
+    case goodTillExpiredOrCanceled = "GoodTillExpiredOrCanceled"
 }

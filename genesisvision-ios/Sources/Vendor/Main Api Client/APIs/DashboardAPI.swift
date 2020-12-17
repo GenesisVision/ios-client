@@ -32,21 +32,21 @@ open class DashboardAPI {
     "color" : "color",
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "chart" : [ {
-      "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 0.8008281904610115
+      "date" : 0,
+      "value" : 6.027456183070403
     }, {
-      "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 0.8008281904610115
+      "date" : 0,
+      "value" : 6.027456183070403
     } ]
   }, {
     "color" : "color",
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "chart" : [ {
-      "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 0.8008281904610115
+      "date" : 0,
+      "value" : 6.027456183070403
     }, {
-      "date" : "2000-01-23T04:56:07.000+00:00",
-      "value" : 0.8008281904610115
+      "date" : 0,
+      "value" : 6.027456183070403
     } ]
   } ]
 }}]
@@ -185,48 +185,75 @@ open class DashboardAPI {
     }
 
     /**
-     - parameter exchangeAccountId: (query)  (optional)     - parameter brokerId: (query)  (optional)
+     - parameter brokerId: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getExchangeAccountCredentials(exchangeAccountId: UUID? = nil, brokerId: UUID? = nil, completion: @escaping ((_ data: DashboardExchangeTradingAsset?,_ error: Error?) -> Void)) {
-        getExchangeAccountCredentialsWithRequestBuilder(exchangeAccountId: exchangeAccountId, brokerId: brokerId).execute { (response, error) -> Void in
+    open class func getExchangeAccountsCredentials(brokerId: UUID? = nil, completion: @escaping ((_ data: ExchangeAssetItemsViewModel?,_ error: Error?) -> Void)) {
+        getExchangeAccountsCredentialsWithRequestBuilder(brokerId: brokerId).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
 
 
     /**
-     - GET /v2.0/dashboard/trading/exchange/credentials
+     - GET /v2.0/dashboard/trading/exchange/credentials/all
      - API Key:
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
-  "credentials" : {
-    "apiKey" : "apiKey",
-    "apiSecret" : "apiSecret"
-  },
-  "broker" : {
-    "name" : "name",
+  "total" : 6,
+  "items" : [ {
+    "balance" : 0.8008281904610115,
+    "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "type" : "Undefined",
-    "logoUrl" : "logoUrl"
-  }
+    "title" : "title",
+    "creationDate" : "2000-01-23T04:56:07.000+00:00",
+    "asset" : {
+      "programDetails" : {
+        "level" : 0,
+        "levelProgress" : 6.027456183070403
+      },
+      "color" : "color",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "title" : "title",
+      "logoUrl" : "logoUrl",
+      "url" : "url",
+      "assetType" : "None"
+    }
+  }, {
+    "balance" : 0.8008281904610115,
+    "currency" : "Undefined",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "title" : "title",
+    "creationDate" : "2000-01-23T04:56:07.000+00:00",
+    "asset" : {
+      "programDetails" : {
+        "level" : 0,
+        "levelProgress" : 6.027456183070403
+      },
+      "color" : "color",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "title" : "title",
+      "logoUrl" : "logoUrl",
+      "url" : "url",
+      "assetType" : "None"
+    }
+  } ]
 }}]
-     - parameter exchangeAccountId: (query)  (optional)     - parameter brokerId: (query)  (optional)
+     - parameter brokerId: (query)  (optional)
 
-     - returns: RequestBuilder<DashboardExchangeTradingAsset> 
+     - returns: RequestBuilder<ExchangeAssetItemsViewModel> 
      */
-    open class func getExchangeAccountCredentialsWithRequestBuilder(exchangeAccountId: UUID? = nil, brokerId: UUID? = nil) -> RequestBuilder<DashboardExchangeTradingAsset> {
-        let path = "/v2.0/dashboard/trading/exchange/credentials"
+    open class func getExchangeAccountsCredentialsWithRequestBuilder(brokerId: UUID? = nil) -> RequestBuilder<ExchangeAssetItemsViewModel> {
+        let path = "/v2.0/dashboard/trading/exchange/credentials/all"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
-                        "exchangeAccountId": exchangeAccountId, 
                         "brokerId": brokerId
         ])
 
-        let requestBuilder: RequestBuilder<DashboardExchangeTradingAsset>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<ExchangeAssetItemsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
@@ -437,11 +464,11 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       }, {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       } ],
       "profit" : 7.386281948385884
     },
@@ -509,11 +536,11 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       }, {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       } ],
       "profit" : 7.386281948385884
     },
@@ -663,17 +690,18 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       }, {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       } ],
       "profit" : 7.386281948385884
     },
     "level" : 6,
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
     "dailyPeriodDetails" : {
+      "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
       "hourProcessing" : 7,
       "isProcessingRealTime" : true
     },
@@ -753,17 +781,18 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       }, {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       } ],
       "profit" : 7.386281948385884
     },
     "level" : 6,
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
     "dailyPeriodDetails" : {
+      "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
       "hourProcessing" : 7,
       "isProcessingRealTime" : true
     },
@@ -866,17 +895,13 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       }, {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       } ],
       "profit" : 7.386281948385884
-    },
-    "credentials" : {
-      "apiKey" : "apiKey",
-      "apiSecret" : "apiSecret"
     },
     "signalInfo" : {
       "subscribersCount" : 1
@@ -884,16 +909,17 @@ open class DashboardAPI {
     "assetTypeExt" : "None",
     "publicInfo" : {
       "programDetails" : {
-        "managementFeeSelected" : 0.8008281904610115,
-        "successFeeSelected" : 1.4658129805029452,
-        "successFeeCurrent" : 5.962133916683182,
-        "level" : 5,
-        "managementFeeCurrent" : 6.027456183070403,
+        "managementFeeSelected" : 1.4658129805029452,
+        "successFeeSelected" : 5.637376656633329,
+        "level" : 0,
+        "successFeeCurrent" : 2.3021358869347655,
+        "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
+          "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
           "hourProcessing" : 7,
           "isProcessingRealTime" : true
         },
-        "levelProgress" : 2.3021358869347655
+        "levelProgress" : 6.027456183070403
       },
       "fundDetails" : {
         "totalAssetsCount" : 7,
@@ -940,17 +966,19 @@ open class DashboardAPI {
       "canClose" : true,
       "canEditSignalProviderSettings" : true,
       "canMakeSignalProviderFromPrivateExternalTradingAccount" : true,
+      "canCreateApiKeys" : true,
       "canTransferMoney" : true,
       "canMakeDemoDeposit" : true,
       "canMakeProgramFromPrivateTradingAccount" : true,
       "canMakeExchangeProgramFromPrivateTradingAccount" : true,
       "canMakeProgramFromSignalProvider" : true,
+      "canClosePeriod" : true,
       "isEnoughMoneyToCreateProgram" : true,
       "canChangePassword" : true,
       "canMakeSignalProviderFromPrivateTradingAccount" : true,
       "canMakeSignalProviderFromProgram" : true,
-      "hasTerminal" : true,
       "canConfirm2FA" : true,
+      "hasTerminal" : true,
       "canAddRequestInvest" : true
     },
     "assetType" : "None",
@@ -983,17 +1011,13 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       }, {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       } ],
       "profit" : 7.386281948385884
-    },
-    "credentials" : {
-      "apiKey" : "apiKey",
-      "apiSecret" : "apiSecret"
     },
     "signalInfo" : {
       "subscribersCount" : 1
@@ -1001,16 +1025,17 @@ open class DashboardAPI {
     "assetTypeExt" : "None",
     "publicInfo" : {
       "programDetails" : {
-        "managementFeeSelected" : 0.8008281904610115,
-        "successFeeSelected" : 1.4658129805029452,
-        "successFeeCurrent" : 5.962133916683182,
-        "level" : 5,
-        "managementFeeCurrent" : 6.027456183070403,
+        "managementFeeSelected" : 1.4658129805029452,
+        "successFeeSelected" : 5.637376656633329,
+        "level" : 0,
+        "successFeeCurrent" : 2.3021358869347655,
+        "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
+          "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
           "hourProcessing" : 7,
           "isProcessingRealTime" : true
         },
-        "levelProgress" : 2.3021358869347655
+        "levelProgress" : 6.027456183070403
       },
       "fundDetails" : {
         "totalAssetsCount" : 7,
@@ -1057,17 +1082,19 @@ open class DashboardAPI {
       "canClose" : true,
       "canEditSignalProviderSettings" : true,
       "canMakeSignalProviderFromPrivateExternalTradingAccount" : true,
+      "canCreateApiKeys" : true,
       "canTransferMoney" : true,
       "canMakeDemoDeposit" : true,
       "canMakeProgramFromPrivateTradingAccount" : true,
       "canMakeExchangeProgramFromPrivateTradingAccount" : true,
       "canMakeProgramFromSignalProvider" : true,
+      "canClosePeriod" : true,
       "isEnoughMoneyToCreateProgram" : true,
       "canChangePassword" : true,
       "canMakeSignalProviderFromPrivateTradingAccount" : true,
       "canMakeSignalProviderFromProgram" : true,
-      "hasTerminal" : true,
       "canConfirm2FA" : true,
+      "hasTerminal" : true,
       "canAddRequestInvest" : true
     },
     "assetType" : "None",
@@ -1186,17 +1213,13 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       }, {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       } ],
       "profit" : 7.386281948385884
-    },
-    "credentials" : {
-      "apiKey" : "apiKey",
-      "apiSecret" : "apiSecret"
     },
     "signalInfo" : {
       "subscribersCount" : 1
@@ -1204,16 +1227,17 @@ open class DashboardAPI {
     "assetTypeExt" : "None",
     "publicInfo" : {
       "programDetails" : {
-        "managementFeeSelected" : 0.8008281904610115,
-        "successFeeSelected" : 1.4658129805029452,
-        "successFeeCurrent" : 5.962133916683182,
-        "level" : 5,
-        "managementFeeCurrent" : 6.027456183070403,
+        "managementFeeSelected" : 1.4658129805029452,
+        "successFeeSelected" : 5.637376656633329,
+        "level" : 0,
+        "successFeeCurrent" : 2.3021358869347655,
+        "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
+          "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
           "hourProcessing" : 7,
           "isProcessingRealTime" : true
         },
-        "levelProgress" : 2.3021358869347655
+        "levelProgress" : 6.027456183070403
       },
       "fundDetails" : {
         "totalAssetsCount" : 7,
@@ -1260,17 +1284,19 @@ open class DashboardAPI {
       "canClose" : true,
       "canEditSignalProviderSettings" : true,
       "canMakeSignalProviderFromPrivateExternalTradingAccount" : true,
+      "canCreateApiKeys" : true,
       "canTransferMoney" : true,
       "canMakeDemoDeposit" : true,
       "canMakeProgramFromPrivateTradingAccount" : true,
       "canMakeExchangeProgramFromPrivateTradingAccount" : true,
       "canMakeProgramFromSignalProvider" : true,
+      "canClosePeriod" : true,
       "isEnoughMoneyToCreateProgram" : true,
       "canChangePassword" : true,
       "canMakeSignalProviderFromPrivateTradingAccount" : true,
       "canMakeSignalProviderFromProgram" : true,
-      "hasTerminal" : true,
       "canConfirm2FA" : true,
+      "hasTerminal" : true,
       "canAddRequestInvest" : true
     },
     "assetType" : "None",
@@ -1303,17 +1329,13 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       }, {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       } ],
       "profit" : 7.386281948385884
-    },
-    "credentials" : {
-      "apiKey" : "apiKey",
-      "apiSecret" : "apiSecret"
     },
     "signalInfo" : {
       "subscribersCount" : 1
@@ -1321,16 +1343,17 @@ open class DashboardAPI {
     "assetTypeExt" : "None",
     "publicInfo" : {
       "programDetails" : {
-        "managementFeeSelected" : 0.8008281904610115,
-        "successFeeSelected" : 1.4658129805029452,
-        "successFeeCurrent" : 5.962133916683182,
-        "level" : 5,
-        "managementFeeCurrent" : 6.027456183070403,
+        "managementFeeSelected" : 1.4658129805029452,
+        "successFeeSelected" : 5.637376656633329,
+        "level" : 0,
+        "successFeeCurrent" : 2.3021358869347655,
+        "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
+          "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
           "hourProcessing" : 7,
           "isProcessingRealTime" : true
         },
-        "levelProgress" : 2.3021358869347655
+        "levelProgress" : 6.027456183070403
       },
       "fundDetails" : {
         "totalAssetsCount" : 7,
@@ -1377,17 +1400,19 @@ open class DashboardAPI {
       "canClose" : true,
       "canEditSignalProviderSettings" : true,
       "canMakeSignalProviderFromPrivateExternalTradingAccount" : true,
+      "canCreateApiKeys" : true,
       "canTransferMoney" : true,
       "canMakeDemoDeposit" : true,
       "canMakeProgramFromPrivateTradingAccount" : true,
       "canMakeExchangeProgramFromPrivateTradingAccount" : true,
       "canMakeProgramFromSignalProvider" : true,
+      "canClosePeriod" : true,
       "isEnoughMoneyToCreateProgram" : true,
       "canChangePassword" : true,
       "canMakeSignalProviderFromPrivateTradingAccount" : true,
       "canMakeSignalProviderFromProgram" : true,
-      "hasTerminal" : true,
       "canConfirm2FA" : true,
+      "hasTerminal" : true,
       "canAddRequestInvest" : true
     },
     "assetType" : "None",
@@ -1465,17 +1490,13 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       }, {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       } ],
       "profit" : 7.386281948385884
-    },
-    "credentials" : {
-      "apiKey" : "apiKey",
-      "apiSecret" : "apiSecret"
     },
     "signalInfo" : {
       "subscribersCount" : 1
@@ -1483,16 +1504,17 @@ open class DashboardAPI {
     "assetTypeExt" : "None",
     "publicInfo" : {
       "programDetails" : {
-        "managementFeeSelected" : 0.8008281904610115,
-        "successFeeSelected" : 1.4658129805029452,
-        "successFeeCurrent" : 5.962133916683182,
-        "level" : 5,
-        "managementFeeCurrent" : 6.027456183070403,
+        "managementFeeSelected" : 1.4658129805029452,
+        "successFeeSelected" : 5.637376656633329,
+        "level" : 0,
+        "successFeeCurrent" : 2.3021358869347655,
+        "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
+          "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
           "hourProcessing" : 7,
           "isProcessingRealTime" : true
         },
-        "levelProgress" : 2.3021358869347655
+        "levelProgress" : 6.027456183070403
       },
       "fundDetails" : {
         "totalAssetsCount" : 7,
@@ -1539,17 +1561,19 @@ open class DashboardAPI {
       "canClose" : true,
       "canEditSignalProviderSettings" : true,
       "canMakeSignalProviderFromPrivateExternalTradingAccount" : true,
+      "canCreateApiKeys" : true,
       "canTransferMoney" : true,
       "canMakeDemoDeposit" : true,
       "canMakeProgramFromPrivateTradingAccount" : true,
       "canMakeExchangeProgramFromPrivateTradingAccount" : true,
       "canMakeProgramFromSignalProvider" : true,
+      "canClosePeriod" : true,
       "isEnoughMoneyToCreateProgram" : true,
       "canChangePassword" : true,
       "canMakeSignalProviderFromPrivateTradingAccount" : true,
       "canMakeSignalProviderFromProgram" : true,
-      "hasTerminal" : true,
       "canConfirm2FA" : true,
+      "hasTerminal" : true,
       "canAddRequestInvest" : true
     },
     "assetType" : "None",
@@ -1582,17 +1606,13 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       }, {
-        "date" : "2000-01-23T04:56:07.000+00:00",
-        "value" : 0.8008281904610115
+        "date" : 0,
+        "value" : 6.027456183070403
       } ],
       "profit" : 7.386281948385884
-    },
-    "credentials" : {
-      "apiKey" : "apiKey",
-      "apiSecret" : "apiSecret"
     },
     "signalInfo" : {
       "subscribersCount" : 1
@@ -1600,16 +1620,17 @@ open class DashboardAPI {
     "assetTypeExt" : "None",
     "publicInfo" : {
       "programDetails" : {
-        "managementFeeSelected" : 0.8008281904610115,
-        "successFeeSelected" : 1.4658129805029452,
-        "successFeeCurrent" : 5.962133916683182,
-        "level" : 5,
-        "managementFeeCurrent" : 6.027456183070403,
+        "managementFeeSelected" : 1.4658129805029452,
+        "successFeeSelected" : 5.637376656633329,
+        "level" : 0,
+        "successFeeCurrent" : 2.3021358869347655,
+        "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
+          "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
           "hourProcessing" : 7,
           "isProcessingRealTime" : true
         },
-        "levelProgress" : 2.3021358869347655
+        "levelProgress" : 6.027456183070403
       },
       "fundDetails" : {
         "totalAssetsCount" : 7,
@@ -1656,17 +1677,19 @@ open class DashboardAPI {
       "canClose" : true,
       "canEditSignalProviderSettings" : true,
       "canMakeSignalProviderFromPrivateExternalTradingAccount" : true,
+      "canCreateApiKeys" : true,
       "canTransferMoney" : true,
       "canMakeDemoDeposit" : true,
       "canMakeProgramFromPrivateTradingAccount" : true,
       "canMakeExchangeProgramFromPrivateTradingAccount" : true,
       "canMakeProgramFromSignalProvider" : true,
+      "canClosePeriod" : true,
       "isEnoughMoneyToCreateProgram" : true,
       "canChangePassword" : true,
       "canMakeSignalProviderFromPrivateTradingAccount" : true,
       "canMakeSignalProviderFromProgram" : true,
-      "hasTerminal" : true,
       "canConfirm2FA" : true,
+      "hasTerminal" : true,
       "canAddRequestInvest" : true
     },
     "assetType" : "None",
@@ -1863,11 +1886,11 @@ open class DashboardAPI {
       "statistic" : {
         "drawdown" : 1.2315135367772556,
         "chart" : [ {
-          "date" : "2000-01-23T04:56:07.000+00:00",
-          "value" : 0.8008281904610115
+          "date" : 0,
+          "value" : 6.027456183070403
         }, {
-          "date" : "2000-01-23T04:56:07.000+00:00",
-          "value" : 0.8008281904610115
+          "date" : 0,
+          "value" : 6.027456183070403
         } ],
         "profit" : 7.386281948385884
       },
@@ -1924,11 +1947,11 @@ open class DashboardAPI {
       "statistic" : {
         "drawdown" : 1.2315135367772556,
         "chart" : [ {
-          "date" : "2000-01-23T04:56:07.000+00:00",
-          "value" : 0.8008281904610115
+          "date" : 0,
+          "value" : 6.027456183070403
         }, {
-          "date" : "2000-01-23T04:56:07.000+00:00",
-          "value" : 0.8008281904610115
+          "date" : 0,
+          "value" : 6.027456183070403
         } ],
         "profit" : 7.386281948385884
       },
@@ -2034,6 +2057,283 @@ open class DashboardAPI {
         ])
 
         let requestBuilder: RequestBuilder<CommonPublicAssetsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter status: (query)  (optional)     - parameter skipStatistic: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getSelfManagedFunds(dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, showIn: Currency? = nil, status: DashboardAssetStatus? = nil, skipStatistic: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: DashboardTradingAssetItemsViewModel?,_ error: Error?) -> Void)) {
+        getSelfManagedFundsWithRequestBuilder(dateFrom: dateFrom, dateTo: dateTo, chartPointsCount: chartPointsCount, showIn: showIn, status: status, skipStatistic: skipStatistic, skip: skip, take: take).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     - GET /v2.0/dashboard/trading/private/selfmanaged
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example={
+  "total" : 1,
+  "items" : [ {
+    "accountInfo" : {
+      "leverage" : 1,
+      "supportedCurrencies" : [ null, null ],
+      "balances" : [ {
+        "amount" : 7.457744773683766,
+        "currency" : "Undefined"
+      }, {
+        "amount" : 7.457744773683766,
+        "currency" : "Undefined"
+      } ],
+      "balance" : 7.386281948385884,
+      "currency" : "Undefined",
+      "title" : "title",
+      "creationDate" : "2000-01-23T04:56:07.000+00:00",
+      "login" : "login",
+      "type" : "None",
+      "status" : "Pending"
+    },
+    "statistic" : {
+      "drawdown" : 1.2315135367772556,
+      "chart" : [ {
+        "date" : 0,
+        "value" : 6.027456183070403
+      }, {
+        "date" : 0,
+        "value" : 6.027456183070403
+      } ],
+      "profit" : 7.386281948385884
+    },
+    "signalInfo" : {
+      "subscribersCount" : 1
+    },
+    "assetTypeExt" : "None",
+    "publicInfo" : {
+      "programDetails" : {
+        "managementFeeSelected" : 1.4658129805029452,
+        "successFeeSelected" : 5.637376656633329,
+        "level" : 0,
+        "successFeeCurrent" : 2.3021358869347655,
+        "managementFeeCurrent" : 5.962133916683182,
+        "dailyPeriodDetails" : {
+          "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
+          "hourProcessing" : 7,
+          "isProcessingRealTime" : true
+        },
+        "levelProgress" : 6.027456183070403
+      },
+      "fundDetails" : {
+        "totalAssetsCount" : 7,
+        "entryFeeCurrent" : 9.301444243932576,
+        "exitFeeSelected" : 4.145608029883936,
+        "tradingSchedule" : {
+          "hourEnd" : 2,
+          "dayStart" : "Sunday",
+          "minuteEnd" : 4,
+          "hourStart" : 9,
+          "hasTradingSchedule" : true,
+          "minuteStart" : 3
+        },
+        "topFundAssets" : [ {
+          "name" : "name",
+          "asset" : "asset",
+          "percent" : 7.061401241503109,
+          "logoUrl" : "logoUrl",
+          "url" : "url"
+        }, {
+          "name" : "name",
+          "asset" : "asset",
+          "percent" : 7.061401241503109,
+          "logoUrl" : "logoUrl",
+          "url" : "url"
+        } ],
+        "exitFeeCurrent" : 2.027123023002322,
+        "entryFeeSelected" : 3.616076749251911
+      },
+      "color" : "color",
+      "title" : "title",
+      "logoUrl" : "logoUrl",
+      "url" : "url"
+    },
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "broker" : {
+      "name" : "name",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "type" : "Undefined",
+      "logoUrl" : "logoUrl"
+    },
+    "actions" : {
+      "canAddRequestWithdraw" : true,
+      "canClose" : true,
+      "canEditSignalProviderSettings" : true,
+      "canMakeSignalProviderFromPrivateExternalTradingAccount" : true,
+      "canCreateApiKeys" : true,
+      "canTransferMoney" : true,
+      "canMakeDemoDeposit" : true,
+      "canMakeProgramFromPrivateTradingAccount" : true,
+      "canMakeExchangeProgramFromPrivateTradingAccount" : true,
+      "canMakeProgramFromSignalProvider" : true,
+      "canClosePeriod" : true,
+      "isEnoughMoneyToCreateProgram" : true,
+      "canChangePassword" : true,
+      "canMakeSignalProviderFromPrivateTradingAccount" : true,
+      "canMakeSignalProviderFromProgram" : true,
+      "canConfirm2FA" : true,
+      "hasTerminal" : true,
+      "canAddRequestInvest" : true
+    },
+    "assetType" : "None",
+    "tags" : [ {
+      "color" : "color",
+      "name" : "name"
+    }, {
+      "color" : "color",
+      "name" : "name"
+    } ]
+  }, {
+    "accountInfo" : {
+      "leverage" : 1,
+      "supportedCurrencies" : [ null, null ],
+      "balances" : [ {
+        "amount" : 7.457744773683766,
+        "currency" : "Undefined"
+      }, {
+        "amount" : 7.457744773683766,
+        "currency" : "Undefined"
+      } ],
+      "balance" : 7.386281948385884,
+      "currency" : "Undefined",
+      "title" : "title",
+      "creationDate" : "2000-01-23T04:56:07.000+00:00",
+      "login" : "login",
+      "type" : "None",
+      "status" : "Pending"
+    },
+    "statistic" : {
+      "drawdown" : 1.2315135367772556,
+      "chart" : [ {
+        "date" : 0,
+        "value" : 6.027456183070403
+      }, {
+        "date" : 0,
+        "value" : 6.027456183070403
+      } ],
+      "profit" : 7.386281948385884
+    },
+    "signalInfo" : {
+      "subscribersCount" : 1
+    },
+    "assetTypeExt" : "None",
+    "publicInfo" : {
+      "programDetails" : {
+        "managementFeeSelected" : 1.4658129805029452,
+        "successFeeSelected" : 5.637376656633329,
+        "level" : 0,
+        "successFeeCurrent" : 2.3021358869347655,
+        "managementFeeCurrent" : 5.962133916683182,
+        "dailyPeriodDetails" : {
+          "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
+          "hourProcessing" : 7,
+          "isProcessingRealTime" : true
+        },
+        "levelProgress" : 6.027456183070403
+      },
+      "fundDetails" : {
+        "totalAssetsCount" : 7,
+        "entryFeeCurrent" : 9.301444243932576,
+        "exitFeeSelected" : 4.145608029883936,
+        "tradingSchedule" : {
+          "hourEnd" : 2,
+          "dayStart" : "Sunday",
+          "minuteEnd" : 4,
+          "hourStart" : 9,
+          "hasTradingSchedule" : true,
+          "minuteStart" : 3
+        },
+        "topFundAssets" : [ {
+          "name" : "name",
+          "asset" : "asset",
+          "percent" : 7.061401241503109,
+          "logoUrl" : "logoUrl",
+          "url" : "url"
+        }, {
+          "name" : "name",
+          "asset" : "asset",
+          "percent" : 7.061401241503109,
+          "logoUrl" : "logoUrl",
+          "url" : "url"
+        } ],
+        "exitFeeCurrent" : 2.027123023002322,
+        "entryFeeSelected" : 3.616076749251911
+      },
+      "color" : "color",
+      "title" : "title",
+      "logoUrl" : "logoUrl",
+      "url" : "url"
+    },
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "broker" : {
+      "name" : "name",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "type" : "Undefined",
+      "logoUrl" : "logoUrl"
+    },
+    "actions" : {
+      "canAddRequestWithdraw" : true,
+      "canClose" : true,
+      "canEditSignalProviderSettings" : true,
+      "canMakeSignalProviderFromPrivateExternalTradingAccount" : true,
+      "canCreateApiKeys" : true,
+      "canTransferMoney" : true,
+      "canMakeDemoDeposit" : true,
+      "canMakeProgramFromPrivateTradingAccount" : true,
+      "canMakeExchangeProgramFromPrivateTradingAccount" : true,
+      "canMakeProgramFromSignalProvider" : true,
+      "canClosePeriod" : true,
+      "isEnoughMoneyToCreateProgram" : true,
+      "canChangePassword" : true,
+      "canMakeSignalProviderFromPrivateTradingAccount" : true,
+      "canMakeSignalProviderFromProgram" : true,
+      "canConfirm2FA" : true,
+      "hasTerminal" : true,
+      "canAddRequestInvest" : true
+    },
+    "assetType" : "None",
+    "tags" : [ {
+      "color" : "color",
+      "name" : "name"
+    }, {
+      "color" : "color",
+      "name" : "name"
+    } ]
+  } ]
+}}]
+     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter chartPointsCount: (query)  (optional)     - parameter showIn: (query)  (optional)     - parameter status: (query)  (optional)     - parameter skipStatistic: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+
+     - returns: RequestBuilder<DashboardTradingAssetItemsViewModel> 
+     */
+    open class func getSelfManagedFundsWithRequestBuilder(dateFrom: Date? = nil, dateTo: Date? = nil, chartPointsCount: Int? = nil, showIn: Currency? = nil, status: DashboardAssetStatus? = nil, skipStatistic: Bool? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<DashboardTradingAssetItemsViewModel> {
+        let path = "/v2.0/dashboard/trading/private/selfmanaged"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "DateFrom": dateFrom?.encodeToJSON(), 
+                        "DateTo": dateTo?.encodeToJSON(), 
+                        "ChartPointsCount": chartPointsCount?.encodeToJSON(), 
+                        "ShowIn": showIn, 
+                        "Status": status, 
+                        "SkipStatistic": skipStatistic, 
+                        "Skip": skip?.encodeToJSON(), 
+                        "Take": take?.encodeToJSON()
+        ])
+
+        let requestBuilder: RequestBuilder<DashboardTradingAssetItemsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }

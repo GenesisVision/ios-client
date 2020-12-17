@@ -122,10 +122,10 @@ open class RateAPI {
   "rates" : {
     "key" : [ {
       "rate" : 0.8008281904610115,
-      "currency" : "Undefined"
+      "currency" : "currency"
     }, {
       "rate" : 0.8008281904610115,
-      "currency" : "Undefined"
+      "currency" : "currency"
     } ]
   }
 }}]

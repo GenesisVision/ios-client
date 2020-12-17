@@ -11,15 +11,15 @@ import Foundation
 public struct TwoFactorCodeWithPassword: Codable {
 
 
+    public var password: String
+
     public var twoFactorCode: String?
 
     public var recoveryCode: String?
-
-    public var password: String
-    public init(twoFactorCode: String? = nil, recoveryCode: String? = nil, password: String) { 
+    public init(password: String, twoFactorCode: String? = nil, recoveryCode: String? = nil) { 
+        self.password = password
         self.twoFactorCode = twoFactorCode
         self.recoveryCode = recoveryCode
-        self.password = password
     }
 
 }

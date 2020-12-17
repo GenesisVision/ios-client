@@ -119,12 +119,7 @@ final class ProgramSubscribeViewModel {
             accountId = tradingAccountId
         }
         
-        self.attachToSignal = AttachToSignalProvider(tradingAccountId: accountId,
-                                                     mode: signalSubscription?.mode,
-                                                     percent: signalSubscription?.percent,
-                                                     openTolerancePercent: signalSubscription?.openTolerancePercent,
-                                                     fixedVolume: signalSubscription?.fixedVolume,
-                                                     fixedCurrency: fixedCurrency)
+        self.attachToSignal = AttachToSignalProvider(mode: signalSubscription?.mode, percent: signalSubscription?.percent, openTolerancePercent: signalSubscription?.openTolerancePercent, fixedVolume: signalSubscription?.fixedVolume, fixedCurrency: fixedCurrency, tradingAccountId: accountId)
         
         self.reasonMode = ._none
         

@@ -19,14 +19,7 @@ class ProgramViewController: BaseTabmanViewController<ProgramViewModel> {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        showProgressHUD()
-        viewModel.fetch { [weak self] (result) in
-            self?.setup()
-            self?.hideHUD()
-            self?.reloadData()
-            self?.title = self?.viewModel.title
-        }
+        fetch()
     }
     
     // MARK: - Private methods
@@ -35,7 +28,19 @@ class ProgramViewController: BaseTabmanViewController<ProgramViewModel> {
         
         dataSource = viewModel.dataSource
         
+        NotificationCenter.default.addObserver(self, selector: #selector(updateNotification(notification:)), name: .updateProgramViewController, object: nil)
+        
         setupUI()
+    }
+    
+    private func fetch() {
+        showProgressHUD()
+        viewModel.fetch { [weak self] (result) in
+            self?.setup()
+            self?.hideHUD()
+            self?.reloadData()
+            self?.title = self?.viewModel.title
+        }
     }
     
     private func setupUI() {
@@ -48,6 +53,11 @@ class ProgramViewController: BaseTabmanViewController<ProgramViewModel> {
         notificationsBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_notifications_icon"), style: .done, target: self, action: #selector(notificationsButtonAction))
         
         navigationItem.rightBarButtonItems = [favoriteBarButtonItem, notificationsBarButtonItem]
+    }
+    
+    @objc private func updateNotification(notification: Notification) {
+        guard let assetId = notification.userInfo?["assetId"] as? String, assetId == viewModel.assetId else { return }
+        fetch()
     }
     
     @objc func notificationsButtonAction() {
@@ -71,6 +81,10 @@ class ProgramViewController: BaseTabmanViewController<ProgramViewModel> {
                 ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }
         }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .updateProgramViewController, object: nil)
     }
 }
 
@@ -134,6 +148,7 @@ final class ProgramViewModel: TabmanViewModel {
             if !showEvents {
                 tabTypes.removeAll(where: { $0 == .events })
                 setViewControllers()
+                reloadDataProtocol?.didReloadData()
             }
         }
     }
@@ -177,13 +192,15 @@ final class ProgramViewModel: TabmanViewModel {
             return router.getInfo(with: assetId)
         case .balance:
             let viewModel = ProgramBalanceViewModel(withRouter: router, assetId: assetId, reloadDataProtocol: router.programViewController)
-            
-            return router.getBalanceViewController(with: viewModel)
+            let viewController = router.getBalanceViewController(with: viewModel)
+            router.programBalanceViewController = viewController
+            return viewController
         case .profit:
             guard let currency = programDetailsFull?.tradingAccountInfo?.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency) else { return nil }
             let viewModel = ProgramProfitViewModel(withRouter: router, assetId: assetId, reloadDataProtocol: router.programViewController, currency: currencyType)
-            
-            return router.getProfitViewController(with: viewModel)
+            let viewController = router.getProfitViewController(with: viewModel)
+            router.programProfitViewController = viewController
+            return viewController
         case .periodHistory:
             return router.getPeriodHistory(with: assetId, currency: currency)
         case .trades:

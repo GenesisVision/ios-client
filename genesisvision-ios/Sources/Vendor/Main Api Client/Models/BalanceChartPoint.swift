@@ -11,12 +11,12 @@ import Foundation
 public struct BalanceChartPoint: Codable {
 
 
-    public var date: Date?
+    public var date: Int64?
 
     public var managerFunds: Double?
 
     public var investorsFunds: Double?
-    public init(date: Date? = nil, managerFunds: Double? = nil, investorsFunds: Double? = nil) { 
+    public init(date: Int64? = nil, managerFunds: Double? = nil, investorsFunds: Double? = nil) { 
         self.date = date
         self.managerFunds = managerFunds
         self.investorsFunds = investorsFunds

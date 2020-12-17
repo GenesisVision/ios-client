@@ -44,13 +44,15 @@ class CircularProgressView: UIView {
 //    }
 
     public func setProgress(to progressConstant: Double, withAnimation: Bool) {
-        guard progress != progressConstant else { return }
+        guard progress != progressConstant || progressConstant == 0.0 else { return } //don't update same value except zero value
         
-        progress = progressConstant > 1.0
-            ? 1.0
-            : progressConstant < 0.0
-                ? 0.0
-                : progressConstant
+        if progressConstant > 1.0 {
+            progress = 1.0
+        } else if progressConstant < 0.0 {
+            progress = 0.0
+        } else {
+            progress = progressConstant
+        }
         
         let percentText = (progress * 100.0).rounded(toPlaces: 0).toString() + "%"
         percentLabel.text = percentText

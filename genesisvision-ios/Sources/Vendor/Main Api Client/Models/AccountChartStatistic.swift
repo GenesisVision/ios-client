@@ -11,14 +11,6 @@ import Foundation
 public struct AccountChartStatistic: Codable {
 
 
-    public var tradingVolume: Double?
-
-    public var trades: Int?
-
-    public var successTradesPercent: Double?
-
-    public var profitFactor: Double?
-
     public var balance: Double?
 
     public var profitPercent: Double?
@@ -30,17 +22,25 @@ public struct AccountChartStatistic: Codable {
     public var calmarRatio: Double?
 
     public var maxDrawdown: Double?
-    public init(tradingVolume: Double? = nil, trades: Int? = nil, successTradesPercent: Double? = nil, profitFactor: Double? = nil, balance: Double? = nil, profitPercent: Double? = nil, sharpeRatio: Double? = nil, sortinoRatio: Double? = nil, calmarRatio: Double? = nil, maxDrawdown: Double? = nil) { 
-        self.tradingVolume = tradingVolume
-        self.trades = trades
-        self.successTradesPercent = successTradesPercent
-        self.profitFactor = profitFactor
+
+    public var tradingVolume: Double?
+
+    public var trades: Int?
+
+    public var successTradesPercent: Double?
+
+    public var profitFactor: Double?
+    public init(balance: Double? = nil, profitPercent: Double? = nil, sharpeRatio: Double? = nil, sortinoRatio: Double? = nil, calmarRatio: Double? = nil, maxDrawdown: Double? = nil, tradingVolume: Double? = nil, trades: Int? = nil, successTradesPercent: Double? = nil, profitFactor: Double? = nil) { 
         self.balance = balance
         self.profitPercent = profitPercent
         self.sharpeRatio = sharpeRatio
         self.sortinoRatio = sortinoRatio
         self.calmarRatio = calmarRatio
         self.maxDrawdown = maxDrawdown
+        self.tradingVolume = tradingVolume
+        self.trades = trades
+        self.successTradesPercent = successTradesPercent
+        self.profitFactor = profitFactor
     }
 
 }

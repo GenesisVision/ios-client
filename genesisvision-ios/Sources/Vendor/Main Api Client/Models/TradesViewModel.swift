@@ -11,6 +11,10 @@ import Foundation
 public struct TradesViewModel: Codable {
 
 
+    public var items: [OrderModel]?
+
+    public var total: Int?
+
     public var showSwaps: Bool?
 
     public var showTickets: Bool?
@@ -26,11 +30,9 @@ public struct TradesViewModel: Codable {
     public var showProfit: Bool?
 
     public var tradesDelay: TradesDelay?
-
-    public var items: [OrderModel]?
-
-    public var total: Int?
-    public init(showSwaps: Bool? = nil, showTickets: Bool? = nil, showDate: Bool? = nil, showDirection: Bool? = nil, showPrice: Bool? = nil, showPriceOpen: Bool? = nil, showProfit: Bool? = nil, tradesDelay: TradesDelay? = nil, items: [OrderModel]? = nil, total: Int? = nil) { 
+    public init(items: [OrderModel]? = nil, total: Int? = nil, showSwaps: Bool? = nil, showTickets: Bool? = nil, showDate: Bool? = nil, showDirection: Bool? = nil, showPrice: Bool? = nil, showPriceOpen: Bool? = nil, showProfit: Bool? = nil, tradesDelay: TradesDelay? = nil) { 
+        self.items = items
+        self.total = total
         self.showSwaps = showSwaps
         self.showTickets = showTickets
         self.showDate = showDate
@@ -39,8 +41,6 @@ public struct TradesViewModel: Codable {
         self.showPriceOpen = showPriceOpen
         self.showProfit = showProfit
         self.tradesDelay = tradesDelay
-        self.items = items
-        self.total = total
     }
 
 }

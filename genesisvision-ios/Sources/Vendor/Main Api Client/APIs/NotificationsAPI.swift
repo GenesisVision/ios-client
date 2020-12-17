@@ -91,7 +91,7 @@ open class NotificationsAPI {
      - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getNotifications(skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: NotificationList?,_ error: Error?) -> Void)) {
+    open class func getNotifications(skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: NotificationViewModelItemsViewModel?,_ error: Error?) -> Void)) {
         getNotificationsWithRequestBuilder(skip: skip, take: take).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
@@ -100,53 +100,137 @@ open class NotificationsAPI {
 
     /**
      User notifications
-     - GET /v2.0/notifications
+     - GET /v2.1/notifications
      - API Key:
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
   "total" : 0,
-  "notifications" : [ {
+  "items" : [ {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "color" : "color",
-    "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "assetDetails" : {
+      "programDetails" : {
+        "level" : 0,
+        "levelProgress" : 6.027456183070403
+      },
+      "color" : "color",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "title" : "title",
+      "logoUrl" : "logoUrl",
+      "url" : "url",
+      "assetType" : "None"
+    },
+    "imageUrl" : "imageUrl",
+    "platformAssetDetails" : {
+      "color" : "color",
+      "provider" : "Undefined",
+      "name" : "name",
+      "description" : "description",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "asset" : "asset",
+      "logoUrl" : "logoUrl",
+      "url" : "url"
+    },
+    "location" : {
+      "externalUrl" : "externalUrl",
+      "location" : "location",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+    },
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "text" : "text",
-    "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "type" : "PlatformNewsAndUpdates",
-    "logoUrl" : "logoUrl",
-    "url" : "url",
-    "isUnread" : true,
-    "assetType" : "Program"
+    "type" : "type",
+    "userDetails" : {
+      "socialLinks" : [ {
+        "name" : "name",
+        "type" : "Undefined",
+        "value" : "value",
+        "url" : "url",
+        "logoUrl" : "logoUrl"
+      }, {
+        "name" : "name",
+        "type" : "Undefined",
+        "value" : "value",
+        "url" : "url",
+        "logoUrl" : "logoUrl"
+      } ],
+      "registrationDate" : "2000-01-23T04:56:07.000+00:00",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "logoUrl" : "logoUrl",
+      "url" : "url",
+      "username" : "username"
+    },
+    "isUnread" : true
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
-    "color" : "color",
-    "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "assetDetails" : {
+      "programDetails" : {
+        "level" : 0,
+        "levelProgress" : 6.027456183070403
+      },
+      "color" : "color",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "title" : "title",
+      "logoUrl" : "logoUrl",
+      "url" : "url",
+      "assetType" : "None"
+    },
+    "imageUrl" : "imageUrl",
+    "platformAssetDetails" : {
+      "color" : "color",
+      "provider" : "Undefined",
+      "name" : "name",
+      "description" : "description",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "asset" : "asset",
+      "logoUrl" : "logoUrl",
+      "url" : "url"
+    },
+    "location" : {
+      "externalUrl" : "externalUrl",
+      "location" : "location",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+    },
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "text" : "text",
-    "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "type" : "PlatformNewsAndUpdates",
-    "logoUrl" : "logoUrl",
-    "url" : "url",
-    "isUnread" : true,
-    "assetType" : "Program"
+    "type" : "type",
+    "userDetails" : {
+      "socialLinks" : [ {
+        "name" : "name",
+        "type" : "Undefined",
+        "value" : "value",
+        "url" : "url",
+        "logoUrl" : "logoUrl"
+      }, {
+        "name" : "name",
+        "type" : "Undefined",
+        "value" : "value",
+        "url" : "url",
+        "logoUrl" : "logoUrl"
+      } ],
+      "registrationDate" : "2000-01-23T04:56:07.000+00:00",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "logoUrl" : "logoUrl",
+      "url" : "url",
+      "username" : "username"
+    },
+    "isUnread" : true
   } ]
 }}]
      - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
 
-     - returns: RequestBuilder<NotificationList> 
+     - returns: RequestBuilder<NotificationViewModelItemsViewModel> 
      */
-    open class func getNotificationsWithRequestBuilder(skip: Int? = nil, take: Int? = nil) -> RequestBuilder<NotificationList> {
-        let path = "/v2.0/notifications"
+    open class func getNotificationsWithRequestBuilder(skip: Int? = nil, take: Int? = nil) -> RequestBuilder<NotificationViewModelItemsViewModel> {
+        let path = "/v2.1/notifications"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems([
-                        "skip": skip?.encodeToJSON(), 
-                        "take": take?.encodeToJSON()
+                        "Skip": skip?.encodeToJSON(), 
+                        "Take": take?.encodeToJSON()
         ])
 
-        let requestBuilder: RequestBuilder<NotificationList>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<NotificationViewModelItemsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
@@ -409,16 +493,16 @@ open class NotificationsAPI {
     "isEnabled" : true,
     "conditionAmount" : 0.8008281904610115,
     "conditionType" : "Empty",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "PlatformNewsAndUpdates"
   }, {
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "isEnabled" : true,
     "conditionAmount" : 0.8008281904610115,
     "conditionType" : "Empty",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "managerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "PlatformNewsAndUpdates"
   } ],
   "settingsFund" : [ {

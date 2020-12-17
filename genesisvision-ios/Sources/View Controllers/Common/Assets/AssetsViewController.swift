@@ -53,6 +53,7 @@ class AssetsViewController: BaseTabmanViewController<AssetsTabmanViewModel> {
         searchViewModel.filterModel.mask = ""
         searchViewController.viewModel = searchViewModel
         searchNavController = BaseNavigationController(rootViewController: searchViewController)
+        searchNavController?.modalPresentationStyle = .overCurrentContext
         present(searchNavController!, animated: true, completion: nil)
     }
     
@@ -76,6 +77,6 @@ extension AssetsViewController: SearchViewControllerProtocol {
     }
     
     func didSelect(_ assetId: String, assetType: AssetType) {
-
+        searchNavController?.dismiss(animated: true, completion: nil)
     }
 }

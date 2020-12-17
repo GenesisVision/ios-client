@@ -11,10 +11,6 @@ import Foundation
 public struct ProgramWithdrawInfo: Codable {
 
 
-    public var periodEnds: Date?
-
-    public var withdrawInPercent: Bool?
-
     public var title: String?
 
     public var availableToWithdraw: Double?
@@ -22,13 +18,17 @@ public struct ProgramWithdrawInfo: Codable {
     public var isOwner: Bool?
 
     public var withheldInvestment: Double?
-    public init(periodEnds: Date? = nil, withdrawInPercent: Bool? = nil, title: String? = nil, availableToWithdraw: Double? = nil, isOwner: Bool? = nil, withheldInvestment: Double? = nil) { 
-        self.periodEnds = periodEnds
-        self.withdrawInPercent = withdrawInPercent
+
+    public var periodEnds: Date?
+
+    public var withdrawInPercent: Bool?
+    public init(title: String? = nil, availableToWithdraw: Double? = nil, isOwner: Bool? = nil, withheldInvestment: Double? = nil, periodEnds: Date? = nil, withdrawInPercent: Bool? = nil) { 
         self.title = title
         self.availableToWithdraw = availableToWithdraw
         self.isOwner = isOwner
         self.withheldInvestment = withheldInvestment
+        self.periodEnds = periodEnds
+        self.withdrawInPercent = withdrawInPercent
     }
 
 }

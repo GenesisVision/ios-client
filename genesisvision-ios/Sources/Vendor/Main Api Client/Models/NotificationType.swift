@@ -32,4 +32,6 @@ public enum NotificationType: String, Codable {
     case managerNewSignalProvider = "ManagerNewSignalProvider"
     case signals = "Signals"
     case externalSignals = "ExternalSignals"
+    case social = "Social"
+    case platformAsset = "PlatformAsset"
 }

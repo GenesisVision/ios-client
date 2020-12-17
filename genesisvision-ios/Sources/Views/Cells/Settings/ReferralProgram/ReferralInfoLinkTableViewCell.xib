@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReferralInfoLinkTableViewCell" id="OHq-gY-L7y" customClass="ReferralInfoLinkTableViewCell" customModule="GV_DEBUG" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="489" height="243"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OHq-gY-L7y" id="VDb-oi-HZR">
+                <rect key="frame" x="0.0" y="0.0" width="489" height="243"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="gAa-YW-exl">
+                        <rect key="frame" x="20" y="15" width="449" height="105"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8eP-jP-aJq" customClass="LargeTitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="449" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="bPZ-Mk-ArD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QoA-Vz-WkZ" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="40" width="449" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="d7o-7b-ab5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rux-XG-opd" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="80" width="449" height="25"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="bfj-JH-SWN">
+                        <rect key="frame" x="20" y="130" width="449" height="50"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C9i-fm-d2s" customClass="ActionButton" customModule="GV_DEBUG" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="214.5" height="50"/>
+                                <connections>
+                                    <action selector="shareButtonAction:" destination="OHq-gY-L7y" eventType="touchUpInside" id="VM7-bI-lQs"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="raH-lk-faN" customClass="ActionButton" customModule="GV_DEBUG" customModuleProvider="target">
+                                <rect key="frame" x="234.5" y="0.0" width="214.5" height="50"/>
+                                <connections>
+                                    <action selector="copyButtonAction:" destination="OHq-gY-L7y" eventType="touchUpInside" id="0te-iT-rAi"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="Lkz-zC-iyi"/>
+                        </constraints>
+                    </stackView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="gAa-YW-exl" firstAttribute="top" secondItem="VDb-oi-HZR" secondAttribute="top" constant="15" id="1CG-xL-GgG"/>
+                    <constraint firstAttribute="trailing" secondItem="gAa-YW-exl" secondAttribute="trailing" constant="20" id="BzC-kM-7EM"/>
+                    <constraint firstItem="bfj-JH-SWN" firstAttribute="leading" secondItem="VDb-oi-HZR" secondAttribute="leading" constant="20" id="JNT-VR-KSh"/>
+                    <constraint firstAttribute="bottom" secondItem="bfj-JH-SWN" secondAttribute="bottom" constant="10" id="LPO-9V-nu3"/>
+                    <constraint firstItem="gAa-YW-exl" firstAttribute="leading" secondItem="VDb-oi-HZR" secondAttribute="leading" constant="20" id="Nn5-cC-UO9"/>
+                    <constraint firstItem="bfj-JH-SWN" firstAttribute="top" secondItem="gAa-YW-exl" secondAttribute="bottom" constant="10" id="azS-Y8-hpt"/>
+                    <constraint firstAttribute="trailing" secondItem="bfj-JH-SWN" secondAttribute="trailing" constant="20" id="gzG-Cz-N0G"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="copyButton" destination="raH-lk-faN" id="eY0-Mk-aM3"/>
+                <outlet property="linkTitleLabel" destination="QoA-Vz-WkZ" id="nPn-j9-1nF"/>
+                <outlet property="linkValueLabel" destination="rux-XG-opd" id="kaP-Lg-tLF"/>
+                <outlet property="shareButton" destination="C9i-fm-d2s" id="Ybz-kT-n8d"/>
+                <outlet property="titleLabel" destination="8eP-jP-aJq" id="iyo-cp-uwU"/>
+            </connections>
+            <point key="canvasLocation" x="-264.49275362318843" y="207.25446428571428"/>
+        </tableViewCell>
+    </objects>
+</document>

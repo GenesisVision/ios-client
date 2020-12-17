@@ -55,9 +55,15 @@ extension DetailStatisticsTableViewCellViewModel: CellViewModel {
         if let value = details.programDetails?.investmentScale {
             cell.addToStackView(cell.topStackView, value: value.toString(), header: "invest. ratio")
         }
+        
         if let value = details.programDetails?.periodDuration {
             cell.addToStackView(cell.topStackView, value: details.tradingAccountInfo?.currency?.rawValue ?? "", header: "currency")
         }
+        
+        if let brokerName = details.brokerDetails?.name, brokerName == "Genesis Markets" {
+            
+        }
+        
         if let value = details.programDetails?.genesisRatio {
             cell.addToStackView(cell.topStackView, value: value.toString(), header: "genesis ratio")
         }
@@ -65,9 +71,11 @@ extension DetailStatisticsTableViewCellViewModel: CellViewModel {
         if let value = details.programDetails?.volumeScale {
             cell.addToStackView(cell.bottomStackView, value: value.toString(), header: "volume scale")
         }
-        if let min = details.tradingAccountInfo?.leverageMin, let max = details.tradingAccountInfo?.leverageMax {
+        
+        if let min = details.tradingAccountInfo?.leverageMin, let max = details.tradingAccountInfo?.leverageMax, let type = details.brokerDetails?.type, type != .binance {
             cell.addToStackView(cell.bottomStackView, value: (min == max) ? "1:\(min)" : "1:\(min)-1:\(max)", header: "leverage")
         }
+        
         if let value = details.programDetails?.ageDays {
             cell.addToStackView(cell.bottomStackView, value: value.toString(), header: "age")
         }

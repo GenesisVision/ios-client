@@ -11,12 +11,12 @@ import Foundation
 public struct FundAssetsState: Codable {
 
 
-    public var date: Date?
+    public var date: Int64?
 
     public var value: Double?
 
     public var assets: [FundAssetPartWithIcon]?
-    public init(date: Date? = nil, value: Double? = nil, assets: [FundAssetPartWithIcon]? = nil) { 
+    public init(date: Int64? = nil, value: Double? = nil, assets: [FundAssetPartWithIcon]? = nil) { 
         self.date = date
         self.value = value
         self.assets = assets

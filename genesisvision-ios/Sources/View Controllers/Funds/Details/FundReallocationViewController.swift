@@ -42,8 +42,7 @@ class FundReallocationViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setup()
-        setupChangeFundAssetPartView()
+        viewModel.reallocationMode == .create ? setupCreate() : setupEdit()
         
         viewModel.fetch { [weak self] (result) in
             switch result {
@@ -54,6 +53,8 @@ class FundReallocationViewController: BaseViewController {
                 ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }
         }
+        
+        setupChangeFundAssetPartView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,8 +63,8 @@ class FundReallocationViewController: BaseViewController {
     
     private func updateUI() {
         DispatchQueue.main.async {
-            self.fundReallocationProgressView.reloadData()
             self.updateProgressView(self.viewModel.assetCollectionViewModel.assets)
+            self.fundReallocationProgressView.reloadData()
             if self.freeSpaceInFundAsset > 0 {
                 self.freeSpaceLabel.text = "+" + self.freeSpaceInFundAsset.toString() + "%"
             } else {
@@ -97,12 +98,22 @@ class FundReallocationViewController: BaseViewController {
         changeFundAssetPartView.anchorSize(size: CGSize(width: view.frame.width - 40, height: height))
     }
     
-    private func setup() {
+    private func setupEdit() {
         title = "Reallocate"
-        
+        reallocateButton.setTitle("Reallocate", for: .normal)
         fundReallocationProgressView.dataSource = self
         freeSpaceLabel.text = ""
         freeSpaceInFundAsset = 0
+    }
+    
+    private func setupCreate() {
+        title = "Create Fund"
+        reallocateButton.setTitle("Next", for: .normal)
+        fundReallocationProgressView.dataSource = self
+        freeSpaceLabel.text = "99"
+        freeSpaceInFundAsset = 99
+        
+        updateUI()
     }
     
     private func setupCollectionView() {
@@ -132,6 +143,10 @@ class FundReallocationViewController: BaseViewController {
     
     @IBAction func reallocateButtonAction(_ sender: Any) {
         guard freeSpaceInFundAsset == 0 else { return }
+        viewModel.reallocationMode == .create ? allocateAction() : reallocateAction()
+    }
+    
+    private func reallocateAction() {
         showProgressHUD()
         viewModel.reallocate { [weak self] (result) in
             self?.hideAll()
@@ -143,6 +158,21 @@ class FundReallocationViewController: BaseViewController {
                 ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }
         }
+    }
+    
+    private func allocateAction() {
+        guard viewModel.canCreateFund else {
+            showErrorHUD(subtitle: "Must be at least 2 assets in the fund")
+            return
+        }
+        
+        guard let viewController = FundChangeSettingsViewController.storyboardInstance(.fund) else { return }
+        let viewModel = ChangeFundSettingsViewModel()
+        viewController.viewModel = viewModel
+        viewController.viewModel?.createViewModel = self.viewModel.createViewModel
+        viewController.viewModel?.createViewModel?.fundAssets = self.viewModel.createFundAssetsParts()
+        viewController.viewModel?.changeSettingsMode = .create
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     func updateProgressView(_ assets: [FundAssetInfo]?) {
@@ -221,8 +251,23 @@ final class FundReallocationViewModel {
     var fundDetails: FundDetailsFull?
     var platformAssets: [PlatformAsset] = []
     var reallocationAvailable: Int = 100
+    var reallocationMode: FundReallocationMode = .edit
+    
+    var createViewModel: CreateNewFundViewModel?
+    
+    var canCreateFund: Bool {
+        get {
+            return assetCollectionViewModel.assets.count > 1
+        }
+    }
+    
+    enum FundReallocationMode {
+        case create
+        case edit
+    }
     
     init(with: String? = nil) {
+        reallocationMode = with == nil ? .create : .edit
         assetId = with
         assetCollectionViewModel = FundReallocationAssetCollectionViewModel()
         assetCollectionViewDataSource = CollectionViewDataSource(assetCollectionViewModel)
@@ -246,8 +291,36 @@ final class FundReallocationViewModel {
     
     
     func fetch(completion: @escaping CompletionBlock) {
-        guard let assetId = assetId else {
-            completion(.failure(errorType: .apiError(message: nil)))
+        reallocationMode == .create ? fetchPlatfromAssets(completion: completion) : fetchFundDetails(completion: completion)
+    }
+    
+    func fetchPlatfromAssets(completion: @escaping CompletionBlock) {
+        PlatformManager.shared.getPlatformAssets { [weak self] (model) in
+            if let assets = model?.assets {
+                self?.platformAssets = assets
+                self?.reallocationMode == .create ? self?.addGVTAsset(completion: completion) : completion(.success)
+            } else {
+                completion(.failure(errorType: .apiError(message: nil)))
+            }
+        }
+    }
+    
+    func createFundAssetsParts() -> [FundAssetPart] {
+        return assetCollectionViewModel.assets.map { (fundAssetInfo) -> FundAssetPart? in
+            guard let platformAsset = platformAssets.first(where: { return $0.name == fundAssetInfo.asset }) else { return nil }
+            return FundAssetPart(_id: platformAsset._id, percent: fundAssetInfo.target)
+        }.compactMap({ $0 })
+    }
+    
+    private func addGVTAsset(completion: @escaping CompletionBlock) {
+        guard reallocationMode == .create, assetCollectionViewModel.assets.first(where: { $0.symbol == "GVT" }) == nil, let platformAsset = self.platformAssets.first(where: { $0.asset == "GVT" }) else { return }
+        
+        assetCollectionViewModel.assets.append(FundAssetInfo(asset: platformAsset.name, symbol: platformAsset.asset, logoUrl: platformAsset.logoUrl, target: 1, current: 1, currentAmount: 0, url: platformAsset.url))
+        completion(.success)
+    }
+    
+    private func fetchFundDetails(completion: @escaping CompletionBlock) {
+        guard let assetId = assetId, reallocationMode == .edit else { completion(.failure(errorType: .apiError(message: nil)))
             return }
         
         FundsDataProvider.get(assetId, currencyType: .usdt, completion: { [weak self] (fundDetailsFull) in
@@ -268,17 +341,17 @@ final class FundReallocationViewModel {
             }
         }
         
-        PlatformManager.shared.getPlatformAssets { [weak self] (model) in
-            if let assets = model?.assets {
-                self?.platformAssets = assets
-            }
-        }
+        fetchPlatfromAssets(completion: completion)
     }
     
     func changeValueForFundAsset(target: Int, symbol: String) {
-        var assetInfo = FundAssetInfo()
+        guard var assetInfo = platformAssets.map({ (platformAsset) -> FundAssetInfo? in
+            guard platformAsset.asset == symbol else { return nil }
+            return FundAssetInfo(asset: platformAsset.name, symbol: platformAsset.asset, logoUrl: platformAsset.logoUrl, target: 0.0, current: 0, currentAmount: 0, url: platformAsset.url)
+        }).compactMap({ $0 }).first else { return }
+        
         assetCollectionViewModel.assets.removeAll { (fundAssetInfo) -> Bool in
-            guard let symbolInArray = fundAssetInfo.symbol else { return false}
+            guard let symbolInArray = fundAssetInfo.symbol else { return false }
             
             if symbolInArray == symbol {
                 assetInfo = fundAssetInfo
@@ -334,7 +407,6 @@ final class FundReallocationAssetCollectionViewModel: CellViewModelWithCollectio
     var assets = [FundAssetInfo]() {
         didSet {
             viewModels = [FundAssetManageCollectionViewCellViewModel]()
-            
             
             assets.forEach { (fundAssetInfo) in
                 viewModels.append(FundAssetManageCollectionViewCellViewModel(assetModel: fundAssetInfo, reallocateMode: true, closeButtonDelegate: self))
@@ -411,7 +483,7 @@ extension FundReallocationAssetCollectionViewModel: FundAssetCellRemoveButtonPro
             changeValueForFundAsset(target: 1, symbol: symbol)
             assetCellSelectedDelegate?.assetCellRemoved(assetInfo: assetInfo)
         } else {
-            assets.removeAll(where: {$0.asset == assetInfo.asset})
+            assets.removeAll(where: { $0.asset == assetInfo.asset })
             assetCellSelectedDelegate?.assetCellRemoved(assetInfo: assetInfo)
         }
     }

@@ -60,6 +60,13 @@ extension ProgramInvestNowTableViewCellViewModel: CellViewModel {
         cell.editButton.isHidden = true
         
         //FIXME: if selected != current => show (selected)
+        
+        if let type = programDetailsFull?.brokerDetails?.type, type == .binance {
+            cell.stopOutStackView.isHidden = true
+        } else {
+            cell.stopOutStackView.isHidden = false
+        }
+        
         cell.stopOutTitleLabel.text = "stop out"
         if let stopOutLevel = programDetails?.stopOutLevelCurrent {
             cell.stopOutValueLabel.text = stopOutLevel.rounded(with: .undefined).toString() + "%"

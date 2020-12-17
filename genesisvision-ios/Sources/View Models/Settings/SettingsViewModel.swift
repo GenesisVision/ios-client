@@ -16,6 +16,7 @@ final class SettingsViewModel {
         case publicProfile = "Public investor's profile"
         
         case currency = "Platform currency"
+        case referralProgram = "Referral program"
         case changePassword = "Change password"
         case passcode = "Passcode"
         case biometricID = "Touch ID"
@@ -113,11 +114,13 @@ final class SettingsViewModel {
     }
     private var profileModel: ProfileFullViewModel?
     
+    var kycVerificationTokens: ExternalKycAccessToken?
+    
     var sections: [SectionType] = [.profile, .currency, .security, .feedback]
     var rows: [SectionType : [RowType]] = [.profile : [.profile, .kycStatus, .publicProfile],
-                                                           .currency : [.currency],
-                                                           .security : [.changePassword, .passcode, .biometricID, .twoFactor],
-                                                           .feedback : [.termsAndConditions, .privacyPolicy, .contactUs]]
+                                           .currency : [.currency, .referralProgram],
+                                           .security : [.changePassword, .passcode, .biometricID, .twoFactor],
+                                           .feedback : [.termsAndConditions, .privacyPolicy, .contactUs]]
     
     var fullName: String? {
         let firstName = self.profileModel?.firstName ?? ""
@@ -238,6 +241,10 @@ final class SettingsViewModel {
         router.show(routeType: .feedback)
     }
     
+    func showReferral() {
+        router.show(routeType: .referral)
+    }
+    
     func showTerms() {
         router.show(routeType: .terms)
     }
@@ -249,6 +256,11 @@ final class SettingsViewModel {
     func signOut() {
         clearData()
         router.show(routeType: .signOut)
+    }
+    
+    func showKYC() {
+        guard let kycVerificationTokens = kycVerificationTokens else { return }
+        router.show(routeType: .kyc(kycVerificationTokens))
     }
     
     // MARK: -  Private methods
@@ -265,11 +277,21 @@ final class SettingsViewModel {
                 }
             }
         }
+        
+        ProfileDataProvider.getMobileVErificationTokens { [weak self] (viewModel) in
+            if let viewModel = viewModel {
+                self?.kycVerificationTokens = viewModel
+            }
+        } errorCompletion: { (_) in }
     }
     
     private func clearData() {
+        if let fcmToken = UserDefaults.standard.string(forKey: UserDefaultKeys.fcmToken) {
+            ProfileDataProvider.removeFCMToken(token: fcmToken) { (result) in }
+        }
         AuthManager.signOut()
         profileModel = nil
+        
     }
     
     private func forceSignOut() {

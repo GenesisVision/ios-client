@@ -11,18 +11,18 @@ import Foundation
 public struct TransactionDetailItem: Codable {
 
 
+    public var title: String?
+
     public var details: String?
 
     public var url: String?
 
     public var canCopy: Bool?
-
-    public var title: String?
-    public init(details: String? = nil, url: String? = nil, canCopy: Bool? = nil, title: String? = nil) { 
+    public init(title: String? = nil, details: String? = nil, url: String? = nil, canCopy: Bool? = nil) { 
+        self.title = title
         self.details = details
         self.url = url
         self.canCopy = canCopy
-        self.title = title
     }
 
 }

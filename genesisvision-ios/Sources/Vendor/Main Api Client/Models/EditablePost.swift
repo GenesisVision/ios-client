@@ -11,8 +11,6 @@ import Foundation
 public struct EditablePost: Codable {
 
 
-    public var textOriginal: String?
-
     public var _id: UUID?
 
     public var url: String?
@@ -46,8 +44,9 @@ public struct EditablePost: Codable {
     public var personalDetails: PostPersonalDetails?
 
     public var comments: [Post]?
-    public init(textOriginal: String? = nil, _id: UUID? = nil, url: String? = nil, text: String? = nil, date: Date? = nil, likesCount: Int? = nil, likesUsers: [ProfilePublicShort]? = nil, rePostsCount: Int? = nil, rePostsUsers: [ProfilePublicShort]? = nil, impressionsCount: Int? = nil, isPinned: Bool? = nil, isDeleted: Bool? = nil, isHighlighted: Bool? = nil, images: [PostImage]? = nil, tags: [PostTag]? = nil, author: ProfilePublic? = nil, personalDetails: PostPersonalDetails? = nil, comments: [Post]? = nil) { 
-        self.textOriginal = textOriginal
+
+    public var textOriginal: String?
+    public init(_id: UUID? = nil, url: String? = nil, text: String? = nil, date: Date? = nil, likesCount: Int? = nil, likesUsers: [ProfilePublicShort]? = nil, rePostsCount: Int? = nil, rePostsUsers: [ProfilePublicShort]? = nil, impressionsCount: Int? = nil, isPinned: Bool? = nil, isDeleted: Bool? = nil, isHighlighted: Bool? = nil, images: [PostImage]? = nil, tags: [PostTag]? = nil, author: ProfilePublic? = nil, personalDetails: PostPersonalDetails? = nil, comments: [Post]? = nil, textOriginal: String? = nil) { 
         self._id = _id
         self.url = url
         self.text = text
@@ -65,9 +64,9 @@ public struct EditablePost: Codable {
         self.author = author
         self.personalDetails = personalDetails
         self.comments = comments
+        self.textOriginal = textOriginal
     }
     public enum CodingKeys: String, CodingKey { 
-        case textOriginal
         case _id = "id"
         case url
         case text
@@ -85,6 +84,7 @@ public struct EditablePost: Codable {
         case author
         case personalDetails
         case comments
+        case textOriginal
     }
 
 }

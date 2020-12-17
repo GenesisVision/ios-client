@@ -12,15 +12,8 @@ public struct TradingAccountDemoDeposit: Codable {
 
 
     public var amount: Double?
-
-    public var _id: UUID?
-    public init(amount: Double? = nil, _id: UUID? = nil) { 
+    public init(amount: Double? = nil) { 
         self.amount = amount
-        self._id = _id
-    }
-    public enum CodingKeys: String, CodingKey { 
-        case amount
-        case _id = "id"
     }
 
 }

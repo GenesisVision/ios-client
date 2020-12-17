@@ -327,9 +327,9 @@ final class NotificationsSettingsViewModel {
         
         settingsGeneralViewModels.removeAll()
         
-        var newsAndUpdatesSetting = NotificationSettingViewModel(_id: nil, isEnabled: false, assetId: nil, managerId: nil, type: .platformNewsAndUpdates, conditionType: .empty, conditionAmount: 0)
+        var newsAndUpdatesSetting = NotificationSettingViewModel(assetId: nil, managerId: nil, type: .platformNewsAndUpdates, conditionType: .empty, conditionAmount: 0, _id: nil, isEnabled: false)
         
-        var emergencySettings = NotificationSettingViewModel(_id: nil, isEnabled: false, assetId: nil, managerId: nil, type: .platformEmergency, conditionType: .empty, conditionAmount: 0)
+        var emergencySettings = NotificationSettingViewModel(assetId: nil, managerId: nil, type: .platformEmergency, conditionType: .empty, conditionAmount: 0, _id: nil, isEnabled: false)
         
         if let settings = settingsGeneral, settings.count > 0 {
             settings.forEach({ (setting) in
@@ -362,9 +362,9 @@ final class NotificationsSettingsViewModel {
         
         settingsGeneralViewModels.removeAll()
         
-        var programNewsAndUpdates = NotificationSettingViewModel(_id: nil, isEnabled: false, assetId: uuid, managerId: nil, type: .programNewsAndUpdates, conditionType: .empty, conditionAmount: 0)
+        var programNewsAndUpdates = NotificationSettingViewModel(assetId: uuid, managerId: nil, type: .programNewsAndUpdates, conditionType: .empty, conditionAmount: 0, _id: nil, isEnabled: false)
         
-        var programEndOfPeriod = NotificationSettingViewModel(_id: nil, isEnabled: false, assetId: uuid, managerId: nil, type: .programEndOfPeriod, conditionType: .empty, conditionAmount: 0)
+        var programEndOfPeriod = NotificationSettingViewModel(assetId: uuid, managerId: nil, type: .programEndOfPeriod, conditionType: .empty, conditionAmount: 0, _id: nil, isEnabled: false)
         
         if let settings = settingsGeneral, settings.count > 0 {
             settings.forEach({ (setting) in
@@ -403,9 +403,9 @@ final class NotificationsSettingsViewModel {
         
         settingsGeneralViewModels.removeAll()
         
-        var fundNewsAndUpdates = NotificationSettingViewModel(_id: nil, isEnabled: false, assetId: uuid, managerId: nil, type: .fundNewsAndUpdates, conditionType: .empty, conditionAmount: 0)
+        var fundNewsAndUpdates = NotificationSettingViewModel(assetId: uuid, managerId: nil, type: .fundNewsAndUpdates, conditionType: .empty, conditionAmount: 0, _id: nil, isEnabled: false)
         
-        var fundRebalancing = NotificationSettingViewModel(_id: nil, isEnabled: false, assetId: uuid, managerId: nil, type: .fundRebalancing, conditionType: .empty, conditionAmount: 0)
+        var fundRebalancing = NotificationSettingViewModel(assetId: uuid, managerId: nil, type: .fundRebalancing, conditionType: .empty, conditionAmount: 0, _id: nil, isEnabled: false)
         
         if let settings = settingsGeneral, settings.count > 0 {
             settings.forEach({ (setting) in

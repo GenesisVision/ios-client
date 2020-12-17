@@ -120,6 +120,41 @@ open class AuthAPI {
     }
 
     /**
+     3FA confirm
+     - parameter body: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func confirmThreeStepAuth(body: ThreeFactorAuthenticatorConfirm? = nil, completion: @escaping ((_ data: String?,_ error: Error?) -> Void)) {
+        confirmThreeStepAuthWithRequestBuilder(body: body).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     3FA confirm
+     - POST /v2.0/auth/3fa/confirm
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example=""}]
+     - parameter body: (body)  (optional)
+
+     - returns: RequestBuilder<String> 
+     */
+    open class func confirmThreeStepAuthWithRequestBuilder(body: ThreeFactorAuthenticatorConfirm? = nil) -> RequestBuilder<String> {
+        let path = "/v2.0/auth/3fa/confirm"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
+
+        let url = URLComponents(string: URLString)
+
+        let requestBuilder: RequestBuilder<String>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+    }
+
+    /**
      2FA confirm
      - parameter body: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
@@ -283,7 +318,7 @@ open class AuthAPI {
     }
 
     /**
-     Forgot password for investor
+     Forgot password
      - parameter body: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -299,7 +334,7 @@ open class AuthAPI {
 
 
     /**
-     Forgot password for investor
+     Forgot password
      - POST /v2.0/auth/password/forgot
      - API Key:
        - type: apiKey Authorization 
@@ -473,40 +508,6 @@ open class AuthAPI {
     }
 
     /**
-     Get phone number verification code
-
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func requestPhoneNumberVerificationCode(completion: @escaping ((_ data: Int?,_ error: Error?) -> Void)) {
-        requestPhoneNumberVerificationCodeWithRequestBuilder().execute { (response, error) -> Void in
-            completion(response?.body, error)
-        }
-    }
-
-
-    /**
-     Get phone number verification code
-     - POST /v2.0/auth/phone/code
-     - API Key:
-       - type: apiKey Authorization 
-       - name: Bearer
-     - examples: [{contentType=application/json, example=0}]
-
-     - returns: RequestBuilder<Int> 
-     */
-    open class func requestPhoneNumberVerificationCodeWithRequestBuilder() -> RequestBuilder<Int> {
-        let path = "/v2.0/auth/phone/code"
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = URLComponents(string: URLString)
-
-        let requestBuilder: RequestBuilder<Int>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    /**
      Resend Confirmation Link
      - parameter body: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
@@ -609,46 +610,6 @@ open class AuthAPI {
         let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<String>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    /**
-     Verify phone number
-     - parameter code: (query)  (optional)
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func validatePhoneNumber(code: String? = nil, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
-        validatePhoneNumberWithRequestBuilder(code: code).execute { (response, error) -> Void in
-            if error == nil {
-                completion((), error)
-            } else {
-                completion(nil, error)
-            }
-        }
-    }
-
-
-    /**
-     Verify phone number
-     - POST /v2.0/auth/phone/verify
-     - API Key:
-       - type: apiKey Authorization 
-       - name: Bearer
-     - parameter code: (query)  (optional)
-
-     - returns: RequestBuilder<Void> 
-     */
-    open class func validatePhoneNumberWithRequestBuilder(code: String? = nil) -> RequestBuilder<Void> {
-        let path = "/v2.0/auth/phone/verify"
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
-                        "code": code
-        ])
-
-        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }

@@ -182,7 +182,7 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
         }
     }
     
-    func updateData(from dateFrom: Date?, to dateTo: Date?) {
+    func updateData(from dateFrom: Date?, to dateTo: Date?, dateRangeType: DateRangeType? = nil) {
         //fetch()
     }
     
@@ -262,7 +262,7 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
         let dateRangeType = dateRangeModel.dateRangeType
         
         guard var dateFrom = dateRangeModel.dateFrom, var dateTo = dateRangeModel.dateTo else {
-            updateData(from: nil, to: nil)
+            updateData(from: nil, to: nil, dateRangeType: dateRangeType)
             return
         }
         
@@ -280,6 +280,46 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
             dateFrom.setTime(hour: hour, min: min, sec: sec)
             dateTo.setTime(hour: hour, min: min, sec: sec)
             dateFrom = dateFrom.removeDays(1)
+//        case .week:
+//            dateFrom.setTime(hour: 0, min: 0, sec: 0)
+//            dateTo.setTime(hour: 0, min: 0, sec: 0)
+//
+//            let hour = calendar.component(.hour, from: dateTo)
+//            let min = calendar.component(.minute, from: dateTo)
+//            let sec = calendar.component(.second, from: dateTo)
+//            dateFrom.setTime(hour: hour, min: min, sec: sec)
+//            dateTo.setTime(hour: hour, min: min, sec: sec)
+//            dateFrom = dateFrom.removeDays(7)
+//        case .month:
+//            dateFrom.setTime(hour: 0, min: 0, sec: 0)
+//            dateTo.setTime(hour: 0, min: 0, sec: 0)
+//
+//            let hour = calendar.component(.hour, from: dateTo)
+//            let min = calendar.component(.minute, from: dateTo)
+//            let sec = calendar.component(.second, from: dateTo)
+//            dateFrom.setTime(hour: hour, min: min, sec: sec)
+//            dateTo.setTime(hour: hour, min: min, sec: sec)
+//            dateFrom = dateFrom.removeMonths(1)
+//        case .all:
+//            dateFrom.setTime(hour: 0, min: 0, sec: 0)
+//            dateTo.setTime(hour: 0, min: 0, sec: 0)
+//
+//            let hour = calendar.component(.hour, from: dateTo)
+//            let min = calendar.component(.minute, from: dateTo)
+//            let sec = calendar.component(.second, from: dateTo)
+//            dateFrom.setTime(hour: hour, min: min, sec: sec)
+//            dateTo.setTime(hour: hour, min: min, sec: sec)
+//            dateFrom = dateFrom.removeMonths(1)
+//        case .year:
+//            dateFrom.setTime(hour: 0, min: 0, sec: 0)
+//            dateTo.setTime(hour: 0, min: 0, sec: 0)
+//
+//            let hour = calendar.component(.hour, from: dateTo)
+//            let min = calendar.component(.minute, from: dateTo)
+//            let sec = calendar.component(.second, from: dateTo)
+//            dateFrom.setTime(hour: hour, min: min, sec: sec)
+//            dateTo.setTime(hour: hour, min: min, sec: sec)
+//            dateFrom = dateFrom.removeYears(1)
         default:
             let hour = calendar.component(.hour, from: dateTo)
             let min = calendar.component(.minute, from: dateTo)
@@ -288,7 +328,7 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
             dateTo.setTime(hour: hour, min: min, sec: sec)
         }
         
-        updateData(from: dateFrom, to: dateTo)
+        updateData(from: dateFrom, to: dateTo, dateRangeType: dateRangeType)
     }
 }
 

@@ -11,24 +11,24 @@ import Foundation
 public struct FundAssetPartWithIcon: Codable {
 
 
-    public var logoUrl: String?
-
-    public var color: String?
-
-    public var url: String?
-
     public var name: String?
 
     public var asset: String?
 
     public var percent: Double?
-    public init(logoUrl: String? = nil, color: String? = nil, url: String? = nil, name: String? = nil, asset: String? = nil, percent: Double? = nil) { 
-        self.logoUrl = logoUrl
-        self.color = color
-        self.url = url
+
+    public var logoUrl: String?
+
+    public var color: String?
+
+    public var url: String?
+    public init(name: String? = nil, asset: String? = nil, percent: Double? = nil, logoUrl: String? = nil, color: String? = nil, url: String? = nil) { 
         self.name = name
         self.asset = asset
         self.percent = percent
+        self.logoUrl = logoUrl
+        self.color = color
+        self.url = url
     }
 
 }

@@ -14,7 +14,7 @@ public struct ErrorViewModel: Codable {
     public var errors: [ErrorMessage]?
 
     public var code: ErrorCodes?
-    public init(errors: [ErrorMessage]? = nil, code: ErrorCodes? = nil) { 
+    public init(errors: [ErrorMessage]? = nil, code: ErrorCodes? = nil) {
         self.errors = errors
         self.code = code
     }

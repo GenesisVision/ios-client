@@ -12,6 +12,42 @@ import Alamofire
 
 open class ProfileAPI {
     /**
+
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getMobileVerificationToken(completion: @escaping ((_ data: ExternalKycAccessToken?,_ error: Error?) -> Void)) {
+        getMobileVerificationTokenWithRequestBuilder().execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     - POST /v2.0/profile/verification/mobile/token
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example={
+  "baseAddress" : "baseAddress",
+  "accessToken" : "accessToken",
+  "flowName" : "flowName"
+}}]
+
+     - returns: RequestBuilder<ExternalKycAccessToken> 
+     */
+    open class func getMobileVerificationTokenWithRequestBuilder() -> RequestBuilder<ExternalKycAccessToken> {
+        let path = "/v2.0/profile/verification/mobile/token"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = URLComponents(string: URLString)
+
+        let requestBuilder: RequestBuilder<ExternalKycAccessToken>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
      Get full profile
 
      - parameter completion: completion handler to receive the data and the error objects
@@ -171,30 +207,34 @@ open class ProfileAPI {
 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getVerificationToken(completion: @escaping ((_ data: String?,_ error: Error?) -> Void)) {
-        getVerificationTokenWithRequestBuilder().execute { (response, error) -> Void in
+    open class func getWebVerificationToken(completion: @escaping ((_ data: ExternalKycAccessToken?,_ error: Error?) -> Void)) {
+        getWebVerificationTokenWithRequestBuilder().execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
 
 
     /**
-     - POST /v2.0/profile/verification/token
+     - POST /v2.0/profile/verification/web/token
      - API Key:
        - type: apiKey Authorization 
        - name: Bearer
-     - examples: [{contentType=application/json, example=""}]
+     - examples: [{contentType=application/json, example={
+  "baseAddress" : "baseAddress",
+  "accessToken" : "accessToken",
+  "flowName" : "flowName"
+}}]
 
-     - returns: RequestBuilder<String> 
+     - returns: RequestBuilder<ExternalKycAccessToken> 
      */
-    open class func getVerificationTokenWithRequestBuilder() -> RequestBuilder<String> {
-        let path = "/v2.0/profile/verification/token"
+    open class func getWebVerificationTokenWithRequestBuilder() -> RequestBuilder<ExternalKycAccessToken> {
+        let path = "/v2.0/profile/verification/web/token"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
         let url = URLComponents(string: URLString)
 
-        let requestBuilder: RequestBuilder<String>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<ExternalKycAccessToken>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }

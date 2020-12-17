@@ -97,6 +97,12 @@ class SelectableTableViewCell: UITableViewCell {
         
         changeSelected(selected)
     }
+    
+    func configure(_ model: ExchangeAccountType? = nil, selected: Bool) {
+        setTitle(model?.name)
+        
+        changeSelected(selected)
+    }
 
     
     // MARK: - Private methods

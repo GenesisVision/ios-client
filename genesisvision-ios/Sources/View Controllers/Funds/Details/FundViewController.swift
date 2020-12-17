@@ -36,6 +36,10 @@ class FundViewController: BaseTabmanViewController<FundViewModel> {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //setupImageView()
+        fetch()
+    }
+    
+    private func fetch() {
         showProgressHUD()
         viewModel.fetch { [weak self] (result) in
             self?.hideHUD()
@@ -55,6 +59,16 @@ class FundViewController: BaseTabmanViewController<FundViewModel> {
     }
     
     // MARK: - Private methods
+    private func setup() {
+        navigationItem.title = viewModel.title
+        
+        dataSource = viewModel.dataSource
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateNotification(notification:)), name: .updateFundViewController, object: nil)
+        
+        setupUI()
+    }
+    
     private func setupUI() {
         guard AuthManager.isLogin() else { return }
         
@@ -133,16 +147,13 @@ class FundViewController: BaseTabmanViewController<FundViewModel> {
 //        }
 //    }
     
-    @objc func notificationsButtonAction() {
-        viewModel.showNotificationSettings()
+    @objc private func updateNotification(notification: Notification) {
+        guard let assetId = notification.userInfo?["assetId"] as? String, assetId == viewModel.assetId else { return }
+        fetch()
     }
     
-    private func setup() {
-        navigationItem.title = viewModel.title
-        
-        dataSource = viewModel.dataSource
-        
-        setupUI()
+    @objc func notificationsButtonAction() {
+        viewModel.showNotificationSettings()
     }
     
     // MARK: - IBActions
@@ -162,6 +173,10 @@ class FundViewController: BaseTabmanViewController<FundViewModel> {
                 ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }
         }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .updateFundViewController, object: nil)
     }
 }
 
@@ -222,6 +237,7 @@ final class FundViewModel: TabmanViewModel {
             if !showEvents {
                 tabTypes = [.info, .assets, .reallocateHistory, .profit, .balance]
                 setViewControllers()
+                reloadDataProtocol?.didReloadData()
             }
         }
     }
@@ -282,12 +298,14 @@ final class FundViewModel: TabmanViewModel {
             return router.getInfo(with: assetId)
         case .balance:
             let viewModel = FundBalanceViewModel(withRouter: router, assetId: assetId, reloadDataProtocol: router.fundViewController)
-            
-            return router.getBalanceViewController(with: viewModel)
+            let viewController = router.getBalanceViewController(with: viewModel)
+            router.fundBalanceViewController = viewController
+            return viewController
         case .profit:
             let viewModel = FundProfitViewModel(withRouter: router, assetId: assetId, reloadDataProtocol: router.fundViewController, currency: getPlatformCurrencyType())
-            
-            return router.getProfitViewController(with: viewModel)
+            let viewController = router.getProfitViewController(with: viewModel)
+            router.fundProfitViewController = viewController
+            return viewController
         case .reallocateHistory:
             return router.getReallocateHistory(with: assetId)
         case .assets:

@@ -19,6 +19,8 @@ public struct BrokerAccountType: Codable {
 
     public var type: BrokerTradeServerType?
 
+    public var typeTitle: String?
+
     public var leverages: [Int]?
 
     public var currencies: [String]?
@@ -32,11 +34,12 @@ public struct BrokerAccountType: Codable {
     public var isSignalsAvailable: Bool?
 
     public var isDepositRequired: Bool?
-    public init(_id: UUID? = nil, name: String? = nil, _description: String? = nil, type: BrokerTradeServerType? = nil, leverages: [Int]? = nil, currencies: [String]? = nil, minimumDepositsAmount: [String:Double]? = nil, isKycRequired: Bool? = nil, isCountryNotUSRequired: Bool? = nil, isSignalsAvailable: Bool? = nil, isDepositRequired: Bool? = nil) { 
+    public init(_id: UUID? = nil, name: String? = nil, _description: String? = nil, type: BrokerTradeServerType? = nil, typeTitle: String? = nil, leverages: [Int]? = nil, currencies: [String]? = nil, minimumDepositsAmount: [String:Double]? = nil, isKycRequired: Bool? = nil, isCountryNotUSRequired: Bool? = nil, isSignalsAvailable: Bool? = nil, isDepositRequired: Bool? = nil) { 
         self._id = _id
         self.name = name
         self._description = _description
         self.type = type
+        self.typeTitle = typeTitle
         self.leverages = leverages
         self.currencies = currencies
         self.minimumDepositsAmount = minimumDepositsAmount
@@ -50,6 +53,7 @@ public struct BrokerAccountType: Codable {
         case name
         case _description = "description"
         case type
+        case typeTitle
         case leverages
         case currencies
         case minimumDepositsAmount

@@ -66,9 +66,10 @@ class FundReallocateHistoryViewController: BaseViewControllerWithTableView {
         fetch()
     }
     
-    override func updateData(from dateFrom: Date?, to dateTo: Date?) {
+    override func updateData(from dateFrom: Date?, to dateTo: Date?, dateRangeType: DateRangeType? = nil) {
         showProgressHUD()
         fetch()
+        dateRangeModel = FilterDateRangeModel(dateRangeType: dateRangeType ?? .month, dateFrom: dateFrom, dateTo: dateTo)
     }
 }
 

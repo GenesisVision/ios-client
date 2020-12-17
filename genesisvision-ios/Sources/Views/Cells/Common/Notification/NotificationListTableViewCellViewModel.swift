@@ -15,7 +15,7 @@ struct NotificationListTableViewCellViewModel {
 extension NotificationListTableViewCellViewModel: CellViewModel {
     func setup(on cell: NotificationListTableViewCell) {
 
-        if let type = notification.type {
+        if let type = NotificationType(rawValue: notification.type ?? "") {
             switch type {
             case .profile2FA:
                 cell.iconImageView.image = #imageLiteral(resourceName: "icon_notification_user")

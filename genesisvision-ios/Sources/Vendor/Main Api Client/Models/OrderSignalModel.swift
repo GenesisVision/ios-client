@@ -11,16 +11,6 @@ import Foundation
 public struct OrderSignalModel: Codable {
 
 
-    public var providers: [OrderSignalProgramInfo]?
-
-    public var totalCommission: Double?
-
-    public var totalCommissionByType: [FeeDetails]?
-
-    public var tradingAccountId: UUID?
-
-    public var currency: Currency?
-
     public var _id: UUID?
 
     public var login: String?
@@ -63,12 +53,17 @@ public struct OrderSignalModel: Codable {
     public var assetData: TradeAssetData?
 
     public var signalData: OrderModelSignalData?
-    public init(providers: [OrderSignalProgramInfo]? = nil, totalCommission: Double? = nil, totalCommissionByType: [FeeDetails]? = nil, tradingAccountId: UUID? = nil, currency: Currency? = nil, _id: UUID? = nil, login: String? = nil, ticket: String? = nil, symbol: String? = nil, volume: Double? = nil, profit: Double? = nil, profitCurrency: String? = nil, direction: TradeDirectionType? = nil, date: Date? = nil, price: Double? = nil, priceCurrent: Double? = nil, entry: TradeEntryType? = nil, baseVolume: Double? = nil, originalCommission: Double? = nil, originalCommissionCurrency: String? = nil, commission: Double? = nil, swap: Double? = nil, showOriginalCommission: Bool? = nil, assetData: TradeAssetData? = nil, signalData: OrderModelSignalData? = nil) { 
-        self.providers = providers
-        self.totalCommission = totalCommission
-        self.totalCommissionByType = totalCommissionByType
-        self.tradingAccountId = tradingAccountId
-        self.currency = currency
+
+    public var providers: [OrderSignalProgramInfo]?
+
+    public var totalCommission: Double?
+
+    public var totalCommissionByType: [FeeDetails]?
+
+    public var tradingAccountId: UUID?
+
+    public var currency: Currency?
+    public init(_id: UUID? = nil, login: String? = nil, ticket: String? = nil, symbol: String? = nil, volume: Double? = nil, profit: Double? = nil, profitCurrency: String? = nil, direction: TradeDirectionType? = nil, date: Date? = nil, price: Double? = nil, priceCurrent: Double? = nil, entry: TradeEntryType? = nil, baseVolume: Double? = nil, originalCommission: Double? = nil, originalCommissionCurrency: String? = nil, commission: Double? = nil, swap: Double? = nil, showOriginalCommission: Bool? = nil, assetData: TradeAssetData? = nil, signalData: OrderModelSignalData? = nil, providers: [OrderSignalProgramInfo]? = nil, totalCommission: Double? = nil, totalCommissionByType: [FeeDetails]? = nil, tradingAccountId: UUID? = nil, currency: Currency? = nil) { 
         self._id = _id
         self.login = login
         self.ticket = ticket
@@ -89,13 +84,13 @@ public struct OrderSignalModel: Codable {
         self.showOriginalCommission = showOriginalCommission
         self.assetData = assetData
         self.signalData = signalData
+        self.providers = providers
+        self.totalCommission = totalCommission
+        self.totalCommissionByType = totalCommissionByType
+        self.tradingAccountId = tradingAccountId
+        self.currency = currency
     }
     public enum CodingKeys: String, CodingKey { 
-        case providers
-        case totalCommission
-        case totalCommissionByType
-        case tradingAccountId
-        case currency
         case _id = "id"
         case login
         case ticket
@@ -116,6 +111,11 @@ public struct OrderSignalModel: Codable {
         case showOriginalCommission
         case assetData
         case signalData
+        case providers
+        case totalCommission
+        case totalCommissionByType
+        case tradingAccountId
+        case currency
     }
 
 }

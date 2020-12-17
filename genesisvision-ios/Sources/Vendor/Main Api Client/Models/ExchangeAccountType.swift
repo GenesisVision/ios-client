@@ -19,7 +19,11 @@ public struct ExchangeAccountType: Codable {
 
     public var type: BrokerTradeServerType?
 
+    public var typeTitle: String?
+
     public var currencies: [String]?
+
+    public var permissions: [TradingAccountPermission]?
 
     public var minimumDepositsAmount: [String:Double]?
 
@@ -30,12 +34,14 @@ public struct ExchangeAccountType: Codable {
     public var isSignalsAvailable: Bool?
 
     public var isDepositRequired: Bool?
-    public init(_id: UUID? = nil, name: String? = nil, _description: String? = nil, type: BrokerTradeServerType? = nil, currencies: [String]? = nil, minimumDepositsAmount: [String:Double]? = nil, isKycRequired: Bool? = nil, isCountryNotUSRequired: Bool? = nil, isSignalsAvailable: Bool? = nil, isDepositRequired: Bool? = nil) { 
+    public init(_id: UUID? = nil, name: String? = nil, _description: String? = nil, type: BrokerTradeServerType? = nil, typeTitle: String? = nil, currencies: [String]? = nil, permissions: [TradingAccountPermission]? = nil, minimumDepositsAmount: [String:Double]? = nil, isKycRequired: Bool? = nil, isCountryNotUSRequired: Bool? = nil, isSignalsAvailable: Bool? = nil, isDepositRequired: Bool? = nil) { 
         self._id = _id
         self.name = name
         self._description = _description
         self.type = type
+        self.typeTitle = typeTitle
         self.currencies = currencies
+        self.permissions = permissions
         self.minimumDepositsAmount = minimumDepositsAmount
         self.isKycRequired = isKycRequired
         self.isCountryNotUSRequired = isCountryNotUSRequired
@@ -47,7 +53,9 @@ public struct ExchangeAccountType: Codable {
         case name
         case _description = "description"
         case type
+        case typeTitle
         case currencies
+        case permissions
         case minimumDepositsAmount
         case isKycRequired
         case isCountryNotUSRequired

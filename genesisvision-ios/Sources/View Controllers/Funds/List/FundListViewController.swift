@@ -178,10 +178,7 @@ class FundListViewController: BaseViewControllerWithTableView {
         fetch()
     }
     
-    override func updateData(from dateFrom: Date?, to dateTo: Date?) {
-//        viewModel.filterModel.dateRangeModel.dateFrom = dateFrom
-//        viewModel.filterModel.dateRangeModel.dateTo = dateTo
-        
+    override func updateData(from dateFrom: Date?, to dateTo: Date?, dateRangeType: DateRangeType? = nil) {
         showProgressHUD()
         fetch()
     }
@@ -350,7 +347,7 @@ extension FundListViewController: BaseTableViewProtocol {
     }
     
     func didSelect(_ type: CellActionType, cellViewModel: CellViewAnyModel?) {
-        guard let cellViewModel = cellViewModel as?FundTableViewCellViewModel, let assetId = cellViewModel.asset._id?.uuidString  else { return }
+        guard let cellViewModel = cellViewModel as? FundTableViewCellViewModel, let assetId = cellViewModel.asset._id?.uuidString  else { return }
         viewModel.showDetail(with: assetId)
     }
 }

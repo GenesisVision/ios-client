@@ -61,6 +61,10 @@ extension ProgramYourInvestmentTableViewCellViewModel: CellViewModel {
             cell.reinvestView.isHidden = true
         }
         
+        if let type = programDetailsFull.brokerDetails?.type, type == .binance {
+            cell.reinvestView.isHidden = true
+        }
+        
         cell.disclaimerLabel.text = "You can withdraw only the invested funds, the profit will be withdrawn to your account at the end of the period automatically."
 
         cell.yourInvestmentProtocol = yourInvestmentProtocol

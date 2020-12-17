@@ -64,8 +64,8 @@ class FundInfoRouter: Router {
     }
     
     private func editPublicInfo(with assetId: String) {
-        guard let viewController = FundEditPublicInfoViewController.storyboardInstance(.fund) else { return }
-        let viewModel = FundEditPublicInfoViewModel(assetId: assetId)
+        guard let viewController = FundPublicInfoViewController.storyboardInstance(.fund) else { return }
+        let viewModel = FundPublicInfoViewModel(mode: .edit, assetId: assetId)
         viewController.viewModel = viewModel
         navigationController?.pushViewController(viewController, animated: true)
     }

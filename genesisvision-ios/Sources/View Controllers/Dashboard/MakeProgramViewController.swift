@@ -98,7 +98,7 @@ class MakeProgramViewController: BaseModalViewController {
             viewModel.request._description = description
         }
         if let entryFee = stackView.entryFeeView.textField.text?.doubleValue {
-            viewModel.request.entryFee = entryFee
+            viewModel.request.managementFee = entryFee
         }
         if let successFee = stackView.successFeeView.textField.text?.doubleValue {
             viewModel.request.successFee = successFee
@@ -275,7 +275,8 @@ class MakeProgramViewModel {
     private let errorCompletion: ((CompletionResult) -> Void) = { (result) in
        print(result)
     }
-    var request = MakeTradingAccountProgram(_id: nil, periodLength: nil, stopOutLevel: nil, investmentLimit: nil, tradesDelay: nil, entryFee: nil, successFee: nil, title: nil,_description: nil, logo: nil)
+    
+    var request = MakeTradingAccountProgram(title: nil, _description: nil, logo: nil, _id: nil, periodLength: nil, stopOutLevel: nil, investmentLimit: nil, tradesDelay: nil, successFee: nil, managementFee: nil)
     
     weak var delegate: BaseTableViewProtocol?
     init(_ delegate: BaseTableViewProtocol?) {

@@ -11,14 +11,6 @@ import Foundation
 public struct PostAssetDetailsWithPrices: Codable {
 
 
-    public var price: Double?
-
-    public var priceCurrency: Currency?
-
-    public var change24Percent: Double?
-
-    public var changeState: ChangeState?
-
     public var _id: UUID?
 
     public var logoUrl: String?
@@ -32,11 +24,15 @@ public struct PostAssetDetailsWithPrices: Codable {
     public var assetType: AssetType?
 
     public var programDetails: ProgramAssetDetails?
-    public init(price: Double? = nil, priceCurrency: Currency? = nil, change24Percent: Double? = nil, changeState: ChangeState? = nil, _id: UUID? = nil, logoUrl: String? = nil, color: String? = nil, title: String? = nil, url: String? = nil, assetType: AssetType? = nil, programDetails: ProgramAssetDetails? = nil) { 
-        self.price = price
-        self.priceCurrency = priceCurrency
-        self.change24Percent = change24Percent
-        self.changeState = changeState
+
+    public var price: Double?
+
+    public var priceCurrency: Currency?
+
+    public var change24Percent: Double?
+
+    public var changeState: ChangeState?
+    public init(_id: UUID? = nil, logoUrl: String? = nil, color: String? = nil, title: String? = nil, url: String? = nil, assetType: AssetType? = nil, programDetails: ProgramAssetDetails? = nil, price: Double? = nil, priceCurrency: Currency? = nil, change24Percent: Double? = nil, changeState: ChangeState? = nil) { 
         self._id = _id
         self.logoUrl = logoUrl
         self.color = color
@@ -44,12 +40,12 @@ public struct PostAssetDetailsWithPrices: Codable {
         self.url = url
         self.assetType = assetType
         self.programDetails = programDetails
+        self.price = price
+        self.priceCurrency = priceCurrency
+        self.change24Percent = change24Percent
+        self.changeState = changeState
     }
     public enum CodingKeys: String, CodingKey { 
-        case price
-        case priceCurrency
-        case change24Percent
-        case changeState
         case _id = "id"
         case logoUrl
         case color
@@ -57,6 +53,10 @@ public struct PostAssetDetailsWithPrices: Codable {
         case url
         case assetType
         case programDetails
+        case price
+        case priceCurrency
+        case change24Percent
+        case changeState
     }
 
 }
