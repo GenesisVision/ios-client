@@ -42,7 +42,7 @@ final class ProgramWithdrawViewModel {
             guard let programWithdrawInfo = programWithdrawInfo else {
                 return completion(.failure(errorType: .apiError(message: nil)))
             }
-            self?.getInfo(completion: completion)
+            self?.getProgramsDetails(completion: completion)
             self?.programWithdrawInfo = programWithdrawInfo
             }, errorCompletion: completion)
     }

@@ -14,9 +14,12 @@ public struct ProgramDailyPeriodDetails: Codable {
     public var isProcessingRealTime: Bool?
 
     public var hourProcessing: Int?
-    public init(isProcessingRealTime: Bool? = nil, hourProcessing: Int? = nil) { 
+
+    public var nextProcessingDate: Date?
+    public init(isProcessingRealTime: Bool? = nil, hourProcessing: Int? = nil, nextProcessingDate: Date? = nil) { 
         self.isProcessingRealTime = isProcessingRealTime
         self.hourProcessing = hourProcessing
+        self.nextProcessingDate = nextProcessingDate
     }
 
 }

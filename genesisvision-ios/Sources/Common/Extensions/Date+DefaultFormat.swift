@@ -60,5 +60,12 @@ extension Date {
         dateFormatter.locale = Bundle.main.locale
         return dateFormatter.string(from: self)
     }
+    
+    var textDateAndHours: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMM YYYY hh:mm:ss"
+        dateFormatter.locale = Bundle.main.locale
+        return dateFormatter.string(from: self)
+    }
 }
 

@@ -701,6 +701,7 @@ open class DashboardAPI {
     "level" : 6,
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
     "dailyPeriodDetails" : {
+      "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
       "hourProcessing" : 7,
       "isProcessingRealTime" : true
     },
@@ -791,6 +792,7 @@ open class DashboardAPI {
     "level" : 6,
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
     "dailyPeriodDetails" : {
+      "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
       "hourProcessing" : 7,
       "isProcessingRealTime" : true
     },
@@ -913,6 +915,7 @@ open class DashboardAPI {
         "successFeeCurrent" : 2.3021358869347655,
         "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
+          "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
           "hourProcessing" : 7,
           "isProcessingRealTime" : true
         },
@@ -1028,6 +1031,7 @@ open class DashboardAPI {
         "successFeeCurrent" : 2.3021358869347655,
         "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
+          "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
           "hourProcessing" : 7,
           "isProcessingRealTime" : true
         },
@@ -1229,6 +1233,7 @@ open class DashboardAPI {
         "successFeeCurrent" : 2.3021358869347655,
         "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
+          "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
           "hourProcessing" : 7,
           "isProcessingRealTime" : true
         },
@@ -1344,6 +1349,7 @@ open class DashboardAPI {
         "successFeeCurrent" : 2.3021358869347655,
         "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
+          "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
           "hourProcessing" : 7,
           "isProcessingRealTime" : true
         },
@@ -1504,6 +1510,7 @@ open class DashboardAPI {
         "successFeeCurrent" : 2.3021358869347655,
         "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
+          "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
           "hourProcessing" : 7,
           "isProcessingRealTime" : true
         },
@@ -1619,6 +1626,7 @@ open class DashboardAPI {
         "successFeeCurrent" : 2.3021358869347655,
         "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
+          "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
           "hourProcessing" : 7,
           "isProcessingRealTime" : true
         },
@@ -2113,6 +2121,7 @@ open class DashboardAPI {
         "successFeeCurrent" : 2.3021358869347655,
         "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
+          "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
           "hourProcessing" : 7,
           "isProcessingRealTime" : true
         },
@@ -2228,6 +2237,7 @@ open class DashboardAPI {
         "successFeeCurrent" : 2.3021358869347655,
         "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
+          "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
           "hourProcessing" : 7,
           "isProcessingRealTime" : true
         },

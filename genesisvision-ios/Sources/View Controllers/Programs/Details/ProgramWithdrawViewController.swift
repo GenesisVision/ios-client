@@ -66,6 +66,12 @@ class ProgramWithdrawViewController: BaseViewController {
         }
     }
     
+    @IBOutlet weak var approxLabelValue: SubtitleLabel! {
+        didSet {
+            
+        }
+    }
+    
     private var isGenesisMarkets: Bool = false
     
     // MARK: - Views
@@ -152,21 +158,49 @@ class ProgramWithdrawViewController: BaseViewController {
     }
     
     private func updateUIasGM() {
-        amountToWithdrawGVTLabel.text = viewModel.programCurrency.rawValue
         
         if let availableToWithdraw = viewModel.programWithdrawInfo?.availableToWithdraw {
-            self.availableToWithdrawValue = availableToWithdraw
+            availableToWithdrawValue = availableToWithdraw
         }
+        
+        if amountToWithdrawValue > 100 {
+            amountToWithdrawValueLabel.text = "100"
+        }
+        
+        let withdrawingValue = availableToWithdrawValue / 100 * amountToWithdrawValue
+        
+        approxLabelValue.text = "≈" + withdrawingValue.toString() + " " + viewModel.programCurrency.rawValue
         
         if let isOwner = viewModel.programWithdrawInfo?.isOwner, isOwner {
             withdrawAllStackView.isHidden = true
         }
+        
+        if let periodEnds = viewModel.programWithdrawInfo?.periodEnds {
+            payoutDayValueLabel.text = periodEnds.onlyDateFormatString
+        }
+        
+        amountToWithdrawGVTLabel.text = "%"
+        
+        let withdrawButtonEnabled = withdrawingValue > 0.0 && withdrawingValue <= availableToWithdrawValue
+        
+        withdrawButton.setEnabled(withdrawButtonEnabled)
     }
     
     private func withdrawMethod() {
-        guard let text = amountToWithdrawValueLabel.text,
-            let amount = text.doubleValue
-            else { return showErrorHUD(subtitle: "Enter withdraw value, please") }
+        
+        var amountRaw: Double?
+        
+        if isGenesisMarkets {
+            amountRaw = (availableToWithdrawValue / 100 * amountToWithdrawValue)
+        } else {
+            guard let amountValue = amountToWithdrawValueLabel.text?.doubleValue
+                else { return showErrorHUD(subtitle: "Enter withdraw value, please") }
+            amountRaw = amountValue
+        }
+        
+        guard let amount = amountRaw else {
+            return
+        }
         
         showProgressHUD()
         viewModel.withdraw(with: amount) { [weak self] (result) in
@@ -195,7 +229,21 @@ class ProgramWithdrawViewController: BaseViewController {
         confirmView = InvestWithdrawConfirmView.viewFromNib()
         
         let withdrawAll = viewModel.withdrawAll
-        let subtitle = "Your request will be processed at the end of the reporting period."
+        
+        var subtitle: String = "Your request will be processed at the end of the reporting period."
+        
+        if viewModel.programDetails?.brokerDetails?.type == .binance, let realTime =
+            viewModel.programDetails?.programDetails?.dailyPeriodDetails?.isProcessingRealTime, !realTime, let date = viewModel.programDetails?.programDetails?.dailyPeriodDetails?.nextProcessingDate {
+            subtitle = "Your request will be processed at \(date.textDateAndHours) GMT."
+        }
+        
+        
+        var withdrawingValue = amountToWithdrawValueLabel.text
+        
+        if isGenesisMarkets {
+            withdrawingValue = (availableToWithdrawValue / 100 * amountToWithdrawValue).toString() + " " + viewModel.programCurrency.rawValue
+        }
+        
         
         let confirmViewModel = InvestWithdrawConfirmModel(title: "Confirm Withdraw",
                                                           subtitle: subtitle,
@@ -203,7 +251,7 @@ class ProgramWithdrawViewController: BaseViewController {
                                                           programTitle: viewModel.programWithdrawInfo?.title,
                                                           managerName: nil,
                                                           firstTitle: "Amount to withdraw",
-                                                          firstValue: withdrawAll ? "All" : amountToWithdrawValueLabel.text,
+                                                          firstValue: withdrawAll ? "All" : withdrawingValue,
                                                           secondTitle: "Payout day",
                                                           secondValue: viewModel.programWithdrawInfo?.periodEnds?.onlyDateFormatString,
                                                           thirdTitle: nil,
@@ -222,8 +270,15 @@ class ProgramWithdrawViewController: BaseViewController {
     }
     
     @IBAction func copyAllButtonAction(_ sender: UIButton) {
-        amountToWithdrawValueLabel.text = availableToWithdrawValue.toString(withoutFormatter: true)
-        amountToWithdrawValue = availableToWithdrawValue
+        if isGenesisMarkets {
+            amountToWithdrawValueLabel.text = "100"
+            approxLabelValue.text = availableToWithdrawValue.toString() + " " + viewModel.programCurrency.rawValue
+        } else {
+            amountToWithdrawValueLabel.text = availableToWithdrawValue.toString(withoutFormatter: true)
+            amountToWithdrawValue = availableToWithdrawValue
+        }
+        
+        withdrawButton.setEnabled(true)
     }
     
     @IBAction func switchButtonAction(_ sender: UIButton) {
@@ -237,7 +292,11 @@ class ProgramWithdrawViewController: BaseViewController {
 
 extension ProgramWithdrawViewController: NumpadViewProtocol {
     var maxAmount: Double? {
-        return availableToWithdrawValue
+        if isGenesisMarkets {
+            return 100.0
+        } else {
+            return availableToWithdrawValue
+        }
     }
     
     var textPlaceholder: String? {
@@ -261,7 +320,15 @@ extension ProgramWithdrawViewController: NumpadViewProtocol {
     }
     
     func textLabelDidChange(value: Double?) {
-        guard let value = value, value <= availableToWithdrawValue else { return }
+        guard let value = value else { return }
+        
+        if isGenesisMarkets {
+            
+        } else {
+            guard value <= availableToWithdrawValue else { return }
+        }
+        
+
         
         numpadView.isEnable = true
         amountToWithdrawValue = value

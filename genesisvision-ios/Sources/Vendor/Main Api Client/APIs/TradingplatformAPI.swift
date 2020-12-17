@@ -156,6 +156,368 @@ open class TradingplatformAPI {
     }
 
     /**
+     - parameter accountId: (query)  (optional)     - parameter symbol: (query)  (optional)     - parameter leverage: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func changeFuturesInitialLeverageAsync(accountId: UUID? = nil, symbol: String? = nil, leverage: Int? = nil, completion: @escaping ((_ data: BinanceRawFuturesInitialLeverageChangeResult?,_ error: Error?) -> Void)) {
+        changeFuturesInitialLeverageAsyncWithRequestBuilder(accountId: accountId, symbol: symbol, leverage: leverage).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     - POST /v2.0/tradingplatform/binance/account/futures/leverage/initial
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example={
+  "leverage" : 0,
+  "symbol" : "symbol",
+  "maxNotionalValue" : "maxNotionalValue"
+}}]
+     - parameter accountId: (query)  (optional)     - parameter symbol: (query)  (optional)     - parameter leverage: (query)  (optional)
+
+     - returns: RequestBuilder<BinanceRawFuturesInitialLeverageChangeResult> 
+     */
+    open class func changeFuturesInitialLeverageAsyncWithRequestBuilder(accountId: UUID? = nil, symbol: String? = nil, leverage: Int? = nil) -> RequestBuilder<BinanceRawFuturesInitialLeverageChangeResult> {
+        let path = "/v2.0/tradingplatform/binance/account/futures/leverage/initial"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "accountId": accountId, 
+                        "symbol": symbol, 
+                        "leverage": leverage?.encodeToJSON()
+        ])
+
+        let requestBuilder: RequestBuilder<BinanceRawFuturesInitialLeverageChangeResult>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     - parameter accountId: (query)  (optional)     - parameter symbol: (query)  (optional)     - parameter marginType: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func changeFuturesMarginType(accountId: UUID? = nil, symbol: String? = nil, marginType: BinanceFuturesMarginType? = nil, completion: @escaping ((_ data: BinanceRawFuturesChangeMarginTypeResult?,_ error: Error?) -> Void)) {
+        changeFuturesMarginTypeWithRequestBuilder(accountId: accountId, symbol: symbol, marginType: marginType).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     - POST /v2.0/tradingplatform/binance/account/futures/margin/type
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example={
+  "code" : 0,
+  "message" : "message"
+}}]
+     - parameter accountId: (query)  (optional)     - parameter symbol: (query)  (optional)     - parameter marginType: (query)  (optional)
+
+     - returns: RequestBuilder<BinanceRawFuturesChangeMarginTypeResult> 
+     */
+    open class func changeFuturesMarginTypeWithRequestBuilder(accountId: UUID? = nil, symbol: String? = nil, marginType: BinanceFuturesMarginType? = nil) -> RequestBuilder<BinanceRawFuturesChangeMarginTypeResult> {
+        let path = "/v2.0/tradingplatform/binance/account/futures/margin/type"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "accountId": accountId, 
+                        "symbol": symbol, 
+                        "marginType": marginType
+        ])
+
+        let requestBuilder: RequestBuilder<BinanceRawFuturesChangeMarginTypeResult>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Cancel all futures orders
+     - parameter accountId: (query)  (optional)     - parameter symbol: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func futuresCancelAllOpenOrders(accountId: UUID? = nil, symbol: String? = nil, completion: @escaping ((_ data: BinanceRawFuturesCancelAllOrders?,_ error: Error?) -> Void)) {
+        futuresCancelAllOpenOrdersWithRequestBuilder(accountId: accountId, symbol: symbol).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     Cancel all futures orders
+     - POST /v2.0/tradingplatform/binance/futures/orders/cancel/all
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example={
+  "code" : 0,
+  "message" : "message"
+}}]
+     - parameter accountId: (query)  (optional)     - parameter symbol: (query)  (optional)
+
+     - returns: RequestBuilder<BinanceRawFuturesCancelAllOrders> 
+     */
+    open class func futuresCancelAllOpenOrdersWithRequestBuilder(accountId: UUID? = nil, symbol: String? = nil) -> RequestBuilder<BinanceRawFuturesCancelAllOrders> {
+        let path = "/v2.0/tradingplatform/binance/futures/orders/cancel/all"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "accountId": accountId, 
+                        "symbol": symbol
+        ])
+
+        let requestBuilder: RequestBuilder<BinanceRawFuturesCancelAllOrders>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Cancel futures order
+     - parameter accountId: (query)  (optional)     - parameter symbol: (query)  (optional)     - parameter orderId: (query)  (optional)     - parameter origClientOrderId: (query)  (optional)     - parameter newClientOrderId: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func futuresCancelOrder(accountId: UUID? = nil, symbol: String? = nil, orderId: Int64? = nil, origClientOrderId: String? = nil, newClientOrderId: String? = nil, completion: @escaping ((_ data: BinanceRawFuturesCancelOrder?,_ error: Error?) -> Void)) {
+        futuresCancelOrderWithRequestBuilder(accountId: accountId, symbol: symbol, orderId: orderId, origClientOrderId: origClientOrderId, newClientOrderId: newClientOrderId).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     Cancel futures order
+     - POST /v2.0/tradingplatform/binance/futures/orders/cancel
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example={
+  "symbol" : "symbol",
+  "cumulativeQuoteQuantity" : 5.962133916683182,
+  "executedQuantity" : 5.637376656633329,
+  "side" : "Buy",
+  "priceRate" : 3.616076749251911,
+  "originalType" : "Limit",
+  "orderId" : 0,
+  "originalQuantity" : 2.3021358869347655,
+  "clientOrderId" : "clientOrderId",
+  "positionSide" : "Short",
+  "activatePrice" : 9.301444243932576,
+  "updateTime" : "2000-01-23T04:56:07.000+00:00",
+  "closePosition" : true,
+  "cumulativeQuantity" : 1.4658129805029452,
+  "stopPrice" : 7.061401241503109,
+  "reduceOnly" : true,
+  "price" : 6.027456183070403,
+  "timeInForce" : "GoodTillCancel",
+  "workingType" : "Mark",
+  "status" : "New"
+}}]
+     - parameter accountId: (query)  (optional)     - parameter symbol: (query)  (optional)     - parameter orderId: (query)  (optional)     - parameter origClientOrderId: (query)  (optional)     - parameter newClientOrderId: (query)  (optional)
+
+     - returns: RequestBuilder<BinanceRawFuturesCancelOrder> 
+     */
+    open class func futuresCancelOrderWithRequestBuilder(accountId: UUID? = nil, symbol: String? = nil, orderId: Int64? = nil, origClientOrderId: String? = nil, newClientOrderId: String? = nil) -> RequestBuilder<BinanceRawFuturesCancelOrder> {
+        let path = "/v2.0/tradingplatform/binance/futures/orders/cancel"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "accountId": accountId, 
+                        "symbol": symbol, 
+                        "orderId": orderId?.encodeToJSON(), 
+                        "origClientOrderId": origClientOrderId, 
+                        "newClientOrderId": newClientOrderId
+        ])
+
+        let requestBuilder: RequestBuilder<BinanceRawFuturesCancelOrder>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Ping futures account stream
+     - parameter accountId: (query)  (optional)     - parameter listenKey: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func futuresKeepAliveAccountStream(accountId: UUID? = nil, listenKey: String? = nil, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        futuresKeepAliveAccountStreamWithRequestBuilder(accountId: accountId, listenKey: listenKey).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
+        }
+    }
+
+
+    /**
+     Ping futures account stream
+     - POST /v2.0/tradingplatform/binance/futures/stream/ping
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter accountId: (query)  (optional)     - parameter listenKey: (query)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func futuresKeepAliveAccountStreamWithRequestBuilder(accountId: UUID? = nil, listenKey: String? = nil) -> RequestBuilder<Void> {
+        let path = "/v2.0/tradingplatform/binance/futures/stream/ping"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "accountId": accountId, 
+                        "listenKey": listenKey
+        ])
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Place futures order
+     - parameter body: (body)  (optional)     - parameter accountId: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func futuresPlaceOrder(body: BinanceRawFuturesPlaceOrder? = nil, accountId: UUID? = nil, completion: @escaping ((_ data: BinanceRawFuturesPlacedOrder?,_ error: Error?) -> Void)) {
+        futuresPlaceOrderWithRequestBuilder(body: body, accountId: accountId).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     Place futures order
+     - POST /v2.0/tradingplatform/binance/futures/orders/place
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example={
+  "symbol" : "symbol",
+  "cumulativeQuoteQuantity" : 5.637376656633329,
+  "executedQuantity" : 2.3021358869347655,
+  "side" : "Buy",
+  "priceRate" : 2.027123023002322,
+  "orderId" : 0,
+  "avgPrice" : 1.4658129805029452,
+  "originalQuantity" : 7.061401241503109,
+  "clientOrderId" : "clientOrderId",
+  "positionSide" : "Short",
+  "activatePrice" : 3.616076749251911,
+  "updateTime" : "2000-01-23T04:56:07.000+00:00",
+  "type" : "Limit",
+  "closePosition" : true,
+  "cumulativeQuantity" : 5.962133916683182,
+  "stopPrice" : 9.301444243932576,
+  "reduceOnly" : true,
+  "price" : 6.027456183070403,
+  "timeInForce" : "GoodTillCancel",
+  "workingType" : "Mark",
+  "status" : "New"
+}}]
+     - parameter body: (body)  (optional)     - parameter accountId: (query)  (optional)
+
+     - returns: RequestBuilder<BinanceRawFuturesPlacedOrder> 
+     */
+    open class func futuresPlaceOrderWithRequestBuilder(body: BinanceRawFuturesPlaceOrder? = nil, accountId: UUID? = nil) -> RequestBuilder<BinanceRawFuturesPlacedOrder> {
+        let path = "/v2.0/tradingplatform/binance/futures/orders/place"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "accountId": accountId
+        ])
+
+        let requestBuilder: RequestBuilder<BinanceRawFuturesPlacedOrder>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+    }
+
+    /**
+     Start futures account stream
+     - parameter accountId: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func futuresStartAccountStream(accountId: UUID? = nil, completion: @escaping ((_ data: String?,_ error: Error?) -> Void)) {
+        futuresStartAccountStreamWithRequestBuilder(accountId: accountId).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     Start futures account stream
+     - POST /v2.0/tradingplatform/binance/futures/stream/start
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example=""}]
+     - parameter accountId: (query)  (optional)
+
+     - returns: RequestBuilder<String> 
+     */
+    open class func futuresStartAccountStreamWithRequestBuilder(accountId: UUID? = nil) -> RequestBuilder<String> {
+        let path = "/v2.0/tradingplatform/binance/futures/stream/start"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "accountId": accountId
+        ])
+
+        let requestBuilder: RequestBuilder<String>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Stop futures account stream
+     - parameter accountId: (query)  (optional)     - parameter listenKey: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func futuresStopAccountStream(accountId: UUID? = nil, listenKey: String? = nil, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        futuresStopAccountStreamWithRequestBuilder(accountId: accountId, listenKey: listenKey).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
+        }
+    }
+
+
+    /**
+     Stop futures account stream
+     - POST /v2.0/tradingplatform/binance/futures/stream/stop
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter accountId: (query)  (optional)     - parameter listenKey: (query)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func futuresStopAccountStreamWithRequestBuilder(accountId: UUID? = nil, listenKey: String? = nil) -> RequestBuilder<Void> {
+        let path = "/v2.0/tradingplatform/binance/futures/stream/stop"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "accountId": accountId, 
+                        "listenKey": listenKey
+        ])
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
      Get 24H price
      - parameter symbol: (path)  
      - parameter completion: completion handler to receive the data and the error objects
@@ -349,6 +711,68 @@ open class TradingplatformAPI {
         ])
 
         let requestBuilder: RequestBuilder<BinanceRawAccountInfo>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Get leveraged tokens klines
+     - parameter symbol: (query)  (optional)     - parameter interval: (query)  (optional)     - parameter startTime: (query)  (optional)     - parameter endTime: (query)  (optional)     - parameter limit: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getBlvtKlines(symbol: String? = nil, interval: BinanceRawKlineInterval? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil, completion: @escaping ((_ data: BinanceRawBlvtKlineItemsViewModel?,_ error: Error?) -> Void)) {
+        getBlvtKlinesWithRequestBuilder(symbol: symbol, interval: interval, startTime: startTime, endTime: endTime, limit: limit).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     Get leveraged tokens klines
+     - GET /v2.0/tradingplatform/binance/blvt/market/klines
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example={
+  "total" : 7,
+  "items" : [ {
+    "navUpdates" : 2,
+    "high" : 6.027456183070403,
+    "realLeverage" : 5.637376656633329,
+    "low" : 1.4658129805029452,
+    "closeTime" : "2000-01-23T04:56:07.000+00:00",
+    "openTime" : "2000-01-23T04:56:07.000+00:00",
+    "close" : 5.962133916683182,
+    "open" : 0.8008281904610115
+  }, {
+    "navUpdates" : 2,
+    "high" : 6.027456183070403,
+    "realLeverage" : 5.637376656633329,
+    "low" : 1.4658129805029452,
+    "closeTime" : "2000-01-23T04:56:07.000+00:00",
+    "openTime" : "2000-01-23T04:56:07.000+00:00",
+    "close" : 5.962133916683182,
+    "open" : 0.8008281904610115
+  } ]
+}}]
+     - parameter symbol: (query)  (optional)     - parameter interval: (query)  (optional)     - parameter startTime: (query)  (optional)     - parameter endTime: (query)  (optional)     - parameter limit: (query)  (optional)
+
+     - returns: RequestBuilder<BinanceRawBlvtKlineItemsViewModel> 
+     */
+    open class func getBlvtKlinesWithRequestBuilder(symbol: String? = nil, interval: BinanceRawKlineInterval? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil) -> RequestBuilder<BinanceRawBlvtKlineItemsViewModel> {
+        let path = "/v2.0/tradingplatform/binance/blvt/market/klines"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "symbol": symbol, 
+                        "interval": interval, 
+                        "startTime": startTime?.encodeToJSON(), 
+                        "endTime": endTime?.encodeToJSON(), 
+                        "limit": limit?.encodeToJSON()
+        ])
+
+        let requestBuilder: RequestBuilder<BinanceRawBlvtKlineItemsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
@@ -654,6 +1078,112 @@ open class TradingplatformAPI {
         ])
 
         let requestBuilder: RequestBuilder<[BinanceRawFutures24HPrice]>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     - parameter accountId: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getFuturesAccountInfo(accountId: UUID? = nil, completion: @escaping ((_ data: BinanceRawFuturesAccountInfo?,_ error: Error?) -> Void)) {
+        getFuturesAccountInfoWithRequestBuilder(accountId: accountId).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     - GET /v2.0/tradingplatform/binance/account/futures
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example={
+  "totalOpenOrderInitialMargin" : 2.3021358869347655,
+  "totalMaintMargin" : 5.962133916683182,
+  "totalPositionInitialMargin" : 7.061401241503109,
+  "feeTier" : 0,
+  "totalInitialMargin" : 1.4658129805029452,
+  "canWithdraw" : true,
+  "updateTime" : "2000-01-23T04:56:07.000+00:00",
+  "positions" : [ {
+    "entryPrice" : 2.8841621266687802,
+    "leverage" : 8,
+    "symbol" : "symbol",
+    "maxNotional" : 6.778324963048013,
+    "maintMargin" : 6.438423552598547,
+    "openOrderInitialMargin" : 3.5571952270680973,
+    "positionInitialMargin" : 6.965117697638846,
+    "positionSide" : "Short",
+    "isolated" : true,
+    "unrealizedProfit" : 1.284659006116532,
+    "positionAmount" : 6.878052220127876,
+    "initialMargin" : 9.018348186070783
+  }, {
+    "entryPrice" : 2.8841621266687802,
+    "leverage" : 8,
+    "symbol" : "symbol",
+    "maxNotional" : 6.778324963048013,
+    "maintMargin" : 6.438423552598547,
+    "openOrderInitialMargin" : 3.5571952270680973,
+    "positionInitialMargin" : 6.965117697638846,
+    "positionSide" : "Short",
+    "isolated" : true,
+    "unrealizedProfit" : 1.284659006116532,
+    "positionAmount" : 6.878052220127876,
+    "initialMargin" : 9.018348186070783
+  } ],
+  "canTrade" : true,
+  "availableBalance" : 7.386281948385884,
+  "maxWithdrawAmount" : 6.027456183070403,
+  "assets" : [ {
+    "maxWithdrawAmount" : 6.84685269835264,
+    "maintMargin" : 1.0246457001441578,
+    "openOrderInitialMargin" : 7.457744773683766,
+    "walletBalance" : 5.025004791520295,
+    "crossWalletBalance" : 9.965781217890562,
+    "positionInitialMargin" : 1.1730742509559433,
+    "crossUnPnl" : 9.369310271410669,
+    "unrealizedProfit" : 4.965218492984954,
+    "asset" : "asset",
+    "initialMargin" : 1.2315135367772556,
+    "marginBalance" : 1.4894159098541704,
+    "availableBalance" : 6.683562403749608
+  }, {
+    "maxWithdrawAmount" : 6.84685269835264,
+    "maintMargin" : 1.0246457001441578,
+    "openOrderInitialMargin" : 7.457744773683766,
+    "walletBalance" : 5.025004791520295,
+    "crossWalletBalance" : 9.965781217890562,
+    "positionInitialMargin" : 1.1730742509559433,
+    "crossUnPnl" : 9.369310271410669,
+    "unrealizedProfit" : 4.965218492984954,
+    "asset" : "asset",
+    "initialMargin" : 1.2315135367772556,
+    "marginBalance" : 1.4894159098541704,
+    "availableBalance" : 6.683562403749608
+  } ],
+  "totalCrossWalletBalance" : 2.027123023002322,
+  "totalMarginBalance" : 5.637376656633329,
+  "totalUnrealizedProfit" : 9.301444243932576,
+  "totalCrossUnPnl" : 4.145608029883936,
+  "totalWalletBalance" : 3.616076749251911,
+  "canDeposit" : true
+}}]
+     - parameter accountId: (query)  (optional)
+
+     - returns: RequestBuilder<BinanceRawFuturesAccountInfo> 
+     */
+    open class func getFuturesAccountInfoWithRequestBuilder(accountId: UUID? = nil) -> RequestBuilder<BinanceRawFuturesAccountInfo> {
+        let path = "/v2.0/tradingplatform/binance/account/futures"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "accountId": accountId
+        ])
+
+        let requestBuilder: RequestBuilder<BinanceRawFuturesAccountInfo>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
@@ -1274,6 +1804,94 @@ open class TradingplatformAPI {
     }
 
     /**
+     Futures open positions
+     - parameter accountId: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getFuturesOpenOrders(accountId: UUID? = nil, completion: @escaping ((_ data: BinanceRawFuturesOrderItemsViewModel?,_ error: Error?) -> Void)) {
+        getFuturesOpenOrdersWithRequestBuilder(accountId: accountId).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     Futures open positions
+     - GET /v2.0/tradingplatform/binance/futures/usdt/orders
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example={
+  "total" : 4,
+  "items" : [ {
+    "symbol" : "symbol",
+    "cumulativeQuoteQuantity" : 5.637376656633329,
+    "executedQuantity" : 2.3021358869347655,
+    "side" : "Buy",
+    "priceRate" : 2.027123023002322,
+    "originalType" : "Limit",
+    "orderId" : 0,
+    "avgPrice" : 1.4658129805029452,
+    "originalQuantity" : 7.061401241503109,
+    "clientOrderId" : "clientOrderId",
+    "positionSide" : "Short",
+    "activatePrice" : 3.616076749251911,
+    "updateTime" : "2000-01-23T04:56:07.000+00:00",
+    "closePosition" : true,
+    "accountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "cumulativeQuantity" : 5.962133916683182,
+    "stopPrice" : 9.301444243932576,
+    "reduceOnly" : true,
+    "price" : 6.027456183070403,
+    "createdTime" : "2000-01-23T04:56:07.000+00:00",
+    "timeInForce" : "GoodTillCancel",
+    "workingType" : "Mark",
+    "status" : "New"
+  }, {
+    "symbol" : "symbol",
+    "cumulativeQuoteQuantity" : 5.637376656633329,
+    "executedQuantity" : 2.3021358869347655,
+    "side" : "Buy",
+    "priceRate" : 2.027123023002322,
+    "originalType" : "Limit",
+    "orderId" : 0,
+    "avgPrice" : 1.4658129805029452,
+    "originalQuantity" : 7.061401241503109,
+    "clientOrderId" : "clientOrderId",
+    "positionSide" : "Short",
+    "activatePrice" : 3.616076749251911,
+    "updateTime" : "2000-01-23T04:56:07.000+00:00",
+    "closePosition" : true,
+    "accountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "cumulativeQuantity" : 5.962133916683182,
+    "stopPrice" : 9.301444243932576,
+    "reduceOnly" : true,
+    "price" : 6.027456183070403,
+    "createdTime" : "2000-01-23T04:56:07.000+00:00",
+    "timeInForce" : "GoodTillCancel",
+    "workingType" : "Mark",
+    "status" : "New"
+  } ]
+}}]
+     - parameter accountId: (query)  (optional)
+
+     - returns: RequestBuilder<BinanceRawFuturesOrderItemsViewModel> 
+     */
+    open class func getFuturesOpenOrdersWithRequestBuilder(accountId: UUID? = nil) -> RequestBuilder<BinanceRawFuturesOrderItemsViewModel> {
+        let path = "/v2.0/tradingplatform/binance/futures/usdt/orders"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "accountId": accountId
+        ])
+
+        let requestBuilder: RequestBuilder<BinanceRawFuturesOrderItemsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
      Get futures order book
      - parameter symbol: (query)  (optional)     - parameter limit: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
@@ -1319,6 +1937,43 @@ open class TradingplatformAPI {
         ])
 
         let requestBuilder: RequestBuilder<BinanceRawOrderBook>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     - parameter accountId: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getFuturesPositionMode(accountId: UUID? = nil, completion: @escaping ((_ data: BinanceRawFuturesPositionMode?,_ error: Error?) -> Void)) {
+        getFuturesPositionModeWithRequestBuilder(accountId: accountId).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     - GET /v2.0/tradingplatform/binance/account/futures/position/mode
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example={
+  "positionMode" : "Hedge"
+}}]
+     - parameter accountId: (query)  (optional)
+
+     - returns: RequestBuilder<BinanceRawFuturesPositionMode> 
+     */
+    open class func getFuturesPositionModeWithRequestBuilder(accountId: UUID? = nil) -> RequestBuilder<BinanceRawFuturesPositionMode> {
+        let path = "/v2.0/tradingplatform/binance/account/futures/position/mode"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "accountId": accountId
+        ])
+
+        let requestBuilder: RequestBuilder<BinanceRawFuturesPositionMode>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
@@ -2119,13 +2774,9 @@ open class TradingplatformAPI {
      - parameter body: (body)  (optional)     - parameter accountId: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func placeOrder(body: BinanceRawPlaceOrder? = nil, accountId: UUID? = nil, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+    open class func placeOrder(body: BinanceRawPlaceOrder? = nil, accountId: UUID? = nil, completion: @escaping ((_ data: BinanceRawPlacedOrder?,_ error: Error?) -> Void)) {
         placeOrderWithRequestBuilder(body: body, accountId: accountId).execute { (response, error) -> Void in
-            if error == nil {
-                completion((), error)
-            } else {
-                completion(nil, error)
-            }
+            completion(response?.body, error)
         }
     }
 
@@ -2136,11 +2787,44 @@ open class TradingplatformAPI {
      - API Key:
        - type: apiKey Authorization 
        - name: Bearer
+     - examples: [{contentType=application/json, example={
+  "marginBuyBorrowAmount" : 1.2315135367772556,
+  "symbol" : "symbol",
+  "side" : "Buy",
+  "orderListId" : 6,
+  "quantity" : 5.962133916683182,
+  "orderId" : 0,
+  "marginBuyBorrowAsset" : "marginBuyBorrowAsset",
+  "clientOrderId" : "clientOrderId",
+  "type" : "Limit",
+  "quantityFilled" : 5.637376656633329,
+  "stopPrice" : 7.386281948385884,
+  "originalClientOrderId" : "originalClientOrderId",
+  "createTime" : "2000-01-23T04:56:07.000+00:00",
+  "price" : 1.4658129805029452,
+  "timeInForce" : "GoodTillCancel",
+  "quoteQuantity" : 7.061401241503109,
+  "fills" : [ {
+    "quantity" : 2.027123023002322,
+    "price" : 3.616076749251911,
+    "commission" : 4.145608029883936,
+    "commissionAsset" : "commissionAsset",
+    "tradeId" : 9
+  }, {
+    "quantity" : 2.027123023002322,
+    "price" : 3.616076749251911,
+    "commission" : 4.145608029883936,
+    "commissionAsset" : "commissionAsset",
+    "tradeId" : 9
+  } ],
+  "quoteQuantityFilled" : 2.3021358869347655,
+  "status" : "New"
+}}]
      - parameter body: (body)  (optional)     - parameter accountId: (query)  (optional)
 
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<BinanceRawPlacedOrder> 
      */
-    open class func placeOrderWithRequestBuilder(body: BinanceRawPlaceOrder? = nil, accountId: UUID? = nil) -> RequestBuilder<Void> {
+    open class func placeOrderWithRequestBuilder(body: BinanceRawPlaceOrder? = nil, accountId: UUID? = nil) -> RequestBuilder<BinanceRawPlacedOrder> {
         let path = "/v2.0/tradingplatform/binance/spot/orders/place"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
@@ -2149,7 +2833,7 @@ open class TradingplatformAPI {
                         "accountId": accountId
         ])
 
-        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+        let requestBuilder: RequestBuilder<BinanceRawPlacedOrder>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
@@ -2192,6 +2876,45 @@ open class TradingplatformAPI {
         let parameters: [String:Any]? = nil
 
         let url = URLComponents(string: URLString)
+
+        let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     - parameter accountId: (query)  (optional)     - parameter mode: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func setFuturesPositionMode(accountId: UUID? = nil, mode: BinancePositionMode? = nil, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        setFuturesPositionModeWithRequestBuilder(accountId: accountId, mode: mode).execute { (response, error) -> Void in
+            if error == nil {
+                completion((), error)
+            } else {
+                completion(nil, error)
+            }
+        }
+    }
+
+
+    /**
+     - POST /v2.0/tradingplatform/binance/account/futures/position/mode
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - parameter accountId: (query)  (optional)     - parameter mode: (query)  (optional)
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func setFuturesPositionModeWithRequestBuilder(accountId: UUID? = nil, mode: BinancePositionMode? = nil) -> RequestBuilder<Void> {
+        let path = "/v2.0/tradingplatform/binance/account/futures/position/mode"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "accountId": accountId, 
+                        "mode": mode
+        ])
 
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
