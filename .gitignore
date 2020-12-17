@@ -7,8 +7,7 @@ DerivedData/
 .idea/
 
 ## Xcode User data
-xcuserdata/ruslanlukin.xcuserdatad/UserInterfaceState.xcuserstate
-xcuserdata/ruslanlukin.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
+xcuserdata/
 
 ## Constants 
 Constants.swift
