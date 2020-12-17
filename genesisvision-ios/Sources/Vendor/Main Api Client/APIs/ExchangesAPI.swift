@@ -38,6 +38,7 @@ open class ExchangesAPI {
     "name" : "name",
     "description" : "description",
     "accountTypes" : [ {
+      "permissions" : [ "None", "None" ],
       "name" : "name",
       "description" : "description",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -52,6 +53,7 @@ open class ExchangesAPI {
       "isKycRequired" : true,
       "currencies" : [ "currencies", "currencies" ]
     }, {
+      "permissions" : [ "None", "None" ],
       "name" : "name",
       "description" : "description",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -82,6 +84,7 @@ open class ExchangesAPI {
     "name" : "name",
     "description" : "description",
     "accountTypes" : [ {
+      "permissions" : [ "None", "None" ],
       "name" : "name",
       "description" : "description",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
@@ -96,6 +99,7 @@ open class ExchangesAPI {
       "isKycRequired" : true,
       "currencies" : [ "currencies", "currencies" ]
     }, {
+      "permissions" : [ "None", "None" ],
       "name" : "name",
       "description" : "description",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",

@@ -212,6 +212,7 @@
 		19A56F97258A65DC00553408 /* BinanceRawFuturesPositionMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A56F96258A65DC00553408 /* BinanceRawFuturesPositionMode.swift */; };
 		19A56F9E258A660D00553408 /* BinanceRawOrderTrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A56F9C258A660D00553408 /* BinanceRawOrderTrade.swift */; };
 		19A56F9F258A660D00553408 /* BinanceRawPlacedOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A56F9D258A660D00553408 /* BinanceRawPlacedOrder.swift */; };
+		19A56FB1258B864300553408 /* TradingAccountPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A56FB0258B864300553408 /* TradingAccountPermission.swift */; };
 		19B9D0C22559CEE700DF8C70 /* ReferralDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B9D0C12559CEE700DF8C70 /* ReferralDataProvider.swift */; };
 		19D3099A24ECA4D0006B4185 /* ChangeFundAssetPartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D3099924ECA4D0006B4185 /* ChangeFundAssetPartView.swift */; };
 		19D3099C24ED85ED006B4185 /* FundAssetsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D3099B24ED85ED006B4185 /* FundAssetsListViewController.swift */; };
@@ -1371,6 +1372,7 @@
 		19A56F96258A65DC00553408 /* BinanceRawFuturesPositionMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawFuturesPositionMode.swift; sourceTree = "<group>"; };
 		19A56F9C258A660D00553408 /* BinanceRawOrderTrade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawOrderTrade.swift; sourceTree = "<group>"; };
 		19A56F9D258A660D00553408 /* BinanceRawPlacedOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawPlacedOrder.swift; sourceTree = "<group>"; };
+		19A56FB0258B864300553408 /* TradingAccountPermission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradingAccountPermission.swift; sourceTree = "<group>"; };
 		19B9D0C12559CEE700DF8C70 /* ReferralDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralDataProvider.swift; sourceTree = "<group>"; };
 		19D3099924ECA4D0006B4185 /* ChangeFundAssetPartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeFundAssetPartView.swift; sourceTree = "<group>"; };
 		19D3099B24ED85ED006B4185 /* FundAssetsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundAssetsListViewController.swift; sourceTree = "<group>"; };
@@ -2496,6 +2498,7 @@
 				1906DA562539A6DE00A08846 /* BinanceRawSymbolIcebergPartsFilter.swift */,
 				1906DA552539A6DE00A08846 /* BinanceRawSymbolLotSizeFilter.swift */,
 				1906DA5B2539A6DE00A08846 /* BinanceRawSymbolMarketLotSizeFilter.swift */,
+				19A56FB0258B864300553408 /* TradingAccountPermission.swift */,
 				1906DA572539A6DE00A08846 /* BinanceRawSymbolMaxAlgorithmicOrdersFilter.swift */,
 				1906DA542539A6DD00A08846 /* BinanceRawSymbolMaxOrdersFilter.swift */,
 				19A56EF9258939BC00553408 /* ExternalKycAccessToken.swift */,
@@ -5181,6 +5184,7 @@
 				5E39F71623A3F92F0073DAD5 /* SignalTradingEvent.swift in Sources */,
 				19812429246450B800F286FE /* BetaTestingType.swift in Sources */,
 				5E69AC8223DA0542000AB692 /* TradingInfoContentView.swift in Sources */,
+				19A56FB1258B864300553408 /* TradingAccountPermission.swift in Sources */,
 				5EC1C3B72288178A0024008E /* WalletDepositCurrencyDelegateManager.swift in Sources */,
 				5E39F74923A3F92F0073DAD5 /* SecureAlgorithm.swift in Sources */,
 				199D0E2A24F2DB830005D76B /* MainSocialPageViewController.swift in Sources */,
