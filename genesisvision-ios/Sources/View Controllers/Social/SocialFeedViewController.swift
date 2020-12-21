@@ -12,34 +12,49 @@ import UIKit
 
 class SocialFeedViewController: BaseViewController {
     
-    private let tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = .clear
-        return tableView
-    }()
-    
     var viewModel: SocialFeedViewModel!
+    
+    private var socialFeedCollectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = .clear
+        return collectionView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Social"
-        setupTableView()
+        setupCollectionView()
     }
     
-    private func setupTableView() {
-        view.addSubview(tableView)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        tableView.fillSuperview(padding: UIEdgeInsets(top: 60, left: 0, bottom: 0, right: 0))
+        viewModel.fetch { [weak self] (result) in
+            self?.hideAll()
+            self?.reloadData()
+        }
+    }
+    
+    private func setupCollectionView() {
+        view.addSubview(socialFeedCollectionView)
         
-        tableView.delegate = viewModel.dataSource
-        tableView.dataSource = viewModel.dataSource
-        tableView.registerNibs(for: viewModel.cellModelsForRegistration)
-        tableView.separatorStyle = .none
-        tableView.backgroundView = nil
-        tableView.backgroundColor = .clear
-        tableView.rowHeight = UITableView.automaticDimension
-        setupPullToRefresh(scrollView: tableView)
+        socialFeedCollectionView.fillSuperview(padding: UIEdgeInsets(top: 60, left: 0, bottom: 0, right: 0))
+        
+        socialFeedCollectionView.dataSource = viewModel.socialCollectionViewDataSource
+        socialFeedCollectionView.delegate = viewModel.socialCollectionViewDataSource
+        
+        if let layout = socialFeedCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.scrollDirection = .vertical
+        }
+        
+        socialFeedCollectionView.isScrollEnabled = true
+        socialFeedCollectionView.showsHorizontalScrollIndicator = false
+        socialFeedCollectionView.indicatorStyle = .black
+        socialFeedCollectionView.allowsSelection = false
+        socialFeedCollectionView.registerNibs(for: viewModel.socialCollectionViewModel.cellModelsForRegistration)
+        
+        setupPullToRefresh(scrollView: socialFeedCollectionView)
     }
     
     override func pullToRefresh() {
@@ -47,15 +62,13 @@ class SocialFeedViewController: BaseViewController {
         
         viewModel.fetch(completion: { [weak self] (result) in
             self?.hideAll()
+            self?.reloadData()
         }, refresh: true)
     }
-}
-
-
-extension SocialFeedViewController: BaseTableViewProtocol {
-    func didReload() {
+    
+    private func reloadData() {
         DispatchQueue.main.async {
-            self.tableView.reloadDataSmoothly()
+            self.socialFeedCollectionView.reloadData()
         }
     }
 }

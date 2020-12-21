@@ -35,6 +35,8 @@ enum CellActionType {
     case changePassword
     case closePeriod
     case openSettings
+    
+    case social
 }
 
 enum DidSelectType {

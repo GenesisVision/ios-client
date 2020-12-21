@@ -100,6 +100,12 @@ class ReferralHistoryViewController: BaseViewControllerWithTableView {
         fetch()
     }
     
+    override func fetchMore() {
+        super.fetchMore()
+        
+        
+    }
+    
     private func reloadData() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
@@ -117,7 +123,7 @@ final class ReferralHistoryViewModel: ViewModelWithListProtocol {
     
     var skip: Int = 0
     
-    var take =  ApiKeys.take
+    var take = ApiKeys.take
     
     var dateFrom: Date?
     var dateTo: Date?

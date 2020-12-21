@@ -213,13 +213,14 @@
 		19A56F9F258A660D00553408 /* BinanceRawPlacedOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A56F9D258A660D00553408 /* BinanceRawPlacedOrder.swift */; };
 		19A56FB1258B864300553408 /* TradingAccountPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A56FB0258B864300553408 /* TradingAccountPermission.swift */; };
 		19B9D0C22559CEE700DF8C70 /* ReferralDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B9D0C12559CEE700DF8C70 /* ReferralDataProvider.swift */; };
-		19CB5997258B9B300008D8BC /* SocialFeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19CB5995258B9B2F0008D8BC /* SocialFeedTableViewCell.xib */; };
-		19CB5998258B9B300008D8BC /* SocialFeedTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CB5996258B9B300008D8BC /* SocialFeedTableViewCellViewModel.swift */; };
+		19CB5997258B9B300008D8BC /* SocialFeedCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19CB5995258B9B2F0008D8BC /* SocialFeedCollectionViewCell.xib */; };
+		19CB5998258B9B300008D8BC /* SocialFeedCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CB5996258B9B300008D8BC /* SocialFeedCollectionViewCellViewModel.swift */; };
 		19CB59B8258B9B630008D8BC /* SocialFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CB59B6258B9B630008D8BC /* SocialFeedViewController.swift */; };
 		19CB59B9258B9B630008D8BC /* SocialMainFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CB59B7258B9B630008D8BC /* SocialMainFeedViewController.swift */; };
 		19CB59BF258B9B960008D8BC /* SocialDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CB59BE258B9B960008D8BC /* SocialDataProvider.swift */; };
 		19CB59C6258B9D4D0008D8BC /* SocialFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CB59C5258B9D4D0008D8BC /* SocialFeedViewModel.swift */; };
 		19CB59D0258B9D750008D8BC /* SocialFeedCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CB59CF258B9D750008D8BC /* SocialFeedCollectionViewModel.swift */; };
+		19CB59E2258CE41F0008D8BC /* SocialActivitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CB59E1258CE41F0008D8BC /* SocialActivitiesView.swift */; };
 		19D3099A24ECA4D0006B4185 /* ChangeFundAssetPartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D3099924ECA4D0006B4185 /* ChangeFundAssetPartView.swift */; };
 		19D3099C24ED85ED006B4185 /* FundAssetsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D3099B24ED85ED006B4185 /* FundAssetsListViewController.swift */; };
 		19D3099E24ED8799006B4185 /* FundAssetsListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19D3099D24ED8799006B4185 /* FundAssetsListTableViewCell.xib */; };
@@ -1379,13 +1380,14 @@
 		19A56F9D258A660D00553408 /* BinanceRawPlacedOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawPlacedOrder.swift; sourceTree = "<group>"; };
 		19A56FB0258B864300553408 /* TradingAccountPermission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradingAccountPermission.swift; sourceTree = "<group>"; };
 		19B9D0C12559CEE700DF8C70 /* ReferralDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralDataProvider.swift; sourceTree = "<group>"; };
-		19CB5995258B9B2F0008D8BC /* SocialFeedTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SocialFeedTableViewCell.xib; sourceTree = "<group>"; };
-		19CB5996258B9B300008D8BC /* SocialFeedTableViewCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialFeedTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		19CB5995258B9B2F0008D8BC /* SocialFeedCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SocialFeedCollectionViewCell.xib; sourceTree = "<group>"; };
+		19CB5996258B9B300008D8BC /* SocialFeedCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialFeedCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		19CB59B6258B9B630008D8BC /* SocialFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialFeedViewController.swift; sourceTree = "<group>"; };
 		19CB59B7258B9B630008D8BC /* SocialMainFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialMainFeedViewController.swift; sourceTree = "<group>"; };
 		19CB59BE258B9B960008D8BC /* SocialDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialDataProvider.swift; sourceTree = "<group>"; };
 		19CB59C5258B9D4D0008D8BC /* SocialFeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialFeedViewModel.swift; sourceTree = "<group>"; };
 		19CB59CF258B9D750008D8BC /* SocialFeedCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialFeedCollectionViewModel.swift; sourceTree = "<group>"; };
+		19CB59E1258CE41F0008D8BC /* SocialActivitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialActivitiesView.swift; sourceTree = "<group>"; };
 		19D3099924ECA4D0006B4185 /* ChangeFundAssetPartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeFundAssetPartView.swift; sourceTree = "<group>"; };
 		19D3099B24ED85ED006B4185 /* FundAssetsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundAssetsListViewController.swift; sourceTree = "<group>"; };
 		19D3099D24ED8799006B4185 /* FundAssetsListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FundAssetsListTableViewCell.xib; sourceTree = "<group>"; };
@@ -2392,8 +2394,8 @@
 		19CB599D258B9B350008D8BC /* Social */ = {
 			isa = PBXGroup;
 			children = (
-				19CB5995258B9B2F0008D8BC /* SocialFeedTableViewCell.xib */,
-				19CB5996258B9B300008D8BC /* SocialFeedTableViewCellViewModel.swift */,
+				19CB5995258B9B2F0008D8BC /* SocialFeedCollectionViewCell.xib */,
+				19CB5996258B9B300008D8BC /* SocialFeedCollectionViewCellViewModel.swift */,
 			);
 			path = Social;
 			sourceTree = "<group>";
@@ -3352,6 +3354,7 @@
 				5EAD0AB62090AB1000A92B49 /* MarkerView.xib */,
 				5E5EB5362167B1FA00CDA376 /* CircularProgressView.swift */,
 				5EDD6D4022C7A70D00B9DB93 /* CustomTextField.swift */,
+				19CB59E1258CE41F0008D8BC /* SocialActivitiesView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -4843,7 +4846,7 @@
 				5E93E6FB21D1A5370020DE55 /* NotificationsSettingsAssetTableViewCell.xib in Resources */,
 				5E5BC08921836C00009E4BA3 /* WalletTransactionView.xib in Resources */,
 				5E39F5A023A3E3BE0073DAD5 /* AssetCollectionViewCell.xib in Resources */,
-				19CB5997258B9B300008D8BC /* SocialFeedTableViewCell.xib in Resources */,
+				19CB5997258B9B300008D8BC /* SocialFeedCollectionViewCell.xib in Resources */,
 				FCC9DD57200DFA5E008825EC /* Main.storyboard in Resources */,
 				5EAD0AB72090AB1000A92B49 /* MarkerView.xib in Resources */,
 				5E93E6FC21D1A5370020DE55 /* NotificationListTableViewCell.xib in Resources */,
@@ -5427,6 +5430,7 @@
 				196389BD2530AAC800CA2092 /* BinanceRawPlaceOrder.swift in Sources */,
 				19812439246451FF00F286FE /* FundDetailsListItemItemsViewModel.swift in Sources */,
 				19A56F9F258A660D00553408 /* BinanceRawPlacedOrder.swift in Sources */,
+				19CB59E2258CE41F0008D8BC /* SocialActivitiesView.swift in Sources */,
 				5E39F7B823A3F9300073DAD5 /* LevelsParamsInfo.swift in Sources */,
 				5E541D3A238DD5E600B38244 /* TradingEventsViewModel.swift in Sources */,
 				5E39F74F23A3F92F0073DAD5 /* ProgramsLevelsInfo.swift in Sources */,
@@ -5456,7 +5460,7 @@
 				5E39F7C223A3F9300073DAD5 /* PersonalInvestingFundDetailsList.swift in Sources */,
 				5EB06A37239D312A003AB3FB /* DashboardAPI.swift in Sources */,
 				5E39F71A23A3F92F0073DAD5 /* PlatformUrlInfo.swift in Sources */,
-				19CB5998258B9B300008D8BC /* SocialFeedTableViewCellViewModel.swift in Sources */,
+				19CB5998258B9B300008D8BC /* SocialFeedCollectionViewCellViewModel.swift in Sources */,
 				5E39F70C23A3F92F0073DAD5 /* FilterInfo.swift in Sources */,
 				5E4A7E87222B9D0900A97968 /* AppConstants.swift in Sources */,
 				5EF14D9E2181FC5500B3843A /* FundInvestRouter.swift in Sources */,

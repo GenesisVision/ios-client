@@ -13,6 +13,10 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
     var title: String
     var type: CellActionType
     
+    var skip: Int = 0
+    var take: Int = 12
+    var totalCount: Int = 0
+    
     var selectedIndex: Int = 0
 
     var viewModels = [CellViewAnyModel]()
@@ -31,10 +35,12 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
     }
 
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [.self]
+        return [SocialFeedCollectionViewCellViewModel.self]
     }
     
-    init() {
+    init(type: CellActionType, title: String) {
+        self.type = type
+        self.title = title
     }
     
     func didSelect(at indexPath: IndexPath) {
@@ -48,10 +54,18 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
         return 150
     }
     
+    func model(for indexPath: IndexPath) -> CellViewAnyModel? {
+        return viewModels[indexPath.row]
+    }
+    
     func sizeForItem(at indexPath: IndexPath, frame: CGRect) -> CGSize {
-        let space: CGFloat = collectionLineSpacing + collectionLeftInset + collectionRightInset
-        let size: CGFloat = (frame.width - space) / 2.0
-        return CGSize(width: size, height: 50)
+        let spacing: CGFloat = collectionLeftInset + collectionRightInset
+        if let viewModel = viewModels[safe: indexPath.row] as? SocialFeedCollectionViewCellViewModel {
+            return viewModel.cellSize(spacing: spacing, frame: frame)
+        } else {
+            let size: CGFloat = (frame.width - spacing)
+            return CGSize(width: size, height: 300)
+        }
     }
     
     func insetForSection(for section: Int) -> UIEdgeInsets {
@@ -72,6 +86,62 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
     
     func numberOfSections() -> Int {
         return 1
+    }
+    
+    func fetch(completion: @escaping CompletionBlock, refresh: Bool? = nil, feedType: SocialFeedType) {
+        
+        let refresh = refresh ?? false
+        let skip = refresh ? 0 : self.skip
+        
+        var models = [SocialFeedCollectionViewCellViewModel]()
+        
+        switch feedType {
+        case .live:
+            SocialDataProvider.getFeed(userId: nil, tagContentId: nil, tagContentIds: nil, userMode: nil, hashTags: nil, mask: nil, showTop: nil, showLiked: nil, showOnlyUsersPosts: true, skip: skip, take: take) { [weak self] (postsViewModel) in
+                if let viewModel = postsViewModel, let total = postsViewModel?.total {
+                    viewModel.items?.forEach({ (model) in
+                        let viewModel = SocialFeedCollectionViewCellViewModel(post: model)
+                        models.append(viewModel)
+                    })
+                    self?.updateViewModels(models, refresh: refresh, total: total)
+                }
+                completion(.success)
+            } errorCompletion: { _ in }
+        case .hot:
+            SocialDataProvider.getFeed(userId: nil, tagContentId: nil, tagContentIds: nil, userMode: nil, hashTags: nil, mask: nil, showTop: true, showLiked: nil, showOnlyUsersPosts: nil, skip: skip, take: take) { [weak self] (postsViewModel) in
+                if let viewModel = postsViewModel, let total = postsViewModel?.total {
+                    viewModel.items?.forEach({ (model) in
+                        let viewModel = SocialFeedCollectionViewCellViewModel(post: model)
+                        models.append(viewModel)
+                    })
+                    self?.updateViewModels(models, refresh: refresh, total: total)
+                }
+                completion(.success)
+            } errorCompletion: { _ in }
+        case .feed:
+            SocialDataProvider.getFeed(userId: nil, tagContentId: nil, tagContentIds: nil, userMode: nil, hashTags: nil, mask: nil, showTop: nil, showLiked: nil, showOnlyUsersPosts: nil, skip: skip, take: take) { [weak self] (postsViewModel) in
+                if let viewModel = postsViewModel, let total = postsViewModel?.total {
+                    viewModel.items?.forEach({ (model) in
+                        let viewModel = SocialFeedCollectionViewCellViewModel(post: model)
+                        models.append(viewModel)
+                    })
+                    self?.updateViewModels(models, refresh: refresh, total: total)
+                }
+                completion(.success)
+            } errorCompletion: { _ in }
+        }
+    }
+    
+    func fetch(completion: @escaping CompletionBlock) {
+        
+    }
+    
+    func updateViewModels(_ models: [CellViewAnyModel], refresh: Bool, total: Int?) {
+        totalCount = total ?? 0
+        if models.count > 0 {
+            skip += take
+        }
+        viewModels = refresh ? models : viewModels + models
     }
 }
 

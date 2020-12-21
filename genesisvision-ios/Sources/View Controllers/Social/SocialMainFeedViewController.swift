@@ -43,17 +43,17 @@ final class SocialMainFeedViewModel: TabmanViewModel {
         switch type {
         case .live:
             let viewController = SocialFeedViewController()
-            let viewModel = SocialFeedViewModel(feedType: .live, tableViewDelegate: viewController)
+            let viewModel = SocialFeedViewModel(feedType: .live)
             viewController.viewModel = viewModel
             return viewController
         case .hot:
             let viewController = SocialFeedViewController()
-            let viewModel = SocialFeedViewModel(feedType: .hot, tableViewDelegate: viewController)
+            let viewModel = SocialFeedViewModel(feedType: .hot)
             viewController.viewModel = viewModel
             return viewController
         case .feed:
             let viewController = SocialFeedViewController()
-            let viewModel = SocialFeedViewModel(feedType: .feed, tableViewDelegate: viewController)
+            let viewModel = SocialFeedViewModel(feedType: .feed)
             viewController.viewModel = viewModel
             return viewController
         }
