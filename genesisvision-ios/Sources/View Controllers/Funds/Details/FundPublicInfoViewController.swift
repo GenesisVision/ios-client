@@ -110,17 +110,22 @@ class FundPublicInfoViewController: BaseViewController {
     }
     
     private func updateUI() {
-        guard let titleText = viewModel.fundPublicInfo?.title,
-            let descriptionText = viewModel.fundPublicInfo?._description, let urlString = viewModel.fundPublicInfo?.logoUrl, let logoURL = getFileURL(fileName: urlString) else { return }
+        if let titleText = viewModel.fundPublicInfo?.title {
+            titleTextField.text = titleText
+            titleCountLabel.text = "\(titleText.count) / \(maxTitleLenght)"
+        }
         
-        titleTextField.text = titleText
-        descriptionTextView.text = descriptionText
-        titleCountLabel.text = "\(titleText.count) / \(maxTitleLenght)"
-        descriptionCountLabel.text = "\(descriptionText.count) / \(maxDescriptionLenght)"
+        if let descriptionText = viewModel.fundPublicInfo?._description {
+            descriptionTextView.text = descriptionText
+            descriptionCountLabel.text = "\(descriptionText.count) / \(maxDescriptionLenght)"
+        }
         
-        logoImageView.kf.setImage(with: logoURL, placeholder: UIImage.fundPlaceholder)
-        
-        removeImageButton.isHidden = isPictureURL(url: urlString) ? false : true
+        if let urlString = viewModel.fundPublicInfo?.logoUrl, let logoURL = getFileURL(fileName: urlString) {
+            logoImageView.kf.setImage(with: logoURL, placeholder: UIImage.fundPlaceholder)
+            removeImageButton.isHidden = false
+        } else {
+            removeImageButton.isHidden = true
+        }
     }
     
     @objc private func titleFieldDidChange() {
@@ -162,6 +167,7 @@ class FundPublicInfoViewController: BaseViewController {
         logoImageView.image = nil
         removeImageButton.isHidden = true
         viewModel.pickedImageURL = nil
+        checkActionButton()
     }
     
     @IBAction func uploadLogoButtonAction(_ sender: Any) {
@@ -253,6 +259,8 @@ extension FundPublicInfoViewController: ImagePickerPresentable {
         
         removeImageButton.isHidden = false
         
+        checkActionButton()
+        
     }
 }
 
@@ -298,7 +306,8 @@ final class FundPublicInfoViewModel {
         }, errorCompletion: completion)
     }
     
-    private func saveImage(_ pickedImageURL: URL, completion: @escaping (CompletionBlock)) {
+    private func saveImage(completion: @escaping (CompletionBlock)) {
+        guard let pickedImageURL = pickedImageURL else { return completion(.failure(errorType: .apiError(message: ""))) }
         BaseDataProvider.uploadImage(imageData: pickedImageURL.dataRepresentation, imageLocation: .fundAsset, completion: { [weak self] (uploadResult) in
             guard let uploadResult = uploadResult, let uuidString = uploadResult._id?.uuidString else { return completion(.failure(errorType: .apiError(message: nil))) }
             
@@ -308,8 +317,8 @@ final class FundPublicInfoViewModel {
     }
     
     func updateFund(completion: @escaping CompletionBlock) {
-        if let pickedImageUrl = self.pickedImageURL {
-            saveImage(pickedImageUrl) { [weak self] (result) in
+        if let _ = pickedImageURL {
+            saveImage() { [weak self] (result) in
                 switch result {
                 case .success:
                     self?.updatePublicInfo(completion: completion)
@@ -323,7 +332,7 @@ final class FundPublicInfoViewModel {
     }
     
     private func updatePublicInfo(completion: @escaping CompletionBlock) {
-        guard let assetId = self.assetId else { return completion(.failure(errorType: .apiError(message: nil))) }
+        guard let assetId = assetId else { return completion(.failure(errorType: .apiError(message: nil))) }
         var imageLogo: String?
         
         if let uploadedImageUuid = uploadedImageUuid {

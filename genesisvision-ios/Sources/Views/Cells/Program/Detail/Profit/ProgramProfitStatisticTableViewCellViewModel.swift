@@ -11,6 +11,7 @@ import UIKit
 struct ProgramProfitStatisticTableViewCellViewModel {
     let currency: CurrencyType
     let statistic: ProgramChartStatistic
+    let programType: BrokerTradeServerType
 }
 
 extension ProgramProfitStatisticTableViewCellViewModel: CellViewModel {
@@ -29,12 +30,12 @@ extension ProgramProfitStatisticTableViewCellViewModel: CellViewModel {
             cell.addToStackView(text, header: "Investors")
         }
         
-        if let value = statistic.lastPeriodStarts {
+        if let value = statistic.lastPeriodStarts, !(programType == .binance) {
             let text = value.toString()
             cell.addToStackView(text, header: "Last period starts")
         }
         
-        if let value = statistic.lastPeriodEnds {
+        if let value = statistic.lastPeriodEnds, !(programType == .binance) {
             let text = value.toString()
             cell.addToStackView(text, header: "Last period ends")
         }

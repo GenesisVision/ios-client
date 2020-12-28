@@ -77,7 +77,7 @@ extension DetailStatisticsTableViewCellViewModel: CellViewModel {
         }
         
         if let value = details.programDetails?.ageDays {
-            cell.addToStackView(cell.bottomStackView, value: value.toString(), header: "age")
+            cell.addToStackView(cell.bottomStackView, value: value.toString() + " days", header: "age")
         }
     }
 }

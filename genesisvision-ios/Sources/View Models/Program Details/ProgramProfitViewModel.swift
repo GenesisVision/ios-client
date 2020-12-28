@@ -44,13 +44,15 @@ final class ProgramProfitViewModel: ViewModelWithListProtocol, ViewModelWithFilt
     
     private var programProfitChartTableViewCellViewModel:  ProgramProfitChartTableViewCellViewModel?
     private var programProfitStatisticTableViewCellViewModel: ProgramProfitStatisticTableViewCellViewModel?
+    private let programType: BrokerTradeServerType
     
     // MARK: - Init
-    init(withRouter router: Router, assetId: String, reloadDataProtocol: ReloadDataProtocol?, currency: CurrencyType?) {
+    init(withRouter router: Router, assetId: String, reloadDataProtocol: ReloadDataProtocol?, currency: CurrencyType?, programType: BrokerTradeServerType? = nil) {
         self.router = router
         self.assetId = assetId
         self.currency = currency
         self.reloadDataProtocol = reloadDataProtocol
+        self.programType = programType ?? .undefined
     }
     
     // MARK: - Public methods
@@ -110,7 +112,7 @@ extension ProgramProfitViewModel {
             return programProfitChartTableViewCellViewModel
         case .statistics:
             if let statistic = programProfitChart.statistic, let currency = currency {
-                self.programProfitStatisticTableViewCellViewModel = ProgramProfitStatisticTableViewCellViewModel(currency: currency, statistic: statistic)
+                self.programProfitStatisticTableViewCellViewModel = ProgramProfitStatisticTableViewCellViewModel(currency: currency, statistic: statistic, programType: programType)
                 return programProfitStatisticTableViewCellViewModel
             }
         }

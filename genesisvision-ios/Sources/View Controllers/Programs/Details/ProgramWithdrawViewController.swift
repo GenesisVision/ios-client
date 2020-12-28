@@ -191,7 +191,8 @@ class ProgramWithdrawViewController: BaseViewController {
         var amountRaw: Double?
         
         if isGenesisMarkets {
-            amountRaw = (availableToWithdrawValue / 100 * amountToWithdrawValue)
+            amountRaw = (availableToWithdrawValue / 100 * (amountToWithdrawValueLabel.text?.doubleValue ?? 0))
+            amountRaw = viewModel.withdrawAll ? availableToWithdrawValue : amountRaw
         } else {
             guard let amountValue = amountToWithdrawValueLabel.text?.doubleValue
                 else { return showErrorHUD(subtitle: "Enter withdraw value, please") }
@@ -240,8 +241,8 @@ class ProgramWithdrawViewController: BaseViewController {
         
         var withdrawingValue = amountToWithdrawValueLabel.text
         
-        if isGenesisMarkets {
-            withdrawingValue = (availableToWithdrawValue / 100 * amountToWithdrawValue).toString() + " " + viewModel.programCurrency.rawValue
+        if isGenesisMarkets, let amountValue = amountToWithdrawValueLabel.text?.doubleValue {
+            withdrawingValue = (availableToWithdrawValue / 100 * amountValue).toString() + " " + viewModel.programCurrency.rawValue
         }
         
         

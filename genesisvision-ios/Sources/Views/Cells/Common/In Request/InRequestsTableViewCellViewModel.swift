@@ -52,8 +52,8 @@ extension InRequestsTableViewCellViewModel: CellViewModel {
                     text = "+"
                 }
                 
-                if let amount = request.amount, let currencyValue = request.currency?.rawValue, let currency: CurrencyType = CurrencyType(rawValue: currencyValue) {
-                    text = text + amount.rounded(with: currency).toString() + " " + currencyValue
+                if let amount = request.amount, let currencyValue = request.currency?.rawValue {
+                    text = text + amount.rounded(toPlaces: 4).toString() + " " + currencyValue
                 }
             }
             

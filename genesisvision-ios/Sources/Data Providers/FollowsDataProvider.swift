@@ -30,13 +30,13 @@ class FollowsDataProvider: DataProvider {
         
         let chartPointsCount = filterModel?.chartPointsCount
         
-        var showIn: Currency?
-        if let newCurrency = Currency(rawValue: selectedPlatformCurrency) {
-            showIn = newCurrency
-        }
+//        var showIn: Currency?
+//        if let newCurrency = Currency(rawValue: selectedPlatformCurrency) {
+//            showIn = newCurrency
+//        }
         
         FollowAPI.getFollowAssets(sorting: sorting,
-                                  showIn: showIn,
+                                  showIn: nil,
                                   tags: tags,
                                   dateFrom: dateFrom,
                                   dateTo: dateTo,

@@ -276,7 +276,7 @@ class ProgramInvestViewController: BaseViewController {
         var subtitle: String = "Your request will be processed at the end of the reporting period."
         
         if viewModel.programFollowDetailsFull?.brokerDetails?.type == .binance, let realTime = viewModel.programDetailsFull?.dailyPeriodDetails?.isProcessingRealTime, !realTime, let date = viewModel.programDetailsFull?.dailyPeriodDetails?.nextProcessingDate {
-            subtitle = "Your request will be processed at \(date.textDateAndHours) GMT."
+            subtitle = "Your request will be processed at \(date) GMT."
         }
         
         guard let currency = viewModel.selectedWalletFromDelegateManager?.selected?.currency else { return }

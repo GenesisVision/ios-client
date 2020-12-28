@@ -48,6 +48,7 @@ class TradingViewController: ListViewController {
             guard let viewController = FundPublicInfoViewController.storyboardInstance(.fund) else { return }
             viewController.title = "Create Fund"
             viewController.viewModel = FundPublicInfoViewModel(mode: .create)
+            viewController.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(viewController, animated: true)
         }
     }
@@ -285,9 +286,9 @@ class TradingViewModel: ViewModelWithListProtocol {
             
             guard let count = details?.events?.items?.count, count > 0 else { return }
             
-            sections.insert(.events, at: 1)
             let eventsViewModel = CellWithCollectionViewModel(TradingEventsViewModel(details, delegate: delegate), delegate: delegate)
             viewModels.append(eventsViewModel)
+            sections.contains(.events) ? reloadSection(.events) : sections.insert(.events, at: 1)
             delegate?.didReload()
         }
     }

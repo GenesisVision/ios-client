@@ -25,7 +25,7 @@ final class ProgramPeriodHistoryViewModel {
     var dateTo: Date?
     var skip = 0
     var take = ApiKeys.take
-    var currency: CurrencyType?
+    var currency: Currency?
     var allowsSelection = false
     
     var totalCount = 0 {
@@ -50,7 +50,7 @@ final class ProgramPeriodHistoryViewModel {
     var isOpenTrades: Bool = false
     
     // MARK: - Init
-    init(withRouter router: ProgramRouter, assetId: String, reloadDataProtocol: ReloadDataProtocol?, currency: CurrencyType? = nil) {
+    init(withRouter router: ProgramRouter, assetId: String, reloadDataProtocol: ReloadDataProtocol?, currency: Currency? = nil) {
         self.router = router
         self.assetId = assetId
         self.reloadDataProtocol = reloadDataProtocol

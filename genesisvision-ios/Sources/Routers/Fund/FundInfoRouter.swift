@@ -67,6 +67,7 @@ class FundInfoRouter: Router {
         guard let viewController = FundPublicInfoViewController.storyboardInstance(.fund) else { return }
         let viewModel = FundPublicInfoViewModel(mode: .edit, assetId: assetId)
         viewController.viewModel = viewModel
+        viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

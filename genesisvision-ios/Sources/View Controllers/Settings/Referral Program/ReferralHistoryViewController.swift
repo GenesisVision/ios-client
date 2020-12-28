@@ -117,7 +117,7 @@ final class ReferralHistoryViewModel: ViewModelWithListProtocol {
     
     var skip: Int = 0
     
-    var take =  ApiKeys.take
+    var take = 30
     
     var dateFrom: Date?
     var dateTo: Date?

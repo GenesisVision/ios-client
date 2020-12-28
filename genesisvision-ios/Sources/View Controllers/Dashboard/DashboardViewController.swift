@@ -93,6 +93,7 @@ extension DashboardViewController: DashBoardTradingTableViewCellButtonsActionsPr
         guard let viewController = FundPublicInfoViewController.storyboardInstance(.fund) else { return }
         viewController.title = "Create Fund"
         viewController.viewModel = FundPublicInfoViewModel(mode: .create)
+        viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)
     }
     

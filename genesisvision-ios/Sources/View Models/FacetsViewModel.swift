@@ -120,15 +120,15 @@ final class FacetsViewModel: ListViewModelProtocolWithFacets {
         if let facetTimeFrame = facet.timeframe {
             switch facetTimeFrame {
             case .day:
-                filterModel.dateRangeModel = .init(dateRangeType: .day, dateFrom: Date(), dateTo: Date().removeDays(1))
+                filterModel.dateRangeModel = .init(dateRangeType: .day, dateFrom: Date().removeDays(1), dateTo: Date())
             case .week:
-                filterModel.dateRangeModel = .init(dateRangeType: .week, dateFrom: Date(), dateTo: Date().removeDays(7))
+                filterModel.dateRangeModel = .init(dateRangeType: .week, dateFrom: Date().removeDays(7), dateTo: Date())
             case .month:
-                filterModel.dateRangeModel = .init(dateRangeType: .month, dateFrom: Date(), dateTo: Date().removeMonths(1))
+                filterModel.dateRangeModel = .init(dateRangeType: .month, dateFrom: Date().removeMonths(1), dateTo: Date())
             case .threeMonths:
                 filterModel.dateRangeModel = .init(dateRangeType: .custom, dateFrom: Date().removeMonths(3), dateTo: Date())
             case .year:
-                filterModel.dateRangeModel = .init(dateRangeType: .year, dateFrom: Date(), dateTo: Date().removeYears(1))
+                filterModel.dateRangeModel = .init(dateRangeType: .year, dateFrom: Date().removeYears(1), dateTo: Date())
             case .allTime:
                 filterModel.dateRangeModel = .init(dateRangeType: .all, dateFrom: Date().removeYears(20), dateTo: Date())
             }

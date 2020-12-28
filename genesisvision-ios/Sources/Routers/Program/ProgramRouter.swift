@@ -59,7 +59,7 @@ class ProgramRouter: TabmanRouter {
         return viewController
     }
     
-    func getPeriodHistory(with assetId: String, currency: CurrencyType) -> ProgramPeriodHistoryViewController? {
+    func getPeriodHistory(with assetId: String, currency: Currency) -> ProgramPeriodHistoryViewController? {
         
         let viewController = ProgramPeriodHistoryViewController()
         let viewModel = ProgramPeriodHistoryViewModel(withRouter: self, assetId: assetId, reloadDataProtocol: viewController, currency: currency)

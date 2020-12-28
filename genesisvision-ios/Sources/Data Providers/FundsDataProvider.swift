@@ -158,4 +158,7 @@ class FundsDataProvider: DataProvider {
             })
         }
     }
+    
+    static func getRequests(with assetId: String, completion: @escaping CompletionBlock) {
+    }
 }

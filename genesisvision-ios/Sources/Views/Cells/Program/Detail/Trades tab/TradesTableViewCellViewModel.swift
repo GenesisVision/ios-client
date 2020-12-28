@@ -43,8 +43,12 @@ extension TradesTableViewCellViewModel: CellViewModel {
                 }
             }
         } else if let orderModel = orderModel as? OrderModel {
-            if let value = orderModel.price {
-                cell.balanceLabel.text = value.toString()
+            if let price = orderModel.price {
+                cell.balanceLabel.text = price.toString()
+            }
+            
+            if let price = orderModel.price, price == 0, let volume = orderModel.volume {
+                cell.balanceLabel.text = volume.toString()
             }
             
             if let value = orderModel.profit {

@@ -197,11 +197,12 @@ final class ProgramViewModel: TabmanViewModel {
             return viewController
         case .profit:
             guard let currency = programDetailsFull?.tradingAccountInfo?.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency) else { return nil }
-            let viewModel = ProgramProfitViewModel(withRouter: router, assetId: assetId, reloadDataProtocol: router.programViewController, currency: currencyType)
+            let viewModel = ProgramProfitViewModel(withRouter: router, assetId: assetId, reloadDataProtocol: router.programViewController, currency: currencyType, programType: programDetailsFull?.brokerDetails?.type)
             let viewController = router.getProfitViewController(with: viewModel)
             router.programProfitViewController = viewController
             return viewController
         case .periodHistory:
+            guard let currency = programDetailsFull?.tradingAccountInfo?.currency else { return nil }
             return router.getPeriodHistory(with: assetId, currency: currency)
         case .trades:
             return router.getTrades(with: assetId, currencyType: currency)

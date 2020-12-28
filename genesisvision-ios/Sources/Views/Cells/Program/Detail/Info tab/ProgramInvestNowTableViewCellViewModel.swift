@@ -27,7 +27,7 @@ extension ProgramInvestNowTableViewCellViewModel: CellViewModel {
             cell.investButton.setEnabled(canInvest)
         }
         
-        if let periodEnds = programDetails?.periodEnds {
+        if let periodEnds = programDetails?.periodEnds, !(programDetailsFull?.brokerDetails?.type == .binance) {
             let periodEndsString = periodEnds.defaultFormatString
             cell.disclaimerLabel.text = "Your request will be processed at the end of the reporting period " + periodEndsString
         }

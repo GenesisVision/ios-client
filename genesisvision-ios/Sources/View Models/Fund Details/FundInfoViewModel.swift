@@ -242,6 +242,10 @@ extension FundInfoViewModel: YourInvestmentProtocol {
     func didTapWithdrawButton() {
         withdraw()
     }
+    
+    func didTapStatusButton() {
+        guard let assetId = assetId else { return }
+    }
 }
 
 extension FundInfoViewModel: InvestNowProtocol {

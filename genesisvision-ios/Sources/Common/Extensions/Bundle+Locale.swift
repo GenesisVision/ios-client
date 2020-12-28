@@ -10,7 +10,7 @@ import Foundation
 
 extension Bundle {
     var locale: Locale {
-        let language = self.preferredLocalizations[0]
+        let language = preferredLocalizations[0]
         let locale = Locale(identifier: language)
         return locale
     }
