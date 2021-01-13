@@ -159,6 +159,11 @@
 		19A2E05725AF29370020AD01 /* SocialMediaFeedCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19A2E05625AF29360020AD01 /* SocialMediaFeedCollectionViewCell.xib */; };
 		19A2E05D25AF295C0020AD01 /* SocialMediaFeedCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E05C25AF295C0020AD01 /* SocialMediaFeedCollectionViewCellViewModel.swift */; };
 		19A2E06325AF29F40020AD01 /* SocialPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E06225AF29F40020AD01 /* SocialPostView.swift */; };
+		19A2E06D25AF41C60020AD01 /* SocialMediaCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19A2E06C25AF41C60020AD01 /* SocialMediaCollectionViewCell.xib */; };
+		19A2E07325AF41EE0020AD01 /* SocialMediaCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E07225AF41EE0020AD01 /* SocialMediaCollectionViewCellViewModel.swift */; };
+		19A2E07925AF4AD90020AD01 /* SocialMediaPostCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E07825AF4AD90020AD01 /* SocialMediaPostCollectionViewCellViewModel.swift */; };
+		19A2E07F25AF4B260020AD01 /* SocialMediaPostCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19A2E07E25AF4B260020AD01 /* SocialMediaPostCollectionViewCell.xib */; };
+		19A2E0AE25AFA8CD0020AD01 /* SocialRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E0AD25AFA8CD0020AD01 /* SocialRouter.swift */; };
 		19A56E64258937FF00553408 /* BinanceAccountType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A56E63258937FF00553408 /* BinanceAccountType.swift */; };
 		19A56E6A2589380D00553408 /* BinanceOrderResponseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A56E692589380D00553408 /* BinanceOrderResponseType.swift */; };
 		19A56E702589382900553408 /* BinancePeriodInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A56E6F2589382900553408 /* BinancePeriodInterval.swift */; };
@@ -1330,6 +1335,11 @@
 		19A2E05625AF29360020AD01 /* SocialMediaFeedCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialMediaFeedCollectionViewCell.xib; sourceTree = "<group>"; };
 		19A2E05C25AF295C0020AD01 /* SocialMediaFeedCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMediaFeedCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		19A2E06225AF29F40020AD01 /* SocialPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialPostView.swift; sourceTree = "<group>"; };
+		19A2E06C25AF41C60020AD01 /* SocialMediaCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialMediaCollectionViewCell.xib; sourceTree = "<group>"; };
+		19A2E07225AF41EE0020AD01 /* SocialMediaCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMediaCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
+		19A2E07825AF4AD90020AD01 /* SocialMediaPostCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMediaPostCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
+		19A2E07E25AF4B260020AD01 /* SocialMediaPostCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialMediaPostCollectionViewCell.xib; sourceTree = "<group>"; };
+		19A2E0AD25AFA8CD0020AD01 /* SocialRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialRouter.swift; sourceTree = "<group>"; };
 		19A56E63258937FF00553408 /* BinanceAccountType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceAccountType.swift; sourceTree = "<group>"; };
 		19A56E692589380D00553408 /* BinanceOrderResponseType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceOrderResponseType.swift; sourceTree = "<group>"; };
 		19A56E6F2589382900553408 /* BinancePeriodInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinancePeriodInterval.swift; sourceTree = "<group>"; };
@@ -2418,6 +2428,10 @@
 				19A2E04625AE03700020AD01 /* SocialMediaAddPostCollectionViewCellViewModel.swift */,
 				19A2E05625AF29360020AD01 /* SocialMediaFeedCollectionViewCell.xib */,
 				19A2E05C25AF295C0020AD01 /* SocialMediaFeedCollectionViewCellViewModel.swift */,
+				19A2E06C25AF41C60020AD01 /* SocialMediaCollectionViewCell.xib */,
+				19A2E07225AF41EE0020AD01 /* SocialMediaCollectionViewCellViewModel.swift */,
+				19A2E07E25AF4B260020AD01 /* SocialMediaPostCollectionViewCell.xib */,
+				19A2E07825AF4AD90020AD01 /* SocialMediaPostCollectionViewCellViewModel.swift */,
 			);
 			path = Social;
 			sourceTree = "<group>";
@@ -4553,6 +4567,7 @@
 				5EE00764217873CB0045B890 /* Manager */,
 				FC4C194220304EF800625795 /* Wallet */,
 				5EC7B88320D15E89007720D1 /* Settings */,
+				19A2E0AD25AFA8CD0020AD01 /* SocialRouter.swift */,
 			);
 			path = Routers;
 			sourceTree = "<group>";
@@ -4868,6 +4883,7 @@
 				192DB068256F075000C198CB /* DashboardInvestmentLimitsTableViewCell.xib in Resources */,
 				5E1CF81F218B71D100541C70 /* Montserrat-Medium.ttf in Resources */,
 				5E93E6FB21D1A5370020DE55 /* NotificationsSettingsAssetTableViewCell.xib in Resources */,
+				19A2E06D25AF41C60020AD01 /* SocialMediaCollectionViewCell.xib in Resources */,
 				19A2E04D25AE040C0020AD01 /* SocialMediaAddPostCollectionViewCell.xib in Resources */,
 				5E5BC08921836C00009E4BA3 /* WalletTransactionView.xib in Resources */,
 				5E39F5A023A3E3BE0073DAD5 /* AssetCollectionViewCell.xib in Resources */,
@@ -4940,6 +4956,7 @@
 				19A2E03B25ADC5EF0020AD01 /* Social.storyboard in Resources */,
 				5E93E70E21D1AC130020DE55 /* NotificationsSettingsCustomTableViewCell.xib in Resources */,
 				5E3C72FC2174EC6500DE6F7D /* InvestWithdrawConfirmView.xib in Resources */,
+				19A2E07F25AF4B260020AD01 /* SocialMediaPostCollectionViewCell.xib in Resources */,
 				5EF9F90423E09C4400542E1E /* ProgramContentView.xib in Resources */,
 				5ED0F33222CE501600F3F9F0 /* CommissionsView.xib in Resources */,
 				5E6A6BC1216D5EEE0082C343 /* EventTableViewCell.xib in Resources */,
@@ -5249,6 +5266,7 @@
 				5E39F7AB23A3F9300073DAD5 /* DetachFromExternalSignalProvider.swift in Sources */,
 				5EA1FE2721A2F24A00308D81 /* FacetCollectionViewCell.swift in Sources */,
 				5E39F7B123A3F9300073DAD5 /* PlatformCommissionInfo.swift in Sources */,
+				19A2E0AE25AFA8CD0020AD01 /* SocialRouter.swift in Sources */,
 				5E39F79E23A3F9300073DAD5 /* SignalDataMaster.swift in Sources */,
 				5E39F71623A3F92F0073DAD5 /* SignalTradingEvent.swift in Sources */,
 				19812429246450B800F286FE /* BetaTestingType.swift in Sources */,
@@ -5359,6 +5377,7 @@
 				19787B00248141A400217CA9 /* PostEvent.swift in Sources */,
 				1979A5322524DE8F005EEABF /* BinanceRawKline.swift in Sources */,
 				5E39F5F923A3F8A60073DAD5 /* AttachToExternalSignalProviderExt.swift in Sources */,
+				19A2E07925AF4AD90020AD01 /* SocialMediaPostCollectionViewCellViewModel.swift in Sources */,
 				19A56F6D258A657C00553408 /* BinanceRawFuturesAccountAsset.swift in Sources */,
 				5E39F78923A3F9300073DAD5 /* MoneyLocationType.swift in Sources */,
 				5E39F5ED23A3F8A60073DAD5 /* BalanceChartPoint.swift in Sources */,
@@ -5744,6 +5763,7 @@
 				5EFB2375238AC2B600CD7480 /* TradingPrivateShortListViewModel.swift in Sources */,
 				195B9F2725585DE0003DA54E /* ReferralInfoLinkTableViewCell.swift in Sources */,
 				1981242F2464510C00F286FE /* DashboardTradingAssetItemsViewModel.swift in Sources */,
+				19A2E07325AF41EE0020AD01 /* SocialMediaCollectionViewCellViewModel.swift in Sources */,
 				198124532464585D00F286FE /* PostImageResize.swift in Sources */,
 				FC5E904A202169DC000E4A90 /* FilterViewController.swift in Sources */,
 				FCA19A25201AA8C000157AD6 /* Router.swift in Sources */,
@@ -6112,7 +6132,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -6121,7 +6141,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.2.0;
+				MARKETING_VERSION = 2.2.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor.NotificationService;
@@ -6170,7 +6190,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 8;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -6190,7 +6210,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.2.0;
+				MARKETING_VERSION = 2.2.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor.NotificationService;
@@ -6243,7 +6263,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 8;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -6263,7 +6283,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.2.0;
+				MARKETING_VERSION = 2.2.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor.NotificationService;
@@ -6286,7 +6306,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_ENTITLEMENTS = NotificationContent/NotificationContent.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = NotificationContent/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -6296,7 +6316,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.2.0;
+				MARKETING_VERSION = 2.2.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor.NotificationContent;
@@ -6344,7 +6364,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationContent/NotificationContent.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 8;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -6365,7 +6385,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.2.0;
+				MARKETING_VERSION = 2.2.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor.NotificationContent;
@@ -6417,7 +6437,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationContent/NotificationContent.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 8;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -6438,7 +6458,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.2.0;
+				MARKETING_VERSION = 2.2.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor.NotificationContent;
@@ -6521,7 +6541,7 @@
 				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -6530,7 +6550,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.0;
+				MARKETING_VERSION = 2.2.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "\"-DPROD\"";
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor;
@@ -6824,7 +6844,7 @@
 				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
@@ -6834,7 +6854,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.0;
+				MARKETING_VERSION = 2.2.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Onone";
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor;
 				PRODUCT_NAME = "${APP_DISPLAY_NAME}";
@@ -6914,7 +6934,7 @@
 				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -6923,7 +6943,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.0;
+				MARKETING_VERSION = 2.2.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "\"-DDEV\"";
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor;

@@ -49,4 +49,10 @@ class SocialDataProvider: DataProvider {
             DataProvider().responseHandler(error, completion: completion)
         }
     }
+    
+    static func getMedia(completion: @escaping (_ signalTradingEvents: MediaPostItemsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        SocialAPI.getSocialMedia { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
 }

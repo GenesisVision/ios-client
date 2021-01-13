@@ -77,7 +77,8 @@ class Router {
         
         addDashboard(&navigationController, &viewControllers)
         addPrograms(&viewControllers)
-        addWallet(&navigationController, &viewControllers)
+        addSocial(&navigationController, &viewControllers)
+        //addWallet(&navigationController, &viewControllers)
         addSettings(&navigationController, &viewControllers)
         
         return viewControllers
@@ -127,22 +128,33 @@ class Router {
         }
     }
     
-    private func addWallet(_ navigationController: inout BaseNavigationController, _ viewControllers: inout [UIViewController]) {
-        //let socialViewController = SocialMainFeedViewController()
-        let viewModel = SocialMediaViewModel()
+    private func addSocial(_ navigationController: inout BaseNavigationController, _ viewControllers: inout [UIViewController]) {
         let socialMediaViewController = SocialMediaViewController()
-        socialMediaViewController.viewModel = viewModel
-        //let walletViewController = WalletViewController()
+        let router = SocialRouter(parentRouter: self, navigationController: navigationController)
+        socialMediaViewController.viewModel = SocialMediaViewModel(router: router, socialMediaCollectionViewModelDelegate: socialMediaViewController)
+        router.socialMediaViewController = socialMediaViewController
         navigationController = BaseNavigationController(rootViewController: socialMediaViewController)
-        navigationController.title = ""
-        //let router = WalletRouter(parentRouter: self, navigationController: navigationController)
-        //router.walletTabmanViewController = walletViewController
-        
-        //walletViewController.viewModel = WalletTabmanViewModel(withRouter: router, walletType: .all)
-        
-        //socialViewController.viewModel = SocialMainFeedViewModel(withRouter: self)
+        navigationController.title = "Social"
         navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_wallet").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_wallet").withRenderingMode(.alwaysOriginal)
         viewControllers.append(navigationController)
+    }
+    
+    private func addWallet(_ navigationController: inout BaseNavigationController, _ viewControllers: inout [UIViewController]) {
+//        //let socialViewController = SocialMainFeedViewController()
+//        let socialMediaViewController = SocialMediaViewController()
+//        //let viewModel = SocialMediaViewModel(router: self, socialMediaCollectionViewModelDelegate: socialMediaViewController)
+//        socialMediaViewController.viewModel = viewModel
+//        //let walletViewController = WalletViewController()
+//        navigationController = BaseNavigationController(rootViewController: socialMediaViewController)
+//        navigationController.title = ""
+//        //let router = WalletRouter(parentRouter: self, navigationController: navigationController)
+//        //router.walletTabmanViewController = walletViewController
+//
+//        //walletViewController.viewModel = WalletTabmanViewModel(withRouter: router, walletType: .all)
+//
+//        //socialViewController.viewModel = SocialMainFeedViewModel(withRouter: self)
+//        navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_wallet").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_wallet").withRenderingMode(.alwaysOriginal)
+//        viewControllers.append(navigationController)
     }
     
     private func addSettings(_ navigationController: inout BaseNavigationController, _ viewControllers: inout [UIViewController]) {

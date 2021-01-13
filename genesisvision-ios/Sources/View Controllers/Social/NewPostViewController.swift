@@ -8,10 +8,15 @@
 
 import UIKit
 
-class NewPostViewController: BaseModalViewController {
+class NewPostViewController: BaseViewController {
     
     var viewModel: NewPostViewModel!
     
+    @IBOutlet weak var sharedPostMainView: UIView! {
+        didSet {
+            sharedPostMainView.isHidden = true
+        }
+    }
     @IBOutlet weak var sharedPostView: SocialPostView! {
         didSet {
             sharedPostView.isHidden = true
@@ -80,6 +85,7 @@ class NewPostViewController: BaseModalViewController {
     
     private func setupSharedPostView() {
         sharedPostView.isHidden = false
+        sharedPostMainView.isHidden = false
         
         if let logo = viewModel.sharedPost?.author?.logoUrl, let fileUrl = getFileURL(fileName: logo), isPictureURL(url: fileUrl.absoluteString) {
             sharedPostView.userImageView.kf.indicatorType = .activity

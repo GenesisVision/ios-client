@@ -120,6 +120,7 @@
                         <outlet property="attachmentButton" destination="TiI-m7-9NQ" id="hm0-OV-e29"/>
                         <outlet property="hashtagSignButton" destination="DQJ-uR-aOj" id="3ZO-MW-1T3"/>
                         <outlet property="publishButton" destination="jPM-Re-cua" id="4KQ-Jf-RL9"/>
+                        <outlet property="sharedPostMainView" destination="a3g-bf-2Gm" id="HIZ-h6-ynF"/>
                         <outlet property="sharedPostView" destination="7wc-VE-Knv" id="qLy-YF-GJa"/>
                         <outlet property="textView" destination="bCO-Cu-9kt" id="e6R-Bx-zaB"/>
                     </connections>

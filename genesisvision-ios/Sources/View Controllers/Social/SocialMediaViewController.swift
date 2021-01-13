@@ -16,33 +16,39 @@ class SocialMediaViewController: BaseViewController {
     private var mediaFeedCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.backgroundColor = .clear
+        collectionView.backgroundColor = UIColor.Cell.headerBg
         return collectionView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.setNavigationBarHidden(true, animated: false)
+        
         setupCollectionView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
         
         viewModel.fetch { [weak self] (result) in
             switch result {
             case .success:
                 self?.reloadData()
-            case .failure(errorType: let errorType):
+            case .failure(errorType: _):
                 break
             }
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
     private func setupCollectionView() {
         view.addSubview(mediaFeedCollectionView)
         
-        mediaFeedCollectionView.fillSuperview(padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
+        mediaFeedCollectionView.fillSuperview(padding: UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0))
         
         mediaFeedCollectionView.dataSource = viewModel.socialMediaCollectionViewDataSource
         mediaFeedCollectionView.delegate = viewModel.socialMediaCollectionViewDataSource
@@ -52,8 +58,7 @@ class SocialMediaViewController: BaseViewController {
         }
         
         mediaFeedCollectionView.isScrollEnabled = true
-        mediaFeedCollectionView.showsHorizontalScrollIndicator = false
-        mediaFeedCollectionView.indicatorStyle = .black
+        mediaFeedCollectionView.showsVerticalScrollIndicator = false
         mediaFeedCollectionView.allowsSelection = false
         mediaFeedCollectionView.registerNibs(for: viewModel.socialMediaCollectionViewModel.cellModelsForRegistration)
         
@@ -66,16 +71,83 @@ class SocialMediaViewController: BaseViewController {
         }
     }
     
+    private func showNewPostViewController(sharedPost: Post?) {
+        guard let sharedPost = sharedPost else {
+            viewModel.router.show(routeType: .addPost)
+            return
+        }
+        
+        viewModel.router.show(routeType: .sharePost(post: sharedPost))
+    }
+    
+    private func showSocialFeed(type: SocialMediaFeedCollectionCellType) {
+        viewModel.router.show(routeType: .socialFeed)
+    }
+}
+
+extension SocialMediaViewController: SocialMediaCollectionViewModelDelegate {
+    func openSocialFeed(type: SocialMediaFeedCollectionCellType) {
+        showSocialFeed(type: type)
+    }
+    
+    func commentPressed(postId: UUID) {
+    }
+    
+    func sharePressed(postId: UUID) {
+        
+        var sharedPost: Post?
+        
+        SocialDataProvider.getPost(postId: postId) { [weak self] (postModel) in
+            sharedPost = postModel
+            self?.showNewPostViewController(sharedPost: sharedPost)
+        } errorCompletion: { (result) in
+            switch result {
+            case .success:
+                break
+            case .failure(errorType: let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
+            }
+        }
+    }
+    
+    func likePressed(postId: UUID) {
+        SocialDataProvider.getPost(postId: postId) { (post) in
+            if let isLiked = post?.personalDetails?.isLiked {
+                isLiked ? SocialDataProvider.unlikePost(postId: postId) { _ in } : SocialDataProvider.likePost(postId: postId) { _ in }
+            }
+        } errorCompletion: { _ in }
+    }
+    
+    func shareIdeasPressed() {
+        showNewPostViewController(sharedPost: nil)
+    }
+    
+    func mediaPostPressed(post: MediaPost) {
+        guard let url = post.url else { return }
+        openSafariVC(with: url)
+    }
+}
+
+protocol SocialMediaCollectionViewModelDelegate: class {
+    func openSocialFeed(type: SocialMediaFeedCollectionCellType)
+    func commentPressed(postId: UUID)
+    func sharePressed(postId: UUID)
+    func likePressed(postId: UUID)
+    
+    func shareIdeasPressed()
+    func mediaPostPressed(post: MediaPost)
 }
 
 final class SocialMediaViewModel {
     
     var socialMediaCollectionViewModel: SocialMediaCollectionViewModel!
     var socialMediaCollectionViewDataSource: CollectionViewDataSource!
+    var router: SocialRouter!
     
-    init() {
-        socialMediaCollectionViewModel = SocialMediaCollectionViewModel(type: .social, title: "")
+    init(router: SocialRouter, socialMediaCollectionViewModelDelegate: SocialMediaCollectionViewModelDelegate) {
+        socialMediaCollectionViewModel = SocialMediaCollectionViewModel(type: .social, title: "", delegate: socialMediaCollectionViewModelDelegate)
         socialMediaCollectionViewDataSource = CollectionViewDataSource(socialMediaCollectionViewModel)
+        self.router = router
     }
     
     func fetch(completion: @escaping CompletionBlock) {
@@ -97,9 +169,13 @@ final class SocialMediaCollectionViewModel: CellViewModelWithCollection {
         case users
     }
     
-    var sections: [SectionType] = [.addPost]
+    var sections: [SectionType] = [.addPost, .feed, .media]
     
     var viewModels = [CellViewAnyModel]()
+    
+    var feedViewModels = [CellViewAnyModel]()
+    
+    var mediaViewModel = [CellViewAnyModel]()
     
     let collectionTopInset: CGFloat = Constants.SystemSizes.Cell.horizontalMarginValue
     let collectionBottomInset: CGFloat = Constants.SystemSizes.Cell.horizontalMarginValue
@@ -110,12 +186,16 @@ final class SocialMediaCollectionViewModel: CellViewModelWithCollection {
     
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [SocialMediaAddPostCollectionViewCellViewModel.self,
-                SocialMediaFeedCollectionViewCellViewModel.self]
+                SocialMediaFeedCollectionViewCellViewModel.self,
+                SocialMediaCollectionViewCellViewModel.self]
     }
     
-    init(type: CellActionType, title: String) {
+    weak var delegate: SocialMediaCollectionViewModelDelegate?
+    
+    init(type: CellActionType, title: String, delegate: SocialMediaCollectionViewModelDelegate) {
         self.type = type
         self.title = title
+        self.delegate = delegate
     }
     
     
@@ -128,12 +208,12 @@ final class SocialMediaCollectionViewModel: CellViewModelWithCollection {
             }
             let firstCellViewModel = SocialMediaAddPostCollectionViewCellViewModel(imageUrl: imageUrl, delegate: self)
             self?.viewModels.removeAll(where: { $0 is SocialMediaAddPostCollectionViewCellViewModel })
-            self?.viewModels.append(firstCellViewModel)
-            completion(.success)
-        } completionError: { _ in
-            completion(.failure(errorType: .apiError(message: "")))
+            self?.viewModels.insert(firstCellViewModel, at: 0)
+            
+            self?.fetchSocialFeeds(completion: completion)
+        } completionError: { [weak self] _ in
+            self?.fetchSocialFeeds(completion: completion)
         }
-        
     }
     
     
@@ -141,26 +221,62 @@ final class SocialMediaCollectionViewModel: CellViewModelWithCollection {
         
         //live
         SocialDataProvider.getFeed(userId: nil, tagContentId: nil, tagContentIds: nil, userMode: nil, hashTags: nil, mask: nil, showTop: nil, showLiked: nil, showOnlyUsersPosts: true, skip: 0, take: 1) { [weak self] (postsViewModel) in
-            if let viewModel = postsViewModel, let total = postsViewModel?.total {
-                let viewModel = SocialMediaFeedCollectionViewCellViewModel(title: "Live", post: )
+            if let post = postsViewModel?.items?.first {
+                let viewModel = SocialMediaFeedCollectionViewCellViewModel(type: .live, post: post, cellDelegate: self)
+                
+                self?.feedViewModels.removeAll(where: { guard let model = $0 as? SocialMediaFeedCollectionViewCellViewModel else { return false }
+                    return model.type == .live
+                })
+                self?.feedViewModels.append(viewModel)
             }
-            completion(.success)
-        } errorCompletion: { _ in }
+        } errorCompletion: { _ in
+            completion(.failure(errorType: .apiError(message: "")))
+        }
         
         //hot
         SocialDataProvider.getFeed(userId: nil, tagContentId: nil, tagContentIds: nil, userMode: nil, hashTags: nil, mask: nil, showTop: true, showLiked: nil, showOnlyUsersPosts: nil, skip: 0, take: 1) { [weak self] (postsViewModel) in
-            if let viewModel = postsViewModel, let total = postsViewModel?.total {
+            if let post = postsViewModel?.items?.first {
+                let viewModel = SocialMediaFeedCollectionViewCellViewModel(type: .hot, post: post, cellDelegate: self)
+                
+                self?.feedViewModels.removeAll(where: { guard let model = $0 as? SocialMediaFeedCollectionViewCellViewModel else { return false }
+                    return model.type == .hot
+                })
+                self?.feedViewModels.append(viewModel)
             }
-            completion(.success)
-        } errorCompletion: { _ in }
+        } errorCompletion: { _ in
+            completion(.failure(errorType: .apiError(message: "")))
+        }
         
         //feed
         SocialDataProvider.getFeed(userId: nil, tagContentId: nil, tagContentIds: nil, userMode: nil, hashTags: nil, mask: nil, showTop: nil, showLiked: nil, showOnlyUsersPosts: nil, skip: 0, take: 1) { [weak self] (postsViewModel) in
-            if let viewModel = postsViewModel, let total = postsViewModel?.total {
+            if let post = postsViewModel?.items?.first {
+                let viewModel = SocialMediaFeedCollectionViewCellViewModel(type: .feed, post: post, cellDelegate: self)
+                
+                self?.feedViewModels.removeAll(where: { guard let model = $0 as? SocialMediaFeedCollectionViewCellViewModel else { return false }
+                    return model.type == .feed
+                })
+                self?.feedViewModels.append(viewModel)
             }
             completion(.success)
-        } errorCompletion: { _ in }
+            self?.fetchMedia(completion: completion)
+        } errorCompletion: { _ in
+            completion(.failure(errorType: .apiError(message: "")))
+        }
         
+    }
+    
+    func fetchMedia(completion: @escaping CompletionBlock) {
+        SocialDataProvider.getMedia { [weak self] (viewModel) in
+            if let posts = viewModel?.items {
+                let viewModel = SocialMediaCollectionViewCellViewModel(items: posts, cellDelegate: self)
+                self?.mediaViewModel = []
+                self?.mediaViewModel.append(viewModel)
+            }
+            completion(.success)
+        } errorCompletion: { _ in
+            completion(.failure(errorType: .apiError(message: "")))
+        }
+
     }
     
     func model(for indexPath: IndexPath) -> CellViewAnyModel? {
@@ -170,9 +286,9 @@ final class SocialMediaCollectionViewModel: CellViewModelWithCollection {
         case .addPost:
             return viewModels.first{ $0 is SocialMediaAddPostCollectionViewCellViewModel }
         case .feed:
-            break
+            return feedViewModels[indexPath.row]
         case .media:
-            break
+            return mediaViewModel.first
         case .users:
             break
         }
@@ -180,17 +296,15 @@ final class SocialMediaCollectionViewModel: CellViewModelWithCollection {
     }
     
     func sizeForItem(at indexPath: IndexPath, frame: CGRect) -> CGSize {
-        
         let type = sections[indexPath.section]
         
         switch type {
         case .addPost:
-            let spacing: CGFloat = collectionLeftInset + collectionRightInset
-            return CGSize(width: frame.width - spacing, height: 50)
+            return CGSize(width: frame.width, height: 50)
         case .feed:
-            break
+            return CGSize(width: frame.width, height: 300)
         case .media:
-            break
+            return CGSize(width: frame.width, height: 300)
         case .users:
             break
         }
@@ -198,11 +312,11 @@ final class SocialMediaCollectionViewModel: CellViewModelWithCollection {
     }
     
     func insetForSection(for section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: collectionTopInset, left: collectionLeftInset, bottom: collectionBottomInset, right: collectionRightInset)
+        return UIEdgeInsets(top: collectionTopInset, left: 0, bottom: collectionBottomInset, right: 0)
     }
     
     func minimumLineSpacing(for section: Int) -> CGFloat {
-        return collectionLineSpacing
+        return collectionLineSpacing*2
     }
     
     func minimumInteritemSpacing(for section: Int) -> CGFloat {
@@ -210,7 +324,18 @@ final class SocialMediaCollectionViewModel: CellViewModelWithCollection {
     }
     
     func numberOfRows(in section: Int) -> Int {
-        return viewModels.count
+        let type = sections[section]
+        
+        switch type {
+        case .addPost:
+            return viewModels.count
+        case .feed:
+            return feedViewModels.count
+        case .media:
+            return mediaViewModel.count
+        case .users:
+            return 0
+        }
     }
     
     func numberOfSections() -> Int {
@@ -218,8 +343,32 @@ final class SocialMediaCollectionViewModel: CellViewModelWithCollection {
     }
 }
 
-extension SocialMediaCollectionViewModel: SocialMediaAddPostCollectionViewCellProtocol {
+extension SocialMediaCollectionViewModel: SocialMediaAddPostCollectionViewCellDelegate {
     func shareIdeasButtonPressed() {
-        
+        delegate?.shareIdeasPressed()
+    }
+}
+
+extension SocialMediaCollectionViewModel: SocialMediaFeedCollectionViewCellDelegate {
+    func openSocialFeed(type: SocialMediaFeedCollectionCellType) {
+        delegate?.openSocialFeed(type: type)
+    }
+    
+    func commentPressed(postId: UUID) {
+        delegate?.commentPressed(postId: postId)
+    }
+    
+    func sharePressed(postId: UUID) {
+        delegate?.sharePressed(postId: postId)
+    }
+    
+    func likePressed(postId: UUID) {
+        delegate?.likePressed(postId: postId)
+    }
+}
+
+extension SocialMediaCollectionViewModel: SocialMediaCollectionViewCellDelegate {
+    func mediaPostSelected(post: MediaPost) {
+        delegate?.mediaPostPressed(post: post)
     }
 }

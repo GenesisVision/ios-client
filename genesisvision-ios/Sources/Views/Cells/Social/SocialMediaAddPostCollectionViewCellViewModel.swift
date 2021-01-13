@@ -8,13 +8,13 @@
 
 import UIKit
 
-protocol SocialMediaAddPostCollectionViewCellProtocol: class {
+protocol SocialMediaAddPostCollectionViewCellDelegate: class {
     func shareIdeasButtonPressed()
 }
 
 struct SocialMediaAddPostCollectionViewCellViewModel {
     let imageUrl: String
-    weak var delegate: SocialMediaAddPostCollectionViewCellProtocol?
+    weak var delegate: SocialMediaAddPostCollectionViewCellDelegate?
 }
 
 extension SocialMediaAddPostCollectionViewCellViewModel: CellViewModel {
@@ -62,12 +62,11 @@ class SocialMediaAddPostCollectionViewCell: UICollectionViewCell {
         button.setTitle("Share your ideas", for: .normal)
         button.contentHorizontalAlignment = .left
         button.setTitleColor(UIColor.Common.darkTextPlaceholder, for: .normal)
-        button.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
         button.isUserInteractionEnabled = true
         return button
     }()
     
-    weak var delegate: SocialMediaAddPostCollectionViewCellProtocol?
+    weak var delegate: SocialMediaAddPostCollectionViewCellDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -80,17 +79,23 @@ class SocialMediaAddPostCollectionViewCell: UICollectionViewCell {
     }
     
     private func setup() {
-        backgroundColor = UIColor.BaseView.bg
-        contentView.backgroundColor = UIColor.BaseView.bg
+        backgroundColor = .clear
+        contentView.backgroundColor = .clear
+        
+        button.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
         
         overlayZeroLayer()
         overlayFirstLayer()
         overlaySecondLayer()
     }
     
+    @objc private func buttonPressed(_ sender: UIButton) {
+        delegate?.shareIdeasButtonPressed()
+    }
+    
     private func overlayZeroLayer() {
         contentView.addSubview(mainView)
-        mainView.fillSuperview()
+        mainView.fillSuperview(padding: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10))
         mainView.roundCorners(with: 25)
     }
     
@@ -107,12 +112,7 @@ class SocialMediaAddPostCollectionViewCell: UICollectionViewCell {
     
     private func overlaySecondLayer() {
         buttonView.addSubview(button)
-        
+
         button.fillSuperview(padding: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0))
-    }
-    
-    @objc private func buttonPressed(_ sender: UIButton) {
-        print("Button Pressed")
-        delegate?.shareIdeasButtonPressed()
     }
 }
