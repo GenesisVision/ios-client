@@ -6,7 +6,6 @@
 //  Copyright © 2020 Genesis Vision. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import Tabman
 
@@ -43,17 +42,17 @@ final class SocialMainFeedViewModel: TabmanViewModel {
         switch type {
         case .live:
             let viewController = SocialFeedViewController()
-            let viewModel = SocialFeedViewModel(feedType: .live)
+            let viewModel = SocialFeedViewModel(feedType: .live, collectionViewDelegate: viewController)
             viewController.viewModel = viewModel
             return viewController
         case .hot:
             let viewController = SocialFeedViewController()
-            let viewModel = SocialFeedViewModel(feedType: .hot)
+            let viewModel = SocialFeedViewModel(feedType: .hot, collectionViewDelegate: viewController)
             viewController.viewModel = viewModel
             return viewController
         case .feed:
             let viewController = SocialFeedViewController()
-            let viewModel = SocialFeedViewModel(feedType: .feed)
+            let viewModel = SocialFeedViewModel(feedType: .feed, collectionViewDelegate: viewController)
             viewController.viewModel = viewModel
             return viewController
         }

@@ -15,6 +15,38 @@ class SocialDataProvider: DataProvider {
         SocialAPI.getFeed(userId: userId, tagContentId: tagContentId, tagContentIds: tagContentIds, userMode: userMode, hashTags: hashTags, mask: mask, showTop: showTop, showLiked: showLiked, showOnlyUserPosts: showOnlyUsersPosts, skip: skip, take: take) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
+    }
+    
+    static func likePost(postId: UUID, completion: @escaping CompletionBlock) {
         
+        SocialAPI.likePost(_id: postId) { (viewModel, error) in
+            DataProvider().responseHandler(error, completion: completion)
+        }
+    }
+    
+    static func unlikePost(postId: UUID, completion: @escaping CompletionBlock) {
+        
+        SocialAPI.unlikePost(_id: postId) { (viewModel, error) in
+            DataProvider().responseHandler(error, completion: completion)
+        }
+    }
+    
+    static func getPost(postId: UUID, completion: @escaping (_ post: Post?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        
+        SocialAPI.getPost(_id: postId.uuidString) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
+    static func rePost(model: RePost?, completion: @escaping CompletionBlock) {
+        SocialAPI.rePost(body: model) { (viewModel, error) in
+            DataProvider().responseHandler(error, completion: completion)
+        }
+    }
+    
+    static func addPost(model: NewPost?, completion: @escaping CompletionBlock) {
+        SocialAPI.addPost(body: model) { (viewModel, error) in
+            DataProvider().responseHandler(error, completion: completion)
+        }
     }
 }

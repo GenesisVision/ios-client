@@ -9,6 +9,11 @@
 import Foundation
 import UIKit
 
+protocol SocialFeedCollectionViewModelProtocol: class {
+    func commentPost(postId: UUID)
+    func sharePost(postId: UUID)
+}
+
 final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
     var title: String
     var type: CellActionType
@@ -38,9 +43,12 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
         return [SocialFeedCollectionViewCellViewModel.self]
     }
     
-    init(type: CellActionType, title: String) {
+    weak var delegate: SocialFeedCollectionViewModelProtocol?
+    
+    init(type: CellActionType, title: String, delegate: SocialFeedCollectionViewModelProtocol) {
         self.type = type
         self.title = title
+        self.delegate = delegate
     }
     
     func didSelect(at indexPath: IndexPath) {
@@ -100,7 +108,7 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
             SocialDataProvider.getFeed(userId: nil, tagContentId: nil, tagContentIds: nil, userMode: nil, hashTags: nil, mask: nil, showTop: nil, showLiked: nil, showOnlyUsersPosts: true, skip: skip, take: take) { [weak self] (postsViewModel) in
                 if let viewModel = postsViewModel, let total = postsViewModel?.total {
                     viewModel.items?.forEach({ (model) in
-                        let viewModel = SocialFeedCollectionViewCellViewModel(post: model)
+                        let viewModel = SocialFeedCollectionViewCellViewModel(post: model, cellDelegate: self)
                         models.append(viewModel)
                     })
                     self?.updateViewModels(models, refresh: refresh, total: total)
@@ -111,7 +119,7 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
             SocialDataProvider.getFeed(userId: nil, tagContentId: nil, tagContentIds: nil, userMode: nil, hashTags: nil, mask: nil, showTop: true, showLiked: nil, showOnlyUsersPosts: nil, skip: skip, take: take) { [weak self] (postsViewModel) in
                 if let viewModel = postsViewModel, let total = postsViewModel?.total {
                     viewModel.items?.forEach({ (model) in
-                        let viewModel = SocialFeedCollectionViewCellViewModel(post: model)
+                        let viewModel = SocialFeedCollectionViewCellViewModel(post: model, cellDelegate: self)
                         models.append(viewModel)
                     })
                     self?.updateViewModels(models, refresh: refresh, total: total)
@@ -122,7 +130,7 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
             SocialDataProvider.getFeed(userId: nil, tagContentId: nil, tagContentIds: nil, userMode: nil, hashTags: nil, mask: nil, showTop: nil, showLiked: nil, showOnlyUsersPosts: nil, skip: skip, take: take) { [weak self] (postsViewModel) in
                 if let viewModel = postsViewModel, let total = postsViewModel?.total {
                     viewModel.items?.forEach({ (model) in
-                        let viewModel = SocialFeedCollectionViewCellViewModel(post: model)
+                        let viewModel = SocialFeedCollectionViewCellViewModel(post: model, cellDelegate: self)
                         models.append(viewModel)
                     })
                     self?.updateViewModels(models, refresh: refresh, total: total)
@@ -142,6 +150,28 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
             skip += take
         }
         viewModels = refresh ? models : viewModels + models
+    }
+}
+
+extension SocialFeedCollectionViewModel: SocialFeedCollectionViewCellDelegateProtocol {
+    func commentTouched(postId: UUID) {
+        delegate?.commentPost(postId: postId)
+    }
+    
+    func likeTouched(postId: UUID) {
+        guard let _ = viewModels.first(where: {return ($0 as? SocialFeedCollectionViewCellViewModel)?.post._id == postId }) as? SocialFeedCollectionViewCellViewModel else {
+            return
+        }
+        
+        SocialDataProvider.getPost(postId: postId) { (post) in
+            if let isLiked = post?.personalDetails?.isLiked {
+                isLiked ? SocialDataProvider.unlikePost(postId: postId) { _ in } : SocialDataProvider.likePost(postId: postId) { _ in }
+            }
+        } errorCompletion: { _ in }
+    }
+    
+    func shareTouched(postId: UUID) {
+        delegate?.sharePost(postId: postId)
     }
 }
 

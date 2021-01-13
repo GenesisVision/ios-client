@@ -128,16 +128,19 @@ class Router {
     }
     
     private func addWallet(_ navigationController: inout BaseNavigationController, _ viewControllers: inout [UIViewController]) {
-        let socialViewController = SocialMainFeedViewController()
+        //let socialViewController = SocialMainFeedViewController()
+        let viewModel = SocialMediaViewModel()
+        let socialMediaViewController = SocialMediaViewController()
+        socialMediaViewController.viewModel = viewModel
         //let walletViewController = WalletViewController()
-        navigationController = BaseNavigationController(rootViewController: socialViewController)
+        navigationController = BaseNavigationController(rootViewController: socialMediaViewController)
         navigationController.title = ""
         //let router = WalletRouter(parentRouter: self, navigationController: navigationController)
         //router.walletTabmanViewController = walletViewController
         
         //walletViewController.viewModel = WalletTabmanViewModel(withRouter: router, walletType: .all)
         
-        socialViewController.viewModel = SocialMainFeedViewModel(withRouter: self)
+        //socialViewController.viewModel = SocialMainFeedViewModel(withRouter: self)
         navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_wallet").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_wallet").withRenderingMode(.alwaysOriginal)
         viewControllers.append(navigationController)
     }

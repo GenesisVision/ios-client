@@ -151,6 +151,14 @@
 		199D0E3124F560FA0005D76B /* FundPublicInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199D0E3024F560FA0005D76B /* FundPublicInfoViewController.swift */; };
 		199D0E3324F804F30005D76B /* ProgramDailyPeriodDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199D0E3224F804F20005D76B /* ProgramDailyPeriodDetails.swift */; };
 		199D0E3524F805C90005D76B /* ProgramType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199D0E3424F805C80005D76B /* ProgramType.swift */; };
+		19A2E03525ADC5550020AD01 /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E03425ADC5550020AD01 /* NewPostViewController.swift */; };
+		19A2E03B25ADC5EF0020AD01 /* Social.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19A2E03A25ADC5EF0020AD01 /* Social.storyboard */; };
+		19A2E04125ADFC7C0020AD01 /* SocialMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E04025ADFC7C0020AD01 /* SocialMediaViewController.swift */; };
+		19A2E04725AE03700020AD01 /* SocialMediaAddPostCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E04625AE03700020AD01 /* SocialMediaAddPostCollectionViewCellViewModel.swift */; };
+		19A2E04D25AE040C0020AD01 /* SocialMediaAddPostCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19A2E04C25AE040C0020AD01 /* SocialMediaAddPostCollectionViewCell.xib */; };
+		19A2E05725AF29370020AD01 /* SocialMediaFeedCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19A2E05625AF29360020AD01 /* SocialMediaFeedCollectionViewCell.xib */; };
+		19A2E05D25AF295C0020AD01 /* SocialMediaFeedCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E05C25AF295C0020AD01 /* SocialMediaFeedCollectionViewCellViewModel.swift */; };
+		19A2E06325AF29F40020AD01 /* SocialPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E06225AF29F40020AD01 /* SocialPostView.swift */; };
 		19A56E64258937FF00553408 /* BinanceAccountType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A56E63258937FF00553408 /* BinanceAccountType.swift */; };
 		19A56E6A2589380D00553408 /* BinanceOrderResponseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A56E692589380D00553408 /* BinanceOrderResponseType.swift */; };
 		19A56E702589382900553408 /* BinancePeriodInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A56E6F2589382900553408 /* BinancePeriodInterval.swift */; };
@@ -1314,6 +1322,14 @@
 		199D0E3024F560FA0005D76B /* FundPublicInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundPublicInfoViewController.swift; sourceTree = "<group>"; };
 		199D0E3224F804F20005D76B /* ProgramDailyPeriodDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramDailyPeriodDetails.swift; sourceTree = "<group>"; };
 		199D0E3424F805C80005D76B /* ProgramType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramType.swift; sourceTree = "<group>"; };
+		19A2E03425ADC5550020AD01 /* NewPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostViewController.swift; sourceTree = "<group>"; };
+		19A2E03A25ADC5EF0020AD01 /* Social.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Social.storyboard; sourceTree = "<group>"; };
+		19A2E04025ADFC7C0020AD01 /* SocialMediaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMediaViewController.swift; sourceTree = "<group>"; };
+		19A2E04625AE03700020AD01 /* SocialMediaAddPostCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMediaAddPostCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
+		19A2E04C25AE040C0020AD01 /* SocialMediaAddPostCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialMediaAddPostCollectionViewCell.xib; sourceTree = "<group>"; };
+		19A2E05625AF29360020AD01 /* SocialMediaFeedCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialMediaFeedCollectionViewCell.xib; sourceTree = "<group>"; };
+		19A2E05C25AF295C0020AD01 /* SocialMediaFeedCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMediaFeedCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
+		19A2E06225AF29F40020AD01 /* SocialPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialPostView.swift; sourceTree = "<group>"; };
 		19A56E63258937FF00553408 /* BinanceAccountType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceAccountType.swift; sourceTree = "<group>"; };
 		19A56E692589380D00553408 /* BinanceOrderResponseType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceOrderResponseType.swift; sourceTree = "<group>"; };
 		19A56E6F2589382900553408 /* BinancePeriodInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinancePeriodInterval.swift; sourceTree = "<group>"; };
@@ -2387,6 +2403,8 @@
 			children = (
 				19CB59B6258B9B630008D8BC /* SocialFeedViewController.swift */,
 				19CB59B7258B9B630008D8BC /* SocialMainFeedViewController.swift */,
+				19A2E03425ADC5550020AD01 /* NewPostViewController.swift */,
+				19A2E04025ADFC7C0020AD01 /* SocialMediaViewController.swift */,
 			);
 			path = Social;
 			sourceTree = "<group>";
@@ -2396,6 +2414,10 @@
 			children = (
 				19CB5995258B9B2F0008D8BC /* SocialFeedCollectionViewCell.xib */,
 				19CB5996258B9B300008D8BC /* SocialFeedCollectionViewCellViewModel.swift */,
+				19A2E04C25AE040C0020AD01 /* SocialMediaAddPostCollectionViewCell.xib */,
+				19A2E04625AE03700020AD01 /* SocialMediaAddPostCollectionViewCellViewModel.swift */,
+				19A2E05625AF29360020AD01 /* SocialMediaFeedCollectionViewCell.xib */,
+				19A2E05C25AF295C0020AD01 /* SocialMediaFeedCollectionViewCellViewModel.swift */,
 			);
 			path = Social;
 			sourceTree = "<group>";
@@ -3355,6 +3377,7 @@
 				5E5EB5362167B1FA00CDA376 /* CircularProgressView.swift */,
 				5EDD6D4022C7A70D00B9DB93 /* CustomTextField.swift */,
 				19CB59E1258CE41F0008D8BC /* SocialActivitiesView.swift */,
+				19A2E06225AF29F40020AD01 /* SocialPostView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -4410,6 +4433,7 @@
 				5EE0076D217881AA0045B890 /* Manager.storyboard */,
 				FCC9DD5A200DFFB8008825EC /* Profile.storyboard */,
 				5E942E8820D7BA5A0069343C /* Settings.storyboard */,
+				19A2E03A25ADC5EF0020AD01 /* Social.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -4844,6 +4868,7 @@
 				192DB068256F075000C198CB /* DashboardInvestmentLimitsTableViewCell.xib in Resources */,
 				5E1CF81F218B71D100541C70 /* Montserrat-Medium.ttf in Resources */,
 				5E93E6FB21D1A5370020DE55 /* NotificationsSettingsAssetTableViewCell.xib in Resources */,
+				19A2E04D25AE040C0020AD01 /* SocialMediaAddPostCollectionViewCell.xib in Resources */,
 				5E5BC08921836C00009E4BA3 /* WalletTransactionView.xib in Resources */,
 				5E39F5A023A3E3BE0073DAD5 /* AssetCollectionViewCell.xib in Resources */,
 				19CB5997258B9B300008D8BC /* SocialFeedCollectionViewCell.xib in Resources */,
@@ -4886,6 +4911,7 @@
 				FCC9DD5D200DFFDC008825EC /* Assets.storyboard in Resources */,
 				5EB064C0239AF6D9003AB3FB /* AddFundAssetTableViewCell.xib in Resources */,
 				1981F22924D1D40000979262 /* InfoSubscriptionTableViewCell.xib in Resources */,
+				19A2E05725AF29370020AD01 /* SocialMediaFeedCollectionViewCell.xib in Resources */,
 				5EDAA71322E5067C00F7BF71 /* PeriodHistoryTableViewCell.xib in Resources */,
 				5ED645F621C06A0F0044AC1D /* AboutLevelView.xib in Resources */,
 				5E54883221412CF500B2D9FE /* PortfolioAssetTableViewCell.xib in Resources */,
@@ -4911,6 +4937,7 @@
 				5EF9F90123E09C4400542E1E /* ProgramTradingContentView.xib in Resources */,
 				5E350372239878DF00115EAF /* SelectableTableViewCell.xib in Resources */,
 				5E1CF81D218B71D100541C70 /* Montserrat-Bold.ttf in Resources */,
+				19A2E03B25ADC5EF0020AD01 /* Social.storyboard in Resources */,
 				5E93E70E21D1AC130020DE55 /* NotificationsSettingsCustomTableViewCell.xib in Resources */,
 				5E3C72FC2174EC6500DE6F7D /* InvestWithdrawConfirmView.xib in Resources */,
 				5EF9F90423E09C4400542E1E /* ProgramContentView.xib in Resources */,
@@ -5178,6 +5205,7 @@
 				5EAC11B420B81AFB0057A2D2 /* AuthChangePasswordViewModel.swift in Sources */,
 				5E106387213D69AF008A0E8B /* BaseExtensions.swift in Sources */,
 				198124492464535C00F286FE /* NewPost.swift in Sources */,
+				19A2E03525ADC5550020AD01 /* NewPostViewController.swift in Sources */,
 				1906DA5D2539A6DE00A08846 /* BinanceRawSymbolLotSizeFilter.swift in Sources */,
 				5E39F72A23A3F92F0073DAD5 /* FacetSortType.swift in Sources */,
 				5E39F60E23A3F8A60073DAD5 /* AssetPlatformInfo.swift in Sources */,
@@ -5327,6 +5355,7 @@
 				5E39F78623A3F9300073DAD5 /* Tag.swift in Sources */,
 				5E528ECE237F00E8006F2339 /* DashboardTradingTableViewCell.swift in Sources */,
 				5E93E70D21D1AC130020DE55 /* NotificationsSettingsCustomTableViewCell.swift in Sources */,
+				19A2E04725AE03700020AD01 /* SocialMediaAddPostCollectionViewCellViewModel.swift in Sources */,
 				19787B00248141A400217CA9 /* PostEvent.swift in Sources */,
 				1979A5322524DE8F005EEABF /* BinanceRawKline.swift in Sources */,
 				5E39F5F923A3F8A60073DAD5 /* AttachToExternalSignalProviderExt.swift in Sources */,
@@ -5350,6 +5379,7 @@
 				5EB932112146999400EE01A2 /* DetailManagerTableViewCellViewModel.swift in Sources */,
 				5EAD3512214FD5D40057450C /* AssetsPageboyViewControllerDataSource.swift in Sources */,
 				19812437246451E600F286FE /* FollowFilterSorting.swift in Sources */,
+				19A2E04125ADFC7C0020AD01 /* SocialMediaViewController.swift in Sources */,
 				5EC7B88220D14C9C007720D1 /* SettingsViewModel.swift in Sources */,
 				FCB8DFCB2010F6B100698D18 /* Protocols.swift in Sources */,
 				1981246C2464592200F286FE /* SignalTradingEventItemsViewModel.swift in Sources */,
@@ -5414,6 +5444,7 @@
 				FCC9DD88200E61C0008825EC /* ProgramInfoViewController.swift in Sources */,
 				5E70429B23CD082700D8950F /* AccountBalanceChartTableViewCellViewModel.swift in Sources */,
 				5E39F7A123A3F9300073DAD5 /* EventFilters.swift in Sources */,
+				19A2E05D25AF295C0020AD01 /* SocialMediaFeedCollectionViewCellViewModel.swift in Sources */,
 				5E39F72F23A3F92F0073DAD5 /* DashboardTradingAssetStatus.swift in Sources */,
 				5E39F72823A3F92F0073DAD5 /* DashboardTradingAssetSignalDetails.swift in Sources */,
 				19A56EB2258938AD00553408 /* BinanceRawFuturesSymbolPercentPriceFilter.swift in Sources */,
@@ -5584,6 +5615,7 @@
 				1981243B2464521C00F286FE /* FundInvestingDetailsListItemsViewModel.swift in Sources */,
 				5EF14D9F2181FC5500B3843A /* FundWithdrawRouter.swift in Sources */,
 				5E21663923A9101A001BB512 /* FundAssetDetails.swift in Sources */,
+				19A2E06325AF29F40020AD01 /* SocialPostView.swift in Sources */,
 				5E39F77323A3F9300073DAD5 /* ManagerNotificationSettingList.swift in Sources */,
 				198124552464585D00F286FE /* Post.swift in Sources */,
 				5E39F77E23A3F9300073DAD5 /* ProgramWithdrawInfo.swift in Sources */,

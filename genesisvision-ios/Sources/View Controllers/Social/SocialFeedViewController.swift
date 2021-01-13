@@ -71,4 +71,38 @@ class SocialFeedViewController: BaseViewController {
             self.socialFeedCollectionView.reloadData()
         }
     }
+    
+    private func showNewPostViewController(sharedPost: Post?) {
+        guard let viewController = NewPostViewController.storyboardInstance(.social) else { return }
+        
+        let viewModel = NewPostViewModel(sharedPost: sharedPost)
+        viewController.viewModel = viewModel
+        viewController.modalPresentationStyle = .fullScreen
+        
+        let nav = BaseNavigationController(rootViewController: viewController)
+        nav.modalPresentationStyle = .fullScreen
+        
+        navigationController?.present(viewController: nav)
+    }
+}
+
+extension SocialFeedViewController: SocialFeedCollectionViewModelProtocol {
+    func commentPost(postId: UUID) {
+    }
+    
+    func sharePost(postId: UUID) {
+        var sharedPost: Post?
+        
+        SocialDataProvider.getPost(postId: postId) { [weak self] (postModel) in
+            sharedPost = postModel
+            self?.showNewPostViewController(sharedPost: sharedPost)
+        } errorCompletion: { (result) in
+            switch result {
+            case .success:
+                break
+            case .failure(errorType: let errorType):
+                ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
+            }
+        }
+    }
 }

@@ -211,6 +211,7 @@ enum StoryboardNames: String {
     case wallet
     case dashboard
     case notifications
+    case social
 }
 
 // MARK: - Filters

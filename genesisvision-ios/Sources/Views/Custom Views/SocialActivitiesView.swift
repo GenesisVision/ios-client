@@ -14,7 +14,7 @@ protocol SocialActivitiesViewDelegateProtocol: class {
     func shareTouched()
 }
 
-class SocialActivitiesView: UIView {
+final class SocialActivitiesView: UIView {
     
     let likesView: UIView = {
         let view = UIView()
@@ -22,13 +22,13 @@ class SocialActivitiesView: UIView {
         return view
     }()
     
-    let commentsView: UIView = {
+    let sharesView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    let sharesView: UIView = {
+    let commentsView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -109,6 +109,32 @@ class SocialActivitiesView: UIView {
         return label
     }()
     
+    var isLiked: Bool = false {
+        didSet {
+            if isLiked {
+                if let likesCount = Int(likesLabel.text ?? "") {
+                    likeCount = likesCount + 1
+                }
+                likesLabel.textColor = UIColor.Common.primary
+                likesImage.tintColor = UIColor.Common.primary
+                likesImage.image = likesImage.image?.withRenderingMode(.alwaysTemplate)
+            } else {
+                if let likesCount = Int(likesLabel.text ?? "") {
+                    likeCount = likesCount - 1
+                }
+                likesLabel.textColor = #colorLiteral(red: 0.5058823529, green: 0.5490196078, blue: 0.6, alpha: 1)
+                likesImage.tintColor = nil
+                likesImage.image = likesImage.image?.withRenderingMode(.alwaysOriginal)
+            }
+        }
+    }
+    
+    private var likeCount: Int = 0 {
+        didSet {
+            likesLabel.text = String(likeCount)
+        }
+    }
+    
     weak var delegate: SocialActivitiesViewDelegateProtocol?
     
     override init(frame: CGRect) {
@@ -139,14 +165,14 @@ class SocialActivitiesView: UIView {
                          trailing: nil,
                          size: CGSize(width: 80, height: 44))
         
-        commentsView.anchor(top: topAnchor,
+        sharesView.anchor(top: topAnchor,
                             leading: likesView.trailingAnchor,
                             bottom: nil,
                             trailing: nil,
                             size: CGSize(width: 80, height: 44))
         
-        sharesView.anchor(top: topAnchor,
-                            leading: commentsView.trailingAnchor,
+        commentsView.anchor(top: topAnchor,
+                            leading: sharesView.trailingAnchor,
                             bottom: nil,
                             trailing: nil,
                             size: CGSize(width: 80, height: 44))
@@ -203,8 +229,8 @@ class SocialActivitiesView: UIView {
         label.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
     
-    
     @objc private func likesViewTouched() {
+        isLiked = !isLiked
         delegate?.likeTouched()
     }
     
