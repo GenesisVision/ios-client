@@ -47,7 +47,10 @@ final class WalletListViewModel {
     }
     
     private func getAmountForPlatformCurrency(fromAmount: Double?, fromCurrency: String?) -> Double? {
-        guard let fromAmount = fromAmount, let fromCurrency = fromCurrency, let rates = rates?.rates, let rate = rates[getPlatformCurrencyType().rawValue]?.first(where: {$0.currency == fromCurrency })?.rate else { return nil }
+        guard let fromAmount = fromAmount,
+              let fromCurrency = fromCurrency,
+              let rates = rates?.rates,
+              let rate = rates[getPlatformCurrencyType().rawValue]?.first(where: {$0.currency == fromCurrency })?.rate else { return nil }
         return fromAmount/rate
     }
 }
@@ -151,17 +154,17 @@ extension WalletListViewModel {
 // MARK: - Fetch
 extension WalletListViewModel {
     func fetch() {
-        RateDataProvider.getRates(from: [getPlatformCurrencyType().rawValue], to: [Currency.btc.rawValue, Currency.eth.rawValue, Currency.gvt.rawValue, Currency.usdt.rawValue], completion: { [weak self] (ratesModel) in
-            self?.rates = ratesModel
-            AuthManager.getWallet(completion: { [weak self] (wallet) in
-                guard let wallet = wallet else { return }
-                self?.wallet = wallet
+        AuthManager.getWallet(completion: { [weak self] (wallet) in
+            guard let wallet = wallet else { return }
+            self?.wallet = wallet
+            let walletsList = wallet.wallets?.map({ (wallet) -> String? in
+                guard let currency = wallet.currency?.rawValue else { return nil }
+                return currency
+            }).compactMap({ $0 }) ?? [Currency.btc.rawValue, Currency.eth.rawValue, Currency.gvt.rawValue, Currency.usdt.rawValue, Currency.usdc.rawValue]
+            RateDataProvider.getRates(from: [getPlatformCurrencyType().rawValue], to: walletsList, completion: { [weak self] (ratesModel) in
+                self?.rates = ratesModel
                 self?.reloadDataProtocol?.didReloadData()
-            }) { (result) in
-                print("ERROR")
-            }
-            
-        }) { (result) in
-        }
+            }) { _ in }
+        }) { _ in }
     }
 }

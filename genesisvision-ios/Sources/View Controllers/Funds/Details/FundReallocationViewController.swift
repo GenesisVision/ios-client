@@ -197,7 +197,9 @@ extension FundReallocationViewController: ChangeFundAssetPartViewProtocol {
     }
     
     func close() {
+        viewModel.filterAssestsCollectionView()
         changeFundAssetPartView.isHidden = true
+        updateUI()
     }
 }
 
@@ -208,7 +210,11 @@ extension FundReallocationViewController: FundReallocationCellActionProtocol {
     }
     
     func assetCellSelected(assetInfo: FundAssetInfo) {
-        changeFundAssetPartView.configure(assetInfo: assetInfo, freeSpaceInFund: freeSpaceInFundAsset)
+        if let assetAlsoExist = viewModel.assetCollectionViewModel.assets.first(where: { return $0.asset == assetInfo.asset }) {
+            changeFundAssetPartView.configure(assetInfo: assetAlsoExist, freeSpaceInFund: freeSpaceInFundAsset)
+        } else {
+            changeFundAssetPartView.configure(assetInfo: assetInfo, freeSpaceInFund: freeSpaceInFundAsset)
+        }
         
         UIView.animate(withDuration: 0.3) {
             self.changeFundAssetPartView.isHidden = false
@@ -303,6 +309,10 @@ final class FundReallocationViewModel {
                 completion(.failure(errorType: .apiError(message: nil)))
             }
         }
+    }
+    
+    func filterAssestsCollectionView() {
+        assetCollectionViewModel.assets = assetCollectionViewModel.assets.filter({ return $0.target != 0 })
     }
     
     func createFundAssetsParts() -> [FundAssetPart] {

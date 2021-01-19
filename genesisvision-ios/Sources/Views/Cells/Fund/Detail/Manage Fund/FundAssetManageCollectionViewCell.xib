@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,20 +27,21 @@
                                         <rect key="frame" x="51" y="9" width="307" height="74"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y77-h2-Uvk" customClass="UIImageView">
-                                                <rect key="frame" x="0.0" y="0.0" width="73.5" height="74"/>
+                                                <rect key="frame" x="0.0" y="17" width="40" height="40"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="Ibn-cD-51u"/>
                                                     <constraint firstAttribute="width" secondItem="Y77-h2-Uvk" secondAttribute="height" multiplier="1:1" id="WV9-na-TIE"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QjG-2F-Lek" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
-                                                <rect key="frame" x="73.5" y="0.0" width="107.5" height="74"/>
+                                                <rect key="frame" x="40" y="0.0" width="107.5" height="74"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yTW-n5-OZb" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
-                                                <rect key="frame" x="181" y="0.0" width="126" height="74"/>
+                                                <rect key="frame" x="147.5" y="0.0" width="159.5" height="74"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -53,10 +54,9 @@
                                             <constraint firstItem="QjG-2F-Lek" firstAttribute="leading" secondItem="Y77-h2-Uvk" secondAttribute="trailing" id="K3d-O8-6tZ"/>
                                             <constraint firstItem="yTW-n5-OZb" firstAttribute="top" secondItem="auM-4Z-UhP" secondAttribute="top" id="U7L-ac-2ym"/>
                                             <constraint firstAttribute="bottom" secondItem="QjG-2F-Lek" secondAttribute="bottom" id="b4h-sO-crW"/>
-                                            <constraint firstItem="Y77-h2-Uvk" firstAttribute="top" secondItem="auM-4Z-UhP" secondAttribute="top" id="bS2-3R-eDy"/>
+                                            <constraint firstItem="Y77-h2-Uvk" firstAttribute="centerY" secondItem="auM-4Z-UhP" secondAttribute="centerY" id="cVf-5m-jPm"/>
                                             <constraint firstAttribute="trailing" secondItem="yTW-n5-OZb" secondAttribute="trailing" id="kgS-i4-4Wf"/>
                                             <constraint firstAttribute="bottom" secondItem="yTW-n5-OZb" secondAttribute="bottom" id="oKI-RY-XKR"/>
-                                            <constraint firstAttribute="bottom" secondItem="Y77-h2-Uvk" secondAttribute="bottom" id="prh-Lr-mQW"/>
                                             <constraint firstItem="Y77-h2-Uvk" firstAttribute="leading" secondItem="auM-4Z-UhP" secondAttribute="leading" id="rIe-pM-E7c"/>
                                             <constraint firstItem="QjG-2F-Lek" firstAttribute="top" secondItem="auM-4Z-UhP" secondAttribute="top" id="wCM-fH-gqq"/>
                                         </constraints>
@@ -70,7 +70,7 @@
                                     <constraint firstItem="auM-4Z-UhP" firstAttribute="centerX" secondItem="ulL-l7-rPe" secondAttribute="centerX" id="qLh-S6-Sqd"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ez-by-nBU" userLabel="closeButton">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ez-by-nBU" userLabel="closeButton">
                                 <rect key="frame" x="389" y="0.0" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="Svu-wO-qDo"/>
@@ -104,13 +104,13 @@
                     </view>
                 </subviews>
             </view>
+            <viewLayoutGuide key="safeArea" id="h2a-lR-qR4"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="VoD-OK-PYt" secondAttribute="bottom" id="0A0-Hm-6vv"/>
                 <constraint firstItem="VoD-OK-PYt" firstAttribute="top" secondItem="Pdp-5t-GBh" secondAttribute="top" id="LKc-7i-u3q"/>
                 <constraint firstAttribute="trailing" secondItem="VoD-OK-PYt" secondAttribute="trailing" id="WNU-Ug-aOv"/>
                 <constraint firstItem="VoD-OK-PYt" firstAttribute="leading" secondItem="Pdp-5t-GBh" secondAttribute="leading" id="qk0-9w-l9z"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="h2a-lR-qR4"/>
             <size key="customSize" width="409" height="92"/>
             <connections>
                 <outlet property="closeButton" destination="2ez-by-nBU" id="sU7-KC-cwe"/>

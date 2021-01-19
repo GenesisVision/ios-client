@@ -9,7 +9,7 @@ import Foundation
 
 class ReferralDataProvider: DataProvider {
     
-    static func getReferralDetails(currency: Currency? = .usd, completion: @escaping (_ profile: PartnershipDetails?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func getReferralDetails(currency: Currency? = .usdt, completion: @escaping (_ profile: PartnershipDetails?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
         PartnershipAPI.getDetails(currency: currency) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)

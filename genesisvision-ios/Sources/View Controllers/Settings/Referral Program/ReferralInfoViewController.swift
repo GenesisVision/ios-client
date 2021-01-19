@@ -83,6 +83,8 @@ final class ReferralInfoViewModel: ViewModelWithListProtocol {
     
     var viewModels: [CellViewAnyModel] = []
     
+    private var rates: RatesModel?
+    
     var sections: [SectionType] = [.link, .statistics]
     
     lazy var dataSource: TableViewDataSource = TableViewDataSource(self)
@@ -106,7 +108,7 @@ final class ReferralInfoViewModel: ViewModelWithListProtocol {
                 self?.viewModels.append(ReferralInfoLinkTableViewCellViewModel(link: refLink, delegate: self?.cellsDelegate))
             }
             
-            ReferralDataProvider.getReferralDetails { [weak self] (viewModel) in
+            ReferralDataProvider.getReferralDetails(currency: getPlatformCurrencyType()) { [weak self] (viewModel) in
                 if let viewModel = viewModel {
                     self?.viewModels.removeAll(where: { return $0 is ReferralInfoStatisticsTableViewCellViewModel })
                     self?.viewModels.append(ReferralInfoStatisticsTableViewCellViewModel(partnerDetails: viewModel))
