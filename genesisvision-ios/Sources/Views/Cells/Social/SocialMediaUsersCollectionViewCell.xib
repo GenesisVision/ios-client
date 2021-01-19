@@ -10,15 +10,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SocialMediaPostCollectionViewCell" id="4dC-4n-hft" userLabel="SocialMediaPostCollectionViewCell" customClass="SocialMediaPostCollectionViewCell" customModule="GV_DEBUG" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="205" height="109"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SocialMediaUsersCollectionViewCell" id="ecU-y0-R04" userLabel="SocialMediaUsersCollectionViewCell" customClass="SocialMediaUsersCollectionViewCell" customModule="GV_DEBUG" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="172" height="100"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="oAf-v7-W2C">
-                <rect key="frame" x="0.0" y="0.0" width="205" height="109"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="MTx-AB-FNM">
+                <rect key="frame" x="0.0" y="0.0" width="172" height="100"/>
                 <autoresizingMask key="autoresizingMask"/>
             </collectionViewCellContentView>
-            <size key="customSize" width="205" height="109"/>
-            <point key="canvasLocation" x="-93.478260869565219" y="94.754464285714278"/>
+            <size key="customSize" width="172" height="100"/>
+            <point key="canvasLocation" x="84.057971014492765" y="122.54464285714285"/>
         </collectionViewCell>
     </objects>
 </document>

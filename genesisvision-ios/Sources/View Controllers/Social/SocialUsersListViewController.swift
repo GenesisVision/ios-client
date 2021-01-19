@@ -1,22 +1,16 @@
 //
-//  FundAssetsListViewController.swift
+//  SocialUsersListViewController.swift
 //  genesisvision-ios
 //
-//  Created by Ruslan Lukin on 19.08.2020.
-//  Copyright © 2020 Genesis Vision. All rights reserved.
+//  Created by Ruslan Lukin on 14.01.2021.
+//  Copyright © 2021 Genesis Vision. All rights reserved.
 //
 
 import UIKit
 
-protocol AssetListSelectedProtocol {
-    func assetSelected(asset: PlatformAsset)
-}
-
-class FundAssetsListViewController: BaseViewControllerWithTableView {
+class SocialUsersListViewController: BaseViewControllerWithTableView {
     
-    var viewModel: FundAssetsListViewModel!
-    
-    var assetListSelectedDelegate: AssetListSelectedProtocol?
+    var viewModel: SocialUsersListViewModel!
     
     override var tableView: UITableView! {
         didSet {
@@ -26,9 +20,8 @@ class FundAssetsListViewController: BaseViewControllerWithTableView {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Add asset"
+        title = "Users"
         setupTableConfiguration()
-        setupHeaderView()
     }
     
     private func setupHeaderView() {
@@ -48,7 +41,8 @@ class FundAssetsListViewController: BaseViewControllerWithTableView {
         self.view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .none
-        tableView.fillSuperview(padding: UIEdgeInsets(top: 70, left: 10, bottom: 10, right: 10))
+        tableView.showsVerticalScrollIndicator = false
+        tableView.fillSuperview(padding: UIEdgeInsets(top: 0, left: 10, bottom: 10, right: 10))
         
         tableView.roundCorners(with: 10)
         tableView.configure(with: .defaultConfiguration)
@@ -59,101 +53,103 @@ class FundAssetsListViewController: BaseViewControllerWithTableView {
         setupPullToRefresh(scrollView: tableView)
     }
     
-}
-
-extension FundAssetsListViewController: SearchHeaderTextChangedProtocol {
-    func textChanged(text: String) {
-        guard !text.isEmpty else { return }
-        
-        viewModel.filterAssets(text: text)
+    private func setupTableHeaderView() {
+        let rect = CGRect(x: tableView.frame.minX, y: tableView.frame.minY, width: 390, height: 50)
+        let headerView = SearchHeaderView(frame: rect)
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+        headerView.searchFieldDelegate = self
+        tableView.tableHeaderView = headerView
+    }
+    
+    override func pullToRefresh() {
+        super.pullToRefresh()
+        viewModel.fetch(true)
+    }
+    
+    override func fetchMore() {
     }
 }
 
-extension FundAssetsListViewController: BaseTableViewProtocol {
+extension SocialUsersListViewController: SearchHeaderTextChangedProtocol {
+    func textChanged(text: String) {
+        guard !text.isEmpty else { return }
+    }
+}
+
+extension SocialUsersListViewController: BaseTableViewProtocol {
     func didShowInfiniteIndicator(_ value: Bool) {
         showInfiniteIndicator(value: value)
     }
     
     func didReload() {
         DispatchQueue.main.async {
+            self.hideAll()
             self.tableView.reloadData()
         }
     }
     
     func didSelect(_ type: CellActionType, cellViewModel: CellViewAnyModel?) {
-        guard let cellViewModel = cellViewModel as? FundAssetsListTableViewCellViewModel, let assetModel = cellViewModel.assetModel else { return }
-        navigationController?.popViewController(animated: true)
-        assetListSelectedDelegate?.assetSelected(asset: assetModel)
     }
 }
 
 
-
-final class FundAssetsListViewModel: ListViewModelWithPaging {
+final class SocialUsersListViewModel: ListViewModelWithPaging {
     
     lazy var dataSource: TableViewDataSource = TableViewDataSource(self)
     
-    typealias CellViewModel = FundAssetsListTableViewCellViewModel
+    typealias CellViewModel = SocialUsersListTableViewCellViewModel
     
-    var canFetchMoreResults: Bool = false
+    var canFetchMoreResults: Bool = true
     
-    var canPullToRefresh: Bool = false
+    var canPullToRefresh: Bool = true
     
     var skip: Int = 0
     
     var viewModels: [CellViewAnyModel] = []
     
+    var totalCount: Int = 0
+    
     var copyViewModels: [CellViewAnyModel] = []
     
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [FundAssetsListTableViewCellViewModel.self]
+        return [SocialUsersListTableViewCellViewModel.self]
     }
-    var assets: [PlatformAsset] = [PlatformAsset]()
+    
+    var users: [UserDetailsList] = [UserDetailsList]()
     
     weak var delegate: BaseTableViewProtocol?
     
     init(delegate: BaseTableViewProtocol) {
         self.delegate = delegate
-        
-        
-        PlatformManager.shared.getPlatformAssets { [weak self] (model) in
-            if let assets = model?.assets {
-                self?.assets = assets
-                self?.updateAssets()
-            }
-        }
+        fetch(false)
     }
     
-    func updateAssets() {
-        var models = [FundAssetsListTableViewCellViewModel]()
-        
-        assets.sort { $0.asset ?? "" < $1.asset ?? "" }
-        assets.sort { $0.mandatoryFundPercent! > $1.mandatoryFundPercent! }
-        
-        assets.forEach { (asset) in
-            models.append(FundAssetsListTableViewCellViewModel(assetModel: asset))
+    func updateViewModels(_ models: [CellViewAnyModel], refresh: Bool) {
+        viewModels = refresh ? models : viewModels + models
+        copyViewModels = viewModels
+        totalCount = viewModels.count
+        if models.count > 0 {
+            skip += take()
         }
         
-        viewModels = models
-        copyViewModels = models
         delegate?.didReload()
     }
     
-    func filterAssets(text: String) {
-        viewModels = copyViewModels
-        
-        viewModels = viewModels.filter { (viewModel) -> Bool in
-            guard let viewModel = viewModel as? FundAssetsListTableViewCellViewModel else { return false }
-            
-            if let contains = viewModel.assetModel?.asset?.lowercased().contains(text.lowercased()), contains {
-                return true
-            } else if let contains = viewModel.assetModel?.name?.lowercased().contains(text.lowercased()), contains {
-                return true
-            } else {
-                return false
-            }
+    func fetch(_ refresh: Bool) {
+        if refresh {
+            skip = 0
         }
-        delegate?.didReload()
+        
+        UsersDataProvider.getList(sorting: .byFollowersDesc, tags: nil, skip: skip, take: take()) { [weak self] (viewModel) in
+            if let users = viewModel?.items {
+                self?.users = users
+                
+                var models = [SocialUsersListTableViewCellViewModel]()
+                users.forEach({ models.append(SocialUsersListTableViewCellViewModel(user: $0)) })
+                
+                self?.updateViewModels(models, refresh: refresh)
+            }
+        } errorCompletion: { _ in }
     }
     
     func numberOfSections() -> Int {
@@ -174,5 +170,15 @@ final class FundAssetsListViewModel: ListViewModelWithPaging {
     
     func didSelect(at indexPath: IndexPath) {
         delegate?.didSelect(.none, cellViewModel: viewModels[indexPath.row])
+    }
+    
+    func fetchMore(at indexPath: IndexPath) {
+        if numberOfSections() == indexPath.section + 1
+            && numberOfRows(in: indexPath.section) - ApiKeys.fetchThreshold == indexPath.row
+            && canFetchMoreResults && modelsCount() >= take() {
+            fetch(false)
+        }
+
+        showInfiniteIndicator(skip < totalCount)
     }
 }

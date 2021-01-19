@@ -1,33 +1,34 @@
 //
-//  SocialMediaCollectionViewCellViewModel.swift
+//  SocialMediaUsersCollectionViewCellViewModel.swift
 //  genesisvision-ios
 //
-//  Created by Ruslan Lukin on 13.01.2021.
+//  Created by Ruslan Lukin on 14.01.2021.
 //  Copyright © 2021 Genesis Vision. All rights reserved.
 //
 
 import UIKit
 
-protocol SocialMediaCollectionViewCellDelegate: class {
-    func mediaPostSelected(post: MediaPost)
-    func moreMediaPressed()
-}
-
-struct SocialMediaCollectionViewCellViewModel {
-    let items: [MediaPost]
-    weak var cellDelegate: SocialMediaCollectionViewCellDelegate?
+protocol SocialMediaUsersCollectionViewCellDelegate: class {
+    func userPressed(user: UserDetailsList)
+    func usersMoreButtonPressed()
 }
 
 
-extension SocialMediaCollectionViewCellViewModel: CellViewModel {
-    func setup(on cell: SocialMediaCollectionViewCell) {
-        cell.topButton.setTitle("Media", for: .normal)
+struct SocialMediaUsersCollectionViewCellViewModel {
+    let items: [UserDetailsList]
+    weak var cellDelegate: SocialMediaUsersCollectionViewCellDelegate?
+}
+
+extension SocialMediaUsersCollectionViewCellViewModel: CellViewModel {
+    func setup(on cell: SocialMediaUsersCollectionViewCell) {
+        cell.topButton.setTitle("Users", for: .normal)
         cell.delegate = cellDelegate
         cell.viewModels = items
     }
 }
 
-class SocialMediaCollectionViewCell: UICollectionViewCell {
+
+class SocialMediaUsersCollectionViewCell: UICollectionViewCell {
     
     private let mainView: UIView = {
         let view = UIView()
@@ -70,12 +71,12 @@ class SocialMediaCollectionViewCell: UICollectionViewCell {
     }()
     
     
-    var viewModels: [MediaPost] = [] {
+    var viewModels: [UserDetailsList] = [] {
         didSet {
             collectionView.delegate = self
             collectionView.dataSource = self
             
-            collectionView.registerNibs(for: [SocialMediaPostCollectionViewCell.self])
+            collectionView.registerNibs(for: [SocialMediaUserCollectionViewCell.self])
             if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
                 layout.scrollDirection = .horizontal
             }
@@ -84,8 +85,6 @@ class SocialMediaCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    weak var delegate: SocialMediaCollectionViewCellDelegate?
-    
     private var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -93,6 +92,8 @@ class SocialMediaCollectionViewCell: UICollectionViewCell {
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
+    
+    weak var delegate: SocialMediaUsersCollectionViewCellDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -146,31 +147,44 @@ class SocialMediaCollectionViewCell: UICollectionViewCell {
     }
     
     @objc private func buttonPressed(_ sender: UIButton) {
-        delegate?.moreMediaPressed()
+        delegate?.usersMoreButtonPressed()
     }
 }
 
-extension SocialMediaCollectionViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+
+extension SocialMediaUsersCollectionViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let model = SocialMediaPostCollectionViewCellViewModel(post: viewModels[indexPath.row])
+        let model = SocialMediaUserCollectionViewCellViewModel(user: viewModels[indexPath.row])
         return collectionView.dequeueReusableCell(withModel: model, for: indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: collectionView.frame.width*0.5, height: collectionView.frame.height)
+        let model = viewModels[indexPath.row]
+        
+        let baseWidth: CGFloat = 80
+        
+        let labelWidth = model.username?.width(withConstrainedHeight: 30, font: UIFont.getFont(.semibold, size: 14.0))
+        
+        let cellWidth = baseWidth + (labelWidth ?? CGFloat(50.0))
+        
+        return CGSize(width: cellWidth, height: collectionView.frame.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let model = viewModels[indexPath.row]
-        delegate?.mediaPostSelected(post: model)
+        delegate?.userPressed(user: model)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
     }
 }

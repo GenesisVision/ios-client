@@ -78,7 +78,7 @@ class SocialMediaPostCollectionViewCell: UICollectionViewCell {
     let userImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.backgroundColor = .blue
+        imageView.backgroundColor = .clear
         imageView.contentMode = .scaleAspectFill
         imageView.image = UIImage.profilePlaceholder
         return imageView

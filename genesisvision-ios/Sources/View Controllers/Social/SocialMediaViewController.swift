@@ -80,14 +80,24 @@ class SocialMediaViewController: BaseViewController {
         viewModel.router.show(routeType: .sharePost(post: sharedPost))
     }
     
-    private func showSocialFeed(type: SocialMediaFeedCollectionCellType) {
-        viewModel.router.show(routeType: .socialFeed)
+    override func pullToRefresh() {
+        super.pullToRefresh()
+        
+        viewModel.fetch { [weak self] (result) in
+            self?.hideAll()
+            switch result {
+            case .success:
+                self?.reloadData()
+            case .failure(errorType: _):
+                break
+            }
+        }
     }
 }
 
 extension SocialMediaViewController: SocialMediaCollectionViewModelDelegate {
     func openSocialFeed(type: SocialMediaFeedCollectionCellType) {
-        showSocialFeed(type: type)
+        viewModel.router.show(routeType: .socialFeed)
     }
     
     func commentPressed(postId: UUID) {
@@ -122,9 +132,20 @@ extension SocialMediaViewController: SocialMediaCollectionViewModelDelegate {
         showNewPostViewController(sharedPost: nil)
     }
     
+    func moreMediaPressed() {
+        viewModel.router.show(routeType: .mediaPosts)
+    }
+    
     func mediaPostPressed(post: MediaPost) {
         guard let url = post.url else { return }
         openSafariVC(with: url)
+    }
+    
+    func userPressed(user: UserDetailsList) {
+    }
+    
+    func usersMoreButtonPressed() {
+        viewModel.router.show(routeType: .users)
     }
 }
 
@@ -135,7 +156,12 @@ protocol SocialMediaCollectionViewModelDelegate: class {
     func likePressed(postId: UUID)
     
     func shareIdeasPressed()
+    
     func mediaPostPressed(post: MediaPost)
+    func moreMediaPressed()
+    
+    func userPressed(user: UserDetailsList)
+    func usersMoreButtonPressed()
 }
 
 final class SocialMediaViewModel {
@@ -164,18 +190,19 @@ final class SocialMediaCollectionViewModel: CellViewModelWithCollection {
     
     enum SectionType {
         case addPost
+        case live
+        case hot
         case feed
         case media
         case users
     }
     
-    var sections: [SectionType] = [.addPost, .feed, .media]
+    var sections: [SectionType] = [.addPost, .live, .hot, .feed, .media, .users]
     
     var viewModels = [CellViewAnyModel]()
-    
-    var feedViewModels = [CellViewAnyModel]()
-    
+    var feedViewModel = [CellViewAnyModel]()
     var mediaViewModel = [CellViewAnyModel]()
+    var usersViewModel = [CellViewAnyModel]()
     
     let collectionTopInset: CGFloat = Constants.SystemSizes.Cell.horizontalMarginValue
     let collectionBottomInset: CGFloat = Constants.SystemSizes.Cell.horizontalMarginValue
@@ -187,7 +214,8 @@ final class SocialMediaCollectionViewModel: CellViewModelWithCollection {
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [SocialMediaAddPostCollectionViewCellViewModel.self,
                 SocialMediaFeedCollectionViewCellViewModel.self,
-                SocialMediaCollectionViewCellViewModel.self]
+                SocialMediaCollectionViewCellViewModel.self,
+                SocialMediaUsersCollectionViewCellViewModel.self]
     }
     
     weak var delegate: SocialMediaCollectionViewModelDelegate?
@@ -197,7 +225,6 @@ final class SocialMediaCollectionViewModel: CellViewModelWithCollection {
         self.title = title
         self.delegate = delegate
     }
-    
     
     func fetch(completion: @escaping CompletionBlock) {
         
@@ -224,10 +251,10 @@ final class SocialMediaCollectionViewModel: CellViewModelWithCollection {
             if let post = postsViewModel?.items?.first {
                 let viewModel = SocialMediaFeedCollectionViewCellViewModel(type: .live, post: post, cellDelegate: self)
                 
-                self?.feedViewModels.removeAll(where: { guard let model = $0 as? SocialMediaFeedCollectionViewCellViewModel else { return false }
+                self?.feedViewModel.removeAll(where: { guard let model = $0 as? SocialMediaFeedCollectionViewCellViewModel else { return false }
                     return model.type == .live
                 })
-                self?.feedViewModels.append(viewModel)
+                self?.feedViewModel.append(viewModel)
             }
         } errorCompletion: { _ in
             completion(.failure(errorType: .apiError(message: "")))
@@ -238,10 +265,10 @@ final class SocialMediaCollectionViewModel: CellViewModelWithCollection {
             if let post = postsViewModel?.items?.first {
                 let viewModel = SocialMediaFeedCollectionViewCellViewModel(type: .hot, post: post, cellDelegate: self)
                 
-                self?.feedViewModels.removeAll(where: { guard let model = $0 as? SocialMediaFeedCollectionViewCellViewModel else { return false }
+                self?.feedViewModel.removeAll(where: { guard let model = $0 as? SocialMediaFeedCollectionViewCellViewModel else { return false }
                     return model.type == .hot
                 })
-                self?.feedViewModels.append(viewModel)
+                self?.feedViewModel.append(viewModel)
             }
         } errorCompletion: { _ in
             completion(.failure(errorType: .apiError(message: "")))
@@ -252,10 +279,10 @@ final class SocialMediaCollectionViewModel: CellViewModelWithCollection {
             if let post = postsViewModel?.items?.first {
                 let viewModel = SocialMediaFeedCollectionViewCellViewModel(type: .feed, post: post, cellDelegate: self)
                 
-                self?.feedViewModels.removeAll(where: { guard let model = $0 as? SocialMediaFeedCollectionViewCellViewModel else { return false }
+                self?.feedViewModel.removeAll(where: { guard let model = $0 as? SocialMediaFeedCollectionViewCellViewModel else { return false }
                     return model.type == .feed
                 })
-                self?.feedViewModels.append(viewModel)
+                self?.feedViewModel.append(viewModel)
             }
             completion(.success)
             self?.fetchMedia(completion: completion)
@@ -273,10 +300,24 @@ final class SocialMediaCollectionViewModel: CellViewModelWithCollection {
                 self?.mediaViewModel.append(viewModel)
             }
             completion(.success)
+            self?.fetchUsers(completion: completion)
         } errorCompletion: { _ in
             completion(.failure(errorType: .apiError(message: "")))
         }
 
+    }
+    
+    func fetchUsers(completion: @escaping CompletionBlock) {
+        UsersDataProvider.getList(sorting: .byActivityDesc, tags: nil, skip: 0, take: 10) { [weak self] (viewModel) in
+            if let users = viewModel?.items {
+                let viewModel = SocialMediaUsersCollectionViewCellViewModel(items: users, cellDelegate: self)
+                self?.usersViewModel = []
+                self?.usersViewModel.append(viewModel)
+            }
+            completion(.success)
+        } errorCompletion: { _ in
+            completion(.failure(errorType: .apiError(message: "")))
+        }
     }
     
     func model(for indexPath: IndexPath) -> CellViewAnyModel? {
@@ -286,13 +327,22 @@ final class SocialMediaCollectionViewModel: CellViewModelWithCollection {
         case .addPost:
             return viewModels.first{ $0 is SocialMediaAddPostCollectionViewCellViewModel }
         case .feed:
-            return feedViewModels[indexPath.row]
+            return feedViewModel.first(where: { guard let model = $0 as? SocialMediaFeedCollectionViewCellViewModel, model.type == .feed else { return false }
+                return true
+            })
         case .media:
             return mediaViewModel.first
         case .users:
-            break
+            return usersViewModel.first
+        case .live:
+            return feedViewModel.first(where: { guard let model = $0 as? SocialMediaFeedCollectionViewCellViewModel, model.type == .live else { return false }
+                return true
+            })
+        case .hot:
+            return feedViewModel.first(where: { guard let model = $0 as? SocialMediaFeedCollectionViewCellViewModel, model.type == .hot else { return false }
+                return true
+            })
         }
-        return nil
     }
     
     func sizeForItem(at indexPath: IndexPath, frame: CGRect) -> CGSize {
@@ -306,9 +356,12 @@ final class SocialMediaCollectionViewModel: CellViewModelWithCollection {
         case .media:
             return CGSize(width: frame.width, height: 300)
         case .users:
-            break
+            return CGSize(width: frame.width, height: 150)
+        case .live:
+            return CGSize(width: frame.width, height: 300)
+        case .hot:
+            return CGSize(width: frame.width, height: 300)
         }
-        return .zero
     }
     
     func insetForSection(for section: Int) -> UIEdgeInsets {
@@ -330,11 +383,33 @@ final class SocialMediaCollectionViewModel: CellViewModelWithCollection {
         case .addPost:
             return viewModels.count
         case .feed:
-            return feedViewModels.count
+            guard let _ = feedViewModel.first(where: {
+                guard let model = $0 as? SocialMediaFeedCollectionViewCellViewModel, model.type == .feed else { return false }
+                return true
+            }) as? SocialMediaFeedCollectionViewCellViewModel else {
+                return 0
+            }
+            return 1
         case .media:
             return mediaViewModel.count
         case .users:
-            return 0
+            return usersViewModel.count
+        case .live:
+            guard let _ = feedViewModel.first(where: {
+                guard let model = $0 as? SocialMediaFeedCollectionViewCellViewModel, model.type == .live else { return false }
+                return true
+            }) as? SocialMediaFeedCollectionViewCellViewModel else {
+                return 0
+            }
+            return 1
+        case .hot:
+            guard let _ = feedViewModel.first(where: {
+                guard let model = $0 as? SocialMediaFeedCollectionViewCellViewModel, model.type == .hot else { return false }
+                return true
+            }) as? SocialMediaFeedCollectionViewCellViewModel else {
+                return 0
+            }
+            return 1
         }
     }
     
@@ -370,5 +445,19 @@ extension SocialMediaCollectionViewModel: SocialMediaFeedCollectionViewCellDeleg
 extension SocialMediaCollectionViewModel: SocialMediaCollectionViewCellDelegate {
     func mediaPostSelected(post: MediaPost) {
         delegate?.mediaPostPressed(post: post)
+    }
+    
+    func moreMediaPressed() {
+        delegate?.moreMediaPressed()
+    }
+}
+
+extension SocialMediaCollectionViewModel: SocialMediaUsersCollectionViewCellDelegate {
+    func userPressed(user: UserDetailsList) {
+        delegate?.userPressed(user: user)
+    }
+    
+    func usersMoreButtonPressed() {
+        delegate?.usersMoreButtonPressed()
     }
 }

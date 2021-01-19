@@ -13,6 +13,8 @@ enum SocialRouteType {
     case socialFeed
     case addPost
     case sharePost(post: Post)
+    case users
+    case mediaPosts
 }
 
 
@@ -28,6 +30,10 @@ class SocialRouter: Router {
             showAddPost()
         case .sharePost(let post):
             showSharePost(sharedPost: post)
+        case .users:
+            showUsersList()
+        case .mediaPosts:
+            showMediaList()
         }
     }
     
@@ -35,26 +41,35 @@ class SocialRouter: Router {
         let viewController = SocialMainFeedViewController()
         viewController.viewModel = SocialMainFeedViewModel(withRouter: self)
         viewController.viewModel.title = "Social"
+        viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)
     }
     
     private func showAddPost() {
         guard let viewController = NewPostViewController.storyboardInstance(.social) else { return }
-        
-        let viewModel = NewPostViewModel(sharedPost: nil)
-        viewController.viewModel = viewModel
-        
+        viewController.viewModel = NewPostViewModel(sharedPost: nil)
+        viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)
-        
     }
     
     private func showSharePost(sharedPost: Post) {
         guard let viewController = NewPostViewController.storyboardInstance(.social) else { return }
-        
-        let viewModel = NewPostViewModel(sharedPost: sharedPost)
-        viewController.viewModel = viewModel
-        
+        viewController.viewModel = NewPostViewModel(sharedPost: sharedPost)
+        viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)
-        
+    }
+    
+    private func showUsersList() {
+        let viewController = SocialUsersListViewController()
+        viewController.viewModel = SocialUsersListViewModel(delegate: viewController)
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func showMediaList() {
+        let viewController = SocialMediaListViewController()
+        viewController.viewModel = SocialMediaListViewModel(delegate: viewController)
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }

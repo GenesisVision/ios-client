@@ -162,3 +162,30 @@ extension UIView {
         }
     }
 }
+
+extension UIView {
+    
+    enum BorderSide {
+        case top
+        case bottom
+        case left
+        case right
+    }
+    
+    func addBorderLine(color: UIColor, borderWidth: CGFloat, side: BorderSide, padding: UIEdgeInsets? = nil) {
+        let border = CALayer()
+        border.backgroundColor = color.cgColor
+        
+        switch side {
+        case .top:
+            border.frame = CGRect(x: padding?.left ?? 0, y: 0, width: self.frame.size.width - ((padding?.right ?? 0) + (padding?.left ?? 0)), height: borderWidth)
+        case .bottom:
+            border.frame = CGRect(x: padding?.left ?? 0, y: self.frame.size.height - borderWidth, width: self.frame.size.width - ((padding?.right ?? 0) + (padding?.left ?? 0)), height: borderWidth)
+        case .left:
+            border.frame = CGRect(x: 0, y: padding?.top ?? 0, width: borderWidth, height: self.frame.size.height - ((padding?.top ?? 0) + (padding?.bottom ?? 0)))
+        case .right:
+            border.frame = CGRect(x: self.frame.size.width - borderWidth, y: padding?.top ?? 0, width: borderWidth, height: self.frame.size.height - ((padding?.top ?? 0) + (padding?.bottom ?? 0)))
+        }
+        layer.addSublayer(border)
+    }
+}
