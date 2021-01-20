@@ -28,6 +28,10 @@ class DashboardViewController: ListViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.fetch()
+        
+//        let vc = AuthThreeFactorSignInViewController.storyboardInstance(.auth)!
+//        vc.viewModel = AuthThreeFactorSignInViewModel()
+//        navigationController?.pushViewController(vc, animated: true)
     }
     
     override func pullToRefresh() {

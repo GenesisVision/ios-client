@@ -9,17 +9,15 @@
 import UIKit
 
 class NotificationsDataProvider: DataProvider {
-    static func get(skip: Int, take: Int, completion: @escaping (_ notificationList: NotificationList?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+    static func get(skip: Int, take: Int, completion: @escaping (_ notificationList: NotificationViewModelItemsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
-        NotificationsAPI.getNotifications(authorization: authorization, skip: skip, take: take) { (model, error) in
+        NotificationsAPI.getNotifications(skip: skip, take: take) { (model, error) in
             DataProvider().responseHandler(model, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
     static func getNewCount(skip: Int, take: Int, completion: @escaping (Int?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        NotificationsAPI.getNewNotificationsCount(authorization: authorization) { (model, error) in
+        NotificationsAPI.getNewNotificationsCount { (model, error) in
             DataProvider().responseHandler(model, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
@@ -27,30 +25,28 @@ class NotificationsDataProvider: DataProvider {
     // MARK: - Settings
     static func readSetting(settingId: String?, completion: @escaping CompletionBlock) {
         
-        guard let authorization = AuthManager.authorizedToken,
-            let settingId = settingId,
+        guard let settingId = settingId,
             let uuid = UUID(uuidString: settingId)
             else { return completion(.failure(errorType: .apiError(message: nil))) }
         
-        NotificationsAPI.readNotification(id: uuid, authorization: authorization) { (error) in
+        NotificationsAPI.readNotification(_id: uuid) { (viewModel, error) in
             DataProvider().responseHandler(error, completion: completion)
         }
     }
     static func getSettings(completion: @escaping (_ notificationSettingList: NotificationSettingList?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        NotificationsAPI.getNotificationsSettings(authorization: authorization) { (model, error) in
+        NotificationsAPI.getNotificationsSettings { (model, error) in
             DataProvider().responseHandler(model, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
+    
     static func enableSetting(settingId: String?, enable: Bool, completion: @escaping (_ uuid: String?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
-        guard let authorization = AuthManager.authorizedToken,
-            let settingId = settingId,
+        guard let settingId = settingId,
             let uuid = UUID(uuidString: settingId)
             else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        NotificationsAPI.toggleNotificationSettings(id: uuid, enable: enable, authorization: authorization) { (uuid, error) in
+        NotificationsAPI.toggleNotificationSettings(_id: uuid, enable: enable) { (uuid, error) in
             DataProvider().responseHandler(error, completion: { (result) in
                 switch result {
                 case .success:
@@ -64,10 +60,9 @@ class NotificationsDataProvider: DataProvider {
             })
         }
     }
-    static func addSetting(assetId: String? = nil, managerId: String? = nil, type: NotificationsAPI.ModelType_addNotificationsSettings? = nil, conditionType: NotificationsAPI.ConditionType_addNotificationsSettings? = nil, conditionAmount: Double? = nil, completion: @escaping (_ uuid: String?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        
-        guard let authorization = AuthManager.authorizedToken else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
-        
+    
+    static func addSetting(assetId: String? = nil, managerId: String? = nil, type: NotificationType? = nil, conditionType: NotificationSettingConditionType? = nil, conditionAmount: Double? = nil, completion: @escaping (_ uuid: String?) -> Void, errorCompletion: @escaping CompletionBlock) {
+                
         var assetUUID: UUID? = nil
         if let assetId = assetId {
             assetUUID = UUID(uuidString: assetId)
@@ -77,7 +72,7 @@ class NotificationsDataProvider: DataProvider {
         if let managerId = managerId {
             managerUUID = UUID(uuidString: managerId)
         }
-        NotificationsAPI.addNotificationsSettings(authorization: authorization, assetId: assetUUID, managerId: managerUUID, type: type, conditionType: conditionType, conditionAmount: conditionAmount) { (uuid, error) in
+        NotificationsAPI.addNotificationsSettings(assetId: assetUUID, managerId: managerUUID, type: type, conditionType: conditionType, conditionAmount: conditionAmount) { (uuid, error) in
             DataProvider().responseHandler(error, completion: { (result) in
                 switch result {
                 case .success:
@@ -94,41 +89,37 @@ class NotificationsDataProvider: DataProvider {
     
     static func getSettings(programId assetId: String?, completion: @escaping (ProgramNotificationSettingList?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
-        guard let authorization = AuthManager.authorizedToken,
-            let assetId = assetId else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        guard let assetId = assetId else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        NotificationsAPI.getNotificationsProgramSettings(id: assetId, authorization: authorization) { (model, error) in
+        NotificationsAPI.getNotificationsProgramSettings(_id: assetId) { (model, error) in
             DataProvider().responseHandler(model, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
     
     static func getSettings(fundId assetId: String?, completion: @escaping (FundNotificationSettingList?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
-        guard let authorization = AuthManager.authorizedToken,
-            let assetId = assetId else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        guard let assetId = assetId else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        NotificationsAPI.getNotificationsFundSettings(id: assetId, authorization: authorization) { (model, error) in
+        NotificationsAPI.getNotificationsFundSettings(_id: assetId) { (model, error) in
             DataProvider().responseHandler(model, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
     
     static func getSettings(managerId assetId: String?, completion: @escaping (ManagerNotificationSettingList?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
-        guard let authorization = AuthManager.authorizedToken,
-            let assetId = assetId else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        guard let assetId = assetId else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
         
-        NotificationsAPI.getNotificationsManagerSettings(id: assetId, authorization: authorization) { (model, error) in
+        NotificationsAPI.getNotificationsManagerSettings(_id: assetId) { (model, error) in
             DataProvider().responseHandler(model, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
     
     static func removeSetting(settingId: String?, completion: @escaping CompletionBlock) {
-        guard let authorization = AuthManager.authorizedToken,
-            let settingId = settingId,
+        guard let settingId = settingId,
             let uuid = UUID(uuidString: settingId)
             else { return completion(.failure(errorType: .apiError(message: nil))) }
         
-        NotificationsAPI.removeNotificationsSettings(id: uuid, authorization: authorization) { (error) in
+        NotificationsAPI.removeNotificationsSettings(_id: uuid) { (viewModel, error) in
             DataProvider().responseHandler(error, completion: completion)
         }
     }

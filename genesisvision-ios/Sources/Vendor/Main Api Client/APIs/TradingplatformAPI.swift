@@ -1240,6 +1240,74 @@ open class TradingplatformAPI {
     }
 
     /**
+     Get notional and leverage brackets
+     - parameter accountId: (query)  (optional)     - parameter symbol: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getFuturesBrackets(accountId: UUID? = nil, symbol: String? = nil, completion: @escaping ((_ data: [BinanceRawFuturesSymbolBracket]?,_ error: Error?) -> Void)) {
+        getFuturesBracketsWithRequestBuilder(accountId: accountId, symbol: symbol).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     Get notional and leverage brackets
+     - GET /v2.0/tradingplatform/binance/account/futures/symbols/brackets
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example=[ {
+  "symbolOrPair" : "symbolOrPair",
+  "brackets" : [ {
+    "cap" : 1,
+    "maintenanceMarginRatio" : 5.637376656633329,
+    "bracket" : 0,
+    "floor" : 5,
+    "initialLeverage" : 6
+  }, {
+    "cap" : 1,
+    "maintenanceMarginRatio" : 5.637376656633329,
+    "bracket" : 0,
+    "floor" : 5,
+    "initialLeverage" : 6
+  } ]
+}, {
+  "symbolOrPair" : "symbolOrPair",
+  "brackets" : [ {
+    "cap" : 1,
+    "maintenanceMarginRatio" : 5.637376656633329,
+    "bracket" : 0,
+    "floor" : 5,
+    "initialLeverage" : 6
+  }, {
+    "cap" : 1,
+    "maintenanceMarginRatio" : 5.637376656633329,
+    "bracket" : 0,
+    "floor" : 5,
+    "initialLeverage" : 6
+  } ]
+} ]}]
+     - parameter accountId: (query)  (optional)     - parameter symbol: (query)  (optional)
+
+     - returns: RequestBuilder<[BinanceRawFuturesSymbolBracket]> 
+     */
+    open class func getFuturesBracketsWithRequestBuilder(accountId: UUID? = nil, symbol: String? = nil) -> RequestBuilder<[BinanceRawFuturesSymbolBracket]> {
+        let path = "/v2.0/tradingplatform/binance/account/futures/symbols/brackets"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "accountId": accountId, 
+                        "symbol": symbol
+        ])
+
+        let requestBuilder: RequestBuilder<[BinanceRawFuturesSymbolBracket]>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
      Gets composite index info
      - parameter symbol: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
@@ -1937,6 +2005,70 @@ open class TradingplatformAPI {
         ])
 
         let requestBuilder: RequestBuilder<BinanceRawOrderBook>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Gets position information
+     - parameter accountId: (query)  (optional)     - parameter symbol: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getFuturesPositionInformation(accountId: UUID? = nil, symbol: String? = nil, completion: @escaping ((_ data: [BinanceRawFuturesPosition]?,_ error: Error?) -> Void)) {
+        getFuturesPositionInformationWithRequestBuilder(accountId: accountId, symbol: symbol).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     Gets position information
+     - GET /v2.0/tradingplatform/binance/account/futures/position/risk
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example=[ {
+  "entryPrice" : 0.8008281904610115,
+  "leverage" : 1,
+  "symbol" : "symbol",
+  "isAutoAddMargin" : true,
+  "markPrice" : 5.637376656633329,
+  "quantity" : 2.3021358869347655,
+  "isolatedMargin" : 6.027456183070403,
+  "marginType" : "Isolated",
+  "unrealizedPnL" : 7.061401241503109,
+  "positionSide" : "Short",
+  "liquidationPrice" : 5.962133916683182,
+  "maxNotionalValue" : "maxNotionalValue"
+}, {
+  "entryPrice" : 0.8008281904610115,
+  "leverage" : 1,
+  "symbol" : "symbol",
+  "isAutoAddMargin" : true,
+  "markPrice" : 5.637376656633329,
+  "quantity" : 2.3021358869347655,
+  "isolatedMargin" : 6.027456183070403,
+  "marginType" : "Isolated",
+  "unrealizedPnL" : 7.061401241503109,
+  "positionSide" : "Short",
+  "liquidationPrice" : 5.962133916683182,
+  "maxNotionalValue" : "maxNotionalValue"
+} ]}]
+     - parameter accountId: (query)  (optional)     - parameter symbol: (query)  (optional)
+
+     - returns: RequestBuilder<[BinanceRawFuturesPosition]> 
+     */
+    open class func getFuturesPositionInformationWithRequestBuilder(accountId: UUID? = nil, symbol: String? = nil) -> RequestBuilder<[BinanceRawFuturesPosition]> {
+        let path = "/v2.0/tradingplatform/binance/account/futures/position/risk"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "accountId": accountId, 
+                        "symbol": symbol
+        ])
+
+        let requestBuilder: RequestBuilder<[BinanceRawFuturesPosition]>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }

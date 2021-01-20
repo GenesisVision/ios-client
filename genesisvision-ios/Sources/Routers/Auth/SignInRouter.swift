@@ -7,7 +7,11 @@
 //
 
 enum SignInRouteType {
-    case startAsAuthorized, signUp, forgotPassword, twoFactorSignIn(email: String, password: String)
+    case startAsAuthorized
+    case signUp
+    case forgotPassword
+    case twoFactorSignIn(email: String, password: String)
+    case threeFactorSignIn(email: String, password: String)
 }
 
 class SignInRouter: Router {
@@ -23,6 +27,8 @@ class SignInRouter: Router {
             forgotPasswordAction()
         case .twoFactorSignIn(let email, let password):
             twoFactorSignInAction(email: email, password: password)
+        case .threeFactorSignIn(email: let email, password: let password):
+            threeFactorSignInAction(email: email, password: password)
         }
     }
     
@@ -46,6 +52,12 @@ class SignInRouter: Router {
         guard let viewController = AuthTwoFactorSignInViewController.storyboardInstance(.auth) else { return }
         let router = AuthTwoFactorSignInRouter(parentRouter: self, navigationController: navigationController)
         viewController.viewModel = AuthTwoFactorSignInViewModel(withRouter: router, email: email, password: password)
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func threeFactorSignInAction(email: String, password: String) {
+        guard let viewController = AuthThreeFactorSignInViewController.storyboardInstance(.auth) else { return }
+        viewController.viewModel = AuthThreeFactorSignInViewModel(withRouter: self, email: email, password: password)
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

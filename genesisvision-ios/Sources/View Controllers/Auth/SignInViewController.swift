@@ -109,6 +109,8 @@ class SignInViewController: BaseViewController {
                     })
                 case .requiresTwoFactor:
                     self?.viewModel.showTwoFactorSignInVC(email: email, password: password)
+                case .requiresEmailConfirmation:
+                    self?.viewModel.showThreeFactorSignInVC(email: email, password: password)
                 default:
                     ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
                 }

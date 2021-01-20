@@ -438,8 +438,6 @@ extension NotificationsSettingsViewModel: NotificationsSettingsProtocol {
     func didAdd(type: NotificationType?) {
         router.currentController?.showProgressHUD()
         
-        let type = NotificationsAPI.ModelType_addNotificationsSettings(rawValue: type?.rawValue ?? "")
-        
         NotificationsDataProvider.addSetting(assetId: assetId, type: type, completion: { [weak self] (uuidString) in
             self?.router.currentController?.hideHUD()
                         
@@ -477,7 +475,6 @@ extension NotificationsSettingsViewModel: NotificationsSettingsProtocol {
                 break
             case .failure(let errorType):
                 print(errorType)
-                ErrorHandler.handleError(with: errorType, viewController: self?.router.currentController, hud: true)
             }
         }
     }
@@ -499,9 +496,6 @@ extension NotificationsSettingsViewModel: NotificationsSettingsProtocol {
     func didAdd(assetId: String?, type: NotificationType?, conditionType: NotificationSettingConditionType?, conditionAmount: Double?) {
     
         router.currentController?.showProgressHUD()
-        
-        let type = NotificationsAPI.ModelType_addNotificationsSettings(rawValue: type?.rawValue ?? "")
-        let conditionType = NotificationsAPI.ConditionType_addNotificationsSettings(rawValue: conditionType?.rawValue ?? "")
         
         NotificationsDataProvider.addSetting(assetId: assetId, type: type, conditionType: conditionType, conditionAmount: conditionAmount, completion: { [weak self] (result) in
             self?.router.currentController?.hideHUD()

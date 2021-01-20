@@ -58,6 +58,13 @@ class TwoFactorDataProvider: DataProvider {
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
+    
+    static func confirmThreeStepAuth(model: ThreeFactorAuthenticatorConfirm, completion: @escaping (String?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        
+        AuthAPI.confirmThreeStepAuth(body: model) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
 }
 
 

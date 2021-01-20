@@ -26,6 +26,17 @@ class AuthManager {
         }
     }
     
+    static var tempAuthorizedToken: String? {
+        get {
+            guard let token = UserDefaults.standard.string(forKey: UserDefaultKeys.tempAuthToken) else { return nil }
+            
+            return "Bearer " + token
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultKeys.tempAuthToken)
+        }
+    }
+    
     static func updateToken() {
         AuthManager().updateApiToken { (result) in
             switch result {
@@ -40,6 +51,7 @@ class AuthManager {
     static func signOut() {
         AuthManager.resetUserDefaults()
         AuthManager.authorizedToken = nil
+        AuthManager.tempAuthorizedToken = nil
         AuthManager.profileViewModel = nil
         AuthManager.walletViewModel = nil
         AuthManager.ratesModel = nil

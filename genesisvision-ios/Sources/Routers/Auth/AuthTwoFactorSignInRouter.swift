@@ -8,6 +8,7 @@
 
 enum AuthTwoFactorSignInRouteType {
     case startAsAuthorized
+    case threeFactorSignIn(email: String, password: String)
 }
 
 class AuthTwoFactorSignInRouter: Router {
@@ -17,7 +18,16 @@ class AuthTwoFactorSignInRouter: Router {
         switch routeType {
         case .startAsAuthorized:
             startAsAuthorized()
+        case .threeFactorSignIn(let email, let password):
+            showThreeFactorSignIn(email: email, password: password)
         }
+    }
+    
+    func showThreeFactorSignIn(email: String, password: String) {
+        guard let viewController = AuthThreeFactorSignInViewController.storyboardInstance(.auth) else { return }
+        viewController.viewModel = AuthThreeFactorSignInViewModel(withRouter: self, email: email, password: password)
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 

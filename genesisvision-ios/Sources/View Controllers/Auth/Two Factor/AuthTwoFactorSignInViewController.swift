@@ -92,7 +92,13 @@ class AuthTwoFactorSignInViewController: BaseViewController {
                     self?.viewModel.startAsAuthorized()
                 })
             case .failure(let errorType):
-                ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
+                
+                switch errorType {
+                case .requiresEmailConfirmation(message: let message):
+                    self?.viewModel.showThreeFactorSignInVC()
+                default:
+                    ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
+                }
             }
         }
     }

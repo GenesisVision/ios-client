@@ -34,6 +34,10 @@ final class AuthTwoFactorSignInViewModel {
         router.show(routeType: .startAsAuthorized)
     }
     
+    func showThreeFactorSignInVC() {
+        router.show(routeType: .threeFactorSignIn(email: email, password: password))
+    }
+    
     // MARK: - API
     func signIn(twoFactorCode: String? = nil, recoveryCode: String? = nil, captchaResult: CaptchaCheckResult? = nil, completion: @escaping CompletionBlock) {
         AuthDataProvider.signIn(email: email, password: password, twoFactorCode: twoFactorCode, recoveryCode: recoveryCode, captchaCheckResult: captchaResult, completion: { (token) in

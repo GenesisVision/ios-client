@@ -32,6 +32,10 @@ final class AuthSignInViewModel {
         router.show(routeType: .twoFactorSignIn(email: email, password: password))
     }
     
+    func showThreeFactorSignInVC(email: String, password: String) {
+        router.show(routeType: .threeFactorSignIn(email: email, password: password))
+    }
+    
     func showForgotPasswordVC() {
         router.show(routeType: .forgotPassword)
     }

@@ -39,7 +39,7 @@ open class NotificationsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "AssetId": assetId, 
                         "ManagerId": managerId, 
                         "Type": type, 
@@ -225,7 +225,7 @@ open class NotificationsAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "Skip": skip?.encodeToJSON(), 
                         "Take": take?.encodeToJSON()
         ])

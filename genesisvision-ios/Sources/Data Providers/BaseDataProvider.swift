@@ -17,7 +17,7 @@ class BaseDataProvider: DataProvider {
         }
     }
     static func getAllPlatformAssets(completion: @escaping (PlatformAssets?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        PlatformAPI.getAllPlatformAssets { (model, error) in
+        PlatformAPI.getAllPlatformTradingAssets { (model, error) in
             DataProvider().responseHandler(model, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
@@ -29,19 +29,14 @@ class BaseDataProvider: DataProvider {
         }
     }
     // MARK: - Levels
-    static func getProgramsLevels(_ currencyType: CurrencyType? = nil, completion: @escaping (ProgramsLevelsInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        
-        var currency: PlatformAPI.Currency_getProgramLevels?
-        
-        if let currencyType = currencyType {
-            currency = PlatformAPI.Currency_getProgramLevels(rawValue: currencyType.rawValue)
-        }
+    static func getProgramsLevels(_ currency: Currency? = nil, completion: @escaping (ProgramsLevelsInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
         PlatformAPI.getProgramLevels(currency: currency) { (model, error) in
             DataProvider().responseHandler(model, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
-    static func getLevelsParameters(_ currency: PlatformAPI.Currency_getProgramLevelsParams? = nil, completion: @escaping (LevelsParamsInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    
+    static func getLevelsParameters(_ currency: Currency? = nil, completion: @escaping (LevelsParamsInfo?) -> Void, errorCompletion: @escaping CompletionBlock) {
         PlatformAPI.getProgramLevelsParams(currency: currency) { (viewModel, error) in
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }

@@ -75,7 +75,7 @@ class PlatformManager {
         return mainKYCViewController
     }
     
-    func getLevelsParamsInfo(currency: PlatformAPI.Currency_getProgramLevelsParams, completion: @escaping (_ platformAssets: LevelsParamsInfo?) -> Void) {
+    func getLevelsParamsInfo(currency: Currency, completion: @escaping (_ platformAssets: LevelsParamsInfo?) -> Void) {
         BaseDataProvider.getLevelsParameters(currency, completion: { [weak self] (viewModel) in
             self?.levelsParamsInfo = viewModel
             completion(viewModel)

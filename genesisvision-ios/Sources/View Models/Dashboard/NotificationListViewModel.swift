@@ -208,7 +208,7 @@ extension NotificationListViewModel {
                 
                 let totalCount = notificationList?.total ?? 0
                 
-                notificationList?.notifications?.forEach({ (notification) in
+                notificationList?.items?.forEach({ (notification) in
                     let viewModel = NotificationListTableViewCellViewModel(notification: notification)
                     viewModels.append(viewModel)
                 })

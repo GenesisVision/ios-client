@@ -19,7 +19,7 @@ final class CreateNotificationViewModel {
         }
     }
     
-    var typeValues: [String] = [NotificationsAPI.ConditionType_addNotificationsSettings.profit.rawValue, NotificationsAPI.ConditionType_addNotificationsSettings.level.rawValue]
+    var typeValues: [String] = []
     
     var assetId: String?
     var managerId: String?
@@ -29,7 +29,7 @@ final class CreateNotificationViewModel {
     var selectedLevel: Int = 1
     var enteredProfitValue: Double = 0.0
     
-    public private(set) var selectedType: NotificationsAPI.ConditionType_addNotificationsSettings = .profit
+    public private(set) var selectedType: NotificationSettingConditionType = .profit
     
     private var router: Router!
     private weak var reloadDataProtocol: ReloadDataProtocol?
@@ -49,7 +49,7 @@ final class CreateNotificationViewModel {
     func createNotification(completion: @escaping CompletionBlock) {
         conditionAmount = selectedType == .profit ? enteredProfitValue : Double(selectedLevel)
         
-        NotificationsDataProvider.addSetting(assetId: assetId, managerId: managerId, type: NotificationsAPI.ModelType_addNotificationsSettings.programCondition, conditionType: selectedType, conditionAmount: conditionAmount, completion: { [weak self] (uuidString) in
+        NotificationsDataProvider.addSetting(assetId: assetId, managerId: managerId, type: .externalSignals, conditionType: selectedType, conditionAmount: conditionAmount, completion: { [weak self] (uuidString) in
             self?.router.popViewController(animated: true)
             self?.reloadDataProtocol?.didReloadData()
             completion(.success)

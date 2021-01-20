@@ -204,6 +204,7 @@ open class DashboardAPI {
   "total" : 6,
   "items" : [ {
     "balance" : 0.8008281904610115,
+    "permissions" : [ "None", "None" ],
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "title" : "title",
@@ -222,6 +223,7 @@ open class DashboardAPI {
     }
   }, {
     "balance" : 0.8008281904610115,
+    "permissions" : [ "None", "None" ],
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "title" : "title",
@@ -913,6 +915,7 @@ open class DashboardAPI {
         "successFeeSelected" : 5.637376656633329,
         "level" : 0,
         "successFeeCurrent" : 2.3021358869347655,
+        "type" : "DailyPeriod",
         "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
           "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
@@ -1029,6 +1032,7 @@ open class DashboardAPI {
         "successFeeSelected" : 5.637376656633329,
         "level" : 0,
         "successFeeCurrent" : 2.3021358869347655,
+        "type" : "DailyPeriod",
         "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
           "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
@@ -1231,6 +1235,7 @@ open class DashboardAPI {
         "successFeeSelected" : 5.637376656633329,
         "level" : 0,
         "successFeeCurrent" : 2.3021358869347655,
+        "type" : "DailyPeriod",
         "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
           "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
@@ -1347,6 +1352,7 @@ open class DashboardAPI {
         "successFeeSelected" : 5.637376656633329,
         "level" : 0,
         "successFeeCurrent" : 2.3021358869347655,
+        "type" : "DailyPeriod",
         "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
           "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
@@ -1508,6 +1514,7 @@ open class DashboardAPI {
         "successFeeSelected" : 5.637376656633329,
         "level" : 0,
         "successFeeCurrent" : 2.3021358869347655,
+        "type" : "DailyPeriod",
         "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
           "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
@@ -1624,6 +1631,7 @@ open class DashboardAPI {
         "successFeeSelected" : 5.637376656633329,
         "level" : 0,
         "successFeeCurrent" : 2.3021358869347655,
+        "type" : "DailyPeriod",
         "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
           "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
@@ -2119,6 +2127,7 @@ open class DashboardAPI {
         "successFeeSelected" : 5.637376656633329,
         "level" : 0,
         "successFeeCurrent" : 2.3021358869347655,
+        "type" : "DailyPeriod",
         "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
           "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
@@ -2235,6 +2244,7 @@ open class DashboardAPI {
         "successFeeSelected" : 5.637376656633329,
         "level" : 0,
         "successFeeCurrent" : 2.3021358869347655,
+        "type" : "DailyPeriod",
         "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
           "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",

@@ -24,6 +24,7 @@ class SignalDataProvider: DataProvider {
             DataProvider().responseHandler(error, completion: completion)
         }
     }
+    
     static func attachAccounts(assetId: String, completion: @escaping (_ copyTradingAccountsList: TradingAccountDetailsItemsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
         guard let uuid = UUID(uuidString: assetId) else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
@@ -32,12 +33,7 @@ class SignalDataProvider: DataProvider {
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
-    static func attachExternalCommonAccount(uuid: UUID, model: AttachToExternalSignalProviderCommon? = nil, completion: @escaping CompletionBlock) {
-                
-        SignalAPI.attachSlaveToMasterExternalCommonAccount(_id: uuid, body: model) { (_, error) in
-            DataProvider().responseHandler(error, completion: completion)
-        }
-    }
+    
     static func attachExternalPrivateAccount(uuid: UUID, model: AttachToExternalSignalProviderExt? = nil, completion: @escaping CompletionBlock) {
         
         SignalAPI.attachSlaveToMasterExternalPrivateAccount(_id: uuid, body: model) { (_, error) in
@@ -52,6 +48,7 @@ class SignalDataProvider: DataProvider {
             DataProvider().responseHandler(error, completion: completion)
         }
     }
+    
     static func detachExternal(with programId: String, model: DetachFromExternalSignalProvider, completion: @escaping CompletionBlock) {
         guard let uuid = UUID(uuidString: programId) else { return completion(.failure(errorType: .apiError(message: nil))) }
 
