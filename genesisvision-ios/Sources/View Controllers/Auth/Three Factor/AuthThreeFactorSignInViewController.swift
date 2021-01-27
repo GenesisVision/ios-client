@@ -68,7 +68,7 @@ class AuthThreeFactorSignInViewController: BaseViewController {
     private func signIn(completion: @escaping CompletionBlock) {
         var authenticatorCode = authCodeLabel.text ?? ""
         authenticatorCode = authenticatorCode.trimmingCharacters(in: .whitespaces)
-        
+        authenticatorCode = authenticatorCode.replacingOccurrences(of: " ", with: "")
         viewModel.signIn(authenticatorCode: authenticatorCode, completion: completion)
     }
 }
@@ -153,7 +153,9 @@ final class AuthThreeFactorSignInViewModel {
     var labelPlaceholder: String = ""
     
     var titleText: String {
-        return "To secure your account, please complete the following verification\n\nEnter the 6 digit code received by \n\(email)"
+        let titleText = "To secure your account, please complete the following verification\n\nEnter the 6 digit code received by \n"
+        let partsOfEmail = email.components(separatedBy: "@")
+        return titleText + (partsOfEmail.first?.maskedMid ?? "" ) + "@" + (partsOfEmail.last ?? "")
     }
     
     public private(set) var numbersLimit: Int = 6
@@ -176,6 +178,7 @@ final class AuthThreeFactorSignInViewModel {
             if let viewModel = viewModel {
                 AuthManager.authorizedToken = viewModel
                 self?.router.startAsAuthorized()
+                completion(.success)
             }
         }, errorCompletion: completion)
     }

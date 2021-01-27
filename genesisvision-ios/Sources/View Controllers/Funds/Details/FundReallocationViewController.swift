@@ -323,7 +323,7 @@ final class FundReallocationViewModel {
     }
     
     private func addGVTAsset(completion: @escaping CompletionBlock) {
-        guard reallocationMode == .create, assetCollectionViewModel.assets.first(where: { $0.symbol == "GVT" }) == nil, let platformAsset = self.platformAssets.first(where: { $0.asset == "GVT" }) else { return }
+        guard reallocationMode == .create, assetCollectionViewModel.assets.first(where: { $0.symbol == Constants.gvtString }) == nil, let platformAsset = self.platformAssets.first(where: { $0.asset == Constants.gvtString }) else { return }
         
         assetCollectionViewModel.assets.append(FundAssetInfo(asset: platformAsset.name, symbol: platformAsset.asset, logoUrl: platformAsset.logoUrl, target: 1, current: 1, currentAmount: 0, url: platformAsset.url))
         completion(.success)
@@ -377,7 +377,7 @@ final class FundReallocationViewModel {
     
     func getFreeSpaceInFund() -> Int {
         var freeSpace: Int = 100
-        assetCollectionViewModel.assets.forEach({freeSpace -= Int($0.target ?? 0)})
+        assetCollectionViewModel.assets.forEach({ freeSpace -= Int($0.target ?? 0) })
         return freeSpace
     }
 }
@@ -488,8 +488,7 @@ final class FundReallocationAssetCollectionViewModel: CellViewModelWithCollectio
 
 extension FundReallocationAssetCollectionViewModel: FundAssetCellRemoveButtonProtocol {
     func remove(assetInfo: FundAssetInfo) {
-        
-        if let symbol = assetInfo.symbol, symbol == "GVT" {
+        if let symbol = assetInfo.symbol, symbol == Constants.gvtString {
             changeValueForFundAsset(target: 1, symbol: symbol)
             assetCellSelectedDelegate?.assetCellRemoved(assetInfo: assetInfo)
         } else {

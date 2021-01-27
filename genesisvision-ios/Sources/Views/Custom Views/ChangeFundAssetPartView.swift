@@ -120,7 +120,6 @@ class ChangeFundAssetPartView: UIView {
         return button
     }()
     
-    private let GVT = "GVT"
     private var mainViewHeight: CGFloat = 200
     private var mainViewWidth: CGFloat = 200
     private var freeSpaceInFund: Int = 0
@@ -256,7 +255,7 @@ class ChangeFundAssetPartView: UIView {
     @objc private func minusPercent() {
         guard freeSpaceInFund <= 100, targetValueInFund - 1 >= 0 else { return }
         
-        if let symbol = assetInfo.symbol, symbol == GVT, targetValueInFund == 1 { return }
+        if let symbol = assetInfo.symbol, symbol == Constants.gvtString, targetValueInFund == 1 { return }
         
         let freeSpace = freeSpaceInFund + 1
         let targetValue = targetValueInFund - 1

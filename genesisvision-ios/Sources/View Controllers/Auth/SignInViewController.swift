@@ -57,8 +57,8 @@ class SignInViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         #if DEBUG
-        emailTextField.text = email
-        passwordTextField.text = pass
+        emailTextField.text = "p.melnichenko+1@genesis.vision" //email
+        passwordTextField.text = "Qwerty"//pass
         #endif
         
         setupUI()
@@ -104,7 +104,14 @@ class SignInViewController: BaseViewController {
                                 self?.viewModel.startAsAuthorized()
                             })
                         case .failure(let errorType):
-                            ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
+                            switch errorType {
+                            case .requiresTwoFactor:
+                                self?.viewModel.showTwoFactorSignInVC(email: email, password: password)
+                            case .requiresEmailConfirmation:
+                                self?.viewModel.showThreeFactorSignInVC(email: email, password: password)
+                            default:
+                                ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
+                            }
                         }
                     })
                 case .requiresTwoFactor:

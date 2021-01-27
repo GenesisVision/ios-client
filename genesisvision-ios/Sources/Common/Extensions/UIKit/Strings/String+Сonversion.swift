@@ -84,4 +84,10 @@ extension String {
     var isBothLatinAndCyrillic: Bool {
         return self.isLatin && self.isCyrillic
     }
+    
+    var maskedMid: String {
+        return String(self.enumerated().map { index, char in
+          return [0, 1, self.count - 1, self.count - 2].contains(index) ? char : "*"
+       })
+    }
 }

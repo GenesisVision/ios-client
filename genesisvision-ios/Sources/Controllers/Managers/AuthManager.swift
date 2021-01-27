@@ -30,7 +30,7 @@ class AuthManager {
         get {
             guard let token = UserDefaults.standard.string(forKey: UserDefaultKeys.tempAuthToken) else { return nil }
             
-            return "Bearer " + token
+            return token
         }
         set {
             UserDefaults.standard.set(newValue, forKey: UserDefaultKeys.tempAuthToken)
@@ -75,7 +75,7 @@ class AuthManager {
     static func getSavedRates(completion: @escaping (_ rates: [RateItem]?) -> Void) {
         getRates { (viewModel) in
             guard let viewModel = viewModel else { return completion(nil) }
-            completion(viewModel.rates?["GVT"])
+            completion(viewModel.rates?[Constants.gvtString])
         }
     }
     

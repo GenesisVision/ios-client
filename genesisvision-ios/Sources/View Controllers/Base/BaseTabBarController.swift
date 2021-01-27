@@ -28,9 +28,11 @@ class BaseTabBarController: UITabBarController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(themeChangedNotification(notification:)), name: .themeChanged, object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(notificationDidReceive(_:)), name: .notificationDidReceive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(notificationDidReceive(_:)), name: .notificationDidReceived, object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(notificationDidTap(_:)), name: .notificationDidTap, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(notificationDidTap(_:)), name: .notificationDidTapped, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(linkDidReceived(_:)), name: .linkDidReceived, object: nil)
         
         if let fcmToken = UserDefaults.standard.string(forKey: UserDefaultKeys.fcmToken) {
             sendFcmToken(fcmToken)
@@ -49,8 +51,9 @@ class BaseTabBarController: UITabBarController {
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: .themeChanged, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .notificationDidReceive, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .notificationDidTap, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .notificationDidReceived, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .notificationDidTapped, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .linkDidReceived, object: nil)
     }
     
     // MARK: - Private methods
@@ -133,6 +136,39 @@ class BaseTabBarController: UITabBarController {
         case .nothing:
             NotificationCenter.default.post(name: .updateNotificationListViewController, object: nil, userInfo: nil)
         }
+    }
+    
+    @objc private func linkDidReceived(_ notification: Notification) {
+        guard let userInfo = notification.userInfo, let linkType = DynamicLinkManager.shared.parseLinkFromNotification(notification: userInfo)  else { return }
+        
+        switch linkType {
+        case .security3fa(code: let code, email: let email):
+            signIn(email: email, authenticatorCode: code)
+        }
+    }
+    
+    private func signIn(email: String, authenticatorCode: String) {
+        guard let token = AuthManager.tempAuthorizedToken else {
+            self.router?.startAsUnauthorized()
+            return }
+        
+        let model = ThreeFactorAuthenticatorConfirm(email: email, code: authenticatorCode, token: token)
+        
+        TwoFactorDataProvider.confirmThreeStepAuth(model: model, completion: { [weak self] (viewModel) in
+            if let viewModel = viewModel {
+                AuthManager.authorizedToken = viewModel
+                self?.router?.startAsAuthorized()
+            } else {
+                self?.router?.startAsUnauthorized()
+            }
+        }, errorCompletion: { [weak self] (result) in
+            switch result {
+            case .success:
+                break
+            case .failure(errorType: let errorType):
+                self?.router?.startAsUnauthorized()
+            }
+        })
     }
     
     @objc private func themeChangedNotification(notification: Notification) {

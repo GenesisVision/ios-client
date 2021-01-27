@@ -119,7 +119,7 @@ final class FundWithdrawViewModel {
     // MARK: - Private methods
     private func updateRate(completion: @escaping CompletionBlock) {
         //TODO: change "GVT"
-        RateDataProvider.getRate(from: self.selectedWalletFromDelegateManager?.selected?.currency?.rawValue ?? "", to: "GVT", completion: { [weak self] (rate) in
+        RateDataProvider.getRate(from: self.selectedWalletFromDelegateManager?.selected?.currency?.rawValue ?? "", to: Constants.gvtString, completion: { [weak self] (rate) in
             self?.rate = rate?.rate ?? 0.0
             completion(.success)
             }, errorCompletion: completion)
