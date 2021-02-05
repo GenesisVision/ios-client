@@ -96,6 +96,15 @@ class NotificationsDataProvider: DataProvider {
         }
     }
     
+    static func getSettings(followId assetId: String?, completion: @escaping (FollowNotificationSettingList?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        
+        guard let assetId = assetId else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }
+        
+        NotificationsAPI.getNotificationsFollowSettings(_id: assetId) { (model, error) in
+            DataProvider().responseHandler(model, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
     static func getSettings(fundId assetId: String?, completion: @escaping (FundNotificationSettingList?) -> Void, errorCompletion: @escaping CompletionBlock) {
         
         guard let assetId = assetId else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }

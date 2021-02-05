@@ -87,6 +87,7 @@ class FundReallocationViewController: BaseViewController {
         changeFundAssetPartView = ChangeFundAssetPartView(frame: .zero, mainViewHeight: view.frame.height, mainViewWidth: view.frame.width)
         changeFundAssetPartView.translatesAutoresizingMaskIntoConstraints = false
         changeFundAssetPartView.isHidden = true
+        addAssetButton.setEnabled(true)
         view.addSubview(changeFundAssetPartView)
         changeFundAssetPartView.backgroundColor = UIColor.Cell.bg
         changeFundAssetPartView.delegate = self
@@ -193,12 +194,14 @@ extension FundReallocationViewController: ChangeFundAssetPartViewProtocol {
         freeSpaceInFundAsset = freeInFund
         viewModel.changeValueForFundAsset(target: targetInFund, symbol: fundSymbol)
         changeFundAssetPartView.isHidden = true
+        addAssetButton.setEnabled(true)
         updateUI()
     }
     
     func close() {
         viewModel.filterAssestsCollectionView()
         changeFundAssetPartView.isHidden = true
+        addAssetButton.setEnabled(true)
         updateUI()
     }
 }
@@ -219,6 +222,7 @@ extension FundReallocationViewController: FundReallocationCellActionProtocol {
         UIView.animate(withDuration: 0.3) {
             self.changeFundAssetPartView.isHidden = false
         }
+        addAssetButton.setEnabled(false)
     }
 }
 
@@ -371,8 +375,10 @@ final class FundReallocationViewModel {
             }
         }
         
-        assetInfo.target = Double(target)
-        assetCollectionViewModel.assets.append(assetInfo)
+        if target > 0 {
+            assetInfo.target = Double(target)
+            assetCollectionViewModel.assets.append(assetInfo)
+        }
     }
     
     func getFreeSpaceInFund() -> Int {

@@ -105,7 +105,16 @@ final class FacetsViewModel: ListViewModelProtocolWithFacets {
             case .toLevelUp:
                 break
             case .mostReliable:
-                break
+                switch assetType {
+                case ._none:
+                    break
+                case .program:
+                    filterModel.sortingModel.selectedSorting = ProgramsFilterSorting.byLevelProgressDesc
+                case .fund:
+                    break
+                case .follow:
+                    break
+                }
             case .trading:
                 break
             case .investing:

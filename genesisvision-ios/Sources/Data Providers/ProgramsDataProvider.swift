@@ -33,7 +33,7 @@ class ProgramsDataProvider: DataProvider {
         
         var sorting: ProgramsFilterSorting?
         
-        if let selectedSorting = filterModel?.sortingModel.selectedSorting as? ProgramsFilterSorting, filterModel?.facetTitle != "Rating" {
+        if let selectedSorting = filterModel?.sortingModel.selectedSorting as? ProgramsFilterSorting {
             sorting = selectedSorting
         }
         

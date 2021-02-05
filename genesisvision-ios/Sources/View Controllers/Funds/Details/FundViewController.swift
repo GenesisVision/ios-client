@@ -338,7 +338,7 @@ extension FundViewModel: TabmanDataSourceProtocol {
 extension FundViewModel {
     // MARK: - Public methods
     func showNotificationSettings() {
-       router.showAssetNotificationsSettings(assetId, title: fundDetailsFull?.publicInfo?.title ?? "Fund Settings", type: .fund)
+        router.showAssetNotificationsSettings(assetId, title: fundDetailsFull?.publicInfo?.title ?? "Fund Settings", type: .fund, assetType: .fund)
     }
     
     func fetch(_ completion: @escaping CompletionBlock) {

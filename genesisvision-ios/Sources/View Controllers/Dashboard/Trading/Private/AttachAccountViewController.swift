@@ -71,7 +71,7 @@ class AttachAccountViewController: BaseModalViewController {
             case .success:
                 self?.dismiss(animated: true, completion: nil)
             case .failure(let errorType):
-                ErrorHandler.handleError(with: errorType, viewController: self)
+                ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }
         }
     }

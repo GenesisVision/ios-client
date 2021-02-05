@@ -19,7 +19,8 @@ final class CreateNotificationViewModel {
         }
     }
     
-    var typeValues: [String] = []
+    var typeValues: [String] = [NotificationSettingConditionType.profit.rawValue,
+                                NotificationSettingConditionType.level.rawValue]
     
     var assetId: String?
     var managerId: String?
@@ -49,7 +50,7 @@ final class CreateNotificationViewModel {
     func createNotification(completion: @escaping CompletionBlock) {
         conditionAmount = selectedType == .profit ? enteredProfitValue : Double(selectedLevel)
         
-        NotificationsDataProvider.addSetting(assetId: assetId, managerId: managerId, type: .externalSignals, conditionType: selectedType, conditionAmount: conditionAmount, completion: { [weak self] (uuidString) in
+        NotificationsDataProvider.addSetting(assetId: assetId, managerId: managerId, type: .programCondition, conditionType: selectedType, conditionAmount: conditionAmount, completion: { [weak self] (uuidString) in
             self?.router.popViewController(animated: true)
             self?.reloadDataProtocol?.didReloadData()
             completion(.success)

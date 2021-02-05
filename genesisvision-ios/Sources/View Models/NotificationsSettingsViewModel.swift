@@ -23,6 +23,7 @@ final class NotificationsSettingsViewModel {
         case general
         case programs
         case funds
+        case follow
         case managers
         case custom
     }
@@ -34,12 +35,14 @@ final class NotificationsSettingsViewModel {
     
     var type: NotificationSettingsType = .all
     var assetId: String?
+    var assetType: AssetType = ._none
     
     private var router: Router!
     private weak var reloadDataProtocol: ReloadDataProtocol?
     
     var settingsGeneralViewModels = [NotificationsSettingsGeneralTableViewCellViewModel]()
     var settingsProgramsViewModels = [NotificationsSettingsProgramTableViewCellViewModel]()
+    var settingsFollowsViewModels = [NotificationsSettingsProgramTableViewCellViewModel]()
     var settingsFundsViewModels = [NotificationsSettingsFundTableViewCellViewModel]()
     var settingsManagersViewModels = [NotificationsSettingsManagerTableViewCellViewModel]()
     var settingsCustomViewModels = [NotificationsSettingsCustomTableViewCellViewModel]()
@@ -59,16 +62,28 @@ final class NotificationsSettingsViewModel {
     }
     
     // MARK: - Init
-    init(withRouter router: Router, notificationSettingList: NotificationSettingList? = nil, reloadDataProtocol: ReloadDataProtocol?, type: NotificationSettingsType, assetId: String? = nil, title: String = "Notifications settings") {
+    init(withRouter router: Router, notificationSettingList: NotificationSettingList? = nil, reloadDataProtocol: ReloadDataProtocol?, type: NotificationSettingsType, assetId: String? = nil, title: String = "Notifications settings", assetType: AssetType? = nil) {
         self.router = router
         self.reloadDataProtocol = reloadDataProtocol
         self.type = type
         self.assetId = assetId
         self.title = title
+        self.assetType = assetType ?? ._none
         
         guard let notificationSettingList = notificationSettingList else { return }
         
         setup(notificationSettingList)
+        fetchAssetType()
+    }
+    
+    private func fetchAssetType() {
+        guard let assetId = assetId, assetType == .program else { return }
+        
+        FollowsDataProvider.get(assetId) { [weak self] (viewModel) in
+            if let _ = viewModel {
+                self?.assetType = .follow
+            }
+        } errorCompletion: { _ in }
     }
     
     
@@ -89,6 +104,8 @@ final class NotificationsSettingsViewModel {
             return settingsManagersViewModels[indexPath.row]
         case .custom:
             return settingsCustomViewModels[indexPath.row]
+        case .follow:
+            return settingsFollowsViewModels[indexPath.row]
         }
     }
     
@@ -133,6 +150,8 @@ final class NotificationsSettingsViewModel {
             return "Users"
         case .custom:
             return "Custom"
+        case .follow:
+            return "Follow"
         }
     }
     
@@ -177,6 +196,8 @@ final class NotificationsSettingsViewModel {
             return settingsManagersViewModels.count
         case .custom:
             return settingsCustomViewModels.count
+        case .follow:
+            return settingsFollowsViewModels.count
         }
     }
     
@@ -194,10 +215,10 @@ final class NotificationsSettingsViewModel {
         switch sections[indexPath.section] {
         case .programs:
             guard let viewModel = model(for: indexPath) as? NotificationsSettingsProgramTableViewCellViewModel, let assetId = viewModel.setting.assetId?.uuidString, let title = viewModel.setting.title else { return }
-            router.showAssetNotificationsSettings(assetId, title: title, type: .program)
+            router.showAssetNotificationsSettings(assetId, title: title, type: .program, assetType: .program)
         case .funds:
             guard let viewModel = model(for: indexPath) as? NotificationsSettingsFundTableViewCellViewModel, let assetId = viewModel.setting.assetId?.uuidString, let title = viewModel.setting.title else { return }
-            router.showAssetNotificationsSettings(assetId, title: title, type: .fund)
+            router.showAssetNotificationsSettings(assetId, title: title, type: .fund, assetType: .fund)
         case .managers:
             break
         case .custom:
@@ -231,14 +252,28 @@ final class NotificationsSettingsViewModel {
                 completion(.success)
                 }, errorCompletion: completion)
         case .program:
-            NotificationsDataProvider.getSettings(programId: assetId, completion: { [weak self] (notificationSettingList) in
-                guard let notificationSettingList = notificationSettingList else { return ErrorHandler.handleApiError(error: nil, completion: completion) }
-                
-                self?.setup(program: notificationSettingList)
-                self?.reloadDataProtocol?.didReloadData()
-                
-                completion(.success)
-            }, errorCompletion: completion)
+            switch assetType {
+            case .program:
+                NotificationsDataProvider.getSettings(programId: assetId, completion: { [weak self] (notificationSettingList) in
+                    guard let notificationSettingList = notificationSettingList else { return ErrorHandler.handleApiError(error: nil, completion: completion) }
+                    
+                    self?.setup(program: notificationSettingList)
+                    self?.reloadDataProtocol?.didReloadData()
+                    
+                    completion(.success)
+                }, errorCompletion: completion)
+            case .follow:
+                NotificationsDataProvider.getSettings(followId: assetId, completion: { [weak self] (notificationSettingList) in
+                    guard let notificationSettingList = notificationSettingList else { return ErrorHandler.handleApiError(error: nil, completion: completion) }
+                    
+                    self?.setup(follow: notificationSettingList)
+                    self?.reloadDataProtocol?.didReloadData()
+                    
+                    completion(.success)
+                }, errorCompletion: completion)
+            default:
+                break
+            }
         case .fund:
             NotificationsDataProvider.getSettings(fundId: assetId, completion: { [weak self] (notificationSettingList) in
                 guard let notificationSettingList = notificationSettingList else { return ErrorHandler.handleApiError(error: nil, completion: completion) }
@@ -270,6 +305,11 @@ final class NotificationsSettingsViewModel {
         setup(generalsFund: notificationSettingList.settingsGeneral)
     }
     
+    private func setup(follow notificationSettingList: FollowNotificationSettingList) {
+        setup(generalsFollow: notificationSettingList.settingsGeneral)
+        //setup(generalsProgram: notificationSettingList.settingsFollow)
+    }
+    
     private func setup(customs settings: [NotificationSettingViewModel]?) {
         settingsCustomViewModels.removeAll()
         
@@ -295,6 +335,19 @@ final class NotificationsSettingsViewModel {
             })
         }
     }
+    
+//    private func setup(follows settings: [FollowNotificationSettingList]?) {
+//        settingsFollowsViewModels.removeAll()
+//
+//        if let settings = settings, settings.count > 0 {
+//            sections.append(.follow)
+//
+//            settings.forEach({ (setting) in
+//                let settingsViewModel = NotificationsSettingsProgramTableViewCellViewModel(setting: setting)
+//                settingsFollowsViewModels.append(settingsViewModel)
+//            })
+//        }
+//    }
     
     private func setup(funds settings: [FundNotificationSettingList]?) {
         settingsFundsViewModels.removeAll()
@@ -392,6 +445,34 @@ final class NotificationsSettingsViewModel {
         settingsGeneralViewModels.append(secondSettingsViewModel)
     }
     
+    private func setup(generalsFollow settingsGeneral: [NotificationSettingViewModel]?) {
+        guard let assetId = assetId, let uuid = UUID(uuidString: assetId) else { return }
+        
+        sections.append(.general)
+        
+        settingsGeneralViewModels.removeAll()
+        
+        var followNewsAndUpdates = NotificationSettingViewModel(assetId: uuid, managerId: nil, type: .followNewsAndUpdates, conditionType: .empty, conditionAmount: 0, _id: nil, isEnabled: false)
+                
+        if let settings = settingsGeneral, settings.count > 0 {
+            settings.forEach({ (setting) in
+                if let type = setting.type {
+                    switch type {
+                    case .followNewsAndUpdates:
+                        followNewsAndUpdates._id = setting._id
+                        followNewsAndUpdates.assetId = setting.assetId
+                        followNewsAndUpdates.isEnabled = setting.isEnabled
+                    default:
+                        break
+                    }
+                }
+            })
+        }
+        
+        let firstSettingViewModel = NotificationsSettingsGeneralTableViewCellViewModel(setting: followNewsAndUpdates, settingsProtocol: self)
+        settingsGeneralViewModels.append(firstSettingViewModel)
+    }
+    
     private func removeNotification(_ settingId: String?, completion: @escaping CompletionBlock) {
         NotificationsDataProvider.removeSetting(settingId: settingId, completion: completion)
     }
@@ -453,7 +534,6 @@ extension NotificationsSettingsViewModel: NotificationsSettingsProtocol {
                 break
             case .failure(let errorType):
                 print(errorType)
-                ErrorHandler.handleError(with: errorType, viewController: self?.router.currentController, hud: true)
             }
         }
     }
@@ -488,7 +568,6 @@ extension NotificationsSettingsViewModel: NotificationsSettingsProtocol {
                 self?.router.currentController?.hideHUD()
             case .failure(let errorType):
                 print(errorType)
-                ErrorHandler.handleError(with: errorType, viewController: self?.router.currentController, hud: true)
             }
         }
     }
@@ -511,7 +590,6 @@ extension NotificationsSettingsViewModel: NotificationsSettingsProtocol {
                 break
             case .failure(let errorType):
                 print(errorType)
-                ErrorHandler.handleError(with: errorType, viewController: self?.router.currentController, hud: true)
             }
         }
     }

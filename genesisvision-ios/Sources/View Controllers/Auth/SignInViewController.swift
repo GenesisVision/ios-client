@@ -57,7 +57,7 @@ class SignInViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         #if DEBUG
-        emailTextField.text = "p.melnichenko+1@genesis.vision" //email
+        emailTextField.text = "p.melnichenko@genesis.vision"//"goveset149@botfed.com" //email
         passwordTextField.text = "Qwerty"//pass
         #endif
         

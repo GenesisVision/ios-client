@@ -272,7 +272,7 @@ class ChangeFundAssetPartView: UIView {
     }
     
     @objc private func updateButtonAction() {
-        guard let symbol = assetInfo.symbol, targetValueInFund > 0 else { return }
+        guard let symbol = assetInfo.symbol else { return }
         delegate?.update(targetInFund: targetValueInFund, freeInFund: freeSpaceInFund, fundSymbol: symbol)
     }
     

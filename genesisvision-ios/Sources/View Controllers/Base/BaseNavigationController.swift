@@ -23,7 +23,10 @@ class BaseNavigationController: UINavigationController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupUI()
+    }
+    
+    private func setupUI() {
         if isTranslucent {
             navigationBar.setBackgroundImage(UIImage(), for: .default)
         }

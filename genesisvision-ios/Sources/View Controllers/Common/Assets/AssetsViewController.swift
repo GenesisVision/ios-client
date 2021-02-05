@@ -30,11 +30,42 @@ class AssetsViewController: BaseTabmanViewController<AssetsTabmanViewModel> {
             navigationItem.rightBarButtonItems = [searchBarButtonItem]
         }
         
+        NotificationCenter.default.addObserver(self, selector: #selector(linkDidReceived(_:)), name: .linkDidReceived, object: nil)
+        
         guard viewModel.router is DashboardRouter else {
             NotificationCenter.default.addObserver(self, selector: #selector(chooseFundListDidTapped(_:)), name: .chooseFundList, object: nil)
             NotificationCenter.default.addObserver(self, selector: #selector(chooseProgramListDidTapped(_:)), name: .chooseProgramList, object: nil)
             return
         }
+    }
+    
+    @objc private func linkDidReceived(_ notification: Notification) {
+        guard let userInfo = notification.userInfo, let linkType = DynamicLinkManager.shared.parseLinkFromNotification(notification: userInfo)  else { return }
+        
+        switch linkType {
+        case .security3fa(code: let code, email: let email):
+            signIn(email: email, authenticatorCode: code)
+        }
+    }
+    
+    private func signIn(email: String, authenticatorCode: String) {
+        let model = ThreeFactorAuthenticatorConfirm(email: email, code: authenticatorCode, token: AuthManager.tempAuthorizedToken)
+        
+        TwoFactorDataProvider.confirmThreeStepAuth(model: model, completion: { [weak self] (viewModel) in
+            if let viewModel = viewModel {
+                AuthManager.authorizedToken = viewModel
+                self?.viewModel.router.startAsAuthorized()
+            } else {
+                self?.viewModel.router.startAsForceSignOut()
+            }
+        }, errorCompletion: { [weak self] (result) in
+            switch result {
+            case .success:
+                break
+            case .failure(errorType: let errorType):
+                self?.viewModel.router.startAsForceSignOut()
+            }
+        })
     }
     
     // MARK: - Private methods
@@ -60,6 +91,7 @@ class AssetsViewController: BaseTabmanViewController<AssetsTabmanViewModel> {
     deinit {
         NotificationCenter.default.removeObserver(self, name: .chooseFundList, object: nil)
         NotificationCenter.default.removeObserver(self, name: .chooseProgramList, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .linkDidReceived, object: nil)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

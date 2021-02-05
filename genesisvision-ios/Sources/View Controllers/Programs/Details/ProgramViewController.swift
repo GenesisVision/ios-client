@@ -237,7 +237,7 @@ extension ProgramViewModel {
     // MARK: - Public methods
     func showNotificationSettings() {
         //FIXME: program or follow
-        router.showAssetNotificationsSettings(assetId, title: programDetailsFull?.publicInfo?.title ?? "Program Settings", type: .program)
+        router.showAssetNotificationsSettings(assetId, title: programDetailsFull?.publicInfo?.title ?? "Program Settings", type: .program, assetType: assetType)
     }
     
     func showAboutLevels() {
