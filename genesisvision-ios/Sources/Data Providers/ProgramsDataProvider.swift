@@ -96,7 +96,7 @@ class ProgramsDataProvider: DataProvider {
             DataProvider().responseHandler(programWithdrawInfo, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
-    static func withdraw(withAmount amount: Double, assetId: String?, withdrawAll: Bool? = nil, errorCompletion: @escaping CompletionBlock) {
+    static func withdraw(withAmount amount: Double?, assetId: String?, withdrawAll: Bool? = nil, errorCompletion: @escaping CompletionBlock) {
         guard let assetId = assetId,
             let uuid = UUID(uuidString: assetId)
             else { return errorCompletion(.failure(errorType: .apiError(message: nil))) }

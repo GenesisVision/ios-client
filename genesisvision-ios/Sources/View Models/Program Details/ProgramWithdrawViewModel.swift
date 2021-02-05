@@ -59,7 +59,7 @@ final class ProgramWithdrawViewModel {
     
     // MARK: - Navigation
     func withdraw(with amount: Double, completion: @escaping CompletionBlock) {
-        ProgramsDataProvider.withdraw(withAmount: amount, assetId: assetId, withdrawAll: withdrawAll) { (result) in
+        ProgramsDataProvider.withdraw(withAmount: withdrawAll ? nil : amount, assetId: assetId, withdrawAll: withdrawAll) { (result) in
             completion(result)
         }
     }

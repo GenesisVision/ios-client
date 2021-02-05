@@ -191,8 +191,8 @@ class ProgramWithdrawViewController: BaseViewController {
         var amountRaw: Double?
         
         if isGenesisMarkets {
-            amountRaw = (availableToWithdrawValue / 100 * (amountToWithdrawValueLabel.text?.doubleValue ?? 0))
-            amountRaw = viewModel.withdrawAll ? availableToWithdrawValue : amountRaw
+            amountRaw = amountToWithdrawValueLabel.text?.doubleValue ?? 0.0
+            amountRaw = viewModel.withdrawAll ? 100.0 : amountRaw
         } else {
             guard let amountValue = amountToWithdrawValueLabel.text?.doubleValue
                 else { return showErrorHUD(subtitle: "Enter withdraw value, please") }

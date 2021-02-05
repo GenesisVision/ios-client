@@ -19,6 +19,7 @@ final class ProgramBalanceViewModel: ViewModelWithListProtocol, ViewModelWithFil
     // MARK: - Variables
     var title: String = "Equity"
     var assetId: String?
+    var assetType: AssetType
     
     var router: Router!
     private weak var reloadDataProtocol: ReloadDataProtocol?
@@ -38,7 +39,21 @@ final class ProgramBalanceViewModel: ViewModelWithListProtocol, ViewModelWithFil
                 self.chartViewProtocol = router.programBalanceViewController
             }
             
-            let programBalanceChartTableViewCellViewModel = ProgramBalanceChartTableViewCellViewModel(programBalanceChart: programBalanceChart, chartViewProtocol: self.chartViewProtocol)
+            let programBalanceChartTableViewCellViewModel = ProgramBalanceChartTableViewCellViewModel(programBalanceChart: programBalanceChart, followBalanceChart: nil, chartViewProtocol: self.chartViewProtocol)
+            
+            viewModels = [programBalanceChartTableViewCellViewModel]
+        }
+    }
+    
+    private var followBalanceChart: AccountBalanceChart? {
+        didSet {
+            guard let followBalanceChart = followBalanceChart else { return }
+            
+            if let router = router as? ProgramRouter {
+                self.chartViewProtocol = router.programBalanceViewController
+            }
+            
+            let programBalanceChartTableViewCellViewModel = ProgramBalanceChartTableViewCellViewModel(programBalanceChart: nil, followBalanceChart: followBalanceChart, chartViewProtocol: self.chartViewProtocol)
             
             viewModels = [programBalanceChartTableViewCellViewModel]
         }
@@ -49,10 +64,11 @@ final class ProgramBalanceViewModel: ViewModelWithListProtocol, ViewModelWithFil
     private var programBalanceChartTableViewCellViewModel: ProgramBalanceChartTableViewCellViewModel?
     
     // MARK: - Init
-    init(withRouter router: Router, assetId: String, reloadDataProtocol: ReloadDataProtocol?) {
+    init(withRouter router: Router, assetId: String, reloadDataProtocol: ReloadDataProtocol?, assetType: AssetType) {
         self.router = router
         self.assetId = assetId
         self.reloadDataProtocol = reloadDataProtocol
+        self.assetType = assetType
     }
 }
 
@@ -82,25 +98,44 @@ extension ProgramBalanceViewModel {
     
     /// Get TableViewCellViewModel for IndexPath
     func model(for indexPath: IndexPath) -> CellViewAnyModel? {
-        guard let programBalanceChart = programBalanceChart else { return nil }
         
-        let programBalanceChartTableViewCellViewModel =  ProgramBalanceChartTableViewCellViewModel(programBalanceChart: programBalanceChart, chartViewProtocol: self.chartViewProtocol)
+        if let programBalanceChart = programBalanceChart {
+            return ProgramBalanceChartTableViewCellViewModel(programBalanceChart: programBalanceChart, followBalanceChart: nil, chartViewProtocol: self.chartViewProtocol)
+        } else if let followBalanceChart = followBalanceChart {
+            return ProgramBalanceChartTableViewCellViewModel(programBalanceChart: nil, followBalanceChart: followBalanceChart, chartViewProtocol: self.chartViewProtocol)
+        } else {
+            return nil
+        }
         
-        return programBalanceChartTableViewCellViewModel
     }
     
     // MARK: - Private methods
     private func fetch(_ completion: @escaping CompletionBlock) {
         guard let assetId = assetId else { return completion(.failure(errorType: .apiError(message: nil))) }
         
-        ProgramsDataProvider.getBalanceChart(with: assetId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: getPlatformCurrencyType(), completion: { [weak self] (viewModel) in
-            guard viewModel != nil else {
-                return ErrorHandler.handleApiError(error: nil, completion: completion)
-            }
-            
-            self?.programBalanceChart = viewModel
-            self?.reloadDataProtocol?.didReloadData()
-            completion(.success)
-        }, errorCompletion: completion)
+        switch assetType {
+        case .follow:
+            FollowsDataProvider.getBalanceChart(with: assetId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: getPlatformCurrencyType(), completion: { [weak self] (viewModel) in
+                guard viewModel != nil else {
+                    return ErrorHandler.handleApiError(error: nil, completion: completion)
+                }
+                
+                self?.followBalanceChart = viewModel
+                self?.reloadDataProtocol?.didReloadData()
+                completion(.success)
+            }, errorCompletion: completion)
+        case .program:
+            ProgramsDataProvider.getBalanceChart(with: assetId, dateFrom: dateFrom, dateTo: dateTo, maxPointCount: maxPointCount, currency: getPlatformCurrencyType(), completion: { [weak self] (viewModel) in
+                guard viewModel != nil else {
+                    return ErrorHandler.handleApiError(error: nil, completion: completion)
+                }
+                
+                self?.programBalanceChart = viewModel
+                self?.reloadDataProtocol?.didReloadData()
+                completion(.success)
+            }, errorCompletion: completion)
+        default:
+            break
+        }
     }
 }
