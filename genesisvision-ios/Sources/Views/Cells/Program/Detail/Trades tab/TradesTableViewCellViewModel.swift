@@ -37,16 +37,14 @@ extension TradesTableViewCellViewModel: CellViewModel {
             if let logoUrl = orderModel.assetData?.logoUrl, let fileUrl = getFileURL(fileName: logoUrl) {
                 cell.entryImageView.kf.indicatorType = .activity
                 cell.entryImageView.kf.setImage(with: fileUrl)
+            } else if let entry = orderModel.entry {
+                switch entry {
+                case ._in, ._inout:
+                    cell.entryImageView.image = #imageLiteral(resourceName: "img_trade_in")
+                case .out, .outBy:
+                    cell.entryImageView.image = #imageLiteral(resourceName: "img_trade_out")
+                }
             }
-            
-//            if let entry = orderModel.entry {
-//                switch entry {
-//                case ._in, ._inout:
-//                    cell.entryImageView.image = #imageLiteral(resourceName: "img_trade_in")
-//                case .out, .outBy:
-//                    cell.entryImageView.image = #imageLiteral(resourceName: "img_trade_out")
-//                }
-//            }
         } else if let orderModel = orderModel as? OrderModel {
             if let price = orderModel.price {
                 cell.balanceLabel.text = price.toString()
@@ -69,18 +67,16 @@ extension TradesTableViewCellViewModel: CellViewModel {
                 cell.symbolLabel.text = value
             }
             
-//            if let entry = orderModel.entry {
-//                switch entry {
-//                case ._in, ._inout:
-//                    cell.entryImageView.image = #imageLiteral(resourceName: "img_trade_in")
-//                case .out, .outBy:
-//                    cell.entryImageView.image = #imageLiteral(resourceName: "img_trade_out")
-//                }
-//            }
-            
             if let logoUrl = orderModel.assetData?.logoUrl, let fileUrl = getFileURL(fileName: logoUrl) {
                 cell.entryImageView.kf.indicatorType = .activity
                 cell.entryImageView.kf.setImage(with: fileUrl)
+            } else if let entry = orderModel.entry {
+                switch entry {
+                case ._in, ._inout:
+                    cell.entryImageView.image = #imageLiteral(resourceName: "img_trade_in")
+                case .out, .outBy:
+                    cell.entryImageView.image = #imageLiteral(resourceName: "img_trade_out")
+                }
             }
         }
         
