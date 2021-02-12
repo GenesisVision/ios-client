@@ -79,6 +79,8 @@ final class SocialPostView: UIView {
         return imageView
     }()
     
+    var socialPostViewSizes: SocialPostViewSizes?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -129,11 +131,15 @@ final class SocialPostView: UIView {
         middleView.addSubview(textView)
         middleView.addSubview(postImageView)
 
-        textView.anchor(top: middleView.topAnchor, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10))
-        textView.heightAnchor.constraint(equalTo: middleView.heightAnchor, multiplier: 0.5).isActive = true
-
-        postImageView.anchor(top: textView.bottomAnchor, leading: middleView.leadingAnchor, bottom: middleView.bottomAnchor, trailing: middleView.trailingAnchor)
-        postImageView.anchorSize(size: CGSize(width: 0, height: 200))
+        textView.anchor(top: middleView.topAnchor, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10), size: CGSize(width: 0, height: socialPostViewSizes?.textViewHeight ?? 0))
+        
+        postImageView.anchor(top: textView.bottomAnchor, leading: middleView.leadingAnchor, bottom: middleView.bottomAnchor, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: socialPostViewSizes?.imageViewHeight ?? 0))
+    }
+    
+    func updateMiddleViewConstraints() {
+        textView.removeFromSuperview()
+        postImageView.removeFromSuperview()
+        overlayMiddleView()
     }
 }
 

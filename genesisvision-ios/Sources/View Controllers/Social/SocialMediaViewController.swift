@@ -62,7 +62,6 @@ class SocialMediaViewController: BaseViewController {
         mediaFeedCollectionView.allowsSelection = false
         mediaFeedCollectionView.registerNibs(for: viewModel.socialMediaCollectionViewModel.cellModelsForRegistration)
         
-        setupPullToRefresh(scrollView: mediaFeedCollectionView)
     }
     
     private func reloadData() {
@@ -78,20 +77,6 @@ class SocialMediaViewController: BaseViewController {
         }
         
         viewModel.router.show(routeType: .sharePost(post: sharedPost))
-    }
-    
-    override func pullToRefresh() {
-        super.pullToRefresh()
-        
-        viewModel.fetch { [weak self] (result) in
-            self?.hideAll()
-            switch result {
-            case .success:
-                self?.reloadData()
-            case .failure(errorType: _):
-                break
-            }
-        }
     }
 }
 

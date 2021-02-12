@@ -9,6 +9,12 @@
 import Foundation
 import UIKit
 
+struct SocialPostViewSizes {
+    let textViewHeight: CGFloat
+    let imageViewHeight: CGFloat
+    let tagViewHeight: CGFloat = 0
+}
+
 protocol SocialFeedCollectionViewCellDelegateProtocol: class {
     func likeTouched(postId: UUID)
     func shareTouched(postId: UUID)
@@ -21,13 +27,58 @@ struct SocialFeedCollectionViewCellViewModel {
     
     func cellSize(spacing: CGFloat, frame: CGRect) -> CGSize {
         let width = frame.width - spacing
-        var height: CGFloat = 300
+        let imageHeight: CGFloat = 250
+        var textHeight: CGFloat = 0
+        var height: CGFloat = 170
         
-        if let image = post.images?.first, let imageHeight = image.resizes?.first?.height {
-            height += CGFloat(imageHeight)
+        if let isEmpty = post.images?.isEmpty, !isEmpty {
+            if let postImageHeight = post.images?.first?.resizes?.last?.height {
+                height = height + (CGFloat(postImageHeight) < imageHeight ? CGFloat(postImageHeight) : imageHeight)
+            } else {
+                height += imageHeight
+            }
         }
         
+        if let text = post.text, !text.isEmpty {
+            let textHeightValue = text.height(forConstrainedWidth: 400, font: UIFont.getFont(.regular, size: 16))
+            if textHeightValue < 40 {
+                textHeight = 40
+            } else if textHeightValue > 40 && textHeightValue < 250 {
+                textHeight = textHeightValue
+            } else if textHeightValue > 250 {
+                textHeight = 250
+            }
+            height += textHeight
+        }
+        print("CellSize: \(width) || \(height)")
         return CGSize(width: width, height: height)
+    }
+    
+    func postViewSizes() -> SocialPostViewSizes {
+        var textHeight: CGFloat = 0
+        var imageHeight: CGFloat = 0
+        
+        if let isEmpty = post.images?.isEmpty, !isEmpty {
+            if let postImageHeight = post.images?.first?.resizes?.last?.height {
+                imageHeight = CGFloat(postImageHeight) < 250 ? CGFloat(postImageHeight) : 250
+            } else {
+                imageHeight = 250
+            }
+        }
+        
+        if let text = post.text, !text.isEmpty {
+            let textHeightValue = text.height(forConstrainedWidth: 400, font: UIFont.getFont(.regular, size: 16))
+            
+            if textHeightValue < 40 {
+                textHeight = 40
+            } else if textHeightValue > 40 && textHeightValue < 250 {
+                textHeight = textHeightValue
+            } else if textHeightValue > 250 {
+                textHeight = 250
+            }
+        }
+        
+        return SocialPostViewSizes(textViewHeight: textHeight, imageViewHeight: imageHeight)
     }
 }
 
@@ -39,6 +90,9 @@ extension SocialFeedCollectionViewCellViewModel: CellViewModel {
         }
         
         cell.delegate = cellDelegate
+        
+        cell.postView.socialPostViewSizes = postViewSizes()
+        cell.postView.updateMiddleViewConstraints()
         
         if let logo = post.author?.logoUrl, let fileUrl = getFileURL(fileName: logo), isPictureURL(url: fileUrl.absoluteString) {
             cell.postView.userImageView.kf.indicatorType = .activity
@@ -63,16 +117,19 @@ extension SocialFeedCollectionViewCellViewModel: CellViewModel {
             cell.postView.postImageView.isHidden = true
         }
         
-        if let text = post.text {
+        if let text = post.text, !text.isEmpty {
+            cell.postView.textView.isHidden = false
             cell.postView.textView.text = text
+        } else {
+            cell.postView.textView.isHidden = true
         }
         
         if let isLiked = post.personalDetails?.isLiked {
             cell.socialActivitiesView.isLiked = isLiked
         }
         
-        if let likes = post.likesCount, likes > 0 {
-            cell.socialActivitiesView.likesLabel.text = String(likes)
+        if let likes = post.likesCount {
+            cell.socialActivitiesView.likeCount = likes
         }
         
         if let commetsCount = post.comments?.count, commetsCount > 0 {
@@ -140,8 +197,6 @@ class SocialFeedCollectionViewCell: UICollectionViewCell {
         contentView.backgroundColor = UIColor.Common.darkCell
         
         overlayContentView()
-        //overlayTopView()
-        //overlayMiddleView()
         overlayThirdLayerOnBottomView()
     }
     
@@ -151,46 +206,13 @@ class SocialFeedCollectionViewCell: UICollectionViewCell {
         
         postView.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: bottomView.topAnchor, trailing: contentView.trailingAnchor)
         
-        bottomView.anchor(top: nil, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 10, left: 10, bottom: 5, right: 10), size: CGSize(width: 0, height: 50))
+        bottomView.anchor(top: nil, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 10, left: 10, bottom: 5, right: 10), size: CGSize(width: 0, height: 60))
     }
-    
-//    private func overlayTopView() {
-//        topView.addSubview(userImageView)
-//        topView.addSubview(userNameLabel)
-//        topView.addSubview(dateLabel)
-//        topView.addSubview(postActionsButton)
-//
-//        userImageView.anchor(top: nil, leading: topView.leadingAnchor, bottom: nil, trailing: nil)
-//        userImageView.anchorCenter(centerY: topView.centerYAnchor, centerX: nil)
-//        userImageView.anchorSize(size: CGSize(width: 50, height: 50))
-//        userImageView.roundCorners(with: 25)
-//
-//        userNameLabel.anchor(top: topView.topAnchor, leading: userImageView.trailingAnchor, bottom: nil, trailing: postActionsButton.leadingAnchor, padding: UIEdgeInsets(top: 10, left: 15, bottom: 0, right: 0))
-//        userNameLabel.heightAnchor.constraint(equalTo: topView.heightAnchor, multiplier: 0.4).isActive = true
-//
-//        dateLabel.anchor(top: userNameLabel.bottomAnchor, leading: userImageView.trailingAnchor, bottom: nil, trailing: postActionsButton.leadingAnchor, padding: UIEdgeInsets(top: 0, left: 15, bottom: 15, right: 0))
-//        dateLabel.anchorSize(size: CGSize(width: 0, height: 17))
-//
-//        postActionsButton.anchor(top: nil, leading: nil, bottom: nil, trailing: topView.trailingAnchor)
-//        postActionsButton.anchorCenter(centerY: topView.centerYAnchor, centerX: nil)
-//        postActionsButton.anchorSize(size: CGSize(width: 60, height: 60))
-//    }
-    
-//    private func overlayMiddleView() {
-//        middleView.addSubview(textView)
-//        middleView.addSubview(postImageView)
-//
-//        textView.anchor(top: middleView.topAnchor, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10))
-//        textView.heightAnchor.constraint(equalTo: middleView.heightAnchor, multiplier: 0.5).isActive = true
-//
-//        postImageView.anchor(top: textView.bottomAnchor, leading: middleView.leadingAnchor, bottom: middleView.bottomAnchor, trailing: middleView.trailingAnchor)
-//        postImageView.anchorSize(size: CGSize(width: 0, height: 200))
-//    }
     
     private func overlayThirdLayerOnBottomView() {
         bottomView.addSubview(socialActivitiesView)
         socialActivitiesView.delegate = self
-        socialActivitiesView.fillSuperview()
+        socialActivitiesView.fillSuperview(padding: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0))
     }
 }
 

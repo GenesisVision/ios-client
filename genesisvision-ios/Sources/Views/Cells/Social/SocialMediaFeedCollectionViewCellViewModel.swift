@@ -59,16 +59,19 @@ extension SocialMediaFeedCollectionViewCellViewModel: CellViewModel {
             cell.postView.postImageView.isHidden = true
         }
         
-        if let text = post.text {
+        if let text = post.text, !text.isEmpty {
+            cell.postView.textView.isHidden = false
             cell.postView.textView.text = text
+        } else {
+            cell.postView.textView.isHidden = true
         }
         
         if let isLiked = post.personalDetails?.isLiked {
             cell.socialActivitiesView.isLiked = isLiked
         }
         
-        if let likes = post.likesCount, likes > 0 {
-            cell.socialActivitiesView.likesLabel.text = String(likes)
+        if let likes = post.likesCount {
+            cell.socialActivitiesView.likeCount = likes
         }
         
         if let commetsCount = post.comments?.count, commetsCount > 0 {
@@ -123,7 +126,6 @@ class SocialMediaFeedCollectionViewCell: UICollectionViewCell {
         button.backgroundColor = .clear
         button.contentHorizontalAlignment = .left
         button.setTitleColor(UIColor.Common.white, for: .normal)
-        //button.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
         button.isUserInteractionEnabled = true
         button.titleLabel?.font = UIFont.getFont(.semibold, size: 17)
         return button
@@ -200,7 +202,7 @@ class SocialMediaFeedCollectionViewCell: UICollectionViewCell {
         
         postView.anchor(top: centralView.topAnchor, leading: centralView.leadingAnchor, bottom: socialActivitiesView.topAnchor, trailing: centralView.trailingAnchor)
         
-        socialActivitiesView.anchor(top: nil, leading: centralView.leadingAnchor, bottom: centralView.bottomAnchor, trailing: centralView.trailingAnchor, padding: UIEdgeInsets(top: 10, left: 10, bottom: 5, right: 10), size: CGSize(width: 0, height: 50))
+        socialActivitiesView.anchor(top: nil, leading: centralView.leadingAnchor, bottom: centralView.bottomAnchor, trailing: centralView.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 10, bottom: 5, right: 10), size: CGSize(width: 0, height: 60))
         
         socialActivitiesView.delegate = self
     }

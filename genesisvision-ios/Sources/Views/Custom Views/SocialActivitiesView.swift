@@ -112,16 +112,10 @@ final class SocialActivitiesView: UIView {
     var isLiked: Bool = false {
         didSet {
             if isLiked {
-                if let likesCount = Int(likesLabel.text ?? "") {
-                    likeCount = likesCount + 1
-                }
                 likesLabel.textColor = UIColor.Common.primary
                 likesImage.tintColor = UIColor.Common.primary
                 likesImage.image = likesImage.image?.withRenderingMode(.alwaysTemplate)
             } else {
-                if let likesCount = Int(likesLabel.text ?? "") {
-                    likeCount = likesCount - 1
-                }
                 likesLabel.textColor = #colorLiteral(red: 0.5058823529, green: 0.5490196078, blue: 0.6, alpha: 1)
                 likesImage.tintColor = nil
                 likesImage.image = likesImage.image?.withRenderingMode(.alwaysOriginal)
@@ -129,9 +123,9 @@ final class SocialActivitiesView: UIView {
         }
     }
     
-    private var likeCount: Int = 0 {
+    var likeCount: Int = 0 {
         didSet {
-            likesLabel.text = String(likeCount)
+            likesLabel.text = likeCount == 0 ? "" : String(likeCount)
         }
     }
     
@@ -230,6 +224,7 @@ final class SocialActivitiesView: UIView {
     }
     
     @objc private func likesViewTouched() {
+        likeCount = isLiked ? likeCount - 1 : likeCount + 1
         isLiked = !isLiked
         delegate?.likeTouched()
     }
