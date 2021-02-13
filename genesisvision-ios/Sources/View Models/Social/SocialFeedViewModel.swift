@@ -20,10 +20,11 @@ final class SocialFeedViewModel {
     var socialCollectionViewDataSource: CollectionViewDataSource!
 
     let feedType: SocialFeedType
+    let socialRouter: SocialRouter
 
-    init(feedType: SocialFeedType, collectionViewDelegate: SocialFeedCollectionViewModelProtocol) {
-
+    init(feedType: SocialFeedType, collectionViewDelegate: SocialFeedCollectionViewModelDelegate, router: SocialRouter) {
         self.feedType = feedType
+        self.socialRouter = router
         socialCollectionViewModel = SocialFeedCollectionViewModel(type: .social, title: "", delegate: collectionViewDelegate)
         socialCollectionViewDataSource = CollectionViewDataSource(socialCollectionViewModel)
     }

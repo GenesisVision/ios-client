@@ -123,7 +123,6 @@ class FundManageViewController: BaseViewController {
     }
     
     @IBAction func closeFundButtonAction(_ sender: Any) {
-        
         showAlertWithTitle(title: "Close fund", message: "The fund will be closed after pressing the button. Are you sure?", actionTitle: "Confirm", cancelTitle: "Cancel", handler: {
             self.closeFund()
         }, cancelHandler: nil)
@@ -192,7 +191,7 @@ class ManageFundViewModel {
     }
     
     func closeFund(twoFactorCode: String, completion: @escaping CompletionBlock) {
-        guard let assetId = self.assetId, !twoFactorCode.isEmpty else {
+        guard let assetId = assetId, !twoFactorCode.isEmpty else {
             completion(.failure(errorType: .apiError(message: nil)))
             return
         }

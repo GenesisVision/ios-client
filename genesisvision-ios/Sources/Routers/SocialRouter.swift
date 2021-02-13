@@ -10,9 +10,9 @@ import UIKit
 
 
 enum SocialRouteType {
-    case socialFeed
+    case socialFeed(tabType: SocialMainFeedTabType)
     case addPost
-    case sharePost(post: Post)
+    case sharePost(post: Post?)
     case users
     case mediaPosts
 }
@@ -24,8 +24,8 @@ class SocialRouter: Router {
     
     func show(routeType: SocialRouteType) {
         switch routeType {
-        case .socialFeed:
-            showSocialFeed()
+        case .socialFeed(let tabType):
+            showSocialFeed(tabType: tabType)
         case .addPost:
             showAddPost()
         case .sharePost(let post):
@@ -37,9 +37,9 @@ class SocialRouter: Router {
         }
     }
     
-    private func showSocialFeed() {
+    private func showSocialFeed(tabType: SocialMainFeedTabType) {
         let viewController = SocialMainFeedViewController()
-        viewController.viewModel = SocialMainFeedViewModel(withRouter: self)
+        viewController.viewModel = SocialMainFeedViewModel(withRouter: self, openedTab: tabType)
         viewController.viewModel.title = "Social"
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)
@@ -52,7 +52,7 @@ class SocialRouter: Router {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    private func showSharePost(sharedPost: Post) {
+    private func showSharePost(sharedPost: Post?) {
         guard let viewController = NewPostViewController.storyboardInstance(.social) else { return }
         viewController.viewModel = NewPostViewModel(sharedPost: sharedPost)
         viewController.hidesBottomBarWhenPushed = true

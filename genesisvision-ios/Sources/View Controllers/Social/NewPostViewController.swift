@@ -119,7 +119,7 @@ class NewPostViewController: BaseViewController {
         viewModel.publishPost { [weak self] (result) in
             switch result {
             case .success:
-                self?.dismiss(animated: true, completion: nil)
+                self?.navigationController?.popViewController(animated: true)
             case .failure(errorType: let errorType):
                 ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }
@@ -127,15 +127,27 @@ class NewPostViewController: BaseViewController {
     }
     
     @IBAction func atSignButtonAction(_ sender: Any) {
+        if textView.text == placeholder { textView.text = "" }
         textView.text = textView.text + atSign
     }
     
     @IBAction func hashtagButtonAction(_ sender: Any) {
+        if textView.text == placeholder { textView.text = "" }
         textView.text = textView.text + hashtagSign
     }
     
     @IBAction func attachmentButtonAction(_ sender: Any) {
         
+    }
+}
+
+extension NewPostViewController: ImagePickerPresentable {
+    var choosePhotoButton: UIButton {
+        return attachmentButton
+    }
+    
+    func selected(pickedImage: UIImage?, pickedImageURL: URL?) {
+        print("s")
     }
 }
 

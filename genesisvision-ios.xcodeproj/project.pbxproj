@@ -46,6 +46,9 @@
 		196389DB2535AFFB00CA2092 /* NotificationViewModelItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196389DA2535AFFB00CA2092 /* NotificationViewModelItemsViewModel.swift */; };
 		196389E12535B33A00CA2092 /* NotificationTypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196389E02535B33A00CA2092 /* NotificationTypeViewModel.swift */; };
 		196389E7253702AA00CA2092 /* FundDepositViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196389E6253702AA00CA2092 /* FundDepositViewController.swift */; };
+		1967210325D6ABBC001A04DA /* SocialPostTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1967210225D6ABBC001A04DA /* SocialPostTagsView.swift */; };
+		1967210A25D6AE3C001A04DA /* SocialPostTagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1967210825D6AE3C001A04DA /* SocialPostTagCollectionViewCell.swift */; };
+		1967210B25D6AE3C001A04DA /* SocialPostTagCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1967210925D6AE3C001A04DA /* SocialPostTagCollectionViewCell.xib */; };
 		196FFF1024EDC3F50064B633 /* SearchHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196FFF0F24EDC3F50064B633 /* SearchHeaderView.swift */; };
 		1973143A24C8B38C00D675B6 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1973143924C8B38C00D675B6 /* Collection.swift */; };
 		1975B8D324D829920095C72B /* FundManageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1975B8D224D829920095C72B /* FundManageViewController.swift */; };
@@ -1228,6 +1231,9 @@
 		196389DA2535AFFB00CA2092 /* NotificationViewModelItemsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewModelItemsViewModel.swift; sourceTree = "<group>"; };
 		196389E02535B33A00CA2092 /* NotificationTypeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTypeViewModel.swift; sourceTree = "<group>"; };
 		196389E6253702AA00CA2092 /* FundDepositViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundDepositViewController.swift; sourceTree = "<group>"; };
+		1967210225D6ABBC001A04DA /* SocialPostTagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialPostTagsView.swift; sourceTree = "<group>"; };
+		1967210825D6AE3C001A04DA /* SocialPostTagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialPostTagCollectionViewCell.swift; sourceTree = "<group>"; };
+		1967210925D6AE3C001A04DA /* SocialPostTagCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialPostTagCollectionViewCell.xib; sourceTree = "<group>"; };
 		196FFF0F24EDC3F50064B633 /* SearchHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeaderView.swift; sourceTree = "<group>"; };
 		1973143924C8B38C00D675B6 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		1975B8D224D829920095C72B /* FundManageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundManageViewController.swift; sourceTree = "<group>"; };
@@ -2462,6 +2468,8 @@
 				19DC7B3925B09710008AC6D7 /* SocialUsersListTableViewCellViewModel.swift */,
 				19DC7B5525B1D083008AC6D7 /* SocialMediaListTableViewCell.xib */,
 				19DC7B4F25B1D035008AC6D7 /* SocialMediaListTableViewCellViewModel.swift */,
+				1967210825D6AE3C001A04DA /* SocialPostTagCollectionViewCell.swift */,
+				1967210925D6AE3C001A04DA /* SocialPostTagCollectionViewCell.xib */,
 			);
 			path = Social;
 			sourceTree = "<group>";
@@ -3422,6 +3430,7 @@
 				5EDD6D4022C7A70D00B9DB93 /* CustomTextField.swift */,
 				19CB59E1258CE41F0008D8BC /* SocialActivitiesView.swift */,
 				19A2E06225AF29F40020AD01 /* SocialPostView.swift */,
+				1967210225D6ABBC001A04DA /* SocialPostTagsView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -4981,6 +4990,7 @@
 				5EED8A4E23872652001C3D54 /* DashboardChartItemView.xib in Resources */,
 				5ED03F3A20FF784A00AF5E07 /* FieldWithTextFieldTableViewCell.xib in Resources */,
 				5EF9F90523E09C4400542E1E /* FundTradingContentView.xib in Resources */,
+				1967210B25D6AE3C001A04DA /* SocialPostTagCollectionViewCell.xib in Resources */,
 				FCC9DD53200DFA5E008825EC /* Assets.xcassets in Resources */,
 				FCA5705C20273561001942F3 /* WalletTransactionTableViewCell.xib in Resources */,
 				5EEEA89C21CCE4060062C4B1 /* Notifications.storyboard in Resources */,
@@ -5201,6 +5211,7 @@
 				5EA09B9A2292D04800123B5D /* ListDelegateManager.swift in Sources */,
 				5E39F76A23A3F9300073DAD5 /* DashboardTradingAsset.swift in Sources */,
 				5E39F74823A3F92F0073DAD5 /* WalletDepositSummary.swift in Sources */,
+				1967210A25D6AE3C001A04DA /* SocialPostTagCollectionViewCell.swift in Sources */,
 				198124742464595300F286FE /* SocialViewMode.swift in Sources */,
 				FC140FE52030168100B71E7F /* CodableHelper.swift in Sources */,
 				5EB8E9DE2072654A00F46A8A /* AuthForgotPasswordInfoViewModel.swift in Sources */,
@@ -5505,6 +5516,7 @@
 				5E39F72823A3F92F0073DAD5 /* DashboardTradingAssetSignalDetails.swift in Sources */,
 				19A56EB2258938AD00553408 /* BinanceRawFuturesSymbolPercentPriceFilter.swift in Sources */,
 				5E39F7DE23A3F9300073DAD5 /* NotificationSettingConditionType.swift in Sources */,
+				1967210325D6ABBC001A04DA /* SocialPostTagsView.swift in Sources */,
 				5E77176A2154200D002624FC /* EventCollectionViewCellViewModel.swift in Sources */,
 				1979A53A2524DE8F005EEABF /* BinanceRawSymbol.swift in Sources */,
 				5E616B4020F7880800B3459D /* ImagePickerPresentable.swift in Sources */,

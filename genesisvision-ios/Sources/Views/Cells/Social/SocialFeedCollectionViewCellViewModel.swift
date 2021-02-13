@@ -12,13 +12,14 @@ import UIKit
 struct SocialPostViewSizes {
     let textViewHeight: CGFloat
     let imageViewHeight: CGFloat
-    let tagViewHeight: CGFloat = 0
+    let tagViewHeight: CGFloat
 }
 
 protocol SocialFeedCollectionViewCellDelegateProtocol: class {
     func likeTouched(postId: UUID)
     func shareTouched(postId: UUID)
     func commentTouched(postId: UUID)
+    func tagPressed(tag: PostTag)
 }
 
 struct SocialFeedCollectionViewCellViewModel {
@@ -27,43 +28,55 @@ struct SocialFeedCollectionViewCellViewModel {
     
     func cellSize(spacing: CGFloat, frame: CGRect) -> CGSize {
         let width = frame.width - spacing
-        let imageHeight: CGFloat = 250
-        var textHeight: CGFloat = 0
-        var height: CGFloat = 170
+        let defaultHeight: CGFloat = 200
+        let socialPostViewSizes = postViewSizes()
         
-        if let isEmpty = post.images?.isEmpty, !isEmpty {
-            if let postImageHeight = post.images?.first?.resizes?.last?.height {
-                height = height + (CGFloat(postImageHeight) < imageHeight ? CGFloat(postImageHeight) : imageHeight)
-            } else {
-                height += imageHeight
-            }
-        }
+        let cellHeight = socialPostViewSizes.textViewHeight + socialPostViewSizes.imageViewHeight + socialPostViewSizes.tagViewHeight + defaultHeight
         
-        if let text = post.text, !text.isEmpty {
-            let textHeightValue = text.height(forConstrainedWidth: 400, font: UIFont.getFont(.regular, size: 16))
-            if textHeightValue < 40 {
-                textHeight = 40
-            } else if textHeightValue > 40 && textHeightValue < 250 {
-                textHeight = textHeightValue
-            } else if textHeightValue > 250 {
-                textHeight = 250
-            }
-            height += textHeight
-        }
-        print("CellSize: \(width) || \(height)")
-        return CGSize(width: width, height: height)
+        return CGSize(width: width, height: cellHeight)
+        
+        
+//        if let isEmpty = post.images?.isEmpty, !isEmpty {
+//            height += imageHeight
+////            if let postImageHeight = post.images?.first?.resizes?.last?.height {
+////                height = height + (CGFloat(postImageHeight) < imageHeight ? CGFloat(postImageHeight) : imageHeight)
+////            } else {
+////                height += imageHeight
+////            }
+//        }
+//
+//        if let text = post.text, !text.isEmpty {
+//            let textHeightValue = text.height(forConstrainedWidth: 400, font: UIFont.getFont(.regular, size: 16))
+//            if textHeightValue < 40 {
+//                textHeight = 40
+//            } else if textHeightValue > 40 && textHeightValue < 250 {
+//                textHeight = textHeightValue
+//            } else if textHeightValue > 250 {
+//                textHeight = 250
+//            }
+//            height += textHeight
+//        }
+//
+//        if let tags = post.tags, !tags.isEmpty {
+//            height += tagsViewHeight
+//        }
+//
+//        print("CellSize: \(width) || \(height)")
+//        return CGSize(width: width, height: height)
     }
     
     func postViewSizes() -> SocialPostViewSizes {
         var textHeight: CGFloat = 0
         var imageHeight: CGFloat = 0
+        var tagsViewHeight: CGFloat = 0
         
         if let isEmpty = post.images?.isEmpty, !isEmpty {
-            if let postImageHeight = post.images?.first?.resizes?.last?.height {
-                imageHeight = CGFloat(postImageHeight) < 250 ? CGFloat(postImageHeight) : 250
-            } else {
-                imageHeight = 250
-            }
+            imageHeight = 250
+//            if let postImageHeight = post.images?.first?.resizes?.last?.height {
+//                imageHeight = CGFloat(postImageHeight) < 250 ? CGFloat(postImageHeight) : 250
+//            } else {
+//                imageHeight = 250
+//            }
         }
         
         if let text = post.text, !text.isEmpty {
@@ -78,7 +91,11 @@ struct SocialFeedCollectionViewCellViewModel {
             }
         }
         
-        return SocialPostViewSizes(textViewHeight: textHeight, imageViewHeight: imageHeight)
+        if let tags = post.tags, !tags.isEmpty {
+            tagsViewHeight = 110
+        }
+        
+        return SocialPostViewSizes(textViewHeight: textHeight, imageViewHeight: imageHeight, tagViewHeight: tagsViewHeight)
     }
 }
 
@@ -122,6 +139,11 @@ extension SocialFeedCollectionViewCellViewModel: CellViewModel {
             cell.postView.textView.text = text
         } else {
             cell.postView.textView.isHidden = true
+        }
+        
+        if let tags = post.tags, !tags.isEmpty {
+            cell.postView.tagsView.isHidden = false
+            cell.postView.postTags = tags
         }
         
         if let isLiked = post.personalDetails?.isLiked {
@@ -205,14 +227,21 @@ class SocialFeedCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(bottomView)
         
         postView.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: bottomView.topAnchor, trailing: contentView.trailingAnchor)
+        postView.delegate = self
         
-        bottomView.anchor(top: nil, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 10, left: 10, bottom: 5, right: 10), size: CGSize(width: 0, height: 60))
+        bottomView.anchor(top: nil, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10), size: CGSize(width: 0, height: 65))
     }
     
     private func overlayThirdLayerOnBottomView() {
         bottomView.addSubview(socialActivitiesView)
         socialActivitiesView.delegate = self
-        socialActivitiesView.fillSuperview(padding: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0))
+        socialActivitiesView.fillSuperview(padding: UIEdgeInsets(top: 10, left: 0, bottom: 15, right: 0))
+        let borderLine = UIView()
+        borderLine.translatesAutoresizingMaskIntoConstraints = false
+        borderLine.backgroundColor = UIColor.Common.darkTextSecondary
+        socialActivitiesView.addSubview(borderLine)
+        
+        borderLine.anchor(top: socialActivitiesView.topAnchor, leading: socialActivitiesView.leadingAnchor, bottom: nil, trailing: socialActivitiesView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 1))
     }
 }
 
@@ -230,5 +259,11 @@ extension SocialFeedCollectionViewCell: SocialActivitiesViewDelegateProtocol {
     func shareTouched() {
         guard let postId = postId else { return }
         delegate?.shareTouched(postId: postId)
+    }
+}
+
+extension SocialFeedCollectionViewCell: SocialPostViewDelegate {
+    func tagPressed(tag: PostTag) {
+        delegate?.tagPressed(tag: tag)
     }
 }

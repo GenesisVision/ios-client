@@ -9,9 +9,10 @@
 import Foundation
 import UIKit
 
-protocol SocialFeedCollectionViewModelProtocol: class {
+protocol SocialFeedCollectionViewModelDelegate: class {
     func commentPost(postId: UUID)
     func sharePost(postId: UUID)
+    func tagPressed(tag: PostTag)
 }
 
 final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
@@ -43,9 +44,9 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
         return [SocialFeedCollectionViewCellViewModel.self]
     }
     
-    weak var delegate: SocialFeedCollectionViewModelProtocol?
+    weak var delegate: SocialFeedCollectionViewModelDelegate?
     
-    init(type: CellActionType, title: String, delegate: SocialFeedCollectionViewModelProtocol) {
+    init(type: CellActionType, title: String, delegate: SocialFeedCollectionViewModelDelegate) {
         self.type = type
         self.title = title
         self.delegate = delegate
@@ -172,6 +173,10 @@ extension SocialFeedCollectionViewModel: SocialFeedCollectionViewCellDelegatePro
     
     func shareTouched(postId: UUID) {
         delegate?.sharePost(postId: postId)
+    }
+    
+    func tagPressed(tag: PostTag) {
+        delegate?.tagPressed(tag: tag)
     }
 }
 

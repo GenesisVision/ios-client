@@ -283,7 +283,7 @@ class WalletWithdrawViewController: BaseViewController {
     }
     
     private func showSuccessfulView() {
-        showBottomSheet(.success, title: "Please approve the withdrawal request via the link in the confirmation email.", subtitle: nil, initializeHeight: nil) { [weak self] (result) in
+        showBottomSheet(.success, title: "Please approve the withdrawal request via the link in the confirmation email.", subtitle: nil, initializeHeight: 400) { [weak self] (result) in
             DispatchQueue.main.async {
                 self?.viewModel.goToBack()
                 self?.bottomSheetController.dismiss()

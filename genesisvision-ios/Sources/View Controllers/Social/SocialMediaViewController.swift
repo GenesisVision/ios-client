@@ -82,7 +82,14 @@ class SocialMediaViewController: BaseViewController {
 
 extension SocialMediaViewController: SocialMediaCollectionViewModelDelegate {
     func openSocialFeed(type: SocialMediaFeedCollectionCellType) {
-        viewModel.router.show(routeType: .socialFeed)
+        switch type {
+        case .feed:
+            viewModel.router.show(routeType: .socialFeed(tabType: .feed))
+        case .hot:
+            viewModel.router.show(routeType: .socialFeed(tabType: .hot))
+        case .live:
+            viewModel.router.show(routeType: .socialFeed(tabType: .live))
+        }
     }
     
     func commentPressed(postId: UUID) {

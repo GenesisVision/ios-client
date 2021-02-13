@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol SocialPostViewDelegate: class {
+    func tagPressed(tag: PostTag)
+}
+
 final class SocialPostView: UIView {
     //MARK: First Layer
     private let topView: UIView = {
@@ -79,18 +83,37 @@ final class SocialPostView: UIView {
         return imageView
     }()
     
+    let tagsView: SocialPostTagsView = {
+        let socialPostTagsView = SocialPostTagsView()
+        socialPostTagsView.translatesAutoresizingMaskIntoConstraints = false
+        socialPostTagsView.backgroundColor = .clear
+        socialPostTagsView.isHidden = true
+        return socialPostTagsView
+    }()
+    
+    var postTags: [PostTag]  = [] {
+        didSet {
+            tagsView.viewModels = postTags
+        }
+    }
+    
     var socialPostViewSizes: SocialPostViewSizes?
+    weak var delegate: SocialPostViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        overlayZeroLayer()
-        overlayTopView()
-        overlayMiddleView()
+        setup()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        
+        setup()
+    }
+    
+    private func setup() {
+        tagsView.delegate = self
         
         overlayZeroLayer()
         overlayTopView()
@@ -130,16 +153,26 @@ final class SocialPostView: UIView {
     private func overlayMiddleView() {
         middleView.addSubview(textView)
         middleView.addSubview(postImageView)
+        middleView.addSubview(tagsView)
 
         textView.anchor(top: middleView.topAnchor, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10), size: CGSize(width: 0, height: socialPostViewSizes?.textViewHeight ?? 0))
         
-        postImageView.anchor(top: textView.bottomAnchor, leading: middleView.leadingAnchor, bottom: middleView.bottomAnchor, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: socialPostViewSizes?.imageViewHeight ?? 0))
+        postImageView.anchor(top: textView.bottomAnchor, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: socialPostViewSizes?.imageViewHeight ?? 0))
+        
+        tagsView.anchor(top: postImageView.bottomAnchor, leading: middleView.leadingAnchor, bottom: middleView.bottomAnchor, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: socialPostViewSizes?.tagViewHeight ?? 0))
+        
     }
     
     func updateMiddleViewConstraints() {
         textView.removeFromSuperview()
         postImageView.removeFromSuperview()
+        tagsView.removeFromSuperview()
         overlayMiddleView()
     }
 }
 
+extension SocialPostView: SocialPostTagsViewDelegate {
+    func tagPressed(tag: PostTag) {
+        delegate?.tagPressed(tag: tag)
+    }
+}

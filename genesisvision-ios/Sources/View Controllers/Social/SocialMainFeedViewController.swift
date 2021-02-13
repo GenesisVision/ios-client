@@ -16,53 +16,67 @@ class SocialMainFeedViewController: BaseTabmanViewController<SocialMainFeedViewM
         setup()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        scrollToPage(.at(index: viewModel.getIndexForDefaultTab()), animated: true)
+    }
+    
     private func setup() {
         dataSource = viewModel.dataSource
     }
     
 }
 
+enum SocialMainFeedTabType: String {
+    case live = "LIVE"
+    case hot = "HOT"
+    case feed = "FEED"
+}
 
 
 final class SocialMainFeedViewModel: TabmanViewModel {
     
-    enum TabType: String {
-        case live = "LIVE"
-        case hot = "HOT"
-        case feed = "FEED"
-    }
+    var tabTypes: [SocialMainFeedTabType] = [.live, .hot, .feed]
     
-    var tabTypes: [TabType] = [.live, .hot, .feed]
+    var controllers = [SocialMainFeedTabType : UIViewController]()
     
-    var controllers = [TabType : UIViewController]()
+    var defaultTab: SocialMainFeedTabType
     
-    func getViewController(_ type: TabType) -> UIViewController? {
+    func getViewController(_ type: SocialMainFeedTabType) -> UIViewController? {
         if let saved = controllers[type] { return saved }
+        
+        guard let socialRouter = router as? SocialRouter else { return nil }
         
         switch type {
         case .live:
             let viewController = SocialFeedViewController()
-            let viewModel = SocialFeedViewModel(feedType: .live, collectionViewDelegate: viewController)
+            let viewModel = SocialFeedViewModel(feedType: .live, collectionViewDelegate: viewController, router: socialRouter)
             viewController.viewModel = viewModel
             return viewController
         case .hot:
             let viewController = SocialFeedViewController()
-            let viewModel = SocialFeedViewModel(feedType: .hot, collectionViewDelegate: viewController)
+            let viewModel = SocialFeedViewModel(feedType: .hot, collectionViewDelegate: viewController, router: socialRouter)
             viewController.viewModel = viewModel
             return viewController
         case .feed:
             let viewController = SocialFeedViewController()
-            let viewModel = SocialFeedViewModel(feedType: .feed, collectionViewDelegate: viewController)
+            let viewModel = SocialFeedViewModel(feedType: .feed, collectionViewDelegate: viewController, router: socialRouter)
             viewController.viewModel = viewModel
             return viewController
         }
     }
     
-    init(withRouter router: Router) {
+    init(withRouter router: Router, openedTab: SocialMainFeedTabType) {
+        self.defaultTab = openedTab
         super.init(withRouter: router, viewControllersCount: 1, defaultPage: 0)
         self.title = ""
         font = UIFont.getFont(.semibold, size: 16)
         self.dataSource = PageboyDataSource(self)
+    }
+    
+    func getIndexForDefaultTab() -> Int {
+        return tabTypes.firstIndex(of: defaultTab) ?? 0
     }
 }
 

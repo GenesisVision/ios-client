@@ -73,20 +73,22 @@ class SocialFeedViewController: BaseViewController {
     }
     
     private func showNewPostViewController(sharedPost: Post?) {
-        guard let viewController = NewPostViewController.storyboardInstance(.social) else { return }
-        
-        let viewModel = NewPostViewModel(sharedPost: sharedPost)
-        viewController.viewModel = viewModel
-        viewController.modalPresentationStyle = .fullScreen
-        
-        let nav = BaseNavigationController(rootViewController: viewController)
-        nav.modalPresentationStyle = .fullScreen
-        
-        navigationController?.present(viewController: nav)
+        viewModel.socialRouter.show(routeType:  .sharePost(post: sharedPost))
+    }
+    
+    private func showAssetViewController(assetDetails: PostAssetDetailsWithPrices) {
+        guard let assetId = assetDetails._id?.uuidString, let assetType = assetDetails.assetType else { return }
+        viewModel.socialRouter.showAssetDetails(with: assetId, assetType: assetType)
+    }
+    
+    private func showUserProfileViewController(userDetails: ProfilePublic) {
+        guard let userId = userDetails._id?.uuidString else { return }
+        viewModel.socialRouter.showUserDetails(with: userId)
     }
 }
 
-extension SocialFeedViewController: SocialFeedCollectionViewModelProtocol {
+extension SocialFeedViewController: SocialFeedCollectionViewModelDelegate {
+    
     func commentPost(postId: UUID) {
     }
     
@@ -103,6 +105,30 @@ extension SocialFeedViewController: SocialFeedCollectionViewModelProtocol {
             case .failure(errorType: let errorType):
                 ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
             }
+        }
+    }
+    
+    func tagPressed(tag: PostTag) {
+        guard let tagType = tag.type else { return }
+        switch tagType {
+        case .program:
+            guard let assetDetails = tag.assetDetails else { return }
+            showAssetViewController(assetDetails: assetDetails)
+        case .fund:
+            guard let assetDetails = tag.assetDetails else { return }
+            showAssetViewController(assetDetails: assetDetails)
+        case .follow:
+            guard let assetDetails = tag.assetDetails else { return }
+            showAssetViewController(assetDetails: assetDetails)
+        case .user:
+            guard let userDetails = tag.userDetails else { return }
+            showUserProfileViewController(userDetails: userDetails)
+        case .asset:
+            break
+        case .event:
+            break
+        default:
+            break
         }
     }
 }
