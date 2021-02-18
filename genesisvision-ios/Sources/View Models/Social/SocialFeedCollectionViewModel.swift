@@ -13,6 +13,8 @@ protocol SocialFeedCollectionViewModelDelegate: class {
     func commentPost(postId: UUID)
     func sharePost(postId: UUID)
     func tagPressed(tag: PostTag)
+    func userOwnerPressed(userDetails: ProfilePublic)
+    func reloadCollectionViewData()
 }
 
 final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
@@ -28,6 +30,8 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
     var viewModels = [CellViewAnyModel]()
 
     var canPullToRefresh: Bool = true
+    var showOnlyUsersPosts: Bool = false
+    var feedType: SocialFeedType = .feed
         
     let collectionTopInset: CGFloat = Constants.SystemSizes.Cell.horizontalMarginValue
     let collectionBottomInset: CGFloat = Constants.SystemSizes.Cell.horizontalMarginValue
@@ -68,7 +72,7 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
     }
     
     func sizeForItem(at indexPath: IndexPath, frame: CGRect) -> CGSize {
-        let spacing: CGFloat = collectionLeftInset + collectionRightInset
+        let spacing: CGFloat = 0
         if let viewModel = viewModels[safe: indexPath.row] as? SocialFeedCollectionViewCellViewModel {
             return viewModel.cellSize(spacing: spacing, frame: frame)
         } else {
@@ -101,12 +105,13 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
         
         let refresh = refresh ?? false
         let skip = refresh ? 0 : self.skip
+        self.feedType = feedType
         
         var models = [SocialFeedCollectionViewCellViewModel]()
         
         switch feedType {
         case .live:
-            SocialDataProvider.getFeed(userId: nil, tagContentId: nil, tagContentIds: nil, userMode: nil, hashTags: nil, mask: nil, showTop: nil, showLiked: nil, showOnlyUsersPosts: true, skip: skip, take: take) { [weak self] (postsViewModel) in
+            SocialDataProvider.getFeed(userId: nil, tagContentId: nil, tagContentIds: nil, userMode: nil, hashTags: nil, mask: nil, showTop: nil, showLiked: nil, showOnlyUsersPosts: showOnlyUsersPosts, skip: skip, take: take) { [weak self] (postsViewModel) in
                 if let viewModel = postsViewModel, let total = postsViewModel?.total {
                     viewModel.items?.forEach({ (model) in
                         let viewModel = SocialFeedCollectionViewCellViewModel(post: model, cellDelegate: self)
@@ -117,7 +122,7 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
                 completion(.success)
             } errorCompletion: { _ in }
         case .hot:
-            SocialDataProvider.getFeed(userId: nil, tagContentId: nil, tagContentIds: nil, userMode: nil, hashTags: nil, mask: nil, showTop: true, showLiked: nil, showOnlyUsersPosts: nil, skip: skip, take: take) { [weak self] (postsViewModel) in
+            SocialDataProvider.getFeed(userId: nil, tagContentId: nil, tagContentIds: nil, userMode: nil, hashTags: nil, mask: nil, showTop: true, showLiked: nil, showOnlyUsersPosts: showOnlyUsersPosts, skip: skip, take: take) { [weak self] (postsViewModel) in
                 if let viewModel = postsViewModel, let total = postsViewModel?.total {
                     viewModel.items?.forEach({ (model) in
                         let viewModel = SocialFeedCollectionViewCellViewModel(post: model, cellDelegate: self)
@@ -128,7 +133,7 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
                 completion(.success)
             } errorCompletion: { _ in }
         case .feed:
-            SocialDataProvider.getFeed(userId: nil, tagContentId: nil, tagContentIds: nil, userMode: nil, hashTags: nil, mask: nil, showTop: nil, showLiked: nil, showOnlyUsersPosts: nil, skip: skip, take: take) { [weak self] (postsViewModel) in
+            SocialDataProvider.getFeed(userId: nil, tagContentId: nil, tagContentIds: nil, userMode: nil, hashTags: nil, mask: nil, showTop: nil, showLiked: nil, showOnlyUsersPosts: showOnlyUsersPosts, skip: skip, take: take) { [weak self] (postsViewModel) in
                 if let viewModel = postsViewModel, let total = postsViewModel?.total {
                     viewModel.items?.forEach({ (model) in
                         let viewModel = SocialFeedCollectionViewCellViewModel(post: model, cellDelegate: self)
@@ -139,6 +144,17 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
                 completion(.success)
             } errorCompletion: { _ in }
         }
+    }
+    
+    func fetchMore() {
+        fetch(completion: { [weak self] (result) in
+            switch result {
+            case .success:
+                self?.delegate?.reloadCollectionViewData()
+            case .failure(errorType: _):
+                break
+            }
+        }, refresh: false, feedType: feedType)
     }
     
     func fetch(completion: @escaping CompletionBlock) {
@@ -154,7 +170,14 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
     }
 }
 
-extension SocialFeedCollectionViewModel: SocialFeedCollectionViewCellDelegateProtocol {
+extension SocialFeedCollectionViewModel: SocialFeedCollectionViewCellDelegate {
+    func userOwnerPressed(postId: UUID) {
+        guard let postViewModel = viewModels.first(where: {return ($0 as? SocialFeedCollectionViewCellViewModel)?.post._id == postId }) as? SocialFeedCollectionViewCellViewModel, let userDetails = postViewModel.post.author else {
+            return
+        }
+        delegate?.userOwnerPressed(userDetails: userDetails)
+    }
+    
     func commentTouched(postId: UUID) {
         delegate?.commentPost(postId: postId)
     }

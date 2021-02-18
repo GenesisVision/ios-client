@@ -24,6 +24,43 @@ class SocialMainFeedViewController: BaseTabmanViewController<SocialMainFeedViewM
     
     private func setup() {
         dataSource = viewModel.dataSource
+        addBarViewSubview()
+    }
+    
+    private func addBarViewSubview() {
+        let barFrame = bar.frame
+        let width: CGFloat = 150
+        let xSpacing: CGFloat = 10
+        let ySpacing: CGFloat = 5
+        let height: CGFloat = barFrame.maxY - barFrame.minY - 2*ySpacing
+        
+        let contentView = UIView(frame: CGRect(x: barFrame.maxX - width - xSpacing, y: barFrame.minY + ySpacing, width: width, height: height))
+        let label = TitleLabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Show events"
+        let switchButton = UISwitch()
+        switchButton.isEnabled = true
+        switchButton.isOn = true
+        switchButton.onTintColor = UIColor.primary
+        switchButton.thumbTintColor = UIColor.Cell.switchThumbTint
+        switchButton.tintColor = UIColor.Cell.switchTint
+        switchButton.translatesAutoresizingMaskIntoConstraints = false
+        switchButton.addTarget(self, action: #selector(showEventsSwitch), for: .valueChanged)
+        
+        contentView.addSubview(label)
+        contentView.addSubview(switchButton)
+        
+        label.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: nil, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10), size: CGSize(width: 90, height: 0))
+        
+        switchButton.anchor(top: contentView.topAnchor, leading: nil, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 10), size: CGSize(width: 40, height: 0))
+        view.addSubview(contentView)
+    }
+    
+    @objc private func showEventsSwitch(switchButton: UISwitch) {
+        let value = switchButton.isOn
+        viewModel.showEvents = value
+        
+        NotificationCenter.default.post(name: .socialShowEventsSwitchValueChanged, object: nil, userInfo: ["showEvents": value])
     }
     
 }
@@ -40,6 +77,12 @@ final class SocialMainFeedViewModel: TabmanViewModel {
     var tabTypes: [SocialMainFeedTabType] = [.live, .hot, .feed]
     
     var controllers = [SocialMainFeedTabType : UIViewController]()
+    
+    var showEvents: Bool = false {
+        didSet {
+            controllers.forEach({ ($1 as? SocialFeedViewController)?.viewModel.socialCollectionViewModel.showOnlyUsersPosts = !showEvents  })
+        }
+    }
     
     var defaultTab: SocialMainFeedTabType
     

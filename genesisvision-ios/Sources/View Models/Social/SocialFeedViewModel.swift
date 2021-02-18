@@ -18,7 +18,13 @@ final class SocialFeedViewModel {
     
     var socialCollectionViewModel: SocialFeedCollectionViewModel!
     var socialCollectionViewDataSource: CollectionViewDataSource!
-
+    
+    var showOnlyUsersPosts: Bool = false {
+        didSet {
+            socialCollectionViewModel.showOnlyUsersPosts = showOnlyUsersPosts
+        }
+    }
+    
     let feedType: SocialFeedType
     let socialRouter: SocialRouter
 

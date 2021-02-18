@@ -26,6 +26,7 @@ extension Notification.Name {
     static let updateNotificationListViewController = Notification.Name(Keys.updateNotificationListViewController)
     static let chooseProgramList = Notification.Name(Keys.chooseProgramListKey)
     static let chooseFundList = Notification.Name(Keys.chooseFundListKey)
+    static let socialShowEventsSwitchValueChanged = Notification.Name(Keys.socialShowEventsSwitchValueChanged)
     
     static let tabBarDidScrollToTop = Notification.Name(Keys.tabBarDidScrollToTopKey)
     

@@ -27,8 +27,9 @@ extension SocialPostTagCollectionViewCellViewModel: CellViewModel {
                 cell.postTagImageView.isHidden = false
                 cell.postTagImageView.kf.indicatorType = .activity
                 cell.postTagImageView.kf.setImage(with: fileUrl)
-            } else {
+            } else if let color = postTag.assetDetails?.color {
                 cell.postTagImageView.image = UIImage.programPlaceholder
+                cell.postTagImageView.backgroundColor = UIColor.hexColor(color)
             }
             
             if let price = postTag.assetDetails?.price?.toString(), let currency = postTag.assetDetails?.priceCurrency?.rawValue {
@@ -42,8 +43,9 @@ extension SocialPostTagCollectionViewCellViewModel: CellViewModel {
                 cell.postTagImageView.isHidden = false
                 cell.postTagImageView.kf.indicatorType = .activity
                 cell.postTagImageView.kf.setImage(with: fileUrl)
-            } else {
-                cell.postTagImageView.image = UIImage.fundPlaceholder
+            } else if let color = postTag.assetDetails?.color {
+                cell.postTagImageView.image = UIImage.programPlaceholder
+                cell.postTagImageView.backgroundColor = UIColor.hexColor(color)
             }
             
             if let price = postTag.assetDetails?.price?.toString(), let currency = postTag.assetDetails?.priceCurrency?.rawValue {
@@ -57,8 +59,9 @@ extension SocialPostTagCollectionViewCellViewModel: CellViewModel {
                 cell.postTagImageView.isHidden = false
                 cell.postTagImageView.kf.indicatorType = .activity
                 cell.postTagImageView.kf.setImage(with: fileUrl)
-            } else {
+            } else if let color = postTag.assetDetails?.color {
                 cell.postTagImageView.image = UIImage.programPlaceholder
+                cell.postTagImageView.backgroundColor = UIColor.hexColor(color)
             }
             
             if let price = postTag.assetDetails?.price?.toString(), let currency = postTag.assetDetails?.priceCurrency?.rawValue {
@@ -139,7 +142,6 @@ class SocialPostTagCollectionViewCell: UICollectionViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.backgroundColor = .clear
         imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage.profilePlaceholder
         return imageView
     }()
     

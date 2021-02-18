@@ -83,9 +83,41 @@ class NewPostViewController: BaseViewController {
         title = "New post"
     }
     
+    func postViewSizes(post: Post) -> SocialPostViewSizes {
+        var textHeight: CGFloat = 0
+        var imageHeight: CGFloat = 0
+        var tagsViewHeight: CGFloat = 0
+        
+        if let isEmpty = post.images?.isEmpty, !isEmpty {
+            imageHeight = 250
+        }
+        
+        if let text = post.text, !text.isEmpty {
+            let textHeightValue = text.height(forConstrainedWidth: 400, font: UIFont.getFont(.regular, size: 16))
+            
+            if textHeightValue < 25 {
+                textHeight = 25
+            } else if textHeightValue > 25 && textHeightValue < 250 {
+                textHeight = textHeightValue
+            } else if textHeightValue > 250 {
+                textHeight = 250
+            }
+        }
+        
+        if let tags = post.tags, !tags.isEmpty {
+            tagsViewHeight = 110
+        }
+        
+        return SocialPostViewSizes(textViewHeight: textHeight, imageViewHeight: imageHeight, tagViewHeight: tagsViewHeight)
+    }
+    
     private func setupSharedPostView() {
+        guard let post = viewModel.sharedPost else { return }
         sharedPostView.isHidden = false
         sharedPostMainView.isHidden = false
+        
+        sharedPostView.socialPostViewSizes = postViewSizes(post: post)
+        sharedPostView.updateMiddleViewConstraints()
         
         if let logo = viewModel.sharedPost?.author?.logoUrl, let fileUrl = getFileURL(fileName: logo), isPictureURL(url: fileUrl.absoluteString) {
             sharedPostView.userImageView.kf.indicatorType = .activity
@@ -196,7 +228,7 @@ final class NewPostViewModel {
     }
     
     private func addPost(completion: @escaping CompletionBlock) {
-        let model = NewPost(text: newPostText, postId: nil, userId: nil, images: [])
+        let model = NewPost(text: newPostText, postId: nil, userId: nil, images: newPostImages)
         SocialDataProvider.addPost(model: model, completion: completion)
     }
 }

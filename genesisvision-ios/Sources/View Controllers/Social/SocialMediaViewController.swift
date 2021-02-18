@@ -78,9 +78,48 @@ class SocialMediaViewController: BaseViewController {
         
         viewModel.router.show(routeType: .sharePost(post: sharedPost))
     }
+    
+    private func showAssetViewController(assetDetails: PostAssetDetailsWithPrices) {
+        guard let assetId = assetDetails._id?.uuidString, let assetType = assetDetails.assetType else { return }
+        viewModel.router.showAssetDetails(with: assetId, assetType: assetType)
+    }
+    
+    private func showUserProfileViewController(userDetails: ProfilePublic) {
+        guard let userId = userDetails._id?.uuidString else { return }
+        viewModel.router.showUserDetails(with: userId)
+    }
 }
 
 extension SocialMediaViewController: SocialMediaCollectionViewModelDelegate {
+    
+    func userOwnerPressed(userDetails: ProfilePublic) {
+        showUserProfileViewController(userDetails: userDetails)
+    }
+    
+    func tagPressed(tag: PostTag) {
+        guard let tagType = tag.type else { return }
+        switch tagType {
+        case .program:
+            guard let assetDetails = tag.assetDetails else { return }
+            showAssetViewController(assetDetails: assetDetails)
+        case .fund:
+            guard let assetDetails = tag.assetDetails else { return }
+            showAssetViewController(assetDetails: assetDetails)
+        case .follow:
+            guard let assetDetails = tag.assetDetails else { return }
+            showAssetViewController(assetDetails: assetDetails)
+        case .user:
+            guard let userDetails = tag.userDetails else { return }
+            showUserProfileViewController(userDetails: userDetails)
+        case .asset:
+            break
+        case .event:
+            break
+        default:
+            break
+        }
+    }
+    
     func openSocialFeed(type: SocialMediaFeedCollectionCellType) {
         switch type {
         case .feed:
@@ -95,21 +134,8 @@ extension SocialMediaViewController: SocialMediaCollectionViewModelDelegate {
     func commentPressed(postId: UUID) {
     }
     
-    func sharePressed(postId: UUID) {
-        
-        var sharedPost: Post?
-        
-        SocialDataProvider.getPost(postId: postId) { [weak self] (postModel) in
-            sharedPost = postModel
-            self?.showNewPostViewController(sharedPost: sharedPost)
-        } errorCompletion: { (result) in
-            switch result {
-            case .success:
-                break
-            case .failure(errorType: let errorType):
-                ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
-            }
-        }
+    func sharePressed(post: Post) {
+        showNewPostViewController(sharedPost: post)
     }
     
     func likePressed(postId: UUID) {
@@ -144,8 +170,10 @@ extension SocialMediaViewController: SocialMediaCollectionViewModelDelegate {
 protocol SocialMediaCollectionViewModelDelegate: class {
     func openSocialFeed(type: SocialMediaFeedCollectionCellType)
     func commentPressed(postId: UUID)
-    func sharePressed(postId: UUID)
+    func sharePressed(post: Post)
     func likePressed(postId: UUID)
+    func tagPressed(tag: PostTag)
+    func userOwnerPressed(userDetails: ProfilePublic)
     
     func shareIdeasPressed()
     
@@ -344,15 +372,39 @@ final class SocialMediaCollectionViewModel: CellViewModelWithCollection {
         case .addPost:
             return CGSize(width: frame.width, height: 50)
         case .feed:
-            return CGSize(width: frame.width, height: 300)
+            let spacing: CGFloat = 0
+            if let viewModel = feedViewModel.first(where: { guard let model = $0 as? SocialMediaFeedCollectionViewCellViewModel, model.type == .feed else { return false }
+                return true
+            }) as? SocialMediaFeedCollectionViewCellViewModel {
+                return viewModel.cellSize(spacing: spacing, frame: frame)
+            } else {
+                let size: CGFloat = (frame.width - spacing)
+                return CGSize(width: size, height: 300)
+            }
         case .media:
             return CGSize(width: frame.width, height: 300)
         case .users:
             return CGSize(width: frame.width, height: 150)
         case .live:
-            return CGSize(width: frame.width, height: 300)
+            let spacing: CGFloat = 0
+            if let viewModel = feedViewModel.first(where: { guard let model = $0 as? SocialMediaFeedCollectionViewCellViewModel, model.type == .live else { return false }
+                return true
+            }) as? SocialMediaFeedCollectionViewCellViewModel {
+                return viewModel.cellSize(spacing: spacing, frame: frame)
+            } else {
+                let size: CGFloat = (frame.width - spacing)
+                return CGSize(width: size, height: 300)
+            }
         case .hot:
-            return CGSize(width: frame.width, height: 300)
+            let spacing: CGFloat = 0
+            if let viewModel = feedViewModel.first(where: { guard let model = $0 as? SocialMediaFeedCollectionViewCellViewModel, model.type == .hot else { return false }
+                return true
+            }) as? SocialMediaFeedCollectionViewCellViewModel {
+                return viewModel.cellSize(spacing: spacing, frame: frame)
+            } else {
+                let size: CGFloat = (frame.width - spacing)
+                return CGSize(width: size, height: 300)
+            }
         }
     }
     
@@ -417,6 +469,19 @@ extension SocialMediaCollectionViewModel: SocialMediaAddPostCollectionViewCellDe
 }
 
 extension SocialMediaCollectionViewModel: SocialMediaFeedCollectionViewCellDelegate {
+    func userOwnerPressed(postId: UUID) {
+        guard let postViewModel = feedViewModel.first(where: {
+            guard let model = $0 as? SocialMediaFeedCollectionViewCellViewModel, model.post._id == postId else { return false }
+            return true
+        }) as? SocialMediaFeedCollectionViewCellViewModel,
+        let userDetails = postViewModel.post.author else { return }
+        delegate?.userOwnerPressed(userDetails: userDetails)
+    }
+    
+    func tagPressed(tag: PostTag) {
+        delegate?.tagPressed(tag: tag)
+    }
+    
     func openSocialFeed(type: SocialMediaFeedCollectionCellType) {
         delegate?.openSocialFeed(type: type)
     }
@@ -426,7 +491,8 @@ extension SocialMediaCollectionViewModel: SocialMediaFeedCollectionViewCellDeleg
     }
     
     func sharePressed(postId: UUID) {
-        delegate?.sharePressed(postId: postId)
+        guard let postViewModel = feedViewModel.first(where: { return ($0 as? SocialMediaFeedCollectionViewCellViewModel)?.post._id == postId }) as? SocialMediaFeedCollectionViewCellViewModel else { return }
+        delegate?.sharePressed(post: postViewModel.post)
     }
     
     func likePressed(postId: UUID) {

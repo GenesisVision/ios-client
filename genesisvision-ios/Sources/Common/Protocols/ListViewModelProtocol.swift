@@ -92,6 +92,7 @@ protocol ViewModelWithListProtocol {
     
     func didSelect(at indexPath: IndexPath)
     func cellAnimations() -> Bool
+    func fetchMore()
     
     @available(iOS 13.0, *)
     func getMenu(_ indexPath: IndexPath) -> UIMenu?
@@ -172,6 +173,10 @@ extension ViewModelWithListProtocol {
     }
     func minimumInteritemSpacing(for section: Int) -> CGFloat {
         return 16.0
+    }
+    
+    func fetchMore() {
+        
     }
     
     @available(iOS 13.0, *)

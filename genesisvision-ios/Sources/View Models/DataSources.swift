@@ -162,6 +162,12 @@ final class CollectionViewDataSource: NSObject, CollectionDataSourceProtocol, UI
         return viewModel.minimumInteritemSpacing(for: section)
     }
     
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if scrollView.contentOffset.y > scrollView.contentSize.height * 0.7 {
+            return viewModel.fetchMore()
+        }
+    }
+    
     @available(iOS 13.0, *)
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         guard let menu = viewModel.getMenu(indexPath) else { return nil }

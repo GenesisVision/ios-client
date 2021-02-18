@@ -10,6 +10,7 @@ import UIKit
 
 protocol SocialPostViewDelegate: class {
     func tagPressed(tag: PostTag)
+    func userOwnerPressed()
 }
 
 final class SocialPostView: UIView {
@@ -83,6 +84,13 @@ final class SocialPostView: UIView {
         return imageView
     }()
     
+    let eventView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .clear
+        return view
+    }()
+    
     let tagsView: SocialPostTagsView = {
         let socialPostTagsView = SocialPostTagsView()
         socialPostTagsView.translatesAutoresizingMaskIntoConstraints = false
@@ -93,7 +101,7 @@ final class SocialPostView: UIView {
     
     var postTags: [PostTag]  = [] {
         didSet {
-            tagsView.viewModels = postTags
+            tagsView.viewModels = postTags.filter({ $0.type != .event })
         }
     }
     
@@ -148,19 +156,28 @@ final class SocialPostView: UIView {
         postActionsButton.anchor(top: nil, leading: nil, bottom: nil, trailing: topView.trailingAnchor)
         postActionsButton.anchorCenter(centerY: topView.centerYAnchor, centerX: nil)
         postActionsButton.anchorSize(size: CGSize(width: 60, height: 60))
+        
+        let button = UIButton()
+        button.backgroundColor = .clear
+        button.addTarget(self, action: #selector(touchUserView), for: .touchUpInside)
+        topView.addSubview(button)
+        button.fillSuperview(padding: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
+        topView.bringSubviewToFront(button)
     }
     
     private func overlayMiddleView() {
         middleView.addSubview(textView)
         middleView.addSubview(postImageView)
         middleView.addSubview(tagsView)
+//        middleView.addSubview(eventView)
+//        
+//        eventView.anchor(top: middleView.topAnchor, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5), size: CGSize(width: 0, height: 100))
 
-        textView.anchor(top: middleView.topAnchor, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10), size: CGSize(width: 0, height: socialPostViewSizes?.textViewHeight ?? 0))
+        textView.anchor(top: middleView.topAnchor, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 10, bottom: 5, right: 10), size: CGSize(width: 0, height: socialPostViewSizes?.textViewHeight ?? 0))
         
-        postImageView.anchor(top: textView.bottomAnchor, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: socialPostViewSizes?.imageViewHeight ?? 0))
+        postImageView.anchor(top: textView.bottomAnchor, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0), size: CGSize(width: 0, height: socialPostViewSizes?.imageViewHeight ?? 0))
         
-        tagsView.anchor(top: postImageView.bottomAnchor, leading: middleView.leadingAnchor, bottom: middleView.bottomAnchor, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: socialPostViewSizes?.tagViewHeight ?? 0))
-        
+        tagsView.anchor(top: postImageView.bottomAnchor, leading: middleView.leadingAnchor, bottom: middleView.bottomAnchor, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: socialPostViewSizes?.tagViewHeight ?? 0))
     }
     
     func updateMiddleViewConstraints() {
@@ -168,6 +185,10 @@ final class SocialPostView: UIView {
         postImageView.removeFromSuperview()
         tagsView.removeFromSuperview()
         overlayMiddleView()
+    }
+    
+    @objc private func touchUserView() {
+        delegate?.userOwnerPressed()
     }
 }
 

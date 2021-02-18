@@ -19,12 +19,52 @@ protocol SocialMediaFeedCollectionViewCellDelegate: class {
     func commentPressed(postId: UUID)
     func sharePressed(postId: UUID)
     func likePressed(postId: UUID)
+    func tagPressed(tag: PostTag)
+    func userOwnerPressed(postId: UUID)
 }
 
 struct SocialMediaFeedCollectionViewCellViewModel {
     let type: SocialMediaFeedCollectionCellType
     let post: Post
     weak var cellDelegate: SocialMediaFeedCollectionViewCellDelegate?
+    
+    func cellSize(spacing: CGFloat, frame: CGRect) -> CGSize {
+        let width = frame.width - spacing
+        let defaultHeight: CGFloat = 250
+        let socialPostViewSizes = postViewSizes()
+        
+        let cellHeight = socialPostViewSizes.allHeight + defaultHeight
+        
+        return CGSize(width: width, height: cellHeight)
+    }
+    
+    func postViewSizes() -> SocialPostViewSizes {
+        var textHeight: CGFloat = 0
+        var imageHeight: CGFloat = 0
+        var tagsViewHeight: CGFloat = 0
+        
+        if let isEmpty = post.images?.isEmpty, !isEmpty {
+            imageHeight = 250
+        }
+        
+        if let text = post.text, !text.isEmpty {
+            let textHeightValue = text.height(forConstrainedWidth: 400, font: UIFont.getFont(.regular, size: 16))
+            
+            if textHeightValue < 25 {
+                textHeight = 25
+            } else if textHeightValue > 25 && textHeightValue < 250 {
+                textHeight = textHeightValue
+            } else if textHeightValue > 250 {
+                textHeight = 250
+            }
+        }
+        
+        if let tags = post.tags, !tags.isEmpty {
+            tagsViewHeight = 110
+        }
+        
+        return SocialPostViewSizes(textViewHeight: textHeight, imageViewHeight: imageHeight, tagViewHeight: tagsViewHeight)
+    }
 }
 
 extension SocialMediaFeedCollectionViewCellViewModel: CellViewModel {
@@ -35,6 +75,9 @@ extension SocialMediaFeedCollectionViewCellViewModel: CellViewModel {
         cell.postId = post._id
         
         cell.topButton.setTitle(type.rawValue, for: .normal)
+        
+        cell.postView.socialPostViewSizes = postViewSizes()
+        cell.postView.updateMiddleViewConstraints()
         
         if let logo = post.author?.logoUrl, let fileUrl = getFileURL(fileName: logo), isPictureURL(url: fileUrl.absoluteString) {
             cell.postView.userImageView.kf.indicatorType = .activity
@@ -57,6 +100,13 @@ extension SocialMediaFeedCollectionViewCellViewModel: CellViewModel {
             cell.postView.postImageView.kf.setImage(with: fileUrl)
         } else {
             cell.postView.postImageView.isHidden = true
+        }
+        
+        if let tags = post.tags, !tags.isEmpty {
+            cell.postView.tagsView.isHidden = false
+            cell.postView.postTags = tags
+        } else {
+            cell.postView.tagsView.isHidden = true
         }
         
         if let text = post.text, !text.isEmpty {
@@ -160,7 +210,6 @@ class SocialMediaFeedCollectionViewCell: UICollectionViewCell {
         setup()
     }
     
-    
     private func setup() {
         backgroundColor = UIColor.BaseView.bg
         contentView.backgroundColor = UIColor.BaseView.bg
@@ -201,8 +250,16 @@ class SocialMediaFeedCollectionViewCell: UICollectionViewCell {
         centralView.addSubview(socialActivitiesView)
         
         postView.anchor(top: centralView.topAnchor, leading: centralView.leadingAnchor, bottom: socialActivitiesView.topAnchor, trailing: centralView.trailingAnchor)
+        postView.delegate = self
         
-        socialActivitiesView.anchor(top: nil, leading: centralView.leadingAnchor, bottom: centralView.bottomAnchor, trailing: centralView.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 10, bottom: 5, right: 10), size: CGSize(width: 0, height: 60))
+        socialActivitiesView.anchor(top: nil, leading: centralView.leadingAnchor, bottom: centralView.bottomAnchor, trailing: centralView.trailingAnchor, padding: UIEdgeInsets(top: 10, left: 10, bottom: 15, right: 10), size: CGSize(width: 0, height: 45))
+        
+        let borderLine = UIView()
+        borderLine.translatesAutoresizingMaskIntoConstraints = false
+        borderLine.backgroundColor = UIColor.Common.darkTextSecondary
+        socialActivitiesView.addSubview(borderLine)
+        
+        borderLine.anchor(top: socialActivitiesView.topAnchor, leading: socialActivitiesView.leadingAnchor, bottom: nil, trailing: socialActivitiesView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 1))
         
         socialActivitiesView.delegate = self
     }
@@ -227,5 +284,16 @@ extension SocialMediaFeedCollectionViewCell: SocialActivitiesViewDelegateProtoco
     func shareTouched() {
         guard let postId = postId else { return }
         delegate?.sharePressed(postId: postId)
+    }
+}
+
+extension SocialMediaFeedCollectionViewCell: SocialPostViewDelegate {
+    func userOwnerPressed() {
+        guard let postId = postId else { return }
+        delegate?.userOwnerPressed(postId: postId)
+    }
+    
+    func tagPressed(tag: PostTag) {
+        delegate?.tagPressed(tag: tag)
     }
 }

@@ -263,10 +263,11 @@ class DashboardViewModel: ViewModelWithListProtocol {
         case investing
         case portfolio
         case assets
+        case walletSummary
         case recommendations
     }
     
-    private var sections: [SectionType] = [.overview, .investing, .trading, .portfolio, .assets, .recommendations]
+    private var sections: [SectionType] = [.overview, .investing, .trading, .portfolio, .assets, .walletSummary, .recommendations]
     var viewModels = [CellViewAnyModel]()
     
     var canPullToRefresh: Bool = true
@@ -336,6 +337,16 @@ class DashboardViewModel: ViewModelWithListProtocol {
         }
     }
     
+    private var walletsSummary: WalletSummary? {
+        didSet {
+            let viewModel = DashboardWalletsTableViewCellViewModel(walletSummary: walletsSummary, ratesModel: ratesModel)
+            viewModels.append(viewModel)
+            reloadSection(.walletSummary)
+        }
+    }
+    
+    private var ratesModel: RatesModel?
+    
     private var recommendations: CommonPublicAssetsViewModel? {
         didSet {
             let viewModel = CellWithCollectionViewModel(DashboardRecommendationsViewModel(recommendations, delegate: delegate), delegate: delegate)
@@ -361,6 +372,7 @@ class DashboardViewModel: ViewModelWithListProtocol {
                 DashboardInvestingCellViewModel<InvestingCollectionViewModel>.self,
                 DashboardPortfolioChartTableViewCellViewModel.self,
                 DashboardAssetsChartTableViewCellViewModel.self,
+                DashboardWalletsTableViewCellViewModel.self,
                 CellWithCollectionViewModel<DashboardRecommendationsViewModel>.self]
     }
     
@@ -430,7 +442,14 @@ class DashboardViewModel: ViewModelWithListProtocol {
             self?.header = viewModel
         }, errorCompletion: errorCompletion)
         
-        
+        RateDataProvider.getRates(from: [getPlatformCurrencyType().rawValue], to: [Currency.btc.rawValue, Currency.eth.rawValue, Currency.gvt.rawValue, Currency.usdt.rawValue], completion: { [weak self] (ratesModel) in
+            self?.ratesModel = ratesModel
+            AuthManager.getWallet(with: getPlatformCurrencyType()) { (viewModel) in
+                if let walletsSummary = viewModel {
+                    self?.walletsSummary = walletsSummary
+                }
+            } completionError: { _ in }
+        }, errorCompletion: errorCompletion)
         
         delegate?.didReload()
     }
@@ -452,6 +471,8 @@ class DashboardViewModel: ViewModelWithListProtocol {
             return viewModels.first{ $0 is CellWithCollectionViewModel<DashboardRecommendationsViewModel>}
         case .investmentLimit:
             return viewModels.first{ $0 is DashboardInvestmentLimitsTableViewCellViewModel }
+        case .walletSummary:
+            return viewModels.first{ $0 is DashboardWalletsTableViewCellViewModel }
         }
     }
     

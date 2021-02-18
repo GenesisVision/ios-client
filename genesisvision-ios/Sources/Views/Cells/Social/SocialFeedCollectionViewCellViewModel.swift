@@ -1,5 +1,5 @@
 //
-//  SocialFeedTableViewCellViewModel.swift
+//  SocialFeedCollectionViewCell.swift
 //  genesisvision-ios
 //
 //  Created by Ruslan Lukin on 27.09.2020.
@@ -13,56 +13,31 @@ struct SocialPostViewSizes {
     let textViewHeight: CGFloat
     let imageViewHeight: CGFloat
     let tagViewHeight: CGFloat
+    var allHeight: CGFloat {
+        return textViewHeight + imageViewHeight + tagViewHeight
+    }
 }
 
-protocol SocialFeedCollectionViewCellDelegateProtocol: class {
+protocol SocialFeedCollectionViewCellDelegate: class {
     func likeTouched(postId: UUID)
     func shareTouched(postId: UUID)
     func commentTouched(postId: UUID)
     func tagPressed(tag: PostTag)
+    func userOwnerPressed(postId: UUID)
 }
 
 struct SocialFeedCollectionViewCellViewModel {
     let post: Post
-    weak var cellDelegate: SocialFeedCollectionViewCellDelegateProtocol?
+    weak var cellDelegate: SocialFeedCollectionViewCellDelegate?
     
     func cellSize(spacing: CGFloat, frame: CGRect) -> CGSize {
         let width = frame.width - spacing
-        let defaultHeight: CGFloat = 200
+        let defaultHeight: CGFloat = 180
         let socialPostViewSizes = postViewSizes()
         
-        let cellHeight = socialPostViewSizes.textViewHeight + socialPostViewSizes.imageViewHeight + socialPostViewSizes.tagViewHeight + defaultHeight
+        let cellHeight = socialPostViewSizes.allHeight + defaultHeight
         
         return CGSize(width: width, height: cellHeight)
-        
-        
-//        if let isEmpty = post.images?.isEmpty, !isEmpty {
-//            height += imageHeight
-////            if let postImageHeight = post.images?.first?.resizes?.last?.height {
-////                height = height + (CGFloat(postImageHeight) < imageHeight ? CGFloat(postImageHeight) : imageHeight)
-////            } else {
-////                height += imageHeight
-////            }
-//        }
-//
-//        if let text = post.text, !text.isEmpty {
-//            let textHeightValue = text.height(forConstrainedWidth: 400, font: UIFont.getFont(.regular, size: 16))
-//            if textHeightValue < 40 {
-//                textHeight = 40
-//            } else if textHeightValue > 40 && textHeightValue < 250 {
-//                textHeight = textHeightValue
-//            } else if textHeightValue > 250 {
-//                textHeight = 250
-//            }
-//            height += textHeight
-//        }
-//
-//        if let tags = post.tags, !tags.isEmpty {
-//            height += tagsViewHeight
-//        }
-//
-//        print("CellSize: \(width) || \(height)")
-//        return CGSize(width: width, height: height)
     }
     
     func postViewSizes() -> SocialPostViewSizes {
@@ -72,19 +47,14 @@ struct SocialFeedCollectionViewCellViewModel {
         
         if let isEmpty = post.images?.isEmpty, !isEmpty {
             imageHeight = 250
-//            if let postImageHeight = post.images?.first?.resizes?.last?.height {
-//                imageHeight = CGFloat(postImageHeight) < 250 ? CGFloat(postImageHeight) : 250
-//            } else {
-//                imageHeight = 250
-//            }
         }
         
         if let text = post.text, !text.isEmpty {
             let textHeightValue = text.height(forConstrainedWidth: 400, font: UIFont.getFont(.regular, size: 16))
             
-            if textHeightValue < 40 {
-                textHeight = 40
-            } else if textHeightValue > 40 && textHeightValue < 250 {
+            if textHeightValue < 25 {
+                textHeight = 25
+            } else if textHeightValue > 25 && textHeightValue < 250 {
                 textHeight = textHeightValue
             } else if textHeightValue > 250 {
                 textHeight = 250
@@ -144,6 +114,8 @@ extension SocialFeedCollectionViewCellViewModel: CellViewModel {
         if let tags = post.tags, !tags.isEmpty {
             cell.postView.tagsView.isHidden = false
             cell.postView.postTags = tags
+        } else {
+            cell.postView.tagsView.isHidden = true
         }
         
         if let isLiked = post.personalDetails?.isLiked {
@@ -192,7 +164,7 @@ class SocialFeedCollectionViewCell: UICollectionViewCell {
     }()
     
     var postId: UUID?
-    weak var delegate: SocialFeedCollectionViewCellDelegateProtocol?
+    weak var delegate: SocialFeedCollectionViewCellDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -212,6 +184,7 @@ class SocialFeedCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         postView.userImageView.image = UIImage.profilePlaceholder
+        postView.tagsView.viewModels = []
     }
     
     private func setup() {
@@ -236,6 +209,7 @@ class SocialFeedCollectionViewCell: UICollectionViewCell {
         bottomView.addSubview(socialActivitiesView)
         socialActivitiesView.delegate = self
         socialActivitiesView.fillSuperview(padding: UIEdgeInsets(top: 10, left: 0, bottom: 15, right: 0))
+        
         let borderLine = UIView()
         borderLine.translatesAutoresizingMaskIntoConstraints = false
         borderLine.backgroundColor = UIColor.Common.darkTextSecondary
@@ -263,6 +237,11 @@ extension SocialFeedCollectionViewCell: SocialActivitiesViewDelegateProtocol {
 }
 
 extension SocialFeedCollectionViewCell: SocialPostViewDelegate {
+    func userOwnerPressed() {
+        guard let postId = postId else { return }
+        delegate?.userOwnerPressed(postId: postId)
+    }
+    
     func tagPressed(tag: PostTag) {
         delegate?.tagPressed(tag: tag)
     }

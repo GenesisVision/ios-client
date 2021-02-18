@@ -23,8 +23,24 @@ class SocialFeedViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Social"
+        setup()
         setupCollectionView()
+    }
+    
+    private func setup() {
+        title = "Social"
+        NotificationCenter.default.addObserver(self, selector: #selector(updateShowEventsValue), name: .socialShowEventsSwitchValueChanged, object: nil)
+    }
+    
+    @objc private func updateShowEventsValue(notification: Notification) {
+        guard let value = notification.userInfo?["showEvents"] as? Bool else { return }
+        
+        viewModel.showOnlyUsersPosts = !value
+        
+        viewModel.fetch(completion: { [weak self] (result) in
+            self?.hideAll()
+            self?.reloadData()
+        }, refresh: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,8 +65,7 @@ class SocialFeedViewController: BaseViewController {
         }
         
         socialFeedCollectionView.isScrollEnabled = true
-        socialFeedCollectionView.showsHorizontalScrollIndicator = false
-        socialFeedCollectionView.indicatorStyle = .black
+        socialFeedCollectionView.showsVerticalScrollIndicator = false
         socialFeedCollectionView.allowsSelection = false
         socialFeedCollectionView.registerNibs(for: viewModel.socialCollectionViewModel.cellModelsForRegistration)
         
@@ -88,6 +103,13 @@ class SocialFeedViewController: BaseViewController {
 }
 
 extension SocialFeedViewController: SocialFeedCollectionViewModelDelegate {
+    func reloadCollectionViewData() {
+        reloadData()
+    }
+    
+    func userOwnerPressed(userDetails: ProfilePublic) {
+        showUserProfileViewController(userDetails: userDetails)
+    }
     
     func commentPost(postId: UUID) {
     }
