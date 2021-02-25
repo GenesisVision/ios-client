@@ -11,6 +11,7 @@ import UIKit
 protocol SocialPostViewDelegate: class {
     func tagPressed(tag: PostTag)
     func userOwnerPressed()
+    func postActionsPressed()
 }
 
 final class SocialPostView: UIView {
@@ -18,6 +19,7 @@ final class SocialPostView: UIView {
     private let topView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.isUserInteractionEnabled = true
         return view
     }()
     
@@ -57,6 +59,18 @@ final class SocialPostView: UIView {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .clear
+        button.setImage(#imageLiteral(resourceName: "social_post_menu"), for: .normal)
+        button.contentVerticalAlignment = .fill
+        button.contentHorizontalAlignment = .fill
+        button.imageView?.contentMode = .scaleToFill
+        button.imageEdgeInsets = UIEdgeInsets(top: 15, left: 8, bottom: 15, right: 8)
+        return button
+    }()
+    
+    let openUserButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .clear
         return button
     }()
     
@@ -84,10 +98,11 @@ final class SocialPostView: UIView {
         return imageView
     }()
     
-    let eventView: UIView = {
-        let view = UIView()
+    let eventView: SocialEventView = {
+        let view = SocialEventView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .clear
+        view.isHidden = true
         return view
     }()
     
@@ -101,6 +116,9 @@ final class SocialPostView: UIView {
     
     var postTags: [PostTag]  = [] {
         didSet {
+            if let eventModel = postTags.first(where: {$0.type == .event })?.event {
+                eventView.configure(event: eventModel)
+            }
             tagsView.viewModels = postTags.filter({ $0.type != .event })
         }
     }
@@ -141,6 +159,7 @@ final class SocialPostView: UIView {
         topView.addSubview(userNameLabel)
         topView.addSubview(dateLabel)
         topView.addSubview(postActionsButton)
+        topView.addSubview(openUserButton)
         
         userImageView.anchor(top: nil, leading: topView.leadingAnchor, bottom: nil, trailing: nil)
         userImageView.anchorCenter(centerY: topView.centerYAnchor, centerX: nil)
@@ -152,32 +171,30 @@ final class SocialPostView: UIView {
 
         dateLabel.anchor(top: userNameLabel.bottomAnchor, leading: userImageView.trailingAnchor, bottom: nil, trailing: postActionsButton.leadingAnchor, padding: UIEdgeInsets(top: 0, left: 15, bottom: 15, right: 0))
         dateLabel.anchorSize(size: CGSize(width: 0, height: 17))
-
-        postActionsButton.anchor(top: nil, leading: nil, bottom: nil, trailing: topView.trailingAnchor)
-        postActionsButton.anchorCenter(centerY: topView.centerYAnchor, centerX: nil)
-        postActionsButton.anchorSize(size: CGSize(width: 60, height: 60))
         
-        let button = UIButton()
-        button.backgroundColor = .clear
-        button.addTarget(self, action: #selector(touchUserView), for: .touchUpInside)
-        topView.addSubview(button)
-        button.fillSuperview(padding: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
-        topView.bringSubviewToFront(button)
+        postActionsButton.addTarget(self, action: #selector(touchPostActionsButton), for: .touchUpInside)
+        postActionsButton.anchor(top: topView.topAnchor, leading: nil, bottom: nil, trailing: topView.trailingAnchor, padding: UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 5))
+        postActionsButton.anchorSize(size: CGSize(width: 20, height: 50))
+        
+        openUserButton.addTarget(self, action: #selector(touchUserView), for: .touchUpInside)
+        openUserButton.anchor(top: topView.topAnchor, leading: topView.leadingAnchor, bottom: topView.bottomAnchor, trailing: nil)
+        openUserButton.widthAnchor.constraint(equalTo: topView.widthAnchor, multiplier: 0.8).isActive = true
+        topView.bringSubviewToFront(openUserButton)
     }
     
     private func overlayMiddleView() {
         middleView.addSubview(textView)
         middleView.addSubview(postImageView)
         middleView.addSubview(tagsView)
-//        middleView.addSubview(eventView)
-//        
-//        eventView.anchor(top: middleView.topAnchor, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5), size: CGSize(width: 0, height: 100))
+        middleView.addSubview(eventView)
 
         textView.anchor(top: middleView.topAnchor, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 10, bottom: 5, right: 10), size: CGSize(width: 0, height: socialPostViewSizes?.textViewHeight ?? 0))
         
         postImageView.anchor(top: textView.bottomAnchor, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0), size: CGSize(width: 0, height: socialPostViewSizes?.imageViewHeight ?? 0))
         
-        tagsView.anchor(top: postImageView.bottomAnchor, leading: middleView.leadingAnchor, bottom: middleView.bottomAnchor, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: socialPostViewSizes?.tagViewHeight ?? 0))
+        tagsView.anchor(top: nil, leading: middleView.leadingAnchor, bottom: middleView.bottomAnchor, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: socialPostViewSizes?.tagViewHeight ?? 0))
+        
+        eventView.anchor(top: middleView.topAnchor, leading: middleView.leadingAnchor, bottom: tagsView.topAnchor, trailing: middleView.trailingAnchor, size: CGSize(width: 0, height: 60))
     }
     
     func updateMiddleViewConstraints() {
@@ -189,6 +206,10 @@ final class SocialPostView: UIView {
     
     @objc private func touchUserView() {
         delegate?.userOwnerPressed()
+    }
+    
+    @objc private func touchPostActionsButton() {
+        delegate?.postActionsPressed()
     }
 }
 

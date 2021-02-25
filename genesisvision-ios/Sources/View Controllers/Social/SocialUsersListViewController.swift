@@ -89,6 +89,8 @@ extension SocialUsersListViewController: BaseTableViewProtocol {
     }
     
     func didSelect(_ type: CellActionType, cellViewModel: CellViewAnyModel?) {
+        guard let userId = (cellViewModel as? SocialUsersListTableViewCellViewModel)?.user.userId?.uuidString else { return }
+        viewModel.router.showUserDetails(with: userId)
     }
 }
 
@@ -116,11 +118,13 @@ final class SocialUsersListViewModel: ListViewModelWithPaging {
     }
     
     var users: [UserDetailsList] = [UserDetailsList]()
+    var router: SocialRouter!
     
     weak var delegate: BaseTableViewProtocol?
     
-    init(delegate: BaseTableViewProtocol) {
+    init(with router: SocialRouter, delegate: BaseTableViewProtocol) {
         self.delegate = delegate
+        self.router = router
         fetch(false)
     }
     
@@ -139,13 +143,12 @@ final class SocialUsersListViewModel: ListViewModelWithPaging {
         if refresh {
             skip = 0
         }
-        
-        UsersDataProvider.getList(sorting: .byFollowersDesc, tags: nil, skip: skip, take: take()) { [weak self] (viewModel) in
+        UsersDataProvider.getList(sorting: nil, tags: nil, skip: skip, take: take()) { [weak self] (viewModel) in
             if let users = viewModel?.items {
                 self?.users = users
                 
                 var models = [SocialUsersListTableViewCellViewModel]()
-                users.forEach({ models.append(SocialUsersListTableViewCellViewModel(user: $0)) })
+                users.forEach({ models.append(SocialUsersListTableViewCellViewModel(user: $0, delegate: self)) })
                 
                 self?.updateViewModels(models, refresh: refresh)
             }
@@ -180,5 +183,13 @@ final class SocialUsersListViewModel: ListViewModelWithPaging {
         }
 
         showInfiniteIndicator(skip < totalCount)
+    }
+}
+
+extension SocialUsersListViewModel: SocialUsersListTableViewCellDelegate {
+    func followPressed(userId: UUID, followed: Bool) {
+        followed ?
+            SocialDataProvider.unfollow(userId: userId, completion: { _ in })
+            : SocialDataProvider.follow(userId: userId, completion: { _ in })
     }
 }

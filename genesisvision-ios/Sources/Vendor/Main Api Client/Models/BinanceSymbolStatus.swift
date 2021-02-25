@@ -17,4 +17,8 @@ public enum BinanceSymbolStatus: String, Codable {
     case auctionMatch = "AuctionMatch"
     case _break = "Break"
     case close = "Close"
+    case preDelivering = "PreDelivering"
+    case delivering = "Delivering"
+    case preSettle = "PreSettle"
+    case settling = "Settling"
 }

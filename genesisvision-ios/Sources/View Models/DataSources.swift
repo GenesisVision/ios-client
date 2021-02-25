@@ -135,14 +135,14 @@ final class CollectionViewDataSource: NSObject, CollectionDataSourceProtocol, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) {
-            cell.backgroundColor = UIColor.Cell.subtitle.withAlphaComponent(0.3)
+        if let cell = collectionView.cellForItem(at: indexPath), viewModel.shouldHightlight {
+            cell.backgroundColor = viewModel.backgroundColorForSelection
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) {
-            cell.backgroundColor = UIColor.Cell.bg
+        if let cell = collectionView.cellForItem(at: indexPath), viewModel.shouldUnhightlight {
+            cell.backgroundColor = viewModel.backgroundColorForUnselection
         }
     }
     

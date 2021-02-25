@@ -8,13 +8,25 @@
 
 import UIKit
 
+protocol SocialUsersListTableViewCellDelegate: class {
+    func followPressed(userId: UUID, followed: Bool)
+}
+
 struct SocialUsersListTableViewCellViewModel {
     let user: UserDetailsList
+    weak var delegate: SocialUsersListTableViewCellDelegate?
 }
 
 extension SocialUsersListTableViewCellViewModel: CellViewModel {
     
     func setup(on cell: SocialUsersListTableViewCell) {
+        
+        cell.delegate = delegate
+        
+        if let userId = user.userId {
+            cell.userId = userId
+        }
+        
         if let logo = user.logoUrl, let fileUrl = getFileURL(fileName: logo), isPictureURL(url: fileUrl.absoluteString) {
             cell.userImageView.kf.indicatorType = .activity
             cell.userImageView.kf.setImage(with: fileUrl)
@@ -34,8 +46,8 @@ extension SocialUsersListTableViewCellViewModel: CellViewModel {
             cell.periodLabel.text = age.dateForSocialUserAge
         }
         
-        if let aum = user.totalProfit {
-            cell.profitLabel.text = String(aum) + "$"
+        if let aum = user.assetsUnderManagement?.rounded(toPlaces: 2) {
+            cell.profitLabel.text = String(aum) + " " + "$"
         }
         
         if let followersCount = user.followersCount {
@@ -48,7 +60,10 @@ extension SocialUsersListTableViewCellViewModel: CellViewModel {
         
         if let followed = user.personalDetails?.isFollow, followed {
             cell.followButton.setTitle("Unfollow", for: .normal)
+            cell.followButton.configure(with: .darkClear)
         }
+        
+        cell.followed = user.personalDetails?.isFollow
     }
 }
 
@@ -137,6 +152,10 @@ class SocialUsersListTableViewCell: UITableViewCell {
         }
     }
     
+    var userId: UUID?
+    var followed: Bool?
+    weak var delegate: SocialUsersListTableViewCellDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setup()
@@ -152,5 +171,17 @@ class SocialUsersListTableViewCell: UITableViewCell {
     }
     
     @IBAction func followButtonAction(_ sender: Any) {
+        guard let userId = userId, let followed = followed else { return }
+        delegate?.followPressed(userId: userId, followed: followed)
+        
+        if followed {
+            followButton.setTitle("Follow", for: .normal)
+            followButton.configure(with: .normal)
+        } else {
+            followButton.setTitle("Unfollow", for: .normal)
+            followButton.configure(with: .darkClear)
+        }
+        
+        self.followed = !followed
     }
 }

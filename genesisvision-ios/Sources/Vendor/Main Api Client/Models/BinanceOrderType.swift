@@ -19,4 +19,5 @@ public enum BinanceOrderType: String, Codable {
     case takeProfitLimit = "TakeProfitLimit"
     case limitMaker = "LimitMaker"
     case trailingStopMarket = "TrailingStopMarket"
+    case liquidation = "Liquidation"
 }

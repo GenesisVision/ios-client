@@ -14,6 +14,7 @@ enum CellActionType {
     case dashboardTrading
     case dashboardInvestLimitInfo
     case dashboardInvesting
+    case dashboardWallets
     case dashboardRecommendation
     
     case tradingEvents
@@ -221,5 +222,13 @@ enum SliderType: Int {
 
 enum SwitchType: Int {
     case activePrograms, favoritePrograms, availableToInvest
+}
+
+enum SocialPostAction {
+    case edit(postId: UUID)
+    case share(postLink: String)
+    case copyLink(postLink: String)
+    case delete(postId: UUID)
+    case report(postId: UUID)
 }
 

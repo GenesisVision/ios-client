@@ -9,10 +9,25 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--New Post View Controller-->
+        <!--Social Post Report View Controller-->
+        <scene sceneID="tKo-fy-bgR">
+            <objects>
+                <viewController storyboardIdentifier="SocialPostReportViewController" id="Slv-es-czJ" customClass="SocialPostReportViewController" customModule="GV_DEBUG" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MT1-Jz-3qW">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="MHJ-d4-ltd"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5gp-SP-Clh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-551" y="74"/>
+        </scene>
+        <!--Social New Post View Controller-->
         <scene sceneID="8rX-85-Gem">
             <objects>
-                <viewController storyboardIdentifier="NewPostViewController" id="Ejb-9u-4A4" customClass="NewPostViewController" customModule="GV_DEBUG" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SocialNewPostViewController" id="Ejb-9u-4A4" customClass="SocialNewPostViewController" customModule="GV_DEBUG" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="T0F-1r-del">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

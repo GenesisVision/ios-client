@@ -190,6 +190,18 @@ extension DashboardViewController: BaseTableViewProtocol {
             default:
                 break
             }
+        case .dashboardWallets:
+            switch actionType {
+            case .showAll:
+                let walletViewController = WalletViewController()
+                let router = WalletRouter(parentRouter: viewModel.router, navigationController: navigationController)
+                router.walletTabmanViewController = walletViewController
+                walletViewController.viewModel = WalletTabmanViewModel(withRouter: router, walletType: .all)
+                walletViewController.hidesBottomBarWhenPushed = true
+                navigationController?.pushViewController(walletViewController, animated: true)
+            default:
+                break
+            }
         default:
             break
         }
@@ -339,7 +351,7 @@ class DashboardViewModel: ViewModelWithListProtocol {
     
     private var walletsSummary: WalletSummary? {
         didSet {
-            let viewModel = DashboardWalletsTableViewCellViewModel(walletSummary: walletsSummary, ratesModel: ratesModel)
+            let viewModel = DashboardWalletsTableViewCellViewModel(walletSummary: walletsSummary, ratesModel: ratesModel, delegate: delegate)
             viewModels.append(viewModel)
             reloadSection(.walletSummary)
         }
@@ -442,9 +454,9 @@ class DashboardViewModel: ViewModelWithListProtocol {
             self?.header = viewModel
         }, errorCompletion: errorCompletion)
         
-        RateDataProvider.getRates(from: [getPlatformCurrencyType().rawValue], to: [Currency.btc.rawValue, Currency.eth.rawValue, Currency.gvt.rawValue, Currency.usdt.rawValue], completion: { [weak self] (ratesModel) in
+        RateDataProvider.getRates(from: [getPlatformCurrencyType().rawValue], to: [Currency.btc.rawValue, Currency.eth.rawValue, Currency.gvt.rawValue, Currency.usdt.rawValue, Currency.usdc.rawValue, Currency.bnb.rawValue], completion: { [weak self] (ratesModel) in
             self?.ratesModel = ratesModel
-            AuthManager.getWallet(with: getPlatformCurrencyType()) { (viewModel) in
+            AuthManager.getWallet { (viewModel) in
                 if let walletsSummary = viewModel {
                     self?.walletsSummary = walletsSummary
                 }
@@ -499,6 +511,8 @@ class DashboardViewModel: ViewModelWithListProtocol {
             delegate?.action(.dashboardTrading, actionType: .showAll)
         case .investing:
             delegate?.action(.dashboardInvesting, actionType: .showAll)
+        case .walletSummary:
+            delegate?.action(.dashboardWallets, actionType: .showAll)
         default:
             break
         }

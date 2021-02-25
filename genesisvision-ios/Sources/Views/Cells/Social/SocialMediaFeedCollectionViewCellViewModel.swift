@@ -21,6 +21,7 @@ protocol SocialMediaFeedCollectionViewCellDelegate: class {
     func likePressed(postId: UUID)
     func tagPressed(tag: PostTag)
     func userOwnerPressed(postId: UUID)
+    func postActionsPressed(postId: UUID)
 }
 
 struct SocialMediaFeedCollectionViewCellViewModel {
@@ -288,6 +289,11 @@ extension SocialMediaFeedCollectionViewCell: SocialActivitiesViewDelegateProtoco
 }
 
 extension SocialMediaFeedCollectionViewCell: SocialPostViewDelegate {
+    func postActionsPressed() {
+        guard let postId = postId else { return }
+        delegate?.postActionsPressed(postId: postId)
+    }
+    
     func userOwnerPressed() {
         guard let postId = postId else { return }
         delegate?.userOwnerPressed(postId: postId)

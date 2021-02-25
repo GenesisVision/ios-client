@@ -21,13 +21,16 @@ public struct ExchangeAsset: Codable {
 
     public var currency: Currency?
 
+    public var permissions: [TradingAccountPermission]?
+
     public var asset: AssetDetails?
-    public init(_id: UUID? = nil, title: String? = nil, creationDate: Date? = nil, balance: Double? = nil, currency: Currency? = nil, asset: AssetDetails? = nil) { 
+    public init(_id: UUID? = nil, title: String? = nil, creationDate: Date? = nil, balance: Double? = nil, currency: Currency? = nil, permissions: [TradingAccountPermission]? = nil, asset: AssetDetails? = nil) { 
         self._id = _id
         self.title = title
         self.creationDate = creationDate
         self.balance = balance
         self.currency = currency
+        self.permissions = permissions
         self.asset = asset
     }
     public enum CodingKeys: String, CodingKey { 
@@ -36,6 +39,7 @@ public struct ExchangeAsset: Codable {
         case creationDate
         case balance
         case currency
+        case permissions
         case asset
     }
 

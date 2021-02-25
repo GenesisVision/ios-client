@@ -765,6 +765,7 @@ open class TradingaccountAPI {
     "apiKey" : "apiKey",
     "balance" : 6.027456183070403,
     "isExternal" : true,
+    "permissions" : [ "None", "None" ],
     "currency" : "Undefined",
     "login" : "login",
     "type" : "None"

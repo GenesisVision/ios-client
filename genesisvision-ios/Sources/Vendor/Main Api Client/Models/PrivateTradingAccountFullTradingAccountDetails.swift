@@ -32,7 +32,9 @@ public struct PrivateTradingAccountFullTradingAccountDetails: Codable {
     public var showTradingLog: Bool?
 
     public var supportedCurrencies: [Currency]?
-    public init(currency: Currency? = nil, leverage: Int? = nil, apiKey: String? = nil, login: String? = nil, balance: Double? = nil, balances: [AmountWithCurrency]? = nil, type: PrivateTradingAccountType? = nil, subscriptions: Int? = nil, isExternal: Bool? = nil, showTradingLog: Bool? = nil, supportedCurrencies: [Currency]? = nil) { 
+
+    public var permissions: [TradingAccountPermission]?
+    public init(currency: Currency? = nil, leverage: Int? = nil, apiKey: String? = nil, login: String? = nil, balance: Double? = nil, balances: [AmountWithCurrency]? = nil, type: PrivateTradingAccountType? = nil, subscriptions: Int? = nil, isExternal: Bool? = nil, showTradingLog: Bool? = nil, supportedCurrencies: [Currency]? = nil, permissions: [TradingAccountPermission]? = nil) { 
         self.currency = currency
         self.leverage = leverage
         self.apiKey = apiKey
@@ -44,6 +46,7 @@ public struct PrivateTradingAccountFullTradingAccountDetails: Codable {
         self.isExternal = isExternal
         self.showTradingLog = showTradingLog
         self.supportedCurrencies = supportedCurrencies
+        self.permissions = permissions
     }
 
 }

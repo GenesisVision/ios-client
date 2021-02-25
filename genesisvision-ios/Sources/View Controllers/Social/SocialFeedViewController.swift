@@ -66,7 +66,7 @@ class SocialFeedViewController: BaseViewController {
         
         socialFeedCollectionView.isScrollEnabled = true
         socialFeedCollectionView.showsVerticalScrollIndicator = false
-        socialFeedCollectionView.allowsSelection = false
+        socialFeedCollectionView.allowsSelection = true
         socialFeedCollectionView.registerNibs(for: viewModel.socialCollectionViewModel.cellModelsForRegistration)
         
         setupPullToRefresh(scrollView: socialFeedCollectionView)
@@ -100,9 +100,53 @@ class SocialFeedViewController: BaseViewController {
         guard let userId = userDetails._id?.uuidString else { return }
         viewModel.socialRouter.showUserDetails(with: userId)
     }
+    
+    private func showPost(post: Post) {
+        viewModel.socialRouter.show(routeType: .openPost(post: post))
+    }
+}
+
+extension SocialFeedViewController: SocialPostActionsMenuPresenable {
+    func actionSelected(action: SocialPostAction) {
+        switch action {
+        case .edit(postId: _):
+            break
+        case .share(let postLink):
+            viewModel.socialRouter.share(postLink)
+        case .copyLink(postLink: let postLink):
+            UIPasteboard.general.string = postLink
+            showBottomSheet(.success, title: "Your post link was copied to the clipboard successfully")
+        case .delete(let postId):
+            viewModel.deletePost(postId: postId) { [weak self] (result) in
+                switch result {
+                case .success:
+                    self?.viewModel.fetch { [weak self] (result) in
+                        switch result {
+                        case .success:
+                            self?.reloadData()
+                        case .failure(errorType: _):
+                            break
+                        }
+                    }
+                case .failure(errorType: let errorType):
+                    ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
+                }
+            }
+        case .report(let postId):
+            viewModel.socialRouter.show(routeType: .reportPost(postId: postId))
+        }
+    }
 }
 
 extension SocialFeedViewController: SocialFeedCollectionViewModelDelegate {
+    func showPostActions(postActions: [SocialPostAction], postId: UUID, postLink: String) {
+        showPostMenu(actions: postActions, postId: postId, postLink: postLink)
+    }
+    
+    func openPost(post: Post) {
+        //showPost(post: post)
+    }
+    
     func reloadCollectionViewData() {
         reloadData()
     }

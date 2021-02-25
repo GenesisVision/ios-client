@@ -38,4 +38,8 @@ final class SocialFeedViewModel {
     func fetch(completion: @escaping CompletionBlock, refresh: Bool? = nil) {
         socialCollectionViewModel.fetch(completion: completion, refresh: refresh, feedType: feedType)
     }
+    
+    func deletePost(postId: UUID, completion: @escaping CompletionBlock) {
+        socialCollectionViewModel.deletePost(postId: postId, completion: completion)
+    }
 }

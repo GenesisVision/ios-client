@@ -15,6 +15,8 @@ protocol SocialFeedCollectionViewModelDelegate: class {
     func tagPressed(tag: PostTag)
     func userOwnerPressed(userDetails: ProfilePublic)
     func reloadCollectionViewData()
+    func openPost(post: Post)
+    func showPostActions(postActions: [SocialPostAction], postId: UUID, postLink: String)
 }
 
 final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
@@ -48,6 +50,9 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
         return [SocialFeedCollectionViewCellViewModel.self]
     }
     
+    var shouldHightlight: Bool = false
+    var shouldUnhightlight: Bool = false
+    
     weak var delegate: SocialFeedCollectionViewModelDelegate?
     
     init(type: CellActionType, title: String, delegate: SocialFeedCollectionViewModelDelegate) {
@@ -57,6 +62,37 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
     }
     
     func didSelect(at indexPath: IndexPath) {
+        guard let postViewModel = viewModels[safe: indexPath.row] as?  SocialFeedCollectionViewCellViewModel else { return }
+        delegate?.openPost(post: postViewModel.post)
+    }
+    
+    func postActionsForPost(postId: UUID) -> [SocialPostAction] {
+        var postActions: [SocialPostAction] = []
+        
+        guard let postViewModel = viewModels.first(where: {
+            guard let model = $0 as? SocialFeedCollectionViewCellViewModel, model.post._id == postId else { return false }
+            return true
+        }) as? SocialFeedCollectionViewCellViewModel, let postId = postViewModel.post._id else { return postActions }
+        
+        postActions.append(.report(postId: postId))
+        
+        if let canDelete = postViewModel.post.personalDetails?.canDelete, canDelete {
+            postActions.append(.delete(postId: postId))
+        }
+        
+        if let canEdit = postViewModel.post.personalDetails?.canEdit, canEdit {
+            postActions.append(.edit(postId: postId))
+        }
+        
+        guard let url = postViewModel.post.url else { return postActions }
+        
+        postActions.append(contentsOf: [.copyLink(postLink: url), .share(postLink: url)])
+        
+        return postActions
+    }
+    
+    func deletePost(postId: UUID, completion: @escaping CompletionBlock) {
+        SocialDataProvider.deletePost(postId: postId, completion: completion)
     }
     
     func getRightButtons() -> [UIButton] {
@@ -133,7 +169,7 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
                 completion(.success)
             } errorCompletion: { _ in }
         case .feed:
-            SocialDataProvider.getFeed(userId: nil, tagContentId: nil, tagContentIds: nil, userMode: nil, hashTags: nil, mask: nil, showTop: nil, showLiked: nil, showOnlyUsersPosts: showOnlyUsersPosts, skip: skip, take: take) { [weak self] (postsViewModel) in
+            SocialDataProvider.getFeed(userId: nil, tagContentId: nil, tagContentIds: nil, userMode: .friendsPosts, hashTags: nil, mask: nil, showTop: nil, showLiked: nil, showOnlyUsersPosts: showOnlyUsersPosts, skip: skip, take: take) { [weak self] (postsViewModel) in
                 if let viewModel = postsViewModel, let total = postsViewModel?.total {
                     viewModel.items?.forEach({ (model) in
                         let viewModel = SocialFeedCollectionViewCellViewModel(post: model, cellDelegate: self)
@@ -171,6 +207,17 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
 }
 
 extension SocialFeedCollectionViewModel: SocialFeedCollectionViewCellDelegate {
+    func postActionsPressed(postId: UUID) {
+        let postActions = postActionsForPost(postId: postId)
+        var postLink: String = ""
+
+        if let postViewModel = viewModels.first(where: { return ($0 as? SocialFeedCollectionViewCellViewModel)?.post._id == postId }) as? SocialFeedCollectionViewCellViewModel, let url = postViewModel.post.url {
+            postLink = url }
+        
+        
+        delegate?.showPostActions(postActions: postActions, postId: postId, postLink: postLink)
+    }
+    
     func userOwnerPressed(postId: UUID) {
         guard let postViewModel = viewModels.first(where: {return ($0 as? SocialFeedCollectionViewCellViewModel)?.post._id == postId }) as? SocialFeedCollectionViewCellViewModel, let userDetails = postViewModel.post.author else {
             return

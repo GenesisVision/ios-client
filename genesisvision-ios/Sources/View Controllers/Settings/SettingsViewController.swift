@@ -144,6 +144,9 @@ class SettingsViewController: BaseTableViewController {
     
     // MARK: - Cells
     @IBOutlet weak var kycStatusCell: TableViewCell!
+    
+    @IBOutlet weak var profilePrivacyCell: TableViewCell!
+    
     @IBOutlet weak var publicProfileCell: TableViewCell! {
         didSet {
             publicProfileCell.isHidden = true
@@ -172,6 +175,8 @@ class SettingsViewController: BaseTableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        fetch()
         
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive(notification:)), name: UIApplication.didBecomeActiveNotification, object: nil)
         
@@ -407,6 +412,8 @@ extension SettingsViewController {
         switch fieldType {
         case .profile:
             viewModel.showProfile()
+        case .privacy:
+            viewModel.showProfilePrivacy()
         case .currency:
             changePlatformCurrency()
         case .changePassword:

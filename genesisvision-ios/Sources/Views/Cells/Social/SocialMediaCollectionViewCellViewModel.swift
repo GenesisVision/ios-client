@@ -142,7 +142,7 @@ class SocialMediaCollectionViewCell: UICollectionViewCell {
     private func overlayThirdLayer() {
         centralView.addSubview(collectionView)
         
-        collectionView.fillSuperview()
+        collectionView.fillSuperview(padding: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0))
     }
     
     @objc private func buttonPressed(_ sender: UIButton) {

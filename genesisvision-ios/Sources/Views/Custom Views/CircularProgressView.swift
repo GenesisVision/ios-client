@@ -26,6 +26,7 @@ class CircularProgressView: UIView {
     public var percentTextEnable: Bool = false
     public var clockwise: Bool = true
     public var lineWidth: CGFloat = 2
+    public var percentTextFont: UIFont = UIFont.getFont(.regular, size: 12.0)
     public var foregroundStrokeColor: UIColor? {
         didSet {
             self.layoutSubviews()
@@ -111,6 +112,7 @@ class CircularProgressView: UIView {
         let center = CGPoint(x: self.frame.width / 2, y: self.frame.height / 2)
         percentLabel.center = center
         percentLabel.isHidden = !percentTextEnable
+        percentLabel.font = percentTextFont
         
         let startAngle = -CGFloat.pi / 2
         let endAngle = 2 * CGFloat.pi + startAngle

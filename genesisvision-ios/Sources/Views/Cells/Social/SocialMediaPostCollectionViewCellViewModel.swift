@@ -176,6 +176,6 @@ class SocialMediaPostCollectionViewCell: UICollectionViewCell {
         postImageView.fillSuperview()
         
         middleView.addSubview(titleLabel)
-        titleLabel.fillSuperview()
+        titleLabel.fillSuperview(padding: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10))
     }
 }

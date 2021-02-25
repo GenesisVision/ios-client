@@ -8,9 +8,9 @@
 
 import UIKit
 
-class NewPostViewController: BaseViewController {
+class SocialNewPostViewController: BaseViewController {
     
-    var viewModel: NewPostViewModel!
+    var viewModel: SocialNewPostViewModel!
     
     @IBOutlet weak var sharedPostMainView: UIView! {
         didSet {
@@ -173,7 +173,7 @@ class NewPostViewController: BaseViewController {
     }
 }
 
-extension NewPostViewController: ImagePickerPresentable {
+extension SocialNewPostViewController: ImagePickerPresentable {
     var choosePhotoButton: UIButton {
         return attachmentButton
     }
@@ -183,7 +183,7 @@ extension NewPostViewController: ImagePickerPresentable {
     }
 }
 
-extension NewPostViewController: UITextViewDelegate {
+extension SocialNewPostViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == placeholder {
             textView.text = ""
@@ -209,7 +209,7 @@ extension NewPostViewController: UITextViewDelegate {
 }
 
 
-final class NewPostViewModel {
+final class SocialNewPostViewModel {
     var sharedPost: Post?
     var newPostText: String?
     var newPostImages: [NewPostImage]?

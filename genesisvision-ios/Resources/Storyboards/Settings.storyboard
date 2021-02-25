@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -24,7 +24,7 @@
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <color key="sectionIndexBackgroundColor" red="0.066666666669999999" green="0.1019607843" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="1hw-hx-IPR" customClass="UITableViewHeaderFooterView">
-                            <rect key="frame" x="0.0" y="804" width="375" height="40"/>
+                            <rect key="frame" x="0.0" y="848" width="375" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="App version 1.0a (1021)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lmg-9i-SOi" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
@@ -168,12 +168,38 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="zSe-rI-25Z" customClass="TableViewCell" customModule="GV_DEBUG" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="212" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zSe-rI-25Z" id="qaw-Dm-yqv">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Privacy" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Dd-U5-ONu" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                                    <rect key="frame" x="20" y="0.0" width="335" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="44" id="93J-s4-N3b"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="17"/>
+                                                    <color key="textColor" red="0.098039215690000001" green="0.30980392159999998" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="2Dd-U5-ONu" secondAttribute="trailing" constant="20" id="20r-Ks-Oi3"/>
+                                                <constraint firstItem="2Dd-U5-ONu" firstAttribute="leading" secondItem="qaw-Dm-yqv" secondAttribute="leading" constant="20" id="D0C-42-OSf"/>
+                                                <constraint firstAttribute="bottom" secondItem="2Dd-U5-ONu" secondAttribute="bottom" id="dqz-TM-8IM"/>
+                                                <constraint firstItem="2Dd-U5-ONu" firstAttribute="top" secondItem="qaw-Dm-yqv" secondAttribute="top" id="fAx-2E-pPa"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection id="5HV-aO-TNa">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="hCc-Wb-Eix" customClass="TableViewCell" customModule="GV_DEBUG" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="268" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="312" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hCc-Wb-Eix" id="B3t-UG-NFF">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -213,7 +239,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="fcI-JR-Kd5" userLabel="Referral Cell" customClass="TableViewCell" customModule="GV_DEBUG" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="312" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="356" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fcI-JR-Kd5" id="nEZ-b6-JoN">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -243,7 +269,7 @@
                             <tableViewSection id="b8S-Iz-jbk">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Blk-BK-wBO" customClass="TableViewCell" customModule="GV_DEBUG" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="412" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="456" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Blk-BK-wBO" id="eg7-hM-M5p">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -268,7 +294,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="pht-tP-VVL" customClass="TableViewCell" customModule="GV_DEBUG" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="456" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="500" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pht-tP-VVL" id="obL-gB-rDb">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -303,7 +329,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="tfs-ZH-Mmd" customClass="TableViewCell" customModule="GV_DEBUG" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="500" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="544" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tfs-ZH-Mmd" id="Txu-Rc-0N0">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -338,7 +364,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="5ho-iZ-Ot5" customClass="TableViewCell" customModule="GV_DEBUG" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="544" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="588" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5ho-iZ-Ot5" id="PN5-Rj-van">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -377,7 +403,7 @@
                             <tableViewSection id="K4P-NV-KWm">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Q0q-Oi-T8x" customClass="TableViewCell" customModule="GV_DEBUG" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="644" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="688" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Q0q-Oi-T8x" id="hyT-Dn-f9a">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -402,7 +428,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="9nt-yP-Ec0" customClass="TableViewCell" customModule="GV_DEBUG" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="688" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="732" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9nt-yP-Ec0" id="gpL-V6-X4t">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -427,7 +453,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="abL-4O-wxA" customClass="TableViewCell" customModule="GV_DEBUG" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="732" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="776" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="abL-4O-wxA" id="Dgs-HR-Y9g">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -483,6 +509,7 @@
                         <outlet property="profileEmailLabel" destination="ydq-GR-3Fw" id="N1o-Hu-njC"/>
                         <outlet property="profileImageView" destination="beH-g7-9Tg" id="gsO-b8-6yN"/>
                         <outlet property="profileNameLabel" destination="D9d-oA-imM" id="ZIy-Vv-cKH"/>
+                        <outlet property="profilePrivacyCell" destination="zSe-rI-25Z" id="SAJ-IB-FoH"/>
                         <outlet property="publicProfileCell" destination="1TJ-iM-VZM" id="t11-WA-fJf"/>
                         <outlet property="publicProfileSwitch" destination="LYu-HB-1af" id="sMw-RE-oFS"/>
                         <outlet property="sendFeedbackTitleLabel" destination="I6X-VG-nYG" id="H0W-vg-Fg8"/>

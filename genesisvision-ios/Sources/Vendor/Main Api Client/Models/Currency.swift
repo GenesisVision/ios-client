@@ -13,6 +13,7 @@ public enum Currency: String, Codable {
     case eth = "ETH"
     case btc = "BTC"
     case usdt = "USDT"
+    case bnb = "BNB"
     case usdc = "USDC"
     case usd = "USD"
 }

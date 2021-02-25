@@ -86,9 +86,17 @@ class ProfileDataProvider: DataProvider {
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
+    
     static func updateSocialLinks(model: UpdateSocialLinksViewModel?, completion: @escaping CompletionBlock) {
         
         ProfileAPI.updateAllSocialLinks(body: model) { (_, error) in
+            DataProvider().responseHandler(error, completion: completion)
+        }
+    }
+    
+    static func updateSocialPrivacy(whoCanPostToMayWall: SocialViewMode? = nil, whoCanViewCommentsOnMyPosts: SocialViewMode? = nil, whoCanCommentOnMyPosts: SocialViewMode? = nil, completion: @escaping CompletionBlock) {
+        
+        ProfileAPI.updateUserSocialSettings(whoCanPostToMayWall: whoCanPostToMayWall, whoCanViewCommentsOnMyPosts: whoCanViewCommentsOnMyPosts, whoCanCommentOnMyPosts: whoCanCommentOnMyPosts) { (_, error) in
             DataProvider().responseHandler(error, completion: completion)
         }
     }

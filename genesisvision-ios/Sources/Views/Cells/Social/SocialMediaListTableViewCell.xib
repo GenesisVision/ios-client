@@ -23,19 +23,22 @@
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sut-Af-MM1">
-                        <rect key="frame" x="0.0" y="200" width="550" height="180"/>
+                        <rect key="frame" x="0.0" y="200" width="550" height="200"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ySS-V0-dP0">
-                                <rect key="frame" x="10" y="10" width="530" height="90"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="ySS-V0-dP0">
+                                <rect key="frame" x="10" y="10" width="530" height="110"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="abA-Lf-VbR" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="530" height="45"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="abA-Lf-VbR" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="530" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="i7g-1r-pYI"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VDe-0Y-cl4" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="45" width="530" height="45"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VDe-0Y-cl4" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="530" height="60"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -43,7 +46,7 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tdb-Ay-WQf">
-                                <rect key="frame" x="10" y="110" width="530" height="60"/>
+                                <rect key="frame" x="10" y="130" width="530" height="60"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2tN-lo-QgO">
                                         <rect key="frame" x="0.0" y="10" width="40" height="40"/>
@@ -92,6 +95,7 @@
                                     <constraint firstItem="9TB-wv-9q7" firstAttribute="leading" secondItem="2tN-lo-QgO" secondAttribute="trailing" constant="10" id="DGT-uY-iBz"/>
                                     <constraint firstItem="2tN-lo-QgO" firstAttribute="leading" secondItem="tdb-Ay-WQf" secondAttribute="leading" id="Ge4-XL-eBI"/>
                                     <constraint firstAttribute="trailing" secondItem="zTZ-4N-edQ" secondAttribute="trailing" constant="10" id="X5k-2t-dWV"/>
+                                    <constraint firstAttribute="height" constant="60" id="bcH-Ew-Ttf"/>
                                     <constraint firstItem="2tN-lo-QgO" firstAttribute="centerY" secondItem="tdb-Ay-WQf" secondAttribute="centerY" id="iIP-39-obo"/>
                                     <constraint firstItem="zTZ-4N-edQ" firstAttribute="centerY" secondItem="tdb-Ay-WQf" secondAttribute="centerY" id="uTg-qi-AB5"/>
                                     <constraint firstItem="9TB-wv-9q7" firstAttribute="centerY" secondItem="tdb-Ay-WQf" secondAttribute="centerY" id="zTW-v4-vKn"/>
@@ -101,10 +105,9 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="tdb-Ay-WQf" firstAttribute="top" secondItem="ySS-V0-dP0" secondAttribute="bottom" constant="10" id="78g-bK-tW5"/>
-                            <constraint firstItem="ySS-V0-dP0" firstAttribute="height" secondItem="Sut-Af-MM1" secondAttribute="height" multiplier="0.5" id="Xi6-zn-T8X"/>
                             <constraint firstAttribute="bottom" secondItem="tdb-Ay-WQf" secondAttribute="bottom" constant="10" id="enz-Gw-bpt"/>
                             <constraint firstItem="ySS-V0-dP0" firstAttribute="leading" secondItem="Sut-Af-MM1" secondAttribute="leading" constant="10" id="fk8-z1-zi0"/>
-                            <constraint firstAttribute="height" constant="180" id="h5h-Qs-hRU"/>
+                            <constraint firstAttribute="height" constant="200" id="h5h-Qs-hRU"/>
                             <constraint firstAttribute="trailing" secondItem="tdb-Ay-WQf" secondAttribute="trailing" constant="10" id="jKB-uW-B6C"/>
                             <constraint firstItem="ySS-V0-dP0" firstAttribute="top" secondItem="Sut-Af-MM1" secondAttribute="top" constant="10" id="mzt-8q-o3p"/>
                             <constraint firstItem="tdb-Ay-WQf" firstAttribute="leading" secondItem="Sut-Af-MM1" secondAttribute="leading" constant="10" id="ufI-Ag-8J7"/>

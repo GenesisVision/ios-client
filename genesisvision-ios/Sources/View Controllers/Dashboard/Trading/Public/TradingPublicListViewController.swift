@@ -48,13 +48,6 @@ class TradingPublicListViewController: ListViewController, DashboardTradingAcion
         viewController.title = "Create Fund"
         viewController.viewModel = FundPublicInfoViewModel(mode: .create)
         self.navigationController?.pushViewController(viewController, animated: true)
-        
-//        guard let vc = CreateFundViewController.storyboardInstance(.dashboard) else { return }
-//        vc.title = "Create Fund"
-//        vc.viewModel = CreateFundViewModel(vc, addAssetsProtocol: vc)
-//        let nav = BaseNavigationController(rootViewController: vc)
-//        nav.modalPresentationStyle = .fullScreen
-//        present(nav, animated: true, completion: nil)
     }
     
     func showAsset(_ asset: TradingTableViewCellViewModel) {

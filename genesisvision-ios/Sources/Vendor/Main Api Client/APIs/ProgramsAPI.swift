@@ -866,7 +866,7 @@ open class ProgramsAPI {
     "tradesDelay" : "None",
     "dailyPeriodDetails" : {
       "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
-      "hourProcessing" : 7,
+      "hourProcessing" : 5,
       "isProcessingRealTime" : true
     },
     "availableInvestmentBase" : 7.457744773683766,

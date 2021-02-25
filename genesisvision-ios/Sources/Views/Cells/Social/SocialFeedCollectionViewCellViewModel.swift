@@ -24,6 +24,7 @@ protocol SocialFeedCollectionViewCellDelegate: class {
     func commentTouched(postId: UUID)
     func tagPressed(tag: PostTag)
     func userOwnerPressed(postId: UUID)
+    func postActionsPressed(postId: UUID)
 }
 
 struct SocialFeedCollectionViewCellViewModel {
@@ -45,6 +46,14 @@ struct SocialFeedCollectionViewCellViewModel {
         var imageHeight: CGFloat = 0
         var tagsViewHeight: CGFloat = 0
         
+        if let tags = post.tags, !tags.isEmpty {
+            tagsViewHeight = 110
+            if tags.contains(where: { $0.type == .event }) {
+                tagsViewHeight += 60
+                return SocialPostViewSizes(textViewHeight: textHeight, imageViewHeight: imageHeight, tagViewHeight: tagsViewHeight)
+            }
+        }
+        
         if let isEmpty = post.images?.isEmpty, !isEmpty {
             imageHeight = 250
         }
@@ -61,9 +70,7 @@ struct SocialFeedCollectionViewCellViewModel {
             }
         }
         
-        if let tags = post.tags, !tags.isEmpty {
-            tagsViewHeight = 110
-        }
+
         
         return SocialPostViewSizes(textViewHeight: textHeight, imageViewHeight: imageHeight, tagViewHeight: tagsViewHeight)
     }
@@ -72,8 +79,20 @@ struct SocialFeedCollectionViewCellViewModel {
 extension SocialFeedCollectionViewCellViewModel: CellViewModel {
     func setup(on cell: SocialFeedCollectionViewCell) {
         
+        var eventPost: Bool = false
+        
         if let postId = post._id {
             cell.postId = postId
+        }
+        
+        if let tags = post.tags, !tags.isEmpty {
+            cell.postView.tagsView.isHidden = false
+            cell.postView.postTags = tags
+            eventPost = tags.contains(where: { $0.type == .event })
+            cell.postView.eventView.isHidden = !eventPost
+        } else {
+            cell.postView.tagsView.isHidden = true
+            cell.postView.eventView.isHidden = true
         }
         
         cell.delegate = cellDelegate
@@ -96,7 +115,7 @@ extension SocialFeedCollectionViewCellViewModel: CellViewModel {
             cell.postView.dateLabel.text = date.dateForSocialPost
         }
         
-        if let image = post.images?.first, let logo = image.resizes?.last?.logoUrl, let fileUrl = getFileURL(fileName: logo) {
+        if let image = post.images?.first, let logo = image.resizes?.last?.logoUrl, let fileUrl = getFileURL(fileName: logo), !eventPost {
             cell.postView.postImageView.isHidden = false
             cell.postView.postImageView.kf.indicatorType = .activity
             cell.postView.postImageView.kf.setImage(with: fileUrl)
@@ -104,18 +123,11 @@ extension SocialFeedCollectionViewCellViewModel: CellViewModel {
             cell.postView.postImageView.isHidden = true
         }
         
-        if let text = post.text, !text.isEmpty {
+        if let text = post.text, !text.isEmpty, !eventPost {
             cell.postView.textView.isHidden = false
             cell.postView.textView.text = text
         } else {
             cell.postView.textView.isHidden = true
-        }
-        
-        if let tags = post.tags, !tags.isEmpty {
-            cell.postView.tagsView.isHidden = false
-            cell.postView.postTags = tags
-        } else {
-            cell.postView.tagsView.isHidden = true
         }
         
         if let isLiked = post.personalDetails?.isLiked {
@@ -153,6 +165,7 @@ class SocialFeedCollectionViewCell: UICollectionViewCell {
         let view = SocialPostView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .clear
+        view.isUserInteractionEnabled = true
         return view
     }()
     
@@ -237,6 +250,11 @@ extension SocialFeedCollectionViewCell: SocialActivitiesViewDelegateProtocol {
 }
 
 extension SocialFeedCollectionViewCell: SocialPostViewDelegate {
+    func postActionsPressed() {
+        guard let postId = postId else { return }
+        delegate?.postActionsPressed(postId: postId)
+    }
+    
     func userOwnerPressed() {
         guard let postId = postId else { return }
         delegate?.userOwnerPressed(postId: postId)

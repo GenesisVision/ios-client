@@ -76,9 +76,6 @@ extension SocialMediaListViewController: SearchHeaderTextChangedProtocol {
 }
 
 extension SocialMediaListViewController: BaseTableViewProtocol {
-    func didShowInfiniteIndicator(_ value: Bool) {
-        showInfiniteIndicator(value: value)
-    }
     
     func didReload() {
         DispatchQueue.main.async {
@@ -102,7 +99,7 @@ final class SocialMediaListViewModel: ListViewModelWithPaging {
     
     typealias CellViewModel = SocialMediaListTableViewCellViewModel
     
-    var canFetchMoreResults: Bool = true
+    var canFetchMoreResults: Bool = false
     
     var canPullToRefresh: Bool = true
     
@@ -169,10 +166,6 @@ final class SocialMediaListViewModel: ListViewModelWithPaging {
         viewModels.count
     }
     
-    func showInfiniteIndicator(_ value: Bool) {
-        delegate?.didShowInfiniteIndicator(value)
-    }
-    
     func didSelect(at indexPath: IndexPath) {
         delegate?.didSelect(.none, cellViewModel: viewModels[indexPath.row])
     }
@@ -183,8 +176,6 @@ final class SocialMediaListViewModel: ListViewModelWithPaging {
             && canFetchMoreResults && modelsCount() >= take() {
             fetch(false)
         }
-
-        showInfiniteIndicator(skip < totalCount)
     }
 }
 

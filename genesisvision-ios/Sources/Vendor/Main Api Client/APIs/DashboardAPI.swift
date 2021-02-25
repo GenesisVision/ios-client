@@ -204,6 +204,7 @@ open class DashboardAPI {
   "total" : 6,
   "items" : [ {
     "balance" : 0.8008281904610115,
+    "permissions" : [ "None", "None" ],
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "title" : "title",
@@ -222,6 +223,7 @@ open class DashboardAPI {
     }
   }, {
     "balance" : 0.8008281904610115,
+    "permissions" : [ "None", "None" ],
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "title" : "title",
@@ -640,13 +642,14 @@ open class DashboardAPI {
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
-  "total" : 1,
+  "total" : 9,
   "items" : [ {
     "color" : "color",
     "successFeeSelected" : 9.301444243932576,
     "type" : "DailyPeriod",
     "title" : "title",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
+    "stopOutLevelSelected" : 4.145608029883936,
     "managementFeeSelected" : 2.3021358869347655,
     "balance" : {
       "amount" : 7.457744773683766,
@@ -687,6 +690,7 @@ open class DashboardAPI {
       "username" : "username"
     },
     "periodDuration" : 5,
+    "stopOutLevelCurrent" : 7.386281948385884,
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
@@ -702,11 +706,12 @@ open class DashboardAPI {
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
     "dailyPeriodDetails" : {
       "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
-      "hourProcessing" : 7,
+      "hourProcessing" : 5,
       "isProcessingRealTime" : true
     },
     "logoUrl" : "logoUrl",
     "url" : "url",
+    "totalAvailableInvestment" : 2.027123023002322,
     "tags" : [ {
       "color" : "color",
       "name" : "name"
@@ -720,15 +725,15 @@ open class DashboardAPI {
       "canWithdraw" : true,
       "canInvest" : true,
       "isOwnAsset" : true,
-      "managementFeePersonal" : 6.84685269835264,
-      "profitPercent" : 1.2315135367772556,
+      "managementFeePersonal" : 4.965218492984954,
+      "profitPercent" : 6.84685269835264,
       "isReinvest" : true,
       "isAutoJoin" : true,
-      "share" : 2.027123023002322,
-      "value" : 4.145608029883936,
-      "profit" : 7.386281948385884,
-      "successFeePersonal" : 1.4894159098541704,
-      "invested" : 1.0246457001441578,
+      "share" : 1.2315135367772556,
+      "value" : 1.0246457001441578,
+      "profit" : 1.4894159098541704,
+      "successFeePersonal" : 1.1730742509559433,
+      "invested" : 7.457744773683766,
       "isFavorite" : true,
       "status" : "Pending"
     }
@@ -738,6 +743,7 @@ open class DashboardAPI {
     "type" : "DailyPeriod",
     "title" : "title",
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
+    "stopOutLevelSelected" : 4.145608029883936,
     "managementFeeSelected" : 2.3021358869347655,
     "balance" : {
       "amount" : 7.457744773683766,
@@ -778,6 +784,7 @@ open class DashboardAPI {
       "username" : "username"
     },
     "periodDuration" : 5,
+    "stopOutLevelCurrent" : 7.386281948385884,
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
@@ -793,11 +800,12 @@ open class DashboardAPI {
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
     "dailyPeriodDetails" : {
       "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
-      "hourProcessing" : 7,
+      "hourProcessing" : 5,
       "isProcessingRealTime" : true
     },
     "logoUrl" : "logoUrl",
     "url" : "url",
+    "totalAvailableInvestment" : 2.027123023002322,
     "tags" : [ {
       "color" : "color",
       "name" : "name"
@@ -811,15 +819,15 @@ open class DashboardAPI {
       "canWithdraw" : true,
       "canInvest" : true,
       "isOwnAsset" : true,
-      "managementFeePersonal" : 6.84685269835264,
-      "profitPercent" : 1.2315135367772556,
+      "managementFeePersonal" : 4.965218492984954,
+      "profitPercent" : 6.84685269835264,
       "isReinvest" : true,
       "isAutoJoin" : true,
-      "share" : 2.027123023002322,
-      "value" : 4.145608029883936,
-      "profit" : 7.386281948385884,
-      "successFeePersonal" : 1.4894159098541704,
-      "invested" : 1.0246457001441578,
+      "share" : 1.2315135367772556,
+      "value" : 1.0246457001441578,
+      "profit" : 1.4894159098541704,
+      "successFeePersonal" : 1.1730742509559433,
+      "invested" : 7.457744773683766,
       "isFavorite" : true,
       "status" : "Pending"
     }
@@ -875,7 +883,7 @@ open class DashboardAPI {
   "total" : 1,
   "items" : [ {
     "accountInfo" : {
-      "leverage" : 1,
+      "leverage" : 6,
       "supportedCurrencies" : [ null, null ],
       "balances" : [ {
         "amount" : 7.457744773683766,
@@ -884,7 +892,7 @@ open class DashboardAPI {
         "amount" : 7.457744773683766,
         "currency" : "Undefined"
       } ],
-      "balance" : 7.386281948385884,
+      "balance" : 1.4894159098541704,
       "currency" : "Undefined",
       "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
@@ -904,27 +912,43 @@ open class DashboardAPI {
       "profit" : 7.386281948385884
     },
     "signalInfo" : {
-      "subscribersCount" : 1
+      "subscribersCount" : 7
     },
     "assetTypeExt" : "None",
     "publicInfo" : {
+      "owner" : {
+        "personalDetails" : {
+          "isFollow" : true,
+          "allowFollow" : true,
+          "canCommentPosts" : true,
+          "canWritePost" : true
+        },
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "url" : "url",
+        "logoUrl" : "logoUrl",
+        "username" : "username"
+      },
       "programDetails" : {
+        "stopOutLevelSelected" : 7.061401241503109,
         "managementFeeSelected" : 1.4658129805029452,
+        "stopOutLevelCurrent" : 9.301444243932576,
         "successFeeSelected" : 5.637376656633329,
         "level" : 0,
         "successFeeCurrent" : 2.3021358869347655,
+        "type" : "DailyPeriod",
         "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
           "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
-          "hourProcessing" : 7,
+          "hourProcessing" : 5,
           "isProcessingRealTime" : true
         },
-        "levelProgress" : 6.027456183070403
+        "levelProgress" : 6.027456183070403,
+        "totalAvailableInvestment" : 3.616076749251911
       },
       "fundDetails" : {
-        "totalAssetsCount" : 7,
-        "entryFeeCurrent" : 9.301444243932576,
-        "exitFeeSelected" : 4.145608029883936,
+        "totalAssetsCount" : 2,
+        "entryFeeCurrent" : 4.145608029883936,
+        "exitFeeSelected" : 1.0246457001441578,
         "tradingSchedule" : {
           "hourEnd" : 2,
           "dayStart" : "Sunday",
@@ -946,8 +970,8 @@ open class DashboardAPI {
           "logoUrl" : "logoUrl",
           "url" : "url"
         } ],
-        "exitFeeCurrent" : 2.027123023002322,
-        "entryFeeSelected" : 3.616076749251911
+        "exitFeeCurrent" : 1.2315135367772556,
+        "entryFeeSelected" : 7.386281948385884
       },
       "color" : "color",
       "title" : "title",
@@ -991,7 +1015,7 @@ open class DashboardAPI {
     } ]
   }, {
     "accountInfo" : {
-      "leverage" : 1,
+      "leverage" : 6,
       "supportedCurrencies" : [ null, null ],
       "balances" : [ {
         "amount" : 7.457744773683766,
@@ -1000,7 +1024,7 @@ open class DashboardAPI {
         "amount" : 7.457744773683766,
         "currency" : "Undefined"
       } ],
-      "balance" : 7.386281948385884,
+      "balance" : 1.4894159098541704,
       "currency" : "Undefined",
       "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
@@ -1020,27 +1044,43 @@ open class DashboardAPI {
       "profit" : 7.386281948385884
     },
     "signalInfo" : {
-      "subscribersCount" : 1
+      "subscribersCount" : 7
     },
     "assetTypeExt" : "None",
     "publicInfo" : {
+      "owner" : {
+        "personalDetails" : {
+          "isFollow" : true,
+          "allowFollow" : true,
+          "canCommentPosts" : true,
+          "canWritePost" : true
+        },
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "url" : "url",
+        "logoUrl" : "logoUrl",
+        "username" : "username"
+      },
       "programDetails" : {
+        "stopOutLevelSelected" : 7.061401241503109,
         "managementFeeSelected" : 1.4658129805029452,
+        "stopOutLevelCurrent" : 9.301444243932576,
         "successFeeSelected" : 5.637376656633329,
         "level" : 0,
         "successFeeCurrent" : 2.3021358869347655,
+        "type" : "DailyPeriod",
         "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
           "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
-          "hourProcessing" : 7,
+          "hourProcessing" : 5,
           "isProcessingRealTime" : true
         },
-        "levelProgress" : 6.027456183070403
+        "levelProgress" : 6.027456183070403,
+        "totalAvailableInvestment" : 3.616076749251911
       },
       "fundDetails" : {
-        "totalAssetsCount" : 7,
-        "entryFeeCurrent" : 9.301444243932576,
-        "exitFeeSelected" : 4.145608029883936,
+        "totalAssetsCount" : 2,
+        "entryFeeCurrent" : 4.145608029883936,
+        "exitFeeSelected" : 1.0246457001441578,
         "tradingSchedule" : {
           "hourEnd" : 2,
           "dayStart" : "Sunday",
@@ -1062,8 +1102,8 @@ open class DashboardAPI {
           "logoUrl" : "logoUrl",
           "url" : "url"
         } ],
-        "exitFeeCurrent" : 2.027123023002322,
-        "entryFeeSelected" : 3.616076749251911
+        "exitFeeCurrent" : 1.2315135367772556,
+        "entryFeeSelected" : 7.386281948385884
       },
       "color" : "color",
       "title" : "title",
@@ -1193,7 +1233,7 @@ open class DashboardAPI {
   "total" : 1,
   "items" : [ {
     "accountInfo" : {
-      "leverage" : 1,
+      "leverage" : 6,
       "supportedCurrencies" : [ null, null ],
       "balances" : [ {
         "amount" : 7.457744773683766,
@@ -1202,7 +1242,7 @@ open class DashboardAPI {
         "amount" : 7.457744773683766,
         "currency" : "Undefined"
       } ],
-      "balance" : 7.386281948385884,
+      "balance" : 1.4894159098541704,
       "currency" : "Undefined",
       "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
@@ -1222,27 +1262,43 @@ open class DashboardAPI {
       "profit" : 7.386281948385884
     },
     "signalInfo" : {
-      "subscribersCount" : 1
+      "subscribersCount" : 7
     },
     "assetTypeExt" : "None",
     "publicInfo" : {
+      "owner" : {
+        "personalDetails" : {
+          "isFollow" : true,
+          "allowFollow" : true,
+          "canCommentPosts" : true,
+          "canWritePost" : true
+        },
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "url" : "url",
+        "logoUrl" : "logoUrl",
+        "username" : "username"
+      },
       "programDetails" : {
+        "stopOutLevelSelected" : 7.061401241503109,
         "managementFeeSelected" : 1.4658129805029452,
+        "stopOutLevelCurrent" : 9.301444243932576,
         "successFeeSelected" : 5.637376656633329,
         "level" : 0,
         "successFeeCurrent" : 2.3021358869347655,
+        "type" : "DailyPeriod",
         "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
           "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
-          "hourProcessing" : 7,
+          "hourProcessing" : 5,
           "isProcessingRealTime" : true
         },
-        "levelProgress" : 6.027456183070403
+        "levelProgress" : 6.027456183070403,
+        "totalAvailableInvestment" : 3.616076749251911
       },
       "fundDetails" : {
-        "totalAssetsCount" : 7,
-        "entryFeeCurrent" : 9.301444243932576,
-        "exitFeeSelected" : 4.145608029883936,
+        "totalAssetsCount" : 2,
+        "entryFeeCurrent" : 4.145608029883936,
+        "exitFeeSelected" : 1.0246457001441578,
         "tradingSchedule" : {
           "hourEnd" : 2,
           "dayStart" : "Sunday",
@@ -1264,8 +1320,8 @@ open class DashboardAPI {
           "logoUrl" : "logoUrl",
           "url" : "url"
         } ],
-        "exitFeeCurrent" : 2.027123023002322,
-        "entryFeeSelected" : 3.616076749251911
+        "exitFeeCurrent" : 1.2315135367772556,
+        "entryFeeSelected" : 7.386281948385884
       },
       "color" : "color",
       "title" : "title",
@@ -1309,7 +1365,7 @@ open class DashboardAPI {
     } ]
   }, {
     "accountInfo" : {
-      "leverage" : 1,
+      "leverage" : 6,
       "supportedCurrencies" : [ null, null ],
       "balances" : [ {
         "amount" : 7.457744773683766,
@@ -1318,7 +1374,7 @@ open class DashboardAPI {
         "amount" : 7.457744773683766,
         "currency" : "Undefined"
       } ],
-      "balance" : 7.386281948385884,
+      "balance" : 1.4894159098541704,
       "currency" : "Undefined",
       "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
@@ -1338,27 +1394,43 @@ open class DashboardAPI {
       "profit" : 7.386281948385884
     },
     "signalInfo" : {
-      "subscribersCount" : 1
+      "subscribersCount" : 7
     },
     "assetTypeExt" : "None",
     "publicInfo" : {
+      "owner" : {
+        "personalDetails" : {
+          "isFollow" : true,
+          "allowFollow" : true,
+          "canCommentPosts" : true,
+          "canWritePost" : true
+        },
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "url" : "url",
+        "logoUrl" : "logoUrl",
+        "username" : "username"
+      },
       "programDetails" : {
+        "stopOutLevelSelected" : 7.061401241503109,
         "managementFeeSelected" : 1.4658129805029452,
+        "stopOutLevelCurrent" : 9.301444243932576,
         "successFeeSelected" : 5.637376656633329,
         "level" : 0,
         "successFeeCurrent" : 2.3021358869347655,
+        "type" : "DailyPeriod",
         "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
           "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
-          "hourProcessing" : 7,
+          "hourProcessing" : 5,
           "isProcessingRealTime" : true
         },
-        "levelProgress" : 6.027456183070403
+        "levelProgress" : 6.027456183070403,
+        "totalAvailableInvestment" : 3.616076749251911
       },
       "fundDetails" : {
-        "totalAssetsCount" : 7,
-        "entryFeeCurrent" : 9.301444243932576,
-        "exitFeeSelected" : 4.145608029883936,
+        "totalAssetsCount" : 2,
+        "entryFeeCurrent" : 4.145608029883936,
+        "exitFeeSelected" : 1.0246457001441578,
         "tradingSchedule" : {
           "hourEnd" : 2,
           "dayStart" : "Sunday",
@@ -1380,8 +1452,8 @@ open class DashboardAPI {
           "logoUrl" : "logoUrl",
           "url" : "url"
         } ],
-        "exitFeeCurrent" : 2.027123023002322,
-        "entryFeeSelected" : 3.616076749251911
+        "exitFeeCurrent" : 1.2315135367772556,
+        "entryFeeSelected" : 7.386281948385884
       },
       "color" : "color",
       "title" : "title",
@@ -1470,7 +1542,7 @@ open class DashboardAPI {
   "total" : 1,
   "items" : [ {
     "accountInfo" : {
-      "leverage" : 1,
+      "leverage" : 6,
       "supportedCurrencies" : [ null, null ],
       "balances" : [ {
         "amount" : 7.457744773683766,
@@ -1479,7 +1551,7 @@ open class DashboardAPI {
         "amount" : 7.457744773683766,
         "currency" : "Undefined"
       } ],
-      "balance" : 7.386281948385884,
+      "balance" : 1.4894159098541704,
       "currency" : "Undefined",
       "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
@@ -1499,27 +1571,43 @@ open class DashboardAPI {
       "profit" : 7.386281948385884
     },
     "signalInfo" : {
-      "subscribersCount" : 1
+      "subscribersCount" : 7
     },
     "assetTypeExt" : "None",
     "publicInfo" : {
+      "owner" : {
+        "personalDetails" : {
+          "isFollow" : true,
+          "allowFollow" : true,
+          "canCommentPosts" : true,
+          "canWritePost" : true
+        },
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "url" : "url",
+        "logoUrl" : "logoUrl",
+        "username" : "username"
+      },
       "programDetails" : {
+        "stopOutLevelSelected" : 7.061401241503109,
         "managementFeeSelected" : 1.4658129805029452,
+        "stopOutLevelCurrent" : 9.301444243932576,
         "successFeeSelected" : 5.637376656633329,
         "level" : 0,
         "successFeeCurrent" : 2.3021358869347655,
+        "type" : "DailyPeriod",
         "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
           "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
-          "hourProcessing" : 7,
+          "hourProcessing" : 5,
           "isProcessingRealTime" : true
         },
-        "levelProgress" : 6.027456183070403
+        "levelProgress" : 6.027456183070403,
+        "totalAvailableInvestment" : 3.616076749251911
       },
       "fundDetails" : {
-        "totalAssetsCount" : 7,
-        "entryFeeCurrent" : 9.301444243932576,
-        "exitFeeSelected" : 4.145608029883936,
+        "totalAssetsCount" : 2,
+        "entryFeeCurrent" : 4.145608029883936,
+        "exitFeeSelected" : 1.0246457001441578,
         "tradingSchedule" : {
           "hourEnd" : 2,
           "dayStart" : "Sunday",
@@ -1541,8 +1629,8 @@ open class DashboardAPI {
           "logoUrl" : "logoUrl",
           "url" : "url"
         } ],
-        "exitFeeCurrent" : 2.027123023002322,
-        "entryFeeSelected" : 3.616076749251911
+        "exitFeeCurrent" : 1.2315135367772556,
+        "entryFeeSelected" : 7.386281948385884
       },
       "color" : "color",
       "title" : "title",
@@ -1586,7 +1674,7 @@ open class DashboardAPI {
     } ]
   }, {
     "accountInfo" : {
-      "leverage" : 1,
+      "leverage" : 6,
       "supportedCurrencies" : [ null, null ],
       "balances" : [ {
         "amount" : 7.457744773683766,
@@ -1595,7 +1683,7 @@ open class DashboardAPI {
         "amount" : 7.457744773683766,
         "currency" : "Undefined"
       } ],
-      "balance" : 7.386281948385884,
+      "balance" : 1.4894159098541704,
       "currency" : "Undefined",
       "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
@@ -1615,27 +1703,43 @@ open class DashboardAPI {
       "profit" : 7.386281948385884
     },
     "signalInfo" : {
-      "subscribersCount" : 1
+      "subscribersCount" : 7
     },
     "assetTypeExt" : "None",
     "publicInfo" : {
+      "owner" : {
+        "personalDetails" : {
+          "isFollow" : true,
+          "allowFollow" : true,
+          "canCommentPosts" : true,
+          "canWritePost" : true
+        },
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "url" : "url",
+        "logoUrl" : "logoUrl",
+        "username" : "username"
+      },
       "programDetails" : {
+        "stopOutLevelSelected" : 7.061401241503109,
         "managementFeeSelected" : 1.4658129805029452,
+        "stopOutLevelCurrent" : 9.301444243932576,
         "successFeeSelected" : 5.637376656633329,
         "level" : 0,
         "successFeeCurrent" : 2.3021358869347655,
+        "type" : "DailyPeriod",
         "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
           "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
-          "hourProcessing" : 7,
+          "hourProcessing" : 5,
           "isProcessingRealTime" : true
         },
-        "levelProgress" : 6.027456183070403
+        "levelProgress" : 6.027456183070403,
+        "totalAvailableInvestment" : 3.616076749251911
       },
       "fundDetails" : {
-        "totalAssetsCount" : 7,
-        "entryFeeCurrent" : 9.301444243932576,
-        "exitFeeSelected" : 4.145608029883936,
+        "totalAssetsCount" : 2,
+        "entryFeeCurrent" : 4.145608029883936,
+        "exitFeeSelected" : 1.0246457001441578,
         "tradingSchedule" : {
           "hourEnd" : 2,
           "dayStart" : "Sunday",
@@ -1657,8 +1761,8 @@ open class DashboardAPI {
           "logoUrl" : "logoUrl",
           "url" : "url"
         } ],
-        "exitFeeCurrent" : 2.027123023002322,
-        "entryFeeSelected" : 3.616076749251911
+        "exitFeeCurrent" : 1.2315135367772556,
+        "entryFeeSelected" : 7.386281948385884
       },
       "color" : "color",
       "title" : "title",
@@ -2081,7 +2185,7 @@ open class DashboardAPI {
   "total" : 1,
   "items" : [ {
     "accountInfo" : {
-      "leverage" : 1,
+      "leverage" : 6,
       "supportedCurrencies" : [ null, null ],
       "balances" : [ {
         "amount" : 7.457744773683766,
@@ -2090,7 +2194,7 @@ open class DashboardAPI {
         "amount" : 7.457744773683766,
         "currency" : "Undefined"
       } ],
-      "balance" : 7.386281948385884,
+      "balance" : 1.4894159098541704,
       "currency" : "Undefined",
       "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
@@ -2110,27 +2214,43 @@ open class DashboardAPI {
       "profit" : 7.386281948385884
     },
     "signalInfo" : {
-      "subscribersCount" : 1
+      "subscribersCount" : 7
     },
     "assetTypeExt" : "None",
     "publicInfo" : {
+      "owner" : {
+        "personalDetails" : {
+          "isFollow" : true,
+          "allowFollow" : true,
+          "canCommentPosts" : true,
+          "canWritePost" : true
+        },
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "url" : "url",
+        "logoUrl" : "logoUrl",
+        "username" : "username"
+      },
       "programDetails" : {
+        "stopOutLevelSelected" : 7.061401241503109,
         "managementFeeSelected" : 1.4658129805029452,
+        "stopOutLevelCurrent" : 9.301444243932576,
         "successFeeSelected" : 5.637376656633329,
         "level" : 0,
         "successFeeCurrent" : 2.3021358869347655,
+        "type" : "DailyPeriod",
         "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
           "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
-          "hourProcessing" : 7,
+          "hourProcessing" : 5,
           "isProcessingRealTime" : true
         },
-        "levelProgress" : 6.027456183070403
+        "levelProgress" : 6.027456183070403,
+        "totalAvailableInvestment" : 3.616076749251911
       },
       "fundDetails" : {
-        "totalAssetsCount" : 7,
-        "entryFeeCurrent" : 9.301444243932576,
-        "exitFeeSelected" : 4.145608029883936,
+        "totalAssetsCount" : 2,
+        "entryFeeCurrent" : 4.145608029883936,
+        "exitFeeSelected" : 1.0246457001441578,
         "tradingSchedule" : {
           "hourEnd" : 2,
           "dayStart" : "Sunday",
@@ -2152,8 +2272,8 @@ open class DashboardAPI {
           "logoUrl" : "logoUrl",
           "url" : "url"
         } ],
-        "exitFeeCurrent" : 2.027123023002322,
-        "entryFeeSelected" : 3.616076749251911
+        "exitFeeCurrent" : 1.2315135367772556,
+        "entryFeeSelected" : 7.386281948385884
       },
       "color" : "color",
       "title" : "title",
@@ -2197,7 +2317,7 @@ open class DashboardAPI {
     } ]
   }, {
     "accountInfo" : {
-      "leverage" : 1,
+      "leverage" : 6,
       "supportedCurrencies" : [ null, null ],
       "balances" : [ {
         "amount" : 7.457744773683766,
@@ -2206,7 +2326,7 @@ open class DashboardAPI {
         "amount" : 7.457744773683766,
         "currency" : "Undefined"
       } ],
-      "balance" : 7.386281948385884,
+      "balance" : 1.4894159098541704,
       "currency" : "Undefined",
       "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
@@ -2226,27 +2346,43 @@ open class DashboardAPI {
       "profit" : 7.386281948385884
     },
     "signalInfo" : {
-      "subscribersCount" : 1
+      "subscribersCount" : 7
     },
     "assetTypeExt" : "None",
     "publicInfo" : {
+      "owner" : {
+        "personalDetails" : {
+          "isFollow" : true,
+          "allowFollow" : true,
+          "canCommentPosts" : true,
+          "canWritePost" : true
+        },
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "url" : "url",
+        "logoUrl" : "logoUrl",
+        "username" : "username"
+      },
       "programDetails" : {
+        "stopOutLevelSelected" : 7.061401241503109,
         "managementFeeSelected" : 1.4658129805029452,
+        "stopOutLevelCurrent" : 9.301444243932576,
         "successFeeSelected" : 5.637376656633329,
         "level" : 0,
         "successFeeCurrent" : 2.3021358869347655,
+        "type" : "DailyPeriod",
         "managementFeeCurrent" : 5.962133916683182,
         "dailyPeriodDetails" : {
           "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
-          "hourProcessing" : 7,
+          "hourProcessing" : 5,
           "isProcessingRealTime" : true
         },
-        "levelProgress" : 6.027456183070403
+        "levelProgress" : 6.027456183070403,
+        "totalAvailableInvestment" : 3.616076749251911
       },
       "fundDetails" : {
-        "totalAssetsCount" : 7,
-        "entryFeeCurrent" : 9.301444243932576,
-        "exitFeeSelected" : 4.145608029883936,
+        "totalAssetsCount" : 2,
+        "entryFeeCurrent" : 4.145608029883936,
+        "exitFeeSelected" : 1.0246457001441578,
         "tradingSchedule" : {
           "hourEnd" : 2,
           "dayStart" : "Sunday",
@@ -2268,8 +2404,8 @@ open class DashboardAPI {
           "logoUrl" : "logoUrl",
           "url" : "url"
         } ],
-        "exitFeeCurrent" : 2.027123023002322,
-        "entryFeeSelected" : 3.616076749251911
+        "exitFeeCurrent" : 1.2315135367772556,
+        "entryFeeSelected" : 7.386281948385884
       },
       "color" : "color",
       "title" : "title",

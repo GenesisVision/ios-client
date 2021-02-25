@@ -45,6 +45,7 @@ class SelectableTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        changeSelected(selected)
         
         // Configure the view for the selected state
     }
@@ -80,9 +81,9 @@ class SelectableTableViewCell: UITableViewCell {
         changeSelected(selected)
     }
     
-    func configure(_ model: String? = nil, selected: Bool) {
+    func configure(_ model: String? = nil, selected: Bool, showImageView: Bool = true) {
         setTitle(model)
-        
+        selectedImageView.isHidden = !showImageView
         changeSelected(selected)
     }
 

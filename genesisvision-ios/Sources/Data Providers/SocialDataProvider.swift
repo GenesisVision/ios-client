@@ -55,4 +55,28 @@ class SocialDataProvider: DataProvider {
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
+    
+    static func unfollow(userId: UUID, completion: @escaping CompletionBlock) {
+        SocialAPI.unfollowUser(userId: userId) { (viewModel, error) in
+            DataProvider().responseHandler(error, completion: completion)
+        }
+    }
+    
+    static func follow(userId: UUID, completion: @escaping CompletionBlock) {
+        SocialAPI.followUser(userId: userId) { (viewModel, error) in
+            DataProvider().responseHandler(error, completion: completion)
+        }
+    }
+    
+    static func deletePost(postId: UUID, completion: @escaping CompletionBlock) {
+        SocialAPI.deletePost(_id: postId) { (viewModel, error) in
+            DataProvider().responseHandler(error, completion: completion)
+        }
+    }
+    
+    static func report(on postId: String, reason: String?, text: String?, completion: @escaping CompletionBlock) {
+        SocialAPI.spamReport(_id: postId, reason: reason, text: text) { (viewModel, error) in
+            DataProvider().responseHandler(error, completion: completion)
+        }
+    }
 }

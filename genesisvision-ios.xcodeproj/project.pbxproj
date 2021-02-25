@@ -154,7 +154,7 @@
 		199D0E3124F560FA0005D76B /* FundPublicInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199D0E3024F560FA0005D76B /* FundPublicInfoViewController.swift */; };
 		199D0E3324F804F30005D76B /* ProgramDailyPeriodDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199D0E3224F804F20005D76B /* ProgramDailyPeriodDetails.swift */; };
 		199D0E3524F805C90005D76B /* ProgramType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199D0E3424F805C80005D76B /* ProgramType.swift */; };
-		19A2E03525ADC5550020AD01 /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E03425ADC5550020AD01 /* NewPostViewController.swift */; };
+		19A2E03525ADC5550020AD01 /* SocialNewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E03425ADC5550020AD01 /* SocialNewPostViewController.swift */; };
 		19A2E03B25ADC5EF0020AD01 /* Social.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19A2E03A25ADC5EF0020AD01 /* Social.storyboard */; };
 		19A2E04125ADFC7C0020AD01 /* SocialMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E04025ADFC7C0020AD01 /* SocialMediaViewController.swift */; };
 		19A2E04725AE03700020AD01 /* SocialMediaAddPostCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A2E04625AE03700020AD01 /* SocialMediaAddPostCollectionViewCellViewModel.swift */; };
@@ -231,6 +231,19 @@
 		19B9D0C22559CEE700DF8C70 /* ReferralDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B9D0C12559CEE700DF8C70 /* ReferralDataProvider.swift */; };
 		19C3B90425DE59E300C6990D /* DashboardWalletsTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C3B90325DE59E300C6990D /* DashboardWalletsTableViewCellViewModel.swift */; };
 		19C3B90C25DE5C9D00C6990D /* DashboardWalletsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19C3B90A25DE5C9D00C6990D /* DashboardWalletsTableViewCell.xib */; };
+		19C3B91725DE65D900C6990D /* BinanceRawFuturesBracket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C3B91525DE65D800C6990D /* BinanceRawFuturesBracket.swift */; };
+		19C3B91825DE65D900C6990D /* BinanceRawFuturesSymbolBracket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C3B91625DE65D900C6990D /* BinanceRawFuturesSymbolBracket.swift */; };
+		19C3B91E25DE65E900C6990D /* BinanceRawFuturesPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C3B91D25DE65E900C6990D /* BinanceRawFuturesPosition.swift */; };
+		19C3B92425DE660000C6990D /* ErrorViewModelWithToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C3B92325DE660000C6990D /* ErrorViewModelWithToken.swift */; };
+		19C3B92A25DE9A6400C6990D /* SocialEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C3B92925DE9A6400C6990D /* SocialEventView.swift */; };
+		19C3B93025DEA35100C6990D /* SocialPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C3B92F25DEA35100C6990D /* SocialPostViewController.swift */; };
+		19C3B93A25DED8B100C6990D /* ProfilePrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C3B93925DED8B100C6990D /* ProfilePrivacyViewController.swift */; };
+		19C3B94025DED96D00C6990D /* DropDownField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C3B93F25DED96D00C6990D /* DropDownField.swift */; };
+		19C3B97725E1296900C6990D /* Social.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C3B97625E1296900C6990D /* Social.swift */; };
+		19C3B97D25E1455100C6990D /* SocialMediaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C3B97C25E1455100C6990D /* SocialMediaViewModel.swift */; };
+		19C3B98325E1458D00C6990D /* SocialMediaCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C3B98225E1458D00C6990D /* SocialMediaCollectionViewModel.swift */; };
+		19C3B98925E663E300C6990D /* SocialPostReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C3B98825E663E300C6990D /* SocialPostReportViewController.swift */; };
+		19C3B98F25E6900900C6990D /* CustomRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C3B98E25E6900800C6990D /* CustomRadioButton.swift */; };
 		19CB5997258B9B300008D8BC /* SocialFeedCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19CB5995258B9B2F0008D8BC /* SocialFeedCollectionViewCell.xib */; };
 		19CB5998258B9B300008D8BC /* SocialFeedCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CB5996258B9B300008D8BC /* SocialFeedCollectionViewCellViewModel.swift */; };
 		19CB59B8258B9B630008D8BC /* SocialFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CB59B6258B9B630008D8BC /* SocialFeedViewController.swift */; };
@@ -1346,7 +1359,7 @@
 		199D0E3024F560FA0005D76B /* FundPublicInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundPublicInfoViewController.swift; sourceTree = "<group>"; };
 		199D0E3224F804F20005D76B /* ProgramDailyPeriodDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramDailyPeriodDetails.swift; sourceTree = "<group>"; };
 		199D0E3424F805C80005D76B /* ProgramType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramType.swift; sourceTree = "<group>"; };
-		19A2E03425ADC5550020AD01 /* NewPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostViewController.swift; sourceTree = "<group>"; };
+		19A2E03425ADC5550020AD01 /* SocialNewPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialNewPostViewController.swift; sourceTree = "<group>"; };
 		19A2E03A25ADC5EF0020AD01 /* Social.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Social.storyboard; sourceTree = "<group>"; };
 		19A2E04025ADFC7C0020AD01 /* SocialMediaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMediaViewController.swift; sourceTree = "<group>"; };
 		19A2E04625AE03700020AD01 /* SocialMediaAddPostCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMediaAddPostCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
@@ -1427,6 +1440,19 @@
 		19B9D0C12559CEE700DF8C70 /* ReferralDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralDataProvider.swift; sourceTree = "<group>"; };
 		19C3B90325DE59E300C6990D /* DashboardWalletsTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardWalletsTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		19C3B90A25DE5C9D00C6990D /* DashboardWalletsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DashboardWalletsTableViewCell.xib; sourceTree = "<group>"; };
+		19C3B91525DE65D800C6990D /* BinanceRawFuturesBracket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawFuturesBracket.swift; sourceTree = "<group>"; };
+		19C3B91625DE65D900C6990D /* BinanceRawFuturesSymbolBracket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawFuturesSymbolBracket.swift; sourceTree = "<group>"; };
+		19C3B91D25DE65E900C6990D /* BinanceRawFuturesPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawFuturesPosition.swift; sourceTree = "<group>"; };
+		19C3B92325DE660000C6990D /* ErrorViewModelWithToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorViewModelWithToken.swift; sourceTree = "<group>"; };
+		19C3B92925DE9A6400C6990D /* SocialEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialEventView.swift; sourceTree = "<group>"; };
+		19C3B92F25DEA35100C6990D /* SocialPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialPostViewController.swift; sourceTree = "<group>"; };
+		19C3B93925DED8B100C6990D /* ProfilePrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePrivacyViewController.swift; sourceTree = "<group>"; };
+		19C3B93F25DED96D00C6990D /* DropDownField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownField.swift; sourceTree = "<group>"; };
+		19C3B97625E1296900C6990D /* Social.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Social.swift; sourceTree = "<group>"; };
+		19C3B97C25E1455100C6990D /* SocialMediaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMediaViewModel.swift; sourceTree = "<group>"; };
+		19C3B98225E1458D00C6990D /* SocialMediaCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMediaCollectionViewModel.swift; sourceTree = "<group>"; };
+		19C3B98825E663E300C6990D /* SocialPostReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialPostReportViewController.swift; sourceTree = "<group>"; };
+		19C3B98E25E6900800C6990D /* CustomRadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRadioButton.swift; sourceTree = "<group>"; };
 		19CB5995258B9B2F0008D8BC /* SocialFeedCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SocialFeedCollectionViewCell.xib; sourceTree = "<group>"; };
 		19CB5996258B9B300008D8BC /* SocialFeedCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialFeedCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		19CB59B6258B9B630008D8BC /* SocialFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialFeedViewController.swift; sourceTree = "<group>"; };
@@ -2445,11 +2471,13 @@
 			isa = PBXGroup;
 			children = (
 				19CB59B6258B9B630008D8BC /* SocialFeedViewController.swift */,
+				19C3B92F25DEA35100C6990D /* SocialPostViewController.swift */,
 				19CB59B7258B9B630008D8BC /* SocialMainFeedViewController.swift */,
-				19A2E03425ADC5550020AD01 /* NewPostViewController.swift */,
+				19A2E03425ADC5550020AD01 /* SocialNewPostViewController.swift */,
 				19A2E04025ADFC7C0020AD01 /* SocialMediaViewController.swift */,
 				19DC7B3325B09611008AC6D7 /* SocialUsersListViewController.swift */,
 				19DC7B4925B1CF8E008AC6D7 /* SocialMediaListViewController.swift */,
+				19C3B98825E663E300C6990D /* SocialPostReportViewController.swift */,
 			);
 			path = Social;
 			sourceTree = "<group>";
@@ -2485,7 +2513,9 @@
 			isa = PBXGroup;
 			children = (
 				19CB59C5258B9D4D0008D8BC /* SocialFeedViewModel.swift */,
+				19C3B97C25E1455100C6990D /* SocialMediaViewModel.swift */,
 				19CB59CF258B9D750008D8BC /* SocialFeedCollectionViewModel.swift */,
+				19C3B98225E1458D00C6990D /* SocialMediaCollectionViewModel.swift */,
 			);
 			path = Social;
 			sourceTree = "<group>";
@@ -2614,6 +2644,10 @@
 				1906DA5B2539A6DE00A08846 /* BinanceRawSymbolMarketLotSizeFilter.swift */,
 				19A56FB0258B864300553408 /* TradingAccountPermission.swift */,
 				1906DA572539A6DE00A08846 /* BinanceRawSymbolMaxAlgorithmicOrdersFilter.swift */,
+				19C3B91525DE65D800C6990D /* BinanceRawFuturesBracket.swift */,
+				19C3B91D25DE65E900C6990D /* BinanceRawFuturesPosition.swift */,
+				19C3B92325DE660000C6990D /* ErrorViewModelWithToken.swift */,
+				19C3B91625DE65D900C6990D /* BinanceRawFuturesSymbolBracket.swift */,
 				1906DA542539A6DD00A08846 /* BinanceRawSymbolMaxOrdersFilter.swift */,
 				19A56EF9258939BC00553408 /* ExternalKycAccessToken.swift */,
 				1906DA592539A6DE00A08846 /* BinanceRawSymbolMinNotionalFilter.swift */,
@@ -3438,6 +3472,9 @@
 				19CB59E1258CE41F0008D8BC /* SocialActivitiesView.swift */,
 				19A2E06225AF29F40020AD01 /* SocialPostView.swift */,
 				1967210225D6ABBC001A04DA /* SocialPostTagsView.swift */,
+				19C3B92925DE9A6400C6990D /* SocialEventView.swift */,
+				19C3B93F25DED96D00C6990D /* DropDownField.swift */,
+				19C3B98E25E6900800C6990D /* CustomRadioButton.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -3819,6 +3856,7 @@
 			isa = PBXGroup;
 			children = (
 				5EC7B87E20D147F5007720D1 /* SettingsViewController.swift */,
+				19C3B93925DED8B100C6990D /* ProfilePrivacyViewController.swift */,
 				5E36652120D948B700195CBE /* PasscodeViewController.swift */,
 				192DB056256D864100C198CB /* KYCInfoViewController.swift */,
 				FCC9DD72200E4C7E008825EC /* Profile */,
@@ -4702,6 +4740,7 @@
 				FCB8DFCA2010F6B100698D18 /* Protocols.swift */,
 				5EB996A620F36DE600E31D23 /* ListRouterProtocol.swift */,
 				5EB996A820F3738600E31D23 /* ListViewModelProtocol.swift */,
+				19C3B97625E1296900C6990D /* Social.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -5219,12 +5258,14 @@
 				1979A5312524DE8F005EEABF /* BinanceRawOrderBookEntry.swift in Sources */,
 				5E35E80F217DE3890019B60C /* SettingsTableViewCell.swift in Sources */,
 				5EEC1AC92175FC9A007D77ED /* NotificationListRouter.swift in Sources */,
+				19C3B91825DE65D900C6990D /* BinanceRawFuturesSymbolBracket.swift in Sources */,
 				5EA09B9A2292D04800123B5D /* ListDelegateManager.swift in Sources */,
 				5E39F76A23A3F9300073DAD5 /* DashboardTradingAsset.swift in Sources */,
 				5E39F74823A3F92F0073DAD5 /* WalletDepositSummary.swift in Sources */,
 				1967210A25D6AE3C001A04DA /* SocialPostTagCollectionViewCell.swift in Sources */,
 				198124742464595300F286FE /* SocialViewMode.swift in Sources */,
 				FC140FE52030168100B71E7F /* CodableHelper.swift in Sources */,
+				19C3B91E25DE65E900C6990D /* BinanceRawFuturesPosition.swift in Sources */,
 				5EB8E9DE2072654A00F46A8A /* AuthForgotPasswordInfoViewModel.swift in Sources */,
 				19787AFC2481416A00217CA9 /* NewExchangeAccountRequest.swift in Sources */,
 				5EDAA71222E5067C00F7BF71 /* PeriodHistoryTableViewCell.swift in Sources */,
@@ -5280,7 +5321,7 @@
 				5EAC11B420B81AFB0057A2D2 /* AuthChangePasswordViewModel.swift in Sources */,
 				5E106387213D69AF008A0E8B /* BaseExtensions.swift in Sources */,
 				198124492464535C00F286FE /* NewPost.swift in Sources */,
-				19A2E03525ADC5550020AD01 /* NewPostViewController.swift in Sources */,
+				19A2E03525ADC5550020AD01 /* SocialNewPostViewController.swift in Sources */,
 				1906DA5D2539A6DE00A08846 /* BinanceRawSymbolLotSizeFilter.swift in Sources */,
 				5E39F72A23A3F92F0073DAD5 /* FacetSortType.swift in Sources */,
 				5E39F60E23A3F8A60073DAD5 /* AssetPlatformInfo.swift in Sources */,
@@ -5291,6 +5332,8 @@
 				5E39F74323A3F92F0073DAD5 /* WalletSummary.swift in Sources */,
 				19A56F90258A65D200553408 /* BinanceRawFuturesPlacedOrder.swift in Sources */,
 				FC0E200C2044358200872BE5 /* WalletWithdrawViewController.swift in Sources */,
+				19C3B97725E1296900C6990D /* Social.swift in Sources */,
+				19C3B97D25E1455100C6990D /* SocialMediaViewModel.swift in Sources */,
 				FC83DF63203D89BE00A8F8CE /* ProgramWithdrawRouter.swift in Sources */,
 				5E93E70021D1A5370020DE55 /* NotificationsSettingsGeneralTableViewCell.swift in Sources */,
 				5E39F74023A3F92F0073DAD5 /* DashboardTradingAssetBrokerDetails.swift in Sources */,
@@ -5357,6 +5400,7 @@
 				5E39F71423A3F92F0073DAD5 /* DashboardTimeframeProfit.swift in Sources */,
 				19EEE0A82507BF5900F83CED /* TradingplatformAPI.swift in Sources */,
 				5E39F73C23A3F92F0073DAD5 /* FundAssetPart.swift in Sources */,
+				19C3B92425DE660000C6990D /* ErrorViewModelWithToken.swift in Sources */,
 				1906DA692539A71100A08846 /* PushNotificationChannel.swift in Sources */,
 				5E39F7D223A3F9300073DAD5 /* ErrorCodes.swift in Sources */,
 				19EEE0B22507BF6E00F83CED /* BinanceOrderSide.swift in Sources */,
@@ -5408,6 +5452,7 @@
 				5ED3B47A210898810026C123 /* ProfileImageView.swift in Sources */,
 				5EA274B2216281DD008CAF77 /* DefaultTableViewCell.swift in Sources */,
 				5E39F7BD23A3F9300073DAD5 /* ProgramMinInvestAmount.swift in Sources */,
+				19C3B98325E1458D00C6990D /* SocialMediaCollectionViewModel.swift in Sources */,
 				5E6845E221EF7D9900DA8607 /* DateSectionTableHeaderView.swift in Sources */,
 				19EEE0C42507C0F200F83CED /* AssetProvider.swift in Sources */,
 				FC27233020498959005225F2 /* ToggleTorchButton.swift in Sources */,
@@ -5419,6 +5464,7 @@
 				5E39F79123A3F9300073DAD5 /* LoginViewModel.swift in Sources */,
 				5E39F73023A3F92F0073DAD5 /* DashboardSummary.swift in Sources */,
 				FCBD22C22019EACA000B8E38 /* ErrorHandler.swift in Sources */,
+				19C3B91725DE65D900C6990D /* BinanceRawFuturesBracket.swift in Sources */,
 				5E39F75323A3F92F0073DAD5 /* TradesDelay.swift in Sources */,
 				5E5488362141577700B2D9FE /* DateRangeView.swift in Sources */,
 				5E39F76923A3F9300073DAD5 /* TwoFactorCodeWithPassword.swift in Sources */,
@@ -5531,6 +5577,7 @@
 				5E77176A2154200D002624FC /* EventCollectionViewCellViewModel.swift in Sources */,
 				1979A53A2524DE8F005EEABF /* BinanceRawSymbol.swift in Sources */,
 				5E616B4020F7880800B3459D /* ImagePickerPresentable.swift in Sources */,
+				19C3B92A25DE9A6400C6990D /* SocialEventView.swift in Sources */,
 				19D3099C24ED85ED006B4185 /* FundAssetsListViewController.swift in Sources */,
 				5E39F5F523A3F8A60073DAD5 /* AppVersion.swift in Sources */,
 				FC83DF65203D89CE00A8F8CE /* ProgramInvestRouter.swift in Sources */,
@@ -5804,6 +5851,7 @@
 				19A56EAA258938AD00553408 /* BinanceRawFuturesSymbolLotSizeFilter.swift in Sources */,
 				FCC9DD73200E4C7E008825EC /* ProgramListViewController.swift in Sources */,
 				5E39F5FA23A3F8A60073DAD5 /* AssetType.swift in Sources */,
+				19C3B93025DEA35100C6990D /* SocialPostViewController.swift in Sources */,
 				5EFDEABA238FFF2E00AF3AC1 /* CellViews.swift in Sources */,
 				19787AEE2481400B00217CA9 /* DashboardExchangeTradingAsset.swift in Sources */,
 				FC4964262015598300104CEB /* UIColor+Hex.swift in Sources */,
@@ -5812,6 +5860,7 @@
 				5E39F78C23A3F9300073DAD5 /* WalletsGrandTotal.swift in Sources */,
 				5E39F77923A3F9300073DAD5 /* PrivateTradingAccountFull.swift in Sources */,
 				5E39F5E923A3F8A60073DAD5 /* CaptchaCheckResult.swift in Sources */,
+				19C3B98F25E6900900C6990D /* CustomRadioButton.swift in Sources */,
 				19A56EEB2589398E00553408 /* ExchangeCredentialsInfoItemsViewModel.swift in Sources */,
 				5EB9320E214697FF00EE01A2 /* DetailManagerTableViewCell.swift in Sources */,
 				5E5BC190218667E3009E4BA3 /* FundAssetsViewController.swift in Sources */,
@@ -5995,6 +6044,7 @@
 				19A56EAE258938AD00553408 /* BinanceRawFutures24HPrice.swift in Sources */,
 				5E39F7A523A3F9300073DAD5 /* FundBalanceChart.swift in Sources */,
 				FC83DF5F203D895A00A8F8CE /* ProgramInvestViewModel.swift in Sources */,
+				19C3B93A25DED8B100C6990D /* ProfilePrivacyViewController.swift in Sources */,
 				5E39F7C523A3F9300073DAD5 /* PersonalProgramDetailsList.swift in Sources */,
 				5EC0CAFF23CB42E6003D0818 /* InvestingEventListViewController.swift in Sources */,
 				5EE00766217873E90045B890 /* ManagerRouter.swift in Sources */,
@@ -6061,6 +6111,7 @@
 				FCA57070202741A4001942F3 /* UIView+NibLoad.swift in Sources */,
 				5E39F61823A3F8A60073DAD5 /* CreateWithdrawalRequestModel.swift in Sources */,
 				5EC273AC2056B7DB00E51494 /* NumberToStringExtension.swift in Sources */,
+				19C3B98925E663E300C6990D /* SocialPostReportViewController.swift in Sources */,
 				5E39F70023A3F92F0073DAD5 /* TradeEntryType.swift in Sources */,
 				5EA274C621628286008CAF77 /* DetailProfitStatisticTableViewCell.swift in Sources */,
 				5E1813812061D36700481646 /* PickerViewViewController.swift in Sources */,
@@ -6104,6 +6155,7 @@
 				5EC7871D216BD243000C91E4 /* NotificationListViewController.swift in Sources */,
 				5E39F7D023A3F9300073DAD5 /* SocialLinkType.swift in Sources */,
 				5EDD6D3D22C64AA600B9DB93 /* CreateAccountViewModel.swift in Sources */,
+				19C3B94025DED96D00C6990D /* DropDownField.swift in Sources */,
 				5E39F73923A3F92F0073DAD5 /* ProgramUpdate.swift in Sources */,
 				5E39F75923A3F92F0073DAD5 /* FundOwnerActions.swift in Sources */,
 				5EF14DA12182135E00B3843A /* FundInfoRouter.swift in Sources */,
@@ -6197,7 +6249,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -6255,7 +6307,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -6328,7 +6380,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -6371,7 +6423,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_ENTITLEMENTS = NotificationContent/NotificationContent.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = NotificationContent/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -6429,7 +6481,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationContent/NotificationContent.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -6502,7 +6554,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationContent/NotificationContent.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -6606,7 +6658,7 @@
 				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -6909,7 +6961,7 @@
 				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
@@ -6999,7 +7051,7 @@
 				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;

@@ -135,7 +135,7 @@ class Router {
         router.socialMediaViewController = socialMediaViewController
         navigationController = BaseNavigationController(rootViewController: socialMediaViewController)
         navigationController.title = "Social"
-        navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_wallet").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_wallet").withRenderingMode(.alwaysOriginal)
+        navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_social").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_social").withRenderingMode(.alwaysOriginal)
         viewControllers.append(navigationController)
     }
     
