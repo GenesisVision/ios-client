@@ -95,6 +95,8 @@ class ProfilePrivacyViewController: BaseViewController, DropDownFieldDelegate {
     }
     
     func droDownFieldPressed(uuidString: String, titleString: String) {
+        guard viewModel.isSettingChangable(settingUUID: uuidString) else { return }
+        
         viewModel.currentChangingUUID = uuidString
         bottomSheetController = BottomSheetController()
         bottomSheetController.initializeHeight = 150.0
@@ -150,7 +152,13 @@ final class ProfilePrivacyViewModel {
         .comment: UUID().uuidString]
     
     var currentChangingUUID: String = ""
-    var newSettings: [ProfilePrivacySettings: PrivacyRestrictType] = [:]
+    var newSettings: [ProfilePrivacySettings: PrivacyRestrictType] = [:] {
+        didSet {
+            if newSettings[.view] == .me {
+                newSettings[.comment] = .me
+            }
+        }
+    }
     
     init(profile: ProfileFullViewModel) {
         if let whoCanCommentOnMyPosts = profile.whoCanCommentOnMyPosts,
@@ -213,5 +221,18 @@ final class ProfilePrivacyViewModel {
         }
         
         ProfileDataProvider.updateSocialPrivacy(whoCanPostToMayWall: whoCanPostToMayWall, whoCanViewCommentsOnMyPosts: whoCanViewCommentsOnMyPosts, whoCanCommentOnMyPosts: whoCanCommentOnMyPosts, completion: completion)
+    }
+    
+    func isSettingChangable(settingUUID: String) -> Bool {
+        guard let setting = settingsUUIDs.first(where: { $1 == settingUUID }) else { return false }
+        
+        switch setting.key {
+        case .post:
+            return true
+        case .view:
+            return true
+        case .comment:
+            return newSettings[.view] != .me
+        }
     }
 }

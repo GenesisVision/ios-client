@@ -31,6 +31,12 @@ class CustomRadioButton: UIView {
         return view
     }()
     
+    private let cirleView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private let label: TitleLabel = {
         let label = TitleLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -73,6 +79,9 @@ class CustomRadioButton: UIView {
         leftView.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: nil, padding: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0))
         leftView.widthAnchor.constraint(equalTo: leftView.heightAnchor, multiplier: 1.0).isActive = true
         
+        leftView.addSubview(cirleView)
+        
+        
         rightView.anchor(top: topAnchor, leading: leftView.trailingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0))
         
         rightView.addSubview(label)
@@ -94,22 +103,5 @@ class CustomRadioButton: UIView {
         if let tag = tag, !tag.isEmpty {
             customTag = tag
         }
-        
-        layoutSubviews()
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        let shapeLayer = CAShapeLayer()
-        let circularPath = UIBezierPath(arcCenter: .zero, radius: 6, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
-        shapeLayer.path = circularPath.cgPath
-        shapeLayer.fillColor = UIColor.red.cgColor
-        shapeLayer.lineCap = .round
-        shapeLayer.opacity = 0.9
-        
-        shapeLayer.frame = leftView.frame
-        shapeLayer.position = leftView.center
-        leftView.layer.addSublayer(shapeLayer)
     }
 }

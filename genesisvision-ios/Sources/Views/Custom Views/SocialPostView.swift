@@ -8,6 +8,14 @@
 
 import UIKit
 
+enum SocialCellHeightConstraintType {
+    case tagsView
+    case eventView
+    case textView
+    case postImageView
+    case postImagesGallery
+}
+
 protocol SocialPostViewDelegate: class {
     func tagPressed(tag: PostTag)
     func userOwnerPressed()
@@ -23,9 +31,19 @@ final class SocialPostView: UIView {
         return view
     }()
     
-    private let middleView: UIView = {
-        let view = UIView()
+//    private let middleView: UIView = {
+//        let view = UIView()
+//        view.translatesAutoresizingMaskIntoConstraints = false
+//        return view
+//    }()
+    
+    private let middleView: UIStackView = {
+        let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.isUserInteractionEnabled = true
+        view.axis = .vertical
+        view.spacing = 10
+        view.distribution = .fillProportionally
         return view
     }()
     
@@ -65,6 +83,16 @@ final class SocialPostView: UIView {
         button.imageView?.contentMode = .scaleToFill
         button.imageEdgeInsets = UIEdgeInsets(top: 15, left: 8, bottom: 15, right: 8)
         return button
+    }()
+    
+    let pinSymbolImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.backgroundColor = .clear
+        imageView.contentMode = .scaleToFill
+        imageView.image = #imageLiteral(resourceName: "social_pin_icon")
+        imageView.isHidden = true
+        return imageView
     }()
     
     let openUserButton: UIButton = {
@@ -116,12 +144,14 @@ final class SocialPostView: UIView {
     
     var postTags: [PostTag]  = [] {
         didSet {
-            if let eventModel = postTags.first(where: {$0.type == .event })?.event {
+            if let eventModel = postTags.first(where: { $0.type == .event })?.event {
                 eventView.configure(event: eventModel)
             }
             tagsView.viewModels = postTags.filter({ $0.type != .event })
         }
     }
+    
+    var socialPostHeightConstraints: [SocialCellHeightConstraintType: NSLayoutConstraint] = [:]
     
     var socialPostViewSizes: SocialPostViewSizes?
     weak var delegate: SocialPostViewDelegate?
@@ -159,6 +189,7 @@ final class SocialPostView: UIView {
         topView.addSubview(userNameLabel)
         topView.addSubview(dateLabel)
         topView.addSubview(postActionsButton)
+        topView.addSubview(pinSymbolImageView)
         topView.addSubview(openUserButton)
         
         userImageView.anchor(top: nil, leading: topView.leadingAnchor, bottom: nil, trailing: nil)
@@ -166,11 +197,14 @@ final class SocialPostView: UIView {
         userImageView.anchorSize(size: CGSize(width: 50, height: 50))
         userImageView.roundCorners(with: 25)
         
-        userNameLabel.anchor(top: topView.topAnchor, leading: userImageView.trailingAnchor, bottom: nil, trailing: postActionsButton.leadingAnchor, padding: UIEdgeInsets(top: 10, left: 15, bottom: 0, right: 0))
+        userNameLabel.anchor(top: topView.topAnchor, leading: userImageView.trailingAnchor, bottom: nil, trailing: pinSymbolImageView.leadingAnchor, padding: UIEdgeInsets(top: 10, left: 15, bottom: 0, right: 0))
         userNameLabel.heightAnchor.constraint(equalTo: topView.heightAnchor, multiplier: 0.4).isActive = true
 
-        dateLabel.anchor(top: userNameLabel.bottomAnchor, leading: userImageView.trailingAnchor, bottom: nil, trailing: postActionsButton.leadingAnchor, padding: UIEdgeInsets(top: 0, left: 15, bottom: 15, right: 0))
+        dateLabel.anchor(top: userNameLabel.bottomAnchor, leading: userImageView.trailingAnchor, bottom: nil, trailing: pinSymbolImageView.leadingAnchor, padding: UIEdgeInsets(top: 0, left: 15, bottom: 15, right: 0))
         dateLabel.anchorSize(size: CGSize(width: 0, height: 17))
+        
+        pinSymbolImageView.anchor(top: nil, leading: nil, bottom: nil, trailing: postActionsButton.leadingAnchor, padding: UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 20), size: CGSize(width: 15, height: 15))
+        pinSymbolImageView.anchorCenter(centerY: postActionsButton.centerYAnchor, centerX: nil)
         
         postActionsButton.addTarget(self, action: #selector(touchPostActionsButton), for: .touchUpInside)
         postActionsButton.anchor(top: topView.topAnchor, leading: nil, bottom: nil, trailing: topView.trailingAnchor, padding: UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 5))
@@ -183,18 +217,31 @@ final class SocialPostView: UIView {
     }
     
     private func overlayMiddleView() {
-        middleView.addSubview(textView)
-        middleView.addSubview(postImageView)
-        middleView.addSubview(tagsView)
-        middleView.addSubview(eventView)
+//        middleView.addSubview(textView)
+//        middleView.addSubview(postImageView)
+//        middleView.addSubview(tagsView)
+//        middleView.addSubview(eventView)
+        middleView.addArrangedSubview(textView)
+        middleView.addArrangedSubview(postImageView)
+        
+        middleView.addArrangedSubview(eventView)
+        middleView.addArrangedSubview(tagsView)
+        
+        textView.anchor(top: nil, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 10, bottom: 5, right: 10), size: CGSize(width: 0, height: socialPostViewSizes?.textViewHeight ?? 0))
+        
+        postImageView.anchor(top: nil, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0), size: CGSize(width: 0, height: socialPostViewSizes?.imageViewHeight ?? 0))
+        
+        tagsView.anchor(top: nil, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: socialPostViewSizes?.tagViewHeight ?? 0))
+        
+        eventView.anchor(top: nil, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, size: CGSize(width: 0, height: 60))
 
-        textView.anchor(top: middleView.topAnchor, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 10, bottom: 5, right: 10), size: CGSize(width: 0, height: socialPostViewSizes?.textViewHeight ?? 0))
-        
-        postImageView.anchor(top: textView.bottomAnchor, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0), size: CGSize(width: 0, height: socialPostViewSizes?.imageViewHeight ?? 0))
-        
-        tagsView.anchor(top: nil, leading: middleView.leadingAnchor, bottom: middleView.bottomAnchor, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: socialPostViewSizes?.tagViewHeight ?? 0))
-        
-        eventView.anchor(top: middleView.topAnchor, leading: middleView.leadingAnchor, bottom: tagsView.topAnchor, trailing: middleView.trailingAnchor, size: CGSize(width: 0, height: 60))
+//        textView.anchor(top: middleView.topAnchor, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 10, bottom: 5, right: 10), size: CGSize(width: 0, height: socialPostViewSizes?.textViewHeight ?? 0))
+//
+//        postImageView.anchor(top: textView.bottomAnchor, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0), size: CGSize(width: 0, height: socialPostViewSizes?.imageViewHeight ?? 0))
+//
+//        tagsView.anchor(top: nil, leading: middleView.leadingAnchor, bottom: middleView.bottomAnchor, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: socialPostViewSizes?.tagViewHeight ?? 0))
+//
+//        eventView.anchor(top: middleView.topAnchor, leading: middleView.leadingAnchor, bottom: tagsView.topAnchor, trailing: middleView.trailingAnchor, size: CGSize(width: 0, height: 60))
     }
     
     func updateMiddleViewConstraints() {

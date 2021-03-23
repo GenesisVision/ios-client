@@ -19,7 +19,7 @@ final class SocialFeedViewModel {
     var socialCollectionViewModel: SocialFeedCollectionViewModel!
     var socialCollectionViewDataSource: CollectionViewDataSource!
     
-    var showOnlyUsersPosts: Bool = false {
+    var showOnlyUsersPosts: Bool = true {
         didSet {
             socialCollectionViewModel.showOnlyUsersPosts = showOnlyUsersPosts
         }
@@ -28,10 +28,11 @@ final class SocialFeedViewModel {
     let feedType: SocialFeedType
     let socialRouter: SocialRouter
 
-    init(feedType: SocialFeedType, collectionViewDelegate: SocialFeedCollectionViewModelDelegate, router: SocialRouter) {
+    init(feedType: SocialFeedType, collectionViewDelegate: SocialFeedCollectionViewModelDelegate, router: SocialRouter, showEvents: Bool = false) {
         self.feedType = feedType
         self.socialRouter = router
-        socialCollectionViewModel = SocialFeedCollectionViewModel(type: .social, title: "", delegate: collectionViewDelegate)
+        self.showOnlyUsersPosts = !showEvents
+        socialCollectionViewModel = SocialFeedCollectionViewModel(type: .social, title: "", delegate: collectionViewDelegate, showOnlyUsersPosts: !showEvents)
         socialCollectionViewDataSource = CollectionViewDataSource(socialCollectionViewModel)
     }
     
@@ -41,5 +42,9 @@ final class SocialFeedViewModel {
     
     func deletePost(postId: UUID, completion: @escaping CompletionBlock) {
         socialCollectionViewModel.deletePost(postId: postId, completion: completion)
+    }
+    
+    func pinPost(postId: UUID, completion: @escaping CompletionBlock) {
+        socialCollectionViewModel.pinPost(postId: postId, completion: completion)
     }
 }

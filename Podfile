@@ -23,5 +23,6 @@ target 'genesisvision-ios' do
     pod 'ReachabilitySwift'
     pod 'Tabman'
     pod 'NotificationBannerSwift'
-    pod 'IdensicMobileSDK', '= 1.13.1'
+    pod 'IdensicMobileSDK', '= 1.16.0'
+    pod 'RadioGroup'
 end

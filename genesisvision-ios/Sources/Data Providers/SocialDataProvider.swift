@@ -79,4 +79,16 @@ class SocialDataProvider: DataProvider {
             DataProvider().responseHandler(error, completion: completion)
         }
     }
+    
+    static func pin(postId: UUID, completion: @escaping CompletionBlock) {
+        SocialAPI.pinPost(_id: postId) { (viewModel, error) in
+            DataProvider().responseHandler(error, completion: completion)
+        }
+    }
+    
+    static func unpin(postId: UUID, completion: @escaping CompletionBlock) {
+        SocialAPI.unpinPost(_id: postId) { (viewModel, error) in
+            DataProvider().responseHandler(error, completion: completion)
+        }
+    }
 }

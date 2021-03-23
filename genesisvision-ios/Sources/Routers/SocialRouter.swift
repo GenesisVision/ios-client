@@ -87,9 +87,9 @@ class SocialRouter: Router {
     }
     
     private func showPostReport(postId: UUID) {
-//        let viewController = SocialPostReportViewController()
-//        viewController.viewModel = SocialPostReportViewModel(postId: postId)
-//        viewController.hidesBottomBarWhenPushed = true
-//        navigationController?.pushViewController(viewController, animated: true)
+        let viewController = SocialPostReportViewController()
+        viewController.viewModel = SocialPostReportViewModel(postId: postId)
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }

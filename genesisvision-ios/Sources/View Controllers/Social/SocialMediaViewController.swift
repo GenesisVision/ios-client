@@ -120,6 +120,10 @@ extension SocialMediaViewController: SocialPostActionsMenuPresenable {
             }
         case .report(let postId):
             viewModel.router.show(routeType: .reportPost(postId: postId))
+        case .pin(postId: _):
+            break
+        case .unpin(postId: _):
+            break
         }
     }
 }

@@ -26,6 +26,12 @@
 		192DB067256F075000C198CB /* DashboardInvestmentLimitsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192DB065256F074F00C198CB /* DashboardInvestmentLimitsTableViewCell.swift */; };
 		192DB068256F075000C198CB /* DashboardInvestmentLimitsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 192DB066256F074F00C198CB /* DashboardInvestmentLimitsTableViewCell.xib */; };
 		192E0B6B25794DB500EC047F /* ExchangeDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192E0B6A25794DB500EC047F /* ExchangeDataProvider.swift */; };
+		19411FA725EFB4DE00ADE76E /* ManagerSocialTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19411FA625EFB4DE00ADE76E /* ManagerSocialTableViewCellViewModel.swift */; };
+		19411FAE25EFB56F00ADE76E /* ManagerSocialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19411FAC25EFB56F00ADE76E /* ManagerSocialTableViewCell.swift */; };
+		19411FAF25EFB56F00ADE76E /* ManagerSocialTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19411FAD25EFB56F00ADE76E /* ManagerSocialTableViewCell.xib */; };
+		19411FB525EFC0FD00ADE76E /* SocialFollowersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19411FB425EFC0FD00ADE76E /* SocialFollowersViewController.swift */; };
+		19411FBC25EFC66A00ADE76E /* SocialFollowListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19411FBA25EFC66A00ADE76E /* SocialFollowListTableViewCell.swift */; };
+		19411FBD25EFC66A00ADE76E /* SocialFollowListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19411FBB25EFC66A00ADE76E /* SocialFollowListTableViewCell.xib */; };
 		195B9EFA2558469D003DA54E /* ReferralProgramViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195B9EF92558469D003DA54E /* ReferralProgramViewController.swift */; };
 		195B9F0125584711003DA54E /* ReferralProgramViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195B9F0025584711003DA54E /* ReferralProgramViewModel.swift */; };
 		195B9F0B25585429003DA54E /* ReferralInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195B9F0A25585429003DA54E /* ReferralInfoViewController.swift */; };
@@ -1225,6 +1231,12 @@
 		192DB065256F074F00C198CB /* DashboardInvestmentLimitsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardInvestmentLimitsTableViewCell.swift; sourceTree = "<group>"; };
 		192DB066256F074F00C198CB /* DashboardInvestmentLimitsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DashboardInvestmentLimitsTableViewCell.xib; sourceTree = "<group>"; };
 		192E0B6A25794DB500EC047F /* ExchangeDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeDataProvider.swift; sourceTree = "<group>"; };
+		19411FA625EFB4DE00ADE76E /* ManagerSocialTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerSocialTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		19411FAC25EFB56F00ADE76E /* ManagerSocialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerSocialTableViewCell.swift; sourceTree = "<group>"; };
+		19411FAD25EFB56F00ADE76E /* ManagerSocialTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ManagerSocialTableViewCell.xib; sourceTree = "<group>"; };
+		19411FB425EFC0FD00ADE76E /* SocialFollowersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialFollowersViewController.swift; sourceTree = "<group>"; };
+		19411FBA25EFC66A00ADE76E /* SocialFollowListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialFollowListTableViewCell.swift; sourceTree = "<group>"; };
+		19411FBB25EFC66A00ADE76E /* SocialFollowListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialFollowListTableViewCell.xib; sourceTree = "<group>"; };
 		195B9EF92558469D003DA54E /* ReferralProgramViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralProgramViewController.swift; sourceTree = "<group>"; };
 		195B9F0025584711003DA54E /* ReferralProgramViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralProgramViewModel.swift; sourceTree = "<group>"; };
 		195B9F0A25585429003DA54E /* ReferralInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralInfoViewController.swift; sourceTree = "<group>"; };
@@ -2478,6 +2490,7 @@
 				19DC7B3325B09611008AC6D7 /* SocialUsersListViewController.swift */,
 				19DC7B4925B1CF8E008AC6D7 /* SocialMediaListViewController.swift */,
 				19C3B98825E663E300C6990D /* SocialPostReportViewController.swift */,
+				19411FB425EFC0FD00ADE76E /* SocialFollowersViewController.swift */,
 			);
 			path = Social;
 			sourceTree = "<group>";
@@ -2505,6 +2518,8 @@
 				19DC7B4F25B1D035008AC6D7 /* SocialMediaListTableViewCellViewModel.swift */,
 				1967210925D6AE3C001A04DA /* SocialPostTagCollectionViewCell.xib */,
 				1967210825D6AE3C001A04DA /* SocialPostTagCollectionViewCell.swift */,
+				19411FBA25EFC66A00ADE76E /* SocialFollowListTableViewCell.swift */,
+				19411FBB25EFC66A00ADE76E /* SocialFollowListTableViewCell.xib */,
 			);
 			path = Social;
 			sourceTree = "<group>";
@@ -3441,6 +3456,7 @@
 			isa = PBXGroup;
 			children = (
 				5EA8B9C321B453F00074EA2C /* ManagerTableViewCellViewModel.swift */,
+				19411FA625EFB4DE00ADE76E /* ManagerSocialTableViewCellViewModel.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -3614,6 +3630,8 @@
 				5EA274B1216281DD008CAF77 /* DefaultTableViewCell.xib */,
 				5EEFAA7023B6A43100EBBC6D /* ProgramHeaderTableViewCell.swift */,
 				5EEFAA7123B6A43200EBBC6D /* ProgramHeaderTableViewCell.xib */,
+				19411FAC25EFB56F00ADE76E /* ManagerSocialTableViewCell.swift */,
+				19411FAD25EFB56F00ADE76E /* ManagerSocialTableViewCell.xib */,
 			);
 			path = "Info tab";
 			sourceTree = "<group>";
@@ -5007,6 +5025,7 @@
 				5EF9F90723E09C4400542E1E /* PrivateTradingContentView.xib in Resources */,
 				5E528ECF237F00E8006F2339 /* DashboardTradingTableViewCell.xib in Resources */,
 				5EA274BF21628253008CAF77 /* YourInvestmentTableViewCell.xib in Resources */,
+				19411FAF25EFB56F00ADE76E /* ManagerSocialTableViewCell.xib in Resources */,
 				5E0E1B9C2221A0CC001F3C4E /* InfoSignalsTableViewCell.xib in Resources */,
 				5E5BC29B21868FD7009E4BA3 /* FundAssetsHeaderView.xib in Resources */,
 				19DC7B1C25B05ED8008AC6D7 /* SocialMediaUsersCollectionViewCell.xib in Resources */,
@@ -5019,6 +5038,7 @@
 				5EFB2360238AAF3C00CD7480 /* TradingHeaderTableViewCell.xib in Resources */,
 				FCC9DD5D200DFFDC008825EC /* Assets.storyboard in Resources */,
 				5EB064C0239AF6D9003AB3FB /* AddFundAssetTableViewCell.xib in Resources */,
+				19411FBD25EFC66A00ADE76E /* SocialFollowListTableViewCell.xib in Resources */,
 				1981F22924D1D40000979262 /* InfoSubscriptionTableViewCell.xib in Resources */,
 				19A2E05725AF29370020AD01 /* SocialMediaFeedCollectionViewCell.xib in Resources */,
 				5EDAA71322E5067C00F7BF71 /* PeriodHistoryTableViewCell.xib in Resources */,
@@ -5118,18 +5138,18 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${PODS_ROOT}/IdensicMobileSDK/IdensicMobileSDK.framework",
-				"${PODS_ROOT}/IdensicMobileSDK/IdensicMobileSDK_Liveness3D.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/Pageboy/Pageboy.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/RadioGroup/RadioGroup.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SmileLock/SmileLock.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SweeterSwift/SweeterSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Tabman/Tabman.framework",
-				"${PODS_ROOT}/ZoomAuthSDK/ZoomAuthentication.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -5141,18 +5161,18 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IdensicMobileSDK.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IdensicMobileSDK_Liveness3D.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pageboy.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RadioGroup.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SmileLock.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SweeterSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Tabman.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZoomAuthentication.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5279,6 +5299,7 @@
 				5E86BFDE22B7FFC70019DC85 /* TradeDetailView.swift in Sources */,
 				5EC0CAFE23CB42E6003D0818 /* DashboardViewController.swift in Sources */,
 				5E39F74223A3F92F0073DAD5 /* PublicProfile.swift in Sources */,
+				19411FBC25EFC66A00ADE76E /* SocialFollowListTableViewCell.swift in Sources */,
 				5EFDEAB8238FFECA00AF3AC1 /* BaseTableViewCell.swift in Sources */,
 				5EDD6D3F22C7A6DE00B9DB93 /* CustomLabels.swift in Sources */,
 				5E0DB5E321C8EB2C0027A778 /* NotificationsSettingsViewController.swift in Sources */,
@@ -5404,6 +5425,7 @@
 				1906DA692539A71100A08846 /* PushNotificationChannel.swift in Sources */,
 				5E39F7D223A3F9300073DAD5 /* ErrorCodes.swift in Sources */,
 				19EEE0B22507BF6E00F83CED /* BinanceOrderSide.swift in Sources */,
+				19411FB525EFC0FD00ADE76E /* SocialFollowersViewController.swift in Sources */,
 				5E1813802061D36700481646 /* Common+Extensions.swift in Sources */,
 				5E39F7B723A3F9300073DAD5 /* ProgramPeriodViewModel.swift in Sources */,
 				5ED0C91D2091158500C83F23 /* ShadowViewAppearance.swift in Sources */,
@@ -5872,6 +5894,7 @@
 				1975B8D324D829920095C72B /* FundManageViewController.swift in Sources */,
 				5EFB2375238AC2B600CD7480 /* TradingPrivateShortListViewModel.swift in Sources */,
 				195B9F2725585DE0003DA54E /* ReferralInfoLinkTableViewCell.swift in Sources */,
+				19411FAE25EFB56F00ADE76E /* ManagerSocialTableViewCell.swift in Sources */,
 				1981242F2464510C00F286FE /* DashboardTradingAssetItemsViewModel.swift in Sources */,
 				19A2E07325AF41EE0020AD01 /* SocialMediaCollectionViewCellViewModel.swift in Sources */,
 				198124532464585D00F286FE /* PostImageResize.swift in Sources */,
@@ -6204,6 +6227,7 @@
 				5E39F73E23A3F92F0073DAD5 /* WalletWithdrawalInfo.swift in Sources */,
 				5E39F77223A3F9300073DAD5 /* FundDetailsFull.swift in Sources */,
 				198124752464595300F286FE /* SocialSummary.swift in Sources */,
+				19411FA725EFB4DE00ADE76E /* ManagerSocialTableViewCellViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6249,7 +6273,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -6307,7 +6331,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -6380,7 +6404,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -6423,7 +6447,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_ENTITLEMENTS = NotificationContent/NotificationContent.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = NotificationContent/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -6481,7 +6505,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationContent/NotificationContent.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -6554,7 +6578,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationContent/NotificationContent.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -6658,7 +6682,7 @@
 				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -6961,7 +6985,7 @@
 				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
@@ -7051,7 +7075,7 @@
 				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;

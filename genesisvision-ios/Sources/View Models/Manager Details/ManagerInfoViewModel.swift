@@ -15,6 +15,7 @@ final class ManagerInfoViewModel: ViewModelWithListProtocol {
     enum RowType {
         case header
         case info
+        case social
         case about
     }
     
@@ -29,17 +30,29 @@ final class ManagerInfoViewModel: ViewModelWithListProtocol {
     
     var managerId: String!
     
-    public private(set) var publicProfile: PublicProfile?
+    public private(set) var publicProfile: PublicProfile? {
+        didSet {
+            if let isEmpty = publicProfile?.assets?.isEmpty, !isEmpty, !rows.contains(.info) {
+                rows.insert(.info, at: 1)
+            }
+            
+            if let isEmpty = publicProfile?.about?.isEmpty, !isEmpty, !rows.contains(.about) {
+                rows.append(.about)
+            }
+        }
+    }
 
     private var sections: [SectionType] = [.details]
-    private var rows: [RowType] = [.header, .info, .about]
+    private var rows: [RowType] = [.header, .social,]
     
     
     var viewModels: [CellViewAnyModel] = []
     
     /// Return view models for registration cell Nib files
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [DefaultTableViewCellViewModel.self, ManagerTableViewCellViewModel.self]
+        return [DefaultTableViewCellViewModel.self,
+                ManagerTableViewCellViewModel.self,
+                ManagerSocialTableViewCellViewModel.self]
     }
     weak var delegate: BaseTableViewProtocol?
     // MARK: - Init
@@ -110,10 +123,13 @@ extension ManagerInfoViewModel {
                 return ManagerTableViewCellViewModel(profile: publicProfile, selectable: false)
             case .info:
                 guard let assets = publicProfile.assets else { return nil }
-                return  DefaultTableViewCellViewModel(title: "Assets", subtitle: assets.joined(separator: " | "))
+                return DefaultTableViewCellViewModel(title: "Assets", subtitle: assets.joined(separator: " | "))
             case .about:
                 guard let about = publicProfile.about else { return nil }
                 return DefaultTableViewCellViewModel(title: "About", subtitle: about)
+            case .social:
+                guard let followersCount = publicProfile.followers, let followingCount = publicProfile.following else { return nil }
+                return ManagerSocialTableViewCellViewModel(followersCount: followersCount, followingCount: followingCount, delegate: self)
             }
         }
     }
@@ -133,6 +149,18 @@ extension ManagerInfoViewModel {
     func updateDetails(with publicProfile: PublicProfile) {
         self.publicProfile = publicProfile
         self.delegate?.didReload()
+    }
+}
+
+extension ManagerInfoViewModel: ManagerSocialTableViewCellDelegate {
+    func followersTapped() {
+        guard let userId = publicProfile?._id, let followers = publicProfile?.followers, followers > 0 else { return }
+        router.showFollowersList(with: userId)
+    }
+    
+    func followingTapped() {
+        guard let userId = publicProfile?._id, let following = publicProfile?.following, following > 0 else { return  }
+        router.showFollowingList(with: userId)
     }
 }
 

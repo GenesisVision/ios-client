@@ -22,6 +22,12 @@ class UsersDataProvider: DataProvider {
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
+    
+    static func getUserProfileFollowDetails(with userId: String, completion: @escaping (PublicProfileFollow?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        UsersAPI.getUserProfileFollowDetails(_id: userId) { (viewModel, error) in
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
 }
 
 

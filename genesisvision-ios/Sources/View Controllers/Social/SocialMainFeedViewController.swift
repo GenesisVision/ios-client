@@ -40,7 +40,7 @@ class SocialMainFeedViewController: BaseTabmanViewController<SocialMainFeedViewM
         label.text = "Show events"
         let switchButton = UISwitch()
         switchButton.isEnabled = true
-        switchButton.isOn = true
+        switchButton.isOn = UserDefaults.standard.bool(forKey: UserDefaultKeys.socialShowEvents)
         switchButton.onTintColor = UIColor.primary
         switchButton.thumbTintColor = UIColor.Cell.switchThumbTint
         switchButton.tintColor = UIColor.Cell.switchTint
@@ -59,6 +59,8 @@ class SocialMainFeedViewController: BaseTabmanViewController<SocialMainFeedViewM
     @objc private func showEventsSwitch(switchButton: UISwitch) {
         let value = switchButton.isOn
         viewModel.showEvents = value
+        
+        UserDefaults.standard.set(value, forKey: UserDefaultKeys.socialShowEvents)
         
         NotificationCenter.default.post(name: .socialShowEventsSwitchValueChanged, object: nil, userInfo: ["showEvents": value])
     }
@@ -80,7 +82,7 @@ final class SocialMainFeedViewModel: TabmanViewModel {
     
     var showEvents: Bool = false {
         didSet {
-            controllers.forEach({ ($1 as? SocialFeedViewController)?.viewModel.socialCollectionViewModel.showOnlyUsersPosts = !showEvents  })
+            controllers.forEach({ ($1 as? SocialFeedViewController)?.viewModel.showOnlyUsersPosts = !showEvents  })
         }
     }
     
@@ -94,17 +96,17 @@ final class SocialMainFeedViewModel: TabmanViewModel {
         switch type {
         case .live:
             let viewController = SocialFeedViewController()
-            let viewModel = SocialFeedViewModel(feedType: .live, collectionViewDelegate: viewController, router: socialRouter)
+            let viewModel = SocialFeedViewModel(feedType: .live, collectionViewDelegate: viewController, router: socialRouter, showEvents: showEvents)
             viewController.viewModel = viewModel
             return viewController
         case .hot:
             let viewController = SocialFeedViewController()
-            let viewModel = SocialFeedViewModel(feedType: .hot, collectionViewDelegate: viewController, router: socialRouter)
+            let viewModel = SocialFeedViewModel(feedType: .hot, collectionViewDelegate: viewController, router: socialRouter, showEvents: showEvents)
             viewController.viewModel = viewModel
             return viewController
         case .feed:
             let viewController = SocialFeedViewController()
-            let viewModel = SocialFeedViewModel(feedType: .feed, collectionViewDelegate: viewController, router: socialRouter)
+            let viewModel = SocialFeedViewModel(feedType: .feed, collectionViewDelegate: viewController, router: socialRouter, showEvents: showEvents)
             viewController.viewModel = viewModel
             return viewController
         }
@@ -116,6 +118,7 @@ final class SocialMainFeedViewModel: TabmanViewModel {
         self.title = ""
         font = UIFont.getFont(.semibold, size: 16)
         self.dataSource = PageboyDataSource(self)
+        self.showEvents = UserDefaults.standard.bool(forKey: UserDefaultKeys.socialShowEvents)
     }
     
     func getIndexForDefaultTab() -> Int {

@@ -328,7 +328,7 @@ extension SocialMediaCollectionViewModel: SocialMediaFeedCollectionViewCellDeleg
         var postLink: String = ""
 
         if let postViewModel = feedViewModel.first(where: { return ($0 as? SocialMediaFeedCollectionViewCellViewModel)?.post._id == postId }) as? SocialMediaFeedCollectionViewCellViewModel, let url = postViewModel.post.url {
-            postLink = url }
+            postLink = ApiKeys.socialPostsPath + url }
         delegate?.showPostActions(postActions: postActions, postId: postId, postLink: postLink)
     }
     

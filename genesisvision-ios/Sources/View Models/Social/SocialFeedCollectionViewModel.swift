@@ -15,6 +15,7 @@ protocol SocialFeedCollectionViewModelDelegate: class {
     func tagPressed(tag: PostTag)
     func userOwnerPressed(userDetails: ProfilePublic)
     func reloadCollectionViewData()
+    func reloadCells(cells: [IndexPath])
     func openPost(post: Post)
     func showPostActions(postActions: [SocialPostAction], postId: UUID, postLink: String)
 }
@@ -32,7 +33,7 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
     var viewModels = [CellViewAnyModel]()
 
     var canPullToRefresh: Bool = true
-    var showOnlyUsersPosts: Bool = false
+    var showOnlyUsersPosts: Bool = true
     var feedType: SocialFeedType = .feed
         
     let collectionTopInset: CGFloat = Constants.SystemSizes.Cell.horizontalMarginValue
@@ -55,10 +56,11 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
     
     weak var delegate: SocialFeedCollectionViewModelDelegate?
     
-    init(type: CellActionType, title: String, delegate: SocialFeedCollectionViewModelDelegate) {
+    init(type: CellActionType, title: String, delegate: SocialFeedCollectionViewModelDelegate, showOnlyUsersPosts: Bool = true) {
         self.type = type
         self.title = title
         self.delegate = delegate
+        self.showOnlyUsersPosts = showOnlyUsersPosts
     }
     
     func didSelect(at indexPath: IndexPath) {
@@ -80,6 +82,10 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
             postActions.append(.delete(postId: postId))
         }
         
+        if let canPin = postViewModel.post.personalDetails?.canPin, canPin, let isPinned = postViewModel.post.isPinned {
+            isPinned ? postActions.append(.unpin(postId: postId)) : postActions.append(.pin(postId: postId))
+        }
+        
         if let canEdit = postViewModel.post.personalDetails?.canEdit, canEdit {
             postActions.append(.edit(postId: postId))
         }
@@ -93,6 +99,12 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
     
     func deletePost(postId: UUID, completion: @escaping CompletionBlock) {
         SocialDataProvider.deletePost(postId: postId, completion: completion)
+    }
+    
+    func pinPost(postId: UUID, completion: @escaping CompletionBlock) {
+        guard let postViewModel = viewModels.first(where: { return ($0 as? SocialFeedCollectionViewCellViewModel)?.post._id == postId }) as? SocialFeedCollectionViewCellViewModel, let pinned = postViewModel.post.isPinned else { return }
+
+        pinned ? SocialDataProvider.unpin(postId: postId, completion: completion) : SocialDataProvider.pin(postId: postId, completion: completion)
     }
     
     func getRightButtons() -> [UIButton] {
@@ -118,7 +130,7 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
     }
     
     func insetForSection(for section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: collectionTopInset, left: collectionLeftInset, bottom: collectionBottomInset, right: collectionRightInset)
+        return UIEdgeInsets(top: collectionTopInset, left: 0, bottom: collectionBottomInset, right: 0)
     }
     
     func minimumLineSpacing(for section: Int) -> CGFloat {
@@ -212,7 +224,7 @@ extension SocialFeedCollectionViewModel: SocialFeedCollectionViewCellDelegate {
         var postLink: String = ""
 
         if let postViewModel = viewModels.first(where: { return ($0 as? SocialFeedCollectionViewCellViewModel)?.post._id == postId }) as? SocialFeedCollectionViewCellViewModel, let url = postViewModel.post.url {
-            postLink = url }
+            postLink = ApiKeys.socialPostsPath + url }
         
         
         delegate?.showPostActions(postActions: postActions, postId: postId, postLink: postLink)

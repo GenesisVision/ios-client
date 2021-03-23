@@ -30,8 +30,8 @@
             filePath = "genesisvision-ios/Sources/Routers/Router.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "349"
-            endingLineNumber = "349"
+            startingLineNumber = "361"
+            endingLineNumber = "361"
             landmarkName = "showFilterVC(with:filterModel:filterType:sortingType:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1694,8 +1694,8 @@
             filePath = "genesisvision-ios/Sources/Routers/Router.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "618"
-            endingLineNumber = "618"
+            startingLineNumber = "630"
+            endingLineNumber = "630"
             landmarkName = "getBalanceViewController(with:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -4153,8 +4153,8 @@
             filePath = "genesisvision-ios/Sources/Routers/Router.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "366"
-            endingLineNumber = "366"
+            startingLineNumber = "378"
+            endingLineNumber = "378"
             landmarkName = "showAssetList(with:assetType:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -4185,8 +4185,8 @@
             filePath = "genesisvision-ios/Sources/Routers/Router.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "572"
-            endingLineNumber = "572"
+            startingLineNumber = "584"
+            endingLineNumber = "584"
             landmarkName = "getFollows(with:showFacets:parentRouter:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -4425,8 +4425,8 @@
             filePath = "genesisvision-ios/Sources/Routers/Router.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "348"
-            endingLineNumber = "348"
+            startingLineNumber = "360"
+            endingLineNumber = "360"
             landmarkName = "showFilterVC(with:filterModel:filterType:sortingType:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -7593,8 +7593,8 @@
             filePath = "genesisvision-ios/Sources/Routers/Router.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "585"
-            endingLineNumber = "585"
+            startingLineNumber = "597"
+            endingLineNumber = "597"
             landmarkName = "getFunds(with:showFacets:parentRouter:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -7609,8 +7609,8 @@
             filePath = "genesisvision-ios/Sources/Routers/Router.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "586"
-            endingLineNumber = "586"
+            startingLineNumber = "598"
+            endingLineNumber = "598"
             landmarkName = "getFunds(with:showFacets:parentRouter:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -7625,8 +7625,8 @@
             filePath = "genesisvision-ios/Sources/Routers/Router.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "587"
-            endingLineNumber = "587"
+            startingLineNumber = "599"
+            endingLineNumber = "599"
             landmarkName = "getFunds(with:showFacets:parentRouter:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -9542,8 +9542,8 @@
             filePath = "genesisvision-ios/Sources/Routers/Router.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "357"
-            endingLineNumber = "357"
+            startingLineNumber = "369"
+            endingLineNumber = "369"
             landmarkName = "showProgramDetails(with:assetType:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -12870,8 +12870,8 @@
             filePath = "genesisvision-ios/Sources/Routers/Router.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "567"
-            endingLineNumber = "567"
+            startingLineNumber = "579"
+            endingLineNumber = "579"
             landmarkName = "getPrograms(with:showFacets:parentRouter:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -12966,8 +12966,8 @@
             filePath = "genesisvision-ios/Sources/View Models/Social/SocialFeedCollectionViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "233"
-            endingLineNumber = "233"
+            startingLineNumber = "245"
+            endingLineNumber = "245"
             landmarkName = "likeTouched(postId:)"
             landmarkType = "7">
             <Locations>
@@ -13046,8 +13046,8 @@
             filePath = "genesisvision-ios/Sources/View Models/Social/SocialFeedCollectionViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "229"
-            endingLineNumber = "229"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
             landmarkName = "commentTouched(postId:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -13462,8 +13462,8 @@
             filePath = "genesisvision-ios/Sources/View Models/Social/SocialFeedCollectionViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "238"
-            endingLineNumber = "238"
+            startingLineNumber = "250"
+            endingLineNumber = "250"
             landmarkName = "likeTouched(postId:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -13478,8 +13478,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Social/SocialMediaViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
             landmarkName = "likePressed(postId:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -13510,8 +13510,8 @@
             filePath = "genesisvision-ios/Sources/Views/Custom Views/SocialPostView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "186"
-            endingLineNumber = "186"
+            startingLineNumber = "220"
+            endingLineNumber = "220"
             landmarkName = "overlayMiddleView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -13542,8 +13542,8 @@
             filePath = "genesisvision-ios/Sources/Views/Custom Views/SocialPostView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
+            startingLineNumber = "238"
+            endingLineNumber = "238"
             landmarkName = "overlayMiddleView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -13558,8 +13558,8 @@
             filePath = "genesisvision-ios/Sources/Views/Custom Views/SocialPostView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "201"
-            endingLineNumber = "201"
+            startingLineNumber = "248"
+            endingLineNumber = "248"
             landmarkName = "updateMiddleViewConstraints()"
             landmarkType = "7">
          </BreakpointContent>
@@ -13735,8 +13735,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Social/SocialMainFeedViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
             landmarkName = "getViewController(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -13879,8 +13879,8 @@
             filePath = "genesisvision-ios/Sources/View Models/Social/SocialFeedCollectionViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
             landmarkName = "fetch(completion:refresh:feedType:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -13927,8 +13927,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Social/SocialMediaViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
             landmarkName = "shareIdeasPressed()"
             landmarkType = "7">
          </BreakpointContent>
@@ -14055,8 +14055,8 @@
             filePath = "genesisvision-ios/Sources/Views/Custom Views/SocialPostView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
+            startingLineNumber = "255"
+            endingLineNumber = "255"
             landmarkName = "touchUserView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -14071,8 +14071,8 @@
             filePath = "genesisvision-ios/Sources/View Models/Social/SocialFeedCollectionViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "186"
-            endingLineNumber = "186"
+            startingLineNumber = "198"
+            endingLineNumber = "198"
             landmarkName = "fetchMore()"
             landmarkType = "7">
             <Locations>
@@ -14151,8 +14151,8 @@
             filePath = "genesisvision-ios/Sources/View Models/Social/SocialFeedCollectionViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
             landmarkName = "sizeForItem(at:frame:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -14167,8 +14167,8 @@
             filePath = "genesisvision-ios/Sources/View Models/Social/SocialFeedCollectionViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
             landmarkName = "sizeForItem(at:frame:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -14199,8 +14199,8 @@
             filePath = "genesisvision-ios/Sources/View Models/Social/SocialFeedCollectionViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
             landmarkName = "fetch(completion:refresh:feedType:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -14215,8 +14215,8 @@
             filePath = "genesisvision-ios/Sources/View Models/Social/SocialFeedCollectionViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "156"
-            endingLineNumber = "156"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
             landmarkName = "fetch(completion:refresh:feedType:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -14231,8 +14231,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Social/SocialMediaViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
             landmarkName = "sharePressed(post:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -14551,8 +14551,8 @@
             filePath = "genesisvision-ios/Sources/View Models/Social/SocialFeedCollectionViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
             landmarkName = "didSelect(at:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -14631,8 +14631,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Settings/ProfilePrivacyViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
             landmarkName = "droDownFieldPressed(uuidString:titleString:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -14647,8 +14647,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Settings/ProfilePrivacyViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -14679,8 +14679,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Settings/ProfilePrivacyViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
             landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -14695,8 +14695,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Settings/ProfilePrivacyViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
             landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
             <Locations>
@@ -14839,8 +14839,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Settings/ProfilePrivacyViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "156"
-            endingLineNumber = "156"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
             landmarkName = "init(profile:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -14871,8 +14871,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Settings/ProfilePrivacyViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "186"
-            endingLineNumber = "186"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
             landmarkName = "update(completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -14887,8 +14887,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Settings/ProfilePrivacyViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "190"
-            endingLineNumber = "190"
+            startingLineNumber = "198"
+            endingLineNumber = "198"
             landmarkName = "update(completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -14903,8 +14903,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Settings/ProfilePrivacyViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "181"
-            endingLineNumber = "181"
+            startingLineNumber = "189"
+            endingLineNumber = "189"
             landmarkName = "init(profile:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -14919,8 +14919,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Settings/ProfilePrivacyViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "215"
-            endingLineNumber = "215"
+            startingLineNumber = "223"
+            endingLineNumber = "223"
             landmarkName = "update(completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -14935,8 +14935,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Settings/ProfilePrivacyViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
             landmarkName = "init(profile:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -14967,8 +14967,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Social/SocialMediaViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
             landmarkName = "showPostActions(postActions:postId:postLink:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -14983,8 +14983,8 @@
             filePath = "genesisvision-ios/Sources/Common/Protocols/Social.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
             landmarkName = "showPostMenu(actions:postId:postLink:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -15031,8 +15031,8 @@
             filePath = "genesisvision-ios/Sources/Views/Custom Views/CustomRadioButton.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
             landmarkName = "init(frame:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -15047,8 +15047,8 @@
             filePath = "genesisvision-ios/Sources/Views/Custom Views/CustomRadioButton.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "init(coder:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -15063,8 +15063,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Social/SocialFeedViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
             landmarkName = "showPostActions(postActions:postId:postLink:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -15079,8 +15079,8 @@
             filePath = "genesisvision-ios/Sources/View Models/Social/SocialFeedCollectionViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "211"
-            endingLineNumber = "211"
+            startingLineNumber = "223"
+            endingLineNumber = "223"
             landmarkName = "postActionsPressed(postId:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -15095,8 +15095,8 @@
             filePath = "genesisvision-ios/Sources/View Models/Social/SocialFeedCollectionViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
             landmarkName = "postActionsForPost(postId:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -15127,8 +15127,8 @@
             filePath = "genesisvision-ios/Sources/Views/Custom Views/CustomRadioButton.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "init(frame:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -15143,8 +15143,8 @@
             filePath = "genesisvision-ios/Sources/Views/Custom Views/CustomRadioButton.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
             landmarkName = "buttonTouched()"
             landmarkType = "7">
          </BreakpointContent>
@@ -15152,17 +15152,524 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "CAF276A0-CC17-4338-98F9-BF44776CE2BF"
+            uuid = "7EB15FCA-8F8F-4165-A71E-3F4A538B8C0B"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "genesisvision-ios/Sources/Views/Custom Views/CustomRadioButton.swift"
+            filePath = "genesisvision-ios/Sources/View Controllers/Social/SocialMainFeedViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
-            landmarkName = "layoutSubviews()"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
+            landmarkName = "init(withRouter:openedTab:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4A549EF7-EEB8-4827-A7A3-B2BFE8C7ABDC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/View Controllers/Social/SocialMainFeedViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "getViewController(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C7FCB202-8AFD-4D7B-A5EF-0FEF1794F038"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/View Models/Social/SocialFeedViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "showOnlyUsersPosts"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EEC38FC7-099C-4295-86CE-9E205E24E530"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/View Models/Social/SocialFeedCollectionViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "226"
+            endingLineNumber = "226"
+            landmarkName = "postActionsPressed(postId:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "EEC38FC7-099C-4295-86CE-9E205E24E530 - dd94d9798d67b332"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GV_DEBUG.SocialFeedCollectionViewModel.postActionsPressed(postId: Foundation.UUID) -&gt; ()"
+                  moduleName = "GV DEBUG"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ruslanlukin/Workspace/GV/ios-client/genesisvision-ios/Sources/View%20Models/Social/SocialFeedCollectionViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "215"
+                  endingLineNumber = "215"
+                  offsetFromSymbolStart = "432">
+               </Location>
+               <Location
+                  uuid = "EEC38FC7-099C-4295-86CE-9E205E24E530 - a1d459fbc1444214"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (GV_DEBUG.CellViewAnyModel) -&gt; Swift.Bool in GV_DEBUG.SocialFeedCollectionViewModel.postActionsPressed(postId: Foundation.UUID) -&gt; ()"
+                  moduleName = "GV DEBUG"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ruslanlukin/Workspace/GV/ios-client/genesisvision-ios/Sources/View%20Models/Social/SocialFeedCollectionViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "215"
+                  endingLineNumber = "215"
+                  offsetFromSymbolStart = "183">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AA303897-0B40-4293-8646-C91C791050FC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/View Models/Manager Details/ManagerInfoViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
+            landmarkName = "model(for:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "38A341AE-D36F-4953-B002-17A94F802349"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/View Models/Manager Details/ManagerInfoViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "publicProfile"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8179DBA6-4D43-4D95-B47B-82F711F5611C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/View Models/Manager Details/ManagerInfoViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "publicProfile"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "421C9304-2399-457A-B74D-6AACB369057C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/View Models/Manager Details/ManagerInfoViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
+            landmarkName = "model(for:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "32147DC6-C33E-40C8-958A-24FED9D45062"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/View Models/Manager Details/ManagerInfoViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
+            landmarkName = "followersTapped()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "26E5ABFA-DE32-4560-8176-5324C7F3CE8C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/View Models/Manager Details/ManagerInfoViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
+            landmarkName = "followingTapped()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "75909347-FCC6-4FFC-8587-815BEF7973B9"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/Views/Cells/Program/Detail/Info tab/ManagerSocialTableViewCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "followersButtonAction(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E4299898-1766-4C7B-BCE3-61806E7DF7D2"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/Views/Cells/Program/Detail/Info tab/ManagerSocialTableViewCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "followingButtonAction(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C61FD675-BF4E-4706-8B4C-227E83C6E1CB"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/Routers/Router.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "337"
+            endingLineNumber = "337"
+            landmarkName = "showFollowersList(with:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "34FA47A5-0B90-4BE7-BC09-C2F7479B60E2"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/Routers/Router.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "343"
+            endingLineNumber = "343"
+            landmarkName = "showFollowingList(with:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8F2C8F10-1E4C-4E6F-BC57-A2EB8713DEB4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/View Models/Manager Details/ManagerInfoViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
+            landmarkName = "followersTapped()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "526B3261-10D0-4828-BAC5-49D6B977F565"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/View Models/Manager Details/ManagerInfoViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "157"
+            endingLineNumber = "157"
+            landmarkName = "followersTapped()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9CE2A166-88BC-4773-83F7-EDD696BFAE09"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/View Models/Manager Details/ManagerInfoViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
+            landmarkName = "followingTapped()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6291A01D-23FE-4417-A2B2-ACD7C893647A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/Views/Cells/Social/SocialFeedCollectionViewCellViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "setup(on:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E37961D1-6295-456C-B16D-BB34A88C338A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/Views/Cells/Social/SocialFeedCollectionViewCellViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "204"
+            endingLineNumber = "204"
+            landmarkName = "setup()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C0C0407B-CD34-4E2D-B8A9-909CE5E0AB6B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/View Models/Social/SocialFeedCollectionViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
+            landmarkName = "postActionsForPost(postId:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CF7500AC-C7F7-444D-ACE7-AEBDCF458738"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/View Models/Social/SocialFeedCollectionViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "224"
+            endingLineNumber = "224"
+            landmarkName = "postActionsPressed(postId:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "65BB0631-9BC4-4233-8661-1634198AA48F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/Common/Protocols/Social.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "showPostMenu(actions:postId:postLink:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C64E7449-EC63-4759-A6B8-71738132F5B0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/Common/Protocols/Social.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "showPostMenu(actions:postId:postLink:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6F190DD3-E550-4B4E-AB48-D21A39F933FF"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/Common/Protocols/Social.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "showPostMenu(actions:postId:postLink:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "6F190DD3-E550-4B4E-AB48-D21A39F933FF - b6aab376f6e2d325"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #2 (Swift.String) -&gt; () in (extension in GV_DEBUG):GV_DEBUG.SocialPostActionsMenuPresenable&lt; where A: GV_DEBUG.BaseViewController&gt;.showPostMenu(actions: Swift.Array&lt;GV_DEBUG.SocialPostAction&gt;, postId: Foundation.UUID, postLink: Swift.String) -&gt; ()"
+                  moduleName = "GV DEBUG"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ruslanlukin/Workspace/GV/ios-client/genesisvision-ios/Sources/Common/Protocols/Social.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "36"
+                  endingLineNumber = "36"
+                  offsetFromSymbolStart = "297">
+               </Location>
+               <Location
+                  uuid = "6F190DD3-E550-4B4E-AB48-D21A39F933FF - b6aab376f6e2d325"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #2 (Swift.String) -&gt; () in (extension in GV_DEBUG):GV_DEBUG.SocialPostActionsMenuPresenable&lt; where A: GV_DEBUG.BaseViewController&gt;.showPostMenu(actions: Swift.Array&lt;GV_DEBUG.SocialPostAction&gt;, postId: Foundation.UUID, postLink: Swift.String) -&gt; ()"
+                  moduleName = "GV DEBUG"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ruslanlukin/Workspace/GV/ios-client/genesisvision-ios/Sources/Common/Protocols/Social.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "36"
+                  endingLineNumber = "36"
+                  offsetFromSymbolStart = "880">
+               </Location>
+               <Location
+                  uuid = "6F190DD3-E550-4B4E-AB48-D21A39F933FF - b6aab376f6e2d325"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #2 (Swift.String) -&gt; () in (extension in GV_DEBUG):GV_DEBUG.SocialPostActionsMenuPresenable&lt; where A: GV_DEBUG.BaseViewController&gt;.showPostMenu(actions: Swift.Array&lt;GV_DEBUG.SocialPostAction&gt;, postId: Foundation.UUID, postLink: Swift.String) -&gt; ()"
+                  moduleName = "GV DEBUG"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ruslanlukin/Workspace/GV/ios-client/genesisvision-ios/Sources/Common/Protocols/Social.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "36"
+                  endingLineNumber = "36"
+                  offsetFromSymbolStart = "1400">
+               </Location>
+               <Location
+                  uuid = "6F190DD3-E550-4B4E-AB48-D21A39F933FF - b6aab376f6e2d325"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #2 (Swift.String) -&gt; () in (extension in GV_DEBUG):GV_DEBUG.SocialPostActionsMenuPresenable&lt; where A: GV_DEBUG.BaseViewController&gt;.showPostMenu(actions: Swift.Array&lt;GV_DEBUG.SocialPostAction&gt;, postId: Foundation.UUID, postLink: Swift.String) -&gt; ()"
+                  moduleName = "GV DEBUG"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ruslanlukin/Workspace/GV/ios-client/genesisvision-ios/Sources/Common/Protocols/Social.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "36"
+                  endingLineNumber = "36"
+                  offsetFromSymbolStart = "1920">
+               </Location>
+               <Location
+                  uuid = "6F190DD3-E550-4B4E-AB48-D21A39F933FF - b6aab376f6e2d325"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #2 (Swift.String) -&gt; () in (extension in GV_DEBUG):GV_DEBUG.SocialPostActionsMenuPresenable&lt; where A: GV_DEBUG.BaseViewController&gt;.showPostMenu(actions: Swift.Array&lt;GV_DEBUG.SocialPostAction&gt;, postId: Foundation.UUID, postLink: Swift.String) -&gt; ()"
+                  moduleName = "GV DEBUG"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ruslanlukin/Workspace/GV/ios-client/genesisvision-ios/Sources/Common/Protocols/Social.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "36"
+                  endingLineNumber = "36"
+                  offsetFromSymbolStart = "2487">
+               </Location>
+               <Location
+                  uuid = "6F190DD3-E550-4B4E-AB48-D21A39F933FF - b6aab376f6e2d325"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #2 (Swift.String) -&gt; () in (extension in GV_DEBUG):GV_DEBUG.SocialPostActionsMenuPresenable&lt; where A: GV_DEBUG.BaseViewController&gt;.showPostMenu(actions: Swift.Array&lt;GV_DEBUG.SocialPostAction&gt;, postId: Foundation.UUID, postLink: Swift.String) -&gt; ()"
+                  moduleName = "GV DEBUG"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ruslanlukin/Workspace/GV/ios-client/genesisvision-ios/Sources/Common/Protocols/Social.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "36"
+                  endingLineNumber = "36"
+                  offsetFromSymbolStart = "3054">
+               </Location>
+               <Location
+                  uuid = "6F190DD3-E550-4B4E-AB48-D21A39F933FF - b6aab376f6e2d325"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #2 (Swift.String) -&gt; () in (extension in GV_DEBUG):GV_DEBUG.SocialPostActionsMenuPresenable&lt; where A: GV_DEBUG.BaseViewController&gt;.showPostMenu(actions: Swift.Array&lt;GV_DEBUG.SocialPostAction&gt;, postId: Foundation.UUID, postLink: Swift.String) -&gt; ()"
+                  moduleName = "GV DEBUG"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ruslanlukin/Workspace/GV/ios-client/genesisvision-ios/Sources/Common/Protocols/Social.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "36"
+                  endingLineNumber = "36"
+                  offsetFromSymbolStart = "3621">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

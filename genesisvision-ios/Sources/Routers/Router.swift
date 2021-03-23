@@ -332,6 +332,18 @@ extension Router {
         }
     }
     
+    func showFollowersList(with userId: UUID) {
+        let viewController = SocialFollowersViewController()
+        viewController.viewModel = SocialFollowersViewModel(with: self, delegate: viewController, userId: userId, followType: .followers)
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func showFollowingList(with userId: UUID) {
+        let viewController = SocialFollowersViewController()
+        viewController.viewModel = SocialFollowersViewModel(with: self, delegate: viewController, userId: userId, followType: .following)
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
     func showTradingAccountDetails(with assetId: String) {
         guard let viewController = getTradingAccountViewController(with: assetId) else { return }
         navigationController?.pushViewController(viewController, animated: true)

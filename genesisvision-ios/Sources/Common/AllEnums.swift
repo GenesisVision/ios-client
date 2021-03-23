@@ -230,5 +230,26 @@ enum SocialPostAction {
     case copyLink(postLink: String)
     case delete(postId: UUID)
     case report(postId: UUID)
+    case pin(postId: UUID)
+    case unpin(postId: UUID)
+    
+    var string: String {
+        switch self {
+        case .edit:
+            return "Edit"
+        case .share:
+            return "Share"
+        case .copyLink:
+            return "Copy link"
+        case .delete:
+            return "Delete"
+        case .report:
+            return "Report"
+        case .pin:
+            return "Pin"
+        case .unpin:
+            return "Unpin"
+        }
+    }
 }
 

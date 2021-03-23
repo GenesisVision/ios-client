@@ -134,11 +134,33 @@ extension SocialFeedViewController: SocialPostActionsMenuPresenable {
             }
         case .report(let postId):
             viewModel.socialRouter.show(routeType: .reportPost(postId: postId))
+        case .pin(let postId):
+            viewModel.pinPost(postId: postId) { [weak self] (result) in
+                switch result {
+                case .success:
+                    self?.pullToRefresh()
+                case .failure(errorType: let errorType):
+                    ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
+                }
+            }
+        case .unpin(let postId):
+            viewModel.pinPost(postId: postId) { [weak self] (result) in
+                switch result {
+                case .success:
+                    self?.pullToRefresh()
+                case .failure(errorType: let errorType):
+                    ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
+                }
+            }
         }
     }
 }
 
 extension SocialFeedViewController: SocialFeedCollectionViewModelDelegate {
+    func reloadCells(cells: [IndexPath]) {
+        socialFeedCollectionView.reloadItems(at: cells)
+    }
+    
     func showPostActions(postActions: [SocialPostAction], postId: UUID, postLink: String) {
         showPostMenu(actions: postActions, postId: postId, postLink: postLink)
     }
