@@ -81,7 +81,13 @@ class WalletBalanceViewController: BaseViewControllerWithTableView {
             topUpButton.isHidden = true
         }
         
-        if let currency = viewModel.wallet?.currency, currency == .gvt {
+        if let currency = viewModel.wallet?.currency, (currency == .gvt || currency == .bnb) {
+            topUpButton.isHidden = true
+        }
+        
+        if let currency = viewModel.wallet?.currency, currency == .dai {
+            addFundsButton.isHidden = true
+            withdrawButton.isHidden = true
             topUpButton.isHidden = true
         }
     }
@@ -123,11 +129,23 @@ class WalletBalanceViewController: BaseViewControllerWithTableView {
     
     // MARK: - Actions
     @IBAction func withdrawButtonAction(_ sender: UIButton) {
-        viewModel.withdraw()
+        if let currency = viewModel.wallet?.currency, currency == .bnb {
+            showAlertWithTitle(title: "", message: "Please ensure that the withdrawal address supports the Binance Smart Chain network (BSC). You will lose your assets if your choosen platform does not support BSC.", actionTitle: "I understand it", cancelTitle: nil, handler: { [weak self] in
+                self?.viewModel.withdraw()
+            }, cancelHandler: nil)
+        } else {
+            viewModel.withdraw()
+        }
     }
     
     @IBAction func depositButtonAction(_ sender: UISwitch) {
-        viewModel.deposit()
+        if let currency = viewModel.wallet?.currency, currency == .bnb {
+            showAlertWithTitle(title: "", message: "Please ensure that you are using Binance Smart Chain network (BSC) when depositing BNB to this address. You will lose your assets if you do not choose the correct network.", actionTitle: "I understand it", cancelTitle: nil, handler: { [weak self] in
+                self?.viewModel.deposit()
+            }, cancelHandler: nil)
+        } else {
+            viewModel.deposit()
+        }
     }
     
     @IBAction func transferButtonAction(_ sender: UIButton) {

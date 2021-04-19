@@ -25,8 +25,14 @@ public struct DashboardProgramDetails: Codable {
 
     public var successFeeCurrent: Double?
 
+    public var stopOutLevelSelected: Double?
+
+    public var stopOutLevelCurrent: Double?
+
+    public var totalAvailableInvestment: Double?
+
     public var dailyPeriodDetails: ProgramDailyPeriodDetails?
-    public init(level: Int? = nil, levelProgress: Double? = nil, type: ProgramType? = nil, managementFeeSelected: Double? = nil, managementFeeCurrent: Double? = nil, successFeeSelected: Double? = nil, successFeeCurrent: Double? = nil, dailyPeriodDetails: ProgramDailyPeriodDetails? = nil) { 
+    public init(level: Int? = nil, levelProgress: Double? = nil, type: ProgramType? = nil, managementFeeSelected: Double? = nil, managementFeeCurrent: Double? = nil, successFeeSelected: Double? = nil, successFeeCurrent: Double? = nil, stopOutLevelSelected: Double? = nil, stopOutLevelCurrent: Double? = nil, totalAvailableInvestment: Double? = nil, dailyPeriodDetails: ProgramDailyPeriodDetails? = nil) { 
         self.level = level
         self.levelProgress = levelProgress
         self.type = type
@@ -34,6 +40,9 @@ public struct DashboardProgramDetails: Codable {
         self.managementFeeCurrent = managementFeeCurrent
         self.successFeeSelected = successFeeSelected
         self.successFeeCurrent = successFeeCurrent
+        self.stopOutLevelSelected = stopOutLevelSelected
+        self.stopOutLevelCurrent = stopOutLevelCurrent
+        self.totalAvailableInvestment = totalAvailableInvestment
         self.dailyPeriodDetails = dailyPeriodDetails
     }
 

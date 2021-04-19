@@ -49,6 +49,12 @@ public struct ProgramInvestingDetailsList: Codable {
 
     public var successFeeCurrent: Double?
 
+    public var totalAvailableInvestment: Double?
+
+    public var stopOutLevelSelected: Double?
+
+    public var stopOutLevelCurrent: Double?
+
     public var owner: ProfilePublicShort?
 
     public var brokerDetails: BrokerDetails?
@@ -62,7 +68,7 @@ public struct ProgramInvestingDetailsList: Codable {
     public var balance: AmountWithCurrency?
 
     public var dailyPeriodDetails: ProgramDailyPeriodDetails?
-    public init(_id: UUID? = nil, type: ProgramType? = nil, logoUrl: String? = nil, url: String? = nil, color: String? = nil, title: String? = nil, creationDate: Date? = nil, currency: Currency? = nil, availableToInvest: Double? = nil, level: Int? = nil, levelProgress: Double? = nil, periodDuration: Int? = nil, investorsCount: Int? = nil, periodStarts: Date? = nil, periodEnds: Date? = nil, managementFeeSelected: Double? = nil, managementFeeCurrent: Double? = nil, successFeeSelected: Double? = nil, successFeeCurrent: Double? = nil, owner: ProfilePublicShort? = nil, brokerDetails: BrokerDetails? = nil, personalDetails: PersonalInvestingProgramDetailsList? = nil, tags: [Tag]? = nil, statistic: ProfitChart? = nil, balance: AmountWithCurrency? = nil, dailyPeriodDetails: ProgramDailyPeriodDetails? = nil) { 
+    public init(_id: UUID? = nil, type: ProgramType? = nil, logoUrl: String? = nil, url: String? = nil, color: String? = nil, title: String? = nil, creationDate: Date? = nil, currency: Currency? = nil, availableToInvest: Double? = nil, level: Int? = nil, levelProgress: Double? = nil, periodDuration: Int? = nil, investorsCount: Int? = nil, periodStarts: Date? = nil, periodEnds: Date? = nil, managementFeeSelected: Double? = nil, managementFeeCurrent: Double? = nil, successFeeSelected: Double? = nil, successFeeCurrent: Double? = nil, totalAvailableInvestment: Double? = nil, stopOutLevelSelected: Double? = nil, stopOutLevelCurrent: Double? = nil, owner: ProfilePublicShort? = nil, brokerDetails: BrokerDetails? = nil, personalDetails: PersonalInvestingProgramDetailsList? = nil, tags: [Tag]? = nil, statistic: ProfitChart? = nil, balance: AmountWithCurrency? = nil, dailyPeriodDetails: ProgramDailyPeriodDetails? = nil) { 
         self._id = _id
         self.type = type
         self.logoUrl = logoUrl
@@ -82,6 +88,9 @@ public struct ProgramInvestingDetailsList: Codable {
         self.managementFeeCurrent = managementFeeCurrent
         self.successFeeSelected = successFeeSelected
         self.successFeeCurrent = successFeeCurrent
+        self.totalAvailableInvestment = totalAvailableInvestment
+        self.stopOutLevelSelected = stopOutLevelSelected
+        self.stopOutLevelCurrent = stopOutLevelCurrent
         self.owner = owner
         self.brokerDetails = brokerDetails
         self.personalDetails = personalDetails
@@ -110,6 +119,9 @@ public struct ProgramInvestingDetailsList: Codable {
         case managementFeeCurrent
         case successFeeSelected
         case successFeeCurrent
+        case totalAvailableInvestment
+        case stopOutLevelSelected
+        case stopOutLevelCurrent
         case owner
         case brokerDetails
         case personalDetails

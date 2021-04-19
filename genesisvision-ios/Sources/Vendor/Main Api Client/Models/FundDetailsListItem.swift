@@ -19,6 +19,8 @@ public struct FundDetailsListItem: Codable {
 
     public var color: String?
 
+    public var index: Int?
+
     public var title: String?
 
     public var _description: String?
@@ -40,11 +42,12 @@ public struct FundDetailsListItem: Codable {
     public var personalDetails: PersonalFundDetailsList?
 
     public var balance: AmountWithCurrency?
-    public init(_id: UUID? = nil, logoUrl: String? = nil, url: String? = nil, color: String? = nil, title: String? = nil, _description: String? = nil, creationDate: Date? = nil, investorsCount: Int? = nil, status: String? = nil, totalAssetsCount: Int? = nil, topFundAssets: [FundAssetPercent]? = nil, owner: ProfilePublicShort? = nil, statistic: ProfitChart? = nil, personalDetails: PersonalFundDetailsList? = nil, balance: AmountWithCurrency? = nil) { 
+    public init(_id: UUID? = nil, logoUrl: String? = nil, url: String? = nil, color: String? = nil, index: Int? = nil, title: String? = nil, _description: String? = nil, creationDate: Date? = nil, investorsCount: Int? = nil, status: String? = nil, totalAssetsCount: Int? = nil, topFundAssets: [FundAssetPercent]? = nil, owner: ProfilePublicShort? = nil, statistic: ProfitChart? = nil, personalDetails: PersonalFundDetailsList? = nil, balance: AmountWithCurrency? = nil) { 
         self._id = _id
         self.logoUrl = logoUrl
         self.url = url
         self.color = color
+        self.index = index
         self.title = title
         self._description = _description
         self.creationDate = creationDate
@@ -62,6 +65,7 @@ public struct FundDetailsListItem: Codable {
         case logoUrl
         case url
         case color
+        case index
         case title
         case _description = "description"
         case creationDate

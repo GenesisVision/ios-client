@@ -45,8 +45,8 @@ public struct BinanceRawFuturesAccountInfo: Codable {
 
     public var assets: [BinanceRawFuturesAccountAsset]?
 
-    public var positions: [BinanceRawFuturesAccountPosition]?
-    public init(canDeposit: Bool? = nil, canTrade: Bool? = nil, canWithdraw: Bool? = nil, feeTier: Int? = nil, maxWithdrawAmount: Double? = nil, totalInitialMargin: Double? = nil, totalMaintMargin: Double? = nil, totalMarginBalance: Double? = nil, totalOpenOrderInitialMargin: Double? = nil, totalPositionInitialMargin: Double? = nil, totalUnrealizedProfit: Double? = nil, totalWalletBalance: Double? = nil, totalCrossWalletBalance: Double? = nil, totalCrossUnPnl: Double? = nil, availableBalance: Double? = nil, updateTime: Date? = nil, assets: [BinanceRawFuturesAccountAsset]? = nil, positions: [BinanceRawFuturesAccountPosition]? = nil) { 
+    public var positions: [BinanceRawFuturesPosition]?
+    public init(canDeposit: Bool? = nil, canTrade: Bool? = nil, canWithdraw: Bool? = nil, feeTier: Int? = nil, maxWithdrawAmount: Double? = nil, totalInitialMargin: Double? = nil, totalMaintMargin: Double? = nil, totalMarginBalance: Double? = nil, totalOpenOrderInitialMargin: Double? = nil, totalPositionInitialMargin: Double? = nil, totalUnrealizedProfit: Double? = nil, totalWalletBalance: Double? = nil, totalCrossWalletBalance: Double? = nil, totalCrossUnPnl: Double? = nil, availableBalance: Double? = nil, updateTime: Date? = nil, assets: [BinanceRawFuturesAccountAsset]? = nil, positions: [BinanceRawFuturesPosition]? = nil) { 
         self.canDeposit = canDeposit
         self.canTrade = canTrade
         self.canWithdraw = canWithdraw

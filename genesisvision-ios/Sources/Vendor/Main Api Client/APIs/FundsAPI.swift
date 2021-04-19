@@ -230,6 +230,7 @@ open class FundsAPI {
     "color" : "color",
     "description" : "description",
     "logo" : "logo",
+    "index" : 0,
     "isOwnAsset" : true,
     "title" : "title",
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
@@ -417,9 +418,9 @@ open class FundsAPI {
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
-  "total" : 4,
+  "total" : 1,
   "items" : [ {
-    "totalAssetsCount" : 2,
+    "totalAssetsCount" : 7,
     "color" : "color",
     "topFundAssets" : [ {
       "name" : "name",
@@ -434,6 +435,7 @@ open class FundsAPI {
       "logoUrl" : "logoUrl",
       "url" : "url"
     } ],
+    "index" : 2,
     "description" : "description",
     "title" : "title",
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
@@ -444,10 +446,10 @@ open class FundsAPI {
       "isFavorite" : true
     },
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "investorsCount" : 3,
+    "investorsCount" : 4,
     "status" : "status"
   }, {
-    "totalAssetsCount" : 2,
+    "totalAssetsCount" : 7,
     "color" : "color",
     "topFundAssets" : [ {
       "name" : "name",
@@ -462,6 +464,7 @@ open class FundsAPI {
       "logoUrl" : "logoUrl",
       "url" : "url"
     } ],
+    "index" : 2,
     "description" : "description",
     "title" : "title",
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
@@ -472,7 +475,7 @@ open class FundsAPI {
       "isFavorite" : true
     },
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "investorsCount" : 3,
+    "investorsCount" : 4,
     "status" : "status"
   } ]
 }}]
@@ -680,7 +683,7 @@ open class FundsAPI {
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
-  "totalAssetsCount" : 2,
+  "totalAssetsCount" : 7,
   "color" : "color",
   "topFundAssets" : [ {
     "name" : "name",
@@ -695,6 +698,7 @@ open class FundsAPI {
     "logoUrl" : "logoUrl",
     "url" : "url"
   } ],
+  "index" : 2,
   "description" : "description",
   "title" : "title",
   "creationDate" : "2000-01-23T04:56:07.000+00:00",
@@ -705,7 +709,7 @@ open class FundsAPI {
     "isFavorite" : true
   },
   "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-  "investorsCount" : 3,
+  "investorsCount" : 4,
   "status" : "status"
 }}]
      - parameter chartPointsCount: (query)  (optional)

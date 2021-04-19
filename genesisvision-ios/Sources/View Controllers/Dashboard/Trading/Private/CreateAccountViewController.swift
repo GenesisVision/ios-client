@@ -474,13 +474,32 @@ class CreateAccountViewModel {
     }
     
     func getMinDepositValue() -> Double? {
-        guard let currency = currencyListViewModel.selected(), let accountType = accountTypeListViewModel.selected(), let minDeposits = accountType.minimumDepositsAmount, let minDeposit = minDeposits[currency] else { return nil }
+        guard let accountType = accountTypeListViewModel.selected() else { return nil }
+        
+        var minDepositCurrency: String?
+        
+        if let brokerType = accountType.type, (brokerType == .exante || brokerType == .metaTrader4) {
+            minDepositCurrency = getSelectedWalletCurrency()
+        } else {
+            minDepositCurrency = currencyListViewModel.selected()
+        }
+        guard let currency = minDepositCurrency, let minDeposits = accountType.minimumDepositsAmount, let minDeposit = minDeposits[currency] else { return nil }
         
         return minDeposit
     }
     
     func getMinDeposit() -> String {
-        guard let currency = currencyListViewModel.selected(), let accountType = accountTypeListViewModel.selected(), let minDeposits = accountType.minimumDepositsAmount, let minDeposit = minDeposits[currency], let currencyType = CurrencyType(rawValue: currency) else { return "" }
+        guard let accountType = accountTypeListViewModel.selected() else { return "" }
+        
+        var minDepositCurrency: String?
+        
+        if let brokerType = accountType.type, (brokerType == .exante || brokerType == .metaTrader4) {
+            minDepositCurrency = getSelectedWalletCurrency()
+        } else {
+            minDepositCurrency = currencyListViewModel.selected()
+        }
+        
+        guard let currency = minDepositCurrency, let minDeposits = accountType.minimumDepositsAmount, let minDeposit = minDeposits[currency], let currencyType = Currency(rawValue: currency) else { return "" }
         
         return minDeposit.rounded(with: currencyType).toString() + " " + currencyType.rawValue
     }
@@ -547,6 +566,10 @@ class CreateAccountViewModel {
     }
     
     func exchangeValueInCurrency(_ value: Double) -> Double? {
+        // value for this types already in wallet currency
+        guard let accountType = accountTypeListViewModel.selected(), let type = accountType.type, (type != .metaTrader4 && type != .exante) else {
+            return value }
+        
         guard let rate = getRate() else { return nil }
         return value / rate
     }

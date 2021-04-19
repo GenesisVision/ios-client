@@ -31,14 +31,14 @@ open class SearchAPI {
        - name: Bearer
      - examples: [{contentType=application/json, example={
   "follows" : {
-    "total" : 6,
+    "total" : 5,
     "items" : [ {
-      "leverageMin" : 1,
-      "brokerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "leverageMin" : 6,
       "color" : "color",
       "isExternal" : true,
-      "subscribersCount" : 7,
-      "brokerType" : "Undefined",
+      "successFee" : 1.1730742509559433,
+      "subscribersCount" : 1,
+      "volumeFee" : 4.965218492984954,
       "description" : "description",
       "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
@@ -46,20 +46,35 @@ open class SearchAPI {
       "url" : "url",
       "tags" : [ null, null ],
       "tradesCount" : 1,
-      "leverageMax" : 1,
+      "leverageMax" : 7,
       "personalDetails" : {
         "isOwnAsset" : true,
         "isFavorite" : true
       },
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "brokerDetails" : {
+        "showCommissionRebateSometime" : true,
+        "showCommissionRebate" : true,
+        "showSwaps" : true,
+        "showTicketsSometime" : true,
+        "type" : "Undefined",
+        "showTickets" : true,
+        "logoUrl" : "logoUrl",
+        "isKycRequired" : true,
+        "name" : "name",
+        "showSwapsSometime" : true,
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "isSignalsAvailable" : true,
+        "isKycRequiredSometime" : true
+      },
       "status" : "status"
     }, {
-      "leverageMin" : 1,
-      "brokerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "leverageMin" : 6,
       "color" : "color",
       "isExternal" : true,
-      "subscribersCount" : 7,
-      "brokerType" : "Undefined",
+      "successFee" : 1.1730742509559433,
+      "subscribersCount" : 1,
+      "volumeFee" : 4.965218492984954,
       "description" : "description",
       "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
@@ -67,19 +82,34 @@ open class SearchAPI {
       "url" : "url",
       "tags" : [ null, null ],
       "tradesCount" : 1,
-      "leverageMax" : 1,
+      "leverageMax" : 7,
       "personalDetails" : {
         "isOwnAsset" : true,
         "isFavorite" : true
       },
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "brokerDetails" : {
+        "showCommissionRebateSometime" : true,
+        "showCommissionRebate" : true,
+        "showSwaps" : true,
+        "showTicketsSometime" : true,
+        "type" : "Undefined",
+        "showTickets" : true,
+        "logoUrl" : "logoUrl",
+        "isKycRequired" : true,
+        "name" : "name",
+        "showSwapsSometime" : true,
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "isSignalsAvailable" : true,
+        "isKycRequiredSometime" : true
+      },
       "status" : "status"
     } ]
   },
   "funds" : {
-    "total" : 4,
+    "total" : 1,
     "items" : [ {
-      "totalAssetsCount" : 2,
+      "totalAssetsCount" : 7,
       "color" : "color",
       "topFundAssets" : [ {
         "name" : "name",
@@ -94,6 +124,7 @@ open class SearchAPI {
         "logoUrl" : "logoUrl",
         "url" : "url"
       } ],
+      "index" : 2,
       "description" : "description",
       "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
@@ -104,10 +135,10 @@ open class SearchAPI {
         "isFavorite" : true
       },
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "investorsCount" : 3,
+      "investorsCount" : 4,
       "status" : "status"
     }, {
-      "totalAssetsCount" : 2,
+      "totalAssetsCount" : 7,
       "color" : "color",
       "topFundAssets" : [ {
         "name" : "name",
@@ -122,6 +153,7 @@ open class SearchAPI {
         "logoUrl" : "logoUrl",
         "url" : "url"
       } ],
+      "index" : 2,
       "description" : "description",
       "title" : "title",
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
@@ -132,12 +164,12 @@ open class SearchAPI {
         "isFavorite" : true
       },
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "investorsCount" : 3,
+      "investorsCount" : 4,
       "status" : "status"
     } ]
   },
   "programs" : {
-    "total" : 9,
+    "total" : 3,
     "items" : [ {
       "color" : "color",
       "description" : "description",
@@ -148,11 +180,11 @@ open class SearchAPI {
         "amount" : 7.457744773683766,
         "currency" : "Undefined"
       },
-      "availableToInvest" : 5.962133916683182,
+      "availableToInvest" : 5.637376656633329,
       "currency" : "Undefined",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "levelProgress" : 6.027456183070403,
-      "investorsCount" : 5,
+      "levelProgress" : 1.4658129805029452,
+      "investorsCount" : 2,
       "owner" : {
         "personalDetails" : {
           "isFollow" : true,
@@ -165,7 +197,7 @@ open class SearchAPI {
         "logoUrl" : "logoUrl",
         "username" : "username"
       },
-      "periodDuration" : 1,
+      "periodDuration" : 5,
       "brokerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "statistic" : {
         "drawdown" : 1.2315135367772556,
@@ -178,9 +210,10 @@ open class SearchAPI {
         } ],
         "profit" : 7.386281948385884
       },
-      "level" : 0,
-      "entryFeeCurrent" : 7.061401241503109,
-      "entryFeeSelected" : 2.3021358869347655,
+      "level" : 6,
+      "entryFeeCurrent" : 9.301444243932576,
+      "index" : 0,
+      "entryFeeSelected" : 7.061401241503109,
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
       "logoUrl" : "logoUrl",
       "url" : "url",
@@ -209,11 +242,11 @@ open class SearchAPI {
         "amount" : 7.457744773683766,
         "currency" : "Undefined"
       },
-      "availableToInvest" : 5.962133916683182,
+      "availableToInvest" : 5.637376656633329,
       "currency" : "Undefined",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "levelProgress" : 6.027456183070403,
-      "investorsCount" : 5,
+      "levelProgress" : 1.4658129805029452,
+      "investorsCount" : 2,
       "owner" : {
         "personalDetails" : {
           "isFollow" : true,
@@ -226,7 +259,7 @@ open class SearchAPI {
         "logoUrl" : "logoUrl",
         "username" : "username"
       },
-      "periodDuration" : 1,
+      "periodDuration" : 5,
       "brokerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "statistic" : {
         "drawdown" : 1.2315135367772556,
@@ -239,9 +272,10 @@ open class SearchAPI {
         } ],
         "profit" : 7.386281948385884
       },
-      "level" : 0,
-      "entryFeeCurrent" : 7.061401241503109,
-      "entryFeeSelected" : 2.3021358869347655,
+      "level" : 6,
+      "entryFeeCurrent" : 9.301444243932576,
+      "index" : 0,
+      "entryFeeSelected" : 7.061401241503109,
       "creationDate" : "2000-01-23T04:56:07.000+00:00",
       "logoUrl" : "logoUrl",
       "url" : "url",
@@ -263,7 +297,7 @@ open class SearchAPI {
     } ]
   },
   "managers" : {
-    "total" : 4,
+    "total" : 6,
     "items" : [ {
       "socialLinks" : [ {
         "name" : "name",
@@ -279,8 +313,8 @@ open class SearchAPI {
         "logoUrl" : "logoUrl"
       } ],
       "assets" : [ "assets", "assets" ],
-      "followers" : 7,
-      "following" : 1,
+      "followers" : 9,
+      "following" : 9,
       "about" : "about",
       "regDate" : "2000-01-23T04:56:07.000+00:00",
       "personalDetails" : {
@@ -308,8 +342,8 @@ open class SearchAPI {
         "logoUrl" : "logoUrl"
       } ],
       "assets" : [ "assets", "assets" ],
-      "followers" : 7,
-      "following" : 1,
+      "followers" : 9,
+      "following" : 9,
       "about" : "about",
       "regDate" : "2000-01-23T04:56:07.000+00:00",
       "personalDetails" : {

@@ -44,8 +44,8 @@ open class UsersAPI {
     "logoUrl" : "logoUrl"
   } ],
   "assets" : [ "assets", "assets" ],
-  "followers" : 7,
-  "following" : 1,
+  "followers" : 9,
+  "following" : 9,
   "about" : "about",
   "regDate" : "2000-01-23T04:56:07.000+00:00",
   "personalDetails" : {

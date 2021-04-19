@@ -19,6 +19,8 @@ public struct ProgramDetailsListItem: Codable {
 
     public var url: String?
 
+    public var index: Int?
+
     public var _description: String?
 
     public var color: String?
@@ -60,11 +62,12 @@ public struct ProgramDetailsListItem: Codable {
     public var statistic: ProfitChart?
 
     public var balance: AmountWithCurrency?
-    public init(_id: UUID? = nil, type: ProgramType? = nil, logoUrl: String? = nil, url: String? = nil, _description: String? = nil, color: String? = nil, title: String? = nil, creationDate: Date? = nil, currency: Currency? = nil, level: Int? = nil, levelProgress: Double? = nil, periodDuration: Int? = nil, availableToInvest: Double? = nil, investorsCount: Int? = nil, periodStarts: Date? = nil, periodEnds: Date? = nil, status: String? = nil, entryFeeSelected: Double? = nil, entryFeeCurrent: Double? = nil, brokerId: UUID? = nil, owner: ProfilePublicShort? = nil, personalDetails: PersonalProgramDetailsList? = nil, tags: [Tag]? = nil, statistic: ProfitChart? = nil, balance: AmountWithCurrency? = nil) { 
+    public init(_id: UUID? = nil, type: ProgramType? = nil, logoUrl: String? = nil, url: String? = nil, index: Int? = nil, _description: String? = nil, color: String? = nil, title: String? = nil, creationDate: Date? = nil, currency: Currency? = nil, level: Int? = nil, levelProgress: Double? = nil, periodDuration: Int? = nil, availableToInvest: Double? = nil, investorsCount: Int? = nil, periodStarts: Date? = nil, periodEnds: Date? = nil, status: String? = nil, entryFeeSelected: Double? = nil, entryFeeCurrent: Double? = nil, brokerId: UUID? = nil, owner: ProfilePublicShort? = nil, personalDetails: PersonalProgramDetailsList? = nil, tags: [Tag]? = nil, statistic: ProfitChart? = nil, balance: AmountWithCurrency? = nil) { 
         self._id = _id
         self.type = type
         self.logoUrl = logoUrl
         self.url = url
+        self.index = index
         self._description = _description
         self.color = color
         self.title = title
@@ -92,6 +95,7 @@ public struct ProgramDetailsListItem: Codable {
         case type
         case logoUrl
         case url
+        case index
         case _description = "description"
         case color
         case title

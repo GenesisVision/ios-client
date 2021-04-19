@@ -12,8 +12,8 @@ final class ProgramInvestViewModel {
     // MARK: - Variables
     var title: String = "Investment"
     var assetId: String?
-    var programCurrency: CurrencyType?
-    var walletCurrency: CurrencyType?
+    var programCurrency: Currency?
+    var walletCurrency: Currency?
     var labelPlaceholder: String = "0"
 
     var walletSummary: WalletSummary?
@@ -45,7 +45,7 @@ final class ProgramInvestViewModel {
         self.selectedWalletFromDelegateManager?.selected = wallets[selectedIndex]
         self.selectedWalletFromDelegateManager?.selectedIndex = selectedIndex
         
-        self.walletCurrency = CurrencyType(rawValue: wallets[selectedIndex].currency?.rawValue ?? "")
+        self.walletCurrency = Currency(rawValue: wallets[selectedIndex].currency?.rawValue ?? "")
         
         updateRate(completion: completion)
     }
@@ -120,34 +120,42 @@ final class ProgramInvestViewModel {
     }
     
     func getMinInvestmentAmountText() -> String {
-        guard let programCurrency = programCurrency, let walletCurrency = self.selectedWalletFromDelegateManager?.selected?.currency?.rawValue else { return "" }
+        guard let programCurrency = programCurrency, let walletCurrency = selectedWalletFromDelegateManager?.selected?.currency else { return "" }
         
         let minInvestmentAmount = getMinInvestmentAmount()
         
-        var text = "min " + minInvestmentAmount.rounded(with: programCurrency).toString() + " " + programCurrency.rawValue
+        var text: String = ""
         
-        if programCurrency.rawValue != walletCurrency, let walletCurrencyType = CurrencyType(rawValue: walletCurrency) {
-            let minValueInWalletCurrency = (minInvestmentAmount / rate).rounded(with: walletCurrencyType).toString() + " " + walletCurrencyType.rawValue
-            text.append("≈\(minValueInWalletCurrency)")
-            return " (\(text))"
+        if let type = programFollowDetailsFull?.brokerDetails?.type, (type == .exante || type == .metaTrader4 || type == .binance) {
+            text = " min " + minInvestmentAmount.rounded(with: walletCurrency).toString() + " " + walletCurrency.rawValue
+            return text
+        } else {
+            text = " min " + minInvestmentAmount.rounded(with: programCurrency).toString() + " " + programCurrency.rawValue
         }
         
         return text
     }
     
     func getMinInvestmentAmount() -> Double {
-        guard
-            let minInvestAmounts = PlatformManager.shared.platformInfo?.assetInfo?.programInfo?.minInvestAmounts,
-            let minInvestAmountIntoProgram = minInvestAmounts[0].minInvestAmountIntoProgram,
-            let minInvestmentAmount = minInvestAmountIntoProgram.first(where: { $0.currency?.rawValue == programCurrency?.rawValue }) else { return 0.0 }
+        guard let minInvestAmounts = PlatformManager.shared.platformInfo?.assetInfo?.programInfo?.minInvestAmounts,
+              let minInvestAmountIntoProgram = minInvestAmounts.first(where: { $0.serverType == .metaTrader4 })?.minInvestAmountIntoProgram else { return 0.0 }
+        
+        var currency: Currency?
+        
+        if let type = programFollowDetailsFull?.brokerDetails?.type, (type == .exante || type == .metaTrader4 || type == .binance) {
+            currency = walletCurrency
+        } else {
+            currency = programCurrency
+        }
+        
+        guard let minInvestmentAmount = minInvestAmountIntoProgram.first(where: { $0.currency?.rawValue == currency?.rawValue }) else { return 0.0 }
         
         return minInvestmentAmount.amount ?? 0.0
     }
     
     func getSelectedWalletTitle() -> String {
-        guard let title = self.selectedWalletFromDelegateManager?.selected?.title, let currency = self.selectedWalletFromDelegateManager?.selected?.currency?.rawValue else {
-            return ""
-        }
+        guard let title = selectedWalletFromDelegateManager?.selected?.title,
+              let currency = selectedWalletFromDelegateManager?.selected?.currency?.rawValue else { return "" }
         
         return title + " | " + currency
     }
@@ -157,7 +165,7 @@ final class ProgramInvestViewModel {
     }
     
     func getAvailableInWallet() -> Double {
-        guard let available = self.selectedWalletFromDelegateManager?.selected?.available else { return 0.0 }
+        guard let available = selectedWalletFromDelegateManager?.selected?.available else { return 0.0 }
         
         return available
     }

@@ -95,20 +95,46 @@ class FundListViewController: BaseViewControllerWithTableView {
     
     private func setupChallengeTableHeader() {
         let rect = CGRect(x: gvWeeklyChallngeTableView.frame.minX, y: gvWeeklyChallngeTableView.frame.minY, width: gvWeeklyChallngeTableView.width, height: 30)
-        let view = UILabel(frame: rect)
-        view.font = UIFont.getFont(.semibold, size: 16)
-        view.text = "    Last's week challange winner"
+        
+        let view = UIView(frame: rect)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        let label = UILabel(frame: rect)
+        label.font = UIFont.getFont(.semibold, size: 16)
+        label.text = "Last's week challenge winner"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(label)
+        
+        label.fillSuperview(padding: UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0))
+        
+        
+//        let label = UILabel(frame: rect)
+//        label.font = UIFont.getFont(.semibold, size: 16)
+//        view.text = "    Last's week challenge winner"
         
         gvWeeklyChallngeTableView.tableHeaderView = view
     }
     
     private func setupMainTableHeader() {
         let rect = CGRect(x: tableView.frame.minX, y: tableView.frame.minY, width: tableView.width, height: 30)
-        let view = UILabel(frame: rect)
-        view.font = UIFont.getFont(.semibold, size: 16)
         
-        view.text = "    All funds"
+        let view = UIView(frame: rect)
+        view.translatesAutoresizingMaskIntoConstraints = false
         
+        let label = UILabel(frame: rect)
+        label.font = UIFont.getFont(.semibold, size: 16)
+        label.text = "All funds"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(label)
+        
+        label.fillSuperview(padding: UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0))
+//        let view = UILabel(frame: rect)
+//        view.font = UIFont.getFont(.semibold, size: 16)
+//
+//        view.text = "    All funds"
+//
         tableView.tableHeaderView = view
     }
     

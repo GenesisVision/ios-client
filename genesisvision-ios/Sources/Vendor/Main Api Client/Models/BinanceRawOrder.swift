@@ -68,7 +68,9 @@ public struct BinanceRawOrder: Codable {
     public var lastQuoteQuantity: Double?
 
     public var orderListId: Int64?
-    public init(accountId: UUID? = nil, symbol: String? = nil, clientOrderId: String? = nil, side: BinanceOrderSide? = nil, type: BinanceOrderType? = nil, timeInForce: BinanceTimeInForce? = nil, quantity: Double? = nil, price: Double? = nil, stopPrice: Double? = nil, icebergQuantity: Double? = nil, originalClientOrderId: String? = nil, executionType: BinanceExecutionType? = nil, status: BinanceOrderStatus? = nil, rejectReason: BinanceOrderRejectReason? = nil, orderId: Int64? = nil, lastQuantityFilled: Double? = nil, quantityFilled: Double? = nil, lastPriceFilled: Double? = nil, commission: Double? = nil, commissionAsset: String? = nil, updateTime: Date? = nil, tradeId: Int64? = nil, isWorking: Bool? = nil, buyerIsMaker: Bool? = nil, createTime: Date? = nil, quoteQuantityFilled: Double? = nil, quoteQuantity: Double? = nil, lastQuoteQuantity: Double? = nil, orderListId: Int64? = nil) { 
+
+    public var pnL: Double?
+    public init(accountId: UUID? = nil, symbol: String? = nil, clientOrderId: String? = nil, side: BinanceOrderSide? = nil, type: BinanceOrderType? = nil, timeInForce: BinanceTimeInForce? = nil, quantity: Double? = nil, price: Double? = nil, stopPrice: Double? = nil, icebergQuantity: Double? = nil, originalClientOrderId: String? = nil, executionType: BinanceExecutionType? = nil, status: BinanceOrderStatus? = nil, rejectReason: BinanceOrderRejectReason? = nil, orderId: Int64? = nil, lastQuantityFilled: Double? = nil, quantityFilled: Double? = nil, lastPriceFilled: Double? = nil, commission: Double? = nil, commissionAsset: String? = nil, updateTime: Date? = nil, tradeId: Int64? = nil, isWorking: Bool? = nil, buyerIsMaker: Bool? = nil, createTime: Date? = nil, quoteQuantityFilled: Double? = nil, quoteQuantity: Double? = nil, lastQuoteQuantity: Double? = nil, orderListId: Int64? = nil, pnL: Double? = nil) { 
         self.accountId = accountId
         self.symbol = symbol
         self.clientOrderId = clientOrderId
@@ -98,6 +100,7 @@ public struct BinanceRawOrder: Codable {
         self.quoteQuantity = quoteQuantity
         self.lastQuoteQuantity = lastQuoteQuantity
         self.orderListId = orderListId
+        self.pnL = pnL
     }
 
 }

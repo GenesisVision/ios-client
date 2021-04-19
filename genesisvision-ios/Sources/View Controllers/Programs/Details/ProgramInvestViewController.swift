@@ -193,49 +193,49 @@ class ProgramInvestViewController: BaseViewController {
         }
         
         //wallet
-        self.selectedWalletFromValueLabel.text = viewModel.getSelectedWalletTitle()
-        self.availableInWalletFromValue = viewModel.getAvailableInWallet()
+        selectedWalletFromValueLabel.text = viewModel.getSelectedWalletTitle()
+        availableInWalletFromValue = viewModel.getAvailableInWallet()
     
         //investment
-        self.amountToInvestCurrencyLabel.text = walletCurrency
+        amountToInvestCurrencyLabel.text = walletCurrency
         
         if let currency = viewModel.selectedWalletFromDelegateManager?.selected?.currency?.rawValue, programCurrency.rawValue != currency {
-            self.investmentAmountCurrencyLabel.text = viewModel.getInvestmentAmountCurrencyValue(amountToInvestValue)
+            investmentAmountCurrencyLabel.text = viewModel.getInvestmentAmountCurrencyValue(amountToInvestValue)
         } else {
-            self.investmentAmountCurrencyLabel.text = ""
+            investmentAmountCurrencyLabel.text = ""
         }
         
         if let selectedWalletFromDelegateManager = viewModel?.selectedWalletFromDelegateManager {
             selectedWalletFromDelegateManager.currencyDelegate = self
         }
         
-        self.investmentAmountCurrencyLabel.text?.append(viewModel.getMinInvestmentAmountText())
+        investmentAmountCurrencyLabel.text?.append(viewModel.getMinInvestmentAmountText())
         
         let rate = viewModel.rate
         let managementFee = viewModel.getManagementFee()
         let gvCommission = viewModel.getGVCommision()
         
-        self.managementFeeValueLabel.text = managementFee.rounded(with: programCurrency).toString() + "% (annual)"
+        managementFeeValueLabel.text = managementFee.rounded(with: programCurrency).toString() + "% (annual)"
 
         let gvCommissionCurrency = gvCommission * amountToInvestValue / 100
         let gvCommissionCurrencyString = gvCommissionCurrency.rounded(toPlaces: 8).toString()
         let gvCommissionString = gvCommission.rounded(toPlaces: 8).toString()
 
         let gvCommissionValueLabelString = gvCommissionString + "% (≈\(gvCommissionCurrencyString) \(walletCurrencyType.rawValue))"
-        self.gvCommissionValueLabel.text = gvCommissionValueLabelString
+        gvCommissionValueLabel.text = gvCommissionValueLabelString
         let investmentAmountValue = (amountToInvestValue * rate - gvCommissionCurrency * rate).rounded(with: programCurrency).toString()
-        self.investmentAmountValueLabel.text = "≈" + investmentAmountValue + " " + programCurrency.rawValue
+        investmentAmountValueLabel.text = "≈" + investmentAmountValue + " " + programCurrency.rawValue
         
         if viewModel.programDetailsFull == nil {
-            let investButtonEnabled = amountToInvestValue * rate >= viewModel.getMinInvestmentAmount()
+            let investButtonEnabled = amountToInvestValue >= viewModel.getMinInvestmentAmount()
             investButton.setEnabled(investButtonEnabled)
         } else if let isOwner = viewModel.programFollowDetailsFull?.publicInfo?.isOwnAsset, isOwner {
-            self.availableToInvestValue = viewModel.getAvailableToInvest()
-            let investButtonEnabled = amountToInvestValue * rate >= viewModel.getMinInvestmentAmount()
+            availableToInvestValue = viewModel.getAvailableToInvest()
+            let investButtonEnabled = amountToInvestValue >= viewModel.getMinInvestmentAmount()
             investButton.setEnabled(investButtonEnabled)
         } else {
-            self.availableToInvestValue = viewModel.getAvailableToInvest()
-            let investButtonEnabled = amountToInvestValue * rate >= viewModel.getMinInvestmentAmount() && amountToInvestValue * rate <= availableToInvestValue
+            availableToInvestValue = viewModel.getAvailableToInvest()
+            let investButtonEnabled = amountToInvestValue >= viewModel.getMinInvestmentAmount() && amountToInvestValue * rate <= availableToInvestValue
             investButton.setEnabled(investButtonEnabled)
         }
 
@@ -357,10 +357,16 @@ class ProgramInvestViewController: BaseViewController {
         let rate = viewModel.rate
         if let currency = viewModel.selectedWalletFromDelegateManager?.selected?.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency) {
             
-            let minValue = min(availableToInvestValue / rate, availableInWalletFromValue).rounded(with: currencyType)
+            var minValue: Double?
             
-            amountToInvestValueLabel.text = minValue.toString(withoutFormatter: true)
-            amountToInvestValue = minValue
+            if let isOwner = viewModel.programFollowDetailsFull?.publicInfo?.isOwnAsset, isOwner {
+                minValue = availableInWalletFromValue.rounded(with: currencyType)
+            } else {
+                minValue = min(availableToInvestValue / rate, availableInWalletFromValue).rounded(with: currencyType)
+            }
+            
+            amountToInvestValueLabel.text = minValue?.toString(withoutFormatter: true)
+            amountToInvestValue = minValue ?? 0.0
         }
     }
 }
@@ -386,7 +392,11 @@ extension ProgramInvestViewController: WalletDelegateManagerProtocol {
 
 extension ProgramInvestViewController: NumpadViewProtocol {
     var maxAmount: Double? {
-        return viewModel.getMaxAmount()
+        if let isOwner = viewModel.programFollowDetailsFull?.publicInfo?.isOwnAsset, isOwner {
+            return nil
+        } else {
+            return viewModel.getMaxAmount()
+        }
     }
     
     var textPlaceholder: String? {

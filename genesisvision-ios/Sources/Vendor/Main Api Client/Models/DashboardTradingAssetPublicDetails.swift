@@ -22,13 +22,16 @@ public struct DashboardTradingAssetPublicDetails: Codable {
     public var programDetails: DashboardProgramDetails?
 
     public var fundDetails: DashboardFundDetails?
-    public init(logoUrl: String? = nil, color: String? = nil, title: String? = nil, url: String? = nil, programDetails: DashboardProgramDetails? = nil, fundDetails: DashboardFundDetails? = nil) { 
+
+    public var owner: ProfilePublicShort?
+    public init(logoUrl: String? = nil, color: String? = nil, title: String? = nil, url: String? = nil, programDetails: DashboardProgramDetails? = nil, fundDetails: DashboardFundDetails? = nil, owner: ProfilePublicShort? = nil) { 
         self.logoUrl = logoUrl
         self.color = color
         self.title = title
         self.url = url
         self.programDetails = programDetails
         self.fundDetails = fundDetails
+        self.owner = owner
     }
 
 }

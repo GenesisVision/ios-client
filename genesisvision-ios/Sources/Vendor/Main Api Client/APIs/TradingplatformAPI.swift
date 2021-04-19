@@ -720,7 +720,7 @@ open class TradingplatformAPI {
      - parameter symbol: (query)  (optional)     - parameter interval: (query)  (optional)     - parameter startTime: (query)  (optional)     - parameter endTime: (query)  (optional)     - parameter limit: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getBlvtKlines(symbol: String? = nil, interval: BinanceRawKlineInterval? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil, completion: @escaping ((_ data: BinanceRawBlvtKlineItemsViewModel?,_ error: Error?) -> Void)) {
+    open class func getBlvtKlines(symbol: String? = nil, interval: BinanceKlineInterval? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil, completion: @escaping ((_ data: BinanceRawBlvtKlineItemsViewModel?,_ error: Error?) -> Void)) {
         getBlvtKlinesWithRequestBuilder(symbol: symbol, interval: interval, startTime: startTime, endTime: endTime, limit: limit).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
@@ -759,7 +759,7 @@ open class TradingplatformAPI {
 
      - returns: RequestBuilder<BinanceRawBlvtKlineItemsViewModel> 
      */
-    open class func getBlvtKlinesWithRequestBuilder(symbol: String? = nil, interval: BinanceRawKlineInterval? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil) -> RequestBuilder<BinanceRawBlvtKlineItemsViewModel> {
+    open class func getBlvtKlinesWithRequestBuilder(symbol: String? = nil, interval: BinanceKlineInterval? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil) -> RequestBuilder<BinanceRawBlvtKlineItemsViewModel> {
         let path = "/v2.0/tradingplatform/binance/blvt/market/klines"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -1107,31 +1107,31 @@ open class TradingplatformAPI {
   "canWithdraw" : true,
   "updateTime" : "2000-01-23T04:56:07.000+00:00",
   "positions" : [ {
-    "entryPrice" : 2.8841621266687802,
-    "leverage" : 8,
+    "entryPrice" : 8.762042012749001,
+    "leverage" : 3,
     "symbol" : "symbol",
-    "maxNotional" : 6.778324963048013,
-    "maintMargin" : 6.438423552598547,
-    "openOrderInitialMargin" : 3.5571952270680973,
-    "positionInitialMargin" : 6.965117697638846,
+    "isAutoAddMargin" : true,
+    "markPrice" : 1.284659006116532,
+    "isolatedMargin" : 6.438423552598547,
+    "marginType" : "Isolated",
     "positionSide" : "Short",
-    "isolated" : true,
-    "unrealizedProfit" : 1.284659006116532,
-    "positionAmount" : 6.878052220127876,
-    "initialMargin" : 9.018348186070783
+    "liquidationPrice" : 6.965117697638846,
+    "unrealizedProfit" : 6.778324963048013,
+    "maxNotionalValue" : 2.8841621266687802,
+    "positionAmount" : 9.018348186070783
   }, {
-    "entryPrice" : 2.8841621266687802,
-    "leverage" : 8,
+    "entryPrice" : 8.762042012749001,
+    "leverage" : 3,
     "symbol" : "symbol",
-    "maxNotional" : 6.778324963048013,
-    "maintMargin" : 6.438423552598547,
-    "openOrderInitialMargin" : 3.5571952270680973,
-    "positionInitialMargin" : 6.965117697638846,
+    "isAutoAddMargin" : true,
+    "markPrice" : 1.284659006116532,
+    "isolatedMargin" : 6.438423552598547,
+    "marginType" : "Isolated",
     "positionSide" : "Short",
-    "isolated" : true,
-    "unrealizedProfit" : 1.284659006116532,
-    "positionAmount" : 6.878052220127876,
-    "initialMargin" : 9.018348186070783
+    "liquidationPrice" : 6.965117697638846,
+    "unrealizedProfit" : 6.778324963048013,
+    "maxNotionalValue" : 2.8841621266687802,
+    "positionAmount" : 9.018348186070783
   } ],
   "canTrade" : true,
   "availableBalance" : 7.386281948385884,
@@ -1605,7 +1605,7 @@ open class TradingplatformAPI {
      - parameter symbol: (query)  (optional)     - parameter interval: (query)  (optional)     - parameter startTime: (query)  (optional)     - parameter endTime: (query)  (optional)     - parameter limit: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getFuturesKlines(symbol: String? = nil, interval: BinanceRawKlineInterval? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil, completion: @escaping ((_ data: BinanceRawKlineItemsViewModel?,_ error: Error?) -> Void)) {
+    open class func getFuturesKlines(symbol: String? = nil, interval: BinanceKlineInterval? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil, completion: @escaping ((_ data: BinanceRawKlineItemsViewModel?,_ error: Error?) -> Void)) {
         getFuturesKlinesWithRequestBuilder(symbol: symbol, interval: interval, startTime: startTime, endTime: endTime, limit: limit).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
@@ -1650,7 +1650,7 @@ open class TradingplatformAPI {
 
      - returns: RequestBuilder<BinanceRawKlineItemsViewModel> 
      */
-    open class func getFuturesKlinesWithRequestBuilder(symbol: String? = nil, interval: BinanceRawKlineInterval? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil) -> RequestBuilder<BinanceRawKlineItemsViewModel> {
+    open class func getFuturesKlinesWithRequestBuilder(symbol: String? = nil, interval: BinanceKlineInterval? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil) -> RequestBuilder<BinanceRawKlineItemsViewModel> {
         let path = "/v2.0/tradingplatform/binance/futures/market/klines"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -1982,13 +1982,12 @@ open class TradingplatformAPI {
   "lastUpdateId" : 0,
   "asks" : [ null, null ],
   "bids" : [ {
-    "quantity" : 5.962133916683182,
-    "price" : 1.4658129805029452
+    "quantity" : 1.4658129805029452,
+    "price" : 6.027456183070403
   }, {
-    "quantity" : 5.962133916683182,
-    "price" : 1.4658129805029452
-  } ],
-  "firstUpdateId" : 6
+    "quantity" : 1.4658129805029452,
+    "price" : 6.027456183070403
+  } ]
 }}]
      - parameter symbol: (query)  (optional)     - parameter limit: (query)  (optional)
 
@@ -2028,31 +2027,31 @@ open class TradingplatformAPI {
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example=[ {
-  "entryPrice" : 0.8008281904610115,
-  "leverage" : 1,
+  "entryPrice" : 8.762042012749001,
+  "leverage" : 3,
   "symbol" : "symbol",
   "isAutoAddMargin" : true,
-  "markPrice" : 5.637376656633329,
-  "quantity" : 2.3021358869347655,
-  "isolatedMargin" : 6.027456183070403,
+  "markPrice" : 1.284659006116532,
+  "isolatedMargin" : 6.438423552598547,
   "marginType" : "Isolated",
-  "unrealizedPnL" : 7.061401241503109,
   "positionSide" : "Short",
-  "liquidationPrice" : 5.962133916683182,
-  "maxNotionalValue" : "maxNotionalValue"
+  "liquidationPrice" : 6.965117697638846,
+  "unrealizedProfit" : 6.778324963048013,
+  "maxNotionalValue" : 2.8841621266687802,
+  "positionAmount" : 9.018348186070783
 }, {
-  "entryPrice" : 0.8008281904610115,
-  "leverage" : 1,
+  "entryPrice" : 8.762042012749001,
+  "leverage" : 3,
   "symbol" : "symbol",
   "isAutoAddMargin" : true,
-  "markPrice" : 5.637376656633329,
-  "quantity" : 2.3021358869347655,
-  "isolatedMargin" : 6.027456183070403,
+  "markPrice" : 1.284659006116532,
+  "isolatedMargin" : 6.438423552598547,
   "marginType" : "Isolated",
-  "unrealizedPnL" : 7.061401241503109,
   "positionSide" : "Short",
-  "liquidationPrice" : 5.962133916683182,
-  "maxNotionalValue" : "maxNotionalValue"
+  "liquidationPrice" : 6.965117697638846,
+  "unrealizedProfit" : 6.778324963048013,
+  "maxNotionalValue" : 2.8841621266687802,
+  "positionAmount" : 9.018348186070783
 } ]}]
      - parameter accountId: (query)  (optional)     - parameter symbol: (query)  (optional)
 
@@ -2481,7 +2480,7 @@ open class TradingplatformAPI {
      - parameter symbol: (path)       - parameter interval: (query)  (optional)     - parameter startTime: (query)  (optional)     - parameter endTime: (query)  (optional)     - parameter limit: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getKlines(symbol: String, interval: BinanceRawKlineInterval? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil, completion: @escaping ((_ data: BinanceRawKlineItemsViewModel?,_ error: Error?) -> Void)) {
+    open class func getKlines(symbol: String, interval: BinanceKlineInterval? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil, completion: @escaping ((_ data: BinanceRawKlineItemsViewModel?,_ error: Error?) -> Void)) {
         getKlinesWithRequestBuilder(symbol: symbol, interval: interval, startTime: startTime, endTime: endTime, limit: limit).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
@@ -2526,7 +2525,7 @@ open class TradingplatformAPI {
 
      - returns: RequestBuilder<BinanceRawKlineItemsViewModel> 
      */
-    open class func getKlinesWithRequestBuilder(symbol: String, interval: BinanceRawKlineInterval? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil) -> RequestBuilder<BinanceRawKlineItemsViewModel> {
+    open class func getKlinesWithRequestBuilder(symbol: String, interval: BinanceKlineInterval? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil) -> RequestBuilder<BinanceRawKlineItemsViewModel> {
         var path = "/v2.0/tradingplatform/binance/market/{symbol}/klines"
         let symbolPreEscape = "\(symbol)"
         let symbolPostEscape = symbolPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -2565,12 +2564,13 @@ open class TradingplatformAPI {
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
-  "total" : 1,
+  "total" : 6,
   "items" : [ {
     "symbol" : "symbol",
     "orderId" : 5,
     "executionType" : "New",
     "type" : "Limit",
+    "pnL" : 1.4894159098541704,
     "originalClientOrderId" : "originalClientOrderId",
     "rejectReason" : "None",
     "buyerIsMaker" : true,
@@ -2601,6 +2601,7 @@ open class TradingplatformAPI {
     "orderId" : 5,
     "executionType" : "New",
     "type" : "Limit",
+    "pnL" : 1.4894159098541704,
     "originalClientOrderId" : "originalClientOrderId",
     "rejectReason" : "None",
     "buyerIsMaker" : true,
@@ -2669,13 +2670,12 @@ open class TradingplatformAPI {
   "lastUpdateId" : 0,
   "asks" : [ null, null ],
   "bids" : [ {
-    "quantity" : 5.962133916683182,
-    "price" : 1.4658129805029452
+    "quantity" : 1.4658129805029452,
+    "price" : 6.027456183070403
   }, {
-    "quantity" : 5.962133916683182,
-    "price" : 1.4658129805029452
-  } ],
-  "firstUpdateId" : 6
+    "quantity" : 1.4658129805029452,
+    "price" : 6.027456183070403
+  } ]
 }}]
      - parameter symbol: (path)       - parameter limit: (query)  (optional)
 
@@ -2773,12 +2773,13 @@ open class TradingplatformAPI {
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
-  "total" : 1,
+  "total" : 6,
   "items" : [ {
     "symbol" : "symbol",
     "orderId" : 5,
     "executionType" : "New",
     "type" : "Limit",
+    "pnL" : 1.4894159098541704,
     "originalClientOrderId" : "originalClientOrderId",
     "rejectReason" : "None",
     "buyerIsMaker" : true,
@@ -2809,6 +2810,7 @@ open class TradingplatformAPI {
     "orderId" : 5,
     "executionType" : "New",
     "type" : "Limit",
+    "pnL" : 1.4894159098541704,
     "originalClientOrderId" : "originalClientOrderId",
     "rejectReason" : "None",
     "buyerIsMaker" : true,

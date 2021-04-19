@@ -190,7 +190,7 @@ class FundInvestViewController: BaseViewController {
             selectedWalletFromDelegateManager.currencyDelegate = self
         }
         
-        self.investmentAmountCurrencyLabel.text?.append(viewModel.getMinInvestmentAmountText())
+        self.investmentAmountCurrencyLabel.text?.append(" " + viewModel.getMinInvestmentAmountText())
         
         //let rate = viewModel.rate
         let entryFee = viewModel.getEntryFee()

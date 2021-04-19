@@ -564,42 +564,42 @@ open class FollowAPI {
     "username" : "username"
   },
   "programDetails" : {
-    "periodDuration" : 2,
-    "stopOutLevelCurrent" : 6.84685269835264,
-    "successFeeSelected" : 1.2315135367772556,
+    "periodDuration" : 7,
+    "stopOutLevelCurrent" : 7.457744773683766,
+    "successFeeSelected" : 1.0246457001441578,
     "canShowFinancialStatistic" : true,
     "level" : 5,
-    "genesisRatio" : 9.301444243932576,
-    "availableInvestmentLimit" : 1.1730742509559433,
+    "genesisRatio" : 3.616076749251911,
+    "availableInvestmentLimit" : 4.965218492984954,
     "type" : "DailyPeriod",
     "tradesDelay" : "None",
     "dailyPeriodDetails" : {
       "nextProcessingDate" : "2000-01-23T04:56:07.000+00:00",
-      "hourProcessing" : 7,
+      "hourProcessing" : 5,
       "isProcessingRealTime" : true
     },
-    "availableInvestmentBase" : 7.457744773683766,
+    "availableInvestmentBase" : 1.1730742509559433,
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
-    "totalAvailableInvestment" : 4.965218492984954,
-    "stopOutLevelSelected" : 1.4894159098541704,
-    "managementFeeSelected" : 4.145608029883936,
-    "investmentScale" : 3.616076749251911,
-    "successFeeCurrent" : 1.0246457001441578,
+    "totalAvailableInvestment" : 5.025004791520295,
+    "stopOutLevelSelected" : 6.84685269835264,
+    "managementFeeSelected" : 7.386281948385884,
+    "investmentScale" : 2.027123023002322,
+    "successFeeCurrent" : 1.4894159098541704,
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "canShowPeriodHistory" : true,
-    "ageDays" : 7.061401241503109,
+    "ageDays" : 9.301444243932576,
     "personalDetails" : {
       "canChangeReinvest" : true,
       "canWithdraw" : true,
       "pendingOutputIsWithdrawAll" : true,
-      "subscribedAccounts" : 1,
+      "subscribedAccounts" : 2,
       "canInvest" : true,
       "showTwoFactorButton" : true,
-      "pendingOutput" : 9.018348186070783,
-      "managementFeePersonal" : 3.5571952270680973,
+      "pendingOutput" : 6.438423552598547,
+      "managementFeePersonal" : 6.965117697638846,
       "hasNotifications" : true,
-      "pendingInput" : 8.762042012749001,
-      "profitPercent" : 9.369310271410669,
+      "pendingInput" : 9.018348186070783,
+      "profitPercent" : 6.683562403749608,
       "isReinvest" : true,
       "isAutoJoin" : true,
       "migration" : {
@@ -652,25 +652,25 @@ open class FollowAPI {
             "name" : "name"
           } ]
         },
-        "newLeverage" : 6,
+        "newLeverage" : 1,
         "dateCreate" : "2000-01-23T04:56:07.000+00:00"
       },
-      "value" : 5.025004791520295,
-      "profit" : 9.965781217890562,
-      "successFeePersonal" : 6.438423552598547,
-      "invested" : 6.683562403749608,
+      "value" : 9.965781217890562,
+      "profit" : 9.369310271410669,
+      "successFeePersonal" : 3.5571952270680973,
+      "invested" : 8.762042012749001,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
     },
-    "volumeScale" : 2.027123023002322,
-    "managementFeeCurrent" : 7.386281948385884,
-    "levelProgress" : 5.637376656633329
+    "volumeScale" : 4.145608029883936,
+    "managementFeeCurrent" : 1.2315135367772556,
+    "levelProgress" : 2.3021358869347655
   },
   "tradingAccountInfo" : {
-    "leverageMin" : 0,
-    "leverageMax" : 6,
-    "balance" : 1.4658129805029452,
+    "leverageMin" : 6,
+    "leverageMax" : 1,
+    "balance" : 5.962133916683182,
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "login" : "login"
@@ -680,6 +680,7 @@ open class FollowAPI {
     "color" : "color",
     "description" : "description",
     "logo" : "logo",
+    "index" : 0,
     "isOwnAsset" : true,
     "title" : "title",
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
@@ -706,13 +707,13 @@ open class FollowAPI {
     "canConfirm2FA" : true
   },
   "followDetails" : {
-    "tradesCount" : 2,
+    "tradesCount" : 6,
     "signalSettings" : {
-      "signalSuccessFee" : 6.778324963048013,
-      "signalVolumeFee" : 6.878052220127876,
+      "signalSuccessFee" : 6.878052220127876,
+      "signalVolumeFee" : 5.944895607614016,
       "isActive" : true
     },
-    "subscribersCount" : 5,
+    "subscribersCount" : 6,
     "personalDetails" : {
       "guestActions" : {
         "canSubscribeToExternalSignalPrivateAccount" : true,
@@ -720,7 +721,7 @@ open class FollowAPI {
         "canSubscribeToInternalSignal" : true
       },
       "hasNotifications" : true,
-      "subscribedAccounts" : 6,
+      "subscribedAccounts" : 3,
       "isFavorite" : true
     }
   },
@@ -788,14 +789,14 @@ open class FollowAPI {
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
-  "total" : 6,
+  "total" : 5,
   "items" : [ {
-    "leverageMin" : 1,
-    "brokerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "leverageMin" : 6,
     "color" : "color",
     "isExternal" : true,
-    "subscribersCount" : 7,
-    "brokerType" : "Undefined",
+    "successFee" : 1.1730742509559433,
+    "subscribersCount" : 1,
+    "volumeFee" : 4.965218492984954,
     "description" : "description",
     "title" : "title",
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
@@ -803,20 +804,35 @@ open class FollowAPI {
     "url" : "url",
     "tags" : [ null, null ],
     "tradesCount" : 1,
-    "leverageMax" : 1,
+    "leverageMax" : 7,
     "personalDetails" : {
       "isOwnAsset" : true,
       "isFavorite" : true
     },
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "brokerDetails" : {
+      "showCommissionRebateSometime" : true,
+      "showCommissionRebate" : true,
+      "showSwaps" : true,
+      "showTicketsSometime" : true,
+      "type" : "Undefined",
+      "showTickets" : true,
+      "logoUrl" : "logoUrl",
+      "isKycRequired" : true,
+      "name" : "name",
+      "showSwapsSometime" : true,
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "isSignalsAvailable" : true,
+      "isKycRequiredSometime" : true
+    },
     "status" : "status"
   }, {
-    "leverageMin" : 1,
-    "brokerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "leverageMin" : 6,
     "color" : "color",
     "isExternal" : true,
-    "subscribersCount" : 7,
-    "brokerType" : "Undefined",
+    "successFee" : 1.1730742509559433,
+    "subscribersCount" : 1,
+    "volumeFee" : 4.965218492984954,
     "description" : "description",
     "title" : "title",
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
@@ -824,12 +840,27 @@ open class FollowAPI {
     "url" : "url",
     "tags" : [ null, null ],
     "tradesCount" : 1,
-    "leverageMax" : 1,
+    "leverageMax" : 7,
     "personalDetails" : {
       "isOwnAsset" : true,
       "isFavorite" : true
     },
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "brokerDetails" : {
+      "showCommissionRebateSometime" : true,
+      "showCommissionRebate" : true,
+      "showSwaps" : true,
+      "showTicketsSometime" : true,
+      "type" : "Undefined",
+      "showTickets" : true,
+      "logoUrl" : "logoUrl",
+      "isKycRequired" : true,
+      "name" : "name",
+      "showSwapsSometime" : true,
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "isSignalsAvailable" : true,
+      "isKycRequiredSometime" : true
+    },
     "status" : "status"
   } ]
 }}]
@@ -883,7 +914,7 @@ open class FollowAPI {
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
-  "total" : 9,
+  "total" : 2,
   "items" : [ {
     "unsubscriptionDate" : "2000-01-23T04:56:07.000+00:00",
     "totalVolume" : 5.637376656633329,
@@ -892,11 +923,40 @@ open class FollowAPI {
     "totalProfit" : 5.962133916683182,
     "fixedCurrency" : "Undefined",
     "fixedVolume" : 1.4658129805029452,
+    "successFee" : 9.301444243932576,
     "openTolerancePercent" : 6.027456183070403,
+    "volumeFee" : 3.616076749251911,
+    "assetTags" : [ {
+      "color" : "color",
+      "name" : "name"
+    }, {
+      "color" : "color",
+      "name" : "name"
+    } ],
     "volumeFeePersonal" : 7.061401241503109,
     "percent" : 0.8008281904610115,
     "mode" : "ByBalance",
     "subscriptionDate" : "2000-01-23T04:56:07.000+00:00",
+    "assetOwner" : {
+      "socialLinks" : [ {
+        "name" : "name",
+        "type" : "Undefined",
+        "value" : "value",
+        "url" : "url",
+        "logoUrl" : "logoUrl"
+      }, {
+        "name" : "name",
+        "type" : "Undefined",
+        "value" : "value",
+        "url" : "url",
+        "logoUrl" : "logoUrl"
+      } ],
+      "registrationDate" : "2000-01-23T04:56:07.000+00:00",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "logoUrl" : "logoUrl",
+      "url" : "url",
+      "username" : "username"
+    },
     "subscriberInfo" : {
       "tradingAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "asset" : {
@@ -914,6 +974,21 @@ open class FollowAPI {
       "tradingAccountLogin" : "tradingAccountLogin"
     },
     "detachMode" : "None",
+    "assetBrokerDetails" : {
+      "showCommissionRebateSometime" : true,
+      "showCommissionRebate" : true,
+      "showSwaps" : true,
+      "showTicketsSometime" : true,
+      "type" : "Undefined",
+      "showTickets" : true,
+      "logoUrl" : "logoUrl",
+      "isKycRequired" : true,
+      "name" : "name",
+      "showSwapsSometime" : true,
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "isSignalsAvailable" : true,
+      "isKycRequiredSometime" : true
+    },
     "hasActiveSubscription" : true,
     "successFeePersonal" : 2.3021358869347655,
     "status" : "status"
@@ -925,11 +1000,40 @@ open class FollowAPI {
     "totalProfit" : 5.962133916683182,
     "fixedCurrency" : "Undefined",
     "fixedVolume" : 1.4658129805029452,
+    "successFee" : 9.301444243932576,
     "openTolerancePercent" : 6.027456183070403,
+    "volumeFee" : 3.616076749251911,
+    "assetTags" : [ {
+      "color" : "color",
+      "name" : "name"
+    }, {
+      "color" : "color",
+      "name" : "name"
+    } ],
     "volumeFeePersonal" : 7.061401241503109,
     "percent" : 0.8008281904610115,
     "mode" : "ByBalance",
     "subscriptionDate" : "2000-01-23T04:56:07.000+00:00",
+    "assetOwner" : {
+      "socialLinks" : [ {
+        "name" : "name",
+        "type" : "Undefined",
+        "value" : "value",
+        "url" : "url",
+        "logoUrl" : "logoUrl"
+      }, {
+        "name" : "name",
+        "type" : "Undefined",
+        "value" : "value",
+        "url" : "url",
+        "logoUrl" : "logoUrl"
+      } ],
+      "registrationDate" : "2000-01-23T04:56:07.000+00:00",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "logoUrl" : "logoUrl",
+      "url" : "url",
+      "username" : "username"
+    },
     "subscriberInfo" : {
       "tradingAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "asset" : {
@@ -947,6 +1051,21 @@ open class FollowAPI {
       "tradingAccountLogin" : "tradingAccountLogin"
     },
     "detachMode" : "None",
+    "assetBrokerDetails" : {
+      "showCommissionRebateSometime" : true,
+      "showCommissionRebate" : true,
+      "showSwaps" : true,
+      "showTicketsSometime" : true,
+      "type" : "Undefined",
+      "showTickets" : true,
+      "logoUrl" : "logoUrl",
+      "isKycRequired" : true,
+      "name" : "name",
+      "showSwapsSometime" : true,
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "isSignalsAvailable" : true,
+      "isKycRequiredSometime" : true
+    },
     "hasActiveSubscription" : true,
     "successFeePersonal" : 2.3021358869347655,
     "status" : "status"
@@ -992,7 +1111,7 @@ open class FollowAPI {
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
-  "total" : 9,
+  "total" : 2,
   "items" : [ {
     "unsubscriptionDate" : "2000-01-23T04:56:07.000+00:00",
     "totalVolume" : 5.637376656633329,
@@ -1001,11 +1120,40 @@ open class FollowAPI {
     "totalProfit" : 5.962133916683182,
     "fixedCurrency" : "Undefined",
     "fixedVolume" : 1.4658129805029452,
+    "successFee" : 9.301444243932576,
     "openTolerancePercent" : 6.027456183070403,
+    "volumeFee" : 3.616076749251911,
+    "assetTags" : [ {
+      "color" : "color",
+      "name" : "name"
+    }, {
+      "color" : "color",
+      "name" : "name"
+    } ],
     "volumeFeePersonal" : 7.061401241503109,
     "percent" : 0.8008281904610115,
     "mode" : "ByBalance",
     "subscriptionDate" : "2000-01-23T04:56:07.000+00:00",
+    "assetOwner" : {
+      "socialLinks" : [ {
+        "name" : "name",
+        "type" : "Undefined",
+        "value" : "value",
+        "url" : "url",
+        "logoUrl" : "logoUrl"
+      }, {
+        "name" : "name",
+        "type" : "Undefined",
+        "value" : "value",
+        "url" : "url",
+        "logoUrl" : "logoUrl"
+      } ],
+      "registrationDate" : "2000-01-23T04:56:07.000+00:00",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "logoUrl" : "logoUrl",
+      "url" : "url",
+      "username" : "username"
+    },
     "subscriberInfo" : {
       "tradingAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "asset" : {
@@ -1023,6 +1171,21 @@ open class FollowAPI {
       "tradingAccountLogin" : "tradingAccountLogin"
     },
     "detachMode" : "None",
+    "assetBrokerDetails" : {
+      "showCommissionRebateSometime" : true,
+      "showCommissionRebate" : true,
+      "showSwaps" : true,
+      "showTicketsSometime" : true,
+      "type" : "Undefined",
+      "showTickets" : true,
+      "logoUrl" : "logoUrl",
+      "isKycRequired" : true,
+      "name" : "name",
+      "showSwapsSometime" : true,
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "isSignalsAvailable" : true,
+      "isKycRequiredSometime" : true
+    },
     "hasActiveSubscription" : true,
     "successFeePersonal" : 2.3021358869347655,
     "status" : "status"
@@ -1034,11 +1197,40 @@ open class FollowAPI {
     "totalProfit" : 5.962133916683182,
     "fixedCurrency" : "Undefined",
     "fixedVolume" : 1.4658129805029452,
+    "successFee" : 9.301444243932576,
     "openTolerancePercent" : 6.027456183070403,
+    "volumeFee" : 3.616076749251911,
+    "assetTags" : [ {
+      "color" : "color",
+      "name" : "name"
+    }, {
+      "color" : "color",
+      "name" : "name"
+    } ],
     "volumeFeePersonal" : 7.061401241503109,
     "percent" : 0.8008281904610115,
     "mode" : "ByBalance",
     "subscriptionDate" : "2000-01-23T04:56:07.000+00:00",
+    "assetOwner" : {
+      "socialLinks" : [ {
+        "name" : "name",
+        "type" : "Undefined",
+        "value" : "value",
+        "url" : "url",
+        "logoUrl" : "logoUrl"
+      }, {
+        "name" : "name",
+        "type" : "Undefined",
+        "value" : "value",
+        "url" : "url",
+        "logoUrl" : "logoUrl"
+      } ],
+      "registrationDate" : "2000-01-23T04:56:07.000+00:00",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "logoUrl" : "logoUrl",
+      "url" : "url",
+      "username" : "username"
+    },
     "subscriberInfo" : {
       "tradingAccountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
       "asset" : {
@@ -1056,6 +1248,21 @@ open class FollowAPI {
       "tradingAccountLogin" : "tradingAccountLogin"
     },
     "detachMode" : "None",
+    "assetBrokerDetails" : {
+      "showCommissionRebateSometime" : true,
+      "showCommissionRebate" : true,
+      "showSwaps" : true,
+      "showTicketsSometime" : true,
+      "type" : "Undefined",
+      "showTickets" : true,
+      "logoUrl" : "logoUrl",
+      "isKycRequired" : true,
+      "name" : "name",
+      "showSwapsSometime" : true,
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "isSignalsAvailable" : true,
+      "isKycRequiredSometime" : true
+    },
     "hasActiveSubscription" : true,
     "successFeePersonal" : 2.3021358869347655,
     "status" : "status"

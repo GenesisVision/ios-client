@@ -47,6 +47,41 @@ open class AuthAPI {
     }
 
     /**
+     Authorize by signature
+     - parameter body: (body)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func authorizeBySignature(body: LoginSignViewModel? = nil, completion: @escaping ((_ data: String?,_ error: Error?) -> Void)) {
+        authorizeBySignatureWithRequestBuilder(body: body).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     Authorize by signature
+     - POST /v2.0/auth/signature/signin
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example=""}]
+     - parameter body: (body)  (optional)
+
+     - returns: RequestBuilder<String> 
+     */
+    open class func authorizeBySignatureWithRequestBuilder(body: LoginSignViewModel? = nil) -> RequestBuilder<String> {
+        let path = "/v2.0/auth/signature/signin"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
+
+        let url = URLComponents(string: URLString)
+
+        let requestBuilder: RequestBuilder<String>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+    }
+
+    /**
      Change password
      - parameter body: (body)  (optional)
      - parameter completion: completion handler to receive the data and the error objects

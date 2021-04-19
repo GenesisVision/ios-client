@@ -23,6 +23,8 @@ public struct DashboardTradingAssetCommonDetails: Codable {
 
     public var currency: Currency?
 
+    public var originalCurrency: Currency?
+
     public var leverage: Int?
 
     public var type: PrivateTradingAccountType?
@@ -30,13 +32,14 @@ public struct DashboardTradingAssetCommonDetails: Codable {
     public var balances: [AmountWithCurrency]?
 
     public var supportedCurrencies: [Currency]?
-    public init(title: String? = nil, status: DashboardTradingAssetStatus? = nil, creationDate: Date? = nil, balance: Double? = nil, login: String? = nil, currency: Currency? = nil, leverage: Int? = nil, type: PrivateTradingAccountType? = nil, balances: [AmountWithCurrency]? = nil, supportedCurrencies: [Currency]? = nil) { 
+    public init(title: String? = nil, status: DashboardTradingAssetStatus? = nil, creationDate: Date? = nil, balance: Double? = nil, login: String? = nil, currency: Currency? = nil, originalCurrency: Currency? = nil, leverage: Int? = nil, type: PrivateTradingAccountType? = nil, balances: [AmountWithCurrency]? = nil, supportedCurrencies: [Currency]? = nil) { 
         self.title = title
         self.status = status
         self.creationDate = creationDate
         self.balance = balance
         self.login = login
         self.currency = currency
+        self.originalCurrency = originalCurrency
         self.leverage = leverage
         self.type = type
         self.balances = balances

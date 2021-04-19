@@ -127,26 +127,27 @@ final class FundInvestViewModel {
     }
     
     func getMinInvestmentAmountText() -> String {
-        guard let fundCurrency = fundCurrency, let walletCurrency = self.selectedWalletFromDelegateManager?.selected?.currency?.rawValue else { return "" }
+        guard let walletCurrency = self.selectedWalletFromDelegateManager?.selected?.currency else { return "" }
         
         let minInvestmentAmount = getMinInvestmentAmount()
         
-        var text = "min " + minInvestmentAmount.rounded(with: fundCurrency).toString() + " " + fundCurrency.rawValue
+        var text = "min " + minInvestmentAmount.rounded(with: walletCurrency).toString() + " " + walletCurrency.rawValue
         
-        if fundCurrency.rawValue != walletCurrency, let walletCurrencyType = CurrencyType(rawValue: walletCurrency) {
-            let minValueInWalletCurrency = (minInvestmentAmount / rate).rounded(with: walletCurrencyType).toString() + " " + walletCurrencyType.rawValue
-            text.append("≈\(minValueInWalletCurrency)")
-            return " (\(text))"
-        }
+//        if fundCurrency != walletCurrency {
+//            let minValueInWalletCurrency = (minInvestmentAmount / rate).rounded(with: walletCurrency).toString() + " " + walletCurrency.rawValue
+//            text.append("≈\(minValueInWalletCurrency)")
+//            return " (\(text))"
+//        }
         
         return text
     }
     
     func getMinInvestmentAmount() -> Double {
-        guard let selectedCurrency = self.selectedWalletFromDelegateManager?.selected?.currency, let amountWithCurrency = minInvestAmountIntoFund?.first(where: {
+        guard let selectedCurrency = selectedWalletFromDelegateManager?.selected?.currency,
+              let amountWithCurrency = minInvestAmountIntoFund?.first(where: {
             guard let currency = $0.currency else { return false }
             return currency == selectedCurrency
-        }), let minInvestmentAmount = amountWithCurrency.amount  else { return 0.0 }
+        }), let minInvestmentAmount = amountWithCurrency.amount else { return 0.0 }
         
         return minInvestmentAmount
     }

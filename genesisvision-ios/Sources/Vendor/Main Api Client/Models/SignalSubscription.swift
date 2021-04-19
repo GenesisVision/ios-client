@@ -15,6 +15,12 @@ public struct SignalSubscription: Codable {
 
     public var asset: AssetDetails?
 
+    public var assetOwner: ProfilePublic?
+
+    public var assetBrokerDetails: BrokerDetails?
+
+    public var assetTags: [Tag]?
+
     public var status: String?
 
     public var subscriptionDate: Date?
@@ -46,9 +52,16 @@ public struct SignalSubscription: Codable {
     public var successFeePersonal: Double?
 
     public var volumeFeePersonal: Double?
-    public init(subscriberInfo: SignalSubscriberInfo? = nil, asset: AssetDetails? = nil, status: String? = nil, subscriptionDate: Date? = nil, unsubscriptionDate: Date? = nil, hasSignalAccount: Bool? = nil, hasActiveSubscription: Bool? = nil, isExternal: Bool? = nil, mode: SubscriptionMode? = nil, detachMode: SignalDetachMode? = nil, percent: Double? = nil, openTolerancePercent: Double? = nil, fixedVolume: Double? = nil, fixedCurrency: Currency? = nil, totalProfit: Double? = nil, totalVolume: Double? = nil, successFeePersonal: Double? = nil, volumeFeePersonal: Double? = nil) { 
+
+    public var successFee: Double?
+
+    public var volumeFee: Double?
+    public init(subscriberInfo: SignalSubscriberInfo? = nil, asset: AssetDetails? = nil, assetOwner: ProfilePublic? = nil, assetBrokerDetails: BrokerDetails? = nil, assetTags: [Tag]? = nil, status: String? = nil, subscriptionDate: Date? = nil, unsubscriptionDate: Date? = nil, hasSignalAccount: Bool? = nil, hasActiveSubscription: Bool? = nil, isExternal: Bool? = nil, mode: SubscriptionMode? = nil, detachMode: SignalDetachMode? = nil, percent: Double? = nil, openTolerancePercent: Double? = nil, fixedVolume: Double? = nil, fixedCurrency: Currency? = nil, totalProfit: Double? = nil, totalVolume: Double? = nil, successFeePersonal: Double? = nil, volumeFeePersonal: Double? = nil, successFee: Double? = nil, volumeFee: Double? = nil) { 
         self.subscriberInfo = subscriberInfo
         self.asset = asset
+        self.assetOwner = assetOwner
+        self.assetBrokerDetails = assetBrokerDetails
+        self.assetTags = assetTags
         self.status = status
         self.subscriptionDate = subscriptionDate
         self.unsubscriptionDate = unsubscriptionDate
@@ -65,6 +78,8 @@ public struct SignalSubscription: Codable {
         self.totalVolume = totalVolume
         self.successFeePersonal = successFeePersonal
         self.volumeFeePersonal = volumeFeePersonal
+        self.successFee = successFee
+        self.volumeFee = volumeFee
     }
 
 }
