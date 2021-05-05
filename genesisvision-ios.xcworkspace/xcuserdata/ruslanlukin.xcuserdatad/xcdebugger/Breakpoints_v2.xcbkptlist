@@ -6779,8 +6779,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "423"
             endingLineNumber = "423"
-            landmarkName = "didSelect(at:)"
-            landmarkType = "7">
+            landmarkName = "assets"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -6923,7 +6923,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "221"
             endingLineNumber = "221"
-            landmarkName = "assetSelected(asset:)"
+            landmarkName = "assetCellSelected(assetInfo:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -6955,8 +6955,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "200"
             endingLineNumber = "200"
-            landmarkName = "close()"
-            landmarkType = "7">
+            landmarkName = "FundReallocationViewController"
+            landmarkType = "21">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -7019,7 +7019,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "280"
             endingLineNumber = "280"
-            landmarkName = "reallocate(completion:)"
+            landmarkName = "init(with:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -7099,7 +7099,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "482"
             endingLineNumber = "482"
-            landmarkName = "remove(assetInfo:)"
+            landmarkName = "changeValueForFundAsset(target:symbol:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -7115,7 +7115,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "371"
             endingLineNumber = "371"
-            landmarkName = "getFreeSpaceInFund()"
+            landmarkName = "changeValueForFundAsset(target:symbol:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -7675,7 +7675,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "439"
             endingLineNumber = "439"
-            landmarkName = "showDetail(with:)"
+            landmarkName = "showProgramDetail(at:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -8121,9 +8121,9 @@
             filePath = "genesisvision-ios/Sources/Common/Helpers/ErrorHandler.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "handleError(with:viewController:hud:)"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "handleErrorCompletion(errorCodes:errorsText:completion:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -9240,8 +9240,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "229"
             endingLineNumber = "229"
-            landmarkName = "numberOfSections(in:)"
-            landmarkType = "7">
+            landmarkName = "FundReallocationViewController"
+            landmarkType = "21">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -10024,8 +10024,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "270"
             endingLineNumber = "270"
-            landmarkName = "init(with:)"
-            landmarkType = "7">
+            landmarkName = "canCreateFund"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -10040,7 +10040,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "298"
             endingLineNumber = "298"
-            landmarkName = "fetchPlatfromAssets(completion:)"
+            landmarkName = "addAsset(asset:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -10088,7 +10088,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "211"
             endingLineNumber = "211"
-            landmarkName = "assetCellSelected(assetInfo:)"
+            landmarkName = "assetCellRemoved(assetInfo:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -10104,7 +10104,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "287"
             endingLineNumber = "287"
-            landmarkName = "addAsset(asset:)"
+            landmarkName = "reallocate(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -10136,7 +10136,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "318"
             endingLineNumber = "318"
-            landmarkName = "addGVTAsset(completion:)"
+            landmarkName = "filterAssestsCollectionView()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -10264,7 +10264,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "206"
             endingLineNumber = "206"
-            landmarkName = "assetCellRemoved(assetInfo:)"
+            landmarkName = "close()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -10280,8 +10280,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "409"
             endingLineNumber = "409"
-            landmarkName = "assets"
-            landmarkType = "24">
+            landmarkName = "FundReallocationAssetCollectionViewModel"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -10444,7 +10444,7 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "0492D2D0-B779-49BF-ACED-2F167829A75B - f5a9dc7ea0a0c93b"
+                  uuid = "0492D2D0-B779-49BF-ACED-2F167829A75B - f5a9dc7ea0a0cc7c"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -10454,23 +10454,38 @@
                   urlString = "file:///Users/ruslanlukin/Workspace/GV/ios-client/genesisvision-ios/Sources/View%20Controllers/Dashboard/Trading/Private/CreateAccountViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "341"
-                  endingLineNumber = "341"
-                  offsetFromSymbolStart = "56">
+                  startingLineNumber = "378"
+                  endingLineNumber = "378"
+                  offsetFromSymbolStart = "47">
                </Location>
                <Location
-                  uuid = "0492D2D0-B779-49BF-ACED-2F167829A75B - 13eafc0a2ecbb0ff"
+                  uuid = "0492D2D0-B779-49BF-ACED-2F167829A75B - 9a85426f706d9f0d"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;GV_DEBUG.RatesModel&gt;) -&gt; () in GV_DEBUG.CreateAccountViewModel.updateRates() -&gt; ()"
+                  symbolName = "closure #1 (GV_DEBUG.Currency) -&gt; Swift.String in GV_DEBUG.CreateAccountViewModel.updateRates() -&gt; ()"
                   moduleName = "GV DEBUG"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ruslanlukin/Workspace/GV/ios-client/genesisvision-ios/Sources/View%20Controllers/Dashboard/Trading/Private/CreateAccountViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "341"
-                  endingLineNumber = "341"
+                  startingLineNumber = "378"
+                  endingLineNumber = "378"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "0492D2D0-B779-49BF-ACED-2F167829A75B - 93dc93ede9c323b9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Optional&lt;GV_DEBUG.RatesModel&gt;) -&gt; () in GV_DEBUG.CreateAccountViewModel.updateRates() -&gt; ()"
+                  moduleName = "GV DEBUG"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ruslanlukin/Workspace/GV/ios-client/genesisvision-ios/Sources/View%20Controllers/Dashboard/Trading/Private/CreateAccountViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "378"
+                  endingLineNumber = "378"
                   offsetFromSymbolStart = "88">
                </Location>
             </Locations>
@@ -14776,9 +14791,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "100"
-            endingLineNumber = "100"
-            landmarkName = "updateSocialPrivacy(whoCanPostToMayWall:whoCanViewCommentsOnMyPosts:whoCanCommentOnMyPosts:completion:)"
-            landmarkType = "7">
+            endingLineNumber = "100">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -14808,9 +14821,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "98"
-            endingLineNumber = "98"
-            landmarkName = "updateSocialPrivacy(whoCanPostToMayWall:whoCanViewCommentsOnMyPosts:whoCanCommentOnMyPosts:completion:)"
-            landmarkType = "7">
+            endingLineNumber = "98">
             <Locations>
                <Location
                   uuid = "5BE1C955-EB84-4F43-AECC-40E81B107CE7 - 9dbe6404342bd3c1"

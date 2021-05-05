@@ -43,20 +43,11 @@ class ErrorHandler {
                 errorWithTokenViewModel = try JSONDecoder().decode(ErrorViewModelWithToken.self, from: jsonData)
             } catch {}
             
-//            if errorWithTokenViewModel == nil {
-//                do {
-//                    errorViewModel = try JSONDecoder().decode(ErrorViewModel.self, from: jsonData)
-//                } catch {}
-//            }
-            
             if let errorsCode = errorWithTokenViewModel?.code,
                let errorsText = errorWithTokenViewModel?.errors?.compactMap({ $0.message }).joined(separator: "\n") {
                 if let tempToken = errorWithTokenViewModel?.tempToken { AuthManager.tempAuthorizedToken = tempToken }
                 handleErrorCompletion(errorCodes: errorsCode, errorsText: errorsText, completion: completion)
-            }// else if let errorsCode = errorWithTokenViewModel?.code,
-//                      let errorsText = errorWithTokenViewModel?.errors?.compactMap({ $0.message }).joined(separator: "\n") {
-//                handleErrorCompletion(errorCodes: errorsCode, errorsText: errorsText, completion: completion)
-//            }
+            }
         }
     }
     

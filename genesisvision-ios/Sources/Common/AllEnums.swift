@@ -152,7 +152,7 @@ extension Currency {
 
 extension Currency: CaseIterable {
     public static var allCases: [Currency] {
-        return [.btc, .eth, .gvt, .usd, .usdc, .usdt]
+        return [.btc, .eth, .gvt, .usd, .usdc, .usdt, .dai]
     }
 }
 
