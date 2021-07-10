@@ -4009,8 +4009,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Funds/List/FundListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "317"
-            endingLineNumber = "317"
+            startingLineNumber = "343"
+            endingLineNumber = "343"
             landmarkName = "didReloadData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -4937,8 +4937,8 @@
             filePath = "genesisvision-ios/Sources/View Models/Program Details/ProgramInvestViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "168"
-            endingLineNumber = "168"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
             landmarkName = "getAvailableToInvest()"
             landmarkType = "7">
          </BreakpointContent>
@@ -4953,8 +4953,8 @@
             filePath = "genesisvision-ios/Sources/View Models/Program Details/ProgramInvestViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
+            startingLineNumber = "174"
+            endingLineNumber = "174"
             landmarkName = "getAvailableToInvest()"
             landmarkType = "7">
          </BreakpointContent>
@@ -5209,8 +5209,8 @@
             filePath = "genesisvision-ios/Sources/View Models/Fund Details/FundInvestViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "178"
-            endingLineNumber = "178"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
             landmarkName = "getEntryFee()"
             landmarkType = "7">
          </BreakpointContent>
@@ -5305,8 +5305,8 @@
             filePath = "genesisvision-ios/Sources/View Models/Fund Details/FundInvestViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
             landmarkName = "updateRate(completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -5321,8 +5321,8 @@
             filePath = "genesisvision-ios/Sources/View Models/Fund Details/FundInvestViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "213"
-            endingLineNumber = "213"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
             landmarkName = "apiInvest(with:completion:)"
             landmarkType = "7">
             <Locations>
@@ -6779,8 +6779,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "423"
             endingLineNumber = "423"
-            landmarkName = "didSelect(at:)"
-            landmarkType = "7">
+            landmarkName = "assets"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -6923,7 +6923,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "221"
             endingLineNumber = "221"
-            landmarkName = "assetSelected(asset:)"
+            landmarkName = "assetCellSelected(assetInfo:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -6955,8 +6955,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "200"
             endingLineNumber = "200"
-            landmarkName = "close()"
-            landmarkType = "7">
+            landmarkName = "FundReallocationViewController"
+            landmarkType = "21">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -7019,7 +7019,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "280"
             endingLineNumber = "280"
-            landmarkName = "reallocate(completion:)"
+            landmarkName = "init(with:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -7099,7 +7099,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "482"
             endingLineNumber = "482"
-            landmarkName = "remove(assetInfo:)"
+            landmarkName = "changeValueForFundAsset(target:symbol:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -7115,7 +7115,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "371"
             endingLineNumber = "371"
-            landmarkName = "getFreeSpaceInFund()"
+            landmarkName = "changeValueForFundAsset(target:symbol:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -7513,8 +7513,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Funds/List/FundListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "221"
-            endingLineNumber = "221"
+            startingLineNumber = "247"
+            endingLineNumber = "247"
             landmarkName = "fetchData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -7529,8 +7529,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Funds/List/FundListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "343"
-            endingLineNumber = "343"
+            startingLineNumber = "369"
+            endingLineNumber = "369"
             landmarkName = "didReload()"
             landmarkType = "7">
             <Locations>
@@ -7577,8 +7577,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Funds/List/FundListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "237"
-            endingLineNumber = "237"
+            startingLineNumber = "263"
+            endingLineNumber = "263"
             landmarkName = "setupViewModels()"
             landmarkType = "7">
          </BreakpointContent>
@@ -7641,8 +7641,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Funds/List/FundListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "275"
-            endingLineNumber = "275"
+            startingLineNumber = "301"
+            endingLineNumber = "301"
             landmarkName = "delegateManagerTableView(_:didSelectRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -7657,8 +7657,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Funds/List/FundListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "352"
-            endingLineNumber = "352"
+            startingLineNumber = "378"
+            endingLineNumber = "378"
             landmarkName = "didSelect(_:cellViewModel:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -7675,7 +7675,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "439"
             endingLineNumber = "439"
-            landmarkName = "showDetail(with:)"
+            landmarkName = "showProgramDetail(at:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -7689,8 +7689,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Funds/List/FundListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
             landmarkName = "setupChallengeTableView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -7705,8 +7705,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Funds/List/FundListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "258"
-            endingLineNumber = "258"
+            startingLineNumber = "284"
+            endingLineNumber = "284"
             landmarkName = "didSelect(at:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -7721,8 +7721,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Funds/List/FundListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "351"
-            endingLineNumber = "351"
+            startingLineNumber = "377"
+            endingLineNumber = "377"
             landmarkName = "didSelect(_:cellViewModel:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -7737,8 +7737,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Funds/List/FundListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "350"
-            endingLineNumber = "350"
+            startingLineNumber = "376"
+            endingLineNumber = "376"
             landmarkName = "didSelect(_:cellViewModel:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -7753,8 +7753,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Funds/List/FundListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "344"
-            endingLineNumber = "344"
+            startingLineNumber = "370"
+            endingLineNumber = "370"
             landmarkName = "didReload()"
             landmarkType = "7">
          </BreakpointContent>
@@ -7769,8 +7769,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Funds/List/FundListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "284"
-            endingLineNumber = "284"
+            startingLineNumber = "310"
+            endingLineNumber = "310"
             landmarkName = "delegateManagerScrollViewDidScroll(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -8073,8 +8073,8 @@
             filePath = "genesisvision-ios/Sources/View Models/Fund Details/FundInvestViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
             landmarkName = "getMinInvestmentAmount()"
             landmarkType = "7">
          </BreakpointContent>
@@ -8121,9 +8121,9 @@
             filePath = "genesisvision-ios/Sources/Common/Helpers/ErrorHandler.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "handleError(with:viewController:hud:)"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "handleErrorCompletion(errorCodes:errorsText:completion:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -8566,8 +8566,8 @@
             filePath = "genesisvision-ios/Sources/View Models/Fund Details/FundInvestViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
             landmarkName = "updateRate(completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -9206,8 +9206,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Funds/List/FundListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
             landmarkName = "infoButtonPressed()"
             landmarkType = "7">
          </BreakpointContent>
@@ -9240,8 +9240,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "229"
             endingLineNumber = "229"
-            landmarkName = "numberOfSections(in:)"
-            landmarkType = "7">
+            landmarkName = "FundReallocationViewController"
+            landmarkType = "21">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -9286,8 +9286,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Dashboard/Trading/Private/CreateAccountViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "550"
-            endingLineNumber = "550"
+            startingLineNumber = "573"
+            endingLineNumber = "573"
             landmarkName = "exchangeValueInCurrency(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -9302,8 +9302,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Dashboard/Trading/Private/CreateAccountViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "536"
-            endingLineNumber = "536"
+            startingLineNumber = "555"
+            endingLineNumber = "555"
             landmarkName = "getRate()"
             landmarkType = "7">
          </BreakpointContent>
@@ -10024,8 +10024,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "270"
             endingLineNumber = "270"
-            landmarkName = "init(with:)"
-            landmarkType = "7">
+            landmarkName = "canCreateFund"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -10040,7 +10040,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "298"
             endingLineNumber = "298"
-            landmarkName = "fetchPlatfromAssets(completion:)"
+            landmarkName = "addAsset(asset:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -10088,7 +10088,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "211"
             endingLineNumber = "211"
-            landmarkName = "assetCellSelected(assetInfo:)"
+            landmarkName = "assetCellRemoved(assetInfo:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -10104,7 +10104,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "287"
             endingLineNumber = "287"
-            landmarkName = "addAsset(asset:)"
+            landmarkName = "reallocate(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -10136,7 +10136,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "318"
             endingLineNumber = "318"
-            landmarkName = "addGVTAsset(completion:)"
+            landmarkName = "filterAssestsCollectionView()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -10264,7 +10264,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "206"
             endingLineNumber = "206"
-            landmarkName = "assetCellRemoved(assetInfo:)"
+            landmarkName = "close()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -10280,8 +10280,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "409"
             endingLineNumber = "409"
-            landmarkName = "assets"
-            landmarkType = "24">
+            landmarkName = "FundReallocationAssetCollectionViewModel"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -10392,8 +10392,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "152"
             endingLineNumber = "152"
-            landmarkName = "FundPublicInfoViewController"
-            landmarkType = "3">
+            landmarkName = "titleFieldEndEditing()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -10408,7 +10408,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "153"
             endingLineNumber = "153"
-            landmarkName = "checkActionButton()"
+            landmarkName = "titleFieldEndEditing()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -10444,7 +10444,7 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "0492D2D0-B779-49BF-ACED-2F167829A75B - f5a9dc7ea0a0c93b"
+                  uuid = "0492D2D0-B779-49BF-ACED-2F167829A75B - f5a9dc7ea0a0cc7c"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -10454,23 +10454,38 @@
                   urlString = "file:///Users/ruslanlukin/Workspace/GV/ios-client/genesisvision-ios/Sources/View%20Controllers/Dashboard/Trading/Private/CreateAccountViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "341"
-                  endingLineNumber = "341"
-                  offsetFromSymbolStart = "56">
+                  startingLineNumber = "378"
+                  endingLineNumber = "378"
+                  offsetFromSymbolStart = "47">
                </Location>
                <Location
-                  uuid = "0492D2D0-B779-49BF-ACED-2F167829A75B - 13eafc0a2ecbb0ff"
+                  uuid = "0492D2D0-B779-49BF-ACED-2F167829A75B - 9a85426f706d9f0d"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;GV_DEBUG.RatesModel&gt;) -&gt; () in GV_DEBUG.CreateAccountViewModel.updateRates() -&gt; ()"
+                  symbolName = "closure #1 (GV_DEBUG.Currency) -&gt; Swift.String in GV_DEBUG.CreateAccountViewModel.updateRates() -&gt; ()"
                   moduleName = "GV DEBUG"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ruslanlukin/Workspace/GV/ios-client/genesisvision-ios/Sources/View%20Controllers/Dashboard/Trading/Private/CreateAccountViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "341"
-                  endingLineNumber = "341"
+                  startingLineNumber = "378"
+                  endingLineNumber = "378"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "0492D2D0-B779-49BF-ACED-2F167829A75B - 93dc93ede9c323b9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Optional&lt;GV_DEBUG.RatesModel&gt;) -&gt; () in GV_DEBUG.CreateAccountViewModel.updateRates() -&gt; ()"
+                  moduleName = "GV DEBUG"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ruslanlukin/Workspace/GV/ios-client/genesisvision-ios/Sources/View%20Controllers/Dashboard/Trading/Private/CreateAccountViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "378"
+                  endingLineNumber = "378"
                   offsetFromSymbolStart = "88">
                </Location>
             </Locations>
@@ -10886,8 +10901,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Funds/List/FundListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "274"
-            endingLineNumber = "274"
+            startingLineNumber = "300"
+            endingLineNumber = "300"
             landmarkName = "delegateManagerTableView(_:didSelectRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -12150,8 +12165,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Dashboard/Trading/Private/CreateAccountViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "606"
-            endingLineNumber = "606"
+            startingLineNumber = "629"
+            endingLineNumber = "629"
             landmarkName = "didSelect(at:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -12198,8 +12213,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Dashboard/Trading/Private/CreateAccountViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "626"
-            endingLineNumber = "626"
+            startingLineNumber = "649"
+            endingLineNumber = "649"
             landmarkName = "showDetails(_:_:)"
             landmarkType = "7">
             <Locations>
@@ -12246,8 +12261,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Dashboard/Trading/Private/CreateAccountViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "617"
-            endingLineNumber = "617"
+            startingLineNumber = "640"
+            endingLineNumber = "640"
             landmarkName = "isSelected(_:_:)"
             landmarkType = "7">
             <Locations>
@@ -12326,8 +12341,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Dashboard/Trading/Private/CreateAccountViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "511"
-            endingLineNumber = "511"
+            startingLineNumber = "530"
+            endingLineNumber = "530"
             landmarkName = "isEnableLeverageSelector()"
             landmarkType = "7">
          </BreakpointContent>
@@ -12342,8 +12357,8 @@
             filePath = "genesisvision-ios/Sources/View Controllers/Dashboard/Trading/Private/CreateAccountViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "619"
-            endingLineNumber = "619"
+            startingLineNumber = "642"
+            endingLineNumber = "642"
             landmarkName = "isSelected(_:_:)"
             landmarkType = "7">
             <Locations>
@@ -12538,6 +12553,38 @@
             endingLineNumber = "104"
             landmarkName = "reloadData()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E593F7E4-9048-4651-9B21-33CBA7A21E1E - d5bff17a9693cb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GV_DEBUG.ReferralHistoryViewController.(reloadData in _1A01120F9B369F8DADEF9CB6113840D0)() -&gt; ()"
+                  moduleName = "GV DEBUG"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ruslanlukin/Workspace/GV/ios-client/genesisvision-ios/Sources/View%20Controllers/Settings/Referral%20Program/ReferralHistoryViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "104"
+                  endingLineNumber = "104"
+                  offsetFromSymbolStart = "135">
+               </Location>
+               <Location
+                  uuid = "E593F7E4-9048-4651-9B21-33CBA7A21E1E - 8c16b055a144cbf3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in GV_DEBUG.ReferralHistoryViewController.(reloadData in _1A01120F9B369F8DADEF9CB6113840D0)() -&gt; ()"
+                  moduleName = "GV DEBUG"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ruslanlukin/Workspace/GV/ios-client/genesisvision-ios/Sources/View%20Controllers/Settings/Referral%20Program/ReferralHistoryViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "105"
+                  endingLineNumber = "105"
+                  offsetFromSymbolStart = "41">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -12776,8 +12823,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "338"
             endingLineNumber = "338"
-            landmarkName = "FundPublicInfoViewModel"
-            landmarkType = "3">
+            landmarkName = "updatePublicInfo(completion:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -12792,7 +12839,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "314"
             endingLineNumber = "314"
-            landmarkName = "updateFund(completion:)"
+            landmarkName = "saveImage(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -12824,7 +12871,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "310"
             endingLineNumber = "310"
-            landmarkName = "updateFund(completion:)"
+            landmarkName = "saveImage(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -14744,9 +14791,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "100"
-            endingLineNumber = "100"
-            landmarkName = "updateSocialPrivacy(whoCanPostToMayWall:whoCanViewCommentsOnMyPosts:whoCanCommentOnMyPosts:completion:)"
-            landmarkType = "7">
+            endingLineNumber = "100">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -14776,9 +14821,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "98"
-            endingLineNumber = "98"
-            landmarkName = "updateSocialPrivacy(whoCanPostToMayWall:whoCanViewCommentsOnMyPosts:whoCanCommentOnMyPosts:completion:)"
-            landmarkType = "7">
+            endingLineNumber = "98">
             <Locations>
                <Location
                   uuid = "5BE1C955-EB84-4F43-AECC-40E81B107CE7 - 9dbe6404342bd3c1"
@@ -15670,6 +15713,230 @@
                   offsetFromSymbolStart = "3621">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7ECC6BFF-1025-49CA-BDD1-A2B0F0529F70"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/View Controllers/Dashboard/Trading/Private/CreateAccountViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "486"
+            endingLineNumber = "486"
+            landmarkName = "getMinDepositValue()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BF6FAC56-D24C-4D34-8BA0-7DE471811E25"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/View Controllers/Dashboard/Trading/Private/CreateAccountViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "456"
+            endingLineNumber = "456"
+            landmarkName = "updateCurrency(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D2CFAB9B-882F-4628-8876-5052DDF8F760"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/View Controllers/Dashboard/Trading/Private/CreateAccountViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "477"
+            endingLineNumber = "477"
+            landmarkName = "getMinDepositValue()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E6478A2E-A774-4EC8-96A9-B1BAFF962992"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/View Controllers/Programs/Details/ProgramInvestViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "183"
+            endingLineNumber = "183"
+            landmarkName = "updateUI()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "220446DE-8327-41F2-8CAF-6D9FE16969FD"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/View Controllers/Dashboard/Trading/Private/CreateAccountViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "570"
+            endingLineNumber = "570"
+            landmarkName = "exchangeValueInCurrency(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DB1BDFF4-B924-4BD2-9439-B385FFD8E00D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/View Controllers/Wallet/WalletBalanceViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "setupUI()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FC276E24-E408-4C0B-A34B-9B1120CC30DB"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/View Controllers/Wallet/WalletBalanceViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "withdrawButtonAction()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "29FA20AF-8E62-4111-813E-1C718A711F5E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/View Controllers/Programs/Details/ProgramInvestViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "239"
+            endingLineNumber = "239"
+            landmarkName = "updateUI()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A88A57D0-7EE1-4976-B5DB-DBD0DD5CCC7E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/View Controllers/Programs/Details/ProgramInvestViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "238"
+            endingLineNumber = "238"
+            landmarkName = "updateUI()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E6753C79-1ABD-41AA-A4BD-0BEF05FD4800"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/View Models/Program Details/ProgramInvestViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
+            landmarkName = "getMinInvestmentAmount()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E6753C79-1ABD-41AA-A4BD-0BEF05FD4800 - 6158c81fe5ab3831"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GV_DEBUG.ProgramInvestViewModel.getMinInvestmentAmount() -&gt; Swift.Double"
+                  moduleName = "GV DEBUG"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ruslanlukin/Workspace/GV/ios-client/genesisvision-ios/Sources/View%20Models/Program%20Details/ProgramInvestViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "151"
+                  endingLineNumber = "151"
+                  offsetFromSymbolStart = "1939">
+               </Location>
+               <Location
+                  uuid = "E6753C79-1ABD-41AA-A4BD-0BEF05FD4800 - 55d9b29278d29273"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (GV_DEBUG.AmountWithCurrency) -&gt; Swift.Bool in GV_DEBUG.ProgramInvestViewModel.getMinInvestmentAmount() -&gt; Swift.Double"
+                  moduleName = "GV DEBUG"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ruslanlukin/Workspace/GV/ios-client/genesisvision-ios/Sources/View%20Models/Program%20Details/ProgramInvestViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "151"
+                  endingLineNumber = "151"
+                  offsetFromSymbolStart = "124">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E85040F4-8823-46EA-B070-4D9099B5B1D0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/View Controllers/Funds/Details/FundInvestViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "220"
+            endingLineNumber = "220"
+            landmarkName = "updateUI()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "595DA64E-6E70-4292-8EB1-B2E717ED8D12"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "genesisvision-ios/Sources/View Models/Fund Details/FundInvestViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
+            landmarkName = "getMinInvestmentAmountText()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
