@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SocialMediaCollectionViewCellDelegate: class {
+protocol SocialMediaCollectionViewCellDelegate: AnyObject {
     func mediaPostSelected(post: MediaPost)
     func moreMediaPressed()
 }

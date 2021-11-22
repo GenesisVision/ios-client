@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol BottomSheetControllerProtocol: class {
+protocol BottomSheetControllerProtocol: AnyObject {
     func didHide()
     func didShowAll()
 }

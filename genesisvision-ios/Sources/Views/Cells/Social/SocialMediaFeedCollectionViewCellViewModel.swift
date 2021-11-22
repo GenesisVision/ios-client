@@ -14,7 +14,7 @@ enum SocialMediaFeedCollectionCellType: String {
     case live = "Live"
 }
 
-protocol SocialMediaFeedCollectionViewCellDelegate: class {
+protocol SocialMediaFeedCollectionViewCellDelegate: AnyObject {
     func openSocialFeed(type: SocialMediaFeedCollectionCellType)
     func commentPressed(postId: UUID)
     func sharePressed(postId: UUID)
@@ -61,10 +61,10 @@ struct SocialMediaFeedCollectionViewCellViewModel {
         }
         
         if let tags = post.tags, !tags.isEmpty {
-            tagsViewHeight = 110
+            tagsViewHeight = 80
         }
         
-        return SocialPostViewSizes(textViewHeight: textHeight, imageViewHeight: imageHeight, tagViewHeight: tagsViewHeight)
+        return SocialPostViewSizes(textViewHeight: textHeight, imageViewHeight: imageHeight, tagViewHeight: tagsViewHeight, eventViewHeight: 0)
     }
 }
 
@@ -123,18 +123,26 @@ extension SocialMediaFeedCollectionViewCellViewModel: CellViewModel {
         
         if let likes = post.likesCount {
             cell.socialActivitiesView.likeCount = likes
+        } else {
+            cell.socialActivitiesView.likeCount = 0
         }
         
         if let commetsCount = post.comments?.count, commetsCount > 0 {
             cell.socialActivitiesView.commentsLabel.text = String(commetsCount)
+        } else {
+            cell.socialActivitiesView.commentsLabel.text = ""
         }
         
         if let views = post.impressionsCount, views > 0 {
             cell.socialActivitiesView.viewsLabel.text = String(views)
+        } else {
+            cell.socialActivitiesView.viewsLabel.text = ""
         }
         
         if let repostsCount = post.rePostsCount, repostsCount > 0 {
             cell.socialActivitiesView.sharesLabel.text = String(repostsCount)
+        } else {
+            cell.socialActivitiesView.sharesLabel.text = ""
         }
     }
 }
@@ -250,7 +258,10 @@ class SocialMediaFeedCollectionViewCell: UICollectionViewCell {
         centralView.addSubview(postView)
         centralView.addSubview(socialActivitiesView)
         
-        postView.anchor(top: centralView.topAnchor, leading: centralView.leadingAnchor, bottom: socialActivitiesView.topAnchor, trailing: centralView.trailingAnchor)
+        postView.anchor(top: centralView.topAnchor,
+                        leading: centralView.leadingAnchor,
+                        bottom: socialActivitiesView.topAnchor,
+                        trailing: centralView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0))
         postView.delegate = self
         
         socialActivitiesView.anchor(top: nil, leading: centralView.leadingAnchor, bottom: centralView.bottomAnchor, trailing: centralView.trailingAnchor, padding: UIEdgeInsets(top: 10, left: 10, bottom: 15, right: 10), size: CGSize(width: 0, height: 45))

@@ -30,7 +30,7 @@ struct InvestWithdrawConfirmModel {
     let fourthValue: String?
 }
 
-protocol InvestWithdrawConfirmViewProtocol: class {
+protocol InvestWithdrawConfirmViewProtocol: AnyObject {
     func confirmButtonDidPress()
     func cancelButtonDidPress()
 }

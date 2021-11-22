@@ -492,7 +492,7 @@ class AssetCollectionViewModel: CellViewModelWithCollection {
         return UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0.0, right: 16.0)
     }
 }
-protocol AddAssetListViewModelProtocol: class {
+protocol AddAssetListViewModelProtocol: AnyObject {
     func addAssets(_ assets: [PlatformAsset]?)
 }
 final class AddAssetListViewModel: ViewModelWithListProtocol {

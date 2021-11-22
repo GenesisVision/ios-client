@@ -12,7 +12,7 @@ enum LevelFilterType {
     case fields, buttons
 }
 
-protocol LevelsFilterViewProtocol: class {
+protocol LevelsFilterViewProtocol: AnyObject {
     func applyButtonDidPress()
     func showPickerMinPicker(min minLevel: Int, max maxLevel: Int)
     func showPickerMaxPicker(min minLevel: Int, max maxLevel: Int)

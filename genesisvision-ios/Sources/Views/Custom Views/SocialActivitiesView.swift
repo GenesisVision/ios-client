@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SocialActivitiesViewDelegateProtocol: class {
+protocol SocialActivitiesViewDelegateProtocol: AnyObject {
     func likeTouched()
     func commentTouched()
     func shareTouched()

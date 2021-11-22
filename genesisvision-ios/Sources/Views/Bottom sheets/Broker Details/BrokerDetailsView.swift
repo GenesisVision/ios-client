@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol BrokerDetailsViewProtocol: class {
+protocol BrokerDetailsViewProtocol: AnyObject {
     func showTermsButtonDidPress(_ url: String?)
     func viewHeight(_ height: CGFloat)
     func closeButtonDidPress()

@@ -67,6 +67,8 @@ final class ProgramInfoViewModel: ViewModelWithListProtocol {
     public private(set) var programDetailsFull: ProgramDetailsFull?
     
     public private(set) var followDetailsFull: FollowDetailsFull?
+    
+    public private(set) var assetOwnerProfile: PublicProfile?
 
     var availableInvestment: Double {
         return programFollowDetailsFull?.programDetails?.availableInvestmentBase ?? 0.0
@@ -290,8 +292,8 @@ extension ProgramInfoViewModel {
                 guard let details = programFollowDetailsFull else { return nil }
                 return ProgramHeaderTableViewCellViewModel(details: details, delegate: programHeaderProtocol)
             case .manager:
-                guard let owner = programFollowDetailsFull?.owner else { return nil }
-                return DetailManagerTableViewCellViewModel(profilePublic: owner)
+                guard let profilePublic = assetOwnerProfile else { return nil }
+                return DetailManagerTableViewCellViewModel(profilePublic: profilePublic, delegate: self)
             case .statistics:
                 return DetailStatisticsTableViewCellViewModel(details: programFollowDetailsFull)
             case .strategy:
@@ -307,10 +309,6 @@ extension ProgramInfoViewModel {
             return InfoSignalsTableViewCellViewModel(programDetailsFull: programFollowDetailsFull, isFollowed: signalSubscription != nil, infoSignalsProtocol: self)
         case .subscriptionDetail:
             return InfoSubscriptionTableViewCellViewModel(signalSubscription: signalSubscription, infoSignalsProtocol: self)
-//        case .account:
-//            return DetailStatisticsTableViewCellViewModel(details: accountDetailsFull)
-//        case .yourDeposit:
-//            return ProgramYourInvestmentTableViewCellViewModel(details: accountDetailsFull, yourInvestmentProtocol: self)
         case .makeProgram:
             guard let programDetailsFull = programDetailsFull else { return nil }
             return ProgramInfoTableViewCellViewModel(asset: programDetailsFull, assetId: programFollowDetailsFull?._id?.uuidString, delegate: self)
@@ -328,17 +326,34 @@ extension ProgramInfoViewModel {
             ProgramsDataProvider.get(self.assetId, completion: { [weak self] (viewModel) in
                 guard let viewModel = viewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
                 
-                self?.programFollowDetailsFull = viewModel
-                self?.updateSections()
-                self?.getSignalSubscription(completion)
+                UsersDataProvider.get(with: viewModel.owner?._id?.uuidString ?? "") { ownerPublicProfile in
+                    self?.assetOwnerProfile = ownerPublicProfile
+                    self?.programFollowDetailsFull = viewModel
+                    self?.updateSections()
+                    self?.getSignalSubscription(completion)
+                } errorCompletion: { _ in
+                    self?.programFollowDetailsFull = viewModel
+                    self?.updateSections()
+                    self?.getSignalSubscription(completion)
+                }
+                
+                
             }, errorCompletion: completion)
         case .follow:
             FollowsDataProvider.get(self.assetId, completion: { [weak self] (viewModel) in
                 guard let viewModel = viewModel else { return completion(.failure(errorType: .apiError(message: nil))) }
                 
-                self?.programFollowDetailsFull = viewModel
-                self?.updateSections()
-                self?.getSignalSubscription(completion)
+                UsersDataProvider.get(with: viewModel.owner?._id?.uuidString ?? "") { ownerPublicProfile in
+                    self?.assetOwnerProfile = ownerPublicProfile
+                    self?.programFollowDetailsFull = viewModel
+                    self?.updateSections()
+                    self?.getSignalSubscription(completion)
+                } errorCompletion: { _ in
+                    self?.programFollowDetailsFull = viewModel
+                    self?.updateSections()
+                    self?.getSignalSubscription(completion)
+                }
+
             }, errorCompletion: completion)
         default:
             break
@@ -467,5 +482,13 @@ extension ProgramInfoViewModel: InfoSignalsProtocol {
     
     func didTapEditButton() {
         editSubscription()
+    }
+}
+
+extension ProgramInfoViewModel: DetailManagerTableViewCellDelegate {
+    func followPressed(userId: UUID, followed: Bool) {
+        followed ?
+            SocialDataProvider.unfollow(userId: userId, completion: { _ in })
+            : SocialDataProvider.follow(userId: userId, completion: { _ in })
     }
 }

@@ -8,7 +8,7 @@
 
 import UIKit.UITableView
 
-protocol SortingDelegate: class {
+protocol SortingDelegate: AnyObject {
     func didSelectSorting()
 }
 

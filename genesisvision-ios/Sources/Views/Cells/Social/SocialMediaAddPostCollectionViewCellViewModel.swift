@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SocialMediaAddPostCollectionViewCellDelegate: class {
+protocol SocialMediaAddPostCollectionViewCellDelegate: AnyObject {
     func shareIdeasButtonPressed()
 }
 

@@ -250,6 +250,12 @@
 		19C3B98325E1458D00C6990D /* SocialMediaCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C3B98225E1458D00C6990D /* SocialMediaCollectionViewModel.swift */; };
 		19C3B98925E663E300C6990D /* SocialPostReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C3B98825E663E300C6990D /* SocialPostReportViewController.swift */; };
 		19C3B98F25E6900900C6990D /* CustomRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C3B98E25E6900800C6990D /* CustomRadioButton.swift */; };
+		19C3EA1D27457AF4002402B2 /* SocialFeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19C3EA1C27457AF4002402B2 /* SocialFeedTableViewCell.xib */; };
+		19C3EA1F27457B16002402B2 /* SocialFeedTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C3EA1E27457B16002402B2 /* SocialFeedTableViewCellViewModel.swift */; };
+		19C3EA232747D559002402B2 /* SocialLinksCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19C3EA222747D559002402B2 /* SocialLinksCollectionViewCell.xib */; };
+		19C3EA252747D59C002402B2 /* SocialLinksCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C3EA242747D59C002402B2 /* SocialLinksCollectionViewCellViewModel.swift */; };
+		19C3EA272747D6A6002402B2 /* SocialInfoLinksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C3EA262747D6A6002402B2 /* SocialInfoLinksTableViewCell.swift */; };
+		19C3EA292747E627002402B2 /* SocialInfoLinksTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19C3EA282747E627002402B2 /* SocialInfoLinksTableViewCell.xib */; };
 		19CB5997258B9B300008D8BC /* SocialFeedCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19CB5995258B9B2F0008D8BC /* SocialFeedCollectionViewCell.xib */; };
 		19CB5998258B9B300008D8BC /* SocialFeedCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CB5996258B9B300008D8BC /* SocialFeedCollectionViewCellViewModel.swift */; };
 		19CB59B8258B9B630008D8BC /* SocialFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CB59B6258B9B630008D8BC /* SocialFeedViewController.swift */; };
@@ -1465,6 +1471,12 @@
 		19C3B98225E1458D00C6990D /* SocialMediaCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMediaCollectionViewModel.swift; sourceTree = "<group>"; };
 		19C3B98825E663E300C6990D /* SocialPostReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialPostReportViewController.swift; sourceTree = "<group>"; };
 		19C3B98E25E6900800C6990D /* CustomRadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRadioButton.swift; sourceTree = "<group>"; };
+		19C3EA1C27457AF4002402B2 /* SocialFeedTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialFeedTableViewCell.xib; sourceTree = "<group>"; };
+		19C3EA1E27457B16002402B2 /* SocialFeedTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialFeedTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		19C3EA222747D559002402B2 /* SocialLinksCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialLinksCollectionViewCell.xib; sourceTree = "<group>"; };
+		19C3EA242747D59C002402B2 /* SocialLinksCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLinksCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
+		19C3EA262747D6A6002402B2 /* SocialInfoLinksTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialInfoLinksTableViewCell.swift; sourceTree = "<group>"; };
+		19C3EA282747E627002402B2 /* SocialInfoLinksTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialInfoLinksTableViewCell.xib; sourceTree = "<group>"; };
 		19CB5995258B9B2F0008D8BC /* SocialFeedCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SocialFeedCollectionViewCell.xib; sourceTree = "<group>"; };
 		19CB5996258B9B300008D8BC /* SocialFeedCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialFeedCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		19CB59B6258B9B630008D8BC /* SocialFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialFeedViewController.swift; sourceTree = "<group>"; };
@@ -2520,6 +2532,12 @@
 				1967210825D6AE3C001A04DA /* SocialPostTagCollectionViewCell.swift */,
 				19411FBA25EFC66A00ADE76E /* SocialFollowListTableViewCell.swift */,
 				19411FBB25EFC66A00ADE76E /* SocialFollowListTableViewCell.xib */,
+				19C3EA1C27457AF4002402B2 /* SocialFeedTableViewCell.xib */,
+				19C3EA1E27457B16002402B2 /* SocialFeedTableViewCellViewModel.swift */,
+				19C3EA222747D559002402B2 /* SocialLinksCollectionViewCell.xib */,
+				19C3EA242747D59C002402B2 /* SocialLinksCollectionViewCellViewModel.swift */,
+				19C3EA262747D6A6002402B2 /* SocialInfoLinksTableViewCell.swift */,
+				19C3EA282747E627002402B2 /* SocialInfoLinksTableViewCell.xib */,
 			);
 			path = Social;
 			sourceTree = "<group>";
@@ -4993,6 +5011,7 @@
 				19DC7B5625B1D083008AC6D7 /* SocialMediaListTableViewCell.xib in Resources */,
 				5E93E6FB21D1A5370020DE55 /* NotificationsSettingsAssetTableViewCell.xib in Resources */,
 				19A2E06D25AF41C60020AD01 /* SocialMediaCollectionViewCell.xib in Resources */,
+				19C3EA292747E627002402B2 /* SocialInfoLinksTableViewCell.xib in Resources */,
 				19A2E04D25AE040C0020AD01 /* SocialMediaAddPostCollectionViewCell.xib in Resources */,
 				5E5BC08921836C00009E4BA3 /* WalletTransactionView.xib in Resources */,
 				5E39F5A023A3E3BE0073DAD5 /* AssetCollectionViewCell.xib in Resources */,
@@ -5023,6 +5042,7 @@
 				5ED1ED4C2211B4B100031AD4 /* WalletBalanceTableViewCell.xib in Resources */,
 				5E86BFDF22B804F60019DC85 /* TradeDetailView.xib in Resources */,
 				5EF9F90723E09C4400542E1E /* PrivateTradingContentView.xib in Resources */,
+				19C3EA232747D559002402B2 /* SocialLinksCollectionViewCell.xib in Resources */,
 				5E528ECF237F00E8006F2339 /* DashboardTradingTableViewCell.xib in Resources */,
 				5EA274BF21628253008CAF77 /* YourInvestmentTableViewCell.xib in Resources */,
 				19411FAF25EFB56F00ADE76E /* ManagerSocialTableViewCell.xib in Resources */,
@@ -5077,6 +5097,7 @@
 				5EB064B6239A8182003AB3FB /* BrokerDetailsView.xib in Resources */,
 				FC49641E2015500700104CEB /* Dashboard.storyboard in Resources */,
 				5E9C74DF22C99D6B003604ED /* DetailStatisticsTableViewCell.xib in Resources */,
+				19C3EA1D27457AF4002402B2 /* SocialFeedTableViewCell.xib in Resources */,
 				5E54883421414FD100B2D9FE /* DateRangeView.xib in Resources */,
 				5ED7387F21951017001DA633 /* LevelsFilterView.xib in Resources */,
 				5E11DFD321B9286400B2B6EE /* RatingTableHeaderView.xib in Resources */,
@@ -5362,6 +5383,7 @@
 				5E39F73723A3F92F0073DAD5 /* ReallocationModel.swift in Sources */,
 				5EED8A492386ADFD001C3D54 /* ProgressViewSection.swift in Sources */,
 				5E39F7B923A3F9300073DAD5 /* WalletDeposit.swift in Sources */,
+				19C3EA252747D59C002402B2 /* SocialLinksCollectionViewCellViewModel.swift in Sources */,
 				FC0E200E2044359800872BE5 /* WalletDepositViewModel.swift in Sources */,
 				5E39F70723A3F92F0073DAD5 /* FeeDetails.swift in Sources */,
 				5E5488382141600100B2D9FE /* DateHelper.swift in Sources */,
@@ -6110,6 +6132,7 @@
 				5EEC3F1123C554B90023FAC5 /* InfoSubscriptionTableViewCellViewModel.swift in Sources */,
 				5E734255214AC7E200C4483E /* InRequestsTableViewCell.swift in Sources */,
 				5E39F76E23A3F9300073DAD5 /* GeeTestDetails.swift in Sources */,
+				19C3EA272747D6A6002402B2 /* SocialInfoLinksTableViewCell.swift in Sources */,
 				5E39F7CC23A3F9300073DAD5 /* LevelInfo.swift in Sources */,
 				5EF9F90B23E10D6700542E1E /* FollowContentView.swift in Sources */,
 				5E39F7C723A3F9300073DAD5 /* InternalTransferRequestType.swift in Sources */,
@@ -6206,6 +6229,7 @@
 				5EEC1ACB2175FD08007D77ED /* NotificationsDataProvider.swift in Sources */,
 				19A56F81258A65AD00553408 /* BinanceRawFuturesInitialLeverageChangeResult.swift in Sources */,
 				5E39F60C23A3F8A60073DAD5 /* AndroidAppVersion.swift in Sources */,
+				19C3EA1F27457B16002402B2 /* SocialFeedTableViewCellViewModel.swift in Sources */,
 				FC27232920498959005225F2 /* QRCodeReaderView.swift in Sources */,
 				19812489246459B900F286FE /* UtmSource.swift in Sources */,
 				19A56F75258A658800553408 /* BinanceRawFuturesCancelAllOrders.swift in Sources */,
@@ -6273,7 +6297,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -6331,7 +6355,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 10;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -6404,7 +6428,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 10;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -6447,7 +6471,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_ENTITLEMENTS = NotificationContent/NotificationContent.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = NotificationContent/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -6505,7 +6529,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationContent/NotificationContent.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 10;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -6578,7 +6602,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationContent/NotificationContent.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 10;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -6682,7 +6706,7 @@
 				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -6985,7 +7009,7 @@
 				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
@@ -7075,7 +7099,7 @@
 				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;

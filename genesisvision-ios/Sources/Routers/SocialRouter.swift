@@ -81,7 +81,7 @@ class SocialRouter: Router {
     
     private func showPost(post: Post) {
         let viewController = SocialPostViewController()
-        viewController.viewModel = SocialPostViewModel(postId: nil, post: post)
+        viewController.viewModel = SocialPostViewModel(with: self, delegate: viewController, postId: nil, post: post)
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)
     }

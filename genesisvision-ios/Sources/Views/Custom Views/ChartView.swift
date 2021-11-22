@@ -14,7 +14,7 @@ class InvertGradientFillFormatter: IFillFormatter {
     }
 }
 
-protocol ChartMarkerProtocol: class {
+protocol ChartMarkerProtocol: AnyObject {
     func didHideMarker()
     func didChangeMarker()
 }

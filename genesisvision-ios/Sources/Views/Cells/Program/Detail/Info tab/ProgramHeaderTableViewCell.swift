@@ -19,7 +19,7 @@ extension FundHeaderTableViewCellViewModel: CellViewModel {
     }
 }
 
-protocol ProgramHeaderProtocol: class {
+protocol ProgramHeaderProtocol: AnyObject {
     func aboutLevelButtonDidPress()
 }
 

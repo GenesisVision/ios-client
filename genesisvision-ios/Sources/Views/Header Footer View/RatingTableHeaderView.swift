@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol RatingTableHeaderViewProtocol: class {
+protocol RatingTableHeaderViewProtocol: AnyObject {
     func levelButtonDidTap(_ level: Int)
 }
 

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ManagerSocialTableViewCellDelegate: class {
+protocol ManagerSocialTableViewCellDelegate: AnyObject {
     func followersTapped()
     func followingTapped()
 }

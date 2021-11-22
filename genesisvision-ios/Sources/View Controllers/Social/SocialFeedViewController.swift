@@ -14,6 +14,13 @@ class SocialFeedViewController: BaseViewController {
     
     var viewModel: SocialFeedViewModel!
     
+    private let showEventsView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isHidden = true
+        return view
+    }()
+    
     private var socialFeedCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -25,6 +32,7 @@ class SocialFeedViewController: BaseViewController {
         super.viewDidLoad()
         setup()
         setupCollectionView()
+        setupShowEventsView()
     }
     
     private func setup() {
@@ -52,10 +60,61 @@ class SocialFeedViewController: BaseViewController {
         }
     }
     
+    private func setupShowEventsView() {
+        let label = TitleLabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Show events"
+        let switchButton = UISwitch()
+        switchButton.isEnabled = true
+        switchButton.isOn = UserDefaults.standard.bool(forKey: UserDefaultKeys.socialShowEvents)
+        switchButton.onTintColor = UIColor.primary
+        switchButton.thumbTintColor = UIColor.Cell.switchThumbTint
+        switchButton.tintColor = UIColor.Cell.switchTint
+        switchButton.translatesAutoresizingMaskIntoConstraints = false
+        switchButton.addTarget(self, action: #selector(showEventsSwitch), for: .valueChanged)
+        
+        showEventsView.addSubview(label)
+        showEventsView.addSubview(switchButton)
+        
+        
+        label.anchorCenter(centerY: switchButton.centerYAnchor, centerX: nil)
+        label.anchor(top: nil, leading: nil, bottom: nil, trailing: switchButton.leadingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10), size: CGSize(width: 90, height: 0))
+        
+        switchButton.anchorCenter(centerY: showEventsView.centerYAnchor, centerX: nil)
+        switchButton.anchor(top: nil, leading: nil, bottom: nil, trailing: showEventsView.trailingAnchor, size: CGSize(width: 60, height: 0))
+    }
+    
+    @objc private func showEventsSwitch(switchButton: UISwitch) {
+        let value = switchButton.isOn
+        viewModel.showOnlyUsersPosts = !value
+        
+        viewModel.fetch(completion: { [weak self] (result) in
+            self?.hideAll()
+            self?.reloadData()
+        }, refresh: true)
+    }
+    
     private func setupCollectionView() {
         view.addSubview(socialFeedCollectionView)
+        view.addSubview(showEventsView)
         
-        socialFeedCollectionView.fillSuperview(padding: UIEdgeInsets(top: 60, left: 0, bottom: 0, right: 0))
+        if viewModel.showEventsButton {
+            showEventsView.anchor(top: view.topAnchor,
+                                  leading: nil,
+                                  bottom: nil,
+                                  trailing: view.trailingAnchor,
+                                  padding: UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 10), size: CGSize(width: 150, height: 45))
+            socialFeedCollectionView.anchor(top: showEventsView.bottomAnchor,
+                                            leading: view.leadingAnchor,
+                                            bottom: view.bottomAnchor,
+                                            trailing: view.trailingAnchor,
+                                            padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
+            showEventsView.isHidden = false
+        } else {
+            socialFeedCollectionView.fillSuperview(padding: UIEdgeInsets(top: 60, left: 0, bottom: 0, right: 0))
+        }
+        
+
         
         socialFeedCollectionView.dataSource = viewModel.socialCollectionViewDataSource
         socialFeedCollectionView.delegate = viewModel.socialCollectionViewDataSource
@@ -157,6 +216,10 @@ extension SocialFeedViewController: SocialPostActionsMenuPresenable {
 }
 
 extension SocialFeedViewController: SocialFeedCollectionViewModelDelegate {
+    func shareIdeasPressed() {
+        showNewPostViewController(sharedPost: nil)
+    }
+    
     func reloadCells(cells: [IndexPath]) {
         socialFeedCollectionView.reloadItems(at: cells)
     }
@@ -166,7 +229,7 @@ extension SocialFeedViewController: SocialFeedCollectionViewModelDelegate {
     }
     
     func openPost(post: Post) {
-        //showPost(post: post)
+        showPost(post: post)
     }
     
     func reloadCollectionViewData() {

@@ -43,7 +43,7 @@ final class ManagerInfoViewModel: ViewModelWithListProtocol {
     }
 
     private var sections: [SectionType] = [.details]
-    private var rows: [RowType] = [.header, .social,]
+    private var rows: [RowType] = [.header, .social]
     
     
     var viewModels: [CellViewAnyModel] = []
@@ -51,6 +51,7 @@ final class ManagerInfoViewModel: ViewModelWithListProtocol {
     /// Return view models for registration cell Nib files
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [DefaultTableViewCellViewModel.self,
+                SocialInfoLinksTableViewCellViewModel.self,
                 ManagerTableViewCellViewModel.self,
                 ManagerSocialTableViewCellViewModel.self]
     }
@@ -120,10 +121,10 @@ extension ManagerInfoViewModel {
             let rowType = rows[indexPath.row]
             switch rowType {
             case .header:
-                return ManagerTableViewCellViewModel(profile: publicProfile, selectable: false)
+                return ManagerTableViewCellViewModel(profile: publicProfile, selectable: false, delegate: self)
             case .info:
-                guard let assets = publicProfile.assets else { return nil }
-                return DefaultTableViewCellViewModel(title: "Assets", subtitle: assets.joined(separator: " | "))
+                guard let socialLinks = publicProfile.socialLinks else { return nil }
+                return SocialInfoLinksTableViewCellViewModel(socialLinks: socialLinks, delegate: self)
             case .about:
                 guard let about = publicProfile.about else { return nil }
                 return DefaultTableViewCellViewModel(title: "About", subtitle: about)
@@ -169,5 +170,20 @@ extension ManagerInfoViewModel: ReloadDataProtocol {
         fetch { [weak self] (result) in
             self?.delegate?.didReload()
         }
+    }
+}
+
+
+extension ManagerInfoViewModel: SocialInfoLinksTableViewCellDelegate {
+    func socialLinkPressed(link: String) {
+        router.showSafari(with: link)
+    }
+}
+
+extension ManagerInfoViewModel: DetailManagerTableViewCellDelegate {
+    func followPressed(userId: UUID, followed: Bool) {
+        followed ?
+            SocialDataProvider.unfollow(userId: userId, completion: { _ in })
+            : SocialDataProvider.follow(userId: userId, completion: { _ in })
     }
 }

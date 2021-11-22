@@ -16,7 +16,7 @@ enum SocialCellHeightConstraintType {
     case postImagesGallery
 }
 
-protocol SocialPostViewDelegate: class {
+protocol SocialPostViewDelegate: AnyObject {
     func tagPressed(tag: PostTag)
     func userOwnerPressed()
     func postActionsPressed()
@@ -43,7 +43,7 @@ final class SocialPostView: UIView {
         view.isUserInteractionEnabled = true
         view.axis = .vertical
         view.spacing = 10
-        view.distribution = .fillProportionally
+        view.distribution = .equalSpacing
         return view
     }()
     
@@ -144,8 +144,8 @@ final class SocialPostView: UIView {
     
     var postTags: [PostTag]  = [] {
         didSet {
-            if let eventModel = postTags.first(where: { $0.type == .event })?.event {
-                eventView.configure(event: eventModel)
+            if let postTag = postTags.first(where: { $0.type == .event }), let eventModel = postTag.event, let assetDetails = postTag.assetDetails {
+                eventView.configure(event: eventModel, assetDetails: assetDetails)
             }
             tagsView.viewModels = postTags.filter({ $0.type != .event })
         }
@@ -227,13 +227,18 @@ final class SocialPostView: UIView {
         middleView.addArrangedSubview(eventView)
         middleView.addArrangedSubview(tagsView)
         
-        textView.anchor(top: nil, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 10, bottom: 5, right: 10), size: CGSize(width: 0, height: socialPostViewSizes?.textViewHeight ?? 0))
+        textView.anchorSize(size: CGSize(width: 0, height: socialPostViewSizes?.textViewHeight ?? 0))
+        postImageView.anchorSize(size: CGSize(width: 0, height: socialPostViewSizes?.imageViewHeight ?? 0))
+        tagsView.anchorSize(size: CGSize(width: 0, height: socialPostViewSizes?.tagViewHeight ?? 0))
+        eventView.anchorSize(size: CGSize(width: 0, height: 50))
         
-        postImageView.anchor(top: nil, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0), size: CGSize(width: 0, height: socialPostViewSizes?.imageViewHeight ?? 0))
+//        textView.anchor(top: nil, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 10, bottom: 5, right: 10), size: CGSize(width: 0, height: socialPostViewSizes?.textViewHeight ?? 0))
         
-        tagsView.anchor(top: nil, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: socialPostViewSizes?.tagViewHeight ?? 0))
-        
-        eventView.anchor(top: nil, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, size: CGSize(width: 0, height: 60))
+//        postImageView.anchor(top: nil, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0), size: CGSize(width: 0, height: socialPostViewSizes?.imageViewHeight ?? 0))
+//
+//        tagsView.anchor(top: nil, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: socialPostViewSizes?.tagViewHeight ?? 0))
+//
+//        eventView.anchor(top: nil, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, size: CGSize(width: 0, height: 60))
 
 //        textView.anchor(top: middleView.topAnchor, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 10, bottom: 5, right: 10), size: CGSize(width: 0, height: socialPostViewSizes?.textViewHeight ?? 0))
 //
@@ -245,6 +250,7 @@ final class SocialPostView: UIView {
     }
     
     func updateMiddleViewConstraints() {
+        middleView.removeAllArrangedSubviewsCompletely()
         textView.removeFromSuperview()
         postImageView.removeFromSuperview()
         tagsView.removeFromSuperview()

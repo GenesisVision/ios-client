@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ChangeFundAssetPartViewProtocol: class {
+protocol ChangeFundAssetPartViewProtocol: AnyObject {
     func close()
     func update(targetInFund: Int, freeInFund: Int, fundSymbol: String)
 }

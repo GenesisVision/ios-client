@@ -8,7 +8,7 @@
 
 import UIKit.UITableView
 
-protocol FilterCurrencyDelegateManagerProtocol: class {
+protocol FilterCurrencyDelegateManagerProtocol: AnyObject {
     func didSelectFilterCurrency(at indexPath: IndexPath)
 }
 

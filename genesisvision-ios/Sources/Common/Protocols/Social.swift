@@ -18,7 +18,7 @@ fileprivate struct PostActionsStrings {
     static let unpin = "Unpin"
 }
 
-protocol SocialPostActionsMenuPresenable: class {
+protocol SocialPostActionsMenuPresenable: AnyObject {
     func showPostMenu(actions: [SocialPostAction], postId: UUID, postLink: String)
     func actionSelected(action: SocialPostAction)
 }

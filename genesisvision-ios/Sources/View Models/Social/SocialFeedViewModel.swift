@@ -25,14 +25,18 @@ final class SocialFeedViewModel {
         }
     }
     
+    let showEventsButton: Bool
+    
     let feedType: SocialFeedType
     let socialRouter: SocialRouter
 
-    init(feedType: SocialFeedType, collectionViewDelegate: SocialFeedCollectionViewModelDelegate, router: SocialRouter, showEvents: Bool = false) {
+    init(feedType: SocialFeedType, collectionViewDelegate: SocialFeedCollectionViewModelDelegate, router: SocialRouter, showEvents: Bool = false, showAddPost: Bool = false, showEventsButton: Bool = false) {
         self.feedType = feedType
         self.socialRouter = router
         self.showOnlyUsersPosts = !showEvents
-        socialCollectionViewModel = SocialFeedCollectionViewModel(type: .social, title: "", delegate: collectionViewDelegate, showOnlyUsersPosts: !showEvents)
+        self.showEventsButton = showEventsButton
+        
+        socialCollectionViewModel = SocialFeedCollectionViewModel(type: .social, title: "", delegate: collectionViewDelegate, showOnlyUsersPosts: !showEvents, showAddPost: showAddPost)
         socialCollectionViewDataSource = CollectionViewDataSource(socialCollectionViewModel)
     }
     

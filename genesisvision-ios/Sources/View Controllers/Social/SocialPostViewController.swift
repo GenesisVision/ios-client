@@ -44,7 +44,7 @@ class SocialPostViewController: BaseViewController {
         socialPostCollectionView.isScrollEnabled = true
         socialPostCollectionView.showsVerticalScrollIndicator = false
         socialPostCollectionView.allowsSelection = true
-        socialPostCollectionView.registerNibs(for: viewModel.socialPostCollectionViewDataSource.cellModelsForRegistration)
+//        socialPostCollectionView.registerNibs(for: viewModel.socialPostCollectionViewDataSource.cellModelsForRegistration)
         
         setupPullToRefresh(scrollView: socialPostCollectionView)
     }
@@ -52,10 +52,10 @@ class SocialPostViewController: BaseViewController {
     override func pullToRefresh() {
         super.pullToRefresh()
         
-        viewModel.fetch(completion: { [weak self] (result) in
-            self?.hideAll()
-            self?.reloadData()
-        }, refresh: true)
+//        viewModel.fetch(completion: { [weak self] (result) in
+//            self?.hideAll()
+//            self?.reloadData()
+//        }, refresh: true)
     }
     
     private func reloadData() {
@@ -65,12 +65,16 @@ class SocialPostViewController: BaseViewController {
     }
 }
 
+extension SocialPostViewController: BaseTableViewProtocol {
+    
+}
+
 final class SocialPostViewModel {
     
     var socialPostCollectionViewModel: SocialPostCollectionViewModel!
     var socialPostCollectionViewDataSource: CollectionViewDataSource!
     
-    let post: Post?
+    var post: Post?
     let postId: UUID?
     let socialRouter: SocialRouter
     
@@ -132,7 +136,8 @@ final class SocialPostCollectionViewModel: CellViewModelWithCollection {
     var shouldHightlight: Bool = false
     var shouldUnhightlight: Bool = false
     
-    init(type: CellActionType) {
+    init(type: CellActionType, title: String? = nil) {
         self.type = type
+        self.title = title ?? ""
     }
 }

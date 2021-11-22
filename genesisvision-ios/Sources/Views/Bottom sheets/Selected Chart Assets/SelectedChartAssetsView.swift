@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SelectedChartAssetsViewProtocol: class {
+protocol SelectedChartAssetsViewProtocol: AnyObject {
     func assetViewDidClose()
 }
 

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol DateRangeViewProtocol: class {
+protocol DateRangeViewProtocol: AnyObject {
     var dateRange: FilterDateRangeModel? { get set }
 
     func applyButtonDidPress(from dateFrom: Date?, to dateTo: Date?)

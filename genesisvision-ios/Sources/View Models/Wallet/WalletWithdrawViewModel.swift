@@ -83,7 +83,7 @@ final class WalletWithdrawViewModel {
 
 import UIKit
 
-protocol WalletCurrencyDelegateManagerProtocol: class {
+protocol WalletCurrencyDelegateManagerProtocol: AnyObject {
     func didSelectWallet(at indexPath: IndexPath)
 }
 

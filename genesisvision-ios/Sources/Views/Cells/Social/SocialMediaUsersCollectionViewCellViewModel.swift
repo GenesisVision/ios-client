@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SocialMediaUsersCollectionViewCellDelegate: class {
+protocol SocialMediaUsersCollectionViewCellDelegate: AnyObject {
     func userPressed(user: UserDetailsList)
     func usersMoreButtonPressed()
 }

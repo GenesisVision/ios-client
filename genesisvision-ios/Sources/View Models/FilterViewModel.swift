@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol FilterViewModelProtocol: class {
+protocol FilterViewModelProtocol: AnyObject {
     func didFilterReloadCell(_ row: Int)
 }
 

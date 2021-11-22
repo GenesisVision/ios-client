@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol DropDownFieldDelegate: class {
+protocol DropDownFieldDelegate: AnyObject {
     func droDownFieldPressed(uuidString: String, titleString: String)
 }
 

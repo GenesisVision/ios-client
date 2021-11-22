@@ -48,6 +48,8 @@ final class FundInfoViewModel: ViewModelWithListProtocol {
         }
     }
     
+    public private(set) var assetOwnerProfile: PublicProfile?
+    
     var availableInvestment: Double = 0.0
     
     private var sections: [SectionType] = [.details, .investNow]
@@ -200,8 +202,8 @@ extension FundInfoViewModel {
                 guard let fundDetailsFull = fundDetailsFull else { return nil }
                 return FundHeaderTableViewCellViewModel(details: fundDetailsFull)
             case .manager:
-                guard let profilePublic = fundDetailsFull?.owner else { return nil }
-                return DetailManagerTableViewCellViewModel(profilePublic: profilePublic)
+                guard let profilePublic = assetOwnerProfile else { return nil }
+                return DetailManagerTableViewCellViewModel(profilePublic: profilePublic, delegate: self)
             case .strategy:
                 return DefaultTableViewCellViewModel(title: "Strategy", subtitle: fundDetailsFull?.publicInfo?._description, editInfoProtoclDelegate: self, assetType: .fund, isOwner: fundDetailsFull?.publicInfo?.isOwnAsset)
             }
@@ -220,7 +222,12 @@ extension FundInfoViewModel {
             
             self?.fundDetailsFull = viewModel
             
-            completion(.success)
+            UsersDataProvider.get(with: viewModel?.owner?._id?.uuidString ?? "") { ownerPublicProfile in
+                self?.assetOwnerProfile = ownerPublicProfile
+                completion(.success)
+            } errorCompletion: { _ in
+                completion(.success)
+            }
         }, errorCompletion: completion)
     }
     
@@ -265,5 +272,13 @@ extension FundInfoViewModel: InvestNowProtocol {
 extension FundInfoViewModel: EditInfoProtocol {
     func ditTapEditInfoButton() {
         editPublicInfo()
+    }
+}
+
+extension FundInfoViewModel: DetailManagerTableViewCellDelegate {
+    func followPressed(userId: UUID, followed: Bool) {
+        followed ?
+            SocialDataProvider.unfollow(userId: userId, completion: { _ in })
+            : SocialDataProvider.follow(userId: userId, completion: { _ in })
     }
 }

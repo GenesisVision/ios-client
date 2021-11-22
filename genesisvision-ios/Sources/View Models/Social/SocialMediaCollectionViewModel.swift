@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SocialMediaCollectionViewModelDelegate: class {
+protocol SocialMediaCollectionViewModelDelegate: AnyObject {
     func openSocialFeed(type: SocialMediaFeedCollectionCellType)
     func commentPressed(postId: UUID)
     func sharePressed(post: Post)

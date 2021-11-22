@@ -9,7 +9,7 @@
 import UIKit
 import Tabman
 
-protocol BaseTableViewProtocol: class {
+protocol BaseTableViewProtocol: AnyObject {
     func action(_ type: CellActionType, actionType: ActionType)
     func didSelect(_ type: CellActionType, cellViewModel: CellViewAnyModel?)
     func didSelect(_ type: DidSelectType, index: Int)
@@ -63,7 +63,7 @@ protocol NodataProtocol {
     var noDataButtonTitle: String? { get }
 }
 
-protocol YourInvestmentProtocol: class {
+protocol YourInvestmentProtocol: AnyObject {
     func didTapWithdrawButton()
     func didTapDepositButton()
     func didTapStatusButton()
@@ -85,36 +85,36 @@ extension YourInvestmentProtocol {
     }
 }
 
-protocol AccountMakeProgramProtocol: class {
+protocol AccountMakeProgramProtocol: AnyObject {
     func didTapMakeProgramButton()
 }
 
-protocol AccountMakeFollowProtocol: class {
+protocol AccountMakeFollowProtocol: AnyObject {
     func didTapMakeFollowButton()
 }
 
-protocol AccountSubscriptionsProtocol: class {
+protocol AccountSubscriptionsProtocol: AnyObject {
     func didTapDetailsButton()
 }
 
-protocol WalletActionsProtocol: class {
+protocol WalletActionsProtocol: AnyObject {
     func didTapWithdrawButton()
     func didTapAddFundsButton()
     func didTapTransferButton()
 }
 
-protocol NotificationsSettingsProtocol: class {
+protocol NotificationsSettingsProtocol: AnyObject {
     func didChange(enable: Bool, settingId: String?)
     func didRemove(settingId: String?)
     func didAdd(type: NotificationType?)
     func didAdd(assetId: String?, type: NotificationType?, conditionType: NotificationSettingConditionType?, conditionAmount: Double?)
 }
 
-protocol SwitchProtocol: class {
+protocol SwitchProtocol: AnyObject {
     func didChangeSwitch(value: Bool, assetId: String)
 }
 
-protocol DelegateManagerProtocol: class {
+protocol DelegateManagerProtocol: AnyObject {
     func delegateManagerScrollViewDidScroll(_ scrollView: UIScrollView)
     func delegateManagerScrollViewWillBeginDragging(_ scrollView: UIScrollView)
     func delegateManagerTableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
@@ -137,21 +137,21 @@ protocol CurrencyDelegateManagerProtocol: UITableViewDelegate, UITableViewDataSo
     var cellModelsForRegistration: [CellViewAnyModel.Type] { get }
 }
 
-protocol WalletProtocol: class {
+protocol WalletProtocol: AnyObject {
     func didUpdateData()
 }
 
-protocol ReloadDataProtocol: class {
+protocol ReloadDataProtocol: AnyObject {
     func didReloadData()
 }
-protocol FilterChangedProtocol: class {
+protocol FilterChangedProtocol: AnyObject {
     var filterDateRangeModel: FilterDateRangeModel? { get }
 }
 
-protocol FavoriteStateChangeProtocol: class {
+protocol FavoriteStateChangeProtocol: AnyObject {
     func didChangeFavoriteState(with assetID: String, value: Bool, request: Bool)
 }
-protocol FavoriteStateUpdatedProtocol: class {
+protocol FavoriteStateUpdatedProtocol: AnyObject {
     func didFavoriteStateUpdated()
 }
 
@@ -299,7 +299,7 @@ protocol WalletListViewModelProtocol {
     func noDataButtonTitle() -> String
 }
 
-protocol WalletDelegateManagerProtocol: class {
+protocol WalletDelegateManagerProtocol: AnyObject {
     func didSelectWallet(at indexPath: IndexPath, walletId: Int)
 }
 

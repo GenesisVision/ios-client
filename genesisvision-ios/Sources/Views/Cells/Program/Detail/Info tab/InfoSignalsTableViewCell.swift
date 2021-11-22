@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol InfoSignalsProtocol: class {
+protocol InfoSignalsProtocol: AnyObject {
     func didTapFollowButton()
     func didTapEditButton()
 }

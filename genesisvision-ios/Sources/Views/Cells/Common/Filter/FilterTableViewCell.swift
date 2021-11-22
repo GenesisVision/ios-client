@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol FilterTableViewCellProtocol: class {
+protocol FilterTableViewCellProtocol: AnyObject {
     func didChangeSwitch(value: Bool)
 }
 

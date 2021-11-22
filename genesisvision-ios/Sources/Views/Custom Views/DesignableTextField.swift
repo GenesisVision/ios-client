@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol DesignableUITextFieldDelegate: class {
+protocol DesignableUITextFieldDelegate: AnyObject {
     func textFieldDidClear(_ textField: UITextField)
 }
 

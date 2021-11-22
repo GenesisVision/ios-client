@@ -13,7 +13,7 @@ enum CustomRadioButtonState {
     case unselected
 }
 
-protocol CustomRadioButtonDelegate: class {
+protocol CustomRadioButtonDelegate: AnyObject {
     func pressed(state: CustomRadioButtonState, tag: String)
 }
 

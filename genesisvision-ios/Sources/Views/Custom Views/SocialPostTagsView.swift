@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SocialPostTagsViewDelegate: class {
+protocol SocialPostTagsViewDelegate: AnyObject {
     func tagPressed(tag: PostTag)
 }
 
@@ -85,13 +85,13 @@ class SocialPostTagsView: UIView {
     private func overlayFirstLayer() {
         mainView.addSubview(centralView)
         
-        centralView.anchor(top: mainView.topAnchor, leading: mainView.leadingAnchor, bottom: mainView.bottomAnchor, trailing: mainView.trailingAnchor, padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 0))
+        centralView.anchor(top: mainView.topAnchor, leading: mainView.leadingAnchor, bottom: mainView.bottomAnchor, trailing: mainView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0))
     }
     
     private func overlaySecondLayer() {
         centralView.addSubview(collectionView)
         
-        collectionView.fillSuperview(padding: UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0))
+        collectionView.fillSuperview(padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
     }
     
     private func calculateCellWidth(model: PostTag) -> CGFloat {

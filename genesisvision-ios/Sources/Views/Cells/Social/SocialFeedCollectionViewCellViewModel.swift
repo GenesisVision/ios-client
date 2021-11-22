@@ -13,18 +13,20 @@ struct SocialPostViewSizes {
     let textViewHeight: CGFloat
     let imageViewHeight: CGFloat
     let tagViewHeight: CGFloat
+    let eventViewHeight: CGFloat
     var allHeight: CGFloat {
-        return textViewHeight + imageViewHeight + tagViewHeight
+        return textViewHeight + imageViewHeight + tagViewHeight + eventViewHeight
     }
 }
 
-protocol SocialFeedCollectionViewCellDelegate: class {
+protocol SocialFeedCollectionViewCellDelegate: AnyObject {
     func likeTouched(postId: UUID)
     func shareTouched(postId: UUID)
     func commentTouched(postId: UUID)
     func tagPressed(tag: PostTag)
     func userOwnerPressed(postId: UUID)
     func postActionsPressed(postId: UUID)
+    func undoDeletion(postId: UUID)
 }
 
 struct SocialFeedCollectionViewCellViewModel {
@@ -47,11 +49,11 @@ struct SocialFeedCollectionViewCellViewModel {
         var tagsViewHeight: CGFloat = 0
         
         if let tags = post.tags, !tags.isEmpty {
-            tagsViewHeight = 110
-            if tags.contains(where: { $0.type == .event }) {
-                tagsViewHeight += 60
-                return SocialPostViewSizes(textViewHeight: textHeight, imageViewHeight: imageHeight, tagViewHeight: tagsViewHeight)
-            }
+            tagsViewHeight = 80
+        }
+        
+        if let tags = post.tags, !tags.isEmpty, tags.contains(where: { $0.type == .event }) {
+            return SocialPostViewSizes(textViewHeight: textHeight, imageViewHeight: imageHeight, tagViewHeight: tagsViewHeight, eventViewHeight: 50)
         }
         
         if let isEmpty = post.images?.isEmpty, !isEmpty {
@@ -72,7 +74,7 @@ struct SocialFeedCollectionViewCellViewModel {
         
 
         
-        return SocialPostViewSizes(textViewHeight: textHeight, imageViewHeight: imageHeight, tagViewHeight: tagsViewHeight)
+        return SocialPostViewSizes(textViewHeight: textHeight, imageViewHeight: imageHeight, tagViewHeight: tagsViewHeight, eventViewHeight: 0)
     }
 }
 
@@ -80,6 +82,17 @@ extension SocialFeedCollectionViewCellViewModel: CellViewModel {
     func setup(on cell: SocialFeedCollectionViewCell) {
         
         var eventPost: Bool = false
+        
+//        if post.isDeleted == true {
+//            cell.postView.isHidden = true
+//            cell.bottomView.isHidden = true
+//            cell.deletedPostView.isHidden = false
+//            return
+//        } else {
+//            cell.postView.isHidden = false
+//            cell.bottomView.isHidden = false
+//            cell.deletedPostView.isHidden = true
+//        }
         
         if let postId = post._id {
             cell.postId = postId
@@ -136,18 +149,26 @@ extension SocialFeedCollectionViewCellViewModel: CellViewModel {
         
         if let likes = post.likesCount {
             cell.socialActivitiesView.likeCount = likes
+        } else {
+            cell.socialActivitiesView.likeCount = 0
         }
         
         if let commetsCount = post.comments?.count, commetsCount > 0 {
             cell.socialActivitiesView.commentsLabel.text = String(commetsCount)
+        } else {
+            cell.socialActivitiesView.commentsLabel.text = ""
         }
         
         if let views = post.impressionsCount, views > 0 {
             cell.socialActivitiesView.viewsLabel.text = String(views)
+        } else {
+            cell.socialActivitiesView.viewsLabel.text = ""
         }
         
         if let repostsCount = post.rePostsCount, repostsCount > 0 {
             cell.socialActivitiesView.sharesLabel.text = String(repostsCount)
+        } else {
+            cell.socialActivitiesView.sharesLabel.text = ""
         }
     }
 }
@@ -155,7 +176,7 @@ extension SocialFeedCollectionViewCellViewModel: CellViewModel {
 
 class SocialFeedCollectionViewCell: UICollectionViewCell {
     
-    private let bottomView: UIView = {
+    let bottomView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -174,6 +195,31 @@ class SocialFeedCollectionViewCell: UICollectionViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .clear
         return view
+    }()
+    
+    let deletedPostView: UIStackView = {
+       let stackView = UIStackView()
+        stackView.alignment = .center
+        stackView.distribution = .equalSpacing
+        stackView.axis = .horizontal
+        stackView.spacing = 10
+        stackView.isHidden = true
+        return stackView
+    }()
+    
+    let deletedPostLabel: TitleLabel = {
+        let label = TitleLabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.backgroundColor = .clear
+        label.font = UIFont.getFont(.semibold, size: 16.0)
+        return label
+    }()
+    
+    let undoDeletionButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Undo".localized, for: .normal)
+        button.setTitleColor(UIColor.primary, for: .normal)
+        return button
     }()
     
     var postId: UUID?
@@ -203,6 +249,7 @@ class SocialFeedCollectionViewCell: UICollectionViewCell {
     private func setup() {
         backgroundColor = UIColor.BaseView.bg
         contentView.backgroundColor = UIColor.Common.darkCell
+        undoDeletionButton.addTarget(self, action: #selector(undoDeletion), for: .touchUpInside)
         
         overlayContentView()
         overlayThirdLayerOnBottomView()
@@ -211,11 +258,16 @@ class SocialFeedCollectionViewCell: UICollectionViewCell {
     private func overlayContentView() {
         contentView.addSubview(postView)
         contentView.addSubview(bottomView)
+        contentView.addSubview(deletedPostView)
+        deletedPostView.fillSuperview(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
         
         postView.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: bottomView.topAnchor, trailing: contentView.trailingAnchor)
         postView.delegate = self
         
         bottomView.anchor(top: nil, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10), size: CGSize(width: 0, height: 65))
+        
+        deletedPostView.addArrangedSubview(deletedPostLabel)
+        deletedPostView.addArrangedSubview(undoDeletionButton)
     }
     
     private func overlayThirdLayerOnBottomView() {
@@ -229,6 +281,11 @@ class SocialFeedCollectionViewCell: UICollectionViewCell {
         socialActivitiesView.addSubview(borderLine)
         
         borderLine.anchor(top: socialActivitiesView.topAnchor, leading: socialActivitiesView.leadingAnchor, bottom: nil, trailing: socialActivitiesView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 1))
+    }
+    
+    @objc private func undoDeletion() {
+        guard let postId = postId else { return }
+        delegate?.undoDeletion(postId: postId)
     }
 }
 

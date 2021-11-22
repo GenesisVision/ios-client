@@ -40,7 +40,7 @@ extension DashboardTradingCellViewModel: CellViewModel {
     }
 }
 
-protocol DashBoardTradingTableViewCellButtonsActionsProtocol: class {
+protocol DashBoardTradingTableViewCellButtonsActionsProtocol: AnyObject {
     func createFund()
     func createAccount()
 }

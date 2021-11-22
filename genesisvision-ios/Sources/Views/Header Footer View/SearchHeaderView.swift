@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SearchHeaderTextChangedProtocol: class {
+protocol SearchHeaderTextChangedProtocol: AnyObject {
     func textChanged(text: String)
 }
 

@@ -9,10 +9,11 @@
 import Foundation
 import UIKit
 
-protocol SocialFeedCollectionViewModelDelegate: class {
+protocol SocialFeedCollectionViewModelDelegate: AnyObject {
     func commentPost(postId: UUID)
     func sharePost(postId: UUID)
     func tagPressed(tag: PostTag)
+    func shareIdeasPressed()
     func userOwnerPressed(userDetails: ProfilePublic)
     func reloadCollectionViewData()
     func reloadCells(cells: [IndexPath])
@@ -31,6 +32,15 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
     var selectedIndex: Int = 0
 
     var viewModels = [CellViewAnyModel]()
+    
+    var addPostViewModel: SocialMediaAddPostCollectionViewCellViewModel?
+    
+    enum SectionType {
+        case addPost
+        case feed
+    }
+    
+    var sections: [SectionType] = [.feed]
 
     var canPullToRefresh: Bool = true
     var showOnlyUsersPosts: Bool = true
@@ -48,19 +58,27 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
     }
 
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [SocialFeedCollectionViewCellViewModel.self]
+        return [SocialMediaAddPostCollectionViewCellViewModel.self,
+                SocialFeedCollectionViewCellViewModel.self]
     }
     
     var shouldHightlight: Bool = false
     var shouldUnhightlight: Bool = false
     
     weak var delegate: SocialFeedCollectionViewModelDelegate?
+    let showAddPost: Bool
     
-    init(type: CellActionType, title: String, delegate: SocialFeedCollectionViewModelDelegate, showOnlyUsersPosts: Bool = true) {
+    init(type: CellActionType, title: String, delegate: SocialFeedCollectionViewModelDelegate, showOnlyUsersPosts: Bool = true, showAddPost: Bool = false) {
         self.type = type
         self.title = title
         self.delegate = delegate
         self.showOnlyUsersPosts = showOnlyUsersPosts
+        self.showAddPost = showAddPost
+        
+        if showAddPost {
+            sections.insert(.addPost, at: 0)
+            addPostViewModel = SocialMediaAddPostCollectionViewCellViewModel(imageUrl: "", delegate: self)
+        }
     }
     
     func didSelect(at indexPath: IndexPath) {
@@ -116,16 +134,32 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
     }
     
     func model(for indexPath: IndexPath) -> CellViewAnyModel? {
-        return viewModels[indexPath.row]
+        let type = sections[indexPath.section]
+        
+        switch type {
+        case .addPost:
+            return addPostViewModel
+        case .feed:
+            return viewModels[indexPath.row]
+        }
+        
+        
     }
     
     func sizeForItem(at indexPath: IndexPath, frame: CGRect) -> CGSize {
-        let spacing: CGFloat = 0
-        if let viewModel = viewModels[safe: indexPath.row] as? SocialFeedCollectionViewCellViewModel {
-            return viewModel.cellSize(spacing: spacing, frame: frame)
-        } else {
-            let size: CGFloat = (frame.width - spacing)
-            return CGSize(width: size, height: 300)
+        let type = sections[indexPath.section]
+        
+        switch type {
+        case .addPost:
+            return CGSize(width: frame.width, height: 50)
+        case .feed:
+            let spacing: CGFloat = 0
+            if let viewModel = viewModels[safe: indexPath.row] as? SocialFeedCollectionViewCellViewModel {
+                return viewModel.cellSize(spacing: spacing, frame: frame)
+            } else {
+                let size: CGFloat = (frame.width - spacing)
+                return CGSize(width: size, height: 300)
+            }
         }
     }
     
@@ -142,14 +176,29 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
     }
     
     func numberOfRows(in section: Int) -> Int {
-        return viewModels.count
+        let type = sections[section]
+        
+        switch type {
+        case .addPost:
+            return 1
+        case .feed:
+            return viewModels.count
+        }
+        
     }
     
     func numberOfSections() -> Int {
-        return 1
+        return sections.count
     }
     
     func fetch(completion: @escaping CompletionBlock, refresh: Bool? = nil, feedType: SocialFeedType) {
+        
+        if showAddPost {
+            AuthManager.getProfile { [weak self] profile in
+                self?.addPostViewModel = SocialMediaAddPostCollectionViewCellViewModel(imageUrl: profile?.logoUrl ?? "", delegate: self)
+            } completionError: { _ in
+            }
+        }
         
         let refresh = refresh ?? false
         let skip = refresh ? 0 : self.skip
@@ -219,6 +268,9 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
 }
 
 extension SocialFeedCollectionViewModel: SocialFeedCollectionViewCellDelegate {
+    func undoDeletion(postId: UUID) {
+    }
+    
     func postActionsPressed(postId: UUID) {
         let postActions = postActionsForPost(postId: postId)
         var postLink: String = ""
@@ -262,3 +314,9 @@ extension SocialFeedCollectionViewModel: SocialFeedCollectionViewCellDelegate {
     }
 }
 
+
+extension SocialFeedCollectionViewModel: SocialMediaAddPostCollectionViewCellDelegate {
+    func shareIdeasButtonPressed() {
+        delegate?.shareIdeasPressed()
+    }
+}

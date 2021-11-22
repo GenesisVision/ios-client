@@ -580,6 +580,14 @@ extension Router {
         return viewController
     }
     
+    func getFeed(parentRouter: Router? = nil) -> SocialFeedViewController {
+        let viewController = SocialFeedViewController()
+        let router = SocialRouter(parentRouter: parentRouter)
+        let viewModel = SocialFeedViewModel(feedType: .feed, collectionViewDelegate: viewController, router: router, showEvents: true, showAddPost: true, showEventsButton: true)
+        viewController.viewModel = viewModel
+        return viewController
+    }
+    
     func getFollows(with filterModel: FilterModel?, showFacets: Bool = false, parentRouter: Router? = nil) -> ProgramListViewController? {
         guard let viewController = ProgramListViewController.storyboardInstance(.assets) else { return nil }
         followsViewController = viewController

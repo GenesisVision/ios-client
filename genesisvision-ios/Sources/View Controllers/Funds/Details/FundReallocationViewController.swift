@@ -372,7 +372,7 @@ final class FundReallocationViewModel {
     }
 }
 
-protocol FundReallocationCellActionProtocol: class {
+protocol FundReallocationCellActionProtocol: AnyObject {
     func assetCellSelected(assetInfo: FundAssetInfo)
     func assetCellRemoved(assetInfo: FundAssetInfo)
 }

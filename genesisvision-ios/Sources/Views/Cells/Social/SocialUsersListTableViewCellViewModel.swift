@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SocialUsersListTableViewCellDelegate: class {
+protocol SocialUsersListTableViewCellDelegate: AnyObject {
     func followPressed(userId: UUID, followed: Bool)
 }
 

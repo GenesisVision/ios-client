@@ -59,11 +59,12 @@ extension ManagerViewController: ReloadDataProtocol {
 final class ManagerViewModel: TabmanViewModel {
     enum TabType: String {
         case info = "Info"
+        case feed = "Feed"
         case programs = "Programs"
         case follows = "Follows"
         case funds = "Funds"
     }
-    var tabTypes: [TabType] = [.info, .programs, .follows, .funds]
+    var tabTypes: [TabType] = [.info, .feed, .programs, .funds, .follows]
     var controllers = [TabType : UIViewController]()
     
     // MARK: - Variables
@@ -111,6 +112,8 @@ final class ManagerViewModel: TabmanViewModel {
             let filterModel = FilterModel()
             filterModel.managerId = managerId
             return router.getFunds(with: filterModel)
+        case .feed:
+            return router.getFeed(parentRouter: router)
         }
     }
 }
