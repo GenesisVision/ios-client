@@ -15,15 +15,12 @@ public struct BinanceRawOrderBook: Codable {
 
     public var lastUpdateId: Int64?
 
-    public var firstUpdateId: Int64?
-
     public var bids: [BinanceRawOrderBookEntry]?
 
     public var asks: [BinanceRawOrderBookEntry]?
-    public init(symbol: String? = nil, lastUpdateId: Int64? = nil, firstUpdateId: Int64? = nil, bids: [BinanceRawOrderBookEntry]? = nil, asks: [BinanceRawOrderBookEntry]? = nil) { 
+    public init(symbol: String? = nil, lastUpdateId: Int64? = nil, bids: [BinanceRawOrderBookEntry]? = nil, asks: [BinanceRawOrderBookEntry]? = nil) { 
         self.symbol = symbol
         self.lastUpdateId = lastUpdateId
-        self.firstUpdateId = firstUpdateId
         self.bids = bids
         self.asks = asks
     }

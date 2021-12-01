@@ -96,7 +96,7 @@ extension SocialInfoLinksTableViewCell: UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let model = viewModels[indexPath.row]
-        delegate?.socialLinkPressed(link: model.logoUrl ?? "")
+        delegate?.socialLinkPressed(link: model.url ?? "")
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

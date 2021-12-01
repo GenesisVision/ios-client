@@ -28,6 +28,36 @@
 		1926FC772757003800FEC4D3 /* ImagesGalleryCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FC762757003800FEC4D3 /* ImagesGalleryCollectionViewCellViewModel.swift */; };
 		1926FC792757764300FEC4D3 /* ReplyInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FC782757764300FEC4D3 /* ReplyInputField.swift */; };
 		1926FC7B27577F4500FEC4D3 /* ReplierView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FC7A27577F4500FEC4D3 /* ReplierView.swift */; };
+		1926FC7D275798E000FEC4D3 /* CoinsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FC7C275798E000FEC4D3 /* CoinsAPI.swift */; };
+		1926FC892757998500FEC4D3 /* BinanceRawFuturesPositionMarginResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FC7E2757998400FEC4D3 /* BinanceRawFuturesPositionMarginResult.swift */; };
+		1926FC8A2757998600FEC4D3 /* BinanceRawFuturesPositionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FC7F2757998400FEC4D3 /* BinanceRawFuturesPositionInfo.swift */; };
+		1926FC8B2757998600FEC4D3 /* AmountWithLogoCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FC802757998400FEC4D3 /* AmountWithLogoCurrency.swift */; };
+		1926FC8C2757998600FEC4D3 /* BinanceAutoCloseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FC812757998400FEC4D3 /* BinanceAutoCloseType.swift */; };
+		1926FC8D2757998600FEC4D3 /* BasePlatformAssetItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FC822757998500FEC4D3 /* BasePlatformAssetItemsViewModel.swift */; };
+		1926FC8E2757998600FEC4D3 /* BinanceFuturesMarginChangeDirectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FC832757998500FEC4D3 /* BinanceFuturesMarginChangeDirectionType.swift */; };
+		1926FC8F2757998600FEC4D3 /* AnonymousPlatformInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FC842757998500FEC4D3 /* AnonymousPlatformInfo.swift */; };
+		1926FC902757998600FEC4D3 /* BinanceContractType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FC852757998500FEC4D3 /* BinanceContractType.swift */; };
+		1926FC912757998600FEC4D3 /* BinanceKlineInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FC862757998500FEC4D3 /* BinanceKlineInterval.swift */; };
+		1926FC922757998600FEC4D3 /* BinanceRawFuturesIncomeHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FC872757998500FEC4D3 /* BinanceRawFuturesIncomeHistory.swift */; };
+		1926FC932757998600FEC4D3 /* BinanceIncomeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FC882757998500FEC4D3 /* BinanceIncomeType.swift */; };
+		1926FC9E275799DD00FEC4D3 /* BinanceRawFuturesUsdtTrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FC94275799DC00FEC4D3 /* BinanceRawFuturesUsdtTrade.swift */; };
+		1926FC9F275799DE00FEC4D3 /* CoinsFilterSorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FC95275799DC00FEC4D3 /* CoinsFilterSorting.swift */; };
+		1926FCA0275799DE00FEC4D3 /* CoinsHistoryEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FC96275799DC00FEC4D3 /* CoinsHistoryEvent.swift */; };
+		1926FCA1275799DE00FEC4D3 /* BinanceRawFuturesUsdtAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FC97275799DC00FEC4D3 /* BinanceRawFuturesUsdtAsset.swift */; };
+		1926FCA2275799DE00FEC4D3 /* CoinsAssetItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FC98275799DD00FEC4D3 /* CoinsAssetItemsViewModel.swift */; };
+		1926FCA3275799DE00FEC4D3 /* CoinsAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FC99275799DD00FEC4D3 /* CoinsAsset.swift */; };
+		1926FCA4275799DE00FEC4D3 /* Blockchain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FC9A275799DD00FEC4D3 /* Blockchain.swift */; };
+		1926FCA5275799DE00FEC4D3 /* CoinsTrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FC9B275799DD00FEC4D3 /* CoinsTrade.swift */; };
+		1926FCA6275799DE00FEC4D3 /* CoinsHistoryEventItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FC9C275799DD00FEC4D3 /* CoinsHistoryEventItemsViewModel.swift */; };
+		1926FCA7275799DE00FEC4D3 /* BinanceUnderlyingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FC9D275799DD00FEC4D3 /* BinanceUnderlyingType.swift */; };
+		1926FCA9275799F700FEC4D3 /* FileUploadBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FCA8275799F700FEC4D3 /* FileUploadBody.swift */; };
+		1926FCAB27579A0A00FEC4D3 /* LoginSignViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FCAA27579A0900FEC4D3 /* LoginSignViewModel.swift */; };
+		1926FCAD27579A1800FEC4D3 /* PlatformWithdrawalInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FCAC27579A1700FEC4D3 /* PlatformWithdrawalInfo.swift */; };
+		1926FCAF27579A3200FEC4D3 /* RouteType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FCAE27579A3100FEC4D3 /* RouteType.swift */; };
+		1926FCB127579A3D00FEC4D3 /* SignMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FCB027579A3D00FEC4D3 /* SignMessage.swift */; };
+		1926FCB327579A4900FEC4D3 /* TickerChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FCB227579A4900FEC4D3 /* TickerChart.swift */; };
+		1926FCB627579A5A00FEC4D3 /* WalletDepositData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FCB427579A5900FEC4D3 /* WalletDepositData.swift */; };
+		1926FCB727579A5A00FEC4D3 /* WalletWithdrawalCurrencyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FCB527579A5900FEC4D3 /* WalletWithdrawalCurrencyInfo.swift */; };
 		192DB057256D864200C198CB /* KYCInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192DB056256D864100C198CB /* KYCInfoViewController.swift */; };
 		192DB067256F075000C198CB /* DashboardInvestmentLimitsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192DB065256F074F00C198CB /* DashboardInvestmentLimitsTableViewCell.swift */; };
 		192DB068256F075000C198CB /* DashboardInvestmentLimitsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 192DB066256F074F00C198CB /* DashboardInvestmentLimitsTableViewCell.xib */; };
@@ -1245,6 +1275,36 @@
 		1926FC762757003800FEC4D3 /* ImagesGalleryCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesGalleryCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		1926FC782757764300FEC4D3 /* ReplyInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyInputField.swift; sourceTree = "<group>"; };
 		1926FC7A27577F4500FEC4D3 /* ReplierView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplierView.swift; sourceTree = "<group>"; };
+		1926FC7C275798E000FEC4D3 /* CoinsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinsAPI.swift; sourceTree = "<group>"; };
+		1926FC7E2757998400FEC4D3 /* BinanceRawFuturesPositionMarginResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawFuturesPositionMarginResult.swift; sourceTree = "<group>"; };
+		1926FC7F2757998400FEC4D3 /* BinanceRawFuturesPositionInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawFuturesPositionInfo.swift; sourceTree = "<group>"; };
+		1926FC802757998400FEC4D3 /* AmountWithLogoCurrency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmountWithLogoCurrency.swift; sourceTree = "<group>"; };
+		1926FC812757998400FEC4D3 /* BinanceAutoCloseType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceAutoCloseType.swift; sourceTree = "<group>"; };
+		1926FC822757998500FEC4D3 /* BasePlatformAssetItemsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasePlatformAssetItemsViewModel.swift; sourceTree = "<group>"; };
+		1926FC832757998500FEC4D3 /* BinanceFuturesMarginChangeDirectionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceFuturesMarginChangeDirectionType.swift; sourceTree = "<group>"; };
+		1926FC842757998500FEC4D3 /* AnonymousPlatformInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymousPlatformInfo.swift; sourceTree = "<group>"; };
+		1926FC852757998500FEC4D3 /* BinanceContractType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceContractType.swift; sourceTree = "<group>"; };
+		1926FC862757998500FEC4D3 /* BinanceKlineInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceKlineInterval.swift; sourceTree = "<group>"; };
+		1926FC872757998500FEC4D3 /* BinanceRawFuturesIncomeHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawFuturesIncomeHistory.swift; sourceTree = "<group>"; };
+		1926FC882757998500FEC4D3 /* BinanceIncomeType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceIncomeType.swift; sourceTree = "<group>"; };
+		1926FC94275799DC00FEC4D3 /* BinanceRawFuturesUsdtTrade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawFuturesUsdtTrade.swift; sourceTree = "<group>"; };
+		1926FC95275799DC00FEC4D3 /* CoinsFilterSorting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinsFilterSorting.swift; sourceTree = "<group>"; };
+		1926FC96275799DC00FEC4D3 /* CoinsHistoryEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinsHistoryEvent.swift; sourceTree = "<group>"; };
+		1926FC97275799DC00FEC4D3 /* BinanceRawFuturesUsdtAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceRawFuturesUsdtAsset.swift; sourceTree = "<group>"; };
+		1926FC98275799DD00FEC4D3 /* CoinsAssetItemsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinsAssetItemsViewModel.swift; sourceTree = "<group>"; };
+		1926FC99275799DD00FEC4D3 /* CoinsAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinsAsset.swift; sourceTree = "<group>"; };
+		1926FC9A275799DD00FEC4D3 /* Blockchain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Blockchain.swift; sourceTree = "<group>"; };
+		1926FC9B275799DD00FEC4D3 /* CoinsTrade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinsTrade.swift; sourceTree = "<group>"; };
+		1926FC9C275799DD00FEC4D3 /* CoinsHistoryEventItemsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinsHistoryEventItemsViewModel.swift; sourceTree = "<group>"; };
+		1926FC9D275799DD00FEC4D3 /* BinanceUnderlyingType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceUnderlyingType.swift; sourceTree = "<group>"; };
+		1926FCA8275799F700FEC4D3 /* FileUploadBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUploadBody.swift; sourceTree = "<group>"; };
+		1926FCAA27579A0900FEC4D3 /* LoginSignViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginSignViewModel.swift; sourceTree = "<group>"; };
+		1926FCAC27579A1700FEC4D3 /* PlatformWithdrawalInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatformWithdrawalInfo.swift; sourceTree = "<group>"; };
+		1926FCAE27579A3100FEC4D3 /* RouteType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteType.swift; sourceTree = "<group>"; };
+		1926FCB027579A3D00FEC4D3 /* SignMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignMessage.swift; sourceTree = "<group>"; };
+		1926FCB227579A4900FEC4D3 /* TickerChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TickerChart.swift; sourceTree = "<group>"; };
+		1926FCB427579A5900FEC4D3 /* WalletDepositData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletDepositData.swift; sourceTree = "<group>"; };
+		1926FCB527579A5900FEC4D3 /* WalletWithdrawalCurrencyInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletWithdrawalCurrencyInfo.swift; sourceTree = "<group>"; };
 		192DB056256D864100C198CB /* KYCInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCInfoViewController.swift; sourceTree = "<group>"; };
 		192DB065256F074F00C198CB /* DashboardInvestmentLimitsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardInvestmentLimitsTableViewCell.swift; sourceTree = "<group>"; };
 		192DB066256F074F00C198CB /* DashboardInvestmentLimitsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DashboardInvestmentLimitsTableViewCell.xib; sourceTree = "<group>"; };
@@ -2666,6 +2726,7 @@
 				19787AEB24813FEB00217CA9 /* ExchangesAPI.swift */,
 				5EB06A23239D3125003AB3FB /* DashboardAPI.swift */,
 				5EB06A28239D3126003AB3FB /* EventsAPI.swift */,
+				1926FC7C275798E000FEC4D3 /* CoinsAPI.swift */,
 				5EB06A2F239D3129003AB3FB /* FileAPI.swift */,
 				5EB06A32239D312A003AB3FB /* FollowAPI.swift */,
 				5EB06A27239D3126003AB3FB /* FundsAPI.swift */,
@@ -2696,6 +2757,35 @@
 				19C3B91D25DE65E900C6990D /* BinanceRawFuturesPosition.swift */,
 				19C3B92325DE660000C6990D /* ErrorViewModelWithToken.swift */,
 				19C3B91625DE65D900C6990D /* BinanceRawFuturesSymbolBracket.swift */,
+				1926FC802757998400FEC4D3 /* AmountWithLogoCurrency.swift */,
+				1926FCA8275799F700FEC4D3 /* FileUploadBody.swift */,
+				1926FCAC27579A1700FEC4D3 /* PlatformWithdrawalInfo.swift */,
+				1926FC842757998500FEC4D3 /* AnonymousPlatformInfo.swift */,
+				1926FCB427579A5900FEC4D3 /* WalletDepositData.swift */,
+				1926FCB527579A5900FEC4D3 /* WalletWithdrawalCurrencyInfo.swift */,
+				1926FCB027579A3D00FEC4D3 /* SignMessage.swift */,
+				1926FC822757998500FEC4D3 /* BasePlatformAssetItemsViewModel.swift */,
+				1926FC812757998400FEC4D3 /* BinanceAutoCloseType.swift */,
+				1926FCB227579A4900FEC4D3 /* TickerChart.swift */,
+				1926FCAE27579A3100FEC4D3 /* RouteType.swift */,
+				1926FCAA27579A0900FEC4D3 /* LoginSignViewModel.swift */,
+				1926FC852757998500FEC4D3 /* BinanceContractType.swift */,
+				1926FC832757998500FEC4D3 /* BinanceFuturesMarginChangeDirectionType.swift */,
+				1926FC97275799DC00FEC4D3 /* BinanceRawFuturesUsdtAsset.swift */,
+				1926FC94275799DC00FEC4D3 /* BinanceRawFuturesUsdtTrade.swift */,
+				1926FC9D275799DD00FEC4D3 /* BinanceUnderlyingType.swift */,
+				1926FC9A275799DD00FEC4D3 /* Blockchain.swift */,
+				1926FC99275799DD00FEC4D3 /* CoinsAsset.swift */,
+				1926FC98275799DD00FEC4D3 /* CoinsAssetItemsViewModel.swift */,
+				1926FC95275799DC00FEC4D3 /* CoinsFilterSorting.swift */,
+				1926FC96275799DC00FEC4D3 /* CoinsHistoryEvent.swift */,
+				1926FC9C275799DD00FEC4D3 /* CoinsHistoryEventItemsViewModel.swift */,
+				1926FC9B275799DD00FEC4D3 /* CoinsTrade.swift */,
+				1926FC882757998500FEC4D3 /* BinanceIncomeType.swift */,
+				1926FC862757998500FEC4D3 /* BinanceKlineInterval.swift */,
+				1926FC872757998500FEC4D3 /* BinanceRawFuturesIncomeHistory.swift */,
+				1926FC7F2757998400FEC4D3 /* BinanceRawFuturesPositionInfo.swift */,
+				1926FC7E2757998400FEC4D3 /* BinanceRawFuturesPositionMarginResult.swift */,
 				1906DA542539A6DD00A08846 /* BinanceRawSymbolMaxOrdersFilter.swift */,
 				19A56EF9258939BC00553408 /* ExternalKycAccessToken.swift */,
 				1906DA592539A6DE00A08846 /* BinanceRawSymbolMinNotionalFilter.swift */,
@@ -5173,12 +5263,16 @@
 				"${PODS_ROOT}/Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AutoInsetter/AutoInsetter.framework",
+				"${BUILT_PRODUCTS_DIR}/Cache/Cache.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
+				"${BUILT_PRODUCTS_DIR}/FINNBottomSheet/FINNBottomSheet.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${PODS_ROOT}/IdensicMobileSDK/IdensicMobileSDK.framework",
+				"${BUILT_PRODUCTS_DIR}/Imaginary/Imaginary.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/Lightbox/Lightbox.framework",
 				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
@@ -5196,12 +5290,16 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AutoInsetter.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cache.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FINNBottomSheet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IdensicMobileSDK.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Imaginary.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lightbox.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
@@ -5301,6 +5399,7 @@
 				5ED3B47B210898810026C123 /* СhoosePhotoView.swift in Sources */,
 				5ED1ED4B2211B4B100031AD4 /* WalletBalanceTableViewCell.swift in Sources */,
 				5E39F74723A3F92F0073DAD5 /* Timeframe.swift in Sources */,
+				1926FCA9275799F700FEC4D3 /* FileUploadBody.swift in Sources */,
 				FC83DF5D203D887E00A8F8CE /* ProgramWithdrawViewController.swift in Sources */,
 				19EEE0B62507BF6E00F83CED /* BinanceRawOrderItemsViewModel.swift in Sources */,
 				198124232464504A00F286FE /* GuidesAPI.swift in Sources */,
@@ -5311,6 +5410,7 @@
 				5ECA620B21C8217500CA9C8C /* NotificationsSettingsViewModel.swift in Sources */,
 				19CB59B9258B9B630008D8BC /* SocialMainFeedViewController.swift in Sources */,
 				5E39F7AF23A3F9300073DAD5 /* PlatformCurrencyInfo.swift in Sources */,
+				1926FC8C2757998600FEC4D3 /* BinanceAutoCloseType.swift in Sources */,
 				5EF9F92023E322F100542E1E /* TradingAccountDemoDeposit.swift in Sources */,
 				5E21663723A83DAD001BB512 /* CustomLayoutForCollectionView.swift in Sources */,
 				5EC7B88520D15E9D007720D1 /* SettingsRouter.swift in Sources */,
@@ -5371,6 +5471,7 @@
 				19DC7B2E25B06167008AC6D7 /* SocialMediaUserCollectionViewCellViewModel.swift in Sources */,
 				19D3099A24ECA4D0006B4185 /* ChangeFundAssetPartView.swift in Sources */,
 				19787B02248141C100217CA9 /* SocialPostPlatformAsset.swift in Sources */,
+				1926FC8B2757998600FEC4D3 /* AmountWithLogoCurrency.swift in Sources */,
 				19A56E772589384000553408 /* BinanceRateLimitInterval.swift in Sources */,
 				5E39F75B23A3F92F0073DAD5 /* TransactionExternalType.swift in Sources */,
 				19DC7B5025B1D035008AC6D7 /* SocialMediaListTableViewCellViewModel.swift in Sources */,
@@ -5426,6 +5527,7 @@
 				5E70428F23CCFF0E00D8950F /* AccountInfoViewController.swift in Sources */,
 				5EB996A920F3738600E31D23 /* ListViewModelProtocol.swift in Sources */,
 				5E39F5F623A3F8A60073DAD5 /* DashboardChartAsset.swift in Sources */,
+				1926FC7D275798E000FEC4D3 /* CoinsAPI.swift in Sources */,
 				195B9F0B25585429003DA54E /* ReferralInfoViewController.swift in Sources */,
 				5EAC11B220B81AF10057A2D2 /* AuthChangePasswordInfoViewModel.swift in Sources */,
 				5E39F7AB23A3F9300073DAD5 /* DetachFromExternalSignalProvider.swift in Sources */,
@@ -5453,6 +5555,7 @@
 				5EAC11AE20B81A850057A2D2 /* ChangePasswordRouter.swift in Sources */,
 				5E82C75321429785007A21C3 /* DashboardCurrencyTableViewCell.swift in Sources */,
 				5ED03F2920F900EE00AF5E07 /* DataSourceAndDelegate.swift in Sources */,
+				1926FCA2275799DE00FEC4D3 /* CoinsAssetItemsViewModel.swift in Sources */,
 				5EA173CD20A06DED00905253 /* BaseTabmanViewController.swift in Sources */,
 				5E39F5F723A3F8A60073DAD5 /* AccountChartStatistic.swift in Sources */,
 				5E39F60123A3F8A60073DAD5 /* DashboardAssets.swift in Sources */,
@@ -5461,6 +5564,7 @@
 				199D0E3124F560FA0005D76B /* FundPublicInfoViewController.swift in Sources */,
 				5E6A6BC3216D5EF80082C343 /* EventTableViewCellViewModel.swift in Sources */,
 				5E39F60223A3F8A60073DAD5 /* ChangeState.swift in Sources */,
+				1926FCAB27579A0A00FEC4D3 /* LoginSignViewModel.swift in Sources */,
 				5E39F71423A3F92F0073DAD5 /* DashboardTimeframeProfit.swift in Sources */,
 				19EEE0A82507BF5900F83CED /* TradingplatformAPI.swift in Sources */,
 				5E39F73C23A3F92F0073DAD5 /* FundAssetPart.swift in Sources */,
@@ -5470,6 +5574,7 @@
 				19EEE0B22507BF6E00F83CED /* BinanceOrderSide.swift in Sources */,
 				19411FB525EFC0FD00ADE76E /* SocialFollowersViewController.swift in Sources */,
 				5E1813802061D36700481646 /* Common+Extensions.swift in Sources */,
+				1926FCA1275799DE00FEC4D3 /* BinanceRawFuturesUsdtAsset.swift in Sources */,
 				5E39F7B723A3F9300073DAD5 /* ProgramPeriodViewModel.swift in Sources */,
 				5ED0C91D2091158500C83F23 /* ShadowViewAppearance.swift in Sources */,
 				5E616B5E20F7CED000B3459D /* EditableField.swift in Sources */,
@@ -5480,6 +5585,7 @@
 				FCC9DD80200E59C8008825EC /* UITableView+Configure.swift in Sources */,
 				5EEC3F0F23C554930023FAC5 /* InfoSubscriptionTableViewCell.swift in Sources */,
 				1979A5392524DE8F005EEABF /* BinanceRawKlineInterval.swift in Sources */,
+				1926FC902757998600FEC4D3 /* BinanceContractType.swift in Sources */,
 				FCA19A33201ADFAD00157AD6 /* AuthSignUpConfirmationViewModel.swift in Sources */,
 				5ED645F521C06A0F0044AC1D /* AboutLevelView.swift in Sources */,
 				5E177099220D051A00669D84 /* WalletInternalTransactionListViewModel.swift in Sources */,
@@ -5527,6 +5633,7 @@
 				5E39F7C623A3F9300073DAD5 /* ReferralFriend.swift in Sources */,
 				5E1770A5220D197800669D84 /* WalletTabmanViewController.swift in Sources */,
 				5E39F79123A3F9300073DAD5 /* LoginViewModel.swift in Sources */,
+				1926FCA6275799DE00FEC4D3 /* CoinsHistoryEventItemsViewModel.swift in Sources */,
 				5E39F73023A3F92F0073DAD5 /* DashboardSummary.swift in Sources */,
 				FCBD22C22019EACA000B8E38 /* ErrorHandler.swift in Sources */,
 				19C3B91725DE65D900C6990D /* BinanceRawFuturesBracket.swift in Sources */,
@@ -5574,6 +5681,7 @@
 				1981246C2464592200F286FE /* SignalTradingEventItemsViewModel.swift in Sources */,
 				5E39F70E23A3F92F0073DAD5 /* PowDetails.swift in Sources */,
 				5E39F79623A3F9300073DAD5 /* RateItem.swift in Sources */,
+				1926FCB327579A4900FEC4D3 /* TickerChart.swift in Sources */,
 				5E39F78E23A3F9300073DAD5 /* TransactionInternalType.swift in Sources */,
 				5E39F7D523A3F9300073DAD5 /* ResetPasswordViewModel.swift in Sources */,
 				192DB067256F075000C198CB /* DashboardInvestmentLimitsTableViewCell.swift in Sources */,
@@ -5594,6 +5702,7 @@
 				FCD4A2042028B3D600BA7E18 /* NotificationNameExtension.swift in Sources */,
 				FCA19A35201AE00A00157AD6 /* ProfileRouter.swift in Sources */,
 				19E590E32566B2C600D3EB2E /* ReferralHistoryTableViewCell.swift in Sources */,
+				1926FCAF27579A3200FEC4D3 /* RouteType.swift in Sources */,
 				19A56E702589382900553408 /* BinancePeriodInterval.swift in Sources */,
 				5EDAA57422E4F9A800F7BF71 /* FundReallocateHistoryViewModel.swift in Sources */,
 				5E0ACEC5217FC4C500DC76AA /* FundsDataProvider.swift in Sources */,
@@ -5617,18 +5726,21 @@
 				5EB8E9D420723D4A00F46A8A /* AuthForgotPasswordViewModel.swift in Sources */,
 				5EB06A42239D312A003AB3FB /* AssetsAPI.swift in Sources */,
 				5E39F75823A3F92F0073DAD5 /* SocialLinkViewModel.swift in Sources */,
+				1926FCA3275799DE00FEC4D3 /* CoinsAsset.swift in Sources */,
 				5EDD6D4122C7A70D00B9DB93 /* CustomTextField.swift in Sources */,
 				19A56EE22589397A00553408 /* ExchangeAsset.swift in Sources */,
 				5EB996A720F36DE600E31D23 /* ListRouterProtocol.swift in Sources */,
 				5E69601A209362EE00505726 /* FavoriteButton.swift in Sources */,
 				5E39F7B623A3F9300073DAD5 /* TradesViewModel.swift in Sources */,
 				5E39F79023A3F9300073DAD5 /* NotificationType.swift in Sources */,
+				1926FC8D2757998600FEC4D3 /* BasePlatformAssetItemsViewModel.swift in Sources */,
 				5E39F60523A3F8A60073DAD5 /* AndroidVersion.swift in Sources */,
 				198124832464599D00F286FE /* UserFeedMode.swift in Sources */,
 				FC0E20202044459500872BE5 /* UIImageViewExtension.swift in Sources */,
 				5E18CE0720C1952A008FE5B5 /* AuthTwoFactorDisableRouter.swift in Sources */,
 				5E5C66EE207FAF700076F630 /* ProgramDetailFullChartViewController.swift in Sources */,
 				5E39F71923A3F92F0073DAD5 /* NotificationSettingViewModel.swift in Sources */,
+				1926FCB627579A5A00FEC4D3 /* WalletDepositData.swift in Sources */,
 				5E858346205FFCF70039E13F /* UIFontExtension.swift in Sources */,
 				FCC9DD88200E61C0008825EC /* ProgramInfoViewController.swift in Sources */,
 				5E70429B23CD082700D8950F /* AccountBalanceChartTableViewCellViewModel.swift in Sources */,
@@ -5675,8 +5787,10 @@
 				5EF9F92223E322F100542E1E /* PlatformEvents.swift in Sources */,
 				FC0E20062044123F00872BE5 /* PhotoHeaderView.swift in Sources */,
 				5E93E70621D1A5370020DE55 /* NotificationsSettingsGeneralTableViewCellViewModel.swift in Sources */,
+				1926FC912757998600FEC4D3 /* BinanceKlineInterval.swift in Sources */,
 				5EB06A33239D312A003AB3FB /* TradingaccountAPI.swift in Sources */,
 				19787B08248141DB00217CA9 /* SocialSummaryHashTag.swift in Sources */,
+				1926FC922757998600FEC4D3 /* BinanceRawFuturesIncomeHistory.swift in Sources */,
 				5E39F76723A3F9300073DAD5 /* FollowAssetPlatformInfo.swift in Sources */,
 				1979A5342524DE8F005EEABF /* BinanceRawRateLimitInterval.swift in Sources */,
 				5E39F60F23A3F8A60073DAD5 /* AssetInfo.swift in Sources */,
@@ -5738,6 +5852,7 @@
 				5E11DFCC21B91F2100B2B6EE /* ListViewModel.swift in Sources */,
 				5E39F7D823A3F9300073DAD5 /* FundAssetPlatformInfo.swift in Sources */,
 				5E6732AE2195C56A000A5C7C /* BaseViewControllerWithTableView.swift in Sources */,
+				1926FC8F2757998600FEC4D3 /* AnonymousPlatformInfo.swift in Sources */,
 				5E39F74523A3F92F0073DAD5 /* FundAssetInfo.swift in Sources */,
 				FCC9DD75200E4CAE008825EC /* ProfileViewController.swift in Sources */,
 				5E39F77B23A3F9300073DAD5 /* PersonalFundDetailsList.swift in Sources */,
@@ -5782,6 +5897,7 @@
 				198124562464585D00F286FE /* PostItemsViewModel.swift in Sources */,
 				5E0E1B9B2221A0CC001F3C4E /* InfoSignalsTableViewCell.swift in Sources */,
 				FC83DF61203D896C00A8F8CE /* ProgramWithdrawViewModel.swift in Sources */,
+				1926FCAD27579A1800FEC4D3 /* PlatformWithdrawalInfo.swift in Sources */,
 				5E39F73623A3F92F0073DAD5 /* TradingAccountCreateResult.swift in Sources */,
 				5EC0CB0223CB42E6003D0818 /* InvestingViewController.swift in Sources */,
 				FCE8236D201631B3000061E8 /* UIViewExtension.swift in Sources */,
@@ -5793,6 +5909,7 @@
 				1912947E249BBA09007F1083 /* ImageLocation.swift in Sources */,
 				5EF14D932181F85C00B3843A /* FundRouter.swift in Sources */,
 				5EA1FE2321A2F16600308D81 /* FacetsTableViewCell.swift in Sources */,
+				1926FCB727579A5A00FEC4D3 /* WalletWithdrawalCurrencyInfo.swift in Sources */,
 				5E39F79C23A3F9300073DAD5 /* NewTradingAccountRequest.swift in Sources */,
 				5E5914FE2072D575000F5053 /* UITableView+ReloadData.swift in Sources */,
 				5EB3C857239EB3AC003E4DED /* AssetsDataProvider.swift in Sources */,
@@ -5923,6 +6040,7 @@
 				19787AEE2481400B00217CA9 /* DashboardExchangeTradingAsset.swift in Sources */,
 				FC4964262015598300104CEB /* UIColor+Hex.swift in Sources */,
 				5E39F77623A3F9300073DAD5 /* InvestmentEventViewModels.swift in Sources */,
+				1926FC892757998500FEC4D3 /* BinanceRawFuturesPositionMarginResult.swift in Sources */,
 				5EEED7A3239718CB000B2D6A /* BrokerCollectionViewCell.swift in Sources */,
 				5E39F78C23A3F9300073DAD5 /* WalletsGrandTotal.swift in Sources */,
 				5E39F77923A3F9300073DAD5 /* PrivateTradingAccountFull.swift in Sources */,
@@ -5988,6 +6106,7 @@
 				19812467246458F900F286FE /* ReferralFriendItemsViewModel.swift in Sources */,
 				5EA274DD2162DF33008CAF77 /* ProfitViewController.swift in Sources */,
 				198124252464506E00F286FE /* SocialAPI.swift in Sources */,
+				1926FC8A2757998600FEC4D3 /* BinanceRawFuturesPositionInfo.swift in Sources */,
 				198124452464528D00F286FE /* InvestmentEventViewModelItemsViewModel.swift in Sources */,
 				5E39F61023A3F8A60073DAD5 /* BrokerAccountType.swift in Sources */,
 				5E39F71723A3F92F0073DAD5 /* ProgramFollowDetailsFull.swift in Sources */,
@@ -6034,6 +6153,7 @@
 				5E2BA549226F373300C6A88C /* WalletCurrencyTableViewCellViewModel.swift in Sources */,
 				FCA19A3D201AE35800157AD6 /* WelcomeViewModel.swift in Sources */,
 				5EAC11B020B81AD40057A2D2 /* ChangePasswordViewController.swift in Sources */,
+				1926FC932757998600FEC4D3 /* BinanceIncomeType.swift in Sources */,
 				19A56F63258A655900553408 /* BinanceRawBlvtKline.swift in Sources */,
 				FCA19A43201AE85C00157AD6 /* DashboardRouter.swift in Sources */,
 				5E5EB5372167B1FA00CDA376 /* CircularProgressView.swift in Sources */,
@@ -6109,6 +6229,7 @@
 				19A56EAB258938AD00553408 /* BinanceRawFuturesOpenInterest.swift in Sources */,
 				5EED8A4123857E83001C3D54 /* DashboardOverviewTableViewCell.swift in Sources */,
 				19A56EAF258938AD00553408 /* BinanceRawFuturesSymbolPriceFilter.swift in Sources */,
+				1926FC9F275799DE00FEC4D3 /* CoinsFilterSorting.swift in Sources */,
 				19A56EAE258938AD00553408 /* BinanceRawFutures24HPrice.swift in Sources */,
 				5E39F7A523A3F9300073DAD5 /* FundBalanceChart.swift in Sources */,
 				FC83DF5F203D895A00A8F8CE /* ProgramInvestViewModel.swift in Sources */,
@@ -6126,6 +6247,7 @@
 				1981247F2464598C00F286FE /* TransactionViewModelItemsViewModel.swift in Sources */,
 				5EA274CD2162B53B008CAF77 /* ProgramBalanceChartTableViewCellViewModel.swift in Sources */,
 				5EF9F91923E10DC700542E1E /* ProgramInvestingContentView.swift in Sources */,
+				1926FCA5275799DE00FEC4D3 /* CoinsTrade.swift in Sources */,
 				19DC7B4A25B1CF8E008AC6D7 /* SocialMediaListViewController.swift in Sources */,
 				5E39F7A423A3F9300073DAD5 /* OrderSignalFee.swift in Sources */,
 				5E39F7DD23A3F9300073DAD5 /* DashboardInvestingDetails.swift in Sources */,
@@ -6152,6 +6274,7 @@
 				5E39F60423A3F8A60073DAD5 /* CaptchaDetails.swift in Sources */,
 				5EF14D8C2181F80200B3843A /* FundBalanceViewModel.swift in Sources */,
 				1906DA602539A6DE00A08846 /* BinanceRawSymbolPriceFilter.swift in Sources */,
+				1926FCB127579A3D00FEC4D3 /* SignMessage.swift in Sources */,
 				1975B90624E446270095C72B /* FundReallocationViewController.swift in Sources */,
 				5EEC3F1123C554B90023FAC5 /* InfoSubscriptionTableViewCellViewModel.swift in Sources */,
 				5E734255214AC7E200C4483E /* InRequestsTableViewCell.swift in Sources */,
@@ -6207,6 +6330,7 @@
 				5EE0075D217871BB0045B890 /* ManagerInfoViewModel.swift in Sources */,
 				5E026FF922D3532400C555CC /* TagTableViewCellViewModel.swift in Sources */,
 				5E39F76C23A3F9300073DAD5 /* FilterItemInfo.swift in Sources */,
+				1926FCA7275799DE00FEC4D3 /* BinanceUnderlyingType.swift in Sources */,
 				1981245D246458AA00F286FE /* ProgramsFilterSorting.swift in Sources */,
 				5E44E5A82289808400865A85 /* PlatformAPI.swift in Sources */,
 				FCB8DFC42010F5EC00698D18 /* SignUpViewController.swift in Sources */,
@@ -6218,6 +6342,7 @@
 				5E0E1B9D2221A0CC001F3C4E /* InfoSignalsTableViewCellViewModel.swift in Sources */,
 				195B9F112558543C003DA54E /* ReferralFriendsViewController.swift in Sources */,
 				19812461246458BE00F286FE /* PublicProfilePersonalDetails.swift in Sources */,
+				1926FC8E2757998600FEC4D3 /* BinanceFuturesMarginChangeDirectionType.swift in Sources */,
 				5E1770A1220D05BC00669D84 /* WalletTableViewCellViewModel.swift in Sources */,
 				FC4964152015445E00104CEB /* WalletViewController.swift in Sources */,
 				5E12B39120BEEC1400302730 /* AuthTwoFactorConfirmateViewController.swift in Sources */,
@@ -6232,7 +6357,9 @@
 				5EF9F91123E10DA700542E1E /* FundInvestingContentView.swift in Sources */,
 				1906DA5C2539A6DE00A08846 /* BinanceRawSymbolMaxOrdersFilter.swift in Sources */,
 				5ED11422215966CD00EC5385 /* DashboardCurrencyTableViewCellViewModel.swift in Sources */,
+				1926FCA0275799DE00FEC4D3 /* CoinsHistoryEvent.swift in Sources */,
 				5E21663B23A96B02001BB512 /* FacetsViewModel.swift in Sources */,
+				1926FC9E275799DD00FEC4D3 /* BinanceRawFuturesUsdtTrade.swift in Sources */,
 				5ED1141A2159545900EC5385 /* ChartsTabmanViewModel.swift in Sources */,
 				FC140FE42030168100B71E7F /* APIs.swift in Sources */,
 				5E8340E5207E39B6004A29F1 /* TradesTableViewCell.swift in Sources */,
@@ -6270,6 +6397,7 @@
 				5EB06A3F239D312A003AB3FB /* BrokersAPI.swift in Sources */,
 				5E39F7A923A3F9300073DAD5 /* OrderModelSignalData.swift in Sources */,
 				5E39F76223A3F9300073DAD5 /* FundCreateAssetPlatformInfo.swift in Sources */,
+				1926FCA4275799DE00FEC4D3 /* Blockchain.swift in Sources */,
 				5E39F76323A3F9300073DAD5 /* ProfileFullViewModel.swift in Sources */,
 				5E0E1BA722225D56001F3C4E /* WalletTransferViewController.swift in Sources */,
 				5E39F73E23A3F92F0073DAD5 /* WalletWithdrawalInfo.swift in Sources */,
@@ -6321,7 +6449,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -6379,7 +6507,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -6452,7 +6580,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -6495,7 +6623,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_ENTITLEMENTS = NotificationContent/NotificationContent.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = NotificationContent/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -6553,7 +6681,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationContent/NotificationContent.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -6626,7 +6754,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationContent/NotificationContent.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -6730,7 +6858,7 @@
 				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -7033,7 +7161,7 @@
 				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
@@ -7123,7 +7251,7 @@
 				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;

@@ -73,11 +73,11 @@ open class FundsAPI {
      - examples: [{contentType=application/json, example={
   "profit" : 0.8008281904610115,
   "chart" : [ {
-    "date" : 0,
-    "value" : 6.027456183070403
+    "date" : 5,
+    "value" : 2.3021358869347655
   }, {
-    "date" : 0,
-    "value" : 6.027456183070403
+    "date" : 5,
+    "value" : 2.3021358869347655
   } ]
 }}]
      - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter maxPointCount: (query)  (optional)     - parameter currency: (query)  (optional)
@@ -229,13 +229,15 @@ open class FundsAPI {
     "typeExt" : "None",
     "color" : "color",
     "description" : "description",
-    "logo" : "logo",
+    "index" : 0,
     "isOwnAsset" : true,
     "title" : "title",
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
     "systemUrl" : "systemUrl",
     "logoUrl" : "logoUrl",
     "url" : "url",
+    "logo" : "logo",
+    "lastModified" : "2000-01-23T04:56:07.000+00:00",
     "status" : "status"
   },
   "exitFeeCurrent" : 5.962133916683182,
@@ -317,21 +319,21 @@ open class FundsAPI {
     "color" : "color",
     "currency" : "Undefined",
     "chart" : [ {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : 5,
+      "value" : 2.3021358869347655
     }, {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : 5,
+      "value" : 2.3021358869347655
     } ]
   }, {
     "color" : "color",
     "currency" : "Undefined",
     "chart" : [ {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : 5,
+      "value" : 2.3021358869347655
     }, {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : 5,
+      "value" : 2.3021358869347655
     } ]
   } ],
   "assets" : [ {
@@ -417,9 +419,9 @@ open class FundsAPI {
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
-  "total" : 4,
+  "total" : 1,
   "items" : [ {
-    "totalAssetsCount" : 2,
+    "totalAssetsCount" : 7,
     "color" : "color",
     "topFundAssets" : [ {
       "name" : "name",
@@ -434,6 +436,7 @@ open class FundsAPI {
       "logoUrl" : "logoUrl",
       "url" : "url"
     } ],
+    "index" : 2,
     "description" : "description",
     "title" : "title",
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
@@ -444,10 +447,10 @@ open class FundsAPI {
       "isFavorite" : true
     },
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "investorsCount" : 3,
+    "investorsCount" : 4,
     "status" : "status"
   }, {
-    "totalAssetsCount" : 2,
+    "totalAssetsCount" : 7,
     "color" : "color",
     "topFundAssets" : [ {
       "name" : "name",
@@ -462,6 +465,7 @@ open class FundsAPI {
       "logoUrl" : "logoUrl",
       "url" : "url"
     } ],
+    "index" : 2,
     "description" : "description",
     "title" : "title",
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
@@ -472,7 +476,7 @@ open class FundsAPI {
       "isFavorite" : true
     },
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "investorsCount" : 3,
+    "investorsCount" : 4,
     "status" : "status"
   } ]
 }}]
@@ -680,7 +684,7 @@ open class FundsAPI {
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
-  "totalAssetsCount" : 2,
+  "totalAssetsCount" : 7,
   "color" : "color",
   "topFundAssets" : [ {
     "name" : "name",
@@ -695,6 +699,7 @@ open class FundsAPI {
     "logoUrl" : "logoUrl",
     "url" : "url"
   } ],
+  "index" : 2,
   "description" : "description",
   "title" : "title",
   "creationDate" : "2000-01-23T04:56:07.000+00:00",
@@ -705,7 +710,7 @@ open class FundsAPI {
     "isFavorite" : true
   },
   "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-  "investorsCount" : 3,
+  "investorsCount" : 4,
   "status" : "status"
 }}]
      - parameter chartPointsCount: (query)  (optional)

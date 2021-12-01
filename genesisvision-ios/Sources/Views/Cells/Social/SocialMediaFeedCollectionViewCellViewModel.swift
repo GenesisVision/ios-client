@@ -22,6 +22,7 @@ protocol SocialMediaFeedCollectionViewCellDelegate: AnyObject {
     func tagPressed(tag: PostTag)
     func userOwnerPressed(postId: UUID)
     func postActionsPressed(postId: UUID)
+    func imagePressed(postId: UUID, index: Int, image: ImagesGalleryCollectionViewCellViewModel)
 }
 
 struct SocialMediaFeedCollectionViewCellViewModel {
@@ -95,12 +96,38 @@ extension SocialMediaFeedCollectionViewCellViewModel: CellViewModel {
             cell.postView.dateLabel.text = date.dateForSocialPost
         }
         
-        if let image = post.images?.first, let logo = image.resizes?.last?.logoUrl, let fileUrl = getFileURL(fileName: logo) {
-            cell.postView.postImageView.isHidden = false
-            cell.postView.postImageView.kf.indicatorType = .activity
-            cell.postView.postImageView.kf.setImage(with: fileUrl)
+        if let postImages = post.images, !postImages.isEmpty {
+            cell.postView.galleryView.isHidden = false
+            var imagesUrls: [String: PostImageResize?] = [:]
+            
+            for postImage in postImages {
+                if let resizes = postImage.resizes,
+                   resizes.count > 1 {
+                    let original = resizes.filter({ $0.quality == .original })
+                    let hight = resizes.filter({ $0.quality == .high })
+                    let medium = resizes.filter({ $0.quality == .medium })
+                    let low = resizes.filter({ $0.quality == .low })
+                    
+                    if let logoUrl = original.first?.logoUrl {
+                        imagesUrls[logoUrl] = original.first
+                        continue
+                    } else if let logoUrl = hight.first?.logoUrl {
+                        imagesUrls[logoUrl] = hight.first
+                        continue
+                    } else if let logoUrl = medium.first?.logoUrl {
+                        imagesUrls[logoUrl] = medium.first
+                        continue
+                    } else if let logoUrl = low.first?.logoUrl {
+                        imagesUrls[logoUrl] = low.first
+                    }
+                } else if let logoUrl = postImage.resizes?.first?.logoUrl {
+                    imagesUrls[logoUrl] = postImage.resizes?.first
+                }
+            }
+            
+            cell.postView.galleryView.viewModels = imagesUrls.map({ return ImagesGalleryCollectionViewCellViewModel(imageUrl: $0.key, resize: $0.value, image: nil, showRemoveButton: false, delegate: nil) })
         } else {
-            cell.postView.postImageView.isHidden = true
+            cell.postView.galleryView.isHidden = true
         }
         
         if let tags = post.tags, !tags.isEmpty {
@@ -300,6 +327,11 @@ extension SocialMediaFeedCollectionViewCell: SocialActivitiesViewDelegateProtoco
 }
 
 extension SocialMediaFeedCollectionViewCell: SocialPostViewDelegate {
+    func imagePressed(index: Int, image: ImagesGalleryCollectionViewCellViewModel) {
+        guard let postId = postId else { return }
+        delegate?.imagePressed(postId: postId, index: index, image: image)
+    }
+    
     func postActionsPressed() {
         guard let postId = postId else { return }
         delegate?.postActionsPressed(postId: postId)

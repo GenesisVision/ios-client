@@ -580,10 +580,10 @@ extension Router {
         return viewController
     }
     
-    func getFeed(parentRouter: Router? = nil) -> SocialFeedViewController {
+    func getFeed(parentRouter: Router? = nil, userId: UUID? = nil) -> SocialFeedViewController {
         let viewController = SocialFeedViewController()
         let router = SocialRouter(parentRouter: parentRouter)
-        let viewModel = SocialFeedViewModel(feedType: .feed, collectionViewDelegate: viewController, router: router, showEvents: true, showAddPost: true, showEventsButton: true)
+        let viewModel = SocialFeedViewModel(feedType: .feed, collectionViewDelegate: viewController, router: router, showEvents: false, showAddPost: true, showEventsButton: true, userId: userId)
         viewController.viewModel = viewModel
         return viewController
     }

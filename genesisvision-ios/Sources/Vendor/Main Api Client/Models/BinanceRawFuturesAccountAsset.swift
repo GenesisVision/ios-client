@@ -25,16 +25,16 @@ public struct BinanceRawFuturesAccountAsset: Codable {
 
     public var positionInitialMargin: Double?
 
-    public var unrealizedProfit: Double?
-
     public var walletBalance: Double?
 
     public var crossWalletBalance: Double?
 
-    public var crossUnPnl: Double?
-
     public var availableBalance: Double?
-    public init(asset: String? = nil, initialMargin: Double? = nil, maintMargin: Double? = nil, marginBalance: Double? = nil, maxWithdrawAmount: Double? = nil, openOrderInitialMargin: Double? = nil, positionInitialMargin: Double? = nil, unrealizedProfit: Double? = nil, walletBalance: Double? = nil, crossWalletBalance: Double? = nil, crossUnPnl: Double? = nil, availableBalance: Double? = nil) { 
+
+    public var unrealizedPnL: Double?
+
+    public var crossUnrealizedPnL: Double?
+    public init(asset: String? = nil, initialMargin: Double? = nil, maintMargin: Double? = nil, marginBalance: Double? = nil, maxWithdrawAmount: Double? = nil, openOrderInitialMargin: Double? = nil, positionInitialMargin: Double? = nil, walletBalance: Double? = nil, crossWalletBalance: Double? = nil, availableBalance: Double? = nil, unrealizedPnL: Double? = nil, crossUnrealizedPnL: Double? = nil) { 
         self.asset = asset
         self.initialMargin = initialMargin
         self.maintMargin = maintMargin
@@ -42,11 +42,11 @@ public struct BinanceRawFuturesAccountAsset: Codable {
         self.maxWithdrawAmount = maxWithdrawAmount
         self.openOrderInitialMargin = openOrderInitialMargin
         self.positionInitialMargin = positionInitialMargin
-        self.unrealizedProfit = unrealizedProfit
         self.walletBalance = walletBalance
         self.crossWalletBalance = crossWalletBalance
-        self.crossUnPnl = crossUnPnl
         self.availableBalance = availableBalance
+        self.unrealizedPnL = unrealizedPnL
+        self.crossUnrealizedPnL = crossUnrealizedPnL
     }
 
 }

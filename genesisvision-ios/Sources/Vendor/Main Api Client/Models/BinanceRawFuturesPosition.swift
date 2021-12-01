@@ -25,16 +25,16 @@ public struct BinanceRawFuturesPosition: Codable {
 
     public var markPrice: Double?
 
-    public var maxNotionalValue: String?
+    public var symbol: String?
+
+    public var positionSide: BinancePositionSide?
 
     public var quantity: Double?
 
-    public var symbol: String?
-
     public var unrealizedPnL: Double?
 
-    public var positionSide: BinancePositionSide?
-    public init(entryPrice: Double? = nil, marginType: BinanceFuturesMarginType? = nil, isAutoAddMargin: Bool? = nil, isolatedMargin: Double? = nil, leverage: Int? = nil, liquidationPrice: Double? = nil, markPrice: Double? = nil, maxNotionalValue: String? = nil, quantity: Double? = nil, symbol: String? = nil, unrealizedPnL: Double? = nil, positionSide: BinancePositionSide? = nil) { 
+    public var maxNotional: Double?
+    public init(entryPrice: Double? = nil, marginType: BinanceFuturesMarginType? = nil, isAutoAddMargin: Bool? = nil, isolatedMargin: Double? = nil, leverage: Int? = nil, liquidationPrice: Double? = nil, markPrice: Double? = nil, symbol: String? = nil, positionSide: BinancePositionSide? = nil, quantity: Double? = nil, unrealizedPnL: Double? = nil, maxNotional: Double? = nil) { 
         self.entryPrice = entryPrice
         self.marginType = marginType
         self.isAutoAddMargin = isAutoAddMargin
@@ -42,11 +42,11 @@ public struct BinanceRawFuturesPosition: Codable {
         self.leverage = leverage
         self.liquidationPrice = liquidationPrice
         self.markPrice = markPrice
-        self.maxNotionalValue = maxNotionalValue
-        self.quantity = quantity
         self.symbol = symbol
-        self.unrealizedPnL = unrealizedPnL
         self.positionSide = positionSide
+        self.quantity = quantity
+        self.unrealizedPnL = unrealizedPnL
+        self.maxNotional = maxNotional
     }
 
 }

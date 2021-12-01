@@ -7,7 +7,7 @@
 
 import Foundation
 
-
+/** GV copy of ErrorResult */
 public struct ErrorViewModel: Codable {
 
 

@@ -191,7 +191,7 @@ class WalletWithdrawViewController: BaseViewController {
     }
     
     private func updateUI() {
-        if let selectedWallet = viewModel.selectedWallet, let commission = selectedWallet.commission, let currency = selectedWallet.currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
+        if let selectedWallet = viewModel.selectedWallet, let commission = selectedWallet.commissions.value?.first?.value, let currency = selectedWallet.currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
             
             if let description = selectedWallet._description {
                 selectedWalletCurrencyValueLabel.text = description + " | " + currency.rawValue

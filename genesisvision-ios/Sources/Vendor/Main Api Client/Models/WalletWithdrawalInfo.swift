@@ -17,16 +17,16 @@ public struct WalletWithdrawalInfo: Codable {
 
     public var logoUrl: String?
 
-    public var commission: Double?
+    public var commissions: [WalletWithdrawalCurrencyInfo]?
 
     public var rateToGvt: Double?
 
     public var availableToWithdrawal: Double?
-    public init(currency: Currency? = nil, _description: String? = nil, logoUrl: String? = nil, commission: Double? = nil, rateToGvt: Double? = nil, availableToWithdrawal: Double? = nil) { 
+    public init(currency: Currency? = nil, _description: String? = nil, logoUrl: String? = nil, commissions: [WalletWithdrawalCurrencyInfo]? = nil, rateToGvt: Double? = nil, availableToWithdrawal: Double? = nil) { 
         self.currency = currency
         self._description = _description
         self.logoUrl = logoUrl
-        self.commission = commission
+        self.commissions = commissions
         self.rateToGvt = rateToGvt
         self.availableToWithdrawal = availableToWithdrawal
     }
@@ -34,7 +34,7 @@ public struct WalletWithdrawalInfo: Codable {
         case currency
         case _description = "description"
         case logoUrl
-        case commission
+        case commissions
         case rateToGvt
         case availableToWithdrawal
     }

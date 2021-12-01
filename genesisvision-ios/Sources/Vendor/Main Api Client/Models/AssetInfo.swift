@@ -21,15 +21,18 @@ public struct AssetInfo: Codable {
 
     public var chartSymbol: String?
 
+    public var lastModified: Date?
+
     public var tags: [Tag]?
 
     public var socialLinks: [SocialLinkViewModel]?
-    public init(name: String? = nil, symbol: String? = nil, logoUrl: String? = nil, _description: String? = nil, chartSymbol: String? = nil, tags: [Tag]? = nil, socialLinks: [SocialLinkViewModel]? = nil) { 
+    public init(name: String? = nil, symbol: String? = nil, logoUrl: String? = nil, _description: String? = nil, chartSymbol: String? = nil, lastModified: Date? = nil, tags: [Tag]? = nil, socialLinks: [SocialLinkViewModel]? = nil) { 
         self.name = name
         self.symbol = symbol
         self.logoUrl = logoUrl
         self._description = _description
         self.chartSymbol = chartSymbol
+        self.lastModified = lastModified
         self.tags = tags
         self.socialLinks = socialLinks
     }
@@ -39,6 +42,7 @@ public struct AssetInfo: Codable {
         case logoUrl
         case _description = "description"
         case chartSymbol
+        case lastModified
         case tags
         case socialLinks
     }

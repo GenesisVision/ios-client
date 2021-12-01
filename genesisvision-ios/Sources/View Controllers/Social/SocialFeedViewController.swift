@@ -150,6 +150,10 @@ class SocialFeedViewController: BaseViewController {
         viewModel.socialRouter.show(routeType:  .sharePost(post: sharedPost))
     }
     
+    private func showImagesViewController(index: Int, imagesUrls: [URL]) {
+        viewModel.socialRouter.show(routeType: .showImages(index: index, imagesUrls: imagesUrls, images: []))
+    }
+    
     private func showAssetViewController(assetDetails: PostAssetDetailsWithPrices) {
         guard let assetId = assetDetails._id?.uuidString, let assetType = assetDetails.assetType else { return }
         viewModel.socialRouter.showAssetDetails(with: assetId, assetType: assetType)
@@ -216,6 +220,10 @@ extension SocialFeedViewController: SocialPostActionsMenuPresenable {
 }
 
 extension SocialFeedViewController: SocialFeedCollectionViewModelDelegate {
+    func imagePressed(index: Int, imagesUrls: [URL]) {
+        showImagesViewController(index: index, imagesUrls: imagesUrls)
+    }
+    
     func shareIdeasPressed() {
         showNewPostViewController(sharedPost: nil)
     }

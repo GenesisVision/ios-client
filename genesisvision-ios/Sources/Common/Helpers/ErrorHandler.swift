@@ -16,6 +16,9 @@ enum ErrorMessageType {
     case requiresTwoFactor(message: String?)
     case requiresCaptcha(message: String?)
     case requiresEmailConfirmation(message: String?)
+    case requiresSignature(message: String?)
+    case notFound(message: String?)
+    case forbidden(message: String?)
 }
 
 class ErrorHandler {
@@ -58,6 +61,12 @@ class ErrorHandler {
                 completion(.failure(errorType: .apiError(message: errorsText)))
             case .requiresEmailConfirmation:
                 completion(.failure(errorType: .requiresEmailConfirmation(message: errorsText)))
+            case .requiresSignature:
+                completion(.failure(errorType: .requiresSignature(message: errorsText)))
+            case .notFound:
+                completion(.failure(errorType: .notFound(message: errorsText)))
+            case .forbidden:
+                completion(.failure(errorType: .forbidden(message: errorsText)))
             }
         }
     }
@@ -73,6 +82,12 @@ class ErrorHandler {
             
             ReachabilityManager.shared.notificationBanner?.titleLabel?.text = message
             ReachabilityManager.shared.notificationBanner?.show()
+        case .requiresSignature(message: let message):
+            hud && viewController != nil
+                ? message != nil ? viewController!.showErrorHUD(subtitle: message!) : viewController!.showErrorHUD()
+                : message != nil ? print("Api Error with reason: " + message!) : print("Api Error without reason")
+        default:
+            break
         }
     }
 }

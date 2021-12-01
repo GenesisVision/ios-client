@@ -13,4 +13,7 @@ public enum ErrorCodes: String, Codable {
     case requiresTwoFactor = "RequiresTwoFactor"
     case wrongCaptcha = "WrongCaptcha"
     case requiresEmailConfirmation = "RequiresEmailConfirmation"
+    case requiresSignature = "RequiresSignature"
+    case notFound = "NotFound"
+    case forbidden = "Forbidden"
 }

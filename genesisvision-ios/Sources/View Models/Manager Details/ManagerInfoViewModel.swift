@@ -32,7 +32,7 @@ final class ManagerInfoViewModel: ViewModelWithListProtocol {
     
     public private(set) var publicProfile: PublicProfile? {
         didSet {
-            if let isEmpty = publicProfile?.assets?.isEmpty, !isEmpty, !rows.contains(.info) {
+            if let isEmpty = publicProfile?.socialLinks?.isEmpty, !isEmpty, !rows.contains(.info) {
                 rows.insert(.info, at: 1)
             }
             

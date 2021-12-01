@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Lightbox
 
 enum SocialRouteType {
     case socialFeed(tabType: SocialMainFeedTabType)
@@ -17,6 +17,7 @@ enum SocialRouteType {
     case users
     case mediaPosts
     case reportPost(postId: UUID)
+    case showImages(index: Int, imagesUrls: [URL], images: [UIImage])
 }
 
 
@@ -40,6 +41,8 @@ class SocialRouter: Router {
             showPost(post: post)
         case .reportPost(let postId):
             showPostReport(postId: postId)
+        case .showImages(let index, let imagesUrls, let images):
+            showImages(index: index, imagesUrls: imagesUrls, images: images)
         }
     }
     
@@ -91,5 +94,14 @@ class SocialRouter: Router {
         viewController.viewModel = SocialPostReportViewModel(postId: postId)
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func showImages(index: Int, imagesUrls: [URL], images: [UIImage]) {
+        var lightBoxImages = imagesUrls.map({ return LightboxImage(imageURL: $0)})
+        lightBoxImages.append(contentsOf: images.map({ return LightboxImage(image: $0) }))
+        let viewController = LightboxController(images: lightBoxImages, startIndex: index)
+        viewController.modalPresentationStyle = .fullScreen
+        viewController.dynamicBackground = true
+        navigationController?.topViewController?.present(viewController: viewController)
     }
 }

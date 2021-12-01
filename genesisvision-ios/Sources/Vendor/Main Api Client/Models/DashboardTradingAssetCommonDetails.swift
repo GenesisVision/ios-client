@@ -29,10 +29,10 @@ public struct DashboardTradingAssetCommonDetails: Codable {
 
     public var type: PrivateTradingAccountType?
 
-    public var balances: [AmountWithCurrency]?
+    public var balances: [AmountWithLogoCurrency]?
 
     public var supportedCurrencies: [Currency]?
-    public init(title: String? = nil, status: DashboardTradingAssetStatus? = nil, creationDate: Date? = nil, balance: Double? = nil, login: String? = nil, currency: Currency? = nil, originalCurrency: Currency? = nil, leverage: Int? = nil, type: PrivateTradingAccountType? = nil, balances: [AmountWithCurrency]? = nil, supportedCurrencies: [Currency]? = nil) { 
+    public init(title: String? = nil, status: DashboardTradingAssetStatus? = nil, creationDate: Date? = nil, balance: Double? = nil, login: String? = nil, currency: Currency? = nil, originalCurrency: Currency? = nil, leverage: Int? = nil, type: PrivateTradingAccountType? = nil, balances: [AmountWithLogoCurrency]? = nil, supportedCurrencies: [Currency]? = nil) { 
         self.title = title
         self.status = status
         self.creationDate = creationDate

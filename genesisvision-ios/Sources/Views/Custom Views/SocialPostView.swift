@@ -20,6 +20,7 @@ protocol SocialPostViewDelegate: AnyObject {
     func tagPressed(tag: PostTag)
     func userOwnerPressed()
     func postActionsPressed()
+    func imagePressed(index: Int, image: ImagesGalleryCollectionViewCellViewModel)
 }
 
 final class SocialPostView: UIView {
@@ -117,12 +118,10 @@ final class SocialPostView: UIView {
         return textView
     }()
     
-    let postImageView: UIImageView = {
-        let imageView = UIImageView()
+    let galleryView: ImagesGalleryView = {
+        let imageView = ImagesGalleryView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.backgroundColor = .clear
-        imageView.contentMode = .scaleToFill
-        imageView.maskToBounds = true
         return imageView
     }()
     
@@ -170,7 +169,7 @@ final class SocialPostView: UIView {
     
     private func setup() {
         tagsView.delegate = self
-        
+        galleryView.delegate = self
         overlayZeroLayer()
         overlayTopView()
         overlayMiddleView()
@@ -222,13 +221,13 @@ final class SocialPostView: UIView {
 //        middleView.addSubview(tagsView)
 //        middleView.addSubview(eventView)
         middleView.addArrangedSubview(textView)
-        middleView.addArrangedSubview(postImageView)
+        middleView.addArrangedSubview(galleryView)
         
         middleView.addArrangedSubview(eventView)
         middleView.addArrangedSubview(tagsView)
         
         textView.anchorSize(size: CGSize(width: 0, height: socialPostViewSizes?.textViewHeight ?? 0))
-        postImageView.anchorSize(size: CGSize(width: 0, height: socialPostViewSizes?.imageViewHeight ?? 0))
+        galleryView.anchorSize(size: CGSize(width: 0, height: socialPostViewSizes?.imageViewHeight ?? 0))
         tagsView.anchorSize(size: CGSize(width: 0, height: socialPostViewSizes?.tagViewHeight ?? 0))
         eventView.anchorSize(size: CGSize(width: 0, height: 50))
         
@@ -252,7 +251,7 @@ final class SocialPostView: UIView {
     func updateMiddleViewConstraints() {
         middleView.removeAllArrangedSubviewsCompletely()
         textView.removeFromSuperview()
-        postImageView.removeFromSuperview()
+        galleryView.removeFromSuperview()
         tagsView.removeFromSuperview()
         overlayMiddleView()
     }
@@ -269,5 +268,11 @@ final class SocialPostView: UIView {
 extension SocialPostView: SocialPostTagsViewDelegate {
     func tagPressed(tag: PostTag) {
         delegate?.tagPressed(tag: tag)
+    }
+}
+
+extension SocialPostView: ImagesGalleryViewDelegate {
+    func imagePressed(index: Int, image: ImagesGalleryCollectionViewCellViewModel) {
+        delegate?.imagePressed(index: index, image: image)
     }
 }

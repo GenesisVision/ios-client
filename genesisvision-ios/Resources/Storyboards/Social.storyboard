@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -53,12 +53,19 @@
                                         </constraints>
                                     </view>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bCO-Cu-9kt">
-                                        <rect key="frame" x="0.0" y="260" width="394" height="502"/>
+                                        <rect key="frame" x="0.0" y="260" width="394" height="392"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="textColor" systemColor="labelColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0IA-CX-gic" customClass="ImagesGalleryView" customModule="GV_DEBUG" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="662" width="394" height="100"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="9fg-Ss-eFO"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JKY-42-h09">
@@ -134,6 +141,7 @@
                         <outlet property="atSignButton" destination="pz3-Do-wPf" id="xea-hQ-sqh"/>
                         <outlet property="attachmentButton" destination="TiI-m7-9NQ" id="hm0-OV-e29"/>
                         <outlet property="hashtagSignButton" destination="DQJ-uR-aOj" id="3ZO-MW-1T3"/>
+                        <outlet property="imagesGallery" destination="0IA-CX-gic" id="Fcq-mh-Ekh"/>
                         <outlet property="publishButton" destination="jPM-Re-cua" id="4KQ-Jf-RL9"/>
                         <outlet property="sharedPostMainView" destination="a3g-bf-2Gm" id="HIZ-h6-ynF"/>
                         <outlet property="sharedPostView" destination="7wc-VE-Knv" id="qLy-YF-GJa"/>

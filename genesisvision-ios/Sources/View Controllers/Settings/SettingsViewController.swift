@@ -145,6 +145,7 @@ class SettingsViewController: BaseTableViewController {
     // MARK: - Cells
     @IBOutlet weak var kycStatusCell: TableViewCell!
     
+    @IBOutlet weak var mySocialProfileCell: TableViewCell!
     @IBOutlet weak var profilePrivacyCell: TableViewCell!
     
     @IBOutlet weak var publicProfileCell: TableViewCell! {
@@ -426,6 +427,8 @@ extension SettingsViewController {
             feedbackMethod()
         case .referralProgram:
             viewModel.showReferral()
+        case .socialProfile:
+            viewModel.showSocialProfile()
         default:
             break
         }

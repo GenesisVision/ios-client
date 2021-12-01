@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol ImagesGalleryViewDelegate: AnyObject {
+    func imagePressed(index: Int, image: ImagesGalleryCollectionViewCellViewModel)
+}
+
 
 class ImagesGalleryView: UIView {
     
@@ -35,6 +39,8 @@ class ImagesGalleryView: UIView {
         }
     }
     
+    weak var delegate: ImagesGalleryViewDelegate?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -47,7 +53,8 @@ class ImagesGalleryView: UIView {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
+        setup()
     }
     
     
@@ -67,12 +74,17 @@ extension ImagesGalleryView: UICollectionViewDelegate, UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let model = viewModels[indexPath.row]
         
+        if let width = model.resize?.width, let height = model.resize?.height,
+           CGFloat(width) < collectionView.frame.width*0.5, CGFloat(height) < collectionView.frame.height {
+            return CGSize(width: width, height: height)
+        }
+        
         if viewModels.count == 1 {
             return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
         } else if viewModels.count == 2 {
             return CGSize(width: collectionView.frame.width*0.5, height: collectionView.frame.height)
         } else if viewModels.count >= 3 {
-            return CGSize(width: collectionView.frame.width*0.5, height: collectionView.frame.height*0.5)
+            return CGSize(width: collectionView.frame.width*0.5, height: collectionView.frame.height*0.5 - 20)
         }
         
         return CGSize(width: 100, height: 100)
@@ -80,6 +92,7 @@ extension ImagesGalleryView: UICollectionViewDelegate, UICollectionViewDataSourc
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let model = viewModels[indexPath.row]
+        delegate?.imagePressed(index: indexPath.row, image: model)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

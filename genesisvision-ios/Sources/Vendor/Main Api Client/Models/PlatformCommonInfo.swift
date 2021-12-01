@@ -16,10 +16,13 @@ public struct PlatformCommonInfo: Codable {
     public var platformCurrencies: [PlatformCurrencyInfo]?
 
     public var platformUrls: [PlatformUrlInfo]?
-    public init(platformCommission: PlatformCommissionInfo? = nil, platformCurrencies: [PlatformCurrencyInfo]? = nil, platformUrls: [PlatformUrlInfo]? = nil) { 
+
+    public var platformWithdrawalInfo: [PlatformWithdrawalInfo]?
+    public init(platformCommission: PlatformCommissionInfo? = nil, platformCurrencies: [PlatformCurrencyInfo]? = nil, platformUrls: [PlatformUrlInfo]? = nil, platformWithdrawalInfo: [PlatformWithdrawalInfo]? = nil) { 
         self.platformCommission = platformCommission
         self.platformCurrencies = platformCurrencies
         self.platformUrls = platformUrls
+        self.platformWithdrawalInfo = platformWithdrawalInfo
     }
 
 }

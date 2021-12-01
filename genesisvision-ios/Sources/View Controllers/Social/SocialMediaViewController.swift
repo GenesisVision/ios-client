@@ -84,6 +84,10 @@ class SocialMediaViewController: BaseViewController {
         viewModel.router.showAssetDetails(with: assetId, assetType: assetType)
     }
     
+    private func showImagesViewController(index: Int, imagesUrls: [URL]) {
+        viewModel.router.show(routeType: .showImages(index: index, imagesUrls: imagesUrls, images: []))
+    }
+    
     private func showUserProfileViewController(userDetails: ProfilePublic) {
         guard let userId = userDetails._id?.uuidString else { return }
         viewModel.router.showUserDetails(with: userId)
@@ -129,6 +133,10 @@ extension SocialMediaViewController: SocialPostActionsMenuPresenable {
 }
 
 extension SocialMediaViewController: SocialMediaCollectionViewModelDelegate {
+    func imagePressed(index: Int, imagesUrls: [URL]) {
+        showImagesViewController(index: index, imagesUrls: imagesUrls)
+    }
+    
     func showPostActions(postActions: [SocialPostAction], postId: UUID, postLink: String) {
         showPostMenu(actions: postActions, postId: postId, postLink: postLink)
     }

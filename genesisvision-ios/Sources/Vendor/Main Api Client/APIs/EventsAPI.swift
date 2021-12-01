@@ -45,30 +45,30 @@ open class EventsAPI {
       "url" : "url",
       "assetType" : "None"
     },
-    "amount" : 2.3021358869347655,
+    "amount" : 7.061401241503109,
     "feesInfo" : [ {
-      "amount" : 9.301444243932576,
+      "amount" : 3.616076749251911,
       "description" : "description",
       "title" : "title",
       "type" : "Undefined"
     }, {
-      "amount" : 9.301444243932576,
+      "amount" : 3.616076749251911,
       "description" : "description",
       "title" : "title",
       "type" : "Undefined"
     } ],
     "changeState" : "NotChanged",
     "extendedInfo" : [ {
-      "amount" : 7.061401241503109,
+      "amount" : 9.301444243932576,
       "title" : "title"
     }, {
-      "amount" : 7.061401241503109,
+      "amount" : 9.301444243932576,
       "title" : "title"
     } ],
     "currency" : "Undefined",
     "title" : "title",
     "logoUrl" : "logoUrl",
-    "totalFeesAmount" : 3.616076749251911
+    "totalFeesAmount" : 2.027123023002322
   }, {
     "date" : "2000-01-23T04:56:07.000+00:00",
     "assetDetails" : {
@@ -83,30 +83,30 @@ open class EventsAPI {
       "url" : "url",
       "assetType" : "None"
     },
-    "amount" : 2.3021358869347655,
+    "amount" : 7.061401241503109,
     "feesInfo" : [ {
-      "amount" : 9.301444243932576,
+      "amount" : 3.616076749251911,
       "description" : "description",
       "title" : "title",
       "type" : "Undefined"
     }, {
-      "amount" : 9.301444243932576,
+      "amount" : 3.616076749251911,
       "description" : "description",
       "title" : "title",
       "type" : "Undefined"
     } ],
     "changeState" : "NotChanged",
     "extendedInfo" : [ {
-      "amount" : 7.061401241503109,
+      "amount" : 9.301444243932576,
       "title" : "title"
     }, {
-      "amount" : 7.061401241503109,
+      "amount" : 9.301444243932576,
       "title" : "title"
     } ],
     "currency" : "Undefined",
     "title" : "title",
     "logoUrl" : "logoUrl",
-    "totalFeesAmount" : 3.616076749251911
+    "totalFeesAmount" : 2.027123023002322
   } ]
 }}]
      - parameter eventLocation: (query)  (optional)     - parameter assetId: (query)  (optional)     - parameter from: (query)  (optional)     - parameter to: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter eventType: (query)  (optional)     - parameter assetType: (query)  (optional)     - parameter assetsIds: (query)  (optional)     - parameter forceFilterByIds: (query)  (optional)     - parameter eventGroup: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)

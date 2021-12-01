@@ -35,25 +35,6 @@ extension ImagesGalleryCollectionViewCellViewModel: CellViewModel {
     }
 }
 
-//class ImagesGalleryCollectionViewCell: UICollectionViewCell {
-//
-//    @IBOutlet weak var imageView: UIImageView!
-//
-//    @IBOutlet weak var removeButton: UIButton! {
-//        didSet {
-//            removeButton.tintColor = UIColor.primary
-//        }
-//    }
-//
-//    var imageUrl: String?
-//    weak var delegate: ImagesGalleryCollectionViewCellDelegate?
-//
-//    @IBAction func removeButtonAction(_ sender: Any) {
-//        guard let imageUrl = imageUrl else { return }
-//        delegate?.removeImage(imageUrl: imageUrl)
-//    }
-//}
-
 class ImagesGalleryCollectionViewCell: UICollectionViewCell {
     
     let imageView: UIImageView = {

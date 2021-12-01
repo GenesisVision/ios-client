@@ -37,12 +37,16 @@ public struct ProfileHeaderViewModel: Codable {
 
     public var isPublicInvestor: Bool?
 
+    public var hasPassword: Bool?
+
+    public var hasEmailAddress: Bool?
+
     public var betaTester: [BetaTestingType]?
 
     public var isUserNameFilled: Bool?
 
     public var platformCurrency: Currency?
-    public init(_id: UUID? = nil, name: String? = nil, email: String? = nil, url: String? = nil, logoUrl: String? = nil, countryCode: String? = nil, notificationsCount: Int? = nil, isKycConfirmed: Bool? = nil, isForexAllowed: Bool? = nil, isCountryUS: Bool? = nil, isTwoFactorEnabled: Bool? = nil, isNewUser: Bool? = nil, isPublicInvestor: Bool? = nil, betaTester: [BetaTestingType]? = nil, isUserNameFilled: Bool? = nil, platformCurrency: Currency? = nil) { 
+    public init(_id: UUID? = nil, name: String? = nil, email: String? = nil, url: String? = nil, logoUrl: String? = nil, countryCode: String? = nil, notificationsCount: Int? = nil, isKycConfirmed: Bool? = nil, isForexAllowed: Bool? = nil, isCountryUS: Bool? = nil, isTwoFactorEnabled: Bool? = nil, isNewUser: Bool? = nil, isPublicInvestor: Bool? = nil, hasPassword: Bool? = nil, hasEmailAddress: Bool? = nil, betaTester: [BetaTestingType]? = nil, isUserNameFilled: Bool? = nil, platformCurrency: Currency? = nil) { 
         self._id = _id
         self.name = name
         self.email = email
@@ -56,6 +60,8 @@ public struct ProfileHeaderViewModel: Codable {
         self.isTwoFactorEnabled = isTwoFactorEnabled
         self.isNewUser = isNewUser
         self.isPublicInvestor = isPublicInvestor
+        self.hasPassword = hasPassword
+        self.hasEmailAddress = hasEmailAddress
         self.betaTester = betaTester
         self.isUserNameFilled = isUserNameFilled
         self.platformCurrency = platformCurrency
@@ -74,6 +80,8 @@ public struct ProfileHeaderViewModel: Codable {
         case isTwoFactorEnabled
         case isNewUser
         case isPublicInvestor
+        case hasPassword
+        case hasEmailAddress
         case betaTester
         case isUserNameFilled
         case platformCurrency

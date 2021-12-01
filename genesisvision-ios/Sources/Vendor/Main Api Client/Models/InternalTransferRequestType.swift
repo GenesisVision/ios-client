@@ -15,4 +15,5 @@ public enum InternalTransferRequestType: String, Codable {
     case signalTradingAccount = "SignalTradingAccount"
     case publicTradingAccount = "PublicTradingAccount"
     case exchangeAccount = "ExchangeAccount"
+    case coinsMarket = "CoinsMarket"
 }

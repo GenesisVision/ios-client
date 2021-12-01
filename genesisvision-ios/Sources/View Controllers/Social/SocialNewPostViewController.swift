@@ -40,6 +40,13 @@ class SocialNewPostViewController: BaseViewController {
         }
     }
     
+    @IBOutlet weak var imagesGallery: ImagesGalleryView! {
+        didSet {
+            imagesGallery.backgroundColor = .clear
+            imagesGallery.isHidden = true
+        }
+    }
+    
     @IBOutlet weak var publishButton: ActionButton! {
         didSet {
             publishButton.setEnabled(false)
@@ -134,12 +141,38 @@ class SocialNewPostViewController: BaseViewController {
             sharedPostView.dateLabel.text = date.dateForSocialPost
         }
         
-        if let image = viewModel.sharedPost?.images?.first, let logo = image.resizes?.last?.logoUrl, let fileUrl = getFileURL(fileName: logo) {
-            sharedPostView.postImageView.isHidden = false
-            sharedPostView.postImageView.kf.indicatorType = .activity
-            sharedPostView.postImageView.kf.setImage(with: fileUrl)
+        if let postImages = post.images, !postImages.isEmpty {
+            sharedPostView.galleryView.isHidden = false
+            var imagesUrls: [String: PostImageResize?] = [:]
+            
+            for postImage in postImages {
+                if let resizes = postImage.resizes,
+                   resizes.count > 1 {
+                    let original = resizes.filter({ $0.quality == .original })
+                    let hight = resizes.filter({ $0.quality == .high })
+                    let medium = resizes.filter({ $0.quality == .medium })
+                    let low = resizes.filter({ $0.quality == .low })
+                    
+                    if let logoUrl = original.first?.logoUrl {
+                        imagesUrls[logoUrl] = original.first
+                        continue
+                    } else if let logoUrl = hight.first?.logoUrl {
+                        imagesUrls[logoUrl] = hight.first
+                        continue
+                    } else if let logoUrl = medium.first?.logoUrl {
+                        imagesUrls[logoUrl] = medium.first
+                        continue
+                    } else if let logoUrl = low.first?.logoUrl {
+                        imagesUrls[logoUrl] = low.first
+                    }
+                } else if let logoUrl = postImage.resizes?.first?.logoUrl {
+                    imagesUrls[logoUrl] = postImage.resizes?.first
+                }
+            }
+            
+            sharedPostView.galleryView.viewModels = imagesUrls.map({ return ImagesGalleryCollectionViewCellViewModel(imageUrl: $0.key, resize: $0.value, image: nil, showRemoveButton: false, delegate: nil) })
         } else {
-            sharedPostView.postImageView.isHidden = true
+            sharedPostView.galleryView.isHidden = true
         }
         
         if let text = viewModel.sharedPost?.text {
@@ -169,7 +202,7 @@ class SocialNewPostViewController: BaseViewController {
     }
     
     @IBAction func attachmentButtonAction(_ sender: Any) {
-        
+        showImagePicker()
     }
 }
 
@@ -179,7 +212,22 @@ extension SocialNewPostViewController: ImagePickerPresentable {
     }
     
     func selected(pickedImage: UIImage?, pickedImageURL: URL?) {
-        print("s")
+        guard let pickedImageUrl = pickedImageURL, let pickedImage = pickedImage else { return }
+        viewModel.pickedImages.append(SocialNewPostViewModel.PickedImage(imageUrl: pickedImageUrl.absoluteString, image: pickedImage))
+        let viewModels = viewModel.pickedImages.map({ return ImagesGalleryCollectionViewCellViewModel(imageUrl: $0.imageUrl, resize: PostImageResize(quality: nil, logoUrl: nil, height: 100, width: 100), image: $0.image, showRemoveButton: true, delegate: self) })
+        imagesGallery.viewModels = viewModels
+        imagesGallery.isHidden = viewModels.isEmpty
+        viewModel.saveImage(pickedImageUrl) { result in
+        }
+    }
+}
+
+extension SocialNewPostViewController: ImagesGalleryCollectionViewCellDelegate {
+    func removeImage(imageUrl: String) {
+        viewModel.pickedImages.removeAll(where: { $0.imageUrl == imageUrl })
+        let viewModels = viewModel.pickedImages.map({ return ImagesGalleryCollectionViewCellViewModel(imageUrl: $0.imageUrl, resize: PostImageResize(quality: nil, logoUrl: nil, height: 100, width: 100), image: $0.image, showRemoveButton: true, delegate: self) })
+        imagesGallery.viewModels = viewModels
+        imagesGallery.isHidden = viewModels.isEmpty
     }
 }
 
@@ -212,7 +260,25 @@ extension SocialNewPostViewController: UITextViewDelegate {
 final class SocialNewPostViewModel {
     var sharedPost: Post?
     var newPostText: String?
-    var newPostImages: [NewPostImage]?
+    
+    struct UploadedImage {
+        let imageUrl: String
+        let imageUDID: String
+    }
+    
+    struct PickedImage {
+        let imageUrl: String
+        let image: UIImage
+    }
+    
+    var pickedImages: [PickedImage] = [] {
+        didSet {
+            uploadedImages = uploadedImages.filter({ uploadedImage in
+                return pickedImages.contains(where: { $0.imageUrl == uploadedImage.imageUrl })
+            })
+        }
+    }
+    var uploadedImages: [UploadedImage] = []
     
     init(sharedPost: Post?) {
         self.sharedPost = sharedPost
@@ -223,12 +289,23 @@ final class SocialNewPostViewModel {
     }
     
     private func rePost(completion: @escaping CompletionBlock) {
-        let model = RePost(_id: sharedPost?._id, text: newPostText, images: [])
+        let images = uploadedImages.map({ NewPostImage(image: $0.imageUDID, position: 0) })
+        let model = RePost(_id: sharedPost?._id, text: newPostText, images: images)
         SocialDataProvider.rePost(model: model, completion: completion)
     }
     
     private func addPost(completion: @escaping CompletionBlock) {
-        let model = NewPost(text: newPostText, postId: nil, userId: nil, images: newPostImages)
+        let images = uploadedImages.map({ NewPostImage(image: $0.imageUDID, position: 0) })
+        let model = NewPost(text: newPostText, postId: nil, userId: nil, images: images)
         SocialDataProvider.addPost(model: model, completion: completion)
+    }
+    
+    func saveImage(_ pickedImageURL: URL, completion: @escaping (CompletionBlock)) {
+        BaseDataProvider.uploadImage(imageData: pickedImageURL.dataRepresentation, imageLocation: .social, completion: { [weak self] (uploadResult) in
+            guard let uploadResult = uploadResult, let uuidString = uploadResult._id?.uuidString else { return completion(.failure(errorType: .apiError(message: nil))) }
+            
+            self?.uploadedImages.append(UploadedImage(imageUrl: pickedImageURL.absoluteString, imageUDID: uuidString))
+            completion(.success)
+            }, errorCompletion: completion)
     }
 }

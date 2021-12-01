@@ -14,4 +14,5 @@ public enum BinanceExecutionType: String, Codable {
     case rejected = "Rejected"
     case trade = "Trade"
     case expired = "Expired"
+    case amendment = "Amendment"
 }

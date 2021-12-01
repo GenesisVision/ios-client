@@ -25,4 +25,6 @@ target 'genesisvision-ios' do
     pod 'NotificationBannerSwift'
     pod 'IdensicMobileSDK', '= 1.16.0'
     pod 'RadioGroup'
+    pod "FINNBottomSheet", git: "https://github.com/finn-no/BottomSheet.git"
+    pod 'Lightbox'
 end

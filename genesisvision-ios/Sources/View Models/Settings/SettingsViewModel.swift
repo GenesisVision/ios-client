@@ -14,6 +14,7 @@ final class SettingsViewModel {
         case profile = "Profile"
         case kycStatus = "KYC Status"
         case publicProfile = "Public investor's profile"
+        case socialProfile = "My Profile"
         
         case currency = "Platform currency"
         case referralProgram = "Referral program"
@@ -118,7 +119,7 @@ final class SettingsViewModel {
     var kycVerificationTokens: ExternalKycAccessToken?
     
     var sections: [SectionType] = [.profile, .currency, .security, .feedback]
-    var rows: [SectionType : [RowType]] = [.profile : [.profile, .kycStatus, .publicProfile, .privacy],
+    var rows: [SectionType : [RowType]] = [.profile : [.profile, .kycStatus, .publicProfile, .socialProfile, .privacy],
                                            .currency : [.currency, .referralProgram],
                                            .security : [.changePassword, .passcode, .biometricID, .twoFactor],
                                            .feedback : [.termsAndConditions, .privacyPolicy, .contactUs]]
@@ -269,6 +270,11 @@ final class SettingsViewModel {
     func showKYC() {
         guard let kycVerificationTokens = kycVerificationTokens else { return }
         router.show(routeType: .kyc(kycVerificationTokens))
+    }
+    
+    func showSocialProfile() {
+        guard let id = profileModel?._id?.uuidString else { return }
+        router.show(routeType: .showSocialProfile(id))
     }
     
     // MARK: -  Private methods

@@ -39,9 +39,11 @@ public struct FollowDetailsListItem: Codable {
 
     public var leverageMax: Int?
 
-    public var brokerId: UUID?
+    public var successFee: Double?
 
-    public var brokerType: BrokerTradeServerType?
+    public var volumeFee: Double?
+
+    public var brokerDetails: BrokerDetails?
 
     public var owner: ProfilePublicShort?
 
@@ -52,7 +54,7 @@ public struct FollowDetailsListItem: Codable {
     public var tags: [Tag]?
 
     public var balance: AmountWithCurrency?
-    public init(_id: UUID? = nil, title: String? = nil, _description: String? = nil, logoUrl: String? = nil, creationDate: Date? = nil, currency: Currency? = nil, subscribersCount: Int? = nil, tradesCount: Int? = nil, status: String? = nil, url: String? = nil, color: String? = nil, isExternal: Bool? = nil, leverageMin: Int? = nil, leverageMax: Int? = nil, brokerId: UUID? = nil, brokerType: BrokerTradeServerType? = nil, owner: ProfilePublicShort? = nil, statistic: ProfitChart? = nil, personalDetails: PersonalFollowDetailsList? = nil, tags: [Tag]? = nil, balance: AmountWithCurrency? = nil) { 
+    public init(_id: UUID? = nil, title: String? = nil, _description: String? = nil, logoUrl: String? = nil, creationDate: Date? = nil, currency: Currency? = nil, subscribersCount: Int? = nil, tradesCount: Int? = nil, status: String? = nil, url: String? = nil, color: String? = nil, isExternal: Bool? = nil, leverageMin: Int? = nil, leverageMax: Int? = nil, successFee: Double? = nil, volumeFee: Double? = nil, brokerDetails: BrokerDetails? = nil, owner: ProfilePublicShort? = nil, statistic: ProfitChart? = nil, personalDetails: PersonalFollowDetailsList? = nil, tags: [Tag]? = nil, balance: AmountWithCurrency? = nil) { 
         self._id = _id
         self.title = title
         self._description = _description
@@ -67,8 +69,9 @@ public struct FollowDetailsListItem: Codable {
         self.isExternal = isExternal
         self.leverageMin = leverageMin
         self.leverageMax = leverageMax
-        self.brokerId = brokerId
-        self.brokerType = brokerType
+        self.successFee = successFee
+        self.volumeFee = volumeFee
+        self.brokerDetails = brokerDetails
         self.owner = owner
         self.statistic = statistic
         self.personalDetails = personalDetails
@@ -90,8 +93,9 @@ public struct FollowDetailsListItem: Codable {
         case isExternal
         case leverageMin
         case leverageMax
-        case brokerId
-        case brokerType
+        case successFee
+        case volumeFee
+        case brokerDetails
         case owner
         case statistic
         case personalDetails

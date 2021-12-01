@@ -33,6 +33,10 @@ class SocialPostViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        fetchData()
+    }
+    
+    private func fetchData() {
         viewModel.fetchPost { [weak self] _ in
             self?.reloadData()
         }
@@ -76,6 +80,7 @@ class SocialPostViewController: BaseViewController {
     
     private func reloadData() {
         DispatchQueue.main.async {
+            self.replyInputTextField.replierView.configure(replingPost: self.viewModel.replyingPost, delegate: self)
             self.tableView.reloadData()
         }
     }
@@ -88,9 +93,12 @@ extension SocialPostViewController: ImagePickerPresentable {
     
     func selected(pickedImage: UIImage?, pickedImageURL: URL?) {
         guard let pickedImageUrl = pickedImageURL, let pickedImage = pickedImage else { return }
-        viewModel.pickedImagesUrls[pickedImageUrl] = pickedImage
-        let viewModels = viewModel.pickedImagesUrls.map({ return ImagesGalleryCollectionViewCellViewModel(imageUrl: $0.key.absoluteString, resize: PostImageResize(quality: nil, logoUrl: nil, height: 100, width: 100), image: $0.value, showRemoveButton: true, delegate: replyInputTextField) })
-        replyInputTextField.configure(viewModels: viewModels, delegate: self)
+        viewModel.pickedImages.append(SocialPostViewModel.PickedImage(imageUrl: pickedImageUrl.absoluteString, image: pickedImage))
+        let viewModels = viewModel.pickedImages.map({ return ImagesGalleryCollectionViewCellViewModel(imageUrl: $0.imageUrl, resize: PostImageResize(quality: nil, logoUrl: nil, height: 100, width: 100), image: $0.image, showRemoveButton: true, delegate: replyInputTextField) })
+        replyInputTextField.imageGallery.viewModels = viewModels
+        replyInputTextField.imageGallery.isHidden = viewModels.isEmpty
+        viewModel.saveImage(pickedImageUrl) { result in
+        }
     }
 }
 
@@ -100,13 +108,16 @@ extension SocialPostViewController: ReplyInputFieldDelegate {
     }
     
     func sendButtonPressed() {
+        viewModel.addPost(postText: replyInputTextField.textField.text ?? "") { [weak self] _ in
+            self?.fetchData()
+        }
     }
     
     func removeImage(imageUrl: String) {
-        guard let imageUrl = URL(string: imageUrl) else { return }
-        viewModel.pickedImagesUrls.removeValue(forKey: imageUrl)
-        let viewModels = viewModel.pickedImagesUrls.map({ return ImagesGalleryCollectionViewCellViewModel(imageUrl: $0.key.absoluteString, resize: PostImageResize(quality: nil, logoUrl: nil, height: 100, width: 100), image: $0.value, showRemoveButton: true, delegate: replyInputTextField) })
-        replyInputTextField.configure(viewModels: viewModels, delegate: self)
+        viewModel.pickedImages.removeAll(where: { $0.imageUrl == imageUrl })
+        let viewModels = viewModel.pickedImages.map({ return ImagesGalleryCollectionViewCellViewModel(imageUrl: $0.imageUrl, resize: PostImageResize(quality: nil, logoUrl: nil, height: 100, width: 100), image: $0.image, showRemoveButton: true, delegate: replyInputTextField) })
+        replyInputTextField.imageGallery.viewModels = viewModels
+        replyInputTextField.imageGallery.isHidden = viewModels.isEmpty
     }
 }
 
@@ -157,12 +168,12 @@ extension SocialPostViewController: UITableViewDelegate, UITableViewDataSource {
             label.translatesAutoresizingMaskIntoConstraints = false
             label.text = viewModel.commentsViewModels.count.toString() + " comments"
             view.addSubview(label)
-            label.fillSuperview(padding: UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0))
+            label.fillSuperview(padding: UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 0))
             view.isHidden = viewModel.commentsViewModels.isEmpty
             return view
         case .comments:
-            let view = ReplierView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 0))
-            view.configure(replingPost: viewModel.replyingPost, delegate: self)
+            let view = UIView()
+            view.backgroundColor = .clear
             return view
         }
     }
@@ -203,6 +214,7 @@ extension SocialPostViewController: BaseTableViewProtocol {
 extension SocialPostViewController: ReplierViewDelegate {
     func removeButtonPressed() {
         viewModel.replyingPost = nil
+        replyInputTextField.replierView.configure(replingPost: nil, delegate: self)
         reloadData()
     }
 }
@@ -219,7 +231,26 @@ final class SocialPostViewModel {
     var replyingPost: Post?
     
     var post: SocialFeedTableViewCellViewModel?
-    var pickedImagesUrls: [URL: UIImage] = [:]
+    
+    struct UploadedImage {
+        let imageUrl: String
+        let imageUDID: String
+    }
+    
+    struct PickedImage {
+        let imageUrl: String
+        let image: UIImage
+    }
+    
+    var pickedImages: [PickedImage] = [] {
+        didSet {
+            uploadedImages = uploadedImages.filter({ uploadedImage in
+                return pickedImages.contains(where: { $0.imageUrl == uploadedImage.imageUrl })
+            })
+        }
+    }
+    var uploadedImages: [UploadedImage] = []
+    
     var commentsViewModels: [SocialCommentTableViewCellViewModel] = []
     let postId: UUID?
     let socialRouter: SocialRouter
@@ -254,6 +285,21 @@ final class SocialPostViewModel {
             }
         }
     }
+    
+    func saveImage(_ pickedImageURL: URL, completion: @escaping (CompletionBlock)) {
+        BaseDataProvider.uploadImage(imageData: pickedImageURL.dataRepresentation, imageLocation: .social, completion: { [weak self] (uploadResult) in
+            guard let uploadResult = uploadResult, let uuidString = uploadResult._id?.uuidString else { return completion(.failure(errorType: .apiError(message: nil))) }
+            
+            self?.uploadedImages.append(UploadedImage(imageUrl: pickedImageURL.absoluteString, imageUDID: uuidString))
+            completion(.success)
+            }, errorCompletion: completion)
+    }
+    
+    func addPost(postText: String, completion: @escaping CompletionBlock) {
+        let images = uploadedImages.map({ NewPostImage(image: $0.imageUDID, position: 0) })
+        let model = NewPost(text: postText, postId: post?.post._id, userId: replyingPost?._id, images: images)
+        SocialDataProvider.addPost(model: model, completion: completion)
+    }
 }
 
 extension SocialPostViewModel: SocialCommentTableViewCellDelegate {
@@ -265,6 +311,9 @@ extension SocialPostViewModel: SocialCommentTableViewCellDelegate {
 
 
 extension SocialPostViewModel: SocialFeedCollectionViewCellDelegate {
+    func imagePressed(postId: UUID, index: Int, image: ImagesGalleryCollectionViewCellViewModel) {
+    }
+    
     func likeTouched(postId: UUID) {
         
     }
@@ -293,5 +342,8 @@ extension SocialPostViewModel: SocialFeedCollectionViewCellDelegate {
         
     }
     
+    func imagePressed(imageUrl: URL) {
+        
+    }
     
 }

@@ -18,11 +18,14 @@ public struct AssetPlatformInfo: Codable {
     public var fundInfo: FundAssetPlatformInfo?
 
     public var followInfo: FollowAssetPlatformInfo?
-    public init(programInfo: ProgramAssetPlatformInfo? = nil, tradingAccountInfo: TradingAccountAssetPlatformInfo? = nil, fundInfo: FundAssetPlatformInfo? = nil, followInfo: FollowAssetPlatformInfo? = nil) { 
+
+    public var anonymousInfo: AnonymousPlatformInfo?
+    public init(programInfo: ProgramAssetPlatformInfo? = nil, tradingAccountInfo: TradingAccountAssetPlatformInfo? = nil, fundInfo: FundAssetPlatformInfo? = nil, followInfo: FollowAssetPlatformInfo? = nil, anonymousInfo: AnonymousPlatformInfo? = nil) { 
         self.programInfo = programInfo
         self.tradingAccountInfo = tradingAccountInfo
         self.fundInfo = fundInfo
         self.followInfo = followInfo
+        self.anonymousInfo = anonymousInfo
     }
 
 }

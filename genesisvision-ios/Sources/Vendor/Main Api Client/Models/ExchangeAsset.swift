@@ -24,7 +24,9 @@ public struct ExchangeAsset: Codable {
     public var permissions: [TradingAccountPermission]?
 
     public var asset: AssetDetails?
-    public init(_id: UUID? = nil, title: String? = nil, creationDate: Date? = nil, balance: Double? = nil, currency: Currency? = nil, permissions: [TradingAccountPermission]? = nil, asset: AssetDetails? = nil) { 
+
+    public var status: DashboardTradingAssetStatus?
+    public init(_id: UUID? = nil, title: String? = nil, creationDate: Date? = nil, balance: Double? = nil, currency: Currency? = nil, permissions: [TradingAccountPermission]? = nil, asset: AssetDetails? = nil, status: DashboardTradingAssetStatus? = nil) { 
         self._id = _id
         self.title = title
         self.creationDate = creationDate
@@ -32,6 +34,7 @@ public struct ExchangeAsset: Codable {
         self.currency = currency
         self.permissions = permissions
         self.asset = asset
+        self.status = status
     }
     public enum CodingKeys: String, CodingKey { 
         case _id = "id"
@@ -41,6 +44,7 @@ public struct ExchangeAsset: Codable {
         case currency
         case permissions
         case asset
+        case status
     }
 
 }

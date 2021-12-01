@@ -438,12 +438,12 @@ open class ProgramsAPI {
     "volume" : 0.8008281904610115,
     "entry" : "In",
     "totalCommissionByType" : [ {
-      "amount" : 9.301444243932576,
+      "amount" : 3.616076749251911,
       "description" : "description",
       "title" : "title",
       "type" : "Undefined"
     }, {
-      "amount" : 9.301444243932576,
+      "amount" : 3.616076749251911,
       "description" : "description",
       "title" : "title",
       "type" : "Undefined"
@@ -573,12 +573,12 @@ open class ProgramsAPI {
     "volume" : 0.8008281904610115,
     "entry" : "In",
     "totalCommissionByType" : [ {
-      "amount" : 9.301444243932576,
+      "amount" : 3.616076749251911,
       "description" : "description",
       "title" : "title",
       "type" : "Undefined"
     }, {
-      "amount" : 9.301444243932576,
+      "amount" : 3.616076749251911,
       "description" : "description",
       "title" : "title",
       "type" : "Undefined"
@@ -728,11 +728,11 @@ open class ProgramsAPI {
      - examples: [{contentType=application/json, example={
   "profit" : 0.8008281904610115,
   "chart" : [ {
-    "date" : 0,
-    "value" : 6.027456183070403
+    "date" : 5,
+    "value" : 2.3021358869347655
   }, {
-    "date" : 0,
-    "value" : 6.027456183070403
+    "date" : 5,
+    "value" : 2.3021358869347655
   } ]
 }}]
      - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter maxPointCount: (query)  (optional)     - parameter currency: (query)  (optional)
@@ -855,13 +855,13 @@ open class ProgramsAPI {
     "username" : "username"
   },
   "programDetails" : {
-    "periodDuration" : 2,
-    "stopOutLevelCurrent" : 6.84685269835264,
-    "successFeeSelected" : 1.2315135367772556,
+    "periodDuration" : 7,
+    "stopOutLevelCurrent" : 7.457744773683766,
+    "successFeeSelected" : 1.0246457001441578,
     "canShowFinancialStatistic" : true,
     "level" : 5,
-    "genesisRatio" : 9.301444243932576,
-    "availableInvestmentLimit" : 1.1730742509559433,
+    "genesisRatio" : 3.616076749251911,
+    "availableInvestmentLimit" : 4.965218492984954,
     "type" : "DailyPeriod",
     "tradesDelay" : "None",
     "dailyPeriodDetails" : {
@@ -869,28 +869,28 @@ open class ProgramsAPI {
       "hourProcessing" : 5,
       "isProcessingRealTime" : true
     },
-    "availableInvestmentBase" : 7.457744773683766,
+    "availableInvestmentBase" : 1.1730742509559433,
     "periodStarts" : "2000-01-23T04:56:07.000+00:00",
-    "totalAvailableInvestment" : 4.965218492984954,
-    "stopOutLevelSelected" : 1.4894159098541704,
-    "managementFeeSelected" : 4.145608029883936,
-    "investmentScale" : 3.616076749251911,
-    "successFeeCurrent" : 1.0246457001441578,
+    "totalAvailableInvestment" : 5.025004791520295,
+    "stopOutLevelSelected" : 6.84685269835264,
+    "managementFeeSelected" : 7.386281948385884,
+    "investmentScale" : 2.027123023002322,
+    "successFeeCurrent" : 1.4894159098541704,
     "periodEnds" : "2000-01-23T04:56:07.000+00:00",
     "canShowPeriodHistory" : true,
-    "ageDays" : 7.061401241503109,
+    "ageDays" : 9.301444243932576,
     "personalDetails" : {
       "canChangeReinvest" : true,
       "canWithdraw" : true,
       "pendingOutputIsWithdrawAll" : true,
-      "subscribedAccounts" : 1,
+      "subscribedAccounts" : 2,
       "canInvest" : true,
       "showTwoFactorButton" : true,
-      "pendingOutput" : 9.018348186070783,
-      "managementFeePersonal" : 3.5571952270680973,
+      "pendingOutput" : 6.438423552598547,
+      "managementFeePersonal" : 6.965117697638846,
       "hasNotifications" : true,
-      "pendingInput" : 8.762042012749001,
-      "profitPercent" : 9.369310271410669,
+      "pendingInput" : 9.018348186070783,
+      "profitPercent" : 6.683562403749608,
       "isReinvest" : true,
       "isAutoJoin" : true,
       "migration" : {
@@ -943,25 +943,25 @@ open class ProgramsAPI {
             "name" : "name"
           } ]
         },
-        "newLeverage" : 6,
+        "newLeverage" : 1,
         "dateCreate" : "2000-01-23T04:56:07.000+00:00"
       },
-      "value" : 5.025004791520295,
-      "profit" : 9.965781217890562,
-      "successFeePersonal" : 6.438423552598547,
-      "invested" : 6.683562403749608,
+      "value" : 9.965781217890562,
+      "profit" : 9.369310271410669,
+      "successFeePersonal" : 3.5571952270680973,
+      "invested" : 8.762042012749001,
       "isFavorite" : true,
       "isInvested" : true,
       "status" : "Pending"
     },
-    "volumeScale" : 2.027123023002322,
-    "managementFeeCurrent" : 7.386281948385884,
-    "levelProgress" : 5.637376656633329
+    "volumeScale" : 4.145608029883936,
+    "managementFeeCurrent" : 1.2315135367772556,
+    "levelProgress" : 2.3021358869347655
   },
   "tradingAccountInfo" : {
-    "leverageMin" : 0,
-    "leverageMax" : 6,
-    "balance" : 1.4658129805029452,
+    "leverageMin" : 6,
+    "leverageMax" : 1,
+    "balance" : 5.962133916683182,
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "login" : "login"
@@ -970,13 +970,15 @@ open class ProgramsAPI {
     "typeExt" : "None",
     "color" : "color",
     "description" : "description",
-    "logo" : "logo",
+    "index" : 0,
     "isOwnAsset" : true,
     "title" : "title",
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
     "systemUrl" : "systemUrl",
     "logoUrl" : "logoUrl",
     "url" : "url",
+    "logo" : "logo",
+    "lastModified" : "2000-01-23T04:56:07.000+00:00",
     "status" : "status"
   },
   "ownerActions" : {
@@ -997,13 +999,13 @@ open class ProgramsAPI {
     "canConfirm2FA" : true
   },
   "followDetails" : {
-    "tradesCount" : 2,
+    "tradesCount" : 6,
     "signalSettings" : {
-      "signalSuccessFee" : 6.778324963048013,
-      "signalVolumeFee" : 6.878052220127876,
+      "signalSuccessFee" : 6.878052220127876,
+      "signalVolumeFee" : 5.944895607614016,
       "isActive" : true
     },
-    "subscribersCount" : 5,
+    "subscribersCount" : 6,
     "personalDetails" : {
       "guestActions" : {
         "canSubscribeToExternalSignalPrivateAccount" : true,
@@ -1011,7 +1013,7 @@ open class ProgramsAPI {
         "canSubscribeToInternalSignal" : true
       },
       "hasNotifications" : true,
-      "subscribedAccounts" : 6,
+      "subscribedAccounts" : 3,
       "isFavorite" : true
     }
   },
@@ -1336,21 +1338,21 @@ open class ProgramsAPI {
     "color" : "color",
     "currency" : "Undefined",
     "chart" : [ {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : 5,
+      "value" : 2.3021358869347655
     }, {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : 5,
+      "value" : 2.3021358869347655
     } ]
   }, {
     "color" : "color",
     "currency" : "Undefined",
     "chart" : [ {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : 5,
+      "value" : 2.3021358869347655
     }, {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : 5,
+      "value" : 2.3021358869347655
     } ]
   } ]
 }}]
@@ -1467,7 +1469,7 @@ open class ProgramsAPI {
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
-  "total" : 9,
+  "total" : 3,
   "items" : [ {
     "color" : "color",
     "description" : "description",
@@ -1478,11 +1480,11 @@ open class ProgramsAPI {
       "amount" : 7.457744773683766,
       "currency" : "Undefined"
     },
-    "availableToInvest" : 5.962133916683182,
+    "availableToInvest" : 5.637376656633329,
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "levelProgress" : 6.027456183070403,
-    "investorsCount" : 5,
+    "levelProgress" : 1.4658129805029452,
+    "investorsCount" : 2,
     "owner" : {
       "personalDetails" : {
         "isFollow" : true,
@@ -1495,22 +1497,23 @@ open class ProgramsAPI {
       "logoUrl" : "logoUrl",
       "username" : "username"
     },
-    "periodDuration" : 1,
+    "periodDuration" : 5,
     "brokerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : 5,
+        "value" : 2.3021358869347655
       }, {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : 5,
+        "value" : 2.3021358869347655
       } ],
       "profit" : 7.386281948385884
     },
-    "level" : 0,
-    "entryFeeCurrent" : 7.061401241503109,
-    "entryFeeSelected" : 2.3021358869347655,
+    "level" : 6,
+    "entryFeeCurrent" : 9.301444243932576,
+    "index" : 0,
+    "entryFeeSelected" : 7.061401241503109,
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
     "logoUrl" : "logoUrl",
     "url" : "url",
@@ -1539,11 +1542,11 @@ open class ProgramsAPI {
       "amount" : 7.457744773683766,
       "currency" : "Undefined"
     },
-    "availableToInvest" : 5.962133916683182,
+    "availableToInvest" : 5.637376656633329,
     "currency" : "Undefined",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "levelProgress" : 6.027456183070403,
-    "investorsCount" : 5,
+    "levelProgress" : 1.4658129805029452,
+    "investorsCount" : 2,
     "owner" : {
       "personalDetails" : {
         "isFollow" : true,
@@ -1556,22 +1559,23 @@ open class ProgramsAPI {
       "logoUrl" : "logoUrl",
       "username" : "username"
     },
-    "periodDuration" : 1,
+    "periodDuration" : 5,
     "brokerId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : 5,
+        "value" : 2.3021358869347655
       }, {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : 5,
+        "value" : 2.3021358869347655
       } ],
       "profit" : 7.386281948385884
     },
-    "level" : 0,
-    "entryFeeCurrent" : 7.061401241503109,
-    "entryFeeSelected" : 2.3021358869347655,
+    "level" : 6,
+    "entryFeeCurrent" : 9.301444243932576,
+    "index" : 0,
+    "entryFeeSelected" : 7.061401241503109,
     "creationDate" : "2000-01-23T04:56:07.000+00:00",
     "logoUrl" : "logoUrl",
     "url" : "url",

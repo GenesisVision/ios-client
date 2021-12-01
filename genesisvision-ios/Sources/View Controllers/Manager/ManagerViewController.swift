@@ -113,7 +113,7 @@ final class ManagerViewModel: TabmanViewModel {
             filterModel.managerId = managerId
             return router.getFunds(with: filterModel)
         case .feed:
-            return router.getFeed(parentRouter: router)
+            return router.getFeed(parentRouter: router, userId: UUID(uuidString: managerId))
         }
     }
 }

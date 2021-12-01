@@ -126,6 +126,44 @@ open class WalletAPI {
     }
 
     /**
+     Export external transactions
+     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func exportWalletTransactions(dateFrom: Date? = nil, dateTo: Date? = nil, completion: @escaping ((_ data: Data?,_ error: Error?) -> Void)) {
+        exportWalletTransactionsWithRequestBuilder(dateFrom: dateFrom, dateTo: dateTo).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     Export external transactions
+     - POST /v2.0/wallet/transactions/external/export
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example=""}]
+     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)
+
+     - returns: RequestBuilder<Data> 
+     */
+    open class func exportWalletTransactionsWithRequestBuilder(dateFrom: Date? = nil, dateTo: Date? = nil) -> RequestBuilder<Data> {
+        let path = "/v2.0/wallet/transactions/external/export"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "DateFrom": dateFrom?.encodeToJSON(), 
+                        "DateTo": dateTo?.encodeToJSON()
+        ])
+
+        let requestBuilder: RequestBuilder<Data>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
      GenesisMarkets commission data
 
      - parameter completion: completion handler to receive the data and the error objects
@@ -449,19 +487,35 @@ open class WalletAPI {
        - name: Bearer
      - examples: [{contentType=application/json, example={
   "wallets" : [ {
-    "rateToGvt" : 1.4658129805029452,
+    "rateToGvt" : 6.027456183070403,
+    "commissions" : [ {
+      "blockchain" : "None",
+      "blockchainTitle" : "blockchainTitle",
+      "value" : 1.0246457001441578
+    }, {
+      "blockchain" : "None",
+      "blockchainTitle" : "blockchainTitle",
+      "value" : 1.0246457001441578
+    } ],
     "description" : "description",
     "currency" : "Undefined",
-    "commission" : 6.027456183070403,
     "logoUrl" : "logoUrl",
-    "availableToWithdrawal" : 5.962133916683182
+    "availableToWithdrawal" : 1.4658129805029452
   }, {
-    "rateToGvt" : 1.4658129805029452,
+    "rateToGvt" : 6.027456183070403,
+    "commissions" : [ {
+      "blockchain" : "None",
+      "blockchainTitle" : "blockchainTitle",
+      "value" : 1.0246457001441578
+    }, {
+      "blockchain" : "None",
+      "blockchainTitle" : "blockchainTitle",
+      "value" : 1.0246457001441578
+    } ],
     "description" : "description",
     "currency" : "Undefined",
-    "commission" : 6.027456183070403,
     "logoUrl" : "logoUrl",
-    "availableToWithdrawal" : 5.962133916683182
+    "availableToWithdrawal" : 1.4658129805029452
   } ],
   "availableToWithdrawal" : 0.8008281904610115
 }}]
@@ -566,15 +620,31 @@ open class WalletAPI {
     "availableCcy" : 2.027123023002322,
     "pending" : 9.301444243932576,
     "available" : 5.637376656633329,
-    "depositAddress" : "depositAddress",
-    "withdrawalCommission" : 1.4894159098541704,
     "isWithdrawalEnabled" : true,
     "title" : "title",
     "isDepositEnabled" : true,
     "logoUrl" : "logoUrl",
+    "withdrawalCommissions" : [ {
+      "blockchain" : "None",
+      "blockchainTitle" : "blockchainTitle",
+      "value" : 1.0246457001441578
+    }, {
+      "blockchain" : "None",
+      "blockchainTitle" : "blockchainTitle",
+      "value" : 1.0246457001441578
+    } ],
     "total" : 3.616076749251911,
     "tradingCcy" : 7.386281948385884,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "depositAddresses" : [ {
+      "address" : "address",
+      "blockchain" : "None",
+      "blockchainTitle" : "blockchainTitle"
+    }, {
+      "address" : "address",
+      "blockchain" : "None",
+      "blockchainTitle" : "blockchainTitle"
+    } ],
     "depositUrlCoindirect" : "depositUrlCoindirect",
     "invested" : 2.3021358869347655,
     "pendingCcy" : 1.2315135367772556,
@@ -585,21 +655,37 @@ open class WalletAPI {
     "availableCcy" : 2.027123023002322,
     "pending" : 9.301444243932576,
     "available" : 5.637376656633329,
-    "depositAddress" : "depositAddress",
-    "withdrawalCommission" : 1.4894159098541704,
     "isWithdrawalEnabled" : true,
     "title" : "title",
     "isDepositEnabled" : true,
     "logoUrl" : "logoUrl",
+    "withdrawalCommissions" : [ {
+      "blockchain" : "None",
+      "blockchainTitle" : "blockchainTitle",
+      "value" : 1.0246457001441578
+    }, {
+      "blockchain" : "None",
+      "blockchainTitle" : "blockchainTitle",
+      "value" : 1.0246457001441578
+    } ],
     "total" : 3.616076749251911,
     "tradingCcy" : 7.386281948385884,
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "depositAddresses" : [ {
+      "address" : "address",
+      "blockchain" : "None",
+      "blockchainTitle" : "blockchainTitle"
+    }, {
+      "address" : "address",
+      "blockchain" : "None",
+      "blockchainTitle" : "blockchainTitle"
+    } ],
     "depositUrlCoindirect" : "depositUrlCoindirect",
     "invested" : 2.3021358869347655,
     "pendingCcy" : 1.2315135367772556,
     "investedCcy" : 4.145608029883936
   } ],
-  "genesisMarketsDiscountPercent" : 6.84685269835264
+  "genesisMarketsDiscountPercent" : 1.4894159098541704
 }}]
      - parameter currency: (path)  
 
@@ -695,48 +781,6 @@ open class WalletAPI {
         let requestBuilder: RequestBuilder<Void>.Type = SwaggerClientAPI.requestBuilderFactory.getNonDecodableBuilder()
 
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
-    }
-
-    /**
-     Update deposit wallets
-
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func updateDepositWallets(completion: @escaping ((_ data: WalletDepositSummary?,_ error: Error?) -> Void)) {
-        updateDepositWalletsWithRequestBuilder().execute { (response, error) -> Void in
-            completion(response?.body, error)
-        }
-    }
-
-
-    /**
-     Update deposit wallets
-     - POST /v2.0/wallet/deposit/update
-     - API Key:
-       - type: apiKey Authorization 
-       - name: Bearer
-     - examples: [{contentType=application/json, example={
-  "wallets" : [ {
-    "depositAddress" : "depositAddress",
-    "currency" : "Undefined"
-  }, {
-    "depositAddress" : "depositAddress",
-    "currency" : "Undefined"
-  } ]
-}}]
-
-     - returns: RequestBuilder<WalletDepositSummary> 
-     */
-    open class func updateDepositWalletsWithRequestBuilder() -> RequestBuilder<WalletDepositSummary> {
-        let path = "/v2.0/wallet/deposit/update"
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = URLComponents(string: URLString)
-
-        let requestBuilder: RequestBuilder<WalletDepositSummary>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
 }

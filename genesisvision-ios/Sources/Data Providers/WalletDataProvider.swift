@@ -24,14 +24,6 @@ class WalletDataProvider: DataProvider {
         }
     }
     
-    
-    static func updateDepositWallets(completion: @escaping (WalletDepositSummary?) -> Void, errorCompletion: @escaping CompletionBlock) {
-        
-        WalletAPI.updateDepositWallets { (viewModel, error) in
-            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
-        }
-    }
-    
     // MARK: - Pay GVT Fee
     static func getGMCommission(completion: @escaping (UserCommissionData?) -> Void, errorCompletion: @escaping CompletionBlock) {
                 

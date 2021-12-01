@@ -25,6 +25,12 @@ class ReplyInputField: UIView {
         return stackView
     }()
     
+    let replierView: ReplierView = {
+        let view = ReplierView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     let imageGallery: ImagesGalleryView = {
         let imageGallery = ImagesGalleryView()
         imageGallery.translatesAutoresizingMaskIntoConstraints = false
@@ -85,6 +91,7 @@ class ReplyInputField: UIView {
     private func setup() {
         textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         attachmentButton.addTarget(self, action: #selector(attachmentButtonPressed), for: .touchUpInside)
+        sendButton.addTarget(self, action: #selector(sendButtonPressed), for: .touchUpInside)
         setupUI()
     }
     
@@ -92,9 +99,11 @@ class ReplyInputField: UIView {
         addSubview(mainStackView)
         mainStackView.fillSuperview(padding: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
         
+        mainStackView.addArrangedSubview(replierView)
         mainStackView.addArrangedSubview(imageGallery)
         mainStackView.addArrangedSubview(fieldStackView)
         
+        replierView.anchorSize(size: CGSize(width: 0, height: 20))
         imageGallery.anchorSize(size: CGSize(width: 0, height: 100))
         fieldStackView.anchorSize(size: CGSize(width: 0, height: 30))
         
@@ -116,6 +125,10 @@ class ReplyInputField: UIView {
     
     @objc private func attachmentButtonPressed() {
         delegate?.attachmentButtonPressed()
+    }
+    
+    @objc private func sendButtonPressed() {
+        delegate?.sendButtonPressed()
     }
 }
 

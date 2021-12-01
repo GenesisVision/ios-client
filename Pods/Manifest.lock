@@ -1,10 +1,12 @@
 PODS:
   - Alamofire (4.9.1)
   - AutoInsetter (1.8.0)
+  - Cache (6.0.0)
   - Charts (3.4.0):
     - Charts/Core (= 3.4.0)
   - Charts/Core (3.4.0)
   - DZNEmptyDataSet (1.8.1)
+  - FINNBottomSheet (5.1.6)
   - Firebase/Analytics (6.14.0):
     - Firebase/Core
   - Firebase/Core (6.14.0):
@@ -83,10 +85,14 @@ PODS:
   - IdensicMobileSDK/Core (1.16.0)
   - IdensicMobileSDK/Default (1.16.0):
     - IdensicMobileSDK/Core
+  - Imaginary (5.0.0):
+    - Cache (~> 6.0.0)
   - IQKeyboardManagerSwift (6.5.4)
   - Kingfisher (5.12.0):
     - Kingfisher/Core (= 5.12.0)
   - Kingfisher/Core (5.12.0)
+  - Lightbox (2.5.0):
+    - Imaginary (~> 5.0.0)
   - MarqueeLabel (4.0.1)
   - nanopb (0.3.9011):
     - nanopb/decode (= 0.3.9011)
@@ -113,12 +119,14 @@ DEPENDENCIES:
   - Alamofire
   - Charts
   - DZNEmptyDataSet
+  - FINNBottomSheet (from `https://github.com/finn-no/BottomSheet.git`)
   - Firebase/Analytics
   - Firebase/Core
   - Firebase/Messaging
   - IdensicMobileSDK (= 1.16.0)
   - IQKeyboardManagerSwift
   - Kingfisher
+  - Lightbox
   - NotificationBannerSwift
   - PKHUD
   - RadioGroup
@@ -130,6 +138,7 @@ SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - AutoInsetter
+    - Cache
     - Charts
     - DZNEmptyDataSet
     - Firebase
@@ -144,8 +153,10 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
     - GoogleUtilities
+    - Imaginary
     - IQKeyboardManagerSwift
     - Kingfisher
+    - Lightbox
     - MarqueeLabel
     - nanopb
     - NotificationBannerSwift
@@ -161,11 +172,22 @@ SPEC REPOS:
   https://github.com/SumSubstance/Specs.git:
     - IdensicMobileSDK
 
+EXTERNAL SOURCES:
+  FINNBottomSheet:
+    :git: https://github.com/finn-no/BottomSheet.git
+
+CHECKOUT OPTIONS:
+  FINNBottomSheet:
+    :commit: d6182e8bfb125de835eb45fdfb9f23006307c11f
+    :git: https://github.com/finn-no/BottomSheet.git
+
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   AutoInsetter: 0b90ca74e36561c340129045a3722c51a0b15c58
+  Cache: 4ca7e00363fca5455f26534e5607634c820ffc2d
   Charts: 74c9f256eaf0460c0c416522d1cf8c634ea6b286
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
+  FINNBottomSheet: 41d62e35795a4fbee7fef14548e2db90cd48ca3d
   Firebase: 0219bb4782eb1406f1b9b0628a2e625484ce910d
   FirebaseAnalytics: f68b9f3f1241385129ae0a83b63627fc420c05e5
   FirebaseAnalyticsInterop: d48b6ab67bcf016a05e55b71fc39c61c0cb6b7f3
@@ -179,8 +201,10 @@ SPEC CHECKSUMS:
   GoogleDataTransportCCTSupport: 202d7cdf9c4a7d81a2bb7f7e7e1ba6faa421b1f2
   GoogleUtilities: 29bd0d8f850efbd28cff6d99e8b7da1f8d236bcf
   IdensicMobileSDK: a102eb9c1ff7b5082ba89b82192435963ade4a01
+  Imaginary: cf5e3a7dd6ab1dcbd47ba8ce5edf2307c4e99eb3
   IQKeyboardManagerSwift: 2dde0fc70110e8eac7ccce2a46fdbec6a850b414
   Kingfisher: dc6e0f53bb5b12c3e75bedb0e01bbd7a640eea69
+  Lightbox: cc3d5124f024fa8197fd23f913160db1c61a1852
   MarqueeLabel: d24e821159667c93064ea3042ccf1875ca94db6b
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   NotificationBannerSwift: 713e20f21b6105f4a36a00e5d9fa414a930d3d8e
@@ -194,6 +218,6 @@ SPEC CHECKSUMS:
   SweeterSwift: 8a90cf3156f5a1b6f39785c479369a16633b5ea9
   Tabman: 63eae331ae7a9388ae389b1808f1939269fcdece
 
-PODFILE CHECKSUM: dd8c39f6f9c1166f86001d411a93c32f4ced16d5
+PODFILE CHECKSUM: 6e9f8624d73e04827522af99ba3727acc96662bf
 
 COCOAPODS: 1.10.1

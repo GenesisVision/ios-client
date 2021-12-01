@@ -19,6 +19,7 @@ protocol SocialFeedCollectionViewModelDelegate: AnyObject {
     func reloadCells(cells: [IndexPath])
     func openPost(post: Post)
     func showPostActions(postActions: [SocialPostAction], postId: UUID, postLink: String)
+    func imagePressed(index: Int, imagesUrls: [URL])
 }
 
 final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
@@ -67,13 +68,15 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
     
     weak var delegate: SocialFeedCollectionViewModelDelegate?
     let showAddPost: Bool
+    var feedUserId: UUID?
     
-    init(type: CellActionType, title: String, delegate: SocialFeedCollectionViewModelDelegate, showOnlyUsersPosts: Bool = true, showAddPost: Bool = false) {
+    init(type: CellActionType, title: String, delegate: SocialFeedCollectionViewModelDelegate, showOnlyUsersPosts: Bool = true, showAddPost: Bool = false, userId: UUID? = nil) {
         self.type = type
         self.title = title
         self.delegate = delegate
         self.showOnlyUsersPosts = showOnlyUsersPosts
         self.showAddPost = showAddPost
+        self.feedUserId = userId
         
         if showAddPost {
             sections.insert(.addPost, at: 0)
@@ -208,7 +211,7 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
         
         switch feedType {
         case .live:
-            SocialDataProvider.getFeed(userId: nil, tagContentId: nil, tagContentIds: nil, userMode: nil, hashTags: nil, mask: nil, showTop: nil, showLiked: nil, showOnlyUsersPosts: showOnlyUsersPosts, skip: skip, take: take) { [weak self] (postsViewModel) in
+            SocialDataProvider.getFeed(userId: feedUserId, tagContentId: nil, tagContentIds: nil, userMode: nil, hashTags: nil, mask: nil, showTop: nil, showLiked: nil, showOnlyUsersPosts: showOnlyUsersPosts, skip: skip, take: take) { [weak self] (postsViewModel) in
                 if let viewModel = postsViewModel, let total = postsViewModel?.total {
                     viewModel.items?.forEach({ (model) in
                         let viewModel = SocialFeedCollectionViewCellViewModel(post: model, cellDelegate: self)
@@ -219,7 +222,7 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
                 completion(.success)
             } errorCompletion: { _ in }
         case .hot:
-            SocialDataProvider.getFeed(userId: nil, tagContentId: nil, tagContentIds: nil, userMode: nil, hashTags: nil, mask: nil, showTop: true, showLiked: nil, showOnlyUsersPosts: showOnlyUsersPosts, skip: skip, take: take) { [weak self] (postsViewModel) in
+            SocialDataProvider.getFeed(userId: feedUserId, tagContentId: nil, tagContentIds: nil, userMode: nil, hashTags: nil, mask: nil, showTop: true, showLiked: nil, showOnlyUsersPosts: showOnlyUsersPosts, skip: skip, take: take) { [weak self] (postsViewModel) in
                 if let viewModel = postsViewModel, let total = postsViewModel?.total {
                     viewModel.items?.forEach({ (model) in
                         let viewModel = SocialFeedCollectionViewCellViewModel(post: model, cellDelegate: self)
@@ -230,7 +233,9 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
                 completion(.success)
             } errorCompletion: { _ in }
         case .feed:
-            SocialDataProvider.getFeed(userId: nil, tagContentId: nil, tagContentIds: nil, userMode: .friendsPosts, hashTags: nil, mask: nil, showTop: nil, showLiked: nil, showOnlyUsersPosts: showOnlyUsersPosts, skip: skip, take: take) { [weak self] (postsViewModel) in
+            var userMode: UserFeedMode?
+            userMode = feedUserId == nil ? .friendsPosts : .profilePosts
+            SocialDataProvider.getFeed(userId: feedUserId, tagContentId: nil, tagContentIds: nil, userMode: userMode, hashTags: nil, mask: nil, showTop: nil, showLiked: nil, showOnlyUsersPosts: showOnlyUsersPosts, skip: skip, take: take) { [weak self] (postsViewModel) in
                 if let viewModel = postsViewModel, let total = postsViewModel?.total {
                     viewModel.items?.forEach({ (model) in
                         let viewModel = SocialFeedCollectionViewCellViewModel(post: model, cellDelegate: self)
@@ -268,6 +273,45 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
 }
 
 extension SocialFeedCollectionViewModel: SocialFeedCollectionViewCellDelegate {
+    func imagePressed(postId: UUID, index: Int, image: ImagesGalleryCollectionViewCellViewModel) {
+        guard let postViewModel = viewModels.first(where: { return ($0 as? SocialFeedCollectionViewCellViewModel)?.post._id == postId }) as? SocialFeedCollectionViewCellViewModel else {
+            return
+        }
+        
+        if let postImages = postViewModel.post.images, !postImages.isEmpty {
+            var imagesUrls: [String: PostImageResize?] = [:]
+            
+            for postImage in postImages {
+                if let resizes = postImage.resizes,
+                   resizes.count > 1 {
+                    let original = resizes.filter({ $0.quality == .original })
+                    let hight = resizes.filter({ $0.quality == .high })
+                    let medium = resizes.filter({ $0.quality == .medium })
+                    let low = resizes.filter({ $0.quality == .low })
+                    
+                    if let logoUrl = original.first?.logoUrl {
+                        imagesUrls[logoUrl] = original.first
+                        continue
+                    } else if let logoUrl = hight.first?.logoUrl {
+                        imagesUrls[logoUrl] = hight.first
+                        continue
+                    } else if let logoUrl = medium.first?.logoUrl {
+                        imagesUrls[logoUrl] = medium.first
+                        continue
+                    } else if let logoUrl = low.first?.logoUrl {
+                        imagesUrls[logoUrl] = low.first
+                    }
+                } else if let logoUrl = postImage.resizes?.first?.logoUrl {
+                    imagesUrls[logoUrl] = postImage.resizes?.first
+                }
+            }
+            
+            let onlyImagesUrls = imagesUrls.map({ $0.key })
+            let index = Int(onlyImagesUrls.firstIndex(of: image.imageUrl) ?? 0)
+            delegate?.imagePressed(index: index, imagesUrls: onlyImagesUrls.compactMap({ return URL(string: $0) }))
+        }
+    }
+    
     func undoDeletion(postId: UUID) {
     }
     
@@ -311,6 +355,9 @@ extension SocialFeedCollectionViewModel: SocialFeedCollectionViewCellDelegate {
     
     func tagPressed(tag: PostTag) {
         delegate?.tagPressed(tag: tag)
+    }
+    
+    func imagePressed(imageUrl: URL) {
     }
 }
 

@@ -237,6 +237,50 @@ open class TradingplatformAPI {
     }
 
     /**
+     - parameter accountId: (query)  (optional)     - parameter symbol: (query)  (optional)     - parameter amount: (query)  (optional)     - parameter type: (query)  (optional)     - parameter positionSide: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func changeFuturesPositionMargin(accountId: UUID? = nil, symbol: String? = nil, amount: Double? = nil, type: BinanceFuturesMarginChangeDirectionType? = nil, positionSide: BinancePositionSide? = nil, completion: @escaping ((_ data: BinanceRawFuturesPositionMarginResult?,_ error: Error?) -> Void)) {
+        changeFuturesPositionMarginWithRequestBuilder(accountId: accountId, symbol: symbol, amount: amount, type: type, positionSide: positionSide).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     - POST /v2.0/tradingplatform/binance/account/futures/position/margin
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example={
+  "amount" : 0.8008281904610115,
+  "code" : 6,
+  "maxNotionalValue" : "maxNotionalValue",
+  "type" : "Add"
+}}]
+     - parameter accountId: (query)  (optional)     - parameter symbol: (query)  (optional)     - parameter amount: (query)  (optional)     - parameter type: (query)  (optional)     - parameter positionSide: (query)  (optional)
+
+     - returns: RequestBuilder<BinanceRawFuturesPositionMarginResult> 
+     */
+    open class func changeFuturesPositionMarginWithRequestBuilder(accountId: UUID? = nil, symbol: String? = nil, amount: Double? = nil, type: BinanceFuturesMarginChangeDirectionType? = nil, positionSide: BinancePositionSide? = nil) -> RequestBuilder<BinanceRawFuturesPositionMarginResult> {
+        let path = "/v2.0/tradingplatform/binance/account/futures/position/margin"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "accountId": accountId, 
+                        "symbol": symbol, 
+                        "amount": amount, 
+                        "type": type, 
+                        "positionSide": positionSide
+        ])
+
+        let requestBuilder: RequestBuilder<BinanceRawFuturesPositionMarginResult>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
      Cancel all futures orders
      - parameter accountId: (query)  (optional)     - parameter symbol: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
@@ -279,11 +323,11 @@ open class TradingplatformAPI {
 
     /**
      Cancel futures order
-     - parameter accountId: (query)  (optional)     - parameter symbol: (query)  (optional)     - parameter orderId: (query)  (optional)     - parameter origClientOrderId: (query)  (optional)     - parameter newClientOrderId: (query)  (optional)
+     - parameter accountId: (query)  (optional)     - parameter symbol: (query)  (optional)     - parameter orderId: (query)  (optional)     - parameter origClientOrderId: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func futuresCancelOrder(accountId: UUID? = nil, symbol: String? = nil, orderId: Int64? = nil, origClientOrderId: String? = nil, newClientOrderId: String? = nil, completion: @escaping ((_ data: BinanceRawFuturesCancelOrder?,_ error: Error?) -> Void)) {
-        futuresCancelOrderWithRequestBuilder(accountId: accountId, symbol: symbol, orderId: orderId, origClientOrderId: origClientOrderId, newClientOrderId: newClientOrderId).execute { (response, error) -> Void in
+    open class func futuresCancelOrder(accountId: UUID? = nil, symbol: String? = nil, orderId: Int64? = nil, origClientOrderId: String? = nil, completion: @escaping ((_ data: BinanceRawFuturesCancelOrder?,_ error: Error?) -> Void)) {
+        futuresCancelOrderWithRequestBuilder(accountId: accountId, symbol: symbol, orderId: orderId, origClientOrderId: origClientOrderId).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
@@ -317,11 +361,11 @@ open class TradingplatformAPI {
   "workingType" : "Mark",
   "status" : "New"
 }}]
-     - parameter accountId: (query)  (optional)     - parameter symbol: (query)  (optional)     - parameter orderId: (query)  (optional)     - parameter origClientOrderId: (query)  (optional)     - parameter newClientOrderId: (query)  (optional)
+     - parameter accountId: (query)  (optional)     - parameter symbol: (query)  (optional)     - parameter orderId: (query)  (optional)     - parameter origClientOrderId: (query)  (optional)
 
      - returns: RequestBuilder<BinanceRawFuturesCancelOrder> 
      */
-    open class func futuresCancelOrderWithRequestBuilder(accountId: UUID? = nil, symbol: String? = nil, orderId: Int64? = nil, origClientOrderId: String? = nil, newClientOrderId: String? = nil) -> RequestBuilder<BinanceRawFuturesCancelOrder> {
+    open class func futuresCancelOrderWithRequestBuilder(accountId: UUID? = nil, symbol: String? = nil, orderId: Int64? = nil, origClientOrderId: String? = nil) -> RequestBuilder<BinanceRawFuturesCancelOrder> {
         let path = "/v2.0/tradingplatform/binance/futures/orders/cancel"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -330,8 +374,7 @@ open class TradingplatformAPI {
                         "accountId": accountId, 
                         "symbol": symbol, 
                         "orderId": orderId?.encodeToJSON(), 
-                        "origClientOrderId": origClientOrderId, 
-                        "newClientOrderId": newClientOrderId
+                        "origClientOrderId": origClientOrderId
         ])
 
         let requestBuilder: RequestBuilder<BinanceRawFuturesCancelOrder>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
@@ -399,27 +442,27 @@ open class TradingplatformAPI {
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
+  "lastFilledQuantity" : 3.616076749251911,
   "symbol" : "symbol",
-  "cumulativeQuoteQuantity" : 5.637376656633329,
-  "executedQuantity" : 2.3021358869347655,
   "side" : "Buy",
-  "priceRate" : 2.027123023002322,
+  "priceRate" : 2.3021358869347655,
+  "quantity" : 7.061401241503109,
   "orderId" : 0,
   "avgPrice" : 1.4658129805029452,
-  "originalQuantity" : 7.061401241503109,
   "clientOrderId" : "clientOrderId",
   "positionSide" : "Short",
-  "activatePrice" : 3.616076749251911,
+  "activatePrice" : 5.637376656633329,
   "updateTime" : "2000-01-23T04:56:07.000+00:00",
   "type" : "Limit",
   "closePosition" : true,
-  "cumulativeQuantity" : 5.962133916683182,
-  "stopPrice" : 9.301444243932576,
+  "quantityFilled" : 9.301444243932576,
+  "stopPrice" : 5.962133916683182,
   "reduceOnly" : true,
   "price" : 6.027456183070403,
   "timeInForce" : "GoodTillCancel",
   "workingType" : "Mark",
-  "status" : "New"
+  "status" : "New",
+  "quoteQuantityFilled" : 2.027123023002322
 }}]
      - parameter body: (body)  (optional)     - parameter accountId: (query)  (optional)
 
@@ -720,7 +763,7 @@ open class TradingplatformAPI {
      - parameter symbol: (query)  (optional)     - parameter interval: (query)  (optional)     - parameter startTime: (query)  (optional)     - parameter endTime: (query)  (optional)     - parameter limit: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getBlvtKlines(symbol: String? = nil, interval: BinanceRawKlineInterval? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil, completion: @escaping ((_ data: BinanceRawBlvtKlineItemsViewModel?,_ error: Error?) -> Void)) {
+    open class func getBlvtKlines(symbol: String? = nil, interval: BinanceKlineInterval? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil, completion: @escaping ((_ data: BinanceRawBlvtKlineItemsViewModel?,_ error: Error?) -> Void)) {
         getBlvtKlinesWithRequestBuilder(symbol: symbol, interval: interval, startTime: startTime, endTime: endTime, limit: limit).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
@@ -759,7 +802,7 @@ open class TradingplatformAPI {
 
      - returns: RequestBuilder<BinanceRawBlvtKlineItemsViewModel> 
      */
-    open class func getBlvtKlinesWithRequestBuilder(symbol: String? = nil, interval: BinanceRawKlineInterval? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil) -> RequestBuilder<BinanceRawBlvtKlineItemsViewModel> {
+    open class func getBlvtKlinesWithRequestBuilder(symbol: String? = nil, interval: BinanceKlineInterval? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil) -> RequestBuilder<BinanceRawBlvtKlineItemsViewModel> {
         let path = "/v2.0/tradingplatform/binance/blvt/market/klines"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -1107,31 +1150,33 @@ open class TradingplatformAPI {
   "canWithdraw" : true,
   "updateTime" : "2000-01-23T04:56:07.000+00:00",
   "positions" : [ {
-    "entryPrice" : 2.8841621266687802,
-    "leverage" : 8,
+    "maxNotional" : 8.762042012749001,
     "symbol" : "symbol",
-    "maxNotional" : 6.778324963048013,
+    "leverage" : 6,
     "maintMargin" : 6.438423552598547,
-    "openOrderInitialMargin" : 3.5571952270680973,
-    "positionInitialMargin" : 6.965117697638846,
+    "openOrderInitialMargin" : 6.965117697638846,
+    "quantity" : 1.284659006116532,
+    "positionInitialMargin" : 3.5571952270680973,
     "positionSide" : "Short",
     "isolated" : true,
-    "unrealizedProfit" : 1.284659006116532,
-    "positionAmount" : 6.878052220127876,
-    "initialMargin" : 9.018348186070783
+    "updateTime" : "2000-01-23T04:56:07.000+00:00",
+    "initialMargin" : 9.018348186070783,
+    "entryPrice" : 2.8841621266687802,
+    "unrealizedPnl" : 6.878052220127876
   }, {
-    "entryPrice" : 2.8841621266687802,
-    "leverage" : 8,
+    "maxNotional" : 8.762042012749001,
     "symbol" : "symbol",
-    "maxNotional" : 6.778324963048013,
+    "leverage" : 6,
     "maintMargin" : 6.438423552598547,
-    "openOrderInitialMargin" : 3.5571952270680973,
-    "positionInitialMargin" : 6.965117697638846,
+    "openOrderInitialMargin" : 6.965117697638846,
+    "quantity" : 1.284659006116532,
+    "positionInitialMargin" : 3.5571952270680973,
     "positionSide" : "Short",
     "isolated" : true,
-    "unrealizedProfit" : 1.284659006116532,
-    "positionAmount" : 6.878052220127876,
-    "initialMargin" : 9.018348186070783
+    "updateTime" : "2000-01-23T04:56:07.000+00:00",
+    "initialMargin" : 9.018348186070783,
+    "entryPrice" : 2.8841621266687802,
+    "unrealizedPnl" : 6.878052220127876
   } ],
   "canTrade" : true,
   "availableBalance" : 7.386281948385884,
@@ -1140,28 +1185,28 @@ open class TradingplatformAPI {
     "maxWithdrawAmount" : 6.84685269835264,
     "maintMargin" : 1.0246457001441578,
     "openOrderInitialMargin" : 7.457744773683766,
-    "walletBalance" : 5.025004791520295,
-    "crossWalletBalance" : 9.965781217890562,
+    "walletBalance" : 4.965218492984954,
+    "crossWalletBalance" : 5.025004791520295,
     "positionInitialMargin" : 1.1730742509559433,
-    "crossUnPnl" : 9.369310271410669,
-    "unrealizedProfit" : 4.965218492984954,
+    "unrealizedPnL" : 9.369310271410669,
+    "crossUnrealizedPnL" : 6.683562403749608,
     "asset" : "asset",
     "initialMargin" : 1.2315135367772556,
     "marginBalance" : 1.4894159098541704,
-    "availableBalance" : 6.683562403749608
+    "availableBalance" : 9.965781217890562
   }, {
     "maxWithdrawAmount" : 6.84685269835264,
     "maintMargin" : 1.0246457001441578,
     "openOrderInitialMargin" : 7.457744773683766,
-    "walletBalance" : 5.025004791520295,
-    "crossWalletBalance" : 9.965781217890562,
+    "walletBalance" : 4.965218492984954,
+    "crossWalletBalance" : 5.025004791520295,
     "positionInitialMargin" : 1.1730742509559433,
-    "crossUnPnl" : 9.369310271410669,
-    "unrealizedProfit" : 4.965218492984954,
+    "unrealizedPnL" : 9.369310271410669,
+    "crossUnrealizedPnL" : 6.683562403749608,
     "asset" : "asset",
     "initialMargin" : 1.2315135367772556,
     "marginBalance" : 1.4894159098541704,
-    "availableBalance" : 6.683562403749608
+    "availableBalance" : 9.965781217890562
   } ],
   "totalCrossWalletBalance" : 2.027123023002322,
   "totalMarginBalance" : 5.637376656633329,
@@ -1258,32 +1303,36 @@ open class TradingplatformAPI {
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example=[ {
-  "symbolOrPair" : "symbolOrPair",
+  "symbol" : "symbol",
   "brackets" : [ {
     "cap" : 1,
     "maintenanceMarginRatio" : 5.637376656633329,
     "bracket" : 0,
+    "maintAmount" : 2.3021358869347655,
     "floor" : 5,
     "initialLeverage" : 6
   }, {
     "cap" : 1,
     "maintenanceMarginRatio" : 5.637376656633329,
     "bracket" : 0,
+    "maintAmount" : 2.3021358869347655,
     "floor" : 5,
     "initialLeverage" : 6
   } ]
 }, {
-  "symbolOrPair" : "symbolOrPair",
+  "symbol" : "symbol",
   "brackets" : [ {
     "cap" : 1,
     "maintenanceMarginRatio" : 5.637376656633329,
     "bracket" : 0,
+    "maintAmount" : 2.3021358869347655,
     "floor" : 5,
     "initialLeverage" : 6
   }, {
     "cap" : 1,
     "maintenanceMarginRatio" : 5.637376656633329,
     "bracket" : 0,
+    "maintAmount" : 2.3021358869347655,
     "floor" : 5,
     "initialLeverage" : 6
   } ]
@@ -1398,89 +1447,114 @@ open class TradingplatformAPI {
     "interval" : "Second",
     "type" : "RequestWeight"
   } ],
+  "assets" : [ {
+    "autoAssetExchange" : 6.438423552598547,
+    "asset" : "asset",
+    "marginAvailable" : true
+  }, {
+    "autoAssetExchange" : 6.438423552598547,
+    "asset" : "asset",
+    "marginAvailable" : true
+  } ],
   "timeZone" : "timeZone",
   "serverTime" : "2000-01-23T04:56:07.000+00:00",
   "symbols" : [ {
-    "quantityPrecision" : 5,
-    "pricePrecision" : 5,
+    "listingDate" : "2000-01-23T04:56:07.000+00:00",
     "requiredMarginPercent" : 2.3021358869347655,
-    "maxAlgoOrdersFilter" : {
-      "maxNumberAlgorithmicOrders" : 4
-    },
-    "lotSizeFilter" : {
-      "minQuantity" : 7.386281948385884,
-      "maxQuantity" : 1.2315135367772556,
-      "stepSize" : 1.0246457001441578
-    },
+    "contractType" : "Perpetual",
     "priceFilter" : {
-      "minPrice" : 3.616076749251911,
-      "maxPrice" : 2.027123023002322,
+      "minPrice" : 7.386281948385884,
+      "maxPrice" : 1.2315135367772556,
       "filterType" : "Unknown",
-      "tickSize" : 4.145608029883936
+      "tickSize" : 1.0246457001441578
     },
     "baseAsset" : "baseAsset",
-    "baseAssetPrecision" : 7,
-    "marketLotSizeFilter" : {
+    "settlePlan" : 7.061401241503109,
+    "marginAsset" : "marginAsset",
+    "quoteAssetPrecision" : 4,
+    "maintMarginPercent" : 9.301444243932576,
+    "maxOrdersFilter" : {
+      "maxNumberOrders" : 9
+    },
+    "deliveryDate" : "2000-01-23T04:56:07.000+00:00",
+    "timeInForce" : [ "GoodTillCancel", "GoodTillCancel" ],
+    "quoteAsset" : "quoteAsset",
+    "quantityPrecision" : 5,
+    "pricePrecision" : 5,
+    "maxAlgoOrdersFilter" : {
+      "maxNumberAlgorithmicOrders" : 9
+    },
+    "lotSizeFilter" : {
       "minQuantity" : 1.4894159098541704,
       "maxQuantity" : 6.84685269835264,
       "stepSize" : 7.457744773683766
     },
-    "marginAsset" : "marginAsset",
-    "quoteAssetPrecision" : 9,
+    "baseAssetPrecision" : 2,
+    "pair" : "pair",
+    "marketLotSizeFilter" : {
+      "minQuantity" : 1.1730742509559433,
+      "maxQuantity" : 4.965218492984954,
+      "stepSize" : 5.025004791520295
+    },
+    "triggerProtect" : 3.616076749251911,
+    "underlyingType" : "Coin",
     "orderTypes" : [ "Limit", "Limit" ],
     "name" : "name",
     "pricePercentFilter" : {
-      "multiplierDown" : 9.965781217890562,
-      "multiplierUp" : 5.025004791520295,
+      "multiplierDown" : 8.762042012749001,
+      "multiplierUp" : 6.683562403749608,
       "multiplierDecimal" : 9
     },
-    "maxOrdersFilter" : {
-      "maxNumberOrders" : 1
-    },
-    "timeInForce" : [ "GoodTillCancel", "GoodTillCancel" ],
     "maintenanceMarginPercent" : 1.4658129805029452,
-    "quoteAsset" : "quoteAsset",
     "status" : "PreTrading"
   }, {
-    "quantityPrecision" : 5,
-    "pricePrecision" : 5,
+    "listingDate" : "2000-01-23T04:56:07.000+00:00",
     "requiredMarginPercent" : 2.3021358869347655,
-    "maxAlgoOrdersFilter" : {
-      "maxNumberAlgorithmicOrders" : 4
-    },
-    "lotSizeFilter" : {
-      "minQuantity" : 7.386281948385884,
-      "maxQuantity" : 1.2315135367772556,
-      "stepSize" : 1.0246457001441578
-    },
+    "contractType" : "Perpetual",
     "priceFilter" : {
-      "minPrice" : 3.616076749251911,
-      "maxPrice" : 2.027123023002322,
+      "minPrice" : 7.386281948385884,
+      "maxPrice" : 1.2315135367772556,
       "filterType" : "Unknown",
-      "tickSize" : 4.145608029883936
+      "tickSize" : 1.0246457001441578
     },
     "baseAsset" : "baseAsset",
-    "baseAssetPrecision" : 7,
-    "marketLotSizeFilter" : {
+    "settlePlan" : 7.061401241503109,
+    "marginAsset" : "marginAsset",
+    "quoteAssetPrecision" : 4,
+    "maintMarginPercent" : 9.301444243932576,
+    "maxOrdersFilter" : {
+      "maxNumberOrders" : 9
+    },
+    "deliveryDate" : "2000-01-23T04:56:07.000+00:00",
+    "timeInForce" : [ "GoodTillCancel", "GoodTillCancel" ],
+    "quoteAsset" : "quoteAsset",
+    "quantityPrecision" : 5,
+    "pricePrecision" : 5,
+    "maxAlgoOrdersFilter" : {
+      "maxNumberAlgorithmicOrders" : 9
+    },
+    "lotSizeFilter" : {
       "minQuantity" : 1.4894159098541704,
       "maxQuantity" : 6.84685269835264,
       "stepSize" : 7.457744773683766
     },
-    "marginAsset" : "marginAsset",
-    "quoteAssetPrecision" : 9,
+    "baseAssetPrecision" : 2,
+    "pair" : "pair",
+    "marketLotSizeFilter" : {
+      "minQuantity" : 1.1730742509559433,
+      "maxQuantity" : 4.965218492984954,
+      "stepSize" : 5.025004791520295
+    },
+    "triggerProtect" : 3.616076749251911,
+    "underlyingType" : "Coin",
     "orderTypes" : [ "Limit", "Limit" ],
     "name" : "name",
     "pricePercentFilter" : {
-      "multiplierDown" : 9.965781217890562,
-      "multiplierUp" : 5.025004791520295,
+      "multiplierDown" : 8.762042012749001,
+      "multiplierUp" : 6.683562403749608,
       "multiplierDecimal" : 9
     },
-    "maxOrdersFilter" : {
-      "maxNumberOrders" : 1
-    },
-    "timeInForce" : [ "GoodTillCancel", "GoodTillCancel" ],
     "maintenanceMarginPercent" : 1.4658129805029452,
-    "quoteAsset" : "quoteAsset",
     "status" : "PreTrading"
   } ]
 }}]
@@ -1495,6 +1569,99 @@ open class TradingplatformAPI {
         let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<BinanceRawFuturesUsdtExchangeInfo>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     - parameter accountId: (query)  (optional)     - parameter symbol: (query)  (optional)     - parameter closeType: (query)  (optional)     - parameter startTime: (query)  (optional)     - parameter endTime: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getFuturesForcedOrders(accountId: UUID? = nil, symbol: String? = nil, closeType: BinanceAutoCloseType? = nil, startTime: Date? = nil, endTime: Date? = nil, completion: @escaping ((_ data: [BinanceRawFuturesOrder]?,_ error: Error?) -> Void)) {
+        getFuturesForcedOrdersWithRequestBuilder(accountId: accountId, symbol: symbol, closeType: closeType, startTime: startTime, endTime: endTime).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     - GET /v2.0/tradingplatform/binance/account/futures/orders/force
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example=[ {
+  "symbol" : "symbol",
+  "originalType" : "Limit",
+  "orderId" : 0,
+  "avgPrice" : 1.4658129805029452,
+  "realizedProfit" : 7.386281948385884,
+  "price" : 6.027456183070403,
+  "createdTime" : "2000-01-23T04:56:07.000+00:00",
+  "callbackRate" : 3.616076749251911,
+  "commission" : 4.145608029883936,
+  "timeInForce" : "GoodTillCancel",
+  "quoteQuantityFilled" : 9.301444243932576,
+  "lastFilledQuantity" : 2.027123023002322,
+  "side" : "Buy",
+  "quantity" : 2.3021358869347655,
+  "clientOrderId" : "clientOrderId",
+  "positionSide" : "Short",
+  "activatePrice" : 5.637376656633329,
+  "updateTime" : "2000-01-23T04:56:07.000+00:00",
+  "commissionAsset" : "commissionAsset",
+  "closePosition" : true,
+  "quantityFilled" : 7.061401241503109,
+  "accountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+  "stopPrice" : 5.962133916683182,
+  "reduceOnly" : true,
+  "workingType" : "Mark",
+  "status" : "New"
+}, {
+  "symbol" : "symbol",
+  "originalType" : "Limit",
+  "orderId" : 0,
+  "avgPrice" : 1.4658129805029452,
+  "realizedProfit" : 7.386281948385884,
+  "price" : 6.027456183070403,
+  "createdTime" : "2000-01-23T04:56:07.000+00:00",
+  "callbackRate" : 3.616076749251911,
+  "commission" : 4.145608029883936,
+  "timeInForce" : "GoodTillCancel",
+  "quoteQuantityFilled" : 9.301444243932576,
+  "lastFilledQuantity" : 2.027123023002322,
+  "side" : "Buy",
+  "quantity" : 2.3021358869347655,
+  "clientOrderId" : "clientOrderId",
+  "positionSide" : "Short",
+  "activatePrice" : 5.637376656633329,
+  "updateTime" : "2000-01-23T04:56:07.000+00:00",
+  "commissionAsset" : "commissionAsset",
+  "closePosition" : true,
+  "quantityFilled" : 7.061401241503109,
+  "accountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+  "stopPrice" : 5.962133916683182,
+  "reduceOnly" : true,
+  "workingType" : "Mark",
+  "status" : "New"
+} ]}]
+     - parameter accountId: (query)  (optional)     - parameter symbol: (query)  (optional)     - parameter closeType: (query)  (optional)     - parameter startTime: (query)  (optional)     - parameter endTime: (query)  (optional)
+
+     - returns: RequestBuilder<[BinanceRawFuturesOrder]> 
+     */
+    open class func getFuturesForcedOrdersWithRequestBuilder(accountId: UUID? = nil, symbol: String? = nil, closeType: BinanceAutoCloseType? = nil, startTime: Date? = nil, endTime: Date? = nil) -> RequestBuilder<[BinanceRawFuturesOrder]> {
+        let path = "/v2.0/tradingplatform/binance/account/futures/orders/force"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "accountId": accountId, 
+                        "symbol": symbol, 
+                        "closeType": closeType, 
+                        "startTime": startTime?.encodeToJSON(), 
+                        "endTime": endTime?.encodeToJSON()
+        ])
+
+        let requestBuilder: RequestBuilder<[BinanceRawFuturesOrder]>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
@@ -1601,11 +1768,69 @@ open class TradingplatformAPI {
     }
 
     /**
+     - parameter accountId: (query)  (optional)     - parameter symbol: (query)  (optional)     - parameter incomeType: (query)  (optional)     - parameter startTime: (query)  (optional)     - parameter endTime: (query)  (optional)     - parameter limit: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getFuturesIncomeHistory(accountId: UUID? = nil, symbol: String? = nil, incomeType: String? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil, completion: @escaping ((_ data: [BinanceRawFuturesIncomeHistory]?,_ error: Error?) -> Void)) {
+        getFuturesIncomeHistoryWithRequestBuilder(accountId: accountId, symbol: symbol, incomeType: incomeType, startTime: startTime, endTime: endTime, limit: limit).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     - GET /v2.0/tradingplatform/binance/account/futures/income/history
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example=[ {
+  "income" : 0.8008281904610115,
+  "symbol" : "symbol",
+  "incomeType" : "Transfer",
+  "time" : "2000-01-23T04:56:07.000+00:00",
+  "asset" : "asset",
+  "transactionId" : "transactionId",
+  "tradeId" : "tradeId",
+  "info" : "info"
+}, {
+  "income" : 0.8008281904610115,
+  "symbol" : "symbol",
+  "incomeType" : "Transfer",
+  "time" : "2000-01-23T04:56:07.000+00:00",
+  "asset" : "asset",
+  "transactionId" : "transactionId",
+  "tradeId" : "tradeId",
+  "info" : "info"
+} ]}]
+     - parameter accountId: (query)  (optional)     - parameter symbol: (query)  (optional)     - parameter incomeType: (query)  (optional)     - parameter startTime: (query)  (optional)     - parameter endTime: (query)  (optional)     - parameter limit: (query)  (optional)
+
+     - returns: RequestBuilder<[BinanceRawFuturesIncomeHistory]> 
+     */
+    open class func getFuturesIncomeHistoryWithRequestBuilder(accountId: UUID? = nil, symbol: String? = nil, incomeType: String? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil) -> RequestBuilder<[BinanceRawFuturesIncomeHistory]> {
+        let path = "/v2.0/tradingplatform/binance/account/futures/income/history"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "accountId": accountId, 
+                        "symbol": symbol, 
+                        "incomeType": incomeType, 
+                        "startTime": startTime?.encodeToJSON(), 
+                        "endTime": endTime?.encodeToJSON(), 
+                        "limit": limit?.encodeToJSON()
+        ])
+
+        let requestBuilder: RequestBuilder<[BinanceRawFuturesIncomeHistory]>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
      Get futures klines
      - parameter symbol: (query)  (optional)     - parameter interval: (query)  (optional)     - parameter startTime: (query)  (optional)     - parameter endTime: (query)  (optional)     - parameter limit: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getFuturesKlines(symbol: String? = nil, interval: BinanceRawKlineInterval? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil, completion: @escaping ((_ data: BinanceRawKlineItemsViewModel?,_ error: Error?) -> Void)) {
+    open class func getFuturesKlines(symbol: String? = nil, interval: BinanceKlineInterval? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil, completion: @escaping ((_ data: BinanceRawKlineItemsViewModel?,_ error: Error?) -> Void)) {
         getFuturesKlinesWithRequestBuilder(symbol: symbol, interval: interval, startTime: startTime, endTime: endTime, limit: limit).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
@@ -1650,7 +1875,7 @@ open class TradingplatformAPI {
 
      - returns: RequestBuilder<BinanceRawKlineItemsViewModel> 
      */
-    open class func getFuturesKlinesWithRequestBuilder(symbol: String? = nil, interval: BinanceRawKlineInterval? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil) -> RequestBuilder<BinanceRawKlineItemsViewModel> {
+    open class func getFuturesKlinesWithRequestBuilder(symbol: String? = nil, interval: BinanceKlineInterval? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil) -> RequestBuilder<BinanceRawKlineItemsViewModel> {
         let path = "/v2.0/tradingplatform/binance/futures/market/klines"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -1664,68 +1889,6 @@ open class TradingplatformAPI {
         ])
 
         let requestBuilder: RequestBuilder<BinanceRawKlineItemsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    /**
-     Get futures liquidation orders
-     - parameter symbol: (query)  (optional)     - parameter startTime: (query)  (optional)     - parameter endTime: (query)  (optional)     - parameter limit: (query)  (optional)
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func getFuturesLiquidationOrders(symbol: String? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil, completion: @escaping ((_ data: [BinanceRawFuturesLiquidation]?,_ error: Error?) -> Void)) {
-        getFuturesLiquidationOrdersWithRequestBuilder(symbol: symbol, startTime: startTime, endTime: endTime, limit: limit).execute { (response, error) -> Void in
-            completion(response?.body, error)
-        }
-    }
-
-
-    /**
-     Get futures liquidation orders
-     - GET /v2.0/tradingplatform/binance/futures/market/orders/liquidation
-     - API Key:
-       - type: apiKey Authorization 
-       - name: Bearer
-     - examples: [{contentType=application/json, example=[ {
-  "quantityFilled" : 1.4658129805029452,
-  "symbol" : "symbol",
-  "side" : "Buy",
-  "price" : 0.8008281904610115,
-  "averagePrice" : 5.962133916683182,
-  "time" : "2000-01-23T04:56:07.000+00:00",
-  "lastQuantityFilled" : 6.027456183070403,
-  "type" : "Limit",
-  "timeInForce" : "GoodTillCancel",
-  "status" : "New"
-}, {
-  "quantityFilled" : 1.4658129805029452,
-  "symbol" : "symbol",
-  "side" : "Buy",
-  "price" : 0.8008281904610115,
-  "averagePrice" : 5.962133916683182,
-  "time" : "2000-01-23T04:56:07.000+00:00",
-  "lastQuantityFilled" : 6.027456183070403,
-  "type" : "Limit",
-  "timeInForce" : "GoodTillCancel",
-  "status" : "New"
-} ]}]
-     - parameter symbol: (query)  (optional)     - parameter startTime: (query)  (optional)     - parameter endTime: (query)  (optional)     - parameter limit: (query)  (optional)
-
-     - returns: RequestBuilder<[BinanceRawFuturesLiquidation]> 
-     */
-    open class func getFuturesLiquidationOrdersWithRequestBuilder(symbol: String? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil) -> RequestBuilder<[BinanceRawFuturesLiquidation]> {
-        let path = "/v2.0/tradingplatform/binance/futures/market/orders/liquidation"
-        let URLString = SwaggerClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
-                        "symbol": symbol, 
-                        "startTime": startTime?.encodeToJSON(), 
-                        "endTime": endTime?.encodeToJSON(), 
-                        "limit": limit?.encodeToJSON()
-        ])
-
-        let requestBuilder: RequestBuilder<[BinanceRawFuturesLiquidation]>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
@@ -1751,12 +1914,14 @@ open class TradingplatformAPI {
      - examples: [{contentType=application/json, example=[ {
   "symbol" : "symbol",
   "markPrice" : 0.8008281904610115,
+  "indexPrice" : 1.4658129805029452,
   "nextFundingTime" : "2000-01-23T04:56:07.000+00:00",
   "time" : "2000-01-23T04:56:07.000+00:00",
   "fundingRate" : 6.027456183070403
 }, {
   "symbol" : "symbol",
   "markPrice" : 0.8008281904610115,
+  "indexPrice" : 1.4658129805029452,
   "nextFundingTime" : "2000-01-23T04:56:07.000+00:00",
   "time" : "2000-01-23T04:56:07.000+00:00",
   "fundingRate" : 6.027456183070403
@@ -1890,53 +2055,59 @@ open class TradingplatformAPI {
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
-  "total" : 4,
+  "total" : 0,
   "items" : [ {
     "symbol" : "symbol",
-    "cumulativeQuoteQuantity" : 5.637376656633329,
-    "executedQuantity" : 2.3021358869347655,
-    "side" : "Buy",
-    "priceRate" : 2.027123023002322,
     "originalType" : "Limit",
     "orderId" : 0,
     "avgPrice" : 1.4658129805029452,
-    "originalQuantity" : 7.061401241503109,
-    "clientOrderId" : "clientOrderId",
-    "positionSide" : "Short",
-    "activatePrice" : 3.616076749251911,
-    "updateTime" : "2000-01-23T04:56:07.000+00:00",
-    "closePosition" : true,
-    "accountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "cumulativeQuantity" : 5.962133916683182,
-    "stopPrice" : 9.301444243932576,
-    "reduceOnly" : true,
+    "realizedProfit" : 7.386281948385884,
     "price" : 6.027456183070403,
     "createdTime" : "2000-01-23T04:56:07.000+00:00",
+    "callbackRate" : 3.616076749251911,
+    "commission" : 4.145608029883936,
     "timeInForce" : "GoodTillCancel",
+    "quoteQuantityFilled" : 9.301444243932576,
+    "lastFilledQuantity" : 2.027123023002322,
+    "side" : "Buy",
+    "quantity" : 2.3021358869347655,
+    "clientOrderId" : "clientOrderId",
+    "positionSide" : "Short",
+    "activatePrice" : 5.637376656633329,
+    "updateTime" : "2000-01-23T04:56:07.000+00:00",
+    "commissionAsset" : "commissionAsset",
+    "closePosition" : true,
+    "quantityFilled" : 7.061401241503109,
+    "accountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "stopPrice" : 5.962133916683182,
+    "reduceOnly" : true,
     "workingType" : "Mark",
     "status" : "New"
   }, {
     "symbol" : "symbol",
-    "cumulativeQuoteQuantity" : 5.637376656633329,
-    "executedQuantity" : 2.3021358869347655,
-    "side" : "Buy",
-    "priceRate" : 2.027123023002322,
     "originalType" : "Limit",
     "orderId" : 0,
     "avgPrice" : 1.4658129805029452,
-    "originalQuantity" : 7.061401241503109,
-    "clientOrderId" : "clientOrderId",
-    "positionSide" : "Short",
-    "activatePrice" : 3.616076749251911,
-    "updateTime" : "2000-01-23T04:56:07.000+00:00",
-    "closePosition" : true,
-    "accountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "cumulativeQuantity" : 5.962133916683182,
-    "stopPrice" : 9.301444243932576,
-    "reduceOnly" : true,
+    "realizedProfit" : 7.386281948385884,
     "price" : 6.027456183070403,
     "createdTime" : "2000-01-23T04:56:07.000+00:00",
+    "callbackRate" : 3.616076749251911,
+    "commission" : 4.145608029883936,
     "timeInForce" : "GoodTillCancel",
+    "quoteQuantityFilled" : 9.301444243932576,
+    "lastFilledQuantity" : 2.027123023002322,
+    "side" : "Buy",
+    "quantity" : 2.3021358869347655,
+    "clientOrderId" : "clientOrderId",
+    "positionSide" : "Short",
+    "activatePrice" : 5.637376656633329,
+    "updateTime" : "2000-01-23T04:56:07.000+00:00",
+    "commissionAsset" : "commissionAsset",
+    "closePosition" : true,
+    "quantityFilled" : 7.061401241503109,
+    "accountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "stopPrice" : 5.962133916683182,
+    "reduceOnly" : true,
     "workingType" : "Mark",
     "status" : "New"
   } ]
@@ -1982,13 +2153,12 @@ open class TradingplatformAPI {
   "lastUpdateId" : 0,
   "asks" : [ null, null ],
   "bids" : [ {
-    "quantity" : 5.962133916683182,
-    "price" : 1.4658129805029452
+    "quantity" : 1.4658129805029452,
+    "price" : 6.027456183070403
   }, {
-    "quantity" : 5.962133916683182,
-    "price" : 1.4658129805029452
-  } ],
-  "firstUpdateId" : 6
+    "quantity" : 1.4658129805029452,
+    "price" : 6.027456183070403
+  } ]
 }}]
      - parameter symbol: (query)  (optional)     - parameter limit: (query)  (optional)
 
@@ -2031,28 +2201,28 @@ open class TradingplatformAPI {
   "entryPrice" : 0.8008281904610115,
   "leverage" : 1,
   "symbol" : "symbol",
+  "maxNotional" : 9.301444243932576,
   "isAutoAddMargin" : true,
   "markPrice" : 5.637376656633329,
   "quantity" : 2.3021358869347655,
   "isolatedMargin" : 6.027456183070403,
   "marginType" : "Isolated",
-  "unrealizedPnL" : 7.061401241503109,
   "positionSide" : "Short",
-  "liquidationPrice" : 5.962133916683182,
-  "maxNotionalValue" : "maxNotionalValue"
+  "unrealizedPnL" : 7.061401241503109,
+  "liquidationPrice" : 5.962133916683182
 }, {
   "entryPrice" : 0.8008281904610115,
   "leverage" : 1,
   "symbol" : "symbol",
+  "maxNotional" : 9.301444243932576,
   "isAutoAddMargin" : true,
   "markPrice" : 5.637376656633329,
   "quantity" : 2.3021358869347655,
   "isolatedMargin" : 6.027456183070403,
   "marginType" : "Isolated",
-  "unrealizedPnL" : 7.061401241503109,
   "positionSide" : "Short",
-  "liquidationPrice" : 5.962133916683182,
-  "maxNotionalValue" : "maxNotionalValue"
+  "unrealizedPnL" : 7.061401241503109,
+  "liquidationPrice" : 5.962133916683182
 } ]}]
      - parameter accountId: (query)  (optional)     - parameter symbol: (query)  (optional)
 
@@ -2477,11 +2647,180 @@ open class TradingplatformAPI {
     }
 
     /**
+     - parameter accountId: (query)  (optional)     - parameter symbol: (query)  (optional)     - parameter startTime: (query)  (optional)     - parameter endTime: (query)  (optional)     - parameter limit: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getFuturesTrades(accountId: UUID? = nil, symbol: String? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil, completion: @escaping ((_ data: [BinanceRawFuturesUsdtTrade]?,_ error: Error?) -> Void)) {
+        getFuturesTradesWithRequestBuilder(accountId: accountId, symbol: symbol, startTime: startTime, endTime: endTime, limit: limit).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     - GET /v2.0/tradingplatform/binance/account/futures/trades
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example=[ {
+  "symbol" : "symbol",
+  "side" : "Buy",
+  "quantity" : 2.3021358869347655,
+  "orderId" : 5,
+  "positionSide" : "Short",
+  "maker" : true,
+  "commissionAsset" : "commissionAsset",
+  "buyer" : true,
+  "tradeTime" : "2000-01-23T04:56:07.000+00:00",
+  "price" : 5.637376656633329,
+  "realizedPnl" : 7.061401241503109,
+  "commission" : 6.027456183070403,
+  "id" : 1,
+  "quoteQuantity" : 0.8008281904610115
+}, {
+  "symbol" : "symbol",
+  "side" : "Buy",
+  "quantity" : 2.3021358869347655,
+  "orderId" : 5,
+  "positionSide" : "Short",
+  "maker" : true,
+  "commissionAsset" : "commissionAsset",
+  "buyer" : true,
+  "tradeTime" : "2000-01-23T04:56:07.000+00:00",
+  "price" : 5.637376656633329,
+  "realizedPnl" : 7.061401241503109,
+  "commission" : 6.027456183070403,
+  "id" : 1,
+  "quoteQuantity" : 0.8008281904610115
+} ]}]
+     - parameter accountId: (query)  (optional)     - parameter symbol: (query)  (optional)     - parameter startTime: (query)  (optional)     - parameter endTime: (query)  (optional)     - parameter limit: (query)  (optional)
+
+     - returns: RequestBuilder<[BinanceRawFuturesUsdtTrade]> 
+     */
+    open class func getFuturesTradesWithRequestBuilder(accountId: UUID? = nil, symbol: String? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil) -> RequestBuilder<[BinanceRawFuturesUsdtTrade]> {
+        let path = "/v2.0/tradingplatform/binance/account/futures/trades"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "accountId": accountId, 
+                        "symbol": symbol, 
+                        "startTime": startTime?.encodeToJSON(), 
+                        "endTime": endTime?.encodeToJSON(), 
+                        "limit": limit?.encodeToJSON()
+        ])
+
+        let requestBuilder: RequestBuilder<[BinanceRawFuturesUsdtTrade]>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Account futures history
+     - parameter accountId: (query)  (optional)     - parameter mode: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter symbol: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getFuturesTradesHistory(accountId: UUID? = nil, mode: TradingPlatformBinanceOrdersMode? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: BinanceRawFuturesOrderItemsViewModel?,_ error: Error?) -> Void)) {
+        getFuturesTradesHistoryWithRequestBuilder(accountId: accountId, mode: mode, dateFrom: dateFrom, dateTo: dateTo, symbol: symbol, skip: skip, take: take).execute { (response, error) -> Void in
+            completion(response?.body, error)
+        }
+    }
+
+
+    /**
+     Account futures history
+     - GET /v2.0/tradingplatform/binance/futures/trades
+     - API Key:
+       - type: apiKey Authorization 
+       - name: Bearer
+     - examples: [{contentType=application/json, example={
+  "total" : 0,
+  "items" : [ {
+    "symbol" : "symbol",
+    "originalType" : "Limit",
+    "orderId" : 0,
+    "avgPrice" : 1.4658129805029452,
+    "realizedProfit" : 7.386281948385884,
+    "price" : 6.027456183070403,
+    "createdTime" : "2000-01-23T04:56:07.000+00:00",
+    "callbackRate" : 3.616076749251911,
+    "commission" : 4.145608029883936,
+    "timeInForce" : "GoodTillCancel",
+    "quoteQuantityFilled" : 9.301444243932576,
+    "lastFilledQuantity" : 2.027123023002322,
+    "side" : "Buy",
+    "quantity" : 2.3021358869347655,
+    "clientOrderId" : "clientOrderId",
+    "positionSide" : "Short",
+    "activatePrice" : 5.637376656633329,
+    "updateTime" : "2000-01-23T04:56:07.000+00:00",
+    "commissionAsset" : "commissionAsset",
+    "closePosition" : true,
+    "quantityFilled" : 7.061401241503109,
+    "accountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "stopPrice" : 5.962133916683182,
+    "reduceOnly" : true,
+    "workingType" : "Mark",
+    "status" : "New"
+  }, {
+    "symbol" : "symbol",
+    "originalType" : "Limit",
+    "orderId" : 0,
+    "avgPrice" : 1.4658129805029452,
+    "realizedProfit" : 7.386281948385884,
+    "price" : 6.027456183070403,
+    "createdTime" : "2000-01-23T04:56:07.000+00:00",
+    "callbackRate" : 3.616076749251911,
+    "commission" : 4.145608029883936,
+    "timeInForce" : "GoodTillCancel",
+    "quoteQuantityFilled" : 9.301444243932576,
+    "lastFilledQuantity" : 2.027123023002322,
+    "side" : "Buy",
+    "quantity" : 2.3021358869347655,
+    "clientOrderId" : "clientOrderId",
+    "positionSide" : "Short",
+    "activatePrice" : 5.637376656633329,
+    "updateTime" : "2000-01-23T04:56:07.000+00:00",
+    "commissionAsset" : "commissionAsset",
+    "closePosition" : true,
+    "quantityFilled" : 7.061401241503109,
+    "accountId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "stopPrice" : 5.962133916683182,
+    "reduceOnly" : true,
+    "workingType" : "Mark",
+    "status" : "New"
+  } ]
+}}]
+     - parameter accountId: (query)  (optional)     - parameter mode: (query)  (optional)     - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter symbol: (query)  (optional)     - parameter skip: (query)  (optional)     - parameter take: (query)  (optional)
+
+     - returns: RequestBuilder<BinanceRawFuturesOrderItemsViewModel> 
+     */
+    open class func getFuturesTradesHistoryWithRequestBuilder(accountId: UUID? = nil, mode: TradingPlatformBinanceOrdersMode? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, symbol: String? = nil, skip: Int? = nil, take: Int? = nil) -> RequestBuilder<BinanceRawFuturesOrderItemsViewModel> {
+        let path = "/v2.0/tradingplatform/binance/futures/trades"
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+                        "AccountId": accountId, 
+                        "Mode": mode, 
+                        "DateFrom": dateFrom?.encodeToJSON(), 
+                        "DateTo": dateTo?.encodeToJSON(), 
+                        "Symbol": symbol, 
+                        "Skip": skip?.encodeToJSON(), 
+                        "Take": take?.encodeToJSON()
+        ])
+
+        let requestBuilder: RequestBuilder<BinanceRawFuturesOrderItemsViewModel>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
      Get klines
      - parameter symbol: (path)       - parameter interval: (query)  (optional)     - parameter startTime: (query)  (optional)     - parameter endTime: (query)  (optional)     - parameter limit: (query)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getKlines(symbol: String, interval: BinanceRawKlineInterval? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil, completion: @escaping ((_ data: BinanceRawKlineItemsViewModel?,_ error: Error?) -> Void)) {
+    open class func getKlines(symbol: String, interval: BinanceKlineInterval? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil, completion: @escaping ((_ data: BinanceRawKlineItemsViewModel?,_ error: Error?) -> Void)) {
         getKlinesWithRequestBuilder(symbol: symbol, interval: interval, startTime: startTime, endTime: endTime, limit: limit).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
@@ -2526,7 +2865,7 @@ open class TradingplatformAPI {
 
      - returns: RequestBuilder<BinanceRawKlineItemsViewModel> 
      */
-    open class func getKlinesWithRequestBuilder(symbol: String, interval: BinanceRawKlineInterval? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil) -> RequestBuilder<BinanceRawKlineItemsViewModel> {
+    open class func getKlinesWithRequestBuilder(symbol: String, interval: BinanceKlineInterval? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil) -> RequestBuilder<BinanceRawKlineItemsViewModel> {
         var path = "/v2.0/tradingplatform/binance/market/{symbol}/klines"
         let symbolPreEscape = "\(symbol)"
         let symbolPostEscape = symbolPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -2565,12 +2904,13 @@ open class TradingplatformAPI {
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
-  "total" : 1,
+  "total" : 6,
   "items" : [ {
     "symbol" : "symbol",
     "orderId" : 5,
     "executionType" : "New",
     "type" : "Limit",
+    "pnL" : 1.4894159098541704,
     "originalClientOrderId" : "originalClientOrderId",
     "rejectReason" : "None",
     "buyerIsMaker" : true,
@@ -2601,6 +2941,7 @@ open class TradingplatformAPI {
     "orderId" : 5,
     "executionType" : "New",
     "type" : "Limit",
+    "pnL" : 1.4894159098541704,
     "originalClientOrderId" : "originalClientOrderId",
     "rejectReason" : "None",
     "buyerIsMaker" : true,
@@ -2669,13 +3010,12 @@ open class TradingplatformAPI {
   "lastUpdateId" : 0,
   "asks" : [ null, null ],
   "bids" : [ {
-    "quantity" : 5.962133916683182,
-    "price" : 1.4658129805029452
+    "quantity" : 1.4658129805029452,
+    "price" : 6.027456183070403
   }, {
-    "quantity" : 5.962133916683182,
-    "price" : 1.4658129805029452
-  } ],
-  "firstUpdateId" : 6
+    "quantity" : 1.4658129805029452,
+    "price" : 6.027456183070403
+  } ]
 }}]
      - parameter symbol: (path)       - parameter limit: (query)  (optional)
 
@@ -2773,12 +3113,13 @@ open class TradingplatformAPI {
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
-  "total" : 1,
+  "total" : 6,
   "items" : [ {
     "symbol" : "symbol",
     "orderId" : 5,
     "executionType" : "New",
     "type" : "Limit",
+    "pnL" : 1.4894159098541704,
     "originalClientOrderId" : "originalClientOrderId",
     "rejectReason" : "None",
     "buyerIsMaker" : true,
@@ -2809,6 +3150,7 @@ open class TradingplatformAPI {
     "orderId" : 5,
     "executionType" : "New",
     "type" : "Limit",
+    "pnL" : 1.4894159098541704,
     "originalClientOrderId" : "originalClientOrderId",
     "rejectReason" : "None",
     "buyerIsMaker" : true,
