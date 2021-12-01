@@ -22,6 +22,10 @@
 		19129480249BBA1F007F1083 /* PostLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1912947F249BBA1E007F1083 /* PostLink.swift */; };
 		19129484249BBA3F007F1083 /* PublicProfileFollow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19129483249BBA3E007F1083 /* PublicProfileFollow.swift */; };
 		19129486249BBAF8007F1083 /* PostPlatformAssetDetailsWithPrices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19129485249BBAF8007F1083 /* PostPlatformAssetDetailsWithPrices.swift */; };
+		1926FC712756EA4D00FEC4D3 /* SocialCommentTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FC702756EA4D00FEC4D3 /* SocialCommentTableViewCellViewModel.swift */; };
+		1926FC732756FF3000FEC4D3 /* ImagesGalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FC722756FF3000FEC4D3 /* ImagesGalleryView.swift */; };
+		1926FC752756FFC900FEC4D3 /* ImagesGalleryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1926FC742756FFC900FEC4D3 /* ImagesGalleryCollectionViewCell.xib */; };
+		1926FC772757003800FEC4D3 /* ImagesGalleryCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FC762757003800FEC4D3 /* ImagesGalleryCollectionViewCellViewModel.swift */; };
 		192DB057256D864200C198CB /* KYCInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192DB056256D864100C198CB /* KYCInfoViewController.swift */; };
 		192DB067256F075000C198CB /* DashboardInvestmentLimitsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192DB065256F074F00C198CB /* DashboardInvestmentLimitsTableViewCell.swift */; };
 		192DB068256F075000C198CB /* DashboardInvestmentLimitsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 192DB066256F074F00C198CB /* DashboardInvestmentLimitsTableViewCell.xib */; };
@@ -1233,6 +1237,10 @@
 		19129481249BBA2C007F1083 /* PostAssetDetailsWithPrices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostAssetDetailsWithPrices.swift; sourceTree = "<group>"; };
 		19129483249BBA3E007F1083 /* PublicProfileFollow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicProfileFollow.swift; sourceTree = "<group>"; };
 		19129485249BBAF8007F1083 /* PostPlatformAssetDetailsWithPrices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostPlatformAssetDetailsWithPrices.swift; sourceTree = "<group>"; };
+		1926FC702756EA4D00FEC4D3 /* SocialCommentTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialCommentTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		1926FC722756FF3000FEC4D3 /* ImagesGalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesGalleryView.swift; sourceTree = "<group>"; };
+		1926FC742756FFC900FEC4D3 /* ImagesGalleryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImagesGalleryCollectionViewCell.xib; sourceTree = "<group>"; };
+		1926FC762757003800FEC4D3 /* ImagesGalleryCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesGalleryCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		192DB056256D864100C198CB /* KYCInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCInfoViewController.swift; sourceTree = "<group>"; };
 		192DB065256F074F00C198CB /* DashboardInvestmentLimitsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardInvestmentLimitsTableViewCell.swift; sourceTree = "<group>"; };
 		192DB066256F074F00C198CB /* DashboardInvestmentLimitsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DashboardInvestmentLimitsTableViewCell.xib; sourceTree = "<group>"; };
@@ -2538,6 +2546,9 @@
 				19C3EA242747D59C002402B2 /* SocialLinksCollectionViewCellViewModel.swift */,
 				19C3EA262747D6A6002402B2 /* SocialInfoLinksTableViewCell.swift */,
 				19C3EA282747E627002402B2 /* SocialInfoLinksTableViewCell.xib */,
+				1926FC702756EA4D00FEC4D3 /* SocialCommentTableViewCellViewModel.swift */,
+				1926FC742756FFC900FEC4D3 /* ImagesGalleryCollectionViewCell.xib */,
+				1926FC762757003800FEC4D3 /* ImagesGalleryCollectionViewCellViewModel.swift */,
 			);
 			path = Social;
 			sourceTree = "<group>";
@@ -3509,6 +3520,7 @@
 				19C3B92925DE9A6400C6990D /* SocialEventView.swift */,
 				19C3B93F25DED96D00C6990D /* DropDownField.swift */,
 				19C3B98E25E6900800C6990D /* CustomRadioButton.swift */,
+				1926FC722756FF3000FEC4D3 /* ImagesGalleryView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -5031,6 +5043,7 @@
 				FC4964202015502A00104CEB /* Wallet.storyboard in Resources */,
 				5EB064C8239B0C29003AB3FB /* FundAssetCollectionViewCell.xib in Resources */,
 				5E0E1BAF2223E571001F3C4E /* WalletCopytradingAccountTableViewCell.xib in Resources */,
+				1926FC752756FFC900FEC4D3 /* ImagesGalleryCollectionViewCell.xib in Resources */,
 				5EA274B3216281DD008CAF77 /* DefaultTableViewCell.xib in Resources */,
 				5E93E6FD21D1A5370020DE55 /* NotificationsSettingsGeneralTableViewCell.xib in Resources */,
 				5EB9320F214697FF00EE01A2 /* DetailManagerTableViewCell.xib in Resources */,
@@ -5339,6 +5352,7 @@
 				5E11DFD521B93CDF00B2B6EE /* AboutLevelsViewController.swift in Sources */,
 				5E39F71B23A3F92F0073DAD5 /* EventInvestingItemFilters.swift in Sources */,
 				5EA274B621628207008CAF77 /* ProgramPeriodTableViewCell.swift in Sources */,
+				1926FC732756FF3000FEC4D3 /* ImagesGalleryView.swift in Sources */,
 				5E39F76823A3F9300073DAD5 /* PrivateTradingAccountType.swift in Sources */,
 				5E39F7CF23A3F9300073DAD5 /* TradingAccountAssetPlatformInfo.swift in Sources */,
 				19812427246450A600F286FE /* AssetInvestmentRequestItemsViewModel.swift in Sources */,
@@ -5627,6 +5641,7 @@
 				FC83DF65203D89CE00A8F8CE /* ProgramInvestRouter.swift in Sources */,
 				5E39F78723A3F9300073DAD5 /* ProgramFollowDetailsFullTradingAccountDetails.swift in Sources */,
 				5E39F5EF23A3F8A60073DAD5 /* AssetFacet.swift in Sources */,
+				1926FC712756EA4D00FEC4D3 /* SocialCommentTableViewCellViewModel.swift in Sources */,
 				5EA1FE2C21A30EC200308D81 /* FacetsDelegateManager.swift in Sources */,
 				196389BD2530AAC800CA2092 /* BinanceRawPlaceOrder.swift in Sources */,
 				19812439246451FF00F286FE /* FundDetailsListItemItemsViewModel.swift in Sources */,
@@ -5637,6 +5652,7 @@
 				5E39F74F23A3F92F0073DAD5 /* ProgramsLevelsInfo.swift in Sources */,
 				5E39F78B23A3F9300073DAD5 /* FundNotificationSettingList.swift in Sources */,
 				19812460246458BE00F286FE /* PublicProfileItemsViewModel.swift in Sources */,
+				1926FC772757003800FEC4D3 /* ImagesGalleryCollectionViewCellViewModel.swift in Sources */,
 				5EF9F90F23E10D7900542E1E /* FundContentView.swift in Sources */,
 				19A56EA4258938AD00553408 /* BinanceRawFuturesFundingRateHistory.swift in Sources */,
 				5E39F70623A3F92F0073DAD5 /* TwoFactorStatus.swift in Sources */,

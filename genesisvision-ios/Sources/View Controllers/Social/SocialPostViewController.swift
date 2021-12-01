@@ -12,55 +12,124 @@ class SocialPostViewController: BaseViewController {
     
     var viewModel: SocialPostViewModel!
     
-    private var socialPostCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.backgroundColor = .clear
-        return collectionView
+    private let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.backgroundColor = .clear
+        return tableView
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        setupCollectionView()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.fetchPost { [weak self] _ in
+            self?.reloadData()
+        }
     }
     
     private func setup() {
         title = "Post"
+        setupUI()
+        setupTableView()
     }
     
-    private func setupCollectionView() {
-        view.addSubview(socialPostCollectionView)
+    private func setupTableView() {
+        tableView.configure(with: .defaultConfiguration)
+        tableView.allowsSelection = false
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.registerClass(for: SocialFeedTableViewCell.self)
+        tableView.registerClass(for: SocialCommentTableViewCell.self)
+    }
+    
+    private func setupUI() {
+        view.addSubview(tableView)
         
-        socialPostCollectionView.fillSuperview(padding: UIEdgeInsets(top: 60, left: 0, bottom: 0, right: 0))
-        
-        socialPostCollectionView.dataSource = viewModel.socialPostCollectionViewDataSource
-        socialPostCollectionView.delegate = viewModel.socialPostCollectionViewDataSource
-        
-        if let layout = socialPostCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.scrollDirection = .vertical
-        }
-        
-        socialPostCollectionView.isScrollEnabled = true
-        socialPostCollectionView.showsVerticalScrollIndicator = false
-        socialPostCollectionView.allowsSelection = true
-//        socialPostCollectionView.registerNibs(for: viewModel.socialPostCollectionViewDataSource.cellModelsForRegistration)
-        
-        setupPullToRefresh(scrollView: socialPostCollectionView)
+        tableView.anchor(top: view.topAnchor,
+                         leading: view.leadingAnchor,
+                         bottom: view.bottomAnchor,
+                         trailing: view.trailingAnchor)
     }
     
     override func pullToRefresh() {
         super.pullToRefresh()
-        
-//        viewModel.fetch(completion: { [weak self] (result) in
-//            self?.hideAll()
-//            self?.reloadData()
-//        }, refresh: true)
     }
     
     private func reloadData() {
         DispatchQueue.main.async {
-            self.socialPostCollectionView.reloadData()
+            self.tableView.reloadData()
+        }
+    }
+}
+
+extension SocialPostViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let type = viewModel.sections[section]
+        
+        switch type {
+        case .post:
+            return 1
+        case .comments:
+            return viewModel.commentsViewModels.count
+        }
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return viewModel.sections.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let type = viewModel.sections[indexPath.section]
+        
+        switch type {
+        case .post:
+            guard let model = viewModel.post else {
+                return TableViewCell() }
+            return tableView.dequeueReusableCell(withModel: model, for: indexPath)
+        case .comments:
+            guard let model = viewModel.commentsViewModels[safe: indexPath.row] else {
+                return TableViewCell() }
+
+            return tableView.dequeueReusableCell(withModel: model, for: indexPath)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let type = viewModel.sections[section]
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let type = viewModel.sections[indexPath.section]
+        
+        switch type {
+        case .post:
+            guard let model = viewModel.post else { return 0.0 }
+            return model.cellSize(spacing: 0, frame: tableView.frame).height
+        case .comments:
+            guard let model = viewModel.commentsViewModels[safe: indexPath.row] else { return 0.0 }
+            return model.cellSize(spacing: 0, frame: tableView.frame).height
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        let type = viewModel.sections[indexPath.section]
+        
+        switch type {
+        case .post:
+            guard let model = viewModel.post else { return 0.0 }
+            return model.cellSize(spacing: 0, frame: tableView.frame).height
+        case .comments:
+            guard let model = viewModel.commentsViewModels[safe: indexPath.row] else { return 0.0 }
+            return model.cellSize(spacing: 0, frame: tableView.frame).height
         }
     }
 }
@@ -71,24 +140,34 @@ extension SocialPostViewController: BaseTableViewProtocol {
 
 final class SocialPostViewModel {
     
-    var socialPostCollectionViewModel: SocialPostCollectionViewModel!
-    var socialPostCollectionViewDataSource: CollectionViewDataSource!
+    enum SectionType {
+        case post
+        case comments
+    }
     
-    var post: Post?
+    var sections: [SectionType] = [.post, .comments]
+    
+    var post: SocialFeedTableViewCellViewModel?
+    var commentsViewModels: [SocialCommentTableViewCellViewModel] = []
     let postId: UUID?
     let socialRouter: SocialRouter
     
     init(with router: SocialRouter, delegate: BaseTableViewProtocol, postId: UUID?, post: Post?) {
-        self.postId = postId
-        self.post = post
+        self.postId = postId ?? post?._id
         self.socialRouter = router
+        if let post = post {
+            self.post = SocialFeedTableViewCellViewModel(post: post, cellDelegate: self)
+        }
     }
     
     func fetchPost(completion: @escaping CompletionBlock) {
         guard let postId = postId else { return }
         SocialDataProvider.getPost(postId: postId) { [weak self] (viewModel) in
             if let viewModel = viewModel {
-                self?.post = viewModel
+                self?.post = SocialFeedTableViewCellViewModel(post: viewModel, cellDelegate: self)
+                if let comments = viewModel.comments {
+                    self?.commentsViewModels = comments.map({ return SocialCommentTableViewCellViewModel(post: $0, delegate: self) })
+                }
                 completion(.success)
             }
             completion(.failure(errorType: .apiError(message: "")))
@@ -103,41 +182,40 @@ final class SocialPostViewModel {
     }
 }
 
-final class SocialPostCollectionViewModel: CellViewModelWithCollection {
-    var title: String
-    var type: CellActionType
-    
-    var skip: Int = 0
-    var take: Int = 12
-    var totalCount: Int = 0
-    
-    var selectedIndex: Int = 0
+extension SocialPostViewModel: SocialCommentTableViewCellDelegate {
+    func replyButtonPressed(postId: UUID) {
+    }
+}
 
-    var viewModels = [CellViewAnyModel]()
 
-    var canPullToRefresh: Bool = true
-    var showOnlyUsersPosts: Bool = true
+extension SocialPostViewModel: SocialFeedCollectionViewCellDelegate {
+    func likeTouched(postId: UUID) {
         
-    let collectionTopInset: CGFloat = Constants.SystemSizes.Cell.horizontalMarginValue
-    let collectionBottomInset: CGFloat = Constants.SystemSizes.Cell.horizontalMarginValue
-    let collectionLeftInset: CGFloat = Constants.SystemSizes.Cell.verticalMarginValue
-    let collectionRightInset: CGFloat = Constants.SystemSizes.Cell.verticalMarginValue
-    let collectionLineSpacing: CGFloat = Constants.SystemSizes.Cell.lineSpacing
-    let collectionInteritemSpacing: CGFloat = Constants.SystemSizes.Cell.interitemSpacing
-
-    var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
-        return []
-    }
-
-    var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return []
     }
     
-    var shouldHightlight: Bool = false
-    var shouldUnhightlight: Bool = false
-    
-    init(type: CellActionType, title: String? = nil) {
-        self.type = type
-        self.title = title ?? ""
+    func shareTouched(postId: UUID) {
+        
     }
+    
+    func commentTouched(postId: UUID) {
+        
+    }
+    
+    func tagPressed(tag: PostTag) {
+        
+    }
+    
+    func userOwnerPressed(postId: UUID) {
+        
+    }
+    
+    func postActionsPressed(postId: UUID) {
+        
+    }
+    
+    func undoDeletion(postId: UUID) {
+        
+    }
+    
+    
 }

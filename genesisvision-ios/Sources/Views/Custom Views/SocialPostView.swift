@@ -42,7 +42,7 @@ final class SocialPostView: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.isUserInteractionEnabled = true
         view.axis = .vertical
-        view.spacing = 10
+        view.spacing = 5
         view.distribution = .equalSpacing
         return view
     }()

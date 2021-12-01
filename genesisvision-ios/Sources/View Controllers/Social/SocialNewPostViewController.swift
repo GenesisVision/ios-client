@@ -93,7 +93,7 @@ class SocialNewPostViewController: BaseViewController {
         }
         
         if let text = post.text, !text.isEmpty {
-            let textHeightValue = text.height(forConstrainedWidth: 400, font: UIFont.getFont(.regular, size: 16))
+            let textHeightValue = text.height(forConstrainedWidth: UIScreen.main.bounds.width - 20, font: UIFont.getFont(.regular, size: 18))
             
             if textHeightValue < 25 {
                 textHeight = 25

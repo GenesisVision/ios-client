@@ -1,0 +1,92 @@
+//
+//  ImagesGalleryView.swift
+//  genesisvision-ios
+//
+//  Created by Ruslan Lukin on 20.12.2021.
+//  Copyright © 2021 Genesis Vision. All rights reserved.
+//
+
+import UIKit
+
+
+class ImagesGalleryView: UIView {
+    
+    private var collectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = .clear
+        collectionView.showsHorizontalScrollIndicator = false
+        return collectionView
+    }()
+    
+    var viewModels: [ImagesGalleryCollectionViewCellViewModel] = [] {
+        didSet {
+            collectionView.delegate = self
+            collectionView.dataSource = self
+            
+            collectionView.registerNibs(for: [ImagesGalleryCollectionViewCellViewModel.self])
+            collectionView.registerNib(for: ImagesGalleryCollectionViewCell.self)
+            collectionView.registerClass(for: ImagesGalleryCollectionViewCell.self)
+            if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+                layout.scrollDirection = .horizontal
+            }
+            
+            collectionView.reloadData()
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    private func setup() {
+        addSubview(collectionView)
+        
+        collectionView.fillSuperview(padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+}
+
+extension ImagesGalleryView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModels.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let model = viewModels[indexPath.row]
+        return collectionView.dequeueReusableCell(withModel: model, for: indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let model = viewModels[indexPath.row]
+        
+        if viewModels.count == 1 {
+            return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+        } else if viewModels.count == 2 {
+            return CGSize(width: collectionView.frame.width*0.5, height: collectionView.frame.height)
+        } else if viewModels.count >= 3 {
+            return CGSize(width: collectionView.frame.width*0.5, height: collectionView.frame.height*0.5)
+        }
+        
+        return CGSize(width: 100, height: 100)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let model = viewModels[indexPath.row]
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+}
