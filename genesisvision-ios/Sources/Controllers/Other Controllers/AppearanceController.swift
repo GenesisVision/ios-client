@@ -173,6 +173,7 @@ struct AppearanceController {
         IQKeyboardManager.shared.toolbarTintColor = UIColor.primary
         IQKeyboardManager.shared.toolbarDoneBarButtonItemText = "Dismiss"
         IQKeyboardManager.shared.placeholderFont = UIFont.getFont(.regular, size: 14.0)
+        UIApplication.shared.keyWindow?.backgroundColor = UIColor.BaseView.bg
     }
     
     // MARK: - PlateCell

@@ -15,6 +15,7 @@ protocol ImagesGalleryCollectionViewCellDelegate: AnyObject {
 struct ImagesGalleryCollectionViewCellViewModel {
     let imageUrl: String
     let resize: PostImageResize?
+    let image: UIImage?
     let showRemoveButton: Bool
     weak var delegate: ImagesGalleryCollectionViewCellDelegate?
 }
@@ -22,11 +23,13 @@ struct ImagesGalleryCollectionViewCellViewModel {
 extension ImagesGalleryCollectionViewCellViewModel: CellViewModel {
     func setup(on cell: ImagesGalleryCollectionViewCell) {
         
-        if let logoUrl = URL(string: imageUrl) {
+        if let image = image {
+            cell.imageView.image = image
+        } else if let logoUrl = URL(string: imageUrl) {
             cell.imageView.kf.setImage(with: logoUrl)
-            cell.removeButton.isHidden = !showRemoveButton
         }
         
+        cell.removeButton.isHidden = !showRemoveButton
         cell.imageUrl = imageUrl
         cell.delegate = delegate
     }

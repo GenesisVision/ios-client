@@ -63,11 +63,15 @@ extension SocialCommentTableViewCellViewModel: CellViewModel {
             for postImage in postImages {
                 if let resizes = postImage.resizes,
                    resizes.count > 1 {
+                    let original = resizes.filter({ $0.quality == .original })
                     let hight = resizes.filter({ $0.quality == .high })
                     let medium = resizes.filter({ $0.quality == .medium })
                     let low = resizes.filter({ $0.quality == .low })
                     
-                    if let logoUrl = hight.first?.logoUrl {
+                    if let logoUrl = original.first?.logoUrl {
+                        imagesUrls[logoUrl] = original.first
+                        continue
+                    } else if let logoUrl = hight.first?.logoUrl {
                         imagesUrls[logoUrl] = hight.first
                         continue
                     } else if let logoUrl = medium.first?.logoUrl {
@@ -81,7 +85,7 @@ extension SocialCommentTableViewCellViewModel: CellViewModel {
                 }
             }
             
-            cell.galleryView.viewModels = imagesUrls.map({ return ImagesGalleryCollectionViewCellViewModel(imageUrl: $0.key, resize: $0.value, showRemoveButton: false, delegate: nil) })
+            cell.galleryView.viewModels = imagesUrls.map({ return ImagesGalleryCollectionViewCellViewModel(imageUrl: $0.key, resize: $0.value, image: nil, showRemoveButton: false, delegate: nil) })
         } else {
             cell.galleryView.isHidden = true
         }
@@ -89,7 +93,7 @@ extension SocialCommentTableViewCellViewModel: CellViewModel {
     
     func cellSize(spacing: CGFloat, frame: CGRect) -> CGSize {
         let width = frame.width - spacing
-        let defaultHeight: CGFloat = 80
+        let defaultHeight: CGFloat = 90
         let socialPostViewSizes = postViewSizes()
         
         let cellHeight = socialPostViewSizes.allHeight + defaultHeight
@@ -278,12 +282,13 @@ class SocialCommentTableViewCell: UITableViewCell {
     }
     
     private func setup() {
+        replyButton.addTarget(self, action: #selector(replyButtonPressed), for: .touchUpInside)
         setupUI()
     }
     
     private func setupUI() {
         contentView.addSubview(mainView)
-        mainView.fillSuperview(padding: UIEdgeInsets(top: 0, left: 10, bottom: 10, right: 10))
+        mainView.fillSuperview(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
         
         mainView.addSubview(userImageView)
         mainView.addSubview(userNameLabel)
@@ -362,5 +367,10 @@ class SocialCommentTableViewCell: UITableViewCell {
         label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         label.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 4).isActive = true
         label.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+    }
+    
+    @objc private func replyButtonPressed() {
+        guard let postId = postId else { return }
+        delegate?.replyButtonPressed(postId: postId)
     }
 }

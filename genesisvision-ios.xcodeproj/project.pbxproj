@@ -26,6 +26,8 @@
 		1926FC732756FF3000FEC4D3 /* ImagesGalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FC722756FF3000FEC4D3 /* ImagesGalleryView.swift */; };
 		1926FC752756FFC900FEC4D3 /* ImagesGalleryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1926FC742756FFC900FEC4D3 /* ImagesGalleryCollectionViewCell.xib */; };
 		1926FC772757003800FEC4D3 /* ImagesGalleryCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FC762757003800FEC4D3 /* ImagesGalleryCollectionViewCellViewModel.swift */; };
+		1926FC792757764300FEC4D3 /* ReplyInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FC782757764300FEC4D3 /* ReplyInputField.swift */; };
+		1926FC7B27577F4500FEC4D3 /* ReplierView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FC7A27577F4500FEC4D3 /* ReplierView.swift */; };
 		192DB057256D864200C198CB /* KYCInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192DB056256D864100C198CB /* KYCInfoViewController.swift */; };
 		192DB067256F075000C198CB /* DashboardInvestmentLimitsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192DB065256F074F00C198CB /* DashboardInvestmentLimitsTableViewCell.swift */; };
 		192DB068256F075000C198CB /* DashboardInvestmentLimitsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 192DB066256F074F00C198CB /* DashboardInvestmentLimitsTableViewCell.xib */; };
@@ -1241,6 +1243,8 @@
 		1926FC722756FF3000FEC4D3 /* ImagesGalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesGalleryView.swift; sourceTree = "<group>"; };
 		1926FC742756FFC900FEC4D3 /* ImagesGalleryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImagesGalleryCollectionViewCell.xib; sourceTree = "<group>"; };
 		1926FC762757003800FEC4D3 /* ImagesGalleryCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesGalleryCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
+		1926FC782757764300FEC4D3 /* ReplyInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyInputField.swift; sourceTree = "<group>"; };
+		1926FC7A27577F4500FEC4D3 /* ReplierView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplierView.swift; sourceTree = "<group>"; };
 		192DB056256D864100C198CB /* KYCInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCInfoViewController.swift; sourceTree = "<group>"; };
 		192DB065256F074F00C198CB /* DashboardInvestmentLimitsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardInvestmentLimitsTableViewCell.swift; sourceTree = "<group>"; };
 		192DB066256F074F00C198CB /* DashboardInvestmentLimitsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DashboardInvestmentLimitsTableViewCell.xib; sourceTree = "<group>"; };
@@ -3521,6 +3525,8 @@
 				19C3B93F25DED96D00C6990D /* DropDownField.swift */,
 				19C3B98E25E6900800C6990D /* CustomRadioButton.swift */,
 				1926FC722756FF3000FEC4D3 /* ImagesGalleryView.swift */,
+				1926FC782757764300FEC4D3 /* ReplyInputField.swift */,
+				1926FC7A27577F4500FEC4D3 /* ReplierView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -5276,6 +5282,7 @@
 				5EB06A4A239E7C87003AB3FB /* AccountsDataProvider.swift in Sources */,
 				5E39F73823A3F92F0073DAD5 /* OrderModel.swift in Sources */,
 				5EA7A0FA20A0B0AD00D895FC /* ProgramViewController.swift in Sources */,
+				1926FC7B27577F4500FEC4D3 /* ReplierView.swift in Sources */,
 				5E39F79723A3F9300073DAD5 /* SubscriptionMode.swift in Sources */,
 				5E7A2FA220C588A100BDA030 /* AuthTwoFactorDisableViewModel.swift in Sources */,
 				5E39F7D723A3F9300073DAD5 /* RecoveryCodesViewModel.swift in Sources */,
@@ -6125,6 +6132,7 @@
 				195B9EFA2558469D003DA54E /* ReferralProgramViewController.swift in Sources */,
 				5E5BC29C21868FD7009E4BA3 /* FundAssetsHeaderView.swift in Sources */,
 				198124412464524700F286FE /* GuidesCategory.swift in Sources */,
+				1926FC792757764300FEC4D3 /* ReplyInputField.swift in Sources */,
 				5E39F75023A3F92F0073DAD5 /* InternalTransferRequest.swift in Sources */,
 				5EA8B9BA21B4391D0074EA2C /* ManagerListViewController.swift in Sources */,
 				5E39F59B23A3CE0C0073DAD5 /* DashboardPortfolioChartTableViewCell.swift in Sources */,

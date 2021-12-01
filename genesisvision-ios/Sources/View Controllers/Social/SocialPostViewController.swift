@@ -18,6 +18,12 @@ class SocialPostViewController: BaseViewController {
         tableView.backgroundColor = .clear
         return tableView
     }()
+    
+    private let replyInputTextField: ReplyInputField = {
+        let view = ReplyInputField()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +40,7 @@ class SocialPostViewController: BaseViewController {
     
     private func setup() {
         title = "Post"
+        replyInputTextField.configure(viewModels: [], delegate: self)
         setupUI()
         setupTableView()
     }
@@ -50,11 +57,17 @@ class SocialPostViewController: BaseViewController {
     
     private func setupUI() {
         view.addSubview(tableView)
+        view.addSubview(replyInputTextField)
         
         tableView.anchor(top: view.topAnchor,
                          leading: view.leadingAnchor,
-                         bottom: view.bottomAnchor,
+                         bottom: replyInputTextField.topAnchor,
                          trailing: view.trailingAnchor)
+        
+        replyInputTextField.anchor(top: tableView.bottomAnchor,
+                                   leading: view.leadingAnchor,
+                                   bottom: view.safeAreaLayoutGuide.bottomAnchor,
+                                   trailing: view.trailingAnchor)
     }
     
     override func pullToRefresh() {
@@ -65,6 +78,35 @@ class SocialPostViewController: BaseViewController {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
+    }
+}
+
+extension SocialPostViewController: ImagePickerPresentable {
+    var choosePhotoButton: UIButton {
+        replyInputTextField.attachmentButton
+    }
+    
+    func selected(pickedImage: UIImage?, pickedImageURL: URL?) {
+        guard let pickedImageUrl = pickedImageURL, let pickedImage = pickedImage else { return }
+        viewModel.pickedImagesUrls[pickedImageUrl] = pickedImage
+        let viewModels = viewModel.pickedImagesUrls.map({ return ImagesGalleryCollectionViewCellViewModel(imageUrl: $0.key.absoluteString, resize: PostImageResize(quality: nil, logoUrl: nil, height: 100, width: 100), image: $0.value, showRemoveButton: true, delegate: replyInputTextField) })
+        replyInputTextField.configure(viewModels: viewModels, delegate: self)
+    }
+}
+
+extension SocialPostViewController: ReplyInputFieldDelegate {
+    func attachmentButtonPressed() {
+        showImagePicker()
+    }
+    
+    func sendButtonPressed() {
+    }
+    
+    func removeImage(imageUrl: String) {
+        guard let imageUrl = URL(string: imageUrl) else { return }
+        viewModel.pickedImagesUrls.removeValue(forKey: imageUrl)
+        let viewModels = viewModel.pickedImagesUrls.map({ return ImagesGalleryCollectionViewCellViewModel(imageUrl: $0.key.absoluteString, resize: PostImageResize(quality: nil, logoUrl: nil, height: 100, width: 100), image: $0.value, showRemoveButton: true, delegate: replyInputTextField) })
+        replyInputTextField.configure(viewModels: viewModels, delegate: self)
     }
 }
 
@@ -105,6 +147,24 @@ extension SocialPostViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let type = viewModel.sections[section]
+        
+        switch type {
+        case .post:
+            let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 0))
+            view.translatesAutoresizingMaskIntoConstraints = true
+            let label = TitleLabel()
+            label.font = UIFont.getFont(.semibold, size: 15)
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.text = viewModel.commentsViewModels.count.toString() + " comments"
+            view.addSubview(label)
+            label.fillSuperview(padding: UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0))
+            view.isHidden = viewModel.commentsViewModels.isEmpty
+            return view
+        case .comments:
+            let view = ReplierView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 0))
+            view.configure(replingPost: viewModel.replyingPost, delegate: self)
+            return view
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -135,7 +195,16 @@ extension SocialPostViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension SocialPostViewController: BaseTableViewProtocol {
-    
+    func didReload() {
+        reloadData()
+    }
+}
+
+extension SocialPostViewController: ReplierViewDelegate {
+    func removeButtonPressed() {
+        viewModel.replyingPost = nil
+        reloadData()
+    }
 }
 
 final class SocialPostViewModel {
@@ -147,14 +216,19 @@ final class SocialPostViewModel {
     
     var sections: [SectionType] = [.post, .comments]
     
+    var replyingPost: Post?
+    
     var post: SocialFeedTableViewCellViewModel?
+    var pickedImagesUrls: [URL: UIImage] = [:]
     var commentsViewModels: [SocialCommentTableViewCellViewModel] = []
     let postId: UUID?
     let socialRouter: SocialRouter
+    weak var delegate: BaseTableViewProtocol?
     
     init(with router: SocialRouter, delegate: BaseTableViewProtocol, postId: UUID?, post: Post?) {
         self.postId = postId ?? post?._id
         self.socialRouter = router
+        self.delegate = delegate
         if let post = post {
             self.post = SocialFeedTableViewCellViewModel(post: post, cellDelegate: self)
         }
@@ -184,6 +258,8 @@ final class SocialPostViewModel {
 
 extension SocialPostViewModel: SocialCommentTableViewCellDelegate {
     func replyButtonPressed(postId: UUID) {
+        replyingPost = commentsViewModels.first(where: { $0.post._id == postId })?.post
+        delegate?.didReload()
     }
 }
 
