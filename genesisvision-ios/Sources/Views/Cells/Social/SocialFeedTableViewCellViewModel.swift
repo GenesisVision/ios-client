@@ -29,15 +29,30 @@ extension SocialFeedTableViewCellViewModel: CellViewModel {
 //            cell.deletedPostView.isHidden = true
 //        }
         
+        if let text = post.text, !text.isEmpty {
+            cell.postView.textView.isHidden = false
+            let muttableText = NSMutableAttributedString(string: text,
+                                                         attributes: [NSAttributedString.Key.font: cell.postView.textView.font!, NSAttributedString.Key.foregroundColor: UIColor.white])
+            cell.postView.textView.attributedText = muttableText
+        } else {
+            cell.postView.textView.isHidden = true
+        }
+        
         if let postId = post._id {
             cell.postId = postId
         }
         
         if let tags = post.tags, !tags.isEmpty {
-            cell.postView.tagsView.isHidden = false
+            if (tags.count == 1 && tags.first?.type == .url) || tags.allSatisfy({ $0.type == .url }) {
+                cell.postView.tagsView.isHidden = true
+                cell.postView.eventView.isHidden = true
+            } else {
+                cell.postView.tagsView.isHidden = false
+                eventPost = tags.contains(where: { $0.type == .event })
+                cell.postView.eventView.isHidden = !eventPost
+            }
             cell.postView.postTags = tags
-            eventPost = tags.contains(where: { $0.type == .event })
-            cell.postView.eventView.isHidden = !eventPost
+            cell.postView.textView.replaceTagsInText(tags: tags)
         } else {
             cell.postView.tagsView.isHidden = true
             cell.postView.eventView.isHidden = true
@@ -97,13 +112,6 @@ extension SocialFeedTableViewCellViewModel: CellViewModel {
             cell.postView.galleryView.isHidden = true
         }
         
-        if let text = post.text, !text.isEmpty, !eventPost {
-            cell.postView.textView.isHidden = false
-            cell.postView.textView.text = text
-        } else {
-            cell.postView.textView.isHidden = true
-        }
-        
         if let isLiked = post.personalDetails?.isLiked {
             cell.socialActivitiesView.isLiked = isLiked
         }
@@ -149,7 +157,11 @@ extension SocialFeedTableViewCellViewModel: CellViewModel {
         var tagsViewHeight: CGFloat = 0
         
         if let tags = post.tags, !tags.isEmpty {
-            tagsViewHeight = 80
+            if (tags.count == 1 && tags.first?.type == .url) || tags.allSatisfy({ $0.type == .url }) {
+                tagsViewHeight = 0
+            } else {
+                tagsViewHeight = 90
+            }
         }
         
         if let isEmpty = post.images?.isEmpty, !isEmpty {

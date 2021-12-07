@@ -50,7 +50,11 @@ struct SocialFeedCollectionViewCellViewModel {
         var tagsViewHeight: CGFloat = 0
         
         if let tags = post.tags, !tags.isEmpty {
-            tagsViewHeight = 80
+            if (tags.count == 1 && tags.first?.type == .url) || tags.allSatisfy({ $0.type == .url }) {
+                tagsViewHeight = 0
+            } else {
+                tagsViewHeight = 90
+            }
         }
         
         if let tags = post.tags, !tags.isEmpty, tags.contains(where: { $0.type == .event }) {
@@ -97,16 +101,6 @@ extension SocialFeedCollectionViewCellViewModel: CellViewModel {
         
         if let postId = post._id {
             cell.postId = postId
-        }
-        
-        if let tags = post.tags, !tags.isEmpty {
-            cell.postView.tagsView.isHidden = false
-            cell.postView.postTags = tags
-            eventPost = tags.contains(where: { $0.type == .event })
-            cell.postView.eventView.isHidden = !eventPost
-        } else {
-            cell.postView.tagsView.isHidden = true
-            cell.postView.eventView.isHidden = true
         }
         
         cell.delegate = cellDelegate
@@ -164,13 +158,38 @@ extension SocialFeedCollectionViewCellViewModel: CellViewModel {
         
         if let text = post.text, !text.isEmpty, !eventPost {
             cell.postView.textView.isHidden = false
-            cell.postView.textView.text = text
+            let muttableText = NSMutableAttributedString(string: text,
+                                                         attributes: [NSAttributedString.Key.font: cell.postView.textView.font!, NSAttributedString.Key.foregroundColor: UIColor.white])
+            cell.postView.textView.attributedText = muttableText
         } else {
             cell.postView.textView.isHidden = true
         }
         
-        if let isLiked = post.personalDetails?.isLiked {
+        if let tags = post.tags, !tags.isEmpty {
+            if (tags.count == 1 && tags.first?.type == .url) || tags.allSatisfy({ $0.type == .url }) {
+                cell.postView.tagsView.isHidden = true
+                cell.postView.eventView.isHidden = true
+            } else {
+                cell.postView.tagsView.isHidden = false
+                eventPost = tags.contains(where: { $0.type == .event })
+                cell.postView.eventView.isHidden = !eventPost
+            }
+            cell.postView.postTags = tags
+            cell.postView.textView.replaceTagsInText(tags: tags)
+        } else {
+            cell.postView.tagsView.isHidden = true
+            cell.postView.eventView.isHidden = true
+        }
+
+        
+        if let isLiked = post.personalDetails?.isLiked, isLiked {
             cell.socialActivitiesView.isLiked = isLiked
+        }
+        
+        if let isPinned = post.isPinned, isPinned {
+            cell.postView.pinSymbolImageView.isHidden = false
+        } else {
+            cell.postView.pinSymbolImageView.isHidden = true
         }
         
         if let likes = post.likesCount {
@@ -196,6 +215,9 @@ extension SocialFeedCollectionViewCellViewModel: CellViewModel {
         } else {
             cell.socialActivitiesView.sharesLabel.text = ""
         }
+        
+        cell.postView.sizeToFit()
+        //cell.contentView.layoutIfNeeded()
     }
 }
 

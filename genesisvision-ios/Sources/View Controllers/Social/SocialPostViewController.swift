@@ -110,6 +110,8 @@ extension SocialPostViewController: ReplyInputFieldDelegate {
     func sendButtonPressed() {
         viewModel.addPost(postText: replyInputTextField.textField.text ?? "") { [weak self] _ in
             self?.fetchData()
+            self?.replyInputTextField.textField.text = ""
+            self?.removeButtonPressed()
         }
     }
     
@@ -219,6 +221,69 @@ extension SocialPostViewController: ReplierViewDelegate {
     }
 }
 
+
+extension SocialPostViewController: SocialPostViewModelDelegate {
+    func showPostActions(postActions: [SocialPostAction], postId: UUID, postLink: String) {
+        showPostMenu(actions: postActions, postId: postId, postLink: postLink)
+    }
+    
+    
+}
+
+extension SocialPostViewController: SocialPostActionsMenuPresenable {
+    func actionSelected(action: SocialPostAction) {
+        switch action {
+        case .edit(let postId):
+            viewModel.socialRouter.show(routeType: .editPost(postId: postId))
+        case .share(let postLink):
+            viewModel.socialRouter.share(postLink)
+        case .copyLink(postLink: let postLink):
+            UIPasteboard.general.string = postLink
+            showBottomSheet(.success, title: "Your post link was copied to the clipboard successfully")
+        case .delete(let postId):
+            viewModel.deletePost(postId: postId) { [weak self] (result) in
+                switch result {
+                case .success:
+                    self?.viewModel.fetchPost { [weak self] (result) in
+                        switch result {
+                        case .success:
+                            self?.reloadData()
+                        case .failure(errorType: _):
+                            break
+                        }
+                    }
+                case .failure(errorType: let errorType):
+                    ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
+                }
+            }
+        case .report(let postId):
+            viewModel.socialRouter.show(routeType: .reportPost(postId: postId))
+        case .pin(let postId):
+            viewModel.pinPost(postId: postId) { [weak self] (result) in
+                switch result {
+                case .success:
+                    self?.pullToRefresh()
+                case .failure(errorType: let errorType):
+                    ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
+                }
+            }
+        case .unpin(let postId):
+            viewModel.pinPost(postId: postId) { [weak self] (result) in
+                switch result {
+                case .success:
+                    self?.pullToRefresh()
+                case .failure(errorType: let errorType):
+                    ErrorHandler.handleError(with: errorType, viewController: self, hud: true)
+                }
+            }
+        }
+    }
+}
+
+protocol SocialPostViewModelDelegate: AnyObject {
+    func showPostActions(postActions: [SocialPostAction], postId: UUID, postLink: String)
+}
+
 final class SocialPostViewModel {
     
     enum SectionType {
@@ -254,9 +319,9 @@ final class SocialPostViewModel {
     var commentsViewModels: [SocialCommentTableViewCellViewModel] = []
     let postId: UUID?
     let socialRouter: SocialRouter
-    weak var delegate: BaseTableViewProtocol?
+    weak var delegate: (BaseTableViewProtocol & SocialPostViewModelDelegate)?
     
-    init(with router: SocialRouter, delegate: BaseTableViewProtocol, postId: UUID?, post: Post?) {
+    init(with router: SocialRouter, delegate: BaseTableViewProtocol & SocialPostViewModelDelegate, postId: UUID?, post: Post?) {
         self.postId = postId ?? post?._id
         self.socialRouter = router
         self.delegate = delegate
@@ -270,9 +335,7 @@ final class SocialPostViewModel {
         SocialDataProvider.getPost(postId: postId) { [weak self] (viewModel) in
             if let viewModel = viewModel {
                 self?.post = SocialFeedTableViewCellViewModel(post: viewModel, cellDelegate: self)
-                if let comments = viewModel.comments {
-                    self?.commentsViewModels = comments.map({ return SocialCommentTableViewCellViewModel(post: $0, delegate: self) })
-                }
+                self?.createViewModel(comments: viewModel.comments ?? [])
                 completion(.success)
             }
             completion(.failure(errorType: .apiError(message: "")))
@@ -286,6 +349,42 @@ final class SocialPostViewModel {
         }
     }
     
+    func pinPost(postId: UUID, completion: @escaping CompletionBlock) {
+        guard let viewModel = commentsViewModels.first(where: { $0.post._id == postId }), let pinned = viewModel.post.isPinned else { return }
+
+        pinned ? SocialDataProvider.unpin(postId: postId, completion: completion) : SocialDataProvider.pin(postId: postId, completion: completion)
+    }
+    
+    func deletePost(postId: UUID, completion: @escaping CompletionBlock) {
+        guard let _ = commentsViewModels.first(where: { $0.post._id == postId }) else { return }
+    }
+    
+    func postActionsForPost(postId: UUID) -> [SocialPostAction] {
+        var postActions: [SocialPostAction] = []
+        
+        guard let viewModel = commentsViewModels.first(where: { $0.post._id == postId }) else { return postActions }
+        
+        postActions.append(.report(postId: postId))
+        
+        if let canDelete = viewModel.post.personalDetails?.canDelete, canDelete {
+            postActions.append(.delete(postId: postId))
+        }
+        
+        if let canEdit = viewModel.post.personalDetails?.canEdit, canEdit {
+            postActions.append(.edit(postId: postId))
+        }
+        
+        guard let url = viewModel.post.url else { return postActions }
+        
+        postActions.append(contentsOf: [.copyLink(postLink: url), .share(postLink: url)])
+        
+        return postActions
+    }
+    
+    private func createViewModel(comments: [Post]) {
+        commentsViewModels = comments.map({ return SocialCommentTableViewCellViewModel(post: $0, delegate: self) })
+    }
+    
     func saveImage(_ pickedImageURL: URL, completion: @escaping (CompletionBlock)) {
         BaseDataProvider.uploadImage(imageData: pickedImageURL.dataRepresentation, imageLocation: .social, completion: { [weak self] (uploadResult) in
             guard let uploadResult = uploadResult, let uuidString = uploadResult._id?.uuidString else { return completion(.failure(errorType: .apiError(message: nil))) }
@@ -297,12 +396,45 @@ final class SocialPostViewModel {
     
     func addPost(postText: String, completion: @escaping CompletionBlock) {
         let images = uploadedImages.map({ NewPostImage(image: $0.imageUDID, position: 0) })
-        let model = NewPost(text: postText, postId: post?.post._id, userId: replyingPost?._id, images: images)
+        var newPostText = postText
+        if let replyingPostAuthor = replyingPost?.author?.username, !replyingPostAuthor.isEmpty {
+            let userTag = "@\(replyingPostAuthor) (user) "
+            newPostText = userTag + newPostText
+        }
+        let model = NewPost(text: newPostText, postId: post?.post._id, userId: replyingPost?._id, images: images)
+        
         SocialDataProvider.addPost(model: model, completion: completion)
     }
 }
 
 extension SocialPostViewModel: SocialCommentTableViewCellDelegate {
+    func commentTagPressed(tag: PostTag) {
+        guard let tagType = tag.type else { return }
+        switch tagType {
+        case .program:
+            guard let assetId = tag.assetDetails?._id, let assetType = tag.assetDetails?.assetType else { return }
+            socialRouter.showAssetDetails(with: assetId.uuidString, assetType: assetType)
+        case .fund:
+            guard let assetId = tag.assetDetails?._id, let assetType = tag.assetDetails?.assetType else { return }
+            socialRouter.showAssetDetails(with: assetId.uuidString, assetType: assetType)
+        case .follow:
+            guard let assetId = tag.assetDetails?._id, let assetType = tag.assetDetails?.assetType else { return }
+            socialRouter.showAssetDetails(with: assetId.uuidString, assetType: assetType)
+        case .user:
+            guard let userId = tag.userDetails?._id?.uuidString else { return }
+            socialRouter.showUserDetails(with: userId)
+        case .asset:
+            break
+        case .event:
+            break
+        case .url:
+            guard let url = tag.link?.url else { return }
+            socialRouter.showSafari(with: url)
+        default:
+            break
+        }
+    }
+    
     func replyButtonPressed(postId: UUID) {
         replyingPost = commentsViewModels.first(where: { $0.post._id == postId })?.post
         delegate?.didReload()
@@ -315,7 +447,11 @@ extension SocialPostViewModel: SocialFeedCollectionViewCellDelegate {
     }
     
     func likeTouched(postId: UUID) {
-        
+        SocialDataProvider.getPost(postId: postId) { (post) in
+            if let isLiked = post?.personalDetails?.isLiked {
+                isLiked ? SocialDataProvider.unlikePost(postId: postId) { _ in } : SocialDataProvider.likePost(postId: postId) { _ in }
+            }
+        } errorCompletion: { _ in }
     }
     
     func shareTouched(postId: UUID) {
@@ -327,7 +463,30 @@ extension SocialPostViewModel: SocialFeedCollectionViewCellDelegate {
     }
     
     func tagPressed(tag: PostTag) {
-        
+        guard let tagType = tag.type else { return }
+        switch tagType {
+        case .program:
+            guard let assetId = tag.assetDetails?._id, let assetType = tag.assetDetails?.assetType else { return }
+            socialRouter.showAssetDetails(with: assetId.uuidString, assetType: assetType)
+        case .fund:
+            guard let assetId = tag.assetDetails?._id, let assetType = tag.assetDetails?.assetType else { return }
+            socialRouter.showAssetDetails(with: assetId.uuidString, assetType: assetType)
+        case .follow:
+            guard let assetId = tag.assetDetails?._id, let assetType = tag.assetDetails?.assetType else { return }
+            socialRouter.showAssetDetails(with: assetId.uuidString, assetType: assetType)
+        case .user:
+            guard let userId = tag.userDetails?._id?.uuidString else { return }
+            socialRouter.showUserDetails(with: userId)
+        case .asset:
+            break
+        case .event:
+            break
+        case .url:
+            guard let url = tag.link?.url else { return }
+            socialRouter.showSafari(with: url)
+        default:
+            break
+        }
     }
     
     func userOwnerPressed(postId: UUID) {
@@ -335,7 +494,14 @@ extension SocialPostViewModel: SocialFeedCollectionViewCellDelegate {
     }
     
     func postActionsPressed(postId: UUID) {
-        
+        guard let viewModel = commentsViewModels.first(where: { $0.post._id == postId }) else { return }
+        let postActions = postActionsForPost(postId: postId)
+        var postLink: String = ""
+
+        if let url = viewModel.post.url {
+            postLink = ApiKeys.socialPostsPath + url
+        }
+        delegate?.showPostActions(postActions: postActions, postId: postId, postLink: postLink)
     }
     
     func undoDeletion(postId: UUID) {

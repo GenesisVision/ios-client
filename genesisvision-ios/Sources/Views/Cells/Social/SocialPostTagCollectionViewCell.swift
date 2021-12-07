@@ -16,6 +16,8 @@ extension SocialPostTagCollectionViewCellViewModel: CellViewModel {
     func setup(on cell: SocialPostTagCollectionViewCell) {
         guard let type = postTag.type, let title = postTag.title else { return }
         
+        cell.bottomView.isHidden = true
+        
         switch type {
         case .undefined:
             break
@@ -34,6 +36,7 @@ extension SocialPostTagCollectionViewCellViewModel: CellViewModel {
             
             if let price = postTag.assetDetails?.price?.toString(), let currency = postTag.assetDetails?.priceCurrency?.rawValue {
                 cell.postTagValueLabel.text = price + " " + currency
+                cell.bottomView.isHidden = false
             }
         case .fund:
             cell.postTagTitleLabel.text = title
@@ -50,6 +53,7 @@ extension SocialPostTagCollectionViewCellViewModel: CellViewModel {
             
             if let price = postTag.assetDetails?.price?.toString(), let currency = postTag.assetDetails?.priceCurrency?.rawValue {
                 cell.postTagValueLabel.text = price + " " + currency
+                cell.bottomView.isHidden = false
             }
         case .follow:
             cell.postTagTitleLabel.text = title
@@ -66,7 +70,10 @@ extension SocialPostTagCollectionViewCellViewModel: CellViewModel {
             
             if let price = postTag.assetDetails?.price?.toString(), let currency = postTag.assetDetails?.priceCurrency?.rawValue {
                 cell.postTagValueLabel.text = price + " " + currency
+                cell.bottomView.isHidden = false
             }
+            
+            cell.bottomView.isHidden = false
         case .user:
             cell.postTagTitleLabel.text = postTag.userDetails?.username
             
@@ -77,6 +84,8 @@ extension SocialPostTagCollectionViewCellViewModel: CellViewModel {
             } else {
                 cell.postTagImageView.image = UIImage.profilePlaceholder
             }
+            
+            cell.bottomView.isHidden = true
         case .asset:
             cell.postTagTitleLabel.text = postTag.platformAssetDetails?.name
             cell.postTagSubtitleLabel.isHidden = true
@@ -91,6 +100,7 @@ extension SocialPostTagCollectionViewCellViewModel: CellViewModel {
             
             if let price = postTag.platformAssetDetails?.price?.toString(), let currency = postTag.platformAssetDetails?.priceCurrency?.rawValue {
                 cell.postTagValueLabel.text = price + " " + currency
+                cell.bottomView.isHidden = false
             }
             
             if let change = postTag.platformAssetDetails?.change24Percent?.toString(), let changeState = postTag.platformAssetDetails?.changeState {
@@ -102,13 +112,14 @@ extension SocialPostTagCollectionViewCellViewModel: CellViewModel {
                     cell.postTagSecondValueLabel.text = change + " " + "%"
                     cell.postTagSecondValueLabel.textColor = UIColor.Common.red
                 }
+                cell.bottomView.isHidden = false
             }
         case .event:
-            break
+            cell.bottomView.isHidden = false
         case .post:
-            break
+            cell.bottomView.isHidden = false
         case .url:
-            break
+            cell.bottomView.isHidden = false
         }
     }
 }
@@ -123,14 +134,23 @@ class SocialPostTagCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
-    private let topView: UIView = {
+    private let stackView: UIStackView = {
+       let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.distribution = .equalSpacing
+        stackView.axis = .vertical
+        stackView.spacing = 5
+        return stackView
+    }()
+    
+    let topView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .clear
         return view
     }()
     
-    private let bottomView: UIView = {
+    let bottomView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .clear
@@ -223,15 +243,18 @@ class SocialPostTagCollectionViewCell: UICollectionViewCell {
     private func overlayZeroLayer() {
         contentView.addSubview(mainView)
         mainView.fillSuperview()
+        
+        mainView.addSubview(stackView)
+        stackView.fillSuperview(padding: UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10))
     }
     
     private func overlayFirstLayer() {
         mainView.addSubview(topView)
         mainView.addSubview(bottomView)
         
-        topView.anchor(top: mainView.topAnchor, leading: mainView.leadingAnchor, bottom: nil, trailing: mainView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10), size: CGSize(width: 0, height: 50))
+        topView.anchor(top: mainView.topAnchor, leading: mainView.leadingAnchor, bottom: nil, trailing: mainView.trailingAnchor, size: CGSize(width: 0, height: 50))
         
-        bottomView.anchor(top: topView.bottomAnchor, leading: mainView.leadingAnchor, bottom: mainView.bottomAnchor, trailing: mainView.trailingAnchor, padding: UIEdgeInsets(top: 5, left: 10, bottom: 0, right: 10))
+        bottomView.anchor(top: topView.bottomAnchor, leading: mainView.leadingAnchor, bottom: mainView.bottomAnchor, trailing: mainView.trailingAnchor, size: CGSize(width: 0, height: 30))
     }
     
     private func overlayTopView() {

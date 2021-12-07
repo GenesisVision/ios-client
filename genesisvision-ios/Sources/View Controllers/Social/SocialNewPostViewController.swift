@@ -84,6 +84,13 @@ class SocialNewPostViewController: BaseViewController {
         if viewModel.sharedPost != nil {
             setupSharedPostView()
         }
+        
+        if viewModel.mode == .edit {
+            title = "Edit post"
+            viewModel.fetchPost { [weak self] _ in
+                self?.textView.text = self?.viewModel.newPostText
+            }
+        }
     }
     
     private func setup() {
@@ -271,6 +278,11 @@ final class SocialNewPostViewModel {
         let image: UIImage
     }
     
+    enum SocialPostViewModelMode {
+        case add
+        case edit
+    }
+    
     var pickedImages: [PickedImage] = [] {
         didSet {
             uploadedImages = uploadedImages.filter({ uploadedImage in
@@ -280,12 +292,31 @@ final class SocialNewPostViewModel {
     }
     var uploadedImages: [UploadedImage] = []
     
-    init(sharedPost: Post?) {
+    let mode: SocialPostViewModelMode
+    var postId: UUID?
+    
+    init(sharedPost: Post?, mode: SocialPostViewModelMode? = nil, postId: UUID? = nil) {
         self.sharedPost = sharedPost
+        self.postId = postId
+        
+        if let mode = mode {
+            self.mode = mode
+        } else {
+            self.mode = .add
+        }
     }
     
     func publishPost(completion: @escaping CompletionBlock) {
-        sharedPost == nil ? addPost(completion: completion) : rePost(completion: completion)
+        if sharedPost == nil {
+            switch mode {
+            case .add:
+                addPost(completion: completion)
+            case .edit:
+                editPost(completion: completion)
+            }
+        } else {
+            rePost(completion: completion)
+        }
     }
     
     private func rePost(completion: @escaping CompletionBlock) {
@@ -300,6 +331,13 @@ final class SocialNewPostViewModel {
         SocialDataProvider.addPost(model: model, completion: completion)
     }
     
+    private func editPost(completion: @escaping CompletionBlock) {
+        guard let postId = postId else { return  completion(.failure(errorType: .apiError(message: "")))}
+        let images = uploadedImages.map({ NewPostImage(image: $0.imageUDID, position: 0) })
+        let model = EditPost(_id: postId, text: newPostText, images: images)
+        SocialDataProvider.editPost(model: model, completion: completion)
+    }
+    
     func saveImage(_ pickedImageURL: URL, completion: @escaping (CompletionBlock)) {
         BaseDataProvider.uploadImage(imageData: pickedImageURL.dataRepresentation, imageLocation: .social, completion: { [weak self] (uploadResult) in
             guard let uploadResult = uploadResult, let uuidString = uploadResult._id?.uuidString else { return completion(.failure(errorType: .apiError(message: nil))) }
@@ -307,5 +345,23 @@ final class SocialNewPostViewModel {
             self?.uploadedImages.append(UploadedImage(imageUrl: pickedImageURL.absoluteString, imageUDID: uuidString))
             completion(.success)
             }, errorCompletion: completion)
+    }
+    
+    func fetchPost(completion: @escaping CompletionBlock) {
+        guard let postId = postId else { return }
+        SocialDataProvider.getPost(postId: postId) { [weak self] (viewModel) in
+            if let viewModel = viewModel {
+                self?.newPostText = viewModel.text
+                completion(.success)
+            }
+            completion(.failure(errorType: .apiError(message: "")))
+        } errorCompletion: { (result) in
+            switch result {
+            case .success:
+                break
+            case .failure(errorType: let errorType):
+                completion(.failure(errorType: errorType))
+            }
+        }
     }
 }

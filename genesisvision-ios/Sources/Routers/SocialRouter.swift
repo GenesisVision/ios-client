@@ -18,6 +18,7 @@ enum SocialRouteType {
     case mediaPosts
     case reportPost(postId: UUID)
     case showImages(index: Int, imagesUrls: [URL], images: [UIImage])
+    case editPost(postId: UUID)
 }
 
 
@@ -43,6 +44,8 @@ class SocialRouter: Router {
             showPostReport(postId: postId)
         case .showImages(let index, let imagesUrls, let images):
             showImages(index: index, imagesUrls: imagesUrls, images: images)
+        case .editPost(let postId):
+            showEditPost(postId: postId)
         }
     }
     
@@ -85,6 +88,13 @@ class SocialRouter: Router {
     private func showPost(post: Post) {
         let viewController = SocialPostViewController()
         viewController.viewModel = SocialPostViewModel(with: self, delegate: viewController, postId: nil, post: post)
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func showEditPost(postId: UUID) {
+        guard let viewController = SocialNewPostViewController.storyboardInstance(.social) else { return }
+        viewController.viewModel = SocialNewPostViewModel(sharedPost: nil, mode: .edit, postId: postId)
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)
     }

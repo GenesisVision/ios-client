@@ -43,6 +43,7 @@ class ReplierView: UIView {
     }
     
     func configure(replingPost: Post?, delegate: ReplierViewDelegate?) {
+        self.delegate = delegate
         guard let authorName = replingPost?.author?.username else {
             isHidden = true
             return }

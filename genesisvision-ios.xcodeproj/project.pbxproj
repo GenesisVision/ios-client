@@ -58,6 +58,11 @@
 		1926FCB327579A4900FEC4D3 /* TickerChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FCB227579A4900FEC4D3 /* TickerChart.swift */; };
 		1926FCB627579A5A00FEC4D3 /* WalletDepositData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FCB427579A5900FEC4D3 /* WalletDepositData.swift */; };
 		1926FCB727579A5A00FEC4D3 /* WalletWithdrawalCurrencyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FCB527579A5900FEC4D3 /* WalletWithdrawalCurrencyInfo.swift */; };
+		1926FCB92758D55500FEC4D3 /* SocialFeedDeletedPostCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FCB82758D55400FEC4D3 /* SocialFeedDeletedPostCollectionViewCellViewModel.swift */; };
+		1926FCBB2758DE4100FEC4D3 /* SocialFeedDeletedPostCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1926FCBA2758DE4100FEC4D3 /* SocialFeedDeletedPostCollectionViewCell.xib */; };
+		1926FCBD2759289000FEC4D3 /* SocialManagerInfoAboutTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1926FCBC2759289000FEC4D3 /* SocialManagerInfoAboutTableViewCell.xib */; };
+		1926FCBF275928FB00FEC4D3 /* SocialManagerInfoAboutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FCBE275928FB00FEC4D3 /* SocialManagerInfoAboutTableViewCell.swift */; };
+		1926FCC1275E57DF00FEC4D3 /* SocialTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1926FCC0275E57DF00FEC4D3 /* SocialTextView.swift */; };
 		192DB057256D864200C198CB /* KYCInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192DB056256D864100C198CB /* KYCInfoViewController.swift */; };
 		192DB067256F075000C198CB /* DashboardInvestmentLimitsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192DB065256F074F00C198CB /* DashboardInvestmentLimitsTableViewCell.swift */; };
 		192DB068256F075000C198CB /* DashboardInvestmentLimitsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 192DB066256F074F00C198CB /* DashboardInvestmentLimitsTableViewCell.xib */; };
@@ -1305,6 +1310,11 @@
 		1926FCB227579A4900FEC4D3 /* TickerChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TickerChart.swift; sourceTree = "<group>"; };
 		1926FCB427579A5900FEC4D3 /* WalletDepositData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletDepositData.swift; sourceTree = "<group>"; };
 		1926FCB527579A5900FEC4D3 /* WalletWithdrawalCurrencyInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletWithdrawalCurrencyInfo.swift; sourceTree = "<group>"; };
+		1926FCB82758D55400FEC4D3 /* SocialFeedDeletedPostCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialFeedDeletedPostCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
+		1926FCBA2758DE4100FEC4D3 /* SocialFeedDeletedPostCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialFeedDeletedPostCollectionViewCell.xib; sourceTree = "<group>"; };
+		1926FCBC2759289000FEC4D3 /* SocialManagerInfoAboutTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialManagerInfoAboutTableViewCell.xib; sourceTree = "<group>"; };
+		1926FCBE275928FB00FEC4D3 /* SocialManagerInfoAboutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialManagerInfoAboutTableViewCell.swift; sourceTree = "<group>"; };
+		1926FCC0275E57DF00FEC4D3 /* SocialTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialTextView.swift; sourceTree = "<group>"; };
 		192DB056256D864100C198CB /* KYCInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KYCInfoViewController.swift; sourceTree = "<group>"; };
 		192DB065256F074F00C198CB /* DashboardInvestmentLimitsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardInvestmentLimitsTableViewCell.swift; sourceTree = "<group>"; };
 		192DB066256F074F00C198CB /* DashboardInvestmentLimitsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DashboardInvestmentLimitsTableViewCell.xib; sourceTree = "<group>"; };
@@ -2613,6 +2623,10 @@
 				1926FC702756EA4D00FEC4D3 /* SocialCommentTableViewCellViewModel.swift */,
 				1926FC742756FFC900FEC4D3 /* ImagesGalleryCollectionViewCell.xib */,
 				1926FC762757003800FEC4D3 /* ImagesGalleryCollectionViewCellViewModel.swift */,
+				1926FCB82758D55400FEC4D3 /* SocialFeedDeletedPostCollectionViewCellViewModel.swift */,
+				1926FCBA2758DE4100FEC4D3 /* SocialFeedDeletedPostCollectionViewCell.xib */,
+				1926FCBC2759289000FEC4D3 /* SocialManagerInfoAboutTableViewCell.xib */,
+				1926FCBE275928FB00FEC4D3 /* SocialManagerInfoAboutTableViewCell.swift */,
 			);
 			path = Social;
 			sourceTree = "<group>";
@@ -3617,6 +3631,7 @@
 				1926FC722756FF3000FEC4D3 /* ImagesGalleryView.swift */,
 				1926FC782757764300FEC4D3 /* ReplyInputField.swift */,
 				1926FC7A27577F4500FEC4D3 /* ReplierView.swift */,
+				1926FCC0275E57DF00FEC4D3 /* SocialTextView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -5114,6 +5129,7 @@
 				5E17709F220D05A900669D84 /* WalletTableViewCell.xib in Resources */,
 				19DC7B2825B06133008AC6D7 /* SocialMediaUserCollectionViewCell.xib in Resources */,
 				5EEFAA7323B6A43200EBBC6D /* ProgramHeaderTableViewCell.xib in Resources */,
+				1926FCBD2759289000FEC4D3 /* SocialManagerInfoAboutTableViewCell.xib in Resources */,
 				192DB068256F075000C198CB /* DashboardInvestmentLimitsTableViewCell.xib in Resources */,
 				5E1CF81F218B71D100541C70 /* Montserrat-Medium.ttf in Resources */,
 				19DC7B5625B1D083008AC6D7 /* SocialMediaListTableViewCell.xib in Resources */,
@@ -5164,6 +5180,7 @@
 				5EED8A4023857E83001C3D54 /* DashboardOverviewTableViewCell.xib in Resources */,
 				5EA1FE2821A2F24A00308D81 /* FacetCollectionViewCell.xib in Resources */,
 				5ED738772194FA15001DA633 /* FilterTableViewCell.xib in Resources */,
+				1926FCBB2758DE4100FEC4D3 /* SocialFeedDeletedPostCollectionViewCell.xib in Resources */,
 				5EFB2360238AAF3C00CD7480 /* TradingHeaderTableViewCell.xib in Resources */,
 				FCC9DD5D200DFFDC008825EC /* Assets.storyboard in Resources */,
 				5EB064C0239AF6D9003AB3FB /* AddFundAssetTableViewCell.xib in Resources */,
@@ -5443,6 +5460,7 @@
 				19411FBC25EFC66A00ADE76E /* SocialFollowListTableViewCell.swift in Sources */,
 				5EFDEAB8238FFECA00AF3AC1 /* BaseTableViewCell.swift in Sources */,
 				5EDD6D3F22C7A6DE00B9DB93 /* CustomLabels.swift in Sources */,
+				1926FCBF275928FB00FEC4D3 /* SocialManagerInfoAboutTableViewCell.swift in Sources */,
 				5E0DB5E321C8EB2C0027A778 /* NotificationsSettingsViewController.swift in Sources */,
 				5EA8B9BD21B44F920074EA2C /* ManagerListViewModel.swift in Sources */,
 				FC27232A20498959005225F2 /* QRCodeReaderViewContainer.swift in Sources */,
@@ -5608,6 +5626,7 @@
 				19A56E8B2589389000553408 /* BinanceRawCancelOrderId.swift in Sources */,
 				19EEE0CE2507C1E600F83CED /* PostPersonalDetails.swift in Sources */,
 				5EFE7C412181E78700D385C8 /* FundViewController.swift in Sources */,
+				1926FCC1275E57DF00FEC4D3 /* SocialTextView.swift in Sources */,
 				5E39F74D23A3F92F0073DAD5 /* ProfilePublicShort.swift in Sources */,
 				5E39F70823A3F92F0073DAD5 /* TwoFactorAuthenticator.swift in Sources */,
 				5EF9F92123E322F100542E1E /* FollowNotificationSettingList.swift in Sources */,
@@ -6092,6 +6111,7 @@
 				5E39F79323A3F9300073DAD5 /* PlatformAssets.swift in Sources */,
 				5EF14D792181EB0E00B3843A /* FundWithdrawViewController.swift in Sources */,
 				5EC2402422D9139D0053AFF0 /* ErrorBottomSheetView.swift in Sources */,
+				1926FCB92758D55500FEC4D3 /* SocialFeedDeletedPostCollectionViewCellViewModel.swift in Sources */,
 				5E39F73423A3F92F0073DAD5 /* UserDetailsList.swift in Sources */,
 				196389B12530AA9C00CA2092 /* BinanceRawKlineItemsViewModel.swift in Sources */,
 				5E21663523A7DC97001BB512 /* AssetPublicDetails.swift in Sources */,
@@ -6449,7 +6469,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -6507,7 +6527,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 13;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -6580,7 +6600,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 13;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -6623,7 +6643,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_ENTITLEMENTS = NotificationContent/NotificationContent.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = NotificationContent/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -6681,7 +6701,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationContent/NotificationContent.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 13;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -6754,7 +6774,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationContent/NotificationContent.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 13;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -6858,7 +6878,7 @@
 				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -7161,7 +7181,7 @@
 				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
@@ -7251,7 +7271,7 @@
 				CODE_SIGN_ENTITLEMENTS = "genesisvision-ios/Genesis Vision.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;

@@ -35,6 +35,7 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
     var viewModels = [CellViewAnyModel]()
     
     var addPostViewModel: SocialMediaAddPostCollectionViewCellViewModel?
+    var deletedPostViewModels: [SocialFeedDeletedPostCollectionViewCellViewModel] = []
     
     enum SectionType {
         case addPost
@@ -60,7 +61,8 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
 
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [SocialMediaAddPostCollectionViewCellViewModel.self,
-                SocialFeedCollectionViewCellViewModel.self]
+                SocialFeedCollectionViewCellViewModel.self,
+                SocialFeedDeletedPostCollectionViewCellViewModel.self]
     }
     
     var shouldHightlight: Bool = false
@@ -81,6 +83,14 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
         if showAddPost {
             sections.insert(.addPost, at: 0)
             addPostViewModel = SocialMediaAddPostCollectionViewCellViewModel(imageUrl: "", delegate: self)
+        }
+    }
+    
+    func deletePosts() {
+        for item in deletedPostViewModels {
+            if let id = item.post._id {
+                SocialDataProvider.deletePost(postId: id, completion: { _ in })
+            }
         }
     }
     
@@ -119,7 +129,9 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
     }
     
     func deletePost(postId: UUID, completion: @escaping CompletionBlock) {
-        SocialDataProvider.deletePost(postId: postId, completion: completion)
+        guard let postViewModel = viewModels.first(where: { return ($0 as? SocialFeedCollectionViewCellViewModel)?.post._id == postId }) as? SocialFeedCollectionViewCellViewModel else { return }
+        deletedPostViewModels.append(SocialFeedDeletedPostCollectionViewCellViewModel(post: postViewModel.post, delegate: self))
+        delegate?.reloadCollectionViewData()
     }
     
     func pinPost(postId: UUID, completion: @escaping CompletionBlock) {
@@ -143,10 +155,14 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
         case .addPost:
             return addPostViewModel
         case .feed:
+            if let model = viewModels[indexPath.row] as? SocialFeedCollectionViewCellViewModel {
+                if let deletedModel = deletedPostViewModels.first(where: { $0.post._id == model.post._id }) {
+                    return deletedModel
+                }
+                return viewModels[indexPath.row]
+            }
             return viewModels[indexPath.row]
         }
-        
-        
     }
     
     func sizeForItem(at indexPath: IndexPath, frame: CGRect) -> CGSize {
@@ -158,7 +174,11 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
         case .feed:
             let spacing: CGFloat = 0
             if let viewModel = viewModels[safe: indexPath.row] as? SocialFeedCollectionViewCellViewModel {
-                return viewModel.cellSize(spacing: spacing, frame: frame)
+                if let _ = deletedPostViewModels.first(where: { $0.post._id == viewModel.post._id }) {
+                    return CGSize(width: frame.width, height: 70)
+                } else {
+                    return viewModel.cellSize(spacing: spacing, frame: frame)
+                }
             } else {
                 let size: CGFloat = (frame.width - spacing)
                 return CGSize(width: size, height: 300)
@@ -365,5 +385,12 @@ extension SocialFeedCollectionViewModel: SocialFeedCollectionViewCellDelegate {
 extension SocialFeedCollectionViewModel: SocialMediaAddPostCollectionViewCellDelegate {
     func shareIdeasButtonPressed() {
         delegate?.shareIdeasPressed()
+    }
+}
+
+extension SocialFeedCollectionViewModel: SocialFeedDeletedPostCollectionViewCellDelegate {
+    func undoButtonPressed(postId: UUID) {
+        deletedPostViewModels.removeAll(where: { $0.post._id == postId })
+        delegate?.reloadCollectionViewData()
     }
 }

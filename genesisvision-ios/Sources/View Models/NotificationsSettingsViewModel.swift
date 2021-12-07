@@ -331,6 +331,8 @@ final class NotificationsSettingsViewModel {
         
         var emergencySettings = NotificationSettingViewModel(assetId: nil, managerId: nil, type: .platformEmergency, conditionType: .empty, conditionAmount: 0, _id: nil, isEnabled: false)
         
+        var socialSettings = NotificationSettingViewModel(assetId: nil, managerId: nil, type: .social, conditionType: .empty, conditionAmount: 0, _id: nil, isEnabled: false)
+        
         if let settings = settingsGeneral, settings.count > 0 {
             settings.forEach({ (setting) in
                 if let type = setting.type {
@@ -341,6 +343,9 @@ final class NotificationsSettingsViewModel {
                     case .platformEmergency:
                         emergencySettings._id = setting._id
                         emergencySettings.isEnabled = setting.isEnabled
+                    case .social:
+                        socialSettings._id = setting._id
+                        socialSettings.isEnabled = setting.isEnabled
                     default:
                         break
                     }
@@ -349,10 +354,16 @@ final class NotificationsSettingsViewModel {
         }
         
         let firstSettingViewModel = NotificationsSettingsGeneralTableViewCellViewModel(setting: newsAndUpdatesSetting, settingsProtocol: self)
+        
         settingsGeneralViewModels.append(firstSettingViewModel)
         
         let secondSettingsViewModel = NotificationsSettingsGeneralTableViewCellViewModel(setting: emergencySettings, settingsProtocol: self)
+        
         settingsGeneralViewModels.append(secondSettingsViewModel)
+        
+        let thirdSettingsViewModel = NotificationsSettingsGeneralTableViewCellViewModel(setting: socialSettings, settingsProtocol: self)
+        
+        settingsGeneralViewModels.append(thirdSettingsViewModel)
     }
     
     private func setup(generalsProgram settingsGeneral: [NotificationSettingViewModel]?) {

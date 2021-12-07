@@ -21,7 +21,7 @@
                         <rect key="frame" x="10" y="10" width="300" height="202"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="YuM-fc-Klt">
-                                <rect key="frame" x="0.0" y="0.0" width="235" height="36"/>
+                                <rect key="frame" x="0.0" y="0.0" width="42" height="36"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Vt-vU-8tK" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="42" height="15"/>
@@ -49,6 +49,7 @@
                             </button>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="FR9-2k-cmf" firstAttribute="leading" secondItem="YuM-fc-Klt" secondAttribute="trailing" id="Ipc-WL-1F1"/>
                             <constraint firstItem="FR9-2k-cmf" firstAttribute="width" secondItem="oEB-Fv-MdT" secondAttribute="width" multiplier="0.2" id="v2O-zO-gVh"/>
                         </constraints>
                     </stackView>

@@ -60,6 +60,12 @@ class SocialFeedViewController: BaseViewController {
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        viewModel.socialCollectionViewModel.deletePosts()
+    }
+    
     private func setupShowEventsView() {
         let label = TitleLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -172,8 +178,8 @@ class SocialFeedViewController: BaseViewController {
 extension SocialFeedViewController: SocialPostActionsMenuPresenable {
     func actionSelected(action: SocialPostAction) {
         switch action {
-        case .edit(postId: _):
-            break
+        case .edit(let postId):
+            viewModel.socialRouter.show(routeType: .editPost(postId: postId))
         case .share(let postLink):
             viewModel.socialRouter.share(postLink)
         case .copyLink(postLink: let postLink):
@@ -286,6 +292,9 @@ extension SocialFeedViewController: SocialFeedCollectionViewModelDelegate {
             break
         case .event:
             break
+        case .url:
+            guard let url = tag.link?.url else { return }
+            openSafariVC(with: url)
         default:
             break
         }

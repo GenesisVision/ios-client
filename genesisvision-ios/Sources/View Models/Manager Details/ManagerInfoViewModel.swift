@@ -52,6 +52,7 @@ final class ManagerInfoViewModel: ViewModelWithListProtocol {
     var cellModelsForRegistration: [CellViewAnyModel.Type] {
         return [DefaultTableViewCellViewModel.self,
                 SocialInfoLinksTableViewCellViewModel.self,
+                SocialManagerInfoAboutTableViewCellViewModel.self,
                 ManagerTableViewCellViewModel.self,
                 ManagerSocialTableViewCellViewModel.self]
     }
@@ -127,7 +128,7 @@ extension ManagerInfoViewModel {
                 return SocialInfoLinksTableViewCellViewModel(socialLinks: socialLinks, delegate: self)
             case .about:
                 guard let about = publicProfile.about else { return nil }
-                return DefaultTableViewCellViewModel(title: "About", subtitle: about)
+                return SocialManagerInfoAboutTableViewCellViewModel(title: "About", subtitle: about)
             case .social:
                 guard let followersCount = publicProfile.followers, let followingCount = publicProfile.following else { return nil }
                 return ManagerSocialTableViewCellViewModel(followersCount: followersCount, followingCount: followingCount, delegate: self)

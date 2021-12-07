@@ -10,6 +10,9 @@ import UIKit
 
 protocol SocialCommentTableViewCellDelegate: AnyObject {
     func replyButtonPressed(postId: UUID)
+    func commentTagPressed(tag: PostTag)
+    func likeTouched(postId: UUID)
+    func postActionsPressed(postId: UUID)
 }
 
 struct SocialCommentTableViewCellViewModel {
@@ -47,9 +50,23 @@ extension SocialCommentTableViewCellViewModel: CellViewModel {
         
         if let text = post.text, !text.isEmpty {
             cell.textView.isHidden = false
-            cell.textView.text = text
+            let muttableText = NSMutableAttributedString(string: text,
+                                                         attributes: [NSAttributedString.Key.font: cell.textView.font!, NSAttributedString.Key.foregroundColor: UIColor.white])
+            cell.textView.attributedText = muttableText
         } else {
             cell.textView.isHidden = true
+        }
+        
+        if let tags = post.tags, !tags.isEmpty {
+            if (tags.count == 1 && tags.first?.type == .url) || tags.allSatisfy({ $0.type == .url }) {
+                cell.tagsView.isHidden = true
+            } else {
+                cell.tagsView.isHidden = false
+            }
+            cell.postTags = tags
+            cell.textView.replaceTagsInText(tags: tags)
+        } else {
+            cell.tagsView.isHidden = true
         }
         
         if let date = post.date {
@@ -93,7 +110,7 @@ extension SocialCommentTableViewCellViewModel: CellViewModel {
     
     func cellSize(spacing: CGFloat, frame: CGRect) -> CGSize {
         let width = frame.width - spacing
-        let defaultHeight: CGFloat = 90
+        let defaultHeight: CGFloat = 100
         let socialPostViewSizes = postViewSizes()
         
         let cellHeight = socialPostViewSizes.allHeight + defaultHeight
@@ -107,7 +124,11 @@ extension SocialCommentTableViewCellViewModel: CellViewModel {
         var tagsViewHeight: CGFloat = 0
         
         if let tags = post.tags, !tags.isEmpty {
-            tagsViewHeight = 80
+            if (tags.count == 1 && tags.first?.type == .url) || tags.allSatisfy({ $0.type == .url }) {
+                tagsViewHeight = 0
+            } else {
+                tagsViewHeight = 90
+            }
         }
         
         if let isEmpty = post.images?.isEmpty, !isEmpty {
@@ -178,8 +199,8 @@ class SocialCommentTableViewCell: UITableViewCell {
         return view
     }()
     
-    let textView: UITextView = {
-        let textView = UITextView()
+    let textView: SocialTextView = {
+        let textView = SocialTextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.backgroundColor = .clear
         textView.font = UIFont.getFont(.regular, size: 16)
@@ -260,6 +281,20 @@ class SocialCommentTableViewCell: UITableViewCell {
         }
     }
     
+    let tagsView: SocialPostTagsView = {
+        let socialPostTagsView = SocialPostTagsView()
+        socialPostTagsView.translatesAutoresizingMaskIntoConstraints = false
+        socialPostTagsView.backgroundColor = .clear
+        socialPostTagsView.isHidden = true
+        return socialPostTagsView
+    }()
+    
+    var postTags: [PostTag]  = [] {
+        didSet {
+            tagsView.viewModels = postTags.filter({ $0.type != .event }).filter({ $0.type != .url })
+        }
+    }
+    
     weak var delegate: SocialCommentTableViewCellDelegate?
     var postId: UUID?
     
@@ -282,7 +317,12 @@ class SocialCommentTableViewCell: UITableViewCell {
     }
     
     private func setup() {
+        tagsView.delegate = self
+        textView.wordRecognizerDelegate = self
         replyButton.addTarget(self, action: #selector(replyButtonPressed), for: .touchUpInside)
+        let likesGest = UITapGestureRecognizer(target: self, action: #selector(likesViewTouched))
+        likesView.addGestureRecognizer(likesGest)
+        postActionsButton.addTarget(self, action: #selector(touchPostActionsButton), for: .touchUpInside)
         setupUI()
     }
     
@@ -320,13 +360,17 @@ class SocialCommentTableViewCell: UITableViewCell {
         middleView.anchor(top: userNameLabel.bottomAnchor,
                           leading: userNameLabel.leadingAnchor,
                           bottom: dateLabel.topAnchor,
-                          trailing: mainView.trailingAnchor)
+                          trailing: mainView.trailingAnchor,
+                          padding: UIEdgeInsets(top: 0, left: 0, bottom: 5, right: 0))
         
         middleView.addArrangedSubview(textView)
         middleView.addArrangedSubview(galleryView)
+        middleView.addArrangedSubview(tagsView)
         
         textView.anchorSize(size: CGSize(width: 0, height: 40))
         galleryView.anchorSize(size: CGSize(width: 0, height: 150))
+        tagsView.anchorSize(size: CGSize(width: 0, height: 80))
+        
         
         dateLabel.anchor(top: middleView.bottomAnchor,
                          leading: userNameLabel.leadingAnchor,
@@ -372,5 +416,30 @@ class SocialCommentTableViewCell: UITableViewCell {
     @objc private func replyButtonPressed() {
         guard let postId = postId else { return }
         delegate?.replyButtonPressed(postId: postId)
+    }
+    
+    @objc private func likesViewTouched() {
+        guard let postId = postId else { return }
+        likeCount = isLiked ? likeCount - 1 : likeCount + 1
+        isLiked = !isLiked
+        delegate?.likeTouched(postId: postId)
+    }
+    
+    @objc private func touchPostActionsButton() {
+        guard let postId = postId else { return }
+        delegate?.postActionsPressed(postId: postId)
+    }
+}
+
+extension SocialCommentTableViewCell: SocialTextViewDelegate {
+    func wordRecognized(word: String) {
+        guard let tag = postTags.first(where: { $0.title == word }) else { return }
+        delegate?.commentTagPressed(tag: tag)
+    }
+}
+
+extension SocialCommentTableViewCell: SocialPostTagsViewDelegate {
+    func tagPressed(tag: PostTag) {
+        delegate?.commentTagPressed(tag: tag)
     }
 }

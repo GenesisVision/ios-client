@@ -62,7 +62,11 @@ struct SocialMediaFeedCollectionViewCellViewModel {
         }
         
         if let tags = post.tags, !tags.isEmpty {
-            tagsViewHeight = 80
+            if (tags.count == 1 && tags.first?.type == .url) || tags.allSatisfy({ $0.type == .url }) {
+                tagsViewHeight = 0
+            } else {
+                tagsViewHeight = 90
+            }
         }
         
         return SocialPostViewSizes(textViewHeight: textHeight, imageViewHeight: imageHeight, tagViewHeight: tagsViewHeight, eventViewHeight: 0)
@@ -130,18 +134,28 @@ extension SocialMediaFeedCollectionViewCellViewModel: CellViewModel {
             cell.postView.galleryView.isHidden = true
         }
         
-        if let tags = post.tags, !tags.isEmpty {
-            cell.postView.tagsView.isHidden = false
-            cell.postView.postTags = tags
-        } else {
-            cell.postView.tagsView.isHidden = true
-        }
-        
         if let text = post.text, !text.isEmpty {
             cell.postView.textView.isHidden = false
-            cell.postView.textView.text = text
+            let muttableText = NSMutableAttributedString(string: text,
+                                                         attributes: [NSAttributedString.Key.font: cell.postView.textView.font!, NSAttributedString.Key.foregroundColor: UIColor.white])
+            cell.postView.textView.attributedText = muttableText
         } else {
             cell.postView.textView.isHidden = true
+        }
+        
+        if let tags = post.tags, !tags.isEmpty {
+            if (tags.count == 1 && tags.first?.type == .url) || tags.allSatisfy({ $0.type == .url }) {
+                cell.postView.tagsView.isHidden = true
+                cell.postView.eventView.isHidden = true
+            } else {
+                cell.postView.tagsView.isHidden = false
+                cell.postView.eventView.isHidden = true
+            }
+            cell.postView.postTags = tags
+            cell.postView.textView.replaceTagsInText(tags: tags)
+        } else {
+            cell.postView.tagsView.isHidden = true
+            cell.postView.eventView.isHidden = true
         }
         
         if let isLiked = post.personalDetails?.isLiked {

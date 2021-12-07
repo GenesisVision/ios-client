@@ -103,18 +103,17 @@ final class SocialPostView: UIView {
         return button
     }()
     
-    let textView: UITextView = {
-        let textView = UITextView()
+    let textView: SocialTextView = {
+        let textView = SocialTextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.backgroundColor = .clear
         textView.font = UIFont.getFont(.regular, size: 16)
         textView.isUserInteractionEnabled = true
         textView.isEditable = false
             
-        let paddng = textView.textContainer.lineFragmentPadding
-        textView.textContainerInset = UIEdgeInsets(top: 0, left: -paddng, bottom: 0, right: -paddng)
+        textView.textContainerInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         textView.isScrollEnabled = true
-        textView.dataDetectorTypes = UIDataDetectorTypes.all
+        textView.textColor = UIColor.white
         return textView
     }()
     
@@ -146,11 +145,9 @@ final class SocialPostView: UIView {
             if let postTag = postTags.first(where: { $0.type == .event }), let eventModel = postTag.event, let assetDetails = postTag.assetDetails {
                 eventView.configure(event: eventModel, assetDetails: assetDetails)
             }
-            tagsView.viewModels = postTags.filter({ $0.type != .event })
+            tagsView.viewModels = postTags.filter({ $0.type != .event }).filter({ $0.type != .url })
         }
     }
-    
-    var socialPostHeightConstraints: [SocialCellHeightConstraintType: NSLayoutConstraint] = [:]
     
     var socialPostViewSizes: SocialPostViewSizes?
     weak var delegate: SocialPostViewDelegate?
@@ -169,6 +166,7 @@ final class SocialPostView: UIView {
     
     private func setup() {
         tagsView.delegate = self
+        textView.wordRecognizerDelegate = self
         galleryView.delegate = self
         overlayZeroLayer()
         overlayTopView()
@@ -250,9 +248,6 @@ final class SocialPostView: UIView {
     
     func updateMiddleViewConstraints() {
         middleView.removeAllArrangedSubviewsCompletely()
-        textView.removeFromSuperview()
-        galleryView.removeFromSuperview()
-        tagsView.removeFromSuperview()
         overlayMiddleView()
     }
     
@@ -262,6 +257,13 @@ final class SocialPostView: UIView {
     
     @objc private func touchPostActionsButton() {
         delegate?.postActionsPressed()
+    }
+}
+
+extension SocialPostView: SocialTextViewDelegate {
+    func wordRecognized(word: String) {
+        guard let tag = postTags.first(where: { $0.title == word }) else { return }
+        delegate?.tagPressed(tag: tag)
     }
 }
 

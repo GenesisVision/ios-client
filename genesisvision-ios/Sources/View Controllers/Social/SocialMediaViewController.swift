@@ -164,6 +164,9 @@ extension SocialMediaViewController: SocialMediaCollectionViewModelDelegate {
             break
         case .event:
             break
+        case .url:
+            guard let url = tag.link?.url else { return }
+            openSafariVC(with: url)
         default:
             break
         }
