@@ -9,7 +9,7 @@
 import UIKit
 import Charts
 
-protocol ChartViewProtocol: class {
+protocol ChartViewProtocol: AnyObject {
     var filterDateRangeModel: FilterDateRangeModel? { get }
     
     func chartValueSelected(date: Date)

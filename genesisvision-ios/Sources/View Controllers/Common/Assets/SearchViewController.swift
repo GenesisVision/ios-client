@@ -9,7 +9,7 @@
 import UIKit
 import Tabman
 
-protocol SearchViewControllerProtocol: class {
+protocol SearchViewControllerProtocol: AnyObject {
     func didClose()
     func didSelect(_ assetId: String, assetType: AssetType)
 }

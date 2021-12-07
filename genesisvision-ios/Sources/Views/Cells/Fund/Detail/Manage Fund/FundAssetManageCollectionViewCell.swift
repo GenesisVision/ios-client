@@ -15,7 +15,7 @@ struct FundAssetManageCollectionViewCellViewModel {
     let closeButtonDelegate: FundAssetCellRemoveButtonProtocol?
 }
 
-protocol FundAssetCellRemoveButtonProtocol: class {
+protocol FundAssetCellRemoveButtonProtocol: AnyObject {
     func remove(assetInfo: FundAssetInfo)
 }
 

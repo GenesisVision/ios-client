@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol TradeDetailViewProtocol: class {
+protocol TradeDetailViewProtocol: AnyObject {
     func closeButtonDidPress()
     func cancelButtonDidPress(_ uuid: UUID)
 }

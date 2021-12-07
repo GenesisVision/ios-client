@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ReferralInfoLinkTableViewCellProtocol: class {
+protocol ReferralInfoLinkTableViewCellProtocol: AnyObject {
     func shareButtonDidTap()
     func copyButtonDidTap()
 }

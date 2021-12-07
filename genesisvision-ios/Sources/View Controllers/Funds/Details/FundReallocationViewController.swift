@@ -388,7 +388,7 @@ final class FundReallocationViewModel {
     }
 }
 
-protocol FundReallocationCellActionProtocol: class {
+protocol FundReallocationCellActionProtocol: AnyObject {
     func assetCellSelected(assetInfo: FundAssetInfo)
     func assetCellRemoved(assetInfo: FundAssetInfo)
 }
@@ -499,7 +499,6 @@ extension FundReallocationAssetCollectionViewModel: FundAssetCellRemoveButtonPro
             assetCellSelectedDelegate?.assetCellRemoved(assetInfo: assetInfo)
         } else {
             assets.removeAll(where: { $0.asset == assetInfo.asset })
-            //viewModels.removeAll(where: { ($0 as! FundAssetManageCollectionViewCellViewModel).assetModel?.asset == assetInfo.asset })
             assetCellSelectedDelegate?.assetCellRemoved(assetInfo: assetInfo)
         }
     }

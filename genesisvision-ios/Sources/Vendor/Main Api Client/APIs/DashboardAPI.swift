@@ -32,21 +32,21 @@ open class DashboardAPI {
     "color" : "color",
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "chart" : [ {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : 5,
+      "value" : 2.3021358869347655
     }, {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : 5,
+      "value" : 2.3021358869347655
     } ]
   }, {
     "color" : "color",
     "assetId" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "chart" : [ {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : 5,
+      "value" : 2.3021358869347655
     }, {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : 5,
+      "value" : 2.3021358869347655
     } ]
   } ]
 }}]
@@ -158,8 +158,8 @@ open class DashboardAPI {
   },
   "profits" : {
     "day" : {
-      "profitPercent" : 5.637376656633329,
-      "profit" : 5.962133916683182
+      "profitPercent" : 2.3021358869347655,
+      "profit" : 5.637376656633329
     }
   },
   "total" : 5.962133916683182,
@@ -220,7 +220,8 @@ open class DashboardAPI {
       "logoUrl" : "logoUrl",
       "url" : "url",
       "assetType" : "None"
-    }
+    },
+    "status" : "Pending"
   }, {
     "balance" : 0.8008281904610115,
     "permissions" : [ "None", "None" ],
@@ -239,7 +240,8 @@ open class DashboardAPI {
       "logoUrl" : "logoUrl",
       "url" : "url",
       "assetType" : "None"
-    }
+    },
+    "status" : "Pending"
   } ]
 }}]
      - parameter brokerId: (query)  (optional)
@@ -322,17 +324,18 @@ open class DashboardAPI {
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
+  "coinsCount" : 5,
   "profits" : {
     "day" : {
-      "profitPercent" : 5.637376656633329,
-      "profit" : 5.962133916683182
+      "profitPercent" : 2.3021358869347655,
+      "profit" : 5.637376656633329
     }
   },
   "programsCount" : 6,
   "fundsCount" : 1,
   "equity" : 0.8008281904610115,
   "events" : {
-    "total" : 2,
+    "total" : 4,
     "items" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "assetDetails" : {
@@ -347,30 +350,30 @@ open class DashboardAPI {
         "url" : "url",
         "assetType" : "None"
       },
-      "amount" : 2.3021358869347655,
+      "amount" : 7.061401241503109,
       "feesInfo" : [ {
-        "amount" : 9.301444243932576,
+        "amount" : 3.616076749251911,
         "description" : "description",
         "title" : "title",
         "type" : "Undefined"
       }, {
-        "amount" : 9.301444243932576,
+        "amount" : 3.616076749251911,
         "description" : "description",
         "title" : "title",
         "type" : "Undefined"
       } ],
       "changeState" : "NotChanged",
       "extendedInfo" : [ {
-        "amount" : 7.061401241503109,
+        "amount" : 9.301444243932576,
         "title" : "title"
       }, {
-        "amount" : 7.061401241503109,
+        "amount" : 9.301444243932576,
         "title" : "title"
       } ],
       "currency" : "Undefined",
       "title" : "title",
       "logoUrl" : "logoUrl",
-      "totalFeesAmount" : 3.616076749251911
+      "totalFeesAmount" : 2.027123023002322
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "assetDetails" : {
@@ -385,30 +388,30 @@ open class DashboardAPI {
         "url" : "url",
         "assetType" : "None"
       },
-      "amount" : 2.3021358869347655,
+      "amount" : 7.061401241503109,
       "feesInfo" : [ {
-        "amount" : 9.301444243932576,
+        "amount" : 3.616076749251911,
         "description" : "description",
         "title" : "title",
         "type" : "Undefined"
       }, {
-        "amount" : 9.301444243932576,
+        "amount" : 3.616076749251911,
         "description" : "description",
         "title" : "title",
         "type" : "Undefined"
       } ],
       "changeState" : "NotChanged",
       "extendedInfo" : [ {
-        "amount" : 7.061401241503109,
+        "amount" : 9.301444243932576,
         "title" : "title"
       }, {
-        "amount" : 7.061401241503109,
+        "amount" : 9.301444243932576,
         "title" : "title"
       } ],
       "currency" : "Undefined",
       "title" : "title",
       "logoUrl" : "logoUrl",
-      "totalFeesAmount" : 3.616076749251911
+      "totalFeesAmount" : 2.027123023002322
     } ]
   }
 }}]
@@ -466,11 +469,11 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : 5,
+        "value" : 2.3021358869347655
       }, {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : 5,
+        "value" : 2.3021358869347655
       } ],
       "profit" : 7.386281948385884
     },
@@ -538,11 +541,11 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : 5,
+        "value" : 2.3021358869347655
       }, {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : 5,
+        "value" : 2.3021358869347655
       } ],
       "profit" : 7.386281948385884
     },
@@ -694,11 +697,11 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : 5,
+        "value" : 2.3021358869347655
       }, {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : 5,
+        "value" : 2.3021358869347655
       } ],
       "profit" : 7.386281948385884
     },
@@ -788,11 +791,11 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : 5,
+        "value" : 2.3021358869347655
       }, {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : 5,
+        "value" : 2.3021358869347655
       } ],
       "profit" : 7.386281948385884
     },
@@ -880,17 +883,17 @@ open class DashboardAPI {
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
-  "total" : 1,
+  "total" : 4,
   "items" : [ {
     "accountInfo" : {
       "leverage" : 6,
       "supportedCurrencies" : [ null, null ],
       "balances" : [ {
         "amount" : 7.457744773683766,
-        "currency" : "Undefined"
+        "logoUrl" : "logoUrl"
       }, {
         "amount" : 7.457744773683766,
-        "currency" : "Undefined"
+        "logoUrl" : "logoUrl"
       } ],
       "balance" : 1.4894159098541704,
       "currency" : "Undefined",
@@ -903,11 +906,11 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : 5,
+        "value" : 2.3021358869347655
       }, {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : 5,
+        "value" : 2.3021358869347655
       } ],
       "profit" : 7.386281948385884
     },
@@ -1019,10 +1022,10 @@ open class DashboardAPI {
       "supportedCurrencies" : [ null, null ],
       "balances" : [ {
         "amount" : 7.457744773683766,
-        "currency" : "Undefined"
+        "logoUrl" : "logoUrl"
       }, {
         "amount" : 7.457744773683766,
-        "currency" : "Undefined"
+        "logoUrl" : "logoUrl"
       } ],
       "balance" : 1.4894159098541704,
       "currency" : "Undefined",
@@ -1035,11 +1038,11 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : 5,
+        "value" : 2.3021358869347655
       }, {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : 5,
+        "value" : 2.3021358869347655
       } ],
       "profit" : 7.386281948385884
     },
@@ -1230,17 +1233,17 @@ open class DashboardAPI {
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
-  "total" : 1,
+  "total" : 4,
   "items" : [ {
     "accountInfo" : {
       "leverage" : 6,
       "supportedCurrencies" : [ null, null ],
       "balances" : [ {
         "amount" : 7.457744773683766,
-        "currency" : "Undefined"
+        "logoUrl" : "logoUrl"
       }, {
         "amount" : 7.457744773683766,
-        "currency" : "Undefined"
+        "logoUrl" : "logoUrl"
       } ],
       "balance" : 1.4894159098541704,
       "currency" : "Undefined",
@@ -1253,11 +1256,11 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : 5,
+        "value" : 2.3021358869347655
       }, {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : 5,
+        "value" : 2.3021358869347655
       } ],
       "profit" : 7.386281948385884
     },
@@ -1369,10 +1372,10 @@ open class DashboardAPI {
       "supportedCurrencies" : [ null, null ],
       "balances" : [ {
         "amount" : 7.457744773683766,
-        "currency" : "Undefined"
+        "logoUrl" : "logoUrl"
       }, {
         "amount" : 7.457744773683766,
-        "currency" : "Undefined"
+        "logoUrl" : "logoUrl"
       } ],
       "balance" : 1.4894159098541704,
       "currency" : "Undefined",
@@ -1385,11 +1388,11 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : 5,
+        "value" : 2.3021358869347655
       }, {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : 5,
+        "value" : 2.3021358869347655
       } ],
       "profit" : 7.386281948385884
     },
@@ -1539,17 +1542,17 @@ open class DashboardAPI {
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
-  "total" : 1,
+  "total" : 4,
   "items" : [ {
     "accountInfo" : {
       "leverage" : 6,
       "supportedCurrencies" : [ null, null ],
       "balances" : [ {
         "amount" : 7.457744773683766,
-        "currency" : "Undefined"
+        "logoUrl" : "logoUrl"
       }, {
         "amount" : 7.457744773683766,
-        "currency" : "Undefined"
+        "logoUrl" : "logoUrl"
       } ],
       "balance" : 1.4894159098541704,
       "currency" : "Undefined",
@@ -1562,11 +1565,11 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : 5,
+        "value" : 2.3021358869347655
       }, {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : 5,
+        "value" : 2.3021358869347655
       } ],
       "profit" : 7.386281948385884
     },
@@ -1678,10 +1681,10 @@ open class DashboardAPI {
       "supportedCurrencies" : [ null, null ],
       "balances" : [ {
         "amount" : 7.457744773683766,
-        "currency" : "Undefined"
+        "logoUrl" : "logoUrl"
       }, {
         "amount" : 7.457744773683766,
-        "currency" : "Undefined"
+        "logoUrl" : "logoUrl"
       } ],
       "balance" : 1.4894159098541704,
       "currency" : "Undefined",
@@ -1694,11 +1697,11 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : 5,
+        "value" : 2.3021358869347655
       }, {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : 5,
+        "value" : 2.3021358869347655
       } ],
       "profit" : 7.386281948385884
     },
@@ -2022,11 +2025,11 @@ open class DashboardAPI {
       "statistic" : {
         "drawdown" : 1.2315135367772556,
         "chart" : [ {
-          "date" : 0,
-          "value" : 6.027456183070403
+          "date" : 5,
+          "value" : 2.3021358869347655
         }, {
-          "date" : 0,
-          "value" : 6.027456183070403
+          "date" : 5,
+          "value" : 2.3021358869347655
         } ],
         "profit" : 7.386281948385884
       },
@@ -2084,11 +2087,11 @@ open class DashboardAPI {
       "statistic" : {
         "drawdown" : 1.2315135367772556,
         "chart" : [ {
-          "date" : 0,
-          "value" : 6.027456183070403
+          "date" : 5,
+          "value" : 2.3021358869347655
         }, {
-          "date" : 0,
-          "value" : 6.027456183070403
+          "date" : 5,
+          "value" : 2.3021358869347655
         } ],
         "profit" : 7.386281948385884
       },
@@ -2216,17 +2219,17 @@ open class DashboardAPI {
        - type: apiKey Authorization 
        - name: Bearer
      - examples: [{contentType=application/json, example={
-  "total" : 1,
+  "total" : 4,
   "items" : [ {
     "accountInfo" : {
       "leverage" : 6,
       "supportedCurrencies" : [ null, null ],
       "balances" : [ {
         "amount" : 7.457744773683766,
-        "currency" : "Undefined"
+        "logoUrl" : "logoUrl"
       }, {
         "amount" : 7.457744773683766,
-        "currency" : "Undefined"
+        "logoUrl" : "logoUrl"
       } ],
       "balance" : 1.4894159098541704,
       "currency" : "Undefined",
@@ -2239,11 +2242,11 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : 5,
+        "value" : 2.3021358869347655
       }, {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : 5,
+        "value" : 2.3021358869347655
       } ],
       "profit" : 7.386281948385884
     },
@@ -2355,10 +2358,10 @@ open class DashboardAPI {
       "supportedCurrencies" : [ null, null ],
       "balances" : [ {
         "amount" : 7.457744773683766,
-        "currency" : "Undefined"
+        "logoUrl" : "logoUrl"
       }, {
         "amount" : 7.457744773683766,
-        "currency" : "Undefined"
+        "logoUrl" : "logoUrl"
       } ],
       "balance" : 1.4894159098541704,
       "currency" : "Undefined",
@@ -2371,11 +2374,11 @@ open class DashboardAPI {
     "statistic" : {
       "drawdown" : 1.2315135367772556,
       "chart" : [ {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : 5,
+        "value" : 2.3021358869347655
       }, {
-        "date" : 0,
-        "value" : 6.027456183070403
+        "date" : 5,
+        "value" : 2.3021358869347655
       } ],
       "profit" : 7.386281948385884
     },
@@ -2527,15 +2530,15 @@ open class DashboardAPI {
      - examples: [{contentType=application/json, example={
   "profits" : {
     "day" : {
-      "profitPercent" : 5.637376656633329,
-      "profit" : 5.962133916683182
+      "profitPercent" : 2.3021358869347655,
+      "profit" : 5.637376656633329
     }
   },
   "total" : 1.4658129805029452,
   "aum" : 6.027456183070403,
   "equity" : 0.8008281904610115,
   "events" : {
-    "total" : 2,
+    "total" : 4,
     "items" : [ {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "assetDetails" : {
@@ -2550,30 +2553,30 @@ open class DashboardAPI {
         "url" : "url",
         "assetType" : "None"
       },
-      "amount" : 2.3021358869347655,
+      "amount" : 7.061401241503109,
       "feesInfo" : [ {
-        "amount" : 9.301444243932576,
+        "amount" : 3.616076749251911,
         "description" : "description",
         "title" : "title",
         "type" : "Undefined"
       }, {
-        "amount" : 9.301444243932576,
+        "amount" : 3.616076749251911,
         "description" : "description",
         "title" : "title",
         "type" : "Undefined"
       } ],
       "changeState" : "NotChanged",
       "extendedInfo" : [ {
-        "amount" : 7.061401241503109,
+        "amount" : 9.301444243932576,
         "title" : "title"
       }, {
-        "amount" : 7.061401241503109,
+        "amount" : 9.301444243932576,
         "title" : "title"
       } ],
       "currency" : "Undefined",
       "title" : "title",
       "logoUrl" : "logoUrl",
-      "totalFeesAmount" : 3.616076749251911
+      "totalFeesAmount" : 2.027123023002322
     }, {
       "date" : "2000-01-23T04:56:07.000+00:00",
       "assetDetails" : {
@@ -2588,30 +2591,30 @@ open class DashboardAPI {
         "url" : "url",
         "assetType" : "None"
       },
-      "amount" : 2.3021358869347655,
+      "amount" : 7.061401241503109,
       "feesInfo" : [ {
-        "amount" : 9.301444243932576,
+        "amount" : 3.616076749251911,
         "description" : "description",
         "title" : "title",
         "type" : "Undefined"
       }, {
-        "amount" : 9.301444243932576,
+        "amount" : 3.616076749251911,
         "description" : "description",
         "title" : "title",
         "type" : "Undefined"
       } ],
       "changeState" : "NotChanged",
       "extendedInfo" : [ {
-        "amount" : 7.061401241503109,
+        "amount" : 9.301444243932576,
         "title" : "title"
       }, {
-        "amount" : 7.061401241503109,
+        "amount" : 9.301444243932576,
         "title" : "title"
       } ],
       "currency" : "Undefined",
       "title" : "title",
       "logoUrl" : "logoUrl",
-      "totalFeesAmount" : 3.616076749251911
+      "totalFeesAmount" : 2.027123023002322
     } ]
   }
 }}]

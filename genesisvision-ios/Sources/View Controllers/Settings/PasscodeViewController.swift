@@ -13,7 +13,7 @@ enum PasscodeActionType {
     case unlocked, enabled, disabled, closed
 }
 
-protocol PasscodeProtocol: class {
+ protocol PasscodeProtocol: AnyObject {
     func passcodeAction(_ action: PasscodeActionType)
 }
 

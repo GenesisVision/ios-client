@@ -123,11 +123,11 @@ open class TradingaccountAPI {
      - examples: [{contentType=application/json, example={
   "profit" : 0.8008281904610115,
   "chart" : [ {
-    "date" : 0,
-    "value" : 6.027456183070403
+    "date" : 5,
+    "value" : 2.3021358869347655
   }, {
-    "date" : 0,
-    "value" : 6.027456183070403
+    "date" : 5,
+    "value" : 2.3021358869347655
   } ]
 }}]
      - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter maxPointCount: (query)  (optional)     - parameter currency: (query)  (optional)
@@ -176,11 +176,11 @@ open class TradingaccountAPI {
   "balance" : 0.8008281904610115,
   "color" : "color",
   "chart" : [ {
-    "date" : 0,
-    "value" : 6.027456183070403
+    "date" : 5,
+    "value" : 2.3021358869347655
   }, {
-    "date" : 0,
-    "value" : 6.027456183070403
+    "date" : 5,
+    "value" : 2.3021358869347655
   } ]
 }}]
      - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter maxPointCount: (query)  (optional)     - parameter currency: (query)  (optional)
@@ -364,21 +364,21 @@ open class TradingaccountAPI {
     "color" : "color",
     "currency" : "Undefined",
     "chart" : [ {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : 5,
+      "value" : 2.3021358869347655
     }, {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : 5,
+      "value" : 2.3021358869347655
     } ]
   }, {
     "color" : "color",
     "currency" : "Undefined",
     "chart" : [ {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : 5,
+      "value" : 2.3021358869347655
     }, {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : 5,
+      "value" : 2.3021358869347655
     } ]
   } ]
 }}]
@@ -462,12 +462,12 @@ open class TradingaccountAPI {
     "volume" : 0.8008281904610115,
     "entry" : "In",
     "totalCommissionByType" : [ {
-      "amount" : 9.301444243932576,
+      "amount" : 3.616076749251911,
       "description" : "description",
       "title" : "title",
       "type" : "Undefined"
     }, {
-      "amount" : 9.301444243932576,
+      "amount" : 3.616076749251911,
       "description" : "description",
       "title" : "title",
       "type" : "Undefined"
@@ -597,12 +597,12 @@ open class TradingaccountAPI {
     "volume" : 0.8008281904610115,
     "entry" : "In",
     "totalCommissionByType" : [ {
-      "amount" : 9.301444243932576,
+      "amount" : 3.616076749251911,
       "description" : "description",
       "title" : "title",
       "type" : "Undefined"
     }, {
-      "amount" : 9.301444243932576,
+      "amount" : 3.616076749251911,
       "description" : "description",
       "title" : "title",
       "type" : "Undefined"
@@ -756,10 +756,10 @@ open class TradingaccountAPI {
     "supportedCurrencies" : [ null, null ],
     "balances" : [ {
       "amount" : 7.457744773683766,
-      "currency" : "Undefined"
+      "logoUrl" : "logoUrl"
     }, {
       "amount" : 7.457744773683766,
-      "currency" : "Undefined"
+      "logoUrl" : "logoUrl"
     } ],
     "subscriptions" : 1,
     "apiKey" : "apiKey",

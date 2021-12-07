@@ -202,11 +202,11 @@ open class SearchAPI {
       "statistic" : {
         "drawdown" : 1.2315135367772556,
         "chart" : [ {
-          "date" : 0,
-          "value" : 6.027456183070403
+          "date" : 5,
+          "value" : 2.3021358869347655
         }, {
-          "date" : 0,
-          "value" : 6.027456183070403
+          "date" : 5,
+          "value" : 2.3021358869347655
         } ],
         "profit" : 7.386281948385884
       },
@@ -264,11 +264,11 @@ open class SearchAPI {
       "statistic" : {
         "drawdown" : 1.2315135367772556,
         "chart" : [ {
-          "date" : 0,
-          "value" : 6.027456183070403
+          "date" : 5,
+          "value" : 2.3021358869347655
         }, {
-          "date" : 0,
-          "value" : 6.027456183070403
+          "date" : 5,
+          "value" : 2.3021358869347655
         } ],
         "profit" : 7.386281948385884
       },

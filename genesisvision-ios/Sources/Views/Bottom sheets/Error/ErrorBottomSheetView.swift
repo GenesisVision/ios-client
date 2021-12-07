@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ErrorBottomSheetViewProtocol: class {
+protocol ErrorBottomSheetViewProtocol: AnyObject {
     func okButtonDidPress()
 }
 

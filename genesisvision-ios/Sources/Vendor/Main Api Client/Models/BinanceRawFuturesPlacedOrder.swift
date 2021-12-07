@@ -21,14 +21,6 @@ public struct BinanceRawFuturesPlacedOrder: Codable {
 
     public var avgPrice: Double?
 
-    public var cumulativeQuantity: Double?
-
-    public var cumulativeQuoteQuantity: Double?
-
-    public var executedQuantity: Double?
-
-    public var originalQuantity: Double?
-
     public var reduceOnly: Bool?
 
     public var side: BinanceOrderSide?
@@ -54,16 +46,20 @@ public struct BinanceRawFuturesPlacedOrder: Codable {
     public var updateTime: Date?
 
     public var workingType: BinanceWorkingType?
-    public init(symbol: String? = nil, orderId: Int64? = nil, clientOrderId: String? = nil, price: Double? = nil, avgPrice: Double? = nil, cumulativeQuantity: Double? = nil, cumulativeQuoteQuantity: Double? = nil, executedQuantity: Double? = nil, originalQuantity: Double? = nil, reduceOnly: Bool? = nil, side: BinanceOrderSide? = nil, positionSide: BinancePositionSide? = nil, status: BinanceOrderStatus? = nil, stopPrice: Double? = nil, closePosition: Bool? = nil, timeInForce: BinanceTimeInForce? = nil, type: BinanceOrderType? = nil, originalType: BinanceOrderType? = nil, activatePrice: Double? = nil, priceRate: Double? = nil, updateTime: Date? = nil, workingType: BinanceWorkingType? = nil) { 
+
+    public var quantity: Double?
+
+    public var quantityFilled: Double?
+
+    public var lastFilledQuantity: Double?
+
+    public var quoteQuantityFilled: Double?
+    public init(symbol: String? = nil, orderId: Int64? = nil, clientOrderId: String? = nil, price: Double? = nil, avgPrice: Double? = nil, reduceOnly: Bool? = nil, side: BinanceOrderSide? = nil, positionSide: BinancePositionSide? = nil, status: BinanceOrderStatus? = nil, stopPrice: Double? = nil, closePosition: Bool? = nil, timeInForce: BinanceTimeInForce? = nil, type: BinanceOrderType? = nil, originalType: BinanceOrderType? = nil, activatePrice: Double? = nil, priceRate: Double? = nil, updateTime: Date? = nil, workingType: BinanceWorkingType? = nil, quantity: Double? = nil, quantityFilled: Double? = nil, lastFilledQuantity: Double? = nil, quoteQuantityFilled: Double? = nil) { 
         self.symbol = symbol
         self.orderId = orderId
         self.clientOrderId = clientOrderId
         self.price = price
         self.avgPrice = avgPrice
-        self.cumulativeQuantity = cumulativeQuantity
-        self.cumulativeQuoteQuantity = cumulativeQuoteQuantity
-        self.executedQuantity = executedQuantity
-        self.originalQuantity = originalQuantity
         self.reduceOnly = reduceOnly
         self.side = side
         self.positionSide = positionSide
@@ -77,6 +73,10 @@ public struct BinanceRawFuturesPlacedOrder: Codable {
         self.priceRate = priceRate
         self.updateTime = updateTime
         self.workingType = workingType
+        self.quantity = quantity
+        self.quantityFilled = quantityFilled
+        self.lastFilledQuantity = lastFilledQuantity
+        self.quoteQuantityFilled = quoteQuantityFilled
     }
 
 }

@@ -9,6 +9,7 @@ import Foundation
 
 public enum Currency: String, Codable {
     case undefined = "Undefined"
+    case systemCoinMarket = "SystemCoinMarket"
     case gvt = "GVT"
     case eth = "ETH"
     case btc = "BTC"

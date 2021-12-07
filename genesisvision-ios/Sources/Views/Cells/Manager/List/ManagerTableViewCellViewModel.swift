@@ -11,10 +11,12 @@ import UIKit
 struct ManagerTableViewCellViewModel {
     let profile: PublicProfile
     let selectable: Bool
+    weak var delegate: DetailManagerTableViewCellDelegate?
 }
 
 extension ManagerTableViewCellViewModel: CellViewModel {
     func setup(on cell: DetailManagerTableViewCell) {
+        cell.delegate = delegate
         if let registrationDate = profile.regDate {
             cell.dateLabel.text = "since " + registrationDate.onlyDateFormatString
         }
@@ -32,5 +34,13 @@ extension ManagerTableViewCellViewModel: CellViewModel {
         
         cell.arrowImageView.isHidden = !selectable
         cell.selectionStyle = selectable ? .default : .none
+        
+        if let followed = profile.personalDetails?.isFollow, followed {
+            cell.followButton.setTitle("Unfollow", for: .normal)
+            cell.followButton.configure(with: .darkClear)
+        }
+
+        cell.followed = profile.personalDetails?.isFollow
+        cell.userId = profile._id
     }
 }

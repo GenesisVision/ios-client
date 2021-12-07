@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc public protocol MultiProgressViewDataSource: class {
+@objc public protocol MultiProgressViewDataSource: AnyObject {
     func numberOfSections(in progressView: MultiProgressView) -> Int
     func progressView(_ progressView: MultiProgressView,
                       viewForSection section: Int) -> ProgressViewSection

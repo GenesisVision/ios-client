@@ -15,9 +15,8 @@ extension Notification.Name {
     static let programFavoriteStateChange = Notification.Name(Keys.programFavoriteStateChangeKey)
     static let followFavoriteStateChange = Notification.Name(Keys.followFavoriteStateChangeKey)
     static let fundFavoriteStateChange = Notification.Name(Keys.fundFavoriteStateChangeKey)
-    static let notificationDidReceived = Notification.Name(Keys.notificationDidReceivedKey)
-    static let notificationDidTapped = Notification.Name(Keys.notificationDidTappedKey)
-    static let linkDidReceived = Notification.Name(Keys.linkDidReceivedKey)
+    static let notificationDidReceive = Notification.Name(Keys.notificationDidReceivedKey)
+    static let notificationDidTap = Notification.Name(Keys.notificationDidTappedKey)
     static let updateFundViewController = Notification.Name(Keys.updateFundViewController)
     static let updateUserViewController = Notification.Name(Keys.updateUserViewController)
     static let updateProgramViewController = Notification.Name(Keys.updateProgramViewController)
@@ -27,6 +26,7 @@ extension Notification.Name {
     static let updateNotificationListViewController = Notification.Name(Keys.updateNotificationListViewController)
     static let chooseProgramList = Notification.Name(Keys.chooseProgramListKey)
     static let chooseFundList = Notification.Name(Keys.chooseFundListKey)
+    static let socialShowEventsSwitchValueChanged = Notification.Name(Keys.socialShowEventsSwitchValueChanged)
     
     static let tabBarDidScrollToTop = Notification.Name(Keys.tabBarDidScrollToTopKey)
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol BottomSheetControllerProtocol: class {
+protocol BottomSheetControllerProtocol: AnyObject {
     func didHide()
     func didShowAll()
 }
@@ -148,6 +148,10 @@ open class BottomSheet {
         fileprivate lazy var navigationBarHeight: CGFloat = {
             return UINavigationBar().intrinsicContentSize.height
         }()
+        
+        fileprivate var defaultCellModel = SelectableTableViewCellViewModel()
+        fileprivate var viewModels: [String]?
+        fileprivate var tableViewSelectCompletion: ((_ viewModel: String) -> Void)?
         // MARK: - Initialize
         public convenience init() {
             self.init(nibName: nil, bundle: nil)
@@ -168,7 +172,7 @@ open class BottomSheet {
 
         // Adds UIToolbar
         open func addToolbar(_ configurationHandler: ((UIToolbar) -> Void)? = nil) {
-            guard !hasBar else { fatalError("UIToolbar or UINavigationBar can only have one") }
+            guard !hasBar else { return }
             let toolbar = UIToolbar()
             toolbar.isTranslucent = false
             toolbar.backgroundColor = containerViewBackgroundColor
@@ -353,7 +357,7 @@ open class BottomSheet {
             self.contentView?.removeFromSuperview()
             self.contentView = nil
             
-            guard !hasView else { fatalError("ContainerView can only have one") }
+            guard !hasView else { return }
             self.isScrollEnabledInSheet = isScrollEnabledInSheet
             containerView.addSubview(contentView)
             contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -394,7 +398,7 @@ open class BottomSheet {
             self.contentView?.removeFromSuperview()
             self.contentView = nil
             
-            guard !hasView else { fatalError("ContainerView can only have one \(containerView.subviews)") }
+            guard !hasView else { return }
             self.isScrollEnabledInSheet = isScrollEnabledInSheet
             let scrollView = UIScrollView()
             scrollView.backgroundColor = containerViewBackgroundColor
@@ -439,7 +443,7 @@ open class BottomSheet {
             self.contentView?.removeFromSuperview()
             self.contentView = nil
             
-            guard !hasView else { fatalError("ContainerView can only have one \(containerView.subviews)") }
+            guard !hasView else { return }
             self.isScrollEnabledInSheet = isScrollEnabledInSheet
             let collectionView: UICollectionView
             if let flowLayout = flowLayout {
@@ -492,7 +496,7 @@ open class BottomSheet {
             self.contentView?.removeFromSuperview()
             self.contentView = nil
             
-            guard !hasView else { fatalError("ContainerView can only have one \(containerView.subviews)") }
+            guard !hasView else { return }
             self.isScrollEnabledInSheet = isScrollEnabledInSheet
             let tableView = UITableView(frame: .zero)
             tableView.backgroundColor = containerViewBackgroundColor
@@ -501,6 +505,110 @@ open class BottomSheet {
             tableView.translatesAutoresizingMaskIntoConstraints = false
             containerView.addSubview(tableView)
             configurationHandler(tableView)
+            let topConstraint = NSLayoutConstraint(item: tableView,
+                                                   attribute: .top,
+                                                   relatedBy: .equal,
+                                                   toItem: hasBar ? bar : lineView,
+                                                   attribute: .bottom,
+                                                   multiplier: 1,
+                                                   constant: 0)
+            let rightConstraint = NSLayoutConstraint(item: tableView,
+                                                     attribute: .right,
+                                                     relatedBy: .equal,
+                                                     toItem: containerView,
+                                                     attribute: .right,
+                                                     multiplier: 1,
+                                                     constant: 0)
+            let leftConstraint = NSLayoutConstraint(item: tableView,
+                                                    attribute: .left,
+                                                    relatedBy: .equal,
+                                                    toItem: containerView,
+                                                    attribute: .left,
+                                                    multiplier: 1,
+                                                    constant: 0)
+            let bottomConstraint = NSLayoutConstraint(item: tableView,
+                                                      attribute: .bottom,
+                                                      relatedBy: .equal,
+                                                      toItem: containerView,
+                                                      attribute: .bottom,
+                                                      multiplier: 1,
+                                                      constant: 0)
+            containerView.addConstraints([topConstraint, leftConstraint, rightConstraint, bottomConstraint])
+            tableView.reloadDataSmoothly()
+            
+            self.scrollView = tableView
+        }
+        
+        func addDefaultTableView(isScrollEnabledInSheet: Bool = true, registerNibs: [CellViewAnyModel.Type], delegate: UITableViewDelegate, dataSource: UITableViewDataSource) {
+            self.contentView?.removeFromSuperview()
+            self.contentView = nil
+            
+            guard !hasView else { return }
+            self.isScrollEnabledInSheet = isScrollEnabledInSheet
+            
+            let tableView = UITableView(frame: .zero)
+            tableView.backgroundColor = containerViewBackgroundColor
+            tableView.tintColor = tintColor
+            
+            tableView.translatesAutoresizingMaskIntoConstraints = false
+            containerView.addSubview(tableView)
+            tableView.separatorStyle = .none
+            tableView.registerNibs(for: registerNibs)
+            tableView.delegate = delegate
+            tableView.dataSource = dataSource
+            let topConstraint = NSLayoutConstraint(item: tableView,
+                                                   attribute: .top,
+                                                   relatedBy: .equal,
+                                                   toItem: hasBar ? bar : lineView,
+                                                   attribute: .bottom,
+                                                   multiplier: 1,
+                                                   constant: 0)
+            let rightConstraint = NSLayoutConstraint(item: tableView,
+                                                     attribute: .right,
+                                                     relatedBy: .equal,
+                                                     toItem: containerView,
+                                                     attribute: .right,
+                                                     multiplier: 1,
+                                                     constant: 0)
+            let leftConstraint = NSLayoutConstraint(item: tableView,
+                                                    attribute: .left,
+                                                    relatedBy: .equal,
+                                                    toItem: containerView,
+                                                    attribute: .left,
+                                                    multiplier: 1,
+                                                    constant: 0)
+            let bottomConstraint = NSLayoutConstraint(item: tableView,
+                                                      attribute: .bottom,
+                                                      relatedBy: .equal,
+                                                      toItem: containerView,
+                                                      attribute: .bottom,
+                                                      multiplier: 1,
+                                                      constant: 0)
+            containerView.addConstraints([topConstraint, leftConstraint, rightConstraint, bottomConstraint])
+            tableView.reloadDataSmoothly()
+            
+            self.scrollView = tableView
+        }
+        
+        func addDefaultTableViewWithCell(isScrollEnabledInSheet: Bool = true, viewModels: [String], tableViewCellSelectCompletion: @escaping (_ viewModel: String) -> Void) {
+            self.contentView?.removeFromSuperview()
+            self.contentView = nil
+            
+            guard !hasView else { return }
+            self.isScrollEnabledInSheet = isScrollEnabledInSheet
+            self.viewModels = viewModels
+            self.tableViewSelectCompletion = tableViewCellSelectCompletion
+            
+            let tableView = UITableView(frame: .zero)
+            tableView.backgroundColor = containerViewBackgroundColor
+            tableView.tintColor = tintColor
+            
+            tableView.translatesAutoresizingMaskIntoConstraints = false
+            containerView.addSubview(tableView)
+            tableView.separatorStyle = .none
+            tableView.registerNibs(for: [SelectableTableViewCellViewModel.self])
+            tableView.delegate = self
+            tableView.dataSource = self
             let topConstraint = NSLayoutConstraint(item: tableView,
                                                    attribute: .top,
                                                    relatedBy: .equal,
@@ -842,6 +950,23 @@ extension BottomSheetController: UIViewControllerTransitioningDelegate {
     
     public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return BottomSheetTransitionAnimator(present: false)
+    }
+}
+
+extension BottomSheetController: UITableViewDelegate, UITableViewDataSource {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModels?.count ?? 0
+    }
+    
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withModel: defaultCellModel, for: indexPath) as? SelectableTableViewCell else { return UITableViewCell() }
+        cell.configure(viewModels?[indexPath.row], selected: false, showImageView: false)
+        return cell
+    }
+    
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let viewModel = viewModels?[indexPath.row] else { return }
+        tableViewSelectCompletion?(viewModel)
     }
 }
 

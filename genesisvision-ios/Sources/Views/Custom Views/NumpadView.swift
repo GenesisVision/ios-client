@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol NumpadViewProtocol: class {
+protocol NumpadViewProtocol: AnyObject {
     var textLabel: UILabel { get }
     var textPlaceholder: String? { get }
     var currency: CurrencyType? { get }

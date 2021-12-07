@@ -77,7 +77,8 @@ class Router {
         
         addDashboard(&navigationController, &viewControllers)
         addPrograms(&viewControllers)
-        addWallet(&navigationController, &viewControllers)
+        addSocial(&navigationController, &viewControllers)
+        //addWallet(&navigationController, &viewControllers)
         addSettings(&navigationController, &viewControllers)
         
         return viewControllers
@@ -127,14 +128,33 @@ class Router {
         }
     }
     
-    private func addWallet(_ navigationController: inout BaseNavigationController, _ viewControllers: inout [UIViewController]) {
-        let walletViewController = WalletViewController()
-        navigationController = BaseNavigationController(rootViewController: walletViewController)
-        let router = WalletRouter(parentRouter: self, navigationController: navigationController)
-        router.walletTabmanViewController = walletViewController
-        walletViewController.viewModel = WalletTabmanViewModel(withRouter: router, walletType: .all)
-        navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_wallet").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_wallet").withRenderingMode(.alwaysOriginal)
+    private func addSocial(_ navigationController: inout BaseNavigationController, _ viewControllers: inout [UIViewController]) {
+        let socialMediaViewController = SocialMediaViewController()
+        let router = SocialRouter(parentRouter: self, navigationController: navigationController)
+        socialMediaViewController.viewModel = SocialMediaViewModel(router: router, socialMediaCollectionViewModelDelegate: socialMediaViewController)
+        router.socialMediaViewController = socialMediaViewController
+        navigationController = BaseNavigationController(rootViewController: socialMediaViewController)
+        navigationController.title = "Social"
+        navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_social").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_social").withRenderingMode(.alwaysOriginal)
         viewControllers.append(navigationController)
+    }
+    
+    private func addWallet(_ navigationController: inout BaseNavigationController, _ viewControllers: inout [UIViewController]) {
+//        //let socialViewController = SocialMainFeedViewController()
+//        let socialMediaViewController = SocialMediaViewController()
+//        //let viewModel = SocialMediaViewModel(router: self, socialMediaCollectionViewModelDelegate: socialMediaViewController)
+//        socialMediaViewController.viewModel = viewModel
+//        //let walletViewController = WalletViewController()
+//        navigationController = BaseNavigationController(rootViewController: socialMediaViewController)
+//        navigationController.title = ""
+//        //let router = WalletRouter(parentRouter: self, navigationController: navigationController)
+//        //router.walletTabmanViewController = walletViewController
+//
+//        //walletViewController.viewModel = WalletTabmanViewModel(withRouter: router, walletType: .all)
+//
+//        //socialViewController.viewModel = SocialMainFeedViewModel(withRouter: self)
+//        navigationController.tabBarItem.image = AppearanceController.theme == .darkTheme ? #imageLiteral(resourceName: "img_tabbar_wallet").withRenderingMode(.alwaysTemplate) : #imageLiteral(resourceName: "img_tabbar_wallet").withRenderingMode(.alwaysOriginal)
+//        viewControllers.append(navigationController)
     }
     
     private func addSettings(_ navigationController: inout BaseNavigationController, _ viewControllers: inout [UIViewController]) {
@@ -310,6 +330,18 @@ extension Router {
         case ._none:
             showUserDetails(with: assetId)
         }
+    }
+    
+    func showFollowersList(with userId: UUID) {
+        let viewController = SocialFollowersViewController()
+        viewController.viewModel = SocialFollowersViewModel(with: self, delegate: viewController, userId: userId, followType: .followers)
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func showFollowingList(with userId: UUID) {
+        let viewController = SocialFollowersViewController()
+        viewController.viewModel = SocialFollowersViewModel(with: self, delegate: viewController, userId: userId, followType: .following)
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     func showTradingAccountDetails(with assetId: String) {
@@ -545,6 +577,14 @@ extension Router {
         viewController.viewModel = viewModel
         
         viewController.hidesBottomBarWhenPushed = true
+        return viewController
+    }
+    
+    func getFeed(parentRouter: Router? = nil, userId: UUID? = nil) -> SocialFeedViewController {
+        let viewController = SocialFeedViewController()
+        let router = SocialRouter(parentRouter: parentRouter)
+        let viewModel = SocialFeedViewModel(feedType: .feed, collectionViewDelegate: viewController, router: router, showEvents: false, showAddPost: true, showEventsButton: true, userId: userId)
+        viewController.viewModel = viewModel
         return viewController
     }
     

@@ -23,6 +23,8 @@ public enum FeeType: String, Codable {
     case managerFundExit = "ManagerFundExit"
     case gvWithdrawal = "GvWithdrawal"
     case gvConvertingFiat = "GvConvertingFiat"
+    case gvConverting = "GvConverting"
+    case gvConvertingSum = "GvConvertingSum"
     case managerSignalMasterSuccessFee = "ManagerSignalMasterSuccessFee"
     case managerSignalMasterVolumeFee = "ManagerSignalMasterVolumeFee"
     case gvSignalSuccessFee = "GvSignalSuccessFee"

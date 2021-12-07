@@ -6,7 +6,7 @@
 //  Copyright © 2018 Genesis Vision. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension String {
     var floatValue: Float? {
@@ -89,5 +89,14 @@ extension String {
         return String(self.enumerated().map { index, char in
           return [0, 1, self.count - 1, self.count - 2].contains(index) ? char : "*"
        })
+    }
+}
+
+extension String {
+    func width(withConstrainedHeight height: CGFloat, font: UIFont) -> CGFloat {
+        let constraintRect = CGSize(width: .greatestFiniteMagnitude, height: height)
+        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [.font: font], context: nil)
+
+        return ceil(boundingBox.width)
     }
 }

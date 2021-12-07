@@ -11,12 +11,12 @@ import Foundation
 public struct BinanceRawFuturesSymbolBracket: Codable {
 
 
-    public var symbolOrPair: String?
-
     public var brackets: [BinanceRawFuturesBracket]?
-    public init(symbolOrPair: String? = nil, brackets: [BinanceRawFuturesBracket]? = nil) { 
-        self.symbolOrPair = symbolOrPair
+
+    public var symbol: String?
+    public init(brackets: [BinanceRawFuturesBracket]? = nil, symbol: String? = nil) { 
         self.brackets = brackets
+        self.symbol = symbol
     }
 
 }

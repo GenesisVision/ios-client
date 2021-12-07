@@ -8,7 +8,7 @@
 
 import UIKit.UICollectionView
 
-protocol FacetsDelegateManagerDelegate: class {
+protocol FacetsDelegateManagerDelegate: AnyObject {
     func didSelectFacet(at indexPath: IndexPath)
 }
 

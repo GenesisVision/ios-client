@@ -67,7 +67,6 @@ extension FundAssetsListViewController: SearchHeaderTextChangedProtocol {
         
         viewModel.filterAssets(text: text)
     }
-    
 }
 
 extension FundAssetsListViewController: BaseTableViewProtocol {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol EditInfoProtocol: class {
+protocol EditInfoProtocol: AnyObject {
     func ditTapEditInfoButton()
 }
 

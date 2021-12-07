@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol InRequestsDelegateManagerProtocol: class {
+protocol InRequestsDelegateManagerProtocol: AnyObject {
     func didCanceledRequest(completionResult: CompletionResult)
     func didSelectRequest(at indexPath: IndexPath)
 }

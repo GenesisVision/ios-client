@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol BrokerCollectionViewCellViewModelProtocol: class {
+protocol BrokerCollectionViewCellViewModelProtocol: AnyObject {
     func isSelected(_ broker: Broker?, _ exchanger: ExchangeInfo?) -> Bool
     func showDetails(_ broker: Broker?, _ exchanger: ExchangeInfo?)
 }

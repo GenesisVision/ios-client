@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PhotoHeaderViewDelegate: class {
+protocol PhotoHeaderViewDelegate: AnyObject {
     func didPressOnPhotoButton(_ view: PhotoHeaderView)
 }
 

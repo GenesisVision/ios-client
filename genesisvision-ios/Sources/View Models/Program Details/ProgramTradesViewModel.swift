@@ -181,6 +181,7 @@ extension ProgramTradesViewModel {
         var sections = [Date : [CellViewModel]]()
         
         for model in viewModels {
+            
             let dateFormatter = DateFormatter()
             dateFormatter.dateStyle = .medium
             dateFormatter.timeStyle = .none

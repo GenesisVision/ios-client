@@ -86,7 +86,7 @@ class BaseTabBarController: UITabBarController {
                 return }
             NotificationCenter.default.post(name: .updateTradingAccountViewController, object: nil, userInfo: ["assetId": destination.entityId])
         case .socialPost:
-            router?.showSafari(with: ApiKeys.socialPostsPath + "\(destination.entityId)")
+            router?.showSafari(with: ApiKeys.socialPostsPath + destination.entityId)
         case .socialMediaPost:
             SocialAPI.getSocialMediaPost(_id: destination.entityId) { [ weak self] (post, error) in
                 if let post = post, let url = post.url {

@@ -8,7 +8,7 @@
 
 import UIKit.UIButton
 
-protocol TooltipButtonProtocol: class {
+protocol TooltipButtonProtocol: AnyObject {
     func showDidPress(_ tooltipText: String)
 }
 

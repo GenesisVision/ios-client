@@ -217,7 +217,7 @@
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="50" id="F7p-Hp-7V1"/>
+                                        <constraint firstAttribute="height" constant="50" id="ZUO-3C-mfP"/>
                                     </constraints>
                                     <connections>
                                         <outlet property="subtitleLabel" destination="CFx-IB-NvZ" id="2Id-Cm-C6H"/>

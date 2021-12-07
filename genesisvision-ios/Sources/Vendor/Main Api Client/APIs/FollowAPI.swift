@@ -116,11 +116,11 @@ open class FollowAPI {
      - examples: [{contentType=application/json, example={
   "profit" : 0.8008281904610115,
   "chart" : [ {
-    "date" : 0,
-    "value" : 6.027456183070403
+    "date" : 5,
+    "value" : 2.3021358869347655
   }, {
-    "date" : 0,
-    "value" : 6.027456183070403
+    "date" : 5,
+    "value" : 2.3021358869347655
   } ]
 }}]
      - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter maxPointCount: (query)  (optional)     - parameter currency: (query)  (optional)
@@ -202,12 +202,12 @@ open class FollowAPI {
     "volume" : 0.8008281904610115,
     "entry" : "In",
     "totalCommissionByType" : [ {
-      "amount" : 9.301444243932576,
+      "amount" : 3.616076749251911,
       "description" : "description",
       "title" : "title",
       "type" : "Undefined"
     }, {
-      "amount" : 9.301444243932576,
+      "amount" : 3.616076749251911,
       "description" : "description",
       "title" : "title",
       "type" : "Undefined"
@@ -337,12 +337,12 @@ open class FollowAPI {
     "volume" : 0.8008281904610115,
     "entry" : "In",
     "totalCommissionByType" : [ {
-      "amount" : 9.301444243932576,
+      "amount" : 3.616076749251911,
       "description" : "description",
       "title" : "title",
       "type" : "Undefined"
     }, {
-      "amount" : 9.301444243932576,
+      "amount" : 3.616076749251911,
       "description" : "description",
       "title" : "title",
       "type" : "Undefined"
@@ -493,11 +493,11 @@ open class FollowAPI {
   "balance" : 0.8008281904610115,
   "color" : "color",
   "chart" : [ {
-    "date" : 0,
-    "value" : 6.027456183070403
+    "date" : 5,
+    "value" : 2.3021358869347655
   }, {
-    "date" : 0,
-    "value" : 6.027456183070403
+    "date" : 5,
+    "value" : 2.3021358869347655
   } ]
 }}]
      - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter maxPointCount: (query)  (optional)     - parameter currency: (query)  (optional)
@@ -679,7 +679,6 @@ open class FollowAPI {
     "typeExt" : "None",
     "color" : "color",
     "description" : "description",
-    "logo" : "logo",
     "index" : 0,
     "isOwnAsset" : true,
     "title" : "title",
@@ -687,6 +686,8 @@ open class FollowAPI {
     "systemUrl" : "systemUrl",
     "logoUrl" : "logoUrl",
     "url" : "url",
+    "logo" : "logo",
+    "lastModified" : "2000-01-23T04:56:07.000+00:00",
     "status" : "status"
   },
   "ownerActions" : {
@@ -1328,21 +1329,21 @@ open class FollowAPI {
     "color" : "color",
     "currency" : "Undefined",
     "chart" : [ {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : 5,
+      "value" : 2.3021358869347655
     }, {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : 5,
+      "value" : 2.3021358869347655
     } ]
   }, {
     "color" : "color",
     "currency" : "Undefined",
     "chart" : [ {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : 5,
+      "value" : 2.3021358869347655
     }, {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : 5,
+      "value" : 2.3021358869347655
     } ]
   } ]
 }}]

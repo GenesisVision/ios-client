@@ -67,5 +67,40 @@ extension Date {
         dateFormatter.locale = Bundle.main.locale
         return dateFormatter.string(from: self)
     }
+    
+    var dateForSocialPost: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMM YYYY, hh:mm a"
+        dateFormatter.locale = Bundle.main.locale
+        return dateFormatter.string(from: self)
+    }
+    
+    var dateForSocialUserAge: String {
+        let calendar = Calendar.current
+        let years = calendar.component(.year, from: Date()) - calendar.component(.year, from: self)
+        let months = calendar.component(.month, from: Date()) - calendar.component(.month, from: self)
+        
+        var monthsString: String = ""
+        
+        if months < 2 {
+            monthsString = String(months) + " month"
+        } else {
+            monthsString = String(months) + " months"
+        }
+        
+        var yearsString: String = ""
+        
+        if years < 2 {
+            yearsString = String(years) + " year"
+        } else {
+            yearsString = String(years) + " years"
+        }
+        
+        if years < 1 {
+            return monthsString
+        } else {
+            return yearsString
+        }
+    }
 }
 

@@ -20,12 +20,15 @@ public struct BinanceRawFuturesMarkPrice: Codable {
     public var nextFundingTime: Date?
 
     public var time: Date?
-    public init(symbol: String? = nil, markPrice: Double? = nil, fundingRate: Double? = nil, nextFundingTime: Date? = nil, time: Date? = nil) { 
+
+    public var indexPrice: Double?
+    public init(symbol: String? = nil, markPrice: Double? = nil, fundingRate: Double? = nil, nextFundingTime: Date? = nil, time: Date? = nil, indexPrice: Double? = nil) { 
         self.symbol = symbol
         self.markPrice = markPrice
         self.fundingRate = fundingRate
         self.nextFundingTime = nextFundingTime
         self.time = time
+        self.indexPrice = indexPrice
     }
 
 }

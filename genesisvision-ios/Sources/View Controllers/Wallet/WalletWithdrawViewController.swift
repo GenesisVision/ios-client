@@ -191,7 +191,7 @@ class WalletWithdrawViewController: BaseViewController {
     }
     
     private func updateUI() {
-        if let selectedWallet = viewModel.selectedWallet, let commission = selectedWallet.commission, let currency = selectedWallet.currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
+        if let selectedWallet = viewModel.selectedWallet, let commission = selectedWallet.commissions.value?.first?.value, let currency = selectedWallet.currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
             
             if let description = selectedWallet._description {
                 selectedWalletCurrencyValueLabel.text = description + " | " + currency.rawValue
@@ -283,7 +283,7 @@ class WalletWithdrawViewController: BaseViewController {
     }
     
     private func showSuccessfulView() {
-        showBottomSheet(.success, title: "Please approve the withdrawal request via the link in the confirmation email.", subtitle: nil, initializeHeight: nil) { [weak self] (result) in
+        showBottomSheet(.success, title: "Please approve the withdrawal request via the link in the confirmation email.", subtitle: nil, initializeHeight: 400) { [weak self] (result) in
             DispatchQueue.main.async {
                 self?.viewModel.goToBack()
                 self?.bottomSheetController.dismiss()

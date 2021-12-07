@@ -73,11 +73,11 @@ open class FundsAPI {
      - examples: [{contentType=application/json, example={
   "profit" : 0.8008281904610115,
   "chart" : [ {
-    "date" : 0,
-    "value" : 6.027456183070403
+    "date" : 5,
+    "value" : 2.3021358869347655
   }, {
-    "date" : 0,
-    "value" : 6.027456183070403
+    "date" : 5,
+    "value" : 2.3021358869347655
   } ]
 }}]
      - parameter _id: (path)       - parameter dateFrom: (query)  (optional)     - parameter dateTo: (query)  (optional)     - parameter maxPointCount: (query)  (optional)     - parameter currency: (query)  (optional)
@@ -229,7 +229,6 @@ open class FundsAPI {
     "typeExt" : "None",
     "color" : "color",
     "description" : "description",
-    "logo" : "logo",
     "index" : 0,
     "isOwnAsset" : true,
     "title" : "title",
@@ -237,6 +236,8 @@ open class FundsAPI {
     "systemUrl" : "systemUrl",
     "logoUrl" : "logoUrl",
     "url" : "url",
+    "logo" : "logo",
+    "lastModified" : "2000-01-23T04:56:07.000+00:00",
     "status" : "status"
   },
   "exitFeeCurrent" : 5.962133916683182,
@@ -318,21 +319,21 @@ open class FundsAPI {
     "color" : "color",
     "currency" : "Undefined",
     "chart" : [ {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : 5,
+      "value" : 2.3021358869347655
     }, {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : 5,
+      "value" : 2.3021358869347655
     } ]
   }, {
     "color" : "color",
     "currency" : "Undefined",
     "chart" : [ {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : 5,
+      "value" : 2.3021358869347655
     }, {
-      "date" : 0,
-      "value" : 6.027456183070403
+      "date" : 5,
+      "value" : 2.3021358869347655
     } ]
   } ],
   "assets" : [ {

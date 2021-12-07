@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol DefaultHeaderProtocol: class {
+protocol DefaultHeaderProtocol: AnyObject {
     func didTapManageAction(_ assetType: AssetType)
 }
 

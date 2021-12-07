@@ -18,11 +18,14 @@ public struct BinanceRawFuturesUsdtExchangeInfo: Codable {
     public var rateLimits: [BinanceRawRateLimit]?
 
     public var symbols: [BinanceRawFuturesUsdtSymbol]?
-    public init(timeZone: String? = nil, serverTime: Date? = nil, rateLimits: [BinanceRawRateLimit]? = nil, symbols: [BinanceRawFuturesUsdtSymbol]? = nil) { 
+
+    public var assets: [BinanceRawFuturesUsdtAsset]?
+    public init(timeZone: String? = nil, serverTime: Date? = nil, rateLimits: [BinanceRawRateLimit]? = nil, symbols: [BinanceRawFuturesUsdtSymbol]? = nil, assets: [BinanceRawFuturesUsdtAsset]? = nil) { 
         self.timeZone = timeZone
         self.serverTime = serverTime
         self.rateLimits = rateLimits
         self.symbols = symbols
+        self.assets = assets
     }
 
 }

@@ -237,7 +237,7 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
         setupAutoLayout()
     }
     
-    func showBottomSheet(_ type: ErrorBottomSheetViewType, title: String? = nil, subtitle: String? = nil, initializeHeight: CGFloat? = 300.0, completion: SuccessCompletionBlock? = nil) {
+    func showBottomSheet(_ type: ErrorBottomSheetViewType, title: String? = nil, subtitle: String? = nil, initializeHeight: CGFloat? = 400.0, completion: SuccessCompletionBlock? = nil) {
         let errorBottomSheetView = ErrorBottomSheetView.viewFromNib()
         errorBottomSheetView.configure(type, title: title, subtitle: subtitle, completion: completion)
         
@@ -245,7 +245,7 @@ class BaseViewController: UIViewController, Hidable, UIViewControllerWithBottomS
         bottomSheetController.viewType = .bottomView
         bottomSheetController.bottomSheetControllerProtocol = errorBottomSheetView
         bottomSheetController.lineViewIsHidden = true
-        bottomSheetController.initializeHeight = initializeHeight ?? 300.0
+        bottomSheetController.initializeHeight = initializeHeight ?? 400.0
         bottomSheetController.viewActionType = .tappedDismiss
         bottomSheetController.addContentsView(errorBottomSheetView)
         errorBottomSheetView.bottomSheetController = self.bottomSheetController

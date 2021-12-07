@@ -27,6 +27,8 @@ public struct AssetPublicDetails: Codable {
 
     public var creationDate: Date?
 
+    public var lastModified: Date?
+
     public var status: String?
 
     public var isOwnAsset: Bool?
@@ -34,7 +36,7 @@ public struct AssetPublicDetails: Codable {
     public var typeExt: AssetTypeExt?
 
     public var systemUrl: String?
-    public init(title: String? = nil, _description: String? = nil, logo: String? = nil, logoUrl: String? = nil, url: String? = nil, color: String? = nil, index: Int? = nil, creationDate: Date? = nil, status: String? = nil, isOwnAsset: Bool? = nil, typeExt: AssetTypeExt? = nil, systemUrl: String? = nil) { 
+    public init(title: String? = nil, _description: String? = nil, logo: String? = nil, logoUrl: String? = nil, url: String? = nil, color: String? = nil, index: Int? = nil, creationDate: Date? = nil, lastModified: Date? = nil, status: String? = nil, isOwnAsset: Bool? = nil, typeExt: AssetTypeExt? = nil, systemUrl: String? = nil) { 
         self.title = title
         self._description = _description
         self.logo = logo
@@ -43,6 +45,7 @@ public struct AssetPublicDetails: Codable {
         self.color = color
         self.index = index
         self.creationDate = creationDate
+        self.lastModified = lastModified
         self.status = status
         self.isOwnAsset = isOwnAsset
         self.typeExt = typeExt
@@ -57,6 +60,7 @@ public struct AssetPublicDetails: Codable {
         case color
         case index
         case creationDate
+        case lastModified
         case status
         case isOwnAsset
         case typeExt

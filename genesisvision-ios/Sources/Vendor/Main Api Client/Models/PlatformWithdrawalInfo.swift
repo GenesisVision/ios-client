@@ -11,15 +11,21 @@ import Foundation
 public struct PlatformWithdrawalInfo: Codable {
 
 
-    public var withdrawalFee: Double?
-
     public var currency: Currency?
 
+    public var title: String?
+
+    public var logoUrl: String?
+
     public var isWithdrawalEnabled: Bool?
-    public init(withdrawalFee: Double? = nil, currency: Currency? = nil, isWithdrawalEnabled: Bool? = nil) { 
-        self.withdrawalFee = withdrawalFee
+
+    public var commissions: [WalletWithdrawalCurrencyInfo]?
+    public init(currency: Currency? = nil, title: String? = nil, logoUrl: String? = nil, isWithdrawalEnabled: Bool? = nil, commissions: [WalletWithdrawalCurrencyInfo]? = nil) { 
         self.currency = currency
+        self.title = title
+        self.logoUrl = logoUrl
         self.isWithdrawalEnabled = isWithdrawalEnabled
+        self.commissions = commissions
     }
 
 }

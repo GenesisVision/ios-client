@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol InvestNowProtocol: class {
+protocol InvestNowProtocol: AnyObject {
     func didTapInvestButton()
     func didTapEntryFeeTooltipButton(_ tooltipText: String)
     func ditTapEditButton()

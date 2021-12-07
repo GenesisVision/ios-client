@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol WalletTransactionViewProtocol: class {
+protocol WalletTransactionViewProtocol: AnyObject {
     func closeButtonDidPress()
     func openUrlButtonDidPress(_ url: String)
     func copyAddressButtonDidPress(_ address: String)

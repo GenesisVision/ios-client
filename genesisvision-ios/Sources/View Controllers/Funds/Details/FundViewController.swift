@@ -381,11 +381,7 @@ extension FundViewModel {
             return completion(.success)
         }
         
-        guard
-            let personalDetails = fundDetailsFull?.personalDetails,
-            let isFavorite = personalDetails.isFavorite,
-            let assetId = assetId
-            else { return completion(.failure(errorType: .apiError(message: nil))) }
+        guard let personalDetails = fundDetailsFull?.personalDetails, let isFavorite = personalDetails.isFavorite, let assetId = assetId else { return completion(.failure(errorType: .apiError(message: nil))) }
         
         FundsDataProvider.favorites(isFavorite: isFavorite, assetId: assetId) { [weak self] (result) in
             switch result {

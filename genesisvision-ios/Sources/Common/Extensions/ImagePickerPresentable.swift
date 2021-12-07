@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ImagePickerPresentable: class {
+protocol ImagePickerPresentable: AnyObject {
     var choosePhotoButton: UIButton { get }
     
     func showImagePicker()

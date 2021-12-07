@@ -9,12 +9,15 @@
 import UIKit
 
 struct DetailManagerTableViewCellViewModel {
-    let profilePublic: ProfilePublic
+    let profilePublic: PublicProfile
+    weak var delegate: DetailManagerTableViewCellDelegate?
 }
 
 extension DetailManagerTableViewCellViewModel: CellViewModel {
     func setup(on cell: DetailManagerTableViewCell) {
-        if let registrationDate = profilePublic.registrationDate {
+        cell.delegate = delegate
+        
+        if let registrationDate = profilePublic.regDate {
             cell.dateLabel.text = "since " + registrationDate.onlyDateFormatString
         }
         
@@ -28,6 +31,14 @@ extension DetailManagerTableViewCellViewModel: CellViewModel {
             cell.managerImageView.kf.indicatorType = .activity
             cell.managerImageView.kf.setImage(with: fileUrl, placeholder: UIImage.profilePlaceholder)
         }
+
+        if let followed = profilePublic.personalDetails?.isFollow, followed {
+            cell.followButton.setTitle("Unfollow", for: .normal)
+            cell.followButton.configure(with: .darkClear)
+        }
+
+        cell.followed = profilePublic.personalDetails?.isFollow
+        cell.userId = profilePublic._id
     }
 }
 

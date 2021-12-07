@@ -195,6 +195,18 @@ extension DashboardViewController: BaseTableViewProtocol {
             default:
                 break
             }
+        case .dashboardWallets:
+            switch actionType {
+            case .showAll:
+                let walletViewController = WalletViewController()
+                let router = WalletRouter(parentRouter: viewModel.router, navigationController: navigationController)
+                router.walletTabmanViewController = walletViewController
+                walletViewController.viewModel = WalletTabmanViewModel(withRouter: router, walletType: .all)
+                walletViewController.hidesBottomBarWhenPushed = true
+                navigationController?.pushViewController(walletViewController, animated: true)
+            default:
+                break
+            }
         default:
             break
         }
@@ -268,10 +280,11 @@ class DashboardViewModel: ViewModelWithListProtocol {
         case investing
         case portfolio
         case assets
+        case walletSummary
         case recommendations
     }
     
-    private var sections: [SectionType] = [.overview, .investing, .trading, .portfolio, .assets, .recommendations]
+    private var sections: [SectionType] = [.overview, .investing, .trading, .portfolio, .assets, .walletSummary, .recommendations]
     var viewModels = [CellViewAnyModel]()
     
     var canPullToRefresh: Bool = true
@@ -341,6 +354,16 @@ class DashboardViewModel: ViewModelWithListProtocol {
         }
     }
     
+    private var walletsSummary: WalletSummary? {
+        didSet {
+            let viewModel = DashboardWalletsTableViewCellViewModel(walletSummary: walletsSummary, ratesModel: ratesModel, delegate: delegate)
+            viewModels.append(viewModel)
+            reloadSection(.walletSummary)
+        }
+    }
+    
+    private var ratesModel: RatesModel?
+    
     private var recommendations: CommonPublicAssetsViewModel? {
         didSet {
             let viewModel = CellWithCollectionViewModel(DashboardRecommendationsViewModel(recommendations, delegate: delegate), delegate: delegate)
@@ -366,6 +389,7 @@ class DashboardViewModel: ViewModelWithListProtocol {
                 DashboardInvestingCellViewModel<InvestingCollectionViewModel>.self,
                 DashboardPortfolioChartTableViewCellViewModel.self,
                 DashboardAssetsChartTableViewCellViewModel.self,
+                DashboardWalletsTableViewCellViewModel.self,
                 CellWithCollectionViewModel<DashboardRecommendationsViewModel>.self]
     }
     
@@ -435,7 +459,14 @@ class DashboardViewModel: ViewModelWithListProtocol {
             self?.header = viewModel
         }, errorCompletion: errorCompletion)
         
-        
+        RateDataProvider.getRates(from: [getPlatformCurrencyType().rawValue], to: [Currency.btc.rawValue, Currency.eth.rawValue, Currency.gvt.rawValue, Currency.usdt.rawValue, Currency.usdc.rawValue, Currency.bnb.rawValue], completion: { [weak self] (ratesModel) in
+            self?.ratesModel = ratesModel
+            AuthManager.getWallet { (viewModel) in
+                if let walletsSummary = viewModel {
+                    self?.walletsSummary = walletsSummary
+                }
+            } completionError: { _ in }
+        }, errorCompletion: errorCompletion)
         
         delegate?.didReload()
     }
@@ -457,6 +488,8 @@ class DashboardViewModel: ViewModelWithListProtocol {
             return viewModels.first{ $0 is CellWithCollectionViewModel<DashboardRecommendationsViewModel>}
         case .investmentLimit:
             return viewModels.first{ $0 is DashboardInvestmentLimitsTableViewCellViewModel }
+        case .walletSummary:
+            return viewModels.first{ $0 is DashboardWalletsTableViewCellViewModel }
         }
     }
     
@@ -483,6 +516,8 @@ class DashboardViewModel: ViewModelWithListProtocol {
             delegate?.action(.dashboardTrading, actionType: .showAll)
         case .investing:
             delegate?.action(.dashboardInvesting, actionType: .showAll)
+        case .walletSummary:
+            delegate?.action(.dashboardWallets, actionType: .showAll)
         default:
             break
         }

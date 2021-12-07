@@ -61,7 +61,7 @@ class CustomCollectionViewLayout: UICollectionViewLayout {
     weak var delegate: CustomCollectionViewDelegate?
 }
 
-protocol CustomCollectionViewDelegate: class {
+protocol CustomCollectionViewDelegate: AnyObject {
     func theNumberOfItemsInCollectionView() -> Int
 }
 

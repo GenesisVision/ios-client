@@ -43,12 +43,12 @@ public struct WalletData: Codable {
 
     public var isWithdrawalEnabled: Bool?
 
-    public var withdrawalCommission: Double?
+    public var depositAddresses: [WalletDepositData]?
 
-    public var depositAddress: String?
+    public var withdrawalCommissions: [WalletWithdrawalCurrencyInfo]?
 
     public var depositUrlCoindirect: String?
-    public init(currency: Currency? = nil, available: Double? = nil, invested: Double? = nil, trading: Double? = nil, pending: Double? = nil, total: Double? = nil, availableCcy: Double? = nil, investedCcy: Double? = nil, tradingCcy: Double? = nil, pendingCcy: Double? = nil, totalCcy: Double? = nil, _id: UUID? = nil, title: String? = nil, logoUrl: String? = nil, isDepositEnabled: Bool? = nil, isWithdrawalEnabled: Bool? = nil, withdrawalCommission: Double? = nil, depositAddress: String? = nil, depositUrlCoindirect: String? = nil) { 
+    public init(currency: Currency? = nil, available: Double? = nil, invested: Double? = nil, trading: Double? = nil, pending: Double? = nil, total: Double? = nil, availableCcy: Double? = nil, investedCcy: Double? = nil, tradingCcy: Double? = nil, pendingCcy: Double? = nil, totalCcy: Double? = nil, _id: UUID? = nil, title: String? = nil, logoUrl: String? = nil, isDepositEnabled: Bool? = nil, isWithdrawalEnabled: Bool? = nil, depositAddresses: [WalletDepositData]? = nil, withdrawalCommissions: [WalletWithdrawalCurrencyInfo]? = nil, depositUrlCoindirect: String? = nil) { 
         self.currency = currency
         self.available = available
         self.invested = invested
@@ -65,8 +65,8 @@ public struct WalletData: Codable {
         self.logoUrl = logoUrl
         self.isDepositEnabled = isDepositEnabled
         self.isWithdrawalEnabled = isWithdrawalEnabled
-        self.withdrawalCommission = withdrawalCommission
-        self.depositAddress = depositAddress
+        self.depositAddresses = depositAddresses
+        self.withdrawalCommissions = withdrawalCommissions
         self.depositUrlCoindirect = depositUrlCoindirect
     }
     public enum CodingKeys: String, CodingKey { 
@@ -86,8 +86,8 @@ public struct WalletData: Codable {
         case logoUrl
         case isDepositEnabled
         case isWithdrawalEnabled
-        case withdrawalCommission
-        case depositAddress
+        case depositAddresses
+        case withdrawalCommissions
         case depositUrlCoindirect
     }
 

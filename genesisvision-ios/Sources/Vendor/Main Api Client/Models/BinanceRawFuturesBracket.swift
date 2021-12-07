@@ -20,12 +20,15 @@ public struct BinanceRawFuturesBracket: Codable {
     public var floor: Int64?
 
     public var maintenanceMarginRatio: Double?
-    public init(bracket: Int? = nil, initialLeverage: Int? = nil, cap: Int64? = nil, floor: Int64? = nil, maintenanceMarginRatio: Double? = nil) { 
+
+    public var maintAmount: Double?
+    public init(bracket: Int? = nil, initialLeverage: Int? = nil, cap: Int64? = nil, floor: Int64? = nil, maintenanceMarginRatio: Double? = nil, maintAmount: Double? = nil) { 
         self.bracket = bracket
         self.initialLeverage = initialLeverage
         self.cap = cap
         self.floor = floor
         self.maintenanceMarginRatio = maintenanceMarginRatio
+        self.maintAmount = maintAmount
     }
 
 }

@@ -13,6 +13,10 @@ public struct BinanceRawFuturesUsdtSymbol: Codable {
 
     public var name: String?
 
+    public var pair: String?
+
+    public var contractType: BinanceContractType?
+
     public var maintenanceMarginPercent: Double?
 
     public var pricePrecision: Int?
@@ -20,6 +24,12 @@ public struct BinanceRawFuturesUsdtSymbol: Codable {
     public var quantityPrecision: Int?
 
     public var requiredMarginPercent: Double?
+
+    public var settlePlan: Double?
+
+    public var maintMarginPercent: Double?
+
+    public var triggerProtect: Double?
 
     public var baseAsset: String?
 
@@ -32,6 +42,12 @@ public struct BinanceRawFuturesUsdtSymbol: Codable {
     public var quoteAssetPrecision: Int?
 
     public var status: BinanceSymbolStatus?
+
+    public var underlyingType: BinanceUnderlyingType?
+
+    public var deliveryDate: Date?
+
+    public var listingDate: Date?
 
     public var orderTypes: [BinanceOrderType]?
 
@@ -48,18 +64,26 @@ public struct BinanceRawFuturesUsdtSymbol: Codable {
     public var maxAlgoOrdersFilter: BinanceRawFuturesSymbolMaxAlgorithmicOrdersFilter?
 
     public var pricePercentFilter: BinanceRawFuturesSymbolPercentPriceFilter?
-    public init(name: String? = nil, maintenanceMarginPercent: Double? = nil, pricePrecision: Int? = nil, quantityPrecision: Int? = nil, requiredMarginPercent: Double? = nil, baseAsset: String? = nil, marginAsset: String? = nil, quoteAsset: String? = nil, baseAssetPrecision: Int? = nil, quoteAssetPrecision: Int? = nil, status: BinanceSymbolStatus? = nil, orderTypes: [BinanceOrderType]? = nil, timeInForce: [BinanceTimeInForce]? = nil, priceFilter: BinanceRawFuturesSymbolPriceFilter? = nil, lotSizeFilter: BinanceRawFuturesSymbolLotSizeFilter? = nil, marketLotSizeFilter: BinanceRawFuturesSymbolMarketLotSizeFilter? = nil, maxOrdersFilter: BinanceRawFuturesSymbolMaxOrdersFilter? = nil, maxAlgoOrdersFilter: BinanceRawFuturesSymbolMaxAlgorithmicOrdersFilter? = nil, pricePercentFilter: BinanceRawFuturesSymbolPercentPriceFilter? = nil) { 
+    public init(name: String? = nil, pair: String? = nil, contractType: BinanceContractType? = nil, maintenanceMarginPercent: Double? = nil, pricePrecision: Int? = nil, quantityPrecision: Int? = nil, requiredMarginPercent: Double? = nil, settlePlan: Double? = nil, maintMarginPercent: Double? = nil, triggerProtect: Double? = nil, baseAsset: String? = nil, marginAsset: String? = nil, quoteAsset: String? = nil, baseAssetPrecision: Int? = nil, quoteAssetPrecision: Int? = nil, status: BinanceSymbolStatus? = nil, underlyingType: BinanceUnderlyingType? = nil, deliveryDate: Date? = nil, listingDate: Date? = nil, orderTypes: [BinanceOrderType]? = nil, timeInForce: [BinanceTimeInForce]? = nil, priceFilter: BinanceRawFuturesSymbolPriceFilter? = nil, lotSizeFilter: BinanceRawFuturesSymbolLotSizeFilter? = nil, marketLotSizeFilter: BinanceRawFuturesSymbolMarketLotSizeFilter? = nil, maxOrdersFilter: BinanceRawFuturesSymbolMaxOrdersFilter? = nil, maxAlgoOrdersFilter: BinanceRawFuturesSymbolMaxAlgorithmicOrdersFilter? = nil, pricePercentFilter: BinanceRawFuturesSymbolPercentPriceFilter? = nil) { 
         self.name = name
+        self.pair = pair
+        self.contractType = contractType
         self.maintenanceMarginPercent = maintenanceMarginPercent
         self.pricePrecision = pricePrecision
         self.quantityPrecision = quantityPrecision
         self.requiredMarginPercent = requiredMarginPercent
+        self.settlePlan = settlePlan
+        self.maintMarginPercent = maintMarginPercent
+        self.triggerProtect = triggerProtect
         self.baseAsset = baseAsset
         self.marginAsset = marginAsset
         self.quoteAsset = quoteAsset
         self.baseAssetPrecision = baseAssetPrecision
         self.quoteAssetPrecision = quoteAssetPrecision
         self.status = status
+        self.underlyingType = underlyingType
+        self.deliveryDate = deliveryDate
+        self.listingDate = listingDate
         self.orderTypes = orderTypes
         self.timeInForce = timeInForce
         self.priceFilter = priceFilter

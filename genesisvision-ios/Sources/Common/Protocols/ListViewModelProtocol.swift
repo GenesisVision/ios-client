@@ -70,6 +70,10 @@ protocol ViewModelWithListProtocol {
     var canPullToRefresh: Bool { get set }
     var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] { get }
     var cellModelsForRegistration: [CellViewAnyModel.Type] { get }
+    var backgroundColorForUnselection: UIColor { get }
+    var backgroundColorForSelection: UIColor { get }
+    var shouldHightlight: Bool { get }
+    var shouldUnhightlight: Bool { get }
     
     func fetch(completion: @escaping CompletionBlock)
     func fetch()
@@ -92,6 +96,7 @@ protocol ViewModelWithListProtocol {
     
     func didSelect(at indexPath: IndexPath)
     func cellAnimations() -> Bool
+    func fetchMore()
     
     @available(iOS 13.0, *)
     func getMenu(_ indexPath: IndexPath) -> UIMenu?
@@ -149,6 +154,17 @@ extension ViewModelWithListProtocol {
         return 0.0
     }
     
+    var shouldHightlight: Bool { true }
+    var shouldUnhightlight: Bool { true }
+    
+    var backgroundColorForUnselection: UIColor {
+        UIColor.Cell.bg
+    }
+    
+    var backgroundColorForSelection: UIColor {
+        UIColor.Cell.subtitle.withAlphaComponent(0.3)
+    }
+    
     func headerView(_ tableView: UITableView, for section: Int) -> UIView? {
         let view = UIView()
         view.backgroundColor = UIColor.Cell.headerBg
@@ -172,6 +188,10 @@ extension ViewModelWithListProtocol {
     }
     func minimumInteritemSpacing(for section: Int) -> CGFloat {
         return 16.0
+    }
+    
+    func fetchMore() {
+        
     }
     
     @available(iOS 13.0, *)

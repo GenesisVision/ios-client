@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol DashboardInvestingCellViewModelProtocol: class {
+protocol DashboardInvestingCellViewModelProtocol: AnyObject {
     func programs()
     func funds()
 }

@@ -16,6 +16,9 @@ enum ErrorMessageType {
     case requiresTwoFactor(message: String?)
     case requiresCaptcha(message: String?)
     case requiresEmailConfirmation(message: String?)
+    case requiresSignature(message: String?)
+    case notFound(message: String?)
+    case forbidden(message: String?)
 }
 
 class ErrorHandler {
@@ -37,39 +40,40 @@ class ErrorHandler {
                 return completion(.failure(errorType: .apiError(message: nil)))
             }
             
-            var errorWithTokenViewModel: ErrorViewModelWithToken?
+            var errorViewModel: ErrorViewModel?
             
             do {
-                errorWithTokenViewModel = try JSONDecoder().decode(ErrorViewModelWithToken.self, from: jsonData)
+                errorViewModel = try JSONDecoder().decode(ErrorViewModel.self, from: jsonData)
             } catch {}
             
-            if let errorsCode = errorWithTokenViewModel?.code,
-               let errorsText = errorWithTokenViewModel?.errors?.compactMap({ $0.message }).joined(separator: "\n") {
-                if let tempToken = errorWithTokenViewModel?.tempToken { AuthManager.tempAuthorizedToken = tempToken }
-                handleErrorCompletion(errorCodes: errorsCode, errorsText: errorsText, completion: completion)
+            guard let errorsCode = errorViewModel?.code, let errorsText = errorViewModel?.errors?.compactMap({$0.message}).joined(separator: "\n") else {
+                return completion(.failure(errorType: .apiError(message: nil)))
             }
-        }
-    }
-    
-    private static func handleErrorCompletion(errorCodes: ErrorCodes, errorsText: String, completion: @escaping CompletionBlock) {
-        switch errorCodes {
-        case .internalServerError, .validationError:
-            completion(.failure(errorType: .apiError(message: errorsText)))
-        case .requiresTwoFactor:
-            completion(.failure(errorType: .requiresTwoFactor(message: errorsText)))
-        case .wrongCaptcha:
-            completion(.failure(errorType: .requiresCaptcha(message: errorsText)))
-        case .requiresEmailConfirmation:
-            completion(.failure(errorType: .requiresEmailConfirmation(message: errorsText)))
+            
+            print("API ERROR text \(errorsText)")
+            
+            switch errorsCode {
+            case .wrongCaptcha:
+                completion(.failure(errorType: .requiresCaptcha(message: errorsText)))
+            case .requiresTwoFactor:
+                completion(.failure(errorType: .requiresTwoFactor(message: errorsText)))
+            case .internalServerError, .validationError:
+                completion(.failure(errorType: .apiError(message: errorsText)))
+            case .requiresEmailConfirmation:
+                completion(.failure(errorType: .requiresEmailConfirmation(message: errorsText)))
+            case .requiresSignature:
+                completion(.failure(errorType: .requiresSignature(message: errorsText)))
+            case .notFound:
+                completion(.failure(errorType: .notFound(message: errorsText)))
+            case .forbidden:
+                completion(.failure(errorType: .forbidden(message: errorsText)))
+            }
         }
     }
     
     static func handleError(with errorMessageType: ErrorMessageType, viewController: UIViewController? = nil, hud: Bool = false) {
         switch errorMessageType {
-        case .apiError(let message),
-             .requiresTwoFactor(let message),
-             .requiresCaptcha(let message),
-             .requiresEmailConfirmation(let message):
+        case .apiError(let message), .requiresTwoFactor(let message), .requiresCaptcha(let message), .requiresEmailConfirmation(let message):
             hud && viewController != nil
                 ? message != nil ? viewController!.showErrorHUD(subtitle: message!) : viewController!.showErrorHUD()
                 : message != nil ? print("Api Error with reason: " + message!) : print("Api Error without reason")
@@ -78,6 +82,12 @@ class ErrorHandler {
             
             ReachabilityManager.shared.notificationBanner?.titleLabel?.text = message
             ReachabilityManager.shared.notificationBanner?.show()
+        case .requiresSignature(message: let message):
+            hud && viewController != nil
+                ? message != nil ? viewController!.showErrorHUD(subtitle: message!) : viewController!.showErrorHUD()
+                : message != nil ? print("Api Error with reason: " + message!) : print("Api Error without reason")
+        default:
+            break
         }
     }
 }

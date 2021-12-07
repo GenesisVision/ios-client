@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol DesignableUITextFieldDelegate: class {
+protocol DesignableUITextFieldDelegate: AnyObject {
     func textFieldDidClear(_ textField: UITextField)
 }
 
@@ -40,8 +40,6 @@ class DesignableUITextField: UITextField, UITextFieldDelegate {
     }
     
     func setBottomLine(borderColor: UIColor? = UIColor.TextField.line) {
-        layoutIfNeeded()
-        
         borderStyle = UITextField.BorderStyle.none
         backgroundColor = UIColor.clear
         
@@ -50,6 +48,7 @@ class DesignableUITextField: UITextField, UITextFieldDelegate {
         borderLine.backgroundColor = borderColor
         
         addSubview(borderLine)
+        layoutIfNeeded()
     }
     
     func setClearButtonWhileEditing() {

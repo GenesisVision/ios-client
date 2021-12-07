@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Social Post Report View Controller-->
+        <scene sceneID="tKo-fy-bgR">
+            <objects>
+                <viewController storyboardIdentifier="SocialPostReportViewController" id="Slv-es-czJ" customClass="SocialPostReportViewController" customModule="GV_DEBUG" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MT1-Jz-3qW">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="MHJ-d4-ltd"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5gp-SP-Clh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-551" y="74"/>
+        </scene>
+        <!--Social New Post View Controller-->
+        <scene sceneID="8rX-85-Gem">
+            <objects>
+                <viewController storyboardIdentifier="SocialNewPostViewController" id="Ejb-9u-4A4" customClass="SocialNewPostViewController" customModule="GV_DEBUG" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="T0F-1r-del">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="05a-Rz-vnT">
+                                <rect key="frame" x="10" y="54" width="394" height="762"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a3g-bf-2Gm">
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="250"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7wc-VE-Knv" userLabel="sharedPostVIew" customClass="SocialPostView" customModule="GV_DEBUG" customModuleProvider="target">
+                                                <rect key="frame" x="20" y="0.0" width="374" height="250"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="7wc-VE-Knv" secondAttribute="bottom" id="Dsh-Ey-nEr"/>
+                                            <constraint firstItem="7wc-VE-Knv" firstAttribute="top" secondItem="a3g-bf-2Gm" secondAttribute="top" id="Qdz-Tc-xeT"/>
+                                            <constraint firstItem="7wc-VE-Knv" firstAttribute="leading" secondItem="a3g-bf-2Gm" secondAttribute="leading" constant="20" id="Y8w-XD-gkz"/>
+                                            <constraint firstAttribute="height" constant="250" id="udx-7K-3G2"/>
+                                            <constraint firstAttribute="trailing" secondItem="7wc-VE-Knv" secondAttribute="trailing" id="zdV-bK-qwp"/>
+                                        </constraints>
+                                    </view>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bCO-Cu-9kt">
+                                        <rect key="frame" x="0.0" y="260" width="394" height="392"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" systemColor="labelColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0IA-CX-gic" customClass="ImagesGalleryView" customModule="GV_DEBUG" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="662" width="394" height="100"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="9fg-Ss-eFO"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JKY-42-h09">
+                                <rect key="frame" x="20" y="826" width="374" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jPM-Re-cua" customClass="ActionButton" customModule="GV_DEBUG" customModuleProvider="target">
+                                        <rect key="frame" x="284" y="0.0" width="90" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="90" id="H9T-RS-c4j"/>
+                                        </constraints>
+                                        <state key="normal" title="Publish"/>
+                                        <connections>
+                                            <action selector="publishButtonAction:" destination="Ejb-9u-4A4" eventType="touchUpInside" id="7Q9-DG-xUz"/>
+                                        </connections>
+                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="vGd-IW-PPG">
+                                        <rect key="frame" x="10" y="0.0" width="160" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TiI-m7-9NQ" customClass="ActionButton" customModule="GV_DEBUG" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <action selector="attachmentButtonAction:" destination="Ejb-9u-4A4" eventType="touchUpInside" id="X7A-ZY-mdz"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pz3-Do-wPf" customClass="ActionButton" customModule="GV_DEBUG" customModuleProvider="target">
+                                                <rect key="frame" x="55" y="0.0" width="50" height="50"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                <state key="normal" title="@"/>
+                                                <connections>
+                                                    <action selector="atSignButtonAction:" destination="Ejb-9u-4A4" eventType="touchUpInside" id="JeJ-5n-Ot9"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DQJ-uR-aOj" customClass="ActionButton" customModule="GV_DEBUG" customModuleProvider="target">
+                                                <rect key="frame" x="110" y="0.0" width="50" height="50"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                <state key="normal" title="#"/>
+                                                <connections>
+                                                    <action selector="hashtagButtonAction:" destination="Ejb-9u-4A4" eventType="touchUpInside" id="cUQ-C2-ITd"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="160" id="JWb-cf-ZlU"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="vGd-IW-PPG" secondAttribute="bottom" id="6WL-bE-Uqj"/>
+                                    <constraint firstItem="jPM-Re-cua" firstAttribute="top" secondItem="JKY-42-h09" secondAttribute="top" id="7bU-5u-mEV"/>
+                                    <constraint firstAttribute="height" constant="50" id="cjv-Ge-hA6"/>
+                                    <constraint firstAttribute="trailing" secondItem="jPM-Re-cua" secondAttribute="trailing" id="ldZ-ob-KTd"/>
+                                    <constraint firstItem="vGd-IW-PPG" firstAttribute="leading" secondItem="JKY-42-h09" secondAttribute="leading" constant="10" id="nPZ-Bb-NqW"/>
+                                    <constraint firstAttribute="bottom" secondItem="jPM-Re-cua" secondAttribute="bottom" id="oVe-SI-z5j"/>
+                                    <constraint firstItem="vGd-IW-PPG" firstAttribute="top" secondItem="JKY-42-h09" secondAttribute="top" id="wNY-y9-lMr"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="4CA-gp-Xul"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="05a-Rz-vnT" firstAttribute="top" secondItem="4CA-gp-Xul" secondAttribute="top" constant="10" id="2U8-JV-uy0"/>
+                            <constraint firstItem="JKY-42-h09" firstAttribute="leading" secondItem="4CA-gp-Xul" secondAttribute="leading" constant="20" id="Bum-PI-aBB"/>
+                            <constraint firstItem="05a-Rz-vnT" firstAttribute="leading" secondItem="4CA-gp-Xul" secondAttribute="leading" constant="10" id="M5r-VZ-p7g"/>
+                            <constraint firstItem="4CA-gp-Xul" firstAttribute="trailing" secondItem="05a-Rz-vnT" secondAttribute="trailing" constant="10" id="XUP-UH-uf0"/>
+                            <constraint firstItem="JKY-42-h09" firstAttribute="bottom" secondItem="T0F-1r-del" secondAttribute="bottom" constant="-20" id="j5u-SJ-vlh"/>
+                            <constraint firstItem="4CA-gp-Xul" firstAttribute="trailing" secondItem="JKY-42-h09" secondAttribute="trailing" constant="20" id="x6N-CN-VSx"/>
+                            <constraint firstItem="JKY-42-h09" firstAttribute="top" secondItem="05a-Rz-vnT" secondAttribute="bottom" constant="10" id="xZl-Be-9d3"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="atSignButton" destination="pz3-Do-wPf" id="xea-hQ-sqh"/>
+                        <outlet property="attachmentButton" destination="TiI-m7-9NQ" id="hm0-OV-e29"/>
+                        <outlet property="hashtagSignButton" destination="DQJ-uR-aOj" id="3ZO-MW-1T3"/>
+                        <outlet property="imagesGallery" destination="0IA-CX-gic" id="Fcq-mh-Ekh"/>
+                        <outlet property="publishButton" destination="jPM-Re-cua" id="4KQ-Jf-RL9"/>
+                        <outlet property="sharedPostMainView" destination="a3g-bf-2Gm" id="HIZ-h6-ynF"/>
+                        <outlet property="sharedPostView" destination="7wc-VE-Knv" id="qLy-YF-GJa"/>
+                        <outlet property="textView" destination="bCO-Cu-9kt" id="e6R-Bx-zaB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zbb-1j-17c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="230.43478260869566" y="73.660714285714278"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

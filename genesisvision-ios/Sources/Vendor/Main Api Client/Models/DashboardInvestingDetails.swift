@@ -17,13 +17,16 @@ public struct DashboardInvestingDetails: Codable {
 
     public var fundsCount: Int?
 
+    public var coinsCount: Int?
+
     public var profits: DashboardProfits?
 
     public var events: InvestmentEventViewModelItemsViewModel?
-    public init(equity: Double? = nil, programsCount: Int? = nil, fundsCount: Int? = nil, profits: DashboardProfits? = nil, events: InvestmentEventViewModelItemsViewModel? = nil) { 
+    public init(equity: Double? = nil, programsCount: Int? = nil, fundsCount: Int? = nil, coinsCount: Int? = nil, profits: DashboardProfits? = nil, events: InvestmentEventViewModelItemsViewModel? = nil) { 
         self.equity = equity
         self.programsCount = programsCount
         self.fundsCount = fundsCount
+        self.coinsCount = coinsCount
         self.profits = profits
         self.events = events
     }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SearchHeaderTextChangedProtocol: class {
+protocol SearchHeaderTextChangedProtocol: AnyObject {
     func textChanged(text: String)
 }
 
@@ -26,7 +26,8 @@ class SearchHeaderView: UIView {
     private let rightImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = #imageLiteral(resourceName: "img_search_icon")
+        imageView.image = #imageLiteral(resourceName: "img_search_icon").withRenderingMode(.alwaysTemplate)
+        imageView.tintColor = UIColor.Common.primary
         return imageView
     }()
     
@@ -43,10 +44,10 @@ class SearchHeaderView: UIView {
         addSubview(searchField)
         addSubview(rightImageView)
         
-        rightImageView.anchor(top: nil, leading: nil, bottom: nil, trailing: trailingAnchor, size: CGSize(width: 25, height: 25))
+        rightImageView.anchor(top: nil, leading: nil, bottom: nil, trailing: trailingAnchor, size: CGSize(width: 20, height: 20))
         rightImageView.anchorCenter(centerY: searchField.centerYAnchor, centerX: nil)
         searchField.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: rightImageView.leadingAnchor)
-        
+        searchField.anchorSize(size: CGSize(width: UIScreen.main.bounds.width - 20, height: 0))
     }
     
     private func addBottomLine() {
@@ -64,6 +65,6 @@ class SearchHeaderView: UIView {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
     }
 }

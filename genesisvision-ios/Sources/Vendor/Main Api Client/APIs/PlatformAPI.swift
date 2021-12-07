@@ -119,7 +119,7 @@ open class PlatformAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "type": type
         ])
 
@@ -164,6 +164,7 @@ open class PlatformAPI {
   "name" : "name",
   "description" : "description",
   "chartSymbol" : "chartSymbol",
+  "lastModified" : "2000-01-23T04:56:07.000+00:00",
   "logoUrl" : "logoUrl",
   "tags" : [ {
     "color" : "color",
@@ -278,7 +279,7 @@ open class PlatformAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "take": take?.encodeToJSON()
         ])
 
@@ -379,13 +380,33 @@ open class PlatformAPI {
       "name" : "name"
     } ],
     "platformWithdrawalInfo" : [ {
-      "withdrawalFee" : 1.0246457001441578,
+      "commissions" : [ {
+        "blockchain" : "None",
+        "blockchainTitle" : "blockchainTitle",
+        "value" : 1.0246457001441578
+      }, {
+        "blockchain" : "None",
+        "blockchainTitle" : "blockchainTitle",
+        "value" : 1.0246457001441578
+      } ],
       "currency" : "Undefined",
-      "isWithdrawalEnabled" : true
+      "isWithdrawalEnabled" : true,
+      "title" : "title",
+      "logoUrl" : "logoUrl"
     }, {
-      "withdrawalFee" : 1.0246457001441578,
+      "commissions" : [ {
+        "blockchain" : "None",
+        "blockchainTitle" : "blockchainTitle",
+        "value" : 1.0246457001441578
+      }, {
+        "blockchain" : "None",
+        "blockchainTitle" : "blockchainTitle",
+        "value" : 1.0246457001441578
+      } ],
       "currency" : "Undefined",
-      "isWithdrawalEnabled" : true
+      "isWithdrawalEnabled" : true,
+      "title" : "title",
+      "logoUrl" : "logoUrl"
     } ]
   },
   "assetInfo" : {
@@ -725,11 +746,11 @@ open class PlatformAPI {
       "statistic" : {
         "drawdown" : 1.2315135367772556,
         "chart" : [ {
-          "date" : 0,
-          "value" : 6.027456183070403
+          "date" : 5,
+          "value" : 2.3021358869347655
         }, {
-          "date" : 0,
-          "value" : 6.027456183070403
+          "date" : 5,
+          "value" : 2.3021358869347655
         } ],
         "profit" : 7.386281948385884
       },
@@ -787,11 +808,11 @@ open class PlatformAPI {
       "statistic" : {
         "drawdown" : 1.2315135367772556,
         "chart" : [ {
-          "date" : 0,
-          "value" : 6.027456183070403
+          "date" : 5,
+          "value" : 2.3021358869347655
         }, {
-          "date" : 0,
-          "value" : 6.027456183070403
+          "date" : 5,
+          "value" : 2.3021358869347655
         } ],
         "profit" : 7.386281948385884
       },
@@ -852,7 +873,7 @@ open class PlatformAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "eventsTake": eventsTake?.encodeToJSON(), 
                         "followTake": followTake?.encodeToJSON(), 
                         "programsTake": programsTake?.encodeToJSON(), 
@@ -990,7 +1011,7 @@ open class PlatformAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "currency": currency
         ])
 
@@ -1041,7 +1062,7 @@ open class PlatformAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "currency": currency
         ])
 
@@ -1088,7 +1109,7 @@ open class PlatformAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
                         "Route": route, 
                         "Client": client, 
                         "Version": version

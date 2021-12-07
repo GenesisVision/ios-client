@@ -34,7 +34,7 @@ final class WalletDepositViewModel {
     var walletSummary: WalletSummary?
     var selectedWallet: WalletData? {
         didSet {
-            guard let selectedWallet = selectedWallet, let address = selectedWallet.depositAddress else { return }
+            guard let selectedWallet = selectedWallet, let address = selectedWallet.depositAddresses?.first?.address else { return }
             
             self.address = address
         }

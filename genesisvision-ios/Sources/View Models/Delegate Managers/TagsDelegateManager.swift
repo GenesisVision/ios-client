@@ -8,11 +8,11 @@
 
 import UIKit.UITableView
 
-protocol TagsDelegate: class {
+protocol TagsDelegate: AnyObject {
     func didSelectTag()
 }
 
-protocol FilterTagsManager: class {
+protocol FilterTagsManager: AnyObject {
     var selectedIdxs: [Int] { get set }
 
     func isSelected(_ idx: Int) -> Bool

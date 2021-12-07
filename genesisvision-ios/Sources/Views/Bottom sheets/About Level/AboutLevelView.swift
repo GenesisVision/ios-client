@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol AboutLevelViewProtocol: class {
+protocol AboutLevelViewProtocol: AnyObject {
     func aboutLevelsButtonDidPress()
 }
 

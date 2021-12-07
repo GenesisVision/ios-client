@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol EventDetailsViewProtocol: class {
+protocol EventDetailsViewProtocol: AnyObject {
     func showAssetButtonDidPress(_ assetId: String, assetType: AssetType)
     func closeButtonDidPress()
 }

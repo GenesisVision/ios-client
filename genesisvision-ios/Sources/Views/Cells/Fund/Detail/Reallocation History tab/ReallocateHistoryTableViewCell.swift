@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ReallocateHistoryTableViewCellProtocol: class {
+protocol ReallocateHistoryTableViewCellProtocol: AnyObject {
     func didTapSeeAllButton(_ index: Int)
 }
 

@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol DetailManagerTableViewCellDelegate: AnyObject {
+    func followPressed(userId: UUID, followed: Bool)
+}
+
 class DetailManagerTableViewCell: UITableViewCell {
 
     // MARK: - Outlets
@@ -33,6 +37,12 @@ class DetailManagerTableViewCell: UITableViewCell {
         }
     }
     
+    @IBOutlet weak var followButton: ActionButton!
+    
+    var userId: UUID?
+    var followed: Bool?
+    weak var delegate: DetailManagerTableViewCellDelegate?
+    
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -43,6 +53,21 @@ class DetailManagerTableViewCell: UITableViewCell {
         accessoryView?.backgroundColor = UIColor.BaseView.bg
         selectionStyle = .none
         isUserInteractionEnabled = true
+    }
+    
+    @IBAction func followButtonAction(_ sender: Any) {
+        guard let userId = userId, let followed = followed else { return }
+        delegate?.followPressed(userId: userId, followed: followed)
+        
+        if followed {
+            followButton.setTitle("Follow", for: .normal)
+            followButton.configure(with: .normal)
+        } else {
+            followButton.setTitle("Unfollow", for: .normal)
+            followButton.configure(with: .darkClear)
+        }
+        
+        self.followed = !followed
     }
 }
 

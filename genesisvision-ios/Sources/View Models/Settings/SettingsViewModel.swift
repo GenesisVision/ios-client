@@ -14,9 +14,11 @@ final class SettingsViewModel {
         case profile = "Profile"
         case kycStatus = "KYC Status"
         case publicProfile = "Public investor's profile"
+        case socialProfile = "My Profile"
         
         case currency = "Platform currency"
         case referralProgram = "Referral program"
+        case privacy = "Privacy"
         case changePassword = "Change password"
         case passcode = "Passcode"
         case biometricID = "Touch ID"
@@ -117,7 +119,7 @@ final class SettingsViewModel {
     var kycVerificationTokens: ExternalKycAccessToken?
     
     var sections: [SectionType] = [.profile, .currency, .security, .feedback]
-    var rows: [SectionType : [RowType]] = [.profile : [.profile, .kycStatus, .publicProfile],
+    var rows: [SectionType : [RowType]] = [.profile : [.profile, .kycStatus, .publicProfile, .socialProfile, .privacy],
                                            .currency : [.currency, .referralProgram],
                                            .security : [.changePassword, .passcode, .biometricID, .twoFactor],
                                            .feedback : [.termsAndConditions, .privacyPolicy, .contactUs]]
@@ -214,9 +216,16 @@ final class SettingsViewModel {
         guard let profileModel = profileModel else { return }
         router.show(routeType: .showProfile(profileModel))
     }
+    
+    func showProfilePrivacy() {
+        guard let profileModel = profileModel else { return }
+        router.show(routeType: .showProfilePrivacy(profileModel))
+    }
+    
     func publicChange(_ value: Bool, completion: @escaping CompletionBlock) {
         ProfileDataProvider.publicChange(value, completion: completion)
     }
+    
     func changePassword() {
         router.show(routeType: .changePassword)
     }
@@ -261,6 +270,11 @@ final class SettingsViewModel {
     func showKYC() {
         guard let kycVerificationTokens = kycVerificationTokens else { return }
         router.show(routeType: .kyc(kycVerificationTokens))
+    }
+    
+    func showSocialProfile() {
+        guard let id = profileModel?._id?.uuidString else { return }
+        router.show(routeType: .showSocialProfile(id))
     }
     
     // MARK: -  Private methods

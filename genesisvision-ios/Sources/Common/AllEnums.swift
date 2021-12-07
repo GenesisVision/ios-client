@@ -14,6 +14,7 @@ enum CellActionType {
     case dashboardTrading
     case dashboardInvestLimitInfo
     case dashboardInvesting
+    case dashboardWallets
     case dashboardRecommendation
     
     case tradingEvents
@@ -35,6 +36,8 @@ enum CellActionType {
     case changePassword
     case closePeriod
     case openSettings
+    
+    case social
 }
 
 enum DidSelectType {
@@ -209,6 +212,7 @@ enum StoryboardNames: String {
     case wallet
     case dashboard
     case notifications
+    case social
 }
 
 // MARK: - Filters
@@ -218,5 +222,34 @@ enum SliderType: Int {
 
 enum SwitchType: Int {
     case activePrograms, favoritePrograms, availableToInvest
+}
+
+enum SocialPostAction {
+    case edit(postId: UUID)
+    case share(postLink: String)
+    case copyLink(postLink: String)
+    case delete(postId: UUID)
+    case report(postId: UUID)
+    case pin(postId: UUID)
+    case unpin(postId: UUID)
+    
+    var string: String {
+        switch self {
+        case .edit:
+            return "Edit"
+        case .share:
+            return "Share"
+        case .copyLink:
+            return "Copy link"
+        case .delete:
+            return "Delete"
+        case .report:
+            return "Report"
+        case .pin:
+            return "Pin"
+        case .unpin:
+            return "Unpin"
+        }
+    }
 }
 
