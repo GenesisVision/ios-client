@@ -27,7 +27,7 @@ extension Notification.Name {
     static let chooseProgramList = Notification.Name(Keys.chooseProgramListKey)
     static let chooseFundList = Notification.Name(Keys.chooseFundListKey)
     static let socialShowEventsSwitchValueChanged = Notification.Name(Keys.socialShowEventsSwitchValueChanged)
-    
+    static let linkDidReceived = Notification.Name(Keys.linkDidReceivedKey)
     static let tabBarDidScrollToTop = Notification.Name(Keys.tabBarDidScrollToTopKey)
     
     static let themeChanged = Notification.Name(Keys.themeChangedKey)

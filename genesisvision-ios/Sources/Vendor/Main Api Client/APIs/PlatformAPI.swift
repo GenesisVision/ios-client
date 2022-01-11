@@ -119,7 +119,7 @@ open class PlatformAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "type": type
         ])
 
@@ -279,7 +279,7 @@ open class PlatformAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "take": take?.encodeToJSON()
         ])
 
@@ -873,7 +873,7 @@ open class PlatformAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "eventsTake": eventsTake?.encodeToJSON(), 
                         "followTake": followTake?.encodeToJSON(), 
                         "programsTake": programsTake?.encodeToJSON(), 
@@ -1011,7 +1011,7 @@ open class PlatformAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "currency": currency
         ])
 
@@ -1062,7 +1062,7 @@ open class PlatformAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "currency": currency
         ])
 
@@ -1109,7 +1109,7 @@ open class PlatformAPI {
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
                         "Route": route, 
                         "Client": client, 
                         "Version": version

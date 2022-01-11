@@ -185,7 +185,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
         if let modelData = userInfo[gcmModelKey] as? String {
             let dataDict: [String: String] = [gcmModelKey: modelData]
-            NotificationCenter.default.post(name: .notificationDidReceived, object: nil, userInfo: dataDict)
+//            NotificationCenter.default.post(name: .notificationDidReceived, object: nil, userInfo: dataDict)
+            NotificationCenter.default.post(name: .notificationDidReceive, object: nil, userInfo: dataDict)
         }
         
         completionHandler([.alert, .badge, .sound])
@@ -204,13 +205,14 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
         if let modelData = userInfo[gcmModelKey] as? String {
             let dataDict: [String: String] = [gcmModelKey: modelData]
-            NotificationCenter.default.post(name: .notificationDidTapped, object: nil, userInfo: dataDict)
+//            NotificationCenter.default.post(name: .notificationDidTapped, object: nil, userInfo: dataDict)
+            NotificationCenter.default.post(name: .notificationDidTap, object: nil, userInfo: dataDict)
         }
         
         completionHandler()
     }
 }
-
+// MARK: - linkDidReceived
 extension AppDelegate {
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         guard let url = userActivity.webpageURL else { return false }

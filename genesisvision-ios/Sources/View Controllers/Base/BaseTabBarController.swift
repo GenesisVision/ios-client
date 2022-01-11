@@ -28,9 +28,11 @@ class BaseTabBarController: UITabBarController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(themeChangedNotification(notification:)), name: .themeChanged, object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(notificationDidReceive(_:)), name: .notificationDidReceived, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(notificationDidReceive(_:)), name: .notificationDidReceived, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(notificationDidReceive(_:)), name: .notificationDidReceive, object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(notificationDidTap(_:)), name: .notificationDidTapped, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(notificationDidTap(_:)), name: .notificationDidTapped, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(notificationDidTap(_:)), name: .notificationDidTap, object: nil)
         
         if let fcmToken = UserDefaults.standard.string(forKey: UserDefaultKeys.fcmToken) {
             sendFcmToken(fcmToken)
@@ -49,8 +51,10 @@ class BaseTabBarController: UITabBarController {
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: .themeChanged, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .notificationDidReceived, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .notificationDidTapped, object: nil)
+//        NotificationCenter.default.removeObserver(self, name: .notificationDidReceived, object: nil)
+//        NotificationCenter.default.removeObserver(self, name: .notificationDidTapped, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .notificationDidReceive, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .notificationDidTap, object: nil)
     }
     
     // MARK: - Private methods

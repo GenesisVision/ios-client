@@ -29,7 +29,7 @@ class AssetsViewController: BaseTabmanViewController<AssetsTabmanViewModel> {
             
             navigationItem.rightBarButtonItems = [searchBarButtonItem]
         }
-        
+        // MARK: - linkDidReceived
         NotificationCenter.default.addObserver(self, selector: #selector(linkDidReceived(_:)), name: .linkDidReceived, object: nil)
         
         guard viewModel.router is DashboardRouter else {
@@ -91,6 +91,7 @@ class AssetsViewController: BaseTabmanViewController<AssetsTabmanViewModel> {
     deinit {
         NotificationCenter.default.removeObserver(self, name: .chooseFundList, object: nil)
         NotificationCenter.default.removeObserver(self, name: .chooseProgramList, object: nil)
+        // MARK: - linkDidReceived
         NotificationCenter.default.removeObserver(self, name: .linkDidReceived, object: nil)
     }
     

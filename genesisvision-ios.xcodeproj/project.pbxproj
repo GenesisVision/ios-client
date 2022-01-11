@@ -1083,6 +1083,9 @@
 		5EFDEABA238FFF2E00AF3AC1 /* CellViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFDEAB9238FFF2E00AF3AC1 /* CellViews.swift */; };
 		5EFE7C412181E78700D385C8 /* FundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFE7C3D2181E78500D385C8 /* FundViewController.swift */; };
 		C507CE975FDC32C800A243E4 /* Pods_genesisvision_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19E569CA2835914BCDF0493C /* Pods_genesisvision_ios.framework */; };
+		F390C752278D8BE8006FF6CB /* PushNotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F390C751278D8BE8006FF6CB /* PushNotificationViewModel.swift */; };
+		F390C754278D8CD6006FF6CB /* DynamicLinkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F390C753278D8CD6006FF6CB /* DynamicLinkManager.swift */; };
+		F390C756278D8D57006FF6CB /* AuthThreeFactorSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F390C755278D8D57006FF6CB /* AuthThreeFactorSignInViewController.swift */; };
 		FC0E20062044123F00872BE5 /* PhotoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E20052044123F00872BE5 /* PhotoHeaderView.swift */; };
 		FC0E200A2044357800872BE5 /* WalletDepositViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E20092044357800872BE5 /* WalletDepositViewController.swift */; };
 		FC0E200C2044358200872BE5 /* WalletWithdrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E200B2044358200872BE5 /* WalletWithdrawViewController.swift */; };
@@ -2357,6 +2360,9 @@
 		7B0072CCE6DBFD0E5ADFC7E3 /* Pods-genesisvision-ios.release dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.release dev.xcconfig"; path = "Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.release dev.xcconfig"; sourceTree = "<group>"; };
 		CF5D4113314783BE5030CFB6 /* Pods-genesisvision-ios.release prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.release prod.xcconfig"; path = "Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.release prod.xcconfig"; sourceTree = "<group>"; };
 		D5D00DF76C4CB42025582799 /* Pods-genesisvision-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.debug.xcconfig"; path = "Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		F390C751278D8BE8006FF6CB /* PushNotificationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationViewModel.swift; sourceTree = "<group>"; };
+		F390C753278D8CD6006FF6CB /* DynamicLinkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicLinkManager.swift; sourceTree = "<group>"; };
+		F390C755278D8D57006FF6CB /* AuthThreeFactorSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthThreeFactorSignInViewController.swift; sourceTree = "<group>"; };
 		FC0E20052044123F00872BE5 /* PhotoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoHeaderView.swift; sourceTree = "<group>"; };
 		FC0E20092044357800872BE5 /* WalletDepositViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDepositViewController.swift; sourceTree = "<group>"; };
 		FC0E200B2044358200872BE5 /* WalletWithdrawViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletWithdrawViewController.swift; sourceTree = "<group>"; };
@@ -2745,6 +2751,8 @@
 				5EB06A32239D312A003AB3FB /* FollowAPI.swift */,
 				5EB06A27239D3126003AB3FB /* FundsAPI.swift */,
 				19EEE0A72507BF5900F83CED /* TradingplatformAPI.swift */,
+				5EEA460C21F61B4500D6730D /* NotificationsAPI.swift */,
+				5E44E5992289808200865A85 /* PlatformAPI.swift */,
 				5EB06A20239D3124003AB3FB /* InvestmentsAPI.swift */,
 				5EB06A30239D312A003AB3FB /* PartnershipAPI.swift */,
 				5EB06A22239D3124003AB3FB /* ProfileAPI.swift */,
@@ -2762,6 +2770,7 @@
 		5E18CE1320C566F0008FE5B5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				F390C751278D8BE8006FF6CB /* PushNotificationViewModel.swift */,
 				1906DA562539A6DE00A08846 /* BinanceRawSymbolIcebergPartsFilter.swift */,
 				1906DA552539A6DE00A08846 /* BinanceRawSymbolLotSizeFilter.swift */,
 				1906DA5B2539A6DE00A08846 /* BinanceRawSymbolMarketLotSizeFilter.swift */,
@@ -3639,6 +3648,7 @@
 		5EC0309720A5A78E005CBA32 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				F390C753278D8CD6006FF6CB /* DynamicLinkManager.swift */,
 				FCB8DFCE2010F99200698D18 /* AuthManager.swift */,
 				5E89772F206E987B0015FD26 /* ReachabilityManager.swift */,
 				5EC0309520A5A786005CBA32 /* PlatformManager.swift */,
@@ -4240,6 +4250,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		F390C757278D8D66006FF6CB /* Three Factor */ = {
+			isa = PBXGroup;
+			children = (
+				F390C755278D8D57006FF6CB /* AuthThreeFactorSignInViewController.swift */,
+			);
+			path = "Three Factor";
+			sourceTree = "<group>";
+		};
 		FC0E20082044352000872BE5 /* Header Footer View */ = {
 			isa = PBXGroup;
 			children = (
@@ -4567,8 +4585,6 @@
 		FCB177F22045B40E00A482B7 /* Main Api Client */ = {
 			isa = PBXGroup;
 			children = (
-				5EEA460C21F61B4500D6730D /* NotificationsAPI.swift */,
-				5E44E5992289808200865A85 /* PlatformAPI.swift */,
 				5E18CE0C20C566F0008FE5B5 /* APIs */,
 				5E18CE1320C566F0008FE5B5 /* Models */,
 			);
@@ -4582,6 +4598,7 @@
 				FCB8DFC52010F64200698D18 /* SignInViewController.swift */,
 				5EB8E9D520723D6500F46A8A /* ForgetPasswordViewController.swift */,
 				5EAC11AF20B81AD40057A2D2 /* ChangePasswordViewController.swift */,
+				F390C757278D8D66006FF6CB /* Three Factor */,
 				5E12B38A20BEEB7F00302730 /* Two Factor */,
 			);
 			path = Auth;
@@ -6259,6 +6276,7 @@
 				5EE00766217873E90045B890 /* ManagerRouter.swift in Sources */,
 				FC4BFD68202267910044C3EC /* EnumExtension.swift in Sources */,
 				5E39F70A23A3F92F0073DAD5 /* FcmTokenViewModel.swift in Sources */,
+				F390C754278D8CD6006FF6CB /* DynamicLinkManager.swift in Sources */,
 				5E70429D23CD082700D8950F /* AccountProfitStatisticTableViewCellViewModel.swift in Sources */,
 				5EC0CB0423CB42E6003D0818 /* TradingEventListViewController.swift in Sources */,
 				5E39F7BF23A3F9300073DAD5 /* UpdateSocialLinkViewModel.swift in Sources */,
@@ -6272,6 +6290,7 @@
 				5E39F7A423A3F9300073DAD5 /* OrderSignalFee.swift in Sources */,
 				5E39F7DD23A3F9300073DAD5 /* DashboardInvestingDetails.swift in Sources */,
 				195B9EFA2558469D003DA54E /* ReferralProgramViewController.swift in Sources */,
+				F390C756278D8D57006FF6CB /* AuthThreeFactorSignInViewController.swift in Sources */,
 				5E5BC29C21868FD7009E4BA3 /* FundAssetsHeaderView.swift in Sources */,
 				198124412464524700F286FE /* GuidesCategory.swift in Sources */,
 				1926FC792757764300FEC4D3 /* ReplyInputField.swift in Sources */,
@@ -6424,6 +6443,7 @@
 				5E39F77223A3F9300073DAD5 /* FundDetailsFull.swift in Sources */,
 				198124752464595300F286FE /* SocialSummary.swift in Sources */,
 				19411FA725EFB4DE00ADE76E /* ManagerSocialTableViewCellViewModel.swift in Sources */,
+				F390C752278D8BE8006FF6CB /* PushNotificationViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
