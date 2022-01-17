@@ -93,6 +93,9 @@ class SocialMediaViewController: BaseViewController {
         viewModel.router.showUserDetails(with: userId)
     }
     
+    private func showPost(post: Post) {
+        viewModel.router.show(routeType: .openPost(post: post))
+    }
     
 }
 
@@ -133,6 +136,7 @@ extension SocialMediaViewController: SocialPostActionsMenuPresenable {
 }
 
 extension SocialMediaViewController: SocialMediaCollectionViewModelDelegate {
+    
     func imagePressed(index: Int, imagesUrls: [URL]) {
         showImagesViewController(index: index, imagesUrls: imagesUrls)
     }
@@ -216,5 +220,13 @@ extension SocialMediaViewController: SocialMediaCollectionViewModelDelegate {
     
     func usersMoreButtonPressed() {
         viewModel.router.show(routeType: .users)
+    }
+    
+    func touchExpandButton() {
+        reloadData()
+    }
+    
+    func openPost(post: Post) {
+        showPost(post: post)
     }
 }

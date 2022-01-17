@@ -25,6 +25,8 @@ protocol SocialMediaCollectionViewModelDelegate: AnyObject {
     
     func userPressed(user: UserDetailsList)
     func usersMoreButtonPressed()
+    func touchExpandButton()
+    func openPost(post: Post)
 }
 
 final class SocialMediaCollectionViewModel: CellViewModelWithCollection {
@@ -49,6 +51,8 @@ final class SocialMediaCollectionViewModel: CellViewModelWithCollection {
     var feedViewModel = [CellViewAnyModel]()
     var mediaViewModel = [CellViewAnyModel]()
     var usersViewModel = [CellViewAnyModel]()
+    
+    lazy var expandedPostIds = [UUID]()
     
     let collectionTopInset: CGFloat = Constants.SystemSizes.Cell.horizontalMarginValue
     let collectionBottomInset: CGFloat = Constants.SystemSizes.Cell.horizontalMarginValue
@@ -324,6 +328,7 @@ extension SocialMediaCollectionViewModel: SocialMediaAddPostCollectionViewCellDe
 }
 
 extension SocialMediaCollectionViewModel: SocialMediaFeedCollectionViewCellDelegate {
+    
     func imagePressed(postId: UUID, index: Int, image: ImagesGalleryCollectionViewCellViewModel) {
         guard let postViewModel = viewModels.first(where: { return ($0 as? SocialFeedCollectionViewCellViewModel)?.post._id == postId }) as? SocialFeedCollectionViewCellViewModel else {
             return
@@ -397,6 +402,17 @@ extension SocialMediaCollectionViewModel: SocialMediaFeedCollectionViewCellDeleg
     
     func likePressed(postId: UUID) {
         delegate?.likePressed(postId: postId)
+    }
+    func touchExpandButton(postId: UUID) {
+        expandedPostIds.append(postId)
+        delegate?.touchExpandButton()
+    }
+    func isExpandedPost(postId: UUID) -> Bool {
+        return expandedPostIds.contains(postId)
+    }
+    func openPost(postId: UUID) {
+        guard let postViewModel = feedViewModel.first(where: { return ($0 as? SocialMediaFeedCollectionViewCellViewModel)?.post._id == postId }) as? SocialMediaFeedCollectionViewCellViewModel else { return }
+        delegate?.openPost(post: postViewModel.post)
     }
 }
 

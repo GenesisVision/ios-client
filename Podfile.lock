@@ -80,10 +80,10 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (6.4.0):
     - GoogleUtilities/Logger
-  - IdensicMobileSDK (1.16.0):
-    - IdensicMobileSDK/Default (= 1.16.0)
-  - IdensicMobileSDK/Core (1.16.0)
-  - IdensicMobileSDK/Default (1.16.0):
+  - IdensicMobileSDK (1.18.4):
+    - IdensicMobileSDK/Default (= 1.18.4)
+  - IdensicMobileSDK/Core (1.18.4)
+  - IdensicMobileSDK/Default (1.18.4):
     - IdensicMobileSDK/Core
   - Imaginary (5.0.0):
     - Cache (~> 6.0.0)
@@ -123,7 +123,7 @@ DEPENDENCIES:
   - Firebase/Analytics
   - Firebase/Core
   - Firebase/Messaging
-  - IdensicMobileSDK (= 1.16.0)
+  - IdensicMobileSDK
   - IQKeyboardManagerSwift
   - Kingfisher
   - Lightbox
@@ -200,7 +200,7 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 8e9b210c97d55fbff306cc5468ff91b9cb32dcf5
   GoogleDataTransportCCTSupport: 202d7cdf9c4a7d81a2bb7f7e7e1ba6faa421b1f2
   GoogleUtilities: 29bd0d8f850efbd28cff6d99e8b7da1f8d236bcf
-  IdensicMobileSDK: a102eb9c1ff7b5082ba89b82192435963ade4a01
+  IdensicMobileSDK: 21940a4ab07931dad7bb7f06b0e86b21fe02d700
   Imaginary: cf5e3a7dd6ab1dcbd47ba8ce5edf2307c4e99eb3
   IQKeyboardManagerSwift: 2dde0fc70110e8eac7ccce2a46fdbec6a850b414
   Kingfisher: dc6e0f53bb5b12c3e75bedb0e01bbd7a640eea69
@@ -218,6 +218,6 @@ SPEC CHECKSUMS:
   SweeterSwift: 8a90cf3156f5a1b6f39785c479369a16633b5ea9
   Tabman: 63eae331ae7a9388ae389b1808f1939269fcdece
 
-PODFILE CHECKSUM: 6e9f8624d73e04827522af99ba3727acc96662bf
+PODFILE CHECKSUM: cad5d9367ebf609526580fc0f2ced533f4cb5544
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2

@@ -122,6 +122,7 @@ extension SocialCommentTableViewCellViewModel: CellViewModel {
         var textHeight: CGFloat = 0
         var imageHeight: CGFloat = 0
         var tagsViewHeight: CGFloat = 0
+        var fullTextViewHeight: CGFloat = 0
         
         if let tags = post.tags, !tags.isEmpty {
             if (tags.count == 1 && tags.first?.type == .url) || tags.allSatisfy({ $0.type == .url }) {
@@ -147,7 +148,7 @@ extension SocialCommentTableViewCellViewModel: CellViewModel {
             }
         }
         
-        return SocialPostViewSizes(textViewHeight: textHeight, imageViewHeight: imageHeight, tagViewHeight: tagsViewHeight, eventViewHeight: 0)
+        return SocialPostViewSizes(textViewHeight: textHeight, imageViewHeight: imageHeight, tagViewHeight: tagsViewHeight, eventViewHeight: 0, fullTextViewHeight: fullTextViewHeight)
     }
 }
 

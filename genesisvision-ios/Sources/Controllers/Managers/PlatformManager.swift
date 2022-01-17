@@ -61,7 +61,8 @@ class PlatformManager {
     
     func getKYCViewController(token: String, baseUrl: String, flowName: String, oneMoreVC: UIViewController? = nil) -> UIViewController? {
         sdkInstance = SNSMobileSDK(baseUrl: baseUrl, flowName: flowName, accessToken: token, locale: Locale.current.identifier, supportEmail: "")
-
+//        sdkInstance = SNSMobileSDK(accessToken: token)
+        
         guard let isReady = sdkInstance?.isReady, isReady else {
             return nil
         }

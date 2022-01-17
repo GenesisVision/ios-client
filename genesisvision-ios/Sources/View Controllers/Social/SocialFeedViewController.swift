@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-
+//MARK: - Feed ViewControler
 class SocialFeedViewController: BaseViewController {
     
     var viewModel: SocialFeedViewModel!
@@ -298,5 +298,9 @@ extension SocialFeedViewController: SocialFeedCollectionViewModelDelegate {
         default:
             break
         }
+    }
+    
+    func touchExpandButton() {
+        reloadData()
     }
 }

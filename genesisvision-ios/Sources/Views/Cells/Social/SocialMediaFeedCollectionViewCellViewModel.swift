@@ -13,7 +13,7 @@ enum SocialMediaFeedCollectionCellType: String {
     case hot = "Hot"
     case live = "Live"
 }
-
+//MARK: - MainView cell ViewModel
 protocol SocialMediaFeedCollectionViewCellDelegate: AnyObject {
     func openSocialFeed(type: SocialMediaFeedCollectionCellType)
     func commentPressed(postId: UUID)
@@ -23,6 +23,9 @@ protocol SocialMediaFeedCollectionViewCellDelegate: AnyObject {
     func userOwnerPressed(postId: UUID)
     func postActionsPressed(postId: UUID)
     func imagePressed(postId: UUID, index: Int, image: ImagesGalleryCollectionViewCellViewModel)
+    func isExpandedPost(postId: UUID) -> Bool
+    func touchExpandButton(postId: UUID)
+    func openPost(postId: UUID)
 }
 
 struct SocialMediaFeedCollectionViewCellViewModel {
@@ -30,35 +33,50 @@ struct SocialMediaFeedCollectionViewCellViewModel {
     let post: Post
     weak var cellDelegate: SocialMediaFeedCollectionViewCellDelegate?
     
-    func cellSize(spacing: CGFloat, frame: CGRect) -> CGSize {
+    func cellSize(spacing: CGFloat, frame: CGRect, isExpanded : Bool = false) -> CGSize {
         let width = frame.width - spacing
         let defaultHeight: CGFloat = 250
-        let socialPostViewSizes = postViewSizes()
+        let socialPostViewSizes = postViewSizes(isExpanded: isExpanded)
         
         let cellHeight = socialPostViewSizes.allHeight + defaultHeight
         
         return CGSize(width: width, height: cellHeight)
     }
     
-    func postViewSizes() -> SocialPostViewSizes {
+    func postViewSizes(isExpanded : Bool) -> SocialPostViewSizes {
         var textHeight: CGFloat = 0
         var imageHeight: CGFloat = 0
         var tagsViewHeight: CGFloat = 0
+        var fullTextViewHeight: CGFloat = 0
         
         if let isEmpty = post.images?.isEmpty, !isEmpty {
             imageHeight = 250
         }
         
+//        if let text = post.text, !text.isEmpty {
+//            let textHeightValue = text.height(forConstrainedWidth: UIScreen.main.bounds.width - 20, font: UIFont.getFont(.regular, size: 18))
+//
+//            if textHeightValue < 25 {
+//                textHeight = 25
+//            } else if textHeightValue > 25 && textHeightValue < 250 {
+//                textHeight = textHeightValue
+//            } else if textHeightValue > 250 {
+//                textHeight = 250
+//            }
+//        }
         if let text = post.text, !text.isEmpty {
             let textHeightValue = text.height(forConstrainedWidth: UIScreen.main.bounds.width - 20, font: UIFont.getFont(.regular, size: 18))
+            let expandButton = CGFloat(20)
             
             if textHeightValue < 25 {
                 textHeight = 25
             } else if textHeightValue > 25 && textHeightValue < 250 {
                 textHeight = textHeightValue
             } else if textHeightValue > 250 {
-                textHeight = 250
+                textHeight = 250 + expandButton
             }
+            
+            fullTextViewHeight = textHeightValue - expandButton
         }
         
         if let tags = post.tags, !tags.isEmpty {
@@ -69,20 +87,30 @@ struct SocialMediaFeedCollectionViewCellViewModel {
             }
         }
         
-        return SocialPostViewSizes(textViewHeight: textHeight, imageViewHeight: imageHeight, tagViewHeight: tagsViewHeight, eventViewHeight: 0)
+        if isExpanded {
+            return SocialPostViewSizes(textViewHeight: fullTextViewHeight, imageViewHeight: imageHeight, tagViewHeight: tagsViewHeight, eventViewHeight: 0, fullTextViewHeight: fullTextViewHeight, isExpanded : isExpanded)
+        } else {
+            return SocialPostViewSizes(textViewHeight: textHeight, imageViewHeight: imageHeight, tagViewHeight: tagsViewHeight, eventViewHeight: 0, fullTextViewHeight: fullTextViewHeight)
+        }
+        
+//        return SocialPostViewSizes(textViewHeight: textHeight, imageViewHeight: imageHeight, tagViewHeight: tagsViewHeight, eventViewHeight: 0, fullTextViewHeight: fullTextViewHeight)
     }
 }
 
 extension SocialMediaFeedCollectionViewCellViewModel: CellViewModel {
     func setup(on cell: SocialMediaFeedCollectionViewCell) {
+        var isExpanded = false
+        
         cell.delegate = cellDelegate
         
         cell.type = type
         cell.postId = post._id
         
         cell.topButton.setTitle(type.rawValue, for: .normal)
-        
-        cell.postView.socialPostViewSizes = postViewSizes()
+        if let expanded = cellDelegate?.isExpandedPost(postId: cell.postId ?? UUID()) {
+            isExpanded = expanded
+        }
+        cell.postView.socialPostViewSizes = postViewSizes(isExpanded: isExpanded)
         cell.postView.updateMiddleViewConstraints()
         
         if let logo = post.author?.logoUrl, let fileUrl = getFileURL(fileName: logo), isPictureURL(url: fileUrl.absoluteString) {
@@ -358,5 +386,15 @@ extension SocialMediaFeedCollectionViewCell: SocialPostViewDelegate {
     
     func tagPressed(tag: PostTag) {
         delegate?.tagPressed(tag: tag)
+    }
+    
+    func touchExpandButton() {
+        guard let postId = postId else { return }
+        delegate?.touchExpandButton(postId: postId)
+    }
+    
+    func openPost() {
+        guard let postId = postId else { return }
+        delegate?.openPost(postId: postId)
     }
 }

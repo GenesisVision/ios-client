@@ -101,6 +101,7 @@ class SocialNewPostViewController: BaseViewController {
         var textHeight: CGFloat = 0
         var imageHeight: CGFloat = 0
         var tagsViewHeight: CGFloat = 0
+        var fullTextViewHeight: CGFloat = 0
         
         if let isEmpty = post.images?.isEmpty, !isEmpty {
             imageHeight = 250
@@ -122,7 +123,7 @@ class SocialNewPostViewController: BaseViewController {
             tagsViewHeight = 110
         }
         
-        return SocialPostViewSizes(textViewHeight: textHeight, imageViewHeight: imageHeight, tagViewHeight: tagsViewHeight, eventViewHeight: 0)
+        return SocialPostViewSizes(textViewHeight: textHeight, imageViewHeight: imageHeight, tagViewHeight: tagsViewHeight, eventViewHeight: 0, fullTextViewHeight: fullTextViewHeight)
     }
     
     private func setupSharedPostView() {

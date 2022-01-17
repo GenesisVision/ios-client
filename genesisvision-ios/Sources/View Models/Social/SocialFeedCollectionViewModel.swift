@@ -20,8 +20,9 @@ protocol SocialFeedCollectionViewModelDelegate: AnyObject {
     func openPost(post: Post)
     func showPostActions(postActions: [SocialPostAction], postId: UUID, postLink: String)
     func imagePressed(index: Int, imagesUrls: [URL])
+    func touchExpandButton()
 }
-
+//MARK: - Feed Collection ViewModel
 final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
     var title: String
     var type: CellActionType
@@ -36,6 +37,7 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
     
     var addPostViewModel: SocialMediaAddPostCollectionViewCellViewModel?
     var deletedPostViewModels: [SocialFeedDeletedPostCollectionViewCellViewModel] = []
+    lazy var expandedPostIds = [UUID]()
     
     enum SectionType {
         case addPost
@@ -164,7 +166,27 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
             return viewModels[indexPath.row]
         }
     }
-    
+    //MARK: - Размер конкретной ленты
+//    func sizeForItem(at indexPath: IndexPath, frame: CGRect) -> CGSize {
+//        let type = sections[indexPath.section]
+//
+//        switch type {
+//        case .addPost:
+//            return CGSize(width: frame.width, height: 50)
+//        case .feed:
+//            let spacing: CGFloat = 0
+//            if let viewModel = viewModels[safe: indexPath.row] as? SocialFeedCollectionViewCellViewModel {
+//                if let _ = deletedPostViewModels.first(where: { $0.post._id == viewModel.post._id }) {
+//                    return CGSize(width: frame.width, height: 70)
+//                } else {
+//                    return viewModel.cellSize(spacing: spacing, frame: frame)
+//                }
+//            } else {
+//                let size: CGFloat = (frame.width - spacing)
+//                return CGSize(width: size, height: 300)
+//            }
+//        }
+//    }
     func sizeForItem(at indexPath: IndexPath, frame: CGRect) -> CGSize {
         let type = sections[indexPath.section]
         
@@ -177,7 +199,11 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
                 if let _ = deletedPostViewModels.first(where: { $0.post._id == viewModel.post._id }) {
                     return CGSize(width: frame.width, height: 70)
                 } else {
-                    return viewModel.cellSize(spacing: spacing, frame: frame)
+                    if let _ = expandedPostIds.first(where: { $0 == viewModel.post._id }) {
+                        return viewModel.cellSize(spacing: spacing, frame: frame, isExpanded: true)
+                    } else {
+                        return viewModel.cellSize(spacing: spacing, frame: frame)
+                    }
                 }
             } else {
                 let size: CGFloat = (frame.width - spacing)
@@ -379,6 +405,21 @@ extension SocialFeedCollectionViewModel: SocialFeedCollectionViewCellDelegate {
     
     func imagePressed(imageUrl: URL) {
     }
+    
+    func touchExpandButton(postId: UUID) {
+        expandedPostIds.append(postId)
+        delegate?.touchExpandButton()
+    }
+    
+    func isExpandedPost(postId: UUID) -> Bool {
+        return expandedPostIds.contains(postId)
+    }
+    
+    func openPost(postId: UUID) {
+        guard let postViewModel = viewModels.first(where: { return ($0 as? SocialFeedCollectionViewCellViewModel)?.post._id == postId }) as? SocialFeedCollectionViewCellViewModel else { return }
+        delegate?.openPost(post: postViewModel.post)
+    }
+    
 }
 
 

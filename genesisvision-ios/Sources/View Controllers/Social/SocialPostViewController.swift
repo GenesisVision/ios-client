@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+//MARK: - Контроллер конкретного поста
 class SocialPostViewController: BaseViewController {
     
     var viewModel: SocialPostViewModel!
@@ -179,7 +179,7 @@ extension SocialPostViewController: UITableViewDelegate, UITableViewDataSource {
             return view
         }
     }
-    
+    //MARK: - Размер поста
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let type = viewModel.sections[indexPath.section]
         
@@ -512,4 +512,13 @@ extension SocialPostViewModel: SocialFeedCollectionViewCellDelegate {
         
     }
     
+    func touchExpandButton(postId: UUID) {
+    }
+    
+    func isExpandedPost(postId: UUID) -> Bool {
+        true
+    }
+    func openPost(postId: UUID) {
+        
+    }
 }

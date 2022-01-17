@@ -13,7 +13,7 @@ struct SocialFeedTableViewCellViewModel {
     weak var cellDelegate: SocialFeedCollectionViewCellDelegate?
 }
 
-
+//MARK: - Post cell ViewModel
 extension SocialFeedTableViewCellViewModel: CellViewModel {
     func setup(on cell: SocialFeedTableViewCell) {
         var eventPost: Bool = false
@@ -155,6 +155,7 @@ extension SocialFeedTableViewCellViewModel: CellViewModel {
         var textHeight: CGFloat = 0
         var imageHeight: CGFloat = 0
         var tagsViewHeight: CGFloat = 0
+        var fullTextViewHeight : CGFloat = 0
         
         if let tags = post.tags, !tags.isEmpty {
             if (tags.count == 1 && tags.first?.type == .url) || tags.allSatisfy({ $0.type == .url }) {
@@ -173,14 +174,12 @@ extension SocialFeedTableViewCellViewModel: CellViewModel {
             
             if textHeightValue < 25 {
                 textHeight = 25
-            } else if textHeightValue > 25 && textHeightValue < 250 {
+            } else {
                 textHeight = textHeightValue
-            } else if textHeightValue > 250 {
-                textHeight = 250
             }
         }
         
-        return SocialPostViewSizes(textViewHeight: textHeight, imageViewHeight: imageHeight, tagViewHeight: tagsViewHeight, eventViewHeight: 0)
+        return SocialPostViewSizes(textViewHeight: textHeight, imageViewHeight: imageHeight, tagViewHeight: tagsViewHeight, eventViewHeight: 0, fullTextViewHeight: fullTextViewHeight)
     }
 }
 
@@ -334,5 +333,11 @@ extension SocialFeedTableViewCell: SocialPostViewDelegate {
     
     func tagPressed(tag: PostTag) {
         delegate?.tagPressed(tag: tag)
+    }
+    
+    func touchExpandButton() {
+    }
+    
+    func openPost() {
     }
 }

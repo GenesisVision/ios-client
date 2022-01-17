@@ -13,7 +13,7 @@ enum SocialFeedType {
     case hot
     case feed
 }
-
+//MARK: - Feed ViewModel
 final class SocialFeedViewModel {
     
     var socialCollectionViewModel: SocialFeedCollectionViewModel!

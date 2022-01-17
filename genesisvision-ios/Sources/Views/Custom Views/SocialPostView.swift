@@ -21,8 +21,10 @@ protocol SocialPostViewDelegate: AnyObject {
     func userOwnerPressed()
     func postActionsPressed()
     func imagePressed(index: Int, image: ImagesGalleryCollectionViewCellViewModel)
+    func touchExpandButton()
+    func openPost()
 }
-
+//MARK: - Post custom view
 final class SocialPostView: UIView {
     //MARK: First Layer
     private let topView: UIView = {
@@ -110,9 +112,8 @@ final class SocialPostView: UIView {
         textView.font = UIFont.getFont(.regular, size: 16)
         textView.isUserInteractionEnabled = true
         textView.isEditable = false
-            
         textView.textContainerInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-        textView.isScrollEnabled = true
+        textView.isScrollEnabled = false
         textView.textColor = UIColor.white
         return textView
     }()
@@ -138,6 +139,19 @@ final class SocialPostView: UIView {
         socialPostTagsView.backgroundColor = .clear
         socialPostTagsView.isHidden = true
         return socialPostTagsView
+    }()
+    
+    let expandButton : UIButton = {
+        let button = UIButton()
+        button.titleLabel?.font = UIFont.getFont(.regular, size: 16)
+        let color = UIColor(red: 81, green: 180, blue: 169)
+        button.setTitleColor(color, for: .normal)
+        button.contentHorizontalAlignment = .left
+        button.contentVerticalAlignment = .center
+        button.setTitle("Expand...", for: .normal)
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     var postTags: [PostTag]  = [] {
@@ -214,36 +228,43 @@ final class SocialPostView: UIView {
     }
     
     private func overlayMiddleView() {
-//        middleView.addSubview(textView)
-//        middleView.addSubview(postImageView)
-//        middleView.addSubview(tagsView)
-//        middleView.addSubview(eventView)
-        middleView.addArrangedSubview(textView)
-        middleView.addArrangedSubview(galleryView)
         
+        var isPostExpanded = false
+        if let expanded = socialPostViewSizes?.isExpanded {
+            if expanded {
+                isPostExpanded = expanded
+            }
+        }
+        
+        let labelTap = UITapGestureRecognizer(target: self, action: #selector(openPost))
+        textView.addGestureRecognizer(labelTap)
+                        
+        middleView.addArrangedSubview(textView)
+        middleView.addArrangedSubview(expandButton)
+        middleView.addArrangedSubview(galleryView)
         middleView.addArrangedSubview(eventView)
         middleView.addArrangedSubview(tagsView)
-        
-        textView.anchorSize(size: CGSize(width: 0, height: socialPostViewSizes?.textViewHeight ?? 0))
+
         galleryView.anchorSize(size: CGSize(width: 0, height: socialPostViewSizes?.imageViewHeight ?? 0))
         tagsView.anchorSize(size: CGSize(width: 0, height: socialPostViewSizes?.tagViewHeight ?? 0))
         eventView.anchorSize(size: CGSize(width: 0, height: 50))
+        textView.anchor(top: middleView.topAnchor, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor)
         
-//        textView.anchor(top: nil, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 10, bottom: 5, right: 10), size: CGSize(width: 0, height: socialPostViewSizes?.textViewHeight ?? 0))
-        
-//        postImageView.anchor(top: nil, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0), size: CGSize(width: 0, height: socialPostViewSizes?.imageViewHeight ?? 0))
-//
-//        tagsView.anchor(top: nil, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: socialPostViewSizes?.tagViewHeight ?? 0))
-//
-//        eventView.anchor(top: nil, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, size: CGSize(width: 0, height: 60))
-
-//        textView.anchor(top: middleView.topAnchor, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 10, bottom: 5, right: 10), size: CGSize(width: 0, height: socialPostViewSizes?.textViewHeight ?? 0))
-//
-//        postImageView.anchor(top: textView.bottomAnchor, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0), size: CGSize(width: 0, height: socialPostViewSizes?.imageViewHeight ?? 0))
-//
-//        tagsView.anchor(top: nil, leading: middleView.leadingAnchor, bottom: middleView.bottomAnchor, trailing: middleView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: socialPostViewSizes?.tagViewHeight ?? 0))
-//
-//        eventView.anchor(top: middleView.topAnchor, leading: middleView.leadingAnchor, bottom: tagsView.topAnchor, trailing: middleView.trailingAnchor, size: CGSize(width: 0, height: 60))
+        if Int((socialPostViewSizes?.fullTextViewHeight ?? 25)) > 250 && !isPostExpanded {
+            expandButton.isHidden = false
+            textView.bottomAnchor.constraint(equalTo: middleView.topAnchor, constant: 250).isActive = true
+            expandButton.addTarget(self, action: #selector(touchExpandButton), for: .touchUpInside)
+            expandButton.anchor(top: textView.bottomAnchor, leading: textView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor)
+            expandButton.bottomAnchor.constraint(equalTo: textView.bottomAnchor, constant: 20).isActive = true
+        } else if isPostExpanded {
+            middleView.removeArrangedSubviewCompletely(expandButton)
+            expandButton.isHidden = true
+            textView.bottomAnchor.constraint(equalTo: middleView.topAnchor, constant: (socialPostViewSizes?.fullTextViewHeight ?? 250)).isActive = true
+        } else {
+            middleView.removeArrangedSubviewCompletely(expandButton)
+            expandButton.isHidden = true
+            textView.bottomAnchor.constraint(equalTo: middleView.topAnchor, constant: socialPostViewSizes?.textViewHeight ?? 25).isActive = true
+        }
     }
     
     func updateMiddleViewConstraints() {
@@ -257,6 +278,14 @@ final class SocialPostView: UIView {
     
     @objc private func touchPostActionsButton() {
         delegate?.postActionsPressed()
+    }
+    
+    @objc private func touchExpandButton() {
+        delegate?.touchExpandButton()
+    }
+    
+    @objc private func openPost() {
+        delegate?.openPost()
     }
 }
 
