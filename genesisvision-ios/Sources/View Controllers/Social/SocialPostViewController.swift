@@ -357,6 +357,7 @@ final class SocialPostViewModel {
     
     func deletePost(postId: UUID, completion: @escaping CompletionBlock) {
         guard let _ = commentsViewModels.first(where: { $0.post._id == postId }) else { return }
+        SocialDataProvider.deletePost(postId: postId, completion: completion)
     }
     
     func postActionsForPost(postId: UUID) -> [SocialPostAction] {
@@ -364,7 +365,11 @@ final class SocialPostViewModel {
         
         guard let viewModel = commentsViewModels.first(where: { $0.post._id == postId }) else { return postActions }
         
-        postActions.append(.report(postId: postId))
+        let profileId = UserDefaults.standard.string(forKey: UserDefaultKeys.profileID)
+        
+        if profileId != viewModel.post.author?._id?.uuidString {
+            postActions.append(.report(postId: postId))
+        }
         
         if let canDelete = viewModel.post.personalDetails?.canDelete, canDelete {
             postActions.append(.delete(postId: postId))
@@ -493,7 +498,11 @@ extension SocialPostViewModel: SocialFeedCollectionViewCellDelegate {
         
     }
     
-    func postActionsPressed(postId: UUID) {
+    func postActionsPressed(postId: UUID, postActions: [SocialPostAction]?, postLink: String?) {
+        delegate?.showPostActions(postActions: postActions ?? [SocialPostAction](), postId: postId, postLink: postLink ?? "")
+    }
+    
+    func commentActionsPressed(postId: UUID) {
         guard let viewModel = commentsViewModels.first(where: { $0.post._id == postId }) else { return }
         let postActions = postActionsForPost(postId: postId)
         var postLink: String = ""

@@ -139,6 +139,34 @@ extension SocialFeedTableViewCellViewModel: CellViewModel {
         } else {
             cell.socialActivitiesView.sharesLabel.text = ""
         }
+        
+        
+        var postActions: [SocialPostAction] = []
+        
+        guard let postId = post._id, let personalDetails = post.personalDetails else {return}
+        
+        let profileId = UserDefaults.standard.string(forKey: UserDefaultKeys.profileID)
+        
+        if profileId != post.author?._id?.uuidString {
+            postActions.append(.report(postId: postId))
+        }
+        
+        if let canDelete = personalDetails.canDelete, canDelete {
+            postActions.append(.delete(postId: postId))
+        }
+        
+        if let canPin = personalDetails.canPin, canPin, let isPinned = post.isPinned {
+            isPinned ? postActions.append(.unpin(postId: postId)) : postActions.append(.pin(postId: postId))
+        }
+        
+        if let canEdit = personalDetails.canEdit, canEdit {
+            postActions.append(.edit(postId: postId))
+        }
+        if let url = post.url {
+            cell.postLink = ApiKeys.socialPostsPath + url
+            postActions.append(contentsOf: [.copyLink(postLink: url), .share(postLink: url)])
+        }
+        cell.postActions = postActions
     }
     
     func cellSize(spacing: CGFloat, frame: CGRect) -> CGSize {
@@ -155,7 +183,7 @@ extension SocialFeedTableViewCellViewModel: CellViewModel {
         var textHeight: CGFloat = 0
         var imageHeight: CGFloat = 0
         var tagsViewHeight: CGFloat = 0
-        var fullTextViewHeight : CGFloat = 0
+        let fullTextViewHeight : CGFloat = 0
         
         if let tags = post.tags, !tags.isEmpty {
             if (tags.count == 1 && tags.first?.type == .url) || tags.allSatisfy({ $0.type == .url }) {
@@ -232,6 +260,8 @@ class SocialFeedTableViewCell: UITableViewCell {
     }()
     
     var postId: UUID?
+    var postActions: [SocialPostAction]?
+    var postLink: String?
     weak var delegate: SocialFeedCollectionViewCellDelegate?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -323,7 +353,7 @@ extension SocialFeedTableViewCell: SocialPostViewDelegate {
     
     func postActionsPressed() {
         guard let postId = postId else { return }
-        delegate?.postActionsPressed(postId: postId)
+        delegate?.postActionsPressed(postId: postId, postActions: postActions, postLink: postLink)
     }
     
     func userOwnerPressed() {

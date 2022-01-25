@@ -12,7 +12,7 @@ protocol SocialCommentTableViewCellDelegate: AnyObject {
     func replyButtonPressed(postId: UUID)
     func commentTagPressed(tag: PostTag)
     func likeTouched(postId: UUID)
-    func postActionsPressed(postId: UUID)
+    func commentActionsPressed(postId: UUID)
 }
 
 struct SocialCommentTableViewCellViewModel {
@@ -323,7 +323,7 @@ class SocialCommentTableViewCell: UITableViewCell {
         replyButton.addTarget(self, action: #selector(replyButtonPressed), for: .touchUpInside)
         let likesGest = UITapGestureRecognizer(target: self, action: #selector(likesViewTouched))
         likesView.addGestureRecognizer(likesGest)
-        postActionsButton.addTarget(self, action: #selector(touchPostActionsButton), for: .touchUpInside)
+        postActionsButton.addTarget(self, action: #selector(touchCommentActionsButton), for: .touchUpInside)
         setupUI()
     }
     
@@ -426,9 +426,9 @@ class SocialCommentTableViewCell: UITableViewCell {
         delegate?.likeTouched(postId: postId)
     }
     
-    @objc private func touchPostActionsButton() {
+    @objc private func touchCommentActionsButton() {
         guard let postId = postId else { return }
-        delegate?.postActionsPressed(postId: postId)
+        delegate?.commentActionsPressed(postId: postId)
     }
 }
 

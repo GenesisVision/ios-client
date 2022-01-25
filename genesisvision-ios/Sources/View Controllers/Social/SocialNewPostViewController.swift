@@ -12,6 +12,11 @@ class SocialNewPostViewController: BaseViewController {
     
     var viewModel: SocialNewPostViewModel!
     
+    
+   
+    @IBOutlet weak var scrollView: UIScrollView!
+    
+    
     @IBOutlet weak var sharedPostMainView: UIView! {
         didSet {
             sharedPostMainView.isHidden = true
@@ -37,8 +42,11 @@ class SocialNewPostViewController: BaseViewController {
             textView.text = placeholder
             textView.tintColor = UIColor.Common.primary
             textView.delegate = self
+            textView.translatesAutoresizingMaskIntoConstraints = false
+            textView.isScrollEnabled = false
         }
     }
+    @IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var imagesGallery: ImagesGalleryView! {
         didSet {
@@ -226,6 +234,7 @@ extension SocialNewPostViewController: ImagePickerPresentable {
         imagesGallery.viewModels = viewModels
         imagesGallery.isHidden = viewModels.isEmpty
         viewModel.saveImage(pickedImageUrl) { result in
+            self.publishButton.setEnabled(true)
         }
     }
 }
@@ -259,8 +268,35 @@ extension SocialNewPostViewController: UITextViewDelegate {
         guard !textView.text.isEmpty else {
             return
         }
+        
         publishButton.setEnabled(true)
         viewModel.newPostText = textView.text
+        
+//        let minSize = CGSize(width: textView.frame.width, height: 300.0)
+//        let estimatedSize = textView.sizeThatFits(minSize)
+//        if estimatedSize.height <= 300 {
+//            textView.isScrollEnabled = false
+//            textViewHeightConstraint.constant = 300
+//            //                textViewContainerHeightConstraint.constant = estimatedSize.height + 12.0
+//        } else {
+//            textView.isScrollEnabled = false
+//            textViewHeightConstraint.constant = textView.contentSize.height
+//            //                textViewContainerHeightConstraint.constant = 102.0
+//        }
+        let maxHeight: CGFloat = 1500.0
+        let minHeight: CGFloat = 100.0
+//        textViewHeightConstraint.constant = min(maxHeight, max(minHeight, textView.contentSize.height))
+
+        let textHeight = textView.text.height(forConstrainedWidth: UIScreen.main.bounds.width, font: UIFont.systemFont(ofSize: 16)) + 18
+        
+        if textHeight <= minHeight {
+            textViewHeightConstraint.constant = minHeight
+        } else {
+            textViewHeightConstraint.constant = textHeight
+        }
+        print(sharedPostView.socialPostViewSizes?.isExpanded)
+        scrollView.contentSize.height = min(maxHeight, max(minHeight, textHeight)) + imagesGallery.height
+        
     }
 }
 
@@ -328,7 +364,7 @@ final class SocialNewPostViewModel {
     
     private func addPost(completion: @escaping CompletionBlock) {
         let images = uploadedImages.map({ NewPostImage(image: $0.imageUDID, position: 0) })
-        let model = NewPost(text: newPostText, postId: nil, userId: nil, images: images)
+        let model = NewPost(text: newPostText ?? " ", postId: nil, userId: nil, images: images)
         SocialDataProvider.addPost(model: model, completion: completion)
     }
     

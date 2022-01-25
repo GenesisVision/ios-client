@@ -20,7 +20,7 @@ public struct PostPersonalDetails: Codable {
     public var canPin: Bool?
 
     public var canComment: Bool?
-    public init(isLiked: Bool? = nil, canEdit: Bool? = nil, canDelete: Bool? = nil, canPin: Bool? = nil, canComment: Bool? = nil) { 
+    public init(isLiked: Bool? = nil, canEdit: Bool? = nil, canDelete: Bool? = nil, canPin: Bool? = nil, canComment: Bool? = nil) {
         self.isLiked = isLiked
         self.canEdit = canEdit
         self.canDelete = canDelete

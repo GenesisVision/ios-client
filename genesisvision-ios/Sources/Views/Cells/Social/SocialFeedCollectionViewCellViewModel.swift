@@ -27,7 +27,7 @@ protocol SocialFeedCollectionViewCellDelegate: AnyObject {
     func commentTouched(postId: UUID)
     func tagPressed(tag: PostTag)
     func userOwnerPressed(postId: UUID)
-    func postActionsPressed(postId: UUID)
+    func postActionsPressed(postId: UUID, postActions: [SocialPostAction]?, postLink: String?)
     func undoDeletion(postId: UUID)
     func imagePressed(postId: UUID, index: Int, image: ImagesGalleryCollectionViewCellViewModel)
     func touchExpandButton(postId: UUID)
@@ -377,7 +377,7 @@ extension SocialFeedCollectionViewCell: SocialPostViewDelegate {
     
     func postActionsPressed() {
         guard let postId = postId else { return }
-        delegate?.postActionsPressed(postId: postId)
+        delegate?.postActionsPressed(postId: postId,postActions: nil, postLink: nil)
     }
     
     func userOwnerPressed() {

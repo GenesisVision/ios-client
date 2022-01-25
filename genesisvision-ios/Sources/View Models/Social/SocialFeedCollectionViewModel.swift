@@ -109,7 +109,11 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
             return true
         }) as? SocialFeedCollectionViewCellViewModel, let postId = postViewModel.post._id else { return postActions }
         
-        postActions.append(.report(postId: postId))
+        let profileId = UserDefaults.standard.string(forKey: UserDefaultKeys.profileID)
+        
+        if profileId != postViewModel.post.author?._id?.uuidString {
+            postActions.append(.report(postId: postId))
+        }
         
         if let canDelete = postViewModel.post.personalDetails?.canDelete, canDelete {
             postActions.append(.delete(postId: postId))
@@ -319,6 +323,7 @@ final class SocialFeedCollectionViewModel: CellViewModelWithCollection {
 }
 
 extension SocialFeedCollectionViewModel: SocialFeedCollectionViewCellDelegate {
+    
     func imagePressed(postId: UUID, index: Int, image: ImagesGalleryCollectionViewCellViewModel) {
         guard let postViewModel = viewModels.first(where: { return ($0 as? SocialFeedCollectionViewCellViewModel)?.post._id == postId }) as? SocialFeedCollectionViewCellViewModel else {
             return
@@ -361,7 +366,7 @@ extension SocialFeedCollectionViewModel: SocialFeedCollectionViewCellDelegate {
     func undoDeletion(postId: UUID) {
     }
     
-    func postActionsPressed(postId: UUID) {
+    func postActionsPressed(postId: UUID, postActions: [SocialPostAction]?, postLink: String?) {
         let postActions = postActionsForPost(postId: postId)
         var postLink: String = ""
 

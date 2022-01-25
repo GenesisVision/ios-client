@@ -68,7 +68,7 @@ class AuthManager {
         UserDefaults.standard.removeObject(forKey: UserDefaultKeys.biometricLastDomainState)
         UserDefaults.standard.removeObject(forKey: UserDefaultKeys.passcode)
         UserDefaults.standard.removeObject(forKey: UserDefaultKeys.passcodeEnable)
-        
+        UserDefaults.standard.removeObject(forKey: UserDefaultKeys.profileID)
         UserDefaults.standard.synchronize()
     }
     
@@ -95,6 +95,8 @@ class AuthManager {
         
         ProfileDataProvider.getProfile(completion: { (viewModel) in
             if let viewModel = viewModel  {
+                let profileID = viewModel._id
+                UserDefaults.standard.set(profileID?.uuidString, forKey: UserDefaultKeys.profileID)
                 profileViewModel = viewModel
             }
             

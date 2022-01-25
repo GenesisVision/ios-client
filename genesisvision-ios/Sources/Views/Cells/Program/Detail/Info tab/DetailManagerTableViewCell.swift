@@ -53,6 +53,9 @@ class DetailManagerTableViewCell: UITableViewCell {
         accessoryView?.backgroundColor = UIColor.BaseView.bg
         selectionStyle = .none
         isUserInteractionEnabled = true
+        //MARK: - Скрыл кнопку подписаться
+//        followButton.isEnabled = false
+//        followButton.isHidden = true
     }
     
     @IBAction func followButtonAction(_ sender: Any) {

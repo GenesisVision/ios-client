@@ -60,9 +60,21 @@ class PlatformManager {
     }
     
     func getKYCViewController(token: String, baseUrl: String, flowName: String, oneMoreVC: UIViewController? = nil) -> UIViewController? {
-        sdkInstance = SNSMobileSDK(baseUrl: baseUrl, flowName: flowName, accessToken: token, locale: Locale.current.identifier, supportEmail: "")
-//        sdkInstance = SNSMobileSDK(accessToken: token)
-        
+//        sdkInstance = SNSMobileSDK(baseUrl: baseUrl, flowName: flowName, accessToken: token, locale: Locale.current.identifier, supportEmail: "")
+//        SNSMobileSDK(accessToken: token)
+        #if DEBUG
+        sdkInstance = SNSMobileSDK(accessToken: token, environment: .test)
+        #else
+        sdkInstance = SNSMobileSDK(accessToken: token, environment: .production)
+        #endif
+
+        ProfileDataProvider.getMobileVErificationTokens { (viewModel) in
+            guard let viewModel = viewModel, let accessToken = viewModel.accessToken else {return}
+            self.sdkInstance?.tokenExpirationHandler({ (onComplete) in
+                onComplete(accessToken)
+            })
+        } errorCompletion: { (_) in }
+
         guard let isReady = sdkInstance?.isReady, isReady else {
             return nil
         }
@@ -72,7 +84,7 @@ class PlatformManager {
         if let viewController = oneMoreVC {
             mainKYCViewController.pushViewController(viewController, animated: false)
         }
-        
+
         return mainKYCViewController
     }
     

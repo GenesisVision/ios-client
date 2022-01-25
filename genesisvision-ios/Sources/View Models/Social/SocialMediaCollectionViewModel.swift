@@ -84,7 +84,11 @@ final class SocialMediaCollectionViewModel: CellViewModelWithCollection {
             return true
         }) as? SocialMediaFeedCollectionViewCellViewModel, let postId = postViewModel.post._id else { return postActions }
         
-        postActions.append(.report(postId: postId))
+        let profileId = UserDefaults.standard.string(forKey: UserDefaultKeys.profileID)
+        
+        if profileId != postViewModel.post.author?._id?.uuidString {
+            postActions.append(.report(postId: postId))
+        }
         
         if let canDelete = postViewModel.post.personalDetails?.canDelete, canDelete {
             postActions.append(.delete(postId: postId))
