@@ -100,7 +100,7 @@ extension ImagePickerHelper: UIImagePickerControllerDelegate {
         let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
 
         var data: Data?
-        let fileName = "avatar.jpg"
+//        let fileName = "avatar.jpg"
         var selectedImage: UIImage?
         
         if #available(iOS 11.0, *) {
@@ -145,7 +145,8 @@ extension ImagePickerHelper: UIImagePickerControllerDelegate {
             }
         }
         
-        let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent(fileName)
+//        let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent(fileName)
+        let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent(String(selectedImage.hashValue) + ".jpg")
         
         do {
             try data?.write(to: fileURL, options: .atomicWrite)

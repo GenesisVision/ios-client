@@ -39,7 +39,15 @@ class DetailManagerTableViewCell: UITableViewCell {
     
     @IBOutlet weak var followButton: ActionButton!
     
-    var userId: UUID?
+    var userId: UUID? {
+        didSet {
+            let profileId = UserDefaults.standard.string(forKey: UserDefaultKeys.profileID)
+            if userId?.uuidString == profileId {
+                followButton.isEnabled = false
+                followButton.isHidden = true
+            }
+        }
+    }
     var followed: Bool?
     weak var delegate: DetailManagerTableViewCellDelegate?
     
@@ -54,8 +62,10 @@ class DetailManagerTableViewCell: UITableViewCell {
         selectionStyle = .none
         isUserInteractionEnabled = true
         //MARK: - Скрыл кнопку подписаться
-//        followButton.isEnabled = false
-//        followButton.isHidden = true
+//        if isAuthor {
+//            followButton.isEnabled = false
+//            followButton.isHidden = true
+//        }
     }
     
     @IBAction func followButtonAction(_ sender: Any) {

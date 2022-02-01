@@ -398,11 +398,11 @@ final class SocialPostViewModel {
             completion(.success)
             }, errorCompletion: completion)
     }
-    
+    //MARK: - regex
     func addPost(postText: String, completion: @escaping CompletionBlock) {
         let images = uploadedImages.map({ NewPostImage(image: $0.imageUDID, position: 0) })
         var newPostText = postText
-        if let replyingPostAuthor = replyingPost?.author?.username, !replyingPostAuthor.isEmpty {
+        if let replyingPostAuthor = replyingPost?.author?.url, !replyingPostAuthor.isEmpty {
             let userTag = "@\(replyingPostAuthor) (user) "
             newPostText = userTag + newPostText
         }

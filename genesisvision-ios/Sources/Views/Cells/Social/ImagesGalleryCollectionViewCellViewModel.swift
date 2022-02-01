@@ -32,6 +32,7 @@ extension ImagesGalleryCollectionViewCellViewModel: CellViewModel {
         cell.removeButton.isHidden = !showRemoveButton
         cell.imageUrl = imageUrl
         cell.delegate = delegate
+        cell.clipsToBounds = true
     }
 }
 

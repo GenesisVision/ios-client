@@ -102,8 +102,10 @@ class SocialMediaViewController: BaseViewController {
 extension SocialMediaViewController: SocialPostActionsMenuPresenable {
     func actionSelected(action: SocialPostAction) {
         switch action {
-        case .edit(postId: _):
-            break
+//        case .edit(postId: _):
+//            break
+        case .edit(let postId):
+            viewModel.router.show(routeType: .editPost(postId: postId))
         case .share(let postLink):
             viewModel.router.share(postLink)
         case .copyLink(postLink: let postLink):

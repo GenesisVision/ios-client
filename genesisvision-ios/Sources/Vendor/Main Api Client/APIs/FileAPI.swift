@@ -18,6 +18,8 @@ open class FileAPI {
      */
     open class func uploadFile(uploadedFile: Data? = nil, location: ImageLocation? = nil, waitForResize: Bool? = nil, completion: @escaping ((_ data: UploadResult?,_ error: Error?) -> Void)) {
         uploadFileWithRequestBuilder(uploadedFile: uploadedFile, location: location, waitForResize: waitForResize).execute { (response, error) -> Void in
+            print(response?.body?._id?.uuidString.lowercased())
+            
             completion(response?.body, error)
         }
     }

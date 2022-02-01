@@ -34,12 +34,6 @@ final class SocialPostView: UIView {
         return view
     }()
     
-//    private let middleView: UIView = {
-//        let view = UIView()
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        return view
-//    }()
-    
     private let middleView: UIStackView = {
         let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -76,7 +70,7 @@ final class SocialPostView: UIView {
         return label
     }()
     
-    private let postActionsButton: UIButton = {
+     let postActionsButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .clear

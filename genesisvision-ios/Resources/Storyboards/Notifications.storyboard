@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_5" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,7 +19,7 @@
         <!--Create Notification View Controller-->
         <scene sceneID="xxK-Bs-8Mp">
             <objects>
-                <viewController storyboardIdentifier="CreateNotificationViewController" id="JPJ-fQ-e4x" customClass="CreateNotificationViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateNotificationViewController" id="JPJ-fQ-e4x" customClass="CreateNotificationViewController" customModule="GV_DEBUG" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rhw-jS-c9C">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -32,7 +30,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="VYy-CQ-B5y">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="56"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iS4-rb-Xms" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iS4-rb-Xms" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="15"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="15" id="EkM-me-wem"/>
@@ -41,12 +39,11 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Type" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="L6d-wS-SOu" customClass="DesignableUITextField" customModule="Genesis_Vision" customModuleProvider="target">
+                                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Type" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="L6d-wS-SOu" customClass="DesignableUITextField" customModule="GV_DEBUG" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="15" width="374" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="dDe-qo-lG5"/>
                                                 </constraints>
-                                                <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" textContentType="email"/>
                                             </textField>
@@ -65,7 +62,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="8HR-ke-jTz">
                                         <rect key="frame" x="0.0" y="76" width="374" height="135"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select level" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ISI-lM-70D" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select level" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ISI-lM-70D" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="15"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="15" id="Tsc-Z9-DIp"/>
@@ -83,7 +80,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W96-Tz-yTK">
                                                                 <rect key="frame" x="0.0" y="0.0" width="93.666666666666671" height="40"/>
                                                                 <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hx4-4S-MK7" customClass="LevelFilterButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hx4-4S-MK7" customClass="LevelFilterButton" customModule="GV_DEBUG" customModuleProvider="target">
                                                                         <rect key="frame" x="26.666666666666664" y="0.0" width="39.999999999999993" height="40"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <constraints>
@@ -109,7 +106,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lBv-MK-Vli">
                                                                 <rect key="frame" x="93.666666666666686" y="0.0" width="93.333333333333314" height="40"/>
                                                                 <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eH4-fQ-hok" customClass="LevelFilterButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eH4-fQ-hok" customClass="LevelFilterButton" customModule="GV_DEBUG" customModuleProvider="target">
                                                                         <rect key="frame" x="26.666666666666671" y="0.0" width="40" height="40"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -131,7 +128,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="suI-NK-Zzj">
                                                                 <rect key="frame" x="187" y="0.0" width="93.666666666666686" height="40"/>
                                                                 <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q7M-0j-0en" customClass="LevelFilterButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q7M-0j-0en" customClass="LevelFilterButton" customModule="GV_DEBUG" customModuleProvider="target">
                                                                         <rect key="frame" x="26.666666666666657" y="0.0" width="40" height="40"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -153,7 +150,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BJ3-IS-pOC">
                                                                 <rect key="frame" x="280.66666666666669" y="0.0" width="93.333333333333314" height="40"/>
                                                                 <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jjw-8u-yGd" customClass="LevelFilterButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jjw-8u-yGd" customClass="LevelFilterButton" customModule="GV_DEBUG" customModuleProvider="target">
                                                                         <rect key="frame" x="26.666666666666629" y="0.0" width="40" height="40"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -206,7 +203,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qub-Dl-eWA">
                                                                 <rect key="frame" x="0.0" y="0.0" width="107" height="40"/>
                                                                 <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j0u-jM-vb9" customClass="LevelFilterButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j0u-jM-vb9" customClass="LevelFilterButton" customModule="GV_DEBUG" customModuleProvider="target">
                                                                         <rect key="frame" x="33.666666666666664" y="0.0" width="39.999999999999993" height="40"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <constraints>
@@ -232,7 +229,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mdN-Rj-t5P">
                                                                 <rect key="frame" x="107" y="0.0" width="106.66666666666669" height="40"/>
                                                                 <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ySg-2Z-ad0" customClass="LevelFilterButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ySg-2Z-ad0" customClass="LevelFilterButton" customModule="GV_DEBUG" customModuleProvider="target">
                                                                         <rect key="frame" x="33.333333333333343" y="0.0" width="40" height="40"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -254,7 +251,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vm4-4Z-1H7">
                                                                 <rect key="frame" x="213.66666666666663" y="0.0" width="107" height="40"/>
                                                                 <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VMy-BB-mrD" customClass="LevelFilterButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VMy-BB-mrD" customClass="LevelFilterButton" customModule="GV_DEBUG" customModuleProvider="target">
                                                                         <rect key="frame" x="33.666666666666686" y="0.0" width="40" height="40"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -312,7 +309,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3p4-XH-0uD">
                                         <rect key="frame" x="0.0" y="231" width="374" height="56"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter amount" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nhy-Sb-Hw2" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter amount" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nhy-Sb-Hw2" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="15"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="15" id="nal-9T-Gef"/>
@@ -327,13 +324,13 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Os2-SI-ctj">
                                                         <rect key="frame" x="0.0" y="0.0" width="31.666666666666668" height="40"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="65y-fe-yl7" customClass="TitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="65y-fe-yl7" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="8.6666666666666661" height="40"/>
                                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bRx-hb-4SE" customClass="SubtitleLabel" customModule="Genesis_Vision" customModuleProvider="target">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bRx-hb-4SE" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
                                                                 <rect key="frame" x="16.666666666666664" y="0.0" width="15" height="40"/>
                                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Bol" family="NeuzeitGro" pointSize="15"/>
                                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -360,7 +357,7 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Vu-r9-hwm" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Vu-r9-hwm" customClass="ActionButton" customModule="GV_DEBUG" customModuleProvider="target">
                                 <rect key="frame" x="20" y="792" width="374" height="50"/>
                                 <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -374,10 +371,10 @@
                                     <action selector="createButtonAction:" destination="JPJ-fQ-e4x" eventType="touchUpInside" id="x8Z-ZS-DLS"/>
                                 </connections>
                             </button>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3JP-kX-PeZ" customClass="GradientView" customModule="Genesis_Vision" customModuleProvider="target">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3JP-kX-PeZ" customClass="GradientView" customModule="GV_DEBUG" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZzW-xy-m1I" customClass="NumpadView" customModule="Genesis_Vision" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZzW-xy-m1I" customClass="NumpadView" customModule="GV_DEBUG" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="650" width="414" height="212"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="4dw-PV-NOK">
@@ -386,7 +383,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="mhf-AT-Ik7">
                                                         <rect key="frame" x="0.0" y="0.0" width="402" height="47"/>
                                                         <subviews>
-                                                            <button opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" restorationIdentifier="1" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EIR-A2-DbR" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                            <button opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" restorationIdentifier="1" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EIR-A2-DbR" customClass="NumpadButton" customModule="GV_DEBUG" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="130" height="47"/>
                                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
                                                                 <state key="normal" title="1">
@@ -396,7 +393,7 @@
                                                                     <action selector="buttons:" destination="ZzW-xy-m1I" eventType="touchUpInside" id="nJH-Mr-Si6"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M6R-Hm-UZi" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                            <button opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M6R-Hm-UZi" customClass="NumpadButton" customModule="GV_DEBUG" customModuleProvider="target">
                                                                 <rect key="frame" x="136" y="0.0" width="130" height="47"/>
                                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
                                                                 <state key="normal" title="2">
@@ -406,7 +403,7 @@
                                                                     <action selector="buttons:" destination="ZzW-xy-m1I" eventType="touchUpInside" id="GMl-LQ-sfv"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z64-vR-kGo" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                            <button opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z64-vR-kGo" customClass="NumpadButton" customModule="GV_DEBUG" customModuleProvider="target">
                                                                 <rect key="frame" x="272" y="0.0" width="130" height="47"/>
                                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
                                                                 <state key="normal" title="3">
@@ -424,7 +421,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="t7a-7j-Xjh">
                                                         <rect key="frame" x="0.0" y="53" width="402" height="47"/>
                                                         <subviews>
-                                                            <button opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1fb-bk-hYL" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                            <button opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1fb-bk-hYL" customClass="NumpadButton" customModule="GV_DEBUG" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="130" height="47"/>
                                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
                                                                 <state key="normal" title="4">
@@ -434,7 +431,7 @@
                                                                     <action selector="buttons:" destination="ZzW-xy-m1I" eventType="touchUpInside" id="XVg-PX-UFw"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3FQ-k5-PkB" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                            <button opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3FQ-k5-PkB" customClass="NumpadButton" customModule="GV_DEBUG" customModuleProvider="target">
                                                                 <rect key="frame" x="136" y="0.0" width="130" height="47"/>
                                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
                                                                 <state key="normal" title="5">
@@ -444,7 +441,7 @@
                                                                     <action selector="buttons:" destination="ZzW-xy-m1I" eventType="touchUpInside" id="nAb-nc-8WD"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" clipsSubviews="YES" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nGy-Q7-TJI" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                            <button opaque="NO" clipsSubviews="YES" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nGy-Q7-TJI" customClass="NumpadButton" customModule="GV_DEBUG" customModuleProvider="target">
                                                                 <rect key="frame" x="272" y="0.0" width="130" height="47"/>
                                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
                                                                 <state key="normal" title="6">
@@ -459,7 +456,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="jkQ-LQ-Fur">
                                                         <rect key="frame" x="0.0" y="106" width="402" height="47"/>
                                                         <subviews>
-                                                            <button opaque="NO" clipsSubviews="YES" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SWz-YA-mZR" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                            <button opaque="NO" clipsSubviews="YES" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SWz-YA-mZR" customClass="NumpadButton" customModule="GV_DEBUG" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="130" height="47"/>
                                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
                                                                 <state key="normal" title="7">
@@ -469,7 +466,7 @@
                                                                     <action selector="buttons:" destination="ZzW-xy-m1I" eventType="touchUpInside" id="6UW-bU-GLk"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" clipsSubviews="YES" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DEE-x0-LvX" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                            <button opaque="NO" clipsSubviews="YES" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DEE-x0-LvX" customClass="NumpadButton" customModule="GV_DEBUG" customModuleProvider="target">
                                                                 <rect key="frame" x="136" y="0.0" width="130" height="47"/>
                                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
                                                                 <state key="normal" title="8">
@@ -479,7 +476,7 @@
                                                                     <action selector="buttons:" destination="ZzW-xy-m1I" eventType="touchUpInside" id="cyn-dt-2qp"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" clipsSubviews="YES" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G17-zn-3i2" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                            <button opaque="NO" clipsSubviews="YES" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G17-zn-3i2" customClass="NumpadButton" customModule="GV_DEBUG" customModuleProvider="target">
                                                                 <rect key="frame" x="272" y="0.0" width="130" height="47"/>
                                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
                                                                 <state key="normal" title="9">
@@ -494,7 +491,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="uBm-Nq-clv">
                                                         <rect key="frame" x="0.0" y="159" width="402" height="47"/>
                                                         <subviews>
-                                                            <button opaque="NO" clipsSubviews="YES" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ohd-KU-bZY" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                            <button opaque="NO" clipsSubviews="YES" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ohd-KU-bZY" customClass="NumpadButton" customModule="GV_DEBUG" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="130" height="47"/>
                                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
                                                                 <state key="normal" title=".">
@@ -504,7 +501,7 @@
                                                                     <action selector="separatorButtonAction:" destination="ZzW-xy-m1I" eventType="touchUpInside" id="l0D-hl-Zt1"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WJP-Vd-vZA" customClass="NumpadButton" customModule="Genesis_Vision" customModuleProvider="target">
+                                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WJP-Vd-vZA" customClass="NumpadButton" customModule="GV_DEBUG" customModuleProvider="target">
                                                                 <rect key="frame" x="136" y="0.0" width="130" height="47"/>
                                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
                                                                 <state key="normal" title="0">
@@ -514,7 +511,7 @@
                                                                     <action selector="buttons:" destination="ZzW-xy-m1I" eventType="touchUpInside" id="djO-VR-3q9"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" clipsSubviews="YES" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="haF-5W-MZO">
+                                                            <button opaque="NO" clipsSubviews="YES" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="haF-5W-MZO">
                                                                 <rect key="frame" x="272" y="0.0" width="130" height="47"/>
                                                                 <fontDescription key="fontDescription" name="NeuzeitGro-Reg" family="NeuzeitGro" pointSize="25"/>
                                                                 <color key="tintColor" red="0.0" green="0.73725490199999999" blue="0.69019607839999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -568,6 +565,7 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="9zE-nr-Tef"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="9zE-nr-Tef" firstAttribute="bottom" secondItem="2Vu-r9-hwm" secondAttribute="bottom" constant="20" id="22L-ew-ndy"/>
@@ -582,7 +580,6 @@
                             <constraint firstItem="3JP-kX-PeZ" firstAttribute="leading" secondItem="rhw-jS-c9C" secondAttribute="leading" id="pkg-6L-fxL"/>
                             <constraint firstItem="2Vu-r9-hwm" firstAttribute="leading" secondItem="9zE-nr-Tef" secondAttribute="leading" constant="20" id="vRE-nV-XQO"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="9zE-nr-Tef"/>
                     </view>
                     <connections>
                         <outlet property="createButton" destination="2Vu-r9-hwm" id="ET5-Hw-yZt"/>
@@ -613,7 +610,7 @@
         <!--Notifications Settings View Controller-->
         <scene sceneID="pBR-y8-ZEC">
             <objects>
-                <viewController storyboardIdentifier="NotificationsSettingsViewController" id="0OP-Yu-R5z" customClass="NotificationsSettingsViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NotificationsSettingsViewController" id="0OP-Yu-R5z" customClass="NotificationsSettingsViewController" customModule="GV_DEBUG" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Fbv-WV-hPn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -627,7 +624,7 @@
                                     <outlet property="delegate" destination="0OP-Yu-R5z" id="drT-Rg-UKq"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V0y-qE-JQ5" customClass="ActionButton" customModule="Genesis_Vision" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V0y-qE-JQ5" customClass="ActionButton" customModule="GV_DEBUG" customModuleProvider="target">
                                 <rect key="frame" x="20" y="792" width="374" height="50"/>
                                 <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -642,6 +639,7 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="oD3-Zb-Hgd"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="V0y-qE-JQ5" firstAttribute="leading" secondItem="oD3-Zb-Hgd" secondAttribute="leading" constant="20" id="6uY-Zf-dTD"/>
@@ -652,7 +650,6 @@
                             <constraint firstItem="oD3-Zb-Hgd" firstAttribute="bottom" secondItem="V0y-qE-JQ5" secondAttribute="bottom" constant="20" id="qhh-yB-ACY"/>
                             <constraint firstItem="7e3-Qb-z2Z" firstAttribute="top" secondItem="oD3-Zb-Hgd" secondAttribute="top" id="yUH-bW-R5l"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="oD3-Zb-Hgd"/>
                     </view>
                     <navigationItem key="navigationItem" id="nnD-q6-tnf"/>
                     <connections>
@@ -667,7 +664,7 @@
         <!--Notification List View Controller-->
         <scene sceneID="gY9-dC-B8x">
             <objects>
-                <viewController storyboardIdentifier="NotificationListViewController" id="5l9-tM-PE1" customClass="NotificationListViewController" customModule="Genesis_Vision" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NotificationListViewController" id="5l9-tM-PE1" customClass="NotificationListViewController" customModule="GV_DEBUG" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1U0-kE-AzS">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -682,6 +679,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="7GW-Wt-RtC"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="7GW-Wt-RtC" firstAttribute="trailing" secondItem="C5B-wt-JCk" secondAttribute="trailing" id="G7L-R8-bEX"/>
@@ -689,7 +687,6 @@
                             <constraint firstAttribute="bottom" secondItem="C5B-wt-JCk" secondAttribute="bottom" id="NWv-oq-udu"/>
                             <constraint firstItem="C5B-wt-JCk" firstAttribute="leading" secondItem="7GW-Wt-RtC" secondAttribute="leading" id="aHQ-dq-XMn"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="7GW-Wt-RtC"/>
                     </view>
                     <navigationItem key="navigationItem" id="Tbu-2c-UDZ"/>
                     <connections>

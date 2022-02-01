@@ -26,8 +26,11 @@ class SocialNewPostViewController: BaseViewController {
         didSet {
             sharedPostView.isHidden = true
             sharedPostView.backgroundColor = UIColor.Common.darkCell
+            sharedPostView.postActionsButton.isHidden = true
         }
     }
+    
+    @IBOutlet weak var sharedPostmainViewHeightConstraint: NSLayoutConstraint!
     
     private let placeholder = "Share your ideas.\n" +
     "- Use @ to mention a user or a GV asset\n" +
@@ -35,6 +38,7 @@ class SocialNewPostViewController: BaseViewController {
     
     private let atSign = "@"
     private let hashtagSign = "#"
+//    var keyboardHeight : CGFloat?
     
     @IBOutlet weak var textView: UITextView! {
         didSet {
@@ -54,6 +58,8 @@ class SocialNewPostViewController: BaseViewController {
             imagesGallery.isHidden = true
         }
     }
+    
+    @IBOutlet weak var stackView: UIStackView!
     
     @IBOutlet weak var publishButton: ActionButton! {
         didSet {
@@ -97,12 +103,24 @@ class SocialNewPostViewController: BaseViewController {
             title = "Edit post"
             viewModel.fetchPost { [weak self] _ in
                 self?.textView.text = self?.viewModel.newPostText
+                
+                if let pickedImages = self?.viewModel.pickedImages {
+                    for elem in pickedImages {
+//                        print(elem.imageUDID)
+//                        print(elem.imageUrl)
+
+                    }
+                }
+                self?.imagesGallery.viewModels
             }
         }
+        scrollView.contentSize.height = (sharedPostView.height + textView.height + imagesGallery.height) * 1.3
     }
     
     private func setup() {
         title = "New post"
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     func postViewSizes(post: Post) -> SocialPostViewSizes {
@@ -124,6 +142,7 @@ class SocialNewPostViewController: BaseViewController {
                 textHeight = textHeightValue
             } else if textHeightValue > 250 {
                 textHeight = 250
+                fullTextViewHeight = textHeightValue
             }
         }
         
@@ -138,8 +157,17 @@ class SocialNewPostViewController: BaseViewController {
         guard let post = viewModel.sharedPost else { return }
         sharedPostView.isHidden = false
         sharedPostMainView.isHidden = false
-        
         sharedPostView.socialPostViewSizes = postViewSizes(post: post)
+        if let sizes = sharedPostView.socialPostViewSizes {
+            let defaultHeight: CGFloat = 100
+            sharedPostmainViewHeightConstraint.constant = sizes.allHeight + defaultHeight
+            sharedPostView.height = sizes.allHeight + defaultHeight
+//            scrollView.contentSize.height = sharedPostView.height + textView.height + imagesGallery.height
+        }
+        
+        if let fullTextViewHeight = sharedPostView.socialPostViewSizes?.fullTextViewHeight, fullTextViewHeight > 250 {
+            sharedPostView.socialPostViewSizes?.isExpanded = false
+        }
         sharedPostView.updateMiddleViewConstraints()
         
         if let logo = viewModel.sharedPost?.author?.logoUrl, let fileUrl = getFileURL(fileName: logo), isPictureURL(url: fileUrl.absoluteString) {
@@ -185,7 +213,6 @@ class SocialNewPostViewController: BaseViewController {
                     imagesUrls[logoUrl] = postImage.resizes?.first
                 }
             }
-            
             sharedPostView.galleryView.viewModels = imagesUrls.map({ return ImagesGalleryCollectionViewCellViewModel(imageUrl: $0.key, resize: $0.value, image: nil, showRemoveButton: false, delegate: nil) })
         } else {
             sharedPostView.galleryView.isHidden = true
@@ -220,6 +247,20 @@ class SocialNewPostViewController: BaseViewController {
     @IBAction func attachmentButtonAction(_ sender: Any) {
         showImagePicker()
     }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
+    }
 }
 
 extension SocialNewPostViewController: ImagePickerPresentable {
@@ -245,6 +286,9 @@ extension SocialNewPostViewController: ImagesGalleryCollectionViewCellDelegate {
         let viewModels = viewModel.pickedImages.map({ return ImagesGalleryCollectionViewCellViewModel(imageUrl: $0.imageUrl, resize: PostImageResize(quality: nil, logoUrl: nil, height: 100, width: 100), image: $0.image, showRemoveButton: true, delegate: self) })
         imagesGallery.viewModels = viewModels
         imagesGallery.isHidden = viewModels.isEmpty
+        if viewModel.pickedImages.isEmpty {
+            scrollView.contentSize.height -= imagesGallery.height
+        }
     }
 }
 
@@ -262,6 +306,15 @@ extension SocialNewPostViewController: UITextViewDelegate {
             textView.text = placeholder
             return
         }
+        guard let stringFromText = textView.text else {return}
+        var newString = stringFromText
+        var lastChar = newString.last
+        while lastChar == "\n" {
+            newString.removeLast()
+            lastChar = newString.last
+        }
+        textView.text = newString
+        textViewDidChange(textView)
     }
     
     func textViewDidChange(_ textView: UITextView) {
@@ -272,20 +325,8 @@ extension SocialNewPostViewController: UITextViewDelegate {
         publishButton.setEnabled(true)
         viewModel.newPostText = textView.text
         
-//        let minSize = CGSize(width: textView.frame.width, height: 300.0)
-//        let estimatedSize = textView.sizeThatFits(minSize)
-//        if estimatedSize.height <= 300 {
-//            textView.isScrollEnabled = false
-//            textViewHeightConstraint.constant = 300
-//            //                textViewContainerHeightConstraint.constant = estimatedSize.height + 12.0
-//        } else {
-//            textView.isScrollEnabled = false
-//            textViewHeightConstraint.constant = textView.contentSize.height
-//            //                textViewContainerHeightConstraint.constant = 102.0
-//        }
         let maxHeight: CGFloat = 1500.0
         let minHeight: CGFloat = 100.0
-//        textViewHeightConstraint.constant = min(maxHeight, max(minHeight, textView.contentSize.height))
 
         let textHeight = textView.text.height(forConstrainedWidth: UIScreen.main.bounds.width, font: UIFont.systemFont(ofSize: 16)) + 18
         
@@ -294,9 +335,12 @@ extension SocialNewPostViewController: UITextViewDelegate {
         } else {
             textViewHeightConstraint.constant = textHeight
         }
-        print(sharedPostView.socialPostViewSizes?.isExpanded)
-        scrollView.contentSize.height = min(maxHeight, max(minHeight, textHeight)) + imagesGallery.height
         
+        if sharedPostView.isHidden {
+            scrollView.contentSize.height = (min(maxHeight, max(minHeight, textHeight)) + imagesGallery.height) * 1.3
+        } else {
+            scrollView.contentSize.height = (min(maxHeight, max(minHeight, textHeight)) + imagesGallery.height + sharedPostView.height) * 1.3
+        }
     }
 }
 
@@ -357,27 +401,39 @@ final class SocialNewPostViewModel {
     }
     
     private func rePost(completion: @escaping CompletionBlock) {
-        let images = uploadedImages.map({ NewPostImage(image: $0.imageUDID, position: 0) })
+//        let images = uploadedImages.map({ NewPostImage(image: $0.imageUDID, position: 0) })
+        lazy var images = [NewPostImage]()
+        for (index,image) in uploadedImages.enumerated() {
+            images.append(NewPostImage(image: image.imageUDID, position: index))
+        }
         let model = RePost(_id: sharedPost?._id, text: newPostText, images: images)
         SocialDataProvider.rePost(model: model, completion: completion)
     }
     
     private func addPost(completion: @escaping CompletionBlock) {
-        let images = uploadedImages.map({ NewPostImage(image: $0.imageUDID, position: 0) })
+//        let images = uploadedImages.map({ NewPostImage(image: $0.imageUDID, position: 0) })
+        lazy var images = [NewPostImage]()
+        for (index,image) in uploadedImages.enumerated() {
+            images.append(NewPostImage(image: image.imageUDID, position: index))
+        }
         let model = NewPost(text: newPostText ?? " ", postId: nil, userId: nil, images: images)
         SocialDataProvider.addPost(model: model, completion: completion)
     }
     
     private func editPost(completion: @escaping CompletionBlock) {
         guard let postId = postId else { return  completion(.failure(errorType: .apiError(message: "")))}
-        let images = uploadedImages.map({ NewPostImage(image: $0.imageUDID, position: 0) })
+//        let images = uploadedImages.map({ NewPostImage(image: $0.imageUDID, position: 0) })
+        lazy var images = [NewPostImage]()
+        for (index,image) in uploadedImages.enumerated() {
+            images.append(NewPostImage(image: image.imageUDID, position: index))
+        }
         let model = EditPost(_id: postId, text: newPostText, images: images)
         SocialDataProvider.editPost(model: model, completion: completion)
     }
     
     func saveImage(_ pickedImageURL: URL, completion: @escaping (CompletionBlock)) {
         BaseDataProvider.uploadImage(imageData: pickedImageURL.dataRepresentation, imageLocation: .social, completion: { [weak self] (uploadResult) in
-            guard let uploadResult = uploadResult, let uuidString = uploadResult._id?.uuidString else { return completion(.failure(errorType: .apiError(message: nil))) }
+            guard let uploadResult = uploadResult, let uuidString = uploadResult._id?.uuidString.lowercased() else { return completion(.failure(errorType: .apiError(message: nil))) }
             
             self?.uploadedImages.append(UploadedImage(imageUrl: pickedImageURL.absoluteString, imageUDID: uuidString))
             completion(.success)
@@ -389,6 +445,16 @@ final class SocialNewPostViewModel {
         SocialDataProvider.getPost(postId: postId) { [weak self] (viewModel) in
             if let viewModel = viewModel {
                 self?.newPostText = viewModel.text
+                
+                if let pickedImages = viewModel.images {
+                    for elem in pickedImages {
+                        if let id = elem._id {
+                            print(id)
+                            
+                            self?.pickedImages.append(PickedImage(imageUrl: id, image: UIImage()))
+                        }
+                    }
+                }
                 completion(.success)
             }
             completion(.failure(errorType: .apiError(message: "")))
