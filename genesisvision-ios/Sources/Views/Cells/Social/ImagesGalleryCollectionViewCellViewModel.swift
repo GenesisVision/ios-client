@@ -33,8 +33,35 @@ extension ImagesGalleryCollectionViewCellViewModel: CellViewModel {
         cell.imageUrl = imageUrl
         cell.delegate = delegate
         cell.clipsToBounds = true
+        cell.imageView.clipsToBounds = true
     }
 }
+
+extension ImagesGalleryCollectionViewCellViewModel {
+    func setupMoreImageButton(on cell: ImagesGalleryCollectionViewCell, remainImagesCount: Int) {
+        setup(on: cell)
+        
+        cell.imageView.subviews.forEach({ $0.removeFromSuperview() })
+        let blurEffect = UIBlurEffect(style: .light)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = CGRect(x: 0, y: 0, width: cell.imageView.width, height: cell.imageView.height)
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blurEffectView.alpha = 0.5
+        cell.imageView.addSubview(blurEffectView)
+        
+        let countLabel : UILabel = {
+            let label = UILabel()
+            label.text = "+\(remainImagesCount)"
+            label.textColor = .white
+            label.textAlignment = .center
+            label.font = UIFont.systemFont(ofSize: 24)
+            return label
+        }()
+        countLabel.frame = CGRect(x: cell.imageView.center.x / 2, y: cell.imageView.center.y / 2, width: 50, height: 50)
+        blurEffectView.contentView.addSubview(countLabel)
+    }
+}
+
 
 class ImagesGalleryCollectionViewCell: UICollectionViewCell {
     
@@ -71,7 +98,8 @@ class ImagesGalleryCollectionViewCell: UICollectionViewCell {
         addSubview(imageView)
         addSubview(removeButton)
         
-        imageView.fillSuperview(padding: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
+//        imageView.fillSuperview(padding: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
+        imageView.fillSuperview(padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         
         removeButton.anchor(top: topAnchor,
                             leading: nil,

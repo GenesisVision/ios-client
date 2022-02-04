@@ -1086,6 +1086,7 @@
 		F390C752278D8BE8006FF6CB /* PushNotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F390C751278D8BE8006FF6CB /* PushNotificationViewModel.swift */; };
 		F390C754278D8CD6006FF6CB /* DynamicLinkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F390C753278D8CD6006FF6CB /* DynamicLinkManager.swift */; };
 		F390C756278D8D57006FF6CB /* AuthThreeFactorSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F390C755278D8D57006FF6CB /* AuthThreeFactorSignInViewController.swift */; };
+		F3A3AE9327ABCBC500580C51 /* PostImagesGalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A3AE9227ABCBC500580C51 /* PostImagesGalleryView.swift */; };
 		FC0E20062044123F00872BE5 /* PhotoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E20052044123F00872BE5 /* PhotoHeaderView.swift */; };
 		FC0E200A2044357800872BE5 /* WalletDepositViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E20092044357800872BE5 /* WalletDepositViewController.swift */; };
 		FC0E200C2044358200872BE5 /* WalletWithdrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E200B2044358200872BE5 /* WalletWithdrawViewController.swift */; };
@@ -2363,6 +2364,7 @@
 		F390C751278D8BE8006FF6CB /* PushNotificationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationViewModel.swift; sourceTree = "<group>"; };
 		F390C753278D8CD6006FF6CB /* DynamicLinkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicLinkManager.swift; sourceTree = "<group>"; };
 		F390C755278D8D57006FF6CB /* AuthThreeFactorSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthThreeFactorSignInViewController.swift; sourceTree = "<group>"; };
+		F3A3AE9227ABCBC500580C51 /* PostImagesGalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImagesGalleryView.swift; sourceTree = "<group>"; };
 		FC0E20052044123F00872BE5 /* PhotoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoHeaderView.swift; sourceTree = "<group>"; };
 		FC0E20092044357800872BE5 /* WalletDepositViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDepositViewController.swift; sourceTree = "<group>"; };
 		FC0E200B2044358200872BE5 /* WalletWithdrawViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletWithdrawViewController.swift; sourceTree = "<group>"; };
@@ -3638,6 +3640,7 @@
 				19C3B93F25DED96D00C6990D /* DropDownField.swift */,
 				19C3B98E25E6900800C6990D /* CustomRadioButton.swift */,
 				1926FC722756FF3000FEC4D3 /* ImagesGalleryView.swift */,
+				F3A3AE9227ABCBC500580C51 /* PostImagesGalleryView.swift */,
 				1926FC782757764300FEC4D3 /* ReplyInputField.swift */,
 				1926FC7A27577F4500FEC4D3 /* ReplierView.swift */,
 				1926FCC0275E57DF00FEC4D3 /* SocialTextView.swift */,
@@ -6343,6 +6346,7 @@
 				5E39F61823A3F8A60073DAD5 /* CreateWithdrawalRequestModel.swift in Sources */,
 				5EC273AC2056B7DB00E51494 /* NumberToStringExtension.swift in Sources */,
 				19C3B98925E663E300C6990D /* SocialPostReportViewController.swift in Sources */,
+				F3A3AE9327ABCBC500580C51 /* PostImagesGalleryView.swift in Sources */,
 				5E39F70023A3F92F0073DAD5 /* TradeEntryType.swift in Sources */,
 				5EA274C621628286008CAF77 /* DetailProfitStatisticTableViewCell.swift in Sources */,
 				5E1813812061D36700481646 /* PickerViewViewController.swift in Sources */,

@@ -111,9 +111,9 @@ final class SocialPostView: UIView {
         textView.textColor = UIColor.white
         return textView
     }()
-    
-    let galleryView: ImagesGalleryView = {
-        let imageView = ImagesGalleryView()
+    //MARK: - Изменил тип вью
+    let galleryView: PostImagesGalleryView = {
+        let imageView = PostImagesGalleryView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.backgroundColor = .clear
         return imageView
@@ -244,7 +244,7 @@ final class SocialPostView: UIView {
         eventView.anchorSize(size: CGSize(width: 0, height: 50))
         textView.anchor(top: middleView.topAnchor, leading: middleView.leadingAnchor, bottom: nil, trailing: middleView.trailingAnchor)
         
-        if Int((socialPostViewSizes?.fullTextViewHeight ?? 25)) > 250 && !isPostExpanded {
+        if Int((socialPostViewSizes?.fullTextViewHeight ?? 0)) > 250 && !isPostExpanded {
             expandButton.isHidden = false
             textView.bottomAnchor.constraint(equalTo: middleView.topAnchor, constant: 250).isActive = true
             expandButton.addTarget(self, action: #selector(touchExpandButton), for: .touchUpInside)
@@ -257,7 +257,7 @@ final class SocialPostView: UIView {
         } else {
             middleView.removeArrangedSubviewCompletely(expandButton)
             expandButton.isHidden = true
-            textView.bottomAnchor.constraint(equalTo: middleView.topAnchor, constant: socialPostViewSizes?.textViewHeight ?? 25).isActive = true
+            textView.bottomAnchor.constraint(equalTo: middleView.topAnchor, constant: socialPostViewSizes?.textViewHeight ?? 0).isActive = true
         }
     }
     

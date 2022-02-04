@@ -75,7 +75,7 @@ extension SocialCommentTableViewCellViewModel: CellViewModel {
         
         if let postImages = post.images, !postImages.isEmpty {
             cell.galleryView.isHidden = false
-            var imagesUrls: [String: PostImageResize?] = [:]
+           lazy var images = [ImagesGalleryCollectionViewCellViewModel]()
             
             for postImage in postImages {
                 if let resizes = postImage.resizes,
@@ -86,23 +86,42 @@ extension SocialCommentTableViewCellViewModel: CellViewModel {
                     let low = resizes.filter({ $0.quality == .low })
                     
                     if let logoUrl = original.first?.logoUrl {
-                        imagesUrls[logoUrl] = original.first
+                        images.append(ImagesGalleryCollectionViewCellViewModel(imageUrl: logoUrl,
+                                                                               resize: original.first,
+                                                                               image: nil,
+                                                                               showRemoveButton: false,
+                                                                               delegate: nil))
                         continue
                     } else if let logoUrl = hight.first?.logoUrl {
-                        imagesUrls[logoUrl] = hight.first
+                        images.append(ImagesGalleryCollectionViewCellViewModel(imageUrl: logoUrl,
+                                                                               resize: hight.first,
+                                                                               image: nil,
+                                                                               showRemoveButton: false,
+                                                                               delegate: nil))
                         continue
                     } else if let logoUrl = medium.first?.logoUrl {
-                        imagesUrls[logoUrl] = medium.first
+                        images.append(ImagesGalleryCollectionViewCellViewModel(imageUrl: logoUrl,
+                                                                               resize: medium.first,
+                                                                               image: nil,
+                                                                               showRemoveButton: false,
+                                                                               delegate: nil))
                         continue
                     } else if let logoUrl = low.first?.logoUrl {
-                        imagesUrls[logoUrl] = low.first
+                        images.append(ImagesGalleryCollectionViewCellViewModel(imageUrl: logoUrl,
+                                                                               resize: low.first,
+                                                                               image: nil,
+                                                                               showRemoveButton: false,
+                                                                               delegate: nil))
                     }
                 } else if let logoUrl = postImage.resizes?.first?.logoUrl {
-                    imagesUrls[logoUrl] = postImage.resizes?.first
+                    images.append(ImagesGalleryCollectionViewCellViewModel(imageUrl: logoUrl,
+                                                                           resize: postImage.resizes?.first,
+                                                                           image: nil,
+                                                                           showRemoveButton: false,
+                                                                           delegate: nil))
                 }
             }
-            
-            cell.galleryView.viewModels = imagesUrls.map({ return ImagesGalleryCollectionViewCellViewModel(imageUrl: $0.key, resize: $0.value, image: nil, showRemoveButton: false, delegate: nil) })
+            cell.galleryView.viewModels = images
         } else {
             cell.galleryView.isHidden = true
         }
@@ -139,7 +158,7 @@ extension SocialCommentTableViewCellViewModel: CellViewModel {
         if let text = post.text, !text.isEmpty {
             let textHeightValue = text.height(forConstrainedWidth: UIScreen.main.bounds.width - 20, font: UIFont.getFont(.regular, size: 18))
             
-            if textHeightValue < 25 {
+            if textHeightValue < 25 && textHeightValue != 0 {
                 textHeight = 25
             } else if textHeightValue > 25 && textHeightValue < 250 {
                 textHeight = textHeightValue

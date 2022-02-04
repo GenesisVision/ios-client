@@ -17,6 +17,17 @@ extension UICollectionView {
         
         return cell
     }
+    
+    func dequeueReusableCellForMoreImageButton(withModel model: ImagesGalleryCollectionViewCellViewModel, for indexPath: IndexPath, remainImagesCount : Int) -> UICollectionViewCell {
+        let indetifier = String(describing: ImagesGalleryCollectionViewCell.self)
+        guard let cell = dequeueReusableCell(withReuseIdentifier: indetifier, for: indexPath) as? ImagesGalleryCollectionViewCell else {
+            return UICollectionViewCell()
+            
+        }
+        model.setupMoreImageButton(on: cell, remainImagesCount: remainImagesCount)
+        
+        return cell
+    }
 }
 
 

@@ -73,12 +73,12 @@ extension ImagesGalleryView: UICollectionViewDelegate, UICollectionViewDataSourc
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let model = viewModels[indexPath.row]
-        
+
         if let width = model.resize?.width, let height = model.resize?.height,
            CGFloat(width) < collectionView.frame.width*0.5, CGFloat(height) < collectionView.frame.height {
             return CGSize(width: width, height: height)
         }
-        
+
         if viewModels.count == 1 {
             return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
         } else if viewModels.count == 2 {
@@ -96,7 +96,7 @@ extension ImagesGalleryView: UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
+        return 5
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

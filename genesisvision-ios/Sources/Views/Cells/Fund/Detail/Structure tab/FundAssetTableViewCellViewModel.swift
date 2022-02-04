@@ -14,6 +14,9 @@ struct FundAssetTableViewCellViewModel {
 }
 
 extension FundAssetTableViewCellViewModel: CellViewModel {
+    func setupImageMoreButton(on cell: FundAssetTableViewCell) {
+    }
+    
     func setup(on cell: FundAssetTableViewCell) {
         cell.assetLogoImageView.image = nil
         

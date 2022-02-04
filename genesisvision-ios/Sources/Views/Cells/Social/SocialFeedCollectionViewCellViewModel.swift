@@ -75,7 +75,7 @@ struct SocialFeedCollectionViewCellViewModel {
             let textHeightValue = text.height(forConstrainedWidth: UIScreen.main.bounds.width - 20, font: UIFont.getFont(.regular, size: 18))
             let expandButton = CGFloat(20)
             
-            if textHeightValue < 25 {
+            if textHeightValue < 25 && textHeightValue != 0 {
                 textHeight = 25
             } else if textHeightValue > 25 && textHeightValue < 250 {
                 textHeight = textHeightValue
@@ -99,17 +99,6 @@ extension SocialFeedCollectionViewCellViewModel: CellViewModel {
         
         var eventPost: Bool = false
         var isExpanded = false
-         
-//        if post.isDeleted == true {
-//            cell.postView.isHidden = true
-//            cell.bottomView.isHidden = true
-//            cell.deletedPostView.isHidden = false
-//            return
-//        } else {
-//            cell.postView.isHidden = false
-//            cell.bottomView.isHidden = false
-//            cell.deletedPostView.isHidden = true
-//        }
         
         if let postId = post._id {
             cell.postId = postId
@@ -140,7 +129,7 @@ extension SocialFeedCollectionViewCellViewModel: CellViewModel {
         
         if let postImages = post.images, !postImages.isEmpty {
             cell.postView.galleryView.isHidden = false
-            var imagesUrls: [String: PostImageResize?] = [:]
+            lazy var images = [ImagesGalleryCollectionViewCellViewModel]()
             
             for postImage in postImages {
                 if let resizes = postImage.resizes,
@@ -151,22 +140,42 @@ extension SocialFeedCollectionViewCellViewModel: CellViewModel {
                     let low = resizes.filter({ $0.quality == .low })
                     
                     if let logoUrl = original.first?.logoUrl {
-                        imagesUrls[logoUrl] = original.first
+                        images.append(ImagesGalleryCollectionViewCellViewModel(imageUrl: logoUrl,
+                                                                               resize: original.first,
+                                                                               image: nil,
+                                                                               showRemoveButton: false,
+                                                                               delegate: nil))
                         continue
                     } else if let logoUrl = hight.first?.logoUrl {
-                        imagesUrls[logoUrl] = hight.first
+                        images.append(ImagesGalleryCollectionViewCellViewModel(imageUrl: logoUrl,
+                                                                               resize: hight.first,
+                                                                               image: nil,
+                                                                               showRemoveButton: false,
+                                                                               delegate: nil))
                         continue
                     } else if let logoUrl = medium.first?.logoUrl {
-                        imagesUrls[logoUrl] = medium.first
+                        images.append(ImagesGalleryCollectionViewCellViewModel(imageUrl: logoUrl,
+                                                                               resize: medium.first,
+                                                                               image: nil,
+                                                                               showRemoveButton: false,
+                                                                               delegate: nil))
                         continue
                     } else if let logoUrl = low.first?.logoUrl {
-                        imagesUrls[logoUrl] = low.first
+                        images.append(ImagesGalleryCollectionViewCellViewModel(imageUrl: logoUrl,
+                                                                               resize: low.first,
+                                                                               image: nil,
+                                                                               showRemoveButton: false,
+                                                                               delegate: nil))
                     }
                 } else if let logoUrl = postImage.resizes?.first?.logoUrl {
-                    imagesUrls[logoUrl] = postImage.resizes?.first
+                    images.append(ImagesGalleryCollectionViewCellViewModel(imageUrl: logoUrl,
+                                                                           resize: postImage.resizes?.first,
+                                                                           image: nil,
+                                                                           showRemoveButton: false,
+                                                                           delegate: nil))
                 }
             }
-            cell.postView.galleryView.viewModels = imagesUrls.map({ return ImagesGalleryCollectionViewCellViewModel(imageUrl: $0.key, resize: $0.value, image: nil, showRemoveButton: false, delegate: nil) })
+            cell.postView.galleryView.viewModels = images
         } else {
             cell.postView.galleryView.isHidden = true
         }
@@ -232,7 +241,6 @@ extension SocialFeedCollectionViewCellViewModel: CellViewModel {
         }
         
         cell.postView.sizeToFit()
-        //cell.contentView.layoutIfNeeded()
     }
 }
 
