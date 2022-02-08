@@ -47,8 +47,9 @@ class PostImagesGalleryView: UIView {
     
     private func setup() {
         addSubview(collectionView)
-        
-        collectionView.fillSuperview(padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
+    
+//        collectionView.fillSuperview(padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
+        collectionView.frame = CGRect(x: 0, y: 0, width: 390, height: 250)
     }
     
     required init?(coder: NSCoder) {
@@ -78,8 +79,8 @@ extension PostImagesGalleryView: UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let cellSize = CGSize(width: 100, height: 100)
-        
+        let cellSize = CGSize(width: 300, height: 100)
+      
         if viewModels.count == 1 {
             return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
         } else if viewModels.count == 2 {

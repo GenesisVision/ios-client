@@ -90,14 +90,6 @@ class SocialNewPostViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if viewModel.sharedPost != nil {
-            setupSharedPostView()
-        }
-        
         if viewModel.mode == .edit {
             title = "Edit post"
             viewModel.fetchPost { [weak self] _ in
@@ -108,6 +100,24 @@ class SocialNewPostViewController: BaseViewController {
                 self?.imagesGallery.viewModels = self?.viewModel.uploadedImages.map({ return ImagesGalleryCollectionViewCellViewModel(imageUrl: $0.imageUrl, resize: PostImageResize(quality: nil, logoUrl: nil, height: 100, width: 100), image: nil, showRemoveButton: true, delegate: self) }) ?? []
             }
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if viewModel.sharedPost != nil {
+            setupSharedPostView()
+        }
+        
+//        if viewModel.mode == .edit {
+//            title = "Edit post"
+//            viewModel.fetchPost { [weak self] _ in
+//                self?.textView.text = self?.viewModel.newPostText
+//                self?.imagesGallery.isHidden = false
+//
+////                self?.imagesGallery.viewModels = self?.viewModel.imagesUrls.map({ return ImagesGalleryCollectionViewCellViewModel(imageUrl: $0.key, resize: PostImageResize(quality: nil, logoUrl: nil, height: 100, width: 100), image: nil, showRemoveButton: true, delegate: self) }) ?? []
+//                self?.imagesGallery.viewModels = self?.viewModel.uploadedImages.map({ return ImagesGalleryCollectionViewCellViewModel(imageUrl: $0.imageUrl, resize: PostImageResize(quality: nil, logoUrl: nil, height: 100, width: 100), image: nil, showRemoveButton: true, delegate: self) }) ?? []
+//            }
+//        }
         scrollView.contentSize.height = (sharedPostView.height + textView.height + imagesGallery.height) * 1.3
     }
     
@@ -284,13 +294,17 @@ extension SocialNewPostViewController: ImagePickerPresentable {
     
     func selected(pickedImage: UIImage?, pickedImageURL: URL?) {
         guard let pickedImageUrl = pickedImageURL, let pickedImage = pickedImage else { return }
+        
         viewModel.pickedImages.append(SocialNewPostViewModel.PickedImage(imageUrl: pickedImageUrl.absoluteString, image: pickedImage))
+        
 //        let viewModels = viewModel.pickedImages.map({ return ImagesGalleryCollectionViewCellViewModel(imageUrl: $0.imageUrl, resize: PostImageResize(quality: nil, logoUrl: nil, height: 100, width: 100), image: $0.image, showRemoveButton: true, delegate: self) })
 //        imagesGallery.viewModels = viewModels
+        
         imagesGallery.viewModels.append(ImagesGalleryCollectionViewCellViewModel(imageUrl: pickedImageUrl.absoluteString, resize: PostImageResize(quality: nil, logoUrl: nil, height: 100, width: 100), image: pickedImage, showRemoveButton: true, delegate: self))
         imagesGallery.isHidden = imagesGallery.viewModels.isEmpty
         viewModel.saveImage(pickedImageUrl) { result in
             self.publishButton.setEnabled(true)
+            print(self.imagesGallery.viewModels.count)
         }
     }
 }
@@ -452,7 +466,6 @@ final class SocialNewPostViewModel {
     func saveImage(_ pickedImageURL: URL, completion: @escaping (CompletionBlock)) {
         BaseDataProvider.uploadImage(imageData: pickedImageURL.dataRepresentation, imageLocation: .social, completion: { [weak self] (uploadResult) in
             guard let uploadResult = uploadResult, let uuidString = uploadResult._id?.uuidString.lowercased() else { return completion(.failure(errorType: .apiError(message: nil))) }
-            
             self?.uploadedImages.append(UploadedImage(imageUrl: pickedImageURL.absoluteString, imageUDID: uuidString))
             completion(.success)
             }, errorCompletion: completion)

@@ -109,6 +109,8 @@ final class SocialPostView: UIView {
         textView.textContainerInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         textView.isScrollEnabled = false
         textView.textColor = UIColor.white
+        textView.isSelectable = true
+//        textView.dataDetectorTypes = .link
         return textView
     }()
     //MARK: - Изменил тип вью
@@ -285,7 +287,9 @@ final class SocialPostView: UIView {
 
 extension SocialPostView: SocialTextViewDelegate {
     func wordRecognized(word: String) {
-        guard let tag = postTags.first(where: { $0.title == word }) else { return }
+        guard let tag = postTags.first(where: { $0.title == word }) else {
+            delegate?.openPost()
+            return }
         delegate?.tagPressed(tag: tag)
     }
 }

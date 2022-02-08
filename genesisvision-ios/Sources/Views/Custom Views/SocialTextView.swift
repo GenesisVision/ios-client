@@ -47,16 +47,29 @@ class SocialTextView: UITextView {
                 muttableText.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.primary, range: range)
             }
         }
-        
+//        let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
+//        let matches = detector.matches(in: muttableText.string, options: [], range: NSRange(location: 0, length: muttableText.string.utf16.count))
+//
+//        for match in matches {
+//            guard let range = Range(match.range, in: muttableText.string) else { continue }
+//            let url = muttableText.string[range]
+//            let arange = muttableText.mutableString.range(of: String(url))
+//            muttableText.addAttribute(.link, value: String(url), range: arange)
+//        }
         attributedText = muttableText
+        setupGesturerecognizer()
     }
     
     private func setup() {
+        setupGesturerecognizer()
+    }
+    func setupGesturerecognizer() {
         let tapTextViewGesture = UITapGestureRecognizer(target: self, action: #selector(textViewDidTapped))
         addGestureRecognizer(tapTextViewGesture)
     }
     
     @objc func textViewDidTapped(recognizer: UITapGestureRecognizer) {
+        
         guard let myTextView = recognizer.view as? UITextView else { return }
         
         var location = recognizer.location(in: myTextView)
@@ -74,6 +87,7 @@ class SocialTextView: UITextView {
         if let tappedWordFull = words.first(where: { word in
             return tappedWord == word || word.contains(tappedWord)
         }) {
+            print(tappedWordFull)
             wordRecognizerDelegate?.wordRecognized(word: tappedWordFull)
         }
     }

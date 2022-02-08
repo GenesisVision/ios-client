@@ -232,6 +232,7 @@ extension SocialMediaFeedCollectionViewCellViewModel: CellViewModel {
         } else {
             cell.socialActivitiesView.sharesLabel.text = ""
         }
+        cell.postView.textView.setupGesturerecognizer()
     }
 }
 

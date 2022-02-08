@@ -241,6 +241,7 @@ extension SocialFeedCollectionViewCellViewModel: CellViewModel {
         }
         
         cell.postView.sizeToFit()
+        cell.postView.textView.setupGesturerecognizer()
     }
 }
 

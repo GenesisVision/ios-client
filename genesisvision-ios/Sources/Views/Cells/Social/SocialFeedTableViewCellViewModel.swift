@@ -175,6 +175,7 @@ extension SocialFeedTableViewCellViewModel: CellViewModel {
             postActions.append(contentsOf: [.copyLink(postLink: url), .share(postLink: url)])
         }
         cell.postActions = postActions
+        cell.postView.textView.setupGesturerecognizer()
     }
     
     func cellSize(spacing: CGFloat, frame: CGRect) -> CGSize {
