@@ -334,8 +334,10 @@ extension SocialMediaCollectionViewModel: SocialMediaAddPostCollectionViewCellDe
 extension SocialMediaCollectionViewModel: SocialMediaFeedCollectionViewCellDelegate {
     
     func imagePressed(postId: UUID, index: Int, image: ImagesGalleryCollectionViewCellViewModel) {
-        
-        guard let postViewModel = viewModels.first(where: { return ($0 as? SocialFeedCollectionViewCellViewModel)?.post._id == postId }) as? SocialFeedCollectionViewCellViewModel else {
+//        guard let postViewModel = feedViewModel.first(where: { return ($0 as? SocialFeedCollectionViewCellViewModel)?.post._id == postId }) as? SocialFeedCollectionViewCellViewModel else {
+//            return
+//        }
+        guard let postViewModel = feedViewModel.first(where: { return ($0 as? SocialMediaFeedCollectionViewCellViewModel)?.post._id == postId }) as? SocialMediaFeedCollectionViewCellViewModel else {
             return
         }
         

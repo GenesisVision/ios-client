@@ -449,6 +449,39 @@ extension SocialPostViewModel: SocialCommentTableViewCellDelegate {
 
 extension SocialPostViewModel: SocialFeedCollectionViewCellDelegate {
     func imagePressed(postId: UUID, index: Int, image: ImagesGalleryCollectionViewCellViewModel) {
+        if let postImages = post?.post.images, !postImages.isEmpty {
+            var imagesUrls: [String: PostImageResize?] = [:]
+            
+            for postImage in postImages {
+                if let resizes = postImage.resizes,
+                   resizes.count > 1 {
+                    let original = resizes.filter({ $0.quality == .original })
+                    let hight = resizes.filter({ $0.quality == .high })
+                    let medium = resizes.filter({ $0.quality == .medium })
+                    let low = resizes.filter({ $0.quality == .low })
+                    
+                    if let logoUrl = original.first?.logoUrl {
+                        imagesUrls[logoUrl] = original.first
+                        continue
+                    } else if let logoUrl = hight.first?.logoUrl {
+                        imagesUrls[logoUrl] = hight.first
+                        continue
+                    } else if let logoUrl = medium.first?.logoUrl {
+                        imagesUrls[logoUrl] = medium.first
+                        continue
+                    } else if let logoUrl = low.first?.logoUrl {
+                        imagesUrls[logoUrl] = low.first
+                    }
+                } else if let logoUrl = postImage.resizes?.first?.logoUrl {
+                    imagesUrls[logoUrl] = postImage.resizes?.first
+                }
+            }
+            
+            let onlyImagesUrls = imagesUrls.map({ $0.key })
+            let index = Int(onlyImagesUrls.firstIndex(of: image.imageUrl) ?? 0)
+            socialRouter.show(routeType: .showImages(index: index, imagesUrls: onlyImagesUrls.compactMap({ return URL(string: $0) }), images: [UIImage]()))
+        }
+        
     }
     
     func likeTouched(postId: UUID) {
