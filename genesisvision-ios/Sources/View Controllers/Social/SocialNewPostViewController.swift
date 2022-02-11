@@ -86,6 +86,7 @@ class SocialNewPostViewController: BaseViewController {
         }
     }
     
+    @IBOutlet weak var assetsTableView: AssetsTableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,11 +96,10 @@ class SocialNewPostViewController: BaseViewController {
             viewModel.fetchPost { [weak self] _ in
                 self?.textView.text = self?.viewModel.newPostText
                 self?.imagesGallery.isHidden = false
-                
-//                self?.imagesGallery.viewModels = self?.viewModel.imagesUrls.map({ return ImagesGalleryCollectionViewCellViewModel(imageUrl: $0.key, resize: PostImageResize(quality: nil, logoUrl: nil, height: 100, width: 100), image: nil, showRemoveButton: true, delegate: self) }) ?? []
                 self?.imagesGallery.viewModels = self?.viewModel.uploadedImages.map({ return ImagesGalleryCollectionViewCellViewModel(imageUrl: $0.imageUrl, resize: PostImageResize(quality: nil, logoUrl: nil, height: 100, width: 100), image: nil, showRemoveButton: true, delegate: self) }) ?? []
             }
         }
+        assetsTableView.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -107,24 +107,13 @@ class SocialNewPostViewController: BaseViewController {
         if viewModel.sharedPost != nil {
             setupSharedPostView()
         }
-        
-//        if viewModel.mode == .edit {
-//            title = "Edit post"
-//            viewModel.fetchPost { [weak self] _ in
-//                self?.textView.text = self?.viewModel.newPostText
-//                self?.imagesGallery.isHidden = false
-//
-////                self?.imagesGallery.viewModels = self?.viewModel.imagesUrls.map({ return ImagesGalleryCollectionViewCellViewModel(imageUrl: $0.key, resize: PostImageResize(quality: nil, logoUrl: nil, height: 100, width: 100), image: nil, showRemoveButton: true, delegate: self) }) ?? []
-//                self?.imagesGallery.viewModels = self?.viewModel.uploadedImages.map({ return ImagesGalleryCollectionViewCellViewModel(imageUrl: $0.imageUrl, resize: PostImageResize(quality: nil, logoUrl: nil, height: 100, width: 100), image: nil, showRemoveButton: true, delegate: self) }) ?? []
-//            }
-//        }
         scrollView.contentSize.height = (sharedPostView.height + textView.height + imagesGallery.height) * 1.3
     }
     
     private func setup() {
         title = "New post"
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(atSignWasAdded), name: .didSelectAssetsTableView, object: nil)
     }
     
     func postViewSizes(post: Post) -> SocialPostViewSizes {
@@ -166,7 +155,6 @@ class SocialNewPostViewController: BaseViewController {
             let defaultHeight: CGFloat = 100
             sharedPostmainViewHeightConstraint.constant = sizes.allHeight + defaultHeight
             sharedPostView.height = sizes.allHeight + defaultHeight
-//            scrollView.contentSize.height = sharedPostView.height + textView.height + imagesGallery.height
         }
         
         if let fullTextViewHeight = sharedPostView.socialPostViewSizes?.fullTextViewHeight, fullTextViewHeight > 250 {
@@ -261,6 +249,8 @@ class SocialNewPostViewController: BaseViewController {
     @IBAction func atSignButtonAction(_ sender: Any) {
         if textView.text == placeholder { textView.text = "" }
         textView.text = textView.text + atSign
+        assetsTableView.isHidden = false
+        textView.becomeFirstResponder()
     }
     
     @IBAction func hashtagButtonAction(_ sender: Any) {
@@ -285,6 +275,12 @@ class SocialNewPostViewController: BaseViewController {
             self.view.frame.origin.y = 0
         }
     }
+    @objc func atSignWasAdded(notification: Notification) {
+        guard let text = notification.userInfo?["text"] as? String else { return }
+        textView.text = textView.text.components(separatedBy: " ").dropLast().joined(separator: " ")
+        textView.text.append(" @"+text)
+        textViewDidChange(textView)
+    }
 }
 
 extension SocialNewPostViewController: ImagePickerPresentable {
@@ -296,10 +292,6 @@ extension SocialNewPostViewController: ImagePickerPresentable {
         guard let pickedImageUrl = pickedImageURL, let pickedImage = pickedImage else { return }
         
         viewModel.pickedImages.append(SocialNewPostViewModel.PickedImage(imageUrl: pickedImageUrl.absoluteString, image: pickedImage))
-        
-//        let viewModels = viewModel.pickedImages.map({ return ImagesGalleryCollectionViewCellViewModel(imageUrl: $0.imageUrl, resize: PostImageResize(quality: nil, logoUrl: nil, height: 100, width: 100), image: $0.image, showRemoveButton: true, delegate: self) })
-//        imagesGallery.viewModels = viewModels
-        
         imagesGallery.viewModels.append(ImagesGalleryCollectionViewCellViewModel(imageUrl: pickedImageUrl.absoluteString, resize: PostImageResize(quality: nil, logoUrl: nil, height: 100, width: 100), image: pickedImage, showRemoveButton: true, delegate: self))
         imagesGallery.isHidden = imagesGallery.viewModels.isEmpty
         viewModel.saveImage(pickedImageUrl) { result in
@@ -315,9 +307,6 @@ extension SocialNewPostViewController: ImagesGalleryCollectionViewCellDelegate {
         imagesGallery.viewModels.removeAll(where: { $0.imageUrl == imageUrl })
         imagesGallery.isHidden = imagesGallery.viewModels.isEmpty
         self.publishButton.setEnabled(true)
-//        let viewModels = viewModel.pickedImages.map({ return ImagesGalleryCollectionViewCellViewModel(imageUrl: $0.imageUrl, resize: PostImageResize(quality: nil, logoUrl: nil, height: 100, width: 100), image: $0.image, showRemoveButton: true, delegate: self) })
-//        imagesGallery.viewModels = viewModels
-//        imagesGallery.isHidden = viewModels.isEmpty
         if viewModel.pickedImages.isEmpty {
             scrollView.contentSize.height -= imagesGallery.height
         }
@@ -333,6 +322,7 @@ extension SocialNewPostViewController: UITextViewDelegate {
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
+        
         guard !textView.text.isEmpty else {
             textView.textColor = UIColor.Common.darkTextPlaceholder
             textView.text = placeholder
@@ -374,6 +364,22 @@ extension SocialNewPostViewController: UITextViewDelegate {
             scrollView.contentSize.height = (min(maxHeight, max(minHeight, textHeight)) + imagesGallery.height + sharedPostView.height) * 1.3
         }
     }
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        guard let lastWord = textView.text.getLastWord(in: range, with: text) else { return true }
+        if lastWord.contains(atSign) {
+            assetsTableView.isHidden = false
+            var lastWordWithoutaAtSign = lastWord
+            lastWordWithoutaAtSign.removeFirst()
+            viewModel.fetchAssets(searchWord: lastWordWithoutaAtSign) { assetsArray in
+                self.assetsTableView.viewModels.removeAll()
+                self.assetsTableView.viewModels = assetsArray
+            }
+            assetsTableView.reloadTableView()
+        } else {
+            assetsTableView.isHidden = true
+        }
+        return true
+    }
 }
 
 
@@ -404,7 +410,6 @@ final class SocialNewPostViewModel {
         }
     }
     var uploadedImages: [UploadedImage] = []
-//    lazy var imagesUrls: [String : String?] = [:]
     let mode: SocialPostViewModelMode
     var postId: UUID?
     
@@ -433,7 +438,6 @@ final class SocialNewPostViewModel {
     }
     
     private func rePost(completion: @escaping CompletionBlock) {
-//        let images = uploadedImages.map({ NewPostImage(image: $0.imageUDID, position: 0) })
         lazy var images = [NewPostImage]()
         for (index,image) in uploadedImages.enumerated() {
             images.append(NewPostImage(image: image.imageUDID, position: index))
@@ -443,7 +447,6 @@ final class SocialNewPostViewModel {
     }
     
     private func addPost(completion: @escaping CompletionBlock) {
-//        let images = uploadedImages.map({ NewPostImage(image: $0.imageUDID, position: 0) })
         lazy var images = [NewPostImage]()
         for (index,image) in uploadedImages.enumerated() {
             images.append(NewPostImage(image: image.imageUDID, position: index))
@@ -454,7 +457,6 @@ final class SocialNewPostViewModel {
     
     private func editPost(completion: @escaping CompletionBlock) {
         guard let postId = postId else { return  completion(.failure(errorType: .apiError(message: "")))}
-//        let images = uploadedImages.map({ NewPostImage(image: $0.imageUDID, position: 0) })
         lazy var images = [NewPostImage]()
         for (index,image) in uploadedImages.enumerated() {
             images.append(NewPostImage(image: image.imageUDID, position: index))
@@ -471,6 +473,45 @@ final class SocialNewPostViewModel {
             }, errorCompletion: completion)
     }
     
+    func fetchAssets(searchWord : String, complition : @escaping ([SocialAssetsTableViewCellViewModel]) -> ()) {
+        SearchDataProvider.get(searchWord.lowercased(), take: ApiKeys.take, completion: { viewModel in
+            var assetsArray = [SocialAssetsTableViewCellViewModel]()
+            viewModel?.funds?.items.map({ list in
+                for i in list {
+                    let elem = SocialAssetsTableViewCellViewModel(assetName: i.title, assetImage: i.logoUrl, tagType: .fund, assetURL: i.url)
+                    assetsArray.append(elem)
+                }
+            })
+            viewModel?.follows?.items.map({ list in
+                for i in list {
+                    let elem = SocialAssetsTableViewCellViewModel(assetName: i.title, assetImage: i.logoUrl, tagType: .follow, assetURL: i.url)
+                    assetsArray.append(elem)
+                }
+            })
+            viewModel?.programs?.items.map({ list in
+                for i in list {
+                    let elem = SocialAssetsTableViewCellViewModel(assetName: i.title, assetImage: i.logoUrl, tagType: .program, assetURL: i.url)
+                    assetsArray.append(elem)
+                }
+            })
+            viewModel?.managers?.items.map({ list in
+                for i in list {
+                    let elem = SocialAssetsTableViewCellViewModel(assetName: i.username, assetImage: i.logoUrl, tagType: .user, assetURL: i.url)
+                    assetsArray.append(elem)
+                }
+            })
+            complition(assetsArray)
+            
+        }) { result in
+            switch result {
+            case .success:
+                break
+            case .failure(let errorType):
+                ErrorHandler.handleError(with: errorType)
+            }
+        }
+    }
+    
     func fetchPost(completion: @escaping CompletionBlock) {
         guard let postId = postId else { return }
         SocialDataProvider.getPost(postId: postId) { [weak self] (viewModel) in
@@ -478,7 +519,6 @@ final class SocialNewPostViewModel {
                 self?.newPostText = viewModel.text
                 
                 guard let postImages = viewModel.images else { return }
-//                var imagesUrls: [String : String] = [:]
 
                 for postImage in postImages {
                     if let resizes = postImage.resizes,
@@ -488,43 +528,28 @@ final class SocialNewPostViewModel {
                         let medium = resizes.filter({ $0.quality == .medium })
                         let low = resizes.filter({ $0.quality == .low })
                         
-            
                  
                         if let logoUrl = original.first?.logoUrl, let imageId = postImage._id {
-//                            imagesUrls[logoUrl] = original.first
                             self?.uploadedImages.append(UploadedImage(imageUrl: logoUrl, imageUDID: imageId))
                             self?.pickedImages.append(PickedImage(imageUrl: logoUrl, image: UIImage()))
-//                            imagesUrls[logoUrl] = imageId
                             continue
                         } else if let logoUrl = hight.first?.logoUrl, let imageId = postImage._id {
-//                            imagesUrls[logoUrl] = hight.first
-//                            imagesUrls[logoUrl] = imageId
                             self?.uploadedImages.append(UploadedImage(imageUrl: logoUrl, imageUDID: imageId))
                             self?.pickedImages.append(PickedImage(imageUrl: logoUrl, image: UIImage()))
                             continue
                         } else if let logoUrl = medium.first?.logoUrl, let imageId = postImage._id {
-//                            imagesUrls[logoUrl] = medium.first
-//                            imagesUrls[logoUrl] = imageId
                             self?.uploadedImages.append(UploadedImage(imageUrl: logoUrl, imageUDID: imageId))
                             self?.pickedImages.append(PickedImage(imageUrl: logoUrl, image: UIImage()))
                             continue
                         } else if let logoUrl = low.first?.logoUrl, let imageId = postImage._id {
-//                            imagesUrls[logoUrl] = low.first
-//                            imagesUrls[logoUrl] = imageId
                             self?.uploadedImages.append(UploadedImage(imageUrl: logoUrl, imageUDID: imageId))
                             self?.pickedImages.append(PickedImage(imageUrl: logoUrl, image: UIImage()))
                         }
                     } else if let logoUrl = postImage.resizes?.first?.logoUrl, let imageId = postImage._id  {
-//                        imagesUrls[logoUrl] = postImage.resizes?.first
-//                        imagesUrls[logoUrl] = postImage._id
                         self?.uploadedImages.append(UploadedImage(imageUrl: logoUrl, imageUDID: imageId))
                         self?.pickedImages.append(PickedImage(imageUrl: logoUrl, image: UIImage()))
                     }
                 }
-//                self?.imagesUrls = imagesUrls
-//                self?.pickedImages = imagesUrls.map({ return PickedImage(imageUrl: $0.key, image: UIImage()) })
-//                self?.uploadedImages = imagesUrls.map({return UploadedImage(imageUrl: $0.key, imageUDID: $0.value)})
-
                 completion(.success)
             }
             completion(.failure(errorType: .apiError(message: "")))

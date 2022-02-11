@@ -1083,9 +1083,13 @@
 		5EFDEABA238FFF2E00AF3AC1 /* CellViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFDEAB9238FFF2E00AF3AC1 /* CellViews.swift */; };
 		5EFE7C412181E78700D385C8 /* FundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFE7C3D2181E78500D385C8 /* FundViewController.swift */; };
 		C507CE975FDC32C800A243E4 /* Pods_genesisvision_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19E569CA2835914BCDF0493C /* Pods_genesisvision_ios.framework */; };
+		F35EC8BC27B6B8BB002D72E9 /* String+LastWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35EC8BB27B6B8BB002D72E9 /* String+LastWord.swift */; };
 		F390C752278D8BE8006FF6CB /* PushNotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F390C751278D8BE8006FF6CB /* PushNotificationViewModel.swift */; };
 		F390C754278D8CD6006FF6CB /* DynamicLinkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F390C753278D8CD6006FF6CB /* DynamicLinkManager.swift */; };
 		F390C756278D8D57006FF6CB /* AuthThreeFactorSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F390C755278D8D57006FF6CB /* AuthThreeFactorSignInViewController.swift */; };
+		F3A0D03C27B3CDCD0012C0CA /* AssetsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0D03B27B3CDCD0012C0CA /* AssetsTableView.swift */; };
+		F3A0D03E27B3F3E50012C0CA /* SocialAssetsTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0D03D27B3F3E50012C0CA /* SocialAssetsTableViewCellViewModel.swift */; };
+		F3A0D04027B3FC7E0012C0CA /* SocialAssetsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3A0D03F27B3FC7E0012C0CA /* SocialAssetsTableViewCell.xib */; };
 		F3A3AE9327ABCBC500580C51 /* PostImagesGalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A3AE9227ABCBC500580C51 /* PostImagesGalleryView.swift */; };
 		FC0E20062044123F00872BE5 /* PhotoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E20052044123F00872BE5 /* PhotoHeaderView.swift */; };
 		FC0E200A2044357800872BE5 /* WalletDepositViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E20092044357800872BE5 /* WalletDepositViewController.swift */; };
@@ -2361,9 +2365,13 @@
 		7B0072CCE6DBFD0E5ADFC7E3 /* Pods-genesisvision-ios.release dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.release dev.xcconfig"; path = "Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.release dev.xcconfig"; sourceTree = "<group>"; };
 		CF5D4113314783BE5030CFB6 /* Pods-genesisvision-ios.release prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.release prod.xcconfig"; path = "Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.release prod.xcconfig"; sourceTree = "<group>"; };
 		D5D00DF76C4CB42025582799 /* Pods-genesisvision-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.debug.xcconfig"; path = "Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		F35EC8BB27B6B8BB002D72E9 /* String+LastWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+LastWord.swift"; sourceTree = "<group>"; };
 		F390C751278D8BE8006FF6CB /* PushNotificationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationViewModel.swift; sourceTree = "<group>"; };
 		F390C753278D8CD6006FF6CB /* DynamicLinkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicLinkManager.swift; sourceTree = "<group>"; };
 		F390C755278D8D57006FF6CB /* AuthThreeFactorSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthThreeFactorSignInViewController.swift; sourceTree = "<group>"; };
+		F3A0D03B27B3CDCD0012C0CA /* AssetsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsTableView.swift; sourceTree = "<group>"; };
+		F3A0D03D27B3F3E50012C0CA /* SocialAssetsTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAssetsTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		F3A0D03F27B3FC7E0012C0CA /* SocialAssetsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialAssetsTableViewCell.xib; sourceTree = "<group>"; };
 		F3A3AE9227ABCBC500580C51 /* PostImagesGalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImagesGalleryView.swift; sourceTree = "<group>"; };
 		FC0E20052044123F00872BE5 /* PhotoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoHeaderView.swift; sourceTree = "<group>"; };
 		FC0E20092044357800872BE5 /* WalletDepositViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDepositViewController.swift; sourceTree = "<group>"; };
@@ -2631,6 +2639,8 @@
 				1926FC702756EA4D00FEC4D3 /* SocialCommentTableViewCellViewModel.swift */,
 				1926FC742756FFC900FEC4D3 /* ImagesGalleryCollectionViewCell.xib */,
 				1926FC762757003800FEC4D3 /* ImagesGalleryCollectionViewCellViewModel.swift */,
+				F3A0D03D27B3F3E50012C0CA /* SocialAssetsTableViewCellViewModel.swift */,
+				F3A0D03F27B3FC7E0012C0CA /* SocialAssetsTableViewCell.xib */,
 				1926FCB82758D55400FEC4D3 /* SocialFeedDeletedPostCollectionViewCellViewModel.swift */,
 				1926FCBA2758DE4100FEC4D3 /* SocialFeedDeletedPostCollectionViewCell.xib */,
 				1926FCBC2759289000FEC4D3 /* SocialManagerInfoAboutTableViewCell.xib */,
@@ -3551,6 +3561,7 @@
 			isa = PBXGroup;
 			children = (
 				FC7D87B320446F17002FC943 /* String+Сonversion.swift */,
+				F35EC8BB27B6B8BB002D72E9 /* String+LastWord.swift */,
 				5E87E764208F638E00141269 /* Tooltips.swift */,
 				FCB2C4E92010BAAA0012AA58 /* String+Localized.swift */,
 				5E6D681C207655A100299408 /* String+Constants.swift */,
@@ -3640,6 +3651,7 @@
 				19C3B93F25DED96D00C6990D /* DropDownField.swift */,
 				19C3B98E25E6900800C6990D /* CustomRadioButton.swift */,
 				1926FC722756FF3000FEC4D3 /* ImagesGalleryView.swift */,
+				F3A0D03B27B3CDCD0012C0CA /* AssetsTableView.swift */,
 				F3A3AE9227ABCBC500580C51 /* PostImagesGalleryView.swift */,
 				1926FC782757764300FEC4D3 /* ReplyInputField.swift */,
 				1926FC7A27577F4500FEC4D3 /* ReplierView.swift */,
@@ -5216,6 +5228,7 @@
 				5E69AC7E23D9FBAD000AB692 /* TradingInfoTableViewCell.xib in Resources */,
 				FCC9DD5B200DFFB8008825EC /* Profile.storyboard in Resources */,
 				5E826AE023855EB700116DD7 /* DashboardInvestingTableViewCell.xib in Resources */,
+				F3A0D04027B3FC7E0012C0CA /* SocialAssetsTableViewCell.xib in Resources */,
 				5EA274C721628286008CAF77 /* DetailProfitStatisticTableViewCell.xib in Resources */,
 				195B9F2D25585DFE003DA54E /* ReferralInfoStatisticsTableViewCell.xib in Resources */,
 				5EA274BB2162823F008CAF77 /* InvestNowTableViewCell.xib in Resources */,
@@ -5738,6 +5751,7 @@
 				FCA19A4C201B83E900157AD6 /* ChartView.swift in Sources */,
 				5EB06A3C239D312A003AB3FB /* EventsAPI.swift in Sources */,
 				FCD4A2042028B3D600BA7E18 /* NotificationNameExtension.swift in Sources */,
+				F3A0D03C27B3CDCD0012C0CA /* AssetsTableView.swift in Sources */,
 				FCA19A35201AE00A00157AD6 /* ProfileRouter.swift in Sources */,
 				19E590E32566B2C600D3EB2E /* ReferralHistoryTableViewCell.swift in Sources */,
 				1926FCAF27579A3200FEC4D3 /* RouteType.swift in Sources */,
@@ -6032,6 +6046,7 @@
 				5E93E70421D1A5370020DE55 /* NotificationListTableViewCellViewModel.swift in Sources */,
 				FCB8DFCF2010F99200698D18 /* AuthManager.swift in Sources */,
 				19A56EA5258938AD00553408 /* BinanceRawFuturesCompositeIndexInfo.swift in Sources */,
+				F3A0D03E27B3F3E50012C0CA /* SocialAssetsTableViewCellViewModel.swift in Sources */,
 				5EAD0AB92090AB2300A92B49 /* MarkerView.swift in Sources */,
 				19A56F97258A65DC00553408 /* BinanceRawFuturesPositionMode.swift in Sources */,
 				5E39F74623A3F92F0073DAD5 /* OrderSignalModel.swift in Sources */,
@@ -6107,6 +6122,7 @@
 				1981246F2464593300F286FE /* SignalSubscriptionItemsViewModel.swift in Sources */,
 				5EA8B9C021B4528C0074EA2C /* ListRouter.swift in Sources */,
 				5EB06A50239EA1FE003AB3FB /* UsersDataProvider.swift in Sources */,
+				F35EC8BC27B6B8BB002D72E9 /* String+LastWord.swift in Sources */,
 				5E5BBE6A218228E6009E4BA3 /* FundProfitChartTableViewCellViewModel.swift in Sources */,
 				5E39F71E23A3F92F0073DAD5 /* RatesModel.swift in Sources */,
 				FC900E5E204EC403007E9142 /* AuthDataProvider.swift in Sources */,

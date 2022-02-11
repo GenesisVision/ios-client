@@ -29,6 +29,6 @@ extension Notification.Name {
     static let socialShowEventsSwitchValueChanged = Notification.Name(Keys.socialShowEventsSwitchValueChanged)
     static let linkDidReceived = Notification.Name(Keys.linkDidReceivedKey)
     static let tabBarDidScrollToTop = Notification.Name(Keys.tabBarDidScrollToTopKey)
-    
+    static let didSelectAssetsTableView = Notification.Name(Keys.didSelectAssetsTableView)
     static let themeChanged = Notification.Name(Keys.themeChangedKey)
 }
