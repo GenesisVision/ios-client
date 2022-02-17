@@ -47,15 +47,12 @@ class SocialTextView: UITextView {
                 muttableText.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.primary, range: range)
             }
         }
-//        let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
-//        let matches = detector.matches(in: muttableText.string, options: [], range: NSRange(location: 0, length: muttableText.string.utf16.count))
-//
-//        for match in matches {
-//            guard let range = Range(match.range, in: muttableText.string) else { continue }
-//            let url = muttableText.string[range]
-//            let arange = muttableText.mutableString.range(of: String(url))
-//            muttableText.addAttribute(.link, value: String(url), range: arange)
-//        }
+        let textAsNsString = newText as NSString
+        let range = textAsNsString.range(of: "#\\w.*?\\b", options: .regularExpression, range: NSMakeRange(0,textAsNsString.length))
+        if range.length > 0 {
+            muttableText.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.primary, range: range)
+        }
+        
         attributedText = muttableText
         setupGesturerecognizer()
     }
@@ -87,7 +84,6 @@ class SocialTextView: UITextView {
         if let tappedWordFull = words.first(where: { word in
             return tappedWord == word || word.contains(tappedWord)
         }) {
-            print(tappedWordFull)
             wordRecognizerDelegate?.wordRecognized(word: tappedWordFull)
         }
     }

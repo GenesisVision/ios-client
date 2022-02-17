@@ -53,17 +53,6 @@ struct SocialMediaFeedCollectionViewCellViewModel {
             imageHeight = 250
         }
         
-//        if let text = post.text, !text.isEmpty {
-//            let textHeightValue = text.height(forConstrainedWidth: UIScreen.main.bounds.width - 20, font: UIFont.getFont(.regular, size: 18))
-//
-//            if textHeightValue < 25 {
-//                textHeight = 25
-//            } else if textHeightValue > 25 && textHeightValue < 250 {
-//                textHeight = textHeightValue
-//            } else if textHeightValue > 250 {
-//                textHeight = 250
-//            }
-//        }
         if let text = post.text, !text.isEmpty {
             let textHeightValue = text.height(forConstrainedWidth: UIScreen.main.bounds.width - 20, font: UIFont.getFont(.regular, size: 18))
             let expandButton = CGFloat(20)
@@ -92,8 +81,6 @@ struct SocialMediaFeedCollectionViewCellViewModel {
         } else {
             return SocialPostViewSizes(textViewHeight: textHeight, imageViewHeight: imageHeight, tagViewHeight: tagsViewHeight, eventViewHeight: 0, fullTextViewHeight: fullTextViewHeight)
         }
-        
-//        return SocialPostViewSizes(textViewHeight: textHeight, imageViewHeight: imageHeight, tagViewHeight: tagsViewHeight, eventViewHeight: 0, fullTextViewHeight: fullTextViewHeight)
     }
 }
 
@@ -363,11 +350,17 @@ class SocialMediaFeedCollectionViewCell: UICollectionViewCell {
         borderLine.anchor(top: socialActivitiesView.topAnchor, leading: socialActivitiesView.leadingAnchor, bottom: nil, trailing: socialActivitiesView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 1))
         
         socialActivitiesView.delegate = self
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(commentLabelTouched(_:)))
+        socialActivitiesView.commentsLabel.addGestureRecognizer(recognizer)
     }
     
     @objc private func buttonPressed(_ sender: UIButton) {
         guard let type = type else { return }
         delegate?.openSocialFeed(type: type)
+    }
+    
+    @objc private func commentLabelTouched(_ sender: Any) {
+        commentTouched()
     }
 }
 

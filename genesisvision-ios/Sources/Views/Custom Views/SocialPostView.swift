@@ -110,7 +110,6 @@ final class SocialPostView: UIView {
         textView.isScrollEnabled = false
         textView.textColor = UIColor.white
         textView.isSelectable = true
-//        textView.dataDetectorTypes = .link
         return textView
     }()
     //MARK: - Изменил тип вью
@@ -287,10 +286,20 @@ final class SocialPostView: UIView {
 
 extension SocialPostView: SocialTextViewDelegate {
     func wordRecognized(word: String) {
-        guard let tag = postTags.first(where: { $0.title == word }) else {
+        guard word.first == "#" else {
             delegate?.openPost()
-            return }
-        delegate?.tagPressed(tag: tag)
+            return
+        }
+        var wordWithoutTag = word
+        wordWithoutTag.removeFirst()
+        
+        if let tag = postTags.first(where: { $0.title?.lowercased() == wordWithoutTag.lowercased()}) {
+            delegate?.tagPressed(tag: tag)
+        } else if let tag = postTags.first(where: { $0.platformAssetDetails?.name?.lowercased() == wordWithoutTag.lowercased() }) {
+            delegate?.tagPressed(tag: tag)
+        } else {
+            delegate?.openPost()
+        }
     }
 }
 

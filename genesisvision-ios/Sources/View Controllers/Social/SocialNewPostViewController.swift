@@ -412,6 +412,7 @@ final class SocialNewPostViewModel {
     var uploadedImages: [UploadedImage] = []
     let mode: SocialPostViewModelMode
     var postId: UUID?
+    var userId : UUID?
     
     init(sharedPost: Post?, mode: SocialPostViewModelMode? = nil, postId: UUID? = nil) {
         self.sharedPost = sharedPost
@@ -451,7 +452,7 @@ final class SocialNewPostViewModel {
         for (index,image) in uploadedImages.enumerated() {
             images.append(NewPostImage(image: image.imageUDID, position: index))
         }
-        let model = NewPost(text: newPostText ?? " ", postId: nil, userId: nil, images: images)
+        let model = NewPost(text: newPostText ?? " ", postId: nil, userId: userId, images: images)
         SocialDataProvider.addPost(model: model, completion: completion)
     }
     

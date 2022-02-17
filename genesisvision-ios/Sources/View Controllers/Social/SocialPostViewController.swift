@@ -38,6 +38,11 @@ class SocialPostViewController: BaseViewController {
     
     private func fetchData() {
         viewModel.fetchPost { [weak self] _ in
+            if let isCommentForPostShowing = self?.viewModel.isCommentForPostShowing, let postHeight = self?.viewModel.post?.postViewSizes().allHeight {
+                if isCommentForPostShowing {
+                    self?.tableView.contentOffset.y = postHeight
+                }
+            }
             self?.reloadData()
         }
     }
@@ -244,6 +249,10 @@ extension SocialPostViewController: SocialPostActionsMenuPresenable {
             viewModel.deletePost(postId: postId) { [weak self] (result) in
                 switch result {
                 case .success:
+                    if let _ = self?.viewModel.commentsViewModels.first(where: { $0.post._id == postId }) {
+                    } else {
+                        self?.viewModel.socialRouter.popViewController(animated: true)
+                    }
                     self?.viewModel.fetchPost { [weak self] (result) in
                         switch result {
                         case .success:
@@ -294,6 +303,8 @@ final class SocialPostViewModel {
     var sections: [SectionType] = [.post, .comments]
     
     var replyingPost: Post?
+    
+    var isCommentForPostShowing = false
     
     var post: SocialFeedTableViewCellViewModel?
     
@@ -356,7 +367,7 @@ final class SocialPostViewModel {
     }
     
     func deletePost(postId: UUID, completion: @escaping CompletionBlock) {
-        guard let _ = commentsViewModels.first(where: { $0.post._id == postId }) else { return }
+//        guard let _ = commentsViewModels.first(where: { $0.post._id == postId }) else { return }
         SocialDataProvider.deletePost(postId: postId, completion: completion)
     }
     
@@ -516,7 +527,8 @@ extension SocialPostViewModel: SocialFeedCollectionViewCellDelegate {
             guard let userId = tag.userDetails?._id?.uuidString else { return }
             socialRouter.showUserDetails(with: userId)
         case .asset:
-            break
+            let tabType : SocialMainFeedTabType = .live
+            socialRouter.show(routeType: .socialFeedWithTag(tabType: tabType, tag: tag))
         case .event:
             break
         case .url:

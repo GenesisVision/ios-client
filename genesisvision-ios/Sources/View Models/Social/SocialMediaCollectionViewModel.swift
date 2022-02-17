@@ -10,7 +10,7 @@ import UIKit
 
 protocol SocialMediaCollectionViewModelDelegate: AnyObject {
     func openSocialFeed(type: SocialMediaFeedCollectionCellType)
-    func commentPressed(postId: UUID)
+    func commentPressed(post: Post)
     func sharePressed(post: Post)
     func likePressed(postId: UUID)
     func tagPressed(tag: PostTag)
@@ -399,7 +399,8 @@ extension SocialMediaCollectionViewModel: SocialMediaFeedCollectionViewCellDeleg
     }
     
     func commentPressed(postId: UUID) {
-        delegate?.commentPressed(postId: postId)
+        guard let postViewModel = feedViewModel.first(where: { return ($0 as? SocialMediaFeedCollectionViewCellViewModel)?.post._id == postId }) as? SocialMediaFeedCollectionViewCellViewModel else { return }
+        delegate?.commentPressed(post: postViewModel.post)
     }
     
     func sharePressed(postId: UUID) {

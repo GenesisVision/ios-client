@@ -25,6 +25,11 @@ extension SocialUsersListTableViewCellViewModel: CellViewModel {
         
         if let userId = user.userId {
             cell.userId = userId
+            
+            let profileId = UserDefaults.standard.string(forKey: UserDefaultKeys.profileID)
+            if userId.uuidString == profileId {
+                cell.followButton.isHidden = true
+            }
         }
         
         if let logo = user.logoUrl, let fileUrl = getFileURL(fileName: logo), isPictureURL(url: fileUrl.absoluteString) {
@@ -40,6 +45,8 @@ extension SocialUsersListTableViewCellViewModel: CellViewModel {
         
         if let userStatus = user.about {
             cell.userStatusLabel.text = userStatus
+        } else {
+            cell.userStatusLabel.text = " "
         }
         
         if let age = user.regDate {

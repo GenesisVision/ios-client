@@ -84,6 +84,11 @@ class SocialMediaViewController: BaseViewController {
         viewModel.router.showAssetDetails(with: assetId, assetType: assetType)
     }
     
+    private func showFeedViewControllerWithTag(tag: PostTag) {
+        let tabType : SocialMainFeedTabType = .live
+        viewModel.router.show(routeType: .socialFeedWithTag(tabType: tabType, tag: tag))
+    }
+    
     private func showImagesViewController(index: Int, imagesUrls: [URL]) {
         viewModel.router.show(routeType: .showImages(index: index, imagesUrls: imagesUrls, images: []))
     }
@@ -96,7 +101,9 @@ class SocialMediaViewController: BaseViewController {
     private func showPost(post: Post) {
         viewModel.router.show(routeType: .openPost(post: post))
     }
-    
+    private func showCommentsForPost(post: Post) {
+        viewModel.router.show(routeType: .showCommentsforPost(post: post))
+    }
 }
 
 extension SocialMediaViewController: SocialPostActionsMenuPresenable {
@@ -167,7 +174,7 @@ extension SocialMediaViewController: SocialMediaCollectionViewModelDelegate {
             guard let userDetails = tag.userDetails else { return }
             showUserProfileViewController(userDetails: userDetails)
         case .asset:
-            break
+            showFeedViewControllerWithTag(tag: tag)
         case .event:
             break
         case .url:
@@ -189,7 +196,8 @@ extension SocialMediaViewController: SocialMediaCollectionViewModelDelegate {
         }
     }
     
-    func commentPressed(postId: UUID) {
+    func commentPressed(post: Post) {
+        showCommentsForPost(post: post)
     }
     
     func sharePressed(post: Post) {

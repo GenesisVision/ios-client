@@ -155,6 +155,10 @@ class SocialFeedViewController: BaseViewController {
     private func showNewPostViewController(sharedPost: Post?) {
         viewModel.socialRouter.show(routeType:  .sharePost(post: sharedPost))
     }
+    private func showNewPostForUserFeedViewController() {
+        guard let userId = viewModel.socialCollectionViewModel.feedUserId else { return }
+        viewModel.socialRouter.show(routeType: .addPostToUserFeed(userId: userId))
+    }
     
     private func showImagesViewController(index: Int, imagesUrls: [URL]) {
         viewModel.socialRouter.show(routeType: .showImages(index: index, imagesUrls: imagesUrls, images: []))
@@ -165,6 +169,19 @@ class SocialFeedViewController: BaseViewController {
         viewModel.socialRouter.showAssetDetails(with: assetId, assetType: assetType)
     }
     
+    private func showFeedViewControllerWithTag(tag: PostTag) {
+        var tabType : SocialMainFeedTabType = .feed
+        switch viewModel.feedType {
+        case .feed:
+            tabType = .feed
+        case .hot:
+            tabType = .hot
+        case .live:
+            tabType = .live
+        }
+        viewModel.socialRouter.show(routeType: .socialFeedWithTag(tabType: tabType, tag: tag))
+    }
+    
     private func showUserProfileViewController(userDetails: ProfilePublic) {
         guard let userId = userDetails._id?.uuidString else { return }
         viewModel.socialRouter.showUserDetails(with: userId)
@@ -172,6 +189,9 @@ class SocialFeedViewController: BaseViewController {
     
     private func showPost(post: Post) {
         viewModel.socialRouter.show(routeType: .openPost(post: post))
+    }
+    private func showCommentsForPost(post: Post) {
+        viewModel.socialRouter.show(routeType: .showCommentsforPost(post: post))
     }
 }
 
@@ -231,7 +251,7 @@ extension SocialFeedViewController: SocialFeedCollectionViewModelDelegate {
     }
     
     func shareIdeasPressed() {
-        showNewPostViewController(sharedPost: nil)
+        showNewPostForUserFeedViewController()
     }
     
     func reloadCells(cells: [IndexPath]) {
@@ -254,7 +274,8 @@ extension SocialFeedViewController: SocialFeedCollectionViewModelDelegate {
         showUserProfileViewController(userDetails: userDetails)
     }
     
-    func commentPost(postId: UUID) {
+    func commentPost(post: Post) {
+        showCommentsForPost(post: post)
     }
     
     func sharePost(postId: UUID) {
@@ -289,7 +310,7 @@ extension SocialFeedViewController: SocialFeedCollectionViewModelDelegate {
             guard let userDetails = tag.userDetails else { return }
             showUserProfileViewController(userDetails: userDetails)
         case .asset:
-            break
+            showFeedViewControllerWithTag(tag: tag)
         case .event:
             break
         case .url:

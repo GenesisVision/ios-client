@@ -88,6 +88,7 @@ final class SocialActivitiesView: UIView {
         label.textColor = #colorLiteral(red: 0.5058823529, green: 0.5490196078, blue: 0.6, alpha: 1)
         label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         label.lineBreakMode = .byClipping
+        label.isUserInteractionEnabled = true
         return label
     }()
     

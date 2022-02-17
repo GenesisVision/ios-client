@@ -353,11 +353,18 @@ class SocialFeedCollectionViewCell: UICollectionViewCell {
         socialActivitiesView.addSubview(borderLine)
         
         borderLine.anchor(top: socialActivitiesView.topAnchor, leading: socialActivitiesView.leadingAnchor, bottom: nil, trailing: socialActivitiesView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 1))
+        
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(commentLabelTouched(_:)))
+        socialActivitiesView.commentsLabel.addGestureRecognizer(recognizer)
     }
     
     @objc private func undoDeletion() {
         guard let postId = postId else { return }
         delegate?.undoDeletion(postId: postId)
+    }
+    
+    @objc private func commentLabelTouched(_ sender: Any) {
+        commentTouched()
     }
 }
 

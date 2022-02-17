@@ -11,6 +11,7 @@ import Lightbox
 
 enum SocialRouteType {
     case socialFeed(tabType: SocialMainFeedTabType)
+    case socialFeedWithTag(tabType: SocialMainFeedTabType , tag : PostTag)
     case addPost
     case sharePost(post: Post?)
     case openPost(post: Post)
@@ -19,6 +20,8 @@ enum SocialRouteType {
     case reportPost(postId: UUID)
     case showImages(index: Int, imagesUrls: [URL], images: [UIImage])
     case editPost(postId: UUID)
+    case addPostToUserFeed(userId : UUID)
+    case showCommentsforPost(post: Post)
 }
 
 
@@ -30,6 +33,8 @@ class SocialRouter: Router {
         switch routeType {
         case .socialFeed(let tabType):
             showSocialFeed(tabType: tabType)
+        case .socialFeedWithTag(let tabType, let tag):
+            showSocialFeedWithTag(tabType: tabType, tag : tag)
         case .addPost:
             showAddPost()
         case .sharePost(let post):
@@ -46,6 +51,10 @@ class SocialRouter: Router {
             showImages(index: index, imagesUrls: imagesUrls, images: images)
         case .editPost(let postId):
             showEditPost(postId: postId)
+        case .addPostToUserFeed(let userId) :
+            addPostToUserFeed(userId : userId)
+        case .showCommentsforPost(post: let post):
+            showCommentsforPost(post: post)
         }
     }
     
@@ -53,6 +62,18 @@ class SocialRouter: Router {
         let viewController = SocialMainFeedViewController()
         viewController.viewModel = SocialMainFeedViewModel(withRouter: self, openedTab: tabType)
         viewController.viewModel.title = "Social"
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func showSocialFeedWithTag(tabType: SocialMainFeedTabType, tag : PostTag) {
+        let viewController = SocialMainFeedViewController()
+        viewController.viewModel = SocialMainFeedViewModel(withRouter: self, openedTab: tabType)
+        if let tagName = tag.title {
+            let hashTags = [tagName]
+            viewController.viewModel.hashtags = hashTags
+            viewController.viewModel.title = tagName
+        }
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)
     }
@@ -92,6 +113,14 @@ class SocialRouter: Router {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
+    private func showCommentsforPost(post: Post) {
+        let viewController = SocialPostViewController()
+        viewController.viewModel = SocialPostViewModel(with: self, delegate: viewController, postId: nil, post: post)
+        viewController.viewModel.isCommentForPostShowing = true
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
     private func showEditPost(postId: UUID) {
         guard let viewController = SocialNewPostViewController.storyboardInstance(.social) else { return }
         viewController.viewModel = SocialNewPostViewModel(sharedPost: nil, mode: .edit, postId: postId)
@@ -113,5 +142,13 @@ class SocialRouter: Router {
         viewController.modalPresentationStyle = .fullScreen
         viewController.dynamicBackground = true
         navigationController?.topViewController?.present(viewController: viewController)
+    }
+    
+    private func addPostToUserFeed(userId : UUID) {
+        guard let viewController = SocialNewPostViewController.storyboardInstance(.social) else { return }
+        viewController.viewModel = SocialNewPostViewModel(sharedPost: nil)
+        viewController.viewModel.userId = userId
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }

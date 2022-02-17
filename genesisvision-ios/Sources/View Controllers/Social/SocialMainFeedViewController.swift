@@ -77,7 +77,7 @@ enum SocialMainFeedTabType: String {
 final class SocialMainFeedViewModel: TabmanViewModel {
     
     var tabTypes: [SocialMainFeedTabType] = [.live, .hot, .feed]
-    
+    var hashtags: [String]!
     var controllers = [SocialMainFeedTabType : UIViewController]()
     
     var showEvents: Bool = false {
@@ -97,16 +97,19 @@ final class SocialMainFeedViewModel: TabmanViewModel {
         case .live:
             let viewController = SocialFeedViewController()
             let viewModel = SocialFeedViewModel(feedType: .live, collectionViewDelegate: viewController, router: socialRouter, showEvents: showEvents)
+            viewModel.socialCollectionViewModel.hashTags = hashtags
             viewController.viewModel = viewModel
             return viewController
         case .hot:
             let viewController = SocialFeedViewController()
             let viewModel = SocialFeedViewModel(feedType: .hot, collectionViewDelegate: viewController, router: socialRouter, showEvents: showEvents)
+            viewModel.socialCollectionViewModel.hashTags = hashtags
             viewController.viewModel = viewModel
             return viewController
         case .feed:
             let viewController = SocialFeedViewController()
             let viewModel = SocialFeedViewModel(feedType: .feed, collectionViewDelegate: viewController, router: socialRouter, showEvents: showEvents)
+            viewModel.socialCollectionViewModel.hashTags = hashtags
             viewController.viewModel = viewModel
             return viewController
         }
