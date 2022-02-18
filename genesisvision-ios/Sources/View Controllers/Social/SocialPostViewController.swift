@@ -231,8 +231,6 @@ extension SocialPostViewController: SocialPostViewModelDelegate {
     func showPostActions(postActions: [SocialPostAction], postId: UUID, postLink: String) {
         showPostMenu(actions: postActions, postId: postId, postLink: postLink)
     }
-    
-    
 }
 
 extension SocialPostViewController: SocialPostActionsMenuPresenable {
@@ -367,7 +365,6 @@ final class SocialPostViewModel {
     }
     
     func deletePost(postId: UUID, completion: @escaping CompletionBlock) {
-//        guard let _ = commentsViewModels.first(where: { $0.post._id == postId }) else { return }
         SocialDataProvider.deletePost(postId: postId, completion: completion)
     }
     

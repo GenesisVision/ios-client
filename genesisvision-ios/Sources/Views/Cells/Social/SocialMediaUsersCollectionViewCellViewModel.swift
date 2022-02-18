@@ -172,7 +172,7 @@ extension SocialMediaUsersCollectionViewCell: UICollectionViewDelegate, UICollec
         
         let cellWidth = baseWidth + (labelWidth ?? CGFloat(50.0))
         
-        return CGSize(width: cellWidth, height: collectionView.frame.height)
+        return CGSize(width: cellWidth, height: 90)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

@@ -33,7 +33,6 @@ extension ImagesGalleryCollectionViewCellViewModel: CellViewModel {
         cell.imageUrl = imageUrl
         cell.delegate = delegate
         cell.clipsToBounds = true
-        cell.imageView.clipsToBounds = true
     }
 }
 
@@ -57,7 +56,8 @@ extension ImagesGalleryCollectionViewCellViewModel {
             label.font = UIFont.systemFont(ofSize: 24)
             return label
         }()
-        countLabel.frame = CGRect(x: cell.imageView.center.x / 2, y: cell.imageView.center.y / 2, width: 50, height: 50)
+       
+        countLabel.frame = CGRect(x: cell.width / 4, y: cell.height / 4, width: 50, height: 50)
         blurEffectView.contentView.addSubview(countLabel)
     }
 }

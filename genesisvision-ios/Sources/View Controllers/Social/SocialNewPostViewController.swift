@@ -20,6 +20,7 @@ class SocialNewPostViewController: BaseViewController {
     @IBOutlet weak var sharedPostMainView: UIView! {
         didSet {
             sharedPostMainView.isHidden = true
+            sharedPostMainView.backgroundColor = .red
         }
     }
     @IBOutlet weak var sharedPostView: SocialPostView! {
@@ -232,6 +233,23 @@ class SocialNewPostViewController: BaseViewController {
         
         if let text = viewModel.sharedPost?.text {
             sharedPostView.textView.text = text
+        }
+
+        var eventPost: Bool = false
+        if let tags = post.tags, !tags.isEmpty {
+            if (tags.count == 1 && tags.first?.type == .url) || tags.allSatisfy({ $0.type == .url }) {
+                sharedPostView.tagsView.isHidden = true
+                sharedPostView.eventView.isHidden = true
+            } else {
+                sharedPostView.tagsView.isHidden = false
+                eventPost = tags.contains(where: { $0.type == .event })
+                sharedPostView.eventView.isHidden = !eventPost
+            }
+            sharedPostView.postTags = tags
+            sharedPostView.textView.replaceTagsInText(tags: tags)
+        } else {
+            sharedPostView.tagsView.isHidden = true
+            sharedPostView.eventView.isHidden = true
         }
     }
     
@@ -452,7 +470,7 @@ final class SocialNewPostViewModel {
         for (index,image) in uploadedImages.enumerated() {
             images.append(NewPostImage(image: image.imageUDID, position: index))
         }
-        let model = NewPost(text: newPostText ?? " ", postId: nil, userId: userId, images: images)
+        let model = NewPost(text: newPostText ?? "", postId: nil, userId: userId, images: images)
         SocialDataProvider.addPost(model: model, completion: completion)
     }
     

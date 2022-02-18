@@ -323,7 +323,7 @@ extension SocialFeedCollectionViewModel: SocialFeedCollectionViewCellDelegate {
         }
         
         if let postImages = postViewModel.post.images, !postImages.isEmpty {
-            var imagesUrls: [String: PostImageResize?] = [:]
+            var imagesUrls = [String]()
             
             for postImage in postImages {
                 if let resizes = postImage.resizes,
@@ -334,25 +334,25 @@ extension SocialFeedCollectionViewModel: SocialFeedCollectionViewCellDelegate {
                     let low = resizes.filter({ $0.quality == .low })
                     
                     if let logoUrl = original.first?.logoUrl {
-                        imagesUrls[logoUrl] = original.first
+                        imagesUrls.append(logoUrl)
                         continue
                     } else if let logoUrl = hight.first?.logoUrl {
-                        imagesUrls[logoUrl] = hight.first
+                        imagesUrls.append(logoUrl)
                         continue
                     } else if let logoUrl = medium.first?.logoUrl {
-                        imagesUrls[logoUrl] = medium.first
+                        imagesUrls.append(logoUrl)
                         continue
                     } else if let logoUrl = low.first?.logoUrl {
-                        imagesUrls[logoUrl] = low.first
+                        imagesUrls.append(logoUrl)
                     }
                 } else if let logoUrl = postImage.resizes?.first?.logoUrl {
-                    imagesUrls[logoUrl] = postImage.resizes?.first
+                    imagesUrls.append(logoUrl)
                 }
             }
             
-            let onlyImagesUrls = imagesUrls.map({ $0.key })
-            let index = Int(onlyImagesUrls.firstIndex(of: image.imageUrl) ?? 0)
-            delegate?.imagePressed(index: index, imagesUrls: onlyImagesUrls.compactMap({ return URL(string: $0) }))
+            let index = Int(imagesUrls.firstIndex(of: image.imageUrl) ?? 0)
+    
+            delegate?.imagePressed(index: index, imagesUrls: imagesUrls.compactMap({ return URL(string: $0) }))
         }
     }
     

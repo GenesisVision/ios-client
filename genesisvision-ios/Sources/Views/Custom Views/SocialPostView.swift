@@ -144,7 +144,7 @@ final class SocialPostView: UIView {
         button.contentHorizontalAlignment = .left
         button.contentVerticalAlignment = .center
         button.setTitle("Expand...", for: .normal)
-        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 10, right: 0)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()

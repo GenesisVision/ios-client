@@ -8,10 +8,6 @@
 
 import UIKit
 
-//protocol ImagesGalleryViewDelegate: AnyObject {
-//    func imagePressed(index: Int, image: ImagesGalleryCollectionViewCellViewModel)
-//}
-
 
 class PostImagesGalleryView: UIView {
     
@@ -31,8 +27,6 @@ class PostImagesGalleryView: UIView {
             collectionView.registerNibs(for: [ImagesGalleryCollectionViewCellViewModel.self])
             collectionView.registerNib(for: ImagesGalleryCollectionViewCell.self)
             collectionView.registerClass(for: ImagesGalleryCollectionViewCell.self)
-            if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            }
             
             collectionView.reloadData()
         }
@@ -47,17 +41,15 @@ class PostImagesGalleryView: UIView {
     
     private func setup() {
         addSubview(collectionView)
-    
-//        collectionView.fillSuperview(padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
-        collectionView.frame = CGRect(x: 0, y: 0, width: 390, height: 250)
+
+        let width = UIScreen.main.bounds.width
+        collectionView.frame = CGRect(x: 0, y: 0, width: width, height: 250)
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setup()
     }
-    
-    
 }
 
 extension PostImagesGalleryView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -85,33 +77,33 @@ extension PostImagesGalleryView: UICollectionViewDelegate, UICollectionViewDataS
             return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
         } else if viewModels.count == 2 {
             guard collectionView.frame.width > 0 else { return cellSize }
-            return CGSize(width: collectionView.frame.width * 0.5 - 7, height: collectionView.frame.height)
+            return CGSize(width: collectionView.frame.width * 0.5 - 2, height: collectionView.frame.height)
         } else if viewModels.count == 3 {
             guard collectionView.frame.width > 0, collectionView.frame.height > 0 else { return cellSize }
             if indexPath.item == 0 {
-                return CGSize(width: collectionView.frame.width - 10, height: collectionView.frame.height * 0.5 - 7)
+                return CGSize(width: collectionView.frame.width, height: collectionView.frame.height * 0.5)
             } else {
-                return CGSize(width: collectionView.frame.width * 0.5 - 7, height: collectionView.frame.height * 0.5 - 7)
+                return CGSize(width: collectionView.frame.width * 0.5 - 1, height: collectionView.frame.height * 0.5 - 2)
             }
         } else if viewModels.count == 4 {
             guard collectionView.frame.width > 0, collectionView.frame.height > 0 else { return cellSize }
-            return CGSize(width: collectionView.frame.width * 0.5 - 7, height: collectionView.frame.height * 0.5 - 7)
+            return CGSize(width: collectionView.frame.width * 0.5 - 1, height: collectionView.frame.height * 0.5 - 1)
         } else if viewModels.count == 5 {
             guard collectionView.frame.width > 0, collectionView.frame.height > 0 else { return cellSize }
             if indexPath.item <= 1 {
-                return CGSize(width: collectionView.frame.width * 0.5 - 7, height: collectionView.frame.height * 0.5 - 7)
+                return CGSize(width: collectionView.frame.width * 0.5 - 1, height: collectionView.frame.height * 0.5)
             } else {
-                return CGSize(width: collectionView.frame.width / 3 - 7, height: collectionView.frame.height * 0.5 - 7)
+                return CGSize(width: collectionView.frame.width / 3 - 2, height: collectionView.frame.height * 0.5 - 2)
             }
         } else if viewModels.count == 6 {
             guard collectionView.frame.width > 0, collectionView.frame.height > 0 else { return cellSize }
-            return CGSize(width: collectionView.frame.width / 3 - 7, height: collectionView.frame.height * 0.5 - 7)
+            return CGSize(width: collectionView.frame.width / 3 - 2, height: collectionView.frame.height * 0.5 - 1)
         } else if viewModels.count > 6 {
             guard collectionView.frame.width > 0, collectionView.frame.height > 0 else { return cellSize }
             if indexPath.item < 3 {
-                return CGSize(width: collectionView.frame.width / 3 - 7, height: collectionView.frame.height * 0.5 - 7)
+                return CGSize(width: collectionView.frame.width / 3 - 2, height: collectionView.frame.height * 0.5 - 1)
             } else {
-                return CGSize(width: collectionView.frame.width / 4 - 6, height: collectionView.frame.height * 0.5 - 7)
+                return CGSize(width: collectionView.frame.width / 4 - 2, height: collectionView.frame.height * 0.5 - 1)
             }
         }
         return cellSize
@@ -125,14 +117,14 @@ extension PostImagesGalleryView: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 4
+        return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 4
+        return 2
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//        return UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+//    }
 }
