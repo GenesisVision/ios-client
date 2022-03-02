@@ -64,15 +64,8 @@ final class ManagerViewModel: TabmanViewModel {
         case follows = "Follows"
         case funds = "Funds"
     }
-    //MARK: - Скрыл feed
-//    enum TabType: String {
-//        case info = "Info"
-//        case programs = "Programs"
-//        case follows = "Follows"
-//        case funds = "Funds"
-//    }
+
     var tabTypes: [TabType] = [.info, .feed, .programs, .funds, .follows]
-//    var tabTypes: [TabType] = [.info, .programs, .funds, .follows]
     var controllers = [TabType : UIViewController]()
     
     // MARK: - Variables

@@ -47,11 +47,7 @@ class SocialTextView: UITextView {
                 muttableText.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.primary, range: range)
             }
         }
-//        let textAsNsString = newText as NSString
-//        let range = textAsNsString.range(of: "#\\w.*?\\b", options: .regularExpression, range: NSMakeRange(0,textAsNsString.length))
-//        if range.length > 0 {
-//            muttableText.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.primary, range: range)
-//        }
+        
         let regex = try! NSRegularExpression(pattern: "#\\w.*?\\b",options: .caseInsensitive)
         for match in regex.matches(in: newText, options: NSRegularExpression.MatchingOptions(), range: NSRange(location: 0, length: newText.count)) as [NSTextCheckingResult] {
             muttableText.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.primary, range: match.range)
@@ -81,7 +77,7 @@ class SocialTextView: UITextView {
               let wordTextRange = tokenizer.rangeEnclosingPosition(tapPosition, with: .word, inDirection: UITextDirection(rawValue: 1)),
               let sentenceTextRange = tokenizer.rangeEnclosingPosition(tapPosition, with: .sentence, inDirection: UITextDirection(rawValue: 1)) else { return }
         let tappedWord: String = text(in: wordTextRange) ?? ""
-        print("============",tappedWord,wordTextRange)
+        
         let tappedSentence: String = text(in: sentenceTextRange) ?? ""
         let words = tappedSentence.components(separatedBy: .whitespaces)
         

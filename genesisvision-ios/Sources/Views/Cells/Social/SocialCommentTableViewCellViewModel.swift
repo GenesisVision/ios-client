@@ -76,7 +76,6 @@ extension SocialCommentTableViewCellViewModel: CellViewModel {
         if let postImages = post.images, !postImages.isEmpty {
             cell.galleryView.isHidden = false
            lazy var images = [ImagesGalleryCollectionViewCellViewModel]()
-            
             for postImage in postImages {
                 if let resizes = postImage.resizes,
                    resizes.count > 1 {

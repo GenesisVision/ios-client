@@ -100,7 +100,7 @@ extension SocialMediaFeedCollectionViewCellViewModel: CellViewModel {
         cell.postView.socialPostViewSizes = postViewSizes(isExpanded: isExpanded)
         cell.postView.updateMiddleViewConstraints()
         
-        if let logo = post.author?.logoUrl, let fileUrl = getFileURL(fileName: logo), isPictureURL(url: fileUrl.absoluteString) {
+        if let logo = post.author?.logoUrl, let fileUrl = getFileURL(fileName: logo) {
             cell.postView.userImageView.kf.indicatorType = .activity
             cell.postView.userImageView.kf.setImage(with: fileUrl)
         } else {

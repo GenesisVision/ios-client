@@ -10,7 +10,23 @@ import UIKit
 
 struct SocialFeedTableViewCellViewModel {
     let post: Post
+    var sharedPost : Post?
     weak var cellDelegate: SocialFeedCollectionViewCellDelegate?
+    
+    init(post: Post, cellDelegate: SocialFeedCollectionViewCellDelegate?) {
+        self.post = post
+        self.cellDelegate = cellDelegate
+        self.setupSharedPost(post : post)
+    }
+    
+    mutating func setupSharedPost(post : Post) {
+        guard let tags = post.tags, !tags.isEmpty else { return }
+        for tag in tags {
+            if tag.type == .post {
+                sharedPost = tag.post
+            }
+        }
+    }
 }
 
 //MARK: - Post cell ViewModel
@@ -40,8 +56,10 @@ extension SocialFeedTableViewCellViewModel: CellViewModel {
                 eventPost = tags.contains(where: { $0.type == .event })
                 cell.postView.eventView.isHidden = !eventPost
             }
-            cell.postView.postTags = tags
-            cell.postView.textView.replaceTagsInText(tags: tags)
+            var tagsWithoutReposts = tags
+            tagsWithoutReposts.removeAll(where: {$0.type == .post})
+            cell.postView.postTags = tagsWithoutReposts
+            cell.postView.textView.replaceTagsInText(tags: tagsWithoutReposts)
         } else {
             cell.postView.tagsView.isHidden = true
             cell.postView.eventView.isHidden = true
@@ -52,7 +70,7 @@ extension SocialFeedTableViewCellViewModel: CellViewModel {
         cell.postView.socialPostViewSizes = postViewSizes()
         cell.postView.updateMiddleViewConstraints()
         
-        if let logo = post.author?.logoUrl, let fileUrl = getFileURL(fileName: logo), isPictureURL(url: fileUrl.absoluteString) {
+        if let logo = post.author?.logoUrl, let fileUrl = getFileURL(fileName: logo) {
             cell.postView.userImageView.kf.indicatorType = .activity
             cell.postView.userImageView.kf.setImage(with: fileUrl)
         } else {
@@ -176,14 +194,130 @@ extension SocialFeedTableViewCellViewModel: CellViewModel {
         }
         cell.postActions = postActions
         cell.postView.textView.setupGesturerecognizer()
+        
+        //MARK: - Repost setup
+        
+        cell.sharedPostView.isHidden = true
+        guard let sharedPost = sharedPost else {
+            cell.setupContentView()
+            return
+        }
+        cell.sharedPostView.isHidden = false
+        cell.sharedPostView.socialPostViewSizes = sharedPostViewSizes(isExpanded: false)
+        cell.sharedPostView.updateMiddleViewConstraints()
+        if let sizes = cell.sharedPostView.socialPostViewSizes {
+            let defaultHeight: CGFloat = 100
+            cell.sharedPostmainViewHeight = sizes.allHeight + defaultHeight
+        }
+
+        if let fullTextViewHeight = cell.sharedPostView.socialPostViewSizes?.fullTextViewHeight, fullTextViewHeight > 250 {
+            cell.sharedPostView.socialPostViewSizes?.isExpanded = false
+        }
+
+        if let logo = sharedPost.author?.logoUrl, let fileUrl = getFileURL(fileName: logo) {
+            cell.sharedPostView.userImageView.kf.indicatorType = .activity
+            cell.sharedPostView.userImageView.kf.setImage(with: fileUrl)
+        } else {
+            cell.sharedPostView.userImageView.image = UIImage.profilePlaceholder
+        }
+
+        if let userName = sharedPost.author?.username {
+            cell.sharedPostView.userNameLabel.text = userName
+        }
+
+        if let date = sharedPost.date {
+            cell.sharedPostView.dateLabel.text = date.dateForSocialPost
+        }
+
+        if let postImages = sharedPost.images, !postImages.isEmpty {
+            cell.sharedPostView.galleryView.isHidden = false
+            lazy var images = [ImagesGalleryCollectionViewCellViewModel]()
+
+            for postImage in postImages {
+                if let resizes = postImage.resizes,
+                   resizes.count > 1 {
+                    let original = resizes.filter({ $0.quality == .original })
+                    let hight = resizes.filter({ $0.quality == .high })
+                    let medium = resizes.filter({ $0.quality == .medium })
+                    let low = resizes.filter({ $0.quality == .low })
+
+                    if let logoUrl = original.first?.logoUrl {
+                        images.append(ImagesGalleryCollectionViewCellViewModel(imageUrl: logoUrl,
+                                                                               resize: original.first,
+                                                                               image: nil,
+                                                                               showRemoveButton: false,
+                                                                               delegate: nil))
+                        continue
+                    } else if let logoUrl = hight.first?.logoUrl {
+                        images.append(ImagesGalleryCollectionViewCellViewModel(imageUrl: logoUrl,
+                                                                               resize: hight.first,
+                                                                               image: nil,
+                                                                               showRemoveButton: false,
+                                                                               delegate: nil))
+                        continue
+                    } else if let logoUrl = medium.first?.logoUrl {
+                        images.append(ImagesGalleryCollectionViewCellViewModel(imageUrl: logoUrl,
+                                                                               resize: medium.first,
+                                                                               image: nil,
+                                                                               showRemoveButton: false,
+                                                                               delegate: nil))
+                        continue
+                    } else if let logoUrl = low.first?.logoUrl {
+                        images.append(ImagesGalleryCollectionViewCellViewModel(imageUrl: logoUrl,
+                                                                               resize: low.first,
+                                                                               image: nil,
+                                                                               showRemoveButton: false,
+                                                                               delegate: nil))
+                    }
+                } else if let logoUrl = postImage.resizes?.first?.logoUrl {
+                    images.append(ImagesGalleryCollectionViewCellViewModel(imageUrl: logoUrl,
+                                                                           resize: postImage.resizes?.first,
+                                                                           image: nil,
+                                                                           showRemoveButton: false,
+                                                                           delegate: nil))
+                }
+            }
+            cell.sharedPostView.galleryView.viewModels = images
+        } else {
+            cell.sharedPostView.galleryView.isHidden = true
+        }
+
+        if let text = sharedPost.text {
+            cell.sharedPostView.textView.text = text
+        }
+
+        var eventSharedPost: Bool = false
+        if let tags = sharedPost.tags, !tags.isEmpty {
+            if (tags.count == 1 && tags.first?.type == .url) || tags.allSatisfy({ $0.type == .url }) {
+                cell.sharedPostView.tagsView.isHidden = true
+                cell.sharedPostView.eventView.isHidden = true
+            } else {
+                cell.sharedPostView.tagsView.isHidden = false
+                eventSharedPost = tags.contains(where: { $0.type == .event })
+                cell.sharedPostView.eventView.isHidden = !eventSharedPost
+            }
+            cell.sharedPostView.postTags = tags
+            cell.sharedPostView.textView.replaceTagsInText(tags: tags)
+        } else {
+            cell.sharedPostView.tagsView.isHidden = true
+            cell.sharedPostView.eventView.isHidden = true
+        }
+        cell.setupContentView()
+        cell.sharedPostView.sizeToFit()
     }
     
     func cellSize(spacing: CGFloat, frame: CGRect) -> CGSize {
         let width = frame.width - spacing
         let defaultHeight: CGFloat = 180
         let socialPostViewSizes = postViewSizes()
+        let sharedPostViewSizes = sharedPostViewSizes(isExpanded: false)
         
-        let cellHeight = socialPostViewSizes.allHeight + defaultHeight
+        let cellHeight: CGFloat
+        if sharedPost == nil {
+            cellHeight = socialPostViewSizes.allHeight + defaultHeight
+        } else {
+            cellHeight = socialPostViewSizes.allHeight + sharedPostViewSizes.allHeight + (defaultHeight * 1.5)
+        }
         
         return CGSize(width: width, height: cellHeight)
     }
@@ -195,7 +329,7 @@ extension SocialFeedTableViewCellViewModel: CellViewModel {
         let fullTextViewHeight : CGFloat = 0
         
         if let tags = post.tags, !tags.isEmpty {
-            if (tags.count == 1 && tags.first?.type == .url) || tags.allSatisfy({ $0.type == .url }) {
+            if (tags.count == 1 && tags.first?.type == .url) || tags.allSatisfy({ $0.type == .url }) || (tags.count == 1 && tags.first?.type == .post) {
                 tagsViewHeight = 0
             } else {
                 tagsViewHeight = 90
@@ -218,6 +352,53 @@ extension SocialFeedTableViewCellViewModel: CellViewModel {
         
         return SocialPostViewSizes(textViewHeight: textHeight, imageViewHeight: imageHeight, tagViewHeight: tagsViewHeight, eventViewHeight: 0, fullTextViewHeight: fullTextViewHeight)
     }
+    
+    func sharedPostViewSizes(isExpanded : Bool) -> SocialPostViewSizes {
+        var textHeight: CGFloat = 0
+        var imageHeight: CGFloat = 0
+        var tagsViewHeight: CGFloat = 0
+        var fullTextViewHeight : CGFloat = 0
+        guard let post = sharedPost else {
+            return SocialPostViewSizes(textViewHeight: textHeight, imageViewHeight: imageHeight, tagViewHeight: tagsViewHeight, eventViewHeight: 0, fullTextViewHeight: fullTextViewHeight)
+        }
+        
+        if let tags = post.tags, !tags.isEmpty {
+            if (tags.count == 1 && tags.first?.type == .url) || tags.allSatisfy({ $0.type == .url }) {
+                tagsViewHeight = 0
+            } else {
+                tagsViewHeight = 90
+            }
+        }
+        
+        if let tags = post.tags, !tags.isEmpty, tags.contains(where: { $0.type == .event }) {
+            return SocialPostViewSizes(textViewHeight: textHeight, imageViewHeight: imageHeight, tagViewHeight: tagsViewHeight, eventViewHeight: 50, fullTextViewHeight: fullTextViewHeight)
+        }
+        
+        if let isEmpty = post.images?.isEmpty, !isEmpty {
+            imageHeight = 250
+        }
+        
+        if let text = post.text, !text.isEmpty {
+            let textHeightValue = text.height(forConstrainedWidth: UIScreen.main.bounds.width - 20, font: UIFont.getFont(.regular, size: 18))
+            let expandButton = CGFloat(20)
+            
+            if textHeightValue < 25 && textHeightValue != 0 {
+                textHeight = 25
+            } else if textHeightValue > 25 && textHeightValue < 250 {
+                textHeight = textHeightValue
+            } else if textHeightValue > 250 {
+                textHeight = 250 + expandButton
+            }
+            
+            fullTextViewHeight = textHeightValue - expandButton
+        }
+        
+        if isExpanded {
+            return SocialPostViewSizes(textViewHeight: fullTextViewHeight, imageViewHeight: imageHeight, tagViewHeight: tagsViewHeight, eventViewHeight: 0, fullTextViewHeight: fullTextViewHeight, isExpanded : isExpanded)
+        } else {
+            return SocialPostViewSizes(textViewHeight: textHeight, imageViewHeight: imageHeight, tagViewHeight: tagsViewHeight, eventViewHeight: 0, fullTextViewHeight: fullTextViewHeight)
+        }
+    }
 }
 
 
@@ -235,6 +416,19 @@ class SocialFeedTableViewCell: UITableViewCell {
         view.isUserInteractionEnabled = true
         return view
     }()
+    
+    let sharedPostView: SocialPostView = {
+        let sharedPost = SocialPostView()
+        sharedPost.translatesAutoresizingMaskIntoConstraints = false
+        sharedPost.isHidden = true
+        let width = UIScreen.main.bounds.width - 40
+        let size = CGSize(width: width, height: 250)
+        sharedPost.galleryView.changeSizeforCollectionview(size: size)
+        sharedPost.postActionsButton.isHidden = true
+        return sharedPost
+    }()
+    
+    var sharedPostmainViewHeight : CGFloat = 0
     
     let socialActivitiesView: SocialActivitiesView = {
         let view = SocialActivitiesView()
@@ -304,18 +498,55 @@ class SocialFeedTableViewCell: UITableViewCell {
     }
     
     private func overlayContentView() {
-        contentView.addSubview(postView)
-        contentView.addSubview(bottomView)
-        contentView.addSubview(deletedPostView)
-        deletedPostView.fillSuperview(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
-        
-        postView.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: bottomView.topAnchor, trailing: contentView.trailingAnchor)
-        postView.delegate = self
-        
-        bottomView.anchor(top: nil, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10), size: CGSize(width: 0, height: 65))
-        
-        deletedPostView.addArrangedSubview(deletedPostLabel)
-        deletedPostView.addArrangedSubview(undoDeletionButton)
+        if sharedPostView.isHidden {
+            contentView.addSubview(postView)
+            contentView.addSubview(bottomView)
+            contentView.addSubview(deletedPostView)
+            deletedPostView.fillSuperview(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+
+            postView.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: bottomView.topAnchor, trailing: contentView.trailingAnchor)
+            postView.delegate = self
+
+            bottomView.anchor(top: nil, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10), size: CGSize(width: 0, height: 65))
+
+            deletedPostView.addArrangedSubview(deletedPostLabel)
+            deletedPostView.addArrangedSubview(undoDeletionButton)
+        } else {
+            contentView.addSubview(postView)
+            contentView.addSubview(bottomView)
+            contentView.addSubview(deletedPostView)
+            contentView.addSubview(sharedPostView)
+            deletedPostView.fillSuperview(padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+
+
+            postView.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: nil, trailing: contentView.trailingAnchor)
+            if let socialPostViewSizes = postView.socialPostViewSizes {
+                let postHeight = socialPostViewSizes.allHeight + 100
+                postView.height = postHeight
+            } else {
+                postView.bottomAnchor.constraint(equalTo: sharedPostView.topAnchor).isActive = true
+            }
+            postView.delegate = self
+            
+            sharedPostView.bottomAnchor.constraint(equalTo: bottomView.topAnchor).isActive = true
+            sharedPostView.height = sharedPostmainViewHeight
+            sharedPostView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 30).isActive = true
+            sharedPostView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+            sharedPostView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
+            sharedPostView.delegate = self
+
+            let borderLine = UIView()
+            borderLine.translatesAutoresizingMaskIntoConstraints = false
+            borderLine.backgroundColor = UIColor.Common.darkTextSecondary
+            contentView.addSubview(borderLine)
+            borderLine.anchor(top: sharedPostView.topAnchor, leading: contentView.leadingAnchor, bottom: sharedPostView.bottomAnchor, trailing: nil, padding: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 0), size: CGSize(width: 1, height: sharedPostView.height - 20))
+
+
+            bottomView.anchor(top: nil, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10), size: CGSize(width: 0, height: 65))
+
+            deletedPostView.addArrangedSubview(deletedPostLabel)
+            deletedPostView.addArrangedSubview(undoDeletionButton)
+        }
     }
     
     private func overlayThirdLayerOnBottomView() {
@@ -329,6 +560,11 @@ class SocialFeedTableViewCell: UITableViewCell {
         socialActivitiesView.addSubview(borderLine)
         
         borderLine.anchor(top: socialActivitiesView.topAnchor, leading: socialActivitiesView.leadingAnchor, bottom: nil, trailing: socialActivitiesView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 1))
+    }
+    
+    func setupContentView() {
+        contentView.subviews.forEach { $0.removeFromSuperview() }
+        overlayContentView()
     }
     
     @objc private func undoDeletion() {

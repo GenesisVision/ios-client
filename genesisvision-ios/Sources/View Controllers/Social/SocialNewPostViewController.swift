@@ -314,7 +314,6 @@ extension SocialNewPostViewController: ImagePickerPresentable {
         imagesGallery.isHidden = imagesGallery.viewModels.isEmpty
         viewModel.saveImage(pickedImageUrl) { result in
             self.publishButton.setEnabled(true)
-            print(self.imagesGallery.viewModels.count)
         }
     }
 }

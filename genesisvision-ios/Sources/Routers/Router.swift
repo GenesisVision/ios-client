@@ -127,7 +127,7 @@ class Router {
             viewControllers.append(navigationController)
         }
     }
-    //MARK: - скрыл Social
+    
     private func addSocial(_ navigationController: inout BaseNavigationController, _ viewControllers: inout [UIViewController]) {
         let socialMediaViewController = SocialMediaViewController()
         let router = SocialRouter(parentRouter: self, navigationController: navigationController)

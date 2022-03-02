@@ -21,7 +21,7 @@ extension SocialMediaAddPostCollectionViewCellViewModel: CellViewModel {
     func setup(on cell: SocialMediaAddPostCollectionViewCell) {
         cell.delegate = delegate
         
-        if let fileUrl = getFileURL(fileName: imageUrl), isPictureURL(url: fileUrl.absoluteString) {
+        if let fileUrl = getFileURL(fileName: imageUrl) {
             cell.userImageView.kf.indicatorType = .activity
             cell.userImageView.kf.setImage(with: fileUrl)
         } else {

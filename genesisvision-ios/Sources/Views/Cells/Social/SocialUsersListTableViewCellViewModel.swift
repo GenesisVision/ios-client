@@ -71,6 +71,9 @@ extension SocialUsersListTableViewCellViewModel: CellViewModel {
         }
         
         cell.followed = user.personalDetails?.isFollow
+        print("----")
+        print(cell.userStatusLabel.height)
+        print("----")
     }
 }
 

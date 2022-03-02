@@ -16,6 +16,11 @@ protocol ReplyInputFieldDelegate: AnyObject {
 
 class ReplyInputField: UIView {
     
+    enum SocialPostViewModelMode {
+        case add
+        case edit
+    }
+    
     private let mainStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -30,6 +35,8 @@ class ReplyInputField: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
+    var mode : SocialPostViewModelMode = .add
     
     let imageGallery: ImagesGalleryView = {
         let imageGallery = ImagesGalleryView()
@@ -130,6 +137,7 @@ class ReplyInputField: UIView {
     @objc private func sendButtonPressed() {
         delegate?.sendButtonPressed()
     }
+    
 }
 
 extension ReplyInputField: ImagesGalleryCollectionViewCellDelegate {

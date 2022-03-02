@@ -112,7 +112,7 @@ final class SocialPostView: UIView {
         textView.isSelectable = true
         return textView
     }()
-    //MARK: - Изменил тип вью
+    
     let galleryView: PostImagesGalleryView = {
         let imageView = PostImagesGalleryView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -286,19 +286,21 @@ final class SocialPostView: UIView {
 
 extension SocialPostView: SocialTextViewDelegate {
     func wordRecognized(word: String) {
-        guard word.first == "#" else {
-            delegate?.openPost()
-            return
-        }
-        var wordWithoutTag = word
-        wordWithoutTag.removeFirst()
         
-        if let tag = postTags.first(where: { $0.title?.lowercased() == wordWithoutTag.lowercased()}) {
-            delegate?.tagPressed(tag: tag)
-        } else if let tag = postTags.first(where: { $0.platformAssetDetails?.name?.lowercased() == wordWithoutTag.lowercased() }) {
-            delegate?.tagPressed(tag: tag)
+        if word.first == "#" {
+            var wordWithoutTag = word
+            wordWithoutTag.removeFirst()
+            
+            if let tag = postTags.first(where: { $0.title?.lowercased() == wordWithoutTag.lowercased()}) {
+                delegate?.tagPressed(tag: tag)
+            } else if let tag = postTags.first(where: { $0.platformAssetDetails?.name?.lowercased() == wordWithoutTag.lowercased() }) {
+                delegate?.tagPressed(tag: tag)
+            }
         } else {
-            delegate?.openPost()
+            guard let tag = postTags.first(where: { $0.title == word }) else {
+                delegate?.openPost()
+                return }
+            delegate?.tagPressed(tag: tag)
         }
     }
 }

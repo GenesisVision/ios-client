@@ -39,6 +39,11 @@ class PostImagesGalleryView: UIView {
         setup()
     }
     
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setup()
+    }
+    
     private func setup() {
         addSubview(collectionView)
 
@@ -46,9 +51,10 @@ class PostImagesGalleryView: UIView {
         collectionView.frame = CGRect(x: 0, y: 0, width: width, height: 250)
     }
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setup()
+    func changeSizeforCollectionview(size: CGSize) {
+        collectionView.height = size.height
+        collectionView.width = size.width
+        collectionView.reloadData()
     }
 }
 
