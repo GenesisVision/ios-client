@@ -1087,7 +1087,6 @@
 		F390C752278D8BE8006FF6CB /* PushNotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F390C751278D8BE8006FF6CB /* PushNotificationViewModel.swift */; };
 		F390C754278D8CD6006FF6CB /* DynamicLinkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F390C753278D8CD6006FF6CB /* DynamicLinkManager.swift */; };
 		F390C756278D8D57006FF6CB /* AuthThreeFactorSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F390C755278D8D57006FF6CB /* AuthThreeFactorSignInViewController.swift */; };
-		F3A0BC3A27BD52E600A11AD9 /* SocialUsersListTableViewCellCopy.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3A0BC3927BD52E600A11AD9 /* SocialUsersListTableViewCellCopy.xib */; };
 		F3A0D03C27B3CDCD0012C0CA /* AssetsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0D03B27B3CDCD0012C0CA /* AssetsTableView.swift */; };
 		F3A0D03E27B3F3E50012C0CA /* SocialAssetsTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0D03D27B3F3E50012C0CA /* SocialAssetsTableViewCellViewModel.swift */; };
 		F3A0D04027B3FC7E0012C0CA /* SocialAssetsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3A0D03F27B3FC7E0012C0CA /* SocialAssetsTableViewCell.xib */; };
@@ -2370,7 +2369,6 @@
 		F390C751278D8BE8006FF6CB /* PushNotificationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationViewModel.swift; sourceTree = "<group>"; };
 		F390C753278D8CD6006FF6CB /* DynamicLinkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicLinkManager.swift; sourceTree = "<group>"; };
 		F390C755278D8D57006FF6CB /* AuthThreeFactorSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthThreeFactorSignInViewController.swift; sourceTree = "<group>"; };
-		F3A0BC3927BD52E600A11AD9 /* SocialUsersListTableViewCellCopy.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialUsersListTableViewCellCopy.xib; sourceTree = "<group>"; };
 		F3A0D03B27B3CDCD0012C0CA /* AssetsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsTableView.swift; sourceTree = "<group>"; };
 		F3A0D03D27B3F3E50012C0CA /* SocialAssetsTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAssetsTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		F3A0D03F27B3FC7E0012C0CA /* SocialAssetsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialAssetsTableViewCell.xib; sourceTree = "<group>"; };
@@ -2625,7 +2623,6 @@
 				19DC7B2725B06133008AC6D7 /* SocialMediaUserCollectionViewCell.xib */,
 				19DC7B2D25B06167008AC6D7 /* SocialMediaUserCollectionViewCellViewModel.swift */,
 				19DC7B3F25B09A88008AC6D7 /* SocialUsersListTableViewCell.xib */,
-				F3A0BC3927BD52E600A11AD9 /* SocialUsersListTableViewCellCopy.xib */,
 				19DC7B3925B09710008AC6D7 /* SocialUsersListTableViewCellViewModel.swift */,
 				19DC7B5525B1D083008AC6D7 /* SocialMediaListTableViewCell.xib */,
 				19DC7B4F25B1D035008AC6D7 /* SocialMediaListTableViewCellViewModel.swift */,
@@ -5158,7 +5155,6 @@
 				5E1CF820218B71D100541C70 /* Montserrat-Regular.ttf in Resources */,
 				5E8340DC207E3279004A29F1 /* Program.storyboard in Resources */,
 				5ED03F3620FF784A00AF5E07 /* FieldWithTextViewTableViewCell.xib in Resources */,
-				F3A0BC3A27BD52E600A11AD9 /* SocialUsersListTableViewCellCopy.xib in Resources */,
 				5EEED7A4239718CB000B2D6A /* BrokerCollectionViewCell.xib in Resources */,
 				5EF9F90623E09C4400542E1E /* FollowContentView.xib in Resources */,
 				5E17709F220D05A900669D84 /* WalletTableViewCell.xib in Resources */,
