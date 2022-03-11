@@ -29,6 +29,7 @@ class Router {
     var fundsViewController: FundListViewController!
     var followsViewController: ProgramListViewController!
     var managersViewController: ManagerListViewController!
+    var coinAssetListViewController : CoinAssetsListViewController!
 
     var dashboardViewController: DashboardViewController!
     var tradingViewController: TradingViewController!
@@ -91,6 +92,7 @@ class Router {
         self.programsViewController = parentRouter?.programsViewController
         self.fundsViewController = parentRouter?.fundsViewController
         self.managersViewController = parentRouter?.managersViewController
+        self.coinAssetListViewController = parentRouter?.coinAssetListViewController
         
         self.assetsViewController = parentRouter?.assetsViewController
         self.dashboardViewController = parentRouter?.dashboardViewController
@@ -171,6 +173,12 @@ class Router {
     
     private func showProgramList(with filterModel: FilterModel) {
         guard let viewController = getPrograms(with: filterModel) else { return }
+        
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func showCoinAssetsList(with filterModel: FilterModel) {
+        guard let viewController = getCoinAssets(with: filterModel) else { return }
         
         navigationController?.pushViewController(viewController, animated: true)
     }
@@ -327,6 +335,8 @@ extension Router {
             showProgramDetails(with: assetId, assetType: assetType)
         case .fund:
             showFundDetails(with: assetId)
+        case .coinAsset:
+            break
         case ._none:
             showUserDetails(with: assetId)
         }
@@ -382,6 +392,8 @@ extension Router {
             showFollowList(with: filterModel)
         case .fund:
             showFundList(with: filterModel)
+        case .coinAsset:
+            showCoinAssetsList(with: filterModel)
         case ._none:
             showManagerList(with: filterModel)
         }
@@ -570,6 +582,19 @@ extension Router {
     func getPrograms(with filterModel: FilterModel?, showFacets: Bool = false, parentRouter: Router? = nil) -> ProgramListViewController? {
         guard let viewController = ProgramListViewController.storyboardInstance(.assets) else { return nil }
         programsViewController = viewController
+        let router = ListRouter(parentRouter: parentRouter ?? self)
+        router.currentController = viewController
+        let viewModel = ListViewModel(withRouter: router, reloadDataProtocol: viewController, filterModel: filterModel, showFacets: showFacets, assetType: .program)
+        
+        viewController.viewModel = viewModel
+        
+        viewController.hidesBottomBarWhenPushed = true
+        return viewController
+    }
+    
+    func getCoinAssets(with filterModel: FilterModel?, showFacets: Bool = false, parentRouter: Router? = nil) -> CoinAssetsListViewController? {
+        guard let viewController = CoinAssetsListViewController.storyboardInstance(.assets) else { return nil }
+        coinAssetListViewController = viewController
         let router = ListRouter(parentRouter: parentRouter ?? self)
         router.currentController = viewController
         let viewModel = ListViewModel(withRouter: router, reloadDataProtocol: viewController, filterModel: filterModel, showFacets: showFacets, assetType: .program)

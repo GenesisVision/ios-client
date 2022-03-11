@@ -76,9 +76,9 @@ class WalletDataProvider: DataProvider {
             DataProvider().responseHandler(error, completion: completion)
         }
     }
-    static func createWithdrawalRequest(with amount: Double, address: String, currency: Currency, twoFactorCode: String, completion: @escaping CompletionBlock) {
+    static func createWithdrawalRequest(with amount: Double, address: String, currency: Currency, twoFactorCode: String, blockchain : Blockchain, completion: @escaping CompletionBlock) {
         
-        let requestModel = CreateWithdrawalRequestModel(amount: amount, currency: currency, address: address, twoFactorCode: twoFactorCode)
+        let requestModel = CreateWithdrawalRequestModel(amount: amount, currency: currency, blockchain: blockchain, address: address, twoFactorCode: twoFactorCode)
         
         WalletAPI.createWithdrawalRequest(body: requestModel) { (_, error) in
             DataProvider().responseHandler(error, completion: completion)

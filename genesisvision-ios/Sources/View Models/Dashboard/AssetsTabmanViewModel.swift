@@ -42,6 +42,8 @@ class AssetsTabmanViewModel: TabmanViewModel {
             return controllers[type] ?? router.getFunds(with: FilterModel(), showFacets: showFacets, parentRouter: router)
         case .follows:
             return controllers[type] ?? router.getFollows(with: FilterModel(), showFacets: showFacets, parentRouter: router)
+//        case .assets:
+//            return controllers[type] ?? router.getCoinAssets(with: FilterModel(), showFacets: showFacets, parentRouter: router)
         }
     }
 }

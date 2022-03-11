@@ -330,6 +330,10 @@ extension ListViewModelProtocol {
             if let viewModels = viewModels as? [FundTableViewCellViewModel], let i = viewModels.firstIndex(where: { $0.asset._id?.uuidString == assetId }) {
                 return viewModels[i]
             }
+        case .coinAsset:
+            if let viewModels = viewModels as? [CoinAssetTableViewCellViewModel], let i = viewModels.firstIndex(where: { $0.asset._id?.uuidString == assetId }) {
+                return viewModels[i]
+            }
         case ._none:
             //TODO: check it
             if let viewModels = viewModels as? [ManagerTableViewCellViewModel], let i = viewModels.firstIndex(where: { $0.profile._id?.uuidString == assetId }) {
@@ -363,6 +367,9 @@ extension ListViewModelProtocol {
                 else { return nil }
             
             return router.getFundViewController(with: assetId)
+        case .coinAsset:
+            
+            return nil
         case ._none:
             guard let model = model(for: indexPath) as? ManagerTableViewCellViewModel,
                 let managerId = model.profile._id?.uuidString,
@@ -384,6 +391,8 @@ extension ListViewModelProtocol {
             return [FacetsTableViewCellViewModel.self, FollowTableViewCellViewModel.self]
         case .fund:
             return [FacetsTableViewCellViewModel.self, FundTableViewCellViewModel.self]
+        case .coinAsset:
+            return [FacetsTableViewCellViewModel.self, CoinAssetTableViewCellViewModel.self]
         case ._none:
             return [FacetsTableViewCellViewModel.self, ManagerTableViewCellViewModel.self]
         }
@@ -447,6 +456,8 @@ extension ListViewModelProtocol {
             showFollowDetail(at: indexPath)
         case .fund:
             showFundDetail(at: indexPath)
+        case .coinAsset:
+            break
         case ._none:
             showManagerDetail(at: indexPath)
         }

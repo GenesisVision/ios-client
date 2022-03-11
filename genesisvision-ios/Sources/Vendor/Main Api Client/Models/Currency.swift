@@ -18,4 +18,5 @@ public enum Currency: String, Codable {
     case usdc = "USDC"
     case dai = "DAI"
     case usd = "USD"
+    case trx = "TRX"
 }

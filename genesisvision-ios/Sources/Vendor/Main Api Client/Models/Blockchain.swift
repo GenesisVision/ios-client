@@ -13,4 +13,5 @@ public enum Blockchain: String, Codable {
     case ethereum = "Ethereum"
     case binanceSmartChain = "BinanceSmartChain"
     case xdaichain = "xDaiChain"
+    case tron = "Tron"
 }

@@ -542,6 +542,9 @@ extension ListViewModel {
                 
                 completionSuccess(totalCount, viewModels)
                 }, errorCompletion: completionError)
+        case .coinAsset:
+            
+            break
         default:
             break
         }

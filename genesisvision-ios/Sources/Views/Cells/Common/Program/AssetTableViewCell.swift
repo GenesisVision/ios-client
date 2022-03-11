@@ -16,7 +16,7 @@ protocol ContentViewProtocol {
     
     func configure(_ asset: FundInvestingDetailsList, filterProtocol: FilterChangedProtocol?, favoriteProtocol: FavoriteStateChangeProtocol?)
     func configure(_ asset: ProgramInvestingDetailsList, filterProtocol: FilterChangedProtocol?, favoriteProtocol: FavoriteStateChangeProtocol?)
-    
+    func configure(_ asset: CoinsAsset, filterProtocol: FilterChangedProtocol?, favoriteProtocol: FavoriteStateChangeProtocol?)
     func configure(_ asset: DashboardTradingAsset, filterProtocol: FilterChangedProtocol?)
     
     func configure(programTrading asset: DashboardTradingAsset, filterProtocol: FilterChangedProtocol?)
@@ -30,6 +30,8 @@ extension ContentViewProtocol {
     func configure(_ asset: FollowDetailsListItem, filterProtocol: FilterChangedProtocol?, favoriteProtocol: FavoriteStateChangeProtocol?) {}
     func configure(_ asset: FundInvestingDetailsList, filterProtocol: FilterChangedProtocol?, favoriteProtocol: FavoriteStateChangeProtocol?) {}
     func configure(_ asset: ProgramInvestingDetailsList, filterProtocol: FilterChangedProtocol?, favoriteProtocol: FavoriteStateChangeProtocol?) {}
+    func configure(_ asset: CoinsAsset, filterProtocol: FilterChangedProtocol?, favoriteProtocol: FavoriteStateChangeProtocol?) {}
+
     
     func configure(_ asset: DashboardTradingAsset, filterProtocol: FilterChangedProtocol?) {}
     func configure(programTrading asset: DashboardTradingAsset, filterProtocol: FilterChangedProtocol?) {}
@@ -106,6 +108,20 @@ class AssetTableViewCell: PlateTableViewCell {
         cellContentView = FollowContentView.viewFromNib()
         if let cellContentView = cellContentView as? FollowContentView {
             stackView.removeAllArrangedSubviews()
+            stackView.addArrangedSubview(cellContentView)
+            cellContentView.configure(asset, filterProtocol: filterProtocol, favoriteProtocol: favoriteProtocol)
+        }
+    }
+    
+    /// CoinsAsset
+    /// - Parameters:
+    ///   - asset: CoinsAsset
+    ///   - filterProtocol: FilterChangedProtocol
+    ///   - favoriteProtocol: FavoriteStateChangeProtocol
+    func configure(_ asset: CoinsAsset, filterProtocol: FilterChangedProtocol?, favoriteProtocol: FavoriteStateChangeProtocol?) {
+        stackView.removeAllArrangedSubviews()
+        cellContentView = ProgramContentView.viewFromNib()
+        if let cellContentView = cellContentView as? ProgramContentView {
             stackView.addArrangedSubview(cellContentView)
             cellContentView.configure(asset, filterProtocol: filterProtocol, favoriteProtocol: favoriteProtocol)
         }

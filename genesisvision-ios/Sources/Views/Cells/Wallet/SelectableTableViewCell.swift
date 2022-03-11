@@ -67,6 +67,11 @@ class SelectableTableViewCell: UITableViewCell {
         changeSelected(selected)
     }
     
+    func configure(_ model: WalletDepositData? = nil, selected: Bool) {
+        setTitle(model?.blockchainTitle)        
+        changeSelected(selected)
+    }
+    
     func configure(_ model: TradingAccountDetails? = nil, selected: Bool) {
         setTitle(model?.login)
         setSubtitle(model?.currency?.rawValue)

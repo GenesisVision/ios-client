@@ -140,6 +140,9 @@ extension ProgramListViewController {
             viewModel.showFilterVC(listViewModel: self.viewModel, filterModel: viewModel.filterModel, filterType: .funds, sortingType: .funds)
         case .follow:
             viewModel.showFilterVC(listViewModel: self.viewModel, filterModel: viewModel.filterModel, filterType: .follows, sortingType: .follows)
+        case .coinAsset:
+//            viewModel.showFilterVC(listViewModel: self.viewModel, filterModel: viewModel.filterModel, filterType: .programs, sortingType: .programs)
+            break
         }
     }
     

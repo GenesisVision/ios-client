@@ -1083,6 +1083,7 @@
 		5EFDEABA238FFF2E00AF3AC1 /* CellViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFDEAB9238FFF2E00AF3AC1 /* CellViews.swift */; };
 		5EFE7C412181E78700D385C8 /* FundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFE7C3D2181E78500D385C8 /* FundViewController.swift */; };
 		C507CE975FDC32C800A243E4 /* Pods_genesisvision_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19E569CA2835914BCDF0493C /* Pods_genesisvision_ios.framework */; };
+		F30B565627D8A489008D37B5 /* AssetsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30B565527D8A489008D37B5 /* AssetsListViewController.swift */; };
 		F35EC8BC27B6B8BB002D72E9 /* String+LastWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35EC8BB27B6B8BB002D72E9 /* String+LastWord.swift */; };
 		F390C752278D8BE8006FF6CB /* PushNotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F390C751278D8BE8006FF6CB /* PushNotificationViewModel.swift */; };
 		F390C754278D8CD6006FF6CB /* DynamicLinkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F390C753278D8CD6006FF6CB /* DynamicLinkManager.swift */; };
@@ -2365,6 +2366,7 @@
 		7B0072CCE6DBFD0E5ADFC7E3 /* Pods-genesisvision-ios.release dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.release dev.xcconfig"; path = "Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.release dev.xcconfig"; sourceTree = "<group>"; };
 		CF5D4113314783BE5030CFB6 /* Pods-genesisvision-ios.release prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.release prod.xcconfig"; path = "Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.release prod.xcconfig"; sourceTree = "<group>"; };
 		D5D00DF76C4CB42025582799 /* Pods-genesisvision-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-genesisvision-ios.debug.xcconfig"; path = "Target Support Files/Pods-genesisvision-ios/Pods-genesisvision-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		F30B565527D8A489008D37B5 /* AssetsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsListViewController.swift; sourceTree = "<group>"; };
 		F35EC8BB27B6B8BB002D72E9 /* String+LastWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+LastWord.swift"; sourceTree = "<group>"; };
 		F390C751278D8BE8006FF6CB /* PushNotificationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationViewModel.swift; sourceTree = "<group>"; };
 		F390C753278D8CD6006FF6CB /* DynamicLinkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicLinkManager.swift; sourceTree = "<group>"; };
@@ -4265,6 +4267,22 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		F30B565327D8A438008D37B5 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				F30B565427D8A466008D37B5 /* List */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		F30B565427D8A466008D37B5 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				F30B565527D8A489008D37B5 /* AssetsListViewController.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
 		F390C757278D8D66006FF6CB /* Three Factor */ = {
 			isa = PBXGroup;
 			children = (
@@ -4820,6 +4838,7 @@
 				FC49641C2015489B00104CEB /* Welcome */,
 				5EC670A121AEAD8A009BF4C0 /* Common */,
 				FCC9DD6F200E4C7E008825EC /* Programs */,
+				F30B565327D8A438008D37B5 /* Assets */,
 				5E0AD0E821813E8700DC76AA /* Funds */,
 				5E6C0CF12109A8E000B7F844 /* Manager */,
 				FC4964162015446700104CEB /* Wallet */,
@@ -5961,6 +5980,7 @@
 				1912947E249BBA09007F1083 /* ImageLocation.swift in Sources */,
 				5EF14D932181F85C00B3843A /* FundRouter.swift in Sources */,
 				5EA1FE2321A2F16600308D81 /* FacetsTableViewCell.swift in Sources */,
+				F30B565627D8A489008D37B5 /* AssetsListViewController.swift in Sources */,
 				1926FCB727579A5A00FEC4D3 /* WalletWithdrawalCurrencyInfo.swift in Sources */,
 				5E39F79C23A3F9300073DAD5 /* NewTradingAccountRequest.swift in Sources */,
 				5E5914FE2072D575000F5053 /* UITableView+ReloadData.swift in Sources */,
@@ -6919,7 +6939,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
@@ -7226,7 +7246,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
@@ -7319,7 +7339,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = 3FUAGA25F7;
 				INFOPLIST_FILE = "$(SRCROOT)/genesisvision-ios/Resources/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;

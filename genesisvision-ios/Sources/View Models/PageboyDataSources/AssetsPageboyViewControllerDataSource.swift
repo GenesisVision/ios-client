@@ -13,10 +13,11 @@ class AssetsPageboyViewControllerDataSource: BasePageboyViewControllerDataSource
     internal override func setup(router: Router, showFacets: Bool) {
         guard let programListViewController = getProgramList(with: router, filterModel: FilterModel(), showFacets: showFacets),
             let fundListViewController = getFundList(with: router, filterModel: FilterModel(), showFacets: showFacets),
-            let followListViewController = getFollowList(with: router, filterModel: FilterModel(), showFacets: showFacets)
+            let followListViewController = getFollowList(with: router, filterModel: FilterModel(), showFacets: showFacets),
+            let coinAssetListViewController = getCoinAssetList(with: router, filterModel: FilterModel(), showFacets: showFacets)
             else { return }
         
-        controllers = [followListViewController, fundListViewController, programListViewController]
+        controllers = [followListViewController, fundListViewController, programListViewController, coinAssetListViewController]
     }
     
     func getProgramList(with router: Router, filterModel: FilterModel? = nil, showFacets: Bool) -> ProgramListViewController? {
@@ -51,6 +52,18 @@ class AssetsPageboyViewControllerDataSource: BasePageboyViewControllerDataSource
         listRouter.currentController = viewController
         let viewModel =
             ListViewModel(withRouter: listRouter, reloadDataProtocol: viewController, filterModel: filterModel, showFacets: showFacets, assetType: .follow)
+        viewController.viewModel = viewModel
+        
+        return viewController
+    }
+    
+    func getCoinAssetList(with router: Router, filterModel: FilterModel? = nil, showFacets: Bool) -> CoinAssetsListViewController? {
+        guard let viewController = CoinAssetsListViewController.storyboardInstance(.assets) else { return nil }
+        router.coinAssetListViewController = viewController
+        let listRouter = ListRouter(parentRouter: router)
+        listRouter.currentController = viewController
+        let viewModel =
+            ListViewModel(withRouter: listRouter, reloadDataProtocol: viewController, filterModel: filterModel, showFacets: showFacets, assetType: .program)
         viewController.viewModel = viewModel
         
         return viewController

@@ -68,6 +68,8 @@ final class FacetsViewModel: ListViewModelProtocolWithFacets {
                     filterModel.sortingModel.selectedSorting = FundsFilterSorting.byNewDesc
                 case .follow:
                     filterModel.sortingModel.selectedSorting = FollowFilterSorting.byNewDesc
+                case .coinAsset:
+                    break
                 }
             case .top:
                 switch assetType {
@@ -79,6 +81,8 @@ final class FacetsViewModel: ListViewModelProtocolWithFacets {
                     filterModel.sortingModel.selectedSorting = FundsFilterSorting.byProfitDesc
                 case .follow:
                     filterModel.sortingModel.selectedSorting = FollowFilterSorting.byProfitDesc
+                case .coinAsset:
+                    break
                 }
             case .weeklyTop:
                 switch assetType {
@@ -90,6 +94,8 @@ final class FacetsViewModel: ListViewModelProtocolWithFacets {
                     filterModel.sortingModel.selectedSorting = FundsFilterSorting.byProfitDesc
                 case .follow:
                     filterModel.sortingModel.selectedSorting = FollowFilterSorting.byProfitDesc
+                case .coinAsset:
+                    break
                 }
             case .popular:
                 switch assetType {
@@ -101,6 +107,8 @@ final class FacetsViewModel: ListViewModelProtocolWithFacets {
                     filterModel.sortingModel.selectedSorting = FundsFilterSorting.byInvestorsDesc
                 case .follow:
                     filterModel.sortingModel.selectedSorting = FollowFilterSorting.bySubscribersDesc
+                case .coinAsset:
+                    break
                 }
             case .toLevelUp:
                 break
@@ -113,6 +121,8 @@ final class FacetsViewModel: ListViewModelProtocolWithFacets {
                 case .fund:
                     break
                 case .follow:
+                    break
+                case .coinAsset:
                     break
                 }
             case .trading:

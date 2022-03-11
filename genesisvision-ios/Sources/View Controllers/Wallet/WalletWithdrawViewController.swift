@@ -103,6 +103,19 @@ class WalletWithdrawViewController: BaseViewController {
         }
     }
     
+    @IBOutlet weak var selectABlockchainTitleLabel: SubtitleLabel! {
+        didSet {
+            selectABlockchainTitleLabel.text = "Select a blockchain"
+        }
+    }
+    
+    
+    @IBOutlet weak var selectedBlockchainValueLabel: TitleLabel!{
+        didSet {
+            selectedBlockchainValueLabel.font = UIFont.getFont(.regular, size: 18.0)
+        }
+    }
+    
     @IBOutlet weak var copyMaxValueButton: UIButton! {
         didSet {
             copyMaxValueButton.setTitleColor(UIColor.Cell.title, for: .normal)
@@ -169,7 +182,7 @@ class WalletWithdrawViewController: BaseViewController {
     // MARK: - Private methods
     private func setup() {
         navigationItem.title = viewModel.title
-        
+        viewModel.blockchainValueUpdateDelegate = self
         withdrawButton.setEnabled(false)
         AuthManager.twoFactorEnabled { [weak self] (success) in
             self?.twoFactorStackView.isHidden = !success
@@ -190,7 +203,7 @@ class WalletWithdrawViewController: BaseViewController {
         })
     }
     
-    private func updateUI() {
+    internal func updateUI() {
         if let selectedWallet = viewModel.selectedWallet, let commission = selectedWallet.commissions.value?.first?.value, let currency = selectedWallet.currency, let currencyType = CurrencyType(rawValue: currency.rawValue) {
             
             if let description = selectedWallet._description {
@@ -211,6 +224,10 @@ class WalletWithdrawViewController: BaseViewController {
             viewModel.walletCurrencyDelegateManager?.selectedWallet = selectedWallet
         }
         
+        if let selectedAdress = viewModel.selectedAdress?.blockchainTitle {
+            selectedBlockchainValueLabel.text = selectedAdress
+        }
+        
         if let currency = viewModel.selectedWallet?.currency {
             self.amountToWithdrawCurrencyLabel.text = currency.rawValue
         }
@@ -221,6 +238,10 @@ class WalletWithdrawViewController: BaseViewController {
         
         if let walletCurrencyDelegateManager = viewModel?.walletCurrencyDelegateManager {
             walletCurrencyDelegateManager.currencyDelegate = self
+        }
+        
+        if let walletBlockchainDelegateManager = viewModel?.walletBlockchainDelegateManager {
+            walletBlockchainDelegateManager.addressDelegate = self
         }
         
         let withdrawButtonEnabled = amountToWithdrawValue > 0.0 && amountToWithdrawValue <= availableInWalletValue
@@ -266,11 +287,12 @@ class WalletWithdrawViewController: BaseViewController {
             let address = addressTextField.text,
             let twoFactorCode = twoFactorTextField.text,
             let selectedWallet = viewModel.selectedWallet,
-            let currency = Currency(rawValue: selectedWallet.currency?.rawValue ?? "")
+            let currency = Currency(rawValue: selectedWallet.currency?.rawValue ?? ""),
+            let blockchain = viewModel.selectedAdress?.blockchain
             else { return showErrorHUD(subtitle: "Enter withdraw amount and data, please") }
         
         showProgressHUD()
-        viewModel.withdraw(with: amountToWithdrawValue, address: address, currency: currency, twoFactorCode: twoFactorCode) { [weak self] (result) in
+        viewModel.withdraw(with: amountToWithdrawValue, address: address, currency: currency, twoFactorCode: twoFactorCode, blockchain : blockchain) { [weak self] (result) in
             self?.hideAll()
             
             switch result {
@@ -351,6 +373,25 @@ class WalletWithdrawViewController: BaseViewController {
         
         bottomSheetController.present()
     }
+    
+    @IBAction func selectedBlockchainButtonAction(_ sender: UIButton) {
+        self.view.endEditing(true)
+        
+        viewModel?.walletBlockchainDelegateManager?.updateSelectedIndex()
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.initializeHeight = 275.0
+        bottomSheetController.addNavigationBar(selectABlockchainTitleLabel.text)
+        bottomSheetController.addTableView { [weak self] tableView in
+            self?.viewModel.walletBlockchainDelegateManager?.tableView = tableView
+            tableView.separatorStyle = .none
+            
+            guard let walletBlockchainDelegateManager = self?.viewModel.walletBlockchainDelegateManager else { return }
+            tableView.registerNibs(for: walletBlockchainDelegateManager.cellModelsForRegistration)
+            tableView.delegate = walletBlockchainDelegateManager
+            tableView.dataSource = walletBlockchainDelegateManager
+        }
+        bottomSheetController.present()
+    }
 }
 
 extension WalletWithdrawViewController: WalletCurrencyDelegateManagerProtocol {
@@ -358,6 +399,14 @@ extension WalletWithdrawViewController: WalletCurrencyDelegateManagerProtocol {
         self.viewModel.updateWalletCurrencyIndex(indexPath.row)
         self.updateUI()
         
+        bottomSheetController.dismiss()
+    }
+}
+
+extension WalletWithdrawViewController : WalletBlockchainDelegateManagerProtocol {
+    func didSelectAdress(at indexPath: IndexPath) {
+        self.viewModel.updateWalletBlockchainAddressIndex(indexPath.row)
+        self.updateUI()
         bottomSheetController.dismiss()
     }
 }
@@ -432,5 +481,11 @@ extension WalletWithdrawViewController: InvestWithdrawConfirmViewProtocol {
 extension WalletWithdrawViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         return touch.view == gestureRecognizer.view
+    }
+}
+
+extension WalletWithdrawViewController : BlockchainValueUpdateProtocol {
+    func updateVCUI() {
+        updateUI()
     }
 }

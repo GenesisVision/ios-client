@@ -12,4 +12,5 @@ public enum AssetType: String, Codable {
     case program = "Program"
     case fund = "Fund"
     case follow = "Follow"
+    case coinAsset = "CoinAsset"
 }

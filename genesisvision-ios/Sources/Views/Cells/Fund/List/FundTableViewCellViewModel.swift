@@ -45,6 +45,18 @@ extension FollowTableViewCellViewModel: CellViewModel {
     }
 }
 
+struct CoinAssetTableViewCellViewModel {
+    var asset: CoinsAsset
+    weak var filterProtocol: FilterChangedProtocol?
+    weak var favoriteProtocol: FavoriteStateChangeProtocol?
+}
+
+extension CoinAssetTableViewCellViewModel: CellViewModel {
+    func setup(on cell: AssetTableViewCell) {
+        cell.configure(asset, filterProtocol: filterProtocol, favoriteProtocol: favoriteProtocol)
+    }
+}
+
 struct TradingTableViewCellViewModel {
     let asset: DashboardTradingAsset
     weak var filterProtocol: FilterChangedProtocol?
