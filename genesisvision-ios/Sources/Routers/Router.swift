@@ -597,7 +597,7 @@ extension Router {
         coinAssetListViewController = viewController
         let router = ListRouter(parentRouter: parentRouter ?? self)
         router.currentController = viewController
-        let viewModel = ListViewModel(withRouter: router, reloadDataProtocol: viewController, filterModel: filterModel, showFacets: showFacets, assetType: .program)
+        let viewModel = ListViewModel(withRouter: router, reloadDataProtocol: viewController, filterModel: filterModel, showFacets: showFacets, assetType: .coinAsset)
         
         viewController.viewModel = viewModel
         

@@ -58,20 +58,22 @@ final class WalletWithdrawViewModel {
         if let selectedCurrency = Currency(rawValue: currency.rawValue) {
             self.selectedCurrency = selectedCurrency
             updateSelectedCurrency(selectedCurrency)
-            
-            getWallet(with: selectedCurrency, completion: { [weak self] (wallet) in
-                self?.walletSummary = wallet
-                self?.selectedWalletData = wallet?.wallets?.first(where: { $0.currency == selectedCurrency })
-                guard let depositAddress = self?.selectedWalletData?.depositAddresses else { return }
-                self?.depositAddresses = depositAddress
-                self?.selectedAdress = depositAddress.first
-                self?.walletBlockchainDelegateManager = WalletBlockchainDelegateManager(depositAddress)
-                
-                self?.blockchainValueUpdateDelegate?.updateVCUI()
-            }, completionError: { (result) in
-                print("ERROR")
-            })
+            updateBlockchain(with: selectedCurrency)
         }
+    }
+    
+    private func updateBlockchain(with currency: CurrencyType? = nil) {
+        getWallet(with: selectedCurrency, completion: { [weak self] (wallet) in
+            self?.walletSummary = wallet
+            self?.selectedWalletData = wallet?.wallets?.first(where: { $0.currency == currency })
+            guard let depositAddress = self?.selectedWalletData?.depositAddresses else { return }
+            self?.depositAddresses = depositAddress
+            self?.selectedAdress = depositAddress.first
+            self?.walletBlockchainDelegateManager = WalletBlockchainDelegateManager(depositAddress)
+            self?.blockchainValueUpdateDelegate?.updateVCUI()
+        }, completionError: { (result) in
+            print("ERROR")
+        })
     }
     
     private func getWallet(with currency: CurrencyType? = nil, completion: @escaping (_ wallet: WalletSummary?) -> Void, completionError: @escaping CompletionBlock) {
@@ -94,6 +96,8 @@ final class WalletWithdrawViewModel {
         guard let withdrawalSummary = withdrawalSummary,
             let wallets = withdrawalSummary.wallets else { return }
         selectedWallet = wallets[selectedIndex]
+        guard let selectedCurrency = selectedWallet?.currency else { return }
+        updateBlockchain(with: selectedCurrency)
     }
     
     func updateWalletBlockchainAddressIndex(_ selectedIndex: Int) {
@@ -176,72 +180,6 @@ final class WalletCurrencyDelegateManager: NSObject, UITableViewDelegate, UITabl
         guard let cell = tableView.dequeueReusableCell(withModel: model, for: indexPath) as? SelectableTableViewCell else { return UITableViewCell() }
         
         let wallet = wallets[indexPath.row]
-        let isSelected = indexPath.row == selectedIndex
-        cell.configure(wallet, selected: isSelected)
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) {
-            cell.contentView.backgroundColor = UIColor.Cell.subtitle.withAlphaComponent(0.3)
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) {
-            cell.contentView.backgroundColor = UIColor.Cell.bg
-        }
-    }
-}
-
-protocol WalletBlockchainDelegateManagerProtocol: AnyObject {
-    func didSelectAdress(at indexPath: IndexPath)
-}
-
-final class WalletBlockchainDelegateManager: NSObject, UITableViewDelegate, UITableViewDataSource {
-    // MARK: - Variables
-    weak var addressDelegate: WalletBlockchainDelegateManagerProtocol?
-    
-    var tableView: UITableView?
-    var depositAddresses: [WalletDepositData] = []
-    var selectedIndex: Int = 0
-    var selectedAdress: WalletDepositData?
-    
-    var cellModelsForRegistration: [CellViewAnyModel.Type] {
-        return [SelectableTableViewCellViewModel.self]
-    }
-    
-    // MARK: - Lifecycle
-    init(_ depositAddresses: [WalletDepositData]) {
-        super.init()
-        
-        self.depositAddresses = depositAddresses
-    }
-    
-    func updateSelectedIndex() {
-        self.selectedIndex = depositAddresses.firstIndex(where: { return $0.blockchainTitle == self.selectedAdress?.blockchainTitle } ) ?? 0
-    }
-    
-    // MARK: - TableViewDelegate
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        self.selectedAdress = depositAddresses[indexPath.row]
-        
-        addressDelegate?.didSelectAdress(at: indexPath)
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return depositAddresses.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let model = SelectableTableViewCellViewModel()
-        
-        guard let cell = tableView.dequeueReusableCell(withModel: model, for: indexPath) as? SelectableTableViewCell else { return UITableViewCell() }
-        
-        let wallet = depositAddresses[indexPath.row]
         let isSelected = indexPath.row == selectedIndex
         cell.configure(wallet, selected: isSelected)
         

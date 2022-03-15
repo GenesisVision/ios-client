@@ -294,8 +294,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Zzx-PF-gIY"/>
                     <connections>
-                        <outlet property="AssetsListTableView" destination="Grm-9g-4D9" id="cWO-8w-t6L"/>
-                        <outlet property="tableView" destination="Grm-9g-4D9" id="WCC-Q9-GrL"/>
+                        <outlet property="tableView" destination="Grm-9g-4D9" id="cWO-8w-t6L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Xi-mF-7bO" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -223,6 +223,8 @@ final class ListViewModel: ListViewModelProtocol {
             changeFavoriteFund(value: value, assetId: assetId, request: request, completion: completion)
         case .follow:
             changeFavoriteFollow(value: value, assetId: assetId, request: request, completion: completion)
+        case .coinAsset:
+            changeFavoriteCoin(value: value, assetId: assetId, request: request, completion: completion)
         default:
             break
         }
@@ -322,6 +324,38 @@ final class ListViewModel: ListViewModelProtocol {
             }
         }
     }
+    
+    func changeFavoriteCoin(value: Bool, assetId: String, request: Bool = false, completion: @escaping CompletionBlock) {
+        guard request else {
+            var followModel = model(for: assetId) as? FollowTableViewCellViewModel
+            
+            if followModel != nil {
+                followModel!.asset.personalDetails?.isFavorite = value
+                completion(.success)
+                return
+            } else {
+                return completion(.failure(errorType: .apiError(message: nil)))
+            }
+        }
+
+        CoinAssetsDataProvider.favorites(isFavorite: !value, assetId: assetId) { [weak self] (result) in
+            switch result {
+            case .success:
+                var followModel = self?.model(for: assetId) as? FollowTableViewCellViewModel
+                
+                if followModel != nil {
+                    followModel!.asset.personalDetails?.isFavorite = value
+                    completion(.success)
+                    return
+                }
+            case .failure(let errorType):
+                print(errorType)
+                completion(result)
+            }
+        }
+    }
+    
+    
     
     func updateViewModels(_ assetList: ProgramDetailsListItemItemsViewModel?) {
         guard let assetList = assetList else { return }
@@ -543,8 +577,21 @@ extension ListViewModel {
                 completionSuccess(totalCount, viewModels)
                 }, errorCompletion: completionError)
         case .coinAsset:
+            CoinAssetsDataProvider.get(.byMarketCapDesc, skip : skip, take: 20, completion: { [weak self] (assetList) in
+                guard let assetList = assetList else { return completionError(.failure(errorType: .apiError(message: nil))) }
+                
+                totalCount = assetList.total ?? 0
+                
+                assetList.items?.forEach({ (asset) in
+                    guard let listRouter = self?.router as? ListRouter else { return completionError(.failure(errorType: .apiError(message: nil))) }
+                    
+                    let coinAssetsTableViewCellViewModel = CoinAssetTableViewCellViewModel(asset: asset, filterProtocol: listRouter.currentController as? FilterChangedProtocol, favoriteProtocol: listRouter.currentController as? FavoriteStateChangeProtocol)
+                    viewModels.append(coinAssetsTableViewCellViewModel)
+                })
+                
+                completionSuccess(totalCount, viewModels)
+            }, errorCompletion: completionError)
             
-            break
         default:
             break
         }

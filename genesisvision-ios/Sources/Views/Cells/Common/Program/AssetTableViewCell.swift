@@ -120,8 +120,8 @@ class AssetTableViewCell: PlateTableViewCell {
     ///   - favoriteProtocol: FavoriteStateChangeProtocol
     func configure(_ asset: CoinsAsset, filterProtocol: FilterChangedProtocol?, favoriteProtocol: FavoriteStateChangeProtocol?) {
         stackView.removeAllArrangedSubviews()
-        cellContentView = ProgramContentView.viewFromNib()
-        if let cellContentView = cellContentView as? ProgramContentView {
+        cellContentView = CoinAssetContentView.viewFromNib()
+        if let cellContentView = cellContentView as? CoinAssetContentView {
             stackView.addArrangedSubview(cellContentView)
             cellContentView.configure(asset, filterProtocol: filterProtocol, favoriteProtocol: favoriteProtocol)
         }

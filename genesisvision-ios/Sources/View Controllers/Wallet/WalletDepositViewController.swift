@@ -60,6 +60,20 @@ class WalletDepositViewController: BaseViewController {
         }
     }
     
+    @IBOutlet weak var selectABlockchainTitleLabel: SubtitleLabel! {
+        didSet {
+            selectABlockchainTitleLabel.font = UIFont.getFont(.regular, size: 18.0)
+        }
+    }
+    
+    @IBOutlet weak var selectedBlockchainValueLabel: TitleLabel! {
+        didSet {
+            selectedBlockchainValueLabel.font = UIFont.getFont(.regular, size: 18.0)
+        }
+    }
+    
+    
+    
     @IBOutlet weak var disclaimerLabel: SubtitleLabel! {
         didSet {
             disclaimerLabel.isHidden = true
@@ -132,6 +146,10 @@ class WalletDepositViewController: BaseViewController {
             selectedWalletCurrencyValueLabel.text = title + " | " + currency.rawValue
         }
         
+        if let selectedAdress = viewModel.selectedAdress?.blockchainTitle {
+            selectedBlockchainValueLabel.text = selectedAdress
+        }
+        
         self.view.layoutIfNeeded()
     }
     
@@ -163,6 +181,29 @@ class WalletDepositViewController: BaseViewController {
         
         bottomSheetController.present()
     }
+    
+    @IBAction func selectedBlockchainButtonAction(_ sender: UIButton) {
+        self.view.endEditing(true)
+        
+        viewModel?.walletBlockchainDelegateManager?.updateSelectedIndex()
+        bottomSheetController = BottomSheetController()
+        bottomSheetController.initializeHeight = 275.0
+        bottomSheetController.addNavigationBar(selectABlockchainTitleLabel.text)
+        bottomSheetController.addTableView { [weak self] tableView in
+            self?.viewModel.walletBlockchainDelegateManager?.tableView = tableView
+            tableView.separatorStyle = .none
+            
+            guard let walletBlockchainDelegateManager = self?.viewModel.walletBlockchainDelegateManager else { return }
+            tableView.registerNibs(for: walletBlockchainDelegateManager.cellModelsForRegistration)
+            tableView.delegate = walletBlockchainDelegateManager
+            tableView.dataSource = walletBlockchainDelegateManager
+            if let walletBlockchainDelegateManager = viewModel?.walletBlockchainDelegateManager {
+                walletBlockchainDelegateManager.addressDelegate = self
+            }
+        }
+        bottomSheetController.present()
+    }
+    
 }
 
 extension WalletDepositViewController: WalletDelegateManagerProtocol {
@@ -171,6 +212,20 @@ extension WalletDepositViewController: WalletDelegateManagerProtocol {
         self.updateUI()
         
         bottomSheetController.dismiss()
+    }
+}
+
+extension WalletDepositViewController : WalletBlockchainDelegateManagerProtocol {
+    func didSelectAdress(at indexPath: IndexPath) {
+        self.viewModel.updateWalletBlockchainAddressIndex(indexPath.row)
+        self.updateUI()
+        bottomSheetController.dismiss()
+    }
+}
+
+extension WalletDepositViewController : BlockchainValueUpdateProtocol {
+    func updateVCUI() {
+        updateUI()
     }
 }
 

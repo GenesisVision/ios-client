@@ -1092,6 +1092,10 @@
 		F3A0D03E27B3F3E50012C0CA /* SocialAssetsTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0D03D27B3F3E50012C0CA /* SocialAssetsTableViewCellViewModel.swift */; };
 		F3A0D04027B3FC7E0012C0CA /* SocialAssetsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3A0D03F27B3FC7E0012C0CA /* SocialAssetsTableViewCell.xib */; };
 		F3A3AE9327ABCBC500580C51 /* PostImagesGalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A3AE9227ABCBC500580C51 /* PostImagesGalleryView.swift */; };
+		F3AB3E9027E0926000F15944 /* CoinAssetsDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AB3E8F27E0926000F15944 /* CoinAssetsDataProvider.swift */; };
+		F3AB3E9227E0A3B100F15944 /* CoinAssetContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3AB3E9127E0A3B100F15944 /* CoinAssetContentView.xib */; };
+		F3AB3E9427E0AC9500F15944 /* CoinAssetContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AB3E9327E0AC9500F15944 /* CoinAssetContentView.swift */; };
+		F3E6185527DF863A00B28324 /* WalletBlockchainDelegateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E6185427DF863A00B28324 /* WalletBlockchainDelegateManager.swift */; };
 		FC0E20062044123F00872BE5 /* PhotoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E20052044123F00872BE5 /* PhotoHeaderView.swift */; };
 		FC0E200A2044357800872BE5 /* WalletDepositViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E20092044357800872BE5 /* WalletDepositViewController.swift */; };
 		FC0E200C2044358200872BE5 /* WalletWithdrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E200B2044358200872BE5 /* WalletWithdrawViewController.swift */; };
@@ -2375,6 +2379,10 @@
 		F3A0D03D27B3F3E50012C0CA /* SocialAssetsTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAssetsTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		F3A0D03F27B3FC7E0012C0CA /* SocialAssetsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialAssetsTableViewCell.xib; sourceTree = "<group>"; };
 		F3A3AE9227ABCBC500580C51 /* PostImagesGalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImagesGalleryView.swift; sourceTree = "<group>"; };
+		F3AB3E8F27E0926000F15944 /* CoinAssetsDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinAssetsDataProvider.swift; sourceTree = "<group>"; };
+		F3AB3E9127E0A3B100F15944 /* CoinAssetContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CoinAssetContentView.xib; sourceTree = "<group>"; };
+		F3AB3E9327E0AC9500F15944 /* CoinAssetContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinAssetContentView.swift; sourceTree = "<group>"; };
+		F3E6185427DF863A00B28324 /* WalletBlockchainDelegateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletBlockchainDelegateManager.swift; sourceTree = "<group>"; };
 		FC0E20052044123F00872BE5 /* PhotoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoHeaderView.swift; sourceTree = "<group>"; };
 		FC0E20092044357800872BE5 /* WalletDepositViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDepositViewController.swift; sourceTree = "<group>"; };
 		FC0E200B2044358200872BE5 /* WalletWithdrawViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletWithdrawViewController.swift; sourceTree = "<group>"; };
@@ -4237,7 +4245,9 @@
 				5EF9F8FE23E09C4300542E1E /* PrivateTradingContentView.xib */,
 				5EF9F91423E10DB600542E1E /* PrivateTradingContentView.swift */,
 				5EF9F8FB23E09C4200542E1E /* ProgramContentView.xib */,
+				F3AB3E9127E0A3B100F15944 /* CoinAssetContentView.xib */,
 				5EF9F91623E10DBE00542E1E /* ProgramContentView.swift */,
+				F3AB3E9327E0AC9500F15944 /* CoinAssetContentView.swift */,
 				5EF9F8F923E09C4200542E1E /* ProgramInvestingContentView.xib */,
 				5EF9F91823E10DC700542E1E /* ProgramInvestingContentView.swift */,
 				5EF9F8F823E09C4200542E1E /* ProgramTradingContentView.xib */,
@@ -4479,6 +4489,7 @@
 				5E17709A220D053F00669D84 /* WalletExternalTransactionListViewModel.swift */,
 				FC0E200D2044359800872BE5 /* WalletDepositViewModel.swift */,
 				FC0E200F2044359D00872BE5 /* WalletWithdrawViewModel.swift */,
+				F3E6185427DF863A00B28324 /* WalletBlockchainDelegateManager.swift */,
 				5E0E1BA822227F16001F3C4E /* WalletTransferViewModel.swift */,
 				5EC1C3B4228817750024008E /* AccountsDepositCurrencyDelegateManager.swift */,
 				5EC1C3B62288178A0024008E /* WalletDepositCurrencyDelegateManager.swift */,
@@ -4885,6 +4896,7 @@
 				19CB59BE258B9B960008D8BC /* SocialDataProvider.swift */,
 				FCB1786F2045C47A00A482B7 /* WalletDataProvider.swift */,
 				FCB178712046CA0D00A482B7 /* ProgramsDataProvider.swift */,
+				F3AB3E8F27E0926000F15944 /* CoinAssetsDataProvider.swift */,
 				5E0ACEC4217FC4C500DC76AA /* FundsDataProvider.swift */,
 				FCA60B9B204721600081DC14 /* DashboardDataProvider.swift */,
 				FC4C51AB204812B00042CEE1 /* RequestDataProvider.swift */,
@@ -5181,6 +5193,7 @@
 				5EEFAA7323B6A43200EBBC6D /* ProgramHeaderTableViewCell.xib in Resources */,
 				1926FCBD2759289000FEC4D3 /* SocialManagerInfoAboutTableViewCell.xib in Resources */,
 				192DB068256F075000C198CB /* DashboardInvestmentLimitsTableViewCell.xib in Resources */,
+				F3AB3E9227E0A3B100F15944 /* CoinAssetContentView.xib in Resources */,
 				5E1CF81F218B71D100541C70 /* Montserrat-Medium.ttf in Resources */,
 				19DC7B5625B1D083008AC6D7 /* SocialMediaListTableViewCell.xib in Resources */,
 				5E93E6FB21D1A5370020DE55 /* NotificationsSettingsAssetTableViewCell.xib in Resources */,
@@ -5417,6 +5430,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3AB3E9027E0926000F15944 /* CoinAssetsDataProvider.swift in Sources */,
 				FC27232E20498959005225F2 /* ReaderOverlayView.swift in Sources */,
 				FCA5707220274AC1001942F3 /* Date+DefaultFormat.swift in Sources */,
 				5E39F61323A3F8A60073DAD5 /* AccountProfitPercentCharts.swift in Sources */,
@@ -6188,6 +6202,7 @@
 				19812487246459A900F286FE /* UsersFilterTimeframe.swift in Sources */,
 				FC0E201C2044459500872BE5 /* CIColorExtension.swift in Sources */,
 				5EF9F92A23E322FF00542E1E /* PlatformEvent.swift in Sources */,
+				F3E6185527DF863A00B28324 /* WalletBlockchainDelegateManager.swift in Sources */,
 				5E39F71C23A3F92F0073DAD5 /* TwoFactorCodeModel.swift in Sources */,
 				FC83DF6D203DCBE400A8F8CE /* ProfileDataProvider.swift in Sources */,
 				FCA19A49201AF8ED00157AD6 /* ProgramInfoRouter.swift in Sources */,
@@ -6286,6 +6301,7 @@
 				19787B06248141DB00217CA9 /* SocialSummaryStrategy.swift in Sources */,
 				5E39F5F223A3F8A60073DAD5 /* BrokersProgramInfo.swift in Sources */,
 				5E177095220D03C900669D84 /* WalletTransactionListViewController.swift in Sources */,
+				F3AB3E9427E0AC9500F15944 /* CoinAssetContentView.swift in Sources */,
 				5E12B38D20BEEBF700302730 /* AuthTwoFactorCreateViewController.swift in Sources */,
 				5EC78814216CDE65000C91E4 /* UICollectionView+CellViewModel.swift in Sources */,
 				5EC1C3B5228817750024008E /* AccountsDepositCurrencyDelegateManager.swift in Sources */,
@@ -6949,7 +6965,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.4;
+				MARKETING_VERSION = 2.2.5;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "\"-DPROD\"";
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor;
@@ -7256,7 +7272,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.4;
+				MARKETING_VERSION = 2.2.5;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Onone";
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor;
 				PRODUCT_NAME = "${APP_DISPLAY_NAME}";
@@ -7348,7 +7364,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.4;
+				MARKETING_VERSION = 2.2.5;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "\"-DDEV\"";
 				PRODUCT_BUNDLE_IDENTIFIER = vision.genesis.ios.investor;

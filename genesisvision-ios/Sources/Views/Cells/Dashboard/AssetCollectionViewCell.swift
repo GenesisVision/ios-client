@@ -52,6 +52,8 @@ extension AssetCollectionViewCellViewModel: CellViewModel {
             cell.configure(asset, filterProtocol: filterProtocol, favoriteProtocol: favoriteProtocol)
         } else if let asset = asset as? ProgramInvestingDetailsList {
             cell.configure(asset, filterProtocol: filterProtocol, favoriteProtocol: favoriteProtocol)
+        } else if let asset = asset as? CoinsAsset {
+            cell.configure(asset, filterProtocol: filterProtocol, favoriteProtocol: favoriteProtocol)
         }
     }
 }
@@ -104,6 +106,19 @@ class AssetCollectionViewCell: BaseCollectionViewCell {
         stackView.removeAllArrangedSubviews()
         cellContentView = FollowContentView.viewFromNib()
         if let cellContentView = cellContentView as? FollowContentView {
+            stackView.addArrangedSubview(cellContentView)
+            cellContentView.configure(asset, filterProtocol: filterProtocol, favoriteProtocol: favoriteProtocol)
+        }
+    }
+    
+    /// CoinsAsset
+    /// - Parameters:
+    ///   - asset: CoinsAsset
+    ///   - delegate: FavoriteStateChangeProtocol
+    func configure(_ asset: CoinsAsset, filterProtocol: FilterChangedProtocol?, favoriteProtocol: FavoriteStateChangeProtocol?) {
+        stackView.removeAllArrangedSubviews()
+        cellContentView = CoinAssetContentView.viewFromNib()
+        if let cellContentView = cellContentView as? CoinAssetContentView {
             stackView.addArrangedSubview(cellContentView)
             cellContentView.configure(asset, filterProtocol: filterProtocol, favoriteProtocol: favoriteProtocol)
         }

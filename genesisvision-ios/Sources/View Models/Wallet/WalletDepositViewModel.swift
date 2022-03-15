@@ -30,13 +30,24 @@ final class WalletDepositViewModel {
     
     var selectedCurrency: Currency = .gvt
     var walletCurrencyDelegateManager: WalletDepositCurrencyDelegateManager?
-    
+    weak var blockchainValueUpdateDelegate : BlockchainValueUpdateProtocol?
+    var selectedAdress : WalletDepositData? {
+        didSet {
+            if let address = selectedAdress?.address {
+                self.address = address
+            }
+        }
+    }
+    var walletBlockchainDelegateManager: WalletBlockchainDelegateManager?
+    var depositAddresses: [WalletDepositData]?
+    var selectedWalletData: WalletData?
     var walletSummary: WalletSummary?
     var selectedWallet: WalletData? {
         didSet {
             guard let selectedWallet = selectedWallet, let address = selectedWallet.depositAddresses?.first?.address else { return }
-            
             self.address = address
+            guard let addresses = selectedWallet.depositAddresses else { return }
+            updateBlockchainAddress(addresses: addresses)
         }
     }
     
@@ -52,7 +63,18 @@ final class WalletDepositViewModel {
         if let selectedCurrency = Currency(rawValue: currency.rawValue) {
             self.selectedCurrency = selectedCurrency
             updateSelectedCurrency(selectedCurrency)
+            
+            guard let addresses = selectedWallet?.depositAddresses else { return }
+            updateBlockchainAddress(addresses: addresses)
         }
+    }
+    
+    private func updateBlockchainAddress(addresses: [WalletDepositData]) {
+        depositAddresses = addresses
+        if let firstAddress = addresses.first {
+            selectedAdress = firstAddress
+        }
+        walletBlockchainDelegateManager = WalletBlockchainDelegateManager(addresses)
     }
     
     private func updateSelectedCurrency(_ selectedCurrency: Currency) {
@@ -67,6 +89,11 @@ final class WalletDepositViewModel {
         guard let walletSummary = walletSummary,
             let wallets = walletSummary.wallets else { return }
         selectedWallet = wallets[selectedIndex]
+    }
+    
+    func updateWalletBlockchainAddressIndex(_ selectedIndex: Int) {
+        guard let depositAddresses = depositAddresses else { return }
+        selectedAdress = depositAddresses[selectedIndex]
     }
     
     func getAddress() -> String {

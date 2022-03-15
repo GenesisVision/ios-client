@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -203,7 +203,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="68.5" height="40"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="11i-8E-hSj">
-                                                    <rect key="frame" x="5.5" y="10" width="57.5" height="20"/>
+                                                    <rect key="frame" x="5" y="10" width="58.5" height="20"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Zgo-Ml-RRx">
                                                             <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
@@ -213,7 +213,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fM1-eD-7v3" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
-                                                            <rect key="frame" x="28" y="0.0" width="29.5" height="20"/>
+                                                            <rect key="frame" x="28" y="0.0" width="30.5" height="20"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -239,7 +239,7 @@
                                             <rect key="frame" x="76.5" y="0.0" width="68" height="40"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Gom-yB-NKL">
-                                                    <rect key="frame" x="5.5" y="10" width="57.5" height="20"/>
+                                                    <rect key="frame" x="5" y="10" width="58.5" height="20"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nNV-Jj-wuf">
                                                             <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
@@ -249,7 +249,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="36w-OQ-O7v" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
-                                                            <rect key="frame" x="28" y="0.0" width="29.5" height="20"/>
+                                                            <rect key="frame" x="28" y="0.0" width="30.5" height="20"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -274,7 +274,7 @@
                                             <rect key="frame" x="152.5" y="0.0" width="68.5" height="40"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="C7M-52-BDR">
-                                                    <rect key="frame" x="5.5" y="10" width="57.5" height="20"/>
+                                                    <rect key="frame" x="5" y="10" width="58.5" height="20"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZjK-ji-F6d">
                                                             <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
@@ -284,7 +284,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dwQ-RY-uxs" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
-                                                            <rect key="frame" x="28" y="0.0" width="29.5" height="20"/>
+                                                            <rect key="frame" x="28" y="0.0" width="30.5" height="20"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -341,8 +341,8 @@
                     </subviews>
                 </stackView>
             </subviews>
-            <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="8" bottom="8" trailing="8"/>
             <viewLayoutGuide key="safeArea" id="eqq-Cg-3gG"/>
+            <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="8" bottom="8" trailing="8"/>
             <connections>
                 <outlet property="chartView" destination="REY-F4-ReO" id="Iv4-4a-3R0"/>
                 <outlet property="favoriteButton" destination="mZG-vS-NyW" id="Uch-Xi-Rei"/>
