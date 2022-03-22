@@ -99,6 +99,16 @@ class CoinAssetsListViewController : BaseViewControllerWithTableView {
     
 }
 
+extension CoinAssetsListViewController {
+    override func filterButtonAction() {
+        viewModel.showFilterVC(listViewModel: viewModel, filterModel: viewModel.filterModel, filterType: .coinAsset, sortingType: .funds)
+    }
+    
+    override func signInButtonAction() {
+        viewModel.showSignInVC()
+    }
+}
+
 
 // MARK: - ReloadDataProtocol
 extension CoinAssetsListViewController: ReloadDataProtocol {

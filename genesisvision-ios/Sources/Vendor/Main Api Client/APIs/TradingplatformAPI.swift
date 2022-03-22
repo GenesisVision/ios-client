@@ -2874,9 +2874,9 @@ open class TradingplatformAPI {
         let parameters: [String:Any]? = nil
         var url = URLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems(values: [
-                        "interval": interval, 
-                        "startTime": startTime?.encodeToJSON(), 
-                        "endTime": endTime?.encodeToJSON(), 
+                        "interval": interval,
+                        "startTime": startTime?.encodeToJSON(),
+                        "endTime": endTime?.encodeToJSON(),
                         "limit": limit?.encodeToJSON()
         ])
 

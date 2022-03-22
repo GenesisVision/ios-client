@@ -14,6 +14,18 @@ class CoinAssetsDataProvider: DataProvider {
             DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
+    static func getKlines(symbol: String, interval: BinanceKlineInterval? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil, completion: @escaping (_ binanceRawKlineItemsViewModel: BinanceRawKlineItemsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+
+        let fullSymbol = symbol.uppercased() + Currency.usdt.rawValue.uppercased()
+        TradingplatformAPI.getKlines(symbol: fullSymbol,
+                                     interval: interval,
+                                     startTime: startTime,
+                                     endTime: endTime,
+                                     limit: limit) { viewModel, error in
+            
+            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
     
     // MARK: - Favorites
     static func favorites(isFavorite: Bool, assetId: String, completion: @escaping CompletionBlock) {

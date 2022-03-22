@@ -364,6 +364,13 @@ extension Router {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
+    func showCoinAssetDetails(coinAsset : CoinsAsset) {
+        guard let viewController = CoinAssetDetailViewController.storyboardInstance(.assets) else { return }
+        viewController.viewModel = CoinAssetDetailViewModel(asset: coinAsset)
+        viewController.viewModel?.chartViewDelegate = viewController
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
     func showFilterVC(with listViewModel: ListViewModelProtocol, filterModel: FilterModel, filterType: FilterType, sortingType: SortingType) {
         guard let viewController = FiltersViewController.storyboardInstance(.assets) else { return }
         let router = ProgramFilterRouter(parentRouter: self, navigationController: navigationController)

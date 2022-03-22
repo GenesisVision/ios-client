@@ -81,6 +81,7 @@ enum ChartDurationType: Int {
     }
 }
 
+
 // MARK: - DateRange
 enum DateRangeType: Int {
     case day

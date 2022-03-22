@@ -457,7 +457,7 @@ extension ListViewModelProtocol {
         case .fund:
             showFundDetail(at: indexPath)
         case .coinAsset:
-            break
+            showCoinAssetDetail(at: indexPath)
         case ._none:
             showManagerDetail(at: indexPath)
         }
@@ -479,6 +479,12 @@ extension ListViewModelProtocol {
         guard let model = model(for: indexPath) as? FundTableViewCellViewModel, let assetId = model.asset._id?.uuidString else { return }
         
         router.show(routeType: .showAssetDetails(assetId: assetId, assetType: assetType))
+    }
+    
+    func showCoinAssetDetail(at indexPath: IndexPath) {
+        guard let model = model(for: indexPath) as? CoinAssetTableViewCellViewModel else { return }
+        
+        router.show(routeType: .showCoinAssetDetails(coinAsset : model.asset))
     }
     
     func showManagerDetail(at indexPath: IndexPath) {

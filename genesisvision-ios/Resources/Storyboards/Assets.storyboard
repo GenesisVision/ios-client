@@ -301,10 +301,85 @@
             </objects>
             <point key="canvasLocation" x="4872" y="913"/>
         </scene>
+        <!--Coin Asset Detail View Controller-->
+        <scene sceneID="mzQ-S1-F6h">
+            <objects>
+                <viewController storyboardIdentifier="CoinAssetDetailViewController" id="emw-du-hu6" customClass="CoinAssetDetailViewController" customModule="GV_DEBUG" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Mal-DB-9MY">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YeH-l8-PLD">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ZIU-7K-SaR">
+                                        <rect key="frame" x="8" y="0.0" width="398" height="32"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <segments>
+                                            <segment title="First"/>
+                                            <segment title="Second"/>
+                                        </segments>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <action selector="segmentedControlValueChanged:" destination="emw-du-hu6" eventType="valueChanged" id="0fg-dF-qks"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UBw-u5-F1Z" customClass="LineChartView" customModule="Charts">
+                                        <rect key="frame" x="0.0" y="31" width="414" height="260"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="260" id="iVL-di-6fD"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="descriptionLabel" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bz6-9U-DzV">
+                                        <rect key="frame" x="8" y="291" width="398" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                <constraints>
+                                    <constraint firstItem="ZIU-7K-SaR" firstAttribute="leading" secondItem="6H9-nX-wZV" secondAttribute="leading" constant="8" id="3dF-u8-hT6"/>
+                                    <constraint firstItem="6H9-nX-wZV" firstAttribute="trailing" secondItem="UBw-u5-F1Z" secondAttribute="trailing" id="e5U-Qh-rnO"/>
+                                    <constraint firstItem="bz6-9U-DzV" firstAttribute="leading" secondItem="6H9-nX-wZV" secondAttribute="leading" constant="8" id="hfe-RB-NWe"/>
+                                    <constraint firstItem="bz6-9U-DzV" firstAttribute="top" secondItem="UBw-u5-F1Z" secondAttribute="bottom" id="iZb-jq-Ign"/>
+                                    <constraint firstItem="ZIU-7K-SaR" firstAttribute="top" secondItem="jni-s3-Nin" secondAttribute="top" id="kv7-Ky-IZX"/>
+                                    <constraint firstItem="UBw-u5-F1Z" firstAttribute="top" secondItem="ZIU-7K-SaR" secondAttribute="bottom" id="nf4-c0-TLU"/>
+                                    <constraint firstItem="6H9-nX-wZV" firstAttribute="trailing" secondItem="ZIU-7K-SaR" secondAttribute="trailing" constant="8" id="xsg-WE-AmJ"/>
+                                    <constraint firstItem="6H9-nX-wZV" firstAttribute="trailing" secondItem="bz6-9U-DzV" secondAttribute="trailing" constant="8" id="yYW-gW-Jdz"/>
+                                    <constraint firstItem="UBw-u5-F1Z" firstAttribute="leading" secondItem="6H9-nX-wZV" secondAttribute="leading" id="zGz-df-C0E"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="jni-s3-Nin"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="6H9-nX-wZV"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="7f7-x5-DEK"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="YeH-l8-PLD" firstAttribute="top" secondItem="7f7-x5-DEK" secondAttribute="top" id="4bg-si-3Xb"/>
+                            <constraint firstItem="YeH-l8-PLD" firstAttribute="leading" secondItem="7f7-x5-DEK" secondAttribute="leading" id="Dks-M4-5q0"/>
+                            <constraint firstAttribute="bottom" secondItem="YeH-l8-PLD" secondAttribute="bottom" id="fOJ-QN-5lD"/>
+                            <constraint firstItem="YeH-l8-PLD" firstAttribute="trailing" secondItem="7f7-x5-DEK" secondAttribute="trailing" id="wBR-DC-YcO"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="descriptionLabel" destination="bz6-9U-DzV" id="GFD-ma-5eU"/>
+                        <outlet property="lineChartView" destination="UBw-u5-F1Z" id="hWu-Yy-StW"/>
+                        <outlet property="segmentedControl" destination="ZIU-7K-SaR" id="HQf-n9-IIo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ija-iY-p4I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4871.0144927536239" y="1563.6160714285713"/>
+        </scene>
     </scenes>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

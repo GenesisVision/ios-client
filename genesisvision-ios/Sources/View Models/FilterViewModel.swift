@@ -14,7 +14,7 @@ protocol FilterViewModelProtocol: AnyObject {
 }
 
 enum FilterType {
-    case programs, funds, follows
+    case programs, funds, follows, coinAsset
 }
 
 final class FilterViewModel {
@@ -74,6 +74,8 @@ final class FilterViewModel {
             rows = [.dateRange, .sort]
         case .funds:
             rows = [.dateRange, .sort]
+        case .coinAsset:
+            rows = [.assets, .sort]
         }
         
         self.router = router
