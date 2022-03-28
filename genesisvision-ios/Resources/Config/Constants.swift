@@ -44,4 +44,9 @@ final class Constants {
     
     static let gvtString = "GVT"
     static let projectStartDate = 1483228800
+    
+    struct CoinAssetsConstants {
+        static let about = "About"
+        static let chart = "Chart"
+    }
 }

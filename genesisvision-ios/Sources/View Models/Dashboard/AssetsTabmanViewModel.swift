@@ -11,9 +11,9 @@ import Tabman
 
 class AssetsTabmanViewModel: TabmanViewModel {
     enum TabType: String {
-        case follows = "Follows", funds = "Funds", programs = "Programs", coinAssets = "Assets"
+        case coinAssets = "Assets", follows = "Follows", funds = "Funds", programs = "Programs"
     }
-    var tabTypes: [TabType] = [.follows, .funds, .programs, .coinAssets]
+    var tabTypes: [TabType] = [.coinAssets, .follows, .funds, .programs]
     var controllers = [TabType : UIViewController]()
     
     var filterModel: FilterModel = FilterModel()

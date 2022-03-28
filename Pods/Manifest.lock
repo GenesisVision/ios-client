@@ -117,7 +117,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
-  - Charts
+  - Charts (= 3.4.0)
   - DZNEmptyDataSet
   - FINNBottomSheet (from `https://github.com/finn-no/BottomSheet.git`)
   - Firebase/Analytics
@@ -218,6 +218,6 @@ SPEC CHECKSUMS:
   SweeterSwift: 8a90cf3156f5a1b6f39785c479369a16633b5ea9
   Tabman: 63eae331ae7a9388ae389b1808f1939269fcdece
 
-PODFILE CHECKSUM: cad5d9367ebf609526580fc0f2ced533f4cb5544
+PODFILE CHECKSUM: 6be5ac64292d292e76457c2a6867251568a57f14
 
 COCOAPODS: 1.11.2

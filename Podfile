@@ -5,7 +5,7 @@ use_frameworks!
 inhibit_all_warnings!
 
 target 'genesisvision-ios' do
-    pod 'Charts'
+    pod 'Charts', '3.4.0'
     
     pod 'Alamofire'
     pod 'PKHUD'

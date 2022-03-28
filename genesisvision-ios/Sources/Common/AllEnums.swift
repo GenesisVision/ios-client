@@ -81,6 +81,24 @@ enum ChartDurationType: Int {
     }
 }
 
+enum KlinesChartIntervalLabels : String {
+    case oneMinute = "1m"
+    case threeMinutes = "3m"
+    case fiveMinutes = "5m"
+    case fifteenMinutes = "15m"
+    case thirtyMinutes = "30m"
+    case oneHour = "1H"
+    case twoHour = "2H"
+    case fourHour = "4H"
+    case sixHour = "6H"
+    case eightHour = "8H"
+    case twelveHour = "12H"
+    case oneDay = "1D"
+    case threeDay = "3D"
+    case oneWeek = "1W"
+    case oneMonth = "1M"
+}
+
 
 // MARK: - DateRange
 enum DateRangeType: Int {

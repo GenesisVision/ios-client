@@ -9,90 +9,111 @@
 import Foundation
 import Charts
 
+protocol ChartViewDelegateProtocol: AnyObject {
+    func pushDataToChartView(dataSet: CandleChartDataSet, xAxisValueFormatter: MyXAxisFormatter)
+}
 
-protocol ChartViewDelegateProtocol : AnyObject {
-    func pushDataToChartView(candleChartData : CandleChartData, xAxisValueFormatter : MyXAxisFormatter)
+protocol CoinAssetDetailViewModelProtocol {
+    var intervals: [KlineIntervalButton] { get }
+    var coinAsset: CoinsAsset? { get }
+    func deleteChartValues()
+    func setupIntervalButtons(indexPath : IndexPath)
+}
+
+protocol CoinAssetDetailViewModelChartProtocol {
+    func setupChartValues(interval: BinanceKlineInterval)
+    func updateChartValues(indexPath: IndexPath)
+    func deleteChartValues()
 }
 
 class CoinAssetDetailViewModel {
     let asset: CoinsAsset?
-    var chartValues = [CandleChartDataEntry]()
-    var dateRange = FilterDateRangeModel()
-    weak var chartViewDelegate : ChartViewDelegateProtocol?
+    private var chartValues = [CandleChartDataEntry]()
+    private var dateRange = FilterDateRangeModel()
+    private weak var chartViewDelegate: ChartViewDelegateProtocol?
+    private(set) var interval: BinanceKlineInterval = .oneHour
+    private var intervalButtons = [KlineIntervalButton(title: .oneMinute, interval: .oneMinute),
+                           KlineIntervalButton(title: .threeMinutes, interval: .threeMinutes),
+                           KlineIntervalButton(title: .fiveMinutes, interval: .fiveMinutes),
+                           KlineIntervalButton(title: .fifteenMinutes, interval: .fifteenMinutes),
+                           KlineIntervalButton(title: .thirtyMinutes, interval: .thirtyMinutes),
+                           KlineIntervalButton(title: .oneHour, interval: .oneHour, isCurrent: true),
+                           KlineIntervalButton(title: .twoHour, interval: .twoHour),
+                           KlineIntervalButton(title: .fourHour, interval: .fourHour),
+                           KlineIntervalButton(title: .sixHour, interval: .sixHour),
+                           KlineIntervalButton(title: .twelveHour, interval: .twelveHour),
+                           KlineIntervalButton(title: .oneDay, interval: .oneDay),
+                           KlineIntervalButton(title: .threeDay, interval: .threeDay),
+                           KlineIntervalButton(title: .oneWeek, interval: .oneWeek),
+                           KlineIntervalButton(title: .oneMonth, interval: .oneMonth)
+    ]
     
-    init(asset: CoinsAsset) {
+    init(asset: CoinsAsset, chartViewDelegate: ChartViewDelegateProtocol) {
         self.asset = asset
-//        self.setupChartValues(asset: asset)
-//        setupChartValues2()
+        self.chartViewDelegate = chartViewDelegate
+        self.setupChartValues(interval: interval)
     }
+}
+
+extension CoinAssetDetailViewModel: CoinAssetDetailViewModelProtocol {
+    var coinAsset: CoinsAsset? {
+        asset
+    }
+    var intervals: [KlineIntervalButton] {
+        intervalButtons
+    }
+    func setupIntervalButtons(indexPath: IndexPath) {
+        guard indexPath.item <= intervalButtons.count else { return }
+        for (index, _ ) in intervalButtons.enumerated() {
+            intervalButtons[index].isCurrent = false
+        }
+        intervalButtons[indexPath.item].isCurrent = true
+        let selectedInterval = intervalButtons[indexPath.item]
+        interval = selectedInterval.interval
+    }
+}
+
+extension CoinAssetDetailViewModel: CoinAssetDetailViewModelChartProtocol {
     
-    func setupChartValues(asset: CoinsAsset) {
-        guard let symbol = asset.details?.symbol else { return }
-        CoinAssetsDataProvider.getKlines(symbol: symbol, interval: .oneMonth) { viewModel in
+    func setupChartValues(interval: BinanceKlineInterval) {
+        
+        guard let symbol = asset?.details?.symbol else { return }
+        CoinAssetsDataProvider.getKlines(symbol: symbol, interval: interval) { viewModel in
             guard let items = viewModel?.items else { return }
-            for elem in items {
+            var xVlaues = [Double]()
+            for (index,elem) in items.enumerated() {
+    
                 guard let openTime = elem.openTime?.timeIntervalSince1970,
                       let high = elem.high,
                       let low = elem.low,
                       let openValue = elem._open,
                       let closeValue = elem.close else { return }
-                print(openTime)
-                print(high)
-                print(low)
-                print(openValue)
-                print(closeValue)
-                
-                let chartData = CandleChartDataEntry(x: openTime, shadowH: high, shadowL: low, open: openValue, close: closeValue)
+                let chartData = CandleChartDataEntry(x: Double(index), shadowH: high, shadowL: low, open: openValue, close: closeValue)
+                xVlaues.append(openTime)
                 self.chartValues.append(chartData)
             }
             DispatchQueue.main.async {
                 let dataSet = CandleChartDataSet(entries: self.chartValues, label: "Data Set")
-                let data = CandleChartData(dataSet: dataSet)
                 guard self.chartViewDelegate != nil else { return }
                 let dateFormat = "MMM d"
-                let xAxisValueFormatter = MyXAxisFormatter(dateFormat: dateFormat)
-//                self.chartViewDelegate?.pushDataToChartView(candleChartData: data, xAxisValueFormatter : xAxisValueFormatter)
+                let xAxisValueFormatter = MyXAxisFormatter(dateFormat: dateFormat, xVlaues: xVlaues)
+                self.chartViewDelegate?.pushDataToChartView(dataSet: dataSet, xAxisValueFormatter : xAxisValueFormatter)
             }
             
         } errorCompletion: { result in
             print(result)
         }
     }
-    func setupChartValues2() {
-        DispatchQueue.main.async {
-            let yVals1 = (0..<10).map { (i) -> CandleChartDataEntry in
-                let mult = 50 + 1
-                let val = Double(Int(arc4random_uniform(40)) + mult)
-                let high = Double(arc4random_uniform(9) + 8)
-                let low = Double(arc4random_uniform(9) + 8)
-                let open = Double(arc4random_uniform(6) + 1)
-                let close = Double(arc4random_uniform(6) + 1)
-                let even = i % 2 == 0
-                
-                return CandleChartDataEntry(x: Double(i), shadowH: val + high, shadowL: val - low, open: even ? val + open : val - open, close: even ? val - close : val + close)
-            }
-            
-            let set1 = CandleChartDataSet(entries: yVals1, label: "Data Set")
-            let data = CandleChartData(dataSet: set1)
-            let dateFormat = "MMM d"
-            let xAxisValueFormatter = MyXAxisFormatter(dateFormat: dateFormat)
-            self.chartViewDelegate?.pushDataToChartView(candleChartData: data, xAxisValueFormatter : xAxisValueFormatter)
-        }
+    
+    func deleteChartValues() {
+        chartValues.removeAll()
+    }
+    
+    func updateChartValues(indexPath: IndexPath) {
+        guard indexPath.item <= intervals.count else { return }
+        let interval = intervals[indexPath.item].interval
+        deleteChartValues()
+        setupChartValues(interval: interval)
     }
 }
 
-class MyXAxisFormatter : NSObject, IAxisValueFormatter {
-    
-    var dateFormat : String
-    
-    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        let date = Date(timeIntervalSince1970: TimeInterval(value) / 1000)
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = dateFormat
-        let dateString = dateFormatter.string(from: date)
-        return dateString
-    }
-    init(dateFormat: String) {
-        self.dateFormat = dateFormat
-    }
-}

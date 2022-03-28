@@ -11,7 +11,7 @@ import Foundation
 class CoinAssetsDataProvider: DataProvider {
     static func get(_ sorting: CoinsFilterSorting? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ coinAssetsViewModel: CoinsAssetItemsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         CoinsAPI.getCoins(sorting: sorting, assets: nil, isFavorite: nil, skip: skip, take: take) { viewModel, error in
-            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+                DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
     static func getKlines(symbol: String, interval: BinanceKlineInterval? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil, completion: @escaping (_ binanceRawKlineItemsViewModel: BinanceRawKlineItemsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
@@ -22,8 +22,7 @@ class CoinAssetsDataProvider: DataProvider {
                                      startTime: startTime,
                                      endTime: endTime,
                                      limit: limit) { viewModel, error in
-            
-            DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+                DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
     

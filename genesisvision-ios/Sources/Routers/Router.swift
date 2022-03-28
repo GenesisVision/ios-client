@@ -366,8 +366,7 @@ extension Router {
     
     func showCoinAssetDetails(coinAsset : CoinsAsset) {
         guard let viewController = CoinAssetDetailViewController.storyboardInstance(.assets) else { return }
-        viewController.viewModel = CoinAssetDetailViewModel(asset: coinAsset)
-        viewController.viewModel?.chartViewDelegate = viewController
+        viewController.viewModel = CoinAssetDetailViewModel(asset: coinAsset, chartViewDelegate: viewController)
         navigationController?.pushViewController(viewController, animated: true)
     }
     
