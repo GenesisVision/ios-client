@@ -16,6 +16,7 @@ protocol ChartViewDelegateProtocol: AnyObject {
 protocol CoinAssetDetailViewModelProtocol {
     var intervals: [KlineIntervalButton] { get }
     var coinAsset: CoinsAsset? { get }
+    var tickerSymbol: String? { get }
     func deleteChartValues()
     func setupIntervalButtons(indexPath : IndexPath)
 }
@@ -28,6 +29,7 @@ protocol CoinAssetDetailViewModelChartProtocol {
 
 class CoinAssetDetailViewModel {
     let asset: CoinsAsset?
+    var fullSymbol: String?
     private var chartValues = [CandleChartDataEntry]()
     private var dateRange = FilterDateRangeModel()
     private weak var chartViewDelegate: ChartViewDelegateProtocol?
@@ -56,6 +58,9 @@ class CoinAssetDetailViewModel {
 }
 
 extension CoinAssetDetailViewModel: CoinAssetDetailViewModelProtocol {
+    var tickerSymbol: String? {
+        fullSymbol
+    }
     var coinAsset: CoinsAsset? {
         asset
     }
@@ -77,8 +82,20 @@ extension CoinAssetDetailViewModel: CoinAssetDetailViewModelChartProtocol {
     
     func setupChartValues(interval: BinanceKlineInterval) {
         
-        guard let symbol = asset?.details?.symbol else { return }
-        CoinAssetsDataProvider.getKlines(symbol: symbol, interval: interval) { viewModel in
+        guard let symbol = asset?.details?.symbol?.uppercased() else { return }
+        
+        switch symbol {
+        case Currency.btc.rawValue.uppercased():
+            fullSymbol = symbol.uppercased() + Currency.usdt.rawValue.uppercased()
+        case Currency.usdt.rawValue.uppercased():
+            fullSymbol = Currency.btc.rawValue.uppercased() + Currency.usdt.rawValue.uppercased()
+        default:
+            fullSymbol = symbol.uppercased() + Currency.btc.rawValue.uppercased()
+        }
+        
+        guard let fullSymbol = fullSymbol else { return }
+        
+        CoinAssetsDataProvider.getKlines(symbol: fullSymbol, interval: interval) { viewModel in
             guard let items = viewModel?.items else { return }
             var xVlaues = [Double]()
             for (index,elem) in items.enumerated() {

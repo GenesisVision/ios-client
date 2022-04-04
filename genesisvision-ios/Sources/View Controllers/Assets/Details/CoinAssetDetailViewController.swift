@@ -70,10 +70,23 @@ class CoinAssetDetailViewController : UIViewController {
         }
     }
     @IBOutlet var constraints: [NSLayoutConstraint]!
+    
     var activityIndicator = UIActivityIndicatorView()
+    
+    @IBAction func buyButtonTapped(_ sender: UIButton) {
+        guard let viewController = CoinAssetBuyOrSellViewController.storyboardInstance(.assets),
+              let coinAsset = viewModel?.coinAsset else { return }
+        
+        viewController.viewModel = CoinAssetBuyAndSellViewModel(asset: coinAsset)
+        navigationController?.pushViewController(viewController, animated: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setuplabels()
+        navigationBarSetup()
+        setupStackView()
+        setupActivityIndicator()
         CandleStickChartView.delegate = self
         intervalCollectionView.delegate = self
         intervalCollectionView.dataSource = self
@@ -83,10 +96,9 @@ class CoinAssetDetailViewController : UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setuplabels()
-        navigationBarSetup()
-        setupStackView()
-        setupActivityIndicator()
+//        setuplabels()
+//        navigationBarSetup()
+//        setupStackView()
     }
     
     override func viewWillLayoutSubviews() {
@@ -105,8 +117,8 @@ class CoinAssetDetailViewController : UIViewController {
         DispatchQueue.main.async { [self] in
             self.descriptionLabel.text = asset.details?._description
             self.aboutTitleLabel.text = Constants.CoinAssetsConstants.about + " " + (asset.name ?? "")
-            if let symbol = asset.details?.symbol {
-                self.chartLabel.text = Constants.CoinAssetsConstants.chart + " " + symbol + Currency.usdt.rawValue
+            if let tickerSymbol = viewModel?.tickerSymbol {
+                self.chartLabel.text = Constants.CoinAssetsConstants.chart + " " + tickerSymbol
             }
         }
     }
@@ -184,6 +196,7 @@ class CoinAssetDetailViewController : UIViewController {
 }
 
 extension CoinAssetDetailViewController : ChartViewDelegateProtocol, ChartViewDelegate {
+    
     func lineChartViewSetup() {
         DispatchQueue.main.async { [self] in
             CandleStickChartView.backgroundColor = UIColor.BaseView.bg

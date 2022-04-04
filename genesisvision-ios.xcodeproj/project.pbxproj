@@ -1086,6 +1086,7 @@
 		F30B565627D8A489008D37B5 /* CoinAssetsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30B565527D8A489008D37B5 /* CoinAssetsListViewController.swift */; };
 		F35ABFEB27EB576F003D1011 /* CoinAssetDetailIntervalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35ABFEA27EB576F003D1011 /* CoinAssetDetailIntervalCollectionViewCell.swift */; };
 		F35EC8BC27B6B8BB002D72E9 /* String+LastWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35EC8BB27B6B8BB002D72E9 /* String+LastWord.swift */; };
+		F364EFC327F3068C000FE6EE /* CoinAssetBuyAndSellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F364EFC227F3068C000FE6EE /* CoinAssetBuyAndSellViewModel.swift */; };
 		F390C752278D8BE8006FF6CB /* PushNotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F390C751278D8BE8006FF6CB /* PushNotificationViewModel.swift */; };
 		F390C754278D8CD6006FF6CB /* DynamicLinkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F390C753278D8CD6006FF6CB /* DynamicLinkManager.swift */; };
 		F390C756278D8D57006FF6CB /* AuthThreeFactorSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F390C755278D8D57006FF6CB /* AuthThreeFactorSignInViewController.swift */; };
@@ -1098,8 +1099,11 @@
 		F3AB3E9427E0AC9500F15944 /* CoinAssetContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AB3E9327E0AC9500F15944 /* CoinAssetContentView.swift */; };
 		F3AF4D3827E87B6700486716 /* CoinAssetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AF4D3727E87B6700486716 /* CoinAssetDetailViewController.swift */; };
 		F3AF4D3B27E89B0500486716 /* CoinAssetDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AF4D3A27E89B0500486716 /* CoinAssetDetailViewModel.swift */; };
+		F3BA45F827FB2B5500ED7A0C /* SellAndBuyCoinAssetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BA45F727FB2B5500ED7A0C /* SellAndBuyCoinAssetView.swift */; };
+		F3BA45FA27FB2C1A00ED7A0C /* SellAndBuyCoinAssetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3BA45F927FB2C1A00ED7A0C /* SellAndBuyCoinAssetView.xib */; };
 		F3D3A1BB27F1BD6300263364 /* ButtonsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D3A1BA27F1BD6300263364 /* ButtonsModels.swift */; };
 		F3D3A1BD27F1BE8000263364 /* ChartsAxisFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D3A1BC27F1BE8000263364 /* ChartsAxisFormatter.swift */; };
+		F3D3A1BF27F1FE4D00263364 /* CoinAssetBuyOrSellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D3A1BE27F1FE4D00263364 /* CoinAssetBuyOrSellViewController.swift */; };
 		F3E6185527DF863A00B28324 /* WalletBlockchainDelegateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E6185427DF863A00B28324 /* WalletBlockchainDelegateManager.swift */; };
 		FC0E20062044123F00872BE5 /* PhotoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E20052044123F00872BE5 /* PhotoHeaderView.swift */; };
 		FC0E200A2044357800872BE5 /* WalletDepositViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E20092044357800872BE5 /* WalletDepositViewController.swift */; };
@@ -2378,6 +2382,7 @@
 		F30B565527D8A489008D37B5 /* CoinAssetsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinAssetsListViewController.swift; sourceTree = "<group>"; };
 		F35ABFEA27EB576F003D1011 /* CoinAssetDetailIntervalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinAssetDetailIntervalCollectionViewCell.swift; sourceTree = "<group>"; };
 		F35EC8BB27B6B8BB002D72E9 /* String+LastWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+LastWord.swift"; sourceTree = "<group>"; };
+		F364EFC227F3068C000FE6EE /* CoinAssetBuyAndSellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinAssetBuyAndSellViewModel.swift; sourceTree = "<group>"; };
 		F390C751278D8BE8006FF6CB /* PushNotificationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationViewModel.swift; sourceTree = "<group>"; };
 		F390C753278D8CD6006FF6CB /* DynamicLinkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicLinkManager.swift; sourceTree = "<group>"; };
 		F390C755278D8D57006FF6CB /* AuthThreeFactorSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthThreeFactorSignInViewController.swift; sourceTree = "<group>"; };
@@ -2390,8 +2395,11 @@
 		F3AB3E9327E0AC9500F15944 /* CoinAssetContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinAssetContentView.swift; sourceTree = "<group>"; };
 		F3AF4D3727E87B6700486716 /* CoinAssetDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinAssetDetailViewController.swift; sourceTree = "<group>"; };
 		F3AF4D3A27E89B0500486716 /* CoinAssetDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinAssetDetailViewModel.swift; sourceTree = "<group>"; };
+		F3BA45F727FB2B5500ED7A0C /* SellAndBuyCoinAssetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellAndBuyCoinAssetView.swift; sourceTree = "<group>"; };
+		F3BA45F927FB2C1A00ED7A0C /* SellAndBuyCoinAssetView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SellAndBuyCoinAssetView.xib; sourceTree = "<group>"; };
 		F3D3A1BA27F1BD6300263364 /* ButtonsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsModels.swift; sourceTree = "<group>"; };
 		F3D3A1BC27F1BE8000263364 /* ChartsAxisFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsAxisFormatter.swift; sourceTree = "<group>"; };
+		F3D3A1BE27F1FE4D00263364 /* CoinAssetBuyOrSellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinAssetBuyOrSellViewController.swift; sourceTree = "<group>"; };
 		F3E6185427DF863A00B28324 /* WalletBlockchainDelegateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletBlockchainDelegateManager.swift; sourceTree = "<group>"; };
 		FC0E20052044123F00872BE5 /* PhotoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoHeaderView.swift; sourceTree = "<group>"; };
 		FC0E20092044357800872BE5 /* WalletDepositViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDepositViewController.swift; sourceTree = "<group>"; };
@@ -3676,6 +3684,8 @@
 				1926FC782757764300FEC4D3 /* ReplyInputField.swift */,
 				1926FC7A27577F4500FEC4D3 /* ReplierView.swift */,
 				1926FCC0275E57DF00FEC4D3 /* SocialTextView.swift */,
+				F3BA45F727FB2B5500ED7A0C /* SellAndBuyCoinAssetView.swift */,
+				F3BA45F927FB2C1A00ED7A0C /* SellAndBuyCoinAssetView.xib */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -4290,6 +4300,7 @@
 		F30B565327D8A438008D37B5 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				F3AF4D3627E87B4200486716 /* Details */,
 				F30B565427D8A466008D37B5 /* List */,
 			);
 			path = Assets;
@@ -4339,6 +4350,7 @@
 			isa = PBXGroup;
 			children = (
 				F3AF4D3727E87B6700486716 /* CoinAssetDetailViewController.swift */,
+				F3D3A1BE27F1FE4D00263364 /* CoinAssetBuyOrSellViewController.swift */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -4347,6 +4359,7 @@
 			isa = PBXGroup;
 			children = (
 				F3AF4D3A27E89B0500486716 /* CoinAssetDetailViewModel.swift */,
+				F364EFC227F3068C000FE6EE /* CoinAssetBuyAndSellViewModel.swift */,
 			);
 			path = "CoinAsset Details";
 			sourceTree = "<group>";
@@ -4911,7 +4924,6 @@
 				5EC670A121AEAD8A009BF4C0 /* Common */,
 				FCC9DD6F200E4C7E008825EC /* Programs */,
 				F30B565327D8A438008D37B5 /* Assets */,
-				F3AF4D3627E87B4200486716 /* Details */,
 				5E0AD0E821813E8700DC76AA /* Funds */,
 				5E6C0CF12109A8E000B7F844 /* Manager */,
 				FC4964162015446700104CEB /* Wallet */,
@@ -5236,6 +5248,7 @@
 				5EA274CB21628297008CAF77 /* DetailBalanceChartTableViewCell.xib in Resources */,
 				5EEFAA6523B5BFB900EBBC6D /* DetailTradingAccountTableViewCell.xib in Resources */,
 				5E942E8920D7BA5A0069343C /* Settings.storyboard in Resources */,
+				F3BA45FA27FB2C1A00ED7A0C /* SellAndBuyCoinAssetView.xib in Resources */,
 				5E1CF81C218B71D100541C70 /* Montserrat-ExtraLight.ttf in Resources */,
 				5EA274B721628207008CAF77 /* ProgramPeriodTableViewCell.xib in Resources */,
 				5E69AC8623DA4EED000AB692 /* DefaultHeaderTableViewCell.xib in Resources */,
@@ -5886,6 +5899,7 @@
 				1926FC8D2757998600FEC4D3 /* BasePlatformAssetItemsViewModel.swift in Sources */,
 				5E39F60523A3F8A60073DAD5 /* AndroidVersion.swift in Sources */,
 				198124832464599D00F286FE /* UserFeedMode.swift in Sources */,
+				F3D3A1BF27F1FE4D00263364 /* CoinAssetBuyOrSellViewController.swift in Sources */,
 				FC0E20202044459500872BE5 /* UIImageViewExtension.swift in Sources */,
 				5E18CE0720C1952A008FE5B5 /* AuthTwoFactorDisableRouter.swift in Sources */,
 				5E5C66EE207FAF700076F630 /* ProgramDetailFullChartViewController.swift in Sources */,
@@ -6319,6 +6333,7 @@
 				19A56F91258A65D200553408 /* BinanceRawFuturesPlaceOrder.swift in Sources */,
 				5E93E70A21D1A5E10020DE55 /* NotificationsSettingsManagerTableViewCellViewModel.swift in Sources */,
 				5E39F72E23A3F92F0073DAD5 /* ProgramInvestingDetailsList.swift in Sources */,
+				F364EFC327F3068C000FE6EE /* CoinAssetBuyAndSellViewModel.swift in Sources */,
 				5E5BBE6E21822AA6009E4BA3 /* FundProfitStatisticTableViewCellViewModel.swift in Sources */,
 				5E39F76F23A3F9300073DAD5 /* SignalSubscriberStatus.swift in Sources */,
 				FC140FE22030168100B71E7F /* AlamofireImplementations.swift in Sources */,
@@ -6494,6 +6509,7 @@
 				1926FCA7275799DE00FEC4D3 /* BinanceUnderlyingType.swift in Sources */,
 				1981245D246458AA00F286FE /* ProgramsFilterSorting.swift in Sources */,
 				5E44E5A82289808400865A85 /* PlatformAPI.swift in Sources */,
+				F3BA45F827FB2B5500ED7A0C /* SellAndBuyCoinAssetView.swift in Sources */,
 				FCB8DFC42010F5EC00698D18 /* SignUpViewController.swift in Sources */,
 				192DB057256D864200C198CB /* KYCInfoViewController.swift in Sources */,
 				5E39F73B23A3F92F0073DAD5 /* ProgramPeriodsViewModel.swift in Sources */,

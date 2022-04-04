@@ -16,8 +16,7 @@ class CoinAssetsDataProvider: DataProvider {
     }
     static func getKlines(symbol: String, interval: BinanceKlineInterval? = nil, startTime: Date? = nil, endTime: Date? = nil, limit: Int? = nil, completion: @escaping (_ binanceRawKlineItemsViewModel: BinanceRawKlineItemsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
 
-        let fullSymbol = symbol.uppercased() + Currency.usdt.rawValue.uppercased()
-        TradingplatformAPI.getKlines(symbol: fullSymbol,
+        TradingplatformAPI.getKlines(symbol: symbol,
                                      interval: interval,
                                      startTime: startTime,
                                      endTime: endTime,

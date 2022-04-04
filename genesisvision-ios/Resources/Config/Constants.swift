@@ -48,5 +48,9 @@ final class Constants {
     struct CoinAssetsConstants {
         static let about = "About"
         static let chart = "Chart"
+        static let disclaimer = "The funds will be converted according to the current market price (Market order)."
+        static let selectAWallet = "Select a wallet currency"
+        static let fee = 0.001
+        static let enterAmount = "Enter amount to transfer"
     }
 }
