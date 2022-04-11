@@ -120,6 +120,10 @@ extension String: CodingKey {
     
 }
 
+extension UINavigationController {
+    var previousViewController: UIViewController? { viewControllers.last { $0 != topViewController } }
+}
+
 extension KeyedEncodingContainerProtocol {
     
     public mutating func encodeArray<T>(_ values: [T], forKey key: Self.Key) throws where T : Encodable {

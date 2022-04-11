@@ -24,6 +24,18 @@ class CoinAssetsDataProvider: DataProvider {
                 DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
+    static func getCoinsPortfolio(sorting: CoinsFilterSorting? = nil, assets: [String]? = nil, isFavorite: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ coinsAssetItemsViewModel: CoinsAssetItemsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        CoinsAPI.getUserCoins(sorting: sorting, assets: assets, isFavorite: isFavorite, skip: skip, take: take) { data, error in
+
+            DataProvider().responseHandler(data, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    
+    static func transfer(body: InternalTransferRequest?, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        CoinsAPI.transfer(body: body) { data, error in
+            completion(data, error)
+        }
+    }
     
     // MARK: - Favorites
     static func favorites(isFavorite: Bool, assetId: String, completion: @escaping CompletionBlock) {

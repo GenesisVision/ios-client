@@ -46,11 +46,25 @@ final class Constants {
     static let projectStartDate = 1483228800
     
     struct CoinAssetsConstants {
+        struct portfolioLabels {
+            static let yourInvestments = "Your investments"
+            static let amount = "Amount"
+            static let price = "Price"
+            static let change24h = "Change24h"
+            static let total = "Total"
+            static let AvaragePrice = "Avarage price"
+            static let profit = "Profit"
+        }
+        
         static let about = "About"
         static let chart = "Chart"
         static let disclaimer = "The funds will be converted according to the current market price (Market order)."
         static let selectAWallet = "Select a wallet currency"
         static let fee = 0.001
         static let enterAmount = "Enter amount to transfer"
+        static let from = "From"
+        static let to = "To"
+        static let minimalTransferDisclaimer = "Not enough money to transfer. Min $10"
+        static let transferError = "Еransaction error. Please try again later"
     }
 }

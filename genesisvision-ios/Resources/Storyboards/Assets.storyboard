@@ -367,6 +367,13 @@
                                                     <constraint firstAttribute="height" constant="324" id="CDh-lY-4X1"/>
                                                 </constraints>
                                             </view>
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Jc-nX-qPp" customClass="SellAndBuyCoinAssetView" customModule="GV_DEBUG" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="444" width="414" height="300"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="300" id="3vy-Rs-r43"/>
+                                                </constraints>
+                                            </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VDH-ed-ulf">
                                                 <rect key="frame" x="51" y="444" width="311" height="47"/>
                                                 <color key="backgroundColor" systemColor="systemGreenColor"/>
@@ -418,13 +425,16 @@
                                             <constraint firstItem="VDH-ed-ulf" firstAttribute="leading" secondItem="V2c-bp-SeE" secondAttribute="leading" constant="51" id="M8G-Fi-fEy"/>
                                             <constraint firstItem="8Np-RF-mm8" firstAttribute="top" secondItem="bz6-9U-DzV" secondAttribute="bottom" constant="30.5" id="NnW-g8-VJr"/>
                                             <constraint firstAttribute="trailing" secondItem="xeq-Tf-Exq" secondAttribute="trailing" id="PGs-L8-dPV"/>
+                                            <constraint firstItem="5Jc-nX-qPp" firstAttribute="leading" secondItem="V2c-bp-SeE" secondAttribute="leading" id="QkO-Z3-odb"/>
                                             <constraint firstItem="xeq-Tf-Exq" firstAttribute="leading" secondItem="V2c-bp-SeE" secondAttribute="leading" constant="16" id="Tjt-W5-XyW"/>
+                                            <constraint firstAttribute="trailing" secondItem="5Jc-nX-qPp" secondAttribute="trailing" id="TwV-wA-dED"/>
                                             <constraint firstAttribute="trailing" secondItem="a9M-rh-y1a" secondAttribute="trailing" constant="16" id="ZBd-Sl-Nko"/>
                                             <constraint firstItem="kDr-72-ZIS" firstAttribute="top" secondItem="VDH-ed-ulf" secondAttribute="bottom" constant="20" id="dsW-1Q-VuZ"/>
                                             <constraint firstAttribute="trailing" secondItem="VDH-ed-ulf" secondAttribute="trailing" constant="52" id="fGR-4U-hH9"/>
                                             <constraint firstAttribute="height" constant="852" id="fzU-6a-veC"/>
                                             <constraint firstItem="bz6-9U-DzV" firstAttribute="top" secondItem="kDr-72-ZIS" secondAttribute="bottom" constant="10" id="h15-dd-0nA"/>
                                             <constraint firstItem="xeq-Tf-Exq" firstAttribute="top" secondItem="a9M-rh-y1a" secondAttribute="bottom" constant="8" symbolic="YES" id="jgs-0c-XUG"/>
+                                            <constraint firstItem="5Jc-nX-qPp" firstAttribute="top" secondItem="UBw-u5-F1Z" secondAttribute="bottom" constant="20" id="ncH-a0-QT1"/>
                                             <constraint firstItem="bz6-9U-DzV" firstAttribute="leading" secondItem="V2c-bp-SeE" secondAttribute="leading" constant="16" id="pEO-x9-fhv"/>
                                             <constraint firstAttribute="centerX" secondItem="8Np-RF-mm8" secondAttribute="trailing" id="qWi-q5-hxn"/>
                                             <constraint firstAttribute="trailing" secondItem="bz6-9U-DzV" secondAttribute="trailing" constant="16" id="wmV-34-wzM"/>
@@ -462,6 +472,8 @@
                         <outlet property="descriptionLabel" destination="bz6-9U-DzV" id="GFD-ma-5eU"/>
                         <outlet property="intervalCollectionView" destination="xeq-Tf-Exq" id="V3b-Q0-6gf"/>
                         <outlet property="scrollView" destination="YeH-l8-PLD" id="s3k-4Z-yXW"/>
+                        <outlet property="sellAndBuyCoinAssetView" destination="5Jc-nX-qPp" id="2KS-OO-rL7"/>
+                        <outlet property="spacingConstraintBetweenButtonAndAboutLabel" destination="dsW-1Q-VuZ" id="NaW-Qo-IUj"/>
                         <outletCollection property="constraints" destination="h15-dd-0nA" collectionClass="NSMutableArray" id="CDx-MM-2pA"/>
                         <outletCollection property="constraints" destination="dsW-1Q-VuZ" collectionClass="NSMutableArray" id="Lru-fx-TL9"/>
                         <outletCollection property="constraints" destination="B4u-k5-QOa" collectionClass="NSMutableArray" id="lau-bc-F9M"/>
@@ -529,7 +541,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="648"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="kFC-kl-wSb">
-                                                <rect key="frame" x="30" y="20" width="354" height="358"/>
+                                                <rect key="frame" x="30" y="20" width="354" height="418"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xTx-am-KEt">
                                                         <rect key="frame" x="0.0" y="0.0" width="354" height="81"/>
@@ -722,19 +734,19 @@
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="akI-T4-Ydy">
-                                                        <rect key="frame" x="0.0" y="226" width="354" height="50"/>
+                                                        <rect key="frame" x="0.0" y="226" width="354" height="110"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="LF3-dZ-k4X">
-                                                                <rect key="frame" x="0.0" y="0.0" width="354" height="10"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="354" height="30"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You will get" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="J2c-3K-1Ow" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="289.5" height="10"/>
+                                                                        <rect key="frame" x="0.0" y="7" width="289.5" height="16.5"/>
                                                                         <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="14"/>
                                                                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="oJv-f6-9vy" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
-                                                                        <rect key="frame" x="297.5" y="0.0" width="56.5" height="10"/>
+                                                                        <rect key="frame" x="297.5" y="7" width="56.5" height="16.5"/>
                                                                         <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="14"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -742,16 +754,16 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wxe-Qx-VIq">
-                                                                <rect key="frame" x="0.0" y="20" width="354" height="10"/>
+                                                                <rect key="frame" x="0.0" y="40" width="354" height="30"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fee" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="aiv-RK-MFl" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="210.5" height="10"/>
+                                                                        <rect key="frame" x="0.0" y="7" width="210.5" height="16.5"/>
                                                                         <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="14"/>
                                                                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="dzM-pc-WBo" customClass="TitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
-                                                                        <rect key="frame" x="218.5" y="0.0" width="135.5" height="10"/>
+                                                                        <rect key="frame" x="218.5" y="7" width="135.5" height="16.5"/>
                                                                         <fontDescription key="fontDescription" name="NeuzeitGro-Lig" family="NeuzeitGroLig" pointSize="14"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -759,7 +771,10 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Disclaimer" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Upf-yo-ePH" customClass="SubtitleLabel" customModule="GV_DEBUG" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="40" width="354" height="10"/>
+                                                                <rect key="frame" x="0.0" y="80" width="354" height="30"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="30" id="3CW-O0-57C"/>
+                                                                </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -767,7 +782,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CoJ-qR-1Kv" customClass="ActionButton" customModule="GV_DEBUG" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="308" width="354" height="50"/>
+                                                        <rect key="frame" x="0.0" y="368" width="354" height="50"/>
                                                         <color key="backgroundColor" red="0.0" green="0.74117647060000003" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="REu-U1-EdW"/>
@@ -776,6 +791,9 @@
                                                         <state key="normal" title="Confirm">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="confirmButtonTapped:" destination="3Am-q1-PTz" eventType="touchUpInside" id="JAq-5G-ffB"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>

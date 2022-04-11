@@ -95,12 +95,17 @@ class CoinAssetBuyOrSellViewController : BaseViewController {
     }
     
     @IBAction func maxButtonTapped(_ sender: UIButton) {
-        amountValueLabel.text = availableInWalletValue.toString()
-        amountValue = availableInWalletValue
+        guard let viewModel = viewModel else { return }
+        if viewModel.isBuyVC {
+            amountValueLabel.text = availableInWalletValue.toString()
+            amountValue = availableInWalletValue
+        } else {
+            guard let assetAvailable = viewModel.coinAsset?.amount else { return }
+            amountValueLabel.text = assetAvailable.toString()
+            amountValue = assetAvailable
+        }
         updateUI()
     }
-    
-    var isBuyViewController = true
     
     var amountValue: Double {
         get {
@@ -137,16 +142,33 @@ class CoinAssetBuyOrSellViewController : BaseViewController {
     
     private func setup() {
         confirmButtonLabel.setEnabled(false)
-        navigationItem.title = "Buy"
+        if viewModel != nil {
+            viewModel?.alertControllerDelegate = self
+        }
+        guard let isBuyVC = viewModel?.isBuyVC else {
+            return}
+        switch isBuyVC {
+        case true:
+            navigationItem.title = "Buy"
+        case false:
+            navigationItem.title = "Sell"
+        }
     }
     
     func setupMainCoinlabels() {
-        guard let asset = viewModel?.coinAsset else { return }
+        guard let viewModel = viewModel, let asset = viewModel.coinAsset else { return }
         DispatchQueue.main.async { [self] in
             if let stringURL = asset.logoUrl, let url = URL(string: stringURL), let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
                 self.currencyLogoImage.image = image
             }
             currencyTitle.text = asset.name
+            
+            switch viewModel.isBuyVC {
+            case true:
+                fromLabel.text = Constants.CoinAssetsConstants.from
+            case false:
+                fromLabel.text = Constants.CoinAssetsConstants.to
+            }
         }
     }
     
@@ -157,18 +179,33 @@ class CoinAssetBuyOrSellViewController : BaseViewController {
             print(result)
         })
     }
-    
+    //MARK: - TODO Постоянно облновлять только некоторые лейблы, неизменные вынести в одиночный метод
     func updateUI() {
         guard let viewModel = self.viewModel, let wallet = viewModel.wallet else { return }
         self.availableInWalletTitleLabel.text = WalletBalanceType.available.rawValue
         if let available = wallet.available, let currency = wallet.currency?.rawValue {
             self.availableInWalletValueLabel.text = available.toString() + " " + (currency)
             self.availableInWalletValue = available
-            self.amountCurrencyLabel.text = currency
+//            self.amountCurrencyLabel.text = currency
         }
+        
+        if viewModel.isBuyVC {
+            let currency = wallet.currency?.rawValue
+            self.amountCurrencyLabel.text = currency
+            let confirmButtonEnabled = amountValue > 0.0 && amountValue <= availableInWalletValue
+            confirmButtonLabel?.setEnabled(confirmButtonEnabled)
+        } else {
+            let assetCurrency = viewModel.coinAsset?.asset
+            self.amountCurrencyLabel.text = assetCurrency
+            guard let assetAvailable = viewModel.coinAsset?.amount else { return }
+            let confirmButtonEnabled = amountValue > 0.0 && amountValue <= assetAvailable
+            confirmButtonLabel?.setEnabled(confirmButtonEnabled)
+        }
+        
         let commission = viewModel.commission
-        if let currency = viewModel.coinAsset?.asset, let currencyType = CurrencyType(rawValue: currency) {
-            if amountValue > commission {
+        if let currency = viewModel.isBuyVC ? viewModel.coinAsset?.asset : wallet.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency) {
+            
+            if viewModel.whatUserGetValue > commission {
                 var value = viewModel.whatUserGetValue
                 value = value > 0.0 ? value : 0.0
                 self.withdrawingValueLabel.text = "≈" + value.rounded(with: currencyType).toString() + " " + currency
@@ -180,10 +217,14 @@ class CoinAssetBuyOrSellViewController : BaseViewController {
         }
         
         amountTitleLabel.text = Constants.CoinAssetsConstants.enterAmount
-        amountValueLabel.text = amountValue.toString()
+//        amountValueLabel.text = amountValue.toString()
         
         if let rate = viewModel.rate, let currency = wallet.currency?.rawValue, let assetCurrency = viewModel.coinAsset?.asset {
-            currencyRateLabel.text = "1 " + currency + " = " + rate.toString() + " " + assetCurrency
+            if viewModel.isBuyVC {
+                currencyRateLabel.text = "1 " + currency + " = " + rate.toString() + " " + assetCurrency
+            } else {
+                currencyRateLabel.text = "1 " + assetCurrency + " = " + rate.toString() + " " + currency
+            }
         }
         
         if let logo = wallet.logoUrl, let fileUrl = getFileURL(fileName: logo) {
@@ -194,33 +235,43 @@ class CoinAssetBuyOrSellViewController : BaseViewController {
             walletDepositCurrencyDelegateManager.currencyDelegate = self
         }
         
-        if let assetAvailable = viewModel.getAssetAvailable(), let currency = viewModel.coinAsset?.asset {
+        if let assetAvailable = viewModel.coinAsset?.amount, let currency = viewModel.coinAsset?.asset {
             currencyValueLabel.text = assetAvailable.toString() + " " + currency
         }
-        let confirmButtonEnabled = amountValue > 0.0 && amountValue <= availableInWalletValue
-        confirmButtonLabel?.setEnabled(confirmButtonEnabled)
+//        let confirmButtonEnabled = amountValue > 0.0 && amountValue <= availableInWalletValue
+//        confirmButtonLabel?.setEnabled(confirmButtonEnabled)
     }
     
     func setupTriange() {
+        guard let viewModel = viewModel else { return }
         let triangle = UIView()
         triangle.translatesAutoresizingMaskIntoConstraints = false
-        firstView.addSubview(triangle)
-        triangle.centerXAnchor.constraint(equalTo: firstView.centerXAnchor).isActive = true
-        triangle.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        triangle.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        triangle.bottomAnchor.constraint(equalTo: firstView.bottomAnchor).isActive = true
         
         let heightWidth = 30
         let path = CGMutablePath()
         
-        path.move(to: CGPoint(x: 0, y: heightWidth))
-        path.addLine(to: CGPoint(x:heightWidth/2, y: heightWidth/2))
-        path.addLine(to: CGPoint(x:heightWidth, y:heightWidth))
-        path.addLine(to: CGPoint(x:0, y:heightWidth))
+        if viewModel.isBuyVC {
+            path.move(to: CGPoint(x: 0, y: heightWidth))
+            path.addLine(to: CGPoint(x:heightWidth/2, y: heightWidth/2))
+            path.addLine(to: CGPoint(x:heightWidth, y:heightWidth))
+            path.addLine(to: CGPoint(x:0, y:heightWidth))
+            firstView.addSubview(triangle)
+            triangle.bottomAnchor.constraint(equalTo: firstView.bottomAnchor).isActive = true
+        } else {
+            path.move(to: CGPoint(x: 0, y: 0))
+            path.addLine(to: CGPoint(x:heightWidth/2, y: heightWidth/2))
+            path.addLine(to: CGPoint(x:heightWidth, y:0))
+            path.addLine(to: CGPoint(x:0, y:0))
+            secondView.addSubview(triangle)
+            triangle.topAnchor.constraint(equalTo: secondView.topAnchor).isActive = true
+        }
+        triangle.centerXAnchor.constraint(equalTo: firstView.centerXAnchor).isActive = true
+        triangle.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        triangle.widthAnchor.constraint(equalToConstant: 30).isActive = true
         
         let shape = CAShapeLayer()
         shape.path = path
-        shape.fillColor = UIColor.Common.darkCell.cgColor
+        shape.fillColor = viewModel.isBuyVC ? UIColor.Common.darkCell.cgColor : UIColor.BaseView.bg.cgColor
         
         triangle.layer.insertSublayer(shape, at: 0)
     }
@@ -260,6 +311,11 @@ class CoinAssetBuyOrSellViewController : BaseViewController {
         })
     }
     
+    @IBAction func confirmButtonTapped(_ sender: UIButton) {
+        viewModel?.transfer(navigationController: navigationController)
+    }
+    
+    
     @objc private func hideNumpadView() {
         numpadHeightConstraint.constant = 0.0
         numpadBackView.setNeedsUpdateConstraints()
@@ -269,10 +325,6 @@ class CoinAssetBuyOrSellViewController : BaseViewController {
             self.scrollView.setContentOffset(CGPoint(x: 0, y: self.scrollView.frame.minY), animated: true)
             self.numpadBackView.layoutIfNeeded()
         })
-    }
-    
-    func setupBuyAndSellView() {
-        
     }
 }
 
@@ -286,7 +338,12 @@ extension CoinAssetBuyOrSellViewController : WalletDelegateManagerProtocol {
 
 extension CoinAssetBuyOrSellViewController: NumpadViewProtocol {
     var maxAmount: Double? {
-        return availableInWalletValue
+        guard let viewModel = viewModel else { return availableInWalletValue }
+        if viewModel.isBuyVC {
+            return availableInWalletValue
+        } else {
+            return viewModel.coinAsset?.amount
+        }
     }
     
     var textPlaceholder: String? {
@@ -314,8 +371,12 @@ extension CoinAssetBuyOrSellViewController: NumpadViewProtocol {
     }
     
     func textLabelDidChange(value: Double?) {
-        guard let value = value, value <= availableInWalletValue else { return }
-        
+        guard let viewModel = viewModel, let value = value else { return }
+        if viewModel.isBuyVC {
+            guard value <= availableInWalletValue else { return }
+        } else {
+            guard let amount = viewModel.coinAsset?.amount, value <= amount else { return }
+        }
         numpadView.isEnable = true
         amountValue = value
         updateUI()
@@ -324,5 +385,15 @@ extension CoinAssetBuyOrSellViewController: NumpadViewProtocol {
 extension CoinAssetBuyOrSellViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         return touch.view == gestureRecognizer.view
+    }
+}
+
+extension CoinAssetBuyOrSellViewController : AlertControllerDelegateProtocol {
+    func showAlert(title: String?, massage: String?) {
+        let alert = UIAlertController(title: title, message: massage, preferredStyle: .alert)
+        self.present(viewController: alert)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+           alert.dismiss(animated: true, completion: nil)
+         })
     }
 }

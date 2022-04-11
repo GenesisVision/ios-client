@@ -6,7 +6,7 @@
 //  Copyright © 2022 Genesis Vision. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol CoinAssetBuyAndSellViewModelProtocol {
     var coinAsset: CoinsAsset? { get }
@@ -16,13 +16,20 @@ protocol CoinAssetBuyAndSellViewModelProtocol {
     var commission : Double { get }
     var whatUserGetValue : Double { get }
     var rate: Double? { get }
+    var isBuyVC: Bool { get }
     var walletDepositCurrencyDelegate: WalletDepositCurrencyDelegateManager? { get set }
+    var alertControllerDelegate: AlertControllerDelegateProtocol? { get set }
     func getWalletSummary(currency: Currency?, completion: @escaping (_ wallet: WalletSummary?) -> (), completionError: @escaping CompletionBlock)
-    func getAssetAvailable() -> Double?
     func updateSelectedWallet(index : Int)
+    func transfer(navigationController: UINavigationController?)
+}
+
+protocol AlertControllerDelegateProtocol {
+    func showAlert(title: String?, massage: String?)
 }
 
 class CoinAssetBuyAndSellViewModel: CoinAssetBuyAndSellViewModelProtocol {
+    let isBuyViewController: Bool
     private let asset: CoinsAsset?
     private var walletSummary: WalletSummary?
     private var feePercent = 0.0
@@ -59,10 +66,12 @@ class CoinAssetBuyAndSellViewModel: CoinAssetBuyAndSellViewModelProtocol {
         guard let currencyRate = currencyRate else { return 0.0 }
         return amountValue * currencyRate - commission
     }
-    private var walletDepositCurrencyDelegateManager: WalletDepositCurrencyDelegateManager?
+    var walletDepositCurrencyDelegate: WalletDepositCurrencyDelegateManager?
+    var alertControllerDelegate: AlertControllerDelegateProtocol?
     
-    init(asset: CoinsAsset) {
+    init(asset: CoinsAsset, isBuyViewController: Bool = true) {
         self.asset = asset
+        self.isBuyViewController = isBuyViewController
     }
     // MARK: - TODO Check memory leak
     
@@ -72,7 +81,7 @@ class CoinAssetBuyAndSellViewModel: CoinAssetBuyAndSellViewModelProtocol {
             if viewModel != nil  {
                 self.walletSummary = viewModel
                 self.wallets = viewModel?.wallets
-                self.walletDepositCurrencyDelegateManager = WalletDepositCurrencyDelegateManager(viewModel?.wallets ?? [WalletData]())
+                self.walletDepositCurrencyDelegate = WalletDepositCurrencyDelegateManager(viewModel?.wallets ?? [WalletData]())
                 self.selectedWallet = viewModel?.wallets?.first(where: {$0.currency == self.selectedCurrency})
                 self.getRates { ratesModel in
                     self.ratesModel = ratesModel
@@ -86,8 +95,15 @@ class CoinAssetBuyAndSellViewModel: CoinAssetBuyAndSellViewModelProtocol {
     
     private func getRates(completion: @escaping (_ ratesModel: RatesModel?) -> ()) {
         guard let asset = asset?.asset else { return }
-        let from = wallets?.compactMap({$0.currency?.rawValue})
-        let to = [asset]
+        let from: [String]?
+        let to: [String]?
+        if isBuyViewController {
+            from = wallets?.compactMap({$0.currency?.rawValue})
+            to = [asset]
+        } else {
+            from = [asset]
+            to = wallets?.compactMap({$0.currency?.rawValue})
+        }
         RateDataProvider.getRates(from: from, to: to, completion: { ratesModel in
             completion(ratesModel)
         }, errorCompletion: {result in
@@ -97,32 +113,89 @@ class CoinAssetBuyAndSellViewModel: CoinAssetBuyAndSellViewModelProtocol {
     
     private func updateCurrencyRate() {
         guard let currency = asset?.asset else { return }
-        let currencyArray = ratesModel?.rates?[selectedCurrency.rawValue]
-        let currencyRate = currencyArray?.first(where: {$0.currency == currency})?.rate
-        self.currencyRate = currencyRate
-    }
-    
-    func getAssetAvailable() -> Double? {
-        let wallet = wallets?.first(where: {$0.currency?.rawValue == asset?.asset})
-        return wallet?.available
+        if isBuyViewController {
+            let currencyArray = ratesModel?.rates?[selectedCurrency.rawValue]
+            let currencyRate = currencyArray?.first(where: {$0.currency == currency})?.rate
+            self.currencyRate = currencyRate
+        } else {
+            let currencyArray = ratesModel?.rates?[currency]
+            let currencyRate = currencyArray?.first(where: {$0.currency == selectedCurrency.rawValue})?.rate
+            self.currencyRate = currencyRate
+        }
     }
     
     func updateSelectedWallet(index : Int) {
         guard let wallet = wallets?[index] else { return }
         selectedWallet = wallet
     }
+    //MARK: - TODO Check memory leak
+    
+    func transfer(navigationController: UINavigationController?) {
+        guard let asset = asset, let currency = asset.asset else { return }
+        let from : [String]?
+        let to : [String]?
+        
+        if isBuyViewController {
+            from = [selectedCurrency.rawValue]
+            to = [Currency.usd.rawValue]
+        } else {
+            from = [currency]
+            to = [Currency.usd.rawValue]
+        }
+        
+        RateDataProvider.getRates(from: from, to: to, completion: { [self] ratesModel in
+            guard let from = from?.first, let to = to?.first else { return }
+            let rateItems = ratesModel?.rates?[from]
+            let usd = rateItems?.first(where: {$0.currency == to})?.rate
+            
+            guard let usd = usd, (usd * self.amount) >= 10 else {
+                alertControllerDelegate?.showAlert(title: Constants.CoinAssetsConstants.minimalTransferDisclaimer, massage: nil)
+                return }
+            
+            
+            var body : InternalTransferRequest?
+            let assetId : UUID?
+            if let oefAssetId = asset.oefAssetId {
+                assetId = oefAssetId
+            } else {
+                assetId = asset._id
+            }
+            switch self.isBuyViewController {
+            case true:
+                body = InternalTransferRequest(sourceId: self.selectedWallet?._id, sourceType: .wallet, destinationId: assetId, destinationType: .coinsMarket, amount: self.amountValue)
+            case false:
+                body = InternalTransferRequest(sourceId: assetId, sourceType: .coinsMarket, destinationId: self.selectedWallet?._id, destinationType: .wallet, amount: self.amountValue)
+            }
+        
+            CoinAssetsDataProvider.transfer(body: body) { data, error in
+                if error == nil {
+                    CoinAssetRouter.showDetailViewControllerAfterConfirmingTransaction(navigationController: navigationController)
+                } else {
+                    alertControllerDelegate?.showAlert(title: Constants.CoinAssetsConstants.transferError, massage: nil)
+                }
+            }
+            
+        }, errorCompletion: {result in
+            print("Rates error : ", result)
+            
+        })
+    }
 }
 
 //MARK: - CoinAssetBuyAndSellViewModelProtocol
 extension CoinAssetBuyAndSellViewModel {
-    var walletDepositCurrencyDelegate: WalletDepositCurrencyDelegateManager? {
-        get {
-            walletDepositCurrencyDelegateManager
-        }
-        set {
-            walletDepositCurrencyDelegateManager = newValue
-        }
+    var isBuyVC: Bool {
+        isBuyViewController
     }
+    
+//    var walletDepositCurrencyDelegate: WalletDepositCurrencyDelegateManager? {
+//        get {
+//            walletDepositCurrencyDelegateManager
+//        }
+//        set {
+//            walletDepositCurrencyDelegateManager = newValue
+//        }
+//    }
     var rate: Double? {
         currencyRate
     }

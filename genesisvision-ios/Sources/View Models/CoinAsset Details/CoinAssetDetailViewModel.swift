@@ -13,12 +13,18 @@ protocol ChartViewDelegateProtocol: AnyObject {
     func pushDataToChartView(dataSet: CandleChartDataSet, xAxisValueFormatter: MyXAxisFormatter)
 }
 
+protocol AssetPortfolioDelegateProtocol: AnyObject {
+    func pushPortfolioData(assetPortfolio: CoinsAsset?)
+}
+
 protocol CoinAssetDetailViewModelProtocol {
     var intervals: [KlineIntervalButton] { get }
     var coinAsset: CoinsAsset? { get }
+    var portfolio: CoinsAsset? { get }
     var tickerSymbol: String? { get }
     func deleteChartValues()
     func setupIntervalButtons(indexPath : IndexPath)
+    func fetchCoinsPortfolio()
 }
 
 protocol CoinAssetDetailViewModelChartProtocol {
@@ -29,10 +35,12 @@ protocol CoinAssetDetailViewModelChartProtocol {
 
 class CoinAssetDetailViewModel {
     let asset: CoinsAsset?
+    var assetPortfolio: CoinsAsset?
     var fullSymbol: String?
     private var chartValues = [CandleChartDataEntry]()
     private var dateRange = FilterDateRangeModel()
     private weak var chartViewDelegate: ChartViewDelegateProtocol?
+    private weak var assetPortfolioDelegate: AssetPortfolioDelegateProtocol?
     private(set) var interval: BinanceKlineInterval = .oneHour
     private var intervalButtons = [KlineIntervalButton(title: .oneMinute, interval: .oneMinute),
                            KlineIntervalButton(title: .threeMinutes, interval: .threeMinutes),
@@ -50,14 +58,20 @@ class CoinAssetDetailViewModel {
                            KlineIntervalButton(title: .oneMonth, interval: .oneMonth)
     ]
     
-    init(asset: CoinsAsset, chartViewDelegate: ChartViewDelegateProtocol) {
+    init(asset: CoinsAsset, chartViewDelegate: ChartViewDelegateProtocol, assetPortfolioDelegate: AssetPortfolioDelegateProtocol) {
         self.asset = asset
         self.chartViewDelegate = chartViewDelegate
+        self.assetPortfolioDelegate = assetPortfolioDelegate
+        self.fetchCoinsPortfolio()
         self.setupChartValues(interval: interval)
     }
 }
 
 extension CoinAssetDetailViewModel: CoinAssetDetailViewModelProtocol {
+    var portfolio: CoinsAsset? {
+        assetPortfolio
+    }
+    
     var tickerSymbol: String? {
         fullSymbol
     }
@@ -120,6 +134,16 @@ extension CoinAssetDetailViewModel: CoinAssetDetailViewModelChartProtocol {
         } errorCompletion: { result in
             print(result)
         }
+    }
+    
+    func fetchCoinsPortfolio() {
+        guard let symbol = asset?.details?.symbol?.uppercased() else { return }
+        CoinAssetsDataProvider.getCoinsPortfolio(assets: [symbol], completion: { viewModel in
+            let items = viewModel?.items
+            let portfolioAsset = items?.first
+            self.assetPortfolio = portfolioAsset
+            self.assetPortfolioDelegate?.pushPortfolioData(assetPortfolio: portfolioAsset)
+        }, errorCompletion: { _ in })
     }
     
     func deleteChartValues() {

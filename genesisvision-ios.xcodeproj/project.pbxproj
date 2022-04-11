@@ -1099,6 +1099,7 @@
 		F3AB3E9427E0AC9500F15944 /* CoinAssetContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AB3E9327E0AC9500F15944 /* CoinAssetContentView.swift */; };
 		F3AF4D3827E87B6700486716 /* CoinAssetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AF4D3727E87B6700486716 /* CoinAssetDetailViewController.swift */; };
 		F3AF4D3B27E89B0500486716 /* CoinAssetDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AF4D3A27E89B0500486716 /* CoinAssetDetailViewModel.swift */; };
+		F3B756E027FCAC180002A630 /* CoinAssetRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B756DF27FCAC180002A630 /* CoinAssetRouter.swift */; };
 		F3BA45F827FB2B5500ED7A0C /* SellAndBuyCoinAssetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BA45F727FB2B5500ED7A0C /* SellAndBuyCoinAssetView.swift */; };
 		F3BA45FA27FB2C1A00ED7A0C /* SellAndBuyCoinAssetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3BA45F927FB2C1A00ED7A0C /* SellAndBuyCoinAssetView.xib */; };
 		F3D3A1BB27F1BD6300263364 /* ButtonsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D3A1BA27F1BD6300263364 /* ButtonsModels.swift */; };
@@ -2395,6 +2396,7 @@
 		F3AB3E9327E0AC9500F15944 /* CoinAssetContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinAssetContentView.swift; sourceTree = "<group>"; };
 		F3AF4D3727E87B6700486716 /* CoinAssetDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinAssetDetailViewController.swift; sourceTree = "<group>"; };
 		F3AF4D3A27E89B0500486716 /* CoinAssetDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinAssetDetailViewModel.swift; sourceTree = "<group>"; };
+		F3B756DF27FCAC180002A630 /* CoinAssetRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinAssetRouter.swift; sourceTree = "<group>"; };
 		F3BA45F727FB2B5500ED7A0C /* SellAndBuyCoinAssetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellAndBuyCoinAssetView.swift; sourceTree = "<group>"; };
 		F3BA45F927FB2C1A00ED7A0C /* SellAndBuyCoinAssetView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SellAndBuyCoinAssetView.xib; sourceTree = "<group>"; };
 		F3D3A1BA27F1BD6300263364 /* ButtonsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsModels.swift; sourceTree = "<group>"; };
@@ -4364,6 +4366,14 @@
 			path = "CoinAsset Details";
 			sourceTree = "<group>";
 		};
+		F3B756DE27FCABEA0002A630 /* Asset */ = {
+			isa = PBXGroup;
+			children = (
+				F3B756DF27FCAC180002A630 /* CoinAssetRouter.swift */,
+			);
+			path = Asset;
+			sourceTree = "<group>";
+		};
 		F3D3A1B827F1BCA300263364 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -4944,6 +4954,7 @@
 				FC4C193F20304ED300625795 /* Auth */,
 				FC4C194120304EEF00625795 /* Dashboard */,
 				5E70425F23CCEA3C00D8950F /* Account */,
+				F3B756DE27FCABEA0002A630 /* Asset */,
 				5EF14DA4218213BC00B3843A /* Fund */,
 				FC4C194320304F0400625795 /* Program */,
 				5EE00764217873CB0045B890 /* Manager */,
@@ -5932,6 +5943,7 @@
 				19CB59E2258CE41F0008D8BC /* SocialActivitiesView.swift in Sources */,
 				5E39F7B823A3F9300073DAD5 /* LevelsParamsInfo.swift in Sources */,
 				5E541D3A238DD5E600B38244 /* TradingEventsViewModel.swift in Sources */,
+				F3B756E027FCAC180002A630 /* CoinAssetRouter.swift in Sources */,
 				5E39F74F23A3F92F0073DAD5 /* ProgramsLevelsInfo.swift in Sources */,
 				5E39F78B23A3F9300073DAD5 /* FundNotificationSettingList.swift in Sources */,
 				19812460246458BE00F286FE /* PublicProfileItemsViewModel.swift in Sources */,

@@ -9,9 +9,16 @@
 import UIKit
 import Charts
 
+enum CoinAssetDetailType {
+    case buyViewController
+    case buyAndSellViewController
+}
+
 class CoinAssetDetailViewController : UIViewController {
     
     var viewModel : (CoinAssetDetailViewModelProtocol & CoinAssetDetailViewModelChartProtocol)?
+    
+    var type : CoinAssetDetailType = .buyViewController
     
     @IBOutlet weak var contentView: UIView! {
         didSet {
@@ -71,14 +78,15 @@ class CoinAssetDetailViewController : UIViewController {
     }
     @IBOutlet var constraints: [NSLayoutConstraint]!
     
+    @IBOutlet weak var spacingConstraintBetweenButtonAndAboutLabel: NSLayoutConstraint!
+    
+    @IBOutlet weak var sellAndBuyCoinAssetView: SellAndBuyCoinAssetView!
+    
+    var isBuyViewController = true
     var activityIndicator = UIActivityIndicatorView()
     
     @IBAction func buyButtonTapped(_ sender: UIButton) {
-        guard let viewController = CoinAssetBuyOrSellViewController.storyboardInstance(.assets),
-              let coinAsset = viewModel?.coinAsset else { return }
-        
-        viewController.viewModel = CoinAssetBuyAndSellViewModel(asset: coinAsset)
-        navigationController?.pushViewController(viewController, animated: true)
+        CoinAssetRouter.showBuyViewController(portfolioAsset: viewModel?.coinAsset, navigationController: navigationController)
     }
     
     override func viewDidLoad() {
@@ -104,9 +112,18 @@ class CoinAssetDetailViewController : UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         DispatchQueue.main.async { [self] in
-            let totalHeight = chartLabel.height + intervalCollectionView.height + CandleStickChartView.height + buyButtonLabel.height + aboutTitleLabel.height + descriptionLabel.height + buttonsStackView.height
-            let constaintsConstats = constraints.map({$0.map({$0.constant})})
-            let totalHeightOfConstraints = constaintsConstats?.reduce(0, +)
+            var totalHeight: CGFloat = 0.0
+            let descriptionLabelHeight = (descriptionLabel.text?.isEmpty ?? false) ? 40 : descriptionLabel.height
+            let buttonsStackViewHeight = buttonsStackView.arrangedSubviews.isEmpty ? 20 : buttonsStackView.height
+            switch type {
+            case .buyViewController:
+                totalHeight = chartLabel.height + intervalCollectionView.height + CandleStickChartView.height + buyButtonLabel.height + aboutTitleLabel.height + descriptionLabelHeight + buttonsStackViewHeight
+            case .buyAndSellViewController:
+                totalHeight = chartLabel.height + intervalCollectionView.height + CandleStickChartView.height + sellAndBuyCoinAssetView.height + aboutTitleLabel.height + descriptionLabelHeight + buttonsStackViewHeight
+            }
+            let constraintsConstats = constraints.map({$0.map({$0.constant})})
+            let totalHeightOfConstraints = constraintsConstats?.reduce(0, +)
+            print(descriptionLabel.height, buttonsStackView.height)
             scrollView.contentSize.height = totalHeight + (totalHeightOfConstraints ?? 90) + 20
             contentViewHeightConstraint.constant = totalHeight + (totalHeightOfConstraints ?? 90) + 20
         }
@@ -193,6 +210,34 @@ class CoinAssetDetailViewController : UIViewController {
             self.activityIndicator.startAnimating()
         }
     }
+    
+    func setupBuyAndSellView(assetPortfolio: CoinsAsset) {
+        type = .buyAndSellViewController
+        sellAndBuyCoinAssetView.configure(assetPortfolio: assetPortfolio)
+        buyButtonLabel.isHidden = true
+        sellAndBuyCoinAssetView.isHidden = false
+        spacingConstraintBetweenButtonAndAboutLabel.isActive = false
+        aboutTitleLabel.topAnchor.constraint(equalTo: sellAndBuyCoinAssetView.bottomAnchor, constant: 10).isActive = true
+//        scrollView.contentSize.height += sellAndBuyCoinAssetView.height - buyButtonLabel.height
+        sellAndBuyCoinAssetView.buyButtonLabel.addTarget(self, action: #selector(buyCoinAsset), for: .touchUpInside)
+        sellAndBuyCoinAssetView.sellButtonLabel.addTarget(self, action: #selector(sellCoinAsset), for: .touchUpInside)
+    }
+    
+    func setupBuyButtonView() {
+        type = .buyViewController
+        buyButtonLabel.isHidden = false
+        sellAndBuyCoinAssetView.isHidden = true
+        spacingConstraintBetweenButtonAndAboutLabel.isActive = true
+        aboutTitleLabel.topAnchor.constraint(equalTo: sellAndBuyCoinAssetView.bottomAnchor, constant: 10).isActive = false
+    }
+    
+    @objc func buyCoinAsset() {
+        CoinAssetRouter.showBuyViewController(portfolioAsset: viewModel?.portfolio, navigationController: navigationController)
+    }
+    
+    @objc func sellCoinAsset() {
+        CoinAssetRouter.showSellViewController(portfolioAsset: viewModel?.portfolio, navigationController: navigationController)
+    }
 }
 
 extension CoinAssetDetailViewController : ChartViewDelegateProtocol, ChartViewDelegate {
@@ -253,7 +298,19 @@ extension CoinAssetDetailViewController : ChartViewDelegateProtocol, ChartViewDe
     }
 }
 
-extension CoinAssetDetailViewController : UICollectionViewDelegate, UICollectionViewDataSource {
+extension CoinAssetDetailViewController: AssetPortfolioDelegateProtocol {
+    func pushPortfolioData(assetPortfolio: CoinsAsset?) {
+        if let assetPortfolio = assetPortfolio {
+            setupBuyAndSellView(assetPortfolio: assetPortfolio)
+        } else {
+            if buyButtonLabel.isHidden {
+                setupBuyButtonView()
+            }
+        }
+    }
+}
+
+extension CoinAssetDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel?.intervals.count ?? 0
     }
