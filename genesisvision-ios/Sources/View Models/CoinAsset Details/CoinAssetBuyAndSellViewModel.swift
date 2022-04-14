@@ -155,18 +155,20 @@ class CoinAssetBuyAndSellViewModel: CoinAssetBuyAndSellViewModelProtocol {
             
             var body : InternalTransferRequest?
             let assetId : UUID?
+            
             if let oefAssetId = asset.oefAssetId {
                 assetId = oefAssetId
             } else {
                 assetId = asset._id
             }
+            
             switch self.isBuyViewController {
             case true:
                 body = InternalTransferRequest(sourceId: self.selectedWallet?._id, sourceType: .wallet, destinationId: assetId, destinationType: .coinsMarket, amount: self.amountValue)
             case false:
                 body = InternalTransferRequest(sourceId: assetId, sourceType: .coinsMarket, destinationId: self.selectedWallet?._id, destinationType: .wallet, amount: self.amountValue)
             }
-        
+            
             CoinAssetsDataProvider.transfer(body: body) { data, error in
                 if error == nil {
                     CoinAssetRouter.showDetailViewControllerAfterConfirmingTransaction(navigationController: navigationController)
@@ -188,14 +190,6 @@ extension CoinAssetBuyAndSellViewModel {
         isBuyViewController
     }
     
-//    var walletDepositCurrencyDelegate: WalletDepositCurrencyDelegateManager? {
-//        get {
-//            walletDepositCurrencyDelegateManager
-//        }
-//        set {
-//            walletDepositCurrencyDelegateManager = newValue
-//        }
-//    }
     var rate: Double? {
         currencyRate
     }

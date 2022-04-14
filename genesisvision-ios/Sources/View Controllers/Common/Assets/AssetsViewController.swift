@@ -84,7 +84,8 @@ class AssetsViewController: BaseTabmanViewController<AssetsTabmanViewModel> {
         searchViewModel.filterModel.mask = ""
         searchViewController.viewModel = searchViewModel
         searchNavController = BaseNavigationController(rootViewController: searchViewController)
-        searchNavController?.modalPresentationStyle = .overCurrentContext
+        
+        searchNavController?.modalPresentationStyle = .fullScreen
         present(searchNavController!, animated: true, completion: nil)
     }
     

@@ -9,7 +9,14 @@
 import Foundation
 
 class CoinAssetsDataProvider: DataProvider {
-    static func get(_ sorting: CoinsFilterSorting? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ coinAssetsViewModel: CoinsAssetItemsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+//    static func get(_ filterModel: FilterModel? = nil, sorting: CoinsFilterSorting? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ coinAssetsViewModel: CoinsAssetItemsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+//        let sorting = filterModel?.sortingModel.selectedSorting as? CoinsFilterSorting ?? CoinsFilterSorting.byMarketCapDesc
+//        CoinsAPI.getCoins(sorting: sorting, assets: nil, isFavorite: nil, skip: skip, take: take) { viewModel, error in
+//                DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+//        }
+//    }
+    static func get(_ filterModel: FilterModel? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ coinAssetsViewModel: CoinsAssetItemsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        let sorting = filterModel?.sortingModel.selectedSorting as? CoinsFilterSorting ?? CoinsFilterSorting.byMarketCapDesc
         CoinsAPI.getCoins(sorting: sorting, assets: nil, isFavorite: nil, skip: skip, take: take) { viewModel, error in
                 DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }

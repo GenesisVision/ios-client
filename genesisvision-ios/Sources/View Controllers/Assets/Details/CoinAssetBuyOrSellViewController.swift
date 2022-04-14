@@ -203,12 +203,11 @@ class CoinAssetBuyOrSellViewController : BaseViewController {
         }
         
         let commission = viewModel.commission
-        if let currency = viewModel.isBuyVC ? viewModel.coinAsset?.asset : wallet.currency?.rawValue, let currencyType = CurrencyType(rawValue: currency) {
-            
+        if let currency = viewModel.isBuyVC ? viewModel.coinAsset?.asset : wallet.currency?.rawValue {
             if viewModel.whatUserGetValue > commission {
                 var value = viewModel.whatUserGetValue
                 value = value > 0.0 ? value : 0.0
-                self.withdrawingValueLabel.text = "≈" + value.rounded(with: currencyType).toString() + " " + currency
+                self.withdrawingValueLabel.text = "≈" + value.toString() + " " + currency
                 feeValueLabel.text = "≈" + commission.toString() + " " + currency
             } else {
                 self.withdrawingValueLabel.text = "0 " + currency

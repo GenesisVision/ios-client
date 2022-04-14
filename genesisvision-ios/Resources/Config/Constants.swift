@@ -65,6 +65,6 @@ final class Constants {
         static let from = "From"
         static let to = "To"
         static let minimalTransferDisclaimer = "Not enough money to transfer. Min $10"
-        static let transferError = "Еransaction error. Please try again later"
+        static let transferError = "Transaction error. Please try again later"
     }
 }

@@ -34,9 +34,5 @@ class SearchPageboyViewControllerDataSource: BasePageboyViewControllerDataSource
         router.managersViewController = managerListViewController
         controllers.append(managerListViewController)
         
-        guard let coinAssetListViewController = router.getCoinAssets(with: filterModel, showFacets: showFacets, parentRouter: router) else { return }
-        coinAssetListViewController.searchProtocol = searchProtocol
-        router.coinAssetListViewController = coinAssetListViewController
-        controllers.append(coinAssetListViewController)
     }
 }

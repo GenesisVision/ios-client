@@ -70,13 +70,15 @@ class CoinAssetDetailViewController : UIViewController {
     }
     @IBOutlet weak var buttonsStackView: UIStackView! {
         didSet {
-            buttonsStackView.alignment = .fill
-            buttonsStackView.distribution = .fillEqually
-            buttonsStackView.spacing = 8.0
+            buttonsStackView.alignment = .center
+            buttonsStackView.distribution = .equalCentering
+            buttonsStackView.spacing = 8
             buttonsStackView.isUserInteractionEnabled = true
         }
     }
     @IBOutlet var constraints: [NSLayoutConstraint]!
+    
+    @IBOutlet weak var butonStackViewWidthConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var spacingConstraintBetweenButtonAndAboutLabel: NSLayoutConstraint!
     
@@ -144,10 +146,14 @@ class CoinAssetDetailViewController : UIViewController {
         guard let asset = viewModel?.coinAsset,
               let links = asset.details?.socialLinks else { return }
         DispatchQueue.main.async {
+            self.butonStackViewWidthConstraint.constant = CGFloat(links.count * 48)
             for link in links {
                 guard let imageLogoURL = link.logoUrl, let logoURL = URL(string: imageLogoURL), let url = link.url else { return }
                 guard let data = try? Data(contentsOf: logoURL) else { return }
                 let button = ButtonWithURL(url: url)
+                button.translatesAutoresizingMaskIntoConstraints = false
+                button.widthAnchor.constraint(equalToConstant: 40).isActive = true
+                button.heightAnchor.constraint(equalToConstant: 40).isActive = true
                 let image = UIImage(data: data)
                 button.setImage(image, for: .normal)
                 button.addTarget(self, action: #selector(self.linkButtonTapped(_:)), for: .touchUpInside)

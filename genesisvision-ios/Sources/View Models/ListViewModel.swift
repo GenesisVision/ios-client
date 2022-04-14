@@ -577,7 +577,7 @@ extension ListViewModel {
                 completionSuccess(totalCount, viewModels)
                 }, errorCompletion: completionError)
         case .coinAsset:
-            CoinAssetsDataProvider.get(.byMarketCapDesc, skip : skip, take: 20, completion: { [weak self] (assetList) in
+            CoinAssetsDataProvider.get(filterModel, skip : skip, take: 20, completion: { [weak self] (assetList) in
                 guard let assetList = assetList else { return completionError(.failure(errorType: .apiError(message: nil))) }
                 
                 totalCount = assetList.total ?? 0
