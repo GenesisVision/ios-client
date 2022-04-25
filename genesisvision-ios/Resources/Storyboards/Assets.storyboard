@@ -456,7 +456,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="YeH-l8-PLD" firstAttribute="top" secondItem="7f7-x5-DEK" secondAttribute="top" id="4bg-si-3Xb"/>
-                            <constraint firstItem="YeH-l8-PLD" firstAttribute="bottom" secondItem="7f7-x5-DEK" secondAttribute="bottom" id="D2C-h5-jnz"/>
+                            <constraint firstItem="YeH-l8-PLD" firstAttribute="bottom" secondItem="Mal-DB-9MY" secondAttribute="bottom" id="D2C-h5-jnz"/>
                             <constraint firstItem="YeH-l8-PLD" firstAttribute="leading" secondItem="7f7-x5-DEK" secondAttribute="leading" id="Dks-M4-5q0"/>
                             <constraint firstItem="YeH-l8-PLD" firstAttribute="trailing" secondItem="7f7-x5-DEK" secondAttribute="trailing" id="wBR-DC-YcO"/>
                         </constraints>

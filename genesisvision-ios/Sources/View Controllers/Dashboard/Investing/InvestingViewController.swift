@@ -23,6 +23,14 @@ class InvestingViewController: ListViewController {
         showProgressHUD()
         fetch()
     }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(showAssetList), name: .findAsset, object: nil)
+    }
     
     // MARK: - Methods
     private func setup() {
@@ -100,6 +108,10 @@ class InvestingViewController: ListViewController {
         
         fetch()
     }
+    @objc func showAssetList(_ notification: Notification) {
+        guard let userInfo = notification.userInfo, let type = userInfo["type"] as? AssetType else { return }
+        viewModel.router?.showAssetList(with: FilterModel(), assetType: type)
+    }
 }
 
 extension InvestingViewController: InRequestsDelegateManagerProtocol {
@@ -151,7 +163,7 @@ extension InvestingViewController: BaseTableViewProtocol {
             let vc = BaseViewController()
             vc.title = "Requests"
             navigationController?.pushViewController(vc, animated: true)
-        case .investingPrograms, .investingFunds:
+        case .investingPrograms, .investingFunds, .investingAssets:
             if let cellViewModel = cellViewModel as? AssetCollectionViewCellViewModel {
                 showAsset(cellViewModel)
             }
@@ -213,8 +225,9 @@ class InvestingViewModel: ViewModelWithListProtocol {
         case events
         case funds
         case programs
+        case assets
     }
-    private var sections: [SectionType] = [.overview, .funds, .programs]
+    private var sections: [SectionType] = [.overview, .funds, .programs, .assets]
     
     var viewModels = [CellViewAnyModel]()
     
@@ -227,6 +240,7 @@ class InvestingViewModel: ViewModelWithListProtocol {
                 CellWithCollectionViewModel<InvestingEventsViewModel>.self,
                 CellWithCollectionViewModel<InvestingProgramsViewModel>.self,
                 CellWithCollectionViewModel<InvestingFundsViewModel>.self,
+                CellWithCollectionViewModel<InvestingAssetsViewModel>.self
         ]
     }
     
@@ -235,7 +249,7 @@ class InvestingViewModel: ViewModelWithListProtocol {
             let overviewViewModel = InvestingHeaderTableViewCellViewModel(data: InvestingHeaderData(details: details, currency: currency), delegate: delegate)
             viewModels.append(overviewViewModel)
             //reloadSection(.events)
-            
+            delegate?.didReload()
             guard let count = details?.events?.items?.count, count > 0 else { return }
             //sections.insert(.events, at: sections.contains(.requests) ? 2 : 1)
             
@@ -259,8 +273,6 @@ class InvestingViewModel: ViewModelWithListProtocol {
     
     var fundInvesting: FundInvestingDetailsListItemsViewModel? {
         didSet {
-            guard let count = fundInvesting?.items?.count, count > 0 else { return }
-            
             let viewModel = CellWithCollectionViewModel(InvestingFundsViewModel(fundInvesting, delegate: delegate), delegate: delegate)
             viewModels.append(viewModel)
             reloadSection(.funds)
@@ -269,11 +281,16 @@ class InvestingViewModel: ViewModelWithListProtocol {
     
     var programInvesting: ProgramInvestingDetailsListItemsViewModel? {
         didSet {
-            guard let count = programInvesting?.items?.count, count > 0 else { return }
-            
             let viewModel = CellWithCollectionViewModel(InvestingProgramsViewModel(programInvesting, delegate: delegate), delegate: delegate)
             viewModels.append(viewModel)
             reloadSection(.programs)
+        }
+    }
+    var coinsInvesting: CoinsAssetItemsViewModel? {
+        didSet {
+            let viewModel = CellWithCollectionViewModel(InvestingAssetsViewModel(coinsInvesting, delegate: delegate), delegate: delegate)
+            viewModels.append(viewModel)
+            reloadSection(.assets)
         }
     }
     
@@ -289,6 +306,7 @@ class InvestingViewModel: ViewModelWithListProtocol {
         self.delegate = router?.investingViewController
         self.router = router
     }
+    
     private func reloadSection(_ section: SectionType) {
         let reloadSection = sections.firstIndex(of: section) ?? 0
         delegate?.didReload(IndexPath(row: 0, section: reloadSection))
@@ -313,6 +331,10 @@ class InvestingViewModel: ViewModelWithListProtocol {
         DashboardDataProvider.getInvestingPrograms(currency: currency, status: .active, skip: 0, take: 12, completion: { [weak self] (model) in
             self?.programInvesting = model
         }, errorCompletion: errorCompletion)
+        CoinAssetsDataProvider.getCoinsPortfolio(completion: { [weak self] (model) in
+            self?.coinsInvesting = model
+        }, errorCompletion: errorCompletion)
+
         
         delegate?.didReload()
     }
@@ -336,6 +358,8 @@ class InvestingViewModel: ViewModelWithListProtocol {
             return viewModels.first{ $0 is CellWithCollectionViewModel<InvestingFundsViewModel> }
         case .programs:
             return viewModels.first{ $0 is CellWithCollectionViewModel<InvestingProgramsViewModel> }
+        case .assets:
+            return viewModels.first{ $0 is CellWithCollectionViewModel<InvestingAssetsViewModel> }
         }
     }
     func didSelect(at indexPath: IndexPath) {

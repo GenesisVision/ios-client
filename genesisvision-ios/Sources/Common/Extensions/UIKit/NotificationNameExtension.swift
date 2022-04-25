@@ -15,6 +15,7 @@ extension Notification.Name {
     static let programFavoriteStateChange = Notification.Name(Keys.programFavoriteStateChangeKey)
     static let followFavoriteStateChange = Notification.Name(Keys.followFavoriteStateChangeKey)
     static let fundFavoriteStateChange = Notification.Name(Keys.fundFavoriteStateChangeKey)
+    static let coinAssetFavoriteStateChangeKey = Notification.Name(Keys.coinAssetFavoriteStateChangeKey)
     static let notificationDidReceive = Notification.Name(Keys.notificationDidReceivedKey)
     static let notificationDidTap = Notification.Name(Keys.notificationDidTappedKey)
     static let updateFundViewController = Notification.Name(Keys.updateFundViewController)
@@ -31,4 +32,5 @@ extension Notification.Name {
     static let tabBarDidScrollToTop = Notification.Name(Keys.tabBarDidScrollToTopKey)
     static let didSelectAssetsTableView = Notification.Name(Keys.didSelectAssetsTableView)
     static let themeChanged = Notification.Name(Keys.themeChangedKey)
+    static let findAsset = Notification.Name(Keys.findAsset)
 }

@@ -101,7 +101,7 @@ class CoinAssetsListViewController : BaseViewControllerWithTableView {
 
 extension CoinAssetsListViewController {
     override func filterButtonAction() {
-        viewModel.showFilterVC(listViewModel: viewModel, filterModel: viewModel.filterModel, filterType: .coinAsset, sortingType: .funds)
+        viewModel.showFilterVC(listViewModel: viewModel, filterModel: viewModel.filterModel, filterType: .coinAsset, sortingType: .assets)
     }
     
     override func signInButtonAction() {
@@ -170,7 +170,7 @@ extension CoinAssetsListViewController: FavoriteStateChangeProtocol {
     }
     
     func didChangeFavoriteState(with assetID: String, value: Bool, request: Bool) {
-        showProgressHUD()
+//        showProgressHUD()
         viewModel.changeFavorite(value: value, assetId: assetID, request: request) { [weak self] (result) in
             self?.hideAll()
             

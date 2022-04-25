@@ -9,12 +9,6 @@
 import Foundation
 
 class CoinAssetsDataProvider: DataProvider {
-//    static func get(_ filterModel: FilterModel? = nil, sorting: CoinsFilterSorting? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ coinAssetsViewModel: CoinsAssetItemsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
-//        let sorting = filterModel?.sortingModel.selectedSorting as? CoinsFilterSorting ?? CoinsFilterSorting.byMarketCapDesc
-//        CoinsAPI.getCoins(sorting: sorting, assets: nil, isFavorite: nil, skip: skip, take: take) { viewModel, error in
-//                DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
-//        }
-//    }
     static func get(_ filterModel: FilterModel? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ coinAssetsViewModel: CoinsAssetItemsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         let sorting = filterModel?.sortingModel.selectedSorting as? CoinsFilterSorting ?? CoinsFilterSorting.byMarketCapDesc
         CoinsAPI.getCoins(sorting: sorting, assets: nil, isFavorite: nil, skip: skip, take: take) { viewModel, error in
@@ -33,7 +27,6 @@ class CoinAssetsDataProvider: DataProvider {
     }
     static func getCoinsPortfolio(sorting: CoinsFilterSorting? = nil, assets: [String]? = nil, isFavorite: Bool? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ coinsAssetItemsViewModel: CoinsAssetItemsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         CoinsAPI.getUserCoins(sorting: sorting, assets: assets, isFavorite: isFavorite, skip: skip, take: take) { data, error in
-
             DataProvider().responseHandler(data, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
@@ -59,7 +52,7 @@ class CoinAssetsDataProvider: DataProvider {
             DataProvider().responseHandler(error, completion: { (result) in
                 switch result {
                 case .success:
-                    NotificationCenter.default.post(name: .programFavoriteStateChange, object: nil, userInfo: ["isFavorite" : true, "programId" : assetId])
+                    NotificationCenter.default.post(name: .programFavoriteStateChange, object: nil, userInfo: ["isFavorite" : true, "coinAssetId" : assetId])
                 default:
                     break
                 }
@@ -75,7 +68,7 @@ class CoinAssetsDataProvider: DataProvider {
             DataProvider().responseHandler(error, completion: { (result) in
                 switch result {
                 case .success:
-                    NotificationCenter.default.post(name: .programFavoriteStateChange, object: nil, userInfo: ["isFavorite" : false, "programId" : assetId])
+                    NotificationCenter.default.post(name: .programFavoriteStateChange, object: nil, userInfo: ["isFavorite" : false, "coinAssetId" : assetId])
                 default:
                     break
                 }

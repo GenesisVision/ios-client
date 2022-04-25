@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,8 +10,8 @@
             <connections>
                 <outlet property="amountTitleLabel" destination="tZP-vF-GFh" id="BQi-ZJ-93I"/>
                 <outlet property="amountValueLabel" destination="iKU-J0-aMg" id="taR-n9-kwN"/>
-                <outlet property="avaragePriceTitleLabel" destination="by3-Nz-gnY" id="pwP-HN-513"/>
                 <outlet property="avaragePriceValueLabel" destination="A7Y-wP-Mpf" id="n8v-NZ-3H8"/>
+                <outlet property="averagePriceTitleLabel" destination="by3-Nz-gnY" id="pwP-HN-513"/>
                 <outlet property="buyButtonLabel" destination="EWT-Mi-z4h" id="85r-qq-Xrn"/>
                 <outlet property="change24hTitleLabel" destination="rvE-F9-lwD" id="Bgw-9Q-29G"/>
                 <outlet property="change24hValueLabel" destination="Oiw-4A-WW9" id="Uhu-tl-49i"/>

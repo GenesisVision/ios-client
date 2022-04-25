@@ -52,7 +52,7 @@ final class Constants {
             static let price = "Price"
             static let change24h = "Change24h"
             static let total = "Total"
-            static let AvaragePrice = "Avarage price"
+            static let averagePrice = "Average price"
             static let profit = "Profit"
         }
         
@@ -66,5 +66,11 @@ final class Constants {
         static let to = "To"
         static let minimalTransferDisclaimer = "Not enough money to transfer. Min $10"
         static let transferError = "Transaction error. Please try again later"
+        
+        static let emptyInvestmentDisclaimer = "You have no investment in any "
+        static let program = "program"
+        static let fund = "fund"
+        static let asset = "asset"
+        static let find = "Find"
     }
 }

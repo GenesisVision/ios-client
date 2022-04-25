@@ -13,7 +13,7 @@ protocol SortingDelegate: AnyObject {
 }
 
 enum SortingType {
-    case programs, funds, follows, tradesOpen, trades, signalTradesOpen
+    case programs, funds, follows, tradesOpen, trades, signalTradesOpen, assets
 }
 
 enum SortingValue: String {
@@ -36,6 +36,9 @@ enum SortingValue: String {
     case price = "Price"
     case levelProgress = "Level progress"
     case value = "Value"
+    case asset = "Asset"
+    case change = "Change"
+    case marketCap = "Market Cap"
 }
 
 class SortingManager: NSObject {
@@ -173,6 +176,25 @@ class SortingManager: NSObject {
             return highToLowValue ? .byProfitDesc : .byProfitAsc
         }
     }
+    private func getAssetsSelectedSorting() -> CoinsFilterSorting {
+        let selectedValue = getSelectedSortingValue()
+        
+        switch selectedValue {
+        case .volume:
+            return highToLowValue ? .byVolumeDesc : .byVolumeAsc
+        case .price:
+            return highToLowValue ? .byPriceDesc : .byPriceAsc
+        case .asset:
+            return highToLowValue ? .byAssetDesc : .byAssetAsc
+        case .change:
+            return highToLowValue ? .byChangeDesc : .byChangeAsc
+        case .marketCap:
+            return highToLowValue ? .byMarketCapDesc : .byMarketCapAsc
+        default:
+            return highToLowValue ? .byMarketCapDesc : .byMarketCapAsc
+        }
+        
+    }
     
     private func setup() {
         switch sortingType {
@@ -182,6 +204,8 @@ class SortingManager: NSObject {
             sortingValues = [.profit, .equity, .title, .subscribers, .drawdown]
         case .funds:
             sortingValues = [.profit, .size, .title, .investors, .drawdown]
+        case .assets:
+            sortingValues = [.marketCap, .asset, .price, .change, .volume]
         case .tradesOpen, .trades, .signalTradesOpen:
             sortingValues = [.date, .ticket, .symbol, .direction, .volume, .price, .profit]
         }
@@ -218,6 +242,8 @@ class SortingManager: NSObject {
             return getTradesSelectedSorting()
         case .signalTradesOpen:
             return getTradesSelectedSorting()
+        case .assets:
+            return getAssetsSelectedSorting()
         }
     }
 }

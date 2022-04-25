@@ -673,6 +673,8 @@ class DashboardInvestingEmptyView: UIStackView {
     
     @IBOutlet weak var programsButton: ActionButton!
     @IBOutlet weak var fundsButton: ActionButton!
+    @IBOutlet weak var assetsButton: ActionButton!
+    
 }
 
 class DashboardInvestingLabelsView: UIStackView {
@@ -681,13 +683,14 @@ class DashboardInvestingLabelsView: UIStackView {
     @IBOutlet weak var bottomStackView: UIStackView!
     @IBOutlet weak var programsLabel: LabelWithTitle!
     @IBOutlet weak var fundsLabel: LabelWithTitle!
+    @IBOutlet weak var assetsLabel: LabelWithTitle!
     
     func configure(_ data: InvestingHeaderData?) {
         guard let data = data else { return }
-        let currency = data.currency
+        let currency = "$"
         
         balanceLabel.titleLabel.text = "balance"
-        balanceLabel.valueLabel.text = data.balance.toString() + " " + currency.rawValue
+        balanceLabel.valueLabel.text = currency + " " + data.balance.rounded(toPlaces: 2).toString()
         balanceLabel.valueLabel.font = UIFont.getFont(.semibold, size: 18.0)
         
         programsLabel.titleLabel.text = "programs"
@@ -698,23 +701,48 @@ class DashboardInvestingLabelsView: UIStackView {
         fundsLabel.valueLabel.text = data.funds.toString()
         fundsLabel.valueLabel.font = UIFont.getFont(.semibold, size: 18.0)
         
+        assetsLabel.titleLabel.text = "assets"
+        assetsLabel.valueLabel.text = data.coins.toString()
+        assetsLabel.valueLabel.font = UIFont.getFont(.semibold, size: 18.0)
+        
         let day = data.profits.day
         changeLabelsView.dayLabel.titleLabel.text = "day"
-        changeLabelsView.dayLabel.valueLabel.text = day.value.toString() + " " + currency.rawValue
-        changeLabelsView.dayLabel.percentValueLabel.text = day.percent.toString() + "%"
-        changeLabelsView.dayLabel.percentValueLabel.textColor = day.percent == 0 ? UIColor.Cell.title : day.percent > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
+        var dayValue = day.value.rounded(toPlaces: 2).toString()
+        if dayValue.first == "-" {
+            let i = dayValue.index(dayValue.startIndex, offsetBy: 1)
+            dayValue.insert(contentsOf: currency, at: i)
+            changeLabelsView.dayLabel.valueLabel.textColor = UIColor.Cell.redTitle
+        } else {
+            dayValue.insert(contentsOf: currency, at: dayValue.startIndex)
+            changeLabelsView.dayLabel.valueLabel.textColor = UIColor.Cell.greenTitle
+        }
+        changeLabelsView.dayLabel.valueLabel.text = dayValue
         
         let week = data.profits.week
+        var weekValue = week.value.rounded(toPlaces: 2).toString()
+        if weekValue.first == "-" {
+            let i = weekValue.index(weekValue.startIndex, offsetBy: 1)
+            weekValue.insert(contentsOf: " " + currency, at: i)
+            changeLabelsView.weekLabel.valueLabel.textColor = UIColor.Cell.redTitle
+        } else {
+            weekValue.insert(contentsOf: currency, at: weekValue.startIndex)
+            changeLabelsView.weekLabel.valueLabel.textColor = UIColor.Cell.greenTitle
+        }
         changeLabelsView.weekLabel.titleLabel.text = "week"
-        changeLabelsView.weekLabel.valueLabel.text = week.value.toString() + " " + currency.rawValue
-        changeLabelsView.weekLabel.percentValueLabel.text = week.percent.toString() + "%"
-        changeLabelsView.weekLabel.percentValueLabel.textColor = week.percent == 0 ? UIColor.Cell.title : week.percent > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
+        changeLabelsView.weekLabel.valueLabel.text = weekValue
         
         let month = data.profits.month
         changeLabelsView.monthLabel.titleLabel.text = "month"
-        changeLabelsView.monthLabel.valueLabel.text = month.value.toString() + " " + currency.rawValue
-        changeLabelsView.monthLabel.percentValueLabel.text = month.percent.toString() + "%"
-        changeLabelsView.monthLabel.percentValueLabel.textColor = month.percent == 0 ? UIColor.Cell.title : month.percent > 0 ? UIColor.Cell.greenTitle : UIColor.Cell.redTitle
+        var monthValue = month.value.rounded(toPlaces: 2).toString()
+        if monthValue.first == "-" {
+            let i = monthValue.index(monthValue.startIndex, offsetBy: 1)
+            monthValue.insert(contentsOf: " " + currency, at: i)
+            changeLabelsView.monthLabel.valueLabel.textColor = UIColor.Cell.redTitle
+        } else {
+            monthValue.insert(contentsOf: currency, at: monthValue.startIndex)
+            changeLabelsView.monthLabel.valueLabel.textColor = UIColor.Cell.greenTitle
+        }
+        changeLabelsView.monthLabel.valueLabel.text = monthValue
     }
 }
 

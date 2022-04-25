@@ -261,6 +261,10 @@ extension DashboardViewController: EventDetailsViewProtocol {
 }
 
 extension DashboardViewController: DashboardInvestingCellViewModelProtocol {
+    func assets() {
+        viewModel.router?.showAssetList(with: FilterModel(), assetType: .coinAsset)
+    }
+    
     func programs() {
         viewModel.router?.showAssetList(with: FilterModel(), assetType: .program)
     }

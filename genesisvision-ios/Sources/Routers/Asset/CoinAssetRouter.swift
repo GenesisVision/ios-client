@@ -30,6 +30,5 @@ class CoinAssetRouter {
         prevVC.viewModel?.fetchCoinsPortfolio()
         prevVC.type = .buyAndSellViewController
         navigationController?.popViewController(animated: true)
-//        prevVC.setupBuyAndSellView()
     }
 }

@@ -75,7 +75,7 @@ final class FilterViewModel {
         case .funds:
             rows = [.dateRange, .sort]
         case .coinAsset:
-            rows = [.assets, .sort]
+            rows = [.sort]
         }
         
         self.router = router

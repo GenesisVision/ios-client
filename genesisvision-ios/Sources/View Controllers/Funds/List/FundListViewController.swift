@@ -353,7 +353,7 @@ extension FundListViewController: FavoriteStateChangeProtocol {
     }
     
     func didChangeFavoriteState(with assetID: String, value: Bool, request: Bool) {
-        showProgressHUD()
+//        showProgressHUD()
         viewModel.changeFavorite(value: value, assetId: assetID, request: request) { [weak self] (result) in
             self?.hideAll()
             

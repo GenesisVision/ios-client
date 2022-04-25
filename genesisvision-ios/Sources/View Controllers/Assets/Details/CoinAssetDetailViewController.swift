@@ -125,7 +125,6 @@ class CoinAssetDetailViewController : UIViewController {
             }
             let constraintsConstats = constraints.map({$0.map({$0.constant})})
             let totalHeightOfConstraints = constraintsConstats?.reduce(0, +)
-            print(descriptionLabel.height, buttonsStackView.height)
             scrollView.contentSize.height = totalHeight + (totalHeightOfConstraints ?? 90) + 20
             contentViewHeightConstraint.constant = totalHeight + (totalHeightOfConstraints ?? 90) + 20
         }

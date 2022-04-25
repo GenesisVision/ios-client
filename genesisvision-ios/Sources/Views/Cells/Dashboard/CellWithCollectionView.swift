@@ -82,8 +82,10 @@ class CellWithCollectionView: BaseTableViewCell {
         
         collectionView.backgroundColor = UIColor.BaseView.bg
 
-        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout, self.type != .investingAssets {
             layout.scrollDirection = .horizontal
+        } else if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout, self.type == .investingAssets {
+            layout.scrollDirection = .vertical
         }
         
         collectionView.isScrollEnabled = true

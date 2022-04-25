@@ -50,10 +50,14 @@ extension AssetCollectionViewCellViewModel: CellViewModel {
             cell.configure(asset, filterProtocol: filterProtocol)
         } else if let asset = asset as? FundInvestingDetailsList {
             cell.configure(asset, filterProtocol: filterProtocol, favoriteProtocol: favoriteProtocol)
+        } else if asset == nil && (type == .fund || type == .program || type == .coinAsset) {
+            cell.configureEmptyInvestingView(type: type)
         } else if let asset = asset as? ProgramInvestingDetailsList {
             cell.configure(asset, filterProtocol: filterProtocol, favoriteProtocol: favoriteProtocol)
-        } else if let asset = asset as? CoinsAsset {
+        } else if let asset = asset as? CoinsAsset, type == .coinAsset {
             cell.configure(asset, filterProtocol: filterProtocol, favoriteProtocol: favoriteProtocol)
+        } else if let asset = asset as? CoinsAsset, type == ._none {
+            cell.configureInvesting(asset, filterProtocol: filterProtocol, favoriteProtocol: favoriteProtocol)
         }
     }
 }
@@ -124,6 +128,19 @@ class AssetCollectionViewCell: BaseCollectionViewCell {
         }
     }
     
+    /// CoinsAsset
+    /// - Parameters:
+    ///   - asset: CoinsAsset
+    ///   - delegate: FavoriteStateChangeProtocol
+    func configureInvesting(_ asset: CoinsAsset, filterProtocol: FilterChangedProtocol?, favoriteProtocol: FavoriteStateChangeProtocol?) {
+        stackView.removeAllArrangedSubviews()
+        cellContentView = CoinAssetInvestingContentView.viewFromNib()
+        if let cellContentView = cellContentView as? CoinAssetInvestingContentView {
+            stackView.addArrangedSubview(cellContentView)
+            cellContentView.configure(asset, filterProtocol: filterProtocol, favoriteProtocol: favoriteProtocol)
+        }
+    }
+    
     /// FundInvesting
     /// - Parameters:
     ///   - asset: FundInvestingDetailsList
@@ -134,6 +151,19 @@ class AssetCollectionViewCell: BaseCollectionViewCell {
         if let cellContentView = cellContentView as? FundInvestingContentView {
             stackView.addArrangedSubview(cellContentView)
             cellContentView.configure(asset, filterProtocol: filterProtocol, favoriteProtocol: favoriteProtocol)
+        }
+    }
+    
+    /// FundInvesting
+    /// - Parameters:
+    ///   - asset: FundInvestingDetailsList
+    ///   - delegate: FavoriteStateChangeProtocol
+    func configureEmptyInvestingView(type: AssetType) {
+        stackView.removeAllArrangedSubviews()
+        cellContentView = EmptyInvestingContentView.viewFromNib()
+        if let cellContentView = cellContentView as? EmptyInvestingContentView {
+            stackView.addArrangedSubview(cellContentView)
+            cellContentView.configure(type: type)
         }
     }
     

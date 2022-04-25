@@ -90,6 +90,10 @@ final class ListViewModel: ListViewModelProtocol {
             title = "Follow"
             
             NotificationCenter.default.addObserver(self, selector: #selector(followFavoriteStateChangeNotification(notification:)), name: .followFavoriteStateChange, object: nil)
+        case .coinAsset:
+            title = "Assets"
+            
+            NotificationCenter.default.addObserver(self, selector: #selector(coinAssetFavoriteStateChangeNotification(notification:)), name: .coinAssetFavoriteStateChangeKey, object: nil)
         default:
             break
         }
@@ -119,6 +123,8 @@ final class ListViewModel: ListViewModelProtocol {
             NotificationCenter.default.removeObserver(self, name: .fundFavoriteStateChange, object: nil)
         case .follow:
             NotificationCenter.default.removeObserver(self, name: .followFavoriteStateChange, object: nil)
+        case .coinAsset:
+            NotificationCenter.default.removeObserver(self, name: .coinAssetFavoriteStateChangeKey, object: nil)
         default:
             break
         }
@@ -327,10 +333,10 @@ final class ListViewModel: ListViewModelProtocol {
     
     func changeFavoriteCoin(value: Bool, assetId: String, request: Bool = false, completion: @escaping CompletionBlock) {
         guard request else {
-            var followModel = model(for: assetId) as? FollowTableViewCellViewModel
+            var coinModel = model(for: assetId) as? CoinAssetTableViewCellViewModel
             
-            if followModel != nil {
-                followModel!.asset.personalDetails?.isFavorite = value
+            if coinModel != nil {
+                coinModel!.asset.isFavorite = value
                 completion(.success)
                 return
             } else {
@@ -427,6 +433,14 @@ final class ListViewModel: ListViewModelProtocol {
     
     @objc private func followFavoriteStateChangeNotification(notification: Notification) {
         if let isFavorite = notification.userInfo?["isFavorite"] as? Bool, let assetId = notification.userInfo?["followId"] as? String {
+            changeFavorite(value: isFavorite, assetId: assetId) { [weak self] (result) in
+                self?.reloadDataProtocol?.didReloadData()
+            }
+        }
+    }
+    
+    @objc private func coinAssetFavoriteStateChangeNotification(notification: Notification) {
+        if let isFavorite = notification.userInfo?["isFavorite"] as? Bool, let assetId = notification.userInfo?["coinAssetId"] as? String {
             changeFavorite(value: isFavorite, assetId: assetId) { [weak self] (result) in
                 self?.reloadDataProtocol?.didReloadData()
             }
@@ -577,7 +591,7 @@ extension ListViewModel {
                 completionSuccess(totalCount, viewModels)
                 }, errorCompletion: completionError)
         case .coinAsset:
-            CoinAssetsDataProvider.get(filterModel, skip : skip, take: 20, completion: { [weak self] (assetList) in
+            CoinAssetsDataProvider.get(filterModel, skip : skip, take: take, completion: { [weak self] (assetList) in
                 guard let assetList = assetList else { return completionError(.failure(errorType: .apiError(message: nil))) }
                 
                 totalCount = assetList.total ?? 0

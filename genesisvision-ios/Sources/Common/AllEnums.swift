@@ -25,6 +25,7 @@ enum CellActionType {
     case investingRequests
     case investingFunds
     case investingPrograms
+    case investingAssets
     
     case createFund
     case createAccount

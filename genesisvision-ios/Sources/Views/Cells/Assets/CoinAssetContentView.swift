@@ -66,19 +66,9 @@ class CoinAssetContentView: UIStackView {
     }
 }
 
-
-
-
 // MARK: - TODO Remove all constants!
-
-
-
-
 extension CoinAssetContentView: ContentViewProtocol {
-    /// Fund
-    /// - Parameters:
-    ///   - asset: CoinsAsset
-    ///   - delegate: FavoriteStateChangeProtocol
+    
     func configure(_ asset: CoinsAsset, filterProtocol: FilterChangedProtocol?, favoriteProtocol: FavoriteStateChangeProtocol?) {
         self.filterProtocol = filterProtocol
         self.favoriteProtocol = favoriteProtocol

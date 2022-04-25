@@ -32,7 +32,7 @@ class SellAndBuyCoinAssetView: UIView {
     
     @IBOutlet weak var avaragePriceValueLabel: TitleLabel!
     
-    @IBOutlet weak var avaragePriceTitleLabel: SubtitleLabel!
+    @IBOutlet weak var averagePriceTitleLabel: SubtitleLabel!
     
     @IBOutlet weak var profitValueLabel: TitleLabel!
     
@@ -75,7 +75,7 @@ class SellAndBuyCoinAssetView: UIView {
         if let avaragePrice = assetPortfolio.averagePrice {
             avaragePriceValueLabel.text = "$ " + avaragePrice.toString()
         }
-        avaragePriceTitleLabel.text = Constants.CoinAssetsConstants.portfolioLabels.AvaragePrice
+        averagePriceTitleLabel.text = Constants.CoinAssetsConstants.portfolioLabels.averagePrice
         if let profit = assetPortfolio.profitCurrent {
             var stringProfit = profit.toString()
             if stringProfit.starts(with: "-") {

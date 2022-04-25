@@ -11,6 +11,7 @@ import UIKit
 protocol DashboardInvestingCellViewModelProtocol: AnyObject {
     func programs()
     func funds()
+    func assets()
 }
 
 struct DashboardInvestingCellViewModel<ViewModelType: CellViewModelWithCollection> {
@@ -41,9 +42,9 @@ extension DashboardInvestingCellViewModel: CellViewModel {
         cell.cellDelegate = cellDelegate
         
         cell.labelsView.configure(data)
-        cell.labelsView.changeLabelsView.dayLabel.valueLabel.isHidden = true
-        cell.labelsView.changeLabelsView.weekLabel.valueLabel.isHidden = true
-        cell.labelsView.changeLabelsView.monthLabel.valueLabel.isHidden = true
+//        cell.labelsView.changeLabelsView.dayLabel.valueLabel.isHidden = true
+//        cell.labelsView.changeLabelsView.weekLabel.valueLabel.isHidden = true
+//        cell.labelsView.changeLabelsView.monthLabel.valueLabel.isHidden = true
     }
 }
 
@@ -65,6 +66,11 @@ class DashboardInvestingTableViewCell: CellWithCollectionView {
     @IBAction func fundsButtonAction(_ sender: Any) {
         cellDelegate?.funds()
     }
+    
+    @IBAction func assetsButtonAction(_ sender: Any) {
+        cellDelegate?.assets()
+    }
+    
 }
 
 class InvestingCollectionViewModel: CellViewModelWithCollection {

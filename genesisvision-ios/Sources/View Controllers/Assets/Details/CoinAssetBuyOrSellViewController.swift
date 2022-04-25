@@ -330,6 +330,7 @@ class CoinAssetBuyOrSellViewController : BaseViewController {
 extension CoinAssetBuyOrSellViewController : WalletDelegateManagerProtocol {
     func didSelectWallet(at indexPath: IndexPath, walletId: Int) {
         self.viewModel?.updateSelectedWallet(index: indexPath.row)
+        amountValueLabel.text = amountValue.toString()
         updateUI()
         bottomSheetController.dismiss()
     }

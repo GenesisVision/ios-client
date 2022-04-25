@@ -1,21 +1,20 @@
 //
-//  InvestingProgramsViewModel.swift
+//  InvestingAssetsViewModel.swift
 //  genesisvision-ios
 //
-//  Created by George on 25.11.2019.
-//  Copyright © 2019 Genesis Vision. All rights reserved.
+//  Created by Gregory on 14.04.2022.
+//  Copyright © 2022 Genesis Vision. All rights reserved.
 //
-
 import UIKit
 
-class InvestingProgramsViewModel: CellViewModelWithCollection {
+class InvestingAssetsViewModel: CellViewModelWithCollection {
     var title: String
     var type: CellActionType
     
     var viewModels = [CellViewAnyModel]()
     
     var canPullToRefresh: Bool = true
-    var details: ProgramInvestingDetailsListItemsViewModel?
+    var details: CoinsAssetItemsViewModel?
     var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] {
         return []
     }
@@ -25,17 +24,17 @@ class InvestingProgramsViewModel: CellViewModelWithCollection {
     }
     
     weak var delegate: BaseTableViewProtocol?
-    init(_ details: ProgramInvestingDetailsListItemsViewModel?, delegate: BaseTableViewProtocol?) {
+    init(_ details: CoinsAssetItemsViewModel?, delegate: BaseTableViewProtocol?) {
         self.details = details
         self.delegate = delegate
-        title = "Programs"
-        type = .investingPrograms
+        title = "Assets"
+        type = .investingAssets
         
         if let items = details?.items, items.isEmpty {
-            viewModels.append(AssetCollectionViewCellViewModel(type: .program, asset: nil, filterProtocol: nil, favoriteProtocol: nil))
+            viewModels.append(AssetCollectionViewCellViewModel(type: .coinAsset, asset: nil, filterProtocol: nil, favoriteProtocol: nil))
         } else {
             details?.items?.forEach({ (viewModel) in
-                viewModels.append(AssetCollectionViewCellViewModel(type: .program, asset: viewModel, filterProtocol: nil, favoriteProtocol: nil))
+                viewModels.append(AssetCollectionViewCellViewModel(type: ._none, asset: viewModel, filterProtocol: nil, favoriteProtocol: nil))
             })
         }
     }
@@ -50,21 +49,21 @@ class InvestingProgramsViewModel: CellViewModelWithCollection {
     }
 }
 
-extension InvestingProgramsViewModel {
-    func getRightButtons() -> [UIButton] {
-        guard let items = details?.items, !items.isEmpty else { return [UIButton()]}
-        let showAllButton = UIButton(type: .system)
-        showAllButton.setTitle("show all", for: .normal)
-        showAllButton.setTitleColor(.primary, for: .normal)
-        showAllButton.addTarget(self, action: #selector(showAllButtonAction(_:)), for: .touchUpInside)
-        return [showAllButton]
-    }
+extension InvestingAssetsViewModel {
+//    func getRightButtons() -> [UIButton] {
+//        let showAllButton = UIButton(type: .system)
+//        showAllButton.setTitle("show all", for: .normal)
+//        showAllButton.setTitleColor(.primary, for: .normal)
+//        showAllButton.addTarget(self, action: #selector(showAllButtonAction(_:)), for: .touchUpInside)
+//        return [showAllButton]
+//    }
     
     func getCollectionViewHeight() -> CGFloat {
-        if let items = details?.items, items.isEmpty {
+        guard let items = details?.items else { return 0 }
+        if items.isEmpty {
             return 150.0
         } else {
-            return 250.0
+            return CGFloat(items.count * 100)
         }
     }
     
@@ -75,11 +74,12 @@ extension InvestingProgramsViewModel {
             return details?.total
         }
     }
+    
     func sizeForItem(at indexPath: IndexPath, frame: CGRect) -> CGSize {
         if let items = details?.items, items.isEmpty {
             return CGSize(width: frame.width - 30, height: 100.0)
         } else {
-            return CGSize(width: frame.width - 30, height: 250.0)
+            return CGSize(width: frame.width - 20, height: 80)
         }
     }
 }

@@ -15,6 +15,7 @@ struct InvestingHeaderData: BaseData {
     var balance: Double
     var programs: Int
     var funds: Int
+    var coins: Int
     
     let profits: Profits
     
@@ -25,7 +26,7 @@ struct InvestingHeaderData: BaseData {
     init(title: String? = nil, details: DashboardInvestingDetails?, currency: CurrencyType) {
         type = .none
         
-        isEmpty = details?.events?.items?.count == 0 && details?.programsCount == 0 && details?.fundsCount == 0
+        isEmpty = details?.events?.items?.count == 0 && details?.programsCount == 0 && details?.fundsCount == 0 && details?.coinsCount == 0
         
         self.title = title ?? ""
         self.currency = currency
@@ -33,6 +34,7 @@ struct InvestingHeaderData: BaseData {
         balance = details?.equity ?? 0.0
         programs = details?.programsCount ?? 0
         funds = details?.fundsCount ?? 0
+        coins = details?.coinsCount ?? 0
         profits = Profits(details?.profits)
     }
 }
@@ -75,13 +77,17 @@ class InvestingHeaderTableViewCell: BaseTableViewCell {
             titleLabel.isHidden = true
         }
 
+//        labelsView.balanceLabel.titleLabel.isHidden = true
+//        labelsView.changeLabelsView.dayLabel.valueLabel.isHidden = true
+//        labelsView.changeLabelsView.weekLabel.valueLabel.isHidden = true
+//        labelsView.changeLabelsView.monthLabel.valueLabel.isHidden = true
         labelsView.configure(data)
-        labelsView.balanceLabel.titleLabel.isHidden = true
+        labelsView.balanceLabel.titleLabel.isHidden = false
         labelsView.balanceLabel.valueLabel.textAlignment = .center
         labelsView.bottomStackView.isHidden = true
-        labelsView.changeLabelsView.dayLabel.valueLabel.isHidden = true
-        labelsView.changeLabelsView.weekLabel.valueLabel.isHidden = true
-        labelsView.changeLabelsView.monthLabel.valueLabel.isHidden = true
+        labelsView.changeLabelsView.dayLabel.valueLabel.isHidden = false
+        labelsView.changeLabelsView.weekLabel.valueLabel.isHidden = false
+        labelsView.changeLabelsView.monthLabel.valueLabel.isHidden = false
     }
 }
 

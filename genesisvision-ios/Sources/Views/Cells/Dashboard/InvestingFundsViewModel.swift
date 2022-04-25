@@ -30,13 +30,18 @@ class InvestingFundsViewModel: CellViewModelWithCollection {
         title = "Funds"
         type = .investingFunds
         
-        details?.items?.forEach({ (viewModel) in
-            //FIXIT: Add filterProtocol, favoriteProtocol
-            viewModels.append(AssetCollectionViewCellViewModel(type: .fund, asset: viewModel, filterProtocol: nil, favoriteProtocol: nil))
-        })
+        if let items = details?.items, items.isEmpty {
+            viewModels.append(AssetCollectionViewCellViewModel(type: .fund, asset: nil, filterProtocol: nil, favoriteProtocol: nil))
+        } else {
+            details?.items?.forEach({ (viewModel) in
+                //FIXIT: Add filterProtocol, favoriteProtocol
+                viewModels.append(AssetCollectionViewCellViewModel(type: .fund, asset: viewModel, filterProtocol: nil, favoriteProtocol: nil))
+            })
+        }
     }
     
     func didSelect(at indexPath: IndexPath) {
+        guard let items = details?.items, !items.isEmpty else { return }
         delegate?.didSelect(type, cellViewModel: model(for: indexPath))
     }
     
@@ -47,6 +52,7 @@ class InvestingFundsViewModel: CellViewModelWithCollection {
 
 extension InvestingFundsViewModel {
     func getRightButtons() -> [UIButton] {
+        guard let items = details?.items, !items.isEmpty else { return [UIButton()]}
         let showAllButton = UIButton(type: .system)
         showAllButton.setTitle("show all", for: .normal)
         showAllButton.setTitleColor(.primary, for: .normal)
@@ -55,10 +61,26 @@ extension InvestingFundsViewModel {
     }
     
     func getCollectionViewHeight() -> CGFloat {
-        return 250.0
+        if let items = details?.items, items.isEmpty {
+            return 150.0
+        } else {
+            return 250.0
+        }
     }
     
     func getTotalCount() -> Int? {
-        return details?.total
+        if let items = details?.items, items.isEmpty {
+            return 1
+        } else {
+            return details?.total
+        }
+    }
+    
+    func sizeForItem(at indexPath: IndexPath, frame: CGRect) -> CGSize {
+        if let items = details?.items, items.isEmpty {
+            return CGSize(width: frame.width - 30, height: 100.0)
+        } else {
+            return CGSize(width: frame.width - 30, height: 250.0)
+        }
     }
 }

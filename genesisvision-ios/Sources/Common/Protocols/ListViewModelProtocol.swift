@@ -368,8 +368,7 @@ extension ListViewModelProtocol {
             
             return router.getFundViewController(with: assetId)
         case .coinAsset:
-            
-            return nil
+            return UIViewController()
         case ._none:
             guard let model = model(for: indexPath) as? ManagerTableViewCellViewModel,
                 let managerId = model.profile._id?.uuidString,
