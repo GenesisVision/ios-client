@@ -9,9 +9,9 @@
 import Foundation
 
 class CoinAssetsDataProvider: DataProvider {
-    static func get(_ filterModel: FilterModel? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ coinAssetsViewModel: CoinsAssetItemsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+    static func get(_ filterModel: FilterModel? = nil, assets: [String]? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ coinAssetsViewModel: CoinsAssetItemsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         let sorting = filterModel?.sortingModel.selectedSorting as? CoinsFilterSorting ?? CoinsFilterSorting.byMarketCapDesc
-        CoinsAPI.getCoins(sorting: sorting, assets: nil, isFavorite: nil, skip: skip, take: take) { viewModel, error in
+        CoinsAPI.getCoins(sorting: sorting, assets: assets, isFavorite: nil, skip: skip, take: take) { viewModel, error in
                 DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }
@@ -34,6 +34,13 @@ class CoinAssetsDataProvider: DataProvider {
     static func transfer(body: InternalTransferRequest?, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
         CoinsAPI.transfer(body: body) { data, error in
             completion(data, error)
+        }
+    }
+    
+    static func getCoinsHistory(dateFrom: Date? = nil, dateTo: Date? = nil, assets: [String]? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping ((_ data: CoinsHistoryEventItemsViewModel?,_ error: Error?) -> Void)) {
+        CoinsAPI.getCoinsConvertingHistory(dateFrom: dateFrom, dateTo: dateTo, assets: assets, skip: skip, take: take) {
+            historyViewModel, error in
+            completion(historyViewModel,error)
         }
     }
     

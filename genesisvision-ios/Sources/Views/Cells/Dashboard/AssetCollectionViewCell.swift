@@ -26,6 +26,8 @@ struct AssetCollectionViewCellViewModel {
             assetId = id
         } else if let fundInvesting = asset as? FundInvestingDetailsList, let id = fundInvesting._id?.uuidString {
             assetId = id
+        } else if let coinAssetInvesting = asset as? CoinsAsset, let id = coinAssetInvesting.asset {
+            assetId = id
         } else if let tradingAsset = asset as? DashboardTradingAsset, tradingAsset.assetType == type, let id = tradingAsset._id?.uuidString {
             assetId = id
         } else if let follow = asset as? FollowDetailsListItem {

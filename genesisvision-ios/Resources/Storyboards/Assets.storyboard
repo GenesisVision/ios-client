@@ -1071,6 +1071,37 @@
             </objects>
             <point key="canvasLocation" x="4871" y="2215"/>
         </scene>
+        <!--Asset Investing Portfolio List View Controller-->
+        <scene sceneID="7pg-SF-IcF">
+            <objects>
+                <viewController storyboardIdentifier="AssetInvestingPortfolioListViewController" id="ecP-LM-znt" customClass="AssetInvestingPortfolioListViewController" customModule="GV_DEBUG" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZHo-PR-PZ6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ti8-gC-uIr">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="separatorColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="2DW-TZ-2uU"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ti8-gC-uIr" firstAttribute="leading" secondItem="2DW-TZ-2uU" secondAttribute="leading" id="1ge-NG-bxr"/>
+                            <constraint firstItem="ti8-gC-uIr" firstAttribute="top" secondItem="2DW-TZ-2uU" secondAttribute="top" id="Fgu-Nq-rGi"/>
+                            <constraint firstAttribute="bottom" secondItem="ti8-gC-uIr" secondAttribute="bottom" id="io4-VR-L6w"/>
+                            <constraint firstItem="2DW-TZ-2uU" firstAttribute="trailing" secondItem="ti8-gC-uIr" secondAttribute="trailing" id="kbS-V4-jzz"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="ti8-gC-uIr" id="eHl-dt-F3n"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F8t-L3-E1O" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5733" y="913"/>
+        </scene>
     </scenes>
     <resources>
         <image name="img_numpad_delete" width="26" height="18"/>

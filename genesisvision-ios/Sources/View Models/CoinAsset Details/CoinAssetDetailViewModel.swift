@@ -11,10 +11,12 @@ import Charts
 
 protocol ChartViewDelegateProtocol: AnyObject {
     func pushDataToChartView(dataSet: CandleChartDataSet, xAxisValueFormatter: MyXAxisFormatter)
+    func noChartDataSetup()
 }
 
 protocol AssetPortfolioDelegateProtocol: AnyObject {
     func pushPortfolioData(assetPortfolio: CoinsAsset?)
+    func updateAssetData()
 }
 
 protocol CoinAssetDetailViewModelProtocol {
@@ -34,7 +36,7 @@ protocol CoinAssetDetailViewModelChartProtocol {
 }
 
 class CoinAssetDetailViewModel {
-    let asset: CoinsAsset?
+    var asset: CoinsAsset?
     var assetPortfolio: CoinsAsset?
     var fullSymbol: String?
     private var chartValues = [CandleChartDataEntry]()
@@ -64,6 +66,17 @@ class CoinAssetDetailViewModel {
         self.assetPortfolioDelegate = assetPortfolioDelegate
         self.fetchCoinsPortfolio()
         self.setupChartValues(interval: interval)
+    }
+    init(assetId: String, chartViewDelegate: ChartViewDelegateProtocol, assetPortfolioDelegate: AssetPortfolioDelegateProtocol) {
+        self.asset = CoinsAsset()
+        self.chartViewDelegate = chartViewDelegate
+        self.assetPortfolioDelegate = assetPortfolioDelegate
+        self.fetchAsset(id: assetId) { (viewModel) in
+            self.asset = viewModel?.items?.first
+            self.fetchCoinsPortfolio()
+            self.setupChartValues(interval: self.interval)
+            self.assetPortfolioDelegate?.updateAssetData()
+        }
     }
 }
 
@@ -131,6 +144,15 @@ extension CoinAssetDetailViewModel: CoinAssetDetailViewModelChartProtocol {
                 self.chartViewDelegate?.pushDataToChartView(dataSet: dataSet, xAxisValueFormatter : xAxisValueFormatter)
             }
             
+        } errorCompletion: { result in
+            print(result)
+            self.chartViewDelegate?.noChartDataSetup()
+        }
+    }
+    
+    func fetchAsset(id: String, complition: @escaping (_ coinAssetsViewModel: CoinsAssetItemsViewModel?)->()) {
+        CoinAssetsDataProvider.get(assets: [id]) { coinAssetsViewModel in
+            complition(coinAssetsViewModel)
         } errorCompletion: { result in
             print(result)
         }

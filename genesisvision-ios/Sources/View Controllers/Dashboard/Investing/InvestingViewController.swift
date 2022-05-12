@@ -96,7 +96,11 @@ class InvestingViewController: ListViewController {
     func showAsset(_ asset: AssetCollectionViewCellViewModel) {
         let assetId = asset.getAssetId()
         let type = asset.type
-        viewModel.router?.showAssetDetails(with: assetId, assetType: type)
+        if type == ._none {
+            viewModel.router?.showCoinAssetDetails(with: assetId)
+        } else {
+            viewModel.router?.showAssetDetails(with: assetId, assetType: type)
+        }
     }
     
     func fetch() {
@@ -193,6 +197,11 @@ extension InvestingViewController: BaseTableViewProtocol {
             navigationController?.pushViewController(vc, animated: true)
         case .investingRequests:
             showRequests(viewModel?.requests)
+        case .investingAssets:
+            let vc = InvestingAssetListViewController()
+            vc.viewModel = InvestingAssetTabmanViewModel(withRouter: CoinAssetInvestRouter(parentRouter: viewModel.router, navigationController: navigationController))
+            vc.title = "Assets"
+            navigationController?.pushViewController(vc, animated: true)
         default:
             break
         }

@@ -301,6 +301,13 @@ extension CoinAssetDetailViewController : ChartViewDelegateProtocol, ChartViewDe
             self.activityIndicator.stopAnimating()
         }
     }
+    func noChartDataSetup() {
+        DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
+//            self.CandleStickChartView.noDataText = "No data"
+//            self.CandleStickChartView.reloadInputViews()
+        }
+    }
 }
 
 extension CoinAssetDetailViewController: AssetPortfolioDelegateProtocol {
@@ -312,6 +319,11 @@ extension CoinAssetDetailViewController: AssetPortfolioDelegateProtocol {
                 setupBuyButtonView()
             }
         }
+    }
+    func updateAssetData() {
+        setuplabels()
+        navigationBarSetup()
+        setupStackView()
     }
 }
 

@@ -273,3 +273,8 @@ enum SocialPostAction {
     }
 }
 
+enum InvestingPortfolioSectionType {
+    case portfolio
+    case history
+}
+

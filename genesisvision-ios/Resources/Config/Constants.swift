@@ -72,5 +72,7 @@ final class Constants {
         static let fund = "fund"
         static let asset = "asset"
         static let find = "Find"
+        
+        static let maxValueOfCoinAssetsInInvestingVC = 5
     }
 }
