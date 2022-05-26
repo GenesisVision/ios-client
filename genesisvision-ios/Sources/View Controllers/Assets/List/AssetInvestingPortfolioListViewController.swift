@@ -52,8 +52,8 @@ class AssetInvestingPortfolioListViewController: BaseViewControllerWithTableView
         if let imageName = viewModel.noDataImageName() {
             noDataImage = UIImage(named: imageName)
         }
-
-        bottomViewType = .none
+        tableView.separatorStyle = .singleLine
+        bottomViewType = viewModel.bottomViewType
     }
     
     private func setupTableConfiguration() {
@@ -68,8 +68,7 @@ class AssetInvestingPortfolioListViewController: BaseViewControllerWithTableView
     
     override func pullToRefresh() {
         super.pullToRefresh()
-
-        viewModel.refresh { (result) in }
+        fetch()
     }
     
     private func reloadData() {
@@ -79,13 +78,15 @@ class AssetInvestingPortfolioListViewController: BaseViewControllerWithTableView
         }
     }
     override func fetch() {
-//        showProgressHUD()
         viewModel.fetch { [weak self] (result) in
             self?.hideAll()
             if let totalCount = self?.viewModel.totalCount {
                 self?.tabmanBarItems?.forEach({ $0.badgeValue = "\(totalCount)" })
             }
         }
+    }
+    override func filterButtonAction() {
+        viewModel.showFilterVC()
     }
 }
 

@@ -147,11 +147,10 @@ class CoinAssetBuyAndSellViewModel: CoinAssetBuyAndSellViewModelProtocol {
             guard let from = from?.first, let to = to?.first else { return }
             let rateItems = ratesModel?.rates?[from]
             let usd = rateItems?.first(where: {$0.currency == to})?.rate
-            
+
             guard let usd = usd, (usd * self.amount) >= 10 else {
                 alertControllerDelegate?.showAlert(title: Constants.CoinAssetsConstants.minimalTransferDisclaimer, massage: nil)
                 return }
-            
             
             var body : InternalTransferRequest?
             let assetId : UUID?
@@ -162,11 +161,16 @@ class CoinAssetBuyAndSellViewModel: CoinAssetBuyAndSellViewModelProtocol {
                 assetId = asset._id
             }
             
+            guard assetId != nil, let selectedWalletID = self.selectedWallet?._id else {
+                alertControllerDelegate?.showAlert(title: Constants.CoinAssetsConstants.transferError, massage: nil)
+                return
+            }
+            let amount = self.amountValue
             switch self.isBuyViewController {
             case true:
-                body = InternalTransferRequest(sourceId: self.selectedWallet?._id, sourceType: .wallet, destinationId: assetId, destinationType: .coinsMarket, amount: self.amountValue)
+                body = InternalTransferRequest(sourceId: selectedWalletID, sourceType: .wallet, destinationId: assetId, destinationType: .coinsMarket, amount: amount)
             case false:
-                body = InternalTransferRequest(sourceId: assetId, sourceType: .coinsMarket, destinationId: self.selectedWallet?._id, destinationType: .wallet, amount: self.amountValue)
+                body = InternalTransferRequest(sourceId: assetId, sourceType: .coinsMarket, destinationId: selectedWalletID, destinationType: .wallet, amount: amount)
             }
             
             CoinAssetsDataProvider.transfer(body: body) { data, error in
@@ -177,9 +181,9 @@ class CoinAssetBuyAndSellViewModel: CoinAssetBuyAndSellViewModelProtocol {
                 }
             }
             
-        }, errorCompletion: {result in
+        }, errorCompletion: { [self] result in
             print("Rates error : ", result)
-            
+            alertControllerDelegate?.showAlert(title: Constants.CoinAssetsConstants.minimalTransferDisclaimer, massage: nil)
         })
     }
 }

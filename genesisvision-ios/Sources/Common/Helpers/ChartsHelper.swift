@@ -15,6 +15,7 @@ class MyXAxisFormatter: NSObject, IAxisValueFormatter {
     var xVlaues: [Double]
 
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        guard Int(value) <= xVlaues.count else { return ""}
         let xValue = xVlaues[Int(value)]
         let date = Date(timeIntervalSince1970: TimeInterval(xValue) / 1000)
         let dateFormatter = DateFormatter()

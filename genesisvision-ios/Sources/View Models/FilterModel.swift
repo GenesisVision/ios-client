@@ -54,6 +54,7 @@ class FilterModel {
     var levelModel: FilterLevelModel
     var dateRangeModel: FilterDateRangeModel
     var currencyModel: FilterCurrencyModel
+    var assetsModel = Set<String>()
     var chartPointsCount: Int = ApiKeys.equityChartLength
     var mask: String?
     var isFavorite: Bool = false

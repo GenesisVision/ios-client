@@ -51,7 +51,7 @@ final class ListViewModel: ListViewModelProtocol {
     var signInButtonEnable: Bool {
         return state == .listWithSignIn
     }
-    
+    var historyDelegate: historyReloadProtocol?
     // MARK: - Init
     init(withRouter router: ListRouterProtocol, reloadDataProtocol: ReloadDataProtocol?, filterModel: FilterModel? = nil, showFacets: Bool = false, bottomViewType: BottomViewType? = nil, assetType: AssetType) {
         self.router = router
@@ -609,5 +609,11 @@ extension ListViewModel {
         default:
             break
         }
+    }
+}
+// MARK: - History Update
+extension ListViewModel {
+    func refreshHistory(assets: [String]?, dateFrom: Date?, dateTo: Date?, filterModel: FilterModel?) {
+        historyDelegate?.reload(assets: assets, dateFrom: dateFrom, dateTo: dateTo, filterModel: filterModel)
     }
 }

@@ -32,7 +32,7 @@ extension ContentViewProtocol {
     func configure(_ asset: ProgramInvestingDetailsList, filterProtocol: FilterChangedProtocol?, favoriteProtocol: FavoriteStateChangeProtocol?) {}
     func configure(_ asset: CoinsAsset, filterProtocol: FilterChangedProtocol?, favoriteProtocol: FavoriteStateChangeProtocol?) {}
     func configure(type: AssetType){}
-    
+    func configure(_ asset: BasePlatformAsset) {}
     func configure(_ asset: DashboardTradingAsset, filterProtocol: FilterChangedProtocol?) {}
     func configure(programTrading asset: DashboardTradingAsset, filterProtocol: FilterChangedProtocol?) {}
     func configure(followTrading asset: DashboardTradingAsset, filterProtocol: FilterChangedProtocol?) {}

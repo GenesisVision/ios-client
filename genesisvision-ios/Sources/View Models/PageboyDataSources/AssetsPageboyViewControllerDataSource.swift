@@ -63,7 +63,7 @@ class AssetsPageboyViewControllerDataSource: BasePageboyViewControllerDataSource
         let listRouter = ListRouter(parentRouter: router)
         listRouter.currentController = viewController
         let viewModel =
-            ListViewModel(withRouter: listRouter, reloadDataProtocol: viewController, filterModel: filterModel, showFacets: showFacets, assetType: .program)
+            ListViewModel(withRouter: listRouter, reloadDataProtocol: viewController, filterModel: filterModel, showFacets: showFacets, assetType: .coinAsset)
         viewController.viewModel = viewModel
         
         return viewController

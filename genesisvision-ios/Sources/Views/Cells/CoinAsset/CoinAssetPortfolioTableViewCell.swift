@@ -25,6 +25,7 @@ class CoinAssetTableViewCell: UITableViewCell {
     }
 
     func configure(_ asset: CoinsAsset, filterProtocol: FilterChangedProtocol?, favoriteProtocol: FavoriteStateChangeProtocol?) {
+        cellContentView.removeAllArrangedSubviews()
         cellContentView = CoinAssetInvestingContentView.viewFromNib()
         addSubview(cellContentView)
         cellContentView.fillSuperview(padding: UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15))
@@ -32,9 +33,18 @@ class CoinAssetTableViewCell: UITableViewCell {
     }
     
     func configure(_ asset: CoinsHistoryEvent, filterProtocol: FilterChangedProtocol?, favoriteProtocol: FavoriteStateChangeProtocol?) {
+        cellContentView.removeAllArrangedSubviews()
         cellContentView = CoinAssetInvestingHistoryContentView.viewFromNib()
         addSubview(cellContentView)
         cellContentView.fillSuperview(padding: UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20))
         (cellContentView as? CoinAssetInvestingHistoryContentView)?.configure(asset, filterProtocol: filterProtocol, favoriteProtocol: favoriteProtocol)
+    }
+    
+    func configure(_ asset: BasePlatformAsset) {
+        cellContentView.removeAllArrangedSubviews()
+        cellContentView = SearchCoinAssetContentView.viewFromNib()
+        addSubview(cellContentView)
+        cellContentView.fillSuperview(padding: UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20))
+        (cellContentView as? SearchCoinAssetContentView)?.configure(asset)
     }
 }

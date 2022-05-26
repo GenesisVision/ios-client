@@ -102,5 +102,17 @@ extension Date {
             return yearsString
         }
     }
+    
+    static func getDateFormatFromeBinanceKlineInterval(interval: BinanceKlineInterval) -> String {
+        switch interval {
+        case .oneMinute, .threeMinutes, .fiveMinutes, .fifteenMinutes,
+                .thirtyMinutes, .oneHour, .twoHour, .fourHour, .sixHour, .eightHour, .twelveHour, .oneDay:
+            return "h:mm a"
+        case .threeDay, .oneWeek:
+            return "E, h:mm"
+        case .oneMonth:
+            return "MMM d, h:mm a"
+        }
+    }
 }
 

@@ -278,3 +278,7 @@ enum InvestingPortfolioSectionType {
     case history
 }
 
+enum SearchCoinTabType: String {
+    case binance = "Binance", huobi = "Huobi"
+}
+

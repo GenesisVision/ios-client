@@ -128,3 +128,7 @@ extension ManagerListViewModel {
     }
 }
 
+extension ManagerListViewModel {
+    func refreshHistory(assets: [String]?, dateFrom: Date?, dateTo: Date?, filterModel: FilterModel?) {
+    }
+}

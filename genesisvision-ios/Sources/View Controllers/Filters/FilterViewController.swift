@@ -159,6 +159,11 @@ class FiltersViewController: BaseViewControllerWithTableView {
         bottomSheetController.present()
     }
     
+    private func showSearchAssetsViewController() {
+        guard let viewController = viewModel.assetDelegateManager else { return }
+        navigationController?.pushViewController(viewController as! SearchCoinAssetViewController, animated: true)
+    }
+    
     // MARK: - IBAction
     @IBAction func applyButtonAction(_ sender: UIButton) {
         showProgressHUD()
@@ -200,12 +205,14 @@ extension FiltersViewController: UITableViewDelegate, UITableViewDataSource {
             showLevels()
         case .sort:
             showSort()
-        case .tags, .assets:
+        case .tags:
             showTags()
         case .dateRange:
             showDateRange()
         case .onlyActive:
             break
+        case .assets:
+            showSearchAssetsViewController()
         }
     }
     

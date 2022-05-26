@@ -104,12 +104,12 @@ class CoinAssetDetailViewController : UIViewController {
         intervalCollectionView.backgroundColor = .clear
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        setuplabels()
-//        navigationBarSetup()
-//        setupStackView()
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+////        setuplabels()
+////        navigationBarSetup()
+////        setupStackView()
+//    }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -223,7 +223,7 @@ class CoinAssetDetailViewController : UIViewController {
         sellAndBuyCoinAssetView.isHidden = false
         spacingConstraintBetweenButtonAndAboutLabel.isActive = false
         aboutTitleLabel.topAnchor.constraint(equalTo: sellAndBuyCoinAssetView.bottomAnchor, constant: 10).isActive = true
-//        scrollView.contentSize.height += sellAndBuyCoinAssetView.height - buyButtonLabel.height
+        viewWillLayoutSubviews()
         sellAndBuyCoinAssetView.buyButtonLabel.addTarget(self, action: #selector(buyCoinAsset), for: .touchUpInside)
         sellAndBuyCoinAssetView.sellButtonLabel.addTarget(self, action: #selector(sellCoinAsset), for: .touchUpInside)
     }
@@ -249,35 +249,30 @@ extension CoinAssetDetailViewController : ChartViewDelegateProtocol, ChartViewDe
     
     func lineChartViewSetup() {
         DispatchQueue.main.async { [self] in
+            CandleStickChartView.clipsToBounds = false
             CandleStickChartView.backgroundColor = UIColor.BaseView.bg
-            CandleStickChartView.leftAxis.enabled = false
-            CandleStickChartView.xAxis.setLabelCount(5, force: false)
-            CandleStickChartView.rightAxis.setLabelCount(8, force: false)
+            CandleStickChartView.leftAxis.enabled = true
+            CandleStickChartView.rightAxis.enabled = false
+            CandleStickChartView.xAxis.setLabelCount(6, force: false)
+//            CandleStickChartView.rightAxis.setLabelCount(8, force: false)
             CandleStickChartView.xAxis.labelPosition = .bottom
             CandleStickChartView.xAxis.labelTextColor = .white
-            CandleStickChartView.rightAxis.labelTextColor = .white
-            
-            CandleStickChartView.animate(xAxisDuration: 0.8)
+
+            CandleStickChartView.leftAxis.setLabelCount(8, force: false)
+            CandleStickChartView.leftAxis.labelTextColor = .white
+            CandleStickChartView.leftAxis.labelPosition = .insideChart
+            CandleStickChartView.setScaleEnabled(true)
+//            CandleStickChartView.animate(xAxisDuration: 0.5)
             CandleStickChartView.noDataText = ""
-            CandleStickChartView.zoomIn()
+//            CandleStickChartView.zoomIn()
+            let scaleX = CandleStickChartView.scaleX
+            let scaleY = CandleStickChartView.scaleY
+            
+            CandleStickChartView.zoom(scaleX: scaleX * 6, scaleY: scaleY * 1.5, x: 350, y: 180)
             CandleStickChartView.dragEnabled = true
             CandleStickChartView.pinchZoomEnabled = true
             CandleStickChartView.legend.enabled = false
             CandleStickChartView.tintColor = .white
-            //        CandleStickChartView.setScaleEnabled(true)
-            //        CandleStickChartView.maxVisibleCount = 200
-            //        CandleStickChartView.legend.horizontalAlignment = .right
-            //        CandleStickChartView.legend.verticalAlignment = .top
-            //        CandleStickChartView.legend.orientation = .vertical
-            //        CandleStickChartView.legend.drawInside = false
-            //        CandleStickChartView.legend.font = UIFont(name: "HelveticaNeue-Light", size: 10)!
-            //        CandleStickChartView.leftAxis.labelFont = UIFont(name: "HelveticaNeue-Light", size: 10)!
-            //        CandleStickChartView.leftAxis.spaceTop = 0.3
-            //        CandleStickChartView.leftAxis.spaceBottom = 0.3
-            //        CandleStickChartView.leftAxis.axisMinimum = 0
-            //        CandleStickChartView.rightAxis.enabled = false
-            //        CandleStickChartView.xAxis.labelPosition = .bottom
-            //        CandleStickChartView.xAxis.labelFont = UIFont(name: "HelveticaNeue-Light", size: 10)!
         }
     }
     
@@ -304,8 +299,6 @@ extension CoinAssetDetailViewController : ChartViewDelegateProtocol, ChartViewDe
     func noChartDataSetup() {
         DispatchQueue.main.async {
             self.activityIndicator.stopAnimating()
-//            self.CandleStickChartView.noDataText = "No data"
-//            self.CandleStickChartView.reloadInputViews()
         }
     }
 }

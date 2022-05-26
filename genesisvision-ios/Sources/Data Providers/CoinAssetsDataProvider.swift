@@ -11,7 +11,16 @@ import Foundation
 class CoinAssetsDataProvider: DataProvider {
     static func get(_ filterModel: FilterModel? = nil, assets: [String]? = nil, skip: Int? = nil, take: Int? = nil, completion: @escaping (_ coinAssetsViewModel: CoinsAssetItemsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
         let sorting = filterModel?.sortingModel.selectedSorting as? CoinsFilterSorting ?? CoinsFilterSorting.byMarketCapDesc
+        var assets = assets
+        if let assetsModel = filterModel?.assetsModel {
+            assets = Array(assetsModel)
+        }
         CoinsAPI.getCoins(sorting: sorting, assets: assets, isFavorite: nil, skip: skip, take: take) { viewModel, error in
+                DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
+        }
+    }
+    static func getAllCoinsList(completion: @escaping (_ coinAssetsViewModel: BasePlatformAssetItemsViewModel?) -> Void, errorCompletion: @escaping CompletionBlock) {
+        CoinsAPI.getAllCoins() { viewModel, error in
                 DataProvider().responseHandler(viewModel, error: error, successCompletion: completion, errorCompletion: errorCompletion)
         }
     }

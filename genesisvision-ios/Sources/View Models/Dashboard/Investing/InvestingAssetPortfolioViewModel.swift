@@ -8,6 +8,10 @@
 
 import UIKit.UITableViewHeaderFooterView
 
+protocol historyReloadProtocol {
+    func reload(assets: [String]?, dateFrom: Date?, dateTo: Date?, filterModel: FilterModel?)
+}
+
 final class InvestingAssetPortfolioViewModel {
 
     typealias SectionType = InvestingPortfolioSectionType
@@ -15,12 +19,21 @@ final class InvestingAssetPortfolioViewModel {
     // MARK: - Variables
     var title: String = "Transactions"
     
-    private var sections: [SectionType] = [.portfolio]
+    private var sections: [SectionType] = [.portfolio, .history]
     private var type: SectionType = .portfolio
     private var router: Router!
     private var viewModels = [CellViewAnyModel]()
     private weak var reloadDataProtocol: ReloadDataProtocol?
+    private var filterModel = FilterModel()
     var totalCount = 0
+    var bottomViewType: BottomViewType {
+        switch type {
+        case .portfolio:
+            return .none
+        case .history:
+            return .filter
+        }
+    }
     
     // MARK: - Init
     init(withRouter router: Router, reloadDataProtocol: ReloadDataProtocol, type: SectionType) {
@@ -32,6 +45,12 @@ final class InvestingAssetPortfolioViewModel {
     
     func showAssetDetails(with assetId: String, assetType: AssetType) {
         router.showAssetDetails(with: assetId, assetType: assetType)
+    }
+    func showFilterVC() {
+        let listViewModel = ListViewModel(withRouter: router as! ListRouterProtocol, reloadDataProtocol: reloadDataProtocol, assetType: .coinAsset)
+        listViewModel.historyDelegate = self
+        listViewModel.filterModel = filterModel
+        router.showFilterVC(with: listViewModel, filterModel: filterModel, filterType: .history, sortingType: .assets)
     }
 }
 
@@ -94,24 +113,21 @@ extension InvestingAssetPortfolioViewModel {
 // MARK: - Fetch
 extension InvestingAssetPortfolioViewModel {
     
-    func fetch(completion: @escaping CompletionBlock) {
+    func fetch(_ assets: [String]? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, completion: @escaping CompletionBlock) {
         switch type {
         case .portfolio:
             fetchPortfolio({ [weak self] (totalCount, viewModels) in
                 self?.updateFetchedData(totalCount: totalCount, viewModels)
                 completion(.success)
+                self?.reloadDataProtocol?.didReloadData()
             }, completionError: completion)
         case .history:
-            fetchHistory ({ [weak self] totalCount, viewModels in
+            fetchHistory(assets: assets, dateFrom: dateFrom, dateTo: dateTo, { [weak self] totalCount, viewModels in
                 self?.updateFetchedData(totalCount: totalCount, viewModels)
                 completion(.success)
+                self?.reloadDataProtocol?.didReloadData()
             }, completionError: completion)
         }
-    }
-    
-    func refresh(completion: @escaping CompletionBlock) {
-        fetch(completion: { result in
-        })
     }
     
     private func updateFetchedData(totalCount: Int, _ viewModels: [CellViewAnyModel]) {
@@ -130,15 +146,13 @@ extension InvestingAssetPortfolioViewModel {
                 viewModel.setup(on: cell)
                 viewModels.append(viewModel)
             })
-            
             completionSuccess(totalCount, viewModels)
         } errorCompletion: { result in
         
         }
     }
-    
-    private func fetchHistory(_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [CoinAssetHistoryTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
-        CoinAssetsDataProvider.getCoinsHistory { coinsHistoryEventItemsViewModel, error in
+    private func fetchHistory(assets: [String]? = nil, dateFrom: Date? = nil, dateTo: Date? = nil,_ completionSuccess: @escaping (_ totalCount: Int, _ viewModels: [CoinAssetHistoryTableViewCellViewModel]) -> Void, completionError: @escaping CompletionBlock) {
+        CoinAssetsDataProvider.getCoinsHistory(dateFrom: dateFrom, dateTo: dateTo, assets: assets) { coinsHistoryEventItemsViewModel, error in
             var viewModels = [CoinAssetHistoryTableViewCellViewModel]()
             let totalCount = coinsHistoryEventItemsViewModel?.total ?? 0
             coinsHistoryEventItemsViewModel?.items?.forEach({ (viewModel) in
@@ -169,5 +183,14 @@ extension InvestingAssetPortfolioViewModel {
     func noDataButtonTitle() -> String {
         let text = ""
         return text
+    }
+}
+
+extension InvestingAssetPortfolioViewModel: historyReloadProtocol {
+    func reload(assets: [String]? = nil, dateFrom: Date? = nil, dateTo: Date? = nil, filterModel: FilterModel?) {
+        fetch(assets, dateFrom: dateFrom, dateTo: dateTo) { result in
+            guard let filterModel = filterModel else { return }
+            self.filterModel = filterModel
+        }
     }
 }

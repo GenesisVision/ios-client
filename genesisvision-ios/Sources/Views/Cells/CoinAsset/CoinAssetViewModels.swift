@@ -23,3 +23,11 @@ struct CoinAssetHistoryTableViewCellViewModel: CellViewModel {
         cell.configure(coinsHistoryEvent, filterProtocol: nil, favoriteProtocol: nil)
     }
 }
+
+struct CoinAssetSearchTableViewCellViewModel: CellViewModel {
+    let coinSearchItem: BasePlatformAsset
+    
+    func setup(on cell: CoinAssetTableViewCell) {
+        cell.configure(coinSearchItem)
+    }
+}

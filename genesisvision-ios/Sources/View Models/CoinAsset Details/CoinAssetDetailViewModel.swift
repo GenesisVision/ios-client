@@ -139,7 +139,7 @@ extension CoinAssetDetailViewModel: CoinAssetDetailViewModelChartProtocol {
             DispatchQueue.main.async {
                 let dataSet = CandleChartDataSet(entries: self.chartValues, label: "Data Set")
                 guard self.chartViewDelegate != nil else { return }
-                let dateFormat = "MMM d"
+                let dateFormat = Date.getDateFormatFromeBinanceKlineInterval(interval: interval)
                 let xAxisValueFormatter = MyXAxisFormatter(dateFormat: dateFormat, xVlaues: xVlaues)
                 self.chartViewDelegate?.pushDataToChartView(dataSet: dataSet, xAxisValueFormatter : xAxisValueFormatter)
             }

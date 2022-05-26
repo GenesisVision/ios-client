@@ -24,7 +24,6 @@ class InvestingAssetListViewController: BaseTabmanViewController<InvestingAssetT
         navigationItem.title = viewModel.title
         
         dataSource = viewModel.dataSource
-        
         setupUI()
     }
     
@@ -33,9 +32,3 @@ class InvestingAssetListViewController: BaseTabmanViewController<InvestingAssetT
         navigationController?.navigationBar.barTintColor = UIColor.BaseView.bg
     }
 }
-
-//extension InvestingAssetListViewController: WalletProtocol {
-//    func didUpdateData() {
-////        viewModel.reloadDetails()
-//    }
-//}

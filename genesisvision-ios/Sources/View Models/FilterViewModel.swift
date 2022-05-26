@@ -14,7 +14,7 @@ protocol FilterViewModelProtocol: AnyObject {
 }
 
 enum FilterType {
-    case programs, funds, follows, coinAsset
+    case programs, funds, follows, coinAsset, history
 }
 
 final class FilterViewModel {
@@ -52,6 +52,7 @@ final class FilterViewModel {
     var sortingDelegateManager: SortingDelegateManager?
     var currencyDelegateManager: FilterCurrencyDelegateManager?
     var tagsDelegateManager: TagsDelegateManager?
+    var assetDelegateManager: SearchAssetsManagerProtocol?
     var levelsFilterView: LevelsFilterView?
     var dateRangeView: DateRangeView?
     var onlyActive: Bool?
@@ -75,7 +76,9 @@ final class FilterViewModel {
         case .funds:
             rows = [.dateRange, .sort]
         case .coinAsset:
-            rows = [.sort]
+            rows = [.assets, .sort]
+        case .history:
+            rows = [.assets, .dateRange]
         }
         
         self.router = router
@@ -146,18 +149,28 @@ final class FilterViewModel {
                 if let detail = sortingDelegateManager?.manager?.getSelectedSortingValue() {
                     viewModels[idx].detail = detail.rawValue
                 }
-            case .tags, .assets:
+            case .tags:
                 if let detail = tagsDelegateManager?.manager?.getSelectedValues() {
                     viewModels[idx].detail = detail
                 }
             case .onlyActive:
                 viewModels[idx].switchOn = onlyActive
+            case .assets:
+                listViewModel?.filterModel.assetsModel.removeAll()
+                viewModels[idx].detail = assetDelegateManager?.allConstant
             }
         }
     }
     
     func apply(completion: @escaping CompletionBlock) {
         guard let filterModel = listViewModel?.filterModel else { return completion(.failure(errorType: .apiError(message: nil))) }
+        guard filterType != .history else {
+            guard let assets = listViewModel?.filterModel.assetsModel else { return }
+            let assetsArray = Array(assets)
+            listViewModel?.refreshHistory(assets: assetsArray, dateFrom: dateRangeView?.dateFrom, dateTo: dateRangeView?.dateTo, filterModel: listViewModel?.filterModel)
+            goToBack()
+            return
+        }
         
         if let minLevel = levelsFilterView?.minLevel, let maxLevel = levelsFilterView?.maxLevel {
             filterModel.levelModel.minLevel = minLevel
@@ -211,8 +224,10 @@ final class FilterViewModel {
                 setupSortingManager(filterModel, sortingType: sortingType)
             case .onlyActive:
                 onlyActive = filterModel.onlyActive
-            case .tags, .assets:
+            case .tags:
                 setupTagsManager(filterModel)
+            case .assets:
+                setupAssetsManager(filterModel)
             }
         }
     }
@@ -253,6 +268,13 @@ final class FilterViewModel {
         tagsDelegateManager?.manager?.selectedIdxs = filterModel.tagsModel.selectedIdxs
     }
     
+    private func setupAssetsManager(_ filterModel: FilterModel) {
+        let viewController = SearchCoinAssetViewController()
+        viewController.viewModel = SearchCoinAssetTabmanViewModel(withRouter: router, delegate: viewController)
+        viewController.filterManagerDelegate = self
+        assetDelegateManager = viewController
+    }
+    
     private func setup() {
         var tableViewCellViewModel: FilterTableViewCellViewModel?
         
@@ -289,7 +311,7 @@ final class FilterViewModel {
                     tableViewCellViewModel?.detail = selectedValue.rawValue
                 }
                 viewModels.append(tableViewCellViewModel!)
-            case .tags, .assets:
+            case .tags:
                 var title = ""
                 if filterType == .programs {
                     title = "Tags"
@@ -300,6 +322,15 @@ final class FilterViewModel {
                 tableViewCellViewModel = FilterTableViewCellViewModel(title: title, detail: nil, detailImage: nil, switchOn: nil, style: .detail, delegate: nil)
                 if let selectedValue = tagsDelegateManager?.manager?.getSelectedValues() {
                     tableViewCellViewModel?.detail = selectedValue
+                }
+                viewModels.append(tableViewCellViewModel!)
+            case .assets:
+                let title = "Assets"
+                tableViewCellViewModel = FilterTableViewCellViewModel(title: title, detail: nil, detailImage: nil, switchOn: nil, style: .detail, delegate: nil)
+                if let selectedValue = listViewModel?.filterModel.assetsModel, !selectedValue.isEmpty {
+                    tableViewCellViewModel?.detail = selectedValue.joined(separator: ", ")
+                } else {
+                    tableViewCellViewModel?.detail = assetDelegateManager?.allConstant
                 }
                 viewModels.append(tableViewCellViewModel!)
             case .onlyActive:
@@ -432,6 +463,16 @@ extension FilterViewModel: SortingDelegate {
             viewModels[idx].detailImage = highToLowValue ? #imageLiteral(resourceName: "img_profit_filter_icon") : #imageLiteral(resourceName: "img_profit_filter_desc_icon")
         }
         
+        filterViewModelProtocol?.didFilterReloadCell(idx)
+    }
+}
+
+extension FilterViewModel: SearchAssetsFilterViewModelProtocol {
+    func updateSelectedAsset(asset: String) {
+        listViewModel?.filterModel.assetsModel.insert(asset)
+        let index = rows.firstIndex { $0 == .assets }
+        guard let idx = index, let detail = viewModels[idx].detail, let all = assetDelegateManager?.allConstant else { return }
+        viewModels[idx].detail = listViewModel?.filterModel.assetsModel.joined(separator: ", ")
         filterViewModelProtocol?.didFilterReloadCell(idx)
     }
 }

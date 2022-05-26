@@ -268,7 +268,8 @@ protocol ListViewModelProtocol {
     
     var viewModelsForRegistration: [UITableViewHeaderFooterView.Type] { get }
     var cellModelsForRegistration: [CellViewAnyModel.Type] { get }
-    
+
+    func refreshHistory(assets: [String]?, dateFrom: Date?, dateTo: Date?, filterModel: FilterModel?)
     func refresh(completion: @escaping CompletionBlock)
     
     func model(for indexPath: IndexPath) -> CellViewAnyModel?

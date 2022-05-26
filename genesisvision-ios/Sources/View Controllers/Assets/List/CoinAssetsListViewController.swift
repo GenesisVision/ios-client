@@ -170,7 +170,6 @@ extension CoinAssetsListViewController: FavoriteStateChangeProtocol {
     }
     
     func didChangeFavoriteState(with assetID: String, value: Bool, request: Bool) {
-//        showProgressHUD()
         viewModel.changeFavorite(value: value, assetId: assetID, request: request) { [weak self] (result) in
             self?.hideAll()
             

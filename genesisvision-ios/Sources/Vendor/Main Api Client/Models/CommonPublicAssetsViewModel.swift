@@ -24,5 +24,4 @@ public struct CommonPublicAssetsViewModel: Codable {
         self.follows = follows
         self.managers = managers
     }
-
 }
