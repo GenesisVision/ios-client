@@ -17,7 +17,7 @@ final class InvestingAssetPortfolioViewModel {
     typealias SectionType = InvestingPortfolioSectionType
     
     // MARK: - Variables
-    var title: String = "Transactions"
+    var title: String = "Assets"
     
     private var sections: [SectionType] = [.portfolio, .history]
     private var type: SectionType = .portfolio

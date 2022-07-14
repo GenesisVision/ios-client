@@ -21,7 +21,7 @@ class InvestingAssetListViewController: BaseTabmanViewController<InvestingAssetT
     
     // MARK: - Private methods
     private func setup() {
-        navigationItem.title = viewModel.title
+        navigationItem.title = "Assets"
         
         dataSource = viewModel.dataSource
         setupUI()

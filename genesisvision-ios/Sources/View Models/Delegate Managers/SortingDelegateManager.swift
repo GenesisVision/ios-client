@@ -30,13 +30,15 @@ enum SortingValue: String {
     case investors = "Investors"
     case date = "Date"
     case ticket = "Ticket"
-    case symbol = "Symbol"
+//    case symbol = "Symbol"
+    case symbol = "Asset"
     case direction = "Direction"
     case volume = "Volume"
     case price = "Price"
     case levelProgress = "Level progress"
     case value = "Value"
-    case asset = "Asset"
+//    case asset = "Asset"
+    case asset = "Name"
     case change = "Change"
     case marketCap = "Market Cap"
 }
@@ -186,6 +188,8 @@ class SortingManager: NSObject {
             return highToLowValue ? .byPriceDesc : .byPriceAsc
         case .asset:
             return highToLowValue ? .byAssetDesc : .byAssetAsc
+        case .symbol:
+            return highToLowValue ? .bySymbolDesc : .bySymbolAsc
         case .change:
             return highToLowValue ? .byChangeDesc : .byChangeAsc
         case .marketCap:
@@ -205,7 +209,7 @@ class SortingManager: NSObject {
         case .funds:
             sortingValues = [.profit, .size, .title, .investors, .drawdown]
         case .assets:
-            sortingValues = [.marketCap, .asset, .price, .change, .volume]
+            sortingValues = [.marketCap, .asset, .symbol, .price, .change, .volume]
         case .tradesOpen, .trades, .signalTradesOpen:
             sortingValues = [.date, .ticket, .symbol, .direction, .volume, .price, .profit]
         }

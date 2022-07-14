@@ -298,7 +298,7 @@ extension FundListViewController {
 extension FundListViewController: DelegateManagerProtocol {
     func delegateManagerTableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let model = viewModel.model(for: indexPath) as? FundTableViewCellViewModel, let assetId = model.asset._id?.uuidString else { return }
-        searchProtocol?.didSelect(assetId, assetType: .fund)
+//        searchProtocol?.didSelect(assetId, assetType: .fund)
     }
     
     func delegateManagerTableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

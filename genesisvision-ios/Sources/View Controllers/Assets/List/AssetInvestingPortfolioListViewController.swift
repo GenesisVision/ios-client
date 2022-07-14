@@ -54,6 +54,7 @@ class AssetInvestingPortfolioListViewController: BaseViewControllerWithTableView
         }
         tableView.separatorStyle = .singleLine
         bottomViewType = viewModel.bottomViewType
+        navigationItem.title = viewModel.title
     }
     
     private func setupTableConfiguration() {

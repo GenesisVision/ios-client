@@ -77,16 +77,14 @@ extension CoinAssetContentView: ContentViewProtocol {
             self.assetId = assetId
         }
         
-        chartView.isHidden = true
-        noDataLabel.isHidden = false
+        chartView.isHidden = false
+        noDataLabel.isHidden = true
         viewForChartView.isHidden = chartView.isHidden
         
         noDataLabel.text = String.Alerts.ErrorMessages.noDataText
         
         if let chart = asset.chart?.chart {
-            chartView.isHidden = false
             viewForChartView.isHidden = chartView.isHidden
-            noDataLabel.isHidden = true
             chartView.setup(chartType: .default, lineChartData: chart, dateRangeModel: filterProtocol?.filterDateRangeModel)
         }
         

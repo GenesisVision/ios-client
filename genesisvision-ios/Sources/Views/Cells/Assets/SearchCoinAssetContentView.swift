@@ -25,6 +25,5 @@ extension SearchCoinAssetContentView: ContentViewProtocol {
         if let fileName = asset.logoUrl, let fileUrl = getFileURL(fileName: fileName) {
             logoImage.kf.setImage(with: fileUrl, placeholder: UIImage.noDataPlaceholder)
         }
-        
     }
 }

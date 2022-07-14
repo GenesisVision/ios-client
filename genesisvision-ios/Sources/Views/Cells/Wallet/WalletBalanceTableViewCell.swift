@@ -54,10 +54,14 @@ class WalletBalanceTableViewCell: UITableViewCell {
             stackView.alignment = .center
             balanceValueLabel.font = UIFont.getFont(.semibold, size: 26.0)
         case .available:
+            stackView.alignment = .leading
             progressView.foregroundStrokeColor = UIColor.Common.purple
         case .invested:
+            stackView.alignment = .leading
             progressView.foregroundStrokeColor = UIColor.primary
         case .trading:
+            stackView.alignment = .leading
+            balanceValueLabel.font = UIFont.getFont(.semibold, size: 21.0)
             progressView.foregroundStrokeColor = UIColor.Common.yellow
         }
     }

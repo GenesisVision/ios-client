@@ -81,13 +81,7 @@ class WalletBalanceViewController: BaseViewControllerWithTableView {
             topUpButton.isHidden = true
         }
         
-        if let currency = viewModel.wallet?.currency, (currency == .gvt || currency == .bnb) {
-            topUpButton.isHidden = true
-        }
-        
-        if let currency = viewModel.wallet?.currency, currency == .dai {
-            addFundsButton.isHidden = true
-            withdrawButton.isHidden = true
+        if let currency = viewModel.wallet?.currency, (currency == .gvt || currency == .bnb || currency == .dai) {
             topUpButton.isHidden = true
         }
     }
